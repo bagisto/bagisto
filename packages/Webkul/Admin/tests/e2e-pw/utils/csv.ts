@@ -5,13 +5,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 export const GENERATED_PATH = path.resolve(__dirname, "../.state/generated");
 
-/**
- * Write a sheet and return its absolute path, which is what the import form
- * takes in place of a fixture's name.
- */
 export const writeGeneratedCsv = (
     fileName: string,
     rows: string[][],
@@ -60,9 +55,6 @@ export const parseCsv = (contents: string): string[][] => {
 
             field = "";
         } else if (character === "\n" || character === "\r") {
-            /**
-             * A CRLF is one break, not two.
-             */
             if (character === "\r" && contents[index + 1] === "\n") {
                 index++;
             }

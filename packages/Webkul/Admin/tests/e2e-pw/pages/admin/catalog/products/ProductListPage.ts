@@ -81,7 +81,6 @@ export class ProductListPage extends BasePage {
     }
 
     async selectProductCheckbox() {
-        // await this.rowCheckboxes.first().click();   // Only if you want all lisiting product update
         await this.rowCheckboxes.nth(1).click();
         await this.rowCheckboxes.nth(2).click();
     }

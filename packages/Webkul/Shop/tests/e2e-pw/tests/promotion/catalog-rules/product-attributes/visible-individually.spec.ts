@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -7,10 +7,11 @@ import { loginAsAdmin } from "../../../../utils/admin";
 import { Page } from "@playwright/test";
 
 let generatedName: string;
-generatedName = `Simple-${Date.now()}`;
 
 test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    generatedName = `Simple-${Date.now()}`;
+
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",

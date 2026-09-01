@@ -1,6 +1,6 @@
 import { test } from "../../../setup";
 import { expect, Page } from "@playwright/test";
-import { ProductCreation } from "../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../pages/shop/rules/RuleApplyPage";
@@ -37,9 +37,7 @@ async function createBuyXGetYRule(
 
     await loginAsAdmin(page);
     await ruleCreatePage.cartRuleCreationFlow();
-    await ruleCreatePage.actionTypeSelect.selectOption("buy_x_get_y");
-    await ruleCreatePage.discountAmountInput.fill(discountAmount.toString());
-    await ruleCreatePage.discountStepInput.fill(discountStep.toString());
+    await ruleCreatePage.setBuyXGetYAction(discountAmount, discountStep);
     await ruleCreatePage.saveCartRule();
 }
 
@@ -50,27 +48,7 @@ async function verifyBuyXGetYAtCheckout(
     discountAmount: number,
     qty: number,
 ) {
-    await ruleApplyPage.visit("");
-
-    const product = ruleApplyPage.getSavedProduct();
-
-    await ruleApplyPage.searchInput.fill(product.name);
-    await ruleApplyPage.searchInput.press("Enter");
-    await ruleApplyPage.addToCartButton.first().click();
-    await expect(ruleApplyPage.addToCartSuccessMessage).toBeVisible();
-
-    await ruleApplyPage.visit("checkout/cart");
-
-    if (qty > 1) {
-        for (let i = 1; i < qty; i++) {
-            await ruleApplyPage.incrementQtyButton.first().click();
-        }
-
-        await ruleApplyPage.updateCart.click();
-        await expect(ruleApplyPage.cartUpdateSuccess.first()).toBeVisible();
-    }
-
-    const subtotal = await ruleApplyPage.getSubTotalValue();
+    const subtotal = await ruleApplyPage.addSavedProductToCart(qty);
 
     const unitPrice = subtotal / qty;
 
@@ -86,20 +64,7 @@ async function verifyBuyXGetYAtCheckout(
         page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
-    if (expectedGrandTotal === 0) {
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText("$0.00");
-    } else {
-        const formattedAmount = new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(expectedGrandTotal);
-
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText(`$${formattedAmount}`);
-    }
+    await ruleApplyPage.expectGrandTotal(expectedGrandTotal);
 }
 
 const cases: {
@@ -153,7 +118,7 @@ const cases: {
 ];
 
 test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",

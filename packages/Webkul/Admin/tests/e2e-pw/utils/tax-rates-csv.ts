@@ -29,9 +29,6 @@ const HEADER = [
     "tax_rate",
 ];
 
-/**
- * Write a sheet of tax rates and return its absolute path.
- */
 export const writeTaxRatesCsv = (
     fileName: string,
     rows: TaxRateRow[],

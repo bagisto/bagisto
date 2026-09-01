@@ -26,9 +26,6 @@ const HEADER = [
     "gender",
 ];
 
-/**
- * Write a sheet of customers and return its absolute path.
- */
 export const writeCustomersCsv = (
     fileName: string,
     rows: CustomerRow[],

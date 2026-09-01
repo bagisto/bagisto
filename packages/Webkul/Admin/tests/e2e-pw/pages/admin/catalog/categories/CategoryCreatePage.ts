@@ -15,6 +15,14 @@ export class CategoryCreatePage extends BasePage {
         return this.page.locator('button:has-text("Save Category")');
     }
 
+    private generateCategorySlug() {
+        return Array(5)
+            .fill(null)
+            .map(() => generateName())
+            .join("")
+            .replaceAll(" ", "");
+    }
+
     async visit() {
         await super.visit("admin/catalog/categories");
         await expect(this.openCreateButton).toBeVisible();
@@ -24,14 +32,6 @@ export class CategoryCreatePage extends BasePage {
         await this.visit();
         await this.openCreateButton.click();
         await this.page.waitForSelector('form[action*="/catalog/categories/create"]');
-    }
-
-    private generateCategorySlug() {
-        return Array(5)
-            .fill(null)
-            .map(() => generateName())
-            .join("")
-            .replaceAll(" ", "");
     }
 
     async createCategory() {

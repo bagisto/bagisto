@@ -2,45 +2,51 @@ import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 
 export class RuleDeletePage extends BasePage {
-    readonly couponCode: string;
-
     constructor(page: Page) {
         super(page);
-        this.couponCode = `CP-${Date.now()}`;
     }
 
-    get deleteIcon() {
+    private get deleteIcon() {
         return this.page.locator(".icon-delete");
     }
 
-    get agree() {
+    private get agree() {
         return this.page.getByRole("button", { name: "Agree", exact: true });
     }
 
-    get selectRowBtn() {
+    private get selectRowBtn() {
         return this.page.locator(".icon-uncheckbox");
     }
 
-    get selectAction() {
+    private get selectAction() {
         return this.page.getByRole("button", { name: "Select Action" });
     }
 
-    get selectDelete() {
+    private get selectDelete() {
         return this.page.getByRole("link", { name: "Delete" });
     }
 
-    get productDeleteSuccess() {
+    private get productDeleteSuccess() {
         return this.page.getByText("Selected Products Deleted Successfully");
     }
 
-    async deleteRuleAndProduct() {
-        await this.visit("admin/marketing/promotions/cart-rules");
+    private async deleteRuleIfPresent(path: string, successMessage: string) {
+        await this.visit(path);
+
+        try {
+            await this.deleteIcon
+                .first()
+                .waitFor({ state: "visible", timeout: 5000 });
+        } catch {
+            return;
+        }
+
         await this.deleteIcon.first().click();
         await this.agree.click();
-        await expect(
-            this.page.getByText("Cart Rule Deleted Successfully"),
-        ).toBeVisible();
+        await expect(this.page.getByText(successMessage)).toBeVisible();
+    }
 
+    private async deleteLatestProduct() {
         await this.visit("admin/catalog/products");
         await this.selectRowBtn.nth(2).click();
         await this.selectAction.click();
@@ -49,19 +55,25 @@ export class RuleDeletePage extends BasePage {
         await expect(this.productDeleteSuccess).toBeVisible();
     }
 
-    async deleteCatalogRuleAndProduct() {
-        await this.visit("admin/marketing/promotions/catalog-rules");
-        await this.deleteIcon.first().click();
-        await this.agree.click();
-        await expect(
-            this.page.getByText("Catalog Rule Deleted Successfully"),
-        ).toBeVisible();
+    async deleteRuleAndProduct() {
+        try {
+            await this.deleteRuleIfPresent(
+                "admin/marketing/promotions/cart-rules",
+                "Cart Rule Deleted Successfully",
+            );
+        } finally {
+            await this.deleteLatestProduct();
+        }
+    }
 
-        await this.visit("admin/catalog/products");
-        await this.selectRowBtn.nth(2).click();
-        await this.selectAction.click();
-        await this.selectDelete.click();
-        await this.agree.click();
-        await expect(this.productDeleteSuccess).toBeVisible();
+    async deleteCatalogRuleAndProduct() {
+        try {
+            await this.deleteRuleIfPresent(
+                "admin/marketing/promotions/catalog-rules",
+                "Catalog Rule Deleted Successfully",
+            );
+        } finally {
+            await this.deleteLatestProduct();
+        }
     }
 }

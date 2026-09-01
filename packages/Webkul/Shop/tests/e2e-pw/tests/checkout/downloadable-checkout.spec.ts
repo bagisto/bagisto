@@ -1,11 +1,11 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { DownloadableProductCheckout } from "../../pages/shop/checkout/product-types/DownloadableProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 test.describe("downloadable product checkout flow", () => {
     test("should create downloadable product", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "downloadable",

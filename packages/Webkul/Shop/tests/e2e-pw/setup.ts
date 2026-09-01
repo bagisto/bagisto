@@ -16,18 +16,10 @@ interface ShopPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
 }
 
-/**
- * Fixtures Types
- */
-
 type Fixtures = {
     adminPage: AdminPage;
     shopPage: ShopPage;
 };
-
-/**
- * Test with Fixtures
- */
 
 async function saveAdminAuth(context: BrowserContext): Promise<void> {
     ensureStateDir();
@@ -36,10 +28,6 @@ async function saveAdminAuth(context: BrowserContext): Promise<void> {
 }
 
 export const test = base.extend<Fixtures>({
-    /**
-     *  AdminPage
-     */
-
     adminPage: async ({ browser }, use) => {
         const authExists = fs.existsSync(ADMIN_AUTH_STATE_PATH);
 
@@ -83,18 +71,10 @@ export const test = base.extend<Fixtures>({
         await context.close();
     },
 
-    /**
-     * Shop Page
-     */
-
     shopPage: async ({ browser }, use) => {
         const context = await browser.newContext();
         const page = await context.newPage();
 
-        /**
-         * Extend shop page with Tinymce helper
-         * (exact logic you provided)
-         */
         (page as ShopPage).fillInTinymce = async (
             iframeSelector: string,
             content: string,

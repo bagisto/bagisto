@@ -2,27 +2,17 @@ import { Page, expect } from "@playwright/test";
 import { CheckoutHelper } from "../CheckoutHelper";
 import { ProductDataManager } from "../../../admin/catalog/products/ProductDataManager";
 
-/**
- * Configurable product checkout flow
- * Handles product variants and checkout
- */
 export class ConfigurableProductCheckout extends CheckoutHelper {
     constructor(page: Page) {
         super(page);
     }
 
-    /**
-     * Select product options
-     */
     private async selectProductOptions() {
         await this.page.getByLabel("Color").selectOption({label: "Red"});
         await this.page.getByLabel("Size").selectOption({label: "S"});
         await this.addToCartButton.click();
     }
 
-    /**
-     * Configurable product checkout with default shipping
-     */
     async checkoutWithDefaultShipping() {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
@@ -35,9 +25,6 @@ export class ConfigurableProductCheckout extends CheckoutHelper {
         await this.placeOrder();
     }
 
-    /**
-     * Configurable product checkout with flat rate shipping
-     */
     async checkoutWithFlatRateShipping() {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
@@ -50,9 +37,6 @@ export class ConfigurableProductCheckout extends CheckoutHelper {
         await this.placeOrder();
     }
 
-    /**
-     * Configurable product checkout with Cash On Delivery
-     */
     async checkoutWithCOD() {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
@@ -65,9 +49,6 @@ export class ConfigurableProductCheckout extends CheckoutHelper {
         await this.placeOrder();
     }
 
-    /**
-     * Configurable product guest checkout
-     */
     async guestCheckout() {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
@@ -77,9 +58,6 @@ export class ConfigurableProductCheckout extends CheckoutHelper {
         await this.guestCheckoutComplete();
     }
 
-    /**
-     * Configurable product checkout with new address
-     */
     async checkoutWithNewAddress() {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);

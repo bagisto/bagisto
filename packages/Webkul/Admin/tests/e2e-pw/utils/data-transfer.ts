@@ -34,10 +34,6 @@ export interface ImportOptions {
 
 export const IMPORT_TIMEOUT = 180 * 1000;
 
-/**
- * A shipped fixture, by name. A generated sheet passes its own absolute path
- * through untouched.
- */
 export const dataFilePath = (fileName: string) =>
     path.isAbsolute(fileName)
         ? fileName

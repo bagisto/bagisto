@@ -1,7 +1,7 @@
 import { test, expect } from "../setup";
 import { FilterPage } from "../pages/shop/FilterPage";
 
-test("should be able to filter A-Z products", async ({ shopPage }) => {
+test("should be able to filter a-z products", async ({ shopPage }) => {
     const filterPage = new FilterPage(shopPage);
 
     await filterPage.gotoCategory("mens");
@@ -14,7 +14,7 @@ test("should be able to filter A-Z products", async ({ shopPage }) => {
     expect(productNames).toEqual(sortedNames);
 });
 
-test("should be able to filter Z-A products", async ({ shopPage }) => {
+test("should be able to filter z-a products", async ({ shopPage }) => {
     const filterPage = new FilterPage(shopPage);
 
     await filterPage.gotoCategory("mens");
@@ -29,7 +29,7 @@ test("should be able to filter Z-A products", async ({ shopPage }) => {
     expect(productNames).toEqual(sortedNamesDesc);
 });
 
-test("should be able to Expensive First filter on products", async ({
+test("should be able to expensive first filter on products", async ({
     shopPage,
 }) => {
     const filterPage = new FilterPage(shopPage);
@@ -44,7 +44,7 @@ test("should be able to Expensive First filter on products", async ({
     expect(prices).toEqual(sortedPrices);
 });
 
-test("should be able to cheaper First filter on products", async ({
+test("should be able to cheaper first filter on products", async ({
     shopPage,
 }) => {
     const filterPage = new FilterPage(shopPage);

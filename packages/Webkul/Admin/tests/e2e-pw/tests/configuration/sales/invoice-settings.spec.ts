@@ -6,7 +6,7 @@ import {
 } from '../../../utils/faker';
 import { InvoiceSettingsConfigurationPage } from '../../../pages/admin/configuration/sales/InvoiceSettingsConfigurationPage';
 
-test.describe('Invoice Settings Configuration', () => {
+test.describe('invoice settings configuration', () => {
     test.beforeEach(async ({ adminPage }) => {
         await new InvoiceSettingsConfigurationPage(adminPage).open();
     });
@@ -30,7 +30,7 @@ test.describe('Invoice Settings Configuration', () => {
         await page.saveAndVerify();
     });
 
-    test('should configure PDF print outs ', async ({ adminPage }) => {
+    test('should configure pdf print outs', async ({ adminPage }) => {
         const page = new InvoiceSettingsConfigurationPage(adminPage);
 
         await page.configurePdfPrintOuts(getImageFile());

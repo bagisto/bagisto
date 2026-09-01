@@ -4,10 +4,6 @@ import { TaxRateEditPage } from "../../../pages/admin/settings/taxes/TaxRateEdit
 import { TaxRateListPage } from "../../../pages/admin/settings/taxes/TaxRateListPage";
 import { TAX_REGIONS } from "../../../utils/tax";
 
-/**
- * Tax Rate management — full CRUD, validations and grid operations driven
- * entirely through the Page Object Model.
- */
 test.describe("tax rates", () => {
     test.describe("creation", () => {
         test("should create a tax rate with all valid fields and list it in the grid", async ({
@@ -134,10 +130,5 @@ test.describe("tax rates", () => {
             await listPage.filterByColumn("Identifier", rate.identifier);
             await listPage.expectRowVisible(rate.identifier);
         });
-
-        /**
-         * The Tax Rate datagrid declares no mass actions, so mass-action
-         * coverage is intentionally not implemented (scoped to "if available").
-         */
     });
 });

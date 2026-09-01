@@ -134,7 +134,7 @@ test.describe("attribute management", () => {
         );
     });
 
-    test("should create a new price type attribute ", async ({ adminPage }) => {
+    test("should create a new price type attribute", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
         await attributeCreatePage.createAttribute(
             buildAttributeData({
@@ -143,7 +143,7 @@ test.describe("attribute management", () => {
         );
     });
 
-    test("should create a new boolean type attribute ", async ({
+    test("should create a new boolean type attribute", async ({
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
@@ -155,7 +155,7 @@ test.describe("attribute management", () => {
         );
     });
 
-    test("should create a new date type attribute ", async ({ adminPage }) => {
+    test("should create a new date type attribute", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
         await attributeCreatePage.createAttribute(
             buildAttributeData({
@@ -164,7 +164,7 @@ test.describe("attribute management", () => {
         );
     });
 
-    test("should create a new datetime type attribute ", async ({
+    test("should create a new datetime type attribute", async ({
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
@@ -175,7 +175,7 @@ test.describe("attribute management", () => {
         );
     });
 
-    test("should create a new image type attribute ", async ({ adminPage }) => {
+    test("should create a new image type attribute", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
         await attributeCreatePage.createAttribute(
             buildAttributeData({
@@ -184,7 +184,7 @@ test.describe("attribute management", () => {
         );
     });
 
-    test("should create a new file type attribute ", async ({ adminPage }) => {
+    test("should create a new file type attribute", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
         await attributeCreatePage.createAttribute(
             buildAttributeData({

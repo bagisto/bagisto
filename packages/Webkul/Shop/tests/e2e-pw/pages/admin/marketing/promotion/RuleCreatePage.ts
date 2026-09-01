@@ -7,137 +7,131 @@ export class RuleCreatePage extends BasePage {
         super(page);
     }
 
-    get createCartRuleButton() {
+    private get createCartRuleButton() {
         return this.page.locator(
             'a.primary-button:has-text("Create Cart Rule")',
         );
     }
 
-    get cartRuleForm() {
+    private get cartRuleForm() {
         return this.page.locator(
             'form[action*="/promotions/cart-rules/create"]',
         );
     }
 
-    get createCatalogRuleButton() {
+    private get createCatalogRuleButton() {
         return this.page.locator(
             'a.primary-button:has-text("Create Catalog Rule")',
         );
     }
 
-    get catalogRuleButton() {
+    private get catalogRuleButton() {
         return this.page.locator(
             'button.primary-button:has-text("Save Catalog Rule")',
         );
     }
 
-    // General
-    get nameInput() {
+    private get nameInput() {
         return this.page.locator("#name");
     }
 
-    get descriptionInput() {
+    private get descriptionInput() {
         return this.page.locator("#description");
     }
 
-    get couponTypeSelect() {
+    private get couponTypeSelect() {
         return this.page.locator("#coupon_type");
     }
 
-    get autoGenerationSelect() {
+    private get autoGenerationSelect() {
         return this.page.locator("#use_auto_generation");
     }
 
-    get couponCodeInput() {
+    private get couponCodeInput() {
         return this.page.getByRole("textbox", { name: "Coupon Code" });
     }
 
-    get usesPerCouponInput() {
+    private get usesPerCouponInput() {
         return this.page.getByRole("textbox", { name: "Uses Per Coupon" });
     }
 
-    get usesPerCustomerInput() {
+    private get usesPerCustomerInput() {
         return this.page.getByRole("textbox", { name: "Uses Per Customer" });
     }
 
-    // Conditions
-    get addConditionButton() {
+    private get addConditionButton() {
         return this.page.locator(
             'div.secondary-button:has-text("Add Condition")',
         );
     }
 
-    get conditionAttributeSelect() {
+    private get conditionAttributeSelect() {
         return this.page.locator(
             'select[id="conditions\\[0\\]\\[attribute\\]"]',
         );
     }
 
-    get conditionOperatorSelect() {
+    private get conditionOperatorSelect() {
         return this.page.locator(
             'select[name="conditions\\[0\\]\\[operator\\]"]',
         );
     }
 
-    get conditionValueInput() {
+    private get conditionValueInput() {
         return this.page.locator('input[name="conditions\\[0\\]\\[value\\]"]');
     }
 
-    get selectConditionOption() {
+    private get selectConditionOption() {
         return this.page.locator('select[name="conditions[0][value]"]');
     }
 
-    get actionTypeSelect() {
+    private get actionTypeSelect() {
         return this.page.locator("#action_type");
     }
 
-    get discountAmountInput() {
+    private get discountAmountInput() {
         return this.page.locator('input[name="discount_amount"]');
     }
 
-    get discountStepInput() {
+    private get discountStepInput() {
         return this.page.locator("#discount_step");
     }
 
-    get discountQuantityInput() {
-        return this.page.locator("#discount_quantity");
-    }
-
-    get sortOrderInput() {
+    private get sortOrderInput() {
         return this.page.locator('input[name="sort_order"]');
     }
 
-    get channelCheckbox() {
+    private get channelCheckbox() {
         return this.page.locator('label[for="channel__1"]');
     }
 
-    get customerGroupCheckbox() {
+    private get customerGroupCheckbox() {
         return this.page.locator("#customer_group__1");
     }
 
-    get customerGroupCheckbox2() {
+    private get customerGroupCheckbox2() {
         return this.page.locator('label[for="customer_group__2"]');
     }
 
-    get statusToggle() {
+    private get statusToggle() {
         return this.page.locator('label[for="status"]');
     }
 
-    get validationErrors() {
+    private get validationErrors() {
         return this.page.locator("p.text-red-600");
     }
 
-    get saveCartRuleButton() {
+    private get saveCartRuleButton() {
         return this.page.locator(
             'button.primary-button:has-text("Save Cart Rule")',
         );
     }
 
-    get successMessage() {
+    private get successMessage() {
         return this.page.locator("#app");
     }
 
-    get applyToShipping() {
+    private get applyToShipping() {
         return this.page.locator("select[name='apply_to_shipping']");
     }
 
@@ -158,6 +152,20 @@ export class RuleCreatePage extends BasePage {
         await this.createCatalogRuleButton.click();
         await this.nameInput.fill(generateName());
         await this.descriptionInput.fill(generateName());
+    }
+
+    private async configureSettings() {
+        await this.sortOrderInput.fill("1");
+        await this.channelCheckbox.first().click();
+        await this.customerGroupCheckbox.nth(1).click();
+        await this.customerGroupCheckbox2.first().click();
+        await this.statusToggle.first().click();
+    }
+
+    private async centerInViewport(locator: Locator) {
+        await locator.evaluate((element) =>
+            element.scrollIntoView({ block: "center" }),
+        );
     }
 
     public async addCondition({
@@ -248,18 +256,13 @@ export class RuleCreatePage extends BasePage {
         return result;
     }
 
-    private async configureSettings() {
-        await this.sortOrderInput.fill("1");
-        await this.channelCheckbox.first().click();
-        await this.customerGroupCheckbox.nth(1).click();
-        await this.customerGroupCheckbox2.first().click();
-        await this.statusToggle.first().click();
-    }
-
-    private async centerInViewport(locator: Locator) {
-        await locator.evaluate((element) =>
-            element.scrollIntoView({ block: "center" }),
-        );
+    public async setBuyXGetYAction(
+        discountAmount: number,
+        discountStep: number,
+    ) {
+        await this.actionTypeSelect.selectOption("buy_x_get_y");
+        await this.discountAmountInput.fill(discountAmount.toString());
+        await this.discountStepInput.fill(discountStep.toString());
     }
 
     public async saveCartRule() {
@@ -289,5 +292,29 @@ export class RuleCreatePage extends BasePage {
         await this.visit("admin/marketing/promotions/catalog-rules");
         await this.fillGeneralCatalogDetails();
         await this.configureSettings();
+    }
+
+    public async saveCartRuleWithoutRequiredFields() {
+        await this.visit("admin/marketing/promotions/cart-rules");
+        await this.createCartRuleButton.click();
+        await this.cartRuleForm.waitFor();
+        await this.saveCartRuleButton.click();
+    }
+
+    public async saveCatalogRuleWithoutRequiredFields() {
+        await this.visit("admin/marketing/promotions/catalog-rules");
+        await this.createCatalogRuleButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.catalogRuleButton.click();
+    }
+
+    public async expectRequiredFieldErrors() {
+        await expect(this.validationErrors).not.toHaveCount(0);
+
+        for (const field of ["Name", "Channels", "Customer Groups"]) {
+            await expect(
+                this.page.getByText(`The ${field} field is required`).first(),
+            ).toBeVisible();
+        }
     }
 }

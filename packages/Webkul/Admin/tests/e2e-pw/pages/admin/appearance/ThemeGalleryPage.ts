@@ -6,10 +6,6 @@ export class ThemeGalleryPage extends BasePage {
         super(page);
     }
 
-    /**
-     * A heading sits beside its count in a row of its own, and that row sits alongside
-     * the grid of cards, so the group is two steps up from the heading itself.
-     */
     private group(heading: string) {
         return this.page
             .getByText(heading, { exact: true })
@@ -21,10 +17,6 @@ export class ThemeGalleryPage extends BasePage {
         await this.page.waitForLoadState("networkidle");
     }
 
-    /**
-     * The gallery has to say which themes are already installed and which are only on
-     * offer, so a theme that is ready to edit is not mistaken for one still to be bought.
-     */
     async expectThemesGroupedByInstallState(): Promise<void> {
         await this.open();
 

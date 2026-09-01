@@ -366,13 +366,9 @@ test.describe("check the data transfer flow", () => {
 
             await dataTransfer.gotoEdit(dataTransfer.importId());
 
-            await expect(dataTransfer.uploadedArchiveNote).toContainText(
-                "product-images.zip",
-            );
+            await dataTransfer.expectUploadedArchiveNote("product-images.zip");
 
-            await expect(dataTransfer.uploadedArchiveNote).toContainText(
-                "12 image(s) ready",
-            );
+            await dataTransfer.expectUploadedArchiveNote("12 image(s) ready");
         });
 
         test("downloads the images a file names as links", async ({
@@ -395,9 +391,7 @@ test.describe("check the data transfer flow", () => {
             ]);
 
             await dataTransfer.waitForSuccess();
-            await expect(dataTransfer.imagesDownloadedRow).toContainText(
-                "2 / 2",
-            );
+            await dataTransfer.expectImagesDownloaded("2 / 2");
         });
 
         test("stops when the images do not match the chosen source", async ({
@@ -455,7 +449,7 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.gotoEdit(dataTransfer.importId());
 
-                await expect(dataTransfer.imagesDirectoryInput).toHaveValue(
+                await dataTransfer.expectImagesDirectory(
                     SERVER_IMAGES_DIRECTORY,
                 );
             } finally {
@@ -495,20 +489,17 @@ test.describe("check the data transfer flow", () => {
 
             await dataTransfer.gotoCreate();
 
-            /**
-             * Products, the type the form opens on, have images.
-             */
-            await expect(dataTransfer.imagesPanel).toBeVisible();
+            await dataTransfer.expectImagesPanelVisible();
 
             for (const type of ["customers", "tax_rates"]) {
                 await adminPage.selectOption('select[name="type"]', type);
 
-                await expect(dataTransfer.imagesPanel).toBeHidden();
+                await dataTransfer.expectImagesPanelHidden();
             }
 
             await adminPage.selectOption('select[name="type"]', "products");
 
-            await expect(dataTransfer.imagesPanel).toBeVisible();
+            await dataTransfer.expectImagesPanelVisible();
         });
 
         test("asks for the folder when the images are on the server", async ({
@@ -559,10 +550,7 @@ test.describe("check the data transfer flow", () => {
                 adminPage.getByText("Product type is invalid or not supported"),
             ).toBeVisible();
 
-            const [report] = await Promise.all([
-                adminPage.waitForEvent("download"),
-                dataTransfer.errorReportLink.click(),
-            ]);
+            const report = await dataTransfer.downloadErrorReport();
 
             expect(report.suggestedFilename()).toContain(".csv");
         });
@@ -657,16 +645,13 @@ test.describe("check the data transfer flow", () => {
 
             await dataTransfer.chooseImageSource("upload");
 
-            const [archive] = await Promise.all([
-                adminPage.waitForEvent("download"),
-                dataTransfer.sampleImagesLink.click(),
-            ]);
+            const archive = await dataTransfer.downloadSampleImages();
 
             expect(archive.suggestedFilename()).toBe("product-images.zip");
         });
     });
 
-    test.describe("duplicate URL detection across files", () => {
+    test.describe("duplicate url detection across files", () => {
         const seed = async (
             dataTransfer: DataTransferPage,
             name: string,
@@ -758,10 +743,6 @@ test.describe("check the data transfer flow", () => {
 
             await seed(dataTransfer, "03-seed", [taken]);
 
-            /**
-             * The database matches without regard to case, so the clash is found
-             * and counted, and a file allowed no errors is refused.
-             */
             await dataTransfer.createImport({
                 type: "products",
                 file: writeProductsCsv(`${DUP}-03-upper.csv`, [
@@ -778,7 +759,7 @@ test.describe("check the data transfer flow", () => {
             await dataTransfer.waitForValidationFailure();
         });
 
-        test("a SKU keeping its own URL is an update", async ({
+        test("a sku keeping its own url is an update", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);

@@ -16,10 +16,6 @@ export class CheckoutConfigurationPage extends BasePage {
         return this.page.getByText("Configuration saved successfully").first();
     }
 
-    private shoppingCartToggle(selector: string) {
-        return this.page.locator(selector);
-    }
-
     private get myCartSummarySelect() {
         return this.page.locator(
             'select[name="sales[checkout][mini_cart][summary]"]',
@@ -36,6 +32,10 @@ export class CheckoutConfigurationPage extends BasePage {
         return this.page.locator(
             'input[name="sales[checkout][mini_cart][offer_info]"]',
         );
+    }
+
+    private shoppingCartToggle(selector: string) {
+        return this.page.locator(selector);
     }
 
     async open(): Promise<void> {

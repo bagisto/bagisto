@@ -10,11 +10,6 @@ export class AttributeFamilyEditPage extends BasePage {
         super(page);
     }
 
-    async visit() {
-        await super.visit("admin/catalog/families");
-        await this.page.waitForSelector("div.primary-button:visible", { state: "visible" });
-    }
-
     private async dragAttributesToBothGroups() {
         const dragHandles = await this.page.$$("i.icon-drag");
         const targets = await this.page.$$(GROUP_LISTS);
@@ -59,6 +54,11 @@ export class AttributeFamilyEditPage extends BasePage {
             });
             await this.page.mouse.up();
         }
+    }
+
+    async visit() {
+        await super.visit("admin/catalog/families");
+        await this.page.waitForSelector("div.primary-button:visible", { state: "visible" });
     }
 
     async editAttributeFamily() {

@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { ACLManagement } from "../../../pages/admin/acl/index";
+import { ACLManagement } from "../../../pages/admin/acl/ACLManagement";
 
 test.describe("appearance acl", () => {
     test("should create custom role with appearance permission", async ({

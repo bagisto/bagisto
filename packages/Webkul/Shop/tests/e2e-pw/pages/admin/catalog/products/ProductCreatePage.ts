@@ -1,6 +1,6 @@
 import fs from "fs";
 import { expect, Locator, Page } from "@playwright/test";
-import { CommonPage } from "../../../../utils/tinymce";
+import { TinymcePage } from "../../../../utils/TinymcePage";
 import { BaseProduct } from "../../../types/product.types";
 import { BasePage } from "../../../BasePage";
 import {
@@ -10,10 +10,10 @@ import {
     generateDescription,
 } from "../../../../utils/faker";
 
-export class ProductCreation extends BasePage {
+export class ProductCreatePage extends BasePage {
     constructor(
         page: Page,
-        private editor = new CommonPage(page),
+        private editor = new TinymcePage(page),
     ) {
         super(page);
     }
@@ -60,12 +60,6 @@ export class ProductCreation extends BasePage {
 
     private get productInventory() {
         return this.page.locator('input[name^="inventories["]');
-    }
-
-    private bookingSelect(name: string) {
-        return this.page.locator(
-            `select[name="booking[${name}]"], select[name="booking[${name}]\`"]`,
-        );
     }
 
     private get clickRules() {
@@ -245,10 +239,6 @@ export class ProductCreation extends BasePage {
         return this.page.locator('p:has-text("Select Products")');
     }
 
-    private groupedProductVisibleByName(name: string | RegExp): Locator {
-        return this.page.locator("#app").locator("p", { hasText: name });
-    }
-
     private get addLinkButton() {
         return this.page.getByText("Add Link").first();
     }
@@ -263,12 +253,6 @@ export class ProductCreation extends BasePage {
 
     private get linkDownloadsInput() {
         return this.page.locator('input[name="downloads"]');
-    }
-
-    private slotEditorTrigger(dayIndex: number, slotIndex: number) {
-        return this.page.locator(
-            `div.flex.gap-2\\.5[index="${dayIndex}_${slotIndex}"]`,
-        );
     }
 
     private get linkTypeSelect() {
@@ -314,6 +298,7 @@ export class ProductCreation extends BasePage {
     private get bookingAvailableFromInput() {
         return this.page.locator('input[name="booking[available_from]"]');
     }
+
     private get addTicketsButton() {
         return this.page.getByText("Add Tickets");
     }
@@ -350,10 +335,6 @@ export class ProductCreation extends BasePage {
         return this.page.locator('select[name="from_day"]');
     }
 
-    private bookingInput(name: string) {
-        return this.page.locator(`input[name="booking[${name}]"]`);
-    }
-
     private get toDaySelect() {
         return this.page.locator('select[name="to_day"]');
     }
@@ -378,10 +359,6 @@ export class ProductCreation extends BasePage {
         return this.page.locator(".flatpickr-calendar.hasTime.noCalendar.open");
     }
 
-    private calendarSpinbutton(name: "Hour" | "Minute") {
-        return this.flatpickrCalendar.getByRole("spinbutton", { name });
-    }
-
     private get dayStatusSelect() {
         return this.page.locator("select[name='status']");
     }
@@ -394,25 +371,46 @@ export class ProductCreation extends BasePage {
         return this.page.locator('label[for="allow_rma"]');
     }
 
-    private visibleText(text: string | RegExp) {
-        return this.page.getByText(text);
-    }
-
     private get modalSaveButton() {
         return this.page.getByRole("button", { name: "Save", exact: true });
+    }
+
+    private get dailyPriceTextbox() {
+        return this.page.getByRole("textbox", { name: "Daily Price" });
+    }
+
+    private get hourlyPriceTextbox() {
+        return this.page.getByRole("textbox", { name: "Hourly Price" });
+    }
+
+    private bookingSelect(name: string) {
+        return this.page.locator(
+            `select[name="booking[${name}]"], select[name="booking[${name}]\`"]`,
+        );
+    }
+
+    private groupedProductVisibleByName(name: string | RegExp): Locator {
+        return this.page.locator("#app").locator("p", { hasText: name });
+    }
+
+    private slotEditorTrigger(dayIndex: number, slotIndex: number) {
+        return this.page.locator(
+            `div.flex.gap-2\\.5[index="${dayIndex}_${slotIndex}"]`,
+        );
+    }
+
+    private bookingInput(name: string) {
+        return this.page.locator(`input[name="booking[${name}]"]`);
+    }
+
+    private visibleText(text: string | RegExp) {
+        return this.page.getByText(text);
     }
 
     private productRowByText(text: string | RegExp) {
         return this.page.locator("div.flex.justify-between").filter({
             hasText: text,
         });
-    }
-
-    private productRowCheckbox(text: string | RegExp, index = 0) {
-        return this.productRowByText(text)
-            .nth(index)
-            .locator("input[type='checkbox']")
-            .first();
     }
 
     private dayAvailabilityTrigger(dayIndex: number) {
@@ -436,6 +434,25 @@ export class ProductCreation extends BasePage {
         return this.page.locator(
             `input[name="booking[slots][${dayIndex}][0][id]"]`,
         );
+    }
+
+    private inlineDaySlotTrigger(dayIndex: number) {
+        const selector =
+            dayIndex === 1
+                ? ".overflow-x-auto > div > div > .cursor-pointer"
+                : `.overflow-x-auto > div:nth-child(${dayIndex}) > div > .cursor-pointer`;
+        return this.page.locator(selector).first();
+    }
+
+    private calendarSpinbutton(name: "Hour" | "Minute") {
+        return this.flatpickrCalendar.getByRole("spinbutton", { name });
+    }
+
+    private productRowCheckbox(text: string | RegExp, index = 0) {
+        return this.productRowByText(text)
+            .nth(index)
+            .locator("input[type='checkbox']")
+            .first();
     }
 
     private async fillTimeTextbox(
@@ -485,56 +502,6 @@ export class ProductCreation extends BasePage {
             await this.escapeTarget.press("Escape");
         }
         await this.saveSlotDrawer();
-    }
-
-    private inlineDaySlotTrigger(dayIndex: number) {
-        const selector =
-            dayIndex === 1
-                ? ".overflow-x-auto > div > div > .cursor-pointer"
-                : `.overflow-x-auto > div:nth-child(${dayIndex}) > div > .cursor-pointer`;
-        return this.page.locator(selector).first();
-    }
-
-    private get dailyPriceTextbox() {
-        return this.page.getByRole("textbox", { name: "Daily Price" });
-    }
-
-    private get hourlyPriceTextbox() {
-        return this.page.getByRole("textbox", { name: "Hourly Price" });
-    }
-
-    async createProduct(product: BaseProduct) {
-        await this.visit("admin/catalog/products");
-        await this.openCreateModal(product.type, product.sku);
-        await this.fillCommonDetails(product);
-        await this.handleProductType(product);
-        await this.saveAndVerify();
-        this.saveProductToJson(product);
-    }
-
-    async createProductWithoutRMARule(product: BaseProduct) {
-        await this.visit("admin/catalog/products");
-        await this.openCreateModal(product.type, product.sku);
-        await this.fillCommonDetails(product);
-        await this.handleProductType(product);
-        await this.saveAndVerify();
-        this.saveProductToJson(product);
-    }
-
-    async createConfigProduct(product: BaseProduct) {
-        await this.visit("admin/catalog/products");
-        await this.createProductButton.click();
-        await this.selectProductType.selectOption(product.type);
-        await this.selectAttribute.selectOption("1");
-        await this.productSku.fill(product.sku);
-        await this.saveProductButton.click();
-        await this.handleProductType(product);
-        await this.fillCommonDetails(product);
-        await this.allowRmaToggle.click();
-        await this.clickRules.click();
-        await this.rmaSelection.click();
-        await this.saveAndVerify();
-        this.saveProductToJson(product);
     }
 
     private async openCreateModal(type: string, sku: string) {
@@ -714,34 +681,6 @@ export class ProductCreation extends BasePage {
             await this.productPrice.fill(product.price.toString());
         }
         await this.productInventory.first().fill("100");
-    }
-
-    async addDownloadableLink(filePath: string, title: string, url: string) {
-        await this.addLinkButton.click();
-        await this.page.waitForTimeout(1000);
-        await this.linkTitleInput.fill(title);
-        const linkTitle = await this.linkTitleInput.inputValue();
-        await this.linkPriceInput.fill("100");
-        await this.linkDownloadsInput.fill("2");
-        await this.linkTypeSelect.selectOption("url");
-        await this.linkFileInput.fill(url);
-        await this.sampleTypeSelect.selectOption("url");
-        await this.sampleUrlInput.fill(url);
-        await this.linkSaveButton.click();
-        await this.saveButton.click();
-        await expect(this.visibleText(linkTitle)).toBeVisible();
-    }
-
-    async addDownloadableSample(title: string, url: string) {
-        await this.addSampleButton.click();
-        await this.page.waitForTimeout(1000);
-        await this.sampleTitleInput.fill(title);
-        const sampleTitle = await this.sampleTitleInput.inputValue();
-        await this.sampleTypeDropdown.selectOption("url");
-        await this.sampleUrlField.fill(url);
-        await this.linkSaveButton.click();
-        await this.saveButton.click();
-        await expect(this.visibleText(sampleTitle)).toBeVisible();
     }
 
     private async downloadable(product: BaseProduct) {
@@ -1304,5 +1243,67 @@ export class ProductCreation extends BasePage {
             type: product.type,
         };
         fs.writeFileSync(filePath, JSON.stringify(productData, null, 2));
+    }
+
+    async createProduct(product: BaseProduct) {
+        await this.visit("admin/catalog/products");
+        await this.openCreateModal(product.type, product.sku);
+        await this.fillCommonDetails(product);
+        await this.handleProductType(product);
+        await this.saveAndVerify();
+        this.saveProductToJson(product);
+    }
+
+    async createProductWithoutRMARule(product: BaseProduct) {
+        await this.visit("admin/catalog/products");
+        await this.openCreateModal(product.type, product.sku);
+        await this.fillCommonDetails(product);
+        await this.handleProductType(product);
+        await this.saveAndVerify();
+        this.saveProductToJson(product);
+    }
+
+    async createConfigProduct(product: BaseProduct) {
+        await this.visit("admin/catalog/products");
+        await this.createProductButton.click();
+        await this.selectProductType.selectOption(product.type);
+        await this.selectAttribute.selectOption("1");
+        await this.productSku.fill(product.sku);
+        await this.saveProductButton.click();
+        await this.handleProductType(product);
+        await this.fillCommonDetails(product);
+        await this.allowRmaToggle.click();
+        await this.clickRules.click();
+        await this.rmaSelection.click();
+        await this.saveAndVerify();
+        this.saveProductToJson(product);
+    }
+
+    async addDownloadableLink(filePath: string, title: string, url: string) {
+        await this.addLinkButton.click();
+        await this.page.waitForTimeout(1000);
+        await this.linkTitleInput.fill(title);
+        const linkTitle = await this.linkTitleInput.inputValue();
+        await this.linkPriceInput.fill("100");
+        await this.linkDownloadsInput.fill("2");
+        await this.linkTypeSelect.selectOption("url");
+        await this.linkFileInput.fill(url);
+        await this.sampleTypeSelect.selectOption("url");
+        await this.sampleUrlInput.fill(url);
+        await this.linkSaveButton.click();
+        await this.saveButton.click();
+        await expect(this.visibleText(linkTitle)).toBeVisible();
+    }
+
+    async addDownloadableSample(title: string, url: string) {
+        await this.addSampleButton.click();
+        await this.page.waitForTimeout(1000);
+        await this.sampleTitleInput.fill(title);
+        const sampleTitle = await this.sampleTitleInput.inputValue();
+        await this.sampleTypeDropdown.selectOption("url");
+        await this.sampleUrlField.fill(url);
+        await this.linkSaveButton.click();
+        await this.saveButton.click();
+        await expect(this.visibleText(sampleTitle)).toBeVisible();
     }
 }

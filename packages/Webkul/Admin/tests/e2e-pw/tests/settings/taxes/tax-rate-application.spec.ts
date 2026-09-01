@@ -12,13 +12,6 @@ import {
 
 const PRODUCT_PRICE = TAX_PRODUCT_PRICE;
 
-/**
- * End-to-end tax application: rate -> category -> product -> storefront.
- *
- * Each storefront scenario uses a region whose wildcard (empty) state matches
- * the address filled during guest checkout, so the rate is guaranteed to apply
- * and the tax can be asserted mathematically.
- */
 test.describe("tax application", () => {
     test.setTimeout(240000);
 
@@ -43,7 +36,6 @@ test.describe("tax application", () => {
 
         await createSimpleTaxableProduct(adminPage);
 
-        // Assertion lives inside the helper (success toast).
         await assignTaxCategoryToProduct(adminPage, category.name);
     });
 
@@ -73,10 +65,6 @@ test.describe("tax application", () => {
             adminPage,
             shopPage,
         }) => {
-            /**
-             * Admin setup — create the rate (wildcard state), bundle it in a
-             * category, create a product and assign the category to it.
-             */
             const rate = await new TaxRateCreatePage(adminPage).createTaxRate({
                 country: scenario.region.country,
                 state: "",
@@ -91,10 +79,6 @@ test.describe("tax application", () => {
 
             await assignTaxCategoryToProduct(adminPage, category.name);
 
-            /**
-             * Storefront verification — taxable subtotal in the cart, then the
-             * applied tax and grand total at checkout.
-             */
             await new TaxRateApplyPage(shopPage).verifyTaxApplication(
                 productName,
                 PRODUCT_PRICE,
@@ -105,15 +89,7 @@ test.describe("tax application", () => {
                 },
             );
 
-            /**
-             * Cleanup — remove the created tax rate so repeated runs stay clean.
-             */
             await new TaxRateListPage(adminPage).deleteTaxRate(rate.identifier);
         });
     }
-
-    /**
-     * Tax rates have no priority field in Bagisto's schema, so priority-based
-     * resolution is out of scope (requirement scoped to "if supported").
-     */
 });

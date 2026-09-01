@@ -1,11 +1,11 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 import { MultipleCheckout } from "../../pages/shop/checkout/MultipleCheckout";
 
 test.describe("multiple types product combination checkout flow", () => {
     test("should create simple product to checkout", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",
@@ -22,7 +22,7 @@ test.describe("multiple types product combination checkout flow", () => {
     test("should create another simple product to add in group to checkout", async ({
         adminPage,
     }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",
@@ -39,7 +39,7 @@ test.describe("multiple types product combination checkout flow", () => {
     test("should create configurable product to checkout", async ({
         adminPage,
     }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createConfigProduct({
             type: "configurable",
@@ -54,7 +54,7 @@ test.describe("multiple types product combination checkout flow", () => {
     });
 
     test("should create virtual product to checkout", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "virtual",
@@ -69,7 +69,7 @@ test.describe("multiple types product combination checkout flow", () => {
     });
 
     test("should create group product to checkout", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "grouped",
@@ -84,7 +84,7 @@ test.describe("multiple types product combination checkout flow", () => {
     });
 
     test("should create bundle product", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "bundle",
@@ -101,7 +101,7 @@ test.describe("multiple types product combination checkout flow", () => {
     test("should create downloadable product to checkout", async ({
         adminPage,
     }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "downloadable",
@@ -169,7 +169,7 @@ test.describe("multiple types product combination checkout flow", () => {
         await multipleCheckout.customerCheckoutSimpleAndBundle();
     });
 
-    test("should allow customer to complete checkout for Downloadable and bundle product successfully", async ({
+    test("should allow customer to complete checkout for downloadable and bundle product successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);
@@ -178,7 +178,7 @@ test.describe("multiple types product combination checkout flow", () => {
         await multipleCheckout.customerCheckoutDownloadableAndBundle();
     });
 
-    test("should allow customer to complete checkout for Group and bundle product successfully", async ({
+    test("should allow customer to complete checkout for group and bundle product successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);

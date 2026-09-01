@@ -133,10 +133,6 @@ export class ProductCreatePage extends BasePage {
         return this.page.locator(".flatpickr-calendar.hasTime.noCalendar.open");
     }
 
-    public get updateProductSuccessToast() {
-        return this.page.getByText(/Product updated successfully/i);
-    }
-
     private get bulkPriceInput() {
         return this.page.locator('input[name="price"]');
     }
@@ -302,10 +298,6 @@ export class ProductCreatePage extends BasePage {
             .locator('input[type="checkbox"]');
     }
 
-    private configurableAttributeOption(name: string) {
-        return this.paragraphByText(name).locator("span");
-    }
-
     private linkTitleText(title: string) {
         return this.page.getByText(title);
     }
@@ -346,6 +338,10 @@ export class ProductCreatePage extends BasePage {
             .nth(index);
     }
 
+    private configurableAttributeOption(name: string) {
+        return this.paragraphByText(name).locator("span");
+    }
+
     private async fillAvailabilityRange(
         availableFrom: string,
         availableTo: string,
@@ -356,62 +352,11 @@ export class ProductCreatePage extends BasePage {
         await this.availableToTextbox.press("Enter");
     }
 
-    public async expectBookingErrorText(text: string) {
-        await expect(this.bookingErrorMessage()).toBeVisible();
-        await expect(this.bookingErrorMessage()).toHaveText(text);
-    }
-
-    async visit() {
-        await super.visit("admin/catalog/products");
-        await expect(this.createButton).toBeVisible();
-    }
-
-    async openCreateModal() {
-        await this.visit();
-        await this.createButton.click();
-        await expect(this.typeSelect).toBeVisible();
-    }
-
-    async fillType(type: string) {
-        await this.typeSelect.selectOption(type);
-    }
-
-    async fillAttributeFamily(attributeFamily: string | { label: string }) {
-        await this.attributeFamilySelect.selectOption(attributeFamily);
-    }
-
-    async fillSku(sku: string) {
-        await this.skuInput.fill(sku);
-    }
-
-    async submit() {
-        await this.saveProductButton.click();
-    }
-
-    async createProduct(
-        type: string,
-        attributeFamily: string | { label: string },
-        sku: string,
-    ) {
-        await this.openCreateModal();
-        await this.fillType(type);
-        await this.fillAttributeFamily(attributeFamily);
-        await this.fillSku(sku);
-        await this.submit();
-    }
-
     private async startProductCreation(
         type: string,
         attributeFamily: string | { label: string },
     ) {
         await this.createProduct(type, attributeFamily, generateSKU());
-    }
-
-    public async verifyProductVisible(name: string) {
-        await this.visit("admin/catalog/products");
-        await expect(
-            this.paragraphByText(new RegExp(`^${name}$`)),
-        ).toBeVisible();
     }
 
     private async createBookingProductBase(): Promise<BookingProductSeed> {
@@ -468,6 +413,91 @@ export class ProductCreatePage extends BasePage {
         await this.bookingInput("available_to").fill(formattedAvailableToDate);
 
         return product;
+    }
+
+    private async fillTimeTextbox(
+        label: "From" | "To",
+        index: number,
+        hour: string,
+        minute: string,
+    ) {
+        await this.slotTimeTextbox(label, index).click();
+        await this.flatpickrCalendar.waitFor({
+            state: "visible",
+        });
+        await this.hourSpinbutton.fill(hour);
+        await this.minuteSpinbutton.fill(minute);
+        await this.page.waitForTimeout(500);
+        await this.minuteSpinbutton.press("Enter");
+    }
+
+    private async fillInlineDaySlot(
+        dayIndex: number,
+        fromHour: string,
+        fromMinute: string,
+        toHour: string,
+        toMinute: string,
+        pressEscapeBeforeSave: boolean,
+    ) {
+        await this.inlineDaySlotTrigger(dayIndex).click();
+        await this.fillTimeTextbox("From", 0, fromHour, fromMinute);
+        await this.page.waitForTimeout(500);
+        await this.fillTimeTextbox("To", 0, toHour, toMinute);
+        if (pressEscapeBeforeSave) {
+            await this.escapeTarget.press("Escape");
+        }
+        await this.modalSaveButton.click();
+    }
+
+    public async expectBookingErrorText(text: string) {
+        await expect(this.bookingErrorMessage()).toBeVisible();
+        await expect(this.bookingErrorMessage()).toHaveText(text);
+    }
+
+    async visit() {
+        await super.visit("admin/catalog/products");
+        await expect(this.createButton).toBeVisible();
+    }
+
+    async openCreateModal() {
+        await this.visit();
+        await this.createButton.click();
+        await expect(this.typeSelect).toBeVisible();
+    }
+
+    async fillType(type: string) {
+        await this.typeSelect.selectOption(type);
+    }
+
+    async fillAttributeFamily(attributeFamily: string | { label: string }) {
+        await this.attributeFamilySelect.selectOption(attributeFamily);
+    }
+
+    async fillSku(sku: string) {
+        await this.skuInput.fill(sku);
+    }
+
+    async submit() {
+        await this.saveProductButton.click();
+    }
+
+    async createProduct(
+        type: string,
+        attributeFamily: string | { label: string },
+        sku: string,
+    ) {
+        await this.openCreateModal();
+        await this.fillType(type);
+        await this.fillAttributeFamily(attributeFamily);
+        await this.fillSku(sku);
+        await this.submit();
+    }
+
+    public async verifyProductVisible(name: string) {
+        await this.visit("admin/catalog/products");
+        await expect(
+            this.paragraphByText(new RegExp(`^${name}$`)),
+        ).toBeVisible();
     }
 
     async createSimpleProduct(product) {
@@ -940,6 +970,7 @@ export class ProductCreatePage extends BasePage {
             }
         }
     }
+
     async createEventBookingProduct() {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("type").selectOption("event");
@@ -1097,7 +1128,6 @@ export class ProductCreatePage extends BasePage {
         await this.saveProductButton.click();
         return product.name;
     }
-
 
     async createRentalBookingProductBothhourlyDailywith_and_withoutRange(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
         const product = await this.createBookingProductBase();
@@ -1346,39 +1376,5 @@ export class ProductCreatePage extends BasePage {
 
             }
         }
-    }
-
-    private async fillTimeTextbox(
-        label: "From" | "To",
-        index: number,
-        hour: string,
-        minute: string,
-    ) {
-        await this.slotTimeTextbox(label, index).click();
-        await this.flatpickrCalendar.waitFor({
-            state: "visible",
-        });
-        await this.hourSpinbutton.fill(hour);
-        await this.minuteSpinbutton.fill(minute);
-        await this.page.waitForTimeout(500);
-        await this.minuteSpinbutton.press("Enter");
-    }
-
-    private async fillInlineDaySlot(
-        dayIndex: number,
-        fromHour: string,
-        fromMinute: string,
-        toHour: string,
-        toMinute: string,
-        pressEscapeBeforeSave: boolean,
-    ) {
-        await this.inlineDaySlotTrigger(dayIndex).click();
-        await this.fillTimeTextbox("From", 0, fromHour, fromMinute);
-        await this.page.waitForTimeout(500);
-        await this.fillTimeTextbox("To", 0, toHour, toMinute);
-        if (pressEscapeBeforeSave) {
-            await this.escapeTarget.press("Escape");
-        }
-        await this.modalSaveButton.click();
     }
 }

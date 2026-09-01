@@ -1,16 +1,12 @@
 import { Locator, Page, Response, expect } from "@playwright/test";
 import { BasePage } from "../../BasePage";
 
-/**
- * Base checkout helper for common checkout operations
- * Includes all locators needed for shop checkout flow
- */
 export class CheckoutHelper extends BasePage {
     constructor(page: Page) {
         super(page);
     }
 
-    get searchInput() {
+    private get searchInput() {
         return this.page.getByRole("textbox", {
             name: "Search products here",
         });
@@ -30,61 +26,61 @@ export class CheckoutHelper extends BasePage {
         return this.page.getByText("Item Added Successfully");
     }
 
-    get continueButton() {
+    private get continueButton() {
         return this.page.locator(
             '//a[contains(.," Continue to Checkout ")][1]',
         );
     }
 
-    get companyName() {
+    private get companyName() {
         return this.page.getByRole("textbox", { name: "Company Name" });
     }
 
-    get firstName() {
+    private get firstName() {
         return this.page.getByRole("textbox", { name: "First Name" });
     }
 
-    get lastName() {
+    private get lastName() {
         return this.page.getByRole("textbox", { name: "Last Name" });
     }
 
-    get shippingEmail() {
+    private get shippingEmail() {
         return this.page.locator('input[name="billing\\.email"]');
     }
 
-    get streetAddress() {
+    private get streetAddress() {
         return this.page.getByRole("textbox", { name: "Street Address" });
     }
 
-    get addNewAddress() {
+    private get addNewAddress() {
         return this.page.getByText("Add new address");
     }
 
-    get billingCountry() {
+    private get billingCountry() {
         return this.page.locator('select[name="billing\\.country"]');
     }
 
-    get billingState() {
+    private get billingState() {
         return this.page.locator('select[name="billing\\.state"]');
     }
 
-    get billingCity() {
+    private get billingCity() {
         return this.page.getByRole("textbox", { name: "City" });
     }
 
-    get billingZip() {
+    private get billingZip() {
         return this.page.getByRole("textbox", { name: "Zip/Postcode" });
     }
 
-    get billingTelephone() {
+    private get billingTelephone() {
         return this.page.getByRole("textbox", { name: "Telephone" });
     }
 
-    get clickSaveAddressButton() {
+    private get clickSaveAddressButton() {
         return this.page.getByRole("button", { name: "Save" });
     }
 
-    get clickProcessButton() {
+    private get clickProcessButton() {
         return this.page.getByRole("button", { name: "Proceed" });
     }
 
@@ -104,7 +100,7 @@ export class CheckoutHelper extends BasePage {
         return this.page.getByAltText("Cash On Delivery");
     }
 
-    get clickPlaceOrderButton() {
+    private get clickPlaceOrderButton() {
         return this.page.getByRole("button", { name: "Place Order" });
     }
 
@@ -128,10 +124,6 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator(
             'span.flex>label[for="booking[daily]"].icon-radio-unselect',
         );
-    }
-
-    getMinimizebtn() {
-        return this.page.locator("a.phpdebugbar-minimize-btn");
     }
 
     get bookingDateInput() {
@@ -187,19 +179,11 @@ export class CheckoutHelper extends BasePage {
             .first();
     }
 
-    get miniCart() {
-        return this.page.locator("header").first();
-    }
-
     get cartSummaryToggle() {
         return this.page
             .locator("div.flex-1.overflow-auto")
             .getByRole("button", { name: "See Details" })
             .first();
-    }
-
-    cartSummaryText(index: number) {
-        return this.page.locator("div.grid.gap-2>div>p.text-sm").nth(index);
     }
 
     get cartDismissButton() {
@@ -258,14 +242,6 @@ export class CheckoutHelper extends BasePage {
             .first();
     }
 
-    slotGraphTimeText(slotGraph: Locator) {
-        return slotGraph.locator("span.truncate");
-    }
-
-    bookingDetailText(index: number) {
-        return this.page.locator("div.font-medium.text-gray-900").nth(index);
-    }
-
     get bookingCustomerNameText() {
         return this.page.locator("span.font-medium");
     }
@@ -276,19 +252,6 @@ export class CheckoutHelper extends BasePage {
 
     get bookingListToggleButton() {
         return this.page.locator("button.icon-list").first();
-    }
-
-    bookingRowByOrderId(orderId: string) {
-        return this.page
-            .locator("div.row.py-4")
-            .filter({
-                has: this.page.locator("p").nth(1).filter({ hasText: orderId }),
-            })
-            .first();
-    }
-
-    bookingRowText(row: Locator, index: number) {
-        return row.locator("p").nth(index);
     }
 
     get cancelOrderAction() {
@@ -309,51 +272,6 @@ export class CheckoutHelper extends BasePage {
 
     get bookingCalendarNextButton() {
         return this.page.locator("span.icon-sort-right");
-    }
-
-    customerSlotByName(customerName: string) {
-        return this.page
-            .locator(`div.slot:has-text('${customerName}')`)
-            .first();
-    }
-
-    async searchProduct(productName: string) {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchInput.fill(productName);
-        await this.searchInput.press("Enter");
-    }
-
-    async proceedToCheckout() {
-        if (await this.shoppingCartIcon.isVisible()) {
-            await this.shoppingCartIcon.click();
-        }
-        await this.continueButton.click();
-        await this.page.waitForURL("**/checkout/onepage**");
-        const savedAddress = this.page.locator(".icon-radio-unselect").first();
-        await savedAddress.waitFor({ state: "visible", timeout: 60 * 1000 });
-        await savedAddress.click();
-        await this.clickProcessButton.click();
-    }
-
-    async placeOrder() {
-        await this.waitForPaymentMethodSaved();
-
-        await expect(this.clickPlaceOrderButton).toBeEnabled({
-            timeout: 60 * 1000,
-        });
-
-        const orderResponse = this.page.waitForResponse(
-            (response) =>
-                response.url().includes("/api/checkout/onepage/orders")
-                && response.request().method() === "POST",
-            { timeout: 90 * 1000 },
-        );
-
-        await this.clickPlaceOrderButton.click();
-
-        await this.assertOrderAccepted(await orderResponse);
-        await this.waitForOrderPlaced();
     }
 
     private async waitForPaymentMethodSaved() {
@@ -418,9 +336,80 @@ export class CheckoutHelper extends BasePage {
         }
     }
 
-    /**
-     * Common guest checkout address entry
-     */
+    getMinimizebtn() {
+        return this.page.locator("a.phpdebugbar-minimize-btn");
+    }
+
+    cartSummaryText(index: number) {
+        return this.page.locator("div.grid.gap-2>div>p.text-sm").nth(index);
+    }
+
+    slotGraphTimeText(slotGraph: Locator) {
+        return slotGraph.locator("span.truncate");
+    }
+
+    bookingDetailText(index: number) {
+        return this.page.locator("div.font-medium.text-gray-900").nth(index);
+    }
+
+    bookingRowByOrderId(orderId: string) {
+        return this.page
+            .locator("div.row.py-4")
+            .filter({
+                has: this.page.locator("p").nth(1).filter({ hasText: orderId }),
+            })
+            .first();
+    }
+
+    bookingRowText(row: Locator, index: number) {
+        return row.locator("p").nth(index);
+    }
+
+    customerSlotByName(customerName: string) {
+        return this.page
+            .locator(`div.slot:has-text('${customerName}')`)
+            .first();
+    }
+
+    async searchProduct(productName: string) {
+        await this.visit("");
+        await this.page.waitForLoadState("networkidle");
+        await this.searchInput.fill(productName);
+        await this.searchInput.press("Enter");
+    }
+
+    async proceedToCheckout() {
+        if (await this.shoppingCartIcon.isVisible()) {
+            await this.shoppingCartIcon.click();
+        }
+        await this.continueButton.click();
+        await this.page.waitForURL("**/checkout/onepage**");
+        const savedAddress = this.page.locator(".icon-radio-unselect").first();
+        await savedAddress.waitFor({ state: "visible", timeout: 60 * 1000 });
+        await savedAddress.click();
+        await this.clickProcessButton.click();
+    }
+
+    async placeOrder() {
+        await this.waitForPaymentMethodSaved();
+
+        await expect(this.clickPlaceOrderButton).toBeEnabled({
+            timeout: 60 * 1000,
+        });
+
+        const orderResponse = this.page.waitForResponse(
+            (response) =>
+                response.url().includes("/api/checkout/onepage/orders")
+                && response.request().method() === "POST",
+            { timeout: 90 * 1000 },
+        );
+
+        await this.clickPlaceOrderButton.click();
+
+        await this.assertOrderAccepted(await orderResponse);
+        await this.waitForOrderPlaced();
+    }
+
     async fillGuestCheckoutAddress() {
         await this.companyName.fill("Web");
         await this.firstName.fill("demo");
@@ -434,9 +423,6 @@ export class CheckoutHelper extends BasePage {
         await this.billingTelephone.fill("2365432789");
     }
 
-    /**
-     * Complete guest checkout end-to-end
-     */
     async guestCheckoutComplete() {
         await this.shoppingCartIcon.click();
         await this.continueButton.click();
@@ -447,9 +433,6 @@ export class CheckoutHelper extends BasePage {
         await this.placeOrder();
     }
 
-    /**
-     * Complete checkout with new address
-     */
     async checkoutWithNewAddress() {
         await this.shoppingCartIcon.click();
         await this.continueButton.click();

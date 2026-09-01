@@ -1,11 +1,11 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { SimpleProductCheckout } from "../../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 test.describe("simple product checkout flow", () => {
     test("should create simple product", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",

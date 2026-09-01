@@ -1,5 +1,5 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
@@ -10,7 +10,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with available every week and same slot for all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -26,7 +26,7 @@ test.describe("appointment booking product checkout flow", () => {
             });
         });
 
-        test("should allow customer to complete checkout appointment booking with all the test ", async ({
+        test("should allow customer to complete checkout appointment booking with all the test", async ({
             shopPage,
         }) => {
             const customer = await loginAsCustomer(shopPage);
@@ -39,7 +39,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with available every week and same slot for all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -71,7 +71,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with available every week and not same slot for all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -87,7 +87,7 @@ test.describe("appointment booking product checkout flow", () => {
             });
         });
 
-        test("should allow customer to complete checkout appointment booking with all the test ", async ({
+        test("should allow customer to complete checkout appointment booking with all the test", async ({
             shopPage,
         }) => {
             const customer = await loginAsCustomer(shopPage);
@@ -100,7 +100,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with available every week and not same slot for all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -132,7 +132,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with not available every week and same slot for all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -161,7 +161,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with not available every week and same slot for all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -193,7 +193,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with not available every week and not same slot for all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",
@@ -222,7 +222,7 @@ test.describe("appointment booking product checkout flow", () => {
         test("should create appointment booking with not available every week and not same slot for all days without cancelation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "appointment",

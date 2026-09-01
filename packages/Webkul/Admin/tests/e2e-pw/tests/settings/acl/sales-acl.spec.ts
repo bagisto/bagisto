@@ -1,5 +1,5 @@
 import { test, expect } from "../../../setup";
-import { ACLManagement } from "../../../pages/admin/acl/index";
+import { ACLManagement } from "../../../pages/admin/acl/ACLManagement";
 
 test.describe("acl management", () => {
     test("should create role for all permission", async ({ adminPage }) => {
@@ -43,7 +43,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->orders"]);
         });
 
-        test("should create custom role with sales (order-> create) permission", async ({
+        test("should create custom role with sales (order -> create) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -68,7 +68,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->transactions"]);
         });
 
-        test("should create custom role with sales (transaction->view) permission", async ({
+        test("should create custom role with sales (transaction -> view) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -97,7 +97,7 @@ test.describe("acl management", () => {
             await aclManagement.verfiyAssignedRole(["sales->shipments"]);
         });
 
-        test("should create custom role with sales (shipments-> create) permission", async ({
+        test("should create custom role with sales (shipments -> create) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -112,7 +112,7 @@ test.describe("acl management", () => {
             ).toBeVisible();
         });
 
-        test("should create custom role with sales (shipments-> view) permission", async ({
+        test("should create custom role with sales (shipments -> view) permission", async ({
             adminPage,
         }) => {
             const aclManagement = new ACLManagement(adminPage);
@@ -156,7 +156,7 @@ test.describe("acl management", () => {
         });
     });
 
-    test("should create custom role with sales (refunds->view) permission", async ({
+    test("should create custom role with sales (refunds -> view) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -168,7 +168,7 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    test("should create custom role with sales (refunds->create) permission", async ({
+    test("should create custom role with sales (refunds -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -196,7 +196,7 @@ test.describe("acl management", () => {
         await aclManagement.verfiyAssignedRole(["sales->rma"]);
     });
 
-    test("should create custom role with sales (rma->view) permission", async ({
+    test("should create custom role with sales (rma -> view) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -209,7 +209,7 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    test("should create custom role with sales (rma->create) permission", async ({
+    test("should create custom role with sales (rma -> create) permission", async ({
         adminPage,
     }) => {
         test.setTimeout(120 * 1000);
@@ -224,7 +224,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaCreateVerify();
     });
 
-    test("should create custom role with sales (rma_reason->view) permission", async ({
+    test("should create custom role with sales (rma_reason -> view) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -241,7 +241,7 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    test("should create custom role with sales (rma->rma reason->create) permission", async ({
+    test("should create custom role with sales (rma -> rma reason -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -251,7 +251,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaReasonCreateVerify();
     });
 
-    test("should create custom role with sales (rma->rma reason->edit) permission", async ({
+    test("should create custom role with sales (rma -> rma reason -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -261,7 +261,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaReasonEditVerify();
     });
 
-    test("should create custom role with sales (rma->rma reason->delete) permission", async ({
+    test("should create custom role with sales (rma -> rma reason -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -271,7 +271,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaReasonDeleteVerify();
     });
 
-    test("should create custom role with sales (rma_rules->view) permission", async ({
+    test("should create custom role with sales (rma_rules -> view) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -288,7 +288,7 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    test("should create custom role with sales (rma->rma rules->create) permission", async ({
+    test("should create custom role with sales (rma -> rma rules -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -298,7 +298,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaRulesCreateVerify();
     });
 
-    test("should create custom role with sales (rma->rma rules->edit) permission", async ({
+    test("should create custom role with sales (rma -> rma rules -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -308,7 +308,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaRulesEditVerify();
     });
 
-    test("should create custom role with sales (rma->rma rules->delete) permission", async ({
+    test("should create custom role with sales (rma -> rma rules -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -318,7 +318,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaRulesDeleteVerify();
     });
 
-    test("should create custom role with sales (rma_status->view) permission", async ({
+    test("should create custom role with sales (rma_status -> view) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -335,7 +335,7 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    test("should create custom role with sales (rma->rma status->create) permission", async ({
+    test("should create custom role with sales (rma -> rma status -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -345,7 +345,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaStatusCreateVerify();
     });
 
-    test("should create custom role with sales (rma->rma status->edit) permission", async ({
+    test("should create custom role with sales (rma -> rma status -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -355,7 +355,7 @@ test.describe("acl management", () => {
         await aclManagement.rmaStatusEditVerify();
     });
 
-    test("should create custom role with sales (rma->rma status->delete) permission", async ({
+    test("should create custom role with sales (rma -> rma status -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);

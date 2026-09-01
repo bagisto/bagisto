@@ -1,14 +1,14 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 test.describe("event booking product checkout flow", () => {
-    test.describe("Event Booking product for one ticket ", () => {
-        test("Should create event booking product for one ticket", async ({
+    test.describe("event booking product for one ticket", () => {
+        test("should create event booking product for one ticket", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "event",
@@ -34,10 +34,10 @@ test.describe("event booking product checkout flow", () => {
             await checkout.verifyduration(customer, id, false);
         });
 
-        test("Should create event booking product for one ticket without cancellation", async ({
+        test("should create event booking product for one ticket without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "event",
@@ -65,11 +65,11 @@ test.describe("event booking product checkout flow", () => {
         });
     });
 
-    test.describe("event Booking product for multiple tickets ", () => {
+    test.describe("event booking product for multiple tickets", () => {
         test("should create event booking product with multiple tickets", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "event",
@@ -96,10 +96,10 @@ test.describe("event booking product checkout flow", () => {
             await checkout.verifyduration(customer, id, false);
         });
 
-        test("Should create event booking product with multiple tickets without cancellation", async ({
+        test("should create event booking product with multiple tickets without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "event",

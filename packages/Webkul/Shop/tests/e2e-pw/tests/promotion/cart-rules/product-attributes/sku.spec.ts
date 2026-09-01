@@ -1,6 +1,6 @@
 import { test } from "../../../../setup";
 import { expect, Page } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -76,7 +76,7 @@ async function createRuleAndVerifyCoupon({
 test.beforeEach(async ({ adminPage }) => {
     generatedSku = `SKU-${Date.now()}`;
 
-    const productCreation = new ProductCreation(adminPage);
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
@@ -141,7 +141,7 @@ const cases = [
 test.describe("cart rules", () => {
     test.describe("product attribute condition", () => {
         for (const { operator, type, value } of cases) {
-            test(`should apply coupon when sku consition is->  ${operator} (${type})`, async ({
+            test(`should apply coupon when sku consition is -> ${operator} (${type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({

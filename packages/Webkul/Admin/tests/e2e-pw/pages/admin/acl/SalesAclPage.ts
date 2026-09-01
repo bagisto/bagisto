@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { addAddress, loginAsCustomer } from "../../../utils/customer";
-import { SettingsAclPage } from "./settings";
+import { SettingsAclPage } from "./SettingsAclPage";
 
 export class SalesAclPage extends SettingsAclPage {
     constructor(page: Page) {

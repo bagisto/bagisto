@@ -1,5 +1,5 @@
 import { expect, test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -52,7 +52,7 @@ async function createRuleAndVerifyCoupon({
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",

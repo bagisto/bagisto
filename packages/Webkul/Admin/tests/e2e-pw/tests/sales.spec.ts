@@ -55,7 +55,7 @@ test.describe.serial("rma management", () => {
     });
 });
 
-test.describe(" rma management ", () => {
+test.describe("rma management", () => {
     test("should allow admin to create reason for rma", async ({
         adminPage,
     }) => {
@@ -152,24 +152,7 @@ test.describe("sales management", () => {
         });
     });
 
-    // test("should be able to create transaction", async ({ adminPage }) => {
-    //     const salesCreatePage = new SalesCreatePage(adminPage);
-    //     await salesCreatePage.createSimpleProduct();
-    //     await salesCreatePage.generateSimpleOrder();
-    //     await new SalesManagePage(adminPage).createTransaction();
-    // });
-
-    // test("support mass status Change to Paid for Invoices", async ({
-    //     adminPage,
-    // }) => {
-    //     const salesCreatePage = new SalesCreatePage(adminPage);
-    //     await salesCreatePage.createSimpleProduct();
-    //     await salesCreatePage.generateSimpleOrder();
-    //     await new SalesManagePage(adminPage).createInvoice();
-    //     await new SalesManagePage(adminPage).massUpdateInvoiceStatus("Paid");
-    // });
-
-    test("support mass status Change to overdue for Invoices", async ({
+    test("support mass status change to overdue for invoices", async ({
         adminPage,
     }) => {
         await new SalesManagePage(adminPage).massUpdateInvoiceStatus("Overdue");

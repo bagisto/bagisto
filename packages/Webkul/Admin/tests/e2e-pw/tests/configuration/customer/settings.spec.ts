@@ -32,32 +32,32 @@ test.describe("settings configuration", () => {
         ).enableNewsletterSubscription();
     });
 
-    test.describe("Social login configuration", () => {
-        test("should enable the Github login ", async ({ adminPage }) => {
+    test.describe("social login configuration", () => {
+        test("should enable the github login", async ({ adminPage }) => {
             await new CustomerSettingsPage(adminPage).enableSocialLogin(
                 "github",
             );
         });
 
-        test("should enable the linkedin login ", async ({ adminPage }) => {
+        test("should enable the linkedin login", async ({ adminPage }) => {
             await new CustomerSettingsPage(adminPage).enableSocialLogin(
                 "linkedin",
             );
         });
 
-        test("should enable the google login ", async ({ adminPage }) => {
+        test("should enable the google login", async ({ adminPage }) => {
             await new CustomerSettingsPage(adminPage).enableSocialLogin(
                 "google",
             );
         });
 
-        test("should enable the twitter login ", async ({ adminPage }) => {
+        test("should enable the twitter login", async ({ adminPage }) => {
             await new CustomerSettingsPage(adminPage).enableSocialLogin(
                 "twitter",
             );
         });
 
-        test("should enable the facebook login ", async ({ adminPage }) => {
+        test("should enable the facebook login", async ({ adminPage }) => {
             await new CustomerSettingsPage(adminPage).enableSocialLogin(
                 "facebook",
             );

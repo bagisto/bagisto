@@ -23,7 +23,7 @@ test.describe("design configuration", () => {
         await page.saveAndVerify();
     });
 
-    test("should Set sidebar Menu category view", async ({ adminPage }) => {
+    test("should set sidebar menu category view", async ({ adminPage }) => {
         const page = new DesignConfigurationPage(adminPage);
 
         await page.selectCategoryView("sidebar");
@@ -40,7 +40,7 @@ test.describe("design configuration", () => {
         await adminPage.locator(".icon-cancel").first().click();
     });
 
-    test("should Set default Menu category view", async ({ adminPage }) => {
+    test("should set default menu category view", async ({ adminPage }) => {
         const page = new DesignConfigurationPage(adminPage);
 
         await page.selectCategoryView("default");

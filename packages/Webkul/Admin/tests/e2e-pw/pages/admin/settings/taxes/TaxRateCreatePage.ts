@@ -2,13 +2,6 @@ import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 import { generateTaxRateData, TaxRateData } from "../../../../utils/tax";
 
-/**
- * Page object for the "Create Tax Rate" screen
- * (admin/settings/taxes/rates/create).
- *
- * Exposes a high-level `createTaxRate` happy-path plus focused helpers for the
- * required-field, invalid-percentage and duplicate-identifier validations.
- */
 export class TaxRateCreatePage extends BasePage {
     constructor(page: Page) {
         super(page);
@@ -62,19 +55,11 @@ export class TaxRateCreatePage extends BasePage {
         return this.page.getByText("Tax rate created successfully.");
     }
 
-    /**
-     * Open a fresh create form.
-     */
     async open(): Promise<void> {
         await this.visit("admin/settings/taxes/rates/create");
         await expect(this.identifierInput).toBeVisible();
     }
 
-    /**
-     * Fill every field of the create form. The state control switches between a
-     * `<select>` (countries with states) and a free-text `<input>`, so both are
-     * handled. An empty `state` is left untouched to act as a wildcard.
-     */
     async fillForm(data: TaxRateData): Promise<void> {
         await this.identifierInput.fill(data.identifier);
         await this.countrySelect.selectOption(data.country);
@@ -98,10 +83,6 @@ export class TaxRateCreatePage extends BasePage {
         await this.taxRateInput.fill(data.taxRate);
     }
 
-    /**
-     * Create a tax rate end-to-end and assert the success message. Returns the
-     * generated data so callers can locate / clean up the record.
-     */
     async createTaxRate(
         overrides: Partial<TaxRateData> = {},
     ): Promise<TaxRateData> {
@@ -116,10 +97,6 @@ export class TaxRateCreatePage extends BasePage {
         return data;
     }
 
-    /**
-     * Submit the form without filling any field and assert the required-field
-     * validation blocks the save.
-     */
     async expectRequiredFieldErrors(): Promise<void> {
         await this.open();
         await this.saveButton.click();
@@ -129,10 +106,6 @@ export class TaxRateCreatePage extends BasePage {
         await expect(this.page).toHaveURL(/taxes\/rates\/create/);
     }
 
-    /**
-     * Provide an out-of-range percentage (validation rule is
-     * `numeric|min:0|max:100`) and assert the rate is rejected.
-     */
     async expectInvalidPercentageError(
         invalidPercentage: string = "150",
     ): Promise<void> {
@@ -146,10 +119,6 @@ export class TaxRateCreatePage extends BasePage {
         await expect(this.successMessage).toHaveCount(0);
     }
 
-    /**
-     * Attempt to create a second rate reusing an existing identifier and assert
-     * the unique-identifier validation rejects it.
-     */
     async expectDuplicateIdentifierError(identifier: string): Promise<void> {
         const data = generateTaxRateData({ identifier });
 

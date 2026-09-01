@@ -55,7 +55,7 @@ test.describe("magic ai configuration", () => {
         ).toBe(true);
     });
 
-    test("should craft a personalized checkout message for customers using AI", async ({
+    test("should craft a personalized checkout message for customers using ai", async ({
         adminPage,
     }) => {
         const page = new MagicAIConfigurationPage(adminPage);

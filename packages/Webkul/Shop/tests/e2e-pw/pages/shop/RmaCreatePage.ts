@@ -1,88 +1,85 @@
 import fs from "fs";
 import { expect, Page } from "@playwright/test";
-import { CommonPage } from "../../utils/tinymce";
+import { TinymcePage } from "../../utils/TinymcePage";
 import { loginAsAdmin } from "../../utils/admin";
 import { BasePage } from "../BasePage";
 
-/**
- * Reads product data from JSON file
- */
 function readProductData() {
     const product = JSON.parse(fs.readFileSync("product-data.json", "utf-8"));
     return product.name;
 }
 
-export class RMACreatePage extends BasePage {
+export class RmaCreatePage extends BasePage {
     constructor(
         page: Page,
-        private editor = new CommonPage(page),
+        private editor = new TinymcePage(page),
     ) {
         super(page);
     }
 
-    get viewOrder() {
+    private get viewOrder() {
         return this.page.locator(".row > div:nth-child(4) > a").first();
     }
 
-    get invoiceTab() {
+    private get invoiceTab() {
         return this.page.getByText("Invoice", { exact: true });
     }
 
-    get createInvoiceButton() {
+    private get createInvoiceButton() {
         return this.page.getByRole("button", { name: "Create Invoice" });
     }
 
-    get successInvoiceMessage() {
+    private get successInvoiceMessage() {
         return this.page.getByText("Invoice created successfully");
     }
 
-    get requestRMAButton() {
+    private get requestRMAButton() {
         return this.page.getByText("New RMA Request");
     }
 
-    get editIcon() {
+    private get editIcon() {
         return this.page.locator("a.icon-edit");
     }
 
-    get checkBox() {
+    private get checkBox() {
         return this.page.locator('input[name^="isChecked["]');
     }
 
-    get resolutionSelect() {
+    private get resolutionSelect() {
         return this.page.locator('select[name^="resolution_type"]');
     }
 
-    get reasonSelect() {
+    private get reasonSelect() {
         return this.page.locator('select[name="rma_reason_id"]');
     }
 
-    get rmaQtyInput() {
+    private get rmaQtyInput() {
         return this.page.locator('input[name^="rma_qty"]');
     }
 
-    get orderStatusSelect() {
+    private get orderStatusSelect() {
         return this.page.locator('select[name="package_condition"]');
     }
 
-    get infoInput() {
+    private get infoInput() {
         return this.page.locator('textarea[name="information"]');
     }
 
-    get agreementCheckbox() {
+    private get agreementCheckbox() {
         return this.page.locator("label:has(input#agreement)");
     }
 
-    get submitButton() {
+    private get submitButton() {
         return this.page.locator('button:has-text("Submit request")');
     }
 
-    get successRMAMessage() {
+    private get successRMAMessage() {
         return this.page
             .getByRole("paragraph")
             .filter({ hasText: "Request created successfully." });
     }
 
-    get invalidRMAMessage() {
+    private get invalidRMAMessage() {
         return this.page.getByText("The RMA Qty field must be 1 or less");
     }
 
@@ -149,7 +146,6 @@ export class RMACreatePage extends BasePage {
             this.page.getByText(productName, { exact: true }),
         ).toBeVisible();
     }
-
 
     async rmaCreation() {
         await loginAsAdmin(this.page);

@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -7,10 +7,11 @@ import { loginAsAdmin } from "../../../../utils/admin";
 import { Page } from "@playwright/test";
 
 let generatedSku: string;
-generatedSku = `SKU-${Date.now()}`;
 
 test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    generatedSku = `SKU-${Date.now()}`;
+
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
@@ -63,49 +64,49 @@ async function runCatalogRuleTest({
 const testCases = [
     {
         operator: "==",
-        value: generatedSku,
+        value: () => generatedSku,
         label: "is equal to",
         type: "percentage",
     },
     {
         operator: "==",
-        value: generatedSku,
+        value: () => generatedSku,
         label: "is equal to",
         type: "fixed",
     },
     {
         operator: "!=",
-        value: "sku-123",
+        value: () => "sku-123",
         label: "is not equal to",
         type: "percentage",
     },
     {
         operator: "!=",
-        value: "sku-123",
+        value: () => "sku-123",
         label: "is not equal to",
         type: "fixed",
     },
     {
         operator: "{}",
-        value: generatedSku,
+        value: () => generatedSku,
         label: "contains",
         type: "percentage",
     },
     {
         operator: "{}",
-        value: generatedSku,
+        value: () => generatedSku,
         label: "contains",
         type: "fixed",
     },
     {
         operator: "!{}",
-        value: "example",
+        value: () => "example",
         label: "does not contain",
         type: "percentage",
     },
     {
         operator: "!{}",
-        value: "example",
+        value: () => "example",
         label: "does not contain",
         type: "fixed",
     },
@@ -120,7 +121,7 @@ test.describe("catalog rules", () => {
                 await runCatalogRuleTest({
                     page,
                     operator: tc.operator,
-                    value: tc.value,
+                    value: tc.value(),
                     type: tc.type,
                 });
             });

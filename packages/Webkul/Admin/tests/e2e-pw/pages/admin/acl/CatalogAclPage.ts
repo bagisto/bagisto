@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
 import { generateDescription, generateSKU } from "../../../utils/faker";
-import { ACLSharedPage } from "./shared";
+import { ACLSharedPage } from "./ACLSharedPage";
 import { fillInTinymce } from "../../../utils/tinymce";
 
 export class CatalogAclPage extends ACLSharedPage {

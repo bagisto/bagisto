@@ -1,9 +1,6 @@
 import type { Page } from "@playwright/test";
 import { env } from "./env";
 
-/**
- * Sign the admin in and wait for the dashboard.
- */
 export async function loginAsAdmin(page: Page) {
     const adminCredentials = {
         email: env.adminEmail,

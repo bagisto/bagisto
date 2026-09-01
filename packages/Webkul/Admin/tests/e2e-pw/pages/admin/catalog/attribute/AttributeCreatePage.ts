@@ -25,19 +25,19 @@ export class AttributeCreatePage extends BasePage {
         super(page);
     }
 
-    get createBtn() {
+    private get createBtn() {
         return this.page.locator(".primary-button");
     }
 
-    get fillname() {
+    private get fillname() {
         return this.page.locator('input[name="admin_name"]');
     }
 
-    get fillCode() {
+    private get fillCode() {
         return this.page.locator('input[name="code"]');
     }
 
-    get selectTypeAttribute() {
+    private get selectTypeAttribute() {
         return this.page.locator('select[name="type"]');
     }
 

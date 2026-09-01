@@ -1,12 +1,12 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer } from "../utils/customer";
-import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { WishlistPage } from "../pages/shop/WishlistPage";
 
 test.beforeAll(
     "should create simple product to add in wishlist",
     async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",

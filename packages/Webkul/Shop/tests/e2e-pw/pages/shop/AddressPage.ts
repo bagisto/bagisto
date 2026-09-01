@@ -6,7 +6,6 @@ export class AddressPage extends BasePage {
         super(page);
     }
 
-    // Locators
     private get addAddressButton() {
         return this.page.getByRole("link", { name: "Add Address" });
     }

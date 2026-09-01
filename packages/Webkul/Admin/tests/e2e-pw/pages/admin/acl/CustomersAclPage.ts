@@ -6,7 +6,7 @@ import {
     generateName,
     randomElement,
 } from "../../../utils/faker";
-import { CatalogAclPage } from "./catalog";
+import { CatalogAclPage } from "./CatalogAclPage";
 
 export class CustomersAclPage extends CatalogAclPage {
     constructor(page: Page) {

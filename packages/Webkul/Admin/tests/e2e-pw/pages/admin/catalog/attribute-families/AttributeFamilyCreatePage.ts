@@ -10,21 +10,6 @@ export class AttributeFamilyCreatePage extends BasePage {
         super(page);
     }
 
-    async visit() {
-        await super.visit("admin/catalog/families");
-        await this.page.waitForSelector("div.primary-button:visible", {
-            state: "visible",
-        });
-    }
-
-    async openCreateForm() {
-        await this.visit();
-        await this.page.click("div.primary-button:visible");
-        await this.page
-            .waitForSelector("div#not_avaliable", { timeout: 1000 })
-            .catch(() => null);
-    }
-
     private async dragAttributesToBothGroups() {
         const dragHandles = await this.page.$$("i.icon-drag");
         const targets = await this.page.$$(GROUP_LISTS);
@@ -69,6 +54,21 @@ export class AttributeFamilyCreatePage extends BasePage {
             });
             await this.page.mouse.up();
         }
+    }
+
+    async visit() {
+        await super.visit("admin/catalog/families");
+        await this.page.waitForSelector("div.primary-button:visible", {
+            state: "visible",
+        });
+    }
+
+    async openCreateForm() {
+        await this.visit();
+        await this.page.click("div.primary-button:visible");
+        await this.page
+            .waitForSelector("div#not_avaliable", { timeout: 1000 })
+            .catch(() => null);
     }
 
     async createAttributeFamily() {

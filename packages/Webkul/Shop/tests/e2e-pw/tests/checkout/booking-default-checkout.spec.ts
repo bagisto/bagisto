@@ -1,14 +1,14 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-test.describe("default booking product checkout flow ", () => {
-    test.describe("One Booking For Many Days", () => {
+test.describe("default booking product checkout flow", () => {
+    test.describe("one booking for many days", () => {
         test("should create default booking product with one booking for many days with cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "default",
@@ -36,7 +36,7 @@ test.describe("default booking product checkout flow ", () => {
         test("should prevent cancellation when toggle is off", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "default",
@@ -62,11 +62,11 @@ test.describe("default booking product checkout flow ", () => {
             await checkout.verifyCancellationNotAllowed(id);
         });
 
-        test.describe("Many Bookings For One Day", () => {
+        test.describe("many bookings for one day", () => {
             test("should create default booking product with many bookings for one day with allow cancellation", async ({
                 adminPage,
             }) => {
-                const productCreation = new ProductCreation(adminPage);
+                const productCreation = new ProductCreatePage(adminPage);
                 await productCreation.createProduct({
                     type: "booking",
                     bookingType: "default",
@@ -94,7 +94,7 @@ test.describe("default booking product checkout flow ", () => {
             test("should create default booking product with many bookings for one day with not allowed cancellation", async ({
                 adminPage,
             }) => {
-                const productCreation = new ProductCreation(adminPage);
+                const productCreation = new ProductCreatePage(adminPage);
                 await productCreation.createProduct({
                     type: "booking",
                     bookingType: "default",

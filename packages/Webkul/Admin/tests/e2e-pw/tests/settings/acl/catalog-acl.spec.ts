@@ -1,5 +1,5 @@
 import { test, expect } from "../../../setup";
-import { ACLManagement } from "../../../pages/admin/acl/index";
+import { ACLManagement } from "../../../pages/admin/acl/ACLManagement";
 
 test.describe("catalog acl", () => {
     test("should create custom role with catalog permission", async ({
@@ -25,7 +25,7 @@ test.describe("catalog acl", () => {
         await aclManagement.verfiyAssignedRole(["catalog->products"]);
     });
 
-    test("should create custom role with catalog (products-> create) permission", async ({
+    test("should create custom role with catalog (products -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -38,7 +38,7 @@ test.describe("catalog acl", () => {
         await aclManagement.createSimpleProduct(adminPage);
     });
 
-    test("should create custom role with catalog (products-> edit) permission", async ({
+    test("should create custom role with catalog (products -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -58,7 +58,7 @@ test.describe("catalog acl", () => {
         await aclManagement.productCopyVerify();
     });
 
-    test("should create custom role with catalog (products-> delete) permission", async ({
+    test("should create custom role with catalog (products -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -128,7 +128,7 @@ test.describe("catalog acl", () => {
         await aclManagement.verfiyAssignedRole(["catalog->attributes"]);
     });
 
-    test("should create custom role with catalog (attributes-> create) permission", async ({
+    test("should create custom role with catalog (attributes -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -138,7 +138,7 @@ test.describe("catalog acl", () => {
         await aclManagement.attributeCreateVerify();
     });
 
-    test("should create custom role with catalog (attributes-> edit) permission", async ({
+    test("should create custom role with catalog (attributes -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -148,7 +148,7 @@ test.describe("catalog acl", () => {
         await aclManagement.attributeEditVerify();
     });
 
-    test("should create custom role with catalog (attributes-> delete) permission", async ({
+    test("should create custom role with catalog (attributes -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -172,7 +172,7 @@ test.describe("catalog acl", () => {
         await aclManagement.verfiyAssignedRole(["catalog->families"]);
     });
 
-    test("should create custom role with catalog (families->create) permission", async ({
+    test("should create custom role with catalog (families -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -182,7 +182,7 @@ test.describe("catalog acl", () => {
         await aclManagement.familyCreateVerify();
     });
 
-    test("should create custom role with catalog (families->edit) permission", async ({
+    test("should create custom role with catalog (families -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -192,7 +192,7 @@ test.describe("catalog acl", () => {
         await aclManagement.familyEditVerify();
     });
 
-    test("should create custom role with catalog (families->delete) permission", async ({
+    test("should create custom role with catalog (families -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);

@@ -1,16 +1,8 @@
 import fs from "fs";
 
-/**
- * Admin utility for managing test product data
- * Handles reading and writing product information created during admin tests
- */
 export class ProductDataManager {
     private static readonly dataFile = "product-data.json";
 
-    /**
-     * Read product data from JSON file
-     * Used by shop checkout tests to reference products created in admin
-     */
     static readProductData() {
         try {
             const product = JSON.parse(
@@ -24,10 +16,6 @@ export class ProductDataManager {
         }
     }
 
-    /**
-     * Write product data for checkout testing
-     * Called by admin product creation tests
-     */
     static writeProductData(productData: { name: string; [key: string]: any }) {
         try {
             fs.writeFileSync(
@@ -39,9 +27,6 @@ export class ProductDataManager {
         }
     }
 
-    /**
-     * Clear product data after tests
-     */
     static clearProductData() {
         try {
             if (fs.existsSync(this.dataFile)) {

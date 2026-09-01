@@ -11,7 +11,7 @@ async function subscribeToNewsletter(
     await homePage.expectSubscriptionMessage(expectedMessage);
 }
 
-test.describe("Newsletter subscription", () => {
+test.describe("newsletter subscription", () => {
     test("should allow guest to subscribe to newsletter successfully", async ({
         shopPage,
     }) => {

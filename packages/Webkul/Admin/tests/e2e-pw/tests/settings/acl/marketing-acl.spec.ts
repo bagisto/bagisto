@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { ACLManagement } from "../../../pages/admin/acl/index";
+import { ACLManagement } from "../../../pages/admin/acl/ACLManagement";
 
 test.describe("marketing acl", () => {
     test("should create custom role with marketing permission", async ({
@@ -24,7 +24,7 @@ test.describe("marketing acl", () => {
         await aclManagement.verfiyAssignedRole(["marketing->promotions"]);
     });
 
-    test("should create custom role with marketing (promotions-> cart rule-> create) permission", async ({
+    test("should create custom role with marketing (promotions -> cart rule -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -38,7 +38,7 @@ test.describe("marketing acl", () => {
         await aclManagement.cartRuleCreateVerify();
     });
 
-    test("should create custom role with marketing (promotions-> cart rule-> copy) permission", async ({
+    test("should create custom role with marketing (promotions -> cart rule -> copy) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -52,7 +52,7 @@ test.describe("marketing acl", () => {
         await aclManagement.cartRuleCopyVerify();
     });
 
-    test("should create custom role with marketing (promotions-> cart rule-> edit) permission", async ({
+    test("should create custom role with marketing (promotions -> cart rule -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -66,7 +66,7 @@ test.describe("marketing acl", () => {
         await aclManagement.cartRuleEditVerify();
     });
 
-    test("should create custom role with marketing (promotions-> cart rule-> delete) permission", async ({
+    test("should create custom role with marketing (promotions -> cart rule -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -80,7 +80,7 @@ test.describe("marketing acl", () => {
         await aclManagement.cartRuleDeleteVerify();
     });
 
-    test("should create custom role with marketing (promotions-> catalog rule-> create) permission", async ({
+    test("should create custom role with marketing (promotions -> catalog rule -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -94,7 +94,7 @@ test.describe("marketing acl", () => {
         await aclManagement.catalogRuleCreateVerify();
     });
 
-    test("should create custom role with marketing (promotions-> catalog rule-> edit) permission", async ({
+    test("should create custom role with marketing (promotions -> catalog rule -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -108,7 +108,7 @@ test.describe("marketing acl", () => {
         await aclManagement.catalogRuleEditVerify();
     });
 
-    test("should create custom role with marketing (promotions-> catalog rule-> delete) permission", async ({
+    test("should create custom role with marketing (promotions -> catalog rule -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -135,7 +135,7 @@ test.describe("marketing acl", () => {
         await aclManagement.verfiyAssignedRole(["marketing->communications"]);
     });
 
-    test("should create custom role with marketing (communications-> email template-> create) permission", async ({
+    test("should create custom role with marketing (communications -> email template -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -149,7 +149,7 @@ test.describe("marketing acl", () => {
         await aclManagement.communicationEmailTemplateCreateVerify();
     });
 
-    test("should create custom role with marketing (communications-> email template-> edit) permission", async ({
+    test("should create custom role with marketing (communications -> email template -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -163,7 +163,7 @@ test.describe("marketing acl", () => {
         await aclManagement.communicationEmailTemplateEditVerify();
     });
 
-    test("should create custom role with marketing (communications-> email template-> delete) permission", async ({
+    test("should create custom role with marketing (communications -> email template -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -180,7 +180,7 @@ test.describe("marketing acl", () => {
         await aclManagement.communicationEmailTemplateCreateVerify();
     });
 
-    test("should create custom role with marketing (communications-> events-> create) permission", async ({
+    test("should create custom role with marketing (communications -> events -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -195,21 +195,7 @@ test.describe("marketing acl", () => {
         await aclManagement.eventCreateVerify();
     });
 
-    // test("should create custom role with marketing (communications-> events-> edit) permission", async ({
-    //     adminPage,
-    // }) => {
-    //     const aclManagement = new ACLManagement(adminPage);
-    //     await aclManagement.createRole("custom", [
-    //         "marketing.communications.events.edit",
-    //     ]);
-    //     await aclManagement.createUser();
-    //     await aclManagement.verfiyAssignedRole([
-    //         "marketing->communications->event",
-    //     ]);
-    //     await aclManagement.eventEditVerify();
-    // });
-
-    test("should create custom role with marketing (communications-> events-> delete) permission", async ({
+    test("should create custom role with marketing (communications -> events -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -223,7 +209,7 @@ test.describe("marketing acl", () => {
         await aclManagement.eventDeleteVerify();
     });
 
-    test("should create custom role with marketing (communications-> campaigns-> create) permission", async ({
+    test("should create custom role with marketing (communications -> campaigns -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -237,7 +223,7 @@ test.describe("marketing acl", () => {
         await aclManagement.campaignCreateVerify();
     });
 
-    test("should create custom role with marketing (communications-> campaigns-> edit) permission", async ({
+    test("should create custom role with marketing (communications -> campaigns -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -252,7 +238,7 @@ test.describe("marketing acl", () => {
         await aclManagement.campaignEditVerify();
     });
 
-    test("should create custom role with marketing (communications-> campaigns-> delete) permission", async ({
+    test("should create custom role with marketing (communications -> campaigns -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -280,7 +266,7 @@ test.describe("marketing acl", () => {
         await aclManagement.verfiyAssignedRole(["marketing->search_seo"]);
     });
 
-    test("should create custom role with marketing (search_seo->url_rewrites->create) permission", async ({
+    test("should create custom role with marketing (search_seo -> url_rewrites -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -294,7 +280,7 @@ test.describe("marketing acl", () => {
         await aclManagement.urlRewriteCreateVerify();
     });
 
-    test("should create custom role with marketing (search_seo->url_rewrites->edit) permission", async ({
+    test("should create custom role with marketing (search_seo -> url_rewrites -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -308,7 +294,7 @@ test.describe("marketing acl", () => {
         await aclManagement.urlRewriteEditVerify();
     });
 
-    test("should create custom role with marketing (search_seo->url_rewrites->delete) permission", async ({
+    test("should create custom role with marketing (search_seo -> url_rewrites -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -322,7 +308,7 @@ test.describe("marketing acl", () => {
         await aclManagement.urlRewriteDeleteVerify();
     });
 
-    test("should create custom role with marketing (search_seo->search_terms->create) permission", async ({
+    test("should create custom role with marketing (search_seo -> search_terms -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -336,7 +322,7 @@ test.describe("marketing acl", () => {
         await aclManagement.searchTermsCreateVerify();
     });
 
-    test("should create custom role with marketing (search_seo->search_terms->edit) permission", async ({
+    test("should create custom role with marketing (search_seo -> search_terms -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -350,7 +336,7 @@ test.describe("marketing acl", () => {
         await aclManagement.searchTermsEditVerify();
     });
 
-    test("should create custom role with marketing (search_seo->search_terms->delete) permission", async ({
+    test("should create custom role with marketing (search_seo -> search_terms -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -364,7 +350,7 @@ test.describe("marketing acl", () => {
         await aclManagement.searchTermsDeleteVerify();
     });
 
-    test("should create custom role with marketing (search_seo->search_synonyms->create) permission", async ({
+    test("should create custom role with marketing (search_seo -> search_synonyms -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -378,7 +364,7 @@ test.describe("marketing acl", () => {
         await aclManagement.searchSynonymsCreateVerify();
     });
 
-    test("should create custom role with marketing (search_seo->search_synonyms->edit) permission", async ({
+    test("should create custom role with marketing (search_seo -> search_synonyms -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -392,7 +378,7 @@ test.describe("marketing acl", () => {
         await aclManagement.searchSynonymsEditVerify();
     });
 
-    test("should create custom role with marketing (search_seo->search_synonyms->delete) permission", async ({
+    test("should create custom role with marketing (search_seo -> search_synonyms -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -406,7 +392,7 @@ test.describe("marketing acl", () => {
         await aclManagement.searchSynonymsDeleteVerify();
     });
 
-    test("should create custom role with marketing (search_seo->sitemaps->create) permission", async ({
+    test("should create custom role with marketing (search_seo -> sitemaps -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -420,7 +406,7 @@ test.describe("marketing acl", () => {
         await aclManagement.sitemapCreateVerify();
     });
 
-    test("should create custom role with marketing (search_seo->sitemaps->edit) permission", async ({
+    test("should create custom role with marketing (search_seo -> sitemaps -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -434,7 +420,7 @@ test.describe("marketing acl", () => {
         await aclManagement.sitemapEditVerify();
     });
 
-    test("should create custom role with marketing (search_seo->sitemaps->delete) permission", async ({
+    test("should create custom role with marketing (search_seo -> sitemaps -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);

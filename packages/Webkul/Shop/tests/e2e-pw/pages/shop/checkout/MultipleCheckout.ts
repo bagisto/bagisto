@@ -1,9 +1,6 @@
 import { expect } from "@playwright/test";
 import { CheckoutHelper } from "./CheckoutHelper";
 
-/**
- * MultipleCheckout handles combination checkout flows for multiple product types.
- */
 export class MultipleCheckout extends CheckoutHelper {
     constructor(page) {
         super(page);

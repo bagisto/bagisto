@@ -1,6 +1,6 @@
 import { test } from "../../../../setup";
 import { expect, Page } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -74,7 +74,7 @@ async function createRuleAndVerifyCoupon({
 }
 
 test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
@@ -176,7 +176,7 @@ const cases = [
 test.describe("cart rules", () => {
     test.describe("cart item attrubute", () => {
         for (const { operator, value, type, label } of cases) {
-            test(`should apply coupon when qty in cart is ->  ${label} (${operator}) (${type})`, async ({
+            test(`should apply coupon when qty in cart is -> ${label} (${operator}) (${type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({

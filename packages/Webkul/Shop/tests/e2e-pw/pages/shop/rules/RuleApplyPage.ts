@@ -6,109 +6,116 @@ export class RuleApplyPage extends BasePage {
     constructor(page: Page) {
         super(page);
     }
-    // Shop / Cart
-    get searchInput() {
+
+    private get searchInput() {
         return this.page.getByRole("textbox", { name: "Search products here" });
     }
 
-    get addToCartButton() {
+    private get addToCartButton() {
         return this.page.locator(
             "(//button[contains(@class, 'secondary-button')])[2]",
         );
     }
 
-    get addToCartSuccessMessage() {
+    private get addToCartSuccessMessage() {
         return this.page.getByText("Item Added Successfully").first();
     }
 
-    get incrementQtyButton() {
+    private get incrementQtyButton() {
         return this.page.locator(".icon-plus");
     }
 
-    get updateCart() {
+    private get updateCart() {
         return this.page.getByRole("button", { name: "Update Cart" });
     }
 
-    get cartUpdateSuccess() {
+    private get cartUpdateSuccess() {
         return this.page.getByText("Quantity updated successfully");
     }
 
-    // Coupon
-    get applyCouponButton() {
+    private get grandTotalAmount() {
+        return this.page
+            .locator("text=Grand Total")
+            .locator("..")
+            .locator("p")
+            .nth(1);
+    }
+
+    private get applyCouponButton() {
         return this.page.getByRole("button", { name: "Apply Coupon" });
     }
 
-    get couponInput() {
+    private get couponInput() {
         return this.page.locator('input[name="code"]:visible');
     }
 
-    get applyButton() {
+    private get applyButton() {
         return this.page.getByRole("button", { name: "Apply", exact: true });
     }
 
-    get shoppingCartIcon() {
+    private get shoppingCartIcon() {
         return this.page.locator('[class*="icon-cart"]').first();
     }
 
-    get continueButton() {
+    private get continueButton() {
         return this.page.locator(
             '(//a[contains(., " Continue to Checkout ")])[1]',
         );
     }
 
-    get companyName() {
+    private get companyName() {
         return this.page.getByRole("textbox", { name: "Company Name" });
     }
 
-    get firstName() {
+    private get firstName() {
         return this.page.getByRole("textbox", { name: "First Name" });
     }
 
-    get lastName() {
+    private get lastName() {
         return this.page.getByRole("textbox", { name: "Last Name" });
     }
 
-    get shippingEmail() {
+    private get shippingEmail() {
         return this.page.locator('input[name="billing\\.email"]');
     }
 
-    get streetAddress() {
+    private get streetAddress() {
         return this.page.getByRole("textbox", { name: "Street Address" });
     }
 
-    get billingCountry() {
+    private get billingCountry() {
         return this.page.locator('select[name="billing\\.country"]');
     }
 
-    get billingState() {
+    private get billingState() {
         return this.page.locator('select[name="billing\\.state"]');
     }
 
-    get billingCity() {
+    private get billingCity() {
         return this.page.getByRole("textbox", { name: "City" });
     }
 
-    get billingZip() {
+    private get billingZip() {
         return this.page.getByRole("textbox", { name: "Zip/Postcode" });
     }
 
-    get billingTelephone() {
+    private get billingTelephone() {
         return this.page.getByRole("textbox", { name: "Telephone" });
     }
 
-    get clickProcessButton() {
+    private get clickProcessButton() {
         return this.page.getByRole("button", { name: "Proceed" });
     }
 
-    get chooseShippingMethod() {
+    private get chooseShippingMethod() {
         return this.page.getByText("Free Shipping").first();
     }
 
-    get chooseFlatShippingMethod() {
+    private get chooseFlatShippingMethod() {
         return this.page.getByText("Flat Rate").first();
     }
 
-    get choosePaymentMethod() {
+    private get choosePaymentMethod() {
         return this.page.getByAltText("Money Transfer");
     }
 
@@ -206,6 +213,39 @@ export class RuleApplyPage extends BasePage {
         }
 
         return subtotal;
+    }
+
+    async addSavedProductToCart(quantity: number = 1): Promise<number> {
+        await this.visit("");
+
+        const product = this.getSavedProduct();
+
+        await this.searchInput.fill(product.name);
+        await this.searchInput.press("Enter");
+        await this.addToCartButton.first().click();
+        await expect(this.addToCartSuccessMessage).toBeVisible();
+
+        await this.visit("checkout/cart");
+
+        if (quantity > 1) {
+            for (let i = 1; i < quantity; i++) {
+                await this.incrementQtyButton.first().click();
+            }
+
+            await this.updateCart.click();
+            await expect(this.cartUpdateSuccess.first()).toBeVisible();
+        }
+
+        return this.getSubTotalValue();
+    }
+
+    async expectGrandTotal(amount: number): Promise<void> {
+        const formatted = new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(amount);
+
+        await expect(this.grandTotalAmount).toContainText(`$${formatted}`);
     }
 
     async verifyCatalogRule(value: number, type: string) {

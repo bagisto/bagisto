@@ -226,18 +226,8 @@ export function generateDescription(length = 200) {
     return description.trim();
 }
 
-/**
- * Generates a random numeric string with specified length or within a numeric range.
- * 
- * @param {number} [length=10] - The length of the random string (used only when min and max are undefined)
- * @param {number|null|undefined} [min=undefined] - Minimum value (inclusive) when generating a number in range
- * @param {number|null|undefined} [max=undefined] - Maximum value (inclusive) when generating a number in range
- * @returns {string} - Random numeric string
- */
 export function generateRandomNumericString(length: number = 10, min?: number | null, max?: number | null): string {
-    // Generate a number within range
     if (min !== null && min !== undefined && max !== null && max !== undefined) {
-        // Input validation
         if (!Number.isInteger(min) || !Number.isInteger(max)) {
             throw new Error("Min and max must be integers when provided.");
         }
@@ -246,22 +236,18 @@ export function generateRandomNumericString(length: number = 10, min?: number | 
             throw new Error("Min value cannot be greater than max value.");
         }
 
-        // Generate a random number within the range and convert to string
         return Math.floor(Math.random() * (max - min + 1) + min).toString();
     }
 
-    // Generate a random string of specified length
     if (!Number.isInteger(length) || length <= 0) {
         throw new Error("Length must be a positive integer.");
     }
 
-    // More efficient method for generating random digits
     let result = '';
     for (let i = 0; i < length; i++) {
         result += Math.floor(Math.random() * 10);
     }
 
-    // Ensure first character is not zero for a consistent length string
     if (length > 1 && result[0] === '0') {
         result = String(1 + Math.floor(Math.random() * 9)) + result.substring(1);
     }
@@ -854,18 +840,12 @@ export function generateLocation() {
 }
 
 export function generateRandomDate(
-    start: Date = new Date(),                      
-    end: Date = new Date(new Date().getFullYear(), 11, 31) 
+    start: Date = new Date(),
+    end: Date = new Date(new Date().getFullYear(), 11, 31)
 ): string {
-    /**
-     * Generate a random timestamp between start and end
-     */ 
     const timestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
     const randomDate = new Date(timestamp);
 
-    /**
-     * Format to YYYY-MM-DD 
-     */ 
     const year = randomDate.getFullYear();
     const month = String(randomDate.getMonth() + 1).padStart(2, "0");
     const day = String(randomDate.getDate()).padStart(2, "0");

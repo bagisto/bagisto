@@ -29,6 +29,7 @@ npm-debug.log
 opencode.json
 package-lock.json
 /playwright-report
+product-data.json
 /public/css
 /public/js
 /public/hot

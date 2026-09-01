@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { ACLManagement } from "../../../pages/admin/acl/index";
+import { ACLManagement } from "../../../pages/admin/acl/ACLManagement";
 
 test.describe("customers acl", () => {
     test("should create custom role with customers permission", async ({
@@ -27,7 +27,7 @@ test.describe("customers acl", () => {
         await aclManagement.verfiyAssignedRole(["customers->customers"]);
     });
 
-    test("should create custom role with customers (customers->create) permission", async ({
+    test("should create custom role with customers (customers -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -40,7 +40,7 @@ test.describe("customers acl", () => {
         await aclManagement.customerCreateVerify();
     });
 
-    test("should create custom role with customers (customers->edit) permission", async ({
+    test("should create custom role with customers (customers -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -50,7 +50,7 @@ test.describe("customers acl", () => {
         await aclManagement.customerEditVerify();
     });
 
-    test("should create custom role with customers (customers->delete) permission", async ({
+    test("should create custom role with customers (customers -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -79,7 +79,7 @@ test.describe("customers acl", () => {
         await aclManagement.verfiyAssignedRole(["customers->groups"]);
     });
 
-    test("should create custom role with customers (groups-> create) permission", async ({
+    test("should create custom role with customers (groups -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -89,7 +89,7 @@ test.describe("customers acl", () => {
         await aclManagement.groupCreateVerify();
     });
 
-    test("should create custom role with customers (groups-> edit) permission", async ({
+    test("should create custom role with customers (groups -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -99,7 +99,7 @@ test.describe("customers acl", () => {
         await aclManagement.groupEditVerify();
     });
 
-    test("should create custom role with customers (groups-> delete) permission", async ({
+    test("should create custom role with customers (groups -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);

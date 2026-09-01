@@ -27,7 +27,6 @@ export class CustomerPage extends BasePage {
         return this.page.getByRole("link", { name: "Addresses" });
     }
 
-    // Profile form fields
     private get editProfileLink() {
         return this.page.getByRole("link", { name: "Edit" });
     }
@@ -120,7 +119,6 @@ export class CustomerPage extends BasePage {
         return this.page.getByText("Customer deleted successfully").first();
     }
 
-    // Address
     private get addAddressButton() {
         return this.page.getByRole("link", { name: "Add Address" });
     }
@@ -145,7 +143,6 @@ export class CustomerPage extends BasePage {
         return this.page.locator('img[alt="Uploaded Image"]');
     }
 
-    // Navigation methods
     async gotoHome(): Promise<void> {
         await this.visit("");
     }
@@ -184,7 +181,6 @@ export class CustomerPage extends BasePage {
         await this.wishlistLink.click();
     }
 
-    // Profile form methods
     async editProfile(data: {
         email?: string;
         firstName?: string;
@@ -271,7 +267,6 @@ export class CustomerPage extends BasePage {
         await expect(this.customerDeletedMessage).toBeVisible();
     }
 
-    // Wishlist methods
     async searchProduct(term: string): Promise<void> {
         await this.searchProductInput.fill(term);
         await this.searchProductInput.press("Enter");

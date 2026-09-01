@@ -38,9 +38,6 @@ export class CustomersPage extends BasePage {
         return this.page.getByRole("link", { name: "Inactive" });
     }
 
-    /**
-     * The grid's own search box, not the one in the admin header.
-     */
     private get searchInput() {
         return this.page.locator('input[name="search"]');
     }

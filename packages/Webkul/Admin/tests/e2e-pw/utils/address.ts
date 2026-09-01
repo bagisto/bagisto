@@ -21,7 +21,7 @@ const address = async (page) => {
   } else {
     const checkbox = await page.$$('input[name="billing.use_for_shipping"]');
 
-    if (Math.random() < 0.67) {  // ~2/3 chance
+    if (Math.random() < 0.67) {
       if (!(await checkbox[0].isChecked())) {
         await page.click('input[name="billing.use_for_shipping"] + label');
       }

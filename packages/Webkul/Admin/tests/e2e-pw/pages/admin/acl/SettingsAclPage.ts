@@ -7,15 +7,11 @@ import {
     generatePhoneNumber,
     generateSlug,
 } from "../../../utils/faker";
-import { MarketingAclPage } from "./marketing";
+import { MarketingAclPage } from "./MarketingAclPage";
 
 export class SettingsAclPage extends MarketingAclPage {
     constructor(page: Page) {
         super(page);
-    }
-
-    private generateCurrencyCode(): string {
-        return `T${Date.now().toString().slice(-2)}`;
     }
 
     protected get localeActionPage() {
@@ -211,6 +207,10 @@ export class SettingsAclPage extends MarketingAclPage {
                 "Tax category deleted successfully.",
             ),
         };
+    }
+
+    private generateCurrencyCode(): string {
+        return `T${Date.now().toString().slice(-2)}`;
     }
 
     async localeCreateVerify() {

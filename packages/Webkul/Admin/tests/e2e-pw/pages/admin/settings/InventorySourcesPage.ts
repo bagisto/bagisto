@@ -114,7 +114,7 @@ export class InventorySourcesPage extends BasePage {
         await this.cityInput.fill("New Delhi");
         await this.streetInput.fill("Dwarka");
         await this.postcodeInput.fill("110045");
-        // Clicking the status and verify the toggle state.
+
         await this.statusLabel.click();
         const toggleInput = this.statusInput;
         await expect(toggleInput).toBeChecked();

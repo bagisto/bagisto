@@ -6,7 +6,7 @@ import {
     generatePhoneNumber,
     generateEmail,
 } from "../utils/faker";
-import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { CustomerPage } from "../pages/shop/CustomerPage";
 import { AddressPage } from "../pages/shop/AddressPage";
 import { OrderPage } from "../pages/shop/OrderPage";
@@ -80,7 +80,6 @@ test("should display correct message when email verfication is on", async ({
                 .getByText("Configuration saved successfully"),
         ).toBeVisible();
 
-        // Register new user
         const authPage = new AuthPage(shopPage);
         const credentials = {
             firstName: generateFirstName(),
@@ -94,7 +93,6 @@ test("should display correct message when email verfication is on", async ({
             "Account created successfully, an e-mail has been sent for verification.",
         );
     } finally {
-        // Disable email verification
         await adminPage.goto("admin/configuration/customer/settings");
         await verificationToggle.waitFor({ state: "visible" });
 
@@ -252,7 +250,7 @@ test("should delete the address", async ({ shopPage }) => {
 
 test.describe("customer actions", () => {
     test("should create simple product", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",
@@ -272,7 +270,6 @@ test.describe("customer actions", () => {
         const addressPage = new AddressPage(shopPage);
         await loginAsCustomer(shopPage);
 
-        // Add address
         await customerPage.gotoHome();
         await customerPage.openProfile();
         await customerPage.seeProfile();
@@ -291,7 +288,6 @@ test.describe("customer actions", () => {
             phone: generatePhoneNumber(),
         });
 
-        // Create an order
         await customerPage.gotoHome();
         await customerPage.searchProduct("simple");
         await customerPage.addFirstProductToCart();
@@ -318,7 +314,6 @@ test.describe("customer actions", () => {
         await shopPage.getByRole("button", { name: "Place Order" }).click();
         await shopPage.waitForTimeout(2000);
 
-        // Now navigate to orders and reorder
         await orderPage.gotoOrdersPage();
         await orderPage.viewFirstOrder();
         await orderPage.reorderFirstOrder();
@@ -348,7 +343,6 @@ test.describe("customer actions", () => {
             phone: generatePhoneNumber(),
         });
 
-        // Create an order
         await customerPage.gotoHome();
         await customerPage.searchProduct("simple");
         await customerPage.addFirstProductToCart();
@@ -375,7 +369,6 @@ test.describe("customer actions", () => {
         await shopPage.getByRole("button", { name: "Place Order" }).click();
         await shopPage.waitForTimeout(2000);
 
-        // Cancel the order
         await orderPage.gotoOrdersPage();
         await orderPage.viewFirstOrder();
         await orderPage.cancelFirstOrder();
@@ -405,7 +398,6 @@ test.describe("customer actions", () => {
             phone: generatePhoneNumber(),
         });
 
-        // Create an order
         await customerPage.gotoHome();
         await customerPage.searchProduct("simple");
         await customerPage.addFirstProductToCart();
@@ -432,7 +424,6 @@ test.describe("customer actions", () => {
         await shopPage.getByRole("button", { name: "Place Order" }).click();
         await shopPage.waitForTimeout(6000);
 
-        // Create invoice from admin
         const adminCredentials = {
             email: "admin@example.com",
             password: "admin123",
@@ -447,7 +438,6 @@ test.describe("customer actions", () => {
             adminPage.getByText("Invoice created successfully Close"),
         ).toBeVisible();
 
-        // Go back to shop and download invoice
         await orderPage.gotoOrdersPage();
         await orderPage.viewFirstOrder();
         await orderPage.printInvoice();

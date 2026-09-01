@@ -7,9 +7,6 @@ if (envPath) {
     dotenv.config({ path: envPath });
 }
 
-/**
- * Read a variable that the suite cannot run without.
- */
 function required(names: string[]): string {
     for (const name of names) {
         const value = process.env[name];
@@ -24,18 +21,12 @@ function required(names: string[]): string {
     );
 }
 
-/**
- * Read a variable that falls back to a default.
- */
 function optional(name: string, defaultValue: string): string {
     const value = process.env[name];
 
     return value && value.trim() ? value.trim() : defaultValue;
 }
 
-/**
- * Read a flag that is on for any of the usual truthy spellings.
- */
 function optionalBoolean(name: string, defaultValue: boolean): boolean {
     const value = process.env[name];
 
@@ -46,16 +37,10 @@ function optionalBoolean(name: string, defaultValue: boolean): boolean {
     return ["1", "true", "yes", "on"].includes(value.trim().toLowerCase());
 }
 
-/**
- * Drop trailing slashes so a base URL joins predictably.
- */
 function stripTrailingSlashes(url: string): string {
     return url.replace(/\/+$/, "");
 }
 
-/**
- * Every environment value this suite reads, validated once.
- */
 export const env = {
     baseUrl: stripTrailingSlashes(required(["APP_URL", "BASE_URL"])),
 

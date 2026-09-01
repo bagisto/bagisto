@@ -98,6 +98,10 @@ export class ChannelsPage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
+    private flashMessage(text: string) {
+        return this.page.locator("#app").getByText(text);
+    }
+
     async open(): Promise<void> {
         await this.visit("admin/settings/channels");
     }
@@ -133,11 +137,8 @@ export class ChannelsPage extends BasePage {
         await this.metaDescriptionInput.fill(description);
         await this.saveChannelButton.click();
 
-        // Scope to #app: with APP_DEBUG on, laravel-debugbar re-renders the
-        // session flash message as an sf-dump node outside #app, which would
-        // otherwise make this getByText match two elements (strict-mode error).
         await expect(
-            this.page.locator("#app").getByText("Channel created successfully."),
+            this.flashMessage("Channel created successfully."),
         ).toBeVisible();
 
         return { code, name };
@@ -150,7 +151,7 @@ export class ChannelsPage extends BasePage {
         await this.saveChannelButton.click();
 
         await expect(
-            this.page.locator("#app").getByText("Update Channel Successfully"),
+            this.flashMessage("Update Channel Successfully"),
         ).toBeVisible();
     }
 
@@ -169,7 +170,7 @@ export class ChannelsPage extends BasePage {
         }
 
         await expect(
-            this.page.locator("#app").getByText("Channel deleted successfully."),
+            this.flashMessage("Channel deleted successfully."),
         ).toBeVisible();
     }
 }

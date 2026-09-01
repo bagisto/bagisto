@@ -1,12 +1,12 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-test.describe("table Booking product checkout flow", () => {
+test.describe("table booking product checkout flow", () => {
     test.describe("per_table | every week | same slot all days", () => {
         test("should create table booking product", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -33,10 +33,10 @@ test.describe("table Booking product checkout flow", () => {
             await checkout.verifyduration(customer, id, true);
         });
 
-        test("should create table booking product without cancellation ", async ({
+        test("should create table booking product without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -67,7 +67,7 @@ test.describe("table Booking product checkout flow", () => {
 
     test.describe("per_table | every week | different slots", () => {
         test("should create table booking product", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -97,7 +97,7 @@ test.describe("table Booking product checkout flow", () => {
         test("should create table booking product without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -128,7 +128,7 @@ test.describe("table Booking product checkout flow", () => {
 
     test.describe("per_table | date range | same slot all days", () => {
         test("should create table booking product", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -158,7 +158,7 @@ test.describe("table Booking product checkout flow", () => {
         test("should create table booking product without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -189,7 +189,7 @@ test.describe("table Booking product checkout flow", () => {
 
     test.describe("per_table | date range | different slots", () => {
         test("should create table booking product", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",
@@ -219,7 +219,7 @@ test.describe("table Booking product checkout flow", () => {
         test("should create table booking product without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "table",

@@ -40,9 +40,9 @@ export class ProductDeletePage extends BasePage {
         await this.rowsPerPageButton.click();
         await this.rowsPerPageOption.click();
         await expect(this.rowCheckboxes.first()).toBeVisible();
-        // await this.rowCheckboxes.first().click();  // Only if you want to delete all lisiting product update
-        await this.rowCheckboxes.nth(1).click();  
-        await this.rowCheckboxes.nth(2).click();  
+
+        await this.rowCheckboxes.nth(1).click();
+        await this.rowCheckboxes.nth(2).click();
 
         await this.selectActionButton.click();
         await this.deleteActionLink.first().click();

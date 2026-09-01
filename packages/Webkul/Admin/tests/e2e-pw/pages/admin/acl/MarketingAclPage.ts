@@ -6,7 +6,7 @@ import {
     generateRandomDate,
 } from "../../../utils/faker";
 import { fillInTinymce } from "../../../utils/tinymce";
-import { CmsAclPage } from "./cms";
+import { CmsAclPage } from "./CmsAclPage";
 
 export class MarketingAclPage extends CmsAclPage {
     constructor(page: Page) {

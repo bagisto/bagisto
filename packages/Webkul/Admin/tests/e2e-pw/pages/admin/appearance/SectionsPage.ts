@@ -39,39 +39,22 @@ export class SectionsPage extends BasePage {
         return this.page.locator("div[data-draggable]");
     }
 
-    /**
-     * The tile carries an icon glyph beside its label, which lands in the button's
-     * accessible name, so it is picked by the label itself.
-     */
     private typeTile(label: string) {
         return this.createForm
             .locator("span")
             .filter({ hasText: new RegExp(`^${label}$`) });
     }
 
-    /**
-     * Scoped to the draggable list, so the open section's drawer header does not answer
-     * to the name as well.
-     */
     private sectionRow(name: string) {
         return this.page
             .locator("div[data-draggable]")
             .filter({ hasText: name });
     }
 
-    /**
-     * The dot a row carries while it holds changes the storefront has not been given
-     * yet. Read per row rather than from the header count, which every other section
-     * in the list also feeds.
-     */
     private unsavedMarker(name: string) {
         return this.sectionRow(name).locator("span.icon-dot");
     }
 
-    /**
-     * A field in the open section, addressed by the label sitting above its control.
-     * The controls are schema-driven and carry no name of their own.
-     */
     private field(label: string) {
         return this.page
             .locator("p")
@@ -81,10 +64,6 @@ export class SectionsPage extends BasePage {
             );
     }
 
-    /**
-     * The name a row shows, read on its own so a comparison is not thrown by the type
-     * and the row's menu entries sitting in the same element.
-     */
     private rowName(index: number) {
         return this.sectionRows.nth(index).locator("span.truncate").first();
     }
@@ -93,18 +72,10 @@ export class SectionsPage extends BasePage {
         return this.sectionRow(name).locator("button.relative");
     }
 
-    /**
-     * A section that is switched off is struck through in the list, which is the only
-     * place its state can be read without leaving the editor.
-     */
     private switchedOffName(name: string) {
         return this.sectionRow(name).locator("span.line-through");
     }
 
-    /**
-     * Sortable drives the list with pointer events, so the handle has to be taken and
-     * moved rather than handed to Playwright's own drag helper.
-     */
     private async dragRowOnto(from: number, to: number): Promise<void> {
         const handle = this.sectionRows.nth(from).locator("span.section-handle");
 
@@ -120,10 +91,6 @@ export class SectionsPage extends BasePage {
         await this.page.mouse.up();
     }
 
-    /**
-     * Creating a section opens it for editing straight away, and the open drawer covers
-     * the list underneath it.
-     */
     private async closeOpenSection(): Promise<void> {
         await this.closeDrawerButton.click();
 
@@ -157,11 +124,6 @@ export class SectionsPage extends BasePage {
         return name;
     }
 
-    /**
-     * The chosen type has to reach the section itself, not just the drawer that made it,
-     * so the row is expected to name that type and the editor to offer that type's own
-     * fields rather than another type's.
-     */
     async createSectionOfType(type: string, fields: string[]): Promise<void> {
         const name = await this.createSection(type);
 
@@ -198,10 +160,6 @@ export class SectionsPage extends BasePage {
         await expect(row).toHaveCount(0);
     }
 
-    /**
-     * Content typed into a section is held as a draft and reaches the storefront only
-     * once it is published, so the value has to survive both the publish and a reload.
-     */
     async editContentAndPublish(): Promise<void> {
         const name = await this.createSection("Product Carousel");
 
@@ -224,14 +182,6 @@ export class SectionsPage extends BasePage {
         await expect(this.field("Title")).toHaveValue(title);
     }
 
-    /**
-     * Dragging a section is staged like any other edit: the two rows that swapped are
-     * marked, the one below them is not, and the new order survives the publish.
-     *
-     * Whether a reorder stages *only* what moved is decided by the stored numbers rather
-     * than the drag, and both the seeder and a published list leave them gapless, so
-     * that is covered by SectionDraftTest where the gaps can be set up.
-     */
     async reorderIsStagedUntilPublished(): Promise<void> {
         await this.open();
 
@@ -268,10 +218,6 @@ export class SectionsPage extends BasePage {
         await expect(this.rowName(1)).toHaveText(first);
     }
 
-    /**
-     * Switching a section off is staged like any other edit, so the storefront keeps
-     * showing it until the change is published.
-     */
     async statusChangeIsStaged(): Promise<void> {
         const name = await this.createSection("Static Content");
 
@@ -290,9 +236,6 @@ export class SectionsPage extends BasePage {
         await expect(this.unsavedMarker(name)).toHaveCount(0);
     }
 
-    /**
-     * Discarding puts a staged change back the way it was, rather than publishing it.
-     */
     async discardRevertsStagedStatus(): Promise<void> {
         const name = await this.createSection("Static Content");
 
@@ -317,10 +260,6 @@ export class SectionsPage extends BasePage {
         await expect(this.switchedOffName(name)).toHaveCount(0);
     }
 
-    /**
-     * A channel shows one footer links section, so the type is withdrawn once the
-     * channel already has one.
-     */
     async expectFooterLinksNotOffered(): Promise<void> {
         await this.open();
         await this.createSectionButton.click();

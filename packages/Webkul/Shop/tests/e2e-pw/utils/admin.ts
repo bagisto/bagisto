@@ -3,9 +3,6 @@ import type { Page } from "@playwright/test";
 import { env } from "./env";
 import { generateDescription, generateName, generateSlug } from "./faker";
 
-/**
- * Sign the admin in and wait for the dashboard.
- */
 export async function loginAsAdmin(page: Page) {
     const adminCredentials = {
         email: env.adminEmail,
@@ -31,9 +28,6 @@ export async function createTaxRate(adminPage) {
         state: "DL",
     };
 
-    /**
-     * Reaching to the create tax rate page.
-     */
     await adminPage.goto("admin/settings/taxes/rates");
     await adminPage.waitForSelector(
         'a.primary-button:has-text("Create Tax Rate")',
@@ -41,16 +35,10 @@ export async function createTaxRate(adminPage) {
     );
     await adminPage.click('a.primary-button:has-text("Create Tax Rate")');
 
-    /**
-     * Waiting for the main form to be visible.
-     */
     await adminPage.waitForSelector(
         'form[action*="/settings/taxes/rates/create"]',
     );
 
-    /**
-     * General Section.
-     */
     await adminPage
         .locator('input[name="identifier"]')
         .fill(taxRate.identifier);
@@ -60,28 +48,16 @@ export async function createTaxRate(adminPage) {
     await adminPage.locator('select[name="state"]').selectOption(taxRate.state);
     await adminPage.locator('input[name="tax_rate"]').fill("18");
 
-    /**
-     * Save tax rate.
-     */
     await adminPage.getByRole("button", { name: "Save Tax Rate" }).click();
 
     return taxRate;
 }
 
 export async function createTaxCategory(adminPage) {
-    /**
-     * Creating a tax rate.
-     */
     const taxRate = await createTaxRate(adminPage);
 
-    /**
-     * Reaching to the tax category listing page.
-     */
     await adminPage.goto("admin/settings/taxes/categories");
 
-    /**
-     * Opening create tax category form in modal.
-     */
     await adminPage
         .getByRole("button", { name: "Create Tax Category" })
         .click();
@@ -96,33 +72,18 @@ export async function createTaxCategory(adminPage) {
         },
     ]);
 
-    /**
-     * Saving tax category and closing the modal.
-     */
     await adminPage.getByRole("button", { name: "Save Tax Category" }).click();
 
-    /**
-     * Asserting.
-     */
     await expect(
         adminPage.getByText("Tax category created successfully."),
     ).toBeVisible();
 }
 
 export async function createTaxCategoryReturnName(name: string, adminPage) {
-    /**
-     * Creating a tax rate.
-     */
     const taxRate = await createTaxRate(adminPage);
 
-    /**
-     * Reaching to the tax category listing page.
-     */
     await adminPage.goto("admin/settings/taxes/categories");
 
-    /**
-     * Opening create tax category form in modal.
-     */
     await adminPage
         .getByRole("button", { name: "Create Tax Category" })
         .click();
@@ -137,14 +98,8 @@ export async function createTaxCategoryReturnName(name: string, adminPage) {
         },
     ]);
 
-    /**
-     * Saving tax category and closing the modal.
-     */
     await adminPage.getByRole("button", { name: "Save Tax Category" }).click();
 
-    /**
-     * Asserting.
-     */
     await expect(
         adminPage.getByText("Tax category created successfully."),
     ).toBeVisible();

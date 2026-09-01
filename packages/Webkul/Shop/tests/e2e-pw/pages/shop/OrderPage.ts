@@ -6,7 +6,6 @@ export class OrderPage extends BasePage {
         super(page);
     }
 
-    // Locators
     private get profileMenu() {
         return this.page.getByLabel("Profile");
     }
@@ -71,7 +70,6 @@ export class OrderPage extends BasePage {
             .filter({ hasText: "Item Successfully Moved to Cart" });
     }
 
-    // Navigation methods
     async gotoOrdersPage(): Promise<void> {
         await this.visit("");
         await this.profileMenu.click();
@@ -82,7 +80,6 @@ export class OrderPage extends BasePage {
         await this.viewOrderButton.click();
     }
 
-    // Order operations
     async reorderFirstOrder(): Promise<void> {
         await this.reorderLink.click();
         await this.updateCartButton.click();
@@ -110,7 +107,6 @@ export class OrderPage extends BasePage {
             .waitForEvent("download")
             .catch(() => null);
 
-        // Try to find and click on a downloadable product link
         const productLinks = this.page.getByRole("link").filter({
             hasNot: this.page.locator("link[rel='stylesheet']"),
         });

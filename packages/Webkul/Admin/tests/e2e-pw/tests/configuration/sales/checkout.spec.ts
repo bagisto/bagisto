@@ -9,7 +9,7 @@ const SHOPPING_CART_TOGGLES = [
     'label[for="sales[checkout][shopping_cart][estimate_shipping]"]',
 ];
 
-test.describe("Checkout Configuration", () => {
+test.describe("checkout configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
         await new CheckoutConfigurationPage(adminPage).open();
     });

@@ -112,6 +112,187 @@ export class SalesCreatePage extends BasePage {
         ).toBeVisible();
     }
 
+    private async generateBaseProductOrder(
+        handleShipping: boolean,
+        afterSelection?: () => Promise<void>,
+    ) {
+        await this.visit("admin/sales/orders");
+        await this.page.click("button.primary-button:visible");
+        await this.page.click(
+            "div.flex.flex-col.items-center > button.secondary-button:visible",
+        );
+
+        await this.page.fill(
+            'input[name="first_name"]:visible',
+            generateFirstName(),
+        );
+        await this.page.fill(
+            'input[name="last_name"]:visible',
+            generateLastName(),
+        );
+        await this.page.fill('input[name="email"]:visible', generateEmail());
+        await this.page.fill(
+            'input[name="phone"]:visible',
+            generatePhoneNumber(),
+        );
+        await this.page.selectOption('select[name="gender"]:visible', "Other");
+        await this.page.press('input[name="phone"]:visible', "Enter");
+
+        const productSelector =
+            ".grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all";
+        const itemExists = await this.page
+            .waitForSelector(productSelector, { timeout: 5000 })
+            .catch(() => null);
+
+        if (itemExists) {
+            const items = await this.page.$$(productSelector);
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+            await randomItem.click();
+            await this.page.click("button.primary-button:visible");
+        } else {
+            await this.page.click(
+                "p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button",
+            );
+            const productName = getGeneratedProductName();
+            await this.page
+                .getByRole("textbox", { name: "Search by name" })
+                .fill(productName);
+            await this.page
+                .getByRole("button", { name: "Add To Cart" })
+                .first()
+                .click();
+        }
+
+        if (afterSelection) {
+            await afterSelection();
+        }
+
+        await this.handleOrderAddresses(handleShipping);
+        await this.completeOrderFlow();
+    }
+
+    private async handleOrderAddresses(handleShipping: boolean) {
+        const billingRadios = await this.page.$$('input[name="billing.id"]');
+        if (billingRadios.length > 0) {
+            const addressLabels = await this.page.$$(
+                `input[name="billing.id"] + label`,
+            );
+            const randomIndex = Math.floor(
+                Math.random() * billingRadios.length,
+            );
+            await addressLabels[randomIndex].click();
+        } else {
+            await this.page.click(
+                "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all",
+            );
+            if ((await address(this.page)) !== "done") return;
+        }
+
+        if (!handleShipping) {
+            return;
+        }
+
+        const useForShipping = await this.page.$(
+            'input[name="billing.use_for_shipping"]',
+        );
+        const shouldUseBilling = Math.floor(Math.random() * 20) % 3 !== 1;
+        const isShippingChecked = await useForShipping?.isChecked();
+
+        if (shouldUseBilling !== isShippingChecked) {
+            await this.page.click(
+                'input[name="billing.use_for_shipping"] + label',
+            );
+        }
+
+        if (!shouldUseBilling) {
+            const shippingRadios = await this.page.$$(
+                'input[name="shipping.id"]',
+            );
+            if (shippingRadios.length > 0) {
+                const shippingLabels = await this.page.$$(
+                    `input[name="shipping.id"] + label`,
+                );
+                const randomIndex = Math.floor(
+                    Math.random() * shippingRadios.length,
+                );
+                await shippingLabels[randomIndex].click();
+            } else {
+                await this.page.click(
+                    "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible",
+                );
+                await this.page.fill(
+                    'input[name="shipping.company_name"]',
+                    generateLastName(),
+                );
+                await this.page.fill(
+                    'input[name="shipping.first_name"]',
+                    generateFirstName(),
+                );
+                await this.page.fill(
+                    'input[name="shipping.last_name"]',
+                    generateLastName(),
+                );
+                await this.page.fill(
+                    'input[name="shipping.email"]',
+                    generateEmail(),
+                );
+                await this.page.fill(
+                    'input[name="shipping.address.[0]"]',
+                    generateFirstName(),
+                );
+                await this.page.selectOption(
+                    'select[name="shipping.country"]',
+                    "IN",
+                );
+                await this.page.selectOption(
+                    'select[name="shipping.state"]',
+                    "UP",
+                );
+                await this.page.fill(
+                    'input[name="shipping.city"]',
+                    generateLastName(),
+                );
+                await this.page.fill(
+                    'input[name="shipping.postcode"]',
+                    "201301",
+                );
+                await this.page.fill(
+                    'input[name="shipping.phone"]',
+                    generatePhoneNumber(),
+                );
+                await this.page.press('input[name="shipping.phone"]', "Enter");
+            }
+        }
+    }
+
+    private async completeOrderFlow() {
+        await this.page.click(
+            ".mt-4.flex.justify-end > button.primary-button:visible",
+        );
+
+        const shippingMethods = await this.page
+            .waitForSelector('input[name="shipping_method"] + label', {
+                timeout: 10000,
+            })
+            .catch(() => null);
+
+        if (shippingMethods) {
+            const options = await this.page.$$(
+                'input[name="shipping_method"] + label',
+            );
+            await options[Math.floor(Math.random() * options.length)].click();
+        }
+
+        await this.page.locator("label", { hasText: "Money Transfer" }).click();
+
+        const nextBtn = await this.page.$$(
+            "button.primary-button.w-max.px-11.py-3",
+        );
+        await nextBtn[nextBtn.length - 1].click();
+        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.getByText("Order Items")).toBeVisible();
+    }
+
     async createSimpleProduct() {
         await this.createSimpleProductInternal(false);
     }
@@ -488,11 +669,11 @@ export class SalesCreatePage extends BasePage {
         await this.generateBaseProductOrder(true, async () => {
             await this.page
                 .locator("select.custom-select")
-                .nth(0) // adjust index based on position
+                .nth(0)
                 .selectOption({ label: "Brown" });
             await this.page
                 .locator("select.custom-select")
-                .nth(1) // adjust index based on position
+                .nth(1)
                 .selectOption({ label: "Full" });
             await this.page
                 .getByRole("button", { name: "Add To Cart" })
@@ -544,186 +725,5 @@ export class SalesCreatePage extends BasePage {
                     .first(),
             ).toBeVisible();
         });
-    }
-
-    private async generateBaseProductOrder(
-        handleShipping: boolean,
-        afterSelection?: () => Promise<void>,
-    ) {
-        await this.visit("admin/sales/orders");
-        await this.page.click("button.primary-button:visible");
-        await this.page.click(
-            "div.flex.flex-col.items-center > button.secondary-button:visible",
-        );
-
-        await this.page.fill(
-            'input[name="first_name"]:visible',
-            generateFirstName(),
-        );
-        await this.page.fill(
-            'input[name="last_name"]:visible',
-            generateLastName(),
-        );
-        await this.page.fill('input[name="email"]:visible', generateEmail());
-        await this.page.fill(
-            'input[name="phone"]:visible',
-            generatePhoneNumber(),
-        );
-        await this.page.selectOption('select[name="gender"]:visible', "Other");
-        await this.page.press('input[name="phone"]:visible', "Enter");
-
-        const productSelector =
-            ".grid > div.mt-2.flex > .cursor-pointer.text-emerald-600.transition-all";
-        const itemExists = await this.page
-            .waitForSelector(productSelector, { timeout: 5000 })
-            .catch(() => null);
-
-        if (itemExists) {
-            const items = await this.page.$$(productSelector);
-            const randomItem = items[Math.floor(Math.random() * items.length)];
-            await randomItem.click();
-            await this.page.click("button.primary-button:visible");
-        } else {
-            await this.page.click(
-                "p.flex.flex-col.gap-1.text-base.font-semibold + button.secondary-button",
-            );
-            const productName = getGeneratedProductName();
-            await this.page
-                .getByRole("textbox", { name: "Search by name" })
-                .fill(productName);
-            await this.page
-                .getByRole("button", { name: "Add To Cart" })
-                .first()
-                .click();
-        }
-
-        if (afterSelection) {
-            await afterSelection();
-        }
-
-        await this.handleOrderAddresses(handleShipping);
-        await this.completeOrderFlow();
-    }
-
-    private async handleOrderAddresses(handleShipping: boolean) {
-        const billingRadios = await this.page.$$('input[name="billing.id"]');
-        if (billingRadios.length > 0) {
-            const addressLabels = await this.page.$$(
-                `input[name="billing.id"] + label`,
-            );
-            const randomIndex = Math.floor(
-                Math.random() * billingRadios.length,
-            );
-            await addressLabels[randomIndex].click();
-        } else {
-            await this.page.click(
-                "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all",
-            );
-            if ((await address(this.page)) !== "done") return;
-        }
-
-        if (!handleShipping) {
-            return;
-        }
-
-        const useForShipping = await this.page.$(
-            'input[name="billing.use_for_shipping"]',
-        );
-        const shouldUseBilling = Math.floor(Math.random() * 20) % 3 !== 1;
-        const isShippingChecked = await useForShipping?.isChecked();
-
-        if (shouldUseBilling !== isShippingChecked) {
-            await this.page.click(
-                'input[name="billing.use_for_shipping"] + label',
-            );
-        }
-
-        if (!shouldUseBilling) {
-            const shippingRadios = await this.page.$$(
-                'input[name="shipping.id"]',
-            );
-            if (shippingRadios.length > 0) {
-                const shippingLabels = await this.page.$$(
-                    `input[name="shipping.id"] + label`,
-                );
-                const randomIndex = Math.floor(
-                    Math.random() * shippingRadios.length,
-                );
-                await shippingLabels[randomIndex].click();
-            } else {
-                await this.page.click(
-                    "p.text-base.font-medium.text-gray-600 + p.cursor-pointer.text-blue-600.transition-all:visible",
-                );
-                await this.page.fill(
-                    'input[name="shipping.company_name"]',
-                    generateLastName(),
-                );
-                await this.page.fill(
-                    'input[name="shipping.first_name"]',
-                    generateFirstName(),
-                );
-                await this.page.fill(
-                    'input[name="shipping.last_name"]',
-                    generateLastName(),
-                );
-                await this.page.fill(
-                    'input[name="shipping.email"]',
-                    generateEmail(),
-                );
-                await this.page.fill(
-                    'input[name="shipping.address.[0]"]',
-                    generateFirstName(),
-                );
-                await this.page.selectOption(
-                    'select[name="shipping.country"]',
-                    "IN",
-                );
-                await this.page.selectOption(
-                    'select[name="shipping.state"]',
-                    "UP",
-                );
-                await this.page.fill(
-                    'input[name="shipping.city"]',
-                    generateLastName(),
-                );
-                await this.page.fill(
-                    'input[name="shipping.postcode"]',
-                    "201301",
-                );
-                await this.page.fill(
-                    'input[name="shipping.phone"]',
-                    generatePhoneNumber(),
-                );
-                await this.page.press('input[name="shipping.phone"]', "Enter");
-            }
-        }
-    }
-
-    private async completeOrderFlow() {
-        await this.page.click(
-            ".mt-4.flex.justify-end > button.primary-button:visible",
-        );
-
-        const shippingMethods = await this.page
-            .waitForSelector('input[name="shipping_method"] + label', {
-                timeout: 10000,
-            })
-            .catch(() => null);
-
-        if (shippingMethods) {
-            const options = await this.page.$$(
-                'input[name="shipping_method"] + label',
-            );
-            await options[Math.floor(Math.random() * options.length)].click();
-        }
-
-        await this.page.locator("label", { hasText: "Money Transfer" }).click();
-
-        const nextBtn = await this.page.$$(
-            "button.primary-button.w-max.px-11.py-3",
-        );
-        await nextBtn[nextBtn.length - 1].click();
-        await this.page.waitForLoadState("networkidle");
-        await expect(this.page.getByText("Order Items")).toBeVisible();
     }
 }

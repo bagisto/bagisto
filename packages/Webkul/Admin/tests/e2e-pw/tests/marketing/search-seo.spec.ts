@@ -19,10 +19,6 @@ async function openFirstRecordForEdit(adminPage: Page) {
     await adminPage.locator(".row > .flex > a").first().click();
 }
 
-// The sitemap listing has an extra "Link for Google" URL column whose <a> is
-// also a direct `.row > .flex > a`, so the generic helper above would click the
-// (target="_blank") sitemap link instead of the edit action. Scope to the
-// actions column (`.justify-end`) to reliably open the edit modal.
 async function openFirstSitemapForEdit(adminPage: Page) {
     await adminPage.locator(".row .justify-end > a").first().click();
 }
@@ -41,8 +37,6 @@ async function selectSitemapChannel(adminPage: Page, channelName: string) {
 
     await label.click();
 
-    // Note: the custom checkbox renders both an <input> and a <label> sharing
-    // the same id, so the assertion must be scoped to the input element.
     await expect(adminPage.locator(`input#${forId}`)).toBeChecked();
 }
 
@@ -668,10 +662,6 @@ test.describe("search-seo management", () => {
                 adminPage.getByText("Sitemap created successfully"),
             ).toBeVisible();
 
-            // Wait for the create modal to finish its leave transition before
-            // reopening. Its title is also "Create Sitemap" (v-if-removed only
-            // after the animation), so clicking too early makes
-            // getByText("Create Sitemap") match both the title and the button.
             await expect(
                 adminPage.getByRole("button", { name: "Save Sitemap" }),
             ).toBeHidden();

@@ -34,9 +34,6 @@ async function confirmDelete(adminPage: Page) {
 }
 
 async function createTemplate(adminPage: Page) {
-    /**
-     * Reaching the create template page.
-     */
     await openCommunicationsPage(adminPage, "admin/marketing/communications/email-templates");
     await clickCreate(
         adminPage,
@@ -46,15 +43,9 @@ async function createTemplate(adminPage: Page) {
     const name = generateName();
     const description = generateDescription();
 
-    /**
-     * General Section.
-     */
     await adminPage.fill('input[name="name"]', name);
     await adminPage.selectOption('select[name="status"]', "active");
 
-    /**
-     * Content Section.
-     */
     await adminPage.fillInTinymce("#content_ifr", description);
 
     await adminPage.click(
@@ -70,18 +61,12 @@ test.describe("communication management", () => {
     });
 
     test("should edit a template", async ({ adminPage }) => {
-        /**
-         * Creating a template to edit.
-         */
         await createTemplate(adminPage);
 
         await openCommunicationsPage(adminPage, "admin/marketing/communications/email-templates");
         await clickFirstIcon(adminPage, "span.cursor-pointer.icon-edit");
         await adminPage.fill('input[name="name"]', generateName());
 
-        /**
-         * Save the edit template.
-         */
         await adminPage.click(
             'button[type="submit"][class="primary-button"]:visible'
         );
@@ -90,9 +75,6 @@ test.describe("communication management", () => {
     });
 
     test("should delete a template", async ({ adminPage }) => {
-        /**
-         * Creating a template to delete.
-         */
         await createTemplate(adminPage);
 
         await openCommunicationsPage(adminPage, "admin/marketing/communications/email-templates");
@@ -182,9 +164,6 @@ test.describe("communication management", () => {
     });
 
     test("create campaign", async ({ adminPage }) => {
-        /**
-         * Creating a template to use in the campaign.
-         */
         await createTemplate(adminPage);
 
         await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
@@ -294,58 +273,4 @@ test.describe("communication management", () => {
             adminPage.getByText("Campaign deleted successfully")
         ).toBeVisible();
     });
-
-    // test("edit newsletter subscriber", async ({ adminPage }) => {
-    //     await adminPage.goto(
-    //         `admin/marketing/communications/subscribers`
-    //     );
-
-    //     const iconEdit = await adminPage.$$(
-    //         'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-    //     );
-
-    //     await iconEdit[
-    //         Math.floor(Math.random() * (iconEdit.length - 1 - 0 + 1)) + 0
-    //     ].click();
-
-    //     await adminPage.waitForSelector('select[name="is_subscribed"]');
-
-    //     const select = await adminPage.$('select[name="is_subscribed"]');
-
-    //     const option = Math.random() > 0.5 ? "1" : "0";
-
-    //     await select.selectOption({ value: option });
-
-    //     let i = Math.floor(Math.random() * 10) + 1;
-
-    //     await adminPage.click('button[class="primary-button"]:visible');
-
-    //     await expect(
-    //         adminPage.getByText("Newsletter Subscription Updated Successfully")
-    //     ).toBeVisible();
-    // });
-
-    // test("delete newsletter subscriber", async ({ adminPage }) => {
-    //     await adminPage.goto(
-    //         `admin/marketing/communications/subscribers`
-    //     );
-
-    //     await adminPage.waitForSelector(
-    //         'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-    //     );
-
-    //     const iconDelete = await adminPage.$$(
-    //         'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-    //     );
-
-    //     await iconDelete[0].click();
-
-    //     await adminPage.click(
-    //         "button.transparent-button + button.primary-button:visible"
-    //     );
-
-    //     await expect(
-    //         adminPage.getByText("Subscriber Deleted Successfully")
-    //     ).toBeVisible();
-    // });
 });

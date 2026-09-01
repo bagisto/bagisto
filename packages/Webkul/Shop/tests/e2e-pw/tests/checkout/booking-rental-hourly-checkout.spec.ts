@@ -1,14 +1,14 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 test.describe("rental booking product checkout flow", () => {
-    test.describe("rental booking product for hourly basis with available every week with same slot all days ", () => {
+    test.describe("rental booking product for hourly basis with available every week with same slot all days", () => {
         test("should create rental booking product for hourly basis with available every week with same slot all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -24,7 +24,7 @@ test.describe("rental booking product checkout flow", () => {
                 sameSlotAllDays: true,
             });
         });
-        test("should allow customer to complete checkout ", async ({
+        test("should allow customer to complete checkout", async ({
             shopPage,
         }) => {
             const customer = await loginAsCustomer(shopPage);
@@ -36,7 +36,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis with available every week with same slot all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -68,7 +68,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis with available every week and not same slot all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -85,7 +85,7 @@ test.describe("rental booking product checkout flow", () => {
             });
         });
 
-        test("should allow customer to complete checkout ", async ({
+        test("should allow customer to complete checkout", async ({
             shopPage,
         }) => {
             const customer = await loginAsCustomer(shopPage);
@@ -97,7 +97,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis with available every week and not same slot all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -130,7 +130,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis without available every week and same slot all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -147,7 +147,7 @@ test.describe("rental booking product checkout flow", () => {
             });
         });
 
-        test("should allow customer to complete checkout ", async ({
+        test("should allow customer to complete checkout", async ({
             shopPage,
         }) => {
             const customer = await loginAsCustomer(shopPage);
@@ -159,7 +159,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis without available every week and same slot all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -192,7 +192,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis without available every week and not same slot all days", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",
@@ -209,7 +209,7 @@ test.describe("rental booking product checkout flow", () => {
             });
         });
 
-        test("should allow customer to complete checkout ", async ({
+        test("should allow customer to complete checkout", async ({
             shopPage,
         }) => {
             const customer = await loginAsCustomer(shopPage);
@@ -221,7 +221,7 @@ test.describe("rental booking product checkout flow", () => {
         test("should create rental booking product for hourly basis without available every week and not same slot all days without cancellation", async ({
             adminPage,
         }) => {
-            const productCreation = new ProductCreation(adminPage);
+            const productCreation = new ProductCreatePage(adminPage);
             await productCreation.createProduct({
                 type: "booking",
                 bookingType: "rental",

@@ -1,12 +1,14 @@
 import { test } from "../../../../setup";
 import { expect, Page } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
+
+let generatedName: string;
 
 async function expectCouponAppliedWithGrandTotal(
     page: Page,
@@ -35,15 +37,13 @@ async function expectCouponAppliedWithGrandTotal(
     ).toContainText(formatted);
 }
 
-async function createRuleAndVerifyCoupon({
+async function createRuleAndVerifyUrlKey({
     page,
-    attribute,
     operator,
     value,
     couponType,
 }: {
     page: Page;
-    attribute: string;
     operator: string;
     value: string;
     couponType: CouponType;
@@ -55,7 +55,7 @@ async function createRuleAndVerifyCoupon({
     await ruleCreatePage.cartRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
-        attribute,
+        attribute: "product|url_key",
         operator,
         value,
         couponType,
@@ -64,7 +64,7 @@ async function createRuleAndVerifyCoupon({
     if (discountValue === undefined) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
-        
+
     await expectCouponAppliedWithGrandTotal(
         page,
         ruleApplyPage,
@@ -74,12 +74,14 @@ async function createRuleAndVerifyCoupon({
 }
 
 test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    generatedName = `Simple-${Date.now()}`;
+
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
         sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        name: generatedName,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
@@ -96,94 +98,56 @@ test.afterEach(async ({ adminPage }) => {
 const cases = [
     {
         operator: "==",
-        value: "199",
-        type: "percentage",
-        label: "is equal to",
+        type: "fixed",
+        value: () => generatedName.toLowerCase(),
     },
     {
         operator: "==",
-        value: "199",
-        type: "fixed",
-        label: "is equal to",
-    },
-
-    {
-        operator: "!=",
-        value: "100",
         type: "percentage",
-        label: "is not equal to",
+        value: () => generatedName.toLowerCase(),
     },
     {
         operator: "!=",
-        value: "100",
         type: "fixed",
-        label: "is not equal to",
+        value: () => "simple",
     },
-
     {
-        operator: ">=",
-        value: "199",
+        operator: "!=",
         type: "percentage",
-        label: "is greater than or equal to",
+        value: () => "simple",
     },
     {
-        operator: ">=",
-        value: "199",
+        operator: "{}",
         type: "fixed",
-        label: "is greater than or equal to",
+        value: () => generatedName.toLowerCase(),
     },
-
     {
-        operator: "<=",
-        value: "200",
+        operator: "{}",
         type: "percentage",
-        label: "is less than or equal to",
+        value: () => generatedName.toLowerCase(),
     },
     {
-        operator: "<=",
-        value: "200",
+        operator: "!{}",
         type: "fixed",
-        label: "is less than or equal to",
+        value: () => "example",
     },
-
     {
-        operator: ">",
-        value: "198",
+        operator: "!{}",
         type: "percentage",
-        label: "is greater than",
-    },
-    {
-        operator: ">",
-        value: "198",
-        type: "fixed",
-        label: "is greater than",
-    },
-
-    {
-        operator: "<",
-        value: "200",
-        type: "percentage",
-        label: "is less than",
-    },
-    {
-        operator: "<",
-        value: "200",
-        type: "fixed",
-        label: "is less than",
+        value: () => "example",
     },
 ];
 
 test.describe("cart rules", () => {
-    test.describe("cart item attribute", () => {
-        for (const { operator, value, type, label } of cases) {
-            test(`should apply coupon when price in cart condition -> ${label} (${type})`, async ({
+    test.describe("product attribute cndition", () => {
+        for (const { operator, type, value } of cases) {
+            test(`should allow coupon when url key condition is -> ${operator} (${type})`, async ({
                 page,
             }) => {
-                await createRuleAndVerifyCoupon({
+                await createRuleAndVerifyUrlKey({
                     page,
-                    attribute: "cart_item|base_price",
                     operator,
-                    value,
+                    value: value(),
                     couponType: type as CouponType,
                 });
             });

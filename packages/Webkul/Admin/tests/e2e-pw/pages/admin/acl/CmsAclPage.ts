@@ -4,7 +4,7 @@ import {
     generateName,
     generateSlug,
 } from "../../../utils/faker";
-import { CustomersAclPage } from "./customers";
+import { CustomersAclPage } from "./CustomersAclPage";
 
 export class CmsAclPage extends CustomersAclPage {
     constructor(page: Page) {

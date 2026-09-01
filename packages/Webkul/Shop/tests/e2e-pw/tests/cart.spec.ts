@@ -4,7 +4,7 @@ import {
     generateDescription,
     generatePhoneNumber,
 } from "../utils/faker";
-import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { CartPage } from "../pages/shop/CartPage";
 import { loginAsAdmin } from "../utils/admin";
 
@@ -12,7 +12,7 @@ const CART_WAITING_TIME = 2000;
 
 test.describe("cart management", () => {
     test.beforeAll(async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",
@@ -76,7 +76,7 @@ test.describe("cart management", () => {
         await expect(shopPage.locator(".icon-bin")).not.toBeVisible();
     });
 
-    test("Should delete the cart item when clicking the bin icon", async ({
+    test("should delete the cart item when clicking the bin icon", async ({
         shopPage,
     }) => {
         const cartPage = new CartPage(shopPage);
@@ -125,7 +125,7 @@ test.describe("cart management", () => {
         await expect(shopPage.locator(".icon-bin")).not.toBeVisible();
     });
 
-    test("Should delete the cart item when clicking the bin icon in cart view page", async ({
+    test("should delete the cart item when clicking the bin icon in cart view page", async ({
         shopPage,
     }) => {
         const cartPage = new CartPage(shopPage);
@@ -154,8 +154,6 @@ test.describe("cart management", () => {
         await cartPage.searchProduct("simple");
         await cartPage.openFirstProductFromSearch();
 
-        // The product-page quantity-changer is not removable, so the trash
-        // icon must never render — only a disabled minus at the minimum.
         await expect(shopPage.locator(".icon-bin")).toHaveCount(0);
         await expect(shopPage.getByLabel("Decrease Quantity")).toHaveClass(
             /opacity-40/,

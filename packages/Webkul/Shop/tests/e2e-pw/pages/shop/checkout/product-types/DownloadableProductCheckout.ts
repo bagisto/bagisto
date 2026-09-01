@@ -2,18 +2,11 @@ import { Page, expect } from "@playwright/test";
 import { CheckoutHelper } from "../CheckoutHelper";
 import { ProductDataManager } from "../../../admin/catalog/products/ProductDataManager";
 
-/**
- * Downloadable product checkout flow
- * Handles downloadable link selection and checkout
- */
 export class DownloadableProductCheckout extends CheckoutHelper {
     constructor(page: Page) {
         super(page);
     }
 
-    /**
-     * Downloadable product checkout
-     */
     async checkout() {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);

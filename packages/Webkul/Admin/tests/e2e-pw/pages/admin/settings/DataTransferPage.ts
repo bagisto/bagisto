@@ -1,4 +1,9 @@
-import { expect, type Locator, type Page } from "@playwright/test";
+import {
+    expect,
+    type Download,
+    type Locator,
+    type Page,
+} from "@playwright/test";
 import { BasePage } from "../../BasePage";
 import {
     dataFilePath,
@@ -63,12 +68,40 @@ export class DataTransferPage extends BasePage {
         return this.page.locator('input[type="file"][name="upload_images"]');
     }
 
-    get imagesDirectoryInput(): Locator {
+    private get imagesDirectoryInput(): Locator {
         return this.page.locator('input[name="images_directory_path"]');
     }
 
-    get imagesPanel(): Locator {
+    private get imagesPanel(): Locator {
         return this.page.locator("#import-images-panel");
+    }
+
+    private get successMessage(): Locator {
+        return this.page.getByText(
+            "Congratulations! Your import was successful.",
+        );
+    }
+
+    private get validationFailedMessage(): Locator {
+        return this.page.getByText(
+            "Your import is invalid. Please fix the following errors and try again.",
+        );
+    }
+
+    private get errorReportLink(): Locator {
+        return this.page.getByRole("link", { name: "Download Full Report" });
+    }
+
+    private get imagesDownloadedRow(): Locator {
+        return this.page.locator("p", { hasText: "Images Downloaded:" }).last();
+    }
+
+    private get uploadedArchiveNote(): Locator {
+        return this.page.getByText("Currently uploaded:");
+    }
+
+    private get sampleImagesLink(): Locator {
+        return this.page.getByText("Download sample images");
     }
 
     private imageSourceCard(source: ImageSource): Locator {
@@ -83,36 +116,8 @@ export class DataTransferPage extends BasePage {
         );
     }
 
-    get successMessage(): Locator {
-        return this.page.getByText(
-            "Congratulations! Your import was successful.",
-        );
-    }
-
-    get validationFailedMessage(): Locator {
-        return this.page.getByText(
-            "Your import is invalid. Please fix the following errors and try again.",
-        );
-    }
-
-    get errorReportLink(): Locator {
-        return this.page.getByRole("link", { name: "Download Full Report" });
-    }
-
-    get imagesDownloadedRow(): Locator {
-        return this.page.locator("p", { hasText: "Images Downloaded:" }).last();
-    }
-
-    get uploadedArchiveNote(): Locator {
-        return this.page.getByText("Currently uploaded:");
-    }
-
     sampleLink(format: "CSV" | "XLS" | "XLSX" | "XML"): Locator {
         return this.page.getByRole("link", { name: format, exact: true });
-    }
-
-    get sampleImagesLink(): Locator {
-        return this.page.getByText("Download sample images");
     }
 
     gridRow(id: number): Locator {
@@ -141,9 +146,6 @@ export class DataTransferPage extends BasePage {
         await expect(this.importButton).toBeVisible();
     }
 
-    /**
-     * Id of the import whose page is currently open.
-     */
     importId(): number {
         const id = this.page
             .url()
@@ -316,5 +318,43 @@ export class DataTransferPage extends BasePage {
             .click();
 
         await this.confirmAgreeDialog();
+    }
+
+    async expectImagesDirectory(directory: string): Promise<void> {
+        await expect(this.imagesDirectoryInput).toHaveValue(directory);
+    }
+
+    async expectImagesPanelVisible(): Promise<void> {
+        await expect(this.imagesPanel).toBeVisible();
+    }
+
+    async expectImagesPanelHidden(): Promise<void> {
+        await expect(this.imagesPanel).toBeHidden();
+    }
+
+    async expectImagesDownloaded(text: string): Promise<void> {
+        await expect(this.imagesDownloadedRow).toContainText(text);
+    }
+
+    async expectUploadedArchiveNote(text: string): Promise<void> {
+        await expect(this.uploadedArchiveNote).toContainText(text);
+    }
+
+    async downloadErrorReport(): Promise<Download> {
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.errorReportLink.click(),
+        ]);
+
+        return download;
+    }
+
+    async downloadSampleImages(): Promise<Download> {
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.sampleImagesLink.click(),
+        ]);
+
+        return download;
     }
 }

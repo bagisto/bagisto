@@ -17,15 +17,6 @@ interface CheckoutRegion {
     checkoutState: string;
 }
 
-/**
- * Storefront page object that drives a guest checkout and verifies tax is
- * applied for a product whose tax category matches the configured region.
- *
- * Tax is computed by Bagisto from the shipping address, which for a guest is
- * only known once the checkout address is submitted — so the taxable subtotal
- * is asserted on the cart page and the tax / grand-total are asserted on the
- * checkout (one-page) summary.
- */
 export class TaxRateApplyPage extends BasePage {
     constructor(page: Page) {
         super(page);
@@ -109,16 +100,6 @@ export class TaxRateApplyPage extends BasePage {
         return this.page.getByRole("button", { name: "Apply", exact: true });
     }
 
-    /**
-     * Read a money value from a summary row identified by its label (e.g.
-     * "Subtotal", "Tax", "Grand Total"). The "+ " tax prefix and currency
-     * symbol are stripped.
-     *
-     * The checkout renders several summary blocks (responsive duplicates and
-     * hidden tax-display template branches), so the row is matched with
-     * `:visible` to read the one actually shown. The exact label is matched to
-     * avoid "Tax" colliding with "Estimate Shipping and Tax".
-     */
     private async readSummaryAmount(label: string): Promise<number> {
         await this.page.waitForLoadState("networkidle");
 
@@ -136,9 +117,6 @@ export class TaxRateApplyPage extends BasePage {
         return parseFloat(text.replace(/[^0-9.]/g, ""));
     }
 
-    /**
-     * Search the storefront and add the product to the cart.
-     */
     async addProductToCart(productName: string): Promise<void> {
         await this.visit("");
         await this.page.waitForLoadState("networkidle");
@@ -148,10 +126,6 @@ export class TaxRateApplyPage extends BasePage {
         await expect(this.addToCartSuccess).toBeVisible();
     }
 
-    /**
-     * Assert the cart's taxable subtotal equals the product price (tax is not
-     * yet applied at this stage because the guest address is unknown).
-     */
     async verifyCartSubtotal(price: number): Promise<void> {
         await this.visit("checkout/cart");
 
@@ -160,14 +134,6 @@ export class TaxRateApplyPage extends BasePage {
         expect(subtotal).toBeCloseTo(price, 2);
     }
 
-    /**
-     * Move into the one-page guest checkout, filling a shipping address that
-     * matches the tax region, then pick free shipping + money transfer so the
-     * order summary settles with tax applied.
-     *
-     * Navigates straight to the one-page checkout (the cart page links there via
-     * "Proceed To Checkout") so it works regardless of the current page.
-     */
     async proceedToGuestCheckout(region: CheckoutRegion): Promise<void> {
         await this.visit("checkout/onepage");
         await this.page.waitForLoadState("networkidle");
@@ -188,10 +154,6 @@ export class TaxRateApplyPage extends BasePage {
         await this.paymentMethod.click();
     }
 
-    /**
-     * Assert the checkout summary shows the mathematically expected tax line and
-     * grand total for a tax-exclusive product with free shipping.
-     */
     async verifyCheckoutTax(price: number, taxPercent: number): Promise<void> {
         const expectedTax = expectedTaxAmount(price, taxPercent);
         const expectedTotal = expectedGrandTotal(price, taxPercent);
@@ -209,12 +171,6 @@ export class TaxRateApplyPage extends BasePage {
         ).toContainText(formatPrice(expectedTotal));
     }
 
-    /**
-     * Mode-aware checkout verification. Asserts the final tax amount, the grand
-     * total (price + tax for exclusive, the gross price itself for inclusive)
-     * and that the percentage actually applied — derived back from the summary
-     * figures as `tax / net * 100` — matches the configured rate.
-     */
     async verifyCheckoutTaxForMode(
         enteredPrice: number,
         taxPercent: number,
@@ -230,11 +186,9 @@ export class TaxRateApplyPage extends BasePage {
         const tax = await this.readSummaryAmount("Tax");
         const grandTotal = await this.readSummaryAmount("Grand Total");
 
-        // Final tax and price land on the mode-specific expected figures.
         expect(tax).toBeCloseTo(expectedTax, 2);
         expect(grandTotal).toBeCloseTo(expectedTotal, 2);
 
-        // The percentage actually applied (tax over net) matches the rate.
         const applied = appliedPercentage(grandTotal, tax);
         expect(Math.abs(applied - taxPercent)).toBeLessThan(0.5);
 
@@ -245,10 +199,6 @@ export class TaxRateApplyPage extends BasePage {
         ).toContainText(formatPrice(expectedTotal));
     }
 
-    /**
-     * Full storefront flow: add to cart, verify the taxable subtotal, run a
-     * guest checkout for the region and verify the applied tax + grand total.
-     */
     async verifyTaxApplication(
         productName: string,
         price: number,
@@ -261,9 +211,6 @@ export class TaxRateApplyPage extends BasePage {
         await this.verifyCheckoutTax(price, taxPercent);
     }
 
-    /**
-     * Apply a coupon on the checkout summary and assert it is accepted.
-     */
     async applyCoupon(couponCode: string): Promise<void> {
         await this.applyCouponButton.click();
         await this.couponInput.fill(couponCode);
@@ -274,16 +221,6 @@ export class TaxRateApplyPage extends BasePage {
         ).toBeVisible();
     }
 
-    /**
-     * Assert the checkout summary after a cart-rule discount, for the configured
-     * "apply tax on" mode:
-     *
-     *   - before_discount: tax is charged on the full price.
-     *   - after_discount:  tax is charged on the discounted price.
-     *
-     * The discount line, tax amount, grand total and the percentage applied on
-     * the taxable base are all asserted.
-     */
     async verifyDiscountedCheckoutTax(
         price: number,
         taxPercent: number,
@@ -302,14 +239,11 @@ export class TaxRateApplyPage extends BasePage {
         const tax = await this.readSummaryAmount("Tax");
         const grandTotal = await this.readSummaryAmount("Grand Total");
 
-        // The discount itself is independent of the tax mode.
         expect(discount).toBeCloseTo(expected.discount, 2);
 
-        // Tax is charged on the full price (before) or discounted price (after).
         expect(tax).toBeCloseTo(expected.tax, 2);
         expect(grandTotal).toBeCloseTo(expected.grandTotal, 2);
 
-        // The rate applied on the taxable base matches the configured rate.
         const applied = (tax / expected.taxBase) * 100;
         expect(Math.abs(applied - taxPercent)).toBeLessThan(0.5);
 
@@ -320,10 +254,6 @@ export class TaxRateApplyPage extends BasePage {
         ).toContainText(formatPrice(expected.grandTotal));
     }
 
-    /**
-     * Full storefront flow for the before/after-discount scenario: add to cart,
-     * guest checkout, apply the coupon, then verify the discounted tax figures.
-     */
     async verifyTaxWithCartRule(options: {
         productName: string;
         price: number;
@@ -344,12 +274,6 @@ export class TaxRateApplyPage extends BasePage {
         );
     }
 
-    /**
-     * Full storefront flow parameterised by pricing mode. Tax-exclusive runs
-     * also assert the cart's taxable subtotal equals the entered price; for
-     * tax-inclusive prices the displayed subtotal is net-of-tax, so only the
-     * checkout tax/grand-total are asserted.
-     */
     async verifyTaxApplicationForMode(
         productName: string,
         enteredPrice: number,

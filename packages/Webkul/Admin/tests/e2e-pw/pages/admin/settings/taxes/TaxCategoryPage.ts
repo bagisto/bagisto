@@ -5,13 +5,6 @@ import {
     TaxCategoryData,
 } from "../../../../utils/tax";
 
-/**
- * Page object for tax categories (admin/settings/taxes/categories).
- *
- * Categories are created/edited through a modal on the index page. A category
- * bundles one or more existing tax rates, so these helpers expect the rate's
- * identifier to already exist.
- */
 export class TaxCategoryPage extends BasePage {
     constructor(page: Page) {
         super(page);
@@ -45,10 +38,6 @@ export class TaxCategoryPage extends BasePage {
         return this.page.locator("span.cursor-pointer.icon-edit");
     }
 
-    /**
-     * Create a tax category that uses the given (already created) tax rate.
-     * Returns the generated category data.
-     */
     async createTaxCategory(
         taxRateIdentifier: string,
         overrides: Partial<TaxCategoryData> = {},
@@ -70,9 +59,6 @@ export class TaxCategoryPage extends BasePage {
         return data;
     }
 
-    /**
-     * Open the edit modal for the category matching `name`.
-     */
     async openForEdit(name: string): Promise<void> {
         await this.visit("admin/settings/taxes/categories");
         await this.page
@@ -83,10 +69,6 @@ export class TaxCategoryPage extends BasePage {
         await expect(this.taxRatesSelect).toBeVisible();
     }
 
-    /**
-     * Assert the category persists the given tax rate as a selected option,
-     * proving the rate-to-category assignment.
-     */
     async expectRateAssigned(
         categoryName: string,
         taxRateIdentifier: string,

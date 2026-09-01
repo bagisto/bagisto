@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { ACLManagement } from "../../../pages/admin/acl/index";
+import { ACLManagement } from "../../../pages/admin/acl/ACLManagement";
 
 test.describe("settings acl", () => {
     test("should create custom role with settings permission", async ({
@@ -30,7 +30,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->locales"]);
     });
 
-    test("should create custom role with settings (locale-> create) permission", async ({
+    test("should create custom role with settings (locale -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -40,7 +40,7 @@ test.describe("settings acl", () => {
         await aclManagement.localeCreateVerify();
     });
 
-    test("should create custom role with settings (locale-> edit) permission", async ({
+    test("should create custom role with settings (locale -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -50,7 +50,7 @@ test.describe("settings acl", () => {
         await aclManagement.localeEditVerify();
     });
 
-    test("should create custom role with settings (locale-> delete) permission", async ({
+    test("should create custom role with settings (locale -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -79,7 +79,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->currencies"]);
     });
 
-    test("should create custom role with settings (currencies->create) permission", async ({
+    test("should create custom role with settings (currencies -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -91,7 +91,7 @@ test.describe("settings acl", () => {
         await aclManagement.currencyCreateVerify();
     });
 
-    test("should create custom role with settings (currencies->edit) permission", async ({
+    test("should create custom role with settings (currencies -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -101,7 +101,7 @@ test.describe("settings acl", () => {
         await aclManagement.currencyEditVerify();
     });
 
-    test("should create custom role with settings (currencies->delete) permission", async ({
+    test("should create custom role with settings (currencies -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -132,7 +132,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->exchange_rates"]);
     });
 
-    test("should create custom role with settings (exchange_rates-> create) permission", async ({
+    test("should create custom role with settings (exchange_rates -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -146,7 +146,7 @@ test.describe("settings acl", () => {
         await aclManagement.exchangeRateCreateVerify();
     });
 
-    test("should create custom role with settings (exchange_rates-> edit) permission", async ({
+    test("should create custom role with settings (exchange_rates -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -158,7 +158,7 @@ test.describe("settings acl", () => {
         await aclManagement.exchangeRateEditVerify();
     });
 
-    test("should create custom role with settings (exchange_rates-> delete) permission", async ({
+    test("should create custom role with settings (exchange_rates -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -189,7 +189,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->inventory_sources"]);
     });
 
-    test("should create custom role with settings (inventory_sources-> create) permission", async ({
+    test("should create custom role with settings (inventory_sources -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -201,7 +201,7 @@ test.describe("settings acl", () => {
         await aclManagement.inventorySourceCreateVerify();
     });
 
-    test("should create custom role with settings (inventory_sources-> edit) permission", async ({
+    test("should create custom role with settings (inventory_sources -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -213,7 +213,7 @@ test.describe("settings acl", () => {
         await aclManagement.inventorySourceEditVerify();
     });
 
-    test("should create custom role with settings (inventory_sources-> delete) permission", async ({
+    test("should create custom role with settings (inventory_sources -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -244,7 +244,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->channels"]);
     });
 
-    test("should create custom role with settings (channels-> create) permission", async ({
+    test("should create custom role with settings (channels -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -254,7 +254,7 @@ test.describe("settings acl", () => {
         await aclManagement.channelCreateVerify();
     });
 
-    test("should create custom role with settings (channels-> edit) permission", async ({
+    test("should create custom role with settings (channels -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -264,7 +264,7 @@ test.describe("settings acl", () => {
         await aclManagement.channelEditVerify();
     });
 
-    test("should create custom role with settings (channels-> delete) permission", async ({
+    test("should create custom role with settings (channels -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -294,7 +294,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->users"]);
     });
 
-    test("should create custom role with settings (users-> create) permission", async ({
+    test("should create custom role with settings (users -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -304,7 +304,7 @@ test.describe("settings acl", () => {
         await aclManagement.createUserVerify();
     });
 
-    test("should create custom role with settings (users-> edit) permission", async ({
+    test("should create custom role with settings (users -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -314,7 +314,7 @@ test.describe("settings acl", () => {
         await aclManagement.editUserVerify();
     });
 
-    test("should create custom role with settings (users-> delete) permission", async ({
+    test("should create custom role with settings (users -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -343,7 +343,7 @@ test.describe("settings acl", () => {
         await aclManagement.verfiyAssignedRole(["settings->roles"]);
     });
 
-    test("should create custom role with settings (roles-> create) permission", async ({
+    test("should create custom role with settings (roles -> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -353,7 +353,7 @@ test.describe("settings acl", () => {
         await aclManagement.roleCreateVerify();
     });
 
-    test("should create custom role with settings (roles-> edit) permission", async ({
+    test("should create custom role with settings (roles -> edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
@@ -363,7 +363,7 @@ test.describe("settings acl", () => {
         await aclManagement.roleEditVerify();
     });
 
-    test("should create custom role with settings (roles-> delete) permission", async ({
+    test("should create custom role with settings (roles -> delete) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);

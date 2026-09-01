@@ -3,10 +3,6 @@ import { CheckoutHelper } from "../CheckoutHelper";
 import { ProductDataManager } from "../../../admin/catalog/products/ProductDataManager";
 import { loginAsAdmin } from "../../../../utils/admin";
 
-/**
- * Booking product checkout flow
- * Handles date/slot selection and checkout
- */
 export class BookingProductCheckout extends CheckoutHelper {
     constructor(page: Page) {
         super(page);
@@ -94,6 +90,25 @@ export class BookingProductCheckout extends CheckoutHelper {
         return orderId
     }
 
+    private async selectslot() {
+        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('networkidle')
+        await this.bookingSlotStartSelect.click()
+        await this.bookingSlotStartSelect.press("ArrowDown");
+        await this.bookingSlotStartSelect.press("Enter");
+        await this.bookingSlotEndSelect.click()
+        await this.bookingSlotEndSelect.press("ArrowDown");
+        await this.bookingSlotEndSelect.press("Enter");
+    }
+
+    private async selectBookingDateTime() {
+        await this.page.waitForTimeout(2000);
+        await this.bookingSlotSelect.click();
+        await this.page.waitForLoadState('networkidle')
+        await this.bookingSlotSelect.press("ArrowDown");
+        await this.bookingSlotSelect.press("Enter");
+    }
+
     async rentalCheckoutDaily(allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
@@ -176,25 +191,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         }
     }
 
-    private async selectslot() {
-        await this.page.waitForTimeout(2000);
-        await this.page.waitForLoadState('networkidle')
-        await this.bookingSlotStartSelect.click()
-        await this.bookingSlotStartSelect.press("ArrowDown");
-        await this.bookingSlotStartSelect.press("Enter");
-        await this.bookingSlotEndSelect.click()
-        await this.bookingSlotEndSelect.press("ArrowDown");
-        await this.bookingSlotEndSelect.press("Enter");
-    }
-
-    private async selectBookingDateTime() {
-        await this.page.waitForTimeout(2000);
-        await this.bookingSlotSelect.click();
-        await this.page.waitForLoadState('networkidle')
-        await this.bookingSlotSelect.press("ArrowDown");
-        await this.bookingSlotSelect.press("Enter");
-    }
-
     async table_checkout(table: boolean, hour: string, allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
@@ -265,8 +261,6 @@ export class BookingProductCheckout extends CheckoutHelper {
             const customerName = `${customer.firstName} ${customer.lastName}`;
             const slots = this.slotGraphEvents;
             for (let i = 0; i < 7; i++) {
-                // The calendar tile only renders the time range, so every event in the
-                // week is opened until the dialog reports this order's id.
                 const total = await slots.count();
                 for (let j = 0; j < total; j++) {
                     const slotgraph = slots.nth(j);

@@ -22,10 +22,6 @@ export class DesignConfigurationPage extends BasePage {
         );
     }
 
-    private mediaTile(field: string) {
-        return this.mediaInput(field).locator("xpath=../div[1]");
-    }
-
     private categoryViewSelect() {
         return this.page.locator(
             '[name="general[design][categories][category_view]"]',
@@ -50,6 +46,24 @@ export class DesignConfigurationPage extends BasePage {
 
     private closePreviewButton() {
         return this.page.locator("span.icon-close").first();
+    }
+
+    private mediaTile(field: string) {
+        return this.mediaInput(field).locator("xpath=../div[1]");
+    }
+
+    private async uploadMedia(field: string, filePath: string): Promise<void> {
+        const input = this.mediaInput(field);
+        await expect(input).toBeAttached();
+        await input.setInputFiles(filePath);
+        await expect(this.mediaTile(field).locator("img")).toBeVisible();
+    }
+
+    private async deleteMedia(field: string): Promise<void> {
+        const tile = this.mediaTile(field);
+        await tile.hover();
+        await tile.locator(".icon-delete").click();
+        await expect(tile).toBeHidden();
     }
 
     async open(): Promise<void> {
@@ -91,19 +105,5 @@ export class DesignConfigurationPage extends BasePage {
     async saveAndVerify(): Promise<void> {
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
-    }
-
-    private async uploadMedia(field: string, filePath: string): Promise<void> {
-        const input = this.mediaInput(field);
-        await expect(input).toBeAttached();
-        await input.setInputFiles(filePath);
-        await expect(this.mediaTile(field).locator("img")).toBeVisible();
-    }
-
-    private async deleteMedia(field: string): Promise<void> {
-        const tile = this.mediaTile(field);
-        await tile.hover();
-        await tile.locator(".icon-delete").click();
-        await expect(tile).toBeHidden();
     }
 }

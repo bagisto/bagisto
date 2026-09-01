@@ -1,5 +1,5 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { GroupProductCheckout } from "../../pages/shop/checkout/product-types/GroupProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
@@ -7,7 +7,7 @@ test.describe("group product checkout flow", () => {
     test("should create simple product to add in group", async ({
         adminPage,
     }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",
@@ -24,7 +24,7 @@ test.describe("group product checkout flow", () => {
     test("should create another simple product to add in group", async ({
         adminPage,
     }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "simple",
@@ -39,7 +39,7 @@ test.describe("group product checkout flow", () => {
     });
 
     test("should create group product", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
+        const productCreation = new ProductCreatePage(adminPage);
 
         await productCreation.createProduct({
             type: "grouped",

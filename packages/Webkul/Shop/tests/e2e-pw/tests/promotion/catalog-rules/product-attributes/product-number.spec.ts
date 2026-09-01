@@ -1,12 +1,11 @@
 import { expect, test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 let generatedProductNumber: string;
-generatedProductNumber = `PN-${Date.now()}`;
 
 async function createRuleAndVerifyCoupon({
     page,
@@ -53,7 +52,9 @@ async function createRuleAndVerifyCoupon({
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
+    generatedProductNumber = `PN-${Date.now()}`;
+
+    const productCreation = new ProductCreatePage(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
@@ -79,57 +80,57 @@ const conditions = [
     {
         title: "is equal to",
         operator: "==",
-        value: generatedProductNumber,
-        productValue: generatedProductNumber,
+        value: () => generatedProductNumber,
+        productValue: () => generatedProductNumber,
         type: "percentage",
     },
     {
         title: "is equal to",
         operator: "==",
-        value: generatedProductNumber,
-        productValue: generatedProductNumber,
+        value: () => generatedProductNumber,
+        productValue: () => generatedProductNumber,
         type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
-        value: "123456",
-        productValue: generatedProductNumber,
+        value: () => "123456",
+        productValue: () => generatedProductNumber,
         type: "percentage",
     },
     {
         title: "is not equal to",
         operator: "!=",
-        value: "123456",
-        productValue: generatedProductNumber,
+        value: () => "123456",
+        productValue: () => generatedProductNumber,
         type: "fixed",
     },
     {
         title: "contains",
         operator: "{}",
-        value: generatedProductNumber,
-        productValue: generatedProductNumber,
+        value: () => generatedProductNumber,
+        productValue: () => generatedProductNumber,
         type: "percentage",
     },
     {
         title: "contains",
         operator: "{}",
-        value: generatedProductNumber,
-        productValue: generatedProductNumber,
+        value: () => generatedProductNumber,
+        productValue: () => generatedProductNumber,
         type: "fixed",
     },
     {
         title: "does not contain",
         operator: "!{}",
-        value: "123456",
-        productValue: generatedProductNumber,
+        value: () => "123456",
+        productValue: () => generatedProductNumber,
         type: "percentage",
     },
     {
         title: "does not contain",
         operator: "!{}",
-        value: "123456",
-        productValue: generatedProductNumber,
+        value: () => "123456",
+        productValue: () => generatedProductNumber,
         type: "fixed",
     },
 ];
@@ -143,8 +144,8 @@ test.describe("catalog rules", () => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: condition.operator,
-                    value: condition.value,
-                    productValue: condition.productValue,
+                    value: condition.value(),
+                    productValue: condition.productValue(),
                     type: condition.type,
                 });
             });
