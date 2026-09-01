@@ -84,6 +84,23 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * Is within the given channel's tree, defaulting to the current one.
+     * A category belongs to a channel by sitting under that channel's root.
+     */
+    public function isAvailableInChannel(?int $channelId = null): bool
+    {
+        $channel = is_null($channelId)
+            ? core()->getCurrentChannel()
+            : core()->getAllChannels()->firstWhere('id', $channelId);
+
+        if (! $root = $channel?->root_category) {
+            return false;
+        }
+
+        return $this->isSelfOrDescendantOf($root);
+    }
+
+    /**
      * Get url attribute.
      *
      * @return string

@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Category\Models\Category;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 
 use function Pest\Laravel\get;
@@ -59,4 +60,24 @@ it('should drop a cart item whose product is no longer in the current channel', 
         ->assertOk()
         ->assertJsonPath('data.items', [])
         ->assertJsonPath('data.items_count', 0);
+});
+
+it('should render a category that sits under the current channel root', function () {
+    $category = Category::factory()->hasTranslations()->create([
+        'parent_id' => core()->getCurrentChannel()->root_category_id,
+    ]);
+
+    get(route('shop.product_or_category.index', $category->translate('en')->slug))
+        ->assertOk();
+});
+
+it('should not render a category that sits outside the current channel root', function () {
+    $otherRoot = Category::factory()->hasTranslations()->create(['parent_id' => null]);
+
+    $category = Category::factory()->hasTranslations()->create([
+        'parent_id' => $otherRoot->id,
+    ]);
+
+    get(route('shop.product_or_category.index', $category->translate('en')->slug))
+        ->assertNotFound();
 });
