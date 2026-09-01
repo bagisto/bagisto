@@ -1,10 +1,6 @@
 import { test, expect } from "../../setup";
 import { loginAsCustomer } from "../../utils/customer";
-import {
-    enableGDPR,
-    enableGDPRAgreement,
-    enableCookiesNotice,
-} from "../../utils/gdpr";
+import { enableGDPR } from "../../utils/gdpr";
 import { CustomerGDPRPage } from "../../pages/admin/customers/CustomerGDPRPage";
 
 function getGdprRequestMessage(prefix: string): string {
@@ -14,8 +10,6 @@ function getGdprRequestMessage(prefix: string): string {
 test.describe("customer agreement configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
         await enableGDPR(adminPage);
-        await enableGDPRAgreement(adminPage);
-        await enableCookiesNotice(adminPage);
     });
 
     test("should edit gdpr request state pending to processing", async ({
