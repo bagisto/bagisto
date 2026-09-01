@@ -316,7 +316,11 @@ class ProductDataGrid extends DataGrid
 
         $this->dispatchEvent('process_request.before', $this);
 
-        $pagination = $params['pagination'];
+        $pagination = $params['pagination'] ?? [];
+
+        $page = (int) ($pagination['page'] ?? 1);
+
+        $perPage = (int) ($pagination['per_page'] ?? $this->itemsPerPage);
 
         $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
 
@@ -328,8 +332,8 @@ class ProductDataGrid extends DataGrid
             'index' => $indexNames,
             'ignore_unavailable' => true,
             'body' => [
-                'from' => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],
-                'size' => $pagination['per_page'],
+                'from' => ($page * $perPage) - $perPage,
+                'size' => $perPage,
                 'stored_fields' => [],
                 'query' => [
                     'bool' => $this->getElasticFilters($params['filters'] ?? []) ?: new \stdClass,
@@ -354,8 +358,8 @@ class ProductDataGrid extends DataGrid
         $this->paginator = new LengthAwarePaginator(
             $total ? $this->queryBuilder->get() : [],
             $total,
-            $pagination['per_page'],
-            $pagination['page'],
+            $perPage,
+            $page,
             [
                 'path' => request()->url(),
                 'query' => [],

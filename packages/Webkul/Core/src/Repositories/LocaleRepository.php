@@ -5,6 +5,8 @@ namespace Webkul\Core\Repositories;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Prettus\Repository\Events\RepositoryEntityCreated;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Webkul\Core\Contracts\Locale;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\Sanitizer;
@@ -22,7 +24,8 @@ class LocaleRepository extends Repository
     }
 
     /**
-     * Create.
+     * Create a locale, invalidating the cached reads only once its image is
+     * written, so a concurrent read cannot cache a partial one.
      *
      * @return mixed
      */
@@ -34,13 +37,16 @@ class LocaleRepository extends Repository
 
         $this->uploadImage($attributes, $locale);
 
+        Event::dispatch(new RepositoryEntityCreated($this, $locale));
+
         Event::dispatch('core.locale.create.after', $locale);
 
         return $locale;
     }
 
     /**
-     * Update.
+     * Update a locale, invalidating the cached reads only once its image is
+     * written, so a concurrent read cannot cache a partial one.
      *
      * @return mixed
      */
@@ -51,6 +57,8 @@ class LocaleRepository extends Repository
         $locale = parent::update($attributes, $id);
 
         $this->uploadImage($attributes, $locale);
+
+        Event::dispatch(new RepositoryEntityUpdated($this, $locale));
 
         Event::dispatch('core.locale.update.after', $locale);
 

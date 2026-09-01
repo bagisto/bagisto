@@ -3,7 +3,10 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Prettus\Repository\Events\RepositoryEntityCreated;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Webkul\Core\Contracts\Channel;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Helpers\MediaFileName;
@@ -31,13 +34,13 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * Create.
+     * Create a channel, invalidating the cached reads only once its relations
+     * and images are written, so a concurrent read cannot cache a partial one.
      *
      * @return Channel
      */
     public function create(array $data)
     {
-
         $model = $this->getModel();
 
         foreach (core()->getAllLocales() as $locale) {
@@ -60,11 +63,14 @@ class ChannelRepository extends Repository
 
         $this->uploadImages($data, $channel, 'favicon');
 
+        Event::dispatch(new RepositoryEntityCreated($this, $channel));
+
         return $channel;
     }
 
     /**
-     * Update.
+     * Update a channel, invalidating the cached reads only once its relations
+     * and images are written, so a concurrent read cannot cache a partial one.
      *
      * @param  int  $id
      * @return Channel
@@ -82,6 +88,8 @@ class ChannelRepository extends Repository
         $this->uploadImages($data, $channel);
 
         $this->uploadImages($data, $channel, 'favicon');
+
+        Event::dispatch(new RepositoryEntityUpdated($this, $channel));
 
         return $channel;
     }
