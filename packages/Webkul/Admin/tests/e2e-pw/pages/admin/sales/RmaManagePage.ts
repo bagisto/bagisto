@@ -228,6 +228,68 @@ export class RmaManagePage extends BasePage {
         await expect(this.page.getByText("RMA Rules created")).toBeVisible();
     }
 
+    async adminCreateRmaCustomField(field: {
+        label: string;
+        code: string;
+        type: string;
+        required?: boolean;
+    }) {
+        await this.visit("admin/sales/rma/custom-fields/create");
+        await this.page.waitForLoadState("networkidle");
+
+        await this.page.locator('input[name="label"]').fill(field.label);
+        await this.page.locator('input[name="code"]').fill(field.code);
+        await this.page.locator('input[name="position"]').fill("1");
+        await this.page.locator('select[name="type"]').selectOption(field.type);
+        await this.page.locator('label[for="status"]').first().click();
+
+        if (field.required) {
+            await this.page.locator('label[for="is_required"]').first().click();
+        }
+
+        const options = this.page.locator('input[name^="options["]');
+
+        if (await options.count()) {
+            for (let index = 0; index < (await options.count()); index++) {
+                await this.page
+                    .locator(`input[name="options[${index}]"]`)
+                    .fill(`Option ${index + 1}`);
+
+                await this.page
+                    .locator(`input[name="value[${index}]"]`)
+                    .fill(`option_${index + 1}`);
+            }
+        }
+
+        await this.page.getByRole("button", { name: "Save" }).first().click();
+
+        await expect(
+            this.page.getByText("Custom Field created successfully.").first(),
+        ).toBeVisible();
+    }
+
+    async adminDeleteRmaCustomField(label: string) {
+        await this.visit("admin/sales/rma/custom-fields");
+        await this.page.waitForLoadState("networkidle");
+
+        await this.page
+            .locator(".row")
+            .filter({ hasText: label })
+            .first()
+            .locator("a.icon-delete, span.icon-delete")
+            .first()
+            .click();
+
+        await this.page
+            .getByRole("button", { name: "Agree", exact: true })
+            .first()
+            .click();
+
+        await expect(
+            this.page.getByText("Custom Fields deleted successfully.").first(),
+        ).toBeVisible();
+    }
+
     async adminCreateRmaStatus() {
         await this.visit("admin/sales/rma/rma-status");
         await this.page
