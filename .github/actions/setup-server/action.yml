@@ -77,27 +77,34 @@ runs:
 
     - name: Verify Server Hosts
       shell: bash
+      env:
+        PHP_VERSION: ${{ inputs.php-version }}
       run: |
+        if ! timeout 5 bash -c 'until : > /dev/tcp/127.0.0.1/9000; do sleep 1; done' 2>/dev/null; then
+          echo "PHP-FPM is not accepting connections on 127.0.0.1:9000."
+          sudo systemctl status "php$PHP_VERSION-fpm" --no-pager || true
+          exit 1
+        fi
+
+        echo "PHP-FPM is accepting connections."
+
         for host in localhost c1.localhost c2.localhost; do
           status=""
 
           for _ in $(seq 30); do
-            status=$(curl -s -o /dev/null -w '%{http_code}' "http://$host/" || true)
+            status=$(curl -s -o /dev/null -w '%{http_code}' "http://$host/nginx-health" || true)
 
             case "$status" in
-              ""|000|502|504) sleep 1 ;;
-              *) break ;;
+              200) break ;;
+              *) sleep 1 ;;
             esac
           done
 
-          case "$status" in
-            ""|000|502|504)
-              echo "No response from $host."
-              sudo tail -50 /var/log/nginx/error.log || true
-              sudo systemctl status "php${{ inputs.php-version }}-fpm" --no-pager || true
-              exit 1
-              ;;
-          esac
+          if [ "$status" != "200" ]; then
+            echo "No response from $host (HTTP ${status:-000})."
+            sudo tail -50 /var/log/nginx/error.log || true
+            exit 1
+          fi
 
-          echo "$host is answering (HTTP $status)."
+          echo "$host is answering."
         done
