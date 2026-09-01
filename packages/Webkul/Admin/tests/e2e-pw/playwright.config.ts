@@ -32,7 +32,7 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: `${env.baseUrl}/`,
+        baseURL: `${"http://127.0.0.1:8000"}/`,
         headless: !env.headed,
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
