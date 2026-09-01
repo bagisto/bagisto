@@ -283,13 +283,24 @@ export class SalesCreatePage extends BasePage {
             await options[Math.floor(Math.random() * options.length)].click();
         }
 
-        await this.page.locator("label", { hasText: "Money Transfer" }).click();
+        await Promise.all([
+            this.page.waitForResponse((response) =>
+                response.url().includes("/payment-methods"),
+            ),
+            this.page.locator("label", { hasText: "Money Transfer" }).click(),
+        ]);
 
         const nextBtn = await this.page.$$(
             "button.primary-button.w-max.px-11.py-3",
         );
-        await nextBtn[nextBtn.length - 1].click();
-        await this.page.waitForLoadState("networkidle");
+
+        await Promise.all([
+            this.page.waitForResponse((response) =>
+                response.url().includes("/sales/orders/create/"),
+            ),
+            nextBtn[nextBtn.length - 1].click(),
+        ]);
+
         await expect(this.page.getByText("Order Items")).toBeVisible();
     }
 
@@ -714,7 +725,10 @@ export class SalesCreatePage extends BasePage {
 
     async generateDownloadableOrder() {
         await this.generateBaseProductOrder(false, async () => {
-            await this.page.locator('input[name="links[]"]').first().click({ force: true });
+            await this.page
+                .locator('input[name="links[]"]')
+                .first()
+                .click({ force: true });
             await this.page
                 .getByRole("button", { name: "Add To Cart" })
                 .first()

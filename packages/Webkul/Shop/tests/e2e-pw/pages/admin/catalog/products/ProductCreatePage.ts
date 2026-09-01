@@ -517,8 +517,9 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async fillCommonDetails(product: BaseProduct) {
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState("networkidle");
         await this.productName.fill(product.name);
+        await expect(this.productName).toHaveValue(product.name);
         await this.editor.fillInTinymce(
             this.productShortDescription,
             product.shortDescription,
@@ -591,13 +592,13 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async simple(product: BaseProduct) {
-        if (product.price) {
+        if (product.price !== undefined) {
             await this.productPrice.fill(product.price.toString());
         }
-        if (product.weight) {
+        if (product.weight !== undefined) {
             await this.productWeight.fill(product.weight.toString());
         }
-        if (product.inventory) {
+        if (product.inventory !== undefined) {
             await this.productInventory
                 .first()
                 .fill(product.inventory.toString());
@@ -677,14 +678,14 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async virtual(product: BaseProduct) {
-        if (product.price) {
+        if (product.price !== undefined) {
             await this.productPrice.fill(product.price.toString());
         }
         await this.productInventory.first().fill("100");
     }
 
     private async downloadable(product: BaseProduct) {
-        if (product.price) {
+        if (product.price !== undefined) {
             await this.productPrice.fill(product.price.toString());
         }
         await this.addDownloadableLink(

@@ -93,7 +93,7 @@ test.beforeEach(async ({ adminPage }) => {
         name: `Simple-${Date.now()}`,
         shortDescription: "Short desc",
         description: "Full desc",
-        price: Math.floor(Math.random() * 1000),
+        price: Math.floor(Math.random() * 1000) + 1,
         weight: 1,
         inventory: 100,
     });
