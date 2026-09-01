@@ -1,0 +1,62 @@
+name: Setup Bagisto
+description: Install the dependencies, write the environment file and install the application.
+
+inputs:
+  db-connection:
+    description: The database driver the application connects with.
+    required: true
+  db-port:
+    description: The port the database service is published on.
+    required: true
+  db-username:
+    description: The user the application connects to the database as.
+    required: true
+  db-password:
+    description: The password for the database user.
+    required: true
+  app-env:
+    description: The environment the application runs in.
+    required: false
+    default: local
+  app-debug:
+    description: Whether detailed errors are rendered.
+    required: false
+    default: "false"
+  seed-products:
+    description: Whether the sample product catalogue is installed.
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Install Composer Dependencies
+      shell: bash
+      run: composer install
+
+    - name: Setup Environment
+      shell: bash
+      run: |
+        cp .env.example .env
+        sed -i "s|^\(APP_ENV=\s*\).*$|\1${{ inputs.app-env }}|" .env
+        sed -i "s|^\(APP_DEBUG=\s*\).*$|\1${{ inputs.app-debug }}|" .env
+        sed -i "s|^\(APP_URL=\s*\).*$|\1http://localhost|" .env
+        sed -i "s|^\(DB_CONNECTION=\s*\).*$|\1${{ inputs.db-connection }}|" .env
+        sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
+        sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ inputs.db-port }}|" .env
+        sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
+        sed -i "s|^\(DB_USERNAME=\s*\).*$|\1${{ inputs.db-username }}|" .env
+        sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ inputs.db-password }}|" .env
+        sed -i "s|^\(MAIL_MAILER=\s*\).*$|\1log|" .env
+        cat .env
+
+    - name: Run Bagisto Installer
+      shell: bash
+      env:
+        SEED_PRODUCTS: ${{ inputs.seed-products }}
+      run: |
+        if [ "$SEED_PRODUCTS" = "true" ]; then
+          php artisan bagisto:install --no-interaction --demo-samples
+        else
+          php artisan bagisto:install --no-interaction
+        fi

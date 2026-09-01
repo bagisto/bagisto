@@ -81,7 +81,12 @@ jobs:
           ini-values: error_reporting=E_ALL
           tools: composer:v2
 
-      - name: Set Up Node.js
+      - name: Setup Server
+        uses: ./.github/actions/setup-server
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -96,35 +101,18 @@ jobs:
           npm run install:browsers
         working-directory: packages/Webkul/Installer
 
-      - name: Setting Environment
-        run: |
-          cp .env.example .env
-          sed -i "s|^\(DB_CONNECTION=\s*\).*$|\1${{ matrix.db }}|" .env
-          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.database.ports[matrix.db-port] }}|" .env
-          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
-          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1${{ matrix.db-user }}|" .env
-          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ matrix.db-password }}|" .env
-          sed -i "s|^\(APP_DEBUG=\s*\).*$|\1false|" .env
-          sed -i "s|^\(APP_URL=\s*\).*$|\1http://127.0.0.1:8000|" .env
-          cat .env
-
       - name: Install Composer Dependencies
         run: composer install
 
+      - name: Setup Environment
+        run: |
+          cp .env.example .env
+          sed -i "s|^\(APP_DEBUG=\s*\).*$|\1false|" .env
+          sed -i "s|^\(APP_URL=\s*\).*$|\1http://localhost|" .env
+          cat .env
+
       - name: Generate Application Key
         run: php artisan key:generate
-
-      - name: Start Laravel server
-        run: |
-          # The guided installer rewrites .env mid-request (EnvironmentManager::generateEnv),
-          # and `php artisan serve` watches .env and restarts on change — which kills the
-          # in-flight migration. Run the raw built-in server (same router, no .env watcher),
-          # with multiple workers so the progress-screen asset request cannot starve migration.
-          (cd public && PHP_CLI_SERVER_WORKERS=4 php -S 0.0.0.0:8000 \
-            ../vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php > ../server.log 2>&1) &
-          echo "Waiting for the installer to be reachable..."
-          timeout 30 bash -c 'until curl -s http://127.0.0.1:8000/install > /dev/null; do sleep 1; done'
 
       - name: Run Guided Installer Test
         env:
@@ -218,7 +206,12 @@ jobs:
           ini-values: error_reporting=E_ALL
           tools: composer:v2
 
-      - name: Set Up Node.js
+      - name: Setup Server
+        uses: ./.github/actions/setup-server
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -233,43 +226,30 @@ jobs:
           npm run install:browsers
         working-directory: packages/Webkul/${{ matrix.project }}
 
-      - name: Setting Environment
-        run: |
-          cp .env.example .env
-          sed -i "s|^\(DB_CONNECTION=\s*\).*$|\1${{ matrix.db }}|" .env
-          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.database.ports[matrix.db-port] }}|" .env
-          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
-          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1${{ matrix.db-user }}|" .env
-          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ matrix.db-password }}|" .env
-          sed -i "s|^\(APP_DEBUG=\s*\).*$|\1false|" .env
-          sed -i "s|^\(APP_URL=\s*\).*$|\1http://127.0.0.1:8000|" .env
-          cat .env
-
-      - name: Install Composer Dependencies
-        run: composer install
-
-      - name: Running Bagisto Installer
-        run: php artisan bagisto:install --no-interaction
-
-      - name: Seed Product Table
-        run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
-
-      - name: Indexing Product Table
-        run: php artisan indexer:index --mode=full
-
-      - name: Start Laravel server
-        run: |
-          php artisan serve --host=0.0.0.0 --port=8000 > server.log 2>&1 &
-          echo "Waiting for server to start..."
-          timeout 30 bash -c 'until curl -s http://127.0.0.1:8000 > /dev/null; do sleep 1; done'
+      - name: Setup Bagisto
+        uses: ./.github/actions/setup-bagisto
+        with:
+          db-connection: ${{ matrix.db }}
+          db-port: ${{ job.services.database.ports[matrix.db-port] }}
+          db-username: ${{ matrix.db-user }}
+          db-password: ${{ matrix.db-password }}
+          seed-products: "true"
 
       - name: Run All Playwright Tests
         env:
-          BASE_URL: "http://127.0.0.1:8000"
+          BASE_URL: "http://localhost"
         run: |
           npm run test:e2e -- --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/${{ matrix.project }}
+
+      - name: Collect Server Logs
+        if: always()
+        run: |
+          mkdir -p server-logs
+          sudo cp /var/log/nginx/error.log server-logs/nginx-error.log 2>/dev/null || true
+          sudo cp /var/log/nginx/access.log server-logs/nginx-access.log 2>/dev/null || true
+          sudo cp /var/log/php${{ matrix.php-versions }}-fpm.log server-logs/php-fpm.log 2>/dev/null || true
+          sudo chown -R "$USER" server-logs
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
@@ -280,4 +260,5 @@ jobs:
             packages/Webkul/${{ matrix.project }}/tests/e2e-pw/playwright-report
             packages/Webkul/${{ matrix.project }}/tests/e2e-pw/test-results
             storage/logs/laravel.log
+            server-logs
           retention-days: 1

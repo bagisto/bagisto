@@ -1,0 +1,70 @@
+name: Setup Server
+description: Serve the application with nginx and PHP-FPM on localhost, c1.localhost and c2.localhost.
+
+inputs:
+  php-version:
+    description: The PHP version whose FPM pool serves the application.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install Nginx and PHP-FPM
+      shell: bash
+      run: |
+        sudo apt-get update --allow-releaseinfo-change
+        sudo apt-get install -y --no-install-recommends nginx "php${{ inputs.php-version }}-fpm"
+
+    - name: Configure Hosts
+      shell: bash
+      run: echo "127.0.0.1 localhost c1.localhost c2.localhost" | sudo tee -a /etc/hosts > /dev/null
+
+    - name: Configure PHP-FPM
+      shell: bash
+      run: |
+        sudo install -m 644 .github/ci/php-fpm.conf "/etc/php/${{ inputs.php-version }}/fpm/pool.d/bagisto.conf"
+        sudo sed -i "s|__USER__|$USER|g" "/etc/php/${{ inputs.php-version }}/fpm/pool.d/bagisto.conf"
+        sudo rm -f "/etc/php/${{ inputs.php-version }}/fpm/pool.d/www.conf"
+
+    - name: Configure Nginx
+      shell: bash
+      run: |
+        sudo install -m 644 .github/ci/nginx.conf /etc/nginx/sites-available/bagisto
+        sudo sed -i "s|__ROOT__|$GITHUB_WORKSPACE/public|" /etc/nginx/sites-available/bagisto
+        sudo rm -f /etc/nginx/sites-enabled/default
+        sudo ln -sf /etc/nginx/sites-available/bagisto /etc/nginx/sites-enabled/bagisto
+        chmod o+x "$HOME" "$GITHUB_WORKSPACE"
+        sudo nginx -t
+
+    - name: Start Services
+      shell: bash
+      run: |
+        sudo service "php${{ inputs.php-version }}-fpm" restart
+        sudo service nginx restart
+
+    - name: Verify Server Hosts
+      shell: bash
+      run: |
+        for host in localhost c1.localhost c2.localhost; do
+          status=""
+
+          for _ in $(seq 30); do
+            status=$(curl -s -o /dev/null -w '%{http_code}' "http://$host/" || true)
+
+            case "$status" in
+              ""|000) sleep 1 ;;
+              *) break ;;
+            esac
+          done
+
+          case "$status" in
+            ""|000)
+              echo "No response from $host."
+              sudo tail -50 /var/log/nginx/error.log || true
+              sudo systemctl status "php${{ inputs.php-version }}-fpm" --no-pager || true
+              exit 1
+              ;;
+          esac
+
+          echo "$host is answering (HTTP $status)."
+        done
