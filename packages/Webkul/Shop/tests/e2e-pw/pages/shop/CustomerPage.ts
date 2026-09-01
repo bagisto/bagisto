@@ -296,5 +296,9 @@ export class CustomerPage extends BasePage {
             .getByRole("button", { name: "Add To Cart" })
             .first()
             .click();
+
+        await expect(
+            this.page.getByText("Item Added Successfully").first(),
+        ).toBeVisible();
     }
 }

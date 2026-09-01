@@ -74,7 +74,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -91,7 +91,7 @@ jobs:
           extensions: ${{ env.PHP_EXTENSIONS }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -130,7 +130,7 @@ jobs:
         working-directory: packages/Webkul/Installer
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: installer-results-${{ matrix.locale }}-${{ matrix.db }}-${{ github.run_id }}-${{ github.run_number }}
@@ -203,7 +203,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -220,7 +220,7 @@ jobs:
           extensions: ${{ env.PHP_EXTENSIONS }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -260,7 +260,7 @@ jobs:
           sudo chown -R "$USER" server-logs
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: ${{ matrix.project }}-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}

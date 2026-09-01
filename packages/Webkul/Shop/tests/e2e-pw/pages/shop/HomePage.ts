@@ -12,6 +12,7 @@ export class HomePage extends BasePage {
 
     async subscribeToNewsletter(email: string): Promise<void> {
         await this.gotoHome();
+        await this.page.waitForLoadState("networkidle");
         await this.page.getByRole("textbox", { name: "Email" }).fill(email);
         await this.page.getByRole("button", { name: "Subscribe" }).click();
     }

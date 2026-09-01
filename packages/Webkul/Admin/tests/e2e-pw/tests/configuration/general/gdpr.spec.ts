@@ -63,8 +63,8 @@ test.describe("gdpr configuration", () => {
             await disableGDPRAgreement(adminPage);
             await adminPage.goto("customer/register");
             await expect(
-                adminPage.locator("#agreement").nth(1),
-            ).not.toBeVisible();
+                adminPage.locator('input[name="agreement"]'),
+            ).toHaveCount(0);
         });
     });
 
