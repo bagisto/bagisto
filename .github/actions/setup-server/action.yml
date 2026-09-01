@@ -12,6 +12,7 @@ runs:
     - name: Install Nginx and PHP-FPM
       shell: bash
       run: |
+        sudo add-apt-repository -y ppa:ondrej/php
         sudo apt-get update --allow-releaseinfo-change
         sudo apt-get install -y --no-install-recommends nginx "php${{ inputs.php-version }}-fpm"
 
@@ -21,10 +22,35 @@ runs:
 
     - name: Configure PHP-FPM
       shell: bash
+      env:
+        PHP_VERSION: ${{ inputs.php-version }}
       run: |
-        sudo install -m 644 .github/ci/php-fpm.conf "/etc/php/${{ inputs.php-version }}/fpm/pool.d/bagisto.conf"
-        sudo sed -i "s|__USER__|$USER|g" "/etc/php/${{ inputs.php-version }}/fpm/pool.d/bagisto.conf"
-        sudo rm -f "/etc/php/${{ inputs.php-version }}/fpm/pool.d/www.conf"
+        for ini in "/etc/php/$PHP_VERSION/cli/conf.d/"*.ini; do
+          [ -e "$ini" ] || continue
+          sudo ln -sfn "$(readlink -f "$ini")" "/etc/php/$PHP_VERSION/fpm/conf.d/$(basename "$ini")"
+        done
+
+        sudo install -m 644 .github/ci/php-fpm.conf "/etc/php/$PHP_VERSION/fpm/pool.d/bagisto.conf"
+        sudo sed -i "s|__USER__|$USER|g" "/etc/php/$PHP_VERSION/fpm/pool.d/bagisto.conf"
+        sudo rm -f "/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
+
+    - name: Verify PHP Extensions
+      shell: bash
+      env:
+        PHP_VERSION: ${{ inputs.php-version }}
+      run: |
+        php -m | sort > /tmp/cli-modules.txt
+        "php-fpm$PHP_VERSION" -m | sort > /tmp/fpm-modules.txt
+
+        missing=$(comm -23 /tmp/cli-modules.txt /tmp/fpm-modules.txt)
+
+        if [ -n "$missing" ]; then
+          echo "PHP-FPM is missing extensions the CLI has:"
+          echo "$missing"
+          exit 1
+        fi
+
+        echo "PHP-FPM has every extension the CLI has."
 
     - name: Configure Nginx
       shell: bash
@@ -52,13 +78,13 @@ runs:
             status=$(curl -s -o /dev/null -w '%{http_code}' "http://$host/" || true)
 
             case "$status" in
-              ""|000) sleep 1 ;;
+              ""|000|502|504) sleep 1 ;;
               *) break ;;
             esac
           done
 
           case "$status" in
-            ""|000)
+            ""|000|502|504)
               echo "No response from $host."
               sudo tail -50 /var/log/nginx/error.log || true
               sudo systemctl status "php${{ inputs.php-version }}-fpm" --no-pager || true
