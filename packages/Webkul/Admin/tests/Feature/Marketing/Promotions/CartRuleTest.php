@@ -15,8 +15,8 @@ function createCartRule(array $attributes = []): CartRule
 {
     return CartRule::factory()
         ->afterCreating(function (CartRule $rule) {
-            $rule->channels()->sync([1]);
-            $rule->customer_groups()->sync([1, 2, 3]);
+            $rule->cart_rule_channels()->sync([1]);
+            $rule->cart_rule_customer_groups()->sync([1, 2, 3]);
         })
         ->create($attributes);
 }

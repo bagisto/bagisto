@@ -54,7 +54,7 @@ class CartRuleController extends Controller
      */
     public function copy(int $cartRuleId)
     {
-        $cartRule = $this->cartRuleRepository->with(['channels', 'customer_groups'])->findOrFail($cartRuleId);
+        $cartRule = $this->cartRuleRepository->with(['cart_rule_channels', 'cart_rule_customer_groups'])->findOrFail($cartRuleId);
 
         $copiedCartRule = $cartRule->replicate()->fill([
             'status' => 0,
@@ -63,12 +63,12 @@ class CartRuleController extends Controller
 
         $copiedCartRule->save();
 
-        foreach ($copiedCartRule->channels as $channel) {
-            $copiedCartRule->channels()->save($channel);
+        foreach ($copiedCartRule->cart_rule_channels as $channel) {
+            $copiedCartRule->cart_rule_channels()->save($channel);
         }
 
-        foreach ($copiedCartRule->customer_groups as $group) {
-            $copiedCartRule->customer_groups()->save($group);
+        foreach ($copiedCartRule->cart_rule_customer_groups as $group) {
+            $copiedCartRule->cart_rule_customer_groups()->save($group);
         }
 
         return view('admin::marketing.promotions.cart-rules.edit', [

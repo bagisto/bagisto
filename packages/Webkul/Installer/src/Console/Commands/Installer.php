@@ -28,31 +28,15 @@ class Installer extends Command
      * @var string
      */
     protected $signature = 'bagisto:install
-        { --skip-env-check : Skip env check. (Deprecated: use --no-interaction) }
-        { --skip-admin-creation : Skip admin creation. (Deprecated: use --no-interaction) }
-        { --skip-cloud-promotion : Skip Bagisto Cloud hosting prompt. (Deprecated: use --no-interaction) }
-        { --skip-github-star : Skip Bagisto Cloud hosting prompt. (Deprecated: use --no-interaction) }
         { --demo-samples : Seed demo/sample product data (useful with --no-interaction). }
     ';
-
-    /**
-     * Options superseded by the global `--no-interaction` (`-n`) flag.
-     *
-     * @var array<int, string>
-     */
-    protected $deprecatedOptions = [
-        'skip-env-check',
-        'skip-admin-creation',
-        'skip-cloud-promotion',
-        'skip-github-star',
-    ];
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Bagisto installer. Use the global --no-interaction (-n) option for an unattended install that uses the existing `.env`, creates the default admin user and skips sample products (this supersedes the deprecated --skip-* options). Add --demo-samples to also seed demo/sample product data.';
+    protected $description = 'Bagisto installer. Use the global --no-interaction (-n) option for an unattended install that uses the existing `.env`, creates the default admin user and skips sample products. Add --demo-samples to also seed demo/sample product data.';
 
     /**
      * Environment details.
@@ -104,8 +88,6 @@ class Installer extends Command
          */
         $noInteraction = (bool) $this->option('no-interaction');
 
-        $this->warnDeprecatedOptions();
-
         $hasExistingEnv = file_exists(base_path('.env'));
 
         if (! $hasExistingEnv) {
@@ -116,7 +98,7 @@ class Installer extends Command
             $this->components->info('Great! your environment configuration file already exists.');
         }
 
-        ! $this->option('skip-env-check') && ! $noInteraction
+        ! $noInteraction
             ? $this->askDetailsAndUpdateEnv()
             : $this->components->warn('Skipping environment check. This will assume that the `.env` file is already configured. If not, please create it manually.');
 
@@ -143,7 +125,7 @@ class Installer extends Command
         $this->warn('Step: Linking storage directory...');
         $this->call('storage:link');
 
-        if (! $this->option('skip-admin-creation') && ! $noInteraction) {
+        if (! $noInteraction) {
             $this->warn('Step: Create admin credentials...');
             $this->askForAdminDetails();
         } elseif ($this->databaseManager->createAdminUser()) {
@@ -160,35 +142,11 @@ class Installer extends Command
         $this->warn('Step: Clearing cached bootstrap files...');
         $this->call('optimize:clear');
 
-        if (
-            ! $this->option('skip-cloud-promotion')
-            && ! $this->option('skip-github-star')
-            && ! $noInteraction
-        ) {
+        if (! $noInteraction) {
             $this->askToExploreCloudHosting();
         }
 
         ComposerEvents::postCreateProject();
-    }
-
-    /**
-     * Warn about the use of deprecated `--skip-*` options, which are now
-     * superseded by the global `--no-interaction` (`-n`) flag.
-     */
-    protected function warnDeprecatedOptions(): void
-    {
-        $usedOptions = array_filter(
-            $this->deprecatedOptions,
-            fn ($option) => $this->option($option)
-        );
-
-        if (empty($usedOptions)) {
-            return;
-        }
-
-        $flags = implode(', ', array_map(fn ($option) => '--'.$option, $usedOptions));
-
-        $this->components->warn("The option(s) {$flags} are deprecated and will be removed in a future release. Use --no-interaction (-n) instead.");
     }
 
     /**

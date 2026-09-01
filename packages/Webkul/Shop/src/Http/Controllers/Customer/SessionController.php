@@ -56,7 +56,7 @@ class SessionController extends Controller
 
             Cookie::queue(Cookie::make('enable-resend', 'true', 1));
 
-            Cookie::queue(Cookie::make('email-for-resend', $loginRequest->get('email'), 1));
+            Cookie::queue(Cookie::make('email-for-resend', $loginRequest->input('email'), 1));
 
             auth()->guard('customer')->logout();
 

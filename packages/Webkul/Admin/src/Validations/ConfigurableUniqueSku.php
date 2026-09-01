@@ -34,7 +34,7 @@ class ConfigurableUniqueSku implements ValidationRule
      */
     protected function isSkuExistsInProduct()
     {
-        $requestedSkus = collect(request()->get('variants'))->pluck('sku')->toArray();
+        $requestedSkus = collect(request()->input('variants'))->pluck('sku')->toArray();
 
         $productRepository = app(ProductRepository::class);
 

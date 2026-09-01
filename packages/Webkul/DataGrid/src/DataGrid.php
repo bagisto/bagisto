@@ -431,19 +431,6 @@ abstract class DataGrid
     }
 
     /**
-     * To json. The reason for deprecation is that it is not an action returning JSON; instead,
-     * it is a process method which returns a download as well as a JSON response.
-     *
-     * @deprecated
-     *
-     * @return BinaryFileResponse|JsonResponse
-     */
-    public function toJson()
-    {
-        return $this->process();
-    }
-
-    /**
      * Validated request.
      */
     protected function validatedRequest(): array

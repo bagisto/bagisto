@@ -126,9 +126,9 @@ class RequestController extends Controller
      */
     public function getMessages(): JsonResponse
     {
-        $messages = $this->rmaMessageRepository->where('rma_id', request()->get('id'))
+        $messages = $this->rmaMessageRepository->where('rma_id', request()->input('id'))
             ->orderBy('id', 'desc')
-            ->paginate(request()->get('limit') ?? 5);
+            ->paginate(request()->input('limit') ?? 5);
 
         return new JsonResponse([
             'messages' => $messages,

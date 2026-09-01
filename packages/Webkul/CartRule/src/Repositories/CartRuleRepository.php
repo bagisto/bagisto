@@ -52,9 +52,9 @@ class CartRuleRepository extends Repository
     {
         $cartRule = parent::create($data);
 
-        $cartRule->channels()->sync($data['channels']);
+        $cartRule->cart_rule_channels()->sync($data['channels']);
 
-        $cartRule->customer_groups()->sync($data['customer_groups']);
+        $cartRule->cart_rule_customer_groups()->sync($data['customer_groups']);
 
         if (
             $data['coupon_type']
@@ -89,9 +89,9 @@ class CartRuleRepository extends Repository
 
         parent::update($data, $id);
 
-        $cartRule->channels()->sync($data['channels']);
+        $cartRule->cart_rule_channels()->sync($data['channels']);
 
-        $cartRule->customer_groups()->sync($data['customer_groups']);
+        $cartRule->cart_rule_customer_groups()->sync($data['customer_groups']);
 
         if (! $data['coupon_type']) {
             $cartRuleCoupon = $this->cartRuleCouponRepository->deleteWhere(['is_primary' => 1, 'cart_rule_id' => $cartRule->id]);

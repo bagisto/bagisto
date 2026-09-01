@@ -74,7 +74,7 @@ class ProcessSitemap implements ShouldQueue
                 $channelResults[$channel->id] = $this->processChannel($channel);
             }
         } finally {
-            URLFacade::forceRootUrl($originalRoot);
+            URLFacade::useOrigin($originalRoot);
         }
 
         $this->sitemap->update([
@@ -100,7 +100,7 @@ class ProcessSitemap implements ShouldQueue
 
         $baseUrl = $this->channelBaseUrl($channel);
 
-        URLFacade::forceRootUrl($baseUrl);
+        URLFacade::useOrigin($baseUrl);
 
         $this->processItems($channel, [Url::create($baseUrl.'/')]);
 

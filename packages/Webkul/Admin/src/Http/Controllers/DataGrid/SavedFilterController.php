@@ -47,7 +47,7 @@ class SavedFilterController extends Controller
     public function get()
     {
         $savedFilters = $this->savedFilterRepository->findWhere([
-            'src' => request()->get('src'),
+            'src' => request()->input('src'),
             'user_id' => auth()->guard('admin')->user()->id,
         ]);
 

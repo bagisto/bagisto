@@ -197,14 +197,6 @@ class CartRule extends Model implements CartRuleContract
     }
 
     /**
-     * @deprecated laravel standard should be used
-     */
-    public function channels(): BelongsToMany
-    {
-        return $this->cart_rule_channels();
-    }
-
-    /**
      * Get the customer groups that owns the cart rule.
      */
     public function cart_rule_customer_groups(): BelongsToMany
@@ -213,27 +205,11 @@ class CartRule extends Model implements CartRuleContract
     }
 
     /**
-     * @deprecated laravel standard should be used
-     */
-    public function customer_groups(): BelongsToMany
-    {
-        return $this->cart_rule_customer_groups();
-    }
-
-    /**
      * Get the coupons that owns the cart rule.
      */
     public function cart_rule_coupon(): HasOne
     {
         return $this->hasOne(CartRuleCouponProxy::modelClass());
-    }
-
-    /**
-     * @deprecated laravel standard should be used
-     */
-    public function coupons(): HasOne
-    {
-        return $this->cart_rule_coupon();
     }
 
     /**

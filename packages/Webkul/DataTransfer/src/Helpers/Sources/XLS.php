@@ -36,7 +36,7 @@ class XLS extends AbstractSource
     protected function getNextRow(): array|bool
     {
         for ($column = 1; $column <= $this->totalColumns; $column++) {
-            $rowData[] = $this->reader->getCellByColumnAndRow($column, $this->currentRowNumber)->getValue();
+            $rowData[] = $this->reader->getCell(Coordinate::stringFromColumnIndex($column).$this->currentRowNumber)->getValue();
         }
 
         $filteredRowData = array_filter($rowData);

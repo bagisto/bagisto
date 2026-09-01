@@ -43,12 +43,12 @@ class BookingController extends Controller
             return app(BookingDataGrid::class)->process();
         }
 
-        $startDate = request()->get('startDate')
-            ? Carbon::createFromTimeString(request()->get('startDate').' 00:00:01')
+        $startDate = request()->input('startDate')
+            ? Carbon::createFromTimeString(request()->input('startDate').' 00:00:01')
             : Carbon::now()->startOfWeek()->format('Y-m-d H:i:s');
 
-        $endDate = request()->get('endDate')
-            ? Carbon::createFromTimeString(request()->get('endDate').' 23:59:59')
+        $endDate = request()->input('endDate')
+            ? Carbon::createFromTimeString(request()->input('endDate').' 23:59:59')
             : Carbon::now()->endOfWeek()->format('Y-m-d H:i:s');
 
         $bookings = $this->bookingRepository->getBookings([Carbon::parse($startDate)->timestamp, Carbon::parse($endDate)->timestamp])

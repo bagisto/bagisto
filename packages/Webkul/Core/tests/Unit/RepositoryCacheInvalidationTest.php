@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Prettus\Repository\Events\RepositoryEntityCreated;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
+use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\Locale;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\LocaleRepository;
 
-it('does not serve a newly created channel without the image it was given', function () {
+it('should invalidate the channel cache once create has written its image', function () {
     Storage::fake();
 
     $repository = app(ChannelRepository::class);
@@ -40,7 +42,7 @@ it('does not serve a newly created channel without the image it was given', func
     expect($repository->all()->firstWhere('id', $channel->id)->logo)->not->toBeNull();
 });
 
-it('does not serve a channel image the update already removed', function () {
+it('should invalidate the channel cache once update has removed its image', function () {
     $repository = app(ChannelRepository::class);
 
     $channel = $repository->find(1);
@@ -68,7 +70,19 @@ it('does not serve a channel image the update already removed', function () {
     expect($repository->all()->firstWhere('id', 1)->logo)->toBeNull();
 });
 
-it('does not serve a newly created locale without the image it was given', function () {
+it('should invalidate the currency cache when a currency is deleted', function () {
+    $repository = app(CurrencyRepository::class);
+
+    $currency = Currency::factory()->create();
+
+    $repository->all();
+
+    $repository->delete($currency->id);
+
+    expect($repository->all()->firstWhere('id', $currency->id))->toBeNull();
+});
+
+it('should invalidate the locale cache once create has written its image', function () {
     Storage::fake();
 
     $repository = app(LocaleRepository::class);
@@ -87,7 +101,7 @@ it('does not serve a newly created locale without the image it was given', funct
     expect($repository->all()->firstWhere('id', $locale->id)->logo_path)->not->toBeNull();
 });
 
-it('does not serve a locale image the update already removed', function () {
+it('should invalidate the locale cache once update has removed its image', function () {
     $repository = app(LocaleRepository::class);
 
     $locale = Locale::factory()->create(['logo_path' => 'locales/before.png']);
@@ -103,4 +117,16 @@ it('does not serve a locale image the update already removed', function () {
     ], $locale->id);
 
     expect($repository->all()->firstWhere('id', $locale->id)->logo_path)->toBeNull();
+});
+
+it('should invalidate the locale cache when a locale is deleted', function () {
+    $repository = app(LocaleRepository::class);
+
+    $locale = Locale::factory()->create();
+
+    $repository->all();
+
+    $repository->delete($locale->id);
+
+    expect($repository->all()->firstWhere('id', $locale->id))->toBeNull();
 });

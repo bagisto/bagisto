@@ -241,7 +241,7 @@ class Core
      */
     public function getRequestedChannelCode($fallback = true)
     {
-        $channelCode = request()->get('channel');
+        $channelCode = request()->input('channel');
 
         if (! $fallback) {
             return $channelCode;
@@ -314,7 +314,7 @@ class Core
      */
     public function getRequestedLocaleCode($localeKey = 'locale', $fallback = true)
     {
-        $localeCode = request()->get($localeKey);
+        $localeCode = request()->input($localeKey);
 
         if (! $fallback) {
             return $localeCode;
@@ -333,7 +333,7 @@ class Core
      */
     public function getRequestedLocaleCodes($localeKey = 'locale'): array
     {
-        $localeCode = request()->get($localeKey);
+        $localeCode = request()->input($localeKey);
 
         if ($localeCode === 'all') {
             return $this->getAllLocales()->pluck('code')->all();

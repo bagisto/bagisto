@@ -34,7 +34,7 @@ class CustomerController extends APIController
         if (! auth()->guard('customer')->user()->is_verified) {
             Cookie::queue(Cookie::make('enable-resend', 'true', 1));
 
-            Cookie::queue(Cookie::make('email-for-resend', $request->get('email'), 1));
+            Cookie::queue(Cookie::make('email-for-resend', $request->input('email'), 1));
 
             auth()->guard('customer')->logout();
 

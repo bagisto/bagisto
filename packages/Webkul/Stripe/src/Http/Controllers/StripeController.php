@@ -66,7 +66,7 @@ class StripeController extends Controller
      */
     public function success()
     {
-        $sessionId = request()->get('session_id');
+        $sessionId = request()->input('session_id');
 
         if (! $sessionId) {
             session()->flash('error', trans('stripe::app.response.invalid-session'));

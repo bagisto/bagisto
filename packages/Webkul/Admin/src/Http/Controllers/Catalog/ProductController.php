@@ -75,7 +75,7 @@ class ProductController extends Controller
 
         $configurableFamily = null;
 
-        if ($familyId = request()->get('family')) {
+        if ($familyId = request()->input('family')) {
             $configurableFamily = $this->attributeFamilyRepository->find($familyId);
         }
 

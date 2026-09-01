@@ -659,7 +659,7 @@
                                 <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
 
-                            @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
+                            @php($selectedOptionIds = old('channels') ?? $cartRule->cart_rule_channels->pluck('id')->toArray())
 
                             <!--Channel-->
                             <div class="mb-2.5">
@@ -699,7 +699,7 @@
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.customer-groups')
                                 </x-admin::form.control-group.label>
 
-                                @php($selectedOptionIds = old('customer_groups') ?? $cartRule->customer_groups->pluck('id')->toArray())
+                                @php($selectedOptionIds = old('customer_groups') ?? $cartRule->cart_rule_customer_groups->pluck('id')->toArray())
 
                                 @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                     <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">

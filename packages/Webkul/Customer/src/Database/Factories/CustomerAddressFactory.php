@@ -25,7 +25,7 @@ class CustomerAddressFactory extends Factory
 
         return [
             'company_name' => $this->faker->company,
-            'vat_id' => $fakerIt->vatId(),
+            'vat_id' => $fakerIt->vat(),
             'email' => $this->faker->safeEmail(),
             'first_name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
             'last_name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
