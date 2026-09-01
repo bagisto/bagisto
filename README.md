@@ -56,9 +56,9 @@
 
 # Introduction
 
-Bagisto is an opensource [laravel eCommerce](https://www.bagisto.com/) framework built on some of the hottest technologies such as [Laravel](https://laravel.com/) (a [PHP](https://secure.php.net/) framework) and [Vue.js](https://vuejs.org/) a progressive Javascript framework.
+**Bagisto is an open-source [Laravel eCommerce](https://www.bagisto.com/) and [multi-vendor marketplace](https://bagisto.com/en/laravel-multi-vendor-marketplace/) platform for building scalable online commerce solutions.** Built with [Laravel](https://laravel.com/) and [Vue.js](https://vuejs.org/), Bagisto provides a flexible and customizable foundation for businesses to launch online stores, multi-vendor marketplaces, and enterprise commerce experiences.
 
-Bagisto can help you cut down your time, cost, and workforce for building online stores or migrating from physical stores to the ever-demanding online world. Your business—whether small or huge—can benefit. The best part, it's straightforward to set it up!
+Whether you're building a single-vendor store, [B2B eCommerce](https://bagisto.com/en/b2b-ecommerce/) platform, or multi-vendor marketplace, Bagisto helps reduce development time and cost while giving you the freedom to customize and scale your commerce solution.
 
 ![Repo Stats](https://raw.githubusercontent.com/bagisto/temp-media/master/stats.webp)
 
