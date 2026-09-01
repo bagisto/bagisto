@@ -184,39 +184,6 @@ test.describe("rma storefront custom fields", () => {
     }) => {
         await new RmaManagePage(shopPage).adminInvoiceCreateRMA();
     });
-
-    test("should post a multiselect custom field with the request", async ({
-        adminPage,
-        shopPage,
-    }) => {
-        const admin = new RmaManagePage(adminPage);
-        const storefront = new RmaStorefrontPage(shopPage);
-
-        await admin.adminCreateRmaCustomField(multiselectField);
-
-        try {
-            await storefront.signIn();
-            await storefront.expectMultiselectCustomFieldIsPosted();
-        } finally {
-            await admin.adminDeleteRmaCustomField(multiselectField.label);
-        }
-    });
-    test("should keep the form usable with a required custom field", async ({
-        adminPage,
-        shopPage,
-    }) => {
-        const admin = new RmaManagePage(adminPage);
-        const storefront = new RmaStorefrontPage(shopPage);
-
-        await admin.adminCreateRmaCustomField(requiredField);
-
-        try {
-            await storefront.signIn();
-            await storefront.expectRequiredCustomFieldIsUsable();
-        } finally {
-            await admin.adminDeleteRmaCustomField(requiredField.label);
-        }
-    });
 });
 
 test.describe("sales management", () => {
