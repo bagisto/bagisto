@@ -112,7 +112,6 @@ test.describe("rma storefront", () => {
 
     test("should let the customer raise a return", async ({ shopPage }) => {
         const storefront = new RmaStorefrontPage(shopPage);
-
         await storefront.signIn();
         await storefront.openNewRequestForm();
         await storefront.fillRequest();
