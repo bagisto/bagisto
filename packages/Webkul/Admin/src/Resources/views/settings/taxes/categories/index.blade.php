@@ -208,33 +208,49 @@
                                     @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
                                 </x-admin::form.control-group.label>
 
-                                <v-field
-                                    name="taxrates[]"
-                                    rules="required"
-                                    label="@lang('admin::app.settings.taxes.categories.index.create.tax-rates')"
-                                    v-model="selectedTaxRates.tax_rates"
-                                    multiple
-                                >
-                                    <select
-                                        name="taxrates[]"
-                                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                        :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                        multiple
-                                        v-model="selectedTaxRates.tax_rates"
-                                    >
-                                        <option
-                                            v-for="taxRate in taxRates"
-                                            :value="taxRate.id"
-                                            :text="taxRate.identifier"
+                                <!-- Empty state: no tax rates exist yet -->
+                                <template v-if="!taxRates.length">
+                                    <p class="mt-1.5 text-sm text-amber-600 dark:text-amber-400">
+                                        @lang('admin::app.settings.taxes.categories.index.create.empty-text')
+                                        <a
+                                            href="{{ route('admin.settings.taxes.rates.create') }}"
+                                            class="font-semibold underline"
+                                            target="_blank"
                                         >
-                                        </option>
-                                    </select>
-                                </v-field>
+                                            @lang('admin::app.settings.taxes.categories.index.create.add-tax-rates')
+                                        </a>
+                                    </p>
+                                </template>
 
-                                <x-admin::form.control-group.error
-                                    control-name="taxrates[]"
-                                >
-                                </x-admin::form.control-group.error>
+                                <template v-else>
+                                    <v-field
+                                        name="taxrates[]"
+                                        rules="required"
+                                        label="@lang('admin::app.settings.taxes.categories.index.create.tax-rates')"
+                                        v-model="selectedTaxRates.tax_rates"
+                                        multiple
+                                    >
+                                        <select
+                                            name="taxrates[]"
+                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                            :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            multiple
+                                            v-model="selectedTaxRates.tax_rates"
+                                        >
+                                            <option
+                                                v-for="taxRate in taxRates"
+                                                :value="taxRate.id"
+                                                :text="taxRate.identifier"
+                                            >
+                                            </option>
+                                        </select>
+                                    </v-field>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="taxrates[]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </template>
                             </x-admin::form.control-group>
 
                         </x-slot>
@@ -247,7 +263,7 @@
                                 class="primary-button"
                                 :title="trans('admin::app.settings.taxes.categories.index.create.save-btn')"
                                 ::loading="isLoading"
-                                ::disabled="isLoading"
+                                ::disabled="isLoading || (!selectedTaxCategories && !taxRates.length)"
                             />
                         </x-slot>
                     </x-admin::modal>
