@@ -95,6 +95,7 @@ class Category extends TranslatableModel implements CategoryContract
     public function filterableAttributes(): BelongsToMany
     {
         return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')
+            ->where('is_filterable', 1)
             ->with([
                 'options' => function ($query) {
                     $query->orderBy('sort_order');
