@@ -31,7 +31,7 @@ class OnepageController extends Controller
             ! auth()->guard('customer')->check()
             && ! core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
         ) {
-            return redirect()->route('shop.customer.session.index');
+            return $this->redirectToSignIn();
         }
 
         /**
@@ -63,7 +63,7 @@ class OnepageController extends Controller
                 || ! $cart->hasGuestCheckoutItems()
             )
         ) {
-            return redirect()->route('shop.customer.session.index');
+            return $this->redirectToSignIn();
         }
 
         return view('shop::checkout.onepage.index', compact('cart'));
@@ -91,5 +91,21 @@ class OnepageController extends Controller
         }
 
         return view('shop::checkout.success', compact('order'));
+    }
+
+    /**
+     * Send a guest to sign in, holding on to the checkout they were sent away from.
+     *
+     * A guest turned back from checkout has already chosen what to buy, so signing in or
+     * registering returns them to it rather than to the page the account settings would
+     * otherwise pick.
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectToSignIn()
+    {
+        session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
+
+        return redirect()->route('shop.customer.session.index');
     }
 }
