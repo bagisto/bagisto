@@ -231,8 +231,8 @@ test.describe("sales management", () => {
             await new SalesManagePage(adminPage).cancelLatestOrder();
         });
     });
-    
-    test("support mass status Change to overdue for Invoices", async ({
+
+    test("support mass status change to overdue for invoices", async ({
         adminPage,
     }) => {
         await new SalesManagePage(adminPage).massUpdateInvoiceStatus("Overdue");
