@@ -64,11 +64,9 @@ it('caches a page for the number of minutes configured in the admin panel', func
 });
 
 it('falls back to the application lifetime when no admin lifetime is set', function () {
-    // Arrange
-    config(['responsecache.cache.lifetime_in_seconds' => 3600]);
-
     // Act & Assert
-    expect($this->profile->cacheLifetimeInSeconds($this->request))->toBe(3600);
+    expect($this->profile->cacheLifetimeInSeconds($this->request))
+        ->toBe((int) config('responsecache.cache.lifetime_in_seconds'));
 });
 
 it('falls back to the application lifetime when the admin lifetime is cleared', function () {
