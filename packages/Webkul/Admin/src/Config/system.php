@@ -3735,6 +3735,7 @@ return [
                 'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.lifetime-info',
                 'type' => 'text',
                 'validation' => 'nullable|numeric|min:1',
+                'default' => (int) (config('responsecache.cache.lifetime_in_seconds') / 60),
                 'channel_based' => false,
                 'locale_based' => false,
             ],

@@ -59,35 +59,34 @@ it('caches a page for the number of minutes configured in the admin panel', func
     // Arrange
     saveSetting('lifetime', '15');
 
-    // Act
-    $until = $this->profile->cacheRequestUntil($this->request);
-
-    // Assert
-    expect($until->getTimestamp())->toEqualWithDelta(now()->addMinutes(15)->getTimestamp(), 2);
+    // Act & Assert
+    expect($this->profile->cacheLifetimeInSeconds($this->request))->toBe(15 * 60);
 });
 
 it('falls back to the application lifetime when no admin lifetime is set', function () {
     // Arrange
-    config(['responsecache.cache_lifetime_in_seconds' => 3600]);
+    config(['responsecache.cache.lifetime_in_seconds' => 3600]);
 
-    // Act
-    $until = $this->profile->cacheRequestUntil($this->request);
-
-    // Assert
-    expect($until->getTimestamp())->toEqualWithDelta(now()->addSeconds(3600)->getTimestamp(), 2);
+    // Act & Assert
+    expect($this->profile->cacheLifetimeInSeconds($this->request))->toBe(3600);
 });
 
 it('falls back to the application lifetime when the admin lifetime is cleared', function () {
     // Arrange
-    config(['responsecache.cache_lifetime_in_seconds' => 3600]);
+    config(['responsecache.cache.lifetime_in_seconds' => 3600]);
 
     saveSetting('lifetime', '');
 
+    // Act & Assert
+    expect($this->profile->cacheLifetimeInSeconds($this->request))->toBe(3600);
+});
+
+it('overrides the lifetime method the response cache actually calls', function () {
     // Act
-    $until = $this->profile->cacheRequestUntil($this->request);
+    $method = new ReflectionMethod(FullPageCacheProfile::class, 'cacheLifetimeInSeconds');
 
     // Assert
-    expect($until->getTimestamp())->toEqualWithDelta(now()->addSeconds(3600)->getTimestamp(), 2);
+    expect($method->getDeclaringClass()->getName())->toBe(FullPageCacheProfile::class);
 });
 
 it('lets the request through when the settings store cannot be read', function () {

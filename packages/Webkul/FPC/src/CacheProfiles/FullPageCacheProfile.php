@@ -2,9 +2,7 @@
 
 namespace Webkul\FPC\CacheProfiles;
 
-use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Spatie\ResponseCache\CacheProfiles\CacheAllSuccessfulGetRequests;
 use Throwable;
 
@@ -29,15 +27,13 @@ class FullPageCacheProfile extends CacheAllSuccessfulGetRequests
     /**
      * How long a freshly rendered page stays in the cache.
      */
-    public function cacheRequestUntil(Request $request): DateTime
+    public function cacheLifetimeInSeconds(Request $request): int
     {
         $minutes = (int) $this->setting('lifetime', 0);
 
-        return Carbon::now()->addSeconds(
-            $minutes > 0
-                ? $minutes * 60
-                : (int) config('responsecache.cache_lifetime_in_seconds')
-        );
+        return $minutes > 0
+            ? $minutes * 60
+            : (int) config('responsecache.cache.lifetime_in_seconds');
     }
 
     /**
