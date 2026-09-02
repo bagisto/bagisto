@@ -10,7 +10,6 @@ use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Resources\TaxCategoryResource;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxCategoryController extends Controller
 {
@@ -19,10 +18,7 @@ class TaxCategoryController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        protected TaxCategoryRepository $taxCategoryRepository,
-        protected TaxRateRepository $taxRateRepository
-    ) {}
+    public function __construct(protected TaxCategoryRepository $taxCategoryRepository) {}
 
     /**
      * Display a listing of the resource.
@@ -35,7 +31,7 @@ class TaxCategoryController extends Controller
             return datagrid(TaxCategoryDataGrid::class)->process();
         }
 
-        return view('admin::settings.taxes.categories.index')->with('taxRates', $this->taxRateRepository->all());
+        return view('admin::settings.taxes.categories.index');
     }
 
     /**
@@ -49,7 +45,6 @@ class TaxCategoryController extends Controller
             'code' => 'required|string|unique:tax_categories,code',
             'name' => 'required|string',
             'description' => 'required|string',
-            'taxrates' => 'array|required',
         ]);
 
         Event::dispatch('tax.category.create.before');
@@ -58,12 +53,9 @@ class TaxCategoryController extends Controller
             'code',
             'name',
             'description',
-            'taxrates',
         ]);
 
         $taxCategory = $this->taxCategoryRepository->create($data);
-
-        $taxCategory->tax_rates()->sync($data['taxrates']);
 
         Event::dispatch('tax.category.create.after', $taxCategory);
 
@@ -93,7 +85,6 @@ class TaxCategoryController extends Controller
             'code' => 'required|string|unique:tax_categories,code,'.$id,
             'name' => 'required|string',
             'description' => 'required|string',
-            'taxrates' => 'array|required',
         ]);
 
         Event::dispatch('tax.category.update.before', $id);
@@ -102,12 +93,9 @@ class TaxCategoryController extends Controller
             'code',
             'name',
             'description',
-            'taxrates',
         ]);
 
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
-
-        $taxCategory->tax_rates()->sync($data['taxrates']);
 
         Event::dispatch('tax.category.update.after', $taxCategory);
 

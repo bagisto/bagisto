@@ -14,10 +14,7 @@
                 <div class="flex items-center gap-x-2.5">
                     <!-- Create Tax Category Button -->
                     @if (bouncer()->hasPermission('settings.taxes.tax_categories.create'))
-                        <button
-                            type="button"
-                            class="primary-button"
-                        >
+                        <button type="button" class="primary-button">
                             @lang('admin::app.settings.taxes.categories.index.create.title')
                         </button>
                     @endif
@@ -202,41 +199,6 @@
                                 <x-admin::form.control-group.error control-name="description" />
                             </x-admin::form.control-group>
 
-                            <!-- Select Tax Rates -->
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
-                                </x-admin::form.control-group.label>
-
-                                <v-field
-                                    name="taxrates[]"
-                                    rules="required"
-                                    label="@lang('admin::app.settings.taxes.categories.index.create.tax-rates')"
-                                    v-model="selectedTaxRates.tax_rates"
-                                    multiple
-                                >
-                                    <select
-                                        name="taxrates[]"
-                                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                        :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                        multiple
-                                        v-model="selectedTaxRates.tax_rates"
-                                    >
-                                        <option
-                                            v-for="taxRate in taxRates"
-                                            :value="taxRate.id"
-                                            :text="taxRate.identifier"
-                                        >
-                                        </option>
-                                    </select>
-                                </v-field>
-
-                                <x-admin::form.control-group.error
-                                    control-name="taxrates[]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
                         </x-slot>
 
                         <!-- Modal Footer -->
@@ -261,8 +223,6 @@
 
                 data() {
                     return {
-                        taxRates: @json($taxRates),
-
                         selectedTaxRates: {},
 
                         selectedTaxCategories: 0,
@@ -288,7 +248,10 @@
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors }) {
+                    updateOrCreate(params, {
+                        resetForm,
+                        setErrors
+                    }) {
                         this.isLoading = true;
 
                         let formData = new FormData(this.$refs.taxCategoryCreateForm);
@@ -297,11 +260,12 @@
                             formData.append('_method', 'put');
                         }
 
-                        this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}", formData,{
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                                }
-                            })
+                        this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" :
+                                "{{ route('admin.settings.taxes.categories.store') }}", formData, {
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data'
+                                    }
+                                })
                             .then((response) => {
                                 this.isLoading = false;
 
@@ -309,7 +273,10 @@
 
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                this.$emitter.emit('add-flash', {
+                                    type: 'success',
+                                    message: response.data.message
+                                });
 
                                 this.selectedTaxRates = {};
                             })
@@ -329,7 +296,8 @@
                                 this.$refs.taxCategory.toggle();
                             })
                             .catch(error => this.$emitter.emit('add-flash', {
-                                type: 'error', message: error.response.data.message
+                                type: 'error',
+                                message: error.response.data.message
                             }));
                     },
                 },

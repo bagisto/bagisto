@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Arr;
 use Webkul\Tax\Models\TaxCategory;
-use Webkul\Tax\Models\TaxRate;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -27,7 +26,6 @@ it('should fail the validation with errors when certain field not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('taxrates')
         ->assertUnprocessable();
 });
 
@@ -39,7 +37,6 @@ it('should store the tax category', function () {
         'code' => fake()->numerify('code#######'),
         'name' => fake()->words(2, true),
         'description' => fake()->sentence(10),
-        'taxrates' => TaxRate::factory()->count(2)->create()->pluck('id')->toArray(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.taxes.categories.index.create-success'));
@@ -80,7 +77,6 @@ it('should fail the validation with errors when certain field not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('taxrates')
         ->assertUnprocessable();
 });
 
@@ -96,7 +92,6 @@ it('should update the tax category', function () {
         'code' => fake()->numerify('code#######'),
         'name' => fake()->words(2, true),
         'description' => fake()->sentence(10),
-        'taxrates' => TaxRate::factory()->count(2)->create()->pluck('id')->toArray(),
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.settings.taxes.categories.index.update-success'));
