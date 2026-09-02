@@ -97,8 +97,10 @@ return [
         |--------------------------------------------------------------------------
         |
         | What happens to a repository's cached reads once it writes. Bagisto
-        | handles this in `Webkul\Core\Listeners\CleanCacheRepository`, which
-        | forgets the repository's keys and then stops tracking them.
+        | handles this in `Webkul\Core\Listeners\CleanCacheRepository`, which moves
+        | the repository on to a new cache generation. Every key carries the
+        | generation it was written under, so the old ones simply stop being
+        | reachable and expire on their own.
         |
         */
         'clean' => [

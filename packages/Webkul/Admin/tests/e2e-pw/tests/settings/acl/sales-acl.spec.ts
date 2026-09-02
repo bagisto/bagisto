@@ -359,9 +359,10 @@ test.describe("acl management", () => {
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
+        const title = await aclManagement.createRmaStatus();
         await aclManagement.createRole("custom", ["sales.rma.statuses.delete"]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["sales->rma->rma_status"]);
-        await aclManagement.rmaStatusDeleteVerify();
+        await aclManagement.rmaStatusDeleteVerify(title);
     });
 });

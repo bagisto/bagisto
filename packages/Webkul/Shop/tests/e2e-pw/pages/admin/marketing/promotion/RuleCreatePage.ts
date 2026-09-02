@@ -185,7 +185,7 @@ export class RuleCreatePage extends BasePage {
         couponType?: string;
         allowShipping?: string;
     }): Promise<number | undefined> {
-        const discountValue = Math.floor(Math.random() * 1000);
+        const discountValue = Math.floor(Math.random() * 1000) + 1;
         const discountPercentage = Math.floor(Math.random() * 99) + 1;
 
         await this.addConditionButton.click();

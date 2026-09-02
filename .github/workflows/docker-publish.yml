@@ -68,7 +68,7 @@ jobs:
       on_default_branch: ${{ steps.version.outputs.on_default_branch }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Resolve Bagisto Version
         id: version
@@ -149,25 +149,25 @@ jobs:
         database: [mysql, mariadb, postgres]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set Up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
         with:
           platforms: linux/amd64,linux/arm64
 
       - name: Set Up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Log In to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build & Push by Digest
         id: build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ${{ env.BUILD_CONTEXT }}
           file: ${{ env.BUILD_CONTEXT }}/${{ matrix.variant }}/Dockerfile
@@ -193,7 +193,7 @@ jobs:
           echo -n "${{ steps.build.outputs.digest }}" > "/tmp/digests/${{ matrix.variant }}-${{ matrix.database }}"
 
       - name: Upload Digest
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: digest-${{ matrix.variant }}-${{ matrix.database }}
           path: /tmp/digests/${{ matrix.variant }}-${{ matrix.database }}
@@ -214,16 +214,16 @@ jobs:
       contents: read
     steps:
       - name: Set Up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Log In to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Download Digests
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: /tmp/digests
           pattern: digest-*

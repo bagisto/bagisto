@@ -151,7 +151,13 @@ export class TaxRateApplyPage extends BasePage {
         await this.proceedButton.click();
 
         await this.freeShippingMethod.click();
-        await this.paymentMethod.click();
+
+        await Promise.all([
+            this.page.waitForResponse((response) =>
+                response.url().includes("checkout/onepage/payment-methods"),
+            ),
+            this.paymentMethod.click(),
+        ]);
     }
 
     async verifyCheckoutTax(price: number, taxPercent: number): Promise<void> {

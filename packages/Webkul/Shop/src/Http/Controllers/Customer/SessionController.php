@@ -86,6 +86,10 @@ class SessionController extends Controller
 
         auth()->guard('customer')->logout();
 
+        session()->invalidate();
+
+        session()->regenerateToken();
+
         Event::dispatch('customer.after.logout', $id);
 
         return redirect()->route('shop.home.index');

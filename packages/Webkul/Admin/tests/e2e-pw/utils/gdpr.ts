@@ -1,38 +1,53 @@
 import { expect } from "../setup";
 import { generateDescription } from "../utils/faker";
 
-export async function enableGDPR(adminPage) {
-    await adminPage.goto("admin/configuration/general/gdpr");
+const CONFIGURATION_URL = "admin/configuration/general/gdpr";
 
-    const isEnabled = adminPage.locator("label > div").first().check();
+const TOGGLE = {
+    gdpr: 'input[type="checkbox"][name="general[gdpr][settings][enabled]"]',
+    agreement:
+        'input[type="checkbox"][name="general[gdpr][agreement][enabled]"]',
+    cookie: 'input[type="checkbox"][name="general[gdpr][cookie][enabled]"]',
+};
 
-    if (!isEnabled) {
-        const gdprsettingToggle = adminPage.locator("label > div").first();
-        await gdprsettingToggle.waitFor({ state: "visible", timeout: 5000 });
-        await adminPage.locator("label > div").first().click();
+async function setToggle(adminPage, selector: string, enabled: boolean) {
+    const toggle = adminPage.locator(selector);
+
+    await toggle.waitFor({ state: "attached" });
+
+    if (enabled) {
+        await toggle.check({ force: true });
+        await expect(toggle).toBeChecked();
+
+        return;
     }
 
-    const toggleInput = adminPage.locator("label > div").first();
-    await expect(toggleInput).toBeChecked();
+    await toggle.uncheck({ force: true });
+    await expect(toggle).not.toBeChecked();
+}
 
+async function saveConfiguration(adminPage) {
     await adminPage.getByRole("button", { name: "Save Configuration" }).click();
+
+    await expect(
+        adminPage.getByText("Configuration saved successfully").first(),
+    ).toBeVisible();
+}
+
+export async function enableGDPR(adminPage) {
+    await adminPage.goto(CONFIGURATION_URL);
+
+    await setToggle(adminPage, TOGGLE.gdpr, true);
+
+    await saveConfiguration(adminPage);
 }
 
 export async function disableGDPR(adminPage) {
-    await adminPage.goto("admin/configuration/general/gdpr");
+    await adminPage.goto(CONFIGURATION_URL);
 
-    const isDisabled = adminPage.locator("label > div").first().uncheck();
+    await setToggle(adminPage, TOGGLE.gdpr, false);
 
-    if (!isDisabled) {
-        const gdprsettingToggle = adminPage.locator("label > div").first();
-        await gdprsettingToggle.waitFor({ state: "visible", timeout: 5000 });
-        await adminPage.locator("label > div").first().click();
-    }
-
-    const toggleInput = adminPage.locator("label > div").first();
-    await expect(toggleInput).not.toBeChecked();
-
-    await adminPage.getByRole("button", { name: "Save Configuration" }).click();
+    await saveConfiguration(adminPage);
 }
 
 export async function enableGDPRAgreement(adminPage) {
@@ -41,115 +56,55 @@ export async function enableGDPRAgreement(adminPage) {
         content: generateDescription(),
     };
 
-    await adminPage.goto("admin/configuration/general/gdpr");
-    const isEnabled = adminPage
-        .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-        .first()
-        .check();
+    await adminPage.goto(CONFIGURATION_URL);
 
-    if (!isEnabled) {
-        const gdprsettingToggle = adminPage
-            .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-            .first();
-        await gdprsettingToggle.waitFor({ state: "visible", timeout: 5000 });
-        await adminPage
-            .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-            .first()
-            .click();
-    }
-
-    const toggleInput = adminPage
-        .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-        .first();
-    await expect(toggleInput).toBeChecked();
+    await setToggle(adminPage, TOGGLE.agreement, true);
 
     await adminPage
         .getByRole("textbox", { name: "Agreement Checkbox Label" })
-        .click();
-    await adminPage
-        .getByRole("textbox", {
-            name: "Agreement Checkbox Label",
-        })
         .fill(agreement.checkboxLabel);
-    await adminPage.click('button[type="submit"].primary-button:visible');
 
-    await adminPage.waitForSelector('#general_gdpr__agreement__agreement_content__ifr', { state: 'visible' });
-    await adminPage.frameLocator('#general_gdpr__agreement__agreement_content__ifr').locator('body').clear();
-    await adminPage.fillInTinymce(
+    await saveConfiguration(adminPage);
+
+    await adminPage.waitForSelector(
         "#general_gdpr__agreement__agreement_content__ifr",
-        agreement.content
+        { state: "visible" },
     );
 
-    await adminPage.click('button[type="submit"].primary-button:visible');
+    await adminPage.fillInTinymce(
+        "#general_gdpr__agreement__agreement_content__ifr",
+        agreement.content,
+    );
+
+    await saveConfiguration(adminPage);
 
     return agreement;
 }
 
 export async function disableGDPRAgreement(adminPage) {
-    await adminPage.goto("admin/configuration/general/gdpr");
+    await adminPage.goto(CONFIGURATION_URL);
 
-    const isDisabled = adminPage
-        .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-        .first()
-        .uncheck();
+    await setToggle(adminPage, TOGGLE.agreement, false);
 
-    if (!isDisabled) {
-        const gdprsettingToggle = adminPage
-            .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-            .first();
-        await gdprsettingToggle.waitFor({ state: "visible", timeout: 5000 });
-        await adminPage
-            .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-            .first()
-            .click();
-    }
-
-    const toggleInput = adminPage
-        .locator("div:nth-child(4) > div > .mb-4 > .relative > div")
-        .first();
-    await expect(toggleInput).not.toBeChecked();
-
-    await adminPage.getByRole("button", { name: "Save Configuration" }).click();
+    await saveConfiguration(adminPage);
 }
 
 export async function enableCookiesNotice(adminPage, position = "bottom-left") {
-    await adminPage.goto("admin/configuration/general/gdpr");
+    await adminPage.goto(CONFIGURATION_URL);
 
-    const isEnabled = adminPage
-        .locator("div:nth-child(6) > div > .mb-4 > .relative > div")
-        .check();
-
-    if (!isEnabled) {
-        const gdprsettingToggle = adminPage.locator(
-            "div:nth-child(6) > div > .mb-4 > .relative > div"
-        );
-        await gdprsettingToggle.waitFor({ state: "visible", timeout: 5000 });
-        await adminPage
-            .locator("div:nth-child(6) > div > .mb-4 > .relative > div")
-            .click();
-    }
-
-    const toggleInput = adminPage.locator(
-        "div:nth-child(6) > div > .mb-4 > .relative > div"
-    );
-    await expect(toggleInput).toBeChecked();
+    await setToggle(adminPage, TOGGLE.cookie, true);
 
     await adminPage
         .locator('select[name="general[gdpr][cookie][position]"]')
         .selectOption(position);
 
     await adminPage
-        .getByRole("textbox", {
-            name: "Static Block Identifier",
-        })
+        .getByRole("textbox", { name: "Static Block Identifier" })
         .fill("cookie block");
 
     await adminPage
-        .getByRole("textbox", {
-            name: "Description",
-        })
+        .getByRole("textbox", { name: "Description" })
         .fill("this website uses cookies to ensure you");
 
-    await adminPage.click('button[type="submit"].primary-button:visible');
+    await saveConfiguration(adminPage);
 }
-

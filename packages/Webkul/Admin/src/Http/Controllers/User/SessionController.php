@@ -77,7 +77,9 @@ class SessionController extends Controller
     {
         auth()->guard('admin')->logout();
 
-        session()->forget('two_factor_passed');
+        session()->invalidate();
+
+        session()->regenerateToken();
 
         return redirect()->route('admin.session.create');
     }

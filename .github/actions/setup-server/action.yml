@@ -66,6 +66,7 @@ runs:
         sudo sed -i "s|__ROOT__|$GITHUB_WORKSPACE/public|" /etc/nginx/sites-available/bagisto
         sudo rm -f /etc/nginx/sites-enabled/default
         sudo ln -sf /etc/nginx/sites-available/bagisto /etc/nginx/sites-enabled/bagisto
+        sudo sed -i "s|^user .*|user $USER;|" /etc/nginx/nginx.conf
         chmod o+x "$HOME" "$GITHUB_WORKSPACE"
         sudo nginx -t
 

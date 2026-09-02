@@ -252,15 +252,30 @@ export class SalesAclPage extends SettingsAclPage {
         await expect(this.rmaActionPage.successStatusUpdate).toBeVisible();
     }
 
-    async rmaStatusDeleteVerify() {
+    async createRmaStatus(): Promise<string> {
+        const title = `RMA Status ${Date.now()}`;
+
         await this.visit("admin/sales/rma/rma-status");
+        await this.rmaActionPage.createStatusBtn.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.rmaActionPage.statusTitle.fill(title);
+        await this.rmaActionPage.reasonStatus.click();
+        await this.rmaActionPage.saveStatusBtn.click();
+        await expect(this.rmaActionPage.successStatusCreate).toBeVisible();
+
+        return title;
+    }
+
+    async rmaStatusDeleteVerify(title: string) {
+        await this.visit("admin/sales/rma/rma-status");
+        await expect(this.page.getByText(title).first()).toBeVisible();
         await expect(this.rmaActionPage.createStatusBtn).not.toBeVisible();
         await expect(this.rmaActionPage.iconEdit.first()).not.toBeVisible();
-        await expect(this.rmaActionPage.deleteIcon.first()).not.toBeVisible();
-        await this.rmaActionPage.selectRow.first().click();
+        await this.rmaActionPage.selectRow.nth(1).click();
         await this.rmaActionPage.selectAction.click();
         await this.rmaActionPage.deleteAction.click();
         await this.rmaActionPage.agreeBtn.click();
         await expect(this.rmaActionPage.successStatusDelete).toBeVisible();
+        await expect(this.page.getByText(title)).toHaveCount(0);
     }
 }

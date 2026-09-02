@@ -76,8 +76,19 @@ export class SectionsPage extends BasePage {
         return this.sectionRow(name).locator("span.line-through");
     }
 
+    private async publishAll(): Promise<void> {
+        await Promise.all([
+            this.page.waitForResponse((response) =>
+                response.url().includes("/sections/publish"),
+            ),
+            this.publishAllButton.click(),
+        ]);
+    }
+
     private async dragRowOnto(from: number, to: number): Promise<void> {
-        const handle = this.sectionRows.nth(from).locator("span.section-handle");
+        const handle = this.sectionRows
+            .nth(from)
+            .locator("span.section-handle");
 
         const target = await this.sectionRows.nth(to).boundingBox();
 
@@ -137,7 +148,7 @@ export class SectionsPage extends BasePage {
 
         await this.closeOpenSection();
 
-        await this.publishAllButton.click();
+        await this.publishAll();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
     }
@@ -171,7 +182,7 @@ export class SectionsPage extends BasePage {
 
         await this.closeOpenSection();
 
-        await this.publishAllButton.click();
+        await this.publishAll();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
 
@@ -209,7 +220,7 @@ export class SectionsPage extends BasePage {
 
         await expect(this.rowName(2)).toHaveText(third);
 
-        await this.publishAllButton.click();
+        await this.publishAll();
 
         await this.open();
 
@@ -223,7 +234,7 @@ export class SectionsPage extends BasePage {
 
         await this.closeOpenSection();
 
-        await this.publishAllButton.click();
+        await this.publishAll();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
 
@@ -231,7 +242,7 @@ export class SectionsPage extends BasePage {
 
         await expect(this.unsavedMarker(name)).toBeVisible();
 
-        await this.publishAllButton.click();
+        await this.publishAll();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
     }
@@ -241,7 +252,7 @@ export class SectionsPage extends BasePage {
 
         await this.closeOpenSection();
 
-        await this.publishAllButton.click();
+        await this.publishAll();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
 
