@@ -231,24 +231,7 @@ test.describe("sales management", () => {
             await new SalesManagePage(adminPage).cancelLatestOrder();
         });
     });
-
-    // test("should be able to create transaction", async ({ adminPage }) => {
-    //     const salesCreatePage = new SalesCreatePage(adminPage);
-    //     await salesCreatePage.createSimpleProduct();
-    //     await salesCreatePage.generateSimpleOrder();
-    //     await new SalesManagePage(adminPage).createTransaction();
-    // });
-
-    // test("support mass status Change to Paid for Invoices", async ({
-    //     adminPage,
-    // }) => {
-    //     const salesCreatePage = new SalesCreatePage(adminPage);
-    //     await salesCreatePage.createSimpleProduct();
-    //     await salesCreatePage.generateSimpleOrder();
-    //     await new SalesManagePage(adminPage).createInvoice();
-    //     await new SalesManagePage(adminPage).massUpdateInvoiceStatus("Paid");
-    // });
-
+    
     test("support mass status Change to overdue for Invoices", async ({
         adminPage,
     }) => {
