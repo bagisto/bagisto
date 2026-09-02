@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
 
+- #11458 [fixed] - Fixed a category still filtering by an attribute after Use Layered Navigation was turned off for it, which left the filter on the storefront with no way to untick it in the category. A category now filters only by attributes that are still in layered navigation, and turning one back on restores the categories it was chosen for.
+
 - #11450 [fixed] - Fixed a guest turned back from checkout to sign in being left on the home or account page afterwards, losing the product they had chosen with Buy Now. The checkout is now returned to after signing in, registering or using a social provider.
 
 - #11446 [fixed] - Fixed the loading placeholders on the storefront customer account pages. Reviews drew its product thumbnail through the lazy image loader with no source, so the placeholder turned itself into a broken image, and it stood in for a heading the page had already drawn, leaving the cards to jump as the reviews arrived. Orders, Downloadable Products, GDPR and RMA drew a table row where each of them lists cards on a phone. Every placeholder now has the shape and height of what replaces it.
