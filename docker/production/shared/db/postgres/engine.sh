@@ -31,11 +31,8 @@ db_build_init() {
     version="$(pg_version)"
     data="$(pg_data_dir)"
 
-    # The Debian package creates a cluster on install. It is dropped and
-    # rebuilt so the baked data directory is reproducible rather than
-    # whatever the package left behind.
     pg_dropcluster --stop "$version" main 2>/dev/null || true
-    pg_createcluster "$version" main --start-conf=manual
+    pg_createcluster --locale=C.UTF-8 "$version" main --start-conf=manual
 
     # Listen on loopback only; the container publishes HTTP, not SQL.
     echo "listen_addresses = '127.0.0.1'" >> "/etc/postgresql/${version}/main/conf.d/bagisto.conf" 2>/dev/null \
