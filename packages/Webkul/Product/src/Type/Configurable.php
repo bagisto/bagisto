@@ -602,9 +602,7 @@ class Configurable extends AbstractType
         $total = 0;
 
         foreach ($this->product->variants as $variant) {
-            $inventoryIndex = $variant->totalQuantity();
-
-            $total += $inventoryIndex->qty;
+            $total += $variant->getTypeInstance()->totalQuantity();
         }
 
         return $total;
