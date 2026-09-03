@@ -283,15 +283,6 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
-                <!-- Needs to implement that in future -->
-                <div class="flex gap-4">
-                    <span class="block h-7.5 w-7.5 rounded-full bg-[#B5DCB4]">
-                    </span>
-
-                    <span class="block h-7.5 w-7.5 rounded-full bg-zinc-500">
-                    </span>
-                </div>
-
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
                 <p class="text-sm text-zinc-500">

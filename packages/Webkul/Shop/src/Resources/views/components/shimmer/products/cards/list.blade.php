@@ -12,13 +12,6 @@
 
             <p class="shimmer h-6 w-[55%]"></p>
 
-            <!-- Needs to implement that in future -->
-            <div class="flex hidden gap-4"> 
-                <span class="shimmer block h-8 w-8 rounded-full"></span> 
-
-                <span class="shimmer block h-8 w-8 rounded-full"></span> 
-            </div>
-
             <p class="shimmer h-6 w-full"></p>
 
             <div class="shimmer h-12 w-42 rounded-xl"></div>
