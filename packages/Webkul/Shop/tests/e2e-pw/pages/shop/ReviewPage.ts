@@ -22,8 +22,14 @@ export class ReviewPage extends BasePage {
             .locator("#review-tab")
             .getByText("Write a Review")
             .click();
-        await this.page.locator("#review-tab button[aria-pressed]").nth(3).click();
-        await this.page.locator("#review-tab button[aria-pressed]").nth(4).click();
+        await this.page
+            .locator("#review-tab button[aria-pressed]")
+            .nth(3)
+            .click();
+        await this.page
+            .locator("#review-tab button[aria-pressed]")
+            .nth(4)
+            .click();
         await this.page.getByPlaceholder("Title").click();
         await this.page.getByPlaceholder("Title").fill(title);
         await this.page.getByPlaceholder("Comment").click();

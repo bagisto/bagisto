@@ -1,5 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { setBooleanSettings } from "../../../../utils/configuration";
 
 export class OrderSettingsConfigurationPage extends BasePage {
     constructor(page: Page) {
@@ -34,18 +35,6 @@ export class OrderSettingsConfigurationPage extends BasePage {
         );
     }
 
-    private get adminReorderToggle() {
-        return this.page.locator(
-            'label[for="sales[order_settings][reorder][admin]"]',
-        );
-    }
-
-    private get shopReorderToggle() {
-        return this.page.locator(
-            'label[for="sales[order_settings][reorder][shop]"]',
-        );
-    }
-
     async open(): Promise<void> {
         await this.visit("admin/configuration/sales/order_settings");
     }
@@ -61,8 +50,10 @@ export class OrderSettingsConfigurationPage extends BasePage {
     }
 
     async enableReorderOptions(): Promise<void> {
-        await this.adminReorderToggle.click();
-        await this.shopReorderToggle.click();
+        await setBooleanSettings(this.page, [
+            "sales[order_settings][reorder][admin]",
+            "sales[order_settings][reorder][shop]",
+        ]);
     }
 
     async saveAndVerify(): Promise<void> {

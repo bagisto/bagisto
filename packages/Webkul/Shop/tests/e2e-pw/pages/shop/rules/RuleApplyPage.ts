@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../BasePage";
-import fs from "fs";
+import { ProductDataManager } from "../../admin/catalog/products/ProductDataManager";
 
 export class RuleApplyPage extends BasePage {
     constructor(page: Page) {
@@ -41,6 +41,10 @@ export class RuleApplyPage extends BasePage {
             .nth(1);
     }
 
+    private get couponAppliedMessage() {
+        return this.page.getByText("Coupon code applied successfully.").first();
+    }
+
     private get applyCouponButton() {
         return this.page.getByRole("button", { name: "Apply Coupon" });
     }
@@ -51,6 +55,12 @@ export class RuleApplyPage extends BasePage {
 
     private get applyButton() {
         return this.page.getByRole("button", { name: "Apply", exact: true });
+    }
+
+    private get cookieConsentAccept() {
+        return this.page
+            .locator(".js-cookie-consent")
+            .getByRole("button", { name: "Accept" });
     }
 
     private get shoppingCartIcon() {
@@ -119,6 +129,13 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByAltText("Money Transfer");
     }
 
+    private async dismissCookieConsent(): Promise<void> {
+        if (await this.cookieConsentAccept.isVisible().catch(() => false)) {
+            await this.cookieConsentAccept.click();
+            await expect(this.cookieConsentAccept).toBeHidden();
+        }
+    }
+
     async getSubTotalValue(): Promise<number> {
         await this.page.waitForLoadState("networkidle");
 
@@ -135,9 +152,7 @@ export class RuleApplyPage extends BasePage {
     }
 
     getSavedProduct() {
-        const filePath = "product-data.json";
-        const data = fs.readFileSync(filePath, "utf-8");
-        return JSON.parse(data);
+        return ProductDataManager.readProduct();
     }
 
     async applyCoupon(allow?: string) {
@@ -283,6 +298,7 @@ export class RuleApplyPage extends BasePage {
     async applyCouponAtCheckout(allowShipping?: string) {
         await this.visit("");
         await this.page.waitForLoadState("networkidle");
+        await this.dismissCookieConsent();
         await this.shoppingCartIcon.click();
         await this.continueButton.click();
 
@@ -306,8 +322,28 @@ export class RuleApplyPage extends BasePage {
 
         await this.choosePaymentMethod.click();
         await this.applyCouponButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.couponInput.waitFor({ state: "visible" });
         await this.couponInput.fill("TEST50");
         await this.applyButton.click();
+    }
+
+    async expectCouponAppliedWithGrandTotal(
+        discountValue: number,
+        couponType: string,
+        options: { incrementTimes?: number; allowShipping?: string } = {},
+    ): Promise<void> {
+        const discountedAmount = await this.calculateDiscountedAmount(
+            discountValue,
+            couponType,
+            options.incrementTimes,
+        );
+
+        await this.applyCouponAtCheckout(options.allowShipping);
+
+        await expect(this.couponAppliedMessage).toBeVisible();
+
+        await this.expectGrandTotal(
+            Math.abs(discountedAmount) < 0.01 ? 0 : discountedAmount,
+        );
     }
 }

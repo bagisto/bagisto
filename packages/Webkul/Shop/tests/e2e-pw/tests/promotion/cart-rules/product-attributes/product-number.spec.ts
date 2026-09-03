@@ -157,7 +157,7 @@ const testCases = [
 ];
 
 test.describe("cart rules", () => {
-    test.describe("product atribute conditions", () => {
+    test.describe("product attribute conditions", () => {
         for (const { operator, type, valueType } of testCases) {
             test(`should allow coupon when product number condition is -> ${operator} (${type})`, async ({
                 page,

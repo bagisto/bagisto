@@ -1,35 +1,20 @@
-import fs from "fs";
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../BasePage";
 import {
     generateDescription,
     generateEmail,
     generateFirstName,
-    generateHostname,
     generateLastName,
     generateLocation,
     generateName,
     generatePhoneNumber,
-    generateRandomDateTime,
-    generateRandomNumericString,
     generateSKU,
 } from "../../../utils/faker";
 import address from "../../../utils/address";
-
-function saveGeneratedProductName(productName: string) {
-    fs.writeFileSync(
-        "generatedProductName.json",
-        JSON.stringify({ productName }, null, 2),
-    );
-}
-
-function getGeneratedProductName(): string {
-    const data = JSON.parse(
-        fs.readFileSync("generatedProductName.json", "utf-8"),
-    );
-
-    return data.productName;
-}
+import {
+    getGeneratedProductName,
+    saveGeneratedProductName,
+} from "../../../utils/product-data";
 
 export class SalesCreatePage extends BasePage {
     constructor(page: Page) {

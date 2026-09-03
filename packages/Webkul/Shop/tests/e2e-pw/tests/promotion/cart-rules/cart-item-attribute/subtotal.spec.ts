@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import { expect, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -7,33 +7,6 @@ import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
-
-async function expectCouponAppliedWithGrandTotal(
-    page: Page,
-    ruleApplyPage: RuleApplyPage,
-    discountValue: number,
-    couponType: CouponType,
-) {
-    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
-        discountValue,
-        couponType,
-    );
-
-    const formatted =
-        Math.abs(discountedAmount) < 0.01
-            ? "$0.00"
-            : `$${discountedAmount.toFixed(2)}`;
-
-    await ruleApplyPage.applyCouponAtCheckout();
-
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
-
-    await expect(
-        page.getByText("Grand Total").locator("..").locator("p").last(),
-    ).toContainText(formatted);
-}
 
 async function createRuleAndVerifyCoupon({
     page,
@@ -65,9 +38,7 @@ async function createRuleAndVerifyCoupon({
 
     await ruleCreatePage.saveCartRule();
 
-    await expectCouponAppliedWithGrandTotal(
-        page,
-        ruleApplyPage,
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );
@@ -170,7 +141,7 @@ const cases = [
 ];
 
 test.describe("cart rules", () => {
-    test.describe("cart item attrubutes", () => {
+    test.describe("cart item attribute conditions", () => {
         for (const { operator, value, type, label } of cases) {
             test(`should apply coupon when subtotal condition is -> ${label} (${type})`, async ({
                 page,

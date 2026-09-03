@@ -1,5 +1,9 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import {
+    setBooleanSetting,
+    setBooleanSettings,
+} from "../../../../utils/configuration";
 
 export class CheckoutConfigurationPage extends BasePage {
     constructor(page: Page) {
@@ -22,30 +26,18 @@ export class CheckoutConfigurationPage extends BasePage {
         );
     }
 
-    private get miniCartToggle() {
-        return this.page.locator(
-            'label[for="sales[checkout][mini_cart][display_mini_cart]"]',
-        );
-    }
-
     private get miniCartOfferInput() {
         return this.page.locator(
             'input[name="sales[checkout][mini_cart][offer_info]"]',
         );
     }
 
-    private shoppingCartToggle(selector: string) {
-        return this.page.locator(selector);
-    }
-
     async open(): Promise<void> {
         await this.visit("admin/configuration/sales/checkout");
     }
 
-    async toggleShoppingCartSettings(selectors: string[]): Promise<void> {
-        for (const selector of selectors) {
-            await this.shoppingCartToggle(selector).click();
-        }
+    async enableShoppingCartSettings(names: string[]): Promise<void> {
+        await setBooleanSettings(this.page, names);
     }
 
     async setMyCartSummary(value: string): Promise<void> {
@@ -53,7 +45,10 @@ export class CheckoutConfigurationPage extends BasePage {
     }
 
     async enableMiniCart(offerInfo: string): Promise<void> {
-        await this.miniCartToggle.click();
+        await setBooleanSetting(
+            this.page,
+            "sales[checkout][mini_cart][display_mini_cart]",
+        );
         await this.miniCartOfferInput.fill(offerInfo);
     }
 

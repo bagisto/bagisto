@@ -66,7 +66,7 @@ export class ACLSharedPage extends BasePage {
             statusToggle: this.page.locator('label[for="status"]'),
             saveUser: this.page.getByRole("button", { name: "Save User" }),
             successUser: this.page.getByText("User created successfully."),
-            unauthorized: this.page.getByText("401").first(),
+            unauthorized: this.page.getByText("401", { exact: true }).first(),
             iconEdit: this.page.locator(".icon-edit"),
             successUserUpdate: this.page.getByText(
                 "User updated successfully.",
@@ -102,7 +102,10 @@ export class ACLSharedPage extends BasePage {
     }
 
     async rolePermission(permissionValues: string[]): Promise<void> {
-        await this.page.waitForLoadState("networkidle");
+        await this.page
+            .locator('input[name="permissions[]"]')
+            .first()
+            .waitFor({ state: "attached" });
 
         for (const value of permissionValues) {
             await this.togglePermissionCheckbox(value, true);

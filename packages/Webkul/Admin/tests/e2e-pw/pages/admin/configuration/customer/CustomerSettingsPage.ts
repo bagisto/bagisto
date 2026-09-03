@@ -1,12 +1,9 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { setBooleanSetting } from "../../../../utils/configuration";
 
 type SocialLoginProvider =
-    | "github"
-    | "linkedin"
-    | "google"
-    | "twitter"
-    | "facebook";
+    "github" | "linkedin" | "google" | "twitter" | "facebook";
 
 const socialLoginSelectors: Record<
     SocialLoginProvider,
@@ -49,12 +46,6 @@ export class CustomerSettingsPage extends BasePage {
         return this.page.getByText("Configuration saved successfully");
     }
 
-    private getWishlistToggle() {
-        return this.page.locator(
-            'label[for="customer[settings][wishlist][wishlist_option]"]',
-        );
-    }
-
     private getLoginRedirectSelect() {
         return this.page.locator(
             'select[name="customer[settings][login_options][redirected_to_page]"]',
@@ -67,41 +58,15 @@ export class CustomerSettingsPage extends BasePage {
         );
     }
 
-    private getNewsletterToggle() {
-        return this.page.locator(
-            'label[for="customer[settings][create_new_account_options][news_letter]"]',
-        );
-    }
-
-    private getNewsletterSubscriptionToggle() {
-        return this.page.locator(
-            'label[for="customer[settings][newsletter][subscription]"]',
-        );
-    }
-
-    private async ensureCheckboxChecked(labelSelector: string): Promise<void> {
-        const inputName = labelSelector.match(/for="([^"]+)"/)?.[1];
-
-        if (!inputName) {
-            throw new Error(
-                `Unable to resolve input name from selector ${labelSelector}`,
-            );
-        }
-
-        const inputSelector = `input[type="checkbox"][name="${inputName}"]`;
-        const input = this.page.locator(inputSelector);
-
-        if (!(await input.isChecked())) {
-            await this.page.locator(labelSelector).click();
-        }
-    }
-
     async open(): Promise<void> {
         await this.visit("admin/configuration/customer/settings");
     }
 
     async enableWishlist(): Promise<void> {
-        await this.getWishlistToggle().click();
+        await setBooleanSetting(
+            this.page,
+            "customer[settings][wishlist][wishlist_option]",
+        );
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
     }
@@ -116,14 +81,18 @@ export class CustomerSettingsPage extends BasePage {
     async updateDefaultGroupAndNewsletter(): Promise<void> {
         await this.getDefaultGroupSelect().selectOption("general");
         await expect(this.getDefaultGroupSelect()).toHaveValue("general");
-        await this.getNewsletterToggle().click();
+        await setBooleanSetting(
+            this.page,
+            "customer[settings][create_new_account_options][news_letter]",
+        );
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
     }
 
     async enableNewsletterSubscription(): Promise<void> {
-        await this.ensureCheckboxChecked(
-            'label[for="customer[settings][newsletter][subscription]"]',
+        await setBooleanSetting(
+            this.page,
+            "customer[settings][newsletter][subscription]",
         );
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
@@ -135,7 +104,8 @@ export class CustomerSettingsPage extends BasePage {
 
     async enableSocialLogin(provider: SocialLoginProvider): Promise<void> {
         const config = socialLoginSelectors[provider];
-        await this.ensureCheckboxChecked(config.label);
+        const name = config.label.match(/for="([^"]+)"/)?.[1] ?? "";
+        await setBooleanSetting(this.page, name);
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
         await this.visit("customer/login");

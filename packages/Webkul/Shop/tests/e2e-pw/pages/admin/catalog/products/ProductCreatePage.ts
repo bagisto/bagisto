@@ -1,8 +1,8 @@
-import fs from "fs";
 import { expect, Locator, Page } from "@playwright/test";
 import { TinymcePage } from "../../../../utils/TinymcePage";
 import { BaseProduct } from "../../../types/product.types";
 import { BasePage } from "../../../BasePage";
+import { ProductDataManager } from "./ProductDataManager";
 import {
     generateName,
     generateHostname,
@@ -256,11 +256,11 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get linkTypeSelect() {
-        return this.page.locator('select[name="type"]');
+        return this.page.locator('select[name="type"]').first();
     }
 
     private get linkFileInput() {
-        return this.page.locator('input[name="url"]');
+        return this.page.locator('input[name="url"]').first();
     }
 
     private get sampleTypeSelect() {
@@ -280,15 +280,15 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get sampleTitleInput() {
-        return this.page.locator('input[name="title"]');
+        return this.page.locator('input[name="title"]').last();
     }
 
     private get sampleTypeDropdown() {
-        return this.page.locator('select[name="type"]');
+        return this.page.locator('select[name="type"]').last();
     }
 
     private get sampleUrlField() {
-        return this.page.locator('input[name="url"]');
+        return this.page.locator('input[name="url"]').last();
     }
 
     private get bookingLocationInput() {
@@ -347,13 +347,6 @@ export class ProductCreatePage extends BasePage {
         return this.page.getByRole("textbox", { name: "To Time" });
     }
 
-    private get minuteSpinbutton() {
-        return this.page.getByRole("spinbutton", { name: "Minute" });
-    }
-
-    private get hourSpinbutton() {
-        return this.page.getByRole("spinbutton", { name: "Hour" });
-    }
 
     private get flatpickrCalendar() {
         return this.page.locator(".flatpickr-calendar.hasTime.noCalendar.open");
@@ -482,6 +475,30 @@ export class ProductCreatePage extends BasePage {
         await expect(textbox).toHaveValue(expected);
     }
 
+    private async fillSlotTime(
+        textbox: Locator,
+        hour: string,
+        minute: string,
+    ) {
+        const expected = `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+
+        await textbox.evaluate((element, value) => {
+            const candidates = [
+                element,
+                element.previousElementSibling,
+                element.nextElementSibling,
+            ];
+
+            const owner = candidates.find(
+                (candidate) => candidate && (candidate as any)._flatpickr,
+            );
+
+            (owner as any)._flatpickr.setDate(value, true);
+        }, expected);
+
+        await expect(textbox).toHaveValue(expected);
+    }
+
     private async saveSlotDrawer() {
         await this.modalSaveButton.click();
         await expect(this.modalSaveButton).toBeHidden();
@@ -516,6 +533,13 @@ export class ProductCreatePage extends BasePage {
         await this.productName.waitFor({ state: "visible" });
     }
 
+    private async fillAndConfirm(field: Locator, value: string) {
+        await expect(async () => {
+            await field.fill(value);
+            await expect(field).toHaveValue(value, { timeout: 2000 });
+        }).toPass({ timeout: 15000 });
+    }
+
     private async fillCommonDetails(product: BaseProduct) {
         await this.page.waitForLoadState("networkidle");
         await this.productName.fill(product.name);
@@ -544,7 +568,7 @@ export class ProductCreatePage extends BasePage {
         await this.addProduct.first().click();
         await this.searchByNameInput.click();
         await this.searchByNameInput.fill("simple");
-        await this.page.waitForTimeout(2000);
+        await expect(this.addSelectedProductButton).toBeVisible();
         await this.productRowCheckbox("simple").evaluate((el) => {
             (el as HTMLInputElement).checked = true;
             el.dispatchEvent(new Event("change", { bubbles: true }));
@@ -593,15 +617,22 @@ export class ProductCreatePage extends BasePage {
 
     private async simple(product: BaseProduct) {
         if (product.price !== undefined) {
-            await this.productPrice.fill(product.price.toString());
+            await this.fillAndConfirm(
+                this.productPrice,
+                product.price.toString(),
+            );
         }
         if (product.weight !== undefined) {
-            await this.productWeight.fill(product.weight.toString());
+            await this.fillAndConfirm(
+                this.productWeight,
+                product.weight.toString(),
+            );
         }
         if (product.inventory !== undefined) {
-            await this.productInventory
-                .first()
-                .fill(product.inventory.toString());
+            await this.fillAndConfirm(
+                this.productInventory.first(),
+                product.inventory.toString(),
+            );
         }
         await this.allowRmaToggle.click();
     }
@@ -749,15 +780,9 @@ export class ProductCreatePage extends BasePage {
             await this.addSlotsButton.click();
             await this.fromDaySelect.selectOption("0");
             await this.toDaySelect.selectOption("6");
-            await this.fromTimeTextbox.click();
-            await this.page.waitForTimeout(500);
-            await this.minuteSpinbutton.click();
-            await this.page.waitForTimeout(500);
-            await this.toTimeTextbox.click();
-            await this.minuteSpinbutton.click();
-            await this.page.waitForTimeout(500);
-            await this.page.keyboard.press("Escape");
-            await this.saveButton.click();
+            await this.fillSlotTime(this.fromTimeTextbox, "12", "00");
+            await this.fillSlotTime(this.toTimeTextbox, "12", "00");
+            await this.saveSlotDrawer();
             await this.productPrice.fill("199");
         } else {
             await this.bookingSelect("booking_type").selectOption("many");
@@ -767,24 +792,19 @@ export class ProductCreatePage extends BasePage {
             ];
             for (const day of weeks) {
                 await this.dayAvailabilityTrigger(day.status).click();
-                await this.slotTimeTextbox("From", 0).click();
-                await this.flatpickrCalendar.waitFor({ state: "visible" });
-                await this.hourSpinbutton.fill("10");
-                await this.page.waitForTimeout(500);
-                await this.minuteSpinbutton.fill("35");
-                await this.minuteSpinbutton.press("Enter");
-                await this.page.waitForTimeout(500);
-                await this.slotTimeTextbox("To", 0).click();
-                await this.page.waitForTimeout(500);
-                await this.flatpickrCalendar.waitFor({ state: "visible" });
-                await this.hourSpinbutton.fill("11");
-                await this.minuteSpinbutton.fill("35");
-                await this.minuteSpinbutton.press("Enter");
-                await this.page.waitForTimeout(500);
+                await this.fillSlotTime(
+                    this.slotTimeTextbox("From", 0),
+                    "10",
+                    "35",
+                );
+                await this.fillSlotTime(
+                    this.slotTimeTextbox("To", 0),
+                    "11",
+                    "20",
+                );
                 await this.dayStatusSelect.selectOption("1");
-                await this.page.waitForTimeout(500);
                 await this.escapeTarget.press("Escape");
-                await this.saveButton.click();
+                await this.saveSlotDrawer();
                 await expect(
                     this.bookingDaySlotIdInput(day.status - 1),
                 ).toHaveValue(/.+/);
@@ -859,7 +879,6 @@ export class ProductCreatePage extends BasePage {
                 );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "10", "35");
-                await this.page.waitForTimeout(500);
                 await this.fillTimeTextbox("To", 0, "11", "35");
                 await this.escapeTarget.press("Escape");
                 await this.saveSlotDrawer();
@@ -1124,7 +1143,6 @@ export class ProductCreatePage extends BasePage {
                     );
                     await this.addSlotsButton.click();
                     await this.fillTimeTextbox("From", 0, "10", "35");
-                    await this.page.waitForTimeout(500);
                     await this.fillTimeTextbox("To", 0, "11", "35");
                     await this.escapeTarget.press("Escape");
                     await this.saveSlotDrawer();
@@ -1237,13 +1255,11 @@ export class ProductCreatePage extends BasePage {
     }
 
     private saveProductToJson(product: BaseProduct) {
-        const filePath = "product-data.json";
-        const productData = {
+        ProductDataManager.writeProductData({
             name: product.name,
             sku: product.sku,
             type: product.type,
-        };
-        fs.writeFileSync(filePath, JSON.stringify(productData, null, 2));
+        });
     }
 
     async createProduct(product: BaseProduct) {
@@ -1282,8 +1298,9 @@ export class ProductCreatePage extends BasePage {
 
     async addDownloadableLink(filePath: string, title: string, url: string) {
         await this.addLinkButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.linkTitleInput.waitFor({ state: "visible" });
         await this.linkTitleInput.fill(title);
+        await expect(this.linkTitleInput).toHaveValue(title);
         const linkTitle = await this.linkTitleInput.inputValue();
         await this.linkPriceInput.fill("100");
         await this.linkDownloadsInput.fill("2");
@@ -1298,8 +1315,9 @@ export class ProductCreatePage extends BasePage {
 
     async addDownloadableSample(title: string, url: string) {
         await this.addSampleButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.sampleTitleInput.waitFor({ state: "visible" });
         await this.sampleTitleInput.fill(title);
+        await expect(this.sampleTitleInput).toHaveValue(title);
         const sampleTitle = await this.sampleTitleInput.inputValue();
         await this.sampleTypeDropdown.selectOption("url");
         await this.sampleUrlField.fill(url);

@@ -1,4 +1,4 @@
-import { test, expect } from "../../../setup";
+import { test } from "../../../setup";
 import { getImageFile } from "../../../utils/faker";
 import { DesignConfigurationPage } from "../../../pages/admin/configuration/general/DesignConfigurationPage";
 
@@ -30,14 +30,7 @@ test.describe("design configuration", () => {
         await page.previewSidebarMenu();
         await page.saveAndVerify();
 
-        await adminPage.goto("");
-        await expect(adminPage.getByText("All", { exact: true })).toBeVisible();
-        await adminPage
-            .locator("#app span")
-            .filter({ hasText: "All" })
-            .locator("span")
-            .click();
-        await adminPage.locator(".icon-cancel").first().click();
+        await page.expectSidebarMenuOnStorefront();
     });
 
     test("should set default menu category view", async ({ adminPage }) => {
@@ -47,13 +40,6 @@ test.describe("design configuration", () => {
         await page.previewDefaultMenu();
         await page.saveAndVerify();
 
-        await adminPage.goto("");
-        await expect(adminPage.getByText("Men").first()).toBeVisible();
-        await adminPage.waitForTimeout(2000);
-        await adminPage.hover('a:has-text("Men")');
-        await adminPage.waitForTimeout(2000);
-        await expect(
-            adminPage.getByRole("link", { name: "Formal Wear" }).first(),
-        ).toBeVisible();
+        await page.expectDefaultMenuOnStorefront("Men", "Formal Wear");
     });
 });

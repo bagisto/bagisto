@@ -9,37 +9,6 @@ import { get } from "https";
 
 type CouponType = "fixed" | "percentage";
 
-async function expectCouponAppliedWithGrandTotal(
-    page: Page,
-    ruleApplyPage: RuleApplyPage,
-    discountValue: number,
-    couponType: CouponType,
-) {
-    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
-        discountValue,
-        couponType,
-    );
-
-    const grandTotal = Number(discountedAmount.toFixed(2));
-
-    await ruleApplyPage.applyCouponAtCheckout();
-
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
-
-    const expectedText =
-        grandTotal === 0
-            ? "$0.00"
-            : `$${new Intl.NumberFormat("en-US", {
-                  minimumFractionDigits: 2,
-              }).format(grandTotal)}`;
-
-    await expect(
-        page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-    ).toContainText(expectedText);
-}
-
 async function updateProductColor(page: Page, colorValue: string) {
     await page.goto("admin/catalog/products");
 
@@ -87,9 +56,7 @@ async function runCartRuleTest(
 
     await updateProductColor(page, colorToSet);
 
-    await expectCouponAppliedWithGrandTotal(
-        page,
-        ruleApplyPage,
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );

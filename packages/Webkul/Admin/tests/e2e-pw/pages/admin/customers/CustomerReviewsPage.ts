@@ -6,20 +6,12 @@ export class CustomerReviewsPage extends BasePage {
         super(page);
     }
 
-    private get reviewDetailIcons() {
-        return this.page.locator("span.cursor-pointer.icon-sort-right");
-    }
-
     private get statusSelect() {
         return this.page.locator('select[name="status"]');
     }
 
     private get saveButton() {
         return this.page.getByRole("button", { name: "Save" });
-    }
-
-    private get checkboxes() {
-        return this.page.locator(".icon-uncheckbox:visible");
     }
 
     private get selectActionButton() {
@@ -30,34 +22,56 @@ export class CustomerReviewsPage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
-    private get deleteActionLink() {
-        return this.page.locator('a:has-text("Delete")');
+    private reviewRow(title: string) {
+        return this.page.locator(".row").filter({ hasText: title });
     }
 
     async open(): Promise<void> {
         await this.visit("admin/customers/reviews");
     }
 
-    async openFirstReviewDetails(): Promise<void> {
+    async expectReviewListed(title: string): Promise<void> {
         await this.open();
-        await expect(this.reviewDetailIcons.first()).toBeVisible({
-            timeout: 10000,
-        });
-        await this.reviewDetailIcons.first().click();
+        await expect(this.reviewRow(title)).toBeVisible({ timeout: 30000 });
     }
 
-    async updateFirstReviewStatus(
+    async openReviewDetails(title: string): Promise<void> {
+        await this.expectReviewListed(title);
+        await this.reviewRow(title)
+            .locator("span.cursor-pointer.icon-sort-right")
+            .click();
+    }
+
+    async updateReviewStatus(
+        title: string,
         status: "approved" | "disapproved",
     ): Promise<void> {
-        await this.open();
-        await this.reviewDetailIcons.first().click();
+        await this.openReviewDetails(title);
         await this.statusSelect.selectOption(status);
         await this.saveButton.click();
     }
 
-    async selectFirstReviewForMassActions(): Promise<void> {
+    async expectReviewStatus(title: string, status: string): Promise<void> {
         await this.open();
-        await this.checkboxes.nth(1).click();
+        await expect(this.reviewRow(title)).toContainText(status);
+    }
+
+    async selectReviewForMassActions(title: string): Promise<void> {
+        await this.expectReviewListed(title);
+        await this.reviewRow(title).locator(".icon-uncheckbox").click();
+    }
+
+    async deleteReview(title: string): Promise<void> {
+        await this.expectReviewListed(title);
+        await this.reviewRow(title)
+            .locator("span.cursor-pointer.icon-delete")
+            .click();
+        await this.confirmAgreeDialog();
+    }
+
+    async expectReviewNotListed(title: string): Promise<void> {
+        await this.open();
+        await expect(this.reviewRow(title)).toHaveCount(0);
     }
 
     async openSelectActionMenu(): Promise<void> {
@@ -69,9 +83,14 @@ export class CustomerReviewsPage extends BasePage {
         status: "Approved" | "Pending" | "Disapproved",
     ): Promise<void> {
         await this.page.hover('a:has-text("Update Status")');
-        await this.page.waitForTimeout(500);
 
-        await this.page.click(`a:has-text("${status}")`);
+        const statusOption = this.page.getByRole("link", {
+            name: status,
+            exact: true,
+        });
+
+        await statusOption.waitFor({ state: "visible" });
+        await statusOption.click();
     }
 
     async applyMassDelete(): Promise<void> {

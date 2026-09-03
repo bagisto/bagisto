@@ -89,7 +89,6 @@ export class OrderPage extends BasePage {
     async cancelFirstOrder(): Promise<void> {
         await this.cancelLink.click();
         await this.agreeButton.click();
-        await this.page.waitForTimeout(5000);
         await expect(this.itemStatusCell).toContainText("Canceled");
     }
 

@@ -1,6 +1,11 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../BasePage";
-import { generateDescription, generateName, generateRandomNumericString } from "../../../utils/faker";
+import {
+    generateDescription,
+    generateName,
+    generateRandomNumericString,
+} from "../../../utils/faker";
+import { datagridRowAction } from "../../../utils/datagrid";
 
 export class SalesManagePage extends BasePage {
     constructor(page: Page) {
@@ -23,10 +28,13 @@ export class SalesManagePage extends BasePage {
 
     async reorderOrder() {
         await this.visit("admin/sales/orders");
-        await this.page.waitForTimeout(3000);
-        await this.page.locator(".row > div:nth-child(4) > a").first().click();
+        await (
+            await datagridRowAction(this.page, ".row > div:nth-child(4) > a")
+        ).click();
         await this.page.getByRole("link", { name: " Reorder" }).click();
-        await expect(this.page.getByText("Cart Items")).toBeVisible();
+        await expect(
+            this.page.locator("#steps-container").getByText("Cart Items"),
+        ).toBeVisible();
         await this.page.locator("label.icon-radio-normal").first().click();
         await this.page.getByRole("button", { name: "Proceed" }).click();
         await this.page.getByText("Free Shipping$0.00Free").click();
@@ -56,12 +64,17 @@ export class SalesManagePage extends BasePage {
         await this.page.click(
             "div.transparent-button.px-1 > .icon-ship.text-2xl:visible",
         );
-        await this.page.fill('input[name="shipment[carrier_title]"]', generateName());
+        await this.page.fill(
+            'input[name="shipment[carrier_title]"]',
+            generateName(),
+        );
         await this.page.fill(
             'input[name="shipment[track_number]"]',
             generateRandomNumericString(),
         );
-        await this.page.locator('[id="shipment\\[source\\]"]').selectOption("1");
+        await this.page
+            .locator('[id="shipment\\[source\\]"]')
+            .selectOption("1");
         await this.page.click('button[type="submit"].primary-button:visible');
         await expect(this.page.locator("#app")).toContainText(
             "Shipment created successfully",
@@ -111,13 +124,17 @@ export class SalesManagePage extends BasePage {
     async sendDuplicateInvoice() {
         await this.visit("admin/sales/invoices");
         await this.page
-            .locator(".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view")
+            .locator(
+                ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
+            )
             .first()
             .click();
         await this.page
             .getByRole("button", { name: " Send Duplicate Invoice" })
             .click();
-        await this.page.getByRole("button", { name: "Send", exact: true }).click();
+        await this.page
+            .getByRole("button", { name: "Send", exact: true })
+            .click();
         await expect(this.page.locator("#app")).toContainText(
             "Invoice sent successfully",
         );
@@ -126,7 +143,9 @@ export class SalesManagePage extends BasePage {
     async printInvoice() {
         await this.visit("admin/sales/invoices");
         await this.page
-            .locator(".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view")
+            .locator(
+                ".cursor-pointer.rounded-md.text-2xl.transition-all.icon-view",
+            )
             .first()
             .click();
         const downloadPromise = this.page.waitForEvent("download");
@@ -142,7 +161,9 @@ export class SalesManagePage extends BasePage {
             .first()
             .click();
         await this.page.getByRole("link", { name: "Cancel" }).click();
-        await this.page.getByRole("button", { name: "Agree", exact: true }).click();
+        await this.page
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
         await expect(this.page.locator("#app")).toContainText(
             "Order cancelled successfully",
         );
@@ -150,9 +171,9 @@ export class SalesManagePage extends BasePage {
 
     async createTransaction() {
         await this.visit("admin/sales/orders");
-        await this.page.waitForTimeout(3000);
-        await this.page.reload();
-        await this.page.locator(".row > div:nth-child(4) > a").first().click();
+        await (
+            await datagridRowAction(this.page, ".row > div:nth-child(4) > a")
+        ).click();
         await this.page.locator(".transparent-button > .icon-sales").click();
         await this.page.locator("#can_create_transaction").nth(1).click();
         await this.page.getByRole("button", { name: "Create Invoice" }).click();
@@ -168,7 +189,9 @@ export class SalesManagePage extends BasePage {
             .click();
         await this.page.getByRole("link", { name: "Update Status " }).hover();
         await this.page.getByRole("link", { name: status }).click();
-        await this.page.getByRole("button", { name: "Agree", exact: true }).click();
+        await this.page
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
         await expect(this.page.locator("#app")).toContainText(status);
         await expect(
             this.page.getByText("Selected invoice updated successfully"),

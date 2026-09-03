@@ -1,5 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { setBooleanSetting } from "../../../../utils/configuration";
 
 export class GeneralConfigurationPage extends BasePage {
     constructor(page: Page) {
@@ -22,12 +23,6 @@ export class GeneralConfigurationPage extends BasePage {
         );
     }
 
-    private get breadcrumbsToggle() {
-        return this.page.locator(
-            'label[for="general[general][breadcrumbs][shop]"]',
-        );
-    }
-
     async open(): Promise<void> {
         await this.visit("admin/configuration/general/general");
     }
@@ -38,7 +33,10 @@ export class GeneralConfigurationPage extends BasePage {
     }
 
     async toggleBreadcrumbs(): Promise<void> {
-        await this.breadcrumbsToggle.click();
+        await setBooleanSetting(
+            this.page,
+            "general[general][breadcrumbs][shop]",
+        );
     }
 
     async saveAndVerify(): Promise<void> {

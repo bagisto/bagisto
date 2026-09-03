@@ -9,7 +9,7 @@ export class GroupProductCheckout extends CheckoutHelper {
 
     private async selectGroupItems() {
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
     }
 

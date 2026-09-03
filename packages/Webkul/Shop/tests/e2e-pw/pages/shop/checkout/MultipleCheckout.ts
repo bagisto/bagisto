@@ -1,8 +1,8 @@
-import { expect } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 import { CheckoutHelper } from "./CheckoutHelper";
 
 export class MultipleCheckout extends CheckoutHelper {
-    constructor(page) {
+    constructor(page: Page) {
         super(page);
     }
 
@@ -31,13 +31,13 @@ export class MultipleCheckout extends CheckoutHelper {
         await this.page.waitForLoadState("networkidle");
         await this.searchProduct("virtual");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 
         await this.searchProduct("group");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 
@@ -77,7 +77,7 @@ export class MultipleCheckout extends CheckoutHelper {
 
         await this.searchProduct("group");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 
@@ -121,13 +121,13 @@ export class MultipleCheckout extends CheckoutHelper {
 
         await this.searchProduct("virtual");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 
         await this.searchProduct("group");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 
@@ -153,13 +153,13 @@ export class MultipleCheckout extends CheckoutHelper {
 
         await this.searchProduct("virtual");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 
         await this.searchProduct("group");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
 

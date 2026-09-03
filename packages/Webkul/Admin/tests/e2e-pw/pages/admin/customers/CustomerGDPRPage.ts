@@ -74,6 +74,9 @@ export class CustomerGDPRPage extends BasePage {
         await this.page.waitForSelector("#status", { state: "visible" });
         await this.page.selectOption("#status", status);
         await this.saveButton.click();
+        await expect(
+            this.page.getByText("Data Request updated successfully").first(),
+        ).toBeVisible();
     }
 
     async deleteRequest(message: string): Promise<void> {

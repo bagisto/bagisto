@@ -1,80 +1,62 @@
-import { test, expect } from "../setup";
+import { test } from "../setup";
+import { generateEmail } from "../utils/faker";
 import { loginAsCustomer } from "../utils/customer";
 import { HomePage } from "../pages/shop/HomePage";
 
-async function subscribeToNewsletter(
-    homePage: HomePage,
-    email: string,
-    expectedMessage: string,
-) {
-    await homePage.subscribeToNewsletter(email);
-    await homePage.expectSubscriptionMessage(expectedMessage);
-}
+const SUBSCRIBED = "You have successfully subscribed to our newsletter.";
+
+const ALREADY_SUBSCRIBED = "You are already subscribed to our newsletter.";
 
 test.describe("newsletter subscription", () => {
-    test("should allow guest to subscribe to newsletter successfully", async ({
+    let email: string;
+
+    test.beforeEach(() => {
+        email = generateEmail();
+    });
+
+    test("should allow a guest to subscribe to the newsletter", async ({
         shopPage,
     }) => {
         const homePage = new HomePage(shopPage);
 
-        await subscribeToNewsletter(
-            homePage,
-            "guest@example.com",
-            "You have successfully subscribed to our newsletter.",
-        );
+        await homePage.subscribeToNewsletter(email);
+        await homePage.expectSubscriptionMessage(SUBSCRIBED);
     });
 
-    test("should not allow guest to subscribe to newsletter again", async ({
+    test("should tell a guest they are already subscribed when they subscribe twice", async ({
         shopPage,
     }) => {
         const homePage = new HomePage(shopPage);
 
-        await subscribeToNewsletter(
-            homePage,
-            "guest@example.com",
-            "You are already subscribed to our newsletter.",
-        );
+        await homePage.subscribeToNewsletter(email);
+        await homePage.expectSubscriptionMessage(SUBSCRIBED);
+
+        await homePage.subscribeToNewsletter(email);
+        await homePage.expectSubscriptionMessage(ALREADY_SUBSCRIBED);
     });
 
-    test("should allow customer to subscribe to newsletter", async ({
+    test("should allow a signed in customer to subscribe to the newsletter", async ({
         shopPage,
     }) => {
         const homePage = new HomePage(shopPage);
 
         await loginAsCustomer(shopPage);
-        await subscribeToNewsletter(
-            homePage,
-            "customer1@example.com",
-            "You have successfully subscribed to our newsletter.",
-        );
+
+        await homePage.subscribeToNewsletter(email);
+        await homePage.expectSubscriptionMessage(SUBSCRIBED);
     });
 
-    test("should not allow customer to subscribe to newsletter again", async ({
+    test("should tell a signed in customer they are already subscribed when they subscribe twice", async ({
         shopPage,
     }) => {
         const homePage = new HomePage(shopPage);
-        const adminCredentials = {
-            email: "admin@example.com",
-            password: "admin123",
-        };
 
-        await shopPage.goto("admin/customers");
-        await shopPage
-            .locator('input[name="email"]')
-            .fill(adminCredentials.email);
-        await shopPage
-            .locator('input[name="password"]')
-            .fill(adminCredentials.password);
-        await shopPage.press('input[name="password"]', "Enter");
+        await loginAsCustomer(shopPage);
 
-        await shopPage.locator(".icon-login").first().click();
-        await shopPage.waitForLoadState("networkidle");
-        await homePage.gotoHome();
+        await homePage.subscribeToNewsletter(email);
+        await homePage.expectSubscriptionMessage(SUBSCRIBED);
 
-        await subscribeToNewsletter(
-            homePage,
-            "customer1@example.com",
-            "You are already subscribed to our newsletter.",
-        );
+        await homePage.subscribeToNewsletter(email);
+        await homePage.expectSubscriptionMessage(ALREADY_SUBSCRIBED);
     });
 });
