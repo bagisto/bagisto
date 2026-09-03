@@ -380,6 +380,8 @@
                             })
                             .then(response => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                this.$emitter.emit('update-compare-count');
                             })
                             .catch(error => {
                                 if ([400, 422].includes(error.response.status)) {
@@ -406,6 +408,8 @@
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
                             this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare-success')" });
+
+                            this.$emitter.emit('update-compare-count');
                         } else {
                             this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.products.card.already-in-compare')" });
                         }
@@ -413,6 +417,8 @@
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
 
                         this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare-success')" });
+
+                        this.$emitter.emit('update-compare-count');
 
                     }
                 },

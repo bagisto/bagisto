@@ -200,4 +200,77 @@
     >
         <x-shop::layouts.header.mobile />
     </script>
+
+    <script
+        type="text/x-template"
+        id="v-compare-icon-template"
+    >
+        <span class="relative inline-block">
+            <span
+                class="inline-block text-2xl cursor-pointer icon-compare"
+                role="presentation"
+            ></span>
+
+            <span
+                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
+                v-if="compareCount > 0"
+            >
+                @{{ compareCount }}
+            </span>
+        </span>
+    </script>
+
+    <script type="module">
+        app.component('v-compare-icon', {
+            template: '#v-compare-icon-template',
+
+            data() {
+                return {
+                    isCustomer: '{{ auth()->guard('customer')->check() }}',
+
+                    compareCount: 0,
+                };
+            },
+
+            mounted() {
+                this.refreshCompareCount();
+
+                this.$emitter.on('update-compare-count', this.refreshCompareCount);
+            },
+
+            beforeUnmount() {
+                this.$emitter.off('update-compare-count', this.refreshCompareCount);
+            },
+
+            methods: {
+                refreshCompareCount() {
+                    if (this.isCustomer) {
+                        this.getCustomerCompareCount();
+
+                        return;
+                    }
+
+                    this.compareCount = this.getGuestCompareCount();
+                },
+
+                getGuestCompareCount() {
+                    try {
+                        const items = JSON.parse(localStorage.getItem('compare_items') ?? '[]');
+
+                        return Array.isArray(items) ? items.length : 0;
+                    } catch (e) {
+                        return 0;
+                    }
+                },
+
+                getCustomerCompareCount() {
+                    this.$axios.get("{{ route('shop.api.compare.index') }}")
+                        .then(response => {
+                            this.compareCount = response.data.data.length;
+                        })
+                        .catch(error => {});
+                },
+            },
+        });
+    </script>
 @endPushOnce

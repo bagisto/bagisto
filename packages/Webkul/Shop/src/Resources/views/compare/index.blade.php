@@ -219,6 +219,8 @@
 
                                     localStorage.setItem('compare_items', JSON.stringify(items));
 
+                                    this.$emitter.emit('update-compare-count');
+
                                     return;
                                 }
 
@@ -230,6 +232,8 @@
                                         this.items = response.data.data;
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                        this.$emitter.emit('update-compare-count');
 
                                     })
                                     .catch(error => {
@@ -249,6 +253,8 @@
 
                                     this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
 
+                                    this.$emitter.emit('update-compare-count');
+
                                     return;
                                 }
 
@@ -259,6 +265,8 @@
                                         this.items = [];
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                        this.$emitter.emit('update-compare-count');
                                     })
                                     .catch(error => {});
                             }
