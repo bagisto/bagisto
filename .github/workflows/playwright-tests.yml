@@ -1,6 +1,12 @@
 name: Playwright Tests
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types: [labeled]
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -10,6 +16,10 @@ env:
 
 jobs:
   installer_gate:
+    if: >-
+      github.event_name != 'pull_request'
+      || github.event.label.name == 'Need Playwright Testing'
+
     runs-on: ${{ matrix.operating-systems }}
 
     strategy:
@@ -103,7 +113,7 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: Start Laravel server
+      - name: Start Laravel Server
         run: |
           # The guided installer rewrites .env mid-request (EnvironmentManager::generateEnv),
           # and `php artisan serve` watches .env and restarts on change — which kills the
@@ -137,6 +147,10 @@ jobs:
           retention-days: 1
 
   playwright_tests:
+    if: >-
+      github.event_name != 'pull_request'
+      || github.event.label.name == 'Need Playwright Testing'
+
     runs-on: ${{ matrix.operating-systems }}
 
     needs: installer_gate
@@ -234,7 +248,7 @@ jobs:
       - name: Indexing Product Table
         run: php artisan indexer:index --mode=full
 
-      - name: Start Laravel server
+      - name: Start Laravel Server
         run: |
           php artisan serve --host=0.0.0.0 --port=8000 > server.log 2>&1 &
           echo "Waiting for server to start..."
