@@ -693,6 +693,8 @@
                                 })
                                 .then(response => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                    this.$emitter.emit('update-compare-count');
                                 })
                                 .catch(error => {
                                     if ([400, 422].includes(error.response.status)) {
@@ -719,6 +721,8 @@
                                 this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.view.add-to-compare')" });
+
+                                this.$emitter.emit('update-compare-count');
                             } else {
                                 this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.products.view.already-in-compare')" });
                             }
@@ -726,6 +730,8 @@
                             this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
 
                             this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.view.add-to-compare')" });
+
+                            this.$emitter.emit('update-compare-count');
                         }
                     },
 
