@@ -1,6 +1,12 @@
 name: Playwright Tests
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types: [labeled]
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -10,6 +16,10 @@ env:
 
 jobs:
   installer_gate:
+    if: >-
+      github.event_name != 'pull_request'
+      || github.event.label.name == 'Need Playwright Testing'
+
     runs-on: ${{ matrix.operating-systems }}
 
     strategy:
@@ -141,6 +151,10 @@ jobs:
           retention-days: 1
 
   playwright_tests:
+    if: >-
+      github.event_name != 'pull_request'
+      || github.event.label.name == 'Need Playwright Testing'
+
     runs-on: ${{ matrix.operating-systems }}
 
     needs: installer_gate

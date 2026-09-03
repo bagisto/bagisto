@@ -83,16 +83,16 @@ jobs:
             BAGISTO_VERSION="${GITHUB_REF#refs/tags/}"
           fi
 
-          # Sanity check the format: must look like vX.Y.Z[-suffix]
+          # Sanity check the format: must look like vX.Y.Z[-suffix].
           if ! echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?$'; then
             echo "::error::BAGISTO_VERSION '$BAGISTO_VERSION' is not a valid semver tag (expected vX.Y.Z or vX.Y.Z-suffix)"
             exit 1
           fi
 
-          # Docker tag = git tag without the leading 'v'
+          # Docker tag = git tag without the leading 'v'.
           DOCKER_TAG="${BAGISTO_VERSION#v}"
 
-          # Pre-release if the tag has any -suffix
+          # Pre-release if the tag has any -suffix.
           IS_PRERELEASE="false"
           if echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+-'; then
             IS_PRERELEASE="true"
@@ -207,7 +207,7 @@ jobs:
   # the top of the repository page.
   # --------------------------------------------------------------------------
   publish:
-    name: Tag & Publish (ordered)
+    name: Tag & Publish (Ordered)
     needs: [resolve, build]
     runs-on: ubuntu-latest
     permissions:
@@ -294,7 +294,7 @@ jobs:
               echo '- `latest`, `latest-nginx`, `latest-litespeed`, `latest-apache`'
               echo '- `latest-nginx-mysql`, `latest-litespeed-mysql`, `latest-apache-mysql`'
               echo '- `latest-nginx-mariadb`, `latest-litespeed-mariadb`, `latest-apache-mariadb`'
-            echo '- `latest-nginx-postgres`, `latest-litespeed-postgres`, `latest-apache-postgres`'
+              echo '- `latest-nginx-postgres`, `latest-litespeed-postgres`, `latest-apache-postgres`'
             fi
             echo "- then the matching \`${DOCKER_TAG}\` tags."
             echo ""

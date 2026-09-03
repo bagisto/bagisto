@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- #11464 [fixed] - Fixed a pair of unused colour circles showing under the price on product listing cards in list view. They came from a placeholder that was never wired to product data, and it has been removed.
+
 ## **v2.5.0-beta1 (2nd of September 2026)** - *Release*
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
