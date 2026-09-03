@@ -1,17 +1,9 @@
-import fs from "fs";
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../BasePage";
 import { addAddress, loginAsCustomer } from "../../../utils/customer";
 import { loginAsAdmin } from "../../../utils/admin";
 import { datagridRowAction } from "../../../utils/datagrid";
-
-function getGeneratedProductName(): string {
-    const data = JSON.parse(
-        fs.readFileSync("generatedProductName.json", "utf-8"),
-    );
-
-    return data.productName;
-}
+import { getGeneratedProductName } from "../../../utils/product-data";
 
 export class RmaManagePage extends BasePage {
     constructor(page: Page) {
@@ -59,9 +51,16 @@ export class RmaManagePage extends BasePage {
         await this.page.getByRole("button", { name: "Proceed" }).click();
         await this.page.getByText("Free Shipping").first().click();
         await this.page.getByAltText("Money Transfer").click();
-        await this.page.waitForTimeout(2000);
-        await this.page.getByRole("button", { name: "Place Order" }).click();
-        await this.page.waitForTimeout(8000);
+
+        const placeOrderButton = this.page.getByRole("button", {
+            name: "Place Order",
+        });
+
+        await placeOrderButton.waitFor({ state: "visible" });
+        await placeOrderButton.click();
+        await this.page.waitForURL(/checkout\/onepage\/success/, {
+            timeout: 60000,
+        });
     }
 
     private async createInvoiceFromLatestOrder() {
@@ -104,14 +103,12 @@ export class RmaManagePage extends BasePage {
         await expect(this.page.locator("a.icon-edit").first()).toBeVisible();
         await this.page.locator("a.icon-edit").first().click();
         await this.page.locator('input[name^="isChecked["]').click();
-        await this.page.waitForTimeout(1000);
         await this.page
             .locator('select[name^="resolution_type"]')
             .selectOption("return");
         await this.page
             .locator('select[name^="resolution_type"]')
             .selectOption("return");
-        await this.page.waitForTimeout(1000);
         await this.page
             .locator('select[name="rma_reason_id"]')
             .selectOption("1");

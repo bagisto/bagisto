@@ -40,6 +40,7 @@ export class LoginPage extends BasePage {
 
     async logout() {
         await this.accountDropdownToggle.click();
+        await expect(this.logoutLink).toBeVisible();
         await this.logoutLink.click();
         await this.page.waitForURL("**/admin/login");
         await expect(this.passwordInput).toBeVisible();

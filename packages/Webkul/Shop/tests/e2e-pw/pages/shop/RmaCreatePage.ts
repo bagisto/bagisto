@@ -1,13 +1,8 @@
-import fs from "fs";
 import { expect, Page } from "@playwright/test";
 import { TinymcePage } from "../../utils/TinymcePage";
 import { loginAsAdmin } from "../../utils/admin";
 import { BasePage } from "../BasePage";
-
-function readProductData() {
-    const product = JSON.parse(fs.readFileSync("product-data.json", "utf-8"));
-    return product.name;
-}
+import { ProductDataManager } from "../admin/catalog/products/ProductDataManager";
 
 export class RmaCreatePage extends BasePage {
     constructor(
@@ -140,7 +135,7 @@ export class RmaCreatePage extends BasePage {
     }
 
     private async verfiyRMADetails() {
-        const productName = readProductData();
+        const productName = ProductDataManager.readProductData();
 
         await expect(
             this.page.getByText(productName, { exact: true }),

@@ -1,27 +1,10 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { setBooleanSettings } from "../../../../utils/configuration";
 
 export class CustomerAddressPage extends BasePage {
     constructor(page: Page) {
         super(page);
-    }
-
-    private get countryToggle() {
-        return this.page.locator(
-            'label[for="customer[address][requirements][country]"]',
-        );
-    }
-
-    private get stateToggle() {
-        return this.page.locator(
-            'label[for="customer[address][requirements][state]"]',
-        );
-    }
-
-    private get postcodeToggle() {
-        return this.page.locator(
-            'label[for="customer[address][requirements][postcode]"]',
-        );
     }
 
     private get saveButton() {
@@ -39,9 +22,11 @@ export class CustomerAddressPage extends BasePage {
     }
 
     async requireCountryStateZip(): Promise<void> {
-        await this.countryToggle.click();
-        await this.stateToggle.click();
-        await this.postcodeToggle.click();
+        await setBooleanSettings(this.page, [
+            "customer[address][requirements][country]",
+            "customer[address][requirements][state]",
+            "customer[address][requirements][postcode]",
+        ]);
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
     }

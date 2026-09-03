@@ -8,8 +8,8 @@ export class ConfigurableProductCheckout extends CheckoutHelper {
     }
 
     private async selectProductOptions() {
-        await this.page.getByLabel("Color").selectOption({label: "Red"});
-        await this.page.getByLabel("Size").selectOption({label: "S"});
+        await this.page.getByLabel("Color").selectOption({ label: "Red" });
+        await this.page.getByLabel("Size").selectOption({ label: "S" });
         await this.addToCartButton.click();
     }
 

@@ -1,5 +1,9 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import {
+    setBooleanSetting,
+    setBooleanSettings,
+} from "../../../../utils/configuration";
 
 type StorefrontMode = "grid" | "list";
 
@@ -53,13 +57,11 @@ export class ProductConfigurationPage extends BasePage {
         await expect(this.savedNotification).toBeVisible();
     }
 
-    async toggleCompareAndImageSearch(): Promise<void> {
-        await this.page.click(
-            'label[for="catalog[products][settings][compare_option]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][settings][image_search]"]',
-        );
+    async enableCompareAndImageSearch(): Promise<void> {
+        await setBooleanSettings(this.page, [
+            "catalog[products][settings][compare_option]",
+            "catalog[products][settings][image_search]",
+        ]);
         await this.saveAndVerify();
     }
 
@@ -113,11 +115,11 @@ export class ProductConfigurationPage extends BasePage {
             ),
         ).toHaveValue(config.sortBy);
 
-        if (config.buyNowDisplay) {
-            await this.page.click(
-                'label[for="catalog[products][product_view_page][buy_now_button_display]"]',
-            );
-        }
+        await setBooleanSetting(
+            this.page,
+            "catalog[products][product_view_page][buy_now_button_display]",
+            config.buyNowDisplay,
+        );
 
         await this.saveAndVerify();
     }
@@ -162,12 +164,10 @@ export class ProductConfigurationPage extends BasePage {
     }
 
     async updateReviewConfig(summary: string): Promise<void> {
-        await this.page.click(
-            'label[for="catalog[products][review][guest_review]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][review][customer_review]"]',
-        );
+        await setBooleanSettings(this.page, [
+            "catalog[products][review][guest_review]",
+            "catalog[products][review][customer_review]",
+        ]);
         await this.page.selectOption(
             'select[name="catalog[products][review][summary]"]',
             summary,
@@ -198,27 +198,15 @@ export class ProductConfigurationPage extends BasePage {
     }
 
     async updateSocialShare(shareMessage: string): Promise<void> {
-        await this.page.click(
-            'label[for="catalog[products][social_share][enabled]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][social_share][facebook]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][social_share][twitter]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][social_share][pinterest]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][social_share][whatsapp]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][social_share][linkedin]"]',
-        );
-        await this.page.click(
-            'label[for="catalog[products][social_share][email]"]',
-        );
+        await setBooleanSettings(this.page, [
+            "catalog[products][social_share][enabled]",
+            "catalog[products][social_share][facebook]",
+            "catalog[products][social_share][twitter]",
+            "catalog[products][social_share][pinterest]",
+            "catalog[products][social_share][whatsapp]",
+            "catalog[products][social_share][linkedin]",
+            "catalog[products][social_share][email]",
+        ]);
         await this.page
             .locator(
                 'input[name="catalog[products][social_share][share_message]"]',

@@ -122,17 +122,17 @@ export class ProductEditPage extends BasePage {
         }
     }
 
-    async fillPrice(price: string) {
-        await this.priceInput.fill(price);
+    async fillPrice(price: number | string) {
+        await this.priceInput.fill(String(price));
     }
 
-    async fillWeight(weight: string) {
-        await this.weightInput.fill(weight);
+    async fillWeight(weight: number | string) {
+        await this.weightInput.fill(String(weight));
     }
 
-    async fillInventory(quantity: string) {
+    async fillInventory(quantity: number | string) {
         await this.inventoryInput.click();
-        await this.inventoryInput.fill(quantity);
+        await this.inventoryInput.fill(String(quantity));
     }
 
     async saveProduct() {

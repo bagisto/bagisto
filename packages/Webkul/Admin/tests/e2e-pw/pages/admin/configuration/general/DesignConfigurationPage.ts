@@ -28,6 +28,29 @@ export class DesignConfigurationPage extends BasePage {
         );
     }
 
+    private get sidebarMenuToggle() {
+        return this.page
+            .locator("#app span")
+            .filter({ hasText: "All" })
+            .locator("span");
+    }
+
+    private get sidebarMenuCloseButton() {
+        return this.page.locator(".icon-cancel").first();
+    }
+
+    private get storefrontMenuAllLabel() {
+        return this.page.getByText("All", { exact: true });
+    }
+
+    private topLevelCategoryLink(name: string) {
+        return this.page.locator(`a:has-text("${name}")`).first();
+    }
+
+    private categoryLink(name: string) {
+        return this.page.getByRole("link", { name }).first();
+    }
+
     private previewSidebarButton() {
         return this.page.getByRole("button", {
             name: " Preview Sidebar Menu ",
@@ -105,5 +128,31 @@ export class DesignConfigurationPage extends BasePage {
     async saveAndVerify(): Promise<void> {
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
+    }
+
+    async expectSidebarMenuOnStorefront(): Promise<void> {
+        await this.visit("");
+        await expect(this.storefrontMenuAllLabel).toBeVisible();
+
+        await this.sidebarMenuToggle.click();
+        await expect(this.sidebarMenuCloseButton).toBeVisible();
+
+        await this.sidebarMenuCloseButton.click();
+        await expect(this.sidebarMenuCloseButton).toBeHidden();
+    }
+
+    async expectDefaultMenuOnStorefront(
+        topLevelCategory: string,
+        nestedCategory: string,
+    ): Promise<void> {
+        await this.visit("");
+        await expect(this.topLevelCategoryLink(topLevelCategory)).toBeVisible();
+
+        await expect(async () => {
+            await this.topLevelCategoryLink(topLevelCategory).hover();
+            await expect(this.categoryLink(nestedCategory)).toBeVisible({
+                timeout: 2000,
+            });
+        }).toPass();
     }
 }

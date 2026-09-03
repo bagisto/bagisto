@@ -14,33 +14,6 @@ import { generateName } from "../../../../utils/faker";
 
 type CouponType = "fixed" | "percentage";
 
-async function expectCouponAppliedWithGrandTotal(
-    page: Page,
-    ruleApplyPage: RuleApplyPage,
-    discountValue: number,
-    couponType: CouponType,
-) {
-    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
-        discountValue,
-        couponType,
-    );
-
-    const formatted =
-        Math.abs(discountedAmount) < 0.01
-            ? "$0.00"
-            : `$${discountedAmount.toFixed(2)}`;
-
-    await ruleApplyPage.applyCouponAtCheckout();
-
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
-
-    await expect(
-        page.getByText("Grand Total").locator("..").locator("p").last(),
-    ).toContainText(formatted);
-}
-
 async function createRuleAndVerifyTaxCategory({
     page,
     operator,
@@ -69,9 +42,7 @@ async function createRuleAndVerifyTaxCategory({
 
     await ruleCreatePage.saveCartRule();
 
-    await expectCouponAppliedWithGrandTotal(
-        page,
-        ruleApplyPage,
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );
@@ -107,7 +78,10 @@ test.beforeEach(async ({ adminPage }) => {
         .click();
     await adminPage.waitForLoadState("networkidle");
     await adminPage.locator('span:text-is("Tax Category")').click();
-    await adminPage.locator(`span:text-is("${taxCategoryName}")`).first().click();
+    await adminPage
+        .locator(`span:text-is("${taxCategoryName}")`)
+        .first()
+        .click();
 
     await adminPage.locator('button:has-text("Save Product")').first().click();
 
@@ -129,7 +103,7 @@ const cases = [
 ];
 
 test.describe("cart rules", () => {
-    test.describe("product attributes condition", () => {
+    test.describe("product attribute conditions", () => {
         for (const { operator, type, option } of cases) {
             test(`should apply coupon when tax category condition is -> ${operator} (${type})`, async ({
                 page,

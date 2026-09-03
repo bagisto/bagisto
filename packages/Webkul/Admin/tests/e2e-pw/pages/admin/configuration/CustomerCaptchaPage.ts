@@ -40,6 +40,12 @@ export class CustomerCaptchaPage extends BasePage {
             .filter({ hasText: "Item Added Successfully" });
     }
 
+    private get cookieConsentAccept() {
+        return this.page
+            .locator(".js-cookie-consent")
+            .getByRole("button", { name: "Accept" });
+    }
+
     private get cartToggle() {
         return this.page.locator('[class*="icon-cart"]').first();
     }
@@ -81,9 +87,17 @@ export class CustomerCaptchaPage extends BasePage {
         await this.searchProductsInput.press("Enter");
         await this.addToCartButton.click();
         await this.addedItemToast.click();
+        await this.dismissCookieConsent();
         await this.cartToggle.click();
         await this.continueToCheckoutButton.click();
         await this.page.getByRole("button", { name: "Sign In" }).click();
+    }
+
+    private async dismissCookieConsent(): Promise<void> {
+        if (await this.cookieConsentAccept.isVisible().catch(() => false)) {
+            await this.cookieConsentAccept.click();
+            await expect(this.cookieConsentAccept).toBeHidden();
+        }
     }
 
     async expectCaptchaVisible(): Promise<void> {

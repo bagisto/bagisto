@@ -17,8 +17,7 @@ export class BookingProductCheckout extends CheckoutHelper {
                 await this.flatpickrEnabledDates.first().click();
                 break;
             } else {
-                await this.flatpickrNextMonthButton.click();
-                await this.page.waitForTimeout(300);
+                await this.goToNextFlatpickrMonth();
                 maxMonths--;
             }
         }
@@ -34,8 +33,7 @@ export class BookingProductCheckout extends CheckoutHelper {
                 await this.flatpickrOpenEnabledDates.nth(count - 1).click();
                 return;
             }
-            await this.flatpickrNextMonthButton.click();
-            await this.page.waitForTimeout(300);
+            await this.goToNextFlatpickrMonth();
             count -= total;
             maxMonths--;
         }
@@ -45,66 +43,68 @@ export class BookingProductCheckout extends CheckoutHelper {
     private async getOrderId() {
         const text = await this.orderIdHeading.innerText();
         const match = text.match(/#\s*(\d+)/);
-        if (! match) {
-            throw new Error(`Order id not found on the success page: "${text}"`);
+        if (!match) {
+            throw new Error(
+                `Order id not found on the success page: "${text}"`,
+            );
         }
         return match[1];
     }
 
     private async tablematch(table: boolean) {
         await this.shoppingCartIcon.click();
-        await this.cartSummaryToggle.click()
+        await this.cartSummaryToggle.click();
         if (table) {
-            await expect(this.cartSummaryText(7)).toContainText('Per Table')
-            await expect(this.cartSummaryText(9)).toContainText('2')
+            await expect(this.cartSummaryText(7)).toContainText("Per Table");
+            await expect(this.cartSummaryText(9)).toContainText("2");
         } else {
-            await expect(this.cartSummaryText(7)).toContainText('Per Guest')
+            await expect(this.cartSummaryText(7)).toContainText("Per Guest");
         }
-        await this.cartDismissButton.click()
+        await this.cartDismissButton.click();
     }
 
     private async hourMatch(hour: string) {
-        await this.cartSummaryToggle.click()
+        await this.cartSummaryToggle.click();
         const timePattern = new RegExp(`${hour}:\\d{2} [AP]M`);
         await expect(this.cartSummaryText(1)).toContainText(timePattern);
-        await this.cartOverlayDismissButton.click()
+        await this.cartOverlayDismissButton.click();
     }
 
-    private async eventCheckout(hour: string, tickets: number, allowCancellation?: boolean) {
+    private async eventCheckout(
+        hour: string,
+        tickets: number,
+        allowCancellation?: boolean,
+    ) {
         await this.addToCartButton.click();
         if (tickets === 1) {
-            await this.eventTicket.nth(0).click()
+            await this.eventTicket.nth(0).click();
         }
         if (allowCancellation === false) {
-            await this.verifyCancellationNotAllowed()
+            await this.verifyCancellationNotAllowed();
         }
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
         await this.shoppingCartIcon.click();
-        await this.page.waitForTimeout(500)
-        await this.hourMatch(hour)
+        await this.hourMatch(hour);
         await this.proceedToCheckout();
         await this.choosePaymentMethod.click();
         await this.placeOrder();
         const orderId = await this.getOrderId();
-        return orderId
+        return orderId;
     }
 
     private async selectslot() {
-        await this.page.waitForTimeout(2000);
-        await this.page.waitForLoadState('networkidle')
-        await this.bookingSlotStartSelect.click()
-        await this.bookingSlotStartSelect.press("ArrowDown");
-        await this.bookingSlotStartSelect.press("Enter");
-        await this.bookingSlotEndSelect.click()
-        await this.bookingSlotEndSelect.press("ArrowDown");
-        await this.bookingSlotEndSelect.press("Enter");
+        await this.page.waitForLoadState("networkidle");
+        await this.bookingSlotStartSelect.waitFor({ state: "visible" });
+        await this.bookingSlotStartSelect.selectOption({ index: 1 });
+        await this.bookingSlotEndSelect.waitFor({ state: "visible" });
+        await this.bookingSlotEndSelect.selectOption({ index: 1 });
     }
 
     private async selectBookingDateTime() {
-        await this.page.waitForTimeout(2000);
+        await this.bookingSlotSelect.waitFor({ state: "visible" });
         await this.bookingSlotSelect.click();
-        await this.page.waitForLoadState('networkidle')
+        await this.page.waitForLoadState("networkidle");
         await this.bookingSlotSelect.press("ArrowDown");
         await this.bookingSlotSelect.press("Enter");
     }
@@ -118,7 +118,7 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.page.waitForTimeout(500);
         await this.rentalDateSelect(2, this.bookingDateToInput);
         if (allowCancellation === false) {
-            await this.verifyCancellationNotAllowed()
+            await this.verifyCancellationNotAllowed();
         }
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.nth(0)).toBeVisible();
@@ -133,15 +133,14 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.searchProduct(productName);
         await this.addToCartButton.click();
         if (allowCancellation === false) {
-            await this.verifyCancellationNotAllowed()
+            await this.verifyCancellationNotAllowed();
         }
         await this.selectFirstAvailableDate();
         await this.selectBookingDateTime();
-        await this.selectslot()
+        await this.selectslot();
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
         await this.shoppingCartIcon.click();
-        await this.page.waitForTimeout(500)
         if (hour) {
             await this.hourMatch(hour);
         }
@@ -151,22 +150,25 @@ export class BookingProductCheckout extends CheckoutHelper {
         return await this.getOrderId();
     }
 
-    async rentalcheckoutHourlyDaily(hourly: boolean, hour?: string, allowCancellation?: boolean) {
+    async rentalcheckoutHourlyDaily(
+        hourly: boolean,
+        hour?: string,
+        allowCancellation?: boolean,
+    ) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
         if (allowCancellation === false) {
-            await this.verifyCancellationNotAllowed()
+            await this.verifyCancellationNotAllowed();
         }
         if (hourly) {
-            await this.hourlyRadio.click()
+            await this.hourlyRadio.click();
             await this.selectFirstAvailableDate();
             await this.selectBookingDateTime();
-            await this.selectslot()
+            await this.selectslot();
             await this.addToCartButton.click();
             await expect(this.addCartSuccess.first()).toBeVisible();
             await this.shoppingCartIcon.click();
-            await this.page.waitForTimeout(500)
             if (hour) {
                 await this.hourMatch(hour);
             }
@@ -175,9 +177,9 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.placeOrder();
             return await this.getOrderId();
         } else {
-            await this.dailyRadio.click()
+            await this.dailyRadio.click();
             await this.rentalDateSelect(1, this.bookingDateFromInput);
-            await this.page.waitForLoadState('networkidle')
+            await this.page.waitForLoadState("networkidle");
             if (await this.getMinimizebtn().isVisible()) {
                 await this.getMinimizebtn().click();
             }
@@ -191,21 +193,25 @@ export class BookingProductCheckout extends CheckoutHelper {
         }
     }
 
-    async table_checkout(table: boolean, hour: string, allowCancellation?: boolean) {
+    async table_checkout(
+        table: boolean,
+        hour: string,
+        allowCancellation?: boolean,
+    ) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
         if (allowCancellation === false) {
-            await this.verifyCancellationNotAllowed()
+            await this.verifyCancellationNotAllowed();
         }
         await this.selectFirstAvailableDate();
         await this.selectBookingDateTime();
-        await this.page.waitForLoadState('networkidle')
+        await this.page.waitForLoadState("networkidle");
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
-        await this.tablematch(table)
+        await this.tablematch(table);
         await this.shoppingCartIcon.click();
-        await this.hourMatch(hour)
+        await this.hourMatch(hour);
         await this.proceedToCheckout();
         await this.choosePaymentMethod.click();
         await this.placeOrder();
@@ -214,29 +220,32 @@ export class BookingProductCheckout extends CheckoutHelper {
 
     async verifyCancellationNotAllowed(orderId?: string) {
         if (orderId) {
-            await this.visit(`customer/account/orders/view/${orderId}`)
-            await expect(this.bookingItemsWillNotBeCanceledText).toBeVisible()
+            await this.visit(`customer/account/orders/view/${orderId}`);
+            await expect(this.bookingItemsWillNotBeCanceledText).toBeVisible();
         } else {
-            await expect(this.cancellationNotAllowedText).toBeVisible()
+            await expect(this.cancellationNotAllowedText).toBeVisible();
         }
     }
 
-    async checkout(hour?: string, tickets?: number, allowCancellation?: boolean) {
+    async checkout(
+        hour?: string,
+        tickets?: number,
+        allowCancellation?: boolean,
+    ) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         if (tickets !== undefined) {
-            return await this.eventCheckout(hour!, tickets, allowCancellation)
+            return await this.eventCheckout(hour!, tickets, allowCancellation);
         } else {
             await this.addToCartButton.click();
             await this.selectFirstAvailableDate();
             await this.selectBookingDateTime();
             if (allowCancellation === false) {
-                await this.verifyCancellationNotAllowed()
+                await this.verifyCancellationNotAllowed();
             }
             await this.addToCartButton.click();
             await expect(this.addCartSuccess.first()).toBeVisible();
             await this.shoppingCartIcon.click();
-            await this.page.waitForTimeout(500)
             if (hour) {
                 await this.hourMatch(hour);
             }
@@ -248,7 +257,7 @@ export class BookingProductCheckout extends CheckoutHelper {
     }
 
     async verifyduration(customer: any, orderId: string, slot: boolean) {
-        await this.visit('admin/sales/bookings');
+        await this.visit("admin/sales/bookings");
         await loginAsAdmin(this.page);
         if (slot) {
             await this.visit(`admin/sales/orders/view/${orderId}`);
@@ -256,29 +265,49 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.canCreateTransactionToggle.click();
             await this.createInvoiceButton.click();
             await expect(this.invoiceCreatedSuccessText).toBeVisible();
-            await this.visit('admin/sales/bookings');
-            await this.page.waitForLoadState('networkidle');
+            await this.visit("admin/sales/bookings");
+            await this.page.waitForLoadState("networkidle");
             const customerName = `${customer.firstName} ${customer.lastName}`;
             const slots = this.slotGraphEvents;
             for (let i = 0; i < 7; i++) {
                 const total = await slots.count();
                 for (let j = 0; j < total; j++) {
                     const slotgraph = slots.nth(j);
-                    await slotgraph.click();
-                    const isSameOrder = (await this.bookingDialogOrderIdText.textContent())?.trim() === `#${orderId}`;
-                    if (! isSameOrder) {
+                    await slotgraph.dispatchEvent("mousedown");
+                    await slotgraph.dispatchEvent("mouseup");
+                    await slotgraph.dispatchEvent("click");
+                    const isSameOrder =
+                        (
+                            await this.bookingDialogOrderIdText.textContent()
+                        )?.trim() === `#${orderId}`;
+                    if (!isSameOrder) {
                         await this.bookingDialogCloseButton.click();
+                        await expect(
+                            this.bookingDialogCloseButton,
+                        ).toBeHidden();
                         continue;
                     }
-                    await expect(this.slotGraphTimeText(slotgraph)).toHaveText("10:35 AM - 11:20 AM");
-                    await expect(this.bookingDetailText(2)).toContainText("10:35 AM");
-                    await expect(this.bookingDetailText(3)).toContainText("11:20 AM");
-                    await expect(this.bookingCustomerNameText).toContainText(customerName);
+                    await expect(this.slotGraphTimeText(slotgraph)).toHaveText(
+                        "10:35 AM - 11:20 AM",
+                    );
+                    await expect(this.bookingDetailText(2)).toContainText(
+                        "10:35 AM",
+                    );
+                    await expect(this.bookingDetailText(3)).toContainText(
+                        "11:20 AM",
+                    );
+                    await expect(this.bookingCustomerNameText).toContainText(
+                        customerName,
+                    );
                     await this.bookingDialogCloseButton.click();
                     await this.bookingListToggleButton.click();
                     const row = this.bookingRowByOrderId(orderId);
-                    await expect(this.bookingRowText(row, 3)).toContainText('10:35AM');
-                    await expect(this.bookingRowText(row, 4)).toContainText('11:20AM');
+                    await expect(this.bookingRowText(row, 3)).toContainText(
+                        "10:35AM",
+                    );
+                    await expect(this.bookingRowText(row, 4)).toContainText(
+                        "11:20AM",
+                    );
                     await this.visit(`admin/sales/orders/view/${orderId}`);
                     await this.cancelOrderAction.click();
                     await this.refundButton.click();
@@ -286,29 +315,41 @@ export class BookingProductCheckout extends CheckoutHelper {
                     return;
                 }
                 await this.bookingCalendarNextButton.click();
-                await this.page.waitForLoadState('networkidle');
+                await this.page.waitForLoadState("networkidle");
                 await this.page.waitForTimeout(1000);
             }
             throw new Error(`No booking found for order #${orderId}`);
         } else {
-            await this.visit('admin/sales/bookings');
-            await this.page.waitForLoadState('networkidle');
-            const customerSlot = this.customerSlotByName(`${customer.firstName} ${customer.lastName}`);
+            await this.visit("admin/sales/bookings");
+            await this.page.waitForLoadState("networkidle");
+            const customerSlot = this.customerSlotByName(
+                `${customer.firstName} ${customer.lastName}`,
+            );
             for (let i = 0; i < 7; i++) {
-                const isVisible = await customerSlot.isVisible().catch(() => false);
+                const isVisible = await customerSlot
+                    .isVisible()
+                    .catch(() => false);
                 if (isVisible) {
                     await customerSlot.click();
-                    await expect(this.bookingDetailText(2)).toContainText("12:00 PM");
-                    await expect(this.bookingDetailText(3)).toContainText("12:00 PM");
+                    await expect(this.bookingDetailText(2)).toContainText(
+                        "12:00 PM",
+                    );
+                    await expect(this.bookingDetailText(3)).toContainText(
+                        "12:00 PM",
+                    );
                     await this.bookingDialogCloseButton.click();
                     await this.bookingListToggleButton.click();
                     const row = this.bookingRowByOrderId(orderId);
-                    await expect(this.bookingRowText(row, 3)).toContainText('12:00PM');
-                    await expect(this.bookingRowText(row, 4)).toContainText('12:00PM');
+                    await expect(this.bookingRowText(row, 3)).toContainText(
+                        "12:00PM",
+                    );
+                    await expect(this.bookingRowText(row, 4)).toContainText(
+                        "12:00PM",
+                    );
                     return;
                 }
                 await this.bookingCalendarNextButton.click();
-                await this.page.waitForLoadState('networkidle');
+                await this.page.waitForLoadState("networkidle");
                 await this.page.waitForTimeout(1000);
             }
             await expect(customerSlot).toBeVisible();

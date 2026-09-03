@@ -8,6 +8,7 @@ import {
 } from "../utils/faker";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { CustomerPage } from "../pages/shop/CustomerPage";
+import { CheckoutHelper } from "../pages/shop/checkout/CheckoutHelper";
 import { AddressPage } from "../pages/shop/AddressPage";
 import { OrderPage } from "../pages/shop/OrderPage";
 import { AuthPage } from "../pages/shop/AuthPage";
@@ -67,7 +68,7 @@ test("should display correct message when email verfication is on", async ({
     await verificationToggle.waitFor({ state: "visible" });
 
     try {
-        if (! (await verificationCheckbox.isChecked())) {
+        if (!(await verificationCheckbox.isChecked())) {
             await verificationToggle.click();
         }
         await expect(verificationCheckbox).toBeChecked();
@@ -268,6 +269,7 @@ test.describe("customer actions", () => {
         const customerPage = new CustomerPage(shopPage);
         const orderPage = new OrderPage(shopPage);
         const addressPage = new AddressPage(shopPage);
+        const checkoutHelper = new CheckoutHelper(shopPage);
         await loginAsCustomer(shopPage);
 
         await customerPage.gotoHome();
@@ -292,27 +294,7 @@ test.describe("customer actions", () => {
         await customerPage.searchProduct("simple");
         await customerPage.addFirstProductToCart();
 
-        await shopPage.getByRole("button", { name: "Shopping Cart" }).click();
-        await shopPage
-            .getByRole("link", { name: "Continue to Checkout" })
-            .click();
-
-        await shopPage
-            .locator(
-                'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
-            )
-            .nth(0)
-            .click();
-        await shopPage.getByRole("button", { name: "Proceed" }).click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.waitForSelector("text=Free Shipping");
-        await shopPage.getByText("Free Shipping").first().click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.waitForSelector("text=Cash On Delivery");
-        await shopPage.getByText("Cash On Delivery").first().click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForTimeout(2000);
+        await checkoutHelper.completeCheckoutWithSavedAddress();
 
         await orderPage.gotoOrdersPage();
         await orderPage.viewFirstOrder();
@@ -323,6 +305,7 @@ test.describe("customer actions", () => {
         const customerPage = new CustomerPage(shopPage);
         const orderPage = new OrderPage(shopPage);
         const addressPage = new AddressPage(shopPage);
+        const checkoutHelper = new CheckoutHelper(shopPage);
         await loginAsCustomer(shopPage);
 
         await customerPage.gotoHome();
@@ -347,27 +330,7 @@ test.describe("customer actions", () => {
         await customerPage.searchProduct("simple");
         await customerPage.addFirstProductToCart();
 
-        await shopPage.getByRole("button", { name: "Shopping Cart" }).click();
-        await shopPage
-            .getByRole("link", { name: "Continue to Checkout" })
-            .click();
-
-        await shopPage
-            .locator(
-                'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
-            )
-            .nth(0)
-            .click();
-        await shopPage.getByRole("button", { name: "Proceed" }).click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.waitForSelector("text=Free Shipping");
-        await shopPage.getByText("Free Shipping").first().click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.waitForSelector("text=Cash On Delivery");
-        await shopPage.getByText("Cash On Delivery").first().click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForTimeout(2000);
+        await checkoutHelper.completeCheckoutWithSavedAddress();
 
         await orderPage.gotoOrdersPage();
         await orderPage.viewFirstOrder();
@@ -378,6 +341,7 @@ test.describe("customer actions", () => {
         const customerPage = new CustomerPage(shopPage);
         const orderPage = new OrderPage(shopPage);
         const addressPage = new AddressPage(shopPage);
+        const checkoutHelper = new CheckoutHelper(shopPage);
         await loginAsCustomer(shopPage);
 
         await customerPage.gotoHome();
@@ -402,32 +366,8 @@ test.describe("customer actions", () => {
         await customerPage.searchProduct("simple");
         await customerPage.addFirstProductToCart();
 
-        await shopPage.getByRole("button", { name: "Shopping Cart" }).click();
-        await shopPage
-            .getByRole("link", { name: "Continue to Checkout" })
-            .click();
+        await checkoutHelper.completeCheckoutWithSavedAddress();
 
-        await shopPage
-            .locator(
-                'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
-            )
-            .nth(0)
-            .click();
-        await shopPage.getByRole("button", { name: "Proceed" }).click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.waitForSelector("text=Free Shipping");
-        await shopPage.getByText("Free Shipping").first().click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.waitForSelector("text=Cash On Delivery");
-        await shopPage.getByText("Cash On Delivery").first().click();
-        await shopPage.waitForTimeout(2000);
-        await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForTimeout(6000);
-
-        const adminCredentials = {
-            email: "admin@example.com",
-            password: "admin123",
-        };
         await adminPage.goto("admin/sales/orders");
         await adminPage.locator(".row > div:nth-child(4) > a").first().click();
         await adminPage.getByText("Invoice", { exact: true }).click();

@@ -7,7 +7,7 @@ import {
     generateDescription,
 } from "./faker";
 
-export async function register(page) {
+export async function register(page: Page) {
     const credentials = {
         firstName: generateFirstName(),
         lastName: generateLastName(),
@@ -65,7 +65,7 @@ export async function register(page) {
     return credentials;
 }
 
-export async function loginAsCustomer(page) {
+export async function loginAsCustomer(page: Page) {
     const credentials = await register(page);
 
     await page.goto("");
@@ -77,12 +77,15 @@ export async function loginAsCustomer(page) {
     await page.getByPlaceholder("Password").fill(credentials.password);
     await page.getByRole("button", { name: "Sign In" }).click();
 
+    await page.goto("customer/account/profile");
+    await expect(page).toHaveURL(/customer\/account\/profile/);
+
     return credentials;
 }
 
-export async function addAddress(page) {
+export async function addAddress(page: Page) {
     await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Profile" }).click();
+    await page.getByRole("link", { name: "Profile", exact: true }).click();
     await page.getByRole("link", { name: " Address " }).click();
     await page.getByRole("link", { name: "Add Address" }).click();
     await page.getByPlaceholder("Company Name").click();
@@ -127,7 +130,7 @@ export async function addAddress(page) {
     ).toBeVisible();
 }
 
-export async function addWishlist(page) {
+export async function addWishlist(page: Page) {
     await page.locator(".action-items > span").first().click();
     await page
         .locator(
@@ -141,17 +144,38 @@ export async function addWishlist(page) {
     ).toBeVisible();
 }
 
-export async function addReview(page) {
+export async function dismissCookieConsent(page: Page) {
+    const acceptButton = page.getByRole("button", { name: "Accept" });
+
+    if (await acceptButton.isVisible().catch(() => false)) {
+        await acceptButton.click();
+        await expect(acceptButton).toBeHidden();
+    }
+}
+
+export async function addReview(page: Page, productName: string) {
     const review = {
-        title: generateName(),
+        title: `${generateName()} ${Date.now()}`,
         comment: generateDescription(),
     };
     await page.goto("");
-    await page.getByPlaceholder("Search products here").fill("simple");
+    await page.getByPlaceholder("Search products here").fill(productName);
     await page.getByPlaceholder("Search products here").press("Enter");
-    await page.locator(".group img").first().click();
-    await page.getByRole("tab", { name: "Reviews" }).click();
-    await page.locator("#review-tab").getByText("Write a Review").click();
+    await page.getByRole("link", { name: productName }).first().click();
+    await dismissCookieConsent(page);
+
+    const reviewsTab = page.getByRole("tab", { name: "Reviews" });
+
+    const writeReviewButton = page
+        .locator("#review-tab")
+        .getByText("Write a Review");
+
+    await expect(async () => {
+        await reviewsTab.click();
+        await expect(writeReviewButton).toBeVisible({ timeout: 5000 });
+    }).toPass({ timeout: 40000 });
+
+    await writeReviewButton.click();
     await page.locator("#review-tab button[aria-pressed]").nth(3).click();
     await page.locator("#review-tab button[aria-pressed]").nth(4).click();
     await page.getByPlaceholder("Title").fill(review.title);

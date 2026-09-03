@@ -135,7 +135,7 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator("select[name='apply_to_shipping']");
     }
 
-    private async fillGeneralCartDetails() {
+    private async fillGeneralCartDetails(couponCode: string = "TEST50") {
         await this.createCartRuleButton.waitFor();
         await this.createCartRuleButton.click();
         await this.cartRuleForm.waitFor();
@@ -143,7 +143,7 @@ export class RuleCreatePage extends BasePage {
         await this.descriptionInput.fill(generateName());
         await this.couponTypeSelect.selectOption("1");
         await this.autoGenerationSelect.selectOption("0");
-        await this.couponCodeInput.fill("TEST50");
+        await this.couponCodeInput.fill(couponCode);
         await this.usesPerCouponInput.fill("100");
         await this.usesPerCustomerInput.fill("100");
     }
@@ -306,6 +306,31 @@ export class RuleCreatePage extends BasePage {
         await this.createCatalogRuleButton.click();
         await this.page.waitForLoadState("networkidle");
         await this.catalogRuleButton.click();
+    }
+
+    public async createFixedCartRuleWithCoupon(
+        couponCode: string,
+        discountAmount: string = "10",
+    ) {
+        await this.visit("admin/marketing/promotions/cart-rules");
+        await this.fillGeneralCartDetails(couponCode);
+
+        await this.addConditionButton.click();
+        await this.conditionAttributeSelect.waitFor();
+        await this.conditionAttributeSelect.selectOption("cart_item|quantity");
+        await this.conditionOperatorSelect.selectOption(">=");
+        await this.conditionValueInput.fill("1");
+
+        await this.actionTypeSelect.selectOption("by_fixed");
+        await this.discountAmountInput.fill(discountAmount);
+
+        await this.configureSettings();
+
+        await this.saveCartRuleButton.click();
+
+        await expect(this.successMessage).toContainText(
+            "Cart rule created successfully",
+        );
     }
 
     public async expectRequiredFieldErrors() {

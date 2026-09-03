@@ -1,14 +1,20 @@
 import fs from "fs";
 
-export class ProductDataManager {
-    private static readonly dataFile = "product-data.json";
+export type SavedProduct = {
+    name: string;
+    [key: string]: any;
+};
 
-    static readProductData() {
+export class ProductDataManager {
+    private static get dataFile(): string {
+        const worker = process.env.TEST_PARALLEL_INDEX ?? "0";
+
+        return `product-data-${worker}.json`;
+    }
+
+    static readProduct(): SavedProduct {
         try {
-            const product = JSON.parse(
-                fs.readFileSync(this.dataFile, "utf-8"),
-            );
-            return product.name;
+            return JSON.parse(fs.readFileSync(this.dataFile, "utf-8"));
         } catch (error) {
             throw new Error(
                 `Failed to read product data: ${error}. Ensure product is created in admin first.`,
@@ -16,7 +22,11 @@ export class ProductDataManager {
         }
     }
 
-    static writeProductData(productData: { name: string; [key: string]: any }) {
+    static readProductData(): string {
+        return this.readProduct().name;
+    }
+
+    static writeProductData(productData: SavedProduct) {
         try {
             fs.writeFileSync(
                 this.dataFile,

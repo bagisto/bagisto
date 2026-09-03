@@ -274,7 +274,9 @@ export class CustomerPage extends BasePage {
 
     async addFirstProductToWishlist(): Promise<void> {
         await this.addToWishlistButton.first().click();
-        await this.page.waitForTimeout(2000);
+        await expect(
+            this.page.getByText("Item Successfully Added To Wishlist").first(),
+        ).toBeVisible();
     }
 
     async moveFirstWishlistItemToCart(): Promise<void> {

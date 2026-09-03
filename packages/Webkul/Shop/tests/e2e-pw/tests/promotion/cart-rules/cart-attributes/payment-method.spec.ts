@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import { expect, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -7,43 +7,6 @@ import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
-
-async function expectCouponAppliedWithGrandTotal(
-    page: Page,
-    ruleApplyPage: RuleApplyPage,
-    discountValue: number,
-    couponType: CouponType,
-) {
-    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
-        discountValue,
-        couponType,
-    );
-
-    const grandTotal = Number(discountedAmount.toFixed(2));
-
-    await ruleApplyPage.applyCouponAtCheckout();
-
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
-
-    await page.waitForTimeout(2000);
-
-    if (grandTotal === 0) {
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText("$0.00");
-    } else {
-        const formattedAmount = new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(grandTotal);
-
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText(`$${formattedAmount}`);
-    }
-}
 
 async function createRuleAndVerifyCoupon({
     page,
@@ -76,9 +39,7 @@ async function createRuleAndVerifyCoupon({
 
     await ruleCreatePage.saveCartRule();
 
-    await expectCouponAppliedWithGrandTotal(
-        page,
-        ruleApplyPage,
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );

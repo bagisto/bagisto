@@ -77,12 +77,14 @@ export class SectionsPage extends BasePage {
     }
 
     private async publishAll(): Promise<void> {
-        await Promise.all([
+        const [response] = await Promise.all([
             this.page.waitForResponse((response) =>
                 response.url().includes("/sections/publish"),
             ),
             this.publishAllButton.click(),
         ]);
+
+        expect(response.ok()).toBeTruthy();
     }
 
     private async dragRowOnto(from: number, to: number): Promise<void> {
@@ -110,7 +112,6 @@ export class SectionsPage extends BasePage {
 
     async open(): Promise<void> {
         await this.visit("admin/appearance/themes/default/sections");
-        await this.page.waitForLoadState("networkidle");
         await expect(this.createSectionButton).toBeVisible();
     }
 

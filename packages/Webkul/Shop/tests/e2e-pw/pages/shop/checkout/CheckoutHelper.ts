@@ -84,6 +84,10 @@ export class CheckoutHelper extends BasePage {
         return this.page.getByRole("button", { name: "Proceed" });
     }
 
+    protected get savedAddressCard() {
+        return this.page.locator("span.icon-checkout-address").first();
+    }
+
     protected get chooseShippingMethod() {
         return this.page.getByText("Free Shipping").first();
     }
@@ -163,6 +167,12 @@ export class CheckoutHelper extends BasePage {
     protected get flatpickrOpenEnabledDates() {
         return this.page.locator(
             ".flatpickr-calendar.open .flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)",
+        );
+    }
+
+    protected get flatpickrMonthLabel() {
+        return this.page.locator(
+            ".flatpickr-calendar.open .flatpickr-current-month",
         );
     }
 
@@ -247,7 +257,7 @@ export class CheckoutHelper extends BasePage {
     }
 
     protected get bookingDialogCloseButton() {
-        return this.page.locator("span.icon-close").first();
+        return this.page.locator("span.icon-close:visible").first();
     }
 
     protected get bookingListToggleButton() {
@@ -371,6 +381,13 @@ export class CheckoutHelper extends BasePage {
             .first();
     }
 
+    protected async goToNextFlatpickrMonth() {
+        const current = await this.flatpickrMonthLabel.innerText();
+
+        await this.flatpickrNextMonthButton.click();
+        await expect(this.flatpickrMonthLabel).not.toHaveText(current);
+    }
+
     async searchProduct(productName: string) {
         await this.visit("");
         await this.page.waitForLoadState("networkidle");
@@ -408,6 +425,18 @@ export class CheckoutHelper extends BasePage {
 
         await this.assertOrderAccepted(await orderResponse);
         await this.waitForOrderPlaced();
+    }
+
+    async completeCheckoutWithSavedAddress() {
+        await this.shoppingCartIcon.click();
+        await this.continueButton.click();
+        await this.savedAddressCard.click();
+        await this.clickProcessButton.click();
+        await this.chooseShippingMethod.waitFor({ state: "visible" });
+        await this.chooseShippingMethod.click();
+        await this.choosePaymentMethodCOD.waitFor({ state: "visible" });
+        await this.choosePaymentMethodCOD.click();
+        await this.placeOrder();
     }
 
     async fillGuestCheckoutAddress() {

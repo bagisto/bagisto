@@ -1,5 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { setBooleanSetting } from "../../../../utils/configuration";
 
 export class ShippingMethodsConfigurationPage extends BasePage {
     constructor(page: Page) {
@@ -22,10 +23,6 @@ export class ShippingMethodsConfigurationPage extends BasePage {
         );
     }
 
-    private getFreeShippingToggle() {
-        return this.page.locator('label[for="sales[carriers][free][active]"]');
-    }
-
     private getFlatRateTypeSelect() {
         return this.page.locator(
             'select[name="sales[carriers][flatrate][type]"]',
@@ -38,7 +35,7 @@ export class ShippingMethodsConfigurationPage extends BasePage {
 
     async configureFreeShipping(description: string): Promise<void> {
         await this.getFreeShippingDescription().fill(description);
-        await this.getFreeShippingToggle().click();
+        await setBooleanSetting(this.page, "sales[carriers][free][active]");
     }
 
     async configureFlatRate(type: string): Promise<void> {

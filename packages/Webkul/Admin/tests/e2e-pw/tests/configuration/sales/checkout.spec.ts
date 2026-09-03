@@ -2,11 +2,11 @@ import { test, expect } from "../../../setup";
 import { generateDescription } from "../../../utils/faker";
 import { CheckoutConfigurationPage } from "../../../pages/admin/configuration/sales/CheckoutConfigurationPage";
 
-const SHOPPING_CART_TOGGLES = [
-    'label[for="sales[checkout][shopping_cart][allow_guest_checkout]"]',
-    'label[for="sales[checkout][shopping_cart][cart_page]"]',
-    'label[for="sales[checkout][shopping_cart][cross_sell]"]',
-    'label[for="sales[checkout][shopping_cart][estimate_shipping]"]',
+const SHOPPING_CART_SETTINGS = [
+    "sales[checkout][shopping_cart][allow_guest_checkout]",
+    "sales[checkout][shopping_cart][cart_page]",
+    "sales[checkout][shopping_cart][cross_sell]",
+    "sales[checkout][shopping_cart][estimate_shipping]",
 ];
 
 test.describe("checkout configuration", () => {
@@ -19,7 +19,7 @@ test.describe("checkout configuration", () => {
     }) => {
         const page = new CheckoutConfigurationPage(adminPage);
 
-        await page.toggleShoppingCartSettings(SHOPPING_CART_TOGGLES);
+        await page.enableShoppingCartSettings(SHOPPING_CART_SETTINGS);
         await page.saveAndVerify();
     });
 
