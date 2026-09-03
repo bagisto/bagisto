@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Models\CountryState;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
 use Webkul\Customer\Rules\VatIdRule;
@@ -22,6 +23,50 @@ class CartAddressRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Remove a stale state code when it does not belong to the selected country.
+     *
+     * State can be free-form for countries that do not use Bagisto's normalized
+     * state list, so only recognized state codes are cleared here. This keeps
+     * legacy free-form addresses valid while preventing a previous country's
+     * code from surviving a country change in checkout.
+     */
+    protected function prepareForValidation(): void
+    {
+        foreach (['billing', 'shipping'] as $addressType) {
+            $address = $this->input($addressType);
+
+            if (! is_array($address)) {
+                continue;
+            }
+
+            $countryCode = $address['country'] ?? null;
+            $stateCode = $address['state'] ?? null;
+
+            if (
+                ! is_string($countryCode)
+                || $countryCode === ''
+                || ! is_string($stateCode)
+                || $stateCode === ''
+            ) {
+                continue;
+            }
+
+            $stateCountryCodes = CountryState::query()
+                ->where('code', $stateCode)
+                ->pluck('country_code');
+
+            if (
+                $stateCountryCodes->isNotEmpty()
+                && ! $stateCountryCodes->contains($countryCode)
+            ) {
+                $address['state'] = null;
+
+                $this->merge([$addressType => $address]);
+            }
+        }
     }
 
     /**
