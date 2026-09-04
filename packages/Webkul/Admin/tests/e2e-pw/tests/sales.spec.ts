@@ -1,5 +1,6 @@
 import { test } from "../setup";
 import { RmaManagePage } from "../pages/admin/sales/RmaManagePage";
+import { RmaStorefrontPage } from "../pages/shop/RMAStorefrontPage";
 import { SalesCreatePage } from "../pages/admin/sales/SalesCreatePage";
 import { SalesManagePage } from "../pages/admin/sales/SalesManagePage";
 
@@ -55,7 +56,7 @@ test.describe.serial("rma management", () => {
     });
 });
 
-test.describe("rma management", () => {
+test.describe(" rma management ", () => {
     test("should allow admin to create reason for rma", async ({
         adminPage,
     }) => {
@@ -70,6 +71,85 @@ test.describe("rma management", () => {
         adminPage,
     }) => {
         await new RmaManagePage(adminPage).adminCreateRmaStatus();
+    });
+});
+
+test.describe("rma storefront", () => {
+    test.setTimeout(240000);
+
+    test("should place an order the customer can return", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await new SalesCreatePage(adminPage).createRmaEnabledSimpleProduct();
+
+        await new RmaStorefrontPage(shopPage).createReturnableOrder();
+    });
+
+    test("should invoice that order so the item becomes returnable", async ({
+        shopPage,
+    }) => {
+        await new RmaManagePage(shopPage).adminInvoiceCreateRMA();
+    });
+
+    test("should refuse a return quantity above the quantity ordered", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectQuantityAboveOrderedIsRejected();
+    });
+
+    test("should refuse a request until the terms are accepted", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectTermsAreRequired();
+    });
+
+    test("should let the customer raise a return", async ({ shopPage }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+        await storefront.signIn();
+        await storefront.openNewRequestForm();
+        await storefront.fillRequest();
+        await storefront.submitRequest();
+    });
+
+    test("should list the request on the customer's rma page", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectRequestListed();
+    });
+
+    test("should open the request detail page without a server error", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectRequestDetailPageOpens();
+    });
+
+    test("should show the request details and its conversation", async ({
+        shopPage,
+    }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.expectRequestDetails();
+    });
+
+    test("should let the customer cancel the request", async ({ shopPage }) => {
+        const storefront = new RmaStorefrontPage(shopPage);
+
+        await storefront.signIn();
+        await storefront.cancelRequest();
     });
 });
 
