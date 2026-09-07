@@ -32,7 +32,7 @@ function buildCustomer(): CustomerData {
     return {
         firstName: generateFirstName(),
         lastName: `${generateLastName()}${stamp}`,
-        email: `order-${stamp}-${Math.floor(Math.random() * 10000)}@example.com`,
+        email: `order-${stamp}@example.com`,
         phone: generatePhoneNumber(),
         gender: "Other",
     };

@@ -12,7 +12,7 @@ function buildUser(overrides: Partial<AdminUserData> = {}): AdminUserData {
 
     return {
         name: `${generateFullName()} ${stamp}`,
-        email: `user-${stamp}-${Math.floor(Math.random() * 10000)}@example.com`,
+        email: `user-${stamp}@example.com`,
         password: "user12345",
         role: "Administrator",
         active: true,

@@ -21,7 +21,7 @@ function buildCustomer(overrides: Partial<CustomerData> = {}): CustomerData {
     return {
         firstName: generateFirstName(),
         lastName: `${generateLastName()}${stamp}`,
-        email: `customer-${stamp}-${Math.floor(Math.random() * 10000)}@example.com`,
+        email: `customer-${stamp}@example.com`,
         phone: generatePhoneNumber(),
         gender: "Other",
         ...overrides,
