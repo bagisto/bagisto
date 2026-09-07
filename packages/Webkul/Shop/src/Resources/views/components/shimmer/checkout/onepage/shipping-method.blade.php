@@ -11,7 +11,7 @@
             <label class="block rounded-xl border border-zinc-200 p-5">
                 <span class="shimmer block h-15 w-15"></span>
                 
-                <p class="shimmer mt-2 h-9.375 w-3/5"></p>
+                <p class="shimmer mt-2 h-[37.5px] w-3/5"></p>
                 <p class="shimmer mt-2.5 h-4.5 w-45"></p>
             </label>
         </div>

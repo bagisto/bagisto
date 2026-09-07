@@ -27,7 +27,7 @@
     @if ($navigationLink)
         <a
             href="{{ $navigationLink }}"
-            class="shimmer mx-auto mt-16 block h-12 w-37.543 rounded-2xl max-md:hidden"
+            class="shimmer mx-auto mt-16 block h-12 w-[150.172px] rounded-2xl max-md:hidden"
             aria-label="Show more products"
         ></a>
     @endif
