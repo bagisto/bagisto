@@ -13,7 +13,7 @@ export class RmaManagePage extends DatagridPage {
     }
 
     protected get gridPath(): string {
-        return "admin/sales/rma";
+        return "admin/sales/rma/requests";
     }
 
     private get statusSelect() {
@@ -50,7 +50,7 @@ export class RmaManagePage extends DatagridPage {
         await this.requestRow(orderIncrementId).locator("span.icon-view").click();
         await this.waitForVueMount();
 
-        await expect(this.page).toHaveURL(/sales\/rma\/view\/\d+/);
+        await expect(this.page).toHaveURL(/sales\/rma\/requests\/view\/\d+/);
     }
 
     async updateStatus(status: RmaStatus): Promise<void> {

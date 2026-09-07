@@ -137,6 +137,7 @@ export class CustomerDetailsPage extends BasePage {
         await expect(this.firstNameInput(this.customerForm)).toBeVisible();
         await this.firstNameInput(this.customerForm).fill(changes.firstName);
         await this.lastNameInput(this.customerForm).fill(changes.lastName);
+        await this.waitForBackgroundRequestsToSettle();
         await this.saveCustomerButton.click();
 
         await expect(
@@ -148,6 +149,7 @@ export class CustomerDetailsPage extends BasePage {
         await this.createAddressTrigger.click();
         await expect(this.streetInput(this.createAddressForm)).toBeVisible();
         await this.fillAddressForm(this.createAddressForm, data);
+        await this.waitForBackgroundRequestsToSettle();
         await this.saveAddressButton(this.createAddressForm).click();
 
         await expect(
@@ -159,6 +161,7 @@ export class CustomerDetailsPage extends BasePage {
         await this.addressCard(street).getByText("Edit", { exact: true }).click();
         await expect(this.streetInput(this.editAddressForm)).toHaveValue(street);
         await this.streetInput(this.editAddressForm).fill(newStreet);
+        await this.waitForBackgroundRequestsToSettle();
         await this.saveAddressButton(this.editAddressForm).click();
 
         await expect(
@@ -167,6 +170,7 @@ export class CustomerDetailsPage extends BasePage {
     }
 
     async setDefaultAddress(street: string): Promise<void> {
+        await this.waitForBackgroundRequestsToSettle();
         await this.addressCard(street)
             .getByRole("button", { name: "Set as Default" })
             .click();
@@ -177,6 +181,7 @@ export class CustomerDetailsPage extends BasePage {
     }
 
     async deleteAddress(street: string): Promise<void> {
+        await this.waitForBackgroundRequestsToSettle();
         await this.addressCard(street).getByText("Delete", { exact: true }).click();
         await this.agreeButton.click();
 
@@ -187,6 +192,7 @@ export class CustomerDetailsPage extends BasePage {
 
     async addNote(note: string): Promise<void> {
         await this.noteInput.fill(note);
+        await this.waitForBackgroundRequestsToSettle();
         await this.submitNoteButton.click();
 
         await expect(
@@ -195,6 +201,7 @@ export class CustomerDetailsPage extends BasePage {
     }
 
     async deleteAccount(): Promise<void> {
+        await this.waitForBackgroundRequestsToSettle();
         await this.deleteAccountTrigger.click();
         await this.agreeButton.click();
 

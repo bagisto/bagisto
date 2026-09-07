@@ -14,4 +14,8 @@ export abstract class BasePage {
             Boolean((document.getElementById("app") as any)?.__vue_app__),
         );
     }
+
+    protected async waitForBackgroundRequestsToSettle(): Promise<void> {
+        await this.page.waitForLoadState("networkidle");
+    }
 }

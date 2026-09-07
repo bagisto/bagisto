@@ -23,6 +23,7 @@ export class HomePage extends BasePage {
     async subscribeToNewsletter(email: string): Promise<void> {
         await this.open();
         await this.newsletterEmailInput.fill(email);
+        await this.waitForBackgroundRequestsToSettle();
         await this.subscribeButton.click();
     }
 

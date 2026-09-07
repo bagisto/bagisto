@@ -29,6 +29,8 @@ const TEXTS = {
 
 const BANK_DETAILS = "sales[shipping][origin][bank_details]";
 
+const REQUIRED_TEXTS = new Set<string>(["city", "address", "zipcode"]);
+
 export class ShippingSettingsConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
@@ -68,9 +70,15 @@ export class ShippingSettingsConfigurationPage extends ConfigurationFormPage {
         for (const key of Object.keys(TEXTS) as (keyof typeof TEXTS)[]) {
             const value = settings[key];
 
-            if (value !== undefined) {
-                await this.setText(TEXTS[key], value);
+            if (value === undefined) {
+                continue;
             }
+
+            if (value === "" && REQUIRED_TEXTS.has(key)) {
+                continue;
+            }
+
+            await this.setText(TEXTS[key], value);
         }
 
         if (settings.bankDetails !== undefined) {
