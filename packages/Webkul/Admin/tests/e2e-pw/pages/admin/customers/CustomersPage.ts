@@ -1,138 +1,173 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
+import { DatagridPage } from "../DatagridPage";
 
-export class CustomersPage extends BasePage {
+export interface CustomerData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    gender: "Male" | "Female" | "Other";
+}
+
+export class CustomersPage extends DatagridPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get createCustomerButton() {
-        return this.page.locator("button.primary-button:visible");
+    protected get gridPath(): string {
+        return "admin/customers";
     }
 
-    private get customerDetailIcons() {
-        return this.page.locator("a.cursor-pointer.icon-sort-right");
+    private get createButton() {
+        return this.page.getByRole("button", { name: "Create Customer" });
     }
 
-    private get massActionCheckboxes() {
-        return this.page.locator(".icon-uncheckbox:visible");
+    private get firstNameInput() {
+        return this.page.locator('input[name="first_name"]');
     }
 
-    private get selectActionButton() {
-        return this.page.getByRole("button", { name: "Select Action" });
+    private get lastNameInput() {
+        return this.page.locator('input[name="last_name"]');
     }
 
-    private get deleteActionLink() {
-        return this.page.getByRole("link", { name: "Delete" });
+    private get emailInput() {
+        return this.page.locator('input[name="email"]');
     }
 
-    private get updateStatusLink() {
-        return this.page.getByRole("link", { name: "Update Status" });
+    private get phoneInput() {
+        return this.page.locator('input[name="phone"]');
     }
 
-    private get activeActionLink() {
-        return this.page.getByRole("link", { name: "Active" });
+    private get genderSelect() {
+        return this.page.locator('select[name="gender"]');
     }
 
-    private get inactiveActionLink() {
-        return this.page.getByRole("link", { name: "Inactive" });
+    private get saveButton() {
+        return this.page.getByRole("button", { name: "Save customer" });
     }
 
-    private get searchInput() {
-        return this.page.locator('input[name="search"]');
+    private customerViewLink(email: string) {
+        return this.row(email).locator("a.icon-sort-right");
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/customers");
-        await this.waitForLoad();
+    private async openCreateModal(): Promise<void> {
+        await this.openGrid();
+        await this.createButton.click();
+
+        await expect(this.firstNameInput).toBeVisible();
     }
 
-    async waitForLoad(): Promise<void> {
-        await this.page.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
+    private async fillCreateForm(data: CustomerData): Promise<void> {
+        await this.firstNameInput.fill(data.firstName);
+        await this.lastNameInput.fill(data.lastName);
+        await this.emailInput.fill(data.email);
+        await this.phoneInput.fill(data.phone);
+        await this.genderSelect.selectOption(data.gender);
     }
 
-    async searchFor(term: string): Promise<number> {
-        await this.open();
-
-        await this.searchInput.fill(term);
-
-        const [response] = await Promise.all([
-            this.page.waitForResponse((response) =>
-                response.url().includes("filters%5Ball%5D"),
-            ),
-            this.searchInput.press("Enter"),
-        ]);
-
-        const body = await response.json();
-
-        return body.meta?.total ?? 0;
-    }
-
-    async expectRowVisible(text: string): Promise<void> {
-        await expect(this.page.getByText(text).first()).toBeVisible();
-    }
-
-    async openFirstCustomerDetails(): Promise<void> {
-        await this.open();
-        const iconCount = await this.customerDetailIcons.count();
-        expect(iconCount).toBeGreaterThan(0);
-        await this.customerDetailIcons.first().click();
-    }
-
-    async createCustomer(
-        firstName: string,
-        lastName: string,
-        email: string,
-        gender: string,
-        phone: string,
-    ): Promise<void> {
-        await this.open();
-        await this.createCustomerButton.click();
-
-        await this.page.fill('input[name="first_name"]:visible', firstName);
-        await this.page.fill('input[name="last_name"]:visible', lastName);
-        await this.page.fill('input[name="email"]:visible', email);
-        await this.page.selectOption('select[name="gender"]:visible', gender);
-        await this.page.fill('input[name="phone"]:visible', phone);
-        await this.page.press('input[name="phone"]:visible', "Enter");
+    async createCustomer(data: CustomerData): Promise<void> {
+        await this.openCreateModal();
+        await this.fillCreateForm(data);
+        await this.saveButton.click();
 
         await expect(
-            this.page.getByText("Customer created successfully"),
+            this.flashMessage("Customer created successfully"),
         ).toBeVisible();
     }
 
-    async openMassActionMenu(): Promise<void> {
-        await this.open();
-        await this.massActionCheckboxes.nth(1).click();
-        await this.selectActionButton.click();
+    async attemptCreateCustomer(data: CustomerData): Promise<void> {
+        await this.openCreateModal();
+        await this.fillCreateForm(data);
+        await this.saveButton.click();
     }
 
-    async deleteSelectedCustomers(): Promise<void> {
-        await this.deleteActionLink.click();
+    async submitEmptyCreateForm(): Promise<void> {
+        await this.openCreateModal();
+        await this.saveButton.click();
     }
 
-    async updateSelectedCustomersStatusTo(
+    async openCustomer(email: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(email);
+        await this.customerViewLink(email).click();
+        await this.waitForVueMount();
+
+        await expect(this.page).toHaveURL(/customers\/view\/\d+/);
+    }
+
+    async searchFor(term: string): Promise<void> {
+        await super.searchFor(term);
+    }
+
+    async massDeleteCustomers(emails: string[]): Promise<void> {
+        await this.openGrid();
+        await this.selectRows(emails);
+        await this.applyMassAction("Delete");
+
+        await expect(
+            this.flashMessage("Selected data successfully deleted"),
+        ).toBeVisible();
+    }
+
+    async massUpdateStatus(
+        emails: string[],
         status: "Active" | "Inactive",
     ): Promise<void> {
-        await this.updateStatusLink.hover();
-        await this.page.waitForSelector(
-            'a:has-text("Active"), a:has-text("Inactive")',
-            { state: "visible", timeout: 1000 },
-        );
-        await this.page.click(`a:has-text("${status}")`, { timeout: 1000 });
+        await this.openGrid();
+        await this.selectRows(emails);
+        await this.applyMassAction("Update Status", status);
+
+        await expect(
+            this.flashMessage("Selected Customers successfully updated"),
+        ).toBeVisible();
     }
 
-    async confirmAgreeDialog(): Promise<void> {
-        await this.page.waitForSelector("text=Are you sure", {
-            state: "visible",
-            timeout: 1000,
-        });
-        const agreeButton = this.page.locator(
-            'button.primary-button:has-text("Agree")',
-        );
-        await expect(agreeButton).toBeVisible();
-        await agreeButton.click();
+    async deleteCustomersIfPresent(emails: string[]): Promise<void> {
+        const failures: string[] = [];
+
+        for (const email of emails) {
+            try {
+                await this.openGrid();
+                await this.searchFor(email);
+
+                if (await this.row(email).count()) {
+                    await this.selectRows([email]);
+                    await this.applyMassAction("Delete");
+
+                    await expect(
+                        this.flashMessage("Selected data successfully deleted"),
+                    ).toBeVisible();
+                }
+            } catch (error) {
+                failures.push(`${email}: ${error}`);
+            }
+        }
+
+        if (failures.length) {
+            throw new Error(`Cleanup failed for:\n${failures.join("\n")}`);
+        }
+    }
+
+    async expectCustomerListed(
+        email: string,
+        fullName: string,
+        status: "Active" | "Inactive" = "Active",
+    ): Promise<void> {
+        await this.expectSearchedRowCount(email, 1);
+
+        await expect(this.row(email)).toContainText(fullName);
+        await expect(this.row(email)).toContainText(status);
+    }
+
+    async expectCustomerAbsent(email: string): Promise<void> {
+        await this.expectSearchedRowCount(email, 0);
+    }
+
+    async expectRowVisible(text: string): Promise<void> {
+        await expect(this.row(text)).toHaveCount(1);
+    }
+
+    async expectValidationError(message: string): Promise<void> {
+        await this.expectValidationMessage(message);
     }
 }

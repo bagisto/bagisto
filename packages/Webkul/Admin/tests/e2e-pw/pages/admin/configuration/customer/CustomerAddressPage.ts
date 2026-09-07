@@ -1,33 +1,64 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
-import { setBooleanSettings } from "../../../../utils/configuration";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class CustomerAddressPage extends BasePage {
+export interface AddressRequirementSettings {
+    country: boolean;
+    state: boolean;
+    postcode: boolean;
+}
+
+const FIELDS = {
+    country: "customer[address][requirements][country]",
+    state: "customer[address][requirements][state]",
+    postcode: "customer[address][requirements][postcode]",
+} as const;
+
+export class CustomerAddressPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/customer/address";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully");
+    async readSettings(): Promise<AddressRequirementSettings> {
+        await this.open();
+
+        return {
+            country: await this.readBoolean(FIELDS.country),
+            state: await this.readBoolean(FIELDS.state),
+            postcode: await this.readBoolean(FIELDS.postcode),
+        };
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/customer/address");
+    async applySettings(
+        settings: Partial<AddressRequirementSettings>,
+    ): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(FIELDS) as (keyof typeof FIELDS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setBoolean(FIELDS[key], value);
+            }
+        }
+
+        await this.save();
     }
 
-    async requireCountryStateZip(): Promise<void> {
-        await setBooleanSettings(this.page, [
-            "customer[address][requirements][country]",
-            "customer[address][requirements][state]",
-            "customer[address][requirements][postcode]",
-        ]);
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+    async expectSettings(
+        settings: Partial<AddressRequirementSettings>,
+    ): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(FIELDS) as (keyof typeof FIELDS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.expectBoolean(FIELDS[key], value);
+            }
+        }
     }
 }

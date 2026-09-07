@@ -1,47 +1,69 @@
-import { test, expect } from '../../../setup';
+import { test } from "../../../setup";
 import {
-    generateName,
-    generateRandomNumericString,
-    getImageFile,
-} from '../../../utils/faker';
-import { InvoiceSettingsConfigurationPage } from '../../../pages/admin/configuration/sales/InvoiceSettingsConfigurationPage';
+    InvoiceSettingsConfigurationPage,
+    type InvoiceSettings,
+} from "../../../pages/admin/configuration/sales/InvoiceSettingsConfigurationPage";
 
-test.describe('invoice settings configuration', () => {
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
+
+test.describe("invoice settings configuration", () => {
+    test.describe.configure({ timeout: 120000 });
+
+    let configPage: InvoiceSettingsConfigurationPage;
+    let original: InvoiceSettings;
+
     test.beforeEach(async ({ adminPage }) => {
-        await new InvoiceSettingsConfigurationPage(adminPage).open();
+        configPage = new InvoiceSettingsConfigurationPage(adminPage);
+        original = await configPage.readSettings();
     });
 
-    test('should update invoice number settings', async ({ adminPage }) => {
-        const page = new InvoiceSettingsConfigurationPage(adminPage);
-
-        await page.fillInvoiceNumberSettings(
-            generateName(),
-            generateRandomNumericString(1, 10),
-            generateName(),
-            generateRandomNumericString(2),
-        );
-        await page.saveAndVerify();
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
     });
 
-    test('should update payment due duration', async ({ adminPage }) => {
-        const page = new InvoiceSettingsConfigurationPage(adminPage);
+    test("should persist the invoice number format after reload", async () => {
+        const changed = {
+            invoiceNumberPrefix: other(original.invoiceNumberPrefix, "INV", "E2E"),
+            invoiceNumberLength: other(original.invoiceNumberLength, "6", "8"),
+            invoiceNumberSuffix: other(original.invoiceNumberSuffix, "X", "Y"),
+        };
 
-        await page.setPaymentDueDuration(generateRandomNumericString(2));
-        await page.saveAndVerify();
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test('should configure pdf print outs', async ({ adminPage }) => {
-        const page = new InvoiceSettingsConfigurationPage(adminPage);
+    test("should persist the payment due duration after reload", async () => {
+        const changed = {
+            paymentDueDuration: other(original.paymentDueDuration, "15", "30"),
+        };
 
-        await page.configurePdfPrintOuts(getImageFile());
-        await page.saveAndVerify();
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test('should configure the invoice reminders', async ({ adminPage }) => {
-        const page = new InvoiceSettingsConfigurationPage(adminPage);
+    test("should persist the pdf print out settings after reload", async () => {
+        const changed = {
+            printInvoiceId: !original.printInvoiceId,
+            printOrderId: !original.printOrderId,
+        };
 
-        await page.configureInvoiceReminders(generateRandomNumericString(2), 'P2D');
-        await expect(await page.getInvoiceReminderIntervalValue()).toBe('P2D');
-        await page.saveAndVerify();
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
+    });
+
+    test("should persist the invoice reminder settings after reload", async () => {
+        const changed = {
+            remindersLimit: other(original.remindersLimit, "3", "5"),
+            remindersInterval: other(original.remindersInterval, "P2D", "P3D"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

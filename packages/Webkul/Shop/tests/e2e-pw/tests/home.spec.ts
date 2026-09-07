@@ -1,5 +1,6 @@
 import { test } from "../setup";
 import { generateEmail } from "../utils/faker";
+import { deleteNewsletterSubscribersIfPresent } from "../utils/admin";
 import { loginAsCustomer } from "../utils/customer";
 import { HomePage } from "../pages/shop/HomePage";
 
@@ -12,6 +13,10 @@ test.describe("newsletter subscription", () => {
 
     test.beforeEach(() => {
         email = generateEmail();
+    });
+
+    test.afterEach(async ({ adminPage }) => {
+        await deleteNewsletterSubscribersIfPresent(adminPage, [email]);
     });
 
     test("should allow a guest to subscribe to the newsletter", async ({

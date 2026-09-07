@@ -1,69 +1,62 @@
-import { test, expect } from "../setup";
-import { loginAsCustomer } from "../utils/customer";
-import { generateName, generateDescription, generateSKU } from "../utils/faker";
+import { test } from "../setup";
+import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
 import { ReviewPage } from "../pages/shop/ReviewPage";
+import { loginAsCustomer } from "../utils/customer";
+import { generateDescription, generateName, uniqueStamp } from "../utils/faker";
 
-async function createSimpleProduct(adminPage: any) {
-    const product = {
-        name: `simple-${Date.now()}`,
-        sku: generateSKU(),
-        productNumber: generateSKU(),
-        shortDescription: generateDescription(),
-        description: generateDescription(),
-        price: "199",
-        weight: "25",
-    };
+test.describe("product reviews", () => {
+    let productName: string;
+    let productListPage: ProductListPage;
 
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-    await adminPage.locator('select[name="type"]').selectOption("simple");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-    await adminPage.locator("#product_number").fill(product.productNumber);
-    await adminPage.locator("#name").fill(product.name);
-    await adminPage.fillInTinymce(
-        "#short_description_ifr",
-        product.shortDescription,
-    );
-    await adminPage.fillInTinymce("#description_ifr", product.description);
-    await adminPage.locator("#meta_title").fill(product.name);
-    await adminPage.locator("#meta_keywords").fill(product.name);
-    await adminPage.locator("#meta_description").fill(product.shortDescription);
-    await adminPage.locator("#price").fill(product.price);
-    await adminPage.locator("#weight").fill(product.weight);
-    await adminPage.locator('input[name="inventories\\[1\\]"]').click();
-    await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
-    await expect(adminPage.locator("#app")).toContainText(
-        /product updated successfully/i,
-    );
-    await adminPage.goto("admin/catalog/products");
+    test.beforeEach(async ({ adminPage }) => {
+        productListPage = new ProductListPage(adminPage);
+        productName = `Reviewed-${uniqueStamp()}`;
 
-    await expect(
-        adminPage
-            .locator("p.break-all.text-base")
-            .filter({ hasText: product.name }),
-    ).toBeVisible();
-}
+        await new ProductCreatePage(adminPage).createProduct({
+            type: "simple",
+            sku: `SKU-${uniqueStamp()}`,
+            name: productName,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
+        });
+    });
 
-test("should review a product", async ({ adminPage, shopPage }) => {
-    const reviewPage = new ReviewPage(shopPage);
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent([productName]);
+    });
 
-    await createSimpleProduct(adminPage);
-    await loginAsCustomer(shopPage);
+    test("should accept a review from a signed in customer and hold it for approval", async ({
+        shopPage,
+    }) => {
+        const reviewPage = new ReviewPage(shopPage);
+        const title = `${generateName()} ${uniqueStamp()}`;
 
-    await reviewPage.searchProduct("simple");
-    await reviewPage.openFirstProduct();
-    await reviewPage.writeReview(generateName(), generateDescription());
-    await reviewPage.expectReviewSuccess();
+        await loginAsCustomer(shopPage);
+        await reviewPage.openProduct(productName);
+        await reviewPage.submitReview({
+            title,
+            comment: generateDescription(),
+            rating: 5,
+        });
+
+        await reviewPage.openProduct(productName);
+        await reviewPage.expectReviewHidden(title);
+    });
+
+    test("should reject a review without a title, comment and rating", async ({
+        shopPage,
+    }) => {
+        const reviewPage = new ReviewPage(shopPage);
+
+        await loginAsCustomer(shopPage);
+        await reviewPage.openProduct(productName);
+        await reviewPage.submitEmptyReview();
+
+        await reviewPage.expectValidationError("The Title field is required");
+        await reviewPage.expectValidationError("The Comment field is required");
+    });
 });

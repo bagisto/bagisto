@@ -7,12 +7,13 @@ import {
 import fs from "fs";
 import { loginAsAdmin } from "./utils/admin";
 import { ADMIN_AUTH_STATE_PATH, ensureStateDir } from "./utils/paths";
+import { fillTinymce } from "./utils/TinymcePage";
 
-interface AdminPage extends Page {
+export interface AdminPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
 }
 
-interface ShopPage extends Page {
+export interface ShopPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
 }
 
@@ -20,6 +21,15 @@ type Fixtures = {
     adminPage: AdminPage;
     shopPage: ShopPage;
 };
+
+export function withTinymce(page: Page): AdminPage {
+    (page as AdminPage).fillInTinymce = (
+        iframeSelector: string,
+        content: string,
+    ) => fillTinymce(page, iframeSelector, content);
+
+    return page as AdminPage;
+}
 
 async function saveAdminAuth(context: BrowserContext): Promise<void> {
     ensureStateDir();
@@ -49,25 +59,7 @@ export const test = base.extend<Fixtures>({
             await saveAdminAuth(context);
         }
 
-        (page as AdminPage).fillInTinymce = async (
-            iframeSelector: string,
-            content: string,
-        ) => {
-            await page.waitForSelector(iframeSelector);
-
-            const iframe = page.frameLocator(iframeSelector);
-            const editorBody = iframe.locator("body");
-
-            await expect(editorBody).toBeVisible();
-            await editorBody.focus();
-            await editorBody.press("Control+a");
-            await editorBody.press("Backspace");
-
-            await editorBody.pressSequentially(content);
-            await expect(editorBody).toHaveText(content);
-        };
-
-        await use(page as AdminPage);
+        await use(withTinymce(page));
         await context.close();
     },
 
@@ -75,19 +67,7 @@ export const test = base.extend<Fixtures>({
         const context = await browser.newContext();
         const page = await context.newPage();
 
-        (page as ShopPage).fillInTinymce = async (
-            iframeSelector: string,
-            content: string,
-        ) => {
-            await page.waitForSelector(iframeSelector);
-            const iframe = page.frameLocator(iframeSelector);
-            const editorBody = iframe.locator("body");
-            await editorBody.click();
-            await editorBody.pressSequentially(content);
-            await expect(editorBody).toHaveText(content);
-        };
-
-        await use(page as ShopPage);
+        await use(withTinymce(page) as ShopPage);
         await context.close();
     },
 });

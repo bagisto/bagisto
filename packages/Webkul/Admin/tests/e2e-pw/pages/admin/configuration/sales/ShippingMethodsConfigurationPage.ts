@@ -1,49 +1,101 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
-import { setBooleanSetting } from "../../../../utils/configuration";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class ShippingMethodsConfigurationPage extends BasePage {
+export interface ShippingMethodSettings {
+    freeShippingTitle: string;
+    freeShippingDescription: string;
+    flatRateTitle: string;
+    flatRateDescription: string;
+    flatRateDefaultRate: string;
+    flatRateType: string;
+}
+
+const TEXTS = {
+    freeShippingTitle: "sales[carriers][free][title]",
+    flatRateTitle: "sales[carriers][flatrate][title]",
+    flatRateDefaultRate: "sales[carriers][flatrate][default_rate]",
+} as const;
+
+const TEXT_AREAS = {
+    freeShippingDescription: "sales[carriers][free][description]",
+    flatRateDescription: "sales[carriers][flatrate][description]",
+} as const;
+
+const FLAT_RATE_TYPE = "sales[carriers][flatrate][type]";
+
+export class ShippingMethodsConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/sales/carriers";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully").first();
+    async readSettings(): Promise<ShippingMethodSettings> {
+        await this.open();
+
+        return {
+            freeShippingTitle: await this.readText(TEXTS.freeShippingTitle),
+            freeShippingDescription: await this.readTextArea(
+                TEXT_AREAS.freeShippingDescription,
+            ),
+            flatRateTitle: await this.readText(TEXTS.flatRateTitle),
+            flatRateDescription: await this.readTextArea(
+                TEXT_AREAS.flatRateDescription,
+            ),
+            flatRateDefaultRate: await this.readText(TEXTS.flatRateDefaultRate),
+            flatRateType: await this.readSelect(FLAT_RATE_TYPE),
+        };
     }
 
-    private getFreeShippingDescription() {
-        return this.page.locator(
-            'textarea[name="sales[carriers][free][description]"]',
-        );
+    async applySettings(settings: Partial<ShippingMethodSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(TEXTS) as (keyof typeof TEXTS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setText(TEXTS[key], value);
+            }
+        }
+
+        for (const key of Object.keys(TEXT_AREAS) as (keyof typeof TEXT_AREAS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setTextArea(TEXT_AREAS[key], value);
+            }
+        }
+
+        if (settings.flatRateType !== undefined) {
+            await this.setSelect(FLAT_RATE_TYPE, settings.flatRateType);
+        }
+
+        await this.save();
     }
 
-    private getFlatRateTypeSelect() {
-        return this.page.locator(
-            'select[name="sales[carriers][flatrate][type]"]',
-        );
-    }
+    async expectSettings(settings: Partial<ShippingMethodSettings>): Promise<void> {
+        await this.open();
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/sales/carriers");
-    }
+        for (const key of Object.keys(TEXTS) as (keyof typeof TEXTS)[]) {
+            const value = settings[key];
 
-    async configureFreeShipping(description: string): Promise<void> {
-        await this.getFreeShippingDescription().fill(description);
-        await setBooleanSetting(this.page, "sales[carriers][free][active]");
-    }
+            if (value !== undefined) {
+                await this.expectText(TEXTS[key], value);
+            }
+        }
 
-    async configureFlatRate(type: string): Promise<void> {
-        await this.getFlatRateTypeSelect().selectOption(type);
-    }
+        for (const key of Object.keys(TEXT_AREAS) as (keyof typeof TEXT_AREAS)[]) {
+            const value = settings[key];
 
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+            if (value !== undefined) {
+                await this.expectTextArea(TEXT_AREAS[key], value);
+            }
+        }
+
+        if (settings.flatRateType !== undefined) {
+            await this.expectSelect(FLAT_RATE_TYPE, settings.flatRateType);
+        }
     }
 }

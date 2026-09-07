@@ -1,295 +1,236 @@
-import { test } from "../setup";
-import { generatePhoneNumber } from "../utils/faker";
+import { test, withTinymce } from "../setup";
+import { loginAsAdmin } from "../utils/admin";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
 import { RuleCreatePage } from "../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleDeletePage } from "../pages/admin/marketing/promotion/RuleDeletePage";
 import { CartPage } from "../pages/shop/CartPage";
+import { uniqueStamp } from "../utils/faker";
+import { formatPrice } from "../utils/prices";
+
+const PRICE = 199;
 
 test.describe("cart management", () => {
     let productName: string;
 
-    test.beforeAll(async ({ adminPage }) => {
-        productName = `Simple-${Date.now()}`;
+    test.beforeAll(async ({ browser }) => {
+        const context = await browser.newContext();
+        const adminPage = withTinymce(await context.newPage());
 
-        const productCreation = new ProductCreatePage(adminPage);
+        await loginAsAdmin(adminPage);
 
-        await productCreation.createProduct({
+        productName = `Simple-${uniqueStamp()}`;
+
+        await new ProductCreatePage(adminPage).createProduct({
             type: "simple",
-            sku: `SKU-${Date.now()}`,
+            sku: `SKU-${uniqueStamp()}`,
             name: productName,
             shortDescription: "Short desc",
             description: "Full desc",
-            price: 199,
+            price: PRICE,
             weight: 1,
             inventory: 100,
         });
+
+        await context.close();
     });
 
-    test("should increase the quantity from the mini cart drawer", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+    test.afterAll(async ({ browser }) => {
+        const context = await browser.newContext();
+        const page = await context.newPage();
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.openMiniCart();
-
-        await cartPage.expectQuantity(1);
-        await cartPage.increaseQuantityTo(2);
-        await cartPage.increaseQuantityTo(3);
+        await loginAsAdmin(page);
+        await new ProductListPage(page).deleteProductsIfPresent([productName]);
+        await context.close();
     });
 
-    test("should decrease the quantity from the mini cart drawer", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+    test.describe("mini cart drawer", () => {
+        test("should add a product and show it with quantity one and a bin icon", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.openMiniCart();
+            await cartPage.addProductToCart(productName);
+            await cartPage.openMiniCart();
 
-        await cartPage.increaseQuantityTo(2);
-        await cartPage.increaseQuantityTo(3);
+            await cartPage.expectMiniCartQuantity(productName, 1);
+            await cartPage.expectMiniCartBinOffered(productName, true);
+        });
 
-        await cartPage.decreaseQuantityTo(2);
-        await cartPage.decreaseQuantityTo(1);
+        test("should increase and decrease the quantity and swap the bin icon for a minus", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openMiniCart();
+            await cartPage.setMiniCartQuantity(productName, 3);
+
+            await cartPage.expectMiniCartQuantity(productName, 3);
+            await cartPage.expectMiniCartBinOffered(productName, false);
+
+            await cartPage.setMiniCartQuantity(productName, 1);
+
+            await cartPage.expectMiniCartQuantity(productName, 1);
+            await cartPage.expectMiniCartBinOffered(productName, true);
+        });
+
+        test("should remove the item through the bin icon", async ({ shopPage }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openMiniCart();
+            await cartPage.removeFromMiniCartWithBin(productName);
+
+            await cartPage.expectMiniCartItemAbsent(productName);
+            await cartPage.openCart();
+            await cartPage.expectCartEmpty();
+        });
+
+        test("should remove the item through the remove button", async ({ shopPage }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openMiniCart();
+            await cartPage.removeFromMiniCart(productName);
+
+            await cartPage.expectMiniCartItemAbsent(productName);
+            await cartPage.openCart();
+            await cartPage.expectCartEmpty();
+        });
     });
 
-    test("should display bin icon in mini cart drawer", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+    test.describe("cart page", () => {
+        test("should list the added product with its price as the subtotal", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.openMiniCart();
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
 
-        await cartPage.expectQuantity(1);
-        await cartPage.expectBinIconOffered();
+            await cartPage.expectCartQuantity(productName, 1);
+            await cartPage.expectCartBinOffered(productName, true);
+            await cartPage.expectSummaryAmount("Subtotal", formatPrice(PRICE));
+        });
+
+        test("should update the quantity and recalculate the subtotal", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
+            await cartPage.setCartQuantity(productName, 2);
+
+            await cartPage.expectCartBinOffered(productName, false);
+
+            await cartPage.updateCart();
+
+            await cartPage.expectCartQuantity(productName, 2);
+            await cartPage.expectSummaryAmount("Subtotal", formatPrice(PRICE * 2));
+
+            await cartPage.setCartQuantity(productName, 1);
+            await cartPage.updateCart();
+
+            await cartPage.expectCartQuantity(productName, 1);
+            await cartPage.expectSummaryAmount("Subtotal", formatPrice(PRICE));
+        });
+
+        test("should remove the item through the bin icon", async ({ shopPage }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
+            await cartPage.removeFromCartWithBin(productName);
+
+            await cartPage.expectCartEmpty();
+        });
+
+        test("should remove the item through the remove link", async ({ shopPage }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
+            await cartPage.removeFromCart(productName);
+
+            await cartPage.expectCartEmpty();
+        });
+
+        test("should remove every selected item at once", async ({ shopPage }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
+            await cartPage.removeAllFromCart();
+
+            await cartPage.expectCartEmpty();
+        });
     });
 
-    test("should not display bin icon in mini cart drawer when quantity is greater than one", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+    test.describe("product page quantity", () => {
+        test("should disable the minus button and hide the bin at quantity one", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.openMiniCart();
+            await cartPage.openProduct(productName);
 
-        await cartPage.increaseQuantityTo(2);
+            await cartPage.expectProductPageBinOffered(false);
+            await cartPage.expectProductPageDecreaseDisabled(true);
+        });
 
-        await cartPage.expectBinIconNotOffered();
+        test("should enable the minus button above quantity one", async ({ shopPage }) => {
+            const cartPage = new CartPage(shopPage);
+
+            await cartPage.openProduct(productName);
+            await cartPage.setProductPageQuantity(2);
+
+            await cartPage.expectProductPageDecreaseDisabled(false);
+            await cartPage.expectProductPageBinOffered(false);
+        });
     });
 
-    test("should delete the cart item when clicking the bin icon", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+    test.describe("coupons", () => {
+        let ruleName: string;
+        let couponCode: string;
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.openMiniCart();
-        await cartPage.clickBinIcon();
+        test.beforeEach(async ({ adminPage }) => {
+            couponCode = `CART${uniqueStamp()}`;
+            ruleName = await new RuleCreatePage(adminPage).createFixedCartRuleWithCoupon(
+                couponCode,
+                "10",
+            );
+        });
 
-        await cartPage.expectItemRemoved();
-    });
+        test.afterEach(async ({ adminPage }) => {
+            await new RuleDeletePage(adminPage).deleteCartRulesIfPresent([ruleName]);
+        });
 
-    test("should display bin icon in cart view page when quantity is one", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+        test("should apply a valid coupon and discount the grand total", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
+            await cartPage.applyCoupon(couponCode);
 
-        await cartPage.goToCartView();
+            await cartPage.expectSummaryAmount("Discount Amount", formatPrice(10));
+            await cartPage.expectSummaryAmount("Grand Total", formatPrice(PRICE - 10));
+        });
 
-        await cartPage.expectQuantity(1);
-        await cartPage.expectBinIconOffered();
-    });
+        test("should refuse an unknown coupon and leave the total unchanged", async ({
+            shopPage,
+        }) => {
+            const cartPage = new CartPage(shopPage);
 
-    test("should not display bin icon in cart view page when quantity is greater than one", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
+            await cartPage.addProductToCart(productName);
+            await cartPage.openCart();
+            await cartPage.attemptCoupon(`NOPE${uniqueStamp()}`);
 
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-
-        await cartPage.goToCartView();
-        await cartPage.increaseQuantityFromCartView();
-
-        await cartPage.expectQuantity(2);
-        await cartPage.expectBinIconNotOffered();
-    });
-
-    test("should delete the cart item when clicking the bin icon in cart view page", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-
-        await cartPage.goToCartView();
-        await cartPage.clickBinIcon();
-
-        await cartPage.expectItemRemoved();
-    });
-
-    test("should disable the minus icon and not render a bin icon on the product page at minimum quantity", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.openProductFromSearch(productName);
-
-        await cartPage.expectBinIconNotOffered();
-        await cartPage.expectDecreaseQuantityDisabled();
-    });
-
-    test("should enable the minus icon on the product page when quantity is greater than one", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.openProductFromSearch(productName);
-
-        await cartPage.increaseQuantityFromCartView();
-
-        await cartPage.expectQuantity(2);
-        await cartPage.expectDecreaseQuantityEnabled();
-        await cartPage.expectBinIconNotOffered();
-    });
-
-    test("should remove the product from the mini cart drawer", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.openMiniCart();
-        await cartPage.removeProduct();
-
-        await cartPage.expectItemRemoved();
-    });
-
-    test("should add product to cart", async ({ shopPage }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-    });
-
-    test("should update quantity from the cart view page", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-
-        await cartPage.goToCartView();
-        await cartPage.increaseQuantityFromCartView();
-        await cartPage.expectQuantity(2);
-        await cartPage.updateCart();
-
-        await cartPage.expectQuantityUpdated();
-    });
-
-    test("should decrement the quantity of a product from the cart view page", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-
-        await cartPage.goToCartView();
-        await cartPage.increaseQuantityFromCartView();
-        await cartPage.expectQuantity(2);
-        await cartPage.decreaseQuantityFromCartView();
-        await cartPage.expectQuantity(1);
-        await cartPage.updateCart();
-
-        await cartPage.expectQuantityUpdated();
-    });
-
-    test("should remove product from the cart view page", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-
-        await cartPage.goToCartView();
-        await cartPage.removeProduct();
-
-        await cartPage.expectItemRemoved();
-    });
-
-    test("should remove all products from the cart view page", async ({
-        shopPage,
-    }) => {
-        const cartPage = new CartPage(shopPage);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-
-        await cartPage.goToCartView();
-        await cartPage.removeAllFromCartView();
-
-        await cartPage.expectSelectedItemsRemoved();
-    });
-
-    test("should apply coupon", async ({ adminPage, shopPage }) => {
-        const ruleCreatePage = new RuleCreatePage(adminPage);
-        const cartPage = new CartPage(shopPage);
-        const couponCode = generatePhoneNumber();
-
-        await ruleCreatePage.createFixedCartRuleWithCoupon(couponCode);
-
-        await cartPage.gotoHome();
-        await cartPage.searchProduct(productName);
-        await cartPage.addFirstProductToCart();
-        await cartPage.expectItemAdded();
-        await cartPage.goToCartView();
-        await cartPage.applyCoupon(couponCode);
-
-        await cartPage.expectCouponApplied();
+            await cartPage.expectCouponRejected();
+            await cartPage.expectSummaryAmount("Grand Total", formatPrice(PRICE));
+        });
     });
 });

@@ -10,7 +10,9 @@ export async function setBooleanSetting(
     await checkbox.waitFor({ state: "attached" });
 
     if ((await checkbox.isChecked()) !== enabled) {
-        await page.locator(`label[for="${name}"]`).first().click();
+        await page
+            .locator(`label:has(> input[type="checkbox"][name="${name}"])`)
+            .click();
     }
 
     await expect(checkbox).toBeChecked({ checked: enabled });

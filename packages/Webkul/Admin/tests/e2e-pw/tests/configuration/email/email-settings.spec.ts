@@ -1,25 +1,38 @@
+import { uniqueStamp } from "../../../utils/faker";
 import { test } from "../../../setup";
-import type { AdminPage } from "../../../setup";
-import { generateName, generateEmail } from "../../../utils/faker";
-import { EmailConfigurationPage } from "../../../pages/admin/configuration/email/EmailConfigurationPage";
+import {
+    EmailConfigurationPage,
+    type EmailSettings,
+} from "../../../pages/admin/configuration/email/EmailConfigurationPage";
 
 test.describe("email settings configuration", () => {
-    test("should configure the email settings", async ({
-        adminPage,
-    }: {
-        adminPage: AdminPage;
-    }) => {
-        const page = new EmailConfigurationPage(adminPage);
+    test.describe.configure({ timeout: 120000 });
 
-        await page.openSettings();
-        await page.fillEmailSettings({
-            senderName: generateName(),
-            senderEmail: generateEmail(),
-            adminName: generateName(),
-            adminEmail: generateEmail(),
-            contactName: generateName(),
-            contactEmail: generateEmail(),
-        });
-        await page.saveAndVerify();
+    let configPage: EmailConfigurationPage;
+    let original: EmailSettings;
+
+    test.beforeEach(async ({ adminPage }) => {
+        configPage = new EmailConfigurationPage(adminPage);
+        original = await configPage.readSettings();
+    });
+
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
+    });
+
+    test("should persist the sender, admin and contact details after reload", async () => {
+        const stamp = uniqueStamp();
+        const changed = {
+            senderName: `Sender ${stamp}`,
+            senderEmail: `sender-${stamp}@example.com`,
+            adminName: `Admin ${stamp}`,
+            adminEmail: `admin-${stamp}@example.com`,
+            contactName: `Contact ${stamp}`,
+            contactEmail: `contact-${stamp}@example.com`,
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

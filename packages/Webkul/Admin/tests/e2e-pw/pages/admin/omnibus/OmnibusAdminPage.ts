@@ -1,61 +1,31 @@
-import { expect, Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../configuration/ConfigurationFormPage";
 
-export class OmnibusAdminPage extends BasePage {
+const OMNIBUS_FIELD = "catalog[products][omnibus][is_enabled]";
+
+export class OmnibusAdminPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    protected get omnibusActionPage() {
-        return {
-            enableToggle: this.page.locator(
-                'label[for="catalog\\[products\\]\\[omnibus\\]\\[is_enabled\\]"]',
-            ),
-            enableCheckbox: this.page.locator(
-                'input[type="checkbox"][name="catalog[products][omnibus][is_enabled]"]',
-            ),
-            saveButton: this.page.locator(
-                'button[type="submit"].primary-button:visible',
-            ),
-            successMessage: this.page.locator("#app p", {
-                hasText: "Configuration saved successfully",
-            }),
-        };
+    protected get path(): string {
+        return "admin/configuration/catalog/products";
     }
 
-    async visitConfig() {
-        await super.visit("admin/configuration/catalog/products");
-        await this.page.waitForLoadState("networkidle");
+    async readEnabled(): Promise<boolean> {
+        await this.open();
+
+        return this.readBoolean(OMNIBUS_FIELD);
     }
 
-    async enableOmnibus() {
-        await this.visitConfig();
-        const isChecked =
-            await this.omnibusActionPage.enableCheckbox.isChecked();
-
-        if (!isChecked) {
-            await this.omnibusActionPage.enableToggle.click();
-            await this.page.waitForTimeout(300);
-        }
+    async setEnabled(enabled: boolean): Promise<void> {
+        await this.open();
+        await this.setBoolean(OMNIBUS_FIELD, enabled);
+        await this.save();
     }
 
-    async disableOmnibus() {
-        await this.visitConfig();
-        const isChecked =
-            await this.omnibusActionPage.enableCheckbox.isChecked();
-
-        if (isChecked) {
-            await this.omnibusActionPage.enableToggle.click();
-            await this.page.waitForTimeout(300);
-        }
-    }
-
-    async saveConfig() {
-        await this.omnibusActionPage.saveButton.click();
-        await expect(this.omnibusActionPage.successMessage).toBeVisible();
-    }
-
-    async isOmnibusEnabled(): Promise<boolean> {
-        return this.omnibusActionPage.enableCheckbox.isChecked();
+    async expectEnabled(enabled: boolean): Promise<void> {
+        await this.open();
+        await this.expectBoolean(OMNIBUS_FIELD, enabled);
     }
 }

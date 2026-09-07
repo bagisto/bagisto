@@ -1,118 +1,164 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
-import { setBooleanSetting } from "../../../../utils/configuration";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-type SocialLoginProvider =
-    "github" | "linkedin" | "google" | "twitter" | "facebook";
+export type SocialLoginProvider =
+    | "github"
+    | "linkedin"
+    | "google"
+    | "twitter"
+    | "facebook";
 
-const socialLoginSelectors: Record<
-    SocialLoginProvider,
-    { label: string; fill: string }
-> = {
-    github: {
-        label: 'label[for="customer[settings][social_login][enable_github]"]',
-        fill: "black",
-    },
-    linkedin: {
-        label: 'label[for="customer[settings][social_login][enable_linkedin]"]',
-        fill: "#1D8DEE",
-    },
-    google: {
-        label: 'label[for="customer[settings][social_login][enable_google]"]',
-        fill: "white",
-    },
-    twitter: {
-        label: 'label[for="customer[settings][social_login][enable_twitter]"]',
-        fill: "#1A1A1A",
-    },
-    facebook: {
-        label: 'label[for="customer[settings][social_login][enable_facebook]"]',
-        fill: "#1877F2",
-    },
-};
+export const SOCIAL_LOGIN_PROVIDERS: SocialLoginProvider[] = [
+    "github",
+    "linkedin",
+    "google",
+    "twitter",
+    "facebook",
+];
 
-export class CustomerSettingsPage extends BasePage {
+export interface CustomerSettings {
+    wishlist: boolean;
+    loginRedirect: string;
+    defaultGroup: string;
+    newsletterSignup: boolean;
+    newsletterSubscription: boolean;
+    socialLogin: Record<SocialLoginProvider, boolean>;
+}
+
+const FIELDS = {
+    wishlist: "customer[settings][wishlist][wishlist_option]",
+    loginRedirect: "customer[settings][login_options][redirected_to_page]",
+    defaultGroup: "customer[settings][create_new_account_options][default_group]",
+    newsletterSignup: "customer[settings][create_new_account_options][news_letter]",
+    newsletterSubscription: "customer[settings][newsletter][subscription]",
+} as const;
+
+export class CustomerSettingsPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/customer/settings";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully");
+    private socialLoginField(provider: SocialLoginProvider): string {
+        return `customer[settings][social_login][enable_${provider}]`;
     }
 
-    private getLoginRedirectSelect() {
-        return this.page.locator(
-            'select[name="customer[settings][login_options][redirected_to_page]"]',
-        );
+    private storefrontSocialLoginLink(provider: SocialLoginProvider) {
+        const slug = provider === "linkedin" ? "linkedin-openid" : provider;
+
+        return this.page.locator(`a[href*="social-login/${slug}"]`);
     }
 
-    private getDefaultGroupSelect() {
-        return this.page.locator(
-            'select[name="customer[settings][create_new_account_options][default_group]"]',
-        );
+    async readSettings(): Promise<CustomerSettings> {
+        await this.open();
+
+        const socialLogin = {} as CustomerSettings["socialLogin"];
+
+        for (const provider of SOCIAL_LOGIN_PROVIDERS) {
+            socialLogin[provider] = await this.readBoolean(
+                this.socialLoginField(provider),
+            );
+        }
+
+        return {
+            wishlist: await this.readBoolean(FIELDS.wishlist),
+            loginRedirect: await this.readSelect(FIELDS.loginRedirect),
+            defaultGroup: await this.readSelect(FIELDS.defaultGroup),
+            newsletterSignup: await this.readBoolean(FIELDS.newsletterSignup),
+            newsletterSubscription: await this.readBoolean(
+                FIELDS.newsletterSubscription,
+            ),
+            socialLogin,
+        };
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/customer/settings");
+    async applySettings(settings: Partial<CustomerSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.wishlist !== undefined) {
+            await this.setBoolean(FIELDS.wishlist, settings.wishlist);
+        }
+
+        if (settings.loginRedirect !== undefined) {
+            await this.setSelect(FIELDS.loginRedirect, settings.loginRedirect);
+        }
+
+        if (settings.defaultGroup !== undefined) {
+            await this.setSelect(FIELDS.defaultGroup, settings.defaultGroup);
+        }
+
+        if (settings.newsletterSignup !== undefined) {
+            await this.setBoolean(FIELDS.newsletterSignup, settings.newsletterSignup);
+        }
+
+        if (settings.newsletterSubscription !== undefined) {
+            await this.setBoolean(
+                FIELDS.newsletterSubscription,
+                settings.newsletterSubscription,
+            );
+        }
+
+        for (const provider of SOCIAL_LOGIN_PROVIDERS) {
+            const enabled = settings.socialLogin?.[provider];
+
+            if (enabled !== undefined) {
+                await this.setBoolean(this.socialLoginField(provider), enabled);
+            }
+        }
+
+        await this.save();
     }
 
-    async enableWishlist(): Promise<void> {
-        await setBooleanSetting(
-            this.page,
-            "customer[settings][wishlist][wishlist_option]",
-        );
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+    async expectSettings(settings: Partial<CustomerSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.wishlist !== undefined) {
+            await this.expectBoolean(FIELDS.wishlist, settings.wishlist);
+        }
+
+        if (settings.loginRedirect !== undefined) {
+            await this.expectSelect(FIELDS.loginRedirect, settings.loginRedirect);
+        }
+
+        if (settings.defaultGroup !== undefined) {
+            await this.expectSelect(FIELDS.defaultGroup, settings.defaultGroup);
+        }
+
+        if (settings.newsletterSignup !== undefined) {
+            await this.expectBoolean(
+                FIELDS.newsletterSignup,
+                settings.newsletterSignup,
+            );
+        }
+
+        if (settings.newsletterSubscription !== undefined) {
+            await this.expectBoolean(
+                FIELDS.newsletterSubscription,
+                settings.newsletterSubscription,
+            );
+        }
+
+        for (const provider of SOCIAL_LOGIN_PROVIDERS) {
+            const enabled = settings.socialLogin?.[provider];
+
+            if (enabled !== undefined) {
+                await this.expectBoolean(this.socialLoginField(provider), enabled);
+            }
+        }
     }
 
-    async updateLoginRedirect(value: string): Promise<void> {
-        await this.getLoginRedirectSelect().selectOption(value);
-        await expect(this.getLoginRedirectSelect()).toHaveValue(value);
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
-    }
-
-    async updateDefaultGroupAndNewsletter(): Promise<void> {
-        await this.getDefaultGroupSelect().selectOption("general");
-        await expect(this.getDefaultGroupSelect()).toHaveValue("general");
-        await setBooleanSetting(
-            this.page,
-            "customer[settings][create_new_account_options][news_letter]",
-        );
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
-    }
-
-    async enableNewsletterSubscription(): Promise<void> {
-        await setBooleanSetting(
-            this.page,
-            "customer[settings][newsletter][subscription]",
-        );
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
-        const subscriptionInput = this.page.locator(
-            'input[type="checkbox"][name="customer[settings][newsletter][subscription]"]',
-        );
-        await expect(subscriptionInput).toBeChecked();
-    }
-
-    async enableSocialLogin(provider: SocialLoginProvider): Promise<void> {
-        const config = socialLoginSelectors[provider];
-        const name = config.label.match(/for="([^"]+)"/)?.[1] ?? "";
-        await setBooleanSetting(this.page, name);
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+    async expectSocialLoginOfferedOnStorefront(
+        provider: SocialLoginProvider,
+        offered: boolean,
+    ): Promise<void> {
         await this.visit("customer/login");
-        const socialButton = this.page.locator(
-            `rect[width="40"][height="40"][rx="20"][fill="${config.fill}"]`,
+
+        await expect(this.page.getByRole("button", { name: "Sign In" })).toBeVisible();
+        await expect(this.storefrontSocialLoginLink(provider)).toHaveCount(
+            offered ? 1 : 0,
         );
-        await expect(socialButton).toBeVisible();
-        await socialButton.click();
     }
 }

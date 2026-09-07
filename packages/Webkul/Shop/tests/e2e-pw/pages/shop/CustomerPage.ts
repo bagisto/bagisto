@@ -1,90 +1,66 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
-import { generatePhoneNumber } from "../../utils/faker";
+
+export interface ProfileChanges {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    gender?: "Male" | "Female" | "Other";
+    dateOfBirth?: string;
+}
 
 export class CustomerPage extends BasePage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get profileMenu() {
-        return this.page.getByLabel("Profile");
-    }
-
-    private get profileLink() {
-        return this.page.getByRole("link", { name: "Profile" });
-    }
-
-    private get ordersLink() {
-        return this.page.getByRole("link", { name: "Orders", exact: true });
-    }
-
-    private get wishlistLink() {
-        return this.page.getByRole("link", { name: "Wishlist", exact: true });
-    }
-
-    private get addressesLink() {
-        return this.page.getByRole("link", { name: "Addresses" });
-    }
-
-    private get editProfileLink() {
-        return this.page.getByRole("link", { name: "Edit" });
-    }
-
     private get firstNameInput() {
-        return this.page.getByPlaceholder("First Name");
+        return this.page.locator('input[name="first_name"]');
     }
 
     private get lastNameInput() {
-        return this.page.getByPlaceholder("Last Name");
+        return this.page.locator('input[name="last_name"]');
     }
 
     private get emailInput() {
-        return this.page.getByPlaceholder("Email", { exact: true });
+        return this.page.locator('input[name="email"]');
     }
 
     private get phoneInput() {
-        return this.page.getByPlaceholder("Phone");
+        return this.page.locator('input[name="phone"]');
     }
 
     private get genderSelect() {
-        return this.page.getByLabel("shop::app.customers.account.");
+        return this.page.locator('select[name="gender"]');
     }
 
     private get dateOfBirthInput() {
-        return this.page.getByRole("textbox", { name: "Date of Birth" });
+        return this.page.locator('input[name="date_of_birth"]');
     }
 
-    private get profileImageInput() {
-        return this.page.getByLabel("Add Image/Video");
+    private get imageInput() {
+        return this.page.locator('input[type="file"][name="image[]"]');
     }
 
     private get currentPasswordInput() {
-        return this.page.getByPlaceholder("Current Password");
+        return this.page.locator('input[name="current_password"]');
     }
 
     private get newPasswordInput() {
-        return this.page.getByPlaceholder("New Password");
+        return this.page.locator('input[name="new_password"]');
     }
 
     private get confirmPasswordInput() {
-        return this.page.getByPlaceholder("Confirm Password");
+        return this.page.locator('input[name="new_password_confirmation"]');
     }
 
     private get saveButton() {
         return this.page.getByRole("button", { name: "Save" });
     }
 
-    private get deleteProfileButton() {
-        return this.page.getByText("Delete Profile").first();
-    }
-
-    private get phone() {
-        return this.page.locator('input[name="phone"]');
-    }
-
-    private get gender() {
-        return this.page.locator('select[name="gender"]');
+    private get deleteProfileTrigger() {
+        return this.page.getByText("Delete Profile").filter({ visible: true });
     }
 
     private get deletePasswordInput() {
@@ -92,215 +68,129 @@ export class CustomerPage extends BasePage {
     }
 
     private get deleteButton() {
-        return this.page.getByRole("button", { name: "Delete" });
-    }
-
-    private get agreeButton() {
-        return this.page.getByRole("button", { name: "Agree", exact: true });
-    }
-
-    private get searchProductInput() {
-        return this.page.getByPlaceholder("Search products here");
-    }
-
-    private get addToWishlistButton() {
-        return this.page.getByRole("button", { name: "Add To Wishlist" });
-    }
-
-    private get moveToCartButton() {
-        return this.page.getByRole("button", { name: "Move To Cart" });
-    }
-
-    private get successMessage() {
-        return this.page.getByText("Profile updated successfully").first();
-    }
-
-    private get customerDeletedMessage() {
-        return this.page.getByText("Customer deleted successfully").first();
-    }
-
-    private get addAddressButton() {
-        return this.page.getByRole("link", { name: "Add Address" });
-    }
-
-    private get moreOptionsButton() {
-        return this.page.getByLabel("More Options").first();
-    }
-
-    private get updateButton() {
-        return this.page.getByRole("button", { name: "Update" });
-    }
-
-    private get deleteAddressLink() {
-        return this.page.getByRole("link", { name: "Delete" });
-    }
-
-    private get setDefaultButton() {
-        return this.page.getByRole("button", { name: "Set as Default" });
+        return this.page.getByRole("button", { name: "Delete", exact: true });
     }
 
     private get uploadedImage() {
         return this.page.locator('img[alt="Uploaded Image"]');
     }
 
-    async gotoHome(): Promise<void> {
-        await this.visit("");
-    }
-
     async openProfile(): Promise<void> {
-        await this.profileMenu.click();
+        await this.visit("customer/account/profile");
+
+        await expect(this.page).toHaveURL(/customer\/account\/profile$/);
     }
 
-    async clickProfileLink(linkText: string): Promise<void> {
-        await this.page.getByRole("link", { name: linkText }).click();
+    async openEditProfile(): Promise<void> {
+        await this.visit("customer/account/profile/edit");
+
+        await expect(this.firstNameInput).toBeVisible();
     }
 
-    async seeProfile() {
-        await this.page.getByRole("link", { name: "Profile" }).click();
-    }
-
-    async confirmDialog(): Promise<void> {
-        await this.agreeButton.click();
-    }
-
-    async gotoProfilePage(): Promise<void> {
-        await this.gotoHome();
-        await this.openProfile();
-        await this.profileLink.click();
-    }
-
-    async gotoOrdersPage(): Promise<void> {
-        await this.gotoHome();
-        await this.openProfile();
-        await this.ordersLink.click();
-    }
-
-    async gotoWishlistPage(): Promise<void> {
-        await this.gotoHome();
-        await this.openProfile();
-        await this.wishlistLink.click();
-    }
-
-    async editProfile(data: {
-        email?: string;
-        firstName?: string;
-        lastName?: string;
-        phone?: string;
-        gender?: string;
-        dob?: string;
-    }): Promise<void> {
-        await this.editProfileLink.click();
-
-        if (data.firstName) {
-            await this.firstNameInput.click();
-            await this.firstNameInput.clear();
-            await this.firstNameInput.fill(data.firstName);
+    private async fillRequiredExtras(changes: ProfileChanges): Promise<void> {
+        if (changes.phone !== undefined) {
+            await this.phoneInput.fill(changes.phone);
         }
 
-        if (data.lastName) {
-            await this.lastNameInput.click();
-            await this.lastNameInput.clear();
-            await this.lastNameInput.fill(data.lastName);
+        if (changes.gender !== undefined) {
+            await this.genderSelect.selectOption(changes.gender);
+        }
+    }
+
+    async updateProfile(changes: ProfileChanges): Promise<void> {
+        await this.openEditProfile();
+
+        if (changes.firstName !== undefined) {
+            await this.firstNameInput.fill(changes.firstName);
         }
 
-        if (data.email) {
-            await this.emailInput.click();
-            await this.emailInput.clear();
-            await this.emailInput.fill(data.email);
+        if (changes.lastName !== undefined) {
+            await this.lastNameInput.fill(changes.lastName);
         }
 
-        if (data.phone) {
-            await this.phoneInput.click();
-            await this.phoneInput.fill(data.phone);
+        if (changes.email !== undefined) {
+            await this.emailInput.fill(changes.email);
         }
 
-        if (data.gender) {
-            await this.genderSelect.selectOption(data.gender);
-        }
+        await this.fillRequiredExtras(changes);
 
-        if (data.dob) {
-            await this.dateOfBirthInput.click();
-            await this.dateOfBirthInput.fill(data.dob);
+        if (changes.dateOfBirth !== undefined) {
+            await this.dateOfBirthInput.fill(changes.dateOfBirth);
         }
 
         await this.saveButton.click();
-        await expect(this.successMessage).toBeVisible();
+
+        await expect(this.page.getByText("Profile updated successfully").first()).toBeVisible();
     }
 
-    async uploadProfileImage(imagePath: string): Promise<void> {
-        await this.editProfileLink.click();
-        await this.profileImageInput.setInputFiles(imagePath);
-        await this.phone.fill(generatePhoneNumber());
-        await this.gender.selectOption({ value: "Male" });
+    async uploadProfileImage(imagePath: string, extras: ProfileChanges): Promise<void> {
+        await this.openEditProfile();
+        await this.imageInput.setInputFiles(imagePath);
+        await this.fillRequiredExtras(extras);
         await this.saveButton.click();
-        await expect(this.successMessage).toBeVisible();
+
+        await expect(this.page.getByText("Profile updated successfully").first()).toBeVisible();
     }
 
-    async verifyImageUploaded(): Promise<void> {
-        await this.editProfileLink.click();
-        await expect(this.uploadedImage).toBeVisible();
-    }
-
-    async changePassword(data: {
-        currentPassword: string;
-        newPassword: string;
-        confirmPassword: string;
-    }): Promise<void> {
-        await this.editProfileLink.click();
-        await this.currentPasswordInput.click();
-        await this.currentPasswordInput.fill(data.currentPassword);
-        await this.phone.fill(generatePhoneNumber());
-        await this.gender.selectOption({ value: "Male" });
-        await this.newPasswordInput.click();
-        await this.newPasswordInput.fill(data.newPassword);
-        await this.confirmPasswordInput.click();
-        await this.confirmPasswordInput.fill(data.confirmPassword);
+    async changePassword(
+        currentPassword: string,
+        newPassword: string,
+        extras: ProfileChanges,
+    ): Promise<void> {
+        await this.openEditProfile();
+        await this.fillRequiredExtras(extras);
+        await this.currentPasswordInput.fill(currentPassword);
+        await this.newPasswordInput.fill(newPassword);
+        await this.confirmPasswordInput.fill(newPassword);
         await this.saveButton.click();
-        await expect(this.successMessage).toBeVisible();
+
+        await expect(this.page.getByText("Profile updated successfully").first()).toBeVisible();
     }
 
     async deleteProfile(password: string): Promise<void> {
-        await this.deleteProfileButton.click();
-        await this.deletePasswordInput.click();
+        await this.openProfile();
+        await this.deleteProfileTrigger.click();
         await this.deletePasswordInput.fill(password);
         await this.deleteButton.click();
-        await expect(this.customerDeletedMessage).toBeVisible();
+
+        await expect(this.page.getByText("Customer deleted successfully").first()).toBeVisible();
     }
 
-    async searchProduct(term: string): Promise<void> {
-        await this.searchProductInput.fill(term);
-        await this.searchProductInput.press("Enter");
+    async expectProfileShows(values: string[]): Promise<void> {
+        await this.openProfile();
+
+        for (const value of values) {
+            await expect(this.page.getByText(value, { exact: true })).toBeVisible();
+        }
     }
 
-    async addFirstProductToWishlist(): Promise<void> {
-        await this.addToWishlistButton.first().click();
-        await expect(
-            this.page.getByText("Item Successfully Added To Wishlist").first(),
-        ).toBeVisible();
+    async expectEditFormValues(changes: ProfileChanges): Promise<void> {
+        await this.openEditProfile();
+
+        if (changes.firstName !== undefined) {
+            await expect(this.firstNameInput).toHaveValue(changes.firstName);
+        }
+
+        if (changes.lastName !== undefined) {
+            await expect(this.lastNameInput).toHaveValue(changes.lastName);
+        }
+
+        if (changes.phone !== undefined) {
+            await expect(this.phoneInput).toHaveValue(changes.phone);
+        }
+
+        if (changes.gender !== undefined) {
+            await expect(this.genderSelect).toHaveValue(changes.gender);
+        }
+
+        if (changes.dateOfBirth !== undefined) {
+            await expect(this.dateOfBirthInput).toHaveValue(changes.dateOfBirth);
+        }
     }
 
-    async moveFirstWishlistItemToCart(): Promise<void> {
-        await this.moveToCartButton.first().click();
-    }
+    async expectProfileImageShown(): Promise<void> {
+        await this.openEditProfile();
 
-    async removeFirstWishlistItem(): Promise<void> {
-        await this.page.locator(".max-md\\:hidden > .flex").first().click();
-        await this.agreeButton.click();
-        await expect(
-            this.page
-                .getByText("Item Successfully Removed From Wishlist")
-                .first(),
-        ).toBeVisible();
-    }
-
-    async addFirstProductToCart(): Promise<void> {
-        await this.page
-            .getByRole("button", { name: "Add To Cart" })
-            .first()
-            .click();
-
-        await expect(
-            this.page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
+        await expect(this.uploadedImage).toBeVisible();
     }
 }

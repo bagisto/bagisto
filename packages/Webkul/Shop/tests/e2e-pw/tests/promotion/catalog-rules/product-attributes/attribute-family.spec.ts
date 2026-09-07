@@ -1,78 +1,37 @@
-import { test, expect } from "../../../../setup";
+import type { BaseProduct } from "../../../../pages/types/product.types";
+import { uniqueStamp } from "../../../../utils/faker";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import type { Page } from "@playwright/test";
+import { test } from "../../../../setup";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
-import { generateName, generateSlug } from "../../../../utils/faker";
 
-test("should create attribute family for creating rule", async ({
-    adminPage,
-}) => {
-    await adminPage.goto("admin/catalog/families");
-    await adminPage.waitForSelector("div.primary-button", {
-        state: "visible",
-    });
-
-    await adminPage.click("div.primary-button:visible");
-    await adminPage
-        .waitForSelector("div#not_avaliable", { timeout: 1000 })
-        .catch(() => null);
-
-    await adminPage.fill('input[name="name"]', generateName());
-    await adminPage.fill('input[name="code"]', generateSlug("_"));
-
-    const attributes = await adminPage.$$("i.icon-drag");
-    const targets = await adminPage.$$(
-        'div[class="flex [&>*]:flex-1 gap-5 justify-between px-4"] > div > div[class="h-[calc(100vh-285px)] overflow-auto border-gray-200 pb-4 ltr:border-r rtl:border-l"]',
-    );
-
-    for (const attribute of attributes) {
-        const randomTargetIndex = Math.floor(Math.random() * targets.length);
-        const target = targets[randomTargetIndex];
-
-        const attributeBox = await attribute.boundingBox();
-        const targetBox = await target.boundingBox();
-
-        if (attributeBox && targetBox) {
-            const randomX = targetBox.x + Math.random() * targetBox.width;
-            const randomY = targetBox.y + Math.random() * targetBox.height;
-
-            await adminPage.mouse.move(
-                attributeBox.x + attributeBox.width / 2,
-                attributeBox.y + attributeBox.height / 2,
-            );
-            await adminPage.mouse.down();
-            await adminPage.mouse.move(randomX, randomY);
-            await adminPage.mouse.up();
-        }
-    }
-
-    await adminPage.click(".primary-button:visible");
-    await expect(
-        adminPage.getByText("Family created successfully.").first(),
-    ).toBeVisible();
-});
+let product: BaseProduct;
+let createdRules: string[];
 
 async function runCatalogRuleTest({
-    page,
+    adminPage,
+    shopPage,
     operator,
     optionSelect,
     type,
 }: {
-    page: any;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     optionSelect: string;
     type: string;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
 
-    await loginAsAdmin(page);
-
-    await ruleCreatePage.catalogRuleCreationFlow();
+    const rule = await ruleCreatePage.catalogRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
+        scopeSku: product.sku,
         attribute: "product|attribute_family_id",
         operator,
         optionSelect,
@@ -81,7 +40,12 @@ async function runCatalogRuleTest({
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+    await ruleApplyPage.verifyCatalogRule({
+        productName: product.name,
+        price: product.price ?? 0,
+        value: discountValue ?? 0,
+        type: type,
+    });
 }
 
 const testCases = [
@@ -113,32 +77,37 @@ const testCases = [
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test.beforeEach(async ({ adminPage }) => {
-            const productCreation = new ProductCreatePage(adminPage);
 
-            await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
                 type: "simple",
-                sku: `SKU-${Date.now()}`,
-                name: `Simple-${Date.now()}`,
+                sku: `SKU-${uniqueStamp()}`,
+                name: `Simple-${uniqueStamp()}`,
                 shortDescription: "Short desc",
                 description: "Full desc",
                 price: 199,
                 weight: 1,
                 inventory: 100,
             });
-        });
+});
 
-        test.afterEach(async ({ page }) => {
-            const ruleDeletePage = new RuleDeletePage(page);
-            await ruleDeletePage.deleteCatalogRuleAndProduct();
+        test.afterEach(async ({ adminPage }) => {
+            try {
+                await new RuleDeletePage(adminPage).deleteCatalogRulesIfPresent(createdRules);
+            } finally {
+                await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+            }
         });
 
         for (const tc of testCases) {
             test(`should apply coupon when attribute family condition is -> ${tc.label} (${tc.type})`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await runCatalogRuleTest({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator: tc.operator,
                     optionSelect: tc.optionSelect,
                     type: tc.type,

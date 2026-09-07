@@ -1,134 +1,103 @@
 import { test } from "../../../setup";
-import { TaxRateCreatePage } from "../../../pages/admin/settings/taxes/TaxRateCreatePage";
-import { TaxRateEditPage } from "../../../pages/admin/settings/taxes/TaxRateEditPage";
-import { TaxRateListPage } from "../../../pages/admin/settings/taxes/TaxRateListPage";
-import { TAX_REGIONS } from "../../../utils/tax";
+import { TaxRatesPage } from "../../../pages/admin/settings/taxes/TaxRatesPage";
+import { generateTaxRateData, TAX_REGIONS } from "../../../utils/tax";
 
-test.describe("tax rates", () => {
-    test.describe("creation", () => {
-        test("should create a tax rate with all valid fields and list it in the grid", async ({
-            adminPage,
-        }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const listPage = new TaxRateListPage(adminPage);
+test.describe("tax rate management", () => {
+    let taxRatesPage: TaxRatesPage;
+    let created: string[];
 
-            const rate = await createPage.createTaxRate({
-                country: TAX_REGIONS.india.country,
-                state: TAX_REGIONS.india.checkoutState,
-                taxRate: "18",
-            });
-
-            await listPage.open();
-            await listPage.search(rate.identifier);
-            await listPage.expectRowVisible(rate.identifier);
-        });
-
-        test("should create a tax rate restricted by a zip range", async ({
-            adminPage,
-        }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const listPage = new TaxRateListPage(adminPage);
-
-            const rate = await createPage.createTaxRate({
-                taxRate: "5",
-                isZip: true,
-                zipFrom: "100000",
-                zipTo: "199999",
-            });
-
-            await listPage.open();
-            await listPage.search(rate.identifier);
-            await listPage.expectRowVisible(rate.identifier);
-        });
+    test.beforeEach(async ({ adminPage }) => {
+        taxRatesPage = new TaxRatesPage(adminPage);
+        created = [];
     });
 
-    test.describe("validation", () => {
-        test("should reject creation when required fields are empty", async ({
-            adminPage,
-        }) => {
-            await new TaxRateCreatePage(adminPage).expectRequiredFieldErrors();
-        });
-
-        test("should reject an out-of-range tax percentage", async ({
-            adminPage,
-        }) => {
-            await new TaxRateCreatePage(adminPage).expectInvalidPercentageError(
-                "150",
-            );
-        });
-
-        test("should reject a duplicate identifier", async ({ adminPage }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-
-            const rate = await createPage.createTaxRate();
-
-            await createPage.expectDuplicateIdentifierError(rate.identifier);
-        });
+    test.afterEach(async () => {
+        await taxRatesPage.deleteTaxRatesIfPresent(created);
     });
 
-    test.describe("update", () => {
-        test("should edit a tax rate and reflect the new value in the form and grid", async ({
-            adminPage,
-        }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const editPage = new TaxRateEditPage(adminPage);
-
-            const rate = await createPage.createTaxRate({ taxRate: "12" });
-
-            await editPage.updateTaxRate(rate.identifier, { taxRate: "22" });
-            await editPage.expectGridValue(rate.identifier, "22");
-            await editPage.expectFormValue(rate.identifier, "22");
+    test("should create a tax rate for a state and list it with its country and rate", async () => {
+        const rate = generateTaxRateData({
+            country: TAX_REGIONS.india.country,
+            state: TAX_REGIONS.india.checkoutState,
+            taxRate: "18",
         });
+        created.push(rate.identifier);
+
+        await taxRatesPage.createTaxRate(rate);
+
+        await taxRatesPage.expectTaxRateListed(rate);
     });
 
-    test.describe("delete", () => {
-        test("should delete a tax rate and remove it from the grid", async ({
-            adminPage,
-        }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const listPage = new TaxRateListPage(adminPage);
-
-            const rate = await createPage.createTaxRate();
-
-            await listPage.deleteTaxRate(rate.identifier);
+    test("should create a tax rate restricted to a zip range", async () => {
+        const rate = generateTaxRateData({
+            taxRate: "5",
+            isZip: true,
+            zipFrom: "100000",
+            zipTo: "199999",
         });
+        created.push(rate.identifier);
+
+        await taxRatesPage.createTaxRate(rate);
+
+        await taxRatesPage.expectTaxRateListed(rate);
     });
 
-    test.describe("grid operations", () => {
-        test("should search a tax rate by identifier", async ({ adminPage }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const listPage = new TaxRateListPage(adminPage);
+    test("should reject a tax rate without an identifier and country", async () => {
+        await taxRatesPage.submitEmptyCreateForm();
 
-            const rate = await createPage.createTaxRate();
+        await taxRatesPage.expectValidationError("The Identifier field is required");
+        await taxRatesPage.expectValidationError("The Country field is required");
+        await taxRatesPage.expectStillOnCreateForm();
+    });
 
-            await listPage.open();
-            await listPage.search(rate.identifier);
-            await listPage.expectRowVisible(rate.identifier);
+    test("should reject a tax rate above one hundred percent", async () => {
+        const rate = generateTaxRateData({ taxRate: "150" });
+        created.push(rate.identifier);
+
+        await taxRatesPage.attemptCreateTaxRate(rate);
+
+        await taxRatesPage.expectValidationError("must not be greater than 100");
+        await taxRatesPage.expectTaxRateAbsent(rate.identifier);
+    });
+
+    test("should reject a tax rate whose identifier is already used", async () => {
+        const existing = generateTaxRateData();
+        const duplicate = generateTaxRateData({
+            identifier: existing.identifier,
+            taxRate: "7",
         });
+        created.push(existing.identifier);
 
-        test("should sort the grid by the identifier column", async ({
-            adminPage,
-        }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const listPage = new TaxRateListPage(adminPage);
+        await taxRatesPage.createTaxRate(existing);
+        await taxRatesPage.attemptCreateTaxRate(duplicate);
 
-            const rate = await createPage.createTaxRate();
+        await taxRatesPage.expectValidationError(
+            "The identifier has already been taken.",
+        );
+        await taxRatesPage.expectTaxRateListed(existing);
+    });
 
-            await listPage.open();
-            await listPage.sortByColumn("Identifier");
-            await listPage.search(rate.identifier);
-            await listPage.expectRowVisible(rate.identifier);
-        });
+    test("should update the rate and keep the new value after reload", async () => {
+        const rate = generateTaxRateData({ taxRate: "12" });
+        created.push(rate.identifier);
 
-        test("should filter the grid by identifier", async ({ adminPage }) => {
-            const createPage = new TaxRateCreatePage(adminPage);
-            const listPage = new TaxRateListPage(adminPage);
+        await taxRatesPage.createTaxRate(rate);
+        await taxRatesPage.updateTaxRate(rate.identifier, { taxRate: "22" });
 
-            const rate = await createPage.createTaxRate();
+        await taxRatesPage.expectTaxRateListed({ ...rate, taxRate: "22" });
+        await taxRatesPage.expectRateInEditForm(rate.identifier, "22");
+    });
 
-            await listPage.open();
-            await listPage.filterByColumn("Identifier", rate.identifier);
-            await listPage.expectRowVisible(rate.identifier);
-        });
+    test("should delete a tax rate and remove it from the grid", async () => {
+        const rate = generateTaxRateData();
+        const untouched = generateTaxRateData();
+        created.push(rate.identifier, untouched.identifier);
+
+        await taxRatesPage.createTaxRate(rate);
+        await taxRatesPage.createTaxRate(untouched);
+        await taxRatesPage.deleteTaxRate(rate.identifier);
+
+        await taxRatesPage.expectTaxRateAbsent(rate.identifier);
+        await taxRatesPage.expectTaxRateListed(untouched);
     });
 });

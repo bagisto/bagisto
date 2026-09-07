@@ -1,6 +1,11 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { generateName } from "../../../../utils/faker";
+import { generateName, uniqueStamp } from "../../../../utils/faker";
 import { BasePage } from "../../../BasePage";
+
+export interface CreatedRule {
+    name: string;
+    couponCode: string;
+}
 
 export class RuleCreatePage extends BasePage {
     constructor(page: Page) {
@@ -8,27 +13,23 @@ export class RuleCreatePage extends BasePage {
     }
 
     private get createCartRuleButton() {
-        return this.page.locator(
-            'a.primary-button:has-text("Create Cart Rule")',
-        );
+        return this.page.getByRole("link", { name: "Create Cart Rule" });
     }
 
     private get cartRuleForm() {
-        return this.page.locator(
-            'form[action*="/promotions/cart-rules/create"]',
-        );
+        return this.page.locator('form[action*="/promotions/cart-rules/create"]');
     }
 
     private get createCatalogRuleButton() {
-        return this.page.locator(
-            'a.primary-button:has-text("Create Catalog Rule")',
-        );
+        return this.page.getByRole("link", { name: "Create Catalog Rule" });
     }
 
-    private get catalogRuleButton() {
-        return this.page.locator(
-            'button.primary-button:has-text("Save Catalog Rule")',
-        );
+    private get catalogRuleForm() {
+        return this.page.locator('form[action*="/promotions/catalog-rules/create"]');
+    }
+
+    private get saveCatalogRuleButton() {
+        return this.page.getByRole("button", { name: "Save Catalog Rule" });
     }
 
     private get nameInput() {
@@ -60,29 +61,23 @@ export class RuleCreatePage extends BasePage {
     }
 
     private get addConditionButton() {
-        return this.page.locator(
-            'div.secondary-button:has-text("Add Condition")',
-        );
+        return this.page.locator('div.secondary-button:has-text("Add Condition")');
     }
 
-    private get conditionAttributeSelect() {
-        return this.page.locator(
-            'select[id="conditions\\[0\\]\\[attribute\\]"]',
-        );
+    private conditionAttributeSelect(index = 0) {
+        return this.page.locator(`select[id="conditions[${index}][attribute]"]`);
     }
 
-    private get conditionOperatorSelect() {
-        return this.page.locator(
-            'select[name="conditions\\[0\\]\\[operator\\]"]',
-        );
+    private conditionOperatorSelect(index = 0) {
+        return this.page.locator(`select[name="conditions[${index}][operator]"]`);
     }
 
-    private get conditionValueInput() {
-        return this.page.locator('input[name="conditions\\[0\\]\\[value\\]"]');
+    private conditionValueInput(index = 0) {
+        return this.page.locator(`input[name="conditions[${index}][value]"]`);
     }
 
-    private get selectConditionOption() {
-        return this.page.locator('select[name="conditions[0][value]"]');
+    private conditionValueSelect(index = 0) {
+        return this.page.locator(`select[name="conditions[${index}][value]"]`);
     }
 
     private get actionTypeSelect() {
@@ -101,16 +96,8 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('input[name="sort_order"]');
     }
 
-    private get channelCheckbox() {
-        return this.page.locator('label[for="channel__1"]');
-    }
-
-    private get customerGroupCheckbox() {
-        return this.page.locator("#customer_group__1");
-    }
-
-    private get customerGroupCheckbox2() {
-        return this.page.locator('label[for="customer_group__2"]');
+    private get statusInput() {
+        return this.page.locator('input[type="checkbox"][name="status"]');
     }
 
     private get statusToggle() {
@@ -122,53 +109,100 @@ export class RuleCreatePage extends BasePage {
     }
 
     private get saveCartRuleButton() {
-        return this.page.locator(
-            'button.primary-button:has-text("Save Cart Rule")',
-        );
+        return this.page.getByRole("button", { name: "Save Cart Rule" });
     }
 
-    private get successMessage() {
-        return this.page.locator("#app");
-    }
-
-    private get applyToShipping() {
+    private get applyToShippingSelect() {
         return this.page.locator("select[name='apply_to_shipping']");
     }
 
-    private async fillGeneralCartDetails(couponCode: string = "TEST50") {
-        await this.createCartRuleButton.waitFor();
+    private checkboxLabel(forId: string) {
+        return this.page.locator(`label[for="${forId}"]`).filter({ hasText: /\S/ });
+    }
+
+    private checkboxInput(forId: string) {
+        return this.page.locator(`input#${forId.replace(/([^\w-])/g, "\\$1")}`);
+    }
+
+    private async check(forId: string): Promise<void> {
+        if (!(await this.checkboxInput(forId).isChecked())) {
+            await this.checkboxLabel(forId).click();
+        }
+
+        await expect(this.checkboxInput(forId)).toBeChecked();
+    }
+
+    private async fillGeneralCartDetails(couponCode: string): Promise<string> {
+        const name = `${generateName()} ${uniqueStamp()}`;
+
         await this.createCartRuleButton.click();
         await this.cartRuleForm.waitFor();
-        await this.nameInput.fill(generateName());
+        await this.waitForVueMount();
+        await this.nameInput.fill(name);
         await this.descriptionInput.fill(generateName());
         await this.couponTypeSelect.selectOption("1");
         await this.autoGenerationSelect.selectOption("0");
         await this.couponCodeInput.fill(couponCode);
         await this.usesPerCouponInput.fill("100");
         await this.usesPerCustomerInput.fill("100");
+
+        return name;
     }
 
-    private async fillGeneralCatalogDetails() {
+    private async fillGeneralCatalogDetails(): Promise<string> {
+        const name = `${generateName()} ${uniqueStamp()}`;
+
         await this.createCatalogRuleButton.click();
-        await this.nameInput.fill(generateName());
+        await this.catalogRuleForm.waitFor();
+        await this.waitForVueMount();
+        await this.nameInput.fill(name);
         await this.descriptionInput.fill(generateName());
+
+        return name;
     }
 
-    private async configureSettings() {
+    private async configureSettings(): Promise<void> {
         await this.sortOrderInput.fill("1");
-        await this.channelCheckbox.first().click();
-        await this.customerGroupCheckbox.nth(1).click();
-        await this.customerGroupCheckbox2.first().click();
-        await this.statusToggle.first().click();
+        await this.check("channel__1");
+        await this.check("customer_group__1");
+        await this.check("customer_group__2");
+        await this.check("customer_group__3");
+
+        if (!(await this.statusInput.isChecked())) {
+            await this.statusToggle.click();
+        }
+
+        await expect(this.statusInput).toBeChecked();
     }
 
-    private async centerInViewport(locator: Locator) {
+    private async centerInViewport(locator: Locator): Promise<void> {
         await locator.evaluate((element) =>
             element.scrollIntoView({ block: "center" }),
         );
     }
 
-    public async addCondition({
+    private async setDiscount(actionType: string, amount: number): Promise<void> {
+        await this.actionTypeSelect.selectOption(actionType);
+
+        await expect(this.discountAmountInput).toBeVisible();
+        await expect(this.discountAmountInput).toBeEditable();
+
+        await this.discountAmountInput.fill(amount.toString());
+
+        await expect(this.discountAmountInput).toHaveValue(amount.toString());
+    }
+
+    private async addSkuScope(sku: string): Promise<void> {
+        await this.addConditionButton.click();
+        await this.conditionAttributeSelect(1).waitFor();
+        await this.conditionAttributeSelect(1).selectOption("product|sku");
+        await this.conditionOperatorSelect(1).selectOption("==");
+        await this.conditionValueInput(1).fill(sku);
+
+        await expect(this.conditionValueInput(1)).toHaveValue(sku);
+    }
+
+    async addCondition({
         attribute,
         operator,
         value,
@@ -176,6 +210,7 @@ export class RuleCreatePage extends BasePage {
         checkboxSelect,
         couponType,
         allowShipping,
+        scopeSku,
     }: {
         attribute: string;
         operator: string;
@@ -184,156 +219,143 @@ export class RuleCreatePage extends BasePage {
         checkboxSelect?: string;
         couponType?: string;
         allowShipping?: string;
+        scopeSku?: string;
     }): Promise<number | undefined> {
-        const discountValue = Math.floor(Math.random() * 1000) + 1;
-        const discountPercentage = Math.floor(Math.random() * 99) + 1;
+        const discountValue = 40;
+        const discountPercentage = 15;
 
         await this.addConditionButton.click();
-        await this.conditionAttributeSelect.waitFor();
-        await this.conditionAttributeSelect.selectOption(attribute);
-        await this.conditionOperatorSelect.selectOption(operator);
+        await this.conditionAttributeSelect().waitFor();
+        await this.conditionAttributeSelect().selectOption(attribute);
+        await this.conditionOperatorSelect().selectOption(operator);
 
         if (optionSelect) {
-            await this.selectConditionOption.waitFor();
-            await this.selectConditionOption.selectOption({
-                label: optionSelect,
-            });
+            await this.conditionValueSelect().waitFor();
+            await this.conditionValueSelect().selectOption({ label: optionSelect });
         } else if (value) {
-            await this.conditionValueInput.fill(value);
+            await this.conditionValueInput().fill(value);
         } else if (checkboxSelect) {
-            const label = this.page.locator(
-                `label:has(div:text-is("${checkboxSelect}"))`,
-            );
+            const label = this.page.locator(`label:has(div:text-is("${checkboxSelect}"))`);
             const input = label.locator("input");
+
             await expect(input).toBeAttached();
-            const isChecked = await input.isChecked();
-            if (!isChecked) {
+
+            if (!(await input.isChecked())) {
                 await label.click();
             }
-        }
-        let result;
 
-        if (couponType == "fixed") {
-            await this.actionTypeSelect.selectOption("by_fixed");
-            await this.discountAmountInput.waitFor({
-                state: "visible",
-            });
-            await this.page.waitForTimeout(1000);
-            await this.discountAmountInput.click();
-            await this.discountAmountInput.clear();
-            await this.discountAmountInput.fill(discountValue.toString());
+            await expect(input).toBeChecked();
+        }
+
+        if (scopeSku) {
+            await this.addSkuScope(scopeSku);
+        }
+
+        let result: number | undefined;
+
+        if (couponType === "fixed") {
+            await this.setDiscount("by_fixed", discountValue);
             result = discountValue;
         }
 
-        if (couponType == "percentage") {
-            await this.actionTypeSelect.selectOption("by_percent");
-            await this.discountAmountInput.waitFor({
-                state: "visible",
-            });
-            await this.page.waitForTimeout(1000);
-            await this.discountAmountInput.click();
-            await this.discountAmountInput.clear();
-            await this.discountAmountInput.fill(discountPercentage.toString());
+        if (couponType === "percentage") {
+            await this.setDiscount("by_percent", discountPercentage);
             result = discountPercentage;
         }
 
-        if (couponType == "fixedAmmountWholeCart") {
-            await this.actionTypeSelect.selectOption("cart_fixed");
-            await this.discountAmountInput.waitFor({
-                state: "visible",
-            });
-            await this.page.waitForTimeout(1000);
-            await this.discountAmountInput.click();
-            await this.discountAmountInput.clear();
-            await this.discountAmountInput.fill(discountValue.toString());
+        if (couponType === "fixedAmmountWholeCart") {
+            await this.setDiscount("cart_fixed", discountValue);
             result = discountValue;
         }
 
-        if (allowShipping == "yes") {
-            await this.applyToShipping.selectOption("1");
+        if (allowShipping === "yes") {
+            await this.applyToShippingSelect.selectOption("1");
         }
 
         return result;
     }
 
-    public async setBuyXGetYAction(
-        discountAmount: number,
-        discountStep: number,
-    ) {
+    async setBuyXGetYAction(discountAmount: number, discountStep: number): Promise<void> {
         await this.actionTypeSelect.selectOption("buy_x_get_y");
         await this.discountAmountInput.fill(discountAmount.toString());
         await this.discountStepInput.fill(discountStep.toString());
     }
 
-    public async saveCartRule() {
+    async saveCartRule(): Promise<void> {
         await this.centerInViewport(this.saveCartRuleButton);
         await this.saveCartRuleButton.click();
-        await expect(this.successMessage).toContainText(
-            "Cart rule created successfully",
-        );
+
+        await expect(
+            this.page.getByText("Cart rule created successfully"),
+        ).toBeVisible();
     }
 
-    public async saveCatalogRule() {
-        await this.centerInViewport(this.catalogRuleButton);
-        await this.catalogRuleButton.click({ timeout: 60000 });
+    async saveCatalogRule(): Promise<void> {
+        await this.centerInViewport(this.saveCatalogRuleButton);
+        await this.saveCatalogRuleButton.click({ timeout: 60000 });
 
-        await expect(this.successMessage).toContainText(
-            "Catalog rule created successfully",
-        );
+        await expect(
+            this.page.getByText("Catalog rule created successfully"),
+        ).toBeVisible();
     }
 
-    public async cartRuleCreationFlow() {
+    async cartRuleCreationFlow(): Promise<CreatedRule> {
+        const couponCode = `CP${uniqueStamp()}`;
+
         await this.visit("admin/marketing/promotions/cart-rules");
-        await this.fillGeneralCartDetails();
+
+        const name = await this.fillGeneralCartDetails(couponCode);
+
         await this.configureSettings();
+
+        return { name, couponCode };
     }
 
-    public async catalogRuleCreationFlow() {
+    async catalogRuleCreationFlow(): Promise<CreatedRule> {
         await this.visit("admin/marketing/promotions/catalog-rules");
-        await this.fillGeneralCatalogDetails();
+
+        const name = await this.fillGeneralCatalogDetails();
+
         await this.configureSettings();
+
+        return { name, couponCode: "" };
     }
 
-    public async saveCartRuleWithoutRequiredFields() {
+    async saveCartRuleWithoutRequiredFields(): Promise<void> {
         await this.visit("admin/marketing/promotions/cart-rules");
         await this.createCartRuleButton.click();
         await this.cartRuleForm.waitFor();
         await this.saveCartRuleButton.click();
     }
 
-    public async saveCatalogRuleWithoutRequiredFields() {
+    async saveCatalogRuleWithoutRequiredFields(): Promise<void> {
         await this.visit("admin/marketing/promotions/catalog-rules");
         await this.createCatalogRuleButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.catalogRuleButton.click();
+        await this.catalogRuleForm.waitFor();
+        await this.saveCatalogRuleButton.click();
     }
 
-    public async createFixedCartRuleWithCoupon(
+    async createFixedCartRuleWithCoupon(
         couponCode: string,
         discountAmount: string = "10",
-    ) {
+    ): Promise<string> {
         await this.visit("admin/marketing/promotions/cart-rules");
-        await this.fillGeneralCartDetails(couponCode);
+
+        const name = await this.fillGeneralCartDetails(couponCode);
 
         await this.addConditionButton.click();
-        await this.conditionAttributeSelect.waitFor();
-        await this.conditionAttributeSelect.selectOption("cart_item|quantity");
-        await this.conditionOperatorSelect.selectOption(">=");
-        await this.conditionValueInput.fill("1");
-
-        await this.actionTypeSelect.selectOption("by_fixed");
-        await this.discountAmountInput.fill(discountAmount);
-
+        await this.conditionAttributeSelect().waitFor();
+        await this.conditionAttributeSelect().selectOption("cart_item|quantity");
+        await this.conditionOperatorSelect().selectOption(">=");
+        await this.conditionValueInput().fill("1");
+        await this.setDiscount("by_fixed", Number(discountAmount));
         await this.configureSettings();
+        await this.saveCartRule();
 
-        await this.saveCartRuleButton.click();
-
-        await expect(this.successMessage).toContainText(
-            "Cart rule created successfully",
-        );
+        return name;
     }
 
-    public async expectRequiredFieldErrors() {
+    async expectRequiredFieldErrors(): Promise<void> {
         await expect(this.validationErrors).not.toHaveCount(0);
 
         for (const field of ["Name", "Channels", "Customer Groups"]) {
@@ -341,5 +363,9 @@ export class RuleCreatePage extends BasePage {
                 this.page.getByText(`The ${field} field is required`).first(),
             ).toBeVisible();
         }
+    }
+
+    async expectStillOnCreateForm(): Promise<void> {
+        await expect(this.page).toHaveURL(/promotions\/(cart|catalog)-rules\/create/);
     }
 }

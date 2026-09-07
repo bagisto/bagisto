@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
 
 export class CartPage extends BasePage {
@@ -10,56 +10,75 @@ export class CartPage extends BasePage {
         return this.page.getByPlaceholder("Search products here");
     }
 
-    private searchResultLink(productName: string) {
-        return this.page.getByRole("link", { name: productName }).first();
+    private productCard(productName: string) {
+        return this.page
+            .locator("div.group")
+            .filter({ has: this.page.locator(`p:text-is("${productName}")`) });
     }
 
-    private get addToCartButton() {
-        return this.page.getByRole("button", { name: "Add To Cart" }).first();
+    private get productForm() {
+        return this.page.locator('form:has(input[name="product_id"])');
     }
 
-    private get itemAddedMessage() {
-        return this.page.getByText("Item Added Successfully").first();
+    private get miniCartToggle() {
+        return this.page.getByLabel("Shopping Cart");
     }
 
-    private get shoppingCartButton() {
-        return this.page.getByRole("button", { name: "Shopping Cart" });
+    private get miniCartDrawer() {
+        return this.page
+            .locator("div.fixed")
+            .filter({ has: this.page.locator("p", { hasText: /^\s*Shopping Cart\s*$/ }) })
+            .filter({ visible: true });
     }
 
-    private get increaseQuantityButton() {
-        return this.page.getByLabel("Increase Quantity").first();
+    private miniCartItem(productName: string) {
+        return this.miniCartDrawer
+            .locator("div.flex.gap-x-5")
+            .filter({ has: this.page.getByRole("link", { name: productName, exact: true }) });
     }
 
-    private get decreaseQuantityButton() {
-        return this.page.getByLabel("Decrease Quantity").first();
+    private cartItem(productName: string) {
+        return this.page
+            .locator("div.grid.gap-y-6")
+            .filter({ has: this.page.getByRole("link", { name: productName, exact: true }) });
     }
 
-    private get quantityDisplay() {
-        return this.increaseQuantityButton.locator("..").locator("p");
+    private increaseButton(scope: Locator) {
+        return scope.getByLabel("Increase Quantity");
     }
 
-    private get binIcon() {
-        return this.page.locator(".icon-bin");
+    private decreaseButton(scope: Locator) {
+        return scope.getByLabel("Decrease Quantity");
     }
 
-    private get removeButton() {
-        return this.page.getByRole("button", { name: "Remove" }).first();
+    private binButton(scope: Locator) {
+        return scope.getByLabel("Remove Item");
+    }
+
+    private quantityDisplay(scope: Locator) {
+        return this.increaseButton(scope).locator("xpath=..").locator("p");
+    }
+
+    private removeButton(scope: Locator) {
+        return scope.getByRole("button", { name: "Remove", exact: true });
     }
 
     private get agreeButton() {
         return this.page.getByRole("button", { name: "Agree", exact: true });
     }
 
-    private get uncheckIcon() {
-        return this.page.locator(".icon-uncheck").first();
+    private get selectAllLabel() {
+        return this.page.locator('label[for="select-all"]');
+    }
+
+    private get removeSelectedButton() {
+        return this.selectAllLabel
+            .locator('xpath=ancestor::div[.//span[@role="button"][normalize-space()="Remove"]][1]')
+            .getByRole("button", { name: "Remove", exact: true });
     }
 
     private get updateCartButton() {
         return this.page.getByRole("button", { name: "Update Cart" });
-    }
-
-    private get quantityUpdatedMessage() {
-        return this.page.getByText("Quantity updated successfully").first();
     }
 
     private get applyCouponButton() {
@@ -74,148 +93,242 @@ export class CartPage extends BasePage {
         return this.page.getByRole("button", { name: "Apply", exact: true });
     }
 
-    private get couponAppliedMessage() {
+    private summaryRow(label: string) {
         return this.page
-            .getByRole("paragraph")
-            .filter({ hasText: "Coupon code applied" });
+            .locator("div.flex.justify-between")
+            .filter({
+                has: this.page.locator(`xpath=./p[normalize-space()="${label}"]`),
+            })
+            .filter({ visible: true });
     }
 
-    private get itemRemovedMessage() {
-        return this.page
-            .getByText("Item is successfully removed from the cart.")
-            .first();
+    private summaryAmount(label: string) {
+        return this.summaryRow(label)
+            .locator("p")
+            .filter({ hasText: /\d/ })
+            .filter({ hasNotText: /excl/i });
     }
 
-    private get selectedItemsRemovedMessage() {
-        return this.page
-            .getByText("Selected items successfully removed from cart.")
-            .first();
-    }
-
-    private get cartUpdateSpinner() {
-        return this.page.locator("svg.text-blue.animate-spin.font-semibold");
-    }
-
-    async gotoHome(): Promise<void> {
+    async addProductToCart(productName: string): Promise<void> {
         await this.visit("");
-    }
-
-    async goToCartView(): Promise<void> {
-        await this.visit("checkout/cart");
-    }
-
-    async searchProduct(term: string): Promise<void> {
-        await this.searchInput.fill(term);
+        await this.searchInput.fill(productName);
         await this.searchInput.press("Enter");
+
+        const card = this.productCard(productName);
+
+        await expect(card).toHaveCount(1);
+        await card.hover();
+        await card.getByRole("button", { name: "Add To Cart" }).click();
+
+        await expect(this.page.getByText("Item Added Successfully").first()).toBeVisible();
     }
 
-    async openProductFromSearch(productName: string): Promise<void> {
-        await this.searchResultLink(productName).click();
-    }
+    async openProduct(productName: string): Promise<void> {
+        await this.visit("");
+        await this.searchInput.fill(productName);
+        await this.searchInput.press("Enter");
 
-    async addFirstProductToCart(): Promise<void> {
-        await this.addToCartButton.click();
-    }
+        const card = this.productCard(productName);
 
-    async expectItemAdded(): Promise<void> {
-        await expect(this.itemAddedMessage).toBeVisible();
+        await expect(card).toHaveCount(1);
+        await card.getByRole("link", { name: productName }).click();
+
+        await expect(this.productForm).toBeVisible();
     }
 
     async openMiniCart(): Promise<void> {
-        await this.shoppingCartButton.click();
+        await this.miniCartToggle.click();
+
+        await expect(this.miniCartDrawer).toBeVisible();
     }
 
-    async expectQuantity(quantity: number): Promise<void> {
-        await expect(this.quantityDisplay).toHaveText(String(quantity));
+    async openCart(): Promise<void> {
+        await this.visit("checkout/cart");
+
+        await expect(this.page).toHaveURL(/checkout\/cart/);
     }
 
-    async increaseQuantityTo(quantity: number): Promise<void> {
-        await this.increaseQuantityButton.click();
-        await this.expectQuantity(quantity);
-        await this.waitForCartUpdate();
+    async setMiniCartQuantity(productName: string, quantity: number): Promise<void> {
+        const item = this.miniCartItem(productName);
+        const current = Number(await this.quantityDisplay(item).innerText());
+
+        for (let step = current; step < quantity; step++) {
+            await Promise.all([
+                this.page.waitForResponse((response) =>
+                    response.url().includes("/api/checkout/cart") && response.request().method() === "PUT",
+                ),
+                this.increaseButton(item).click(),
+            ]);
+        }
+
+        for (let step = current; step > quantity; step--) {
+            await Promise.all([
+                this.page.waitForResponse((response) =>
+                    response.url().includes("/api/checkout/cart") && response.request().method() === "PUT",
+                ),
+                this.decreaseButton(item).click(),
+            ]);
+        }
+
+        await expect(this.quantityDisplay(item)).toHaveText(String(quantity));
     }
 
-    async decreaseQuantityTo(quantity: number): Promise<void> {
-        await this.decreaseQuantityButton.click();
-        await this.expectQuantity(quantity);
-        await this.waitForCartUpdate();
+    async setCartQuantity(productName: string, quantity: number): Promise<void> {
+        const item = this.cartItem(productName);
+        const current = Number(await this.quantityDisplay(item).innerText());
+
+        for (let step = current; step < quantity; step++) {
+            await this.increaseButton(item).click();
+        }
+
+        for (let step = current; step > quantity; step--) {
+            await this.decreaseButton(item).click();
+        }
+
+        await expect(this.quantityDisplay(item)).toHaveText(String(quantity));
     }
 
-    async increaseQuantityFromCartView(): Promise<void> {
-        await this.increaseQuantityButton.click();
-    }
+    async setProductPageQuantity(quantity: number): Promise<void> {
+        const current = Number(await this.quantityDisplay(this.productForm).innerText());
 
-    async decreaseQuantityFromCartView(): Promise<void> {
-        await this.decreaseQuantityButton.click();
-    }
+        for (let step = current; step < quantity; step++) {
+            await this.increaseButton(this.productForm).click();
+        }
 
-    async expectBinIconOffered(): Promise<void> {
-        await expect(this.binIcon.first()).toBeVisible();
-    }
-
-    async expectBinIconNotOffered(): Promise<void> {
-        await expect(this.binIcon).toHaveCount(0);
-    }
-
-    async expectDecreaseQuantityDisabled(): Promise<void> {
-        await expect(this.decreaseQuantityButton).toHaveAttribute(
-            "aria-disabled",
-            "true",
-        );
-    }
-
-    async expectDecreaseQuantityEnabled(): Promise<void> {
-        await expect(this.decreaseQuantityButton).toHaveAttribute(
-            "aria-disabled",
-            "false",
-        );
-    }
-
-    async clickBinIcon(): Promise<void> {
-        await this.binIcon.first().click();
-        await this.agreeButton.click();
-    }
-
-    async removeProduct(): Promise<void> {
-        await this.removeButton.click();
-        await this.agreeButton.click();
-    }
-
-    async removeAllFromCartView(): Promise<void> {
-        await this.uncheckIcon.waitFor({ state: "visible" });
-        await this.uncheckIcon.click();
-        await this.removeButton.waitFor({ state: "visible" });
-        await this.removeButton.click();
-        await this.agreeButton.click();
+        await expect(this.quantityDisplay(this.productForm)).toHaveText(String(quantity));
     }
 
     async updateCart(): Promise<void> {
         await this.updateCartButton.click();
+
+        await expect(this.page.getByText("Quantity updated successfully").first()).toBeVisible();
     }
 
-    async expectQuantityUpdated(): Promise<void> {
-        await expect(this.quantityUpdatedMessage).toBeVisible();
+    async removeFromMiniCartWithBin(productName: string): Promise<void> {
+        await this.binButton(this.miniCartItem(productName)).click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item is successfully removed from the cart.").first(),
+        ).toBeVisible();
+    }
+
+    async removeFromMiniCart(productName: string): Promise<void> {
+        await this.removeButton(this.miniCartItem(productName)).click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item is successfully removed from the cart.").first(),
+        ).toBeVisible();
+    }
+
+    async removeFromCartWithBin(productName: string): Promise<void> {
+        await this.binButton(this.cartItem(productName)).click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item is successfully removed from the cart.").first(),
+        ).toBeVisible();
+    }
+
+    async removeFromCart(productName: string): Promise<void> {
+        await this.cartItem(productName)
+            .getByRole("button", { name: "Remove", exact: true })
+            .click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item is successfully removed from the cart.").first(),
+        ).toBeVisible();
+    }
+
+    async removeAllFromCart(): Promise<void> {
+        await this.selectAllLabel.click();
+
+        await expect(this.page.locator("input#select-all")).toBeChecked();
+
+        await this.removeSelectedButton.click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Selected items successfully removed from cart.").first(),
+        ).toBeVisible();
     }
 
     async applyCoupon(code: string): Promise<void> {
         await this.applyCouponButton.click();
         await this.couponInput.fill(code);
         await this.applyButton.click();
+
+        await expect(
+            this.page.getByText("Coupon code applied successfully.").first(),
+        ).toBeVisible();
     }
 
-    async expectCouponApplied(): Promise<void> {
-        await expect(this.couponAppliedMessage).toBeVisible();
+    async attemptCoupon(code: string): Promise<void> {
+        await this.applyCouponButton.click();
+        await this.couponInput.fill(code);
+        await this.applyButton.click();
     }
 
-    async expectItemRemoved(): Promise<void> {
-        await expect(this.itemRemovedMessage).toBeVisible();
+    async expectCouponRejected(): Promise<void> {
+        await expect(this.page.getByText("Coupon code is invalid.").first()).toBeVisible();
     }
 
-    async expectSelectedItemsRemoved(): Promise<void> {
-        await expect(this.selectedItemsRemovedMessage).toBeVisible();
+    async expectMiniCartQuantity(productName: string, quantity: number): Promise<void> {
+        await expect(this.quantityDisplay(this.miniCartItem(productName))).toHaveText(
+            String(quantity),
+        );
     }
 
-    async waitForCartUpdate(): Promise<void> {
-        await expect(this.cartUpdateSpinner).toHaveCount(0);
+    async expectCartQuantity(productName: string, quantity: number): Promise<void> {
+        await expect(this.quantityDisplay(this.cartItem(productName))).toHaveText(
+            String(quantity),
+        );
     }
+
+    async expectMiniCartBinOffered(productName: string, offered: boolean): Promise<void> {
+        await expect(this.binButton(this.miniCartItem(productName))).toHaveCount(
+            offered ? 1 : 0,
+        );
+    }
+
+    async expectCartBinOffered(productName: string, offered: boolean): Promise<void> {
+        await expect(this.binButton(this.cartItem(productName))).toHaveCount(
+            offered ? 1 : 0,
+        );
+    }
+
+    async expectProductPageBinOffered(offered: boolean): Promise<void> {
+        await expect(this.binButton(this.productForm)).toHaveCount(offered ? 1 : 0);
+    }
+
+    async expectProductPageDecreaseDisabled(disabled: boolean): Promise<void> {
+        await expect(this.decreaseButton(this.productForm)).toHaveAttribute(
+            "aria-disabled",
+            String(disabled),
+        );
+    }
+
+    async expectMiniCartItemAbsent(productName: string): Promise<void> {
+        await expect(this.miniCartItem(productName)).toHaveCount(0);
+    }
+
+    async expectCartItemAbsent(productName: string): Promise<void> {
+        await expect(this.cartItem(productName)).toHaveCount(0);
+    }
+
+    async expectCartEmpty(): Promise<void> {
+        await expect(
+            this.page.getByText(/You don.t have a product in your cart/).first(),
+        ).toBeVisible();
+    }
+
+    async expectSummaryAmount(label: string, amount: string): Promise<void> {
+        await expect(this.summaryAmount(label)).toHaveText(new RegExp(escapeRegExp(amount)));
+    }
+}
+
+function escapeRegExp(text: string): string {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

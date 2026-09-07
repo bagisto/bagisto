@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
 
 export class WishlistPage extends BasePage {
@@ -6,54 +6,140 @@ export class WishlistPage extends BasePage {
         super(page);
     }
 
-    async gotoHome(): Promise<void> {
+    private get searchInput() {
+        return this.page.getByPlaceholder("Search products here");
+    }
+
+    private productCard(productName: string) {
+        return this.page
+            .locator("div.group")
+            .filter({ has: this.page.locator(`p:text-is("${productName}")`) });
+    }
+
+    private wishlistItem(productName: string): Locator {
+        return this.page.locator("div.mt-8.flex.flex-wrap").filter({
+            has: this.page.locator("p", {
+                hasText: new RegExp(`^\\s*${escapeRegExp(productName)}\\s*$`),
+            }),
+        });
+    }
+
+    private get agreeButton() {
+        return this.page.getByRole("button", { name: "Agree", exact: true });
+    }
+
+    private get deleteAllButton() {
+        return this.page.getByRole("button", { name: "Delete All" });
+    }
+
+    private async searchFor(productName: string): Promise<void> {
         await this.visit("");
+        await this.searchInput.fill(productName);
+        await this.searchInput.press("Enter");
+
+        await expect(this.productCard(productName)).toHaveCount(1);
     }
 
-    async addProductToWishlist(): Promise<void> {
-        await this.page.getByPlaceholder("Search products here").fill("simple");
-        await this.page.getByPlaceholder("Search products here").press("Enter");
-        await this.page.locator(".action-items > span").first().click();
-    }
+    async addToWishlistFromListing(productName: string): Promise<void> {
+        await this.searchFor(productName);
 
-    async increaseQuantityFromWishlishtView(): Promise<void> {
-        await this.page.getByLabel("Increase Quantity").first().click();
-    }
+        const card = this.productCard(productName);
 
-    async clickBinIcon(): Promise<void> {
-        await this.page.locator(".icon-bin").nth(1).click();
-        await this.page
-            .getByRole("button", { name: "Agree", exact: true })
-            .click();
-    }
+        await card.hover();
+        await card.getByLabel("Add To Wishlist").filter({ visible: true }).click();
 
-    async expectWishlistAdded(): Promise<void> {
         await expect(
             this.page.getByText("Item Successfully Added To Wishlist").first(),
         ).toBeVisible();
     }
 
-    async openWishlist(): Promise<void> {
-        await this.page.goto("customer/account/wishlist");
-    }
+    async removeFromListing(productName: string): Promise<void> {
+        await this.searchFor(productName);
 
-    async removeFirstWishlistItem(): Promise<void> {
-        await this.page.locator(".action-items > span").first().click();
-    }
+        const card = this.productCard(productName);
 
-    async clearWishlist(): Promise<void> {
-        await this.openWishlist();
-        await this.page.getByText("Delete All", { exact: true }).click();
-        await this.page
-            .getByRole("button", { name: "Agree", exact: true })
-            .click();
-    }
+        await card.hover();
+        await card.getByLabel("Add To Wishlist").filter({ visible: true }).click();
 
-    async expectWishlistRemoved(): Promise<void> {
         await expect(
-            this.page
-                .getByText("Item Successfully Removed From Wishlist")
-                .first(),
+            this.page.getByText("Item Successfully Removed From Wishlist").first(),
         ).toBeVisible();
     }
+
+    async open(): Promise<void> {
+        await this.visit("customer/account/wishlist");
+
+        await expect(this.page).toHaveURL(/customer\/account\/wishlist/);
+    }
+
+    async increaseQuantity(productName: string): Promise<void> {
+        const item = this.wishlistItem(productName);
+
+        await item.getByLabel("Increase Quantity").click();
+
+        await expect(
+            item.getByLabel("Increase Quantity").locator("xpath=..").locator("p"),
+        ).toHaveText("2");
+    }
+
+    async removeWithBin(productName: string): Promise<void> {
+        await this.wishlistItem(productName).getByLabel("Remove Item").click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item Successfully Removed From Wishlist").first(),
+        ).toBeVisible();
+    }
+
+    async removeItem(productName: string): Promise<void> {
+        await this.wishlistItem(productName)
+            .getByRole("button", { name: "Remove", exact: true })
+            .click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item Successfully Removed From Wishlist").first(),
+        ).toBeVisible();
+    }
+
+    async moveToCart(productName: string): Promise<void> {
+        await this.wishlistItem(productName)
+            .getByRole("button", { name: "Move To Cart" })
+            .click();
+
+        await expect(
+            this.page.getByText("Item Successfully Moved To Cart").first(),
+        ).toBeVisible();
+    }
+
+    async deleteAll(): Promise<void> {
+        await this.deleteAllButton.click();
+        await this.agreeButton.click();
+
+        await expect(
+            this.page.getByText("Item Successfully Removed From Wishlist").first(),
+        ).toBeVisible();
+    }
+
+    async expectItemListed(productName: string): Promise<void> {
+        await expect(this.wishlistItem(productName)).toHaveCount(1);
+    }
+
+    async expectItemAbsent(productName: string): Promise<void> {
+        await expect(this.wishlistItem(productName)).toHaveCount(0);
+    }
+
+    async expectBinOffered(productName: string, offered: boolean): Promise<void> {
+        await expect(
+            this.wishlistItem(productName).getByLabel("Remove Item"),
+        ).toHaveCount(offered ? 1 : 0);
+    }
+
+    async expectEmpty(): Promise<void> {
+        await expect(this.page.locator("div.mt-8.flex.flex-wrap")).toHaveCount(0);
+    }
+}
+
+function escapeRegExp(text: string): string {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

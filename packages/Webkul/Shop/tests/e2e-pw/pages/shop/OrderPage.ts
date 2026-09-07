@@ -6,16 +6,10 @@ export class OrderPage extends BasePage {
         super(page);
     }
 
-    private get profileMenu() {
-        return this.page.getByLabel("Profile");
-    }
-
-    private get ordersLink() {
-        return this.page.getByRole("link", { name: "Orders", exact: true });
-    }
-
-    private get viewOrderButton() {
-        return this.page.locator("div").locator("span.icon-eye").first();
+    private orderCard(orderId: string) {
+        return this.page.locator("div.rounded-md").filter({
+            hasText: new RegExp(`Order ID:\\s*#${orderId}\\b`),
+        });
     }
 
     private get reorderLink() {
@@ -26,107 +20,117 @@ export class OrderPage extends BasePage {
         return this.page.getByRole("link", { name: "Cancel" });
     }
 
-    private get updateCartButton() {
-        return this.page.getByRole("button", { name: "Update Cart" });
-    }
-
-    private get invoicesButton() {
-        return this.page.getByRole("tab", { name: "Invoices" });
-    }
-
-    private get printLink() {
-        return this.page.getByRole("link", { name: " Print" });
-    }
-
-    private get downloadableProductsLink() {
-        return this.page.getByRole("link", {
-            name: " Downloadable Products ",
-        });
-    }
-
     private get agreeButton() {
         return this.page.getByRole("button", { name: "Agree", exact: true });
     }
 
-    private get quantityUpdatedMessage() {
-        return this.page.getByText("Quantity updated successfully").first();
+    private get invoicesTab() {
+        return this.page.getByRole("tab", { name: "Invoices" });
     }
 
-    private get itemStatusCell() {
+    private get printLink() {
+        return this.page.getByRole("link", { name: "Print" });
+    }
+
+    private get itemStatusCells() {
         return this.page.locator('td[data-value="Item Status"]');
     }
 
-    private get processingStatusText() {
-        return this.page.locator("span").filter({ hasText: "Processing" });
+    private statusLabel(status: string) {
+        return this.page.locator('p[class^="label-"]', {
+            hasText: new RegExp(`^\\s*${status}\\s*$`),
+        });
     }
 
-    private get invoiceCreatedMessage() {
-        return this.page.getByText("Invoice created successfully Close");
-    }
-
-    private get itemMovedToCartMessage() {
+    private cartItemRow(productName: string) {
         return this.page
-            .getByRole("paragraph")
-            .filter({ hasText: "Item Successfully Moved to Cart" });
+            .locator("div.flex")
+            .filter({ has: this.page.getByRole("link", { name: productName, exact: true }) });
     }
 
-    async gotoOrdersPage(): Promise<void> {
-        await this.visit("");
-        await this.profileMenu.click();
-        await this.ordersLink.click();
+    async openOrders(): Promise<void> {
+        await this.visit("customer/account/orders");
+
+        await expect(this.page).toHaveURL(/customer\/account\/orders/);
     }
 
-    async viewFirstOrder(): Promise<void> {
-        await this.viewOrderButton.click();
+    async openOrder(orderId: string): Promise<void> {
+        await this.visit(`customer/account/orders/view/${orderId}`);
+
+        await expect(this.page).toHaveURL(new RegExp(`orders/view/${orderId}$`));
     }
 
-    async reorderFirstOrder(): Promise<void> {
+    async reorder(orderId: string): Promise<void> {
+        await this.openOrder(orderId);
         await this.reorderLink.click();
-        await this.updateCartButton.click();
-        await expect(this.quantityUpdatedMessage).toBeVisible();
+
+        await expect(this.page).toHaveURL(/checkout\/cart/);
     }
 
-    async cancelFirstOrder(): Promise<void> {
+    async cancelOrder(orderId: string): Promise<void> {
+        await this.openOrder(orderId);
         await this.cancelLink.click();
         await this.agreeButton.click();
-        await expect(this.itemStatusCell).toContainText("Canceled");
+
+        await expect(this.page.getByText(/has been canceled/).first()).toBeVisible();
     }
 
-    async printInvoice(): Promise<void> {
-        await this.invoicesButton.click();
-        const downloadPromise = this.page.waitForEvent("download");
-        await this.printLink.click();
-        await downloadPromise;
+    async printInvoice(orderId: string): Promise<string> {
+        await this.openOrder(orderId);
+        await this.invoicesTab.click();
+
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.printLink.click(),
+        ]);
+
+        return download.suggestedFilename();
     }
 
-    async downloadDownloadableProduct(): Promise<string | null> {
-        await this.downloadableProductsLink.click();
-        const popupPromise = this.page.waitForEvent("popup").catch(() => null);
-        const downloadPromise = this.page
-            .waitForEvent("download")
-            .catch(() => null);
+    async expectOrderListed(
+        orderId: string,
+        status: string,
+        grandTotal?: string,
+    ): Promise<void> {
+        await this.openOrders();
 
-        const productLinks = this.page.getByRole("link").filter({
-            hasNot: this.page.locator("link[rel='stylesheet']"),
-        });
+        const card = this.orderCard(orderId);
 
-        if ((await productLinks.count()) > 0) {
-            await productLinks.first().click();
+        await expect(card).toHaveCount(1);
+        await expect(card).toContainText(status);
+
+        if (grandTotal !== undefined) {
+            await expect(card).toContainText(grandTotal);
         }
-
-        const result = await Promise.race([popupPromise, downloadPromise]);
-        if (result) {
-            return (result as any).name?.() || "downloaded";
-        }
-
-        return null;
     }
 
-    async moveWishlistItemToCart(): Promise<void> {
-        await this.page
-            .getByRole("button", { name: "Move To Cart" })
-            .first()
-            .click();
-        await expect(this.itemMovedToCartMessage).toBeVisible();
+    async expectOrderStatus(orderId: string, status: string): Promise<void> {
+        await this.openOrder(orderId);
+
+        await expect(this.statusLabel(status)).toHaveCount(1);
+    }
+
+    async expectAllItemsCanceled(orderId: string): Promise<void> {
+        await this.openOrder(orderId);
+
+        const count = await this.itemStatusCells.count();
+
+        expect(count).toBeGreaterThan(0);
+
+        for (let index = 0; index < count; index++) {
+            await expect(this.itemStatusCells.nth(index)).toContainText("Canceled");
+        }
+    }
+
+    async expectCancelNotOffered(orderId: string): Promise<void> {
+        await this.openOrder(orderId);
+
+        await expect(this.cancelLink).toHaveCount(0);
+    }
+
+    async expectCartContains(productName: string): Promise<void> {
+        await this.visit("checkout/cart");
+
+        await expect(this.cartItemRow(productName).first()).toBeVisible();
     }
 }

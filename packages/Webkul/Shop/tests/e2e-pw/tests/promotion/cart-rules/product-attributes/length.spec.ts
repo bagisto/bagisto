@@ -1,29 +1,33 @@
+import { uniqueStamp } from "../../../../utils/faker";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import { ProductEditPage } from "../../../../pages/admin/catalog/products/ProductEditPage";
+import type { BaseProduct } from "../../../../pages/types/product.types";
 import { test } from "../../../../setup";
-import { expect, Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
 
 async function createRuleAndVerifyCoupon({
-    page,
+    adminPage,
+    shopPage,
     operator,
     value,
     couponType,
 }: {
-    page: Page;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     value: string;
     couponType: CouponType;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
-
-    await loginAsAdmin(page);
-    await ruleCreatePage.cartRuleCreationFlow();
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
+    const rule = await ruleCreatePage.cartRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|length",
@@ -38,36 +42,36 @@ async function createRuleAndVerifyCoupon({
 
     await ruleCreatePage.saveCartRule();
 
-    await page.goto("admin/catalog/products");
-    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-    await page.waitForLoadState("networkidle");
+    const productEditPage = new ProductEditPage(adminPage);
+
+    await productEditPage.openProduct(product.name);
 
     if (operator === "!{}" || operator === "!=") {
         const fillValue = (Number(value) - 1).toString();
-        await page.locator('input[name="length"]').first().fill(fillValue);
+        await productEditPage.fillInput("length", fillValue);
     } else {
-        await page.locator('input[name="length"]').first().fill(value);
+        await productEditPage.fillInput("length", value);
     }
 
-    await page.locator('button:has-text("Save Product")').first().click();
+    await productEditPage.save();
 
-    await expect(
-        page.getByText("Product updated successfully").first(),
-    ).toBeVisible();
-
-    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
-        discountValue,
-        couponType,
-    );
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal({
+        productName: product.name,
+        couponCode: rule.couponCode,
+        discountValue: discountValue,
+        couponType: couponType,
+    });
 }
 
-test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreatePage(adminPage);
+let product: BaseProduct;
+let createdRules: string[];
 
-    await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
@@ -77,8 +81,11 @@ test.beforeEach(async ({ adminPage }) => {
 });
 
 test.afterEach(async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
+    try {
+        await new RuleDeletePage(adminPage).deleteCartRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 type TestCase = {
@@ -146,10 +153,12 @@ test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
             test(`should apply coupon when length condition is -> ${tc.label}`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await createRuleAndVerifyCoupon({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator: tc.operator,
                     value: tc.value,
                     couponType: tc.couponType,

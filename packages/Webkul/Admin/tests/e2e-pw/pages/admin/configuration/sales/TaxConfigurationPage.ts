@@ -1,76 +1,100 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
-import { TaxApplyOnMode, TaxPricingMode } from "../../../../utils/tax";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class TaxConfigurationPage extends BasePage {
+export interface TaxSettings {
+    shippingTaxCategory: string;
+    productTaxCategory: string;
+    basedOn: string;
+    productPrices: string;
+    shippingPrices: string;
+    applyTaxOn: string;
+    defaultCountry: string;
+    defaultState: string;
+    defaultPostcode: string;
+    cartDisplayPrices: string;
+    cartDisplaySubtotal: string;
+    cartDisplayShipping: string;
+    salesDisplayPrices: string;
+    salesDisplaySubtotal: string;
+    salesDisplayShipping: string;
+}
+
+const SELECTS = {
+    shippingTaxCategory: "sales[taxes][categories][shipping]",
+    productTaxCategory: "sales[taxes][categories][product]",
+    basedOn: "sales[taxes][calculation][based_on]",
+    productPrices: "sales[taxes][calculation][product_prices]",
+    shippingPrices: "sales[taxes][calculation][shipping_prices]",
+    applyTaxOn: "sales[taxes][calculation][apply_tax_on]",
+    defaultCountry: "sales[taxes][default_destination_calculation][country]",
+    defaultState: "sales[taxes][default_destination_calculation][state]",
+    cartDisplayPrices: "sales[taxes][shopping_cart][display_prices]",
+    cartDisplaySubtotal: "sales[taxes][shopping_cart][display_subtotal]",
+    cartDisplayShipping: "sales[taxes][shopping_cart][display_shipping_amount]",
+    salesDisplayPrices: "sales[taxes][sales][display_prices]",
+    salesDisplaySubtotal: "sales[taxes][sales][display_subtotal]",
+    salesDisplayShipping: "sales[taxes][sales][display_shipping_amount]",
+} as const;
+
+const DEFAULT_POSTCODE =
+    "sales[taxes][default_destination_calculation][post_code]";
+
+type SelectKey = keyof typeof SELECTS;
+
+export class TaxConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get productPricesSelect() {
-        return this.page.locator(
-            'select[name="sales[taxes][calculation][product_prices]"]',
-        );
+    protected get path(): string {
+        return "admin/configuration/sales/taxes";
     }
 
-    private get shippingPricesSelect() {
-        return this.page.locator(
-            'select[name="sales[taxes][calculation][shipping_prices]"]',
-        );
-    }
-
-    private get applyTaxOnSelect() {
-        return this.page.locator(
-            'select[name="sales[taxes][calculation][apply_tax_on]"]',
-        );
-    }
-
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
-    }
-
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully").first();
-    }
-
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/sales/taxes");
-        await expect(this.productPricesSelect).toBeVisible();
-    }
-
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.first().click();
-        await expect(this.successNotification).toBeVisible();
-    }
-
-    async setProductPricesMode(mode: TaxPricingMode): Promise<void> {
+    async readSettings(): Promise<TaxSettings> {
         await this.open();
-        await this.productPricesSelect.selectOption(mode);
-        await this.saveAndVerify();
+
+        const settings = {} as TaxSettings;
+
+        for (const key of Object.keys(SELECTS) as SelectKey[]) {
+            settings[key] = await this.readSelect(SELECTS[key]);
+        }
+
+        settings.defaultPostcode = await this.readText(DEFAULT_POSTCODE);
+
+        return settings;
     }
 
-    async setShippingPricesMode(mode: TaxPricingMode): Promise<void> {
+    async applySettings(settings: Partial<TaxSettings>): Promise<void> {
         await this.open();
-        await this.shippingPricesSelect.selectOption(mode);
-        await this.saveAndVerify();
+
+        for (const key of Object.keys(SELECTS) as SelectKey[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setSelect(SELECTS[key], value);
+            }
+        }
+
+        if (settings.defaultPostcode !== undefined) {
+            await this.setText(DEFAULT_POSTCODE, settings.defaultPostcode);
+        }
+
+        await this.save();
     }
 
-    async setApplyTaxOn(mode: TaxApplyOnMode): Promise<void> {
+    async expectSettings(settings: Partial<TaxSettings>): Promise<void> {
         await this.open();
-        await this.applyTaxOnSelect.selectOption(mode);
-        await this.saveAndVerify();
-    }
 
-    async resetToDefault(): Promise<void> {
-        await this.setProductPricesMode("excluding_tax");
-    }
+        for (const key of Object.keys(SELECTS) as SelectKey[]) {
+            const value = settings[key];
 
-    async resetCalculationDefaults(): Promise<void> {
-        await this.open();
-        await this.productPricesSelect.selectOption("excluding_tax");
-        await this.applyTaxOnSelect.selectOption("after_discount");
-        await this.saveAndVerify();
+            if (value !== undefined) {
+                await this.expectSelect(SELECTS[key], value);
+            }
+        }
+
+        if (settings.defaultPostcode !== undefined) {
+            await this.expectText(DEFAULT_POSTCODE, settings.defaultPostcode);
+        }
     }
 }

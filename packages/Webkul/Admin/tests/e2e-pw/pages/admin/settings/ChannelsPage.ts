@@ -1,176 +1,281 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
+import { DatagridPage } from "../DatagridPage";
 import {
-    generateName,
-    generateSlug,
     generateDescription,
     generateHostname,
+    generateName,
+    generateSlug,
+    uniqueStamp,
 } from "../../../utils/faker";
 
-export class ChannelsPage extends BasePage {
+export interface ChannelData {
+    code: string;
+    name: string;
+    description: string;
+    hostname: string;
+}
+
+export function buildChannel(overrides: Partial<ChannelData> = {}): ChannelData {
+    const name = `${generateName()} ${uniqueStamp()}`;
+
+    return {
+        code: generateSlug("_"),
+        name,
+        description: generateDescription(),
+        hostname: generateHostname(),
+        ...overrides,
+    };
+}
+
+export class ChannelsPage extends DatagridPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get createChannelButton() {
-        return this.page.locator('a.primary-button:has-text("Create Channel")');
+    protected get gridPath(): string {
+        return "admin/settings/channels";
+    }
+
+    private get createLink() {
+        return this.page.getByRole("link", { name: "Create Channel" });
     }
 
     private get codeInput() {
-        return this.page.locator("#code");
+        return this.page.locator('input[name="code"]');
     }
 
     private get nameInput() {
-        return this.page.locator("#name");
+        return this.page.locator('input[name="name"]');
+    }
+
+    private get localeNameInput() {
+        return this.page.locator('input[name="en[name]"]');
     }
 
     private get descriptionInput() {
-        return this.page.locator("#description");
+        return this.page.locator('textarea[name="description"]');
     }
 
-    private get inventorySourcesCheckbox() {
-        return this.page.locator('label[for="inventory_sources_1"]');
+    private get inventorySourceOption() {
+        return this.checkboxLabel("inventory_sources_1");
     }
 
-    private get inventorySourcesInput() {
+    private get inventorySourceInput() {
         return this.page.locator("input#inventory_sources_1");
     }
 
     private get rootCategorySelect() {
-        return this.page.locator("#root_category_id");
+        return this.page.locator('select[name="root_category_id"]');
     }
 
     private get hostnameInput() {
-        return this.page.locator("#hostname");
+        return this.page.locator('input[name="hostname"]');
     }
 
-    private get localesCheckbox() {
-        return this.page.locator('label[for="locales_1"]');
+    private get localeOption() {
+        return this.checkboxLabel("locales_1");
     }
 
-    private get localesInput() {
+    private get localeInput() {
         return this.page.locator("input#locales_1");
     }
 
     private get defaultLocaleSelect() {
-        return this.page.locator("#default_locale_id");
+        return this.page.locator('select[name="default_locale_id"]');
     }
 
-    private get currenciesCheckbox() {
-        return this.page.locator('label[for="currencies_1"]');
+    private get currencyOption() {
+        return this.checkboxLabel("currencies_1");
     }
 
-    private get currenciesInput() {
+    private get currencyInput() {
         return this.page.locator("input#currencies_1");
     }
 
     private get baseCurrencySelect() {
-        return this.page.locator("#base_currency_id");
+        return this.page.locator('select[name="base_currency_id"]');
     }
 
-    private get metaTitleInput() {
-        return this.page.locator("#meta_title");
+    private get seoTitleInput() {
+        return this.page.locator('input[name="seo_title"]');
     }
 
     private get seoKeywordsInput() {
-        return this.page.locator("#seo_keywords");
+        return this.page.locator('textarea[name="seo_keywords"]');
     }
 
-    private get metaDescriptionInput() {
-        return this.page.locator("#meta_description");
+    private get seoDescriptionInput() {
+        return this.page.locator('textarea[name="seo_description"]');
     }
 
-    private get saveChannelButton() {
-        return this.page.locator(
-            'button.primary-button:has-text("Save Channel")',
-        );
+    private get saveButton() {
+        return this.page
+            .locator('button[type="submit"]')
+            .filter({ hasText: "Save Channel" });
     }
 
-    private get editIcons() {
-        return this.page.locator("span.cursor-pointer.icon-edit");
+    private currencyLabel(currencyName: string) {
+        return this.page
+            .locator('label[for^="currencies_"]')
+            .filter({ hasText: new RegExp(`^\\s*${currencyName}\\s*$`) });
     }
 
-    private get deleteIcons() {
-        return this.page.locator("span.cursor-pointer.icon-delete");
+    private currencyCheckbox(currencyName: string) {
+        return this.currencyLabel(currencyName)
+            .locator("..")
+            .locator('input[name="currencies[]"]');
     }
 
-    private get agreeButton() {
-        return this.page.locator('button.primary-button:has-text("Agree")');
+    private async openCreateForm(): Promise<void> {
+        await this.openGrid();
+        await this.createLink.click();
+        await this.openFormPage();
+
+        await expect(this.codeInput).toBeVisible();
     }
 
-    private flashMessage(text: string) {
-        return this.page.locator("#app").getByText(text);
+    private async openEditForm(name: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(name);
+        await this.editIcon(name).click();
+        await this.openFormPage();
+
+        await expect(this.localeNameInput).toHaveValue(name);
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/settings/channels");
-    }
-
-    async createChannel(): Promise<{ code: string; name: string }> {
-        await this.open();
-        await this.createChannelButton.waitFor({ state: "visible" });
-        await this.createChannelButton.click();
-
-        const code = generateSlug("_");
-        const name = generateName();
-        const description = generateDescription();
-
-        await this.page.waitForSelector(
-            'form[action*="/settings/channels/create"]',
-        );
-        await this.codeInput.fill(code);
-        await this.nameInput.fill(name);
-        await this.descriptionInput.fill(description);
-        await this.inventorySourcesCheckbox.first().click();
-        await expect(this.inventorySourcesInput).toBeChecked();
+    private async fillCreateForm(data: ChannelData): Promise<void> {
+        await this.codeInput.fill(data.code);
+        await this.nameInput.fill(data.name);
+        await this.descriptionInput.fill(data.description);
+        await this.inventorySourceOption.click();
+        await expect(this.inventorySourceInput).toBeChecked();
         await this.rootCategorySelect.selectOption("1");
-        await this.hostnameInput.fill(generateHostname());
-        await this.localesCheckbox.first().click();
-        await expect(this.localesInput).toBeChecked();
+        await this.hostnameInput.fill(data.hostname);
+        await this.localeOption.click();
+        await expect(this.localeInput).toBeChecked();
         await this.defaultLocaleSelect.selectOption("1");
-        await this.currenciesCheckbox.first().click();
-        await expect(this.currenciesInput).toBeChecked();
+        await this.currencyOption.click();
+        await expect(this.currencyInput).toBeChecked();
         await this.baseCurrencySelect.selectOption("1");
+        await this.seoTitleInput.fill(data.name);
+        await this.seoKeywordsInput.fill(data.name);
+        await this.seoDescriptionInput.fill(data.description);
+    }
 
-        await this.metaTitleInput.fill(name);
-        await this.seoKeywordsInput.fill(name);
-        await this.metaDescriptionInput.fill(description);
-        await this.saveChannelButton.click();
+    async createChannel(
+        data: ChannelData = buildChannel(),
+    ): Promise<ChannelData> {
+        await this.openCreateForm();
+        await this.fillCreateForm(data);
+        await this.saveButton.click();
 
         await expect(
             this.flashMessage("Channel created successfully."),
         ).toBeVisible();
 
-        return { code, name };
+        return data;
     }
 
-    async editFirstChannel(): Promise<void> {
-        await this.open();
-        await this.editIcons.first().waitFor({ state: "visible" });
-        await this.editIcons.first().click();
-        await this.saveChannelButton.click();
+    async attemptCreateChannel(data: ChannelData): Promise<void> {
+        await this.openCreateForm();
+        await this.fillCreateForm(data);
+        await this.saveButton.click();
+    }
+
+    async submitEmptyCreateForm(): Promise<void> {
+        await this.openCreateForm();
+        await this.saveButton.click();
+    }
+
+    async renameChannel(name: string, newName: string): Promise<void> {
+        await this.openEditForm(name);
+        await this.localeNameInput.fill(newName);
+        await this.saveButton.click();
 
         await expect(
             this.flashMessage("Update Channel Successfully"),
         ).toBeVisible();
     }
 
-    async deleteFirstChannel(): Promise<void> {
-        await this.open();
-        await this.deleteIcons.first().waitFor({ state: "visible" });
-        await this.deleteIcons.first().click();
+    async setChannelCurrency(
+        channelName: string,
+        currencyName: string,
+        enabled: boolean,
+    ): Promise<void> {
+        await this.openEditForm(channelName);
 
-        await this.page.waitForSelector("text=Are you sure");
-        const agreeButton = this.agreeButton;
+        const checkbox = this.currencyCheckbox(currencyName);
 
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
+        await expect(checkbox).toBeAttached();
+
+        if ((await checkbox.isChecked()) !== enabled) {
+            await this.currencyLabel(currencyName).click();
         }
 
+        await expect(checkbox).toBeChecked({ checked: enabled });
+
+        await this.saveButton.click();
+
         await expect(
-            this.flashMessage("Channel deleted successfully."),
+            this.flashMessage("Update Channel Successfully"),
         ).toBeVisible();
+    }
+
+    async deleteChannel(name: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(name);
+        await this.deleteRow(name, "Channel deleted successfully.");
+    }
+
+    async attemptDeleteChannel(name: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(name);
+        await this.rowWithCell(name).locator("span.icon-delete").click();
+        await this.agreeButton.click();
+    }
+
+    async deleteChannelsIfPresent(names: string[]): Promise<void> {
+        await this.deleteRowsIfPresent(names, "Channel deleted successfully.");
+    }
+
+    async expectChannelListed(data: ChannelData): Promise<void> {
+        await this.expectSearchedRowCount(data.name, 1);
+
+        await expect(this.row(data.name)).toContainText(data.code);
+        await expect(this.row(data.name)).toContainText(data.hostname);
+    }
+
+    async expectChannelAbsent(name: string): Promise<void> {
+        await this.expectSearchedRowCount(name, 0);
+    }
+
+    async expectChannelCodeListedOnce(code: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(code);
+
+        await expect(this.rowWithCell(code)).toHaveCount(1);
+    }
+
+    async expectDefaultChannelListed(): Promise<void> {
+        await this.openGrid();
+        await this.searchFor("default");
+
+        await expect(this.rowWithCell("default")).toHaveCount(1);
+    }
+
+    async expectNameInEditForm(name: string): Promise<void> {
+        await this.openEditForm(name);
+    }
+
+    async expectValidationError(message: string): Promise<void> {
+        await this.expectValidationMessage(message);
+    }
+
+    async expectErrorMessage(message: string): Promise<void> {
+        await expect(this.flashMessage(message)).toBeVisible();
+    }
+
+    async expectStillOnCreateForm(): Promise<void> {
+        await expect(this.page).toHaveURL(/settings\/channels\/create/);
     }
 }

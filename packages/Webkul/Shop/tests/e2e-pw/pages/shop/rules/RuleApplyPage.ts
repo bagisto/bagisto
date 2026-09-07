@@ -1,48 +1,11 @@
 import { expect, Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
-import { ProductDataManager } from "../../admin/catalog/products/ProductDataManager";
+import { CheckoutHelper } from "../checkout/CheckoutHelper";
 
-export class RuleApplyPage extends BasePage {
+export type CouponType = "fixed" | "percentage" | "fixedAmmountWholeCart";
+
+export class RuleApplyPage extends CheckoutHelper {
     constructor(page: Page) {
         super(page);
-    }
-
-    private get searchInput() {
-        return this.page.getByRole("textbox", { name: "Search products here" });
-    }
-
-    private get addToCartButton() {
-        return this.page.locator(
-            "(//button[contains(@class, 'secondary-button')])[2]",
-        );
-    }
-
-    private get addToCartSuccessMessage() {
-        return this.page.getByText("Item Added Successfully").first();
-    }
-
-    private get incrementQtyButton() {
-        return this.page.locator(".icon-plus");
-    }
-
-    private get updateCart() {
-        return this.page.getByRole("button", { name: "Update Cart" });
-    }
-
-    private get cartUpdateSuccess() {
-        return this.page.getByText("Quantity updated successfully");
-    }
-
-    private get grandTotalAmount() {
-        return this.page
-            .locator("text=Grand Total")
-            .locator("..")
-            .locator("p")
-            .nth(1);
-    }
-
-    private get couponAppliedMessage() {
-        return this.page.getByText("Coupon code applied successfully.").first();
     }
 
     private get applyCouponButton() {
@@ -57,201 +20,116 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByRole("button", { name: "Apply", exact: true });
     }
 
-    private get cookieConsentAccept() {
+    private get couponAppliedMessage() {
+        return this.page.getByText("Coupon code applied successfully.").first();
+    }
+
+    private get updateCartButton() {
+        return this.page.getByRole("button", { name: "Update Cart" });
+    }
+
+    private cartItem(productName: string) {
         return this.page
-            .locator(".js-cookie-consent")
-            .getByRole("button", { name: "Accept" });
+            .locator("div.grid.gap-y-6")
+            .filter({ has: this.page.getByRole("link", { name: productName, exact: true }) });
     }
 
-    private get shoppingCartIcon() {
-        return this.page.locator('[class*="icon-cart"]').first();
-    }
-
-    private get continueButton() {
-        return this.page.locator(
-            '(//a[contains(., " Continue to Checkout ")])[1]',
-        );
-    }
-
-    private get companyName() {
-        return this.page.getByRole("textbox", { name: "Company Name" });
-    }
-
-    private get firstName() {
-        return this.page.getByRole("textbox", { name: "First Name" });
-    }
-
-    private get lastName() {
-        return this.page.getByRole("textbox", { name: "Last Name" });
-    }
-
-    private get shippingEmail() {
-        return this.page.locator('input[name="billing\\.email"]');
-    }
-
-    private get streetAddress() {
-        return this.page.getByRole("textbox", { name: "Street Address" });
-    }
-
-    private get billingCountry() {
-        return this.page.locator('select[name="billing\\.country"]');
-    }
-
-    private get billingState() {
-        return this.page.locator('select[name="billing\\.state"]');
-    }
-
-    private get billingCity() {
-        return this.page.getByRole("textbox", { name: "City" });
-    }
-
-    private get billingZip() {
-        return this.page.getByRole("textbox", { name: "Zip/Postcode" });
-    }
-
-    private get billingTelephone() {
-        return this.page.getByRole("textbox", { name: "Telephone" });
-    }
-
-    private get clickProcessButton() {
-        return this.page.getByRole("button", { name: "Proceed" });
-    }
-
-    private get chooseShippingMethod() {
-        return this.page.getByText("Free Shipping").first();
-    }
-
-    private get chooseFlatShippingMethod() {
-        return this.page.getByText("Flat Rate").first();
-    }
-
-    private get choosePaymentMethod() {
-        return this.page.getByAltText("Money Transfer");
-    }
-
-    private async dismissCookieConsent(): Promise<void> {
-        if (await this.cookieConsentAccept.isVisible().catch(() => false)) {
-            await this.cookieConsentAccept.click();
-            await expect(this.cookieConsentAccept).toBeHidden();
-        }
-    }
-
-    async getSubTotalValue(): Promise<number> {
-        await this.page.waitForLoadState("networkidle");
-
-        const subtotalRow = this.page
-            .locator("div.flex.justify-between.text-right", {
-                hasText: "Subtotal",
+    private summaryRow(label: string) {
+        return this.page
+            .locator("div.flex.justify-between")
+            .filter({
+                has: this.page.locator(`xpath=./p[normalize-space()="${label}"]`),
             })
-            .first();
-
-        await subtotalRow.waitFor({ state: "visible", timeout: 15000 });
-
-        const subtotalText = await subtotalRow.locator("p").last().innerText();
-        return parseFloat(subtotalText.replace(/[^0-9.]/g, ""));
+            .filter({ visible: true });
     }
 
-    getSavedProduct() {
-        return ProductDataManager.readProduct();
+    private summaryAmount(label: string) {
+        return this.summaryRow(label)
+            .locator("p")
+            .filter({ hasText: /\d/ })
+            .filter({ hasNotText: /excl/i });
     }
 
-    async applyCoupon(allow?: string) {
-        if (allow == "yes") {
-            await this.visit("");
+    private async readSummaryAmount(label: string): Promise<number> {
+        await expect(this.summaryRow(label)).toHaveCount(1);
 
-            const product = this.getSavedProduct();
-            await this.searchInput.fill(product.name);
+        const text = await this.summaryAmount(label).innerText();
 
-            await this.searchInput.press("Enter");
-            await this.addToCartButton.first().click();
-            await expect(this.addToCartSuccessMessage).toBeVisible();
-
-            await this.visit("checkout/cart");
-        }
-        await this.applyCouponButton.click();
-        await this.couponInput.fill("TEST50");
-        await this.applyButton.click();
-        await expect(
-            this.page.getByText("Coupon code applied successfully.").first(),
-        ).toBeVisible();
+        return parseFloat(text.replace(/[^0-9.]/g, ""));
     }
 
-    async calculateDiscountedAmount(
-        discountValue: number,
-        couponType: string,
-        incrementTimes?: number,
-    ): Promise<number> {
-        await this.visit("");
-
-        const product = this.getSavedProduct();
-        await this.searchInput.fill(product.name);
-
-        await this.searchInput.press("Enter");
-        await this.addToCartButton.first().click();
-        await expect(this.addToCartSuccessMessage).toBeVisible();
-
-        await this.visit("checkout/cart");
-
-        var a = 1;
-        if (incrementTimes && incrementTimes > 0) {
-            for (let i = 0; i < incrementTimes; i++) {
-                await this.incrementQtyButton.first().click();
-                a++;
-            }
-
-            await this.updateCart.click();
-            await expect(this.cartUpdateSuccess.first()).toBeVisible();
-        }
-
-        const subtotal = await this.getSubTotalValue();
-
-        if (couponType == "fixed") {
-            if (subtotal < Number(discountValue)) {
-                return 0;
-            }
-            const discount = Number(discountValue);
-
-            return Math.max(subtotal - a * discount, 0);
-        }
-
-        if (couponType == "percentage") {
-            return subtotal - (subtotal * discountValue) / 100;
-        }
-
-        if (couponType == "fixedAmmountWholeCart") {
-            if (subtotal < Number(discountValue)) {
-                return 0;
-            }
-            const discount = Number(discountValue);
-
-            return Math.max(subtotal - discount, 0);
-        }
-
-        return subtotal;
-    }
-
-    async addSavedProductToCart(quantity: number = 1): Promise<number> {
-        await this.visit("");
-
-        const product = this.getSavedProduct();
-
-        await this.searchInput.fill(product.name);
-        await this.searchInput.press("Enter");
-        await this.addToCartButton.first().click();
-        await expect(this.addToCartSuccessMessage).toBeVisible();
-
+    async addSavedProductToCart(productName: string, quantity: number = 1): Promise<number> {
+        await this.addSimpleProductToCart(productName);
         await this.visit("checkout/cart");
 
         if (quantity > 1) {
-            for (let i = 1; i < quantity; i++) {
-                await this.incrementQtyButton.first().click();
+            const item = this.cartItem(productName);
+
+            for (let step = 1; step < quantity; step++) {
+                await item.getByLabel("Increase Quantity").click();
             }
 
-            await this.updateCart.click();
-            await expect(this.cartUpdateSuccess.first()).toBeVisible();
+            await this.updateCartButton.click();
+
+            await expect(this.page.getByText("Quantity updated successfully").first()).toBeVisible();
         }
 
-        return this.getSubTotalValue();
+        return this.readSummaryAmount("Subtotal");
+    }
+
+    async applyCoupon(couponCode: string): Promise<void> {
+        await this.applyCouponButton.click();
+        await this.couponInput.fill(couponCode);
+        await this.applyButton.click();
+
+        await expect(this.couponAppliedMessage).toBeVisible();
+    }
+
+    async attemptCoupon(couponCode: string): Promise<void> {
+        await this.applyCouponButton.click();
+        await this.couponInput.fill(couponCode);
+        await this.applyButton.click();
+    }
+
+    async expectCouponRejected(): Promise<void> {
+        await expect(this.page.getByText("Coupon code is invalid.").first()).toBeVisible();
+    }
+
+    async expectCouponNotApplicable(subtotal: number): Promise<void> {
+        await expect(this.page.getByText("Coupon not found.").first()).toBeVisible();
+        await expect(this.summaryRow("Discount Amount")).toHaveCount(0);
+        await this.expectGrandTotal(subtotal);
+    }
+
+    async expectCouponNotApplicableWithGrandTotal(options: {
+        productName: string;
+        couponCode: string;
+    }): Promise<void> {
+        const subtotal = await this.addSavedProductToCart(options.productName);
+
+        await this.proceedAsGuest();
+        await this.chooseShipping("free");
+        await this.choosePayment("moneytransfer");
+        await this.attemptCoupon(options.couponCode);
+
+        await this.expectCouponNotApplicable(subtotal);
+    }
+
+    expectedDiscountedTotal(
+        subtotal: number,
+        discountValue: number,
+        couponType: CouponType,
+        quantity: number,
+    ): number {
+        if (couponType === "percentage") {
+            return round(subtotal - (subtotal * discountValue) / 100);
+        }
+
+        if (couponType === "fixedAmmountWholeCart") {
+            return subtotal < discountValue ? 0 : round(subtotal - discountValue);
+        }
+
+        return subtotal < discountValue ? 0 : round(Math.max(subtotal - quantity * discountValue, 0));
     }
 
     async expectGrandTotal(amount: number): Promise<void> {
@@ -260,90 +138,68 @@ export class RuleApplyPage extends BasePage {
             maximumFractionDigits: 2,
         }).format(amount);
 
-        await expect(this.grandTotalAmount).toContainText(`$${formatted}`);
+        await expect(this.summaryAmount("Grand Total")).toHaveText(`$${formatted}`);
     }
 
-    async verifyCatalogRule(value: number, type: string) {
-        await this.visit("");
+    async expectCouponAppliedWithGrandTotal(options: {
+        productName: string;
+        couponCode: string;
+        discountValue: number;
+        couponType: CouponType;
+        incrementTimes?: number;
+        allowShipping?: string;
+    }): Promise<void> {
+        const quantity = 1 + (options.incrementTimes ?? 0);
+        const subtotal = await this.addSavedProductToCart(options.productName, quantity);
+        const expected = this.expectedDiscountedTotal(
+            subtotal,
+            options.discountValue,
+            options.couponType,
+            quantity,
+        );
 
-        const product = this.getSavedProduct();
-        await this.searchInput.fill(product.name);
-        await this.searchInput.press("Enter");
+        await this.proceedAsGuest();
+        await this.chooseShipping(options.allowShipping === "yes" ? "flatrate" : "free");
+        await this.choosePayment("moneytransfer");
+        await this.applyCoupon(options.couponCode);
 
-        const actualPrice = 199;
-
-        let expectedDiscountedPrice = "";
-
-        if (type === "percentage") {
-            const discountedPrice = actualPrice - (actualPrice * value) / 100;
-
-            expectedDiscountedPrice = `$${discountedPrice.toFixed(2)}`;
-        }
-
-        if (type === "fixed") {
-            const discountedPrice = Math.max(actualPrice - value, 0);
-
-            expectedDiscountedPrice = `$${discountedPrice.toFixed(2)}`;
-        }
-
-        await expect(
-            this.page
-                .locator("div.flex.items-center")
-                .locator("p")
-                .filter({ hasText: "$" })
-                .last(),
-        ).toHaveText(expectedDiscountedPrice);
+        await this.expectGrandTotal(expected);
     }
 
-    async applyCouponAtCheckout(allowShipping?: string) {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.dismissCookieConsent();
-        await this.shoppingCartIcon.click();
-        await this.continueButton.click();
+    async verifyCatalogRule(options: {
+        productName: string;
+        price: number;
+        value: number;
+        type: string;
+    }): Promise<void> {
+        await this.searchProduct(options.productName);
 
-        await this.companyName.fill("Web");
-        await this.firstName.fill("demo");
-        await this.lastName.fill("guest");
-        await this.shippingEmail.fill("demo@example.com");
-        await this.streetAddress.fill("north street");
-        await this.billingCountry.selectOption({ value: "IN" });
-        await this.billingState.selectOption({ value: "UP" });
-        await this.billingCity.fill("test city");
-        await this.billingZip.fill("123456");
-        await this.billingTelephone.fill("2365432789");
-        await this.clickProcessButton.click();
+        const discounted =
+            options.type === "percentage"
+                ? round(options.price - (options.price * options.value) / 100)
+                : Math.max(round(options.price - options.value), 0);
 
-        if (allowShipping === "yes") {
-            await this.chooseFlatShippingMethod.click();
+        await expect(this.cardSellingPrice(options.productName)).toHaveText(
+            `$${discounted.toFixed(2)}`,
+        );
+
+        if (discounted < options.price) {
+            await expect(this.cardStruckPrice(options.productName)).toHaveText(
+                `$${options.price.toFixed(2)}`,
+            );
         } else {
-            await this.chooseShippingMethod.click();
+            await expect(this.cardStruckPrice(options.productName)).toHaveCount(0);
         }
-
-        await this.choosePaymentMethod.click();
-        await this.applyCouponButton.click();
-        await this.couponInput.waitFor({ state: "visible" });
-        await this.couponInput.fill("TEST50");
-        await this.applyButton.click();
     }
 
-    async expectCouponAppliedWithGrandTotal(
-        discountValue: number,
-        couponType: string,
-        options: { incrementTimes?: number; allowShipping?: string } = {},
-    ): Promise<void> {
-        const discountedAmount = await this.calculateDiscountedAmount(
-            discountValue,
-            couponType,
-            options.incrementTimes,
-        );
+    async expectNoCatalogDiscount(productName: string, price: number): Promise<void> {
+        await this.searchProduct(productName);
 
-        await this.applyCouponAtCheckout(options.allowShipping);
-
-        await expect(this.couponAppliedMessage).toBeVisible();
-
-        await this.expectGrandTotal(
-            Math.abs(discountedAmount) < 0.01 ? 0 : discountedAmount,
-        );
+        await expect(this.cardSellingPrice(productName)).toHaveText(`$${price.toFixed(2)}`);
+        await expect(this.cardStruckPrice(productName)).toHaveCount(0);
     }
+}
+
+function round(amount: number): number {
+    return Math.round(amount * 100) / 100;
 }

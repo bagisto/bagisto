@@ -1,832 +1,400 @@
-import { test, expect } from "../../setup";
-import type { Page } from "@playwright/test";
+import { uniqueStamp } from "../../utils/faker";
+import { test } from "../../setup";
 import {
-    generateHostname,
-    generateRandomNumericString,
-} from "../../utils/faker";
-import { ChannelsPage } from "../../pages/admin/settings/ChannelsPage";
+    REDIRECT_LABELS,
+    UrlRewritesPage,
+    type RedirectType,
+    type UrlRewriteData,
+} from "../../pages/admin/marketing/search-seo/UrlRewritesPage";
+import {
+    SearchTermsPage,
+    type SearchTermData,
+} from "../../pages/admin/marketing/search-seo/SearchTermsPage";
+import {
+    SearchSynonymsPage,
+    type SearchSynonymData,
+} from "../../pages/admin/marketing/search-seo/SearchSynonymsPage";
+import {
+    SitemapsPage,
+    type SitemapData,
+} from "../../pages/admin/marketing/search-seo/SitemapsPage";
+import {
+    buildChannel,
+    ChannelsPage,
+} from "../../pages/admin/settings/ChannelsPage";
+import { env } from "../../utils/env";
 
-const URL_REWRITES_URL = "admin/marketing/search-seo/url-rewrites";
-const SEARCH_TERMS_URL = "admin/marketing/search-seo/search-terms";
-const SEARCH_SYNONYMS_URL = "admin/marketing/search-seo/search-synonyms";
-const SITEMAPS_URL = "admin/marketing/search-seo/sitemaps";
+function buildRewrite(redirectType: RedirectType = "301"): UrlRewriteData {
+    const stamp = uniqueStamp();
 
-async function openSeoSection(adminPage: Page, url: string) {
-    await adminPage.goto(url);
+    return {
+        requestPath: `e2e-request-${stamp}`,
+        targetPath: `e2e-target-${stamp}`,
+        redirectType,
+    };
 }
 
-async function openFirstRecordForEdit(adminPage: Page) {
-    await adminPage.locator(".row > .flex > a").first().click();
+function buildSearchTerm(): SearchTermData {
+    return {
+        term: `e2eterm${uniqueStamp()}`,
+        redirectUrl: `${env.baseUrl}/compare`,
+    };
 }
 
-async function openFirstSitemapForEdit(adminPage: Page) {
-    await adminPage.locator(".row .justify-end > a").first().click();
+function buildSynonym(): SearchSynonymData {
+    const stamp = uniqueStamp();
+
+    return {
+        name: `Synonym ${stamp}`,
+        terms: `alpha${stamp},beta${stamp}`,
+    };
 }
 
-async function confirmAgreeDialog(adminPage: Page) {
-    await adminPage.getByRole("button", { name: "Agree", exact: true }).click();
-}
+function buildSitemap(channel = "Default", channelCode = "default"): SitemapData {
+    const stamp = uniqueStamp();
 
-async function selectSitemapChannel(adminPage: Page, channelName: string) {
-    const label = adminPage
-        .locator('label[for^="channels_"]')
-        .filter({ hasText: channelName })
-        .first();
-
-    const forId = await label.getAttribute("for");
-
-    await label.click();
-
-    await expect(adminPage.locator(`input#${forId}`)).toBeChecked();
-}
-
-async function massDeleteSelectedRows(adminPage: Page) {
-    await adminPage.locator(".icon-uncheckbox").first().click();
-    await adminPage.getByRole("button", { name: "Select Action " }).click();
-    await adminPage.getByRole("link", { name: "Delete" }).click();
-    await confirmAgreeDialog(adminPage);
+    return {
+        fileName: `sitemap-${stamp}.xml`,
+        path: `/sitemap-${stamp}/`,
+        channel,
+        channelCode,
+    };
 }
 
 test.describe("search-seo management", () => {
-    test.describe("url rewrites management", () => {
-        test("should create seo search url rewrite for temporary redirect type", async ({
-            adminPage,
-        }) => {
-            const seo = {
-                url: generateHostname(),
-                product: "product",
-            };
+    test.describe("url rewrite management", () => {
+        let rewritesPage: UrlRewritesPage;
+        let created: string[];
 
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-
-            await adminPage.getByText("Create URL Rewrite").click();
-
-            await adminPage
-                .locator('select[name="entity_type"]')
-                .selectOption(seo.product);
-            await adminPage
-                .getByRole("textbox", { name: "Request Path" })
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "Request Path" })
-                .fill(seo.url);
-            await adminPage
-                .getByRole("textbox", { name: "Target Path" })
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "Target Path" })
-                .fill(seo.url);
-            await adminPage
-                .locator('select[name="redirect_type"]')
-                .selectOption("301");
-            await adminPage.locator('select[name="locale"]').selectOption("en");
-
-            await adminPage
-                .getByRole("button", { name: "Save URL Rewrite" })
-                .click();
-
-            await expect(
-                adminPage.getByText("URL Rewrite created successfully"),
-            ).toBeVisible();
+        test.beforeEach(async ({ adminPage }) => {
+            rewritesPage = new UrlRewritesPage(adminPage);
+            created = [];
         });
 
-        test("should create seo search url rewrite for permanent redirect type", async ({
-            adminPage,
-        }) => {
-            const seo = {
-                url: generateHostname(),
-                product: "product",
-            };
-
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-
-            await adminPage.getByText("Create URL Rewrite").click();
-
-            await adminPage
-                .locator('select[name="entity_type"]')
-                .selectOption(seo.product);
-            await adminPage.getByRole("textbox", { name: "Request Path" });
-            await adminPage
-                .getByRole("textbox", { name: "Request Path" })
-                .fill(seo.url);
-            await adminPage.getByRole("textbox", { name: "Target Path" });
-            await adminPage
-                .getByRole("textbox", { name: "Target Path" })
-                .fill(seo.url);
-            await adminPage
-                .locator('select[name="redirect_type"]')
-                .selectOption("301");
-            await adminPage.locator('select[name="locale"]').selectOption("en");
-
-            await adminPage
-                .getByRole("button", { name: "Save URL Rewrite" })
-                .click();
-
-            await expect(
-                adminPage.getByText("URL Rewrite created successfully"),
-            ).toBeVisible();
+        test.afterEach(async () => {
+            await rewritesPage.deleteRewritesIfPresent(created);
         });
 
-        test("should edit the url redirect for requested path", async ({
-            adminPage,
-        }) => {
-            const seo = {
-                url: generateHostname(),
-            };
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-            await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
+        for (const redirectType of ["301", "302"] as RedirectType[]) {
+            test(`should redirect a rewritten cms page path with a ${REDIRECT_LABELS[redirectType]} redirect`, async () => {
+                const rewrite = buildRewrite(redirectType);
+                created.push(rewrite.requestPath);
 
-            await openFirstRecordForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Request Path" });
-            await adminPage
-                .getByRole("textbox", { name: "Request Path" })
-                .press("ArrowRight");
-            await adminPage
-                .getByRole("textbox", { name: "Request Path" })
-                .fill(seo.url);
+                await rewritesPage.createRewrite(rewrite);
 
-            await adminPage
-                .getByRole("button", { name: "Save URL Rewrite" })
-                .click();
-
-            await expect(
-                adminPage.getByText("URL Rewrite updated successfully"),
-            ).toBeVisible();
-        });
-
-        test("should edit the url redirect for target path", async ({
-            adminPage,
-        }) => {
-            const seo = {
-                url: generateHostname(),
-            };
-
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-            await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Target Path" });
-            await adminPage
-                .getByRole("textbox", { name: "Target Path" })
-                .press("ArrowRight");
-            await adminPage
-                .getByRole("textbox", { name: "Target Path" })
-                .fill(seo.url);
-
-            await adminPage
-                .getByRole("button", { name: "Save URL Rewrite" })
-                .click();
-
-            await expect(
-                adminPage.getByText("URL Rewrite updated successfully"),
-            ).toBeVisible();
-        });
-
-        test("should edit redirect type permanent to temporary", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-            await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage
-                .locator('select[name="redirect_type"]')
-                .selectOption("302");
-            await adminPage
-                .getByRole("button", { name: "Save URL Rewrite" })
-                .click();
-
-            await adminPage.getByRole("button", { name: "Save URL Rewrite" });
-
-            await expect(
-                adminPage.getByText("URL Rewrite updated successfully"),
-            ).toBeVisible();
-        });
-
-        test("should edit redirect type temporary to permanent", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-            await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage
-                .locator('select[name="redirect_type"]')
-                .selectOption("301");
-            await adminPage
-                .getByRole("button", { name: "Save URL Rewrite" })
-                .click();
-
-            await adminPage.getByRole("button", { name: "Save URL Rewrite" });
-
-            await expect(
-                adminPage.getByText("URL Rewrite updated successfully"),
-            ).toBeVisible();
-        });
-
-        test("should delete url redirect via delete button", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-
-            await adminPage
-                .locator(".row > .flex > a:nth-child(2)")
-                .first()
-                .click();
-            await confirmAgreeDialog(adminPage);
-
-            await expect(
-                adminPage.getByText("URL Rewrite deleted"),
-            ).toBeVisible();
-        });
-
-        test("should delete url redirect via mass delete", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, URL_REWRITES_URL);
-
-            await massDeleteSelectedRows(adminPage);
-
-            await expect(
-                adminPage.getByText("Selected URL Rewrites Deleted"),
-            ).toBeVisible();
-        });
-    });
-
-    test.describe("search terms management", () => {
-        test("should create new search term", async ({ adminPage }) => {
-            const seo = {
-                url: generateHostname(),
-            };
-
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-
-            await adminPage.getByText("Create Search Term").click();
-
-            await adminPage
-                .getByRole("textbox", { name: "Search Query" })
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "Search Query" })
-                .fill("Running Shoes");
-            await adminPage
-                .getByRole("textbox", { name: "Redirect Url" })
-                .fill(seo.url);
-            await adminPage
-                .locator('select[name="channel_id"]')
-                .selectOption("1");
-            await adminPage.locator('select[name="locale"]').selectOption("en");
-
-            await adminPage
-                .getByRole("button", { name: "Save Search Term" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Term created"),
-            ).toBeVisible();
-        });
-
-        test("should update search query by editing search term", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage
-                .getByRole("textbox", { name: "Search Query" })
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "Search Query" })
-                .press("ControlOrMeta+a");
-            await adminPage
-                .getByRole("textbox", { name: "Search Query" })
-                .fill("Boots");
-
-            await adminPage
-                .getByRole("button", { name: "Save Search Term" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Term Updated"),
-            ).toBeVisible();
-        });
-
-        test("should update results field by editing search term", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Results" }).click();
-            await adminPage
-                .getByRole("textbox", { name: "Results" })
-                .fill("10");
-
-            await adminPage
-                .getByRole("button", { name: "Save Search Term" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Term Updated"),
-            ).toBeVisible();
-        });
-
-        test("should update uses field by editing search term", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-            await openFirstRecordForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Uses" }).click();
-            await adminPage.getByRole("textbox", { name: "Uses" }).fill("5");
-
-            await adminPage
-                .getByRole("button", { name: "Save Search Term" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Term Updated"),
-            ).toBeVisible();
-        });
-
-        test("should update redirect url field by editing search term", async ({
-            adminPage,
-        }) => {
-            const seo = {
-                url: generateHostname(),
-            };
-
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage
-                .getByRole("textbox", { name: "Redirect Url" })
-                .fill(seo.url);
-            await adminPage
-                .getByRole("button", { name: "Save Search Term" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Term Updated"),
-            ).toBeVisible();
-        });
-
-        test("should update channel by editing search term", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-
-            await openFirstRecordForEdit(adminPage);
-            await adminPage
-                .locator('select[name="channel_id"]')
-                .selectOption("1");
-            await adminPage
-                .getByRole("button", { name: "Save Search Term" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Term Updated"),
-            ).toBeVisible();
-        });
-
-        test("should delete selected search term", async ({ adminPage }) => {
-            await openSeoSection(adminPage, SEARCH_TERMS_URL);
-
-            await adminPage
-                .locator("div:nth-child(1) > p > label > .icon-uncheckbox")
-                .click();
-
-            await adminPage
-                .getByRole("button", { name: "Select Action " })
-                .click();
-            await adminPage.getByRole("link", { name: "Delete" }).click();
-
-            await confirmAgreeDialog(adminPage);
-
-            await expect(
-                adminPage.getByText(
-                    "Selected Search Terms Deleted Successfully",
-                ),
-            ).toBeVisible();
-        });
-    });
-
-    test.describe("search synonyms management", () => {
-        test("should create new search synonym", async ({ adminPage }) => {
-            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
-
-            await adminPage.getByText("Create Search Synonym").click();
-
-            await adminPage.getByRole("textbox", { name: "Name" }).click();
-            await adminPage
-                .getByRole("textbox", { name: "Name" })
-                .fill("Bottom Wear");
-            await adminPage
-                .getByRole("textbox", { name: "Terms" })
-                .fill(
-                    "Jeans,Lowers,Shorts,Running Shorts,Sports Leggings,Trousers",
+                await rewritesPage.expectRewriteListed(rewrite);
+                await rewritesPage.expectStorefrontRedirect(
+                    rewrite.requestPath,
+                    rewrite.targetPath,
+                    redirectType,
                 );
+            });
+        }
 
-            await adminPage
-                .getByRole("button", { name: "Save Search Synonym" })
-                .click();
+        test("should reject a url rewrite without a request and target path", async () => {
+            await rewritesPage.submitEmptyCreateForm();
 
-            await expect(
-                adminPage.getByText("Search Synonym created"),
-            ).toBeVisible();
+            await rewritesPage.expectValidationError(
+                "The Request Path field is required",
+            );
+            await rewritesPage.expectValidationError(
+                "The Target Path field is required",
+            );
         });
 
-        test("should update name in search synonym", async ({ adminPage }) => {
-            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
+        test("should update the request path of a url rewrite", async () => {
+            const rewrite = buildRewrite();
+            const newRequestPath = buildRewrite().requestPath;
+            created.push(rewrite.requestPath, newRequestPath);
 
-            await openFirstRecordForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Name" }).click();
-            await adminPage
-                .getByRole("textbox", { name: "Name" })
-                .press("ControlOrMeta+a");
-            await adminPage
-                .getByRole("textbox", { name: "Name" })
-                .fill("Top Wear");
+            await rewritesPage.createRewrite(rewrite);
+            await rewritesPage.updateRewrite(rewrite.requestPath, {
+                requestPath: newRequestPath,
+            });
 
-            await adminPage
-                .getByRole("button", { name: "Save Search Synonym" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Synonym updated successfully"),
-            ).toBeVisible();
+            await rewritesPage.expectRewriteListed({
+                ...rewrite,
+                requestPath: newRequestPath,
+            });
+            await rewritesPage.expectRewriteAbsent(rewrite.requestPath);
+            await rewritesPage.expectStorefrontRedirect(
+                newRequestPath,
+                rewrite.targetPath,
+                "301",
+            );
         });
 
-        test("should update terms in search synonym", async ({ adminPage }) => {
-            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
+        test("should switch a permanent redirect to a temporary one", async () => {
+            const rewrite = buildRewrite("301");
+            created.push(rewrite.requestPath);
 
-            await openFirstRecordForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Terms" }).click();
-            await adminPage
-                .getByRole("textbox", { name: "Terms" })
-                .press("ControlOrMeta+a");
-            await adminPage
-                .getByRole("textbox", { name: "Terms" })
-                .fill(
-                    "topwear, tops, upper wear, shirts, t-shirts, blouses, tank tops, tunics, sweatshirts, hoodies, jackets, coats",
-                );
+            await rewritesPage.createRewrite(rewrite);
+            await rewritesPage.updateRewrite(rewrite.requestPath, {
+                redirectType: "302",
+            });
 
-            await adminPage
-                .getByRole("button", { name: "Save Search Synonym" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Search Synonym updated successfully"),
-            ).toBeVisible();
+            await rewritesPage.expectRewriteListed({ ...rewrite, redirectType: "302" });
+            await rewritesPage.expectStorefrontRedirect(
+                rewrite.requestPath,
+                rewrite.targetPath,
+                "302",
+            );
         });
 
-        test("should delete search synonyms with mass delete", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
+        test("should delete a url rewrite and stop redirecting", async () => {
+            const rewrite = buildRewrite();
+            created.push(rewrite.requestPath);
 
-            await massDeleteSelectedRows(adminPage);
+            await rewritesPage.createRewrite(rewrite);
+            await rewritesPage.deleteRewrite(rewrite.requestPath);
 
-            await expect(
-                adminPage.getByText(
-                    "Selected Search Synonyms Deleted Successfully",
-                ),
-            ).toBeVisible();
-        });
-    });
-
-    test.describe("sitemaps management", () => {
-        test("should fail to create sitemap when no channel is selected", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await adminPage.getByText("Create Sitemap").click();
-
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill("no-channel.xml");
-            await adminPage.locator('input[name="path"]').fill("/sitemap/");
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-
-            await expect(
-                adminPage.getByText("The Channels field is required"),
-            ).toBeVisible();
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeHidden();
+            await rewritesPage.expectRewriteAbsent(rewrite.requestPath);
         });
 
-        test("should create new sitemap with a channel", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
+        test("should mass delete only the selected url rewrites", async () => {
+            const first = buildRewrite();
+            const second = buildRewrite();
+            const untouched = buildRewrite();
+            created.push(first.requestPath, second.requestPath, untouched.requestPath);
 
-            await adminPage.getByText("Create Sitemap").click();
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill("sitemap1.xml");
-            await adminPage.locator('input[name="path"]').fill("/sitemap/");
-            await adminPage.locator('label[for="channels_1"]').first().click();
-
-            await expect(
-                adminPage.locator("input#channels_1").first(),
-            ).toBeChecked();
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeVisible();
-        });
-
-        test("should show the selected channel in the sitemap listing", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await expect(
-                adminPage.getByText("default", { exact: true }).first(),
-            ).toBeVisible();
-        });
-
-        test("should preselect the channel when editing an existing sitemap", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await openFirstSitemapForEdit(adminPage);
-
-            await expect(
-                adminPage.locator("input#channels_1").first(),
-            ).toBeChecked();
-        });
-
-        test("should update file name in sitemap", async ({ adminPage }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await openFirstSitemapForEdit(adminPage);
-
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill("sitemap1.xml");
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill("sitemap2.xml");
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Sitemap Updated successfully"),
-            ).toBeVisible();
-        });
-
-        test("should update path in sitemap", async ({ adminPage }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await openFirstSitemapForEdit(adminPage);
-            await adminPage.getByRole("textbox", { name: "Path" }).click();
-            await adminPage
-                .getByRole("textbox", { name: "Path" })
-                .press("ControlOrMeta+a");
-            await adminPage
-                .getByRole("textbox", { name: "Path" })
-                .fill("/new_path/");
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-            await expect(
-                adminPage.getByText("Sitemap Updated successfully"),
-            ).toBeVisible();
-        });
-
-        test("should fail to update sitemap when all channels are unselected", async ({
-            adminPage,
-        }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await openFirstSitemapForEdit(adminPage);
-
-            await expect(
-                adminPage.locator("input#channels_1").first(),
-            ).toBeChecked();
-
-            await adminPage.locator('label[for="channels_1"]').first().click();
-            await expect(
-                adminPage.locator("input#channels_1").first(),
-            ).not.toBeChecked();
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-
-            await expect(
-                adminPage.getByText("The Channels field is required"),
-            ).toBeVisible();
-            await expect(
-                adminPage.getByText("Sitemap Updated successfully"),
-            ).toBeHidden();
-        });
-
-        test("should create separate sitemaps for the default and a newly created channel", async ({
-            adminPage,
-        }) => {
-            const channelsPage = new ChannelsPage(adminPage);
-
-            const { name: newChannelName } = await channelsPage.createChannel();
-
-            const token = generateRandomNumericString(6);
-            const defaultFile = `default-${token}.xml`;
-            const newChannelFile = `newchan-${token}.xml`;
-
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await adminPage.getByText("Create Sitemap").click();
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill(defaultFile);
-            await adminPage
-                .locator('input[name="path"]')
-                .fill(`/default-${token}/`);
-            await selectSitemapChannel(adminPage, "Default");
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeVisible();
-
-            await expect(
-                adminPage.getByRole("button", { name: "Save Sitemap" }),
-            ).toBeHidden();
-
-            await adminPage.getByText("Create Sitemap").click();
-
-            await expect(
-                adminPage.locator('input[name="file_name"]'),
-            ).toHaveValue("");
-
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill(newChannelFile);
-            await adminPage
-                .locator('input[name="path"]')
-                .fill(`/newchan-${token}/`);
-            await selectSitemapChannel(adminPage, newChannelName);
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeVisible();
-
-            await expect(
-                adminPage.getByText(defaultFile, { exact: true }),
-            ).toBeVisible();
-            await expect(
-                adminPage.getByText(newChannelFile, { exact: true }),
-            ).toBeVisible();
-        });
-
-        test("should create a new sitemap for a different channel instead of updating the existing one", async ({
-            adminPage,
-        }) => {
-            const channelsPage = new ChannelsPage(adminPage);
-
-            const { name: newChannelName } = await channelsPage.createChannel();
-
-            const token = generateRandomNumericString(6);
-            const existingFile = `existing-${token}.xml`;
-            const createdFile = `created-${token}.xml`;
-
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await adminPage.getByText("Create Sitemap").click();
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill(existingFile);
-            await adminPage
-                .locator('input[name="path"]')
-                .fill(`/existing-${token}/`);
-            await selectSitemapChannel(adminPage, "Default");
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeVisible();
-
-            const existingRow = adminPage
-                .locator(".row")
-                .filter({ hasText: existingFile })
-                .first();
-            await existingRow.locator(".justify-end > a").first().click();
-            await expect(
-                adminPage.locator('input[name="file_name"]'),
-            ).toHaveValue(existingFile);
-            await adminPage.locator("span.icon-close").first().click();
-
-            await adminPage.getByText("Create Sitemap").click();
-
-            await expect(
-                adminPage.locator('input[name="file_name"]'),
-            ).toHaveValue("");
-
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill(createdFile);
-            await adminPage
-                .locator('input[name="path"]')
-                .fill(`/created-${token}/`);
-            await selectSitemapChannel(adminPage, newChannelName);
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeVisible();
-
-            await expect(
-                adminPage.getByText(existingFile, { exact: true }),
-            ).toBeVisible();
-            await expect(
-                adminPage.getByText(createdFile, { exact: true }),
-            ).toBeVisible();
-        });
-
-        test("should open the generated sitemap when clicking its link", async ({
-            adminPage,
-        }) => {
-            const token = generateRandomNumericString(6);
-            const generatedFile = `generated-${token}.xml`;
-
-            await openSeoSection(adminPage, SITEMAPS_URL);
-
-            await adminPage.getByText("Create Sitemap").click();
-
-            await adminPage
-                .locator('input[name="file_name"]')
-                .fill(generatedFile);
-            await adminPage
-                .locator('input[name="path"]')
-                .fill(`/generated-${token}/`);
-            await adminPage.locator('label[for="channels_1"]').first().click();
-
-            await adminPage
-                .getByRole("button", { name: "Save Sitemap" })
-                .click();
-
-            await expect(
-                adminPage.getByText("Sitemap created successfully"),
-            ).toBeVisible();
-
-            const generatedRow = adminPage
-                .locator(".row")
-                .filter({ hasText: generatedFile })
-                .first();
-
-            const sitemapLink = generatedRow.locator('a[target="_blank"]');
-
-            await expect(sitemapLink).toBeVisible();
-
-            const [sitemapPage] = await Promise.all([
-                adminPage.context().waitForEvent("page"),
-                sitemapLink.click(),
+            await rewritesPage.createRewrite(first);
+            await rewritesPage.createRewrite(second);
+            await rewritesPage.createRewrite(untouched);
+            await rewritesPage.massDeleteRewrites([
+                first.requestPath,
+                second.requestPath,
             ]);
 
-            await sitemapPage.waitForLoadState();
+            await rewritesPage.expectRewriteAbsent(first.requestPath);
+            await rewritesPage.expectRewriteAbsent(second.requestPath);
+            await rewritesPage.expectRewriteListed(untouched);
+        });
+    });
 
-            await expect(sitemapPage).toHaveURL(
-                /storage\/sitemaps\/.*generated-.*\.xml$/,
-            );
+    test.describe("search term management", () => {
+        let searchTermsPage: SearchTermsPage;
+        let created: string[];
 
-            const content = await sitemapPage.locator("body").textContent();
-
-            expect(content).toMatch(/<urlset|<sitemapindex/);
+        test.beforeEach(async ({ adminPage }) => {
+            searchTermsPage = new SearchTermsPage(adminPage);
+            created = [];
         });
 
-        test("should delete sitemap via delete button", async ({
+        test.afterEach(async () => {
+            await searchTermsPage.deleteSearchTermsIfPresent(created);
+        });
+
+        test("should redirect a storefront search for the term to its redirect url", async () => {
+            const searchTerm = buildSearchTerm();
+            created.push(searchTerm.term);
+
+            await searchTermsPage.createSearchTerm(searchTerm);
+
+            await searchTermsPage.expectSearchTermListed(searchTerm);
+            await searchTermsPage.expectStorefrontSearchRedirects(
+                searchTerm.term,
+                /\/compare$/,
+            );
+        });
+
+        test("should reject a search term without a query", async () => {
+            await searchTermsPage.submitEmptyCreateForm();
+
+            await searchTermsPage.expectValidationError(
+                "The Search Query field is required",
+            );
+        });
+
+        test("should update a search term and keep it after reload", async () => {
+            const searchTerm = buildSearchTerm();
+            const newTerm = buildSearchTerm().term;
+            created.push(searchTerm.term, newTerm);
+
+            await searchTermsPage.createSearchTerm(searchTerm);
+            await searchTermsPage.renameSearchTerm(searchTerm.term, newTerm);
+
+            await searchTermsPage.expectSearchTermListed({ ...searchTerm, term: newTerm });
+            await searchTermsPage.expectSearchTermAbsent(searchTerm.term);
+        });
+
+        test("should mass delete only the selected search terms", async () => {
+            const first = buildSearchTerm();
+            const second = buildSearchTerm();
+            const untouched = buildSearchTerm();
+            created.push(first.term, second.term, untouched.term);
+
+            await searchTermsPage.createSearchTerm(first);
+            await searchTermsPage.createSearchTerm(second);
+            await searchTermsPage.createSearchTerm(untouched);
+            await searchTermsPage.massDeleteSearchTerms([first.term, second.term]);
+
+            await searchTermsPage.expectSearchTermAbsent(first.term);
+            await searchTermsPage.expectSearchTermAbsent(second.term);
+            await searchTermsPage.expectSearchTermListed(untouched);
+        });
+    });
+
+    test.describe("search synonym management", () => {
+        let synonymsPage: SearchSynonymsPage;
+        let created: string[];
+
+        test.beforeEach(async ({ adminPage }) => {
+            synonymsPage = new SearchSynonymsPage(adminPage);
+            created = [];
+        });
+
+        test.afterEach(async () => {
+            await synonymsPage.deleteSynonymsIfPresent(created);
+        });
+
+        test("should create a search synonym and list it with its terms", async () => {
+            const synonym = buildSynonym();
+            created.push(synonym.name);
+
+            await synonymsPage.createSynonym(synonym);
+
+            await synonymsPage.expectSynonymListed(synonym);
+        });
+
+        test("should reject a search synonym without a name and terms", async () => {
+            await synonymsPage.submitEmptyCreateForm();
+
+            await synonymsPage.expectValidationError("The Name field is required");
+            await synonymsPage.expectValidationError("The Terms field is required");
+        });
+
+        test("should update the name and terms of a search synonym", async () => {
+            const synonym = buildSynonym();
+            const changes = buildSynonym();
+            created.push(synonym.name, changes.name);
+
+            await synonymsPage.createSynonym(synonym);
+            await synonymsPage.updateSynonym(synonym.name, changes);
+
+            await synonymsPage.expectSynonymListed(changes);
+            await synonymsPage.expectSynonymAbsent(synonym.name);
+        });
+
+        test("should mass delete only the selected search synonyms", async () => {
+            const first = buildSynonym();
+            const second = buildSynonym();
+            const untouched = buildSynonym();
+            created.push(first.name, second.name, untouched.name);
+
+            await synonymsPage.createSynonym(first);
+            await synonymsPage.createSynonym(second);
+            await synonymsPage.createSynonym(untouched);
+            await synonymsPage.massDeleteSynonyms([first.name, second.name]);
+
+            await synonymsPage.expectSynonymAbsent(first.name);
+            await synonymsPage.expectSynonymAbsent(second.name);
+            await synonymsPage.expectSynonymListed(untouched);
+        });
+    });
+
+    test.describe("sitemap management", () => {
+        let sitemapsPage: SitemapsPage;
+        let created: string[];
+
+        test.beforeEach(async ({ adminPage }) => {
+            sitemapsPage = new SitemapsPage(adminPage);
+            created = [];
+        });
+
+        test.afterEach(async () => {
+            await sitemapsPage.deleteSitemapsIfPresent(created);
+        });
+
+        test("should refuse a sitemap without a channel", async () => {
+            const sitemap = buildSitemap();
+            created.push(sitemap.fileName);
+
+            await sitemapsPage.attemptCreateSitemapWithoutChannel(sitemap);
+
+            await sitemapsPage.expectValidationError("The Channels field is required");
+            await sitemapsPage.expectNoSaveMessage();
+            await sitemapsPage.expectSitemapAbsent(sitemap.fileName);
+        });
+
+        test("should create a sitemap for a channel and generate its file", async () => {
+            const sitemap = buildSitemap();
+            created.push(sitemap.fileName);
+
+            await sitemapsPage.createSitemap(sitemap);
+
+            await sitemapsPage.expectSitemapListed(sitemap);
+            await sitemapsPage.expectChannelPreselectedInEditForm(
+                sitemap.fileName,
+                sitemap.channel,
+            );
+            await sitemapsPage.expectGeneratedSitemapOpens(sitemap.fileName);
+        });
+
+        test("should update the file name and path of a sitemap", async () => {
+            const sitemap = buildSitemap();
+            const changes = buildSitemap();
+            created.push(sitemap.fileName, changes.fileName);
+
+            await sitemapsPage.createSitemap(sitemap);
+            await sitemapsPage.updateSitemap(sitemap.fileName, changes);
+
+            await sitemapsPage.expectSitemapListed({ ...sitemap, ...changes });
+            await sitemapsPage.expectSitemapAbsent(sitemap.fileName);
+        });
+
+        test("should refuse to update a sitemap when every channel is unselected", async () => {
+            const sitemap = buildSitemap();
+            created.push(sitemap.fileName);
+
+            await sitemapsPage.createSitemap(sitemap);
+            await sitemapsPage.attemptUpdateWithoutChannel(
+                sitemap.fileName,
+                sitemap.channel,
+            );
+
+            await sitemapsPage.expectValidationError("The Channels field is required");
+            await sitemapsPage.expectNoSaveMessage();
+            await sitemapsPage.closeEditModal();
+            await sitemapsPage.expectChannelPreselectedInEditForm(
+                sitemap.fileName,
+                sitemap.channel,
+            );
+        });
+
+        test("should keep separate sitemaps for the default and a newly created channel", async ({
             adminPage,
         }) => {
-            await openSeoSection(adminPage, SITEMAPS_URL);
+            const channelsPage = new ChannelsPage(adminPage);
+            const channel = buildChannel();
+            const defaultSitemap = buildSitemap();
+            const channelSitemap = buildSitemap(channel.name, channel.code);
+            created.push(defaultSitemap.fileName, channelSitemap.fileName);
 
-            await adminPage
-                .locator(".row > .flex > a:nth-child(2)")
-                .first()
-                .click();
+            await channelsPage.createChannel(channel);
 
-            await confirmAgreeDialog(adminPage);
+            try {
+                await sitemapsPage.createSitemap(defaultSitemap);
+                await sitemapsPage.createSitemap(channelSitemap);
 
-            await expect(
-                adminPage.getByText("Sitemap Deleted successfully"),
-            ).toBeVisible();
+                await sitemapsPage.expectSitemapListed(defaultSitemap);
+                await sitemapsPage.expectSitemapListed(channelSitemap);
+            } finally {
+                await sitemapsPage.deleteSitemapsIfPresent([channelSitemap.fileName]);
+                await channelsPage.deleteChannelsIfPresent([channel.name]);
+            }
+        });
+
+        test("should delete a sitemap and remove it from the grid", async () => {
+            const sitemap = buildSitemap();
+            const untouched = buildSitemap();
+            created.push(sitemap.fileName, untouched.fileName);
+
+            await sitemapsPage.createSitemap(sitemap);
+            await sitemapsPage.createSitemap(untouched);
+            await sitemapsPage.deleteSitemap(sitemap.fileName);
+
+            await sitemapsPage.expectSitemapAbsent(sitemap.fileName);
+            await sitemapsPage.expectSitemapListed(untouched);
         });
     });
 });

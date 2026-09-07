@@ -1,66 +1,67 @@
-import { test, expect } from "../../../setup";
-import { CustomerSettingsPage } from "../../../pages/admin/configuration/customer/CustomerSettingsPage";
+import { test } from "../../../setup";
+import {
+    CustomerSettingsPage,
+    SOCIAL_LOGIN_PROVIDERS,
+    type CustomerSettings,
+} from "../../../pages/admin/configuration/customer/CustomerSettingsPage";
 
-test.describe("settings configuration", () => {
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
+
+test.describe("customer settings configuration", () => {
+    test.describe.configure({ timeout: 120000 });
+
+    let configPage: CustomerSettingsPage;
+    let original: CustomerSettings;
+
     test.beforeEach(async ({ adminPage }) => {
-        await new CustomerSettingsPage(adminPage).open();
+        configPage = new CustomerSettingsPage(adminPage);
+        original = await configPage.readSettings();
     });
 
-    test("should enable the wishlist feature", async ({ adminPage }) => {
-        await new CustomerSettingsPage(adminPage).enableWishlist();
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
     });
 
-    test("should update the redirect page option after the login", async ({
-        adminPage,
-    }) => {
-        await new CustomerSettingsPage(adminPage).updateLoginRedirect("home");
+    test("should persist the wishlist and newsletter settings after reload", async () => {
+        const changed = {
+            wishlist: !original.wishlist,
+            newsletterSignup: !original.newsletterSignup,
+            newsletterSubscription: !original.newsletterSubscription,
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test("should update default customer group and enabling the newsletter subscription option during sign-up", async ({
-        adminPage,
-    }) => {
-        await new CustomerSettingsPage(
-            adminPage,
-        ).updateDefaultGroupAndNewsletter();
-    });
+    test("should persist the login redirect and default group after reload", async () => {
+        const changed = {
+            loginRedirect: other(original.loginRedirect, "home", "account"),
+            defaultGroup: other(original.defaultGroup, "general", "wholesale"),
+        };
 
-    test("should update the newsletter subscription option", async ({
-        adminPage,
-    }) => {
-        await new CustomerSettingsPage(
-            adminPage,
-        ).enableNewsletterSubscription();
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
     test.describe("social login configuration", () => {
-        test("should enable the github login", async ({ adminPage }) => {
-            await new CustomerSettingsPage(adminPage).enableSocialLogin(
-                "github",
-            );
-        });
+        for (const provider of SOCIAL_LOGIN_PROVIDERS) {
+            test(`should offer ${provider} sign in on the storefront only while it is enabled`, async () => {
+                await configPage.applySettings({
+                    socialLogin: { ...original.socialLogin, [provider]: true },
+                });
 
-        test("should enable the linkedin login", async ({ adminPage }) => {
-            await new CustomerSettingsPage(adminPage).enableSocialLogin(
-                "linkedin",
-            );
-        });
+                await configPage.expectSocialLoginOfferedOnStorefront(provider, true);
 
-        test("should enable the google login", async ({ adminPage }) => {
-            await new CustomerSettingsPage(adminPage).enableSocialLogin(
-                "google",
-            );
-        });
+                await configPage.applySettings({
+                    socialLogin: { ...original.socialLogin, [provider]: false },
+                });
 
-        test("should enable the twitter login", async ({ adminPage }) => {
-            await new CustomerSettingsPage(adminPage).enableSocialLogin(
-                "twitter",
-            );
-        });
-
-        test("should enable the facebook login", async ({ adminPage }) => {
-            await new CustomerSettingsPage(adminPage).enableSocialLogin(
-                "facebook",
-            );
-        });
+                await configPage.expectSocialLoginOfferedOnStorefront(provider, false);
+            });
+        }
     });
 });

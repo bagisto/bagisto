@@ -1,276 +1,225 @@
-import { test, expect } from "../../setup";
-import type { Page } from "@playwright/test";
-import { generateName, generateDescription, generateRandomDate } from "../../utils/faker";
+import { test } from "../../setup";
+import {
+    CampaignsPage,
+    type CampaignData,
+} from "../../pages/admin/marketing/communications/CampaignsPage";
+import {
+    EmailTemplatesPage,
+    type EmailTemplateData,
+} from "../../pages/admin/marketing/communications/EmailTemplatesPage";
+import {
+    EventsPage,
+    type EventData,
+} from "../../pages/admin/marketing/communications/EventsPage";
+import { generateDescription, generateName, uniqueStamp } from "../../utils/faker";
 
-async function openCommunicationsPage(adminPage: Page, url: string) {
-    await adminPage.goto(url);
+function buildTemplate(): EmailTemplateData {
+    return {
+        name: `${generateName()} ${uniqueStamp()}`,
+        content: generateDescription(),
+    };
 }
 
-async function clickCreate(adminPage: Page, selector = "div.primary-button:visible") {
-    await adminPage.click(selector);
-}
-
-async function clickFirstIcon(adminPage: Page, selector: string) {
-    await adminPage.waitForSelector(selector, { state: "visible" });
-    const icons = await adminPage.$$(selector);
-    expect(icons.length).toBeGreaterThan(0);
-    await icons[0].click();
-}
-
-async function fillVisibleTextInputs(adminPage: Page, value: string) {
-    const inputs = await adminPage.$$('textarea.rounded-md:visible, input[type="text"].rounded-md:visible');
-
-    for (const input of inputs) {
-        await input.fill(value);
-    }
-}
-
-async function submitPrimaryForm(adminPage: Page) {
-    await adminPage.click('button[class="primary-button"]:visible');
-}
-
-async function confirmDelete(adminPage: Page) {
-    await adminPage.click("button.transparent-button + button.primary-button:visible");
-}
-
-async function createTemplate(adminPage: Page) {
-    await openCommunicationsPage(adminPage, "admin/marketing/communications/email-templates");
-    await clickCreate(
-        adminPage,
-        'div.primary-button:visible:has-text("Create Template")'
-    );
-
-    const name = generateName();
-    const description = generateDescription();
-
-    await adminPage.fill('input[name="name"]', name);
-    await adminPage.selectOption('select[name="status"]', "active");
-
-    await adminPage.fillInTinymce("#content_ifr", description);
-
-    await adminPage.click(
-        'button[type="submit"][class="primary-button"]:visible:has-text("Save Template")'
-    );
-
-    await expect(adminPage.locator('#app')).toContainText('Email template created successfully.');
+function buildEvent(): EventData {
+    return {
+        name: `${generateName()} ${uniqueStamp()}`,
+        description: generateDescription(),
+        date: "2030-01-15",
+    };
 }
 
 test.describe("communication management", () => {
-    test("should create a template", async ({ adminPage }) => {
-        await createTemplate(adminPage);
+    test.describe("email template management", () => {
+        let templatesPage: EmailTemplatesPage;
+        let created: string[];
+
+        test.beforeEach(async ({ adminPage }) => {
+            templatesPage = new EmailTemplatesPage(adminPage);
+            created = [];
+        });
+
+        test.afterEach(async () => {
+            await templatesPage.deleteTemplatesIfPresent(created);
+        });
+
+        test("should create an email template and list it as active", async () => {
+            const template = buildTemplate();
+            created.push(template.name);
+
+            await templatesPage.createTemplate(template);
+
+            await templatesPage.expectTemplateListed(template.name);
+        });
+
+        test("should reject an email template without a name", async () => {
+            await templatesPage.submitEmptyCreateForm();
+
+            await templatesPage.expectValidationError("The Name field is required");
+            await templatesPage.expectStillOnCreateForm();
+        });
+
+        test("should rename an email template and keep the new name after reload", async () => {
+            const template = buildTemplate();
+            const newName = `${generateName()} ${uniqueStamp()}`;
+            created.push(template.name, newName);
+
+            await templatesPage.createTemplate(template);
+            await templatesPage.renameTemplate(template.name, newName);
+
+            await templatesPage.expectTemplateListed(newName);
+            await templatesPage.expectTemplateAbsent(template.name);
+            await templatesPage.expectNameInEditForm(newName);
+        });
+
+        test("should delete an email template and remove it from the grid", async () => {
+            const template = buildTemplate();
+            const untouched = buildTemplate();
+            created.push(template.name, untouched.name);
+
+            await templatesPage.createTemplate(template);
+            await templatesPage.createTemplate(untouched);
+            await templatesPage.deleteTemplate(template.name);
+
+            await templatesPage.expectTemplateAbsent(template.name);
+            await templatesPage.expectTemplateListed(untouched.name);
+        });
     });
 
-    test("should edit a template", async ({ adminPage }) => {
-        await createTemplate(adminPage);
+    test.describe("event management", () => {
+        let eventsPage: EventsPage;
+        let created: string[];
 
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/email-templates");
-        await clickFirstIcon(adminPage, "span.cursor-pointer.icon-edit");
-        await adminPage.fill('input[name="name"]', generateName());
+        test.beforeEach(async ({ adminPage }) => {
+            eventsPage = new EventsPage(adminPage);
+            created = [];
+        });
 
-        await adminPage.click(
-            'button[type="submit"][class="primary-button"]:visible'
-        );
+        test.afterEach(async () => {
+            await eventsPage.deleteEventsIfPresent(created);
+        });
 
-        await expect(adminPage.locator('#app')).toContainText('Updated successfully');
+        test("should create an event and list it with its date", async () => {
+            const event = buildEvent();
+            created.push(event.name);
+
+            await eventsPage.createEvent(event);
+
+            await eventsPage.expectEventListed(event.name, event.date);
+        });
+
+        test("should reject an event without its required fields", async () => {
+            await eventsPage.submitEmptyCreateForm();
+
+            await eventsPage.expectValidationError("The Name field is required");
+            await eventsPage.expectValidationError("The Date field is required");
+        });
+
+        test("should rename an event and keep the new name after reload", async () => {
+            const event = buildEvent();
+            const newName = `${generateName()} ${uniqueStamp()}`;
+            created.push(event.name, newName);
+
+            await eventsPage.createEvent(event);
+            await eventsPage.renameEvent(event.name, newName);
+
+            await eventsPage.expectEventListed(newName, event.date);
+            await eventsPage.expectEventAbsent(event.name);
+            await eventsPage.expectNameInEditForm(newName);
+        });
+
+        test("should delete an event and remove it from the grid", async () => {
+            const event = buildEvent();
+            const untouched = buildEvent();
+            created.push(event.name, untouched.name);
+
+            await eventsPage.createEvent(event);
+            await eventsPage.createEvent(untouched);
+            await eventsPage.deleteEvent(event.name);
+
+            await eventsPage.expectEventAbsent(event.name);
+            await eventsPage.expectEventListed(untouched.name, untouched.date);
+        });
     });
 
-    test("should delete a template", async ({ adminPage }) => {
-        await createTemplate(adminPage);
+    test.describe("campaign management", () => {
+        let campaignsPage: CampaignsPage;
+        let templatesPage: EmailTemplatesPage;
+        let eventsPage: EventsPage;
+        let template: EmailTemplateData;
+        let event: EventData;
+        let created: string[];
 
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/email-templates");
-        await clickFirstIcon(adminPage, "span.cursor-pointer.icon-delete");
-        await confirmDelete(adminPage);
+        test.beforeEach(async ({ adminPage }) => {
+            campaignsPage = new CampaignsPage(adminPage);
+            templatesPage = new EmailTemplatesPage(adminPage);
+            eventsPage = new EventsPage(adminPage);
+            template = buildTemplate();
+            event = buildEvent();
+            created = [];
 
-        await expect(
-            adminPage.getByText("Template Deleted successfully")
-        ).toBeVisible();
-    });
+            await templatesPage.createTemplate(template);
+            await eventsPage.createEvent(event);
+        });
 
-    test("create event", async ({ adminPage }) => {
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
-        await clickCreate(adminPage);
-
-        await adminPage.hover('input[name="name"]');
-
-        await fillVisibleTextInputs(adminPage, generateName());
-
-        const time = generateRandomDate();
-
-        await adminPage.fill('input[name="date"]', time);
-
-        await submitPrimaryForm(adminPage);
-
-        await expect(
-            adminPage.getByText("Events Created Successfully")
-        ).toBeVisible();
-    });
-
-    test("edit event", async ({ adminPage }) => {
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
-        await clickFirstIcon(
-            adminPage,
-            'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-        );
-
-        const iconExists = await adminPage
-            .waitForSelector(
-                ".flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl",
-                { timeout: 3000 }
-            )
-            .catch(() => null);
-
-        if (iconExists) {
-            const messages = await adminPage.$$(
-                ".flex.items-center.break-all.text-sm > .icon-toast-done.rounded-full.bg-white.text-2xl"
-            );
-            const icons = await adminPage.$$(
-                ".flex.items-center.break-all.text-sm + .cursor-pointer.underline"
-            );
-
-            const message = await messages[0].evaluate(
-                (el) => el.parentNode.innerText
-            );
-            await icons[0].click();
-
-            throw new Error(message);
-        }
-
-        await adminPage.hover('input[name="name"]');
-
-        await fillVisibleTextInputs(adminPage, generateDescription(200));
-
-        const time = generateRandomDate();
-
-        await adminPage.fill('input[name="date"]', time);
-
-        await submitPrimaryForm(adminPage);
-
-        await expect(
-            adminPage.getByText("Events Updated Successfully")
-        ).toBeVisible();
-    });
-
-    test("delete event", async ({ adminPage }) => {
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
-        await clickFirstIcon(
-            adminPage,
-            'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-        );
-        await confirmDelete(adminPage);
-
-        await expect(
-            adminPage.getByText("Events Deleted Successfully")
-        ).toBeVisible();
-    });
-
-    test("create campaign", async ({ adminPage }) => {
-        await createTemplate(adminPage);
-
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
-        await clickCreate(adminPage);
-
-        await adminPage.hover('input[name="name"]');
-
-        await fillVisibleTextInputs(adminPage, generateDescription(200));
-
-        const time = generateRandomDate();
-
-        await adminPage.fill('input[name="date"]', time);
-
-        await submitPrimaryForm(adminPage);
-
-        await expect(
-            adminPage.getByText("Events Created Successfully")
-        ).toBeVisible();
-
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/campaigns");
-        await clickCreate(adminPage);
-
-        await adminPage.click('input[type="checkbox"] + label.peer');
-
-        await fillVisibleTextInputs(adminPage, generateDescription(200));
-
-        const selects = await adminPage.$$("select.custom-select");
-
-        for (let select of selects) {
-            const options = await select.$$eval("option", (options) => {
-                return options.map((option) => option.value);
-            });
-
-            if (options.length > 1) {
-                const randomIndex =
-                    Math.floor(Math.random() * (options.length - 1)) + 1;
-
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
+        test.afterEach(async () => {
+            try {
+                await campaignsPage.deleteCampaignsIfPresent(created);
+            } finally {
+                try {
+                    await templatesPage.deleteTemplatesIfPresent([template.name]);
+                } finally {
+                    await eventsPage.deleteEventsIfPresent([event.name]);
+                }
             }
+        });
+
+        function buildCampaign(): CampaignData {
+            return {
+                name: `${generateName()} ${uniqueStamp()}`,
+                subject: `Subject ${uniqueStamp()}`,
+                eventName: event.name,
+                templateName: template.name,
+            };
         }
 
-        let i = Math.floor(Math.random() * 10) + 1;
+        test("should create a campaign for an event and template and list it", async () => {
+            const campaign = buildCampaign();
+            created.push(campaign.name);
 
-        if (i % 2 == 1) {
-            await adminPage.click('input[type="checkbox"] + label.peer');
-        }
+            await campaignsPage.createCampaign(campaign);
 
-        await submitPrimaryForm(adminPage);
+            await campaignsPage.expectCampaignListed(campaign.name, campaign.subject);
+        });
 
-        await expect(
-            adminPage.getByText("Campaign created successfully.")
-        ).toBeVisible();
-    });
+        test("should reject a campaign without its required fields", async () => {
+            await campaignsPage.submitEmptyCreateForm();
 
-    test("edit campaign", async ({ adminPage }) => {
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/campaigns");
-        await clickFirstIcon(
-            adminPage,
-            'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]'
-        );
+            await campaignsPage.expectValidationError("The Name field is required");
+            await campaignsPage.expectValidationError("The Subject field is required");
+            await campaignsPage.expectStillOnCreateForm();
+        });
 
-        await adminPage.click('input[type="checkbox"] + label.peer');
+        test("should rename a campaign and keep the new name after reload", async () => {
+            const campaign = buildCampaign();
+            const newName = `${generateName()} ${uniqueStamp()}`;
+            created.push(campaign.name, newName);
 
-        await fillVisibleTextInputs(adminPage, generateDescription(200));
+            await campaignsPage.createCampaign(campaign);
+            await campaignsPage.renameCampaign(campaign.name, newName);
 
-        const selects = await adminPage.$$("select.custom-select");
+            await campaignsPage.expectCampaignListed(newName, campaign.subject);
+            await campaignsPage.expectCampaignAbsent(campaign.name);
+            await campaignsPage.expectNameInEditForm(newName);
+        });
 
-        for (let select of selects) {
-            const options = await select.$$eval("option", (options) => {
-                return options.map((option) => option.value);
-            });
+        test("should delete a campaign and remove it from the grid", async () => {
+            const campaign = buildCampaign();
+            created.push(campaign.name);
 
-            if (options.length > 1) {
-                const randomIndex =
-                    Math.floor(Math.random() * (options.length - 1)) + 1;
+            await campaignsPage.createCampaign(campaign);
+            await campaignsPage.deleteCampaign(campaign.name);
 
-                await select.selectOption(options[randomIndex]);
-            } else {
-                await select.selectOption(options[0]);
-            }
-        }
-
-        let i = Math.floor(Math.random() * 10) + 1;
-
-        if (i % 2 == 1) {
-            await adminPage.click('input[type="checkbox"] + label.peer');
-        }
-
-        await submitPrimaryForm(adminPage);
-
-        await expect(
-            adminPage.getByText("Campaign updated successfully.")
-        ).toBeVisible();
-    });
-
-    test("delete campaign", async ({ adminPage }) => {
-        await openCommunicationsPage(adminPage, "admin/marketing/communications/campaigns");
-        await clickFirstIcon(
-            adminPage,
-            'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]'
-        );
-        await confirmDelete(adminPage);
-
-        await expect(
-            adminPage.getByText("Campaign deleted successfully")
-        ).toBeVisible();
+            await campaignsPage.expectCampaignAbsent(campaign.name);
+        });
     });
 });

@@ -1,85 +1,84 @@
-import { test, expect } from "../setup";
-import { loginAsCustomer } from "../utils/customer";
+import { test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
+import { CartPage } from "../pages/shop/CartPage";
 import { WishlistPage } from "../pages/shop/WishlistPage";
+import { loginAsCustomer } from "../utils/customer";
+import { uniqueStamp } from "../utils/faker";
 
-test.beforeAll(
-    "should create simple product to add in wishlist",
-    async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+test.describe("wishlist", () => {
+    let productName: string;
+    let productListPage: ProductListPage;
+    let wishlistPage: WishlistPage;
 
-        await productCreation.createProduct({
+    test.beforeEach(async ({ adminPage, shopPage }) => {
+        productListPage = new ProductListPage(adminPage);
+        wishlistPage = new WishlistPage(shopPage);
+        productName = `Simple-${uniqueStamp()}`;
+
+        await new ProductCreatePage(adminPage).createProduct({
             type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
+            sku: `SKU-${uniqueStamp()}`,
+            name: productName,
             shortDescription: "Short desc",
             description: "Full desc",
             price: 199,
             weight: 1,
             inventory: 100,
         });
-    },
-);
 
-test("should add wishlist", async ({ shopPage }) => {
-    const wishlistPage = new WishlistPage(shopPage);
+        await loginAsCustomer(shopPage);
+        await wishlistPage.addToWishlistFromListing(productName);
+    });
 
-    await loginAsCustomer(shopPage);
-    await wishlistPage.addProductToWishlist();
-    await wishlistPage.expectWishlistAdded();
-});
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent([productName]);
+    });
 
-test("should remove wishlist", async ({ shopPage }) => {
-    const wishlistPage = new WishlistPage(shopPage);
+    test("should list the product on the wishlist page with a bin icon at quantity one", async () => {
+        await wishlistPage.open();
 
-    await loginAsCustomer(shopPage);
-    await wishlistPage.addProductToWishlist();
-    await wishlistPage.removeFirstWishlistItem();
-    await wishlistPage.expectWishlistRemoved();
-});
+        await wishlistPage.expectItemListed(productName);
+        await wishlistPage.expectBinOffered(productName, true);
+    });
 
-test("should display bin icon in wishlist when product quantity is one", async ({
-    shopPage,
-}) => {
-    const wishlistPage = new WishlistPage(shopPage);
+    test("should hide the bin icon once the quantity is above one", async () => {
+        await wishlistPage.open();
+        await wishlistPage.increaseQuantity(productName);
 
-    await loginAsCustomer(shopPage);
-    await wishlistPage.addProductToWishlist();
-    await shopPage.goto("customer/account/wishlist");
+        await wishlistPage.expectBinOffered(productName, false);
+    });
 
-    await expect(shopPage.locator(".icon-bin").nth(1)).toBeVisible();
-});
+    test("should remove the product from the listing heart icon", async () => {
+        await wishlistPage.removeFromListing(productName);
 
-test("should not display bin icon in wishlist when product quantity is greater than one", async ({
-    shopPage,
-}) => {
-    const wishlistPage = new WishlistPage(shopPage);
+        await wishlistPage.open();
+        await wishlistPage.expectItemAbsent(productName);
+    });
 
-    await loginAsCustomer(shopPage);
-    await wishlistPage.addProductToWishlist();
-    await shopPage.goto("customer/account/wishlist");
-    await wishlistPage.increaseQuantityFromWishlishtView();
+    test("should remove the product through the bin icon", async () => {
+        await wishlistPage.open();
+        await wishlistPage.removeWithBin(productName);
 
-    await expect(shopPage.locator(".icon-bin").nth(1)).not.toBeVisible();
-});
+        await wishlistPage.expectItemAbsent(productName);
+    });
 
-test("should remove using bin icon in wishlist", async ({ shopPage }) => {
-    const wishlistPage = new WishlistPage(shopPage);
+    test("should move the product to the cart", async ({ shopPage }) => {
+        await wishlistPage.open();
+        await wishlistPage.moveToCart(productName);
 
-    await loginAsCustomer(shopPage);
-    await wishlistPage.addProductToWishlist();
-    await shopPage.goto("customer/account/wishlist");
-    await wishlistPage.clickBinIcon();
-    await expect(
-        shopPage.getByText("Item Successfully Removed From Wishlist").first(),
-    ).toBeVisible();
-});
+        await wishlistPage.expectItemAbsent(productName);
 
-test("should clear all wishlist", async ({ shopPage }) => {
-    const wishlistPage = new WishlistPage(shopPage);
+        const cartPage = new CartPage(shopPage);
 
-    await loginAsCustomer(shopPage);
-    await wishlistPage.addProductToWishlist();
-    await wishlistPage.clearWishlist();
-    await wishlistPage.expectWishlistRemoved();
+        await cartPage.openCart();
+        await cartPage.expectCartQuantity(productName, 1);
+    });
+
+    test("should clear the whole wishlist", async () => {
+        await wishlistPage.open();
+        await wishlistPage.deleteAll();
+
+        await wishlistPage.expectEmpty();
+    });
 });

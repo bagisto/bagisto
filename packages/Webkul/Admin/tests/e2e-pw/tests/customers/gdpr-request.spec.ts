@@ -1,15 +1,29 @@
-import { test, expect } from "../../setup";
+import { test } from "../../setup";
 import { loginAsCustomer } from "../../utils/customer";
-import { enableGDPR } from "../../utils/gdpr";
+import {
+    GDPRConfigurationPage,
+    type GdprSettings,
+} from "../../pages/admin/configuration/general/GDPRConfigurationPage";
 import { CustomerGDPRPage } from "../../pages/admin/customers/CustomerGDPRPage";
+import { uniqueStamp } from "../../utils/faker";
 
 function getGdprRequestMessage(prefix: string): string {
-    return `${prefix} ${Date.now()}`;
+    return `${prefix} ${uniqueStamp()}`;
 }
 
-test.describe("customer agreement configuration", () => {
+test.describe("gdpr request management", () => {
+    let gdprConfig: GDPRConfigurationPage;
+    let original: GdprSettings;
+
     test.beforeEach(async ({ adminPage }) => {
-        await enableGDPR(adminPage);
+        gdprConfig = new GDPRConfigurationPage(adminPage);
+        original = await gdprConfig.readSettings();
+
+        await gdprConfig.applySettings({ enabled: true });
+    });
+
+    test.afterEach(async () => {
+        await gdprConfig.applySettings({ enabled: original.enabled });
     });
 
     test("should edit gdpr request state pending to processing", async ({
@@ -35,14 +49,7 @@ test.describe("customer agreement configuration", () => {
         const gdprPage = new CustomerGDPRPage(adminPage);
 
         await loginAsCustomer(adminPage);
-        await adminPage.goto("customer/account/profile");
-        const acceptButton = adminPage.getByRole("button", { name: "Accept" });
-        if (await acceptButton.isVisible()) {
-            await acceptButton.click();
-        }
-
         const requestMessage = getGdprRequestMessage("Delete request:");
-        await adminPage.getByRole("link", { name: "GDPR Requests" }).click();
         await gdprPage.createRequest("delete", requestMessage);
         await gdprPage.expectRequestState(requestMessage, "Pending", "Delete");
         await gdprPage.updateRequestStatus(requestMessage, "processing");
@@ -63,18 +70,11 @@ test.describe("customer agreement configuration", () => {
         const gdprPage = new CustomerGDPRPage(adminPage);
 
         await loginAsCustomer(adminPage);
-        await adminPage.goto("customer/account/profile");
-        const acceptButton = adminPage.getByRole("button", { name: "Accept" });
-        if (await acceptButton.isVisible()) {
-            await acceptButton.click();
-        }
-
         const requestMessage = getGdprRequestMessage("Delete request:");
-        await adminPage.getByRole("link", { name: "GDPR Requests" }).click();
         await gdprPage.createRequest("update", requestMessage);
         await gdprPage.expectRequestState(requestMessage, "Pending", "Update");
         await gdprPage.deleteRequest(requestMessage);
-        await expect(await gdprPage.getRequestCount(requestMessage)).toBe(0);
+        await gdprPage.expectRequestAbsent(requestMessage);
     });
 
     test("should decline gdpr request", async ({ adminPage }) => {

@@ -1,73 +1,69 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-type EmailSettingsData = {
+export interface EmailSettings {
     senderName: string;
     senderEmail: string;
     adminName: string;
     adminEmail: string;
     contactName: string;
     contactEmail: string;
-};
+}
 
-export class EmailConfigurationPage extends BasePage {
+const FIELDS = {
+    senderName: "emails[configure][email_settings][sender_name]",
+    senderEmail: "emails[configure][email_settings][sender_email]",
+    adminName: "emails[configure][email_settings][admin_name]",
+    adminEmail: "emails[configure][email_settings][admin_email]",
+    contactName: "emails[configure][email_settings][contact_name]",
+    contactEmail: "emails[configure][email_settings][contact_email]",
+} as const;
+
+export class EmailConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/emails/configure";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully");
+    async readSettings(): Promise<EmailSettings> {
+        await this.open();
+
+        return {
+            senderName: await this.readText(FIELDS.senderName),
+            senderEmail: await this.readText(FIELDS.senderEmail),
+            adminName: await this.readText(FIELDS.adminName),
+            adminEmail: await this.readText(FIELDS.adminEmail),
+            contactName: await this.readText(FIELDS.contactName),
+            contactEmail: await this.readText(FIELDS.contactEmail),
+        };
     }
 
-    async openSettings(): Promise<void> {
-        await this.visit("admin/configuration/emails/configure");
+    async applySettings(settings: Partial<EmailSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(FIELDS) as (keyof EmailSettings)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setText(FIELDS[key], value);
+            }
+        }
+
+        await this.save();
     }
 
-    async openNotifications(): Promise<void> {
-        await this.visit("admin/configuration/emails/general");
-    }
+    async expectSettings(settings: Partial<EmailSettings>): Promise<void> {
+        await this.open();
 
-    async fillEmailSettings(data: EmailSettingsData): Promise<void> {
-        await this.page
-            .locator(
-                'input[name="emails[configure][email_settings][sender_name]"]',
-            )
-            .fill(data.senderName);
-        await this.page
-            .locator(
-                'input[name="emails[configure][email_settings][sender_email]"]',
-            )
-            .fill(data.senderEmail);
-        await this.page
-            .locator(
-                'input[name="emails[configure][email_settings][admin_name]"]',
-            )
-            .fill(data.adminName);
-        await this.page
-            .locator(
-                'input[name="emails[configure][email_settings][admin_email]"]',
-            )
-            .fill(data.adminEmail);
-        await this.page
-            .locator(
-                'input[name="emails[configure][email_settings][contact_name]"]',
-            )
-            .fill(data.contactName);
-        await this.page
-            .locator(
-                'input[name="emails[configure][email_settings][contact_email]"]',
-            )
-            .fill(data.contactEmail);
-    }
+        for (const key of Object.keys(FIELDS) as (keyof EmailSettings)[]) {
+            const value = settings[key];
 
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+            if (value !== undefined) {
+                await this.expectText(FIELDS[key], value);
+            }
+        }
     }
 }

@@ -1,30 +1,33 @@
+import { uniqueStamp } from "../../../../utils/faker";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import type { BaseProduct } from "../../../../pages/types/product.types";
 import { test } from "../../../../setup";
 import { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
 
 async function createRuleAndVerifyCoupon({
-    page,
+    adminPage,
+    shopPage,
     operator,
     optionSelect,
     couponType,
 }: {
-    page: Page;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     optionSelect: string;
     couponType: CouponType;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
 
-    await loginAsAdmin(page);
-
-    await ruleCreatePage.cartRuleCreationFlow();
+    const rule = await ruleCreatePage.cartRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|guest_checkout",
@@ -37,19 +40,23 @@ async function createRuleAndVerifyCoupon({
 
     await ruleCreatePage.saveCartRule();
 
-    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
-        discountValue,
-        couponType,
-    );
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal({
+        productName: product.name,
+        couponCode: rule.couponCode,
+        discountValue: discountValue,
+        couponType: couponType,
+    });
 }
 
-test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreatePage(adminPage);
+let product: BaseProduct;
+let createdRules: string[];
 
-    await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
@@ -59,8 +66,11 @@ test.beforeEach(async ({ adminPage }) => {
 });
 
 test.afterEach(async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
+    try {
+        await new RuleDeletePage(adminPage).deleteCartRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 const cases = [
@@ -95,10 +105,12 @@ test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const { operator, optionSelect, type, label } of cases) {
             test(`should apply coupon when guest checkout condition is -> ${label}`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await createRuleAndVerifyCoupon({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator,
                     optionSelect,
                     couponType: type as CouponType,

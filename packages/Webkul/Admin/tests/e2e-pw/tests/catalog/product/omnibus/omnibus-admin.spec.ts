@@ -1,30 +1,26 @@
-import { test, expect } from "../../../../setup";
-import { OmnibusAdminPage as OmnibusAdmin } from "../../../../pages/admin/omnibus/OmnibusAdminPage";
+import { test } from "../../../../setup";
+import { OmnibusAdminPage } from "../../../../pages/admin/omnibus/OmnibusAdminPage";
 
 test.describe("omnibus price disclosure", () => {
-    test("should enable omnibus price disclosure in admin configuration", async ({
-        adminPage,
-    }) => {
-        const omnibusAdmin = new OmnibusAdmin(adminPage);
-        await omnibusAdmin.enableOmnibus();
-        await omnibusAdmin.saveConfig();
-        await adminPage.reload();
-        await adminPage.waitForLoadState("networkidle");
+    let omnibusAdmin: OmnibusAdminPage;
+    let original: boolean;
 
-        expect(await omnibusAdmin.isOmnibusEnabled()).toBeTruthy();
+    test.beforeEach(async ({ adminPage }) => {
+        omnibusAdmin = new OmnibusAdminPage(adminPage);
+        original = await omnibusAdmin.readEnabled();
     });
 
-    test("should disable omnibus price disclosure in admin configuration", async ({
-        adminPage,
-    }) => {
-        const omnibusAdmin = new OmnibusAdmin(adminPage);
-        await omnibusAdmin.enableOmnibus();
-        await omnibusAdmin.saveConfig();
-        await omnibusAdmin.disableOmnibus();
-        await omnibusAdmin.saveConfig();
-        await adminPage.reload();
-        await adminPage.waitForLoadState("networkidle");
+    test.afterEach(async () => {
+        await omnibusAdmin.setEnabled(original);
+    });
 
-        expect(await omnibusAdmin.isOmnibusEnabled()).toBeFalsy();
+    test("should persist the omnibus setting through enable and disable", async () => {
+        await omnibusAdmin.setEnabled(!original);
+
+        await omnibusAdmin.expectEnabled(!original);
+
+        await omnibusAdmin.setEnabled(original);
+
+        await omnibusAdmin.expectEnabled(original);
     });
 });

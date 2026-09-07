@@ -1,22 +1,36 @@
-import { test, expect } from "../../../setup";
-import { generateRandomNumericString } from "../../../utils/faker";
+import { test } from "../../../setup";
+import {
+    InventoryConfigurationPage,
+    type InventorySettings,
+} from "../../../pages/admin/configuration/catalog/InventoryConfigurationPage";
+
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
 
 test.describe("inventory configuration", () => {
-    test("should allow back orders and define out-of-stock thresholds", async ({
-        adminPage,
-    }) => {
-        await adminPage.goto("admin/configuration/catalog/inventory");
-        await adminPage.click(
-            'label[for="catalog[inventory][stock_options][back_orders]"]'
-        );
-        await adminPage
-            .locator(
-                'input[name="catalog[inventory][stock_options][out_of_stock_threshold]"]'
-            )
-            .fill(generateRandomNumericString(2));
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+    test.describe.configure({ timeout: 120000 });
+
+    let configPage: InventoryConfigurationPage;
+    let original: InventorySettings;
+
+    test.beforeEach(async ({ adminPage }) => {
+        configPage = new InventoryConfigurationPage(adminPage);
+        original = await configPage.readSettings();
+    });
+
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
+    });
+
+    test("should persist the back order and out of stock threshold settings after reload", async () => {
+        const changed = {
+            backOrders: !original.backOrders,
+            outOfStockThreshold: other(original.outOfStockThreshold, "3", "5"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

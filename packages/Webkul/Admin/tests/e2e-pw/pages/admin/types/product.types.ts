@@ -18,4 +18,5 @@ export interface BaseProduct {
     weight?: number | string;
     inventory?: number | string;
     location?: string;
+    allowRma?: boolean;
 }

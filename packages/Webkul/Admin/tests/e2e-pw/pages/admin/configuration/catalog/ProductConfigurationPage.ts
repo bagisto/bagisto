@@ -1,46 +1,73 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
-import {
-    setBooleanSetting,
-    setBooleanSettings,
-} from "../../../../utils/configuration";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-type StorefrontMode = "grid" | "list";
+export type ImageSize = "small" | "medium" | "large";
 
-type ProductViewConfig = {
+export interface ProductSettings {
+    compare: boolean;
+    imageSearch: boolean;
     relatedProducts: string;
-    upSellsProducts: string;
-};
-
-type StorefrontConfig = {
-    mode: StorefrontMode;
+    upSells: string;
+    crossSells: string;
+    storefrontMode: string;
     productsPerPage: string;
     sortBy: string;
-    buyNowDisplay: boolean;
-};
+    buyNowButton: boolean;
+    guestReview: boolean;
+    customerReview: boolean;
+    reviewSummary: string;
+    imageUploadSize: string;
+    fileUploadSize: string;
+    socialShare: boolean;
+    shareMessage: string;
+    imageSizes: Record<ImageSize, { width: string; height: string }>;
+}
 
-export class ProductConfigurationPage extends BasePage {
+const FIELDS = {
+    compare: "catalog[products][settings][compare_option]",
+    imageSearch: "catalog[products][settings][image_search]",
+    relatedProducts: "catalog[products][product_view_page][no_of_related_products]",
+    upSells: "catalog[products][product_view_page][no_of_up_sells_products]",
+    crossSells: "catalog[products][cart_view_page][no_of_cross_sells_products]",
+    storefrontMode: "catalog[products][storefront][mode]",
+    productsPerPage: "catalog[products][storefront][products_per_page]",
+    sortBy: "catalog[products][storefront][sort_by]",
+    buyNowButton: "catalog[products][product_view_page][buy_now_button_display]",
+    guestReview: "catalog[products][review][guest_review]",
+    customerReview: "catalog[products][review][customer_review]",
+    reviewSummary: "catalog[products][review][summary]",
+    imageUploadSize: "catalog[products][attribute][image_attribute_upload_size]",
+    fileUploadSize: "catalog[products][attribute][file_attribute_upload_size]",
+    socialShare: "catalog[products][social_share][enabled]",
+    shareMessage: "catalog[products][social_share][share_message]",
+} as const;
+
+const IMAGE_SIZES: ImageSize[] = ["small", "medium", "large"];
+
+export class ProductConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/catalog/products";
     }
 
-    private get savedNotification() {
-        return this.page.locator("#app p", {
-            hasText: "Configuration saved successfully",
-        });
+    private imageWidthField(size: ImageSize): string {
+        return `catalog[products][cache_${size}_image][width]`;
     }
 
-    private imagePlaceholderLabel(size: "Small" | "Medium" | "Large") {
-        return this.page.locator(`label:has-text("${size} Image Placeholder")`);
+    private imageHeightField(size: ImageSize): string {
+        return `catalog[products][cache_${size}_image][height]`;
     }
 
-    private imagePlaceholderTile(size: "small" | "medium" | "large") {
+    private imagePlaceholderLabel(size: ImageSize) {
+        const title = size.charAt(0).toUpperCase() + size.slice(1);
+
+        return this.page.locator(`label:has-text("${title} Image Placeholder")`);
+    }
+
+    private imagePlaceholderTile(size: ImageSize) {
         return this.page
             .locator(
                 `input[type="file"][name="catalog[products][cache_${size}_image][url]"]`,
@@ -48,170 +75,168 @@ export class ProductConfigurationPage extends BasePage {
             .locator("xpath=../div[1]");
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/catalog/products");
+    async readSettings(): Promise<ProductSettings> {
+        await this.open();
+
+        const imageSizes = {} as ProductSettings["imageSizes"];
+
+        for (const size of IMAGE_SIZES) {
+            imageSizes[size] = {
+                width: await this.readText(this.imageWidthField(size)),
+                height: await this.readText(this.imageHeightField(size)),
+            };
+        }
+
+        return {
+            compare: await this.readBoolean(FIELDS.compare),
+            imageSearch: await this.readBoolean(FIELDS.imageSearch),
+            relatedProducts: await this.readText(FIELDS.relatedProducts),
+            upSells: await this.readText(FIELDS.upSells),
+            crossSells: await this.readText(FIELDS.crossSells),
+            storefrontMode: await this.readSelect(FIELDS.storefrontMode),
+            productsPerPage: await this.readText(FIELDS.productsPerPage),
+            sortBy: await this.readSelect(FIELDS.sortBy),
+            buyNowButton: await this.readBoolean(FIELDS.buyNowButton),
+            guestReview: await this.readBoolean(FIELDS.guestReview),
+            customerReview: await this.readBoolean(FIELDS.customerReview),
+            reviewSummary: await this.readSelect(FIELDS.reviewSummary),
+            imageUploadSize: await this.readText(FIELDS.imageUploadSize),
+            fileUploadSize: await this.readText(FIELDS.fileUploadSize),
+            socialShare: await this.readBoolean(FIELDS.socialShare),
+            shareMessage: await this.readText(FIELDS.shareMessage),
+            imageSizes,
+        };
     }
 
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.savedNotification).toBeVisible();
+    async applySettings(settings: Partial<ProductSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of [
+            "compare",
+            "imageSearch",
+            "buyNowButton",
+            "guestReview",
+            "customerReview",
+            "socialShare",
+        ] as const) {
+            if (settings[key] !== undefined) {
+                await this.setBoolean(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const key of [
+            "relatedProducts",
+            "upSells",
+            "crossSells",
+            "productsPerPage",
+            "imageUploadSize",
+            "fileUploadSize",
+            "shareMessage",
+        ] as const) {
+            if (settings[key] !== undefined) {
+                await this.setText(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const key of ["storefrontMode", "sortBy", "reviewSummary"] as const) {
+            if (settings[key] !== undefined) {
+                await this.setSelect(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const size of IMAGE_SIZES) {
+            const dimensions = settings.imageSizes?.[size];
+
+            if (dimensions) {
+                await this.setText(this.imageWidthField(size), dimensions.width);
+                await this.setText(this.imageHeightField(size), dimensions.height);
+            }
+        }
+
+        await this.save();
     }
 
-    async enableCompareAndImageSearch(): Promise<void> {
-        await setBooleanSettings(this.page, [
-            "catalog[products][settings][compare_option]",
-            "catalog[products][settings][image_search]",
-        ]);
-        await this.saveAndVerify();
+    async expectSettings(settings: Partial<ProductSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of [
+            "compare",
+            "imageSearch",
+            "buyNowButton",
+            "guestReview",
+            "customerReview",
+            "socialShare",
+        ] as const) {
+            if (settings[key] !== undefined) {
+                await this.expectBoolean(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const key of [
+            "relatedProducts",
+            "upSells",
+            "crossSells",
+            "productsPerPage",
+            "imageUploadSize",
+            "fileUploadSize",
+            "shareMessage",
+        ] as const) {
+            if (settings[key] !== undefined) {
+                await this.expectText(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const key of ["storefrontMode", "sortBy", "reviewSummary"] as const) {
+            if (settings[key] !== undefined) {
+                await this.expectSelect(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const size of IMAGE_SIZES) {
+            const dimensions = settings.imageSizes?.[size];
+
+            if (dimensions) {
+                await this.expectText(this.imageWidthField(size), dimensions.width);
+                await this.expectText(this.imageHeightField(size), dimensions.height);
+            }
+        }
     }
 
-    async updateProductView(config: ProductViewConfig): Promise<void> {
-        await this.page
-            .locator(
-                'input[name="catalog[products][product_view_page][no_of_related_products]"]',
-            )
-            .fill(config.relatedProducts);
-        await this.page
-            .locator(
-                'input[name="catalog[products][product_view_page][no_of_up_sells_products]"]',
-            )
-            .fill(config.upSellsProducts);
-        await this.saveAndVerify();
-    }
+    async uploadImagePlaceholder(size: ImageSize, filePath: string): Promise<void> {
+        await this.open();
 
-    async updateCartView(crossSellCount: string): Promise<void> {
-        await this.page
-            .locator(
-                'input[name="catalog[products][cart_view_page][no_of_cross_sells_products]"]',
-            )
-            .fill(crossSellCount);
-        await this.saveAndVerify();
-    }
-
-    async updateStorefront(config: StorefrontConfig): Promise<void> {
-        await this.page.selectOption(
-            'select[name="catalog[products][storefront][mode]"]',
-            config.mode,
-        );
-        await expect(
-            this.page.locator(
-                'select[name="catalog[products][storefront][mode]"]',
-            ),
-        ).toHaveValue(config.mode);
-
-        await this.page
-            .locator(
-                'input[name="catalog[products][storefront][products_per_page]"]',
-            )
-            .fill(config.productsPerPage);
-
-        await this.page.selectOption(
-            'select[name="catalog[products][storefront][sort_by]"]',
-            config.sortBy,
-        );
-        await expect(
-            this.page.locator(
-                'select[name="catalog[products][storefront][sort_by]"]',
-            ),
-        ).toHaveValue(config.sortBy);
-
-        await setBooleanSetting(
-            this.page,
-            "catalog[products][product_view_page][buy_now_button_display]",
-            config.buyNowDisplay,
-        );
-
-        await this.saveAndVerify();
-    }
-
-    async updateImageSize(
-        size: "small" | "medium" | "large",
-        width: string,
-        height: string,
-    ): Promise<void> {
-        await this.page
-            .locator(
-                `input[name="catalog[products][cache_${size}_image][width]"]`,
-            )
-            .fill(width);
-        await this.page
-            .locator(
-                `input[name="catalog[products][cache_${size}_image][height]"]`,
-            )
-            .fill(height);
-    }
-
-    async uploadImagePlaceholder(
-        size: "Small" | "Medium" | "Large",
-        filePath: string | string[],
-    ): Promise<void> {
         const [fileChooser] = await Promise.all([
             this.page.waitForEvent("filechooser"),
             this.imagePlaceholderLabel(size).click(),
         ]);
 
         await fileChooser.setFiles(filePath);
+        await expect(this.imagePlaceholderTile(size).locator("img")).toBeVisible();
+        await this.save();
     }
 
-    async removeImagePlaceholder(
-        size: "small" | "medium" | "large",
-    ): Promise<void> {
+    async removeImagePlaceholder(size: ImageSize): Promise<void> {
+        await this.open();
+
         const tile = this.imagePlaceholderTile(size);
 
-        await tile.hover();
-        await tile.locator(".icon-delete").click();
-        await expect(tile).toBeHidden();
+        if (await tile.count()) {
+            await tile.hover();
+            await tile.locator(".icon-delete").click();
+            await expect(tile).toBeHidden();
+            await this.save();
+        }
     }
 
-    async updateReviewConfig(summary: string): Promise<void> {
-        await setBooleanSettings(this.page, [
-            "catalog[products][review][guest_review]",
-            "catalog[products][review][customer_review]",
-        ]);
-        await this.page.selectOption(
-            'select[name="catalog[products][review][summary]"]',
-            summary,
-        );
-        await expect(
-            this.page.locator(
-                'select[name="catalog[products][review][summary]"]',
-            ),
-        ).toHaveValue(summary);
-        await this.saveAndVerify();
+    async expectImagePlaceholderShown(size: ImageSize): Promise<void> {
+        await this.open();
+
+        await expect(this.imagePlaceholderTile(size).locator("img")).toBeVisible();
     }
 
-    async updateUploadSizes(
-        imageSize: string,
-        fileSize: string,
-    ): Promise<void> {
-        await this.page
-            .locator(
-                'input[name="catalog[products][attribute][image_attribute_upload_size]"]',
-            )
-            .fill(imageSize);
-        await this.page
-            .locator(
-                'input[name="catalog[products][attribute][file_attribute_upload_size]"]',
-            )
-            .fill(fileSize);
-        await this.saveAndVerify();
-    }
+    async expectImagePlaceholderAbsent(size: ImageSize): Promise<void> {
+        await this.open();
 
-    async updateSocialShare(shareMessage: string): Promise<void> {
-        await setBooleanSettings(this.page, [
-            "catalog[products][social_share][enabled]",
-            "catalog[products][social_share][facebook]",
-            "catalog[products][social_share][twitter]",
-            "catalog[products][social_share][pinterest]",
-            "catalog[products][social_share][whatsapp]",
-            "catalog[products][social_share][linkedin]",
-            "catalog[products][social_share][email]",
-        ]);
-        await this.page
-            .locator(
-                'input[name="catalog[products][social_share][share_message]"]',
-            )
-            .fill(shareMessage);
-        await this.saveAndVerify();
+        await expect(this.imagePlaceholderTile(size)).toHaveCount(0);
     }
 }

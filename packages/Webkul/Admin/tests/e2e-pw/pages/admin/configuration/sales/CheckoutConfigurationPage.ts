@@ -1,63 +1,121 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
-import {
-    setBooleanSetting,
-    setBooleanSettings,
-} from "../../../../utils/configuration";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class CheckoutConfigurationPage extends BasePage {
+export interface CheckoutSettings {
+    guestCheckout: boolean;
+    cartPage: boolean;
+    crossSell: boolean;
+    estimateShipping: boolean;
+    miniCart: boolean;
+    miniCartSummary: string;
+    miniCartOffer: string;
+}
+
+const FIELDS = {
+    guestCheckout: "sales[checkout][shopping_cart][allow_guest_checkout]",
+    cartPage: "sales[checkout][shopping_cart][cart_page]",
+    crossSell: "sales[checkout][shopping_cart][cross_sell]",
+    estimateShipping: "sales[checkout][shopping_cart][estimate_shipping]",
+    miniCart: "sales[checkout][mini_cart][display_mini_cart]",
+    miniCartSummary: "sales[checkout][mini_cart][summary]",
+    miniCartOffer: "sales[checkout][mini_cart][offer_info]",
+} as const;
+
+export class CheckoutConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/sales/checkout";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully").first();
+    async readSettings(): Promise<CheckoutSettings> {
+        await this.open();
+
+        return {
+            guestCheckout: await this.readBoolean(FIELDS.guestCheckout),
+            cartPage: await this.readBoolean(FIELDS.cartPage),
+            crossSell: await this.readBoolean(FIELDS.crossSell),
+            estimateShipping: await this.readBoolean(FIELDS.estimateShipping),
+            miniCart: await this.readBoolean(FIELDS.miniCart),
+            miniCartSummary: await this.readSelect(FIELDS.miniCartSummary),
+            miniCartOffer: await this.readText(FIELDS.miniCartOffer),
+        };
     }
 
-    private get myCartSummarySelect() {
-        return this.page.locator(
-            'select[name="sales[checkout][mini_cart][summary]"]',
-        );
+    async applySettings(settings: Partial<CheckoutSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.guestCheckout !== undefined) {
+            await this.setBoolean(FIELDS.guestCheckout, settings.guestCheckout);
+        }
+
+        if (settings.cartPage !== undefined) {
+            await this.setBoolean(FIELDS.cartPage, settings.cartPage);
+        }
+
+        if (settings.crossSell !== undefined) {
+            await this.setBoolean(FIELDS.crossSell, settings.crossSell);
+        }
+
+        if (settings.estimateShipping !== undefined) {
+            await this.setBoolean(
+                FIELDS.estimateShipping,
+                settings.estimateShipping,
+            );
+        }
+
+        if (settings.miniCart !== undefined) {
+            await this.setBoolean(FIELDS.miniCart, settings.miniCart);
+        }
+
+        if (settings.miniCartSummary !== undefined) {
+            await this.setSelect(FIELDS.miniCartSummary, settings.miniCartSummary);
+        }
+
+        if (settings.miniCartOffer !== undefined) {
+            await this.setText(FIELDS.miniCartOffer, settings.miniCartOffer);
+        }
+
+        await this.save();
     }
 
-    private get miniCartOfferInput() {
-        return this.page.locator(
-            'input[name="sales[checkout][mini_cart][offer_info]"]',
-        );
-    }
+    async expectSettings(settings: Partial<CheckoutSettings>): Promise<void> {
+        await this.open();
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/sales/checkout");
-    }
+        if (settings.guestCheckout !== undefined) {
+            await this.expectBoolean(FIELDS.guestCheckout, settings.guestCheckout);
+        }
 
-    async enableShoppingCartSettings(names: string[]): Promise<void> {
-        await setBooleanSettings(this.page, names);
-    }
+        if (settings.cartPage !== undefined) {
+            await this.expectBoolean(FIELDS.cartPage, settings.cartPage);
+        }
 
-    async setMyCartSummary(value: string): Promise<void> {
-        await this.myCartSummarySelect.selectOption(value);
-    }
+        if (settings.crossSell !== undefined) {
+            await this.expectBoolean(FIELDS.crossSell, settings.crossSell);
+        }
 
-    async enableMiniCart(offerInfo: string): Promise<void> {
-        await setBooleanSetting(
-            this.page,
-            "sales[checkout][mini_cart][display_mini_cart]",
-        );
-        await this.miniCartOfferInput.fill(offerInfo);
-    }
+        if (settings.estimateShipping !== undefined) {
+            await this.expectBoolean(
+                FIELDS.estimateShipping,
+                settings.estimateShipping,
+            );
+        }
 
-    async getMyCartSummaryValue(): Promise<string> {
-        return this.myCartSummarySelect.inputValue();
-    }
+        if (settings.miniCart !== undefined) {
+            await this.expectBoolean(FIELDS.miniCart, settings.miniCart);
+        }
 
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+        if (settings.miniCartSummary !== undefined) {
+            await this.expectSelect(
+                FIELDS.miniCartSummary,
+                settings.miniCartSummary,
+            );
+        }
+
+        if (settings.miniCartOffer !== undefined) {
+            await this.expectText(FIELDS.miniCartOffer, settings.miniCartOffer);
+        }
     }
 }

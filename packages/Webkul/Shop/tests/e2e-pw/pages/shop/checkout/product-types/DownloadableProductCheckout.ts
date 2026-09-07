@@ -1,22 +1,26 @@
 import { Page, expect } from "@playwright/test";
 import { CheckoutHelper } from "../CheckoutHelper";
-import { ProductDataManager } from "../../../admin/catalog/products/ProductDataManager";
 
 export class DownloadableProductCheckout extends CheckoutHelper {
     constructor(page: Page) {
         super(page);
     }
 
-    async checkout() {
-        const productName = ProductDataManager.readProductData();
-        await this.searchProduct(productName);
-        await this.addToCartButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.clickLink.click();
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-        await this.proceedToCheckout();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
+    async addToCart(productName: string): Promise<void> {
+        await this.openProduct(productName);
+
+        await expect(this.clickLink.first()).toBeVisible();
+
+        await this.clickLink.first().click();
+        await this.addOpenProductToCart();
+    }
+
+    async checkout(productName: string): Promise<string> {
+        await this.addToCart(productName);
+        await this.proceedWithSavedAddress();
+        await this.expectNoShippingStep();
+        await this.choosePayment("moneytransfer");
+
+        return this.placeOrder();
     }
 }

@@ -1,19 +1,44 @@
-import { test, expect } from "../../setup";
-import { loginAsCustomer, addReview } from "../../utils/customer";
-import { generateDescription, generateSKU } from "../../utils/faker";
-import { CustomerReviewsPage } from "../../pages/admin/customers/CustomerReviewsPage";
+import { test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
+import { CustomerReviewsPage } from "../../pages/admin/customers/CustomerReviewsPage";
+import { CustomersPage } from "../../pages/admin/customers/CustomersPage";
+import {
+    ProductReviewShopPage,
+    type ReviewData,
+} from "../../pages/shop/ProductReviewShopPage";
+import { loginAsCustomer } from "../../utils/customer";
+import {
+    generateDescription,
+    generateName,
+    generateSKU,
+    uniqueStamp,
+} from "../../utils/faker";
 
 test.describe("review management", () => {
+    test.setTimeout(180000);
+
+    let reviewsPage: CustomerReviewsPage;
+    let productListPage: ProductListPage;
+    let customersPage: CustomersPage;
+    let reviewShop: ProductReviewShopPage;
     let productName: string;
-    let reviewTitle: string;
+    let customerEmail: string;
+    let review: ReviewData;
 
     test.beforeEach(async ({ adminPage, shopPage }) => {
-        productName = `simple-${Date.now()}`;
+        reviewsPage = new CustomerReviewsPage(adminPage);
+        productListPage = new ProductListPage(adminPage);
+        customersPage = new CustomersPage(adminPage);
+        reviewShop = new ProductReviewShopPage(shopPage);
+        productName = `Reviewed ${uniqueStamp()}`;
+        review = {
+            title: `${generateName()} ${uniqueStamp()}`,
+            comment: generateDescription(),
+            rating: 5,
+        };
 
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createSimpleProduct({
+        await new ProductCreatePage(adminPage).createSimpleProduct({
             name: productName,
             productNumber: generateSKU(),
             shortDescription: generateDescription(),
@@ -23,103 +48,60 @@ test.describe("review management", () => {
             inventory: "5000",
         });
 
-        await loginAsCustomer(shopPage);
+        customerEmail = (await loginAsCustomer(shopPage)).email;
 
-        const review = await addReview(shopPage, productName);
+        await reviewShop.submitReview(productName, review);
 
-        reviewTitle = review.title;
+        await reviewsPage.expectReviewStatus(review.title, "pending");
     });
 
-    test("should approve the review", async ({ adminPage }) => {
-        const reviewsPage = new CustomerReviewsPage(adminPage);
-
-        await reviewsPage.updateReviewStatus(reviewTitle, "approved");
-
-        await expect(
-            adminPage.locator("#app p", {
-                hasText: "Review Update Successfully",
-            }),
-        ).toBeVisible();
-
-        await reviewsPage.expectReviewStatus(reviewTitle, "Approved");
+    test.afterEach(async () => {
+        try {
+            await reviewsPage.deleteReviewsIfPresent([review.title]);
+        } finally {
+            try {
+                await productListPage.deleteProductsIfPresent([productName]);
+            } finally {
+                await customersPage.deleteCustomersIfPresent([customerEmail]);
+            }
+        }
     });
 
-    test("should disapprove the review", async ({ adminPage }) => {
-        const reviewsPage = new CustomerReviewsPage(adminPage);
+    test("should publish a review on approval and hide it again on disapproval", async () => {
+        await reviewShop.expectReviewHidden(productName, review.title);
 
-        await reviewsPage.updateReviewStatus(reviewTitle, "disapproved");
+        await reviewsPage.setStatus(review.title, "approved");
 
-        await expect(
-            adminPage.locator("#app p", {
-                hasText: "Review Update Successfully",
-            }),
-        ).toBeVisible();
+        await reviewsPage.expectReviewStatus(review.title, "approved");
+        await reviewShop.expectReviewShown(productName, review.title);
 
-        await reviewsPage.expectReviewStatus(reviewTitle, "Disapproved");
+        await reviewsPage.setStatus(review.title, "disapproved");
+
+        await reviewsPage.expectReviewStatus(review.title, "disapproved");
+        await reviewShop.expectReviewHidden(productName, review.title);
     });
 
-    test("should approve the review via mass update", async ({ adminPage }) => {
-        const reviewsPage = new CustomerReviewsPage(adminPage);
+    test("should update the status of selected reviews through the mass action", async () => {
+        await reviewsPage.massUpdateStatus([review.title], "approved");
 
-        await reviewsPage.selectReviewForMassActions(reviewTitle);
-        await reviewsPage.openSelectActionMenu();
-        await reviewsPage.applyMassUpdateStatus("Approved");
-        await reviewsPage.confirmAgreeDialog();
+        await reviewsPage.expectReviewStatus(review.title, "approved");
+        await reviewShop.expectReviewShown(productName, review.title);
 
-        await expect(
-            adminPage.locator("#app p", {
-                hasText: "Selected Review Updated Successfully",
-            }),
-        ).toBeVisible();
+        await reviewsPage.massUpdateStatus([review.title], "disapproved");
 
-        await reviewsPage.expectReviewStatus(reviewTitle, "Approved");
+        await reviewsPage.expectReviewStatus(review.title, "disapproved");
+        await reviewShop.expectReviewHidden(productName, review.title);
     });
 
-    test("should disapprove the review via mass update", async ({
-        adminPage,
-    }) => {
-        const reviewsPage = new CustomerReviewsPage(adminPage);
+    test("should delete a review and remove it from the grid", async () => {
+        await reviewsPage.deleteReview(review.title);
 
-        await reviewsPage.selectReviewForMassActions(reviewTitle);
-        await reviewsPage.openSelectActionMenu();
-        await reviewsPage.applyMassUpdateStatus("Disapproved");
-        await reviewsPage.confirmAgreeDialog();
-
-        await expect(
-            adminPage.locator("#app p", {
-                hasText: "Selected Review Updated Successfully",
-            }),
-        ).toBeVisible();
-
-        await reviewsPage.expectReviewStatus(reviewTitle, "Disapproved");
+        await reviewsPage.expectReviewAbsent(review.title);
     });
 
-    test("should delete a review", async ({ adminPage }) => {
-        const reviewsPage = new CustomerReviewsPage(adminPage);
+    test("should delete selected reviews through the mass action", async () => {
+        await reviewsPage.massDeleteReviews([review.title]);
 
-        await reviewsPage.deleteReview(reviewTitle);
-
-        await expect(
-            adminPage.locator("#app p", {
-                hasText: "Review Deleted Successfully",
-            }),
-        ).toBeVisible();
-
-        await reviewsPage.expectReviewNotListed(reviewTitle);
-    });
-
-    test("should mass delete reviews", async ({ adminPage }) => {
-        const reviewsPage = new CustomerReviewsPage(adminPage);
-
-        await reviewsPage.selectReviewForMassActions(reviewTitle);
-        await reviewsPage.openSelectActionMenu();
-        await reviewsPage.applyMassDelete();
-        await reviewsPage.confirmAgreeDialog();
-
-        await expect(
-            adminPage.getByText("Selected Review Deleted Successfully"),
-        ).toBeVisible();
-
-        await reviewsPage.expectReviewNotListed(reviewTitle);
+        await reviewsPage.expectReviewAbsent(review.title);
     });
 });

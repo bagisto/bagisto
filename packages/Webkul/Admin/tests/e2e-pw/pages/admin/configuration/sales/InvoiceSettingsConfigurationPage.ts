@@ -1,121 +1,110 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class InvoiceSettingsConfigurationPage extends BasePage {
+export interface InvoiceSettings {
+    invoiceNumberPrefix: string;
+    invoiceNumberLength: string;
+    invoiceNumberSuffix: string;
+    paymentDueDuration: string;
+    printInvoiceId: boolean;
+    printOrderId: boolean;
+    remindersLimit: string;
+    remindersInterval: string;
+}
+
+const FIELDS = {
+    invoiceNumberPrefix:
+        "sales[invoice_settings][invoice_number][invoice_number_prefix]",
+    invoiceNumberLength:
+        "sales[invoice_settings][invoice_number][invoice_number_length]",
+    invoiceNumberSuffix:
+        "sales[invoice_settings][invoice_number][invoice_number_suffix]",
+    paymentDueDuration: "sales[invoice_settings][payment_terms][due_duration]",
+    printInvoiceId: "sales[invoice_settings][pdf_print_outs][invoice_id]",
+    printOrderId: "sales[invoice_settings][pdf_print_outs][order_id]",
+    remindersLimit: "sales[invoice_settings][invoice_reminders][reminders_limit]",
+    remindersInterval:
+        "sales[invoice_settings][invoice_reminders][interval_between_reminders]",
+} as const;
+
+export class InvoiceSettingsConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/sales/invoice_settings";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully").first();
+    async readSettings(): Promise<InvoiceSettings> {
+        await this.open();
+
+        return {
+            invoiceNumberPrefix: await this.readText(FIELDS.invoiceNumberPrefix),
+            invoiceNumberLength: await this.readText(FIELDS.invoiceNumberLength),
+            invoiceNumberSuffix: await this.readText(FIELDS.invoiceNumberSuffix),
+            paymentDueDuration: await this.readText(FIELDS.paymentDueDuration),
+            printInvoiceId: await this.readBoolean(FIELDS.printInvoiceId),
+            printOrderId: await this.readBoolean(FIELDS.printOrderId),
+            remindersLimit: await this.readText(FIELDS.remindersLimit),
+            remindersInterval: await this.readSelect(FIELDS.remindersInterval),
+        };
     }
 
-    private get invoicePrefixInput() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][invoice_number][invoice_number_prefix]"]',
-        );
+    async applySettings(settings: Partial<InvoiceSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of [
+            "invoiceNumberPrefix",
+            "invoiceNumberLength",
+            "invoiceNumberSuffix",
+            "paymentDueDuration",
+            "remindersLimit",
+        ] as const) {
+            if (settings[key] !== undefined) {
+                await this.setText(FIELDS[key], settings[key]);
+            }
+        }
+
+        for (const key of ["printInvoiceId", "printOrderId"] as const) {
+            if (settings[key] !== undefined) {
+                await this.setBoolean(FIELDS[key], settings[key]);
+            }
+        }
+
+        if (settings.remindersInterval !== undefined) {
+            await this.setSelect(FIELDS.remindersInterval, settings.remindersInterval);
+        }
+
+        await this.save();
     }
 
-    private get invoiceLengthInput() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][invoice_number][invoice_number_length]"]',
-        );
-    }
+    async expectSettings(settings: Partial<InvoiceSettings>): Promise<void> {
+        await this.open();
 
-    private get invoiceSuffixInput() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][invoice_number][invoice_number_suffix]"]',
-        );
-    }
+        for (const key of [
+            "invoiceNumberPrefix",
+            "invoiceNumberLength",
+            "invoiceNumberSuffix",
+            "paymentDueDuration",
+            "remindersLimit",
+        ] as const) {
+            if (settings[key] !== undefined) {
+                await this.expectText(FIELDS[key], settings[key]);
+            }
+        }
 
-    private get invoiceGeneratorInput() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][invoice_number][invoice_number_generator_class]"]',
-        );
-    }
+        for (const key of ["printInvoiceId", "printOrderId"] as const) {
+            if (settings[key] !== undefined) {
+                await this.expectBoolean(FIELDS[key], settings[key]);
+            }
+        }
 
-    private get paymentDueDurationInput() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][payment_terms][due_duration]"]',
-        );
-    }
-
-    private get invoiceIdToggle() {
-        return this.page.locator(
-            'label[for="sales[invoice_settings][pdf_print_outs][invoice_id]"]',
-        );
-    }
-
-    private get orderIdToggle() {
-        return this.page.locator(
-            'label[for="sales[invoice_settings][pdf_print_outs][order_id]"]',
-        );
-    }
-
-    private get logoUploader() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][pdf_print_outs][logo]"]',
-        );
-    }
-
-    private get remindersLimitInput() {
-        return this.page.locator(
-            'input[name="sales[invoice_settings][invoice_reminders][reminders_limit]"]',
-        );
-    }
-
-    private get remindersIntervalSelect() {
-        return this.page.locator(
-            'select[name="sales[invoice_settings][invoice_reminders][interval_between_reminders]"]',
-        );
-    }
-
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/sales/invoice_settings");
-    }
-
-    async fillInvoiceNumberSettings(
-        prefix: string,
-        length: string,
-        suffix: string,
-        generator: string,
-    ): Promise<void> {
-        await this.invoicePrefixInput.fill(prefix);
-        await this.invoiceLengthInput.fill(length);
-        await this.invoiceSuffixInput.fill(suffix);
-        await this.invoiceGeneratorInput.fill(generator);
-    }
-
-    async setPaymentDueDuration(value: string): Promise<void> {
-        await this.paymentDueDurationInput.fill(value);
-    }
-
-    async configurePdfPrintOuts(logoPath: string): Promise<void> {
-        await this.invoiceIdToggle.click();
-        await this.orderIdToggle.click();
-        await this.logoUploader.setInputFiles(logoPath);
-    }
-
-    async configureInvoiceReminders(
-        limit: string,
-        interval: string,
-    ): Promise<void> {
-        await this.remindersLimitInput.fill(limit);
-        await this.remindersIntervalSelect.selectOption(interval);
-    }
-
-    async getInvoiceReminderIntervalValue(): Promise<string> {
-        return this.remindersIntervalSelect.inputValue();
-    }
-
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+        if (settings.remindersInterval !== undefined) {
+            await this.expectSelect(
+                FIELDS.remindersInterval,
+                settings.remindersInterval,
+            );
+        }
     }
 }

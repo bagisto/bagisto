@@ -1,189 +1,124 @@
 import { test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
+import { OrderPage } from "../../pages/shop/OrderPage";
+import {
+    MultipleCheckout,
+    type CartItem,
+    type CartItemType,
+} from "../../pages/shop/checkout/MultipleCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
-import { MultipleCheckout } from "../../pages/shop/checkout/MultipleCheckout";
+import { uniqueStamp } from "../../utils/faker";
 
-test.describe("multiple types product combination checkout flow", () => {
-    test("should create simple product to checkout", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+const COMBINATIONS: CartItemType[][] = [
+    ["simple", "configurable"],
+    ["simple", "downloadable"],
+    ["virtual", "configurable"],
+    ["virtual", "grouped"],
+    ["simple", "bundle"],
+    ["downloadable", "bundle"],
+    ["grouped", "bundle"],
+    ["simple", "configurable", "virtual", "grouped"],
+];
 
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
+test.describe("mixed product type checkout", () => {
+    test.setTimeout(600 * 1000);
+
+    let created: string[];
+    let productListPage: ProductListPage;
+    let productCreation: ProductCreatePage;
+
+    async function createSimpleProducts(count: number): Promise<string[]> {
+        const names: string[] = [];
+
+        for (let index = 0; index < count; index++) {
+            const name = `Simple-${uniqueStamp()}`;
+
+            await productCreation.createProduct({
+                type: "simple",
+                sku: `SKU-${uniqueStamp()}`,
+                name,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 1,
+                inventory: 100,
+            });
+            created.push(name);
+            names.push(name);
+        }
+
+        return names;
+    }
+
+    async function createItem(type: CartItemType): Promise<CartItem> {
+        const name = `${type}-${uniqueStamp()}`;
+        const base = {
+            sku: `SKU-${uniqueStamp()}`,
+            name,
             shortDescription: "Short desc",
             description: "Full desc",
             price: 199,
             weight: 1,
             inventory: 100,
+        };
+
+        switch (type) {
+            case "configurable":
+                await productCreation.createConfigProduct({ type, ...base });
+                break;
+
+            case "grouped":
+                await productCreation.createProduct({
+                    type,
+                    ...base,
+                    groupedItems: await createSimpleProducts(2),
+                });
+                break;
+
+            case "bundle":
+                await productCreation.createProduct({
+                    type,
+                    ...base,
+                    bundleItems: await createSimpleProducts(2),
+                });
+                break;
+
+            default:
+                await productCreation.createProduct({ type, ...base });
+        }
+
+        created.push(name);
+
+        return { type, name };
+    }
+
+    test.beforeEach(async ({ adminPage }) => {
+        productCreation = new ProductCreatePage(adminPage);
+        productListPage = new ProductListPage(adminPage);
+        created = [];
+    });
+
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent(created);
+    });
+
+    for (const combination of COMBINATIONS) {
+        test(`should place one order holding ${combination.join(", ")} products`, async ({
+            shopPage,
+        }) => {
+            const items: CartItem[] = [];
+
+            for (const type of combination) {
+                items.push(await createItem(type));
+            }
+
+            await loginAsCustomer(shopPage);
+            await addAddress(shopPage);
+
+            const orderId = await new MultipleCheckout(shopPage).checkout(items);
+
+            await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
         });
-    });
-
-    test("should create another simple product to add in group to checkout", async ({
-        adminPage,
-    }) => {
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should create configurable product to checkout", async ({
-        adminPage,
-    }) => {
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createConfigProduct({
-            type: "configurable",
-            sku: `SKU-${Date.now()}`,
-            name: `Config-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should create virtual product to checkout", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createProduct({
-            type: "virtual",
-            sku: `SKU-${Date.now()}`,
-            name: `virtual-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should create group product to checkout", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createProduct({
-            type: "grouped",
-            sku: `SKU-${Date.now()}`,
-            name: `group-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should create bundle product", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createProduct({
-            type: "bundle",
-            sku: `SKU-${Date.now()}`,
-            name: `bundle-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should create downloadable product to checkout", async ({
-        adminPage,
-    }) => {
-        const productCreation = new ProductCreatePage(adminPage);
-
-        await productCreation.createProduct({
-            type: "downloadable",
-            sku: `SKU-${Date.now()}`,
-            name: `downloadable-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should allow customer to complete checkout for simple, configurable, grouped and virtual product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutSimpleConfigVirtulGroup();
-    });
-
-    test("should allow customer to complete checkout for simple and configurable product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutSimpleAndConfig();
-    });
-
-    test("should allow customer to complete checkout for simple and downloadable product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutSimpleAndDownloadable();
-    });
-
-    test("should allow customer to complete checkout for virtual and configurable product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutVirtualAndConfig();
-    });
-
-    test("should allow customer to complete checkout for virtual and group product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutVirtualAndGroup();
-    });
-
-    test("should allow customer to complete checkout for simple and bundle product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutSimpleAndBundle();
-    });
-
-    test("should allow customer to complete checkout for downloadable and bundle product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutDownloadableAndBundle();
-    });
-
-    test("should allow customer to complete checkout for group and bundle product successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const multipleCheckout = new MultipleCheckout(shopPage);
-        await multipleCheckout.customerCheckoutGroupAndBundle();
-    });
+    }
 });

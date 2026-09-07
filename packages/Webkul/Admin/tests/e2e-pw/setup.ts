@@ -28,11 +28,15 @@ async function fillTinymce(
 ): Promise<void> {
     const editorId = iframeSelector.replace(/^#/, "").replace(/_ifr$/, "");
 
-    await page.waitForFunction((id) => {
-        const editor = (window as any).tinymce?.get(id);
+    await page.waitForFunction(
+        (id) => {
+            const editor = (window as any).tinymce?.get(id);
 
-        return !!editor && editor.initialized;
-    }, editorId);
+            return !!editor && editor.initialized;
+        },
+        editorId,
+        { timeout: 60 * 1000 },
+    );
 
     await page.evaluate(
         ({ id, value }) => {
@@ -48,6 +52,15 @@ async function fillTinymce(
     await expect(page.frameLocator(iframeSelector).locator("body")).toHaveText(
         content,
     );
+}
+
+export function withTinymce(page: Page): AdminPage {
+    (page as AdminPage).fillInTinymce = (
+        iframeSelector: string,
+        content: string,
+    ) => fillTinymce(page, iframeSelector, content);
+
+    return page as AdminPage;
 }
 
 async function saveAdminAuth(context: BrowserContext): Promise<void> {
@@ -78,12 +91,7 @@ export const test = base.extend<Fixtures>({
             await saveAdminAuth(context);
         }
 
-        (page as AdminPage).fillInTinymce = (
-            iframeSelector: string,
-            content: string,
-        ) => fillTinymce(page, iframeSelector, content);
-
-        await use(page as AdminPage);
+        await use(withTinymce(page));
         await context.close();
     },
 
@@ -91,12 +99,7 @@ export const test = base.extend<Fixtures>({
         const context = await browser.newContext();
         const page = await context.newPage();
 
-        (page as ShopPage).fillInTinymce = (
-            iframeSelector: string,
-            content: string,
-        ) => fillTinymce(page, iframeSelector, content);
-
-        await use(page as ShopPage);
+        await use(withTinymce(page) as ShopPage);
         await context.close();
     },
 });

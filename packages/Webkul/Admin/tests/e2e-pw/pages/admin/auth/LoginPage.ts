@@ -19,7 +19,9 @@ export class LoginPage extends BasePage {
     }
 
     private get accountDropdownToggle() {
-        return this.page.locator("header div.flex.select-none > button").last();
+        return this.page
+            .locator("header div.flex.select-none > button")
+            .filter({ visible: true });
     }
 
     private get logoutLink() {
@@ -28,14 +30,21 @@ export class LoginPage extends BasePage {
 
     async visit() {
         await super.visit("admin/login");
+
+        await expect(this.loginButton).toBeVisible();
     }
 
-    async login(email: string, password: string) {
+    async attemptLogin(email: string, password: string) {
         await this.visit();
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
-        await this.page.waitForURL("**/admin/dashboard");
+    }
+
+    async login(email: string, password: string) {
+        await this.attemptLogin(email, password);
+
+        await this.expectSignedIn();
     }
 
     async logout() {
@@ -44,5 +53,20 @@ export class LoginPage extends BasePage {
         await this.logoutLink.click();
         await this.page.waitForURL("**/admin/login");
         await expect(this.passwordInput).toBeVisible();
+    }
+
+    async expectSignedIn() {
+        await expect(this.page).toHaveURL(/admin\/dashboard/);
+    }
+
+    async expectDashboardRequiresLogin() {
+        await super.visit("admin/dashboard");
+
+        await expect(this.page).toHaveURL(/admin\/login/);
+    }
+
+    async expectLoginRefused(message: string) {
+        await expect(this.page.getByText(message)).toBeVisible();
+        await expect(this.page).toHaveURL(/admin\/login/);
     }
 }

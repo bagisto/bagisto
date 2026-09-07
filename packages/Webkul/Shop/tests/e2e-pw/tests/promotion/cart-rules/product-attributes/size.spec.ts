@@ -1,31 +1,35 @@
+import { uniqueStamp } from "../../../../utils/faker";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import { ProductEditPage } from "../../../../pages/admin/catalog/products/ProductEditPage";
+import type { BaseProduct } from "../../../../pages/types/product.types";
 import { test } from "../../../../setup";
-import { expect, Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
 
 async function createRuleAndVerifySize({
-    page,
+    adminPage,
+    shopPage,
     operator,
     couponType,
     ruleSize,
     productSize,
 }: {
-    page: Page;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     couponType: CouponType;
     ruleSize: string;
     productSize: string;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
-
-    await loginAsAdmin(page);
-    await ruleCreatePage.cartRuleCreationFlow();
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
+    const rule = await ruleCreatePage.cartRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|size",
@@ -37,28 +41,30 @@ async function createRuleAndVerifySize({
     if (discountValue === undefined) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
-    await page.goto("admin/catalog/products");
-    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-    await page.waitForLoadState("networkidle");
-    await page.locator('span:text-is("Size")').click();
-    await page.locator(`span:text-is("${productSize}")`).click();
-    await page.locator('button:has-text("Save Product")').first().click();
+    const productEditPage = new ProductEditPage(adminPage);
 
-    await expect(page.getByText("Product updated successfully")).toBeVisible();
+    await productEditPage.openProduct(product.name);
 
-    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
-        discountValue,
-        couponType,
-    );
+    await productEditPage.selectOption("size", productSize);
+    await productEditPage.save();
+
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal({
+        productName: product.name,
+        couponCode: rule.couponCode,
+        discountValue: discountValue,
+        couponType: couponType,
+    });
 }
 
-test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreatePage(adminPage);
+let product: BaseProduct;
+let createdRules: string[];
 
-    await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
@@ -68,8 +74,11 @@ test.beforeEach(async ({ adminPage }) => {
 });
 
 test.afterEach(async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
+    try {
+        await new RuleDeletePage(adminPage).deleteCartRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 const cases = [
@@ -103,10 +112,12 @@ test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const { operator, type, ruleSize, productSize } of cases) {
             test(`should apply coupon when size condition is -> ${operator} (${type})`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await createRuleAndVerifySize({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator,
                     couponType: type as CouponType,
                     ruleSize,

@@ -1,31 +1,34 @@
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import type { BaseProduct } from "../../../../pages/types/product.types";
+import { uniqueStamp } from "../../../../utils/faker";
 import { test } from "../../../../setup";
 import { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
 
 let generatedName: string;
 
 async function createRuleAndVerifyUrlKey({
-    page,
+    adminPage,
+    shopPage,
     operator,
     value,
     couponType,
 }: {
-    page: Page;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     value: string;
     couponType: CouponType;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
-
-    await loginAsAdmin(page);
-    await ruleCreatePage.cartRuleCreationFlow();
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
+    const rule = await ruleCreatePage.cartRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|url_key",
@@ -38,20 +41,24 @@ async function createRuleAndVerifyUrlKey({
 
     await ruleCreatePage.saveCartRule();
 
-    await ruleApplyPage.expectCouponAppliedWithGrandTotal(
-        discountValue,
-        couponType,
-    );
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal({
+        productName: product.name,
+        couponCode: rule.couponCode,
+        discountValue: discountValue,
+        couponType: couponType,
+    });
 }
 
+let product: BaseProduct;
+let createdRules: string[];
+
 test.beforeEach(async ({ adminPage }) => {
-    generatedName = `Simple-${Date.now()}`;
+    createdRules = [];
 
-    const productCreation = new ProductCreatePage(adminPage);
-
-    await productCreation.createProduct({
+    generatedName = `Simple-${uniqueStamp()}`;
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
         name: generatedName,
         shortDescription: "Short desc",
         description: "Full desc",
@@ -62,8 +69,11 @@ test.beforeEach(async ({ adminPage }) => {
 });
 
 test.afterEach(async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
+    try {
+        await new RuleDeletePage(adminPage).deleteCartRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 const cases = [
@@ -113,10 +123,12 @@ test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const { operator, type, value } of cases) {
             test(`should allow coupon when url key condition is -> ${operator} (${type})`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await createRuleAndVerifyUrlKey({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator,
                     value: value(),
                     couponType: type as CouponType,

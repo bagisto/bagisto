@@ -1,13 +1,23 @@
-import { expect, Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+
+export interface AddressData {
+    companyName?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    streetAddress: string;
+    country: string;
+    state: string;
+    city: string;
+    postCode: string;
+    phone: string;
+    vatId?: string;
+}
 
 export class AddressPage extends BasePage {
     constructor(page: Page) {
         super(page);
-    }
-
-    private get addAddressButton() {
-        return this.page.getByRole("link", { name: "Add Address" });
     }
 
     private get companyNameInput() {
@@ -39,7 +49,11 @@ export class AddressPage extends BasePage {
     }
 
     private get stateSelect() {
-        return this.page.locator("#state");
+        return this.page.locator("select#state");
+    }
+
+    private get stateInput() {
+        return this.page.locator("input#state");
     }
 
     private get cityInput() {
@@ -62,184 +76,153 @@ export class AddressPage extends BasePage {
         return this.page.getByRole("button", { name: "Update" });
     }
 
-    private get moreOptionsButton() {
-        return this.page.locator(".icon-more").first();
-    }
-
-    private get editLink() {
-        return this.page.getByRole("link", { name: "Edit" });
-    }
-
-    private get deleteLink() {
-        return this.page.getByRole("button", { name: "Delete" });
-    }
-
-    private get setDefaultButton() {
-        return this.page.getByRole("button", { name: "Set as Default" });
-    }
-
     private get agreeButton() {
         return this.page.getByRole("button", { name: "Agree", exact: true });
     }
 
-    private get successMessage() {
-        return this.page.getByText("Address updated successfully.").first();
-    }
-
-    private get createdMessage() {
+    private addressCard(street: string): Locator {
         return this.page
-            .getByText("Address have been successfully added.")
-            .first();
+            .locator("div.rounded-xl.border")
+            .filter({ hasText: street });
     }
 
-    private get deletedMessage() {
-        return this.page.getByText("Address successfully deleted").first();
-    }
-
-    private get defaultAddressText() {
-        return this.page.getByText("Default Address").first();
-    }
-
-    async addAddress(data: {
-        companyName?: string;
-        firstName: string;
-        lastName: string;
-        email: string;
-        streetAddress: string;
-        country: string;
-        state: string;
-        city: string;
-        postCode: string;
-        phone: string;
-        vatId?: string;
-    }): Promise<void> {
-        await this.addAddressButton.click();
-        await this.page.waitForLoadState("networkidle");
-
-        if (data.companyName) {
-            await this.companyNameInput.click();
+    private async fillForm(data: Partial<AddressData>): Promise<void> {
+        if (data.companyName !== undefined) {
             await this.companyNameInput.fill(data.companyName);
         }
 
-        await this.firstNameInput.click();
-        await this.firstNameInput.fill(data.firstName);
-
-        await this.lastNameInput.click();
-        await this.lastNameInput.fill(data.lastName);
-
-        await this.emailInput.click();
-        await this.emailInput.fill(data.email);
-
-        if (data.vatId) {
-            await this.vatIdInput.click();
-            await this.vatIdInput.fill(data.vatId);
-        }
-
-        await this.streetAddressInput.click();
-        await this.streetAddressInput.fill(data.streetAddress);
-
-        await this.countrySelect.selectOption(data.country);
-        await this.stateSelect.selectOption(data.state);
-
-        await this.cityInput.click();
-        await this.cityInput.fill(data.city);
-
-        await this.postCodeInput.click();
-        await this.postCodeInput.fill(data.postCode);
-
-        await this.phoneInput.click();
-        await this.phoneInput.fill(data.phone);
-
-        await this.saveButton.click();
-        await expect(this.createdMessage.first()).toBeVisible();
-    }
-
-    async editAddress(data: {
-        companyName?: string;
-        firstName?: string;
-        lastName?: string;
-        email?: string;
-        streetAddress?: string;
-        country?: string;
-        state?: string;
-        city?: string;
-        postCode?: string;
-        phone?: string;
-    }): Promise<void> {
-        await this.moreOptionsButton.click();
-        await this.editLink.click();
-
-        if (data.companyName) {
-            await this.companyNameInput.click();
-            await this.companyNameInput.clear();
-            await this.companyNameInput.fill(data.companyName);
-        }
-
-        if (data.firstName) {
-            await this.firstNameInput.click();
-            await this.firstNameInput.clear();
+        if (data.firstName !== undefined) {
             await this.firstNameInput.fill(data.firstName);
         }
 
-        if (data.lastName) {
-            await this.lastNameInput.click();
-            await this.lastNameInput.clear();
+        if (data.lastName !== undefined) {
             await this.lastNameInput.fill(data.lastName);
         }
 
-        if (data.email) {
-            await this.emailInput.click();
-            await this.emailInput.clear();
+        if (data.email !== undefined) {
             await this.emailInput.fill(data.email);
         }
 
-        if (data.streetAddress) {
-            await this.streetAddressInput.click();
-            await this.streetAddressInput.clear();
+        if (data.vatId !== undefined) {
+            await this.vatIdInput.fill(data.vatId);
+        }
+
+        if (data.streetAddress !== undefined) {
             await this.streetAddressInput.fill(data.streetAddress);
         }
 
-        if (data.country) {
+        if (data.country !== undefined) {
             await this.countrySelect.selectOption(data.country);
         }
 
-        if (data.state) {
-            await this.stateSelect.selectOption(data.state);
+        if (data.state !== undefined) {
+            if (await this.stateSelect.count()) {
+                await this.stateSelect.selectOption(data.state);
+            } else {
+                await this.stateInput.fill(data.state);
+            }
         }
 
-        if (data.city) {
-            await this.cityInput.click();
-            await this.cityInput.clear();
+        if (data.city !== undefined) {
             await this.cityInput.fill(data.city);
         }
 
-        if (data.postCode) {
-            await this.postCodeInput.click();
-            await this.postCodeInput.clear();
+        if (data.postCode !== undefined) {
             await this.postCodeInput.fill(data.postCode);
         }
 
-        if (data.phone) {
-            await this.phoneInput.click();
-            await this.phoneInput.clear();
+        if (data.phone !== undefined) {
             await this.phoneInput.fill(data.phone);
         }
+    }
 
+    async open(): Promise<void> {
+        await this.visit("customer/account/addresses");
+
+        await expect(this.page).toHaveURL(/customer\/account\/addresses/);
+    }
+
+    async addAddress(data: AddressData): Promise<void> {
+        await this.visit("customer/account/addresses/create");
+        await this.fillForm(data);
+        await this.saveButton.click();
+
+        await expect(
+            this.page.getByText("Address have been successfully added.").first(),
+        ).toBeVisible();
+    }
+
+    async submitEmptyAddress(): Promise<void> {
+        await this.visit("customer/account/addresses/create");
+        await this.saveButton.click();
+    }
+
+    async editAddress(street: string, changes: Partial<AddressData>): Promise<void> {
+        await this.open();
+        await this.addressCard(street).getByLabel("More Options").click();
+        await this.addressCard(street).getByRole("link", { name: "Edit" }).click();
+
+        await expect(this.streetAddressInput).toHaveValue(street);
+
+        await this.fillForm(changes);
         await this.updateButton.click();
-        await expect(this.successMessage).toBeVisible();
+
+        await expect(
+            this.page.getByText("Address updated successfully.").first(),
+        ).toBeVisible();
     }
 
-    async setDefaultAddress(): Promise<void> {
-        await this.moreOptionsButton.click();
-        await this.setDefaultButton.click();
+    async setDefaultAddress(street: string): Promise<void> {
+        await this.open();
+        await this.addressCard(street).getByLabel("More Options").click();
+        await this.addressCard(street)
+            .getByRole("button", { name: "Set as Default" })
+            .click();
         await this.agreeButton.click();
-        await expect(this.defaultAddressText.first()).toBeVisible();
+
+        await expect(this.addressCard(street)).toContainText("Default Address");
     }
 
-    async deleteAddress(): Promise<void> {
-        await this.moreOptionsButton.click();
-        await this.deleteLink.click();
+    async deleteAddress(street: string): Promise<void> {
+        await this.open();
+        await this.addressCard(street).getByLabel("More Options").click();
+        await this.addressCard(street).getByRole("button", { name: "Delete" }).click();
         await this.agreeButton.click();
-        await expect(this.deletedMessage.first()).toBeVisible();
+
+        await expect(this.page.getByText("Address successfully deleted").first()).toBeVisible();
+    }
+
+    async expectAddressListed(data: AddressData): Promise<void> {
+        await this.open();
+
+        const card = this.addressCard(data.streetAddress);
+
+        await expect(card).toHaveCount(1);
+        await expect(card).toContainText(`${data.firstName} ${data.lastName}`);
+        await expect(card).toContainText(data.city);
+        await expect(card).toContainText(data.postCode);
+    }
+
+    async expectAddressAbsent(street: string): Promise<void> {
+        await this.open();
+
+        await expect(this.addressCard(street)).toHaveCount(0);
+    }
+
+    async expectDefaultAddress(street: string): Promise<void> {
+        await this.open();
+
+        await expect(this.addressCard(street)).toContainText("Default Address");
+    }
+
+    async expectNotDefaultAddress(street: string): Promise<void> {
+        await this.open();
+
+        await expect(this.addressCard(street)).not.toContainText("Default Address");
+    }
+
+    async expectValidationError(message: string): Promise<void> {
+        await expect(this.page.getByText(message).first()).toBeVisible();
+        await expect(this.page).toHaveURL(/addresses\/create/);
     }
 }
