@@ -11,6 +11,8 @@ import { OrderCreatePage } from "../pages/admin/sales/OrderCreatePage";
 import { OrderViewPage } from "../pages/admin/sales/OrderViewPage";
 import { RmaManagePage } from "../pages/admin/sales/RmaManagePage";
 import {
+    RmaCustomFieldsPage,
+    type RmaCustomFieldData,
     RmaReasonsPage,
     RmaRulesPage,
     RmaStatusesPage,
@@ -248,6 +250,64 @@ test.describe("rma management", () => {
             await rulesPage.expectRuleListed(name, "15");
         } finally {
             await rulesPage.deleteRulesIfPresent([name]);
+        }
+    });
+
+    test("should list a newly created rma custom field", async ({ adminPage }) => {
+        const customFieldsPage = new RmaCustomFieldsPage(adminPage);
+        const field: RmaCustomFieldData = {
+            label: `Field ${uniqueStamp()}`,
+            code: `field_${uniqueStamp()}`,
+            type: "text",
+        };
+
+        try {
+            await customFieldsPage.createCustomField(field);
+
+            await customFieldsPage.expectCustomFieldListed(field);
+        } finally {
+            await customFieldsPage.deleteCustomFieldsIfPresent([field.label]);
+        }
+    });
+
+    test("should keep the chosen options of a multiselect custom field on the request", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        const customFieldsPage = new RmaCustomFieldsPage(adminPage);
+        const chosen = [`damaged${uniqueStamp()}`, `late${uniqueStamp()}`];
+        const field: RmaCustomFieldData = {
+            label: `Field ${uniqueStamp()}`,
+            code: `field_${uniqueStamp()}`,
+            type: "multiselect",
+            options: chosen,
+        };
+        const productName = await createSimpleProduct(
+            new ProductCreatePage(adminPage),
+            true,
+        );
+        const shop = new RmaShopPage(shopPage);
+        const rmaPage = new RmaManagePage(adminPage);
+
+        try {
+            await customFieldsPage.createCustomField(field);
+
+            await shop.registerAndAddAddress();
+
+            const orderId = await shop.placeOrder(productName);
+
+            await new OrderViewPage(adminPage).open(orderId);
+            await new OrderViewPage(adminPage).createInvoice();
+
+            await shop.requestReturn(orderId, reasonTitle, chosen);
+
+            await rmaPage.openRequestForOrder(orderId);
+            await rmaPage.expectAdditionalField(field.label, chosen.join(","));
+        } finally {
+            await customFieldsPage.deleteCustomFieldsIfPresent([field.label]);
+            await new ProductListPage(adminPage).deleteProductsIfPresent([
+                productName,
+            ]);
         }
     });
 

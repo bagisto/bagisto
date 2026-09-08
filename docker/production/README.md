@@ -4,7 +4,7 @@ A **single-container**, ready-to-boot production Docker image for [Bagisto](http
 
 One `docker run` gives you a fully installed, migrated, and seeded Bagisto store. No docker-compose, no external database, no first-run setup.
 
-The image is published across two independent choices — the **web server** and the **bundled database** — giving six combinations. They are otherwise identical: same PHP, same build-time install, same behaviour.
+The image is published across two independent choices — the **web server** and the **bundled database** — giving nine combinations. They are otherwise identical: same PHP, same build-time install, same behaviour.
 
 | Web server | PHP SAPI | Tag fragment |
 |---|---|---|
@@ -234,7 +234,7 @@ The CI workflow applies this scheme automatically. The details below explain wha
 
 ### Per-combination tags
 
-Every release publishes all six combinations. The canonical name carries both dimensions; shorter aliases point at the conventional choice so existing pulls keep working.
+Every release publishes all nine combinations. The canonical name carries both dimensions; shorter aliases point at the conventional choice so existing pulls keep working.
 
 | Server | Database | Version tag | Floating tag (stable, default branch) |
 |---|---|---|---|

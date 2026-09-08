@@ -29,6 +29,7 @@ Bagisto follows a modular, package-based architecture. All core features are org
 - `DataGrid` - Tabular data display component
 - `DataTransfer` - Import/export data
 - `DebugBar` - Debug toolbar
+- `EUWithdrawal` - EU right-of-withdrawal handling
 - `FPC` - Full page caching
 - `GDPR` - GDPR compliance
 - `ImageCache` - Image caching/resizing
@@ -37,9 +38,12 @@ Bagisto follows a modular, package-based architecture. All core features are org
 - `MagicAI` - AI features (Laravel AI SDK)
 - `Marketing` - SEO, URL rewrites, search terms, campaigns
 - `Notification` - Notifications
+- `Omnibus` - EU Omnibus Directive lowest-price history
 - `Payment` - Base payment classes (CashOnDelivery, MoneyTransfer)
+- `PayGlocal` - PayGlocal integration
 - `Paypal` - PayPal integration
 - `PayU` - PayU integration
+- `PhonePe` - PhonePe integration
 - `Product` - Product management
 - `Razorpay` - Razorpay integration
 - `RMA` - Return merchandise authorization

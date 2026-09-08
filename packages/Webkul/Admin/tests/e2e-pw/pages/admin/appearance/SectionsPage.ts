@@ -117,7 +117,15 @@ export class SectionsPage extends BasePage {
     }
 
     async fillField(label: string, value: string): Promise<void> {
+        const draftSaved = this.page.waitForResponse(
+            (response) =>
+                /\/admin\/appearance\/sections\/\d+\/draft(\?|$)/.test(response.url())
+                && response.request().method() === "POST",
+        );
+
         await this.field(label).fill(value);
+
+        await draftSaved;
     }
 
     async publishAll(): Promise<void> {

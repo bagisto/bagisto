@@ -82,11 +82,11 @@ docker run -d --name bagisto -p 80:80 webkul/bagisto:latest
 
 Images are published for each web server and each database, so you can match whatever you already run:
 
-| | MySQL 8.0 | PostgreSQL 16 |
-|---|---|---|
-| **Nginx** | `:latest` · `:latest-nginx` · `:latest-nginx-mysql` | `:latest-nginx-postgres` |
-| **Apache** | `:latest-apache` · `:latest-apache-mysql` | `:latest-apache-postgres` |
-| **OpenLiteSpeed** | `:latest-litespeed` · `:latest-litespeed-mysql` | `:latest-litespeed-postgres` |
+| | MySQL 8.0 | MariaDB 10.11 | PostgreSQL 16 |
+|---|---|---|---|
+| **Nginx** | `:latest` · `:latest-nginx` · `:latest-nginx-mysql` | `:latest-nginx-mariadb` | `:latest-nginx-postgres` |
+| **Apache** | `:latest-apache` · `:latest-apache-mysql` | `:latest-apache-mariadb` | `:latest-apache-postgres` |
+| **OpenLiteSpeed** | `:latest-litespeed` · `:latest-litespeed-mysql` | `:latest-litespeed-mariadb` | `:latest-litespeed-postgres` |
 
 Pin a release by swapping `latest` for the version, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Setting `DB_HOST` to an external server skips the bundled database entirely. Full details in [`docker/production/README.md`](docker/production/README.md).
 
@@ -185,11 +185,11 @@ Make use of 200+ Bagisto pre-built extensions from [Bagisto Extension Marketplac
 ![Forum and Facebook Communities](https://raw.githubusercontent.com/bagisto/temp-media/master/community.png)
 
 Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto) and [Forum](https://forums.bagisto.com/)
-Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](https://github.com/bagisto/bagisto/blob/2.4/.github/CONTRIBUTING.md)!
+Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](.github/CONTRIBUTING.md)!
 
 # License
 
-Bagisto is a fully open-source Laravel eCommerce framework that will always remain free under the [MIT License](https://github.com/bagisto/bagisto/blob/2.4/LICENSE).
+Bagisto is a fully open-source Laravel eCommerce framework that will always remain free under the [MIT License](LICENSE).
 
 # Security Vulnerabilities
 

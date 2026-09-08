@@ -789,7 +789,7 @@
                                         type="multiselect"
                                         id="{{ $attribute->id }}"
                                         class="cursor-pointer"
-                                        name="{{ $attribute->id }}[]"
+                                        name="customAttributes[{{ $attribute->id }}][]"
                                         rules="{{ $attribute->is_required }}"
                                         :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"

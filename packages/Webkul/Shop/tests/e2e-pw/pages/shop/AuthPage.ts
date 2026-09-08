@@ -92,6 +92,7 @@ export class AuthPage extends BasePage {
 
     async attemptLogin(email: string, password: string): Promise<void> {
         await this.visit("customer/login");
+        await this.waitForBackgroundRequestsToSettle();
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.signInButton.click();
@@ -109,6 +110,8 @@ export class AuthPage extends BasePage {
         await this.logoutLink.click();
 
         await expect(this.page).toHaveURL(/customer\/login|\/$/);
+
+        await this.waitForBackgroundRequestsToSettle();
     }
 
     async expectSignedIn(fullName: string): Promise<void> {

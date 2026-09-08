@@ -75,6 +75,10 @@ export class RmaShopPage extends BasePage {
         return this.page.getByRole("button", { name: "Submit request" });
     }
 
+    private get multiselectCustomField() {
+        return this.page.locator('select[name^="customAttributes"][multiple]');
+    }
+
     private orderRow(incrementId: string) {
         return this.page.locator("div.row").filter({
             has: this.page.getByRole("link", { name: `#${incrementId}`, exact: true }),
@@ -129,7 +133,11 @@ export class RmaShopPage extends BasePage {
         return (await this.orderLink.innerText()).replace(/[^\d]/g, "");
     }
 
-    async requestReturn(orderIncrementId: string, reason: string): Promise<void> {
+    async requestReturn(
+        orderIncrementId: string,
+        reason: string,
+        multiselectOptions: string[] = [],
+    ): Promise<void> {
         await this.visit("customer/account/rma");
         await this.newRequestLink.click();
         await this.orderRow(orderIncrementId)
@@ -146,6 +154,16 @@ export class RmaShopPage extends BasePage {
         await this.quantityInput.fill("1");
         await this.packageConditionSelect.selectOption("open");
         await this.informationInput.fill("Changed my mind.");
+
+        if (multiselectOptions.length) {
+            await expect(
+                this.multiselectCustomField,
+                "the multiselect custom field is not posted under customAttributes",
+            ).toBeVisible();
+
+            await this.multiselectCustomField.selectOption(multiselectOptions);
+        }
+
         await this.agreementToggle.click();
         await this.submitRequestButton.click();
 

@@ -3,6 +3,7 @@ import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreate
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
 import { AdminOrderPage } from "../pages/admin/sales/AdminOrderPage";
 import { RmaCreatePage } from "../pages/shop/RmaCreatePage";
+import { RmaRequestPage } from "../pages/shop/RmaRequestPage";
 import { SimpleProductCheckout } from "../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { loginAsCustomer, addAddress } from "../utils/customer";
 import { uniqueStamp } from "../utils/faker";
@@ -79,6 +80,62 @@ test.describe("return requests", () => {
 
         await rmaPage.expectQuantityRejected();
         await rmaPage.expectNoRequestForOrder(orderId);
+    });
+
+    test("should refuse a return request until the terms are accepted", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const rmaPage = new RmaCreatePage(shopPage);
+
+        await rmaPage.attemptReturnWithoutAcceptingTerms(orderId);
+
+        await rmaPage.expectTermsRejected();
+        await rmaPage.expectNoRequestForOrder(orderId);
+    });
+
+    test("should show the request with its items and conversation on the detail page", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const message = `Please expedite ${uniqueStamp()}`;
+        const requestPage = new RmaRequestPage(shopPage);
+
+        await new RmaCreatePage(shopPage).requestReturn(orderId);
+
+        await requestPage.expectRequestListed(orderId, "Pending Review");
+        await requestPage.expectDetailPageServesTheRequest(
+            orderId,
+            productName,
+            "Pending Review",
+        );
+
+        await requestPage.sendMessage(orderId, message);
+
+        await requestPage.expectMessageInConversation(message);
+    });
+
+    test("should let a customer cancel a return request", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const requestPage = new RmaRequestPage(shopPage);
+
+        await new RmaCreatePage(shopPage).requestReturn(orderId);
+
+        await requestPage.cancelRequest(orderId);
+
+        await requestPage.expectRequestListed(orderId, "Request Canceled");
+        await requestPage.expectCancelNoLongerOffered(orderId);
     });
 
     test("should not offer an order whose product does not allow rma", async ({

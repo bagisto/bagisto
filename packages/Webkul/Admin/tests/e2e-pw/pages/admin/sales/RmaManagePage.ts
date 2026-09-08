@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { DatagridPage } from "../DatagridPage";
+import { escapeRegExp } from "@shared/regex";
 
 export type RmaStatus =
     | "Pending Review"
@@ -44,6 +45,12 @@ export class RmaManagePage extends DatagridPage {
         return this.rowWithCell(`#${orderIncrementId}`);
     }
 
+    private detailText(text: string): Locator {
+        return this.page.locator("p", {
+            hasText: new RegExp(`^\\s*${escapeRegExp(text)}\\s*$`),
+        });
+    }
+
     async openRequestForOrder(orderIncrementId: string): Promise<void> {
         await this.openGrid();
         await this.searchFor(orderIncrementId);
@@ -78,6 +85,11 @@ export class RmaManagePage extends DatagridPage {
                 hasText: new RegExp(`^\\s*${status}\\s*$`),
             }),
         ).toBeVisible();
+    }
+
+    async expectAdditionalField(label: string, value: string): Promise<void> {
+        await expect(this.detailText(`${label} :`)).toBeVisible();
+        await expect(this.detailText(value)).toBeVisible();
     }
 
     async expectRequestListed(

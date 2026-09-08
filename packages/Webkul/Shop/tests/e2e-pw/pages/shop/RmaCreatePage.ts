@@ -50,6 +50,13 @@ export class RmaCreatePage extends BasePage {
         return this.page.getByRole("button", { name: "Submit request" });
     }
 
+    private get agreementError() {
+        return this.page
+            .locator("div.mb-4")
+            .filter({ has: this.page.locator("input#agreement") })
+            .locator("span.text-red-600");
+    }
+
     private async openRequestForm(orderId: string): Promise<void> {
         await this.visit("customer/account/rma");
         await this.newRequestButton.click();
@@ -87,6 +94,19 @@ export class RmaCreatePage extends BasePage {
 
     async attemptReturnWithExcessQuantity(orderId: string): Promise<void> {
         await this.fillRequest(orderId, "4");
+    }
+
+    async attemptReturnWithoutAcceptingTerms(orderId: string): Promise<void> {
+        await this.fillRequest(orderId, "1");
+        await this.packageConditionSelect.selectOption({ value: "open" });
+        await this.informationInput.fill("Changed my mind.");
+        await this.submitButton.click();
+    }
+
+    async expectTermsRejected(): Promise<void> {
+        await expect(this.agreementError).toBeVisible();
+
+        await expect(this.page).toHaveURL(/rma\/create/);
     }
 
     async expectQuantityRejected(): Promise<void> {
