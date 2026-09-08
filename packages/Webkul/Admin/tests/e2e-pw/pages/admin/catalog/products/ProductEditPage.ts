@@ -1,11 +1,7 @@
-import { fileURLToPath } from "url";
-import path from "path";
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import type { AdminPage } from "../../../../setup";
 import { ProductListPage } from "./ProductListPage";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export interface ProductEditData {
     productNumber?: string;
@@ -27,10 +23,6 @@ export class ProductEditPage extends BasePage {
 
     private get saveButton() {
         return this.page.getByRole("button", { name: "Save Product" });
-    }
-
-    private get form() {
-        return this.page.locator('form[enctype="multipart/form-data"]');
     }
 
     private get productNumberInput() {
@@ -61,6 +53,10 @@ export class ProductEditPage extends BasePage {
         return this.page.locator("#price");
     }
 
+    private get specialPriceInput() {
+        return this.page.locator('input[name="special_price"]');
+    }
+
     private get weightInput() {
         return this.page.locator("#weight");
     }
@@ -69,16 +65,49 @@ export class ProductEditPage extends BasePage {
         return this.page.locator('input[name="inventories\\[1\\]"]');
     }
 
+    private get allowRmaInput() {
+        return this.page.locator('input[type="checkbox"][name="allow_rma"]');
+    }
+
+    private get allowRmaToggle() {
+        return this.page.locator('label[for="allow_rma"]');
+    }
+
+    private get updatedMessage() {
+        return this.page.getByText("Product updated successfully");
+    }
+
+    private get taxCategoryField() {
+        return this.page.locator(
+            'div.relative:has(> div[name="tax_category_id"])',
+        );
+    }
+
+    private get taxCategoryTrigger() {
+        return this.taxCategoryField.locator('> div[name="tax_category_id"]');
+    }
+
+    private get taxCategoryInput() {
+        return this.taxCategoryField.locator(
+            'input[type="hidden"][name="tax_category_id"]',
+        );
+    }
+
+    private taxCategoryOption(label: string) {
+        return this.taxCategoryField
+            .locator("div.max-h-60 > div")
+            .filter({ hasText: new RegExp(`^\\s*${label}\\s*$`) });
+    }
+
     async waitForForm() {
-        await this.page.waitForLoadState("networkidle");
+        await this.waitForVueMount();
+
         await expect(this.saveButton).toBeVisible();
         await expect(this.skuInput).toHaveValue(/.+/);
     }
 
-    async openProductForEdit() {
-        const productListPage = new ProductListPage(this.page);
-
-        await productListPage.openProductForEdit();
+    async openProduct(name: string) {
+        await new ProductListPage(this.page).openProduct(name);
         await this.waitForForm();
     }
 
@@ -94,14 +123,14 @@ export class ProductEditPage extends BasePage {
 
     async fillDescriptions(shortDescription?: string, description?: string) {
         if (shortDescription) {
-            await (this.page as any).fillInTinymce(
+            await (this.page as AdminPage).fillInTinymce(
                 "#short_description_ifr",
                 shortDescription,
             );
         }
 
         if (description) {
-            await (this.page as any).fillInTinymce(
+            await (this.page as AdminPage).fillInTinymce(
                 "#description_ifr",
                 description,
             );
@@ -122,17 +151,46 @@ export class ProductEditPage extends BasePage {
         }
     }
 
-    async fillPrice(price: string) {
-        await this.priceInput.fill(price);
+    async fillPrice(price: number | string) {
+        await this.priceInput.fill(String(price));
     }
 
-    async fillWeight(weight: string) {
-        await this.weightInput.fill(weight);
+    async fillWeight(weight: number | string) {
+        await this.weightInput.fill(String(weight));
     }
 
-    async fillInventory(quantity: string) {
+    async fillInventory(quantity: number | string) {
         await this.inventoryInput.click();
-        await this.inventoryInput.fill(quantity);
+        await this.inventoryInput.fill(String(quantity));
+    }
+
+    async setAllowRma(enabled: boolean) {
+        if ((await this.allowRmaInput.isChecked()) !== enabled) {
+            await this.allowRmaToggle.click();
+        }
+
+        await expect(this.allowRmaInput).toBeChecked({ checked: enabled });
+    }
+
+    async setTaxCategory(label: string) {
+        await this.taxCategoryTrigger.click();
+        await this.taxCategoryOption(label).click();
+
+        await expect(this.taxCategoryInput).toHaveValue(/\d+/);
+        await expect(this.taxCategoryTrigger).toContainText(label);
+    }
+
+    async assignTaxCategory(productName: string, label: string) {
+        await this.openProduct(productName);
+        await this.setTaxCategory(label);
+        await this.saveProduct();
+        await this.verifyProductUpdated();
+    }
+
+    async expectTaxCategoryAssigned(productName: string, label: string) {
+        await this.openProduct(productName);
+
+        await expect(this.taxCategoryTrigger).toContainText(label);
     }
 
     async saveProduct() {
@@ -148,130 +206,20 @@ export class ProductEditPage extends BasePage {
         }
     }
 
-
+    async setSpecialPrice(name: string, price: string) {
+        await this.openProduct(name);
+        await this.specialPriceInput.fill(price);
+        await this.saveProduct();
+        await this.verifyProductUpdated();
+    }
 
     async verifyProductUpdated() {
-        await expect(this.page.locator("#app")).toContainText(
-            /Product updated successfully/i,
-        );
+        await expect(this.updatedMessage).toBeVisible();
     }
 
     async verifyProductCreated() {
-        await expect(this.page.locator("#app")).toContainText(
-            /Product created successfully/i,
-        );
-    }
-
-    async updateProductGroupPriceAfterDelete() {
-        await this.visit("admin/catalog/products");
-        await this.page.getByRole("button", { name: "Create Product" }).click();
-        await this.page.locator('select[name="type"]').selectOption("simple");
-        await this.page
-            .locator('select[name="attribute_family_id"]')
-            .selectOption("1");
-        await this.page.locator('input[name="sku"]').fill(`sku-${Date.now()}`);
-        await this.page.getByRole("button", { name: "Save Product" }).click();
-        await this.waitForForm();
-
-        await this.page.getByText("Add New").click();
-        await this.page
-            .locator('select[name="customer_group_id"]')
-            .selectOption("1");
-        await this.page.locator('input[name="qty"]').fill("022");
-        await this.page.locator('input[name="value"]').fill("045");
-        await this.page
-            .getByRole("button", { name: "Save", exact: true })
-            .click();
         await expect(
-            this.page.getByText("For 022 Qty at fixed price of"),
+            this.page.getByText("Product created successfully"),
         ).toBeVisible();
-        await this.page.waitForTimeout(1000);
-
-        await this.page.getByText("Add New").click();
-        await this.page
-            .locator('select[name="customer_group_id"]')
-            .selectOption("2");
-        await this.page.locator('input[name="qty"]').fill("020");
-        await this.page
-            .locator('select[name="value_type"]')
-            .selectOption("discount");
-        await this.page.locator('input[name="value"]').fill("034");
-        await this.page
-            .getByRole("button", { name: "Save", exact: true })
-            .click();
-        await expect(
-            this.page.getByText("For 020 Qty at discount of"),
-        ).toBeVisible();
-        await this.page.waitForTimeout(1000);
-
-        await this.page.getByText("Add New").click();
-        await this.page
-            .locator('select[name="customer_group_id"]')
-            .selectOption("3");
-        await this.page.locator('input[name="qty"]').fill("015");
-        await this.page.locator('input[name="value"]').fill("043");
-        await this.page
-            .getByRole("button", { name: "Save", exact: true })
-            .click();
-        await expect(
-            this.page.getByText("For 015 Qty at fixed price of"),
-        ).toBeVisible();
-
-        await this.page.getByText("Edit").nth(2).click();
-        await this.page.getByRole("button", { name: "Delete" }).click();
-        await this.page
-            .getByRole("button", { name: "Agree", exact: true })
-            .click();
-    }
-
-    async editSimpleProduct() {
-        await this.openProductForEdit();
-        await this.saveProduct();
-    }
-
-    async editConfigurableProduct() {
-        await this.openProductForEdit();
-        await this.saveProduct();
-    }
-
-    async editGroupedProduct() {
-        await this.openProductForEdit();
-        await this.saveProduct();
-    }
-
-    async editVirtualProduct() {
-        await this.openProductForEdit();
-        await this.priceInput.fill("100");
-        await this.inventoryInput.fill("1000");
-        await this.page
-            .locator("#description_ifr")
-            .contentFrame()
-            .locator("html")
-            .click();
-        await this.saveAndVerifyUpdated(false);
-    }
-
-    async editDownloadableProduct() {
-        await this.openProductForEdit();
-        await this.priceInput.fill("100");
-        await this.page.getByText("Edit", { exact: true }).first().click();
-        await this.page.waitForSelector(".min-h-0 > div > div");
-        await this.page
-            .locator('input[name="file"]')
-            .nth(1)
-            .setInputFiles(
-                path.resolve(__dirname, "../../../../data/images/2.webp"),
-            );
-        await this.page
-            .getByRole("button", { name: "Save", exact: true })
-            .click();
-        await this.page.waitForLoadState("networkidle");
-        await this.saveProduct();
-    }
-
-    async massUpdateProducts(status: "Active" | "Disable" = "Active") {
-        const productListPage = new ProductListPage(this.page);
-
-        await productListPage.massUpdateStatus(status);
     }
 }

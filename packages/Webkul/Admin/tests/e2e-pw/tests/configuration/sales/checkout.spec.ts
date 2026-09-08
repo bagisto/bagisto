@@ -1,46 +1,55 @@
-import { test, expect } from "../../../setup";
-import { generateDescription } from "../../../utils/faker";
-import { CheckoutConfigurationPage } from "../../../pages/admin/configuration/sales/CheckoutConfigurationPage";
+import { uniqueStamp } from "../../../utils/faker";
+import { test } from "../../../setup";
+import {
+    CheckoutConfigurationPage,
+    type CheckoutSettings,
+} from "../../../pages/admin/configuration/sales/CheckoutConfigurationPage";
 
-const SHOPPING_CART_TOGGLES = [
-    'label[for="sales[checkout][shopping_cart][allow_guest_checkout]"]',
-    'label[for="sales[checkout][shopping_cart][cart_page]"]',
-    'label[for="sales[checkout][shopping_cart][cross_sell]"]',
-    'label[for="sales[checkout][shopping_cart][estimate_shipping]"]',
-];
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
 
 test.describe("checkout configuration", () => {
+    test.describe.configure({ timeout: 120000 });
+
+    let configPage: CheckoutConfigurationPage;
+    let original: CheckoutSettings;
+
     test.beforeEach(async ({ adminPage }) => {
-        await new CheckoutConfigurationPage(adminPage).open();
+        configPage = new CheckoutConfigurationPage(adminPage);
+        original = await configPage.readSettings();
     });
 
-    test("should enable guest checkout, cart page, cross-sell products, and estimated shipping", async ({
-        adminPage,
-    }) => {
-        const page = new CheckoutConfigurationPage(adminPage);
-
-        await page.toggleShoppingCartSettings(SHOPPING_CART_TOGGLES);
-        await page.saveAndVerify();
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
     });
 
-    test("should enable settings show a summary of item quantities and display the total number of items", async ({
-        adminPage,
-    }) => {
-        const page = new CheckoutConfigurationPage(adminPage);
+    test("should persist the shopping cart settings after reload", async () => {
+        const changed = {
+            guestCheckout: !original.guestCheckout,
+            cartPage: !original.cartPage,
+            crossSell: !original.crossSell,
+            estimateShipping: !original.estimateShipping,
+        };
 
-        await page.setMyCartSummary("display_item_quantity");
-        await expect(await page.getMyCartSummaryValue()).toBe(
-            "display_item_quantity",
-        );
-        await page.saveAndVerify();
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test("should enable mini cart settings to display the mini cart", async ({
-        adminPage,
-    }) => {
-        const page = new CheckoutConfigurationPage(adminPage);
+    test("should persist the mini cart settings after reload", async () => {
+        const changed = {
+            miniCart: !original.miniCart,
+            miniCartSummary: other(
+                original.miniCartSummary,
+                "display_item_quantity",
+                "display_number_of_items_in_cart",
+            ),
+            miniCartOffer: `Offer ${uniqueStamp()}`,
+        };
 
-        await page.enableMiniCart(generateDescription(100));
-        await page.saveAndVerify();
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

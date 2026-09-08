@@ -1,64 +1,70 @@
-import { expect, test } from "../../../../setup";
+import type { Page } from "@playwright/test";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import { ProductEditPage } from "../../../../pages/admin/catalog/products/ProductEditPage";
+import type { BaseProduct } from "../../../../pages/types/product.types";
+import { uniqueStamp } from "../../../../utils/faker";
+import { test } from "../../../../setup";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
 
 async function createRuleAndVerifyCoupon({
-    page,
+    adminPage,
+    shopPage,
     operator,
     ruleValue,
     productValue,
     type,
 }: {
-    page: any;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     ruleValue: string;
     productValue: string;
     type: string;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
 
-    await loginAsAdmin(page);
-
-    await ruleCreatePage.catalogRuleCreationFlow();
+    const rule = await ruleCreatePage.catalogRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
+        scopeSku: product.sku,
         attribute: "product|color",
         operator,
-        optionSelect: "Red",
+        optionSelect: ruleValue,
         couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
-    await page.goto("admin/catalog/products");
+    const productEditPage = new ProductEditPage(adminPage);
 
-    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
+    await productEditPage.openProduct(product.name);
 
-    await page.waitForLoadState("networkidle");
+    await productEditPage.selectOption("color", productValue);
 
-    await page.locator('span:text-is("Color")').click();
-    await page.locator(`span:text-is("${productValue}")`).click();
+    await productEditPage.save();
 
-    await page.locator('button:has-text("Save Product")').first().click();
-
-    await expect(
-        page.getByText("Product updated successfully").first(),
-    ).toBeVisible();
-
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+    await ruleApplyPage.verifyCatalogRule({
+        productName: product.name,
+        price: product.price ?? 0,
+        value: discountValue ?? 0,
+        type: type,
+    });
 }
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
-    const productCreation = new ProductCreatePage(adminPage);
+let product: BaseProduct;
+let createdRules: string[];
 
-    await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
@@ -67,41 +73,40 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-
-        await ruleDeletePage.deleteCatalogRuleAndProduct();
-    },
-);
+test.afterEach(async ({ adminPage }) => {
+    try {
+        await new RuleDeletePage(adminPage).deleteCatalogRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
+});
 
 const testCases = [
     {
         title: "is equal to",
         operator: "==",
-        ruleValue: "1",
+        ruleValue: "Red",
         productValue: "Red",
         type: "percentage",
     },
     {
         title: "is equal to",
         operator: "==",
-        ruleValue: "1",
+        ruleValue: "Red",
         productValue: "Red",
         type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
-        ruleValue: "1",
+        ruleValue: "Red",
         productValue: "Green",
         type: "percentage",
     },
     {
         title: "is not equal to",
         operator: "!=",
-        ruleValue: "1",
+        ruleValue: "Red",
         productValue: "Green",
         type: "fixed",
     },
@@ -111,10 +116,12 @@ test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
             test(`should apply condition when color condition is -> ${tc.title} (${tc.type})`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await createRuleAndVerifyCoupon({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator: tc.operator,
                     ruleValue: tc.ruleValue,
                     productValue: tc.productValue,

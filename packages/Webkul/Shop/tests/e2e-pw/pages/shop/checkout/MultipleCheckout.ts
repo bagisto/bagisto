@@ -1,191 +1,58 @@
-import { expect } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { CheckoutHelper } from "./CheckoutHelper";
+import { BundleProductCheckout } from "./product-types/BundleProductCheckout";
+import { ConfigurableProductCheckout } from "./product-types/ConfigurableProductCheckout";
+import { DownloadableProductCheckout } from "./product-types/DownloadableProductCheckout";
+import { GroupProductCheckout } from "./product-types/GroupProductCheckout";
+
+export type CartItemType =
+    | "simple"
+    | "virtual"
+    | "configurable"
+    | "grouped"
+    | "bundle"
+    | "downloadable";
+
+export interface CartItem {
+    type: CartItemType;
+    name: string;
+}
 
 export class MultipleCheckout extends CheckoutHelper {
-    constructor(page) {
+    constructor(page: Page) {
         super(page);
     }
 
-    async customerCheckoutSimpleAndConfig() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("simple");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
+    async addItems(items: CartItem[]): Promise<void> {
+        for (const item of items) {
+            switch (item.type) {
+                case "simple":
+                case "virtual":
+                    await this.addSimpleProductToCart(item.name);
+                    break;
 
-        await this.searchProduct("config");
-        await this.addToCartButton.click();
-        await this.page.getByLabel("Color").selectOption("4");
-        await this.page.getByLabel("Size").selectOption("8");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
+                case "configurable":
+                    await new ConfigurableProductCheckout(this.page).addToCart(item.name);
+                    break;
 
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
+                case "grouped":
+                    await new GroupProductCheckout(this.page).addToCart(item.name);
+                    break;
+
+                case "bundle":
+                    await new BundleProductCheckout(this.page).addToCart(item.name);
+                    break;
+
+                case "downloadable":
+                    await new DownloadableProductCheckout(this.page).addToCart(item.name);
+                    break;
+            }
+        }
     }
 
-    async customerCheckoutVirtualAndGroup() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("virtual");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
+    async checkout(items: CartItem[]): Promise<string> {
+        await this.addItems(items);
 
-        await this.searchProduct("group");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async customerCheckoutSimpleAndBundle() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("simple");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("bundle");
-        await this.addToCartButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async customerCheckoutGroupAndBundle() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("bundle");
-        await this.addToCartButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("group");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async customerCheckoutDownloadableAndBundle() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("down");
-        await this.addToCartButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.clickLink.first().click();
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("bundle");
-        await this.addToCartButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async customerCheckoutVirtualAndConfig() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("config");
-        await this.addToCartButton.click();
-        await this.page.getByLabel("Color").selectOption("4");
-        await this.page.getByLabel("Size").selectOption("8");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("virtual");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("group");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async customerCheckoutSimpleConfigVirtulGroup() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("simple");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("config");
-        await this.addToCartButton.click();
-        await this.page.getByLabel("Color").selectOption("4");
-        await this.page.getByLabel("Size").selectOption("8");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("virtual");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("group");
-        await this.addToCartButton.click();
-        await this.page.waitForTimeout(3000);
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
-    }
-
-    async customerCheckoutSimpleAndDownloadable() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.searchProduct("simple");
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.searchProduct("down");
-        await this.addToCartButton.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.clickLink.first().click();
-        await this.addToCartButton.click();
-        await expect(this.addCartSuccess.first()).toBeVisible();
-
-        await this.proceedToCheckout();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-        await this.placeOrder();
+        return this.completeCheckout({ shipping: "free", payment: "moneytransfer" });
     }
 }

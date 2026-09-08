@@ -1,70 +1,97 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-type ContentConfig = {
+export interface ContentSettings {
     headerOfferTitle: string;
     redirectionTitle: string;
     redirectionLink: string;
     customCss: string;
     customJs: string;
-};
+}
 
-export class ContentConfigurationPage extends BasePage {
+const TEXTS = {
+    headerOfferTitle: "general[content][header_offer][title]",
+    redirectionTitle: "general[content][header_offer][redirection_title]",
+    redirectionLink: "general[content][header_offer][redirection_link]",
+} as const;
+
+const TEXT_AREAS = {
+    customCss: "general[content][custom_scripts][custom_css]",
+    customJs: "general[content][custom_scripts][custom_javascript]",
+} as const;
+
+export class ContentConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/general/content";
     }
 
-    private get successNotification() {
-        return this.page.locator("#app p", {
-            hasText: "Configuration saved successfully",
-        });
+    async readSettings(): Promise<ContentSettings> {
+        await this.open();
+
+        return {
+            headerOfferTitle: await this.readText(TEXTS.headerOfferTitle),
+            redirectionTitle: await this.readText(TEXTS.redirectionTitle),
+            redirectionLink: await this.readText(TEXTS.redirectionLink),
+            customCss: await this.readTextArea(TEXT_AREAS.customCss),
+            customJs: await this.readTextArea(TEXT_AREAS.customJs),
+        };
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/general/content");
+    async applySettings(settings: Partial<ContentSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(TEXTS) as (keyof typeof TEXTS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setText(TEXTS[key], value);
+            }
+        }
+
+        for (const key of Object.keys(TEXT_AREAS) as (keyof typeof TEXT_AREAS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setTextArea(TEXT_AREAS[key], value);
+            }
+        }
+
+        await this.save();
     }
 
-    async fillHeaderOffer(
+    async expectSettings(settings: Partial<ContentSettings>): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(TEXTS) as (keyof typeof TEXTS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.expectText(TEXTS[key], value);
+            }
+        }
+
+        for (const key of Object.keys(TEXT_AREAS) as (keyof typeof TEXT_AREAS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.expectTextArea(TEXT_AREAS[key], value);
+            }
+        }
+    }
+
+    async expectHeaderOfferOnStorefront(
         title: string,
         redirectionTitle: string,
-        redirectionLink: string,
     ): Promise<void> {
-        await this.page
-            .locator('input[name="general[content][header_offer][title]"]')
-            .fill(title);
-        await this.page
-            .locator(
-                'input[name="general[content][header_offer][redirection_title]"]',
-            )
-            .fill(redirectionTitle);
-        await this.page
-            .locator(
-                'input[name="general[content][header_offer][redirection_link]"]',
-            )
-            .fill(redirectionLink);
-    }
+        await this.visit("");
 
-    async fillCustomScripts(css: string, js: string): Promise<void> {
-        await this.page
-            .locator(
-                'textarea[name="general[content][custom_scripts][custom_css]"]',
-            )
-            .fill(css);
-        await this.page
-            .locator(
-                'textarea[name="general[content][custom_scripts][custom_javascript]"]',
-            )
-            .fill(js);
-    }
-
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+        await expect(this.page.getByText(title)).toBeVisible();
+        await expect(
+            this.page.getByRole("link", { name: redirectionTitle }),
+        ).toBeVisible();
     }
 }

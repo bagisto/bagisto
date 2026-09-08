@@ -1,175 +1,139 @@
-import { test, expect } from "../../../setup";
-import { loginAsCustomer } from "../../../utils/customer";
-import { generateDescription } from "../../../utils/faker";
+import { uniqueStamp } from "../../../utils/faker";
+import { test } from "../../../setup";
 import {
-    enableGDPR,
-    disableGDPR,
-    enableGDPRAgreement,
-    disableGDPRAgreement,
-    enableCookiesNotice,
-} from "../../../utils/gdpr";
+    GDPRConfigurationPage,
+    type GdprSettings,
+} from "../../../pages/admin/configuration/general/GDPRConfigurationPage";
+import {
+    GdprShopPage,
+    type CookieNoticePosition,
+} from "../../../pages/shop/GdprShopPage";
+import { loginAsCustomer } from "../../../utils/customer";
 
 test.describe("gdpr configuration", () => {
-    test.describe("gdpr enable/disable configuration", () => {
-        test("should display the gdpr section when gdpr status is enabled", async ({
-            adminPage,
-        }) => {
-            await enableGDPR(adminPage);
-            await loginAsCustomer(adminPage);
-            await adminPage.goto("customer/account/profile");
-            await expect(
-                adminPage.getByRole("link", { name: " GDPR Requests " }),
-            ).toContainText("GDPR Requests");
-            await adminPage
-                .getByRole("link", { name: " GDPR Requests " })
-                .click();
-        });
+    test.describe.configure({ timeout: 120000 });
 
-        test("should not display the gdpr section when gdpr status is disabled", async ({
-            adminPage,
-        }) => {
-            await disableGDPR(adminPage);
-            await loginAsCustomer(adminPage);
-            await adminPage.goto("customer/account/profile");
-            await expect(adminPage.locator("#main")).not.toContainText(
-                /GDPR Requests/,
-            );
-        });
+    let gdprPage: GDPRConfigurationPage;
+    let original: GdprSettings;
+
+    test.beforeEach(async ({ adminPage }) => {
+        gdprPage = new GDPRConfigurationPage(adminPage);
+        original = await gdprPage.readSettings();
     });
 
-    test.describe("customer agreement configuration", () => {
-        test("should show agreement statement when customer agreement button is enabled", async ({
-            adminPage,
-        }) => {
-            await enableGDPR(adminPage);
-            const agreement = await enableGDPRAgreement(adminPage);
-            await adminPage.goto("customer/register");
-            await expect(
-                await adminPage.getByText(agreement.checkboxLabel),
-            ).toBeVisible();
-            await expect(
-                await adminPage.getByText(agreement.checkboxLabel),
-            ).toHaveText(agreement.checkboxLabel);
-            await adminPage.getByText("Click Here").click();
-            await expect(adminPage.locator("#main")).toContainText(
-                agreement.content,
-            );
-        });
-
-        test("should not show agreement statement when customer agreement button is disabled", async ({
-            adminPage,
-        }) => {
-            await enableGDPR(adminPage);
-            await disableGDPRAgreement(adminPage);
-            await adminPage.goto("customer/register");
-            await expect(
-                adminPage.locator('input[name="agreement"]'),
-            ).toHaveCount(0);
-        });
+    test.afterEach(async () => {
+        await gdprPage.applySettings(original);
     });
 
-    test.describe("cookies message setting configuration", () => {
-        test("should place cookies box to the bottom left", async ({
-            adminPage,
-        }) => {
-            await enableCookiesNotice(adminPage);
-            await adminPage.goto("");
-            const cookieBanner = adminPage.locator(".js-cookie-consent");
-            const boundingBox = await cookieBanner.boundingBox();
-            expect(boundingBox).not.toBeNull();
-            expect(boundingBox.x).toBeLessThan(50);
-            const viewportHeight = (await adminPage.viewportSize()).height;
-            expect(boundingBox.y).toBeGreaterThan(viewportHeight - 300);
-        });
+    test("should offer gdpr requests to signed in customers only while gdpr is enabled", async ({
+        shopPage,
+    }) => {
+        const shop = new GdprShopPage(shopPage);
 
-        test("should place cookies box to the bottom-right", async ({
-            adminPage,
-        }) => {
-            await enableCookiesNotice(adminPage, "bottom-right");
-            await adminPage.goto("");
-            await expect(
-                adminPage.getByText("cookie block this website"),
-            ).toBeVisible();
-            const cookieBanner = adminPage.locator(".js-cookie-consent");
-            await expect(cookieBanner).toBeVisible();
-            const boundingBox = await cookieBanner.boundingBox();
-            expect(boundingBox).not.toBeNull();
-            const viewportSize = await adminPage.viewportSize();
-            expect(boundingBox.x + boundingBox.width).toBeGreaterThan(
-                viewportSize.width - 50,
-            );
-            expect(boundingBox.y).toBeGreaterThan(viewportSize.height - 300);
-        });
+        await loginAsCustomer(shopPage);
+
+        await gdprPage.applySettings({ enabled: true });
+        await shop.expectGdprRequestsOffered(true);
+
+        await gdprPage.applySettings({ enabled: false });
+        await shop.expectGdprRequestsOffered(false);
     });
 
-    test.describe("your cookie consent preference configuration", () => {
-        test("cookie consent preference checking", async ({ adminPage }) => {
-            await adminPage.goto("admin/configuration/general/gdpr");
-            const agreement = generateDescription();
-            await adminPage.fillInTinymce(
-                "#general_gdpr__cookie_consent__strictly_necessary__ifr",
-                agreement,
-            );
+    test("should require the customer agreement on registration only while it is enabled", async ({
+        shopPage,
+    }) => {
+        const shop = new GdprShopPage(shopPage);
+        const label = `I agree with this statement ${uniqueStamp()}`;
 
-            await adminPage.fillInTinymce(
-                "#general_gdpr__cookie_consent__basic_interaction__ifr",
-                agreement,
-            );
-
-            await adminPage.fillInTinymce(
-                "#general_gdpr__cookie_consent__experience_enhancement__ifr",
-                agreement,
-            );
-
-            await adminPage.fillInTinymce(
-                "#general_gdpr__cookie_consent__measurements__ifr",
-                agreement,
-            );
-
-            await adminPage.fillInTinymce(
-                "#general_gdpr__cookie_consent__targeting_advertising__ifr",
-                agreement,
-            );
-
-            await adminPage
-                .getByRole("button", { name: "Save Configuration" })
-                .click();
-            await adminPage.click(
-                'button[type="submit"].primary-button:visible',
-            );
-            await adminPage.goto("");
-            await expect(
-                await adminPage
-                    .locator(".js-cookie-consent")
-                    .locator("text=Reject"),
-            ).toBeVisible();
-            await expect(
-                await adminPage
-                    .locator(".js-cookie-consent")
-                    .locator("text=Accept"),
-            ).toBeVisible();
-            await expect(
-                await adminPage
-                    .locator(".js-cookie-consent")
-                    .locator("text=Learn More and Customize"),
-            ).toBeVisible();
-            await adminPage
-                .locator(".js-cookie-consent")
-                .locator("text=Learn More and Customize")
-                .click();
-            await loginAsCustomer(adminPage);
-            await adminPage
-                .getByRole("link", { name: "Learn More and Customize" })
-                .click();
-            await adminPage.locator("#strictly_necessary").nth(1).click();
-            await adminPage.locator("#basic_interaction").nth(1).click();
-            await adminPage.locator("#experience_enhancement").nth(1).click();
-            await adminPage.locator("#measurements").nth(1).click();
-            await adminPage.locator("#targeting_advertising").nth(1).click();
-            await adminPage
-                .getByRole("button", { name: "Save and Continue" })
-                .click();
-            await expect(adminPage).toHaveURL("");
+        await gdprPage.applySettings({
+            enabled: true,
+            agreementEnabled: true,
+            agreementLabel: label,
         });
+        await shop.expectRegistrationAgreement(label);
+
+        await gdprPage.applySettings({ agreementEnabled: false });
+        await shop.expectNoRegistrationAgreement();
+    });
+
+    for (const position of ["bottom-left", "bottom-right"] as CookieNoticePosition[]) {
+        test(`should place the cookie notice at the ${position}`, async ({
+            shopPage,
+        }) => {
+            const shop = new GdprShopPage(shopPage);
+            const description = `This website uses cookies ${uniqueStamp()}`;
+
+            await gdprPage.applySettings({
+                enabled: true,
+                cookieEnabled: true,
+                cookiePosition: position,
+                cookieBlockIdentifier: "cookie block",
+                cookieDescription: description,
+            });
+
+            await shop.expectCookieNoticeAt(position, description);
+        });
+    }
+
+    test("should hide the cookie notice once a visitor accepts it", async ({
+        shopPage,
+    }) => {
+        const shop = new GdprShopPage(shopPage);
+        const description = `This website uses cookies ${uniqueStamp()}`;
+
+        await gdprPage.applySettings({
+            enabled: true,
+            cookieEnabled: true,
+            cookiePosition: "bottom-left",
+            cookieBlockIdentifier: "cookie block",
+            cookieDescription: description,
+        });
+
+        await shop.expectCookieNoticeAt("bottom-left", description);
+        await shop.acceptCookies();
+        await shop.expectCookieNoticeHidden();
+    });
+
+    test("should store the consent preference a signed in customer saves as a cookie", async ({
+        shopPage,
+    }) => {
+        const shop = new GdprShopPage(shopPage);
+        const description = `This website uses cookies ${uniqueStamp()}`;
+
+        await loginAsCustomer(shopPage);
+
+        await gdprPage.applySettings({
+            enabled: true,
+            cookieEnabled: true,
+            cookiePosition: "bottom-left",
+            cookieBlockIdentifier: "cookie block",
+            cookieDescription: description,
+        });
+
+        await shop.expectCookieNoticeAt("bottom-left", description);
+        await shop.saveCookieConsent();
+
+        await shop.expectPreferenceCookie("basic_interaction", "true");
+    });
+
+    test("should hide the cookie notice once a signed in customer saves their consent preferences", async ({
+        shopPage,
+    }) => {
+        const shop = new GdprShopPage(shopPage);
+        const description = `This website uses cookies ${uniqueStamp()}`;
+
+        await loginAsCustomer(shopPage);
+
+        await gdprPage.applySettings({
+            enabled: true,
+            cookieEnabled: true,
+            cookiePosition: "bottom-left",
+            cookieBlockIdentifier: "cookie block",
+            cookieDescription: description,
+        });
+
+        await shop.expectCookieNoticeAt("bottom-left", description);
+        await shop.saveCookieConsent();
+        await shop.expectCookieNoticeHidden();
     });
 });

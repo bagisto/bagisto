@@ -47,7 +47,7 @@ rejected on direction rather than on code.
    the repository history uses.
 
 5. Follow the pull request
-   [template](https://github.com/bagisto/bagisto/blob/2.4/.github/PULL_REQUEST_TEMPLATE.md).
+   [template](PULL_REQUEST_TEMPLATE.md).
 
 ### **Did you create a new feature or enhancement?**
 
@@ -59,7 +59,7 @@ rejected on direction rather than on code.
 3. Use `feat:` for the commit subject, and keep the message descriptive.
 
 4. Follow the pull request
-   [template](https://github.com/bagisto/bagisto/blob/2.4/.github/PULL_REQUEST_TEMPLATE.md).
+   [template](PULL_REQUEST_TEMPLATE.md).
 
 ### **Before you open the pull request**
 

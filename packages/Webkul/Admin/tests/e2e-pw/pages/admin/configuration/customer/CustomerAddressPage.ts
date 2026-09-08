@@ -1,48 +1,64 @@
-import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { type Page } from "@playwright/test";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class CustomerAddressPage extends BasePage {
+export interface AddressRequirementSettings {
+    country: boolean;
+    state: boolean;
+    postcode: boolean;
+}
+
+const FIELDS = {
+    country: "customer[address][requirements][country]",
+    state: "customer[address][requirements][state]",
+    postcode: "customer[address][requirements][postcode]",
+} as const;
+
+export class CustomerAddressPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get countryToggle() {
-        return this.page.locator(
-            'label[for="customer[address][requirements][country]"]',
-        );
+    protected get path(): string {
+        return "admin/configuration/customer/address";
     }
 
-    private get stateToggle() {
-        return this.page.locator(
-            'label[for="customer[address][requirements][state]"]',
-        );
+    async readSettings(): Promise<AddressRequirementSettings> {
+        await this.open();
+
+        return {
+            country: await this.readBoolean(FIELDS.country),
+            state: await this.readBoolean(FIELDS.state),
+            postcode: await this.readBoolean(FIELDS.postcode),
+        };
     }
 
-    private get postcodeToggle() {
-        return this.page.locator(
-            'label[for="customer[address][requirements][postcode]"]',
-        );
+    async applySettings(
+        settings: Partial<AddressRequirementSettings>,
+    ): Promise<void> {
+        await this.open();
+
+        for (const key of Object.keys(FIELDS) as (keyof typeof FIELDS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setBoolean(FIELDS[key], value);
+            }
+        }
+
+        await this.save();
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
-    }
+    async expectSettings(
+        settings: Partial<AddressRequirementSettings>,
+    ): Promise<void> {
+        await this.open();
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully");
-    }
+        for (const key of Object.keys(FIELDS) as (keyof typeof FIELDS)[]) {
+            const value = settings[key];
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/customer/address");
-    }
-
-    async requireCountryStateZip(): Promise<void> {
-        await this.countryToggle.click();
-        await this.stateToggle.click();
-        await this.postcodeToggle.click();
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+            if (value !== undefined) {
+                await this.expectBoolean(FIELDS[key], value);
+            }
+        }
     }
 }

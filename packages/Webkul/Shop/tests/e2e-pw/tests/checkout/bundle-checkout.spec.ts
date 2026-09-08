@@ -1,97 +1,96 @@
-import { test } from "../../setup";
+import { expect, test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
+import { OrderPage } from "../../pages/shop/OrderPage";
 import { BundleProductCheckout } from "../../pages/shop/checkout/product-types/BundleProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
+import { uniqueStamp } from "../../utils/faker";
 
-test.describe("bundle product checkout flow", () => {
-    test("should create simple product to add in bundle", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+test.describe("bundle product checkout", () => {
+    let productName: string;
+    let created: string[];
+    let productListPage: ProductListPage;
 
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-    test("should create simple product again to add in bundle", async ({ adminPage }) => {
+    test.beforeEach(async ({ adminPage }) => {
         const productCreation = new ProductCreatePage(adminPage);
+        productListPage = new ProductListPage(adminPage);
+        created = [];
 
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-    test("should create bundle product", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+        const items = [`Simple-${uniqueStamp()}`, `Simple-${uniqueStamp()}`];
+
+        for (const item of items) {
+            await productCreation.createProduct({
+                type: "simple",
+                sku: `SKU-${uniqueStamp()}`,
+                name: item,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 1,
+                inventory: 100,
+            });
+            created.push(item);
+        }
+
+        productName = `bundle-${uniqueStamp()}`;
 
         await productCreation.createProduct({
             type: "bundle",
-            sku: `SKU-${Date.now()}`,
-            name: `bundle-${Date.now()}`,
+            sku: `SKU-${uniqueStamp()}`,
+            name: productName,
             shortDescription: "Short desc",
             description: "Full desc",
             price: 199,
             weight: 1,
             inventory: 100,
+            bundleItems: items,
         });
+        created.unshift(productName);
     });
 
-    test("should allow customer to complete checkout for bundle product successfully", async ({
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent(created);
+    });
+
+    test("should place an order with free shipping and money transfer for a signed in customer", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new BundleProductCheckout(shopPage);
-        await checkout.checkoutWithDefaultShipping();
+
+        const orderId = await new BundleProductCheckout(shopPage).checkout(productName);
+
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 
-    test("should allow guest to complete checkout for bundle product successfully", async ({
-        shopPage,
-    }) => {
-        const checkout = new BundleProductCheckout(shopPage);
-        await checkout.guestCheckout();
+    test("should place an order as a guest", async ({ shopPage }) => {
+        const orderId = await new BundleProductCheckout(shopPage).checkout(productName, {
+            address: "guest",
+        });
+
+        expect(orderId).toMatch(/^\d+$/);
     });
 
-    test("should use same address for shipping", async ({ shopPage }) => {
+    test("should place an order with flat rate shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new BundleProductCheckout(shopPage);
-        await checkout.checkoutWithDefaultShipping();
+
+        const orderId = await new BundleProductCheckout(shopPage).checkout(productName, {
+            shipping: "flatrate",
+        });
+
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 
-    test("should not use same address for shipping", async ({ shopPage }) => {
+    test("should place an order with cash on delivery", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new BundleProductCheckout(shopPage);
-        await checkout.checkoutWithNewAddress();
-    });
 
-    test("should allow customer to complete checkout for bundle product via flat rate shipping successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const checkout = new BundleProductCheckout(shopPage);
-        await checkout.checkoutWithFlatRateShipping();
-    });
+        const orderId = await new BundleProductCheckout(shopPage).checkout(productName, {
+            shipping: "flatrate",
+            payment: "cashondelivery",
+        });
 
-    test("should allow customer to complete checkout for bundle product via cash on delivery successfully", async ({
-        shopPage,
-    }) => {
-        await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const checkout = new BundleProductCheckout(shopPage);
-        await checkout.checkoutWithCOD();
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 });

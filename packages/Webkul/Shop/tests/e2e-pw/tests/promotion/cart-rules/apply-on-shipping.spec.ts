@@ -1,64 +1,34 @@
+import { uniqueStamp } from "../../../utils/faker";
+import { ProductListPage } from "../../../pages/admin/catalog/products/ProductListPage";
+import type { BaseProduct } from "../../../pages/types/product.types";
 import { test } from "../../../setup";
-import { expect, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../utils/admin";
 
 type CouponType = "fixed" | "percentage" | "fixedAmmountWholeCart";
 
-async function expectCouponAppliedWithGrandTotal(
-    page: Page,
-    ruleApplyPage: RuleApplyPage,
-    discountValue: number,
-    couponType: CouponType,
-    allowShipping?: string,
-) {
-    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
-        discountValue,
-        couponType,
-    );
-
-    await ruleApplyPage.applyCouponAtCheckout(allowShipping);
-
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
-    if (discountedAmount === 0) {
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText("$0.00");
-    } else {
-        const formattedAmount = new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(discountedAmount);
-
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText(`$${formattedAmount}`);
-    }
-}
-
 async function createRuleAndVerifyCoupon({
-    page,
+    adminPage,
+    shopPage,
     operator,
     optionSelect,
     couponType,
     allowShipping,
 }: {
-    page: Page;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     optionSelect: string;
     couponType: CouponType;
     allowShipping?: string;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
-
-    await loginAsAdmin(page);
-    await ruleCreatePage.cartRuleCreationFlow();
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
+    const rule = await ruleCreatePage.cartRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "cart|country",
@@ -72,33 +42,38 @@ async function createRuleAndVerifyCoupon({
 
     await ruleCreatePage.saveCartRule();
 
-    await expectCouponAppliedWithGrandTotal(
-        page,
-        ruleApplyPage,
-        discountValue,
-        couponType,
-        allowShipping,
-    );
+    await ruleApplyPage.expectCouponAppliedWithGrandTotal({
+        productName: product.name,
+        couponCode: rule.couponCode,
+        discountValue: discountValue,
+        couponType: couponType,
+        ...{ allowShipping },
+    });
 }
 
-test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreatePage(adminPage);
+let product: BaseProduct;
+let createdRules: string[];
 
-    await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
         shortDescription: "Short desc",
         description: "Full desc",
-        price: Math.floor(Math.random() * 1000) + 1,
+        price: 199,
         weight: 1,
         inventory: 100,
     });
 });
 
 test.afterEach(async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
+    try {
+        await new RuleDeletePage(adminPage).deleteCartRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 test.describe("cart rules", () => {
@@ -112,10 +87,11 @@ test.describe("cart rules", () => {
         },
     ];
 
-    for (const { operator, option, type, allowShipping, label } of cases) {
-        test("should apply coupon on shipping price", async ({ page }) => {
+    for (const { operator, option, type, allowShipping } of cases) {
+        test("should apply coupon on shipping price", async ({ adminPage, shopPage }) => {
             await createRuleAndVerifyCoupon({
-                page,
+                adminPage,
+                shopPage,
                 operator,
                 optionSelect: option,
                 couponType: type as CouponType,

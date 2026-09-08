@@ -1,22 +1,32 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
-import { generateCurrency } from "../../../utils/faker";
+import { DatagridPage } from "../DatagridPage";
+import { generateCurrencyCode, uniqueStamp } from "../../../utils/faker";
 
-interface CurrencyData {
+export interface CurrencyData {
     code: string;
     name: string;
     symbol: string;
-    decimalDigits: string;
-    groupSeparator: string;
-    decimalSeparator: string;
 }
 
-export class CurrenciesPage extends BasePage {
+export function buildCurrency(overrides: Partial<CurrencyData> = {}): CurrencyData {
+    return {
+        code: generateCurrencyCode(),
+        name: `Currency ${uniqueStamp()}`,
+        symbol: "¤",
+        ...overrides,
+    };
+}
+
+export class CurrenciesPage extends DatagridPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get createCurrencyButton() {
+    protected get gridPath(): string {
+        return "admin/settings/currencies";
+    }
+
+    private get createButton() {
         return this.page.getByRole("button", { name: "Create Currency" });
     }
 
@@ -32,105 +42,103 @@ export class CurrenciesPage extends BasePage {
         return this.page.locator('input[name="symbol"]');
     }
 
-    private get decimalInput() {
-        return this.page.locator('input[name="decimal"]');
-    }
-
-    private get groupSeparatorInput() {
-        return this.page.locator('input[name="group_separator"]');
-    }
-
-    private get decimalSeparatorInput() {
-        return this.page.locator('input[name="decimal_separator"]');
-    }
-
-    private get saveCurrencyButton() {
+    private get saveButton() {
         return this.page.getByRole("button", { name: "Save Currency" });
     }
 
-    private get editIcons() {
-        return this.page.locator("span.cursor-pointer.icon-edit");
+    private async openCreateModal(): Promise<void> {
+        await this.openGrid();
+        await this.createButton.click();
+
+        await expect(this.codeInput).toBeVisible();
     }
 
-    private get deleteIcons() {
-        return this.page.locator("span.cursor-pointer.icon-delete");
+    private async openEditModal(name: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(name);
+        await this.editIcon(name).click();
+
+        await expect(this.nameInput).toHaveValue(name);
     }
 
-    private get agreeButton() {
-        return this.page.locator('button.primary-button:has-text("Agree")');
+    private async fillForm(data: CurrencyData): Promise<void> {
+        await this.codeInput.fill(data.code);
+        await this.nameInput.fill(data.name);
+        await this.symbolInput.fill(data.symbol);
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/settings/currencies");
-    }
-
-    async createCurrency(currency?: CurrencyData): Promise<CurrencyData> {
-        const currencyData = currency || generateCurrency();
-        await this.open();
-        await this.createCurrencyButton.click();
-        await this.codeInput.fill(currencyData.code);
-        await this.nameInput.fill(currencyData.name);
-        await this.symbolInput.fill(currencyData.symbol);
-        await this.decimalInput.fill(currencyData.decimalDigits);
-        await this.groupSeparatorInput.fill(currencyData.groupSeparator);
-        await this.decimalSeparatorInput.fill(currencyData.decimalSeparator);
-        await this.saveCurrencyButton.click();
-
-        if (currencyData.code === "USD") {
-            await expect(
-                this.page.getByText("The code has already been taken."),
-            ).toBeVisible();
-            return currencyData;
-        }
+    async createCurrency(data: CurrencyData): Promise<void> {
+        await this.openCreateModal();
+        await this.fillForm(data);
+        await this.saveButton.click();
 
         await expect(
-            this.page.getByText("Currency created successfully."),
-        ).toBeVisible();
-
-        await expect(
-            this.page.getByText(currencyData.name, { exact: true }),
-        ).toBeVisible();
-
-        await expect(
-            this.page.getByText(currencyData.code, { exact: true }),
-        ).toBeVisible();
-
-        return currencyData;
-    }
-
-    async editFirstCurrency(newName: string, newSymbol: string): Promise<void> {
-        await this.open();
-        await this.editIcons.first().waitFor({ state: "visible" });
-        await this.editIcons.first().click();
-        await this.nameInput.fill(newName);
-        await this.symbolInput.fill(newSymbol);
-        await this.saveCurrencyButton.click();
-
-        await expect(
-            this.page.getByText("Currency updated successfully."),
-        ).toBeVisible();
-
-        await expect(
-            this.page.getByText(newName, { exact: true }),
+            this.flashMessage("Currency created successfully."),
         ).toBeVisible();
     }
 
-    async deleteFirstCurrency(): Promise<void> {
-        await this.open();
-        await this.deleteIcons.first().waitFor({ state: "visible" });
-        await this.deleteIcons.first().click();
+    async attemptCreateCurrency(data: CurrencyData): Promise<void> {
+        await this.openCreateModal();
+        await this.fillForm(data);
+        await this.saveButton.click();
+    }
 
-        await this.page.waitForSelector("text=Are you sure");
-        const agreeButton = this.agreeButton;
+    async submitEmptyCreateForm(): Promise<void> {
+        await this.openCreateModal();
+        await this.saveButton.click();
+    }
 
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
-        }
+    async updateCurrency(
+        name: string,
+        changes: { name: string; symbol: string },
+    ): Promise<void> {
+        await this.openEditModal(name);
+        await this.nameInput.fill(changes.name);
+        await this.symbolInput.fill(changes.symbol);
+        await this.saveButton.click();
 
         await expect(
-            this.page.getByText("Currency deleted successfully."),
+            this.flashMessage("Currency updated successfully."),
         ).toBeVisible();
+    }
+
+    async deleteCurrency(name: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(name);
+        await this.deleteRow(name, "Currency deleted successfully.");
+    }
+
+    async deleteCurrenciesIfPresent(names: string[]): Promise<void> {
+        await this.deleteRowsIfPresent(
+            names,
+            "Currency deleted successfully.",
+        );
+    }
+
+    async expectCurrencyListed(data: CurrencyData): Promise<void> {
+        await this.expectSearchedRowCount(data.name, 1);
+
+        await expect(this.row(data.name)).toContainText(data.code);
+    }
+
+    async expectCurrencyAbsent(name: string): Promise<void> {
+        await this.expectSearchedRowCount(name, 0);
+    }
+
+    async expectCurrencyCodeListedOnce(code: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(code);
+
+        await expect(this.rowWithCell(code)).toHaveCount(1);
+    }
+
+    async expectSymbolInEditForm(name: string, symbol: string): Promise<void> {
+        await this.openEditModal(name);
+
+        await expect(this.symbolInput).toHaveValue(symbol);
+    }
+
+    async expectValidationError(message: string): Promise<void> {
+        await this.expectValidationMessage(message);
     }
 }

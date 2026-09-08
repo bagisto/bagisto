@@ -1,45 +1,60 @@
-import { test, expect } from "../setup";
-import { AuthPage, CustomerCredentials } from "../pages/shop/AuthPage";
-import {
-    generateEmail,
-    generateFirstName,
-    generateLastName,
-} from "../utils/faker";
+import { test } from "../setup";
+import { AuthPage } from "../pages/shop/AuthPage";
+import { buildCustomerCredentials } from "../utils/customer";
 
-test("should be able to register", async ({ shopPage }) => {
-    const authPage = new AuthPage(shopPage);
+test.describe("customer authentication", () => {
+    test("should register a new customer", async ({ shopPage }) => {
+        const authPage = new AuthPage(shopPage);
+        const credentials = buildCustomerCredentials();
 
-    await authPage.register({
-        firstName: generateFirstName(),
-        lastName: generateLastName(),
-        email: generateEmail(),
-        password: "admin123",
+        await authPage.register(credentials);
+        await authPage.login(credentials);
+
+        await authPage.expectSignedIn(`${credentials.firstName} ${credentials.lastName}`);
     });
-});
 
-test("should be able to login", async ({ shopPage }) => {
-    const authPage = new AuthPage(shopPage);
-    const credentials: CustomerCredentials = {
-        firstName: generateFirstName(),
-        lastName: generateLastName(),
-        email: generateEmail(),
-        password: "admin123",
-    };
+    test("should refuse to register an email that is already registered", async ({
+        shopPage,
+    }) => {
+        const authPage = new AuthPage(shopPage);
+        const credentials = buildCustomerCredentials();
 
-    await authPage.register(credentials);
-    await authPage.login(credentials);
-});
+        await authPage.register(credentials);
+        await authPage.attemptRegister({ ...buildCustomerCredentials(), email: credentials.email });
 
-test("should be able to logout", async ({ shopPage }) => {
-    const authPage = new AuthPage(shopPage);
-    const credentials: CustomerCredentials = {
-        firstName: generateFirstName(),
-        lastName: generateLastName(),
-        email: generateEmail(),
-        password: "admin123",
-    };
+        await authPage.expectRegistrationRefused("The email has already been taken.");
+    });
 
-    await authPage.register(credentials);
-    await authPage.login(credentials);
-    await authPage.logout();
+    test("should sign in a registered customer", async ({ shopPage }) => {
+        const authPage = new AuthPage(shopPage);
+        const credentials = buildCustomerCredentials();
+
+        await authPage.register(credentials);
+        await authPage.login(credentials);
+
+        await authPage.expectSignedIn(`${credentials.firstName} ${credentials.lastName}`);
+    });
+
+    test("should refuse a wrong password", async ({ shopPage }) => {
+        const authPage = new AuthPage(shopPage);
+        const credentials = buildCustomerCredentials();
+
+        await authPage.register(credentials);
+        await authPage.attemptLogin(credentials.email, "wrong-password");
+
+        await authPage.expectLoginRefused();
+        await authPage.expectSignedOut();
+    });
+
+    test("should sign a customer out", async ({ shopPage }) => {
+        const authPage = new AuthPage(shopPage);
+        const credentials = buildCustomerCredentials();
+
+        await authPage.register(credentials);
+        await authPage.login(credentials);
+        await authPage.logout();
+
+        await authPage.expectGuestMenu();
+        await authPage.expectSignedOut();
+    });
 });

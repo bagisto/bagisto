@@ -1,29 +1,43 @@
-import { test, expect } from "../../../setup";
-import { SitemapConfigurationPage } from "../../../pages/admin/configuration/general/SitemapConfigurationPage";
+import { test } from "../../../setup";
+import {
+    SitemapConfigurationPage,
+    type SitemapSettings,
+} from "../../../pages/admin/configuration/general/SitemapConfigurationPage";
+
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
 
 test.describe("sitemap configuration", () => {
-    test("should disable the sitemap for your website when sitemap button is disabled", async ({
-        adminPage,
-    }) => {
-        const page = new SitemapConfigurationPage(adminPage);
+    test.describe.configure({ timeout: 120000 });
 
-        await page.setSitemapEnabled(false);
-        await page.saveAndVerify();
+    let configPage: SitemapConfigurationPage;
+    let original: SitemapSettings;
 
-        await page.open();
-        await expect(await page.isSitemapEnabled()).toBe(false);
+    test.beforeEach(async ({ adminPage }) => {
+        configPage = new SitemapConfigurationPage(adminPage);
+        original = await configPage.readSettings();
     });
 
-    test("should set maximum number of urls per file", async ({
-        adminPage,
-    }) => {
-        const page = new SitemapConfigurationPage(adminPage);
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
+    });
 
-        await page.setSitemapEnabled(true);
-        await page.setMaximumUrls("4000");
-        await page.saveAndVerify();
+    test("should persist the sitemap status after reload", async () => {
+        const changed = { enabled: !original.enabled };
 
-        await page.open();
-        await expect(await page.getMaximumUrlsValue()).toBe("4000");
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
+    });
+
+    test("should persist the maximum number of urls per file after reload", async () => {
+        const changed = {
+            maximumUrls: other(original.maximumUrls, "4000", "5000"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

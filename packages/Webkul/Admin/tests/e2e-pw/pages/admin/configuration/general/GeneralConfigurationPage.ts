@@ -1,48 +1,70 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class GeneralConfigurationPage extends BasePage {
+export interface GeneralSettings {
+    weightUnit: string;
+    breadcrumbs: boolean;
+}
+
+const FIELDS = {
+    weightUnit: "general[general][locale_options][weight_unit]",
+    breadcrumbs: "general[general][breadcrumbs][shop]",
+} as const;
+
+export class GeneralConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/general/general";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully");
+    private get storefrontBreadcrumbs() {
+        return this.page.locator("nav ol li", { hasText: /compare/i });
     }
 
-    private get weightUnitSelect() {
-        return this.page.locator(
-            'select[name="general[general][locale_options][weight_unit]"]',
-        );
+    async readSettings(): Promise<GeneralSettings> {
+        await this.open();
+
+        return {
+            weightUnit: await this.readSelect(FIELDS.weightUnit),
+            breadcrumbs: await this.readBoolean(FIELDS.breadcrumbs),
+        };
     }
 
-    private get breadcrumbsToggle() {
-        return this.page.locator(
-            'label[for="general[general][breadcrumbs][shop]"]',
-        );
+    async applySettings(settings: Partial<GeneralSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.weightUnit !== undefined) {
+            await this.setSelect(FIELDS.weightUnit, settings.weightUnit);
+        }
+
+        if (settings.breadcrumbs !== undefined) {
+            await this.setBoolean(FIELDS.breadcrumbs, settings.breadcrumbs);
+        }
+
+        await this.save();
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/general/general");
+    async expectSettings(settings: Partial<GeneralSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.weightUnit !== undefined) {
+            await this.expectSelect(FIELDS.weightUnit, settings.weightUnit);
+        }
+
+        if (settings.breadcrumbs !== undefined) {
+            await this.expectBoolean(FIELDS.breadcrumbs, settings.breadcrumbs);
+        }
     }
 
-    async updateWeightUnit(value: string): Promise<void> {
-        await this.weightUnitSelect.selectOption(value);
-        await expect(this.weightUnitSelect).toHaveValue(value);
-    }
+    async expectBreadcrumbsOnStorefront(shown: boolean): Promise<void> {
+        await this.visit("compare");
 
-    async toggleBreadcrumbs(): Promise<void> {
-        await this.breadcrumbsToggle.click();
-    }
-
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+        await expect(
+            this.page.getByRole("heading", { name: "Product Compare" }),
+        ).toBeVisible();
+        await expect(this.storefrontBreadcrumbs).toHaveCount(shown ? 1 : 0);
     }
 }

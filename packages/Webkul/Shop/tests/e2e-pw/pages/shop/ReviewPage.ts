@@ -1,39 +1,136 @@
-import { expect, Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+
+export interface ReviewData {
+    title: string;
+    comment: string;
+    rating: 1 | 2 | 3 | 4 | 5;
+}
 
 export class ReviewPage extends BasePage {
     constructor(page: Page) {
         super(page);
     }
 
-    async searchProduct(term: string): Promise<void> {
-        await this.page.getByPlaceholder("Search products here").fill(term);
-        await this.page.getByPlaceholder("Search products here").press("Enter");
+    private get searchInput() {
+        return this.page.getByPlaceholder("Search products here");
     }
 
-    async openFirstProduct(): Promise<void> {
-        await this.page.locator(".group img").first().click();
+    private productLink(productName: string) {
+        return this.page
+            .locator("div.group")
+            .filter({ has: this.page.locator(`p:text-is("${productName}")`) })
+            .getByRole("link", { name: productName });
     }
 
-    async writeReview(title: string, comment: string): Promise<void> {
-        await this.page.getByRole("tab", { name: "Reviews" }).click();
-        await this.page.waitForSelector("#review-tab");
-        await this.page
-            .locator("#review-tab")
-            .getByText("Write a Review")
-            .click();
-        await this.page.locator("#review-tab button[aria-pressed]").nth(3).click();
-        await this.page.locator("#review-tab button[aria-pressed]").nth(4).click();
-        await this.page.getByPlaceholder("Title").click();
-        await this.page.getByPlaceholder("Title").fill(title);
-        await this.page.getByPlaceholder("Comment").click();
-        await this.page.getByPlaceholder("Comment").fill(comment);
-        await this.page.getByRole("button", { name: "Submit Review" }).click();
+    private get cookieConsentAccept() {
+        return this.page
+            .locator(".js-cookie-consent")
+            .getByRole("button", { name: "Accept" });
     }
 
-    async expectReviewSuccess(): Promise<void> {
+    private get reviewsTab() {
+        return this.page.getByRole("tab", { name: "Reviews" });
+    }
+
+    private get reviewTabPanel() {
+        return this.page.locator("#review-tab");
+    }
+
+    private get writeReviewButton() {
+        return this.reviewTabPanel.getByText("Write a Review");
+    }
+
+    private ratingStar(rating: number) {
+        return this.reviewTabPanel.getByRole("button", {
+            name: `Rating ${rating} Stars`,
+        });
+    }
+
+    private get titleInput() {
+        return this.page.getByPlaceholder("Title");
+    }
+
+    private get commentInput() {
+        return this.page.getByPlaceholder("Comment");
+    }
+
+    private get submitButton() {
+        return this.page.getByRole("button", { name: "Submit Review" });
+    }
+
+    private async dismissCookieConsent(): Promise<void> {
+        if (await this.cookieConsentAccept.count()) {
+            await this.cookieConsentAccept.click();
+
+            await expect(this.cookieConsentAccept).toBeHidden();
+        }
+    }
+
+    async openProduct(productName: string): Promise<void> {
+        await this.visit("");
+        await this.searchInput.fill(productName);
+        await this.searchInput.press("Enter");
+
+        await expect(this.productLink(productName)).toHaveCount(1);
+
+        await this.productLink(productName).click();
+        await this.dismissCookieConsent();
+
+        await expect(this.reviewsTab).toBeVisible();
+    }
+
+    async openReviewsTab(): Promise<void> {
+        await this.reviewsTab.click();
+
+        await expect(this.reviewTabPanel).toBeVisible();
+    }
+
+    async openReviewForm(): Promise<void> {
+        await this.openReviewsTab();
+        await this.writeReviewButton.click();
+
+        await expect(this.submitButton).toBeVisible();
+    }
+
+    async submitReview(review: ReviewData): Promise<void> {
+        await this.openReviewForm();
+        await this.ratingStar(review.rating).click();
+
+        await expect(this.ratingStar(review.rating)).toHaveAttribute(
+            "aria-pressed",
+            "true",
+        );
+
+        await this.titleInput.fill(review.title);
+        await this.commentInput.fill(review.comment);
+        await this.submitButton.click();
+
         await expect(
             this.page.getByText("Review submitted successfully.").first(),
         ).toBeVisible();
+    }
+
+    async submitEmptyReview(): Promise<void> {
+        await this.openReviewForm();
+        await this.submitButton.click();
+    }
+
+    async expectValidationError(message: string): Promise<void> {
+        await expect(
+            this.reviewTabPanel.getByText(message).first(),
+        ).toBeVisible();
+    }
+
+    async expectReviewHidden(title: string): Promise<void> {
+        await this.openReviewsTab();
+
+        await expect(this.reviewTabPanel.getByText(title, { exact: true })).toHaveCount(0);
+    }
+
+    async expectWriteReviewUnavailable(): Promise<void> {
+        await this.openReviewsTab();
+
+        await expect(this.writeReviewButton).toHaveCount(0);
     }
 }

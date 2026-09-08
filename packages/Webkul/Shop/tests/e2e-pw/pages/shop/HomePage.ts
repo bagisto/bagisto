@@ -6,22 +6,30 @@ export class HomePage extends BasePage {
         super(page);
     }
 
-    async gotoHome(): Promise<void> {
+    private get newsletterEmailInput() {
+        return this.page.getByRole("textbox", { name: "Email" });
+    }
+
+    private get subscribeButton() {
+        return this.page.getByRole("button", { name: "Subscribe" });
+    }
+
+    async open(): Promise<void> {
         await this.visit("");
+
+        await expect(this.subscribeButton).toBeVisible();
     }
 
     async subscribeToNewsletter(email: string): Promise<void> {
-        await this.gotoHome();
-        await this.page.waitForLoadState("networkidle");
-        await this.page.getByRole("textbox", { name: "Email" }).fill(email);
-        await this.page.getByRole("button", { name: "Subscribe" }).click();
+        await this.open();
+        await this.newsletterEmailInput.fill(email);
+        await this.waitForBackgroundRequestsToSettle();
+        await this.subscribeButton.click();
     }
 
     async expectSubscriptionMessage(expectedMessage: string): Promise<void> {
         await expect(
-            this.page
-                .getByRole("paragraph")
-                .filter({ hasText: expectedMessage }),
+            this.page.getByRole("paragraph").filter({ hasText: expectedMessage }),
         ).toBeVisible();
     }
 }

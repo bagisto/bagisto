@@ -1,21 +1,25 @@
+import type { BaseProduct } from "../../../../pages/types/product.types";
+import { uniqueStamp } from "../../../../utils/faker";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
 import { test } from "../../../../setup";
 import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
 import { Page } from "@playwright/test";
 
 let generatedName: string;
 
+let product: BaseProduct;
+let createdRules: string[];
+
 test.beforeEach(async ({ adminPage }) => {
-    generatedName = `Simple-${Date.now()}`;
+    createdRules = [];
 
-    const productCreation = new ProductCreatePage(adminPage);
-
-    await productCreation.createProduct({
+    generatedName = `Simple-${uniqueStamp()}`;
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
         name: generatedName,
         shortDescription: "Short desc",
         description: "Full desc",
@@ -25,30 +29,35 @@ test.beforeEach(async ({ adminPage }) => {
     });
 });
 
-test.afterEach(async ({ page }) => {
-    const ruleDeletePage = new RuleDeletePage(page);
-    await ruleDeletePage.deleteCatalogRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    try {
+        await new RuleDeletePage(adminPage).deleteCatalogRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 async function runCatalogRuleTest({
-    page,
+    adminPage,
+    shopPage,
     operator,
     value,
     type,
 }: {
-    page: Page;
+    adminPage: Page;
+    shopPage: Page;
     operator: string;
     value: string;
     type: string;
 }) {
-    const ruleCreatePage = new RuleCreatePage(page);
-    const ruleApplyPage = new RuleApplyPage(page);
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const ruleApplyPage = new RuleApplyPage(shopPage);
 
-    await loginAsAdmin(page);
-
-    await ruleCreatePage.catalogRuleCreationFlow();
+    const rule = await ruleCreatePage.catalogRuleCreationFlow();
+    createdRules.push(rule.name);
 
     const discountValue = await ruleCreatePage.addCondition({
+        scopeSku: product.sku,
         attribute: "product|url_key",
         operator,
         value,
@@ -57,7 +66,12 @@ async function runCatalogRuleTest({
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+    await ruleApplyPage.verifyCatalogRule({
+        productName: product.name,
+        price: product.price ?? 0,
+        value: discountValue ?? 0,
+        type: type,
+    });
 }
 
 const testCases = [
@@ -115,10 +129,12 @@ test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
             test(`should apply condition when url key condition is -> ${tc.label} (${tc.type})`, async ({
-                page,
+                adminPage,
+                shopPage,
             }) => {
                 await runCatalogRuleTest({
-                    page,
+                    adminPage,
+                    shopPage,
                     operator: tc.operator,
                     value: tc.value(),
                     type: tc.type,

@@ -1,90 +1,161 @@
 import { test } from "../../setup";
 import { SectionsPage } from "../../pages/admin/appearance/SectionsPage";
+import { generateName, uniqueStamp } from "../../utils/faker";
+
+function sectionName(): string {
+    return `${generateName()} ${uniqueStamp()}`;
+}
 
 test.describe("section management", () => {
-    test("should create a product carousel section", async ({ adminPage }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    let sectionsPage: SectionsPage;
+    let created: string[];
 
-        await sectionsPage.createSectionOfType("Product Carousel", [
-            "Title",
-            "Filters",
-        ]);
+    test.beforeEach(async ({ adminPage }) => {
+        sectionsPage = new SectionsPage(adminPage);
+        created = [];
     });
 
-    test("should create a category carousel section", async ({ adminPage }) => {
-        const sectionsPage = new SectionsPage(adminPage);
-
-        await sectionsPage.createSectionOfType("Category Carousel", [
-            "Filters",
-        ]);
+    test.afterEach(async () => {
+        await sectionsPage.deleteSectionsIfPresent(created);
     });
 
-    test("should create a static content section", async ({ adminPage }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    const sectionTypes = [
+        { type: "Product Carousel", fields: ["Title", "Filters"] },
+        { type: "Category Carousel", fields: ["Filters"] },
+        { type: "Static Content", fields: ["HTML", "CSS"] },
+        { type: "Image Carousel", fields: ["Slider"] },
+        { type: "Services Content", fields: ["Services"] },
+    ];
 
-        await sectionsPage.createSectionOfType("Static Content", [
-            "HTML",
-            "CSS",
-        ]);
+    for (const { type, fields } of sectionTypes) {
+        test(`should create a ${type.toLowerCase()} section with its editor fields and publish it`, async () => {
+            const name = sectionName();
+            created.push(name);
+
+            await sectionsPage.createSection(type, name);
+
+            await sectionsPage.expectSectionListed(name, type);
+            await sectionsPage.expectEditorFields(fields);
+            await sectionsPage.expectUnpublishedChanges(name);
+
+            await sectionsPage.closeSection();
+            await sectionsPage.publishAll();
+
+            await sectionsPage.expectPublished(name);
+            await sectionsPage.open();
+            await sectionsPage.expectSectionListed(name, type);
+            await sectionsPage.expectPublished(name);
+        });
+    }
+
+    test("should not offer a second footer links section", async () => {
+        await sectionsPage.expectTypeNotOffered("Footer Links");
     });
 
-    test("should create a image carousel section", async ({ adminPage }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    test("should hold typed content as a draft until it is published", async () => {
+        const name = sectionName();
+        const title = `Title ${uniqueStamp()}`;
+        created.push(name);
 
-        await sectionsPage.createSectionOfType("Image Carousel", ["Slider"]);
+        await sectionsPage.createSection("Product Carousel", name);
+        await sectionsPage.fillField("Title", title);
+
+        await sectionsPage.expectUnpublishedChanges(name);
+
+        await sectionsPage.closeSection();
+        await sectionsPage.publishAll();
+
+        await sectionsPage.expectPublished(name);
+
+        await sectionsPage.openSection(name);
+
+        await sectionsPage.expectFieldValue("Title", title);
     });
 
-    test("should create a services content section", async ({ adminPage }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    test("should stage a reorder until it is published", async () => {
+        const first = sectionName();
+        const second = sectionName();
+        created.push(first, second);
 
-        await sectionsPage.createSectionOfType("Services Content", [
-            "Services",
-        ]);
+        await sectionsPage.createSection("Static Content", first);
+        await sectionsPage.closeSection();
+        await sectionsPage.createSection("Static Content", second);
+        await sectionsPage.closeSection();
+        await sectionsPage.publishAll();
+        await sectionsPage.expectOrderedBefore(first, second);
+
+        await sectionsPage.dragSectionOnto(second, first);
+
+        await sectionsPage.expectOrderedBefore(second, first);
+        await sectionsPage.expectUnpublishedChanges(first);
+        await sectionsPage.expectUnpublishedChanges(second);
+
+        await sectionsPage.publishAll();
+        await sectionsPage.open();
+
+        await sectionsPage.expectOrderedBefore(second, first);
+        await sectionsPage.expectPublished(first);
+        await sectionsPage.expectPublished(second);
     });
 
-    test("should not offer a second footer links section", async ({
-        adminPage,
-    }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    test("should stage a status change until it is published", async () => {
+        const name = sectionName();
+        created.push(name);
 
-        await sectionsPage.expectFooterLinksNotOffered();
+        await sectionsPage.createSection("Static Content", name);
+        await sectionsPage.closeSection();
+        await sectionsPage.publishAll();
+        await sectionsPage.expectPublished(name);
+        await sectionsPage.expectSwitchedOn(name);
+
+        await sectionsPage.toggleStatus(name);
+
+        await sectionsPage.expectUnpublishedChanges(name);
+        await sectionsPage.expectSwitchedOff(name);
+
+        await sectionsPage.publishAll();
+        await sectionsPage.open();
+
+        await sectionsPage.expectPublished(name);
+        await sectionsPage.expectSwitchedOff(name);
     });
 
-    test("should hold typed content as a draft until published", async ({
-        adminPage,
-    }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    test("should put a staged status back on discard", async () => {
+        const name = sectionName();
+        created.push(name);
 
-        await sectionsPage.editContentAndPublish();
+        await sectionsPage.createSection("Static Content", name);
+        await sectionsPage.closeSection();
+        await sectionsPage.publishAll();
+        await sectionsPage.expectSwitchedOn(name);
+
+        await sectionsPage.toggleStatus(name);
+
+        await sectionsPage.expectUnpublishedChanges(name);
+        await sectionsPage.expectSwitchedOff(name);
+
+        await sectionsPage.discardAll();
+
+        await sectionsPage.expectPublished(name);
+        await sectionsPage.expectSwitchedOn(name);
+
+        await sectionsPage.open();
+
+        await sectionsPage.expectSwitchedOn(name);
     });
 
-    test("should stage a reorder until it is published", async ({
-        adminPage,
-    }) => {
-        const sectionsPage = new SectionsPage(adminPage);
+    test("should delete a section and keep the others", async () => {
+        const name = sectionName();
+        const untouched = sectionName();
+        created.push(name, untouched);
 
-        await sectionsPage.reorderIsStagedUntilPublished();
-    });
+        await sectionsPage.createSection("Static Content", name);
+        await sectionsPage.closeSection();
+        await sectionsPage.createSection("Static Content", untouched);
+        await sectionsPage.closeSection();
+        await sectionsPage.deleteSection(name);
 
-    test("should stage a status change until it is published", async ({
-        adminPage,
-    }) => {
-        const sectionsPage = new SectionsPage(adminPage);
-
-        await sectionsPage.statusChangeIsStaged();
-    });
-
-    test("should put a staged status back on discard", async ({
-        adminPage,
-    }) => {
-        const sectionsPage = new SectionsPage(adminPage);
-
-        await sectionsPage.discardRevertsStagedStatus();
-    });
-
-    test("should delete a section", async ({ adminPage }) => {
-        const sectionsPage = new SectionsPage(adminPage);
-
-        await sectionsPage.deleteSection("Static Content");
+        await sectionsPage.open();
+        await sectionsPage.expectSectionListed(untouched, "Static Content");
     });
 });

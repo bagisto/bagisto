@@ -30,6 +30,7 @@ opencode.json
 package-lock.json
 /playwright-report
 product-data.json
+product-data-*.json
 /public/css
 /public/js
 /public/hot

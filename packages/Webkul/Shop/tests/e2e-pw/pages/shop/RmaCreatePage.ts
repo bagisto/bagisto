@@ -1,47 +1,24 @@
-import fs from "fs";
 import { expect, Page } from "@playwright/test";
-import { TinymcePage } from "../../utils/TinymcePage";
-import { loginAsAdmin } from "../../utils/admin";
 import { BasePage } from "../BasePage";
 
-function readProductData() {
-    const product = JSON.parse(fs.readFileSync("product-data.json", "utf-8"));
-    return product.name;
-}
-
 export class RmaCreatePage extends BasePage {
-    constructor(
-        page: Page,
-        private editor = new TinymcePage(page),
-    ) {
+    constructor(page: Page) {
         super(page);
     }
 
-    private get viewOrder() {
-        return this.page.locator(".row > div:nth-child(4) > a").first();
-    }
-
-    private get invoiceTab() {
-        return this.page.getByText("Invoice", { exact: true });
-    }
-
-    private get createInvoiceButton() {
-        return this.page.getByRole("button", { name: "Create Invoice" });
-    }
-
-    private get successInvoiceMessage() {
-        return this.page.getByText("Invoice created successfully");
-    }
-
-    private get requestRMAButton() {
+    private get newRequestButton() {
         return this.page.getByText("New RMA Request");
     }
 
-    private get editIcon() {
-        return this.page.locator("a.icon-edit");
+    private orderRow(orderId: string) {
+        return this.page.locator("div.row").filter({
+            has: this.page.locator("p", {
+                hasText: new RegExp(`^\\s*#?${orderId}\\s*$`),
+            }),
+        });
     }
 
-    private get checkBox() {
+    private get itemCheckbox() {
         return this.page.locator('input[name^="isChecked["]');
     }
 
@@ -53,112 +30,108 @@ export class RmaCreatePage extends BasePage {
         return this.page.locator('select[name="rma_reason_id"]');
     }
 
-    private get rmaQtyInput() {
+    private get quantityInput() {
         return this.page.locator('input[name^="rma_qty"]');
     }
 
-    private get orderStatusSelect() {
+    private get packageConditionSelect() {
         return this.page.locator('select[name="package_condition"]');
     }
 
-    private get infoInput() {
+    private get informationInput() {
         return this.page.locator('textarea[name="information"]');
     }
 
-    private get agreementCheckbox() {
+    private get agreementLabel() {
         return this.page.locator("label:has(input#agreement)");
     }
 
     private get submitButton() {
-        return this.page.locator('button:has-text("Submit request")');
+        return this.page.getByRole("button", { name: "Submit request" });
     }
 
-    private get successRMAMessage() {
+    private get agreementError() {
         return this.page
-            .getByRole("paragraph")
-            .filter({ hasText: "Request created successfully." });
+            .locator("div.mb-4")
+            .filter({ has: this.page.locator("input#agreement") })
+            .locator("span.text-red-600");
     }
 
-    private get invalidRMAMessage() {
-        return this.page.getByText("The RMA Qty field must be 1 or less");
-    }
-
-    private async visitOrderPage() {
-        await this.visit("admin/sales/orders");
-    }
-
-    private async createInvoice() {
-        await this.viewOrder.click();
-        await this.invoiceTab.click();
-        await this.createInvoiceButton.click();
-        await expect(this.successInvoiceMessage).toBeVisible();
-    }
-
-    private async createRMA() {
+    private async openRequestForm(orderId: string): Promise<void> {
         await this.visit("customer/account/rma");
+        await this.newRequestButton.click();
 
-        await this.requestRMAButton.click();
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.orderRow(orderId)).toHaveCount(1);
 
-        await this.editIcon.first().click();
-        await this.checkBox.check();
+        await this.orderRow(orderId).locator("a.icon-edit").filter({ visible: true }).click();
 
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.itemCheckbox).toBeVisible();
+    }
+
+    private async fillRequest(orderId: string, quantity: string): Promise<void> {
+        await this.openRequestForm(orderId);
+        await this.itemCheckbox.check();
         await this.resolutionSelect.selectOption("return");
-        await this.resolutionSelect.selectOption("return");
+        await this.resolutionSelect.dispatchEvent("change");
 
-        await this.page.waitForLoadState("networkidle");
-        await this.reasonSelect.selectOption("1");
+        await expect(this.reasonSelect).toBeVisible();
 
-        await this.rmaQtyInput.fill("1");
-        await this.orderStatusSelect.selectOption({ value: "open" });
+        await this.reasonSelect.selectOption({ index: 1 });
+        await this.quantityInput.fill(quantity);
+    }
 
-        await this.infoInput.fill("Changed My Mind.");
-        await this.agreementCheckbox.check();
-
+    async requestReturn(orderId: string): Promise<void> {
+        await this.fillRequest(orderId, "1");
+        await this.packageConditionSelect.selectOption({ value: "open" });
+        await this.informationInput.fill("Changed my mind.");
+        await this.agreementLabel.check();
         await this.submitButton.click();
-        await expect(this.successRMAMessage).toBeVisible();
+
+        await expect(
+            this.page.getByText("Request created successfully").first(),
+        ).toBeVisible();
     }
 
-    private async createInvalidRMA() {
-        await this.visit("customer/account/rma");
-
-        await this.requestRMAButton.click();
-        await this.editIcon.first().click();
-        await this.checkBox.check();
-
-        await this.page.waitForLoadState("networkidle");
-        await this.resolutionSelect.selectOption("return");
-        await this.resolutionSelect.selectOption("return");
-
-        await this.page.waitForLoadState("networkidle");
-        await this.reasonSelect.selectOption("1");
-
-        await this.rmaQtyInput.fill("4");
-
-        await expect(this.invalidRMAMessage).toBeVisible();
+    async attemptReturnWithExcessQuantity(orderId: string): Promise<void> {
+        await this.fillRequest(orderId, "4");
     }
 
-    private async verfiyRMADetails() {
-        const productName = readProductData();
+    async attemptReturnWithoutAcceptingTerms(orderId: string): Promise<void> {
+        await this.fillRequest(orderId, "1");
+        await this.packageConditionSelect.selectOption({ value: "open" });
+        await this.informationInput.fill("Changed my mind.");
+        await this.submitButton.click();
+    }
 
+    async expectTermsRejected(): Promise<void> {
+        await expect(this.agreementError).toBeVisible();
+
+        await expect(this.page).toHaveURL(/rma\/create/);
+    }
+
+    async expectQuantityRejected(): Promise<void> {
+        await expect(
+            this.page.getByText("The RMA Qty field must be 1 or less").first(),
+        ).toBeVisible();
+    }
+
+    async expectRequestListedFor(productName: string): Promise<void> {
         await expect(
             this.page.getByText(productName, { exact: true }),
         ).toBeVisible();
     }
 
-    async rmaCreation() {
-        await loginAsAdmin(this.page);
-        await this.visitOrderPage();
-        await this.createInvoice();
-        await this.createRMA();
-        await this.verfiyRMADetails();
+    async expectOrderNotOffered(orderId: string): Promise<void> {
+        await this.visit("customer/account/rma");
+        await this.newRequestButton.click();
+
+        await expect(this.page).toHaveURL(/rma\/create/);
+        await expect(this.orderRow(orderId)).toHaveCount(0);
     }
 
-    async invalidRMARequest() {
-        await loginAsAdmin(this.page);
-        await this.visitOrderPage();
-        await this.createInvoice();
-        await this.createInvalidRMA();
+    async expectNoRequestForOrder(orderId: string): Promise<void> {
+        await this.visit("customer/account/rma");
+
+        await expect(this.page.getByText(`#${orderId}`)).toHaveCount(0);
     }
 }

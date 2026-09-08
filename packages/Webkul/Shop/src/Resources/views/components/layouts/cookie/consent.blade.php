@@ -153,6 +153,8 @@
                             this.setCookie(id, isChecked, 365 * 20);
                         });
 
+                        this.setCookie('cookie-consent', 1, 365 * 20);
+
                         window.location.href = '{{ route('shop.home.index') }}';
                     },
 

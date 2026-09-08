@@ -16,6 +16,9 @@ export interface BaseProduct {
     price?: number;
     weight?: number;
     inventory?: number;
+    allowRma?: boolean;
+    groupedItems?: string[];
+    bundleItems?: string[];
     bookingType?: "default" | "appointment" | "event" | "rental" | "table";
     defaultBookingType?: "one" | "many";
     rentalType?: "hourly" | "daily" | "both";

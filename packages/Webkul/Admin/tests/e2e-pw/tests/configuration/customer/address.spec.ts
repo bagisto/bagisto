@@ -1,15 +1,33 @@
-import { test, type AdminPage } from "../../../setup";
-import { CustomerAddressPage } from "../../../pages/admin/configuration/customer/CustomerAddressPage";
+import { test } from "../../../setup";
+import {
+    CustomerAddressPage,
+    type AddressRequirementSettings,
+} from "../../../pages/admin/configuration/customer/CustomerAddressPage";
 
 test.describe("customer address configuration", () => {
-    test("should make country, state and zip as a required field", async ({
-        adminPage,
-    }: {
-        adminPage: AdminPage;
-    }) => {
-        const page = new CustomerAddressPage(adminPage);
+    test.describe.configure({ timeout: 120000 });
 
-        await page.open();
-        await page.requireCountryStateZip();
+    let configPage: CustomerAddressPage;
+    let original: AddressRequirementSettings;
+
+    test.beforeEach(async ({ adminPage }) => {
+        configPage = new CustomerAddressPage(adminPage);
+        original = await configPage.readSettings();
+    });
+
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
+    });
+
+    test("should persist which address fields are required after reload", async () => {
+        const changed = {
+            country: !original.country,
+            state: !original.state,
+            postcode: !original.postcode,
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

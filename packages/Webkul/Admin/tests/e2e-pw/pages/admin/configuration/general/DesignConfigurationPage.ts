@@ -1,109 +1,130 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
-export class DesignConfigurationPage extends BasePage {
+export type CategoryView = "default" | "sidebar";
+
+export interface DesignSettings {
+    categoryView: CategoryView;
+}
+
+const CATEGORY_VIEW = "general[design][categories][category_view]";
+
+type LogoField = "logo_image" | "favicon";
+
+export class DesignConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get saveButton() {
-        return this.page.locator(
-            'button[type="submit"].primary-button:visible',
-        );
+    protected get path(): string {
+        return "admin/configuration/general/design";
     }
 
-    private get successNotification() {
-        return this.page.getByText("Configuration saved successfully");
-    }
-
-    private mediaInput(field: string) {
+    private mediaInput(field: LogoField) {
         return this.page.locator(
             `input[type="file"][name="general[design][admin_logo][${field}]"]`,
         );
     }
 
-    private categoryViewSelect() {
-        return this.page.locator(
-            '[name="general[design][categories][category_view]"]',
-        );
-    }
-
-    private previewSidebarButton() {
-        return this.page.getByRole("button", {
-            name: " Preview Sidebar Menu ",
-        });
-    }
-
-    private previewDefaultButton() {
-        return this.page.getByRole("button", { name: "Preview Default Menu" });
-    }
-
-    private previewModal() {
-        return this.page.locator(
-            ".flex.items-center.justify-between.gap-2\\.5",
-        );
-    }
-
-    private closePreviewButton() {
-        return this.page.locator("span.icon-close").first();
-    }
-
-    private mediaTile(field: string) {
+    private mediaTile(field: LogoField) {
         return this.mediaInput(field).locator("xpath=../div[1]");
     }
 
-    private async uploadMedia(field: string, filePath: string): Promise<void> {
-        const input = this.mediaInput(field);
-        await expect(input).toBeAttached();
-        await input.setInputFiles(filePath);
-        await expect(this.mediaTile(field).locator("img")).toBeVisible();
+    private previewButton(view: CategoryView) {
+        return this.page.getByRole("button", {
+            name: view === "sidebar" ? "Preview Sidebar Menu" : "Preview Default Menu",
+        });
     }
 
-    private async deleteMedia(field: string): Promise<void> {
+    private get previewModal() {
+        return this.page.locator("div.fixed div.box-shadow:has(span.icon-close)");
+    }
+
+    private get closePreviewButton() {
+        return this.previewModal.locator("span.icon-close");
+    }
+
+    async readSettings(): Promise<DesignSettings> {
+        await this.open();
+
+        return {
+            categoryView: (await this.readSelect(CATEGORY_VIEW)) as CategoryView,
+        };
+    }
+
+    async applySettings(settings: Partial<DesignSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.categoryView !== undefined) {
+            await this.setSelect(CATEGORY_VIEW, settings.categoryView);
+        }
+
+        await this.save();
+    }
+
+    async expectSettings(settings: Partial<DesignSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.categoryView !== undefined) {
+            await this.expectSelect(CATEGORY_VIEW, settings.categoryView);
+        }
+    }
+
+    async uploadMedia(field: LogoField, filePath: string): Promise<void> {
+        await this.open();
+
+        await expect(this.mediaInput(field)).toBeAttached();
+
+        await this.mediaInput(field).setInputFiles(filePath);
+
+        await expect(this.mediaTile(field).locator("img")).toBeVisible();
+
+        await this.save();
+    }
+
+    async deleteMedia(field: LogoField): Promise<void> {
+        await this.open();
+
         const tile = this.mediaTile(field);
+
         await tile.hover();
         await tile.locator(".icon-delete").click();
+
         await expect(tile).toBeHidden();
+
+        await this.save();
     }
 
-    async open(): Promise<void> {
-        await this.visit("admin/configuration/general/design");
+    async hasMedia(field: LogoField): Promise<boolean> {
+        await this.open();
+
+        return (await this.mediaTile(field).locator("img").count()) > 0;
     }
 
-    async uploadLogo(filePath: string): Promise<void> {
-        await this.uploadMedia("logo_image", filePath);
+    async expectMediaStored(field: LogoField): Promise<void> {
+        await this.open();
+
+        await expect(this.mediaTile(field).locator("img")).toHaveAttribute(
+            "src",
+            /storage\//,
+        );
     }
 
-    async deleteLogo(): Promise<void> {
-        await this.deleteMedia("logo_image");
+    async expectMediaAbsent(field: LogoField): Promise<void> {
+        await this.open();
+
+        await expect(this.mediaTile(field).locator("img")).toHaveCount(0);
     }
 
-    async uploadFavicon(filePath: string): Promise<void> {
-        await this.uploadMedia("favicon", filePath);
-    }
+    async previewCategoryView(view: CategoryView): Promise<void> {
+        await this.open();
+        await this.setSelect(CATEGORY_VIEW, view);
+        await this.previewButton(view).click();
 
-    async deleteFavicon(): Promise<void> {
-        await this.deleteMedia("favicon");
-    }
+        await expect(this.previewModal).toBeVisible();
 
-    async selectCategoryView(mode: "sidebar" | "default"): Promise<void> {
-        await this.categoryViewSelect().selectOption(mode);
-    }
+        await this.closePreviewButton.click();
 
-    async previewSidebarMenu(): Promise<void> {
-        await this.previewSidebarButton().click();
-        await expect(this.previewModal()).toBeVisible();
-        await this.closePreviewButton().click();
-    }
-
-    async previewDefaultMenu(): Promise<void> {
-        await this.previewDefaultButton().click();
-        await expect(this.previewModal()).toBeVisible();
-        await this.closePreviewButton().click();
-    }
-
-    async saveAndVerify(): Promise<void> {
-        await this.saveButton.click();
-        await expect(this.successNotification).toBeVisible();
+        await expect(this.previewModal).toHaveCount(0);
     }
 }

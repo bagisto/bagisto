@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 import { env } from "./utils/env";
 
+process.env.TZ = env.timezone;
+
 export default defineConfig({
     testDir: "./tests",
 
@@ -8,7 +10,7 @@ export default defineConfig({
 
     globalTimeout: 2 * 60 * 60 * 1000,
 
-    expect: { timeout: 20 * 1000 },
+    expect: { timeout: 30 * 1000 },
 
     outputDir: "./test-results",
 
@@ -35,11 +37,12 @@ export default defineConfig({
 
     use: {
         baseURL: `${env.baseUrl}/`,
+        timezoneId: env.timezone,
         headless: !env.headed,
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",
-        actionTimeout: 15 * 1000,
+        actionTimeout: 30 * 1000,
         navigationTimeout: 30 * 1000,
     },
 

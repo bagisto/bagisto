@@ -1,8 +1,4 @@
-import path from "path";
 import type { Page } from "@playwright/test";
-import { fileURLToPath } from "url";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export abstract class BasePage {
     constructor(protected readonly page: Page) {}
@@ -13,7 +9,13 @@ export abstract class BasePage {
         await this.page.goto(normalized);
     }
 
-    protected dataPath(relativePath: string): string {
-        return path.join(__dirname, "..", "data", relativePath);
+    protected async waitForVueMount(): Promise<void> {
+        await this.page.waitForFunction(() =>
+            Boolean((document.getElementById("app") as any)?.__vue_app__),
+        );
+    }
+
+    protected async waitForBackgroundRequestsToSettle(): Promise<void> {
+        await this.page.waitForLoadState("networkidle");
     }
 }

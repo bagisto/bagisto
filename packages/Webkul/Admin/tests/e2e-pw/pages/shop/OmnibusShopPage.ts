@@ -6,54 +6,35 @@ export class OmnibusShopPage extends BasePage {
         super(page);
     }
 
-    protected get shopActionPage() {
-        return {
-            searchInput: this.page.getByRole("textbox", {
-                name: "Search products here",
-            }),
-            omnibusPriceInfo: this.page.locator(".omnibus-price-info"),
-        };
+    private get searchInput() {
+        return this.page.getByRole("textbox", { name: "Search products here" });
+    }
+
+    private get omnibusPriceInfo() {
+        return this.page.locator(".omnibus-price-info");
     }
 
     private productImage(productName: string) {
         return this.page.locator(`img[alt="${productName}"]`);
     }
 
-    async visitHome() {
-        await super.visit("");
-    }
+    async openProductPage(productName: string): Promise<void> {
+        await this.visit("");
+        await this.searchInput.fill(productName);
+        await this.searchInput.press("Enter");
+        await this.productImage(productName).first().click();
 
-    async searchProduct(productName: string) {
-        await this.visitHome();
-        await this.shopActionPage.searchInput.fill(productName);
-        await this.shopActionPage.searchInput.press("Enter");
-    }
-
-    async openProductPage(productName: string) {
-        await this.searchProduct(productName);
-        const image = this.productImage(productName);
-        await image.first().waitFor({ state: "visible" });
-        await image.first().click();
-        await this.page.waitForLoadState("domcontentloaded");
-    }
-
-    async verifyOmnibusVisible() {
         await expect(
-            this.shopActionPage.omnibusPriceInfo.first(),
+            this.page.getByRole("heading", { name: productName }),
         ).toBeVisible();
     }
 
-    async verifyOmnibusNotVisible() {
-        await expect(
-            this.shopActionPage.omnibusPriceInfo.first(),
-        ).not.toBeVisible();
+    async expectLowestPriceDisclosed(formattedPrice: string): Promise<void> {
+        await expect(this.omnibusPriceInfo).toBeVisible();
+        await expect(this.omnibusPriceInfo).toContainText(formattedPrice);
     }
 
-    async getOmnibusText(): Promise<string> {
-        return (
-            (await this.shopActionPage.omnibusPriceInfo
-                .first()
-                .textContent()) || ""
-        );
+    async expectNoPriceDisclosure(): Promise<void> {
+        await expect(this.omnibusPriceInfo).toHaveCount(0);
     }
 }

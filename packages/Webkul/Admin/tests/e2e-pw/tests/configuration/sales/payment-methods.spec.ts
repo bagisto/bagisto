@@ -1,69 +1,78 @@
-import { test, expect } from "../../../setup";
-import { generateDescription, getImageFile } from "../../../utils/faker";
-import { PaymentMethodsConfigurationPage } from "../../../pages/admin/configuration/sales/PaymentMethodsConfigurationPage";
+import { uniqueStamp } from "../../../utils/faker";
+import { test } from "../../../setup";
+import {
+    PaymentMethodsConfigurationPage,
+    type PaymentMethod,
+    type PaymentMethodSettings,
+} from "../../../pages/admin/configuration/sales/PaymentMethodsConfigurationPage";
+
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
+
+const methods: { method: PaymentMethod; title: string }[] = [
+    { method: "cashondelivery", title: "cash on delivery" },
+    { method: "moneytransfer", title: "money transfer" },
+    { method: "paypal_standard", title: "paypal standard" },
+    { method: "paypal_smart_button", title: "paypal smart button" },
+];
 
 test.describe("payment methods configuration", () => {
-    test.beforeEach(async ({ adminPage }) => {
-        await new PaymentMethodsConfigurationPage(adminPage).open();
-    });
+    test.describe.configure({ timeout: 120000 });
 
-    test("should configure the cash on delivery payment method", async ({
-        adminPage,
-    }) => {
-        const page = new PaymentMethodsConfigurationPage(adminPage);
+    for (const { method, title } of methods) {
+        test.describe(`${title} payment method`, () => {
+            let configPage: PaymentMethodsConfigurationPage;
+            let original: PaymentMethodSettings;
 
-        await page.configureCashOnDelivery(
-            generateDescription(200),
-            generateDescription(200),
-            "pending",
-            "pending",
-            "2",
-            getImageFile(),
-        );
-        await page.saveAndVerify();
-    });
+            test.beforeEach(async ({ adminPage }) => {
+                configPage = new PaymentMethodsConfigurationPage(adminPage);
+                original = await configPage.readSettings(method);
+            });
 
-    test("should configure the money transfer payment method", async ({
-        adminPage,
-    }) => {
-        const page = new PaymentMethodsConfigurationPage(adminPage);
+            test.afterEach(async () => {
+                await configPage.applySettings(method, original);
+            });
 
-        await page.configureMoneyTransfer(
-            generateDescription(200),
-            generateDescription(200),
-            "pending",
-            "pending",
-            "2",
-            getImageFile(),
-        );
-        await page.saveAndVerify();
-    });
+            test(`should persist the ${title} settings after reload`, async () => {
+                const stamp = uniqueStamp();
+                const changed: Partial<PaymentMethodSettings> = {
+                    description: `${title} ${stamp}`,
+                    sort: other(original.sort, "2", "3"),
+                };
 
-    test("should configure the paypal standard payment method", async ({
-        adminPage,
-    }) => {
-        const page = new PaymentMethodsConfigurationPage(adminPage);
+                if (original.instructions !== undefined) {
+                    changed.instructions = `Instructions ${stamp}`;
+                }
 
-        await page.configurePaypalStandard(
-            generateDescription(200),
-            true,
-            "2",
-            getImageFile(),
-        );
-        await page.saveAndVerify();
-    });
+                if (original.mailingAddress !== undefined) {
+                    changed.mailingAddress = `Mailing address ${stamp}`;
+                }
 
-    test("should configure the paypal smart button payment method", async ({
-        adminPage,
-    }) => {
-        const page = new PaymentMethodsConfigurationPage(adminPage);
+                if (original.invoiceStatus !== undefined) {
+                    changed.invoiceStatus = other(
+                        original.invoiceStatus,
+                        "pending",
+                        "paid",
+                    );
+                }
 
-        await page.configurePaypalSmartButton(
-            generateDescription(200),
-            true,
-            "2",
-            getImageFile(),
-        );
-        await page.saveAndVerify();
-    });
+                if (original.orderStatus !== undefined) {
+                    changed.orderStatus = other(
+                        original.orderStatus,
+                        "pending",
+                        "processing",
+                    );
+                }
+
+                if (original.sandbox !== undefined) {
+                    changed.sandbox = !original.sandbox;
+                }
+
+                await configPage.applySettings(method, changed);
+
+                await configPage.expectSettings(method, changed);
+            });
+        });
+    }
 });

@@ -1,12 +1,8 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+import type { CustomerCredentials } from "../../utils/customer";
 
-export type CustomerCredentials = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-};
+export type { CustomerCredentials };
 
 export class AuthPage extends BasePage {
     constructor(page: Page) {
@@ -15,14 +11,6 @@ export class AuthPage extends BasePage {
 
     private get profileMenu() {
         return this.page.getByLabel("Profile");
-    }
-
-    private get signUpLink() {
-        return this.page.getByRole("link", { name: "Sign Up" });
-    }
-
-    private get signInLink() {
-        return this.page.getByRole("link", { name: "Sign In" });
     }
 
     private get firstNameInput() {
@@ -38,34 +26,22 @@ export class AuthPage extends BasePage {
     }
 
     private get passwordInput() {
-        return this.page.getByPlaceholder("Password");
+        return this.page.getByPlaceholder("Password", { exact: true });
     }
 
     private get confirmPasswordInput() {
         return this.page.getByPlaceholder("Confirm Password");
     }
 
-    private get agreementCheckbox() {
-        return this.page.locator("#agreement").nth(1);
-    }
-
-    private get agreementText() {
-        return this.page.getByText("I agree with this statement.");
-    }
-
-    private get newsletterOptIn() {
-        return this.page
-            .locator("#main form div")
-            .filter({ hasText: "Subscribe to newsletter" })
-            .locator("label")
-            .first();
+    private get agreementLabel() {
+        return this.page.locator('label[for="agreement"]').filter({ hasText: /\S/ });
     }
 
     private get registerButton() {
         return this.page.getByRole("button", { name: "Register" });
     }
 
-    private get loginButton() {
+    private get signInButton() {
         return this.page.getByRole("button", { name: "Sign In" });
     }
 
@@ -73,64 +49,103 @@ export class AuthPage extends BasePage {
         return this.page.getByRole("link", { name: "Logout" });
     }
 
-    private get accountCreatedMessage() {
-        return this.page.getByText("Account created successfully");
-    }
-
     private get welcomeGuestText() {
-        return this.page.getByText("Welcome Guest").first();
+        return this.page.getByText("Welcome Guest");
     }
 
-    async visit() {
-        await super.visit("");
-    }
-
-    async register(credentials: CustomerCredentials, expectedMessage?: string) {
-        await this.visit();
-        await this.profileMenu.click();
-        await this.signUpLink.click();
-        await this.page.waitForLoadState("networkidle");
-
+    async register(
+        credentials: CustomerCredentials,
+        expectedMessage = "Account created successfully.",
+    ): Promise<void> {
+        await this.visit("customer/register");
         await this.firstNameInput.fill(credentials.firstName);
         await this.lastNameInput.fill(credentials.lastName);
         await this.emailInput.fill(credentials.email);
-        await this.passwordInput.first().fill(credentials.password);
-        await this.confirmPasswordInput.first().fill(credentials.password);
+        await this.passwordInput.fill(credentials.password);
+        await this.confirmPasswordInput.fill(credentials.password);
 
-        if (await this.agreementCheckbox.isVisible()) {
-            await this.agreementText.first().click();
+        if (await this.agreementLabel.count()) {
+            await this.agreementLabel.click();
+
+            await expect(this.page.locator("input#agreement")).toBeChecked();
         }
 
-        await this.newsletterOptIn.click();
         await this.registerButton.click();
 
-        await expect(
-            expectedMessage
-                ? this.page.getByText(expectedMessage).first()
-                : this.accountCreatedMessage.first(),
-        ).toBeVisible();
-
-        return credentials;
+        await expect(this.page.getByText(expectedMessage).first()).toBeVisible();
     }
 
-    async login(credentials: CustomerCredentials) {
-        await this.visit();
-        await this.profileMenu.click();
-        await this.signInLink.click();
-        await this.page.waitForLoadState("networkidle");
-
+    async attemptRegister(credentials: CustomerCredentials): Promise<void> {
+        await this.visit("customer/register");
+        await this.firstNameInput.fill(credentials.firstName);
+        await this.lastNameInput.fill(credentials.lastName);
         await this.emailInput.fill(credentials.email);
         await this.passwordInput.fill(credentials.password);
-        await this.loginButton.click();
-        await this.profileMenu.click();
+        await this.confirmPasswordInput.fill(credentials.password);
 
-        await expect(this.logoutLink.first()).toBeVisible();
+        if (await this.agreementLabel.count()) {
+            await this.agreementLabel.click();
+        }
+
+        await this.registerButton.click();
     }
 
-    async logout() {
-        await this.logoutLink.click();
-        await this.profileMenu.waitFor({ state: "visible" });
+    async attemptLogin(email: string, password: string): Promise<void> {
+        await this.visit("customer/login");
+        await this.waitForBackgroundRequestsToSettle();
+        await this.emailInput.fill(email);
+        await this.passwordInput.fill(password);
+        await this.signInButton.click();
+    }
+
+    async login(credentials: CustomerCredentials): Promise<void> {
+        await this.attemptLogin(credentials.email, credentials.password);
+
+        await expect(this.page).not.toHaveURL(/customer\/login/);
+    }
+
+    async logout(): Promise<void> {
+        await this.visit("");
         await this.profileMenu.click();
+        await this.logoutLink.click();
+
+        await expect(this.page).toHaveURL(/customer\/login|\/$/);
+
+        await this.waitForBackgroundRequestsToSettle();
+    }
+
+    async expectSignedIn(fullName: string): Promise<void> {
+        await this.visit("customer/account/profile");
+
+        await expect(this.page).toHaveURL(/customer\/account\/profile/);
+
+        for (const part of fullName.split(" ")) {
+            await expect(this.page.getByText(part, { exact: true })).toBeVisible();
+        }
+    }
+
+    async expectSignedOut(): Promise<void> {
+        await this.visit("customer/account/profile");
+
+        await expect(this.page).toHaveURL(/customer\/login/);
+    }
+
+    async expectGuestMenu(): Promise<void> {
+        await this.visit("");
+        await this.profileMenu.click();
+
         await expect(this.welcomeGuestText).toBeVisible();
+    }
+
+    async expectLoginRefused(): Promise<void> {
+        await expect(this.page).toHaveURL(/customer\/login/);
+        await expect(
+            this.page.getByText("Please check your credentials and try again.").first(),
+        ).toBeVisible();
+    }
+
+    async expectRegistrationRefused(message: string): Promise<void> {
+        await expect(this.page).toHaveURL(/customer\/register/);
+        await expect(this.page.getByText(message).first()).toBeVisible();
     }
 }

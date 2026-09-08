@@ -2,7 +2,13 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.5.0-beta2 (8th of September 2026)** - *Release*
+
+- #11467 [fixed] - Fixed three storefront loading skeletons — the home page View All button under a product carousel, the category Load More button and the checkout shipping method — standing at dimensions that did not match the control they hold the place of.
+
+- #11466 [fixed] - Fixed the category Load More button collapsing to less than half its width the moment it was clicked. Its loading state now keeps the width of the button it replaces.
+
+- #11465 [fixed] - Fixed a stray slash separator rendering after the final crumb on every page carrying breadcrumbs, so a trail now ends on the current page name.
 
 - #11464 [fixed] - Fixed a pair of unused colour circles showing under the price on product listing cards in list view. They came from a placeholder that was never wired to product data, and it has been removed.
 

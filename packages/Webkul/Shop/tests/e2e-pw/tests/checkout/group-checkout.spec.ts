@@ -1,89 +1,96 @@
-import { test } from "../../setup";
+import { expect, test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
+import { OrderPage } from "../../pages/shop/OrderPage";
 import { GroupProductCheckout } from "../../pages/shop/checkout/product-types/GroupProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
+import { uniqueStamp } from "../../utils/faker";
 
-test.describe("group product checkout flow", () => {
-    test("should create simple product to add in group", async ({
-        adminPage,
-    }) => {
+test.describe("grouped product checkout", () => {
+    let productName: string;
+    let created: string[];
+    let productListPage: ProductListPage;
+
+    test.beforeEach(async ({ adminPage }) => {
         const productCreation = new ProductCreatePage(adminPage);
+        productListPage = new ProductListPage(adminPage);
+        created = [];
 
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
+        const items = [`Simple-${uniqueStamp()}`, `Simple-${uniqueStamp()}`];
 
-    test("should create another simple product to add in group", async ({
-        adminPage,
-    }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+        for (const item of items) {
+            await productCreation.createProduct({
+                type: "simple",
+                sku: `SKU-${uniqueStamp()}`,
+                name: item,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 1,
+                inventory: 100,
+            });
+            created.push(item);
+        }
 
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-    });
-
-    test("should create group product", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+        productName = `grouped-${uniqueStamp()}`;
 
         await productCreation.createProduct({
             type: "grouped",
-            sku: `SKU-${Date.now()}`,
-            name: `group-${Date.now()}`,
+            sku: `SKU-${uniqueStamp()}`,
+            name: productName,
             shortDescription: "Short desc",
             description: "Full desc",
             price: 199,
             weight: 1,
             inventory: 100,
+            groupedItems: items,
         });
+        created.unshift(productName);
     });
 
-    test("should allow customer to complete checkout for group product successfully", async ({
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent(created);
+    });
+
+    test("should place an order with free shipping and money transfer for a signed in customer", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new GroupProductCheckout(shopPage);
-        await checkout.checkoutWithDefaultShipping();
+
+        const orderId = await new GroupProductCheckout(shopPage).checkout(productName);
+
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 
-    test("should allow guest to complete checkout for group product successfully", async ({
-        shopPage,
-    }) => {
-        const checkout = new GroupProductCheckout(shopPage);
-        await checkout.guestCheckout();
+    test("should place an order as a guest", async ({ shopPage }) => {
+        const orderId = await new GroupProductCheckout(shopPage).checkout(productName, {
+            address: "guest",
+        });
+
+        expect(orderId).toMatch(/^\d+$/);
     });
 
-    test("should allow customer to complete checkout for group product via flat rate shipping successfully", async ({
-        shopPage,
-    }) => {
+    test("should place an order with flat rate shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new GroupProductCheckout(shopPage);
-        await checkout.checkoutWithFlatRateShipping();
+
+        const orderId = await new GroupProductCheckout(shopPage).checkout(productName, {
+            shipping: "flatrate",
+        });
+
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 
-    test("should allow customer to complete checkout for group product via cash on delivery successfully", async ({
-        shopPage,
-    }) => {
+    test("should place an order with cash on delivery", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new GroupProductCheckout(shopPage);
-        await checkout.checkoutWithCOD();
+
+        const orderId = await new GroupProductCheckout(shopPage).checkout(productName, {
+            shipping: "flatrate",
+            payment: "cashondelivery",
+        });
+
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 });

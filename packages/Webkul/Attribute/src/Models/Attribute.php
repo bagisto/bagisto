@@ -86,6 +86,14 @@ class Attribute extends TranslatableModel implements AttributeContract
     ];
 
     /**
+     * Set default value with empty string to null conversion.
+     */
+    public function setDefaultValueAttribute($value): void
+    {
+        $this->attributes['default_value'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
      * Get the options.
      */
     public function options(): HasMany

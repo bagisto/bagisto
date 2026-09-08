@@ -8,12 +8,15 @@ export type ProductType =
     | "bundle";
 
 export interface BaseProduct {
-    type: ProductType;
-    sku: string;
+    type?: ProductType;
+    sku?: string;
     name: string;
     shortDescription: string;
     description: string;
-    price?: number;
-    weight?: number;
-    inventory?: number;
+    productNumber?: string;
+    price?: number | string;
+    weight?: number | string;
+    inventory?: number | string;
+    location?: string;
+    allowRma?: boolean;
 }

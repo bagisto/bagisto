@@ -1,59 +1,84 @@
-import { test, expect } from "../../../setup";
-import { getImageFile } from "../../../utils/faker";
-import { DesignConfigurationPage } from "../../../pages/admin/configuration/general/DesignConfigurationPage";
+import { test } from "../../../setup";
+import { CategoryPage, type CategoryData } from "../../../pages/admin/catalog/categories/CategoryPage";
+import {
+    DesignConfigurationPage,
+    type DesignSettings,
+} from "../../../pages/admin/configuration/general/DesignConfigurationPage";
+import { StorefrontMenuPage } from "../../../pages/shop/StorefrontMenuPage";
+import { generateName, generateSlug, getImageFile, uniqueStamp } from "../../../utils/faker";
+
+function buildCategory(): CategoryData {
+    return {
+        name: `${generateName()} ${uniqueStamp()}`,
+        slug: generateSlug(),
+    };
+}
 
 test.describe("design configuration", () => {
+    test.describe.configure({ timeout: 120000 });
+
+    let designConfig: DesignConfigurationPage;
+    let original: DesignSettings;
+
     test.beforeEach(async ({ adminPage }) => {
-        await new DesignConfigurationPage(adminPage).open();
+        designConfig = new DesignConfigurationPage(adminPage);
+        original = await designConfig.readSettings();
     });
 
-    test("should update and delete the logo", async ({ adminPage }) => {
-        const page = new DesignConfigurationPage(adminPage);
-        await page.uploadLogo(getImageFile());
-        await page.saveAndVerify();
-        await page.deleteLogo();
-        await page.saveAndVerify();
+    test.afterEach(async () => {
+        await designConfig.applySettings(original);
     });
 
-    test("should update and delete favicon", async ({ adminPage }) => {
-        const page = new DesignConfigurationPage(adminPage);
-        await page.uploadFavicon(getImageFile());
-        await page.saveAndVerify();
-        await page.deleteFavicon();
-        await page.saveAndVerify();
-    });
+    for (const field of ["logo_image", "favicon"] as const) {
+        test(`should store an uploaded ${field.replace("_", " ")} and remove it again`, async () => {
+            test.skip(
+                await designConfig.hasMedia(field),
+                `A ${field} is already configured and would be lost by this test`,
+            );
 
-    test("should set sidebar menu category view", async ({ adminPage }) => {
-        const page = new DesignConfigurationPage(adminPage);
+            await designConfig.uploadMedia(field, getImageFile());
 
-        await page.selectCategoryView("sidebar");
-        await page.previewSidebarMenu();
-        await page.saveAndVerify();
+            await designConfig.expectMediaStored(field);
 
-        await adminPage.goto("");
-        await expect(adminPage.getByText("All", { exact: true })).toBeVisible();
-        await adminPage
-            .locator("#app span")
-            .filter({ hasText: "All" })
-            .locator("span")
-            .click();
-        await adminPage.locator(".icon-cancel").first().click();
-    });
+            await designConfig.deleteMedia(field);
 
-    test("should set default menu category view", async ({ adminPage }) => {
-        const page = new DesignConfigurationPage(adminPage);
+            await designConfig.expectMediaAbsent(field);
+        });
+    }
 
-        await page.selectCategoryView("default");
-        await page.previewDefaultMenu();
-        await page.saveAndVerify();
+    test.describe("category menu view", () => {
+        let categoryPage: CategoryPage;
+        let category: CategoryData;
 
-        await adminPage.goto("");
-        await expect(adminPage.getByText("Men").first()).toBeVisible();
-        await adminPage.waitForTimeout(2000);
-        await adminPage.hover('a:has-text("Men")');
-        await adminPage.waitForTimeout(2000);
-        await expect(
-            adminPage.getByRole("link", { name: "Formal Wear" }).first(),
-        ).toBeVisible();
+        test.beforeEach(async ({ adminPage }) => {
+            categoryPage = new CategoryPage(adminPage);
+            category = buildCategory();
+
+            await categoryPage.createCategory(category);
+        });
+
+        test.afterEach(async () => {
+            await categoryPage.deleteCategoriesIfPresent([category.name]);
+        });
+
+        test("should show categories in a sidebar drawer when the sidebar view is saved", async ({
+            adminPage,
+        }) => {
+            await designConfig.previewCategoryView("sidebar");
+            await designConfig.applySettings({ categoryView: "sidebar" });
+
+            await designConfig.expectSettings({ categoryView: "sidebar" });
+            await new StorefrontMenuPage(adminPage).expectSidebarMenuLists(category.name);
+        });
+
+        test("should show categories in the header when the default view is saved", async ({
+            adminPage,
+        }) => {
+            await designConfig.previewCategoryView("default");
+            await designConfig.applySettings({ categoryView: "default" });
+
+            await designConfig.expectSettings({ categoryView: "default" });
+            await new StorefrontMenuPage(adminPage).expectDefaultMenuLists(category.name);
+        });
     });
 });

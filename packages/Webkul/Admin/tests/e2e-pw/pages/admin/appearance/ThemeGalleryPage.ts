@@ -14,7 +14,8 @@ export class ThemeGalleryPage extends BasePage {
 
     async open(): Promise<void> {
         await this.visit("admin/appearance/themes");
-        await this.page.waitForLoadState("networkidle");
+
+        await expect(this.page.getByText("My Themes", { exact: true })).toBeVisible();
     }
 
     async expectThemesGroupedByInstallState(): Promise<void> {

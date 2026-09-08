@@ -1,10 +1,12 @@
+import { uniqueStamp } from "../../../utils/faker";
+import { ProductListPage } from "../../../pages/admin/catalog/products/ProductListPage";
+import type { BaseProduct } from "../../../pages/types/product.types";
 import { test } from "../../../setup";
-import { expect, Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 import { ProductCreatePage } from "../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../utils/admin";
 
 function calculateFreeQty(
     totalQty: number,
@@ -29,40 +31,37 @@ function calculateFreeQty(
 }
 
 async function createBuyXGetYRule(
-    page: Page,
+    adminPage: Page,
     discountStep: number,
     discountAmount: number,
-) {
-    const ruleCreatePage = new RuleCreatePage(page);
+): Promise<string> {
+    const ruleCreatePage = new RuleCreatePage(adminPage);
+    const rule = await ruleCreatePage.cartRuleCreationFlow();
 
-    await loginAsAdmin(page);
-    await ruleCreatePage.cartRuleCreationFlow();
+    createdRules.push(rule.name);
+
     await ruleCreatePage.setBuyXGetYAction(discountAmount, discountStep);
     await ruleCreatePage.saveCartRule();
+
+    return rule.couponCode;
 }
 
 async function verifyBuyXGetYAtCheckout(
-    page: Page,
     ruleApplyPage: RuleApplyPage,
+    couponCode: string,
     discountStep: number,
     discountAmount: number,
     qty: number,
 ) {
-    const subtotal = await ruleApplyPage.addSavedProductToCart(qty);
-
+    const subtotal = await ruleApplyPage.addSavedProductToCart(product.name, qty);
     const unitPrice = subtotal / qty;
-
     const freeQty = calculateFreeQty(qty, discountStep, discountAmount);
+    const expectedGrandTotal = Math.max(subtotal - freeQty * unitPrice, 0);
 
-    const expectedDiscount = freeQty * unitPrice;
-
-    const expectedGrandTotal = Math.max(subtotal - expectedDiscount, 0);
-
-    await ruleApplyPage.applyCouponAtCheckout();
-
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
+    await ruleApplyPage.proceedAsGuest();
+    await ruleApplyPage.chooseShipping("free");
+    await ruleApplyPage.choosePayment("moneytransfer");
+    await ruleApplyPage.applyCoupon(couponCode);
 
     await ruleApplyPage.expectGrandTotal(expectedGrandTotal);
 }
@@ -117,36 +116,39 @@ const cases: {
     },
 ];
 
-test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreatePage(adminPage);
+let product: BaseProduct;
+let createdRules: string[];
 
-    await productCreation.createProduct({
+test.beforeEach(async ({ adminPage }) => {
+    createdRules = [];
+    product = await new ProductCreatePage(adminPage).createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
         shortDescription: "Short desc",
         description: "Full desc",
-        price: Math.floor(Math.random() * 1000) + 1,
+        price: 199,
         weight: 1,
         inventory: 100,
     });
 });
 
 test.afterEach(async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
+    try {
+        await new RuleDeletePage(adminPage).deleteCartRulesIfPresent(createdRules);
+    } finally {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+    }
 });
 
 test.describe("buy x get y free cart rules", () => {
     for (const { desc, step, amount, qty } of cases) {
-        test(desc, async ({ page }) => {
-            await createBuyXGetYRule(page, step, amount);
-
-            const ruleApplyPage = new RuleApplyPage(page);
+        test(desc, async ({ adminPage, shopPage }) => {
+            const couponCode = await createBuyXGetYRule(adminPage, step, amount);
 
             await verifyBuyXGetYAtCheckout(
-                page,
-                ruleApplyPage,
+                new RuleApplyPage(shopPage),
+                couponCode,
                 step,
                 amount,
                 qty,

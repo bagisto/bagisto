@@ -1,105 +1,101 @@
 import { expect, Page } from "@playwright/test";
-import { BasePage } from "../../../BasePage";
+import { DatagridPage } from "../../DatagridPage";
 
-export class ProductListPage extends BasePage {
+export class ProductListPage extends DatagridPage {
     constructor(page: Page) {
         super(page);
+    }
+
+    protected get gridPath(): string {
+        return "admin/catalog/products";
     }
 
     private get createProductButton() {
         return this.page.getByRole("button", { name: "Create Product" });
     }
 
-    private get productExpandButtons() {
-        return this.page.locator(".cursor-pointer.icon-sort-right");
+    private productEditLink(name: string) {
+        return this.row(name)
+            .locator("span.icon-sort-right")
+            .filter({ visible: true });
     }
 
-    private get rowCheckboxes() {
-        return this.page.locator(".icon-uncheckbox:visible");
-    }
+    async open(): Promise<void> {
+        await this.openGrid();
 
-    private get rowsPerPageButton() {
-        return this.page.getByRole("button", { name: "" });
-    }
-
-    private get rowsPerPageOption() {
-        return this.page.getByText("50", { exact: true }).first();
-    }
-
-    private get selectActionButton() {
-        return this.page.locator('button:has-text("Select Action")');
-    }
-
-    private get agreeButton() {
-        return this.page.locator('button.primary-button:has-text("Agree")');
-    }
-
-    private get searchInput() {
-        return this.page.locator('input[name="search"]');
-    }
-
-    async visit() {
-        await super.visit("admin/catalog/products");
         await expect(this.createProductButton).toBeVisible();
     }
 
     async searchByName(name: string): Promise<number> {
-        await this.visit();
+        await this.open();
+        await this.searchFor(name);
 
-        await this.searchInput.fill(name);
-
-        const [response] = await Promise.all([
-            this.page.waitForResponse((response) =>
-                response.url().includes("filters%5Ball%5D"),
-            ),
-            this.searchInput.press("Enter"),
-        ]);
-
-        const body = await response.json();
-
-        return body.meta?.total ?? 0;
+        return this.row(name).count();
     }
 
     async isListedByName(name: string): Promise<boolean> {
         return (await this.searchByName(name)) > 0;
     }
 
-    async openProductForEdit() {
-        await this.visit();
-        await this.productExpandButtons.nth(1).click();
+    async openProduct(name: string): Promise<void> {
+        await this.open();
+        await this.searchFor(name);
+        await this.productEditLink(name).click();
+        await this.waitForVueMount();
+
+        await expect(this.page).toHaveURL(/catalog\/products\/edit\/\d+/);
     }
 
-    async openFirstProductForEdit() {
-        await this.openProductForEdit();
+    async massUpdateStatus(
+        names: string[],
+        status: "Active" | "Disable",
+    ): Promise<void> {
+        await this.open();
+        await this.selectRows(names);
+        await this.applyMassAction("Update Status", status);
     }
 
-    async setRowsPerPageTo50() {
-        await this.visit();
-        await this.rowsPerPageButton.click();
-        await this.rowsPerPageOption.click();
-        await expect(this.rowCheckboxes.first()).toBeVisible();
+    async massDeleteProducts(names: string[]): Promise<void> {
+        await this.open();
+        await this.selectRows(names);
+        await this.applyMassAction("Delete");
+
+        await expect(
+            this.flashMessage("Selected Products Deleted Successfully"),
+        ).toBeVisible();
     }
 
-    async selectProductCheckbox() {
-        await this.rowCheckboxes.nth(1).click();
-        await this.rowCheckboxes.nth(2).click();
-    }
+    async deleteProductsIfPresent(names: string[]): Promise<void> {
+        const failures: string[] = [];
 
-    async massUpdateStatus(status: "Active" | "Disable" = "Active") {
-        await this.visit();
-        await this.selectProductCheckbox();
+        for (const name of names) {
+            try {
+                await this.open();
+                await this.searchFor(name);
 
-        await this.selectActionButton.click();
-        await this.page.hover('a:has-text("Update Status")');
-        await this.page.waitForSelector(
-            'a:has-text("Active"), a:has-text("Disable")',
-            { state: "visible" },
-        );
-        await this.page.click(`a:has-text("${status}")`);
+                if (await this.row(name).count()) {
+                    await this.selectRows([name]);
+                    await this.applyMassAction("Delete");
 
-        if (await this.agreeButton.isVisible()) {
-            await this.page.waitForTimeout(1000);
-            await this.agreeButton.click();
+                    await expect(
+                        this.flashMessage("Selected Products Deleted Successfully"),
+                    ).toBeVisible();
+                }
+            } catch (error) {
+                failures.push(`${name}: ${error}`);
+            }
         }
+
+        if (failures.length) {
+            throw new Error(`Cleanup failed for:\n${failures.join("\n")}`);
+        }
+    }
+
+    async expectProductListed(name: string): Promise<void> {
+        await this.expectSearchedRowCount(name, 1);
+    }
+
+    async expectProductAbsent(name: string): Promise<void> {
+        await this.expectSearchedRowCount(name, 0);
     }
 }

@@ -1,73 +1,74 @@
-import { test, expect } from '../../../setup';
-import { generateRandomNumericString } from '../../../utils/faker';
+import { test } from "../../../setup";
+import {
+    TaxConfigurationPage,
+    type TaxSettings,
+} from "../../../pages/admin/configuration/sales/TaxConfigurationPage";
 
-test.describe('taxes configuration', () => {
+function other(current: string, first: string, second: string): string {
+    return current === first ? second : first;
+}
+
+test.describe("taxes configuration", () => {
+    test.describe.configure({ timeout: 120000 });
+
+    let configPage: TaxConfigurationPage;
+    let original: TaxSettings;
+
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto('admin/configuration/sales/taxes');
+        configPage = new TaxConfigurationPage(adminPage);
+        original = await configPage.readSettings();
     });
 
-    test('should update tax categories configuration', async ({ adminPage }) => {
-        await adminPage.selectOption('select[name="sales[taxes][categories][shipping]"]', '0');
-        const shippingTaxCategory = adminPage.locator('select[name="sales[taxes][categories][shipping]"]');
-        await expect(shippingTaxCategory).toHaveValue('0');
-        await adminPage.selectOption('select[name="sales[taxes][categories][product]"]', '0');
-        const productTaxCategory = adminPage.locator('select[name="sales[taxes][categories][product]"]');
-        await expect(productTaxCategory).toHaveValue('0');
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
+    test.afterEach(async () => {
+        await configPage.applySettings(original);
     });
 
-    test('should update tax calculation configuration', async ({ adminPage }) => {
-        await adminPage.selectOption('select[name="sales[taxes][calculation][based_on]"]', 'shipping_address');
-        const taxBasedOn = adminPage.locator('select[name="sales[taxes][calculation][based_on]"]');
-        await expect(taxBasedOn).toHaveValue('shipping_address');
-        await adminPage.selectOption('select[name="sales[taxes][calculation][product_prices]"]', 'excluding_tax');
-        const productPrice = adminPage.locator('select[name="sales[taxes][calculation][product_prices]"]');
-        await expect(productPrice).toHaveValue('excluding_tax');
-        await adminPage.selectOption('select[name="sales[taxes][calculation][shipping_prices]"]', 'excluding_tax');
-        const shippingPrices = adminPage.locator('select[name="sales[taxes][calculation][shipping_prices]"]');
-        await expect(shippingPrices).toHaveValue('excluding_tax');
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+    test("should persist the tax calculation settings after reload", async () => {
+        const changed = {
+            basedOn: other(original.basedOn, "shipping_address", "billing_address"),
+            productPrices: other(original.productPrices, "excluding_tax", "including_tax"),
+            shippingPrices: other(original.shippingPrices, "excluding_tax", "including_tax"),
+            applyTaxOn: other(original.applyTaxOn, "after_discount", "before_discount"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test('should update default destination calculation configuration', async ({ adminPage }) => {
-        await adminPage.selectOption('select[name="sales[taxes][default_destination_calculation][country]"]', 'IN');
-        const taxBasedOn = adminPage.locator('select[name="sales[taxes][default_destination_calculation][country]"]');
-        await expect(taxBasedOn).toHaveValue('IN');
-        await adminPage.selectOption('select[name="sales[taxes][default_destination_calculation][state]"]', 'UP');
-        const productPrice = adminPage.locator('select[name="sales[taxes][default_destination_calculation][state]"]');
-        await expect(productPrice).toHaveValue('UP');
-        await adminPage.fill('input[name="sales[taxes][default_destination_calculation][post_code]"]', generateRandomNumericString(6));
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+    test("should persist the default destination after reload", async () => {
+        const changed = {
+            defaultCountry: "IN",
+            defaultState: "UP",
+            defaultPostcode: other(original.defaultPostcode, "201301", "201302"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test('should update shopping cart display settings configuration', async ({ adminPage }) => {
-        await adminPage.selectOption('select[name="sales[taxes][shopping_cart][display_prices]"]', 'excluding_tax');
-        const taxBasedOn = adminPage.locator('select[name="sales[taxes][shopping_cart][display_prices]"]');
-        await expect(taxBasedOn).toHaveValue('excluding_tax');
-        await adminPage.selectOption('select[name="sales[taxes][shopping_cart][display_subtotal]"]', 'excluding_tax');
-        const productPrice = adminPage.locator('select[name="sales[taxes][shopping_cart][display_subtotal]"]');
-        await expect(productPrice).toHaveValue('excluding_tax');
-        await adminPage.selectOption('select[name="sales[taxes][shopping_cart][display_shipping_amount]"]', 'excluding_tax');
-        const shippingPrices = adminPage.locator('select[name="sales[taxes][shopping_cart][display_shipping_amount]"]');
-        await expect(shippingPrices).toHaveValue('excluding_tax');
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+    test("should persist the shopping cart display settings after reload", async () => {
+        const changed = {
+            cartDisplayPrices: other(original.cartDisplayPrices, "excluding_tax", "including_tax"),
+            cartDisplaySubtotal: other(original.cartDisplaySubtotal, "excluding_tax", "including_tax"),
+            cartDisplayShipping: other(original.cartDisplayShipping, "excluding_tax", "including_tax"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 
-    test('should update orders, invoices, refunds display settings configuration', async ({ adminPage }) => {
-        await adminPage.selectOption('select[name="sales[taxes][sales][display_prices]"]', 'excluding_tax');
-        const taxBasedOn = adminPage.locator('select[name="sales[taxes][sales][display_prices]"]');
-        await expect(taxBasedOn).toHaveValue('excluding_tax');
-        await adminPage.selectOption('select[name="sales[taxes][sales][display_subtotal]"]', 'excluding_tax');
-        const productPrice = adminPage.locator('select[name="sales[taxes][sales][display_subtotal]"]');
-        await expect(productPrice).toHaveValue('excluding_tax');
-        await adminPage.selectOption('select[name="sales[taxes][sales][display_shipping_amount]"]', 'excluding_tax');
-        const shippingPrices = adminPage.locator('select[name="sales[taxes][sales][display_shipping_amount]"]');
-        await expect(shippingPrices).toHaveValue('excluding_tax');
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+    test("should persist the orders, invoices and refunds display settings after reload", async () => {
+        const changed = {
+            salesDisplayPrices: other(original.salesDisplayPrices, "excluding_tax", "including_tax"),
+            salesDisplaySubtotal: other(original.salesDisplaySubtotal, "excluding_tax", "including_tax"),
+            salesDisplayShipping: other(original.salesDisplayShipping, "excluding_tax", "including_tax"),
+        };
+
+        await configPage.applySettings(changed);
+
+        await configPage.expectSettings(changed);
     });
 });

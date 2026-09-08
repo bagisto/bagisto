@@ -26,10 +26,10 @@ export class TaxRateApplyPage extends BasePage {
         return this.page.getByRole("textbox", { name: "Search products here" });
     }
 
-    private get addToCartButton() {
-        return this.page.locator(
-            "(//button[contains(@class, 'secondary-button')])[2]",
-        );
+    private productCard(productName: string) {
+        return this.page
+            .locator("div.group")
+            .filter({ has: this.page.locator(`p:text-is("${productName}")`) });
     }
 
     private get addToCartSuccess() {
@@ -80,12 +80,20 @@ export class TaxRateApplyPage extends BasePage {
         return this.page.getByRole("button", { name: "Proceed" });
     }
 
-    private get freeShippingMethod() {
-        return this.page.getByText("Free Shipping").first();
+    private get freeShippingOption() {
+        return this.page.locator('label[for="free_free"]').filter({ hasText: /\S/ });
     }
 
-    private get paymentMethod() {
-        return this.page.getByAltText("Money Transfer");
+    private get freeShippingInput() {
+        return this.page.locator("input#free_free");
+    }
+
+    private get moneyTransferOption() {
+        return this.page.locator('label[for="moneytransfer"]').filter({ hasText: /\S/ });
+    }
+
+    private get moneyTransferInput() {
+        return this.page.locator("input#moneytransfer");
     }
 
     private get applyCouponButton() {
@@ -93,36 +101,49 @@ export class TaxRateApplyPage extends BasePage {
     }
 
     private get couponInput() {
-        return this.page.locator('input[name="code"]:visible');
+        return this.page.locator('input[name="code"]').filter({ visible: true });
     }
 
     private get couponSubmitButton() {
         return this.page.getByRole("button", { name: "Apply", exact: true });
     }
 
-    private async readSummaryAmount(label: string): Promise<number> {
-        await this.page.waitForLoadState("networkidle");
-
-        const row = this.page
-            .locator("div.flex.justify-between:visible")
+    private summaryRow(label: string) {
+        return this.page
+            .locator("div.flex.justify-between")
             .filter({
-                has: this.page.getByText(label, { exact: true }),
+                has: this.page.locator(`xpath=./p[normalize-space()="${label}"]`),
             })
-            .first();
+            .filter({ visible: true });
+    }
 
-        await row.waitFor({ state: "visible", timeout: 15000 });
+    private summaryAmount(label: string) {
+        return this.summaryRow(label)
+            .locator("p")
+            .filter({ hasText: /\d/ })
+            .filter({ hasNotText: /excl/i });
+    }
 
-        const text = await row.locator("p").last().innerText();
+    private async readSummaryAmount(label: string): Promise<number> {
+        await expect(this.summaryRow(label)).toHaveCount(1);
+        await expect(this.summaryAmount(label)).toHaveCount(1);
+
+        const text = await this.summaryAmount(label).innerText();
 
         return parseFloat(text.replace(/[^0-9.]/g, ""));
     }
 
     async addProductToCart(productName: string): Promise<void> {
         await this.visit("");
-        await this.page.waitForLoadState("networkidle");
         await this.searchInput.fill(productName);
         await this.searchInput.press("Enter");
-        await this.addToCartButton.first().click();
+
+        const card = this.productCard(productName);
+
+        await expect(card).toHaveCount(1);
+        await card.hover();
+        await card.getByRole("button", { name: "Add To Cart" }).click();
+
         await expect(this.addToCartSuccess).toBeVisible();
     }
 
@@ -136,7 +157,6 @@ export class TaxRateApplyPage extends BasePage {
 
     async proceedToGuestCheckout(region: CheckoutRegion): Promise<void> {
         await this.visit("checkout/onepage");
-        await this.page.waitForLoadState("networkidle");
 
         await this.companyName.fill("Webkul");
         await this.firstName.fill("Tax");
@@ -150,14 +170,18 @@ export class TaxRateApplyPage extends BasePage {
         await this.billingTelephone.fill("9876543210");
         await this.proceedButton.click();
 
-        await this.freeShippingMethod.click();
+        await this.freeShippingOption.click();
+
+        await expect(this.freeShippingInput).toBeChecked();
 
         await Promise.all([
             this.page.waitForResponse((response) =>
                 response.url().includes("checkout/onepage/payment-methods"),
             ),
-            this.paymentMethod.click(),
+            this.moneyTransferOption.click(),
         ]);
+
+        await expect(this.moneyTransferInput).toBeChecked();
     }
 
     async verifyCheckoutTax(price: number, taxPercent: number): Promise<void> {
@@ -170,11 +194,9 @@ export class TaxRateApplyPage extends BasePage {
         expect(tax).toBeCloseTo(expectedTax, 2);
         expect(grandTotal).toBeCloseTo(expectedTotal, 2);
 
-        await expect(
-            this.page
-                .locator("div.flex.justify-between", { hasText: "Grand Total" })
-                .first(),
-        ).toContainText(formatPrice(expectedTotal));
+        await expect(this.summaryAmount("Grand Total")).toHaveText(
+            formatPrice(expectedTotal),
+        );
     }
 
     async verifyCheckoutTaxForMode(
@@ -196,13 +218,12 @@ export class TaxRateApplyPage extends BasePage {
         expect(grandTotal).toBeCloseTo(expectedTotal, 2);
 
         const applied = appliedPercentage(grandTotal, tax);
+
         expect(Math.abs(applied - taxPercent)).toBeLessThan(0.5);
 
-        await expect(
-            this.page
-                .locator("div.flex.justify-between", { hasText: "Grand Total" })
-                .first(),
-        ).toContainText(formatPrice(expectedTotal));
+        await expect(this.summaryAmount("Grand Total")).toHaveText(
+            formatPrice(expectedTotal),
+        );
     }
 
     async verifyTaxApplication(
@@ -246,18 +267,16 @@ export class TaxRateApplyPage extends BasePage {
         const grandTotal = await this.readSummaryAmount("Grand Total");
 
         expect(discount).toBeCloseTo(expected.discount, 2);
-
         expect(tax).toBeCloseTo(expected.tax, 2);
         expect(grandTotal).toBeCloseTo(expected.grandTotal, 2);
 
         const applied = (tax / expected.taxBase) * 100;
+
         expect(Math.abs(applied - taxPercent)).toBeLessThan(0.5);
 
-        await expect(
-            this.page
-                .locator("div.flex.justify-between", { hasText: "Grand Total" })
-                .first(),
-        ).toContainText(formatPrice(expected.grandTotal));
+        await expect(this.summaryAmount("Grand Total")).toHaveText(
+            formatPrice(expected.grandTotal),
+        );
     }
 
     async verifyTaxWithCartRule(options: {

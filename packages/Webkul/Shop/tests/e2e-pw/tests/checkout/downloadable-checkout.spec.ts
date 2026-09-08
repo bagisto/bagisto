@@ -1,30 +1,44 @@
 import { test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
+import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
+import { OrderPage } from "../../pages/shop/OrderPage";
 import { DownloadableProductCheckout } from "../../pages/shop/checkout/product-types/DownloadableProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
+import { uniqueStamp } from "../../utils/faker";
 
-test.describe("downloadable product checkout flow", () => {
-    test("should create downloadable product", async ({ adminPage }) => {
-        const productCreation = new ProductCreatePage(adminPage);
+const PRICE = 199;
 
-        await productCreation.createProduct({
+test.describe("downloadable product checkout", () => {
+    let productName: string;
+    let productListPage: ProductListPage;
+
+    test.beforeEach(async ({ adminPage }) => {
+        productListPage = new ProductListPage(adminPage);
+        productName = `downloadable-${uniqueStamp()}`;
+
+        await new ProductCreatePage(adminPage).createProduct({
             type: "downloadable",
-            sku: `SKU-${Date.now()}`,
-            name: `downloadable-${Date.now()}`,
+            sku: `SKU-${uniqueStamp()}`,
+            name: productName,
             shortDescription: "Short desc",
             description: "Full desc",
-            price: 199,
-            weight: 1,
+            price: PRICE,
             inventory: 100,
         });
     });
 
-    test("should allow customer to complete checkout for downloadable product successfully", async ({
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent([productName]);
+    });
+
+    test("should place an order for the selected download link without a shipping step", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const checkout = new DownloadableProductCheckout(shopPage);
-        await checkout.checkout();
+
+        const orderId = await new DownloadableProductCheckout(shopPage).checkout(productName);
+
+        await new OrderPage(shopPage).expectOrderListed(orderId, "Pending");
     });
 });

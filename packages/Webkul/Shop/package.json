@@ -15,12 +15,12 @@
     "format:check": "prettier --check tests/e2e-pw"
   },
   "devDependencies": {
-    "@playwright/test": "^1.57.0",
+    "@playwright/test": "^1.58.1",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^22.7.8",
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "laravel-vite-plugin": "^1.0",
-    "playwright": "^1.59.1",
     "prettier": "^3.8.2",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.2",
@@ -31,9 +31,7 @@
     "@vee-validate/i18n": "^4.9.1",
     "@vee-validate/rules": "^4.9.1",
     "@vitejs/plugin-vue": "^5.2.4",
-    "dotenv": "^16.4.7",
     "mitt": "^3.0.0",
-    "readline-sync": "^1.4.10",
     "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0"
   }

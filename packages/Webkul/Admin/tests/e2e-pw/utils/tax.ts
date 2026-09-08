@@ -1,6 +1,8 @@
-import { expect, Page } from "@playwright/test";
-import { generateName, generateSKU, generateSlug } from "./faker";
+import { Page } from "@playwright/test";
+import { generateDescription, generateSKU, generateSlug, uniqueStamp } from "./faker";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
+import { ProductEditPage } from "../pages/admin/catalog/products/ProductEditPage";
+export { formatPrice } from "@shared/prices";
 
 export const TAX_PRODUCT_PRICE = 199;
 
@@ -30,7 +32,7 @@ export function generateTaxRateData(
     overrides: Partial<TaxRateData> = {},
 ): TaxRateData {
     return {
-        identifier: generateSlug("_"),
+        identifier: `${generateSlug("_")}_${uniqueStamp()}`,
         country: TAX_REGIONS.india.country,
         state: "",
         taxRate: "18",
@@ -43,9 +45,8 @@ export function generateTaxCategoryData(
     overrides: Partial<TaxCategoryData> = {},
 ): TaxCategoryData {
     return {
-        code: generateSlug("_"),
-
-        name: `${generateName()} ${Date.now().toString(36)}`,
+        code: `${generateSlug("_")}_${uniqueStamp()}`,
+        name: `Tax Category ${uniqueStamp()}`,
         description: "Tax category created by the e2e suite.",
         ...overrides,
     };
@@ -111,21 +112,18 @@ export function expectedDiscountedTotals(
     return { discount, taxBase, tax, grandTotal };
 }
 
-export function formatPrice(amount: number): string {
-    return `$${amount.toFixed(2)}`;
-}
 
 export async function createSimpleTaxableProduct(
     adminPage: Page,
     price: number = TAX_PRODUCT_PRICE,
 ): Promise<string> {
-    const name = `Simple-${generateName()}-${Date.now()}`;
+    const name = `Taxable ${uniqueStamp()}`;
 
     await new ProductCreatePage(adminPage).createSimpleProduct({
         name,
         productNumber: generateSKU(),
-        shortDescription: "Short description for tax product.",
-        description: "Full description for tax product.",
+        shortDescription: generateDescription(80),
+        description: generateDescription(120),
         price: `${price}`,
         weight: "1",
         inventory: "100",
@@ -135,17 +133,12 @@ export async function createSimpleTaxableProduct(
 }
 
 export async function assignTaxCategoryToProduct(
-    page: Page,
+    adminPage: Page,
+    productName: string,
     taxCategoryName: string,
 ): Promise<void> {
-    await page.goto("admin/catalog/products");
-    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-    await page.waitForLoadState("networkidle");
-    await page.locator('span:text-is("Tax Category")').click();
-    await page.locator(`span:text-is("${taxCategoryName}")`).click();
-    await page.locator('button:has-text("Save Product")').first().click();
-
-    await expect(
-        page.getByText("Product updated successfully").first(),
-    ).toBeVisible();
+    await new ProductEditPage(adminPage).assignTaxCategory(
+        productName,
+        taxCategoryName,
+    );
 }

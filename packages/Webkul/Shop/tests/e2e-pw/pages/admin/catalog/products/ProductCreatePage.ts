@@ -1,4 +1,3 @@
-import fs from "fs";
 import { expect, Locator, Page } from "@playwright/test";
 import { TinymcePage } from "../../../../utils/TinymcePage";
 import { BaseProduct } from "../../../types/product.types";
@@ -42,6 +41,10 @@ export class ProductCreatePage extends BasePage {
         return this.page.locator("#name");
     }
 
+    private get productUrlKey() {
+        return this.page.locator('input[name="url_key"]');
+    }
+
     private get productShortDescription() {
         return "#short_description_ifr";
     }
@@ -58,8 +61,12 @@ export class ProductCreatePage extends BasePage {
         return this.page.locator('//input[@name="weight"]');
     }
 
+    private get openPanel() {
+        return this.page.locator("div.fixed").filter({ visible: true });
+    }
+
     private get productInventory() {
-        return this.page.locator('input[name^="inventories["]');
+        return this.page.locator('input[name="inventories[1]"]');
     }
 
     private get clickRules() {
@@ -86,12 +93,6 @@ export class ProductCreatePage extends BasePage {
 
     private get selectType() {
         return this.page.locator('select[name="type"]');
-    }
-
-    private get addProduct() {
-        return this.page
-            .locator(".secondary-button")
-            .filter({ hasText: "Add Product" });
     }
 
     private get updateProductSuccessToast() {
@@ -141,8 +142,14 @@ export class ProductCreatePage extends BasePage {
         return this.page.getByRole("button", { name: "Add" });
     }
 
+    private get variantsCard() {
+        return this.page
+            .locator("div.box-shadow")
+            .filter({ has: this.page.getByText("Add Variant") });
+    }
+
     private get variantNameInput() {
-        return this.page.locator('input[name="name"]').nth(1);
+        return this.variantsCard.locator('input[name="name"]');
     }
 
     private get variantPriceInput() {
@@ -158,7 +165,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get variantSkuInput() {
-        return this.page.locator('input[name="sku"]').nth(1);
+        return this.variantsCard.locator('input[name="sku"]');
     }
 
     private get variantSaveButton() {
@@ -173,12 +180,12 @@ export class ProductCreatePage extends BasePage {
         return this.page.getByText("Add Selected Product");
     }
 
-    private get firstCheckbox() {
-        return this.page.locator(".icon-uncheckbox").first();
+    private get selectAllVariantsToggle() {
+        return this.variantsCard.locator('[for="select-all-variants"]');
     }
 
     private get selectActionButton() {
-        return this.page.getByRole("button", { name: "Select Action " });
+        return this.page.getByRole("button", { name: "Select Action" });
     }
 
     private get editPricesOption() {
@@ -244,23 +251,23 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get linkTitleInput() {
-        return this.page.locator('input[name="title"]').first();
+        return this.openPanel.locator('input[name="title"]');
     }
 
     private get linkPriceInput() {
-        return this.page.locator('input[name="price"]').first();
+        return this.openPanel.locator('input[name="price"]');
     }
 
     private get linkDownloadsInput() {
-        return this.page.locator('input[name="downloads"]');
+        return this.openPanel.locator('input[name="downloads"]');
     }
 
     private get linkTypeSelect() {
-        return this.page.locator('select[name="type"]');
+        return this.openPanel.locator('select[name="type"]');
     }
 
     private get linkFileInput() {
-        return this.page.locator('input[name="url"]');
+        return this.openPanel.locator('input[name="url"]');
     }
 
     private get sampleTypeSelect() {
@@ -272,7 +279,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get linkSaveButton() {
-        return this.page.getByText("Link Save");
+        return this.openPanel.getByRole("button", { name: "Save", exact: true });
     }
 
     private get addSampleButton() {
@@ -280,15 +287,15 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get sampleTitleInput() {
-        return this.page.locator('input[name="title"]');
+        return this.openPanel.locator('input[name="title"]');
     }
 
     private get sampleTypeDropdown() {
-        return this.page.locator('select[name="type"]');
+        return this.openPanel.locator('select[name="type"]');
     }
 
     private get sampleUrlField() {
-        return this.page.locator('input[name="url"]');
+        return this.openPanel.locator('input[name="url"]');
     }
 
     private get bookingLocationInput() {
@@ -323,9 +330,6 @@ export class ProductCreatePage extends BasePage {
         return this.page.locator('input[name="booking[available_to]"]');
     }
 
-    private get bookingQuantityInput() {
-        return this.page.locator('input[name="booking[qty]"]');
-    }
 
     private get addSlotsButton() {
         return this.page.getByText("Add Slots").first();
@@ -347,13 +351,6 @@ export class ProductCreatePage extends BasePage {
         return this.page.getByRole("textbox", { name: "To Time" });
     }
 
-    private get minuteSpinbutton() {
-        return this.page.getByRole("spinbutton", { name: "Minute" });
-    }
-
-    private get hourSpinbutton() {
-        return this.page.getByRole("spinbutton", { name: "Hour" });
-    }
 
     private get flatpickrCalendar() {
         return this.page.locator(".flatpickr-calendar.hasTime.noCalendar.open");
@@ -448,12 +445,6 @@ export class ProductCreatePage extends BasePage {
         return this.flatpickrCalendar.getByRole("spinbutton", { name });
     }
 
-    private productRowCheckbox(text: string | RegExp, index = 0) {
-        return this.productRowByText(text)
-            .nth(index)
-            .locator("input[type='checkbox']")
-            .first();
-    }
 
     private async fillTimeTextbox(
         label: "From" | "To",
@@ -478,6 +469,30 @@ export class ProductCreatePage extends BasePage {
                 return;
             }
         }
+
+        await expect(textbox).toHaveValue(expected);
+    }
+
+    private async fillSlotTime(
+        textbox: Locator,
+        hour: string,
+        minute: string,
+    ) {
+        const expected = `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+
+        await textbox.evaluate((element, value) => {
+            const candidates = [
+                element,
+                element.previousElementSibling,
+                element.nextElementSibling,
+            ];
+
+            const owner = candidates.find(
+                (candidate) => candidate && (candidate as any)._flatpickr,
+            );
+
+            (owner as any)._flatpickr.setDate(value, true);
+        }, expected);
 
         await expect(textbox).toHaveValue(expected);
     }
@@ -513,13 +528,22 @@ export class ProductCreatePage extends BasePage {
         await expect(this.page).toHaveURL(
             /\/admin\/catalog\/products\/edit\/\d+/,
         );
+        await this.waitForVueMount();
         await this.productName.waitFor({ state: "visible" });
     }
 
+    private async fillAndConfirm(field: Locator, value: string) {
+        await expect(async () => {
+            await field.fill(value);
+            await expect(field).toHaveValue(value, { timeout: 2000 });
+        }).toPass({ timeout: 15000 });
+    }
+
     private async fillCommonDetails(product: BaseProduct) {
-        await this.page.waitForLoadState("networkidle");
         await this.productName.fill(product.name);
         await expect(this.productName).toHaveValue(product.name);
+        await expect(this.productUrlKey).toHaveValue(/.+/);
+        await this.productUrlKey.fill(await this.productUrlKey.inputValue());
         await this.editor.fillInTinymce(
             this.productShortDescription,
             product.shortDescription,
@@ -529,11 +553,15 @@ export class ProductCreatePage extends BasePage {
             product.description,
         );
         if (product.type === "booking") {
-            await this.variantPriceInput.fill(product.price.toString());
+            await this.variantPriceInput.fill((product.price ?? 0).toString());
         }
     }
 
-    private async bundleAddOption(optionType: string, title: string) {
+    private async bundleAddOption(
+        optionType: string,
+        title: string,
+        items: string[],
+    ) {
         await this.addOptionButton.first().click();
         await this.addLableInput.fill(title);
         await this.selectType.selectOption({ value: optionType });
@@ -541,19 +569,24 @@ export class ProductCreatePage extends BasePage {
             value: "1",
         });
         await this.saveButton.click();
-        await this.addProduct.first().click();
-        await this.searchByNameInput.click();
-        await this.searchByNameInput.fill("simple");
-        await this.page.waitForTimeout(2000);
-        await this.productRowCheckbox("simple").evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        await this.productRowCheckbox("simple", 1).evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        await this.addSelectedProductButton.click();
+
+        const optionHeader = this.page
+            .locator("div.mb-2\\.5.justify-between")
+            .filter({ hasText: title });
+
+        await expect(optionHeader).toHaveCount(1);
+
+        for (const item of items) {
+            await optionHeader
+                .locator("p.cursor-pointer")
+                .filter({ hasText: "Add Product" })
+                .click();
+            await expect(this.selectProductsModalTitle).toBeVisible();
+            await this.selectProductInModal(item);
+            await this.addSelectedProductButton.click();
+
+            await expect(this.selectProductsModalTitle).toBeHidden();
+        }
     }
 
     private async handleProductType(product: BaseProduct) {
@@ -593,20 +626,27 @@ export class ProductCreatePage extends BasePage {
 
     private async simple(product: BaseProduct) {
         if (product.price !== undefined) {
-            await this.productPrice.fill(product.price.toString());
+            await this.fillAndConfirm(
+                this.productPrice,
+                product.price.toString(),
+            );
         }
         if (product.weight !== undefined) {
-            await this.productWeight.fill(product.weight.toString());
+            await this.fillAndConfirm(
+                this.productWeight,
+                product.weight.toString(),
+            );
         }
         if (product.inventory !== undefined) {
-            await this.productInventory
-                .first()
-                .fill(product.inventory.toString());
+            await this.fillAndConfirm(
+                this.productInventory,
+                (product.inventory ?? 100).toString(),
+            );
         }
-        await this.allowRmaToggle.click();
+        await this.applyRmaSetting(product, false);
     }
 
-    private async configurable(product: BaseProduct) {
+    private async configurable(_product: BaseProduct) {
         await this.removeRed.click();
         await this.removeGreen.click();
         await this.removeYellow.click();
@@ -624,7 +664,7 @@ export class ProductCreatePage extends BasePage {
         const skuValue = await this.variantSkuInput.inputValue();
         await this.variantSaveButton.click();
         await expect(this.visibleText(skuValue)).toBeVisible();
-        await this.firstCheckbox.click();
+        await this.selectAllVariantsToggle.click();
         await this.selectActionButton.click();
         await this.editPricesOption.click();
         await this.confirmationText.click();
@@ -634,7 +674,7 @@ export class ProductCreatePage extends BasePage {
         await this.bulkPriceInput.fill("45");
         await this.applyToAllButton.click();
         await this.bulkSaveButton.click();
-        await this.firstCheckbox.click();
+        await this.selectAllVariantsToggle.click();
         await this.selectActionButton.click();
         await this.editInventoriesOption.click();
         await this.confirmationText.click();
@@ -643,7 +683,7 @@ export class ProductCreatePage extends BasePage {
         await this.inventoryInput.fill("100");
         await this.applyToAllButton.click();
         await this.saveButton.click();
-        await this.firstCheckbox.click();
+        await this.selectAllVariantsToggle.click();
         await this.selectActionButton.click();
         await this.editWeightOption.click();
         await this.confirmationText.click();
@@ -656,43 +696,59 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async grouped(product: BaseProduct) {
-        await this.addGroupedProductButton.click();
-        await expect(this.selectProductsModalTitle).toBeVisible();
-        await this.searchByNameInput.click();
-        await this.searchByNameInput.fill("simple");
-        await this.productRowCheckbox(/Simple-\d+/).evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        await this.productRowCheckbox(/Simple-\d+/, 1).evaluate((el) => {
-            (el as HTMLInputElement).checked = true;
-            el.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-        await this.addSelectedProductButton.click();
+        for (const item of product.groupedItems ?? []) {
+            await this.addGroupedProductButton.click();
+            await expect(this.selectProductsModalTitle).toBeVisible();
+            await this.selectProductInModal(item);
+            await this.addSelectedProductButton.click();
+
+            await expect(this.selectProductsModalTitle).toBeHidden();
+        }
+
+        await this.applyRmaSetting(product, true);
+
+        for (const item of product.groupedItems ?? []) {
+            await expect(this.groupedProductVisibleByName(item)).toBeVisible();
+        }
+    }
+
+    private async selectProductInModal(name: string) {
+        await this.searchByNameInput.fill(name);
+
+        const row = this.productRowByText(name);
+
+        await expect(row).toHaveCount(1);
+
+        await row.locator("label.icon-uncheckbox").click();
+
+        await expect(row.locator("input[type='checkbox']")).toBeChecked();
+    }
+
+    private async applyRmaSetting(product: BaseProduct, withRule: boolean) {
+        if (product.allowRma === false) {
+            return;
+        }
+
         await this.allowRmaToggle.click();
-        await this.clickRules.click();
-        await this.rmaSelection.click();
-        await expect(
-            this.groupedProductVisibleByName(/simple-\d+/i).first(),
-        ).toBeVisible();
+
+        if (withRule) {
+            await this.clickRules.click();
+            await this.rmaSelection.click();
+        }
     }
 
     private async virtual(product: BaseProduct) {
         if (product.price !== undefined) {
             await this.productPrice.fill(product.price.toString());
         }
-        await this.productInventory.first().fill("100");
+        await this.productInventory.fill("100");
     }
 
     private async downloadable(product: BaseProduct) {
         if (product.price !== undefined) {
             await this.productPrice.fill(product.price.toString());
         }
-        await this.addDownloadableLink(
-            "../../data/images/1.webp",
-            generateName(),
-            generateHostname(),
-        );
+        await this.addDownloadableLink(generateName(), generateHostname());
         await this.addDownloadableSample(generateName(), generateHostname());
     }
 
@@ -726,7 +782,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async bookingDefault(product: BaseProduct) {
-        const availableFromDate = new Date();
+        const availableFromDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
         const availableToDate = new Date(
             availableFromDate.getTime() + 15 * 24 * 60 * 60 * 1000,
         );
@@ -744,20 +800,14 @@ export class ProductCreatePage extends BasePage {
         if (product.allowCancellation === false) {
             await this.bookingSelect("allow_cancellation").selectOption("0");
         }
-        await this.bookingInput("qty").fill(product.inventory.toString());
+        await this.bookingInput("qty").fill((product.inventory ?? 100).toString());
         if (product.defaultBookingType !== "many") {
             await this.addSlotsButton.click();
             await this.fromDaySelect.selectOption("0");
             await this.toDaySelect.selectOption("6");
-            await this.fromTimeTextbox.click();
-            await this.page.waitForTimeout(500);
-            await this.minuteSpinbutton.click();
-            await this.page.waitForTimeout(500);
-            await this.toTimeTextbox.click();
-            await this.minuteSpinbutton.click();
-            await this.page.waitForTimeout(500);
-            await this.page.keyboard.press("Escape");
-            await this.saveButton.click();
+            await this.fillSlotTime(this.fromTimeTextbox, "12", "00");
+            await this.fillSlotTime(this.toTimeTextbox, "12", "00");
+            await this.saveSlotDrawer();
             await this.productPrice.fill("199");
         } else {
             await this.bookingSelect("booking_type").selectOption("many");
@@ -767,24 +817,19 @@ export class ProductCreatePage extends BasePage {
             ];
             for (const day of weeks) {
                 await this.dayAvailabilityTrigger(day.status).click();
-                await this.slotTimeTextbox("From", 0).click();
-                await this.flatpickrCalendar.waitFor({ state: "visible" });
-                await this.hourSpinbutton.fill("10");
-                await this.page.waitForTimeout(500);
-                await this.minuteSpinbutton.fill("35");
-                await this.minuteSpinbutton.press("Enter");
-                await this.page.waitForTimeout(500);
-                await this.slotTimeTextbox("To", 0).click();
-                await this.page.waitForTimeout(500);
-                await this.flatpickrCalendar.waitFor({ state: "visible" });
-                await this.hourSpinbutton.fill("11");
-                await this.minuteSpinbutton.fill("35");
-                await this.minuteSpinbutton.press("Enter");
-                await this.page.waitForTimeout(500);
+                await this.fillSlotTime(
+                    this.slotTimeTextbox("From", 0),
+                    "10",
+                    "35",
+                );
+                await this.fillSlotTime(
+                    this.slotTimeTextbox("To", 0),
+                    "11",
+                    "20",
+                );
                 await this.dayStatusSelect.selectOption("1");
-                await this.page.waitForTimeout(500);
                 await this.escapeTarget.press("Escape");
-                await this.saveButton.click();
+                await this.saveSlotDrawer();
                 await expect(
                     this.bookingDaySlotIdInput(day.status - 1),
                 ).toHaveValue(/.+/);
@@ -794,7 +839,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async bookingAppointment(product: BaseProduct) {
-        const availableFromDate = new Date();
+        const availableFromDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
         const availableToDate = new Date(
             availableFromDate.getTime() + 15 * 24 * 60 * 60 * 1000,
         );
@@ -817,7 +862,7 @@ export class ProductCreatePage extends BasePage {
                 formattedAvailableFromDate,
             );
             await this.bookingAvailableToInput.fill(formattedAvailableToDate);
-            await this.bookingInput("qty").fill(product.inventory.toString());
+            await this.bookingInput("qty").fill((product.inventory ?? 100).toString());
             if (product.sameSlotAllDays) {
                 await this.bookingSelect("same_slot_all_days").selectOption(
                     "1",
@@ -852,14 +897,13 @@ export class ProductCreatePage extends BasePage {
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
-            await this.bookingInput("qty").fill(product.inventory.toString());
+            await this.bookingInput("qty").fill((product.inventory ?? 100).toString());
             if (product.sameSlotAllDays) {
                 await this.bookingSelect("same_slot_all_days").selectOption(
                     "1",
                 );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "10", "35");
-                await this.page.waitForTimeout(500);
                 await this.fillTimeTextbox("To", 0, "11", "35");
                 await this.escapeTarget.press("Escape");
                 await this.saveSlotDrawer();
@@ -905,8 +949,8 @@ export class ProductCreatePage extends BasePage {
         const availableToDate = new Date(availableFromDate);
         availableToDate.setDate(availableFromDate.getDate() + 2);
         availableToDate.setHours(12, 0, 0, 0);
-        const pad = (num) => String(num).padStart(2, "0");
-        const formatLocalDate = (date) => {
+        const pad = (num: number) => String(num).padStart(2, "0");
+        const formatLocalDate = (date: Date) => {
             return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
         };
         const formattedAvailableFromDate = formatLocalDate(availableFromDate);
@@ -930,7 +974,7 @@ export class ProductCreatePage extends BasePage {
     private async bookingRental(product: BaseProduct) {
         await this.bookingSelect("type").selectOption("rental");
         await this.bookingLocationInput.fill(generateLocation());
-        await this.bookingInput("qty").fill(product.inventory.toString());
+        await this.bookingInput("qty").fill((product.inventory ?? 100).toString());
         if (product.allowCancellation === false) {
             await this.bookingSelect("allow_cancellation").selectOption("0");
         }
@@ -946,8 +990,8 @@ export class ProductCreatePage extends BasePage {
             const availableToDate = new Date(availableFromDate);
             availableToDate.setDate(availableFromDate.getDate() + 7);
             availableToDate.setHours(12, 0, 0, 0);
-            const pad = (num) => String(num).padStart(2, "0");
-            const formatLocalDate = (date) => {
+            const pad = (num: number) => String(num).padStart(2, "0");
+            const formatLocalDate = (date: Date) => {
                 return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
             };
             const formattedAvailableFromDate =
@@ -1087,7 +1131,7 @@ export class ProductCreatePage extends BasePage {
     private async bookingTable(product: BaseProduct) {
         await this.bookingSelect("type").selectOption("table");
         await this.bookingLocationInput.fill(generateLocation());
-        await this.bookingInput("qty").fill(product.inventory.toString());
+        await this.bookingInput("qty").fill((product.inventory ?? 100).toString());
         if (product.allowCancellation === false) {
             await this.bookingSelect("allow_cancellation").selectOption("0");
         }
@@ -1103,8 +1147,8 @@ export class ProductCreatePage extends BasePage {
             const availableToDate = new Date(availableFromDate);
             availableToDate.setDate(availableFromDate.getDate() + 7);
             availableToDate.setHours(12, 0, 0, 0);
-            const pad = (num) => String(num).padStart(2, "0");
-            const formatLocalDate = (date) => {
+            const pad = (num: number) => String(num).padStart(2, "0");
+            const formatLocalDate = (date: Date) => {
                 return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
             };
             const formattedAvailableFromDate =
@@ -1124,7 +1168,6 @@ export class ProductCreatePage extends BasePage {
                     );
                     await this.addSlotsButton.click();
                     await this.fillTimeTextbox("From", 0, "10", "35");
-                    await this.page.waitForTimeout(500);
                     await this.fillTimeTextbox("To", 0, "11", "35");
                     await this.escapeTarget.press("Escape");
                     await this.saveSlotDrawer();
@@ -1225,46 +1268,38 @@ export class ProductCreatePage extends BasePage {
     }
 
     private async bundle(product: BaseProduct) {
-        await this.bundleAddOption("radio", "Bundle Option 1");
-        await this.allowRmaToggle.click();
-        await this.clickRules.click();
-        await this.rmaSelection.click();
+        await this.bundleAddOption(
+            "radio",
+            "Bundle Option 1",
+            product.bundleItems ?? [],
+        );
+        await this.applyRmaSetting(product, true);
+    }
+
+    private async clickPanelSave() {
+        await expect(this.linkSaveButton).toBeVisible();
+        await this.linkSaveButton.focus();
+        await this.linkSaveButton.press("Enter");
+
+        await expect(this.linkSaveButton).toBeHidden();
     }
 
     private async saveAndVerify() {
         await this.saveProductButton.click();
-        await expect(this.updateProductSuccessToast).toBeVisible();
+        await expect(this.updateProductSuccessToast).toBeVisible({ timeout: 60 * 1000 });
     }
 
-    private saveProductToJson(product: BaseProduct) {
-        const filePath = "product-data.json";
-        const productData = {
-            name: product.name,
-            sku: product.sku,
-            type: product.type,
-        };
-        fs.writeFileSync(filePath, JSON.stringify(productData, null, 2));
-    }
-
-    async createProduct(product: BaseProduct) {
+    async createProduct(product: BaseProduct): Promise<BaseProduct> {
         await this.visit("admin/catalog/products");
         await this.openCreateModal(product.type, product.sku);
         await this.fillCommonDetails(product);
         await this.handleProductType(product);
         await this.saveAndVerify();
-        this.saveProductToJson(product);
+
+        return product;
     }
 
-    async createProductWithoutRMARule(product: BaseProduct) {
-        await this.visit("admin/catalog/products");
-        await this.openCreateModal(product.type, product.sku);
-        await this.fillCommonDetails(product);
-        await this.handleProductType(product);
-        await this.saveAndVerify();
-        this.saveProductToJson(product);
-    }
-
-    async createConfigProduct(product: BaseProduct) {
+    async createConfigProduct(product: BaseProduct): Promise<BaseProduct> {
         await this.visit("admin/catalog/products");
         await this.createProductButton.click();
         await this.selectProductType.selectOption(product.type);
@@ -1273,17 +1308,17 @@ export class ProductCreatePage extends BasePage {
         await this.saveProductButton.click();
         await this.handleProductType(product);
         await this.fillCommonDetails(product);
-        await this.allowRmaToggle.click();
-        await this.clickRules.click();
-        await this.rmaSelection.click();
+        await this.applyRmaSetting(product, true);
         await this.saveAndVerify();
-        this.saveProductToJson(product);
+
+        return product;
     }
 
-    async addDownloadableLink(filePath: string, title: string, url: string) {
+    async addDownloadableLink(title: string, url: string) {
         await this.addLinkButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.linkTitleInput.waitFor({ state: "visible" });
         await this.linkTitleInput.fill(title);
+        await expect(this.linkTitleInput).toHaveValue(title);
         const linkTitle = await this.linkTitleInput.inputValue();
         await this.linkPriceInput.fill("100");
         await this.linkDownloadsInput.fill("2");
@@ -1291,20 +1326,19 @@ export class ProductCreatePage extends BasePage {
         await this.linkFileInput.fill(url);
         await this.sampleTypeSelect.selectOption("url");
         await this.sampleUrlInput.fill(url);
-        await this.linkSaveButton.click();
-        await this.saveButton.click();
+        await this.clickPanelSave();
         await expect(this.visibleText(linkTitle)).toBeVisible();
     }
 
     async addDownloadableSample(title: string, url: string) {
         await this.addSampleButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.sampleTitleInput.waitFor({ state: "visible" });
         await this.sampleTitleInput.fill(title);
+        await expect(this.sampleTitleInput).toHaveValue(title);
         const sampleTitle = await this.sampleTitleInput.inputValue();
         await this.sampleTypeDropdown.selectOption("url");
         await this.sampleUrlField.fill(url);
-        await this.linkSaveButton.click();
-        await this.saveButton.click();
+        await this.clickPanelSave();
         await expect(this.visibleText(sampleTitle)).toBeVisible();
     }
 }

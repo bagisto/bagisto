@@ -1,19 +1,18 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
-import { generateCurrency } from "../../../utils/faker";
-import { CurrenciesPage } from "./CurrenciesPage";
+import { DatagridPage } from "../DatagridPage";
+import { numericValuePattern } from "../../../utils/numbers";
 
-export class ExchangeRatesPage extends BasePage {
+export class ExchangeRatesPage extends DatagridPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get createButton() {
-        return this.page.getByRole("button", { name: /create/i });
+    protected get gridPath(): string {
+        return "admin/settings/exchange-rates";
     }
 
-    private get baseCurrencyInput() {
-        return this.page.locator('input[name="base_currency"]');
+    private get createButton() {
+        return this.page.getByRole("button", { name: "Create Exchange Rate" });
     }
 
     private get targetCurrencySelect() {
@@ -24,115 +23,95 @@ export class ExchangeRatesPage extends BasePage {
         return this.page.locator('input[name="rate"]');
     }
 
-    private get editIcons() {
-        return this.page.locator("a:has(span.icon-edit)");
+    private get saveButton() {
+        return this.page.getByRole("button", { name: "Save Exchange Rate" });
     }
 
-    private get deleteIcons() {
-        return this.page.locator("a:has(span.icon-delete)");
-    }
-
-    private get agreeButton() {
-        return this.page.locator(
-            "button.transparent-button + button.primary-button:visible",
-        );
-    }
-
-    async open(): Promise<void> {
-        await this.visit("admin/settings/exchange-rates");
-        await this.page.waitForLoadState("networkidle");
-    }
-
-    async createExchangeRate(): Promise<void> {
-        await this.open();
+    private async openCreateModal(): Promise<void> {
+        await this.openGrid();
         await this.createButton.click();
 
-        const baseCurrencyInput = this.baseCurrencyInput;
-        const baseCurrency = await baseCurrencyInput.inputValue();
-
-        let currency;
-        do {
-            currency = generateCurrency();
-        } while (currency.code === baseCurrency);
-
-        const currenciesPage = new CurrenciesPage(this.page);
-        await currenciesPage.createCurrency(currency);
-
-        await this.open();
-        await this.createButton.click();
-
-        const currencySelect = this.targetCurrencySelect;
-
-        await expect(currencySelect).toBeVisible({ timeout: 30_000 });
-        const options = currencySelect.locator("option");
-
-        await expect
-            .poll(async () => await options.count(), { timeout: 60_000 })
-            .toBeGreaterThan(0);
-
-        const optionCount = await options.count();
-
-        if (optionCount <= 1) {
-            throw new Error("No selectable currency options available");
-        }
-
-        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
-
-        await currencySelect.selectOption({ index: randomIndex });
-        await this.page.fill(
-            'input[name="rate"]',
-            (Math.random() * 500).toFixed(2),
-        );
-        await this.page.keyboard.press("Enter");
-
-        await expect(this.page.locator("#app")).toContainText(
-            "Exchange Rate Created Successfully",
-            { timeout: 30_000 },
-        );
+        await expect(this.rateInput).toBeVisible();
     }
 
-    async editFirstExchangeRate(): Promise<void> {
-        await this.open();
+    private async openEditModal(currencyName: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(currencyName);
+        await this.editIcon(currencyName).click();
 
-        const editIcons = this.editIcons;
-        await editIcons.nth(0).click();
+        await expect(this.rateInput).toBeVisible();
+    }
 
-        const currencySelect = this.targetCurrencySelect;
+    private async fillCreateForm(
+        currencyName: string,
+        rate: string,
+    ): Promise<void> {
+        await this.targetCurrencySelect.selectOption({ label: currencyName });
+        await this.rateInput.fill(rate);
+    }
 
-        await expect(currencySelect).toBeVisible({ timeout: 30_000 });
-        const options = currencySelect.locator("option");
-        await expect
-            .poll(async () => await options.count(), { timeout: 60_000 })
-            .toBeGreaterThan(0);
-        const optionCount = await options.count();
-
-        if (optionCount <= 1) {
-            throw new Error("No selectable currency options available");
-        }
-
-        const randomIndex = Math.floor(Math.random() * (optionCount - 1)) + 1;
-
-        await currencySelect.selectOption({ index: randomIndex });
-        await this.page.fill(
-            'input[name="rate"]',
-            (Math.random() * 500).toFixed(2),
-        );
-        await this.page.keyboard.press("Enter");
+    async createExchangeRate(currencyName: string, rate: string): Promise<void> {
+        await this.openCreateModal();
+        await this.fillCreateForm(currencyName, rate);
+        await this.saveButton.click();
 
         await expect(
-            this.page.getByText("Exchange Rate Updated Successfully").first(),
+            this.flashMessage("Exchange Rate Created Successfully"),
         ).toBeVisible();
     }
 
-    async deleteFirstExchangeRate(): Promise<void> {
-        await this.open();
-        const iconDelete = this.deleteIcons;
-        await iconDelete.nth(0).click();
+    async attemptCreateExchangeRate(
+        currencyName: string,
+        rate: string,
+    ): Promise<void> {
+        await this.openCreateModal();
+        await this.fillCreateForm(currencyName, rate);
+        await this.saveButton.click();
+    }
 
-        await this.agreeButton.click();
+    async updateExchangeRate(currencyName: string, rate: string): Promise<void> {
+        await this.openEditModal(currencyName);
+        await this.rateInput.fill(rate);
+        await this.saveButton.click();
 
         await expect(
-            this.page.getByText("Exchange Rate Deleted Successfully").first(),
+            this.flashMessage("Exchange Rate Updated Successfully"),
         ).toBeVisible();
+    }
+
+    async deleteExchangeRate(currencyName: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(currencyName);
+        await this.deleteRow(currencyName, "Exchange Rate Deleted Successfully");
+    }
+
+    async deleteExchangeRatesIfPresent(currencyNames: string[]): Promise<void> {
+        await this.deleteRowsIfPresent(
+            currencyNames,
+            "Exchange Rate Deleted Successfully",
+        );
+    }
+
+    async expectExchangeRateListed(
+        currencyName: string,
+        rate: string,
+    ): Promise<void> {
+        await this.expectSearchedRowCount(currencyName, 1);
+
+        await expect(this.row(currencyName)).toContainText(rate);
+    }
+
+    async expectExchangeRateAbsent(currencyName: string): Promise<void> {
+        await this.expectSearchedRowCount(currencyName, 0);
+    }
+
+    async expectRateInEditForm(currencyName: string, rate: string): Promise<void> {
+        await this.openEditModal(currencyName);
+
+        await expect(this.rateInput).toHaveValue(numericValuePattern(rate));
+    }
+
+    async expectValidationError(message: string): Promise<void> {
+        await this.expectValidationMessage(message);
     }
 }

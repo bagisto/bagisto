@@ -1,29 +1,75 @@
 import { test } from "../../../setup";
-import { TaxRateCreatePage } from "../../../pages/admin/settings/taxes/TaxRateCreatePage";
-import { TaxRateListPage } from "../../../pages/admin/settings/taxes/TaxRateListPage";
-import { TaxCategoryPage } from "../../../pages/admin/settings/taxes/TaxCategoryPage";
-import { TaxConfigurationPage } from "../../../pages/admin/configuration/sales/TaxConfigurationPage";
-import { CartRuleCreatePage } from "../../../pages/admin/marketing/promotion/CartRuleCreatePage";
-import { TaxRateApplyPage } from "../../../pages/shop/taxes/TaxRateApplyPage";
+import { ProductEditPage } from "../../../pages/admin/catalog/products/ProductEditPage";
+import { ProductListPage } from "../../../pages/admin/catalog/products/ProductListPage";
 import {
-    assignTaxCategoryToProduct,
+    TaxConfigurationPage,
+    type TaxSettings,
+} from "../../../pages/admin/configuration/sales/TaxConfigurationPage";
+import { CartRulePage } from "../../../pages/admin/marketing/promotion/CartRulePage";
+import { TaxCategoriesPage } from "../../../pages/admin/settings/taxes/TaxCategoriesPage";
+import { TaxRatesPage } from "../../../pages/admin/settings/taxes/TaxRatesPage";
+import { TaxRateApplyPage } from "../../../pages/shop/taxes/TaxRateApplyPage";
+import { uniqueStamp } from "../../../utils/faker";
+import {
     createSimpleTaxableProduct,
+    generateTaxCategoryData,
+    generateTaxRateData,
     TaxApplyOnMode,
     TAX_PRODUCT_PRICE,
     TAX_REGIONS,
 } from "../../../utils/tax";
 
-test.describe.configure({ mode: "serial" });
-
-test.describe("tax before / after discount", () => {
+test.describe("tax before and after discount", () => {
     test.setTimeout(300000);
 
     const TAX_PERCENT = 18;
     const DISCOUNT_PERCENT = 10;
     const region = TAX_REGIONS.india;
 
-    test.afterEach(async ({ adminPage }) => {
-        await new TaxConfigurationPage(adminPage).resetCalculationDefaults();
+    let taxConfig: TaxConfigurationPage;
+    let original: TaxSettings;
+    let taxRatesPage: TaxRatesPage;
+    let taxCategoriesPage: TaxCategoriesPage;
+    let productListPage: ProductListPage;
+    let cartRulePage: CartRulePage;
+    let createdRates: string[];
+    let createdCategories: string[];
+    let createdProducts: string[];
+    let createdCartRules: string[];
+
+    test.beforeEach(async ({ adminPage }) => {
+        taxConfig = new TaxConfigurationPage(adminPage);
+        taxRatesPage = new TaxRatesPage(adminPage);
+        taxCategoriesPage = new TaxCategoriesPage(adminPage);
+        productListPage = new ProductListPage(adminPage);
+        cartRulePage = new CartRulePage(adminPage);
+        createdRates = [];
+        createdCategories = [];
+        createdProducts = [];
+        createdCartRules = [];
+        original = await taxConfig.readSettings();
+    });
+
+    test.afterEach(async () => {
+        try {
+            await taxConfig.applySettings(original);
+        } finally {
+            try {
+                await cartRulePage.deleteCartRulesIfPresent(createdCartRules);
+            } finally {
+                try {
+                    await productListPage.deleteProductsIfPresent(createdProducts);
+                } finally {
+                    try {
+                        await taxCategoriesPage.deleteTaxCategoriesIfPresent(
+                            createdCategories,
+                        );
+                    } finally {
+                        await taxRatesPage.deleteTaxRatesIfPresent(createdRates);
+                    }
+                }
+            }
+        }
     });
 
     const modes: { label: string; mode: TaxApplyOnMode }[] = [
@@ -32,32 +78,41 @@ test.describe("tax before / after discount", () => {
     ];
 
     for (const { label, mode } of modes) {
-        test(`should charge ${TAX_PERCENT}% tax ${label} when a cart rule is applied`, async ({
+        test(`should charge ${TAX_PERCENT}% tax ${label} when a coupon is applied`, async ({
             adminPage,
             shopPage,
         }) => {
-            const rate = await new TaxRateCreatePage(adminPage).createTaxRate({
+            const rate = generateTaxRateData({
                 country: region.country,
                 state: "",
                 taxRate: `${TAX_PERCENT}`,
             });
+            const category = generateTaxCategoryData();
+            createdRates.push(rate.identifier);
+            createdCategories.push(category.name);
 
-            const category = await new TaxCategoryPage(
-                adminPage,
-            ).createTaxCategory(rate.identifier);
+            await taxRatesPage.createTaxRate(rate);
+            await taxCategoriesPage.createTaxCategory(category, [rate.identifier]);
 
             const productName = await createSimpleTaxableProduct(adminPage);
+            createdProducts.push(productName);
 
-            await assignTaxCategoryToProduct(adminPage, category.name);
+            await new ProductEditPage(adminPage).assignTaxCategory(
+                productName,
+                category.name,
+            );
 
-            const couponCode = `TAX${Date.now()}`;
-            const cartRule = await new CartRuleCreatePage(
-                adminPage,
-            ).createCouponPercentageRule(couponCode, DISCOUNT_PERCENT);
+            const couponCode = `TAX${uniqueStamp()}`;
+            const cartRule = await cartRulePage.createCouponPercentageRule(
+                couponCode,
+                DISCOUNT_PERCENT,
+            );
+            createdCartRules.push(cartRule.name);
 
-            const configPage = new TaxConfigurationPage(adminPage);
-            await configPage.setProductPricesMode("excluding_tax");
-            await configPage.setApplyTaxOn(mode);
+            await taxConfig.applySettings({
+                productPrices: "excluding_tax",
+                applyTaxOn: mode,
+            });
 
             await new TaxRateApplyPage(shopPage).verifyTaxWithCartRule({
                 productName,
@@ -71,11 +126,6 @@ test.describe("tax before / after discount", () => {
                 },
                 applyOn: mode,
             });
-
-            await new CartRuleCreatePage(adminPage).deleteCartRule(
-                cartRule.name,
-            );
-            await new TaxRateListPage(adminPage).deleteTaxRate(rate.identifier);
         });
     }
 });

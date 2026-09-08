@@ -1,79 +1,115 @@
-import { expect, Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { escapeRegExp } from "@shared/regex";
+
+const DELETE_TIMEOUT = 90 * 1000;
 
 export class RuleDeletePage extends BasePage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get deleteIcon() {
-        return this.page.locator(".icon-delete");
+    private get searchInput() {
+        return this.page.locator('input[name="search"]');
     }
 
-    private get agree() {
+    private get emptyState() {
+        return this.page.getByText("No Records Available.");
+    }
+
+    private get gridRows() {
+        return this.page.locator("div.row:not(.datagrid-head):not(:has(.shimmer))");
+    }
+
+    private get agreeButton() {
         return this.page.getByRole("button", { name: "Agree", exact: true });
     }
 
-    private get selectRowBtn() {
-        return this.page.locator(".icon-uncheckbox");
+    private row(name: string): Locator {
+        return this.gridRows.filter({
+            has: this.page.locator("p", {
+                hasText: new RegExp(`^\\s*${escapeRegExp(name)}\\s*$`),
+            }),
+        });
     }
 
-    private get selectAction() {
-        return this.page.getByRole("button", { name: "Select Action" });
-    }
-
-    private get selectDelete() {
-        return this.page.getByRole("link", { name: "Delete" });
-    }
-
-    private get productDeleteSuccess() {
-        return this.page.getByText("Selected Products Deleted Successfully");
-    }
-
-    private async deleteRuleIfPresent(path: string, successMessage: string) {
+    private async openGrid(path: string): Promise<void> {
         await this.visit(path);
 
-        try {
-            await this.deleteIcon
-                .first()
-                .waitFor({ state: "visible", timeout: 5000 });
-        } catch {
-            return;
-        }
-
-        await this.deleteIcon.first().click();
-        await this.agree.click();
-        await expect(this.page.getByText(successMessage)).toBeVisible();
+        await expect
+            .poll(async () => (await this.gridRows.count()) > 0)
+            .toBe(true);
     }
 
-    private async deleteLatestProduct() {
-        await this.visit("admin/catalog/products");
-        await this.selectRowBtn.nth(2).click();
-        await this.selectAction.click();
-        await this.selectDelete.click();
-        await this.agree.click();
-        await expect(this.productDeleteSuccess).toBeVisible();
+    private async searchFor(name: string): Promise<void> {
+        await this.searchInput.fill(name);
+
+        await Promise.all([
+            this.page.waitForResponse((response) =>
+                decodeURIComponent(response.url()).replace(/\+/g, " ").includes(name),
+            ),
+            this.searchInput.press("Enter"),
+        ]);
     }
 
-    async deleteRuleAndProduct() {
-        try {
-            await this.deleteRuleIfPresent(
-                "admin/marketing/promotions/cart-rules",
-                "Cart Rule Deleted Successfully",
-            );
-        } finally {
-            await this.deleteLatestProduct();
+    private async deleteRulesIfPresent(
+        path: string,
+        names: string[],
+        successMessage: string,
+    ): Promise<void> {
+        const failures: string[] = [];
+
+        for (const name of names) {
+            try {
+                await this.openGrid(path);
+                await this.searchFor(name);
+
+                await expect
+                    .poll(
+                        async () =>
+                            (await this.row(name).count()) > 0 ||
+                            (await this.emptyState.count()) > 0,
+                    )
+                    .toBe(true);
+
+                if (await this.row(name).count()) {
+                    await this.row(name).locator("span.icon-delete").click();
+
+                    const deleted = this.page.waitForResponse(
+                        (response) => response.request().method() === "DELETE",
+                        { timeout: DELETE_TIMEOUT },
+                    );
+
+                    await this.agreeButton.click();
+
+                    expect((await deleted).ok()).toBe(true);
+
+                    await expect(this.page.getByText(successMessage)).toBeVisible();
+                    await expect(this.row(name)).toHaveCount(0);
+                }
+            } catch (error) {
+                failures.push(`${name}: ${error}`);
+            }
+        }
+
+        if (failures.length) {
+            throw new Error(`Cleanup failed for:\n${failures.join("\n")}`);
         }
     }
 
-    async deleteCatalogRuleAndProduct() {
-        try {
-            await this.deleteRuleIfPresent(
-                "admin/marketing/promotions/catalog-rules",
-                "Catalog Rule Deleted Successfully",
-            );
-        } finally {
-            await this.deleteLatestProduct();
-        }
+    async deleteCartRulesIfPresent(names: string[]): Promise<void> {
+        await this.deleteRulesIfPresent(
+            "admin/marketing/promotions/cart-rules",
+            names,
+            "Cart Rule Deleted Successfully",
+        );
+    }
+
+    async deleteCatalogRulesIfPresent(names: string[]): Promise<void> {
+        await this.deleteRulesIfPresent(
+            "admin/marketing/promotions/catalog-rules",
+            names,
+            "Catalog Rule Deleted Successfully",
+        );
     }
 }

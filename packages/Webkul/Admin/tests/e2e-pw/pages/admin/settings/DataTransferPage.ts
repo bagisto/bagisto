@@ -318,6 +318,18 @@ export class DataTransferPage extends BasePage {
             .click();
 
         await this.confirmAgreeDialog();
+
+        await expect(this.page.getByText("Import deleted successfully.")).toBeVisible();
+        await expect(this.gridRow(id)).toHaveCount(0);
+    }
+
+    async expectValidationMessage(text: string): Promise<void> {
+        await expect(this.page.getByText(text).first()).toBeVisible();
+    }
+
+    async expectFormError(text: string): Promise<void> {
+        await expect(this.page.getByText(text)).toBeVisible();
+        await expect(this.page).toHaveURL(/imports\/create/);
     }
 
     async expectImagesDirectory(directory: string): Promise<void> {

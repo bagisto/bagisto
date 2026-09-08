@@ -18,7 +18,8 @@
     "paths": {
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
-      "@data/*": ["data/*"]
+      "@data/*": ["data/*"],
+      "@shared/*": ["../../../../../tests/e2e-pw/helpers/*"]
     },
     "types": ["node"]
   },

@@ -1,85 +1,102 @@
 import { expect, type Page } from "@playwright/test";
-import { BasePage } from "../../BasePage";
+import { DatagridPage } from "../DatagridPage";
 
-export class CustomerReviewsPage extends BasePage {
+export type ReviewStatus = "approved" | "disapproved" | "pending";
+
+export const REVIEW_STATUS_LABELS: Record<ReviewStatus, string> = {
+    approved: "Approved",
+    disapproved: "Disapproved",
+    pending: "Pending",
+};
+
+export class CustomerReviewsPage extends DatagridPage {
     constructor(page: Page) {
         super(page);
     }
 
-    private get reviewDetailIcons() {
-        return this.page.locator("span.cursor-pointer.icon-sort-right");
+    protected get gridPath(): string {
+        return "admin/customers/reviews";
+    }
+
+    private get editModal() {
+        return this.page.locator("form").filter({
+            has: this.page.locator('select[name="status"]'),
+        });
     }
 
     private get statusSelect() {
-        return this.page.locator('select[name="status"]');
+        return this.editModal.locator('select[name="status"]');
     }
 
     private get saveButton() {
-        return this.page.getByRole("button", { name: "Save" });
+        return this.editModal.getByRole("button", { name: "Save" });
     }
 
-    private get checkboxes() {
-        return this.page.locator(".icon-uncheckbox:visible");
+    private editIconFor(title: string) {
+        return this.row(title).locator("span.icon-sort-right");
     }
 
-    private get selectActionButton() {
-        return this.page.locator('button:has-text("Select Action")');
-    }
-
-    private get agreeButton() {
-        return this.page.locator('button.primary-button:has-text("Agree")');
-    }
-
-    private get deleteActionLink() {
-        return this.page.locator('a:has-text("Delete")');
-    }
-
-    async open(): Promise<void> {
-        await this.visit("admin/customers/reviews");
-    }
-
-    async openFirstReviewDetails(): Promise<void> {
-        await this.open();
-        await expect(this.reviewDetailIcons.first()).toBeVisible({
-            timeout: 10000,
+    private statusCell(title: string, status: ReviewStatus) {
+        return this.row(title).locator('p[class^="label-"]', {
+            hasText: new RegExp(`^\\s*${REVIEW_STATUS_LABELS[status]}\\s*$`),
         });
-        await this.reviewDetailIcons.first().click();
     }
 
-    async updateFirstReviewStatus(
-        status: "approved" | "disapproved",
-    ): Promise<void> {
-        await this.open();
-        await this.reviewDetailIcons.first().click();
+    async setStatus(title: string, status: ReviewStatus): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(title);
+        await this.editIconFor(title).click();
+
+        await expect(this.statusSelect).toBeVisible();
+
         await this.statusSelect.selectOption(status);
         await this.saveButton.click();
+
+        await expect(
+            this.flashMessage("Review Update Successfully"),
+        ).toBeVisible();
     }
 
-    async selectFirstReviewForMassActions(): Promise<void> {
-        await this.open();
-        await this.checkboxes.nth(1).click();
-    }
-
-    async openSelectActionMenu(): Promise<void> {
-        await expect(this.selectActionButton).toBeVisible({ timeout: 10000 });
-        await this.selectActionButton.click();
-    }
-
-    async applyMassUpdateStatus(
-        status: "Approved" | "Pending" | "Disapproved",
+    async massUpdateStatus(
+        titles: string[],
+        status: Exclude<ReviewStatus, "pending">,
     ): Promise<void> {
-        await this.page.hover('a:has-text("Update Status")');
-        await this.page.waitForTimeout(500);
+        await this.openGrid();
+        await this.selectRows(titles);
+        await this.applyMassAction("Update Status", REVIEW_STATUS_LABELS[status]);
 
-        await this.page.click(`a:has-text("${status}")`);
+        await expect(
+            this.flashMessage("Selected Review Updated Successfully"),
+        ).toBeVisible();
     }
 
-    async applyMassDelete(): Promise<void> {
-        await this.page.click('a:has-text("Delete")', { timeout: 10000 });
+    async deleteReview(title: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(title);
+        await this.deleteRow(title, "Review Deleted Successfully");
     }
 
-    async confirmAgreeDialog(): Promise<void> {
-        await expect(this.agreeButton).toBeVisible({ timeout: 10000 });
-        await this.agreeButton.click();
+    async deleteReviewsIfPresent(titles: string[]): Promise<void> {
+        await this.deleteRowsIfPresent(titles, "Review Deleted Successfully");
+    }
+
+    async massDeleteReviews(titles: string[]): Promise<void> {
+        await this.openGrid();
+        await this.selectRows(titles);
+        await this.applyMassAction("Delete");
+
+        await expect(
+            this.flashMessage("Selected Review Deleted Successfully"),
+        ).toBeVisible();
+    }
+
+    async expectReviewStatus(title: string, status: ReviewStatus): Promise<void> {
+        await this.expectSearchedRowCount(title, 1);
+
+        await expect(this.statusCell(title, status)).toHaveCount(1);
+    }
+
+    async expectReviewAbsent(title: string): Promise<void> {
+        await this.expectSearchedRowCount(title, 0);
     }
 }
