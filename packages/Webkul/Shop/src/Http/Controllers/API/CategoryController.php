@@ -88,7 +88,7 @@ class CategoryController extends APIController
     }
 
     /**
-     * Get attribute options with pagination and search.
+     * Get attribute options with pagination, search, and optional category scoping.
      */
     public function getAttributeOptions(int $attributeId): mixed
     {
@@ -104,6 +104,25 @@ class CategoryController extends APIController
             ->with([
                 'translation' => fn ($query) => $query->where('locale', core()->getCurrentLocale()->code),
             ]);
+
+        if ($categoryId = request('category_id')) {
+            $query->whereExists(function ($exists) use ($attribute, $categoryId) {
+                $exists->selectRaw('1')
+                    ->from('product_attribute_values as pav')
+                    ->join('product_categories as pc', 'pc.product_id', '=', 'pav.product_id')
+                    ->where('pav.attribute_id', $attribute->id)
+                    ->where('pc.category_id', $categoryId);
+
+                if (in_array($attribute->type, [
+                    AttributeTypeEnum::CHECKBOX->value,
+                    AttributeTypeEnum::MULTISELECT->value,
+                ])) {
+                    $exists->whereRaw('FIND_IN_SET(attribute_options.id, pav.text_value)');
+                } else {
+                    $exists->whereColumn('pav.integer_value', 'attribute_options.id');
+                }
+            });
+        }
 
         if ($search = request('search')) {
             $query->where(function ($query) use ($search) {

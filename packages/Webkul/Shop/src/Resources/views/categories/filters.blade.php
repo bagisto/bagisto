@@ -137,6 +137,7 @@
                     ref="filterItemComponent"
                     :key="filterIndex"
                     :filter="filter"
+                    :category-id="categoryId"
                     v-for='(filter, filterIndex) in filters.available'
                     @values-applied="applyFilter(filter, $event)"
                 >
@@ -345,6 +346,8 @@
                 return {
                     isLoading: true,
 
+                    categoryId: "{{ isset($category) ? $category->id : '' }}",
+
                     filters: {
                         available: {},
 
@@ -426,7 +429,7 @@
         app.component('v-filter-item', {
             template: '#v-filter-item-template',
 
-            props: ['filter'],
+            props: ['filter', 'categoryId'],
 
             data() {
                 return {
@@ -514,6 +517,7 @@
                         params: {
                             page: this.currentPage,
                             search: this.searchQuery,
+                            category_id: this.categoryId,
                         }
                     })
                     .then(response => {
