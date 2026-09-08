@@ -6,12 +6,21 @@ export class BookingProductCheckout extends CheckoutHelper {
         super(page);
     }
 
+    /**
+     * Picks the earliest bookable date after today.
+     *
+     * Today is skipped deliberately. A slot is only offered while its start
+     * time is still in the future, and the server re-validates that when the
+     * checkout page is requested, so a same-day slot whose start falls between
+     * adding it to the cart and placing the order is rejected as expired.
+     */
     private async selectFirstAvailableDate() {
         await this.bookingDateInput.click();
+        await this.flatpickrOpenCalendar.waitFor({ state: "visible" });
 
         for (let month = 0; month < 24; month++) {
-            if (await this.flatpickrEnabledDates.count()) {
-                await this.flatpickrEnabledDates.first().click();
+            if (await this.flatpickrOpenEnabledDatesAfterToday.count()) {
+                await this.flatpickrOpenEnabledDatesAfterToday.first().click();
 
                 return;
             }
@@ -19,7 +28,7 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.goToNextFlatpickrMonth();
         }
 
-        throw new Error("No bookable date found in the next two years");
+        throw new Error("No bookable date after today found in the next two years");
     }
 
     private async rentalDateSelect(count: number, dateInput: Locator) {

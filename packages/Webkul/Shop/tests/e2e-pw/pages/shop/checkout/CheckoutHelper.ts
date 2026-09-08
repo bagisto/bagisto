@@ -163,15 +163,15 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator(".flatpickr-calendar.open");
     }
 
-    protected get flatpickrEnabledDates() {
-        return this.page.locator(
-            ".flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)",
-        );
-    }
-
     protected get flatpickrOpenEnabledDates() {
         return this.page.locator(
             ".flatpickr-calendar.open .flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)",
+        );
+    }
+
+    protected get flatpickrOpenEnabledDatesAfterToday() {
+        return this.page.locator(
+            ".flatpickr-calendar.open .flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay):not(.today)",
         );
     }
 
