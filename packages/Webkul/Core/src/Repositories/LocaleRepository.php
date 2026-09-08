@@ -31,15 +31,11 @@ class LocaleRepository extends Repository
      */
     public function create(array $attributes)
     {
-        Event::dispatch('core.locale.create.before');
-
         $locale = parent::create($attributes);
 
         $this->uploadImage($attributes, $locale);
 
         Event::dispatch(new RepositoryEntityCreated($this, $locale));
-
-        Event::dispatch('core.locale.create.after', $locale);
 
         return $locale;
     }
@@ -52,15 +48,11 @@ class LocaleRepository extends Repository
      */
     public function update(array $attributes, $id)
     {
-        Event::dispatch('core.locale.update.before', $id);
-
         $locale = parent::update($attributes, $id);
 
         $this->uploadImage($attributes, $locale);
 
         Event::dispatch(new RepositoryEntityUpdated($this, $locale));
-
-        Event::dispatch('core.locale.update.after', $locale);
 
         return $locale;
     }
