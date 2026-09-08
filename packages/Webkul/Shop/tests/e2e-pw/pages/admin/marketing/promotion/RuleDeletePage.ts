@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { escapeRegExp } from "@shared/regex";
 
 const DELETE_TIMEOUT = 90 * 1000;
 
@@ -111,8 +112,4 @@ export class RuleDeletePage extends BasePage {
             "Catalog Rule Deleted Successfully",
         );
     }
-}
-
-function escapeRegExp(text: string): string {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

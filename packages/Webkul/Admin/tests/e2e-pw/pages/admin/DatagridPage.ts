@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+import { escapeRegExp } from "@shared/regex";
 
 export abstract class DatagridPage extends BasePage {
     constructor(page: Page) {
@@ -219,10 +220,6 @@ export abstract class DatagridPage extends BasePage {
 
         await expect(input).toBeChecked({ checked: enabled });
     }
-}
-
-function escapeRegExp(text: string): string {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function isGridSearchResponse(url: string, term: string): boolean {

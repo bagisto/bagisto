@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
+import { escapeRegExp } from "@shared/regex";
 
 export class ProductListPage extends BasePage {
     constructor(page: Page) {
@@ -109,8 +110,4 @@ export class ProductListPage extends BasePage {
 
         await expect(this.row(name)).toHaveCount(1);
     }
-}
-
-function escapeRegExp(text: string): string {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

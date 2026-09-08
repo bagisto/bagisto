@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+import { escapeRegExp } from "@shared/regex";
 
 export class WishlistPage extends BasePage {
     constructor(page: Page) {
@@ -138,8 +139,4 @@ export class WishlistPage extends BasePage {
     async expectEmpty(): Promise<void> {
         await expect(this.page.locator("div.mt-8.flex.flex-wrap")).toHaveCount(0);
     }
-}
-
-function escapeRegExp(text: string): string {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

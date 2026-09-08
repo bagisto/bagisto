@@ -2,6 +2,7 @@ import { Page } from "@playwright/test";
 import { generateDescription, generateSKU, generateSlug, uniqueStamp } from "./faker";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductEditPage } from "../pages/admin/catalog/products/ProductEditPage";
+export { formatPrice } from "@shared/prices";
 
 export const TAX_PRODUCT_PRICE = 199;
 
@@ -111,9 +112,6 @@ export function expectedDiscountedTotals(
     return { discount, taxBase, tax, grandTotal };
 }
 
-export function formatPrice(amount: number): string {
-    return `$${amount.toFixed(2)}`;
-}
 
 export async function createSimpleTaxableProduct(
     adminPage: Page,

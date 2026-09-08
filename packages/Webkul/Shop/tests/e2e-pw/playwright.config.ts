@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 import { env } from "./utils/env";
 
+process.env.TZ = env.timezone;
+
 export default defineConfig({
     testDir: "./tests",
 
@@ -35,6 +37,7 @@ export default defineConfig({
 
     use: {
         baseURL: `${env.baseUrl}/`,
+        timezoneId: env.timezone,
         headless: !env.headed,
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",

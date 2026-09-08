@@ -1,6 +1,7 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 import { ProductListPage } from "./ProductListPage";
+import { escapeRegExp } from "@shared/regex";
 
 export class ProductEditPage extends BasePage {
     constructor(page: Page) {
@@ -108,8 +109,4 @@ export class ProductEditPage extends BasePage {
 
         await expect(this.page.getByText("Product updated successfully")).toBeVisible();
     }
-}
-
-function escapeRegExp(text: string): string {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+import { escapeRegExp } from "@shared/regex";
 
 export class CartPage extends BasePage {
     constructor(page: Page) {
@@ -327,8 +328,4 @@ export class CartPage extends BasePage {
     async expectSummaryAmount(label: string, amount: string): Promise<void> {
         await expect(this.summaryAmount(label)).toHaveText(new RegExp(escapeRegExp(amount)));
     }
-}
-
-function escapeRegExp(text: string): string {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

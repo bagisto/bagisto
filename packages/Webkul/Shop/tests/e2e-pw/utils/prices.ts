@@ -1,5 +1,3 @@
-export const FLAT_RATE = 10;
+export * from "@shared/prices";
 
-export function formatPrice(amount: number): string {
-    return `$${amount.toFixed(2)}`;
-}
+export const FLAT_RATE = 10;
