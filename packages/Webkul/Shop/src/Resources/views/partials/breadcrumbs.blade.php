@@ -14,8 +14,8 @@
                         <span class="text-2xl icon-arrow-right rtl:icon-arrow-left"></span>
                     </li>
                 @else
-                    <li 
-                        class="flex items-center gap-x-2.5 break-all text-base text-zinc-500 after:content-['/'] after:last:hidden ltr:ml-2.5 rtl:mr-0" 
+                    <li
+                        class="flex items-center gap-x-2.5 break-all text-base text-zinc-500 after:content-['/'] last:after:hidden ltr:ml-2.5 rtl:mr-0"
                         aria-current="page"
                     >
                         {{ $breadcrumb->title }}

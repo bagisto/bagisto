@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Models\Currency;
 
 use function Pest\Laravel\deleteJson;
@@ -121,4 +122,69 @@ it('should delete a currency', function () {
         ->assertSeeText(trans('admin::app.settings.currencies.index.delete-success'));
 
     $this->assertDatabaseMissing('currencies', ['id' => $currency->id]);
+});
+
+// ============================================================================
+// Events
+// ============================================================================
+
+it('should announce a currency creation exactly once from the controller', function () {
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.currencies.store'), $data = [
+        'code' => 'SEK',
+        'name' => fake()->name(),
+        'symbol' => 'kr',
+        'decimal' => 2,
+        'group_separator' => ',',
+        'decimal_separator' => '.',
+        'currency_position' => 'left',
+    ])->assertOk();
+
+    Event::assertDispatchedTimes('core.currency.create.before', 1);
+
+    Event::assertDispatchedTimes('core.currency.create.after', 1);
+
+    Event::assertDispatched('core.currency.create.after', fn ($event, $payload) => $payload instanceof Currency
+        && $payload->code === $data['code']);
+});
+
+it('should announce a currency update exactly once, carrying the id then the model', function () {
+    $currency = Currency::factory()->create();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.currencies.update'), [
+        'id' => $currency->id,
+        'name' => $name = fake()->name(),
+    ])->assertOk();
+
+    Event::assertDispatchedTimes('core.currency.update.before', 1);
+
+    Event::assertDispatchedTimes('core.currency.update.after', 1);
+
+    Event::assertDispatched('core.currency.update.before', fn ($event, $payload) => $payload == $currency->id);
+
+    Event::assertDispatched('core.currency.update.after', fn ($event, $payload) => $payload instanceof Currency
+        && $payload->name === $name);
+});
+
+it('should announce a currency deletion exactly once from the repository', function () {
+    $currency = Currency::factory()->create();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.settings.currencies.delete', $currency->id))->assertOk();
+
+    Event::assertDispatchedTimes('core.currency.delete.before', 1);
+
+    Event::assertDispatchedTimes('core.currency.delete.after', 1);
+
+    Event::assertDispatched('core.currency.delete.after', fn ($event, $payload) => $payload == $currency->id);
 });

@@ -228,7 +228,7 @@
                     type="file"
                     id="{{ $attribute->code }}"
                     :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:file:bg-gray-800 dark:file:dark:text-white dark:hover:border-gray-400 dark:focus:border-gray-400"
+                    class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:file:bg-gray-800 dark:file:text-white dark:hover:border-gray-400 dark:focus:border-gray-400"
                     name="{{ $attribute->code }}"
                     @change="handleChange"
                     @blur="handleBlur"

@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -45,7 +46,9 @@ class CurrencyController extends Controller
             'name' => 'required',
         ]);
 
-        $this->currencyRepository->create(request()->only([
+        Event::dispatch('core.currency.create.before');
+
+        $currency = $this->currencyRepository->create(request()->only([
             'code',
             'name',
             'symbol',
@@ -54,6 +57,8 @@ class CurrencyController extends Controller
             'decimal_separator',
             'currency_position',
         ]));
+
+        Event::dispatch('core.currency.create.after', $currency);
 
         return new JsonResponse([
             'message' => trans('admin::app.settings.currencies.index.create-success'),
@@ -81,7 +86,9 @@ class CurrencyController extends Controller
             'name' => 'required',
         ]);
 
-        $this->currencyRepository->update(request()->only([
+        Event::dispatch('core.currency.update.before', $id);
+
+        $currency = $this->currencyRepository->update(request()->only([
             'name',
             'symbol',
             'decimal',
@@ -89,6 +96,8 @@ class CurrencyController extends Controller
             'decimal_separator',
             'currency_position',
         ]), $id);
+
+        Event::dispatch('core.currency.update.after', $currency);
 
         return new JsonResponse([
             'message' => trans('admin::app.settings.currencies.index.update-success'),

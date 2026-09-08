@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Models\Locale;
 
@@ -170,4 +171,107 @@ it('should delete a locale', function () {
         ->assertSeeText(trans('admin::app.settings.locales.index.delete-success'));
 
     $this->assertDatabaseMissing('locales', ['id' => $locale->id]);
+});
+
+// ============================================================================
+// Events
+// ============================================================================
+
+it('should announce a locale creation exactly once from the controller', function () {
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), $data = [
+        'code' => 'nb_NO',
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+    ])->assertOk();
+
+    Event::assertDispatchedTimes('core.locale.create.before', 1);
+
+    Event::assertDispatchedTimes('core.locale.create.after', 1);
+
+    Event::assertDispatched('core.locale.create.after', fn ($event, $payload) => $payload instanceof Locale
+        && $payload->code === $data['code']);
+});
+
+it('should announce a locale update exactly once, carrying the id then the model', function () {
+    $locale = Locale::factory()->create();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id' => $locale->id,
+        'code' => $locale->code,
+        'name' => $name = fake()->name(),
+        'direction' => 'ltr',
+    ])->assertOk();
+
+    Event::assertDispatchedTimes('core.locale.update.before', 1);
+
+    Event::assertDispatchedTimes('core.locale.update.after', 1);
+
+    Event::assertDispatched('core.locale.update.before', fn ($event, $payload) => $payload == $locale->id);
+
+    Event::assertDispatched('core.locale.update.after', fn ($event, $payload) => $payload instanceof Locale
+        && $payload->name === $name);
+});
+
+it('should carry the stored logo on the locale creation event', function () {
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code' => 'sv_SE',
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+    ])->assertOk();
+
+    Event::assertDispatched('core.locale.create.after', fn ($event, $payload) => $payload->logo_path === 'locales/sv_SE.png');
+});
+
+it('should announce a locale deletion exactly once from the repository', function () {
+    Locale::factory()->create();
+
+    $locale = Locale::factory()->create();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.settings.locales.delete', $locale->id))->assertOk();
+
+    Event::assertDispatchedTimes('core.locale.delete.before', 1);
+
+    Event::assertDispatchedTimes('core.locale.delete.after', 1);
+
+    Event::assertDispatched('core.locale.delete.after', fn ($event, $payload) => $payload == $locale->id);
+});
+
+it('should remove the stored logo when a locale is deleted', function () {
+    Locale::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code' => 'da_DK',
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+    ])->assertOk();
+
+    Storage::assertExists('locales/da_DK.png');
+
+    deleteJson(route('admin.settings.locales.delete', Locale::where('code', 'da_DK')->first()->id))->assertOk();
+
+    Storage::assertMissing('locales/da_DK.png');
 });
