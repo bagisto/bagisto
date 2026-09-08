@@ -1946,6 +1946,7 @@ return [
                     'inactive' => '非アクティブ',
                     'name' => '名前',
                     'no-of-products' => '製品数',
+                    'parent-category' => '親カテゴリ',
                     'position' => '位置',
                     'status' => 'メニューで表示',
                     'update-status' => 'ステータスを更新',

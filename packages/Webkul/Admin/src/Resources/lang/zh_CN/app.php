@@ -1946,6 +1946,7 @@ return [
                     'inactive' => '禁用',
                     'name' => '名称',
                     'no-of-products' => '产品数量',
+                    'parent-category' => '父级分类',
                     'position' => '位置',
                     'status' => '菜单可见',
                     'update-status' => '更新状态',

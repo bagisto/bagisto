@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'غير نشط',
                     'name' => 'الاسم',
                     'no-of-products' => 'عدد المنتجات',
+                    'parent-category' => 'الفئة الأصلية',
                     'position' => 'الموقع',
                     'status' => 'مرئي في القائمة',
                     'update-status' => 'تحديث الحالة',

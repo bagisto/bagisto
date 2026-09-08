@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'Неактивно',
                     'name' => 'Название',
                     'no-of-products' => 'Количество товаров',
+                    'parent-category' => 'Родительская категория',
                     'position' => 'Позиция',
                     'status' => 'Видимо в меню',
                     'update-status' => 'Обновить статус',

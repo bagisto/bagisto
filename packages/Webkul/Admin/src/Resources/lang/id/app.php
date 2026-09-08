@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'Tidak Aktif',
                     'name' => 'Nama',
                     'no-of-products' => 'Jumlah Produk',
+                    'parent-category' => 'Kategori Induk',
                     'position' => 'Posisi',
                     'status' => 'Terlihat di Menu',
                     'update-status' => 'Perbarui Status',

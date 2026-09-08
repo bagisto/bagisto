@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'निष्क्रिय',
                     'name' => 'नाम',
                     'no-of-products' => 'उत्पादों की संख्या',
+                    'parent-category' => 'माता श्रेणी',
                     'position' => 'स्थिति',
                     'status' => 'मेनू में दिखाई देता है',
                     'update-status' => 'स्थिति अपडेट करें',
