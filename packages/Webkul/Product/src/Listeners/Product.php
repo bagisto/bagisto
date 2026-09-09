@@ -61,7 +61,8 @@ class Product
     }
 
     /**
-     * Delete product indices
+     * Remove the deleted products from the search index and reindex the related products
+     * that still exist, so a surviving parent is not left deleted.
      *
      * @param  int  $productId
      * @return void
@@ -74,9 +75,33 @@ class Product
             return;
         }
 
-        $productIds = $this->getAllRelatedProductIds($product);
+        $deletedIds = $this->getDeletedProductIds($product);
 
-        DeleteSearchIndexJob::dispatch($productIds);
+        DeleteSearchIndexJob::dispatch($deletedIds);
+
+        $reindexIds = array_values(array_diff($this->getAllRelatedProductIds($product), $deletedIds));
+
+        if (! empty($reindexIds)) {
+            IndexSearchJob::dispatch($reindexIds);
+        }
+    }
+
+    /**
+     * Product ids removed from the database by this delete: the product itself, and
+     * a configurable's variants, which cascade with it.
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return array
+     */
+    public function getDeletedProductIds($product)
+    {
+        $deletedIds = [$product->id];
+
+        if ($product->type == 'configurable') {
+            $deletedIds = array_merge($deletedIds, $product->variants->pluck('id')->toArray());
+        }
+
+        return $deletedIds;
     }
 
     /**
