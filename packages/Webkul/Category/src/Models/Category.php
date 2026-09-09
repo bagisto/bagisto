@@ -31,6 +31,8 @@ class Category extends TranslatableModel implements CategoryContract
         'meta_keywords',
         'logo_alt',
         'banner_alt',
+        'mobile_logo_alt',
+        'mobile_banner_alt',
     ];
 
     /**
@@ -58,7 +60,7 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @var array
      */
-    protected $appends = ['logo_url', 'banner_url', 'url'];
+    protected $appends = ['logo_url', 'banner_url', 'mobile_logo_url', 'mobile_banner_url', 'url'];
 
     /**
      * The products that belong to the category.
@@ -144,6 +146,34 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * Get mobile logo url attribute.
+     *
+     * @return string
+     */
+    public function getMobileLogoUrlAttribute()
+    {
+        if (! $this->mobile_logo_path) {
+            return;
+        }
+
+        return Storage::url($this->mobile_logo_path);
+    }
+
+    /**
+     * Get mobile banner url attribute.
+     *
+     * @return string
+     */
+    public function getMobileBannerUrlAttribute()
+    {
+        if (! $this->mobile_banner_path) {
+            return;
+        }
+
+        return Storage::url($this->mobile_banner_path);
+    }
+
+    /**
      * Get the logo file name, without the directory and the extension.
      *
      * @return string
@@ -161,6 +191,26 @@ class Category extends TranslatableModel implements CategoryContract
     public function getBannerFileNameAttribute()
     {
         return pathinfo((string) $this->banner_path, PATHINFO_FILENAME);
+    }
+
+    /**
+     * Get the mobile logo file name, without the directory and the extension.
+     *
+     * @return string
+     */
+    public function getMobileLogoFileNameAttribute()
+    {
+        return pathinfo((string) $this->mobile_logo_path, PATHINFO_FILENAME);
+    }
+
+    /**
+     * Get the mobile banner file name, without the directory and the extension.
+     *
+     * @return string
+     */
+    public function getMobileBannerFileNameAttribute()
+    {
+        return pathinfo((string) $this->mobile_banner_path, PATHINFO_FILENAME);
     }
 
     /**

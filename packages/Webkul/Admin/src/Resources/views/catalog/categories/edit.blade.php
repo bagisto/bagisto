@@ -231,6 +231,47 @@
                             />
                         </div>
                     </div>
+
+                    <div class="flex pt-5">
+                        <!-- Add Mobile Logo -->
+                        <div class="flex w-2/5 flex-col gap-2">
+                            <p class="font-medium text-gray-800 dark:text-white">
+                                @lang('admin::app.catalog.categories.edit.mobile-logo')
+                            </p>
+
+                            <x-admin::media.images
+                                name="mobile_logo_path"
+                                meta-name="mobile_logo_meta"
+                                enable-seo="true"
+                                :uploaded-images="$category->mobile_logo_path ? [[
+                                    'id'        => 'mobile_logo_path',
+                                    'url'       => $category->mobile_logo_url,
+                                    'file_name' => $category->mobile_logo_file_name,
+                                    'alt_text'  => $category->mobile_logo_alt,
+                                ]] : []"
+                            />
+                        </div>
+
+                        <!-- Add Mobile Banner -->
+                        <div class="flex w-3/5 flex-col gap-2">
+                            <p class="font-medium text-gray-800 dark:text-white">
+                                @lang('admin::app.catalog.categories.edit.mobile-banner')
+                            </p>
+
+                            <x-admin::media.images
+                                name="mobile_banner_path"
+                                meta-name="mobile_banner_meta"
+                                enable-seo="true"
+                                :uploaded-images="$category->mobile_banner_path ? [[
+                                    'id'        => 'mobile_banner_path',
+                                    'url'       => $category->mobile_banner_url,
+                                    'file_name' => $category->mobile_banner_file_name,
+                                    'alt_text'  => $category->mobile_banner_alt,
+                                ]] : []"
+                                width="220px"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.after', ['category' => $category]) !!}

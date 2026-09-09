@@ -85,6 +85,10 @@ class CategoryController extends Controller
             'logo_meta',
             'banner_path',
             'banner_meta',
+            'mobile_logo_path',
+            'mobile_logo_meta',
+            'mobile_banner_path',
+            'mobile_banner_meta',
         ]);
 
         if (! empty($data['description'])) {
@@ -140,6 +144,10 @@ class CategoryController extends Controller
             'logo_meta',
             'banner_path',
             'banner_meta',
+            'mobile_logo_path',
+            'mobile_logo_meta',
+            'mobile_banner_path',
+            'mobile_banner_meta',
             'position',
             'display_mode',
             'status',

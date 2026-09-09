@@ -39,6 +39,20 @@ class CategoryResource extends JsonResource
                 'original_image_url' => url('cache/original/'.$this->banner_path),
                 'alt' => $this->banner_alt ?: $this->name,
             ]),
+            'mobile_logo' => $this->when($this->hasStoredImage($this->mobile_logo_path), [
+                'small_image_url' => url('cache/small/'.$this->mobile_logo_path),
+                'medium_image_url' => url('cache/medium/'.$this->mobile_logo_path),
+                'large_image_url' => url('cache/large/'.$this->mobile_logo_path),
+                'original_image_url' => url('cache/original/'.$this->mobile_logo_path),
+                'alt' => $this->mobile_logo_alt ?: $this->name,
+            ]),
+            'mobile_banner' => $this->when($this->hasStoredImage($this->mobile_banner_path), [
+                'small_image_url' => url('cache/small/'.$this->mobile_banner_path),
+                'medium_image_url' => url('cache/medium/'.$this->mobile_banner_path),
+                'large_image_url' => url('cache/large/'.$this->mobile_banner_path),
+                'original_image_url' => url('cache/original/'.$this->mobile_banner_path),
+                'alt' => $this->mobile_banner_alt ?: $this->name,
+            ]),
             'meta' => [
                 'title' => $this->meta_title,
                 'keywords' => $this->meta_keywords,
