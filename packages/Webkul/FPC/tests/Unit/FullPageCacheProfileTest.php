@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Webkul\Core\Facades\SystemConfig;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\FPC\CacheProfiles\FullPageCacheProfile;
+use Webkul\FPC\FullPageCache;
 
 /**
  * Save a Full Page Cache setting the way the configuration screen does.
@@ -14,6 +16,34 @@ function saveSetting(string $field, mixed $value): void
         'code' => 'cache_management.full_page_cache.settings.'.$field,
         'value' => $value,
     ]);
+}
+
+/**
+ * A request on a route the page cache middleware is attached to.
+ */
+function cacheableRequest(): Request
+{
+    return requestOnRoute(['web', 'shop', 'cache.response']);
+}
+
+/**
+ * A request on a route the page cache middleware is not attached to.
+ */
+function uncacheableRequest(): Request
+{
+    return requestOnRoute(['web', 'shop']);
+}
+
+/**
+ * A GET request bound to a route carrying the given middleware.
+ */
+function requestOnRoute(array $middleware): Request
+{
+    $request = Request::create('/');
+
+    $request->setRouteResolver(fn () => (new Route('GET', '/', []))->middleware($middleware));
+
+    return $request;
 }
 
 beforeEach(function () {
@@ -104,4 +134,22 @@ it('keeps caching successful storefront GET requests', function () {
     expect($this->profile->shouldCacheRequest($this->request))->toBeTrue();
 
     expect($this->profile->shouldCacheRequest(Request::create('/', 'POST')))->toBeFalse();
+});
+
+it('reports a storefront page as one the cache will serve to everyone', function () {
+    saveSetting('enabled', '1');
+
+    expect(FullPageCache::willCache(cacheableRequest()))->toBeTrue();
+});
+
+it('reports a page as uncached once the setting is off, so views keep the visitor own state', function () {
+    saveSetting('enabled', '0');
+
+    expect(FullPageCache::willCache(cacheableRequest()))->toBeFalse();
+});
+
+it('reports a route without the page cache middleware as uncached', function () {
+    saveSetting('enabled', '1');
+
+    expect(FullPageCache::willCache(uncacheableRequest()))->toBeFalse();
 });

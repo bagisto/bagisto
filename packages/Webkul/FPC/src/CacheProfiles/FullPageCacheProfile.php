@@ -11,11 +11,8 @@ use Throwable;
 class FullPageCacheProfile extends CacheAllSuccessfulGetRequests
 {
     /**
-     * Whether the page cache should run for this request.
-     *
-     * `RESPONSE_CACHE_ENABLED` stays the deployment switch — a server that cannot afford the cache
-     * turns it off there and no administrator can turn it back on. Underneath it, the setting in
-     * Configure → Cache Management → Full Page Cache is what an operator uses day to day.
+     * Whether the page cache should run for this request, which Configure → Cache
+     * Management → Full Page Cache alone decides.
      */
     public function enabled(Request $request): bool
     {
