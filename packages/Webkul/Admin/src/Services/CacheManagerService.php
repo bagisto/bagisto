@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Artisan;
 class CacheManagerService
 {
     /**
-     * Available clear actions.
+     * Available clear actions, each running one command or a list of them in order.
      */
     protected array $clearActions = [
-        'clear-all' => 'optimize:clear',
+        'clear-all' => ['optimize:clear', 'responsecache:clear'],
         'clear-config' => 'config:clear',
         'clear-cache' => 'cache:clear',
         'clear-compiled' => 'clear-compiled',
@@ -38,17 +38,6 @@ class CacheManagerService
     ];
 
     /**
-     * What an action answers with, for the ones whose command name would tell the operator
-     * running it nothing.
-     */
-    protected array $actionMessages = [
-        'clear-page-cache' => [
-            'success' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush-success',
-            'failed' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush-failed',
-        ],
-    ];
-
-    /**
      * Execute a cache action by key.
      */
     public function execute(string $action): array
@@ -64,25 +53,32 @@ class CacheManagerService
             ];
         }
 
-        $command = $allActions[$action];
+        $commands = (array) $allActions[$action];
+
+        $command = implode(' && php artisan ', $commands);
 
         try {
-            $exitCode = Artisan::call($command);
-            $rawOutput = Artisan::output();
+            $output = [];
 
-            if ($exitCode !== 0) {
-                return [
-                    'success' => false,
-                    'message' => $this->message($action, 'failed', $command),
-                    'output' => trim($rawOutput),
-                    'command' => $command,
-                ];
+            foreach ($commands as $each) {
+                $exitCode = Artisan::call($each);
+
+                $output[] = trim(Artisan::output());
+
+                if ($exitCode !== 0) {
+                    return [
+                        'success' => false,
+                        'message' => $this->message($action, 'failed'),
+                        'output' => trim(implode("\n", array_filter($output))),
+                        'command' => $command,
+                    ];
+                }
             }
 
             return [
                 'success' => true,
-                'message' => $this->message($action, 'success', $command),
-                'output' => trim($rawOutput),
+                'message' => $this->message($action, 'success'),
+                'output' => trim(implode("\n", array_filter($output))),
                 'command' => $command,
             ];
         } catch (\Throwable $e) {
@@ -120,17 +116,33 @@ class CacheManagerService
     }
 
     /**
-     * What an action answers with, falling back to a message naming the command it ran.
+     * What an action answers with: its own sentence when it has one, and otherwise a message
+     * naming the action the way the button that ran it does.
      */
-    protected function message(string $action, string $outcome, string $command): string
+    protected function message(string $action, string $outcome): string
     {
-        if (isset($this->actionMessages[$action][$outcome])) {
-            return trans($this->actionMessages[$action][$outcome]);
+        $key = 'admin::app.configuration.index.cache-management.results.'.$action;
+
+        if (
+            $outcome === 'success'
+            && ($result = trans($key)) !== $key
+        ) {
+            return $result;
         }
 
         return trans(
             'admin::app.configuration.index.cache-management.action-'.$outcome,
-            ['action' => $command]
+            ['action' => $this->label($action)]
         );
+    }
+
+    /**
+     * The name the configuration screen gives an action, falling back to its own key.
+     */
+    protected function label(string $action): string
+    {
+        $key = 'admin::app.configuration.index.cache-management.actions.'.$action;
+
+        return ($label = trans($key)) === $key ? $action : $label;
     }
 }

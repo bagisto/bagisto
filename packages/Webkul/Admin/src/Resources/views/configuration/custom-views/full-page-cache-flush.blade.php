@@ -1,11 +1,11 @@
-<v-full-page-cache-flush></v-full-page-cache-flush>
+<v-full-page-cache-flush depend-name="{{ $field->getDependFieldName() }}"></v-full-page-cache-flush>
 
 @pushOnce('scripts')
     <script
         type="text/x-template"
         id="v-full-page-cache-flush-template"
     >
-        <div>
+        <div v-if="isVisible">
             <p class="mb-3 text-xs text-gray-600 dark:text-gray-300">
                 @lang('admin::app.configuration.index.cache-management.full-page-cache.settings.flush-info')
             </p>
@@ -30,10 +30,32 @@
         app.component('v-full-page-cache-flush', {
             template: '#v-full-page-cache-flush-template',
 
+            props: ['dependName'],
+
             data() {
                 return {
                     isFlushing: false,
+
+                    isVisible: true,
                 };
+            },
+
+            mounted() {
+                if (! this.dependName) {
+                    return;
+                }
+
+                const dependElement = document.getElementById(this.dependName);
+
+                if (! dependElement) {
+                    return;
+                }
+
+                dependElement.addEventListener('change', (event) => {
+                    this.isVisible = event.target.checked;
+                });
+
+                dependElement.dispatchEvent(new Event('change'));
             },
 
             methods: {

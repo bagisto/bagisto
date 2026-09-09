@@ -3736,6 +3736,7 @@ return [
                 'type' => 'text',
                 'validation' => 'nullable|numeric|min:1',
                 'default' => (int) (config('responsecache.cache.lifetime_in_seconds') / 60),
+                'depends' => 'enabled:1',
                 'channel_based' => false,
                 'locale_based' => false,
             ], [
@@ -3743,6 +3744,7 @@ return [
                 'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush',
                 'type' => 'blade',
                 'path' => 'admin::configuration.custom-views.full-page-cache-flush',
+                'depends' => 'enabled:1',
                 'channel_based' => false,
                 'locale_based' => false,
             ],
