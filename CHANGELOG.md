@@ -14,6 +14,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
 
+- #11477 [fixed] - Fixed logging in as a customer from the admin landing on the default channel rather than the customer's own. A signed-in customer is now sent to their assigned channel and cannot open the account area on a channel their account is not registered on.
+
+- #11473 [fixed] - Fixed a configurable product's parent disappearing from the Elasticsearch index when one of its variants was deleted. Only the products actually removed are now deleted from the index, and the surviving parent is reindexed.
+
 - #11458 [fixed] - Fixed a category still filtering by an attribute after Use Layered Navigation was turned off for it, which left the filter on the storefront with no way to untick it in the category. A category now filters only by attributes that are still in layered navigation, and turning one back on restores the categories it was chosen for.
 
 - #11450 [fixed] - Fixed a guest turned back from checkout to sign in being left on the home or account page afterwards, losing the product they had chosen with Buy Now. The checkout is now returned to after signing in, registering or using a social provider.
