@@ -5,12 +5,15 @@ use Spatie\ResponseCache\Serializers\JsonSerializer;
 use Webkul\FPC\CacheProfiles\FullPageCacheProfile;
 use Webkul\FPC\Hasher\DefaultHasher;
 use Webkul\FPC\Replacers\FlashMessagesReplacer;
+use Webkul\FPC\Replacers\MiniCartReplacer;
 
 return [
     /*
-     * Determine if the response cache middleware should be enabled.
+     * Determine if the response cache middleware should be enabled. Whether pages are
+     * actually cached is decided in Configure → Cache Management → Full Page Cache,
+     * which is the only switch an operator needs.
      */
-    'enabled' => env('RESPONSE_CACHE_ENABLED', false),
+    'enabled' => true,
 
     'cache' => [
         /*
@@ -127,5 +130,6 @@ return [
     'replacers' => [
         CsrfTokenReplacer::class,
         FlashMessagesReplacer::class,
+        MiniCartReplacer::class,
     ],
 ];

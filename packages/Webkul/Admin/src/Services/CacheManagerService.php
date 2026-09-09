@@ -30,11 +30,30 @@ class CacheManagerService
     ];
 
     /**
+     * Available page cache actions, which are offered from Full Page Cache rather than
+     * alongside the application caches.
+     */
+    protected array $pageActions = [
+        'clear-page-cache' => 'responsecache:clear',
+    ];
+
+    /**
+     * What an action answers with, for the ones whose command name would tell the operator
+     * running it nothing.
+     */
+    protected array $actionMessages = [
+        'clear-page-cache' => [
+            'success' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush-success',
+            'failed' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush-failed',
+        ],
+    ];
+
+    /**
      * Execute a cache action by key.
      */
     public function execute(string $action): array
     {
-        $allActions = array_merge($this->clearActions, $this->buildActions);
+        $allActions = array_merge($this->clearActions, $this->buildActions, $this->pageActions);
 
         if (! isset($allActions[$action])) {
             return [
@@ -54,7 +73,7 @@ class CacheManagerService
             if ($exitCode !== 0) {
                 return [
                     'success' => false,
-                    'message' => trans('admin::app.configuration.index.cache-management.action-failed', ['action' => $command]),
+                    'message' => $this->message($action, 'failed', $command),
                     'output' => trim($rawOutput),
                     'command' => $command,
                 ];
@@ -62,7 +81,7 @@ class CacheManagerService
 
             return [
                 'success' => true,
-                'message' => trans('admin::app.configuration.index.cache-management.action-success', ['action' => $command]),
+                'message' => $this->message($action, 'success', $command),
                 'output' => trim($rawOutput),
                 'command' => $command,
             ];
@@ -90,5 +109,28 @@ class CacheManagerService
     public function getBuildActions(): array
     {
         return $this->buildActions;
+    }
+
+    /**
+     * Get page cache actions definitions for the view.
+     */
+    public function getPageActions(): array
+    {
+        return $this->pageActions;
+    }
+
+    /**
+     * What an action answers with, falling back to a message naming the command it ran.
+     */
+    protected function message(string $action, string $outcome, string $command): string
+    {
+        if (isset($this->actionMessages[$action][$outcome])) {
+            return trans($this->actionMessages[$action][$outcome]);
+        }
+
+        return trans(
+            'admin::app.configuration.index.cache-management.action-'.$outcome,
+            ['action' => $command]
+        );
     }
 }

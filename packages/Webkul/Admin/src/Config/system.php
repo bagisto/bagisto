@@ -3738,6 +3738,13 @@ return [
                 'default' => (int) (config('responsecache.cache.lifetime_in_seconds') / 60),
                 'channel_based' => false,
                 'locale_based' => false,
+            ], [
+                'name' => 'flush',
+                'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.full-page-cache-flush',
+                'channel_based' => false,
+                'locale_based' => false,
             ],
         ],
     ],

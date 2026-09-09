@@ -13,15 +13,7 @@
             }
         }
 
-        $isResponseCacheMiddlwareActive = false;
-
-        $currentRoute = request()->route();
-
-        if ($currentRoute) {
-            $middlewares = $currentRoute->gatherMiddleware();
-
-            $isResponseCacheMiddlwareActive = in_array('cache.response', $middlewares);
-        }
+        $willResponseBeCached = \Webkul\FPC\FullPageCache::willCache();
     @endphp
 
     <script
@@ -77,10 +69,7 @@
 
             methods: {
                 loadInitialFlashes() {
-                    @if (
-                        config('responsecache.enabled') 
-                        && $isResponseCacheMiddlwareActive
-                    )
+                    @if ($willResponseBeCached)
                         let flashes = '<bagisto-response-cache-session-flashes>';
                     @else
                         let flashes = @json($flashes);
