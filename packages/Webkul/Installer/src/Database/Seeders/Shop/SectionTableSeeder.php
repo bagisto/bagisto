@@ -7,13 +7,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Theme\Enums\SectionTypeEnum;
 
 class SectionTableSeeder extends Seeder
 {
     /**
      * Base path for the images.
      */
-    const BASE_PATH = 'packages/Webkul/Installer/src/Resources/assets/images/seeders/theme/';
+    public const BASE_PATH = 'packages/Webkul/Installer/src/Resources/assets/images/seeders/theme/';
 
     /**
      * Seed the application's database.
@@ -37,7 +38,7 @@ class SectionTableSeeder extends Seeder
             ->insert([
                 [
                     'id' => 1,
-                    'type' => 'image_carousel',
+                    'type' => SectionTypeEnum::IMAGE_CAROUSEL->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.name', [], $defaultLocale),
                     'sort_order' => 1,
                     'status' => 1,
@@ -46,7 +47,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 2,
-                    'type' => 'static_content',
+                    'type' => SectionTypeEnum::STATIC_CONTENT->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.offer-information.name', [], $defaultLocale),
                     'sort_order' => 2,
                     'status' => 1,
@@ -55,7 +56,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 5,
-                    'type' => 'static_content',
+                    'type' => SectionTypeEnum::STATIC_CONTENT->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.top-collections.name', [], $defaultLocale),
                     'sort_order' => 5,
                     'status' => 1,
@@ -64,7 +65,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 6,
-                    'type' => 'static_content',
+                    'type' => SectionTypeEnum::STATIC_CONTENT->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.bold-collections.name', [], $defaultLocale),
                     'sort_order' => 6,
                     'status' => 1,
@@ -73,7 +74,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 8,
-                    'type' => 'static_content',
+                    'type' => SectionTypeEnum::STATIC_CONTENT->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.game-container.name', [], $defaultLocale),
                     'sort_order' => 8,
                     'status' => 1,
@@ -82,7 +83,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 10,
-                    'type' => 'static_content',
+                    'type' => SectionTypeEnum::STATIC_CONTENT->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.bold-collections.name', [], $defaultLocale),
                     'sort_order' => 10,
                     'status' => 1,
@@ -91,7 +92,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 12,
-                    'type' => 'services_content',
+                    'type' => SectionTypeEnum::SERVICES_CONTENT->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.services-content.name', [], $defaultLocale),
                     'sort_order' => 12,
                     'status' => 1,
@@ -100,7 +101,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 13,
-                    'type' => 'footer_links',
+                    'type' => SectionTypeEnum::FOOTER_LINKS->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.footer-links.name', [], $defaultLocale),
                     'sort_order' => 13,
                     'status' => 1,
@@ -393,7 +394,7 @@ class SectionTableSeeder extends Seeder
             ->insert([
                 [
                     'id' => 3,
-                    'type' => 'category_carousel',
+                    'type' => SectionTypeEnum::CATEGORY_CAROUSEL->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.categories-collections.name', [], $defaultLocale),
                     'sort_order' => 3,
                     'status' => 1,
@@ -402,7 +403,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 4,
-                    'type' => 'product_carousel',
+                    'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.mens-collection.name', [], $defaultLocale),
                     'sort_order' => 4,
                     'status' => 1,
@@ -411,7 +412,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 7,
-                    'type' => 'product_carousel',
+                    'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.womens-collection.name', [], $defaultLocale),
                     'sort_order' => 7,
                     'status' => 1,
@@ -420,7 +421,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 9,
-                    'type' => 'product_carousel',
+                    'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.kids-collection.name', [], $defaultLocale),
                     'sort_order' => 9,
                     'status' => 1,
@@ -429,7 +430,7 @@ class SectionTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 11,
-                    'type' => 'product_carousel',
+                    'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
                     'name' => trans('installer::app.seeders.shop.theme-customizations.book-tickets.name', [], $defaultLocale),
                     'sort_order' => 11,
                     'status' => 1,

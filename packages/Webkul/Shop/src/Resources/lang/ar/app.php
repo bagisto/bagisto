@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'سلاسل الفئات',
             'image-carousel' => 'سلاسل الصور',
             'offer' => 'احصل على خصم يصل إلى 40% على طلبك الأول، تسوق الآن',
+            'preview-banner' => 'معاينة سمة :theme على قناة :channel. الروابط معطلة في المعاينة.',
             'product-carousel' => 'سلاسل المنتجات',
             'resend-verify-email' => 'إعادة إرسال بريد التحقق',
             'verify-email' => 'تحقق من حساب بريدك الإلكتروني',

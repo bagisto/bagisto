@@ -21,6 +21,7 @@
     <v-appearance-themes
         :themes='@json($themes)'
         :channels='@json($channels->map(fn ($channel) => ['id' => $channel->id, 'name' => $channel->name])->values())'
+        :default-channel-id="{{ core()->getDefaultChannel()->id }}"
     >
         <x-admin::shimmer.image class="mt-8 h-[300px] w-full rounded" />
     </v-appearance-themes>
@@ -170,13 +171,25 @@
                                         @lang('admin::app.appearance.themes.index.preview-btn')
                                     </a>
 
-                                    <a
-                                        class="secondary-button"
-                                        :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
-                                        v-if="theme.is_installed"
-                                    >
-                                        @lang('admin::app.appearance.themes.index.customize-btn')
-                                    </a>
+                                    @if (bouncer()->hasPermission('appearance.sections'))
+                                        <a
+                                            class="secondary-button"
+                                            :href="previewUrl(theme)"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            v-if="theme.is_installed"
+                                        >
+                                            @lang('admin::app.appearance.themes.index.preview-btn')
+                                        </a>
+
+                                        <a
+                                            class="secondary-button"
+                                            :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
+                                            v-if="theme.status === 'active'"
+                                        >
+                                            @lang('admin::app.appearance.themes.index.customize-btn')
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -273,7 +286,7 @@
             app.component('v-appearance-themes', {
                 template: '#v-appearance-themes-template',
 
-                props: ['themes', 'channels'],
+                props: ['themes', 'channels', 'defaultChannelId'],
 
                 data() {
                     return {
@@ -323,6 +336,17 @@
                         const live = theme.active_on.map(channel => channel.id);
 
                         return this.channels.filter(channel => ! live.includes(channel.id));
+                    },
+
+                    /**
+                     * Storefront preview of an installed theme, on a channel it runs or the default one.
+                     */
+                    previewUrl(theme) {
+                        const channel = theme.active_on[0]?.id ?? this.defaultChannelId;
+
+                        return @json(route('shop.appearance.preview', ['theme' => 'THEME_CODE', 'channel' => 'CHANNEL_ID']))
+                            .replace('THEME_CODE', encodeURIComponent(theme.code))
+                            .replace('CHANNEL_ID', channel);
                     },
 
                     /**

@@ -153,8 +153,379 @@ The `settings.themes.*` permission keys no longer exist. Roles are rebuilt aroun
 appearance permissions after upgrading, and update any code calling
 `bouncer()->hasPermission('settings.themes…')`.
 
+#### Section types
+
+A section's type is now a class that extends `Webkul\Theme\Sections\SectionType`
+and carries its code, title, icon, editor fields and behaviour. The six core types
+are named by `Webkul\Theme\Enums\SectionTypeEnum`, and each case maps to its class
+under `Webkul\Theme\Sections`.
+
+A theme decides which types it offers, and the order the Add Section tiles show
+them in, with a `sections` list beside its entry in `config/themes.php`. No core
+file — the enum, the controller or the editor — changes when a theme adds, removes
+or reorders a type.
+
+| Before | Now |
+|---|---|
+| `Section::IMAGE_CAROUSEL` and the other type constants | `SectionTypeEnum::IMAGE_CAROUSEL->value` — the constants remain as deprecated aliases |
+| `Section::TYPES` | `SectionSchema::types($themeCode)` — the constant remains, deprecated |
+| `SectionSchema::for($type)` | `SectionSchema::for($type, $themeCode)` — the theme is optional |
+| `FPC\Listeners\Section::LAYOUT_TYPES` | Removed; a type draws on every page when it sets `$layout` |
+| `SectionRepository::sanitizeStaticCss()` | Moved to `SectionType::sanitizeCss()` |
+
+#### Adding sections to a theme
+
+##### How the `sections` list is read
+
+```php
+use Webkul\Theme\Enums\SectionTypeEnum;
+
+'shop' => [
+    'default' => [
+        // name, assets_path, views_path, vite ...
+
+        'sections' => [
+            SectionTypeEnum::IMAGE_CAROUSEL,
+            SectionTypeEnum::PRODUCT_CAROUSEL,
+            SectionTypeEnum::CATEGORY_CAROUSEL,
+            SectionTypeEnum::FOOTER_LINKS,
+            SectionTypeEnum::STATIC_CONTENT,
+            SectionTypeEnum::SERVICES_CONTENT,
+        ],
+    ],
+],
+```
+
+- **An entry** is a `SectionTypeEnum` case, a core type's value such as
+  `'image_carousel'`, or the class name of a `SectionType`.
+- **The list order is the tile order.** A type that is not listed is not offered,
+  and creating one is refused.
+- **No `sections` key** offers every core type in enum order, so a theme — or a
+  published `config/themes.php` — from before this release needs no change.
+- **The first entry for a code wins**, keeping both its position and its class; a
+  later entry for the same code is ignored, so there are never duplicate tiles.
+- **An entry that is none of the above** is reported to the log and skipped; the
+  rest of the list still loads.
+- **The list does not touch placed sections.** Sections already on a page keep
+  their own order. One whose type the theme stops listing is still shown: a core
+  type stays editable, and a type whose class is gone opens with no fields.
+
+##### Offer the core types, in your own order
+
+List only the ones you want, in the order you want them. Leaving a type out
+removes its tile:
+
+```php
+'sections' => [
+    'product_carousel',
+    'image_carousel',
+    'category_carousel',
+    'footer_links',
+],
+```
+
+##### Lead with a few types, keep the rest in enum order
+
+Spread the enum after the types that should come first. The duplicates it brings
+in are ignored, so the remaining core types follow in enum order:
+
+```php
+'sections' => [
+    'static_content',
+    'product_carousel',
+    ...SectionTypeEnum::getValues(),
+],
+```
+
+##### Add a new section type
+
+A new type is a class in your theme package. Only `$code` is required; every
+other property has a default — the title falls back to the code in headline case
+and the icon to `icon-cms`:
+
+```php
+namespace Webkul\Fashion\Sections;
+
+use Webkul\Theme\Sections\SectionType;
+use Webkul\Theme\SectionSchema;
+
+class Lookbook extends SectionType
+{
+    /**
+     * Code the section is stored under.
+     */
+    protected string $code = 'lookbook';
+
+    /**
+     * Translation key of the name the editor shows.
+     */
+    protected ?string $title = 'fashion::app.sections.lookbook.title';
+
+    /**
+     * Icon class drawn on the type's tile in the editor.
+     */
+    protected string $icon = 'icon-image';
+
+    /**
+     * The fields the editor draws.
+     */
+    public function getFields(): array
+    {
+        return [
+            ['key' => 'heading', 'type' => SectionSchema::TEXT, 'label' => trans('fashion::app.sections.lookbook.heading')],
+            [
+                'key' => 'looks',
+                'type' => SectionSchema::REPEATER,
+                'label' => trans('fashion::app.sections.lookbook.looks'),
+                'add_label' => trans('fashion::app.sections.lookbook.add-look'),
+                'max' => 6,
+                'fields' => [
+                    ['key' => 'image', 'type' => SectionSchema::IMAGE, 'label' => trans('fashion::app.sections.lookbook.image')],
+                    ['key' => 'link', 'type' => SectionSchema::TEXT, 'label' => trans('fashion::app.sections.lookbook.link')],
+                ],
+            ],
+        ];
+    }
+}
+```
+
+Then list it wherever its tile should appear:
+
+```php
+'sections' => [
+    \Webkul\Fashion\Sections\Lookbook::class,
+    ...SectionTypeEnum::getValues(),
+],
+```
+
+and render it from your theme's home page. The storefront hands the view its live
+sections in page order, and the preview hands it the drafts with `$preview` set —
+wrap each section in the two data attributes so the editor can highlight it:
+
+```blade
+@foreach ($sections as $section)
+    @php ($marks = ($preview ?? false) && ! $section->getTypeInstance()?->rendersInLayout())
+
+    @if ($marks)
+        <div data-section-id="{{ $section->id }}" data-section-name="{{ $section->name }}">
+    @endif
+
+    @switch ($section->type)
+        @case ('lookbook')
+            @include('fashion::sections.lookbook', ['options' => $section->options ?? []])
+
+            @break
+    @endswitch
+
+    @if ($marks)
+        </div>
+    @endif
+@endforeach
+
+@if ($preview ?? false)
+    @include('shop::home.preview-bridge')
+@endif
+```
+
+A section is created before it has content, so the partial must render nothing,
+rather than fail, when its options are empty. Add the translation keys in your
+theme's own language files.
+
+##### Field kinds
+
+| Kind | Control | Extra keys |
+|---|---|---|
+| `SectionSchema::TEXT` | A single line input | — |
+| `SectionSchema::TEXTAREA` | A multi-line input | — |
+| `SectionSchema::NUMBER` | A whole number input | — |
+| `SectionSchema::IMAGE` | An upload, stored as the file's path | — |
+| `SectionSchema::CODE` | A highlighted code editor | `language` (`html` or `css`) |
+| `SectionSchema::REPEATER` | Repeating, draggable rows | `fields`, `add_label`, `max` |
+| `SectionSchema::FILTERS` | Key and value filter rows | `keys` — each `value`, `label`, `options`, and `multiple` for a comma-separated list |
+
+##### Extend a core type under a new code
+
+Extend the core class and give it its own code. It offers everything the core
+type does, and its tile sits beside the core one:
+
+```php
+class PremiumProductCarousel extends \Webkul\Theme\Sections\ProductCarousel
+{
+    /**
+     * Code the section is stored under.
+     */
+    protected string $code = 'premium_product_carousel';
+
+    /**
+     * Translation key of the name the editor shows.
+     */
+    protected ?string $title = 'fashion::app.sections.premium-product-carousel';
+
+    /**
+     * The core product filters, plus the one this theme adds.
+     */
+    protected function filterKeys(): array
+    {
+        return [
+            ...parent::filterKeys(),
+            ['value' => 'on_sale', 'label' => trans('fashion::app.sections.on-sale'), 'options' => []],
+        ];
+    }
+}
+```
+
+`ProductCarousel` and `CategoryCarousel` both expose `filterKeys()` for this.
+
+##### Replace a core type, keeping its code
+
+Extend the core class without changing its code, and list your class before the
+core types. Because the first entry wins, existing sections of that type are
+handled by your class from then on:
+
+```php
+class FooterLinks extends \Webkul\Theme\Sections\FooterLinks
+{
+    /**
+     * Most columns this theme's footer lays out.
+     */
+    protected ?int $maxColumns = 4;
+}
+```
+
+```php
+'sections' => [
+    \Webkul\Fashion\Sections\FooterLinks::class,
+    ...SectionTypeEnum::getValues(),
+],
+```
+
+##### Draw a section on every page
+
+Set `$layout` and render the section from a layout partial instead of the home
+page. Editing it then clears the whole page cache rather than just the home page:
+
+```php
+/**
+ * Whether the layout draws the section on every page.
+ */
+protected bool $layout = true;
+```
+
+```blade
+@inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
+
+@php
+    $channel = core()->getCurrentChannel();
+
+    $section = $sectionRepository->findOneOfType('promo_bar', $channel->id, $channel->theme, app()->getLocale());
+@endphp
+
+@if (! empty($section?->options['message']))
+    <div
+        @if ($sectionRepository->isPreviewing())
+            data-section-id="{{ $section->id }}"
+            data-section-name="{{ $section->name }}"
+        @endif
+    >
+        {{ $section->options['message'] }}
+    </div>
+@endif
+```
+
+Use `findAllOfType()` when a channel may hold more than one. Both return the live
+section on the storefront and the draft in the preview.
+
+##### Allow one per channel, or pin it to the bottom
+
+```php
+/**
+ * Whether a channel may hold only one section of this type.
+ */
+protected bool $singleton = true;
+
+/**
+ * Whether the section is fixed to the bottom of the page.
+ */
+protected bool $pinned = true;
+```
+
+A singleton's tile is withdrawn once the channel has one, and a second is refused
+on the server however it is reached. A pinned section stays at the end of the list
+and cannot be dragged.
+
+##### Accept author-supplied markup
+
+Anything written into the page unescaped must be cleaned. Override `sanitize()`;
+it runs on every draft save, publish and preview:
+
+```php
+/**
+ * Clean the markup and styles, which are written into the page rather than escaped.
+ */
+public function sanitize(array $options): array
+{
+    if (array_key_exists('html', $options)) {
+        $options['html'] = $this->sanitizeHtml($options['html']);
+    }
+
+    if (array_key_exists('css', $options)) {
+        $options['css'] = $this->sanitizeCss($options['css']);
+    }
+
+    return $options;
+}
+```
+
+##### Edit a different shape from the one you store
+
+When the storefront reads a shape the editor cannot edit directly, convert
+between the two: `prepareForEditor()` shapes what is stored for the editor's
+fields, and `prepareForStorage()` shapes each saved draft back. `FooterLinks`
+does this, editing a list of columns while storing `column_1`, `column_2`, ….
+A section storing its tags as one comma-separated string, but editing them as
+rows, would do:
+
+```php
+/**
+ * Shape the stored tags as the rows the editor's repeater reads.
+ */
+public function prepareForEditor(array $options): array
+{
+    $options['tags'] = collect(explode(',', $options['tags'] ?? ''))
+        ->filter()
+        ->map(fn ($tag) => ['name' => $tag])
+        ->values()
+        ->all();
+
+    return $options;
+}
+
+/**
+ * Write the edited rows back as the comma-separated tags the storefront reads.
+ */
+public function prepareForStorage(array $options): array
+{
+    if (is_array($options['tags'] ?? null)) {
+        $options['tags'] = collect($options['tags'])->pluck('name')->filter()->implode(',');
+    }
+
+    return $options;
+}
+```
+
 #### Behavioural changes
 
+- **A section type is offered only to the themes that declare it**, in the order
+  the theme lists it, and creating one of a type the theme does not offer is refused.
+- **Only a theme that a channel runs can be customized.** The gallery hides
+  Customize for any other theme, and the editor, its actions and its sections
+  answer with a 403 for a theme its channel no longer runs.
+- **The preview renders the theme it is asked for**, through a `theme` parameter,
+  and an installed theme can be previewed from the gallery before it is activated.
+- **Footer links take any number of columns.** The editor edits a list of columns
+  and stores them as the same `column_1`, `column_2`, … keys, so saved footers and
+  theme footer views keep working. A theme caps the count by extending
+  `FooterLinks` and setting `$maxColumns`.
 - **Sections are edited beside a live storefront preview**, not on a form of their
   own. The six per-type pages are replaced by one panel built from the section's
   type.
@@ -173,6 +544,11 @@ appearance permissions after upgrading, and update any code calling
 3. **Re-grant appearance permissions** to any custom role that had
    `settings.themes`.
 4. **Update bookmarks and links** pointing at `admin/settings/themes`.
+5. **Replace `Section::*` type constants** with `SectionTypeEnum` in theme views
+   and custom code — the constants still work, but are deprecated.
+6. **Declare `sections`** in a theme's `config/themes.php` entry if it adds,
+   removes or reorders section types; a theme that offers the core types as they
+   are needs nothing.
 
 ### Google reCAPTCHA Enterprise Integration
 

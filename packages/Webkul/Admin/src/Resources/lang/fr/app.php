@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Dupliquer',
                 'empty' => 'Aucune section pour le moment.',
                 'gone' => 'Cette section n\'existe plus.',
+                'inactive-theme' => 'Seul un thème actif sur un canal peut être personnalisé.',
                 'locale' => 'Langue',
                 'mobile' => 'Mobile',
+                'no-fields' => 'Cette section n\'a aucun paramètre à modifier dans ce thème.',
+                'no-types' => 'Ce thème ne propose aucun type de section à ajouter.',
                 'pinned' => 'Épinglé au bas de la page.',
                 'preview-btn' => 'Aperçu',
                 'publish-btn' => 'Publier',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Ce canal n\'affiche qu\'une seule section de liens de pied de page.',
                 'name' => 'Nom',
                 'save-btn' => 'Enregistrer la section',
+                'singleton-exists' => 'Ce canal n\'affiche qu\'une seule section :type.',
                 'title' => 'Créer une section',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Actif',
+                'add-column' => 'Ajouter une colonne',
                 'add-filter-btn' => 'Ajouter un filtre',
                 'add-footer-link-btn' => 'Ajouter un lien de pied de page',
                 'add-image-btn' => 'Ajouter une image',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'ID de catégorie',
                 'channels' => 'Canaux',
                 'column' => 'Colonne',
+                'columns' => 'Colonnes',
                 'create-filter' => 'Créer un filtre',
                 'css' => 'CSS',
                 'delete' => 'Supprimer',

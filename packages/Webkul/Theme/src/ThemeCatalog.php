@@ -62,8 +62,42 @@ class ThemeCatalog
     }
 
     /**
-     * Number of customizations a channel holds for its current theme, used to warn
-     * before switching a channel over to a different theme.
+     * Whether a theme is registered for the storefront on this installation.
+     */
+    public function isInstalled(string $code): bool
+    {
+        return is_array(config('themes.shop.'.$code));
+    }
+
+    /**
+     * Channels that currently run an installed theme.
+     */
+    public function activeChannels(string $code): Collection
+    {
+        if (! $this->isInstalled($code)) {
+            return collect();
+        }
+
+        return $this->channelRepository->all()
+            ->where('theme', $code)
+            ->values();
+    }
+
+    /**
+     * Whether an installed theme runs on any channel, or on the given one when it is named.
+     */
+    public function isActive(string $code, ?int $channelId = null): bool
+    {
+        $channels = $this->activeChannels($code);
+
+        return is_null($channelId)
+            ? $channels->isNotEmpty()
+            : $channels->contains('id', $channelId);
+    }
+
+    /**
+     * Number of customizations a channel holds for its current theme, used to warn before
+     * switching a channel over to a different theme.
      */
     public function sectionCount(int $channelId, string $themeCode): int
     {
@@ -74,8 +108,8 @@ class ThemeCatalog
     }
 
     /**
-     * Build a single catalog row out of the registered config and the catalog entry,
-     * either of which may be missing.
+     * Build a single catalog row out of the registered config and the catalog entry, either of
+     * which may be missing.
      */
     protected function build(string $code, ?array $config, ?array $entry, Collection $channels): array
     {
@@ -108,10 +142,7 @@ class ThemeCatalog
     }
 
     /**
-     * Resolve a catalog screenshot to a url.
-     *
-     * Remote screenshots are used as given. Anything else is treated as an admin asset
-     * path, so that a theme shipped with Bagisto can carry its own bundled image.
+     * Resolve a catalog screenshot to a url, treating anything not remote as a bundled admin asset.
      */
     protected function screenshotUrl(?string $screenshot): ?string
     {

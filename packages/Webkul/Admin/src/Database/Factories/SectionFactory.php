@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section as SectionModel;
 
 class SectionFactory extends Factory
@@ -15,20 +16,20 @@ class SectionFactory extends Factory
     protected $model = SectionModel::class;
 
     /**
-     * Define the model's default state.
+     * Define the model's default state, never of a type a channel may hold only one of, which a
+     * test that wants one asks for.
      */
     public function definition()
     {
         $lastSection = SectionModel::query()->orderBy('id', 'desc')->limit(1)->first();
 
-        /**
-         * A channel draws one footer, so it is not a type to hand out at random; a test
-         * that wants one asks for it.
-         */
-        $types = ['product_carousel', 'category_carousel', 'image_carousel', 'services_content'];
-
         return [
-            'type' => $this->faker->randomElement($types),
+            'type' => $this->faker->randomElement([
+                SectionTypeEnum::PRODUCT_CAROUSEL->value,
+                SectionTypeEnum::CATEGORY_CAROUSEL->value,
+                SectionTypeEnum::IMAGE_CAROUSEL->value,
+                SectionTypeEnum::SERVICES_CONTENT->value,
+            ]),
             'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'sort_order' => ($lastSection ? $lastSection->id : 0) + 1,
             'channel_id' => core()->getDefaultChannel()->id,

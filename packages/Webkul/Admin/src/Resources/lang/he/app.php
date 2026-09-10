@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'שכפל',
                 'empty' => 'אין עדיין מקטעים.',
                 'gone' => 'מקטע זה אינו קיים עוד.',
+                'inactive-theme' => 'ניתן להתאים אישית רק ערכת נושא שפעילה בערוץ.',
                 'locale' => 'שפה',
                 'mobile' => 'נייד',
+                'no-fields' => 'למקטע זה אין הגדרות לעריכה בערכת נושא זו.',
+                'no-types' => 'ערכת נושא זו אינה מציעה סוגי מקטעים להוספה.',
                 'pinned' => 'מוצמד לתחתית העמוד.',
                 'preview-btn' => 'תצוגה מקדימה',
                 'publish-btn' => 'פרסם',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'ערוץ זה מציג מקטע קישורי כותרת תחתונה אחד בלבד.',
                 'name' => 'שם',
                 'save-btn' => 'שמירת מקטע',
+                'singleton-exists' => 'ערוץ זה מציג מקטע :type אחד בלבד.',
                 'title' => 'יצירת מקטע',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'פעיל',
+                'add-column' => 'הוסף עמודה',
                 'add-filter-btn' => 'הוסף מסנן',
                 'add-footer-link-btn' => 'הוסף קישור לתחתית',
                 'add-image-btn' => 'הוסף תמונה',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'מזהה קטגוריה',
                 'channels' => 'ערוצים',
                 'column' => 'עמודה',
+                'columns' => 'עמודות',
                 'create-filter' => 'צור מסנן',
                 'css' => 'CSS',
                 'delete' => 'מחק',

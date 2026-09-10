@@ -1,5 +1,7 @@
 <?php
 
+use Webkul\Theme\Enums\SectionTypeEnum;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -22,6 +24,15 @@ return [
                 'hot_file' => 'shop-default-vite.hot',
                 'build_directory' => 'themes/shop/default/build',
                 'package_assets_directory' => 'src/Resources/assets',
+            ],
+
+            'sections' => [
+                SectionTypeEnum::IMAGE_CAROUSEL,
+                SectionTypeEnum::PRODUCT_CAROUSEL,
+                SectionTypeEnum::CATEGORY_CAROUSEL,
+                SectionTypeEnum::FOOTER_LINKS,
+                SectionTypeEnum::STATIC_CONTENT,
+                SectionTypeEnum::SERVICES_CONTENT,
             ],
         ],
     ],

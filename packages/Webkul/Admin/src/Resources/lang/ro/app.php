@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Duplicate',
                 'empty' => 'No sections yet.',
                 'gone' => 'Această secțiune nu mai există.',
+                'inactive-theme' => 'Doar o temă activă pe un canal poate fi personalizată.',
                 'locale' => 'Limbă',
                 'mobile' => 'Mobile',
+                'no-fields' => 'Această secțiune nu are setări de editat în această temă.',
+                'no-types' => 'Această temă nu oferă tipuri de secțiuni de adăugat.',
                 'pinned' => 'Fixat în partea de jos a paginii.',
                 'preview-btn' => 'Preview',
                 'publish-btn' => 'Publish',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Acest canal afișează o singură secțiune de linkuri în subsol.',
                 'name' => 'Name',
                 'save-btn' => 'Save Section',
+                'singleton-exists' => 'Acest canal afișează o singură secțiune :type.',
                 'title' => 'Create Section',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Active',
+                'add-column' => 'Adaugă coloană',
                 'add-filter-btn' => 'Add Filter',
                 'add-footer-link-btn' => 'Add Footer Link',
                 'add-image-btn' => 'Add Image',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'Category ID',
                 'channels' => 'Channels',
                 'column' => 'Column',
+                'columns' => 'Coloane',
                 'create-filter' => 'Create Filter',
                 'css' => 'CSS',
                 'delete' => 'Delete',

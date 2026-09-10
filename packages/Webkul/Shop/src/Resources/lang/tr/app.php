@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'Kategoriler',
             'image-carousel' => 'Görseller',
             'offer' => 'İlk siparişe özel %40 indirim fırsatı!',
+            'preview-banner' => ':channel kanalında :theme teması önizleniyor. Önizlemede bağlantılar devre dışıdır.',
             'product-carousel' => 'Ürünler',
             'resend-verify-email' => 'Doğrulama e-postasını tekrar gönder',
             'verify-email' => 'E-posta adresinizi doğrulayın',

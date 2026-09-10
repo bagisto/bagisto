@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Duplizieren',
                 'empty' => 'Noch keine Abschnitte.',
                 'gone' => 'Dieser Abschnitt existiert nicht mehr.',
+                'inactive-theme' => 'Nur ein Theme, das in einem Kanal aktiv ist, kann angepasst werden.',
                 'locale' => 'Sprache',
                 'mobile' => 'Mobil',
+                'no-fields' => 'Dieser Abschnitt hat in diesem Theme keine bearbeitbaren Einstellungen.',
+                'no-types' => 'Dieses Theme bietet keine Abschnittstypen zum Hinzufügen an.',
                 'pinned' => 'Am Seitenende fixiert.',
                 'preview-btn' => 'Vorschau',
                 'publish-btn' => 'Veröffentlichen',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Dieser Kanal zeigt nur einen Fußzeilen-Link-Abschnitt an.',
                 'name' => 'Name',
                 'save-btn' => 'Abschnitt speichern',
+                'singleton-exists' => 'Dieser Kanal zeigt nur einen Abschnitt vom Typ :type an.',
                 'title' => 'Abschnitt erstellen',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktiv',
+                'add-column' => 'Spalte hinzufügen',
                 'add-filter-btn' => 'Filter hinzufügen',
                 'add-footer-link-btn' => 'Fußzeilen-Link hinzufügen',
                 'add-image-btn' => 'Bild hinzufügen',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'Kategorien-ID',
                 'channels' => 'Kanäle',
                 'column' => 'Spalte',
+                'columns' => 'Spalten',
                 'create-filter' => 'Filter erstellen',
                 'css' => 'CSS',
                 'delete' => 'Löschen',

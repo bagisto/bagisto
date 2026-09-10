@@ -4,6 +4,14 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Section types are now declared per theme in `config/themes.php`, in the order the Add Section tiles show them, so a theme can offer its own section types without core changes.
+
+- Fixed the Customize action being offered for installed themes that no channel runs; only an active theme can be customized now, and the server enforces it.
+
+- Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited, and an installed theme can be previewed from the gallery.
+
+- Footer links now take any number of columns instead of a fixed two, and existing footers keep working.
+
 - Corrected the titles and descriptions in Admin → Configuration that named settings which no longer exist or defined the concept rather than the setting, in all 22 locales.
 
 - Fixed the LinkedIn social login button never appearing, because the configuration field was named after the Socialite driver while the installer seeded the plain provider name.

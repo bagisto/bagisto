@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'カテゴリカルーセル',
             'image-carousel' => '画像カルーセル',
             'offer' => '初回注文で最大40%オフ、今すぐ購入',
+            'preview-banner' => ':channel チャネルで :theme テーマをプレビューしています。プレビューではリンクは無効です。',
             'product-carousel' => '商品カルーセル',
             'resend-verify-email' => '確認メールを再送信',
             'verify-email' => 'メールアカウントを確認してください',

@@ -6,7 +6,7 @@
     $channel = core()->getCurrentChannel();
 
     $section = $sectionRepository->findOneOfType(
-        'footer_links',
+        \Webkul\Theme\Enums\SectionTypeEnum::FOOTER_LINKS->value,
         $channel->id,
         $channel->theme,
         app()->getLocale()
