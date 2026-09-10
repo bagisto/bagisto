@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Themes can now register their own image cache templates under `customize.image_cache.templates` in `config/themes.php`, overriding or adding to the core `small`, `medium` and `large`.
+- Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product image URLs carry.
 
 - Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
 

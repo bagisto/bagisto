@@ -7,8 +7,8 @@ class InvalidTemplate extends \Exception
     /**
      * Create an instance.
      */
-    public function __construct(string $themeCode, string $name, string $template)
+    public function __construct(string $themeCode, string $name, string $reason)
     {
-        parent::__construct("Image template [{$name}] of theme [{$themeCode}] must be a class with an applyFilter() method, [{$template}] given.");
+        parent::__construct("Image template [{$name}] of theme [{$themeCode}] is invalid: {$reason}.");
     }
 }

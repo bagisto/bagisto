@@ -1158,7 +1158,9 @@ class ProductCard
 ##### Step 2 — Register it for the theme
 
 Map the template's name to its class under `customize.image_cache.templates` in
-the theme's entry in `config/themes.php`. The name is what appears in the URL:
+the theme's entry in `config/themes.php`. The name is what appears in the URL.
+Because `product_card` is meant for product images, also list it under
+`product_images`:
 
 ```php
 use Webkul\Fashion\ImageTemplates\ProductCard;
@@ -1174,37 +1176,48 @@ use Webkul\Fashion\ImageTemplates\ProductCard;
                 'templates' => [
                     'product_card' => ProductCard::class,
                 ],
+
+                'product_images' => [
+                    'product_card',
+                ],
             ],
         ],
     ],
 ],
 ```
 
-The effective templates for `fashion` are now the core `small`, `medium` and
-`large`, plus `product_card`. Themes that do not register it have no
-`product_card` template. If your configuration is cached, run
-`php artisan optimize:clear`.
+- `templates` makes `cache/product_card/{path}` resolve for the theme's channels.
+  The effective templates are the core `small`, `medium` and `large`, plus
+  `product_card`; themes that do not register it have no `product_card` template.
+- `product_images` adds a `product_card_image_url` to every product image array for
+  those channels. A template that is not listed — a banner, say — still resolves,
+  but product images never carry it.
+
+If your configuration is cached, run `php artisan optimize:clear`.
 
 ##### Step 3 — Use it in the theme's views
 
-Build the URL the same way the core templates are used, with the template's name
-and the image's stored path:
+Product images carry the URL beside the core sizes, wherever the product image
+helper builds them — `product_image()`, the product gallery, cart items and the
+storefront product APIs:
 
 ```blade
-@php($image = $product->images->first())
+@php($baseImage = product_image()->getProductBaseImage($product))
 
-@if ($image)
-    <img
-        src="{{ url('cache/product_card/'.$image->path) }}"
-        alt="{{ $product->name }}"
-        width="240"
-        height="320"
-    />
-@endif
+<img
+    src="{{ $baseImage['product_card_image_url'] }}"
+    alt="{{ $baseImage['alt'] }}"
+    width="240"
+    height="320"
+/>
 ```
 
-Any stored image path works the same way, such as a category's
-`url('cache/product_card/'.$category->logo_path)`.
+In a Vue component fed by the product APIs, the same URL is
+`product.base_image.product_card_image_url`, and each entry of `product.images`
+carries one too. A product without an image gets the large placeholder for it.
+
+For any other stored image, build the URL from the template's name and the path,
+such as `url('cache/product_card/'.$category->logo_path)`.
 
 ##### Step 4 — Check it
 
@@ -1309,19 +1322,46 @@ class MobileBanner
             'mobile_banner' => MobileBanner::class,
             'small' => ProductSmall::class,
         ],
+
+        'product_images' => [
+            'product_card',
+        ],
     ],
 ],
 ```
+
+`mobile_banner` is not listed under `product_images`, so it resolves at
+`cache/mobile_banner/{path}` without being added to product image arrays. `small`
+needs no listing: product images always carry the core sizes.
 
 #### Rules
 
 - **Only registered names resolve.** The name in the URL is only ever looked up
   among the registered templates; it is never used as a class. An unknown name
   answers with a 404, as before.
-- **An invalid entry is skipped and reported to the log** — a class that does not
-  exist, is abstract, or has no public `applyFilter()`. The core template of that
-  name, if any, is used instead.
+- **A template name uses letters, digits, dashes and underscores**, since it
+  becomes a URL segment and, for product images, part of an array key.
+- **An invalid entry is skipped and reported to the log** — a name with other
+  characters, a class that does not exist, is abstract, or has no public
+  `applyFilter()`. The core template of that name, if any, is used instead. A name
+  under `product_images` that is not a registered template is skipped and reported
+  the same way.
 - **`original`, `download` and `logo` are reserved** and cannot be overridden.
+- **Product images are opt-in.** Product image arrays keep exactly the core
+  `small`, `medium`, `large` and `original` unless the theme lists more under
+  `product_images`.
+- **The admin panel always uses the core templates**, whatever theme a channel
+  runs, so product images built during an admin request never carry theme
+  templates. The images the admin panel itself shows are the original files.
+  Attribute swatch previews are the one exception: they use `cache/small/…`, the
+  same URL the storefront uses, so they follow the `small` template of the channel
+  that serves the admin panel's host.
+- **Cached product listings follow the theme.** The storefront product API caches a
+  guest listing per channel and theme, so after a channel switches theme its
+  listings carry the new theme's product images straight away.
+- **The Appearance preview of a theme a channel does not run** builds product images
+  for the previewed theme, but its images are served by the channel's active
+  theme; a template only the previewed theme registers does not load there.
 - **Images are resized per request for the requesting channel**, and each response
   carries an ETag of its own bytes, so two themes never share an image. After a
   channel switches theme, browsers may keep images they already cached for up to

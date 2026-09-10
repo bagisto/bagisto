@@ -78,18 +78,52 @@ return [
                 | Image Cache
                 |--------------------------------------------------------------------------
                 |
-                | The image cache templates served at "cache/{template}/{path}" for the
-                | channels running this theme, merged over the core templates in
-                | config/imagecache.php. Register a core name (small, medium, large) to
-                | override it, or a new name to add a template. Each template is a class
-                | with a public applyFilter() method.
-                |
-                | Every name left out falls back to the core template of that name.
+                | How this theme resizes the images served at "cache/{template}/{path}"
+                | for the channels running it, on top of the core image cache in
+                | config/imagecache.php. Admin pages always use the core templates.
                 |
                 */
 
                 'image_cache' => [
+                    
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Templates
+                    |--------------------------------------------------------------------------
+                    |
+                    | The image cache templates this theme registers, keyed by the name used
+                    | in the url, merged over the core templates. Register a core name
+                    | (small, medium, large) to override it, or a new name to add a template.
+                    | A name uses letters, digits, dashes and underscores, and must not be
+                    | original, download or logo. Each template is a class with a public
+                    | applyFilter() method.
+                    |
+                    | Every name left out falls back to the core template of that name.
+                    |
+                    | e.g. 'small' => \Webkul\Fashion\ImageTemplates\Small::class,
+                    |      'product_card' => \Webkul\Fashion\ImageTemplates\ProductCard::class,
+                    |
+                    */
+
                     'templates' => [],
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Product Images
+                    |--------------------------------------------------------------------------
+                    |
+                    | The template names product image urls carry besides the core small,
+                    | medium, large and original, as "{name}_image_url" in the product image
+                    | helper and the storefront product APIs. List only templates meant for
+                    | product images; a name must be registered under "templates" or in
+                    | config/imagecache.php.
+                    |
+                    | e.g. 'product_card', which adds "product_card_image_url" to every
+                    |      product image, served at "cache/product_card/{path}".
+                    |
+                    */
+
+                    'product_images' => [],
                 ],
             ],
         ],

@@ -9,6 +9,16 @@ use Webkul\ImageCache\Exceptions\InvalidTemplate;
 class TemplateRegistry
 {
     /**
+     * Names the image cache controller answers itself, which no template may take.
+     */
+    public const RESERVED = ['original', 'download', 'logo'];
+
+    /**
+     * The characters a template name may use, since it becomes a url segment and an array key.
+     */
+    public const NAME_PATTERN = '/^[A-Za-z0-9_-]+$/';
+
+    /**
      * The core templates, as configured under `imagecache.templates`.
      */
     public function core(): array
@@ -61,10 +71,37 @@ class TemplateRegistry
     }
 
     /**
-     * The theme the channel serving the request renders, falling back to the default storefront theme.
+     * The templates a theme lists under `customize.image_cache.product_images`, which product image
+     * urls carry besides the core sizes, keeping only the names it can resolve.
+     */
+    public function productImages(?string $themeCode): array
+    {
+        $declared = $themeCode
+            ? config('themes.shop.'.$themeCode.'.customize.image_cache.product_images')
+            : null;
+
+        if (! is_array($declared)) {
+            return [];
+        }
+
+        $templates = $this->all($themeCode);
+
+        return array_values(array_unique(array_filter(
+            $declared,
+            fn ($name) => $this->isResolvable($themeCode, $name, $templates)
+        )));
+    }
+
+    /**
+     * The storefront theme the requesting channel renders, or none for an admin request, which uses
+     * the core templates only.
      */
     public function currentTheme(): ?string
     {
+        if ($this->isAdminRequest()) {
+            return null;
+        }
+
         $themeCode = core()->getCurrentChannel()?->theme;
 
         if (
@@ -78,21 +115,58 @@ class TemplateRegistry
     }
 
     /**
-     * Whether a theme's template entry names a class the image cache can apply, reporting it otherwise.
+     * Whether a theme's template entry has a usable name and a class the image cache can apply, reporting it otherwise.
      */
     protected function isValid(string $themeCode, mixed $name, mixed $template): bool
     {
         if (
             is_string($name)
+            && preg_match(self::NAME_PATTERN, $name)
+            && ! in_array($name, self::RESERVED, true)
             && is_string($template)
             && $this->isApplicable($template)
         ) {
             return true;
         }
 
-        report(new InvalidTemplate($themeCode, (string) $name, is_string($template) ? $template : get_debug_type($template)));
+        report(new InvalidTemplate(
+            $themeCode,
+            (string) $name,
+            'a name of letters, digits, dashes or underscores other than '.implode(', ', self::RESERVED).', mapped to a class with a public applyFilter() method, is required; ['.(is_string($template) ? $template : get_debug_type($template)).'] given'
+        ));
 
         return false;
+    }
+
+    /**
+     * Whether a name listed for product images is a template the theme resolves, reporting it otherwise.
+     */
+    protected function isResolvable(string $themeCode, mixed $name, array $templates): bool
+    {
+        if (
+            is_string($name)
+            && array_key_exists($name, $templates)
+        ) {
+            return true;
+        }
+
+        report(new InvalidTemplate(
+            $themeCode,
+            is_string($name) ? $name : get_debug_type($name),
+            'it is listed under product_images but is not a registered template'
+        ));
+
+        return false;
+    }
+
+    /**
+     * Whether the request is for the admin panel, which no storefront theme applies to.
+     */
+    protected function isAdminRequest(): bool
+    {
+        $adminUrl = trim((string) config('app.admin_url'), '/');
+
+        return request()->is($adminUrl, $adminUrl.'/*');
     }
 
     /**
