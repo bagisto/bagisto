@@ -124,6 +124,41 @@ return [
                     */
 
                     'product_images' => [],
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Category Images
+                    |--------------------------------------------------------------------------
+                    |
+                    | The template names category logo and banner urls carry besides the core
+                    | small, medium, large and original, as "{name}_image_url" in the
+                    | storefront category API. List only templates meant for category images;
+                    | a name must be registered under "templates" or in config/imagecache.php.
+                    |
+                    | e.g. 'category_card', which adds "category_card_image_url" to every
+                    |      category logo and banner, served at "cache/category_card/{path}".
+                    |
+                    */
+
+                    'category_images' => [],
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Swatch Images
+                    |--------------------------------------------------------------------------
+                    |
+                    | The template names image swatch urls carry besides the core small,
+                    | medium, large and original, as "{name}_image_url" in the "swatch_image"
+                    | of every configurable product option. List only templates meant for
+                    | swatches; a name must be registered under "templates" or in
+                    | config/imagecache.php.
+                    |
+                    | e.g. 'swatch_card', which adds "swatch_card_image_url" to every image
+                    |      swatch, served at "cache/swatch_card/{path}".
+                    |
+                    */
+
+                    'swatch_images' => [],
                 ],
             ],
         ],

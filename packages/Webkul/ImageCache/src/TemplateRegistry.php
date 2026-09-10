@@ -19,6 +19,21 @@ class TemplateRegistry
     public const NAME_PATTERN = '/^[A-Za-z0-9_-]+$/';
 
     /**
+     * The key under `customize.image_cache` listing the templates product images carry.
+     */
+    public const PRODUCT_IMAGES = 'product_images';
+
+    /**
+     * The key under `customize.image_cache` listing the templates category logos and banners carry.
+     */
+    public const CATEGORY_IMAGES = 'category_images';
+
+    /**
+     * The key under `customize.image_cache` listing the templates attribute option image swatches carry.
+     */
+    public const SWATCH_IMAGES = 'swatch_images';
+
+    /**
      * The core templates, as configured under `imagecache.templates`.
      */
     public function core(): array
@@ -71,13 +86,13 @@ class TemplateRegistry
     }
 
     /**
-     * The templates a theme lists under `customize.image_cache.product_images`, which product image
-     * urls carry besides the core sizes, keeping only the names it can resolve.
+     * The distinct templates a theme lists under a key of `customize.image_cache`, such as
+     * `product_images`, keeping only the names it can resolve.
      */
-    public function productImages(?string $themeCode): array
+    public function listed(?string $themeCode, string $key): array
     {
         $declared = $themeCode
-            ? config('themes.shop.'.$themeCode.'.customize.image_cache.product_images')
+            ? config('themes.shop.'.$themeCode.'.customize.image_cache.'.$key)
             : null;
 
         if (! is_array($declared)) {
@@ -88,7 +103,7 @@ class TemplateRegistry
 
         return array_values(array_unique(array_filter(
             $declared,
-            fn ($name) => $this->isResolvable($themeCode, $name, $templates)
+            fn ($name) => $this->isResolvable($themeCode, $key, $name, $templates)
         )));
     }
 
@@ -139,9 +154,10 @@ class TemplateRegistry
     }
 
     /**
-     * Whether a name listed for product images is a template the theme resolves, reporting it otherwise.
+     * Whether a name listed under a key of `customize.image_cache` is a template the theme resolves,
+     * reporting it otherwise.
      */
-    protected function isResolvable(string $themeCode, mixed $name, array $templates): bool
+    protected function isResolvable(string $themeCode, string $key, mixed $name, array $templates): bool
     {
         if (
             is_string($name)
@@ -153,7 +169,7 @@ class TemplateRegistry
         report(new InvalidTemplate(
             $themeCode,
             is_string($name) ? $name : get_debug_type($name),
-            'it is listed under product_images but is not a registered template'
+            'it is listed under '.$key.' but is not a registered template'
         ));
 
         return false;

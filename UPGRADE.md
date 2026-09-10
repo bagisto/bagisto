@@ -188,8 +188,10 @@ Code that referred to the old constants and helpers:
 | Before | Now |
 |---|---|
 | `Section::IMAGE_CAROUSEL` and the other type constants | `SectionTypeEnum::IMAGE_CAROUSEL->value` — the constants remain as deprecated aliases |
-| `Section::TYPES` | `SectionSchema::types($themeCode)` — the constant remains, deprecated |
-| `SectionSchema::for($type)` | `SectionSchema::for($type, $themeCode)` — the theme is optional |
+| `Section::TYPES` | `app(SectionSchema::class)->types($themeCode)` — the constant remains, deprecated |
+| `SectionSchema::for($type)` | `app(SectionSchema::class)->for($type, $themeCode)` — the theme is optional, as it is for `all()` and `keysFor()` |
+| `SectionSchema`'s constructor and its protected per-type builders (`productCarousel()` and the rest) | Removed; each type's fields live in its class under `Webkul\Theme\Sections`, in `getFields()` and, for the carousels, `filterKeys()` — a subclass of `SectionSchema` must move its changes there |
+| — | New: `app(SectionSchema::class)->type($themeCode, $code)` and `$section->getTypeInstance()` resolve the `SectionType` a theme handles a section with |
 | `FPC\Listeners\Section::LAYOUT_TYPES` | Removed; a type draws on every page when it sets `$layout` |
 | `SectionRepository::sanitizeStaticCss()` | Moved to `SectionType::sanitizeCss()` |
 
@@ -249,10 +251,11 @@ tile. The rules the list follows:
   later entry for the same code is ignored, so a type never gets two tiles.
 - **An entry that is neither an enum case nor a `SectionType` class** is reported
   to the log and skipped; the rest of the list still loads.
+- **An empty list, `'sections' => []`, offers no types at all.**
 - **The list does not affect sections already placed on a page.** They keep their
   own order, and one whose type the theme stops listing stays on the page: a core
-  type remains editable, and a type whose class no longer exists opens with no
-  fields.
+  type remains editable, while a type of your own opens with no fields, and its
+  `sanitize()` no longer runs when it is saved or published.
 
 If your theme only needs the core types, you are done. The remaining steps add a
 section type of your own.
@@ -362,7 +365,8 @@ nowhere else.
 
 ##### Step 4 — Render it on the storefront
 
-The home page receives `$sections` — the live sections in page order on the
+The core `shop::home.index` only draws the core types, so render your own type from
+the theme's override of that view, under its `views_path`. The home page receives `$sections` — the live sections in page order on the
 storefront, and the drafts with `$preview` set in the Appearance preview. Match
 each section on its stored code: the enum case's `->value` for a core type, your
 class's `$code` for your own. While previewing, wrap each section in the two data
@@ -643,11 +647,13 @@ public function prepareForStorage(array $options): array
 
 #### Behavioural changes
 
-- **A section type is offered only to the themes that declare it**, in the order
-  the theme lists it, and creating one of a type the theme does not offer is refused.
+- **A section type is offered only to the themes that list it** (a theme without a
+  `customize.sections` key offers every core type), in the order the theme lists it,
+  and creating one of a type the theme does not offer is refused.
 - **Only a theme that a channel runs can be customized.** The gallery hides
-  Customize for any other theme, and the editor, its actions and its sections
-  answer with a 403 for a theme its channel no longer runs.
+  Customize for any other theme, opening the editor for one sends you back to the
+  gallery with a warning, and the section actions answer with a 403 for a theme its
+  channel no longer runs. A theme this installation does not have answers with a 404.
 - **The preview renders the theme it is asked for**, through a `theme` parameter,
   and an installed theme can be previewed from the gallery before it is activated.
 - **Footer links take any number of columns.** The editor edits a list of columns
@@ -663,8 +669,8 @@ public function prepareForStorage(array $options): array
   switched off with a pending change.
 - **Each channel is previewed and edited on its own**, so a theme customised on
   two channels is two independent sets of sections.
-- **Only one footer links section per channel** is allowed; the type is withdrawn
-  once a channel has one.
+- **Only one footer links section per channel** is allowed, because the core type is
+  a singleton; its tile is withdrawn once a channel has one.
 
 #### Migration steps
 
@@ -1096,9 +1102,11 @@ Bagisto v2.4 has migrated the Magic AI feature from direct OpenAI integration to
 **Impact Probability: Low**
 
 A theme can now register its own image cache templates — the resizes served from
-`cache/{template}/{path}` — without touching `config/imagecache.php`. Nothing is
-required on upgrade: a theme that registers none keeps using the core templates
-exactly as before.
+`cache/{template}/{path}` — without touching `config/imagecache.php`. A theme that
+registers none keeps using the core templates exactly as before. Nothing is required
+on upgrade unless custom code reads `AttributeOption::$swatch_value_url`, calls the
+admin configurable options endpoint, or extends `ImageCacheController` — see
+[Rules](#rules).
 
 #### How the templates for a request are resolved
 
@@ -1111,6 +1119,7 @@ exactly as before.
 3. **The theme is the one the requesting channel runs**, found from the request's
    host, so every channel resolves its own templates. A channel whose theme is not
    installed uses the templates of `themes.shop-default`.
+4. **An admin request uses the core templates only**, whatever theme its channel runs.
 
 A theme's templates never leak into another theme, and `config/imagecache.php`
 itself is never changed.
@@ -1217,8 +1226,23 @@ In a Vue component fed by the product APIs, the same URL is
 `product.base_image.product_card_image_url`, and each entry of `product.images`
 carries one too. A product without an image gets the large placeholder for it.
 
-For any other stored image, build the URL from the template's name and the path,
-such as `url('cache/product_card/'.$category->logo_path)`.
+Category logos and banners, and image swatches, get theme templates the same way
+(see [Adding a template to category and swatch images](#adding-a-template-to-category-and-swatch-images)).
+For any other stored image, `image_urls()` builds the same array — the core sizes,
+the templates the theme lists under the key you pass, and the original — and links
+every name to the stored file on a disk that is not local:
+
+```blade
+@php($bannerImage = image_urls($path, 'mobile_banner_images'))
+
+<img src="{{ $bannerImage['mobile_banner_image_url'] }}" alt="" />
+```
+
+List `mobile_banner` under a `mobile_banner_images` key of `customize.image_cache` for
+it to be included, as the [configuration below](#templates-that-do-more-than-resize)
+does; a key the theme does not declare gives only the core sizes. The core keys are
+available as constants: `TemplateRegistry::PRODUCT_IMAGES`, `CATEGORY_IMAGES` and
+`SWATCH_IMAGES`.
 
 ##### Step 4 — Check it
 
@@ -1226,6 +1250,66 @@ Open the URL on a channel that runs the theme, for example
 `https://fashion.example.com/cache/product_card/product/1/front.webp`. It returns
 the image cropped to 240 × 320. The same URL on a channel running another theme
 answers with a 404, because that theme does not register `product_card`.
+
+#### Adding a template to category and swatch images
+
+Category logos and banners, and attribute option image swatches, work like product
+images. Register the template under `templates`, then list its name under
+`category_images` or `swatch_images`:
+
+```php
+use Webkul\Fashion\ImageTemplates\CategoryBanner;
+use Webkul\Fashion\ImageTemplates\CategoryCard;
+use Webkul\Fashion\ImageTemplates\SwatchCard;
+
+'customize' => [
+    'image_cache' => [
+        'templates' => [
+            'category_card' => CategoryCard::class,
+            'category_banner' => CategoryBanner::class,
+            'swatch_card' => SwatchCard::class,
+        ],
+
+        'category_images' => [
+            'category_card',
+            'category_banner',
+        ],
+
+        'swatch_images' => [
+            'swatch_card',
+        ],
+    ],
+],
+```
+
+On the channels that run the theme:
+
+- Every category the storefront category API returns carries each name listed under
+  `category_images` on both its `logo` and its `banner` — here
+  `logo.category_card_image_url`, `logo.category_banner_image_url` and the same under
+  `banner` — beside the core `small`, `medium`, `large` and `original`. A category
+  without a stored logo or banner has no `logo` or `banner` key, as before.
+- Every option in a configurable product's config carries a `swatch_image` key. For
+  an image swatch it is an array — `swatch_image.swatch_card_image_url` beside the core
+  sizes, and an `alt`; for a color or text swatch, or an image swatch with no stored
+  file, it is `null`. The existing `swatch_value` stays the core `small` URL, so views
+  that read it keep working. `getAttributesData($product, $options, false)` leaves
+  `swatch_image` out and gives an image swatch's `swatch_value` as its stored file.
+
+The core `small`, `medium` and `large` templates crop every image under `category/` to
+a small square, logos and banners alike, so the category page keeps showing its banner
+at full size. To show a sized banner, register a banner-shaped template as above and
+use it in the theme's own `shop::categories.view`:
+
+```blade
+@php($bannerImage = image_urls($category->banner_path, \Webkul\ImageCache\TemplateRegistry::CATEGORY_IMAGES))
+
+<img src="{{ $bannerImage['category_banner_image_url'] }}" alt="{{ $category->banner_alt ?: $category->name }}" />
+```
+
+The image carousel section sizes its slides through the core `small`, `medium` and
+`large` templates, so overriding those for slider images — the path branch the core
+filters size as sliders — resizes the carousel too.
 
 #### Overriding a core template
 
@@ -1327,13 +1411,18 @@ class MobileBanner
         'product_images' => [
             'product_card',
         ],
+
+        'mobile_banner_images' => [
+            'mobile_banner',
+        ],
     ],
 ],
 ```
 
 `mobile_banner` is not listed under `product_images`, so it resolves at
-`cache/mobile_banner/{path}` without being added to product image arrays. `small`
-needs no listing: product images always carry the core sizes.
+`cache/mobile_banner/{path}` without being added to product image arrays; listed under
+`mobile_banner_images`, it is added to what `image_urls($path, 'mobile_banner_images')`
+builds. `small` needs no listing: every image array carries the core sizes.
 
 #### Rules
 
@@ -1341,25 +1430,41 @@ needs no listing: product images always carry the core sizes.
   among the registered templates; it is never used as a class. An unknown name
   answers with a 404, as before.
 - **A template name uses letters, digits, dashes and underscores**, since it
-  becomes a URL segment and, for product images, part of an array key.
+  becomes a URL segment and part of a `{name}_image_url` array key.
+- **A theme's template is a class name.** Only `config/imagecache.php` may map a name
+  to a closure.
 - **An invalid entry is skipped and reported to the log** — a name with other
   characters, a class that does not exist, is abstract, or has no public
   `applyFilter()`. The core template of that name, if any, is used instead. A name
-  under `product_images` that is not a registered template is skipped and reported
-  the same way.
+  listed under `product_images`, `category_images`, `swatch_images` or any other key
+  passed to `image_urls()` that is not a registered template is skipped and reported
+  the same way. It is reported each time the templates are resolved, so fix the entry
+  rather than leave it in place.
 - **`original`, `download` and `logo` are reserved** and cannot be overridden.
-- **Product images are opt-in.** Product image arrays keep exactly the core
-  `small`, `medium`, `large` and `original` unless the theme lists more under
-  `product_images`.
+- **Models give the stored file, the storefront sizes it.** A model's image URL is the
+  stored file's own URL, so the admin panel and every theme read the same value.
+  `AttributeOption::$swatch_value_url` follows this now: it returns
+  `Storage::url($swatch_value)` where it used to return `cache/small/…`. For a sized
+  swatch, read `swatch_value` or `swatch_image` from the configurable product config,
+  or call `image_urls($option->swatch_value, TemplateRegistry::SWATCH_IMAGES)`.
+- **Image arrays are opt-in.** Product images, category logos and banners, and image
+  swatches keep exactly the core `small`, `medium`, `large` and `original` unless the
+  theme lists more under `product_images`, `category_images` or `swatch_images`.
+- **A storage disk that is not local links every name to the stored file.** The
+  image cache only reads local files, so on a disk such as S3 every
+  `{name}_image_url` that `image_urls()` builds — product, category, swatch and
+  carousel images alike — is the file's own URL.
 - **The admin panel always uses the core templates**, whatever theme a channel
   runs, so product images built during an admin request never carry theme
-  templates. The images the admin panel itself shows are the original files.
-  Attribute swatch previews are the one exception: they use `cache/small/…`, the
-  same URL the storefront uses, so they follow the `small` template of the channel
-  that serves the admin panel's host.
-- **Cached product listings follow the theme.** The storefront product API caches a
-  guest listing per channel and theme, so after a channel switches theme its
-  listings carry the new theme's product images straight away.
+  templates. The images the admin panel itself shows, attribute swatches included,
+  are the original files, so no storefront theme resizes them. The admin
+  `admin.catalog.products.configurable.options` endpoint follows suit: it returns only
+  `attributes` and `index`, with an image swatch's `swatch_value` as its stored file,
+  and no longer carries `variant_prices`, `variant_images`, `variant_videos`,
+  `regular` or `final`, which the admin panel never read. The storefront keeps them in `getConfigurationConfig()`.
+- **Cached listings follow the theme.** The storefront product and category APIs
+  cache a guest listing per channel and theme, so after a channel switches theme its
+  listings carry the new theme's images straight away.
 - **The Appearance preview of a theme a channel does not run** builds product images
   for the previewed theme, but its images are served by the channel's active
   theme; a template only the previewed theme registers does not load there.

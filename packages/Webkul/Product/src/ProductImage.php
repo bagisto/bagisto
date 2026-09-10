@@ -3,19 +3,14 @@
 namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use Webkul\Customer\Contracts\Wishlist;
+use Webkul\ImageCache\ImageUrlBuilder;
 use Webkul\ImageCache\TemplateRegistry;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImage
 {
-    /**
-     * The image sizes every image array carries, whether or not a theme registers them.
-     */
-    public const CORE_TEMPLATES = ['small', 'medium', 'large'];
-
     /**
      * Create a new helper instance.
      *
@@ -141,17 +136,7 @@ class ProductImage
      */
     private function getCachedImageUrls($path, string $altText = ''): array
     {
-        $isDriverLocal = $this->isDriverLocal();
-
-        $urls = [];
-
-        foreach ($this->templateNames() as $template) {
-            $urls[$template.'_image_url'] = $isDriverLocal
-                ? url('cache/'.$template.'/'.$path)
-                : Storage::url($path);
-        }
-
-        return $urls + ['alt' => $altText];
+        return image_urls($path, TemplateRegistry::PRODUCT_IMAGES) + ['alt' => $altText];
     }
 
     /**
@@ -161,26 +146,11 @@ class ProductImage
     {
         $urls = [];
 
-        foreach ($this->templateNames() as $template) {
+        foreach (app(ImageUrlBuilder::class)->templateNames(TemplateRegistry::PRODUCT_IMAGES) as $template) {
             $urls[$template.'_image_url'] = $this->placeholderUrl($template);
         }
 
         return $urls + ['alt' => (string) $altText];
-    }
-
-    /**
-     * Names of the templates an image gets a url for: the core sizes, the templates the current theme
-     * lists for product images, and the original.
-     */
-    private function templateNames(): array
-    {
-        $templateRegistry = app(TemplateRegistry::class);
-
-        return array_values(array_unique([
-            ...self::CORE_TEMPLATES,
-            ...$templateRegistry->productImages($templateRegistry->currentTheme()),
-            'original',
-        ]));
     }
 
     /**
@@ -193,20 +163,12 @@ class ProductImage
             return bagisto_asset('images/large-product-placeholder.webp', 'shop');
         }
 
-        $size = in_array($template, self::CORE_TEMPLATES, true) ? $template : 'large';
+        $size = in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true) ? $template : 'large';
 
         $configured = core()->getConfigData('catalog.products.cache_'.$size.'_image.url');
 
         return $configured
             ? Storage::url($configured)
             : bagisto_asset('images/'.$size.'-product-placeholder.webp', 'shop');
-    }
-
-    /**
-     * Is driver local.
-     */
-    private function isDriverLocal(): bool
-    {
-        return Storage::getAdapter() instanceof LocalFilesystemAdapter;
     }
 }

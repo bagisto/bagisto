@@ -1,13 +1,14 @@
 # AGENTS.md — Cross-Agent Instructions for Bagisto 2.4.x
 
-Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue 3, Tailwind 3, Vite 6.
+Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3–8.4, Vue 3, Tailwind 3, Vite 6.
 
 All functionality lives in **41 self-contained packages** under `packages/Webkul/`. The Laravel app
 itself is a thin shell.
 
 ## Skills — load the relevant one before writing code, not after
 
-The conventions live as skills under `.agents/skills/<name>/SKILL.md`. **If your harness has no
+The conventions live as skills under `.agents/skills/<name>/SKILL.md` (`.claude/skills/` for Claude
+Code), wherever your harness installs them. **If your harness has no
 skill loader, read those files directly — they are plain markdown.** Each `SKILL.md` is a short
 router that links reference files beside it; open only the reference the task needs.
 
@@ -47,7 +48,7 @@ Two rules worth stating here because they are so often missed:
 ## Do not edit
 
 - `vendor/`, `node_modules/`, `composer.lock`, `package-lock.json`
-- `public/themes/*/build/` — Vite output
+- `public/themes/*/*/build/` — Vite output
 - `storage/` — runtime caches, logs, compiled views
 - `*.hot` — Vite HMR markers
 - `packages/Webkul/*/src/Resources/assets/` — only when working on the frontend, and always run the
@@ -62,13 +63,13 @@ Two rules worth stating here because they are so often missed:
 │   └── providers.php       # every service provider
 ├── config/
 │   ├── concord.php         # Concord module (model proxy) registration
-│   ├── themes.php          # shop + admin theme config
+│   ├── themes.php          # shop + admin themes, incl. each theme's `customize` (sections, image cache)
 │   └── …                   # standard Laravel config
 ├── database/               # app-level migrations and seeders
 ├── packages/Webkul/        # ★ all 41 Bagisto packages
 ├── routes/web.php          # minimal — packages define their own routes
 ├── tests/Pest.php          # binds test cases to packages
-├── phpunit.xml             # one suite per package that has tests
+├── phpunit.xml             # Unit / Feature suites for the packages that have tests
 ├── pint.json               # Pint config (preset: laravel)
 └── docker-compose.yml      # MySQL 8, Redis, Elasticsearch 7.17, Kibana, Mailpit
 ```
@@ -82,9 +83,10 @@ Marketing Notification PayGlocal Payment Paypal PayU PhonePe Product Razorpay RM
 Shipping Shop Sitemap SocialLogin SocialShare Stripe Tax Theme User
 ```
 
-Each registers **twice** — its main ServiceProvider in `bootstrap/providers.php`, and its
-`ModuleServiceProvider` in `config/concord.php`. Missing either half-loads the package in a way that
-is hard to diagnose.
+Each registers its main ServiceProvider in `bootstrap/providers.php`, and a package with models
+registers its `ModuleServiceProvider` in `config/concord.php` as well — DebugBar, FPC, ImageCache,
+Installer, MagicAI, PhonePe and SocialShare have none. Missing either half-loads the package in a
+way that is hard to diagnose.
 
 Package layout, the Contract/Model/Proxy trio, repositories, routes, ACL and menus are all covered by
 `bagisto-package-development`.

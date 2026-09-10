@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Exceptions;
@@ -10,13 +11,24 @@ use Webkul\Core\Core as BaseCore;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\ImageCache\Exceptions\InvalidTemplate;
 use Webkul\ImageCache\TemplateRegistry;
 use Webkul\ImageCache\Templates\Large;
 use Webkul\ImageCache\Templates\Medium;
 use Webkul\ImageCache\Templates\Small;
+use Webkul\Product\Helpers\SEO;
 use Webkul\Product\Models\ProductImage;
+use Webkul\Product\Models\ProductReview;
+use Webkul\RMA\Enums\DefaultRMAResolution;
+use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+use Webkul\RMA\Helpers\Helper as RMAHelper;
+use Webkul\RMA\Models\RMA;
+use Webkul\RMA\Models\RMAItem;
+use Webkul\RMA\Models\RMAReason;
+use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderItem;
 use Webkul\Shop\Tests\Fixtures\ImageCache\NotATemplate;
 use Webkul\Shop\Tests\Fixtures\ImageCache\PosterSmall;
 use Webkul\Shop\Tests\Fixtures\ImageCache\ProductCard;
@@ -293,4 +305,90 @@ it('should leave out an unusable template or a product image name that is not re
     Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[missing]'));
 
     Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[thumb]'));
+});
+
+it('should give the product rich snippet the full size urls of the product image helper', function () {
+    expect(app(SEO::class)->getProductImages($this->product->fresh()))->toBe([url('cache/original/'.$this->path)]);
+});
+
+it('should give the product rich snippet no images for a product without a stored one', function () {
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    expect(app(SEO::class)->getProductImages($product))->toBe([]);
+});
+
+it('should show a customer review with the product image of the product image helper', function () {
+    $customer = Customer::factory()->create();
+
+    ProductReview::factory()->create([
+        'product_id' => $this->product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    $this->loginAsCustomer($customer);
+
+    get(route('shop.customers.account.reviews.index'))
+        ->assertOk()
+        ->assertSee(url('cache/medium/'.$this->path))
+        ->assertDontSee('storage/'.$this->path);
+});
+
+it('should show the item of an rma request with the product image of the product image helper', function () {
+    $customer = Customer::factory()->create();
+
+    $order = Order::factory()->create([
+        'customer_id' => $customer->id,
+        'customer_email' => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+    ]);
+
+    $orderItem = OrderItem::factory()->create([
+        'order_id' => $order->id,
+        'product_id' => $this->product->id,
+        'sku' => $this->product->sku,
+        'type' => $this->product->type,
+        'name' => $this->product->name,
+    ]);
+
+    $rma = RMA::create([
+        'order_id' => $order->id,
+        'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
+    ]);
+
+    RMAItem::create([
+        'rma_id' => $rma->id,
+        'order_item_id' => $orderItem->id,
+        'rma_reason_id' => RMAReason::create(['title' => 'Damaged', 'status' => 1, 'position' => 1])->id,
+        'quantity' => 1,
+        'resolution' => DefaultRMAResolution::RETURN->value,
+    ]);
+
+    $this->loginAsCustomer($customer);
+
+    get(route('shop.customers.account.rma.view', $rma->id))
+        ->assertOk()
+        ->assertSee(url('cache/small/'.$this->path))
+        ->assertDontSee('storage/'.$this->path);
+});
+
+it('should hand the rma form each order item with the product image of the product image helper', function () {
+    $customer = Customer::factory()->create();
+
+    $order = Order::factory()->create(['customer_id' => $customer->id]);
+
+    $this->mock(RMAHelper::class)
+        ->shouldReceive('getOrderItems')
+        ->with($order->id)
+        ->andReturn(new Collection([
+            (new OrderItem)->forceFill(['product_id' => $this->product->id, 'base_image' => $this->path]),
+            (new OrderItem)->forceFill(['product_id' => null, 'base_image' => null]),
+        ]));
+
+    $this->loginAsCustomer($customer);
+
+    getJson(route('shop.customers.account.rma.get-order-items', $order->id))
+        ->assertOk()
+        ->assertJsonPath('0.base_image_url', url('cache/small/'.$this->path))
+        ->assertJsonPath('1.base_image_url', null);
 });

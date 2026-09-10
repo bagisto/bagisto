@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product image URLs carry.
+- Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product, category and swatch image URLs carry.
 
 - Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
 
@@ -13,6 +13,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited, and an installed theme can be previewed from the gallery.
 
 - Footer links now take any number of columns instead of a fixed two, wrapping to fit every screen and leaving out empty columns, and existing footers keep working.
+
+- Fixed My Reviews, the RMA pages and product rich snippets loading full-size product image files directly; they now go through the product image helper, with its sizes, placeholders and theme templates.
+
+- Fixed category logos and banners, and image swatches, not loading from a storage disk that is not local, and the image carousel section rewriting stored paths into image sizes and drawing slides without an image.
+
+- An attribute option's `swatch_value_url` is now the URL of its stored file, as every model image URL is; sized swatch URLs come from the configurable product config or `image_urls()`.
 
 - Corrected the titles and descriptions in Admin → Configuration that named settings which no longer exist or defined the concept rather than the setting, in all 22 locales.
 
