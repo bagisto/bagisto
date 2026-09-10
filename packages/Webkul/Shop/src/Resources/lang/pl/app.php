@@ -42,7 +42,6 @@ return [
             'page-title' => 'Logowanie klienta',
             'password' => 'Hasło',
             'resend-verification' => 'Wyślij ponownie e-mail weryfikacyjny',
-            'show-password' => 'Pokaż hasło',
             'title' => 'Zaloguj się',
             'verify-first' => 'Najpierw zweryfikuj swoje konto e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Domyślna zmiana',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Pokaż hasło',
+                ],
+            ],
         ],
 
         'media' => [

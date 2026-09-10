@@ -42,7 +42,6 @@ return [
             'page-title' => 'Inicio de Sesión del Cliente',
             'password' => 'Contraseña',
             'resend-verification' => 'Reenviar correo de verificación',
-            'show-password' => 'Mostrar Contraseña',
             'title' => 'Iniciar Sesión',
             'verify-first' => 'Verifica primero tu cuenta de correo electrónico.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Alternar predeterminado',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostrar Contraseña',
+                ],
+            ],
         ],
 
         'media' => [

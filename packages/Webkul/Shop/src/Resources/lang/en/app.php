@@ -42,7 +42,6 @@ return [
             'page-title' => 'Customer Login',
             'password' => 'Password',
             'resend-verification' => 'Resend Verification Email',
-            'show-password' => 'Show Password',
             'title' => 'Sign In',
             'verify-first' => 'Verify your email account first.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Default Toggle',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Show Password',
+                ],
+            ],
         ],
 
         'media' => [

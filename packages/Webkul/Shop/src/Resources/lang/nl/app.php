@@ -42,7 +42,6 @@ return [
             'page-title' => 'Aanmelden',
             'password' => 'Wachtwoord',
             'resend-verification' => 'Verificatie-e-mail opnieuw verzenden',
-            'show-password' => 'Wachtwoord Weergeven',
             'title' => 'Aanmelden',
             'verify-first' => 'Verifieer eerst uw e-mailaccount.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Standaard Schakelen',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Wachtwoord Weergeven',
+                ],
+            ],
         ],
 
         'media' => [

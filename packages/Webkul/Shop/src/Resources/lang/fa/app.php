@@ -42,7 +42,6 @@ return [
             'page-title' => 'ورود مشتری',
             'password' => 'رمز عبور',
             'resend-verification' => 'ارسال مجدد ایمیل تأیید',
-            'show-password' => 'نمایش رمز عبور',
             'title' => 'ورود',
             'verify-first' => 'ابتدا حساب ایمیل خود را تأیید کنید.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'کلیک کردن پیش‌فرض',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'نمایش رمز عبور',
+                ],
+            ],
         ],
 
         'media' => [

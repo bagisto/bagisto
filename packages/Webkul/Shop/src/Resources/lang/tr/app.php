@@ -42,7 +42,6 @@ return [
             'page-title' => 'Müşteri Girişi',
             'password' => 'Şifre',
             'resend-verification' => 'Doğrulama E-postasını Yeniden Gönder',
-            'show-password' => 'Şifreyi Göster',
             'title' => 'Oturum Aç',
             'verify-first' => 'Lütfen önce e-posta adresinizi doğrulayın.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Aç/Kapat',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Şifreyi Göster',
+                ],
+            ],
         ],
 
         'media' => [

@@ -42,7 +42,6 @@ return [
             'page-title' => 'Вхід користувача',
             'password' => 'Пароль',
             'resend-verification' => 'Надіслати лист підтвердження повторно',
-            'show-password' => 'Показати пароль',
             'title' => 'Увійти',
             'verify-first' => 'Спершу перевірте свою електронну пошту.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Перемикач за замовчуванням',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Показати пароль',
+                ],
+            ],
         ],
 
         'media' => [

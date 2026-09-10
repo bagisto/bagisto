@@ -42,7 +42,6 @@ return [
             'page-title' => 'Вход для клиентов',
             'password' => 'Пароль',
             'resend-verification' => 'Повторно отправить письмо подтверждения',
-            'show-password' => 'Показать пароль',
             'title' => 'Войти',
             'verify-first' => 'Сначала подтвердите свой адрес электронной почты.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Переключатель по умолчанию',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Показать пароль',
+                ],
+            ],
         ],
 
         'media' => [

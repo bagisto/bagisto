@@ -42,7 +42,6 @@ return [
             'page-title' => 'Kundenanmeldung',
             'password' => 'Passwort',
             'resend-verification' => 'Bestätigungs-E-Mail erneut senden',
-            'show-password' => 'Passwort anzeigen',
             'title' => 'Anmelden',
             'verify-first' => 'Bitte verifizieren Sie zuerst Ihr E-Mail-Konto.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Standardumschaltung',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Passwort anzeigen',
+                ],
+            ],
         ],
 
         'media' => [

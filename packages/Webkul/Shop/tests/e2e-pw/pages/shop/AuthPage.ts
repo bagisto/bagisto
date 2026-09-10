@@ -8,6 +8,8 @@ export type CustomerCredentials = {
     password: string;
 };
 
+export type PasswordField = "password" | "confirmPassword";
+
 export class AuthPage extends BasePage {
     constructor(page: Page) {
         super(page);
@@ -38,7 +40,7 @@ export class AuthPage extends BasePage {
     }
 
     private get passwordInput() {
-        return this.page.getByPlaceholder("Password");
+        return this.page.getByPlaceholder("Password", { exact: true });
     }
 
     private get confirmPasswordInput() {
@@ -81,21 +83,44 @@ export class AuthPage extends BasePage {
         return this.page.getByText("Welcome Guest").first();
     }
 
+    private passwordField(field: PasswordField) {
+        return field === "password"
+            ? this.passwordInput
+            : this.confirmPasswordInput;
+    }
+
+    private passwordVisibilityToggle(field: PasswordField) {
+        return this.passwordField(field)
+            .locator("..")
+            .getByRole("button", { name: "Show Password" });
+    }
+
     async visit() {
         await super.visit("");
     }
 
-    async register(credentials: CustomerCredentials) {
+    async openSignUpForm() {
         await this.visit();
         await this.profileMenu.click();
         await this.signUpLink.click();
         await this.page.waitForLoadState("networkidle");
+    }
+
+    async openSignInForm() {
+        await this.visit();
+        await this.profileMenu.click();
+        await this.signInLink.click();
+        await this.page.waitForLoadState("networkidle");
+    }
+
+    async register(credentials: CustomerCredentials) {
+        await this.openSignUpForm();
 
         await this.firstNameInput.fill(credentials.firstName);
         await this.lastNameInput.fill(credentials.lastName);
         await this.emailInput.fill(credentials.email);
-        await this.passwordInput.first().fill(credentials.password);
-        await this.confirmPasswordInput.first().fill(credentials.password);
+        await this.passwordInput.fill(credentials.password);
+        await this.confirmPasswordInput.fill(credentials.password);
 
         if (await this.agreementCheckbox.isVisible()) {
             await this.agreementText.first().click();
@@ -109,18 +134,22 @@ export class AuthPage extends BasePage {
         return credentials;
     }
 
-    async login(credentials: CustomerCredentials) {
-        await this.visit();
-        await this.profileMenu.click();
-        await this.signInLink.click();
-        await this.page.waitForLoadState("networkidle");
-
+    async fillSignInForm(credentials: CustomerCredentials) {
         await this.emailInput.fill(credentials.email);
         await this.passwordInput.fill(credentials.password);
+    }
+
+    async submitSignInForm() {
         await this.loginButton.click();
         await this.profileMenu.click();
 
         await expect(this.logoutLink.first()).toBeVisible();
+    }
+
+    async login(credentials: CustomerCredentials) {
+        await this.openSignInForm();
+        await this.fillSignInForm(credentials);
+        await this.submitSignInForm();
     }
 
     async logout() {
@@ -128,5 +157,33 @@ export class AuthPage extends BasePage {
         await this.profileMenu.waitFor({ state: "visible" });
         await this.profileMenu.click();
         await expect(this.welcomeGuestText).toBeVisible();
+    }
+
+    async typePassword(field: PasswordField, value: string) {
+        await this.passwordField(field).fill(value);
+    }
+
+    async togglePasswordVisibility(field: PasswordField) {
+        await this.passwordVisibilityToggle(field).click();
+    }
+
+    async expectPasswordMasked(field: PasswordField) {
+        await expect(this.passwordVisibilityToggle(field)).toHaveAttribute(
+            "aria-pressed",
+            "false",
+        );
+        await expect(this.passwordField(field)).toHaveAttribute(
+            "type",
+            "password",
+        );
+    }
+
+    async expectPasswordRevealed(field: PasswordField, value: string) {
+        await expect(this.passwordVisibilityToggle(field)).toHaveAttribute(
+            "aria-pressed",
+            "true",
+        );
+        await expect(this.passwordField(field)).toHaveAttribute("type", "text");
+        await expect(this.passwordField(field)).toHaveValue(value);
     }
 }

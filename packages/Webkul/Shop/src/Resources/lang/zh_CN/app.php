@@ -42,7 +42,6 @@ return [
             'page-title' => '用户登录',
             'password' => '密码',
             'resend-verification' => '重新发送验证邮件',
-            'show-password' => '显示密码',
             'title' => '登录',
             'verify-first' => '请先验证您的电子邮件。',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => '默认切换',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => '显示密码',
+                ],
+            ],
         ],
 
         'media' => [

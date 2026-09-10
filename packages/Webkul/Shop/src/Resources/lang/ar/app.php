@@ -42,7 +42,6 @@ return [
             'page-title' => 'تسجيل الدخول للعملاء',
             'password' => 'كلمة المرور',
             'resend-verification' => 'إعادة إرسال بريد التحقق',
-            'show-password' => 'عرض كلمة المرور',
             'title' => 'تسجيل الدخول',
             'verify-first' => 'الرجاء التحقق من حساب البريد الإلكتروني الخاص بك أولاً.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'التبديل الافتراضي',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'عرض كلمة المرور',
+                ],
+            ],
         ],
 
         'media' => [

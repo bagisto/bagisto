@@ -42,7 +42,6 @@ return [
             'page-title' => 'ප්‍රමාණවත් වීම',
             'password' => 'මුරපදය',
             'resend-verification' => 'තහවුරු කිරීමේ විද්‍යුත් තැපෑල නැවත යවන්න',
-            'show-password' => 'මුරපදය පෙන්වන්න',
             'title' => 'සන්නියයෙන් ඇතුලත් වන්න',
             'verify-first' => 'කරුණාකර ඔබගේ ඊමේල් ගිණුමක් පෙනෙන පෙනුමට පිළිගනිමු.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'පෙරනි එකක් සැකසෙමින්',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'මුරපදය පෙන්වන්න',
+                ],
+            ],
         ],
 
         'media' => [

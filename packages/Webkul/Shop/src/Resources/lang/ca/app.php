@@ -42,7 +42,6 @@ return [
             'page-title' => 'Inici de sessió del client',
             'password' => 'Contrasenya',
             'resend-verification' => 'Reenvia el correu de verificació',
-            'show-password' => 'Mostrar contrasenya',
             'title' => 'Iniciar sessió',
             'verify-first' => 'Verifica primer el teu compte de correu electrònic.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Alternar per defecte',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostrar contrasenya',
+                ],
+            ],
         ],
 
         'media' => [

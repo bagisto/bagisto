@@ -42,7 +42,6 @@ return [
             'page-title' => 'Connexion client',
             'password' => 'Mot de passe',
             'resend-verification' => 'Renvoyer l\'e-mail de vérification',
-            'show-password' => 'Afficher le mot de passe',
             'title' => 'Se connecter',
             'verify-first' => 'Vérifiez d\'abord votre compte e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Basculer par défaut',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Afficher le mot de passe',
+                ],
+            ],
         ],
 
         'media' => [

@@ -42,7 +42,6 @@ return [
             'page-title' => 'Login do Cliente',
             'password' => 'Senha',
             'resend-verification' => 'Reenviar e-mail de verificação',
-            'show-password' => 'Mostrar Senha',
             'title' => 'Entrar',
             'verify-first' => 'Verifique primeiro sua conta de e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Alternar Padrão',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostrar Senha',
+                ],
+            ],
         ],
 
         'media' => [

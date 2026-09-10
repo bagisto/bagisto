@@ -42,7 +42,6 @@ return [
             'page-title' => 'Autentificare client',
             'password' => 'Parolă',
             'resend-verification' => 'Retrimite emailul de verificare',
-            'show-password' => 'Afișează parola',
             'title' => 'Autentificare',
             'verify-first' => 'Verificați mai întâi contul de e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Comutare implicită',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Afișează parola',
+                ],
+            ],
         ],
 
         'media' => [

@@ -42,7 +42,6 @@ return [
             'page-title' => 'গ্রাহক লগইন',
             'password' => 'পাসওয়ার্ড',
             'resend-verification' => 'ভেরিফিকেশন ইমেইল পুনরায় পাঠান',
-            'show-password' => 'পাসওয়ার্ড দেখুন',
             'title' => 'সাইন ইন করুন',
             'verify-first' => 'প্রথমে আপনার ইমেইল অ্যাকাউন্ট যাচাই করুন।',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'ডিফল্ট টগল',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'পাসওয়ার্ড দেখুন',
+                ],
+            ],
         ],
 
         'media' => [

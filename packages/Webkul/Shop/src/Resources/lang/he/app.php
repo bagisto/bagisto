@@ -42,7 +42,6 @@ return [
             'page-title' => 'התחברות ללקוחות',
             'password' => 'סיסמה',
             'resend-verification' => 'שלח שוב אימייל אימות',
-            'show-password' => 'הצג סיסמה',
             'title' => 'התחברות',
             'verify-first' => 'אנא אמת את חשבון האימייל שלך תחילה.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'מתג ברירת מחדל',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'הצג סיסמה',
+                ],
+            ],
         ],
 
         'media' => [

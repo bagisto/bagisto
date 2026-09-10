@@ -42,7 +42,6 @@ return [
             'page-title' => 'Accesso Cliente',
             'password' => 'Password',
             'resend-verification' => 'Reinvia email di verifica',
-            'show-password' => 'Mostra Password',
             'title' => 'Accedi',
             'verify-first' => 'Verifica prima il tuo account email.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Attivazione predefinita',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostra Password',
+                ],
+            ],
         ],
 
         'media' => [

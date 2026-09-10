@@ -42,7 +42,6 @@ return [
             'page-title' => '顧客ログイン',
             'password' => 'パスワード',
             'resend-verification' => '確認メールを再送信',
-            'show-password' => 'パスワードを表示',
             'title' => 'サインイン',
             'verify-first' => 'まずメールアカウントを確認してください。',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'デフォルトトグル',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'パスワードを表示',
+                ],
+            ],
         ],
 
         'media' => [

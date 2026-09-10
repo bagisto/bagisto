@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
 
+- #11479 [fixed] - Fixed the storefront password fields offering no way to see the password outside sign in, which only had a checkbox. Every password field now has an eye icon inside it, which also stands in for Microsoft Edge's own reveal button.
+
 - #11477 [fixed] - Fixed logging in as a customer from the admin landing on the default channel rather than the customer's own. A signed-in customer is now sent to their assigned channel and cannot open the account area on a channel their account is not registered on.
 
 - #11473 [fixed] - Fixed a configurable product's parent disappearing from the Elasticsearch index when one of its variants was deleted. Only the products actually removed are now deleted from the index, and the surviving parent is reindexed.

@@ -42,7 +42,6 @@ return [
             'page-title' => 'ग्राहक लॉगिन',
             'password' => 'पासवर्ड',
             'resend-verification' => 'सत्यापन ईमेल पुनः भेजें',
-            'show-password' => 'पासवर्ड दिखाएं',
             'title' => 'साइन इन करें',
             'verify-first' => 'पहले अपना ईमेल खाता सत्यापित करें।',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'डिफ़ॉल्ट टॉगल',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'पासवर्ड दिखाएं',
+                ],
+            ],
         ],
 
         'media' => [
