@@ -1440,7 +1440,8 @@ builds. `small` needs no listing: every image array carries the core sizes.
   passed to `image_urls()` that is not a registered template is skipped and reported
   the same way. It is reported each time the templates are resolved, so fix the entry
   rather than leave it in place.
-- **`original`, `download` and `logo` are reserved** and cannot be overridden.
+- **`original`, `download` and `logo` are reserved** in any letter case and cannot be
+  overridden; a theme template named `Original` is refused like `original`.
 - **Models give the stored file, the storefront sizes it.** A model's image URL is the
   stored file's own URL, so the admin panel and every theme read the same value.
   `AttributeOption::$swatch_value_url` follows this now: it returns

@@ -9,7 +9,7 @@ use Webkul\ImageCache\Exceptions\InvalidTemplate;
 class TemplateRegistry
 {
     /**
-     * Names the image cache controller answers itself, which no template may take.
+     * Names the image cache controller answers itself in any letter case, which no template may take.
      */
     public const RESERVED = ['original', 'download', 'logo'];
 
@@ -137,7 +137,7 @@ class TemplateRegistry
         if (
             is_string($name)
             && preg_match(self::NAME_PATTERN, $name)
-            && ! in_array($name, self::RESERVED, true)
+            && ! in_array(strtolower($name), self::RESERVED, true)
             && is_string($template)
             && $this->isApplicable($template)
         ) {

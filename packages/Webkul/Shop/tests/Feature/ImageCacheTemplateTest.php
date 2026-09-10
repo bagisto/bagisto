@@ -202,6 +202,22 @@ it('should not let a theme take over a reserved image route name', function () {
     expect(dimensionsOf(imageOn('poster.test', 'original', $this->source)->assertOk()))->toBe([800, 600]);
 });
 
+it('should refuse a reserved image route name in any letter case, which the route could never reach', function () {
+    Exceptions::fake();
+
+    themeWithImageTemplates('poster', [
+        'Original' => PosterSmall::class,
+        'LOGO' => PosterSmall::class,
+        'poster_small' => PosterSmall::class,
+    ]);
+
+    expect(array_keys(app(TemplateRegistry::class)->theme('poster')))->toBe(['poster_small']);
+
+    Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[Original]'));
+
+    Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[LOGO]'));
+});
+
 it('should use the default storefront theme templates for a channel whose theme is not installed', function () {
     config(['themes.shop.'.config('themes.shop-default').'.customize.image_cache.templates' => ['small' => WideSmall::class]]);
 
