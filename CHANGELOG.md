@@ -4,7 +4,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Section types are now declared per theme in `config/themes.php`, in the order the Add Section tiles show them, so a theme can offer its own section types without core changes.
+- Themes can now register their own image cache templates under `customize.image_cache.templates` in `config/themes.php`, overriding or adding to the core `small`, `medium` and `large`.
+
+- Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
 
 - Fixed the Customize action being offered for installed themes that no channel runs; only an active theme can be customized now, and the server enforces it.
 

@@ -20,7 +20,7 @@ function activeStudioTheme(?array $sections): Channel
 {
     config(['themes.shop.studio' => array_merge(config('themes.shop.default'), [
         'name' => 'Studio',
-        'sections' => $sections,
+        'customize' => ['sections' => $sections],
     ])]);
 
     return Channel::factory()->create(['theme' => 'studio']);

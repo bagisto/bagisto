@@ -151,7 +151,7 @@ it('should publish an edited column count as the columns the storefront renders'
 
 it('should hold a theme footer to the number of columns it lays out', function () {
     config(['themes.shop.narrow' => array_merge(config('themes.shop.default'), [
-        'sections' => [NarrowFooterLinks::class],
+        'customize' => ['sections' => [NarrowFooterLinks::class]],
     ])]);
 
     $channel = Channel::factory()->create(['theme' => 'narrow']);

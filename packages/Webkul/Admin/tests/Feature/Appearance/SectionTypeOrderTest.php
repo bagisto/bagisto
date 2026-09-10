@@ -22,7 +22,7 @@ function themeDeclaringSections(mixed $sections): Channel
 {
     config(['themes.shop.ordered' => array_merge(config('themes.shop.default'), [
         'name' => 'Ordered',
-        'sections' => $sections,
+        'customize' => ['sections' => $sections],
     ])]);
 
     return Channel::factory()->create(['theme' => 'ordered']);
@@ -37,14 +37,14 @@ function offeredCodes(string $themeCode = 'ordered'): array
 }
 
 it('should declare the default theme section types explicitly, in enum order', function () {
-    expect(config('themes.shop.default.sections'))->toBe(SectionTypeEnum::cases())
+    expect(config('themes.shop.default.customize.sections'))->toBe(SectionTypeEnum::cases())
         ->and(offeredCodes('default'))->toBe(SectionTypeEnum::getValues());
 });
 
 it('should keep the enum order for a theme that declares no sections', function () {
-    config(['themes.shop.ordered' => array_merge(Arr::except(config('themes.shop.default'), 'sections'), ['name' => 'Ordered'])]);
+    config(['themes.shop.ordered' => array_merge(Arr::except(config('themes.shop.default'), 'customize'), ['name' => 'Ordered'])]);
 
-    expect(config('themes.shop.ordered'))->not->toHaveKey('sections')
+    expect(config('themes.shop.ordered'))->not->toHaveKey('customize')
         ->and(offeredCodes())->toBe(SectionTypeEnum::getValues());
 });
 

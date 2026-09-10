@@ -9,7 +9,7 @@ use Webkul\Theme\Models\Section;
 
 it('should clear every page when a section the layout draws changes', function (string $type, ?array $sections) {
     // Arrange
-    config(['themes.shop.default.sections' => $sections]);
+    config(['themes.shop.default.customize.sections' => $sections]);
 
     $section = Section::factory()->make(['type' => $type, 'theme_code' => 'default']);
 

@@ -53,7 +53,7 @@ class SectionSchema
     public function types(?string $themeCode = null): Collection
     {
         $declared = $themeCode
-            ? config('themes.shop.'.$themeCode.'.sections')
+            ? config('themes.shop.'.$themeCode.'.customize.sections')
             : null;
 
         return collect($declared ?? SectionTypeEnum::cases())
