@@ -155,15 +155,31 @@ appearance permissions after upgrading, and update any code calling
 
 #### Section types
 
-A section's type is now a class that extends `Webkul\Theme\Sections\SectionType`
-and carries its code, title, icon, editor fields and behaviour. The six core types
-are named by `Webkul\Theme\Enums\SectionTypeEnum`, and each case maps to its class
-under `Webkul\Theme\Sections`.
+A section type is now a class that extends `Webkul\Theme\Sections\SectionType`.
+The class owns everything about the type — its code, title, icon, editor fields
+and behaviour — so the Appearance editor no longer hardcodes any of it.
 
-A theme decides which types it offers, and the order the Add Section tiles show
-them in, with a `sections` list beside its entry in `config/themes.php`. No core
-file — the enum, the controller or the editor — changes when a theme adds, removes
-or reorders a type.
+There are two kinds of section type, and each is always written the same way:
+
+| | Core section type | Theme section type |
+|---|---|---|
+| **What it is** | One of the six types Bagisto ships | A type your theme package adds |
+| **Defined by** | `Webkul\Theme\Enums\SectionTypeEnum` | Your class extending `SectionType` |
+| **Written in `config/themes.php` as** | Its enum case — `SectionTypeEnum::PRODUCT_CAROUSEL` | Its class — `Lookbook::class` |
+| **Stored in `theme_sections.type` as** | The case's value — `product_carousel` | The class's `$code` — `lookbook` |
+
+The core section types:
+
+| Enum case | Stored code | What it renders |
+|---|---|---|
+| `SectionTypeEnum::IMAGE_CAROUSEL` | `image_carousel` | A slider of linked images |
+| `SectionTypeEnum::PRODUCT_CAROUSEL` | `product_carousel` | A strip of products, chosen by filters |
+| `SectionTypeEnum::CATEGORY_CAROUSEL` | `category_carousel` | A strip of categories, chosen by filters |
+| `SectionTypeEnum::FOOTER_LINKS` | `footer_links` | The footer's link columns, one per channel |
+| `SectionTypeEnum::STATIC_CONTENT` | `static_content` | Author-supplied HTML and CSS |
+| `SectionTypeEnum::SERVICES_CONTENT` | `services_content` | The service promises drawn on every page |
+
+Code that referred to the old constants and helpers:
 
 | Before | Now |
 |---|---|
@@ -175,73 +191,67 @@ or reorders a type.
 
 #### Adding sections to a theme
 
-##### How the `sections` list is read
+Everything below happens in your theme package and its entry in
+`config/themes.php`. No core file — the enum, the controller or the editor —
+changes when a theme adds, removes or reorders a section type. The examples use a
+`fashion` theme whose classes live in `Webkul\Fashion\Sections`.
+
+##### Step 1 — Choose the section types your theme offers
+
+List them under `sections` in the theme's entry. The list decides both **which**
+types the Add Section tiles offer and **the order** they appear in:
 
 ```php
 use Webkul\Theme\Enums\SectionTypeEnum;
 
-'shop' => [
-    'default' => [
-        // name, assets_path, views_path, vite ...
+return [
+    'shop' => [
+        'fashion' => [
+            'name' => 'Fashion',
+            'assets_path' => 'public/themes/shop/fashion',
+            'views_path' => 'resources/themes/fashion/views',
 
-        'sections' => [
-            SectionTypeEnum::IMAGE_CAROUSEL,
-            SectionTypeEnum::PRODUCT_CAROUSEL,
-            SectionTypeEnum::CATEGORY_CAROUSEL,
-            SectionTypeEnum::FOOTER_LINKS,
-            SectionTypeEnum::STATIC_CONTENT,
-            SectionTypeEnum::SERVICES_CONTENT,
+            'vite' => [
+                'hot_file' => 'shop-fashion-vite.hot',
+                'build_directory' => 'themes/shop/fashion/build',
+                'package_assets_directory' => 'src/Resources/assets',
+            ],
+
+            'sections' => [
+                SectionTypeEnum::IMAGE_CAROUSEL,
+                SectionTypeEnum::PRODUCT_CAROUSEL,
+                SectionTypeEnum::CATEGORY_CAROUSEL,
+                SectionTypeEnum::FOOTER_LINKS,
+            ],
         ],
     ],
-],
+];
 ```
 
-- **An entry** is a `SectionTypeEnum` case, a core type's value such as
-  `'image_carousel'`, or the class name of a `SectionType`.
-- **The list order is the tile order.** A type that is not listed is not offered,
-  and creating one is refused.
-- **No `sections` key** offers every core type in enum order, so a theme — or a
-  published `config/themes.php` — from before this release needs no change.
-- **The first entry for a code wins**, keeping both its position and its class; a
-  later entry for the same code is ignored, so there are never duplicate tiles.
-- **An entry that is none of the above** is reported to the log and skipped; the
-  rest of the list still loads.
-- **The list does not touch placed sections.** Sections already on a page keep
-  their own order. One whose type the theme stops listing is still shown: a core
-  type stays editable, and a type whose class is gone opens with no fields.
+This theme offers four core types; static content and service promises have no
+tile. The rules the list follows:
 
-##### Offer the core types, in your own order
+- **The list order is the tile order.** A type that is not listed has no tile, and
+  creating one is refused.
+- **Without a `sections` key** a theme offers every core type in enum order, so a
+  theme — or a published `config/themes.php` — from before this release needs no
+  change. The `default` theme lists all six explicitly.
+- **The first entry for a code wins**, keeping both its position and its class. A
+  later entry for the same code is ignored, so a type never gets two tiles.
+- **An entry that is neither an enum case nor a `SectionType` class** is reported
+  to the log and skipped; the rest of the list still loads.
+- **The list does not affect sections already placed on a page.** They keep their
+  own order, and one whose type the theme stops listing stays on the page: a core
+  type remains editable, and a type whose class no longer exists opens with no
+  fields.
 
-List only the ones you want, in the order you want them. Leaving a type out
-removes its tile:
+If your theme only needs the core types, you are done. The remaining steps add a
+section type of your own.
 
-```php
-'sections' => [
-    'product_carousel',
-    'image_carousel',
-    'category_carousel',
-    'footer_links',
-],
-```
+##### Step 2 — Create the section type class
 
-##### Lead with a few types, keep the rest in enum order
-
-Spread the enum after the types that should come first. The duplicates it brings
-in are ignored, so the remaining core types follow in enum order:
-
-```php
-'sections' => [
-    'static_content',
-    'product_carousel',
-    ...SectionTypeEnum::getValues(),
-],
-```
-
-##### Add a new section type
-
-A new type is a class in your theme package. Only `$code` is required; every
-other property has a default — the title falls back to the code in headline case
-and the icon to `icon-cms`:
+Only `$code` is required. Every other property has a default: the title falls back
+to the code in headline case, the icon to `icon-cms`, and the flags to `false`.
 
 ```php
 namespace Webkul\Fashion\Sections;
@@ -272,7 +282,11 @@ class Lookbook extends SectionType
     public function getFields(): array
     {
         return [
-            ['key' => 'heading', 'type' => SectionSchema::TEXT, 'label' => trans('fashion::app.sections.lookbook.heading')],
+            [
+                'key' => 'heading',
+                'type' => SectionSchema::TEXT,
+                'label' => trans('fashion::app.sections.lookbook.heading'),
+            ],
             [
                 'key' => 'looks',
                 'type' => SectionSchema::REPEATER,
@@ -289,28 +303,80 @@ class Lookbook extends SectionType
 }
 ```
 
-Then list it wherever its tile should appear:
+What a section type can declare:
+
+| Member | Default | Purpose |
+|---|---|---|
+| `$code` | *required* | The code stored in `theme_sections.type` |
+| `$title` | The code in headline case | Translation key of the tile's name |
+| `$icon` | `icon-cms` | Admin icon class drawn on the tile |
+| `$singleton` | `false` | A channel may hold only one |
+| `$pinned` | `false` | Fixed to the bottom of the list, not draggable |
+| `$layout` | `false` | Drawn on every page, so editing it clears the whole page cache |
+| `getFields()` | No fields | The fields the editor draws, from the kinds below |
+| `sanitize()` | Unchanged | Cleans options on every draft save, publish and preview |
+| `prepareForEditor()` / `prepareForStorage()` | Unchanged | Convert between the stored shape and the edited shape |
+
+The field kinds `getFields()` can use:
+
+| Kind | Control | Extra keys |
+|---|---|---|
+| `SectionSchema::TEXT` | A single line input | — |
+| `SectionSchema::TEXTAREA` | A multi-line input | — |
+| `SectionSchema::NUMBER` | A whole number input | — |
+| `SectionSchema::IMAGE` | An upload, stored as the file's path | — |
+| `SectionSchema::CODE` | A highlighted code editor | `language` (`html` or `css`) |
+| `SectionSchema::REPEATER` | Repeating, draggable rows of nested fields | `fields`, `add_label`, `max` |
+| `SectionSchema::FILTERS` | Key and value filter rows | `keys` — each with `value`, `label`, `options`, and `multiple` for a comma-separated list |
+
+##### Step 3 — List the class in `sections`
+
+Add the class where its tile should appear, alongside the enum cases:
 
 ```php
+use Webkul\Fashion\Sections\Lookbook;
+use Webkul\Theme\Enums\SectionTypeEnum;
+
 'sections' => [
-    \Webkul\Fashion\Sections\Lookbook::class,
-    ...SectionTypeEnum::getValues(),
+    SectionTypeEnum::IMAGE_CAROUSEL,
+    Lookbook::class,
+    SectionTypeEnum::PRODUCT_CAROUSEL,
+    SectionTypeEnum::CATEGORY_CAROUSEL,
+    SectionTypeEnum::FOOTER_LINKS,
 ],
 ```
 
-and render it from your theme's home page. The storefront hands the view its live
-sections in page order, and the preview hands it the drafts with `$preview` set —
-wrap each section in the two data attributes so the editor can highlight it:
+The Lookbook tile now appears second in the Add Section drawer for this theme, and
+nowhere else.
+
+##### Step 4 — Render it on the storefront
+
+The home page receives `$sections` — the live sections in page order on the
+storefront, and the drafts with `$preview` set in the Appearance preview. Match
+each section on its stored code: the enum case's `->value` for a core type, your
+class's `$code` for your own. While previewing, wrap each section in the two data
+attributes so the editor can highlight it, and include the preview bridge once:
 
 ```blade
 @foreach ($sections as $section)
     @php ($marks = ($preview ?? false) && ! $section->getTypeInstance()?->rendersInLayout())
 
     @if ($marks)
-        <div data-section-id="{{ $section->id }}" data-section-name="{{ $section->name }}">
+        <div
+            data-section-id="{{ $section->id }}"
+            data-section-name="{{ $section->name }}"
+        >
     @endif
 
     @switch ($section->type)
+        @case (\Webkul\Theme\Enums\SectionTypeEnum::PRODUCT_CAROUSEL->value)
+            <x-shop::products.carousel
+                :title="$section->options['title'] ?? ''"
+                :src="route('shop.api.products.index', $section->options['filters'] ?? [])"
+            />
+
+            @break
+
         @case ('lookbook')
             @include('fashion::sections.lookbook', ['options' => $section->options ?? []])
 
@@ -327,63 +393,101 @@ wrap each section in the two data attributes so the editor can highlight it:
 @endif
 ```
 
-A section is created before it has content, so the partial must render nothing,
-rather than fail, when its options are empty. Add the translation keys in your
-theme's own language files.
+A section is created before it has any content, so its partial must render
+nothing, rather than fail, while its options are empty.
 
-##### Field kinds
+##### Step 5 — Translate its labels
 
-| Kind | Control | Extra keys |
-|---|---|---|
-| `SectionSchema::TEXT` | A single line input | — |
-| `SectionSchema::TEXTAREA` | A multi-line input | — |
-| `SectionSchema::NUMBER` | A whole number input | — |
-| `SectionSchema::IMAGE` | An upload, stored as the file's path | — |
-| `SectionSchema::CODE` | A highlighted code editor | `language` (`html` or `css`) |
-| `SectionSchema::REPEATER` | Repeating, draggable rows | `fields`, `add_label`, `max` |
-| `SectionSchema::FILTERS` | Key and value filter rows | `keys` — each `value`, `label`, `options`, and `multiple` for a comma-separated list |
+Add every key the class uses — its `$title` and its field labels — to your theme's
+own language files, in every locale the store runs.
+
+#### Section type recipes
+
+Each recipe builds on the steps above.
+
+##### Reorder or remove core types
+
+List only the core types you want, in the order you want them:
+
+```php
+'sections' => [
+    SectionTypeEnum::PRODUCT_CAROUSEL,
+    SectionTypeEnum::IMAGE_CAROUSEL,
+    SectionTypeEnum::FOOTER_LINKS,
+],
+```
+
+##### Put a few types first, keep the rest in enum order
+
+List the types that lead, then spread every enum case after them. The cases
+already listed are ignored the second time, so the rest follow in enum order:
+
+```php
+'sections' => [
+    Lookbook::class,
+    SectionTypeEnum::STATIC_CONTENT,
+    ...SectionTypeEnum::cases(),
+],
+```
+
+This offers Lookbook, Static Content, then Image, Product and Category Carousel,
+Footer Links and Services Content.
 
 ##### Extend a core type under a new code
 
-Extend the core class and give it its own code. It offers everything the core
-type does, and its tile sits beside the core one:
+Extend the core class and give it a code of its own. It keeps everything the core
+type does and gets its own tile, beside the core one. `ProductCarousel` and
+`CategoryCarousel` expose `filterKeys()` for adding filters:
 
 ```php
-class PremiumProductCarousel extends \Webkul\Theme\Sections\ProductCarousel
+namespace Webkul\Fashion\Sections;
+
+use Webkul\Theme\Sections\ProductCarousel;
+
+class SaleCarousel extends ProductCarousel
 {
     /**
      * Code the section is stored under.
      */
-    protected string $code = 'premium_product_carousel';
+    protected string $code = 'sale_carousel';
 
     /**
      * Translation key of the name the editor shows.
      */
-    protected ?string $title = 'fashion::app.sections.premium-product-carousel';
+    protected ?string $title = 'fashion::app.sections.sale-carousel.title';
 
     /**
-     * The core product filters, plus the one this theme adds.
+     * The core product filters, plus one this theme's storefront reads.
      */
     protected function filterKeys(): array
     {
         return [
             ...parent::filterKeys(),
-            ['value' => 'on_sale', 'label' => trans('fashion::app.sections.on-sale'), 'options' => []],
+            ['value' => 'on_sale', 'label' => trans('fashion::app.sections.sale-carousel.on-sale'), 'options' => []],
         ];
     }
 }
 ```
 
-`ProductCarousel` and `CategoryCarousel` both expose `filterKeys()` for this.
+```php
+'sections' => [
+    SectionTypeEnum::PRODUCT_CAROUSEL,
+    SaleCarousel::class,
+],
+```
 
 ##### Replace a core type, keeping its code
 
-Extend the core class without changing its code, and list your class before the
-core types. Because the first entry wins, existing sections of that type are
-handled by your class from then on:
+Extend the core class **without** changing its code, and list your class instead
+of that enum case. Existing sections of that type are handled by your class from
+then on. This theme's footer lays out at most four columns:
 
 ```php
-class FooterLinks extends \Webkul\Theme\Sections\FooterLinks
+namespace Webkul\Fashion\Sections;
+
+use Webkul\Theme\Sections\FooterLinks as CoreFooterLinks;
+
+class FooterLinks extends CoreFooterLinks
 {
     /**
      * Most columns this theme's footer lays out.
@@ -393,16 +497,21 @@ class FooterLinks extends \Webkul\Theme\Sections\FooterLinks
 ```
 
 ```php
+use Webkul\Fashion\Sections\FooterLinks;
+
 'sections' => [
-    \Webkul\Fashion\Sections\FooterLinks::class,
-    ...SectionTypeEnum::getValues(),
+    FooterLinks::class,
+    ...SectionTypeEnum::cases(),
 ],
 ```
 
+Here the rest of the core types are spread after it. Your class is listed first,
+so it wins over `SectionTypeEnum::FOOTER_LINKS` when the spread repeats that code.
+
 ##### Draw a section on every page
 
-Set `$layout` and render the section from a layout partial instead of the home
-page. Editing it then clears the whole page cache rather than just the home page:
+Set `$layout`, and render the section from a layout partial rather than the home
+page. Editing it then clears the whole page cache instead of the home page alone:
 
 ```php
 /**
@@ -432,8 +541,8 @@ protected bool $layout = true;
 @endif
 ```
 
-Use `findAllOfType()` when a channel may hold more than one. Both return the live
-section on the storefront and the draft in the preview.
+`findOneOfType()` returns the live section on the storefront and its draft in the
+preview. Use `findAllOfType()` when a channel may hold more than one.
 
 ##### Allow one per channel, or pin it to the bottom
 
@@ -455,8 +564,8 @@ and cannot be dragged.
 
 ##### Accept author-supplied markup
 
-Anything written into the page unescaped must be cleaned. Override `sanitize()`;
-it runs on every draft save, publish and preview:
+Anything written into the page unescaped must be cleaned. Override `sanitize()`
+with the `sanitizeHtml()` and `sanitizeCss()` helpers every section type inherits:
 
 ```php
 /**
@@ -478,9 +587,9 @@ public function sanitize(array $options): array
 
 ##### Edit a different shape from the one you store
 
-When the storefront reads a shape the editor cannot edit directly, convert
-between the two: `prepareForEditor()` shapes what is stored for the editor's
-fields, and `prepareForStorage()` shapes each saved draft back. `FooterLinks`
+When the storefront reads a shape the editor cannot edit directly, convert between
+the two. `prepareForEditor()` shapes the stored options for the editor's fields,
+and `prepareForStorage()` shapes each saved draft back. The core `FooterLinks`
 does this, editing a list of columns while storing `column_1`, `column_2`, ….
 A section storing its tags as one comma-separated string, but editing them as
 rows, would do:

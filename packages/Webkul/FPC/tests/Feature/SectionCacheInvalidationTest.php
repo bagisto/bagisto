@@ -3,22 +3,9 @@
 use Spatie\ResponseCache\CacheItemSelector\CacheItemSelector;
 use Spatie\ResponseCache\Facades\ResponseCache;
 use Webkul\FPC\Listeners\Section as SectionListener;
+use Webkul\FPC\Tests\Fixtures\Sections\PromoBarSection;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
-use Webkul\Theme\Sections\SectionType;
-
-class PromoBarSection extends SectionType
-{
-    /**
-     * Code the section is stored under.
-     */
-    protected string $code = 'promo_bar';
-
-    /**
-     * Whether the layout draws the section on every page.
-     */
-    protected bool $layout = true;
-}
 
 it('should clear every page when a section the layout draws changes', function (string $type, ?array $sections) {
     // Arrange

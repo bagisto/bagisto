@@ -2,34 +2,18 @@
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Exceptions;
+use Webkul\Admin\Tests\Fixtures\Sections\HeroSection;
+use Webkul\Admin\Tests\Fixtures\Sections\NarrowFooterLinks;
+use Webkul\Admin\Tests\Fixtures\Sections\PremiumProductCarousel;
+use Webkul\Admin\Tests\Fixtures\Sections\ProductCarouselOverride;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Exceptions\InvalidSectionType;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Sections\ImageCarousel;
-use Webkul\Theme\Sections\ProductCarousel;
-use Webkul\Theme\Sections\SectionType;
 use Webkul\Theme\SectionSchema;
 
 use function Pest\Laravel\get;
-
-class OrderedHeroSection extends SectionType
-{
-    /**
-     * Code the section is stored under.
-     */
-    protected string $code = 'hero';
-}
-
-class OrderedPremiumProductCarousel extends ProductCarousel
-{
-    /**
-     * Code the section is stored under.
-     */
-    protected string $code = 'premium_product_carousel';
-}
-
-class OrderedProductCarouselOverride extends ProductCarousel {}
 
 /**
  * Register a storefront theme declaring the given section types, active on a channel of its own.
@@ -80,10 +64,10 @@ it('should offer a theme core types in exactly the order it lists their codes', 
 
 it('should order a theme own section types alongside core ones, however each is declared', function () {
     themeDeclaringSections([
-        OrderedHeroSection::class,
+        HeroSection::class,
         SectionTypeEnum::STATIC_CONTENT,
         SectionTypeEnum::PRODUCT_CAROUSEL->value,
-        OrderedPremiumProductCarousel::class,
+        PremiumProductCarousel::class,
         ImageCarousel::class,
     ]);
 
@@ -98,7 +82,7 @@ it('should order a theme own section types alongside core ones, however each is 
 
 it('should follow the explicitly ordered types with the remaining core types in enum order', function () {
     themeDeclaringSections([
-        OrderedHeroSection::class,
+        HeroSection::class,
         SectionTypeEnum::SERVICES_CONTENT->value,
         ...SectionTypeEnum::getValues(),
     ]);
@@ -114,16 +98,45 @@ it('should follow the explicitly ordered types with the remaining core types in 
     ]);
 });
 
+it('should lead with a theme own type and fill in the rest from the spread enum cases', function () {
+    themeDeclaringSections([
+        HeroSection::class,
+        SectionTypeEnum::STATIC_CONTENT,
+        ...SectionTypeEnum::cases(),
+    ]);
+
+    expect(offeredCodes())->toBe([
+        'hero',
+        SectionTypeEnum::STATIC_CONTENT->value,
+        SectionTypeEnum::IMAGE_CAROUSEL->value,
+        SectionTypeEnum::PRODUCT_CAROUSEL->value,
+        SectionTypeEnum::CATEGORY_CAROUSEL->value,
+        SectionTypeEnum::FOOTER_LINKS->value,
+        SectionTypeEnum::SERVICES_CONTENT->value,
+    ]);
+});
+
+it('should let a theme replace a core type ahead of the spread enum cases', function () {
+    themeDeclaringSections([
+        NarrowFooterLinks::class,
+        ...SectionTypeEnum::cases(),
+    ]);
+
+    expect(app(SectionSchema::class)->type('ordered', SectionTypeEnum::FOOTER_LINKS->value))
+        ->toBeInstanceOf(NarrowFooterLinks::class)
+        ->and(offeredCodes())->toHaveCount(count(SectionTypeEnum::cases()));
+});
+
 it('should keep a theme override of a core type where the theme first declares it', function () {
     themeDeclaringSections([
-        OrderedProductCarouselOverride::class,
+        ProductCarouselOverride::class,
         ...SectionTypeEnum::getClassNames(),
     ]);
 
     $types = app(SectionSchema::class)->types('ordered');
 
     expect($types->keys()->first())->toBe(SectionTypeEnum::PRODUCT_CAROUSEL->value)
-        ->and($types->get(SectionTypeEnum::PRODUCT_CAROUSEL->value))->toBeInstanceOf(OrderedProductCarouselOverride::class)
+        ->and($types->get(SectionTypeEnum::PRODUCT_CAROUSEL->value))->toBeInstanceOf(ProductCarouselOverride::class)
         ->and($types)->toHaveCount(count(SectionTypeEnum::cases()));
 });
 
@@ -160,7 +173,7 @@ it('should skip and report a declared entry that is not a section type, keeping 
         42,
         ['nested'],
         SectionTypeEnum::IMAGE_CAROUSEL->value,
-        OrderedHeroSection::class,
+        HeroSection::class,
     ]);
 
     expect(offeredCodes())->toBe([SectionTypeEnum::IMAGE_CAROUSEL->value, 'hero']);
@@ -176,7 +189,7 @@ it('should skip and report a declared entry that is not a section type, keeping 
 
 it('should hand the editor the section types already in the theme order', function () {
     themeDeclaringSections([
-        OrderedHeroSection::class,
+        HeroSection::class,
         SectionTypeEnum::FOOTER_LINKS->value,
         SectionTypeEnum::PRODUCT_CAROUSEL->value,
         SectionTypeEnum::IMAGE_CAROUSEL->value,

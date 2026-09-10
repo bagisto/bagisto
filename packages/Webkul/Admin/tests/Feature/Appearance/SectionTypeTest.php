@@ -1,58 +1,17 @@
 <?php
 
+use Webkul\Admin\Tests\Fixtures\Sections\DealsCarousel;
+use Webkul\Admin\Tests\Fixtures\Sections\LookbookSection;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Sections\ImageCarousel;
-use Webkul\Theme\Sections\ProductCarousel;
 use Webkul\Theme\Sections\SectionType;
 use Webkul\Theme\SectionSchema;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
-
-class StudioLookbookSection extends SectionType
-{
-    /**
-     * Code the section is stored under.
-     */
-    protected string $code = 'lookbook';
-
-    /**
-     * Whether a channel may hold only one section of this type.
-     */
-    protected bool $singleton = true;
-}
-
-class StudioDealsCarousel extends ProductCarousel
-{
-    /**
-     * Code the section is stored under.
-     */
-    protected string $code = 'deals_carousel';
-
-    /**
-     * Translation key of the name the editor shows.
-     */
-    protected ?string $title = 'admin::app.appearance.sections.edit.featured';
-
-    /**
-     * Icon class drawn on the type's tile in the editor.
-     */
-    protected string $icon = 'icon-sales';
-
-    /**
-     * The product filters, plus the one this theme adds.
-     */
-    protected function filterKeys(): array
-    {
-        return [
-            ...parent::filterKeys(),
-            ['value' => 'on_sale', 'label' => 'On Sale', 'options' => []],
-        ];
-    }
-}
 
 /**
  * Register a storefront theme offering the given section types, active on a channel of its own.
@@ -73,7 +32,7 @@ it('should offer the default theme every core section type', function () {
 });
 
 it('should offer only the section types a theme declares, in its order', function () {
-    activeStudioTheme([StudioLookbookSection::class, ImageCarousel::class, StudioDealsCarousel::class]);
+    activeStudioTheme([LookbookSection::class, ImageCarousel::class, DealsCarousel::class]);
 
     expect(app(SectionSchema::class)->types('studio')->keys()->all())
         ->toBe(['lookbook', SectionTypeEnum::IMAGE_CAROUSEL->value, 'deals_carousel']);
@@ -86,7 +45,7 @@ it('should let a theme offer no section types at all', function () {
 });
 
 it('should keep a theme own product section type out of every other theme', function () {
-    $studio = activeStudioTheme([StudioDealsCarousel::class]);
+    $studio = activeStudioTheme([DealsCarousel::class]);
 
     expect(app(SectionSchema::class)->types('default')->has('deals_carousel'))->toBeFalse();
 
@@ -107,7 +66,7 @@ it('should keep a theme own product section type out of every other theme', func
 });
 
 it('should refuse a core section type the theme does not offer', function () {
-    $studio = activeStudioTheme([StudioDealsCarousel::class]);
+    $studio = activeStudioTheme([DealsCarousel::class]);
 
     $this->loginAsAdmin();
 
@@ -118,7 +77,7 @@ it('should refuse a core section type the theme does not offer', function () {
 });
 
 it('should extend a core section type field schema from the theme own type', function () {
-    activeStudioTheme([StudioDealsCarousel::class]);
+    activeStudioTheme([DealsCarousel::class]);
 
     $filters = collect(app(SectionSchema::class)->for('deals_carousel', 'studio'))->firstWhere('key', 'filters');
 
@@ -127,7 +86,7 @@ it('should extend a core section type field schema from the theme own type', fun
 });
 
 it('should hand the editor the title, icon and flags of each type the theme offers', function () {
-    activeStudioTheme([StudioLookbookSection::class, StudioDealsCarousel::class]);
+    activeStudioTheme([LookbookSection::class, DealsCarousel::class]);
 
     $this->loginAsAdmin();
 
@@ -148,7 +107,7 @@ it('should resolve a core section type title and icon', function () {
 });
 
 it('should fall back to a title and icon when a section type declares neither', function () {
-    $type = new StudioLookbookSection;
+    $type = new LookbookSection;
 
     expect($type->getTitle())->toBe('Lookbook')
         ->and($type->getIcon())->toBe('icon-cms')
@@ -156,7 +115,7 @@ it('should fall back to a title and icon when a section type declares neither', 
 });
 
 it('should refuse a second section of a theme own singleton type', function () {
-    $studio = activeStudioTheme([StudioLookbookSection::class]);
+    $studio = activeStudioTheme([LookbookSection::class]);
 
     Section::factory()->create([
         'type' => 'lookbook',
@@ -228,7 +187,7 @@ it('should still preview a page holding a stored type the theme no longer offers
 });
 
 it('should still clean static content a theme stopped offering', function () {
-    $studio = activeStudioTheme([StudioDealsCarousel::class]);
+    $studio = activeStudioTheme([DealsCarousel::class]);
 
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
@@ -271,14 +230,14 @@ it('should mark only the footer and the service promises as drawn by the layout'
 });
 
 it('should resolve a stored section to the type its theme handles it with', function () {
-    activeStudioTheme([StudioDealsCarousel::class]);
+    activeStudioTheme([DealsCarousel::class]);
 
     $section = Section::factory()->make([
         'type' => 'deals_carousel',
         'theme_code' => 'studio',
     ]);
 
-    expect($section->getTypeInstance())->toBeInstanceOf(StudioDealsCarousel::class);
+    expect($section->getTypeInstance())->toBeInstanceOf(DealsCarousel::class);
 
     $section->theme_code = 'default';
 

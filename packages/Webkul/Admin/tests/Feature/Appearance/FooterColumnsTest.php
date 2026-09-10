@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Admin\Tests\Fixtures\Sections\NarrowFooterLinks;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
@@ -9,14 +10,6 @@ use Webkul\Theme\SectionSchema;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
-
-class NarrowFooterLinks extends FooterLinks
-{
-    /**
-     * Most columns the theme's footer lays out.
-     */
-    protected ?int $maxColumns = 3;
-}
 
 /**
  * The channel's only footer, holding the given stored options.
