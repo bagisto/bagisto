@@ -27,7 +27,7 @@ return [
         'tags' => ['free', 'starter'],
         'description' => 'The theme Bagisto ships with. A clean, responsive storefront that works out of the box for any catalog.',
     ], [
-        'code' => 'ethereal-fashion',
+        'code' => 'fashion',
         'name' => 'Ethereal Fashion',
         'author' => null,
         'version' => null,
@@ -38,7 +38,7 @@ return [
         'tags' => ['premium', 'fashion'],
         'description' => 'Elegant fashion theme designed for modern clothing brands and boutiques.',
     ], [
-        'code' => 'vape-commerce',
+        'code' => 'breeze',
         'name' => 'Vape Commerce',
         'author' => null,
         'version' => null,
@@ -49,7 +49,7 @@ return [
         'tags' => ['premium', 'vape'],
         'description' => 'Dedicated Vape Commerce solution, alongside custom theme-building resources and a native blog module.',
     ], [
-        'code' => 'quick-commerce',
+        'code' => 'commercia',
         'name' => 'Quick Commerce',
         'author' => null,
         'version' => null,
@@ -60,7 +60,7 @@ return [
         'tags' => ['premium', 'quick-commerce'],
         'description' => 'Build lightning-fast online stores for quick commerce businesses effortlessly.',
     ], [
-        'code' => 'jewellery-commerce',
+        'code' => 'adornments',
         'name' => 'Jewellery Commerce',
         'author' => null,
         'version' => null,
@@ -71,7 +71,7 @@ return [
         'tags' => ['premium', 'jewellery'],
         'description' => 'Elegant jewelry theme crafted for premium online stores and brands.',
     ], [
-        'code' => 'velora-perfume',
+        'code' => 'perfume',
         'name' => 'Velora Perfume',
         'author' => null,
         'version' => null,
@@ -114,5 +114,16 @@ return [
         'rating' => null,
         'tags' => ['automobile'],
         'description' => 'Autrivo automobile theme, built for vehicle and parts catalogs.',
+    ], [
+        'code' => 'waggin',
+        'name' => 'Pet Theme',
+        'author' => null,
+        'version' => null,
+        'url' => null,
+        'demo_url' => 'https://demo.bagisto.com/common/waggin/',
+        'screenshot' => $screenshots.'/pet-theme.png',
+        'rating' => null,
+        'tags' => ['premium', 'pet'],
+        'description' => 'Dedicated pet food commerce solution with custom theme options and a native blog module designed for pet stores and brands.',
     ],
 ];
