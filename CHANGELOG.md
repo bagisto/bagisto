@@ -12,7 +12,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited, and an installed theme can be previewed from the gallery.
 
-- Footer links now take any number of columns instead of a fixed two, and existing footers keep working.
+- Footer links now take any number of columns instead of a fixed two, wrapping to fit every screen and leaving out empty columns, and existing footers keep working.
 
 - Corrected the titles and descriptions in Admin → Configuration that named settings which no longer exist or defined the concept rather than the setting, in all 22 locales.
 

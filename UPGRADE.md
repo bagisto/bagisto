@@ -652,8 +652,9 @@ public function prepareForStorage(array $options): array
   and an installed theme can be previewed from the gallery before it is activated.
 - **Footer links take any number of columns.** The editor edits a list of columns
   and stores them as the same `column_1`, `column_2`, … keys, so saved footers and
-  theme footer views keep working. A theme caps the count by extending
-  `FooterLinks` and setting `$maxColumns`.
+  theme footer views keep working. Link rows left blank, and the columns they leave
+  empty, are not stored. A theme caps the count by extending `FooterLinks` and
+  setting `$maxColumns`.
 - **Sections are edited beside a live storefront preview**, not on a form of their
   own. The six per-type pages are replaced by one panel built from the section's
   type.

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Webkul\Admin\Tests\Fixtures\Sections\NarrowFooterLinks;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Enums\SectionTypeEnum;
@@ -10,6 +11,10 @@ use Webkul\Theme\SectionSchema;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
+
+beforeEach(function () {
+    config(['responsecache.enabled' => false]);
+});
 
 /**
  * The channel's only footer, holding the given stored options.
@@ -55,6 +60,68 @@ it('should let the operator add columns rather than fixing how many there are', 
         ->and($schema[0]['type'])->toBe(SectionSchema::REPEATER)
         ->and($schema[0])->not->toHaveKey('max')
         ->and(collect($schema[0]['fields'])->pluck('key')->all())->toBe(['links']);
+});
+
+it('should leave out a column the operator added and left empty', function () {
+    $section = footerWith([]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => [
+            'columns' => [
+                ['links' => footerColumn('First')],
+                ['links' => []],
+                [],
+                ['links' => [['title' => '', 'url' => '']]],
+                ['links' => [['title' => 'Second', 'url' => ''], ['title' => '', 'url' => ''], ['title' => '', 'url' => '/typed-first']]],
+            ],
+        ],
+    ])->assertOk();
+
+    expect($section->fresh()->translate(app()->getLocale())->draft_options)->toEqual([
+        'column_1' => footerColumn('First'),
+        'column_2' => [['title' => 'Second', 'url' => ''], ['title' => '', 'url' => '/typed-first']],
+    ]);
+});
+
+it('should not let an empty column take one of the columns a theme footer lays out', function () {
+    config(['themes.shop.narrow' => array_merge(config('themes.shop.default'), [
+        'customize' => ['sections' => [NarrowFooterLinks::class]],
+    ])]);
+
+    $section = footerWith([], Channel::factory()->create(['theme' => 'narrow']));
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => [
+            'columns' => [
+                ['links' => []],
+                ...array_map(fn ($number) => ['links' => footerColumn('Link '.$number)], range(1, 3)),
+            ],
+        ],
+    ])->assertOk();
+
+    $draft = $section->fresh()->translate(app()->getLocale())->draft_options;
+
+    expect(array_keys($draft))->toBe(['column_1', 'column_2', 'column_3'])
+        ->and($draft['column_3'][0]['title'])->toBe('Link 3');
+});
+
+it('should not draw an empty column a footer was already saved with', function () {
+    footerWith([
+        'column_1' => footerColumn('Only Column Link'),
+        'column_2' => [],
+        'column_3' => [['title' => '', 'url' => '']],
+    ]);
+
+    $content = get(route('shop.home.index'))
+        ->assertOk()
+        ->assertSee('Only Column Link')
+        ->getContent();
+
+    expect(substr_count(Str::between($content, '<footer', '</footer>'), '<ul'))->toBe(2);
 });
 
 it('should hand the editor a saved two column footer as a list of columns', function () {

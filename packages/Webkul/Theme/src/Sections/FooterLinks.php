@@ -96,7 +96,8 @@ class FooterLinks extends SectionType
     }
 
     /**
-     * Write the edited columns back as the numbered `column_N` keys the storefront renders.
+     * Write the edited columns back as the numbered `column_N` keys the storefront renders, leaving
+     * out untouched links and the columns they leave empty.
      */
     public function prepareForStorage(array $options): array
     {
@@ -105,12 +106,24 @@ class FooterLinks extends SectionType
         }
 
         return collect((array) $options['columns'])
+            ->map(fn ($column) => collect((array) ($column['links'] ?? []))
+                ->filter(fn ($link) => $this->isFilledLink($link))
+                ->values()
+                ->all())
+            ->filter()
             ->values()
             ->when($this->maxColumns, fn ($columns) => $columns->take($this->maxColumns))
-            ->mapWithKeys(fn ($column, $index) => [
-                'column_'.($index + 1) => array_values((array) ($column['links'] ?? [])),
-            ])
+            ->mapWithKeys(fn ($links, $index) => ['column_'.($index + 1) => $links])
             ->all();
+    }
+
+    /**
+     * Whether an edited link carries a title or a url, rather than being a row added and left blank.
+     */
+    protected function isFilledLink(mixed $link): bool
+    {
+        return filled($link['title'] ?? null)
+            || filled($link['url'] ?? null);
     }
 
     /**
