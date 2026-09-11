@@ -657,7 +657,8 @@ public function prepareForStorage(array $options): array
   gallery with a warning, and the section actions answer with a 403 for a theme its
   channel no longer runs. A theme this installation does not have answers with a 404.
 - **The preview renders the theme it is asked for**, through a `theme` parameter,
-  and an installed theme can be previewed from the gallery before it is activated.
+  so the editor previews the theme being customized. The gallery offers no preview
+  of an installed theme; it is previewed in the editor once a channel runs it.
 - **Footer links take any number of columns.** The editor edits a list of columns
   and stores them as the same `column_1`, `column_2`, … keys, so saved footers and
   theme footer views keep working. Link rows left blank, and the columns they leave

@@ -21,7 +21,6 @@
     <v-appearance-themes
         :themes='@json($themes)'
         :channels='@json($channels->map(fn ($channel) => ['id' => $channel->id, 'name' => $channel->name])->values())'
-        :default-channel-id="{{ core()->getDefaultChannel()->id }}"
     >
         <x-admin::shimmer.image class="mt-8 h-[300px] w-full rounded" />
     </v-appearance-themes>
@@ -115,7 +114,7 @@
                                     @{{ theme.description }}
                                 </p>
 
-                                <!-- Channels this theme is live on -->
+                                <!-- Active Channels -->
                                 <p
                                     class="mt-1 text-xs font-medium text-green-600"
                                     v-if="isEverywhere(theme)"
@@ -138,7 +137,7 @@
                                     @lang('admin::app.appearance.themes.index.not-in-use')
                                 </p>
 
-                                <!-- Actions, always on their own row -->
+                                <!-- Actions -->
                                 <div class="mt-auto flex w-full flex-wrap items-center gap-2 pt-3">
                                     @if (bouncer()->hasPermission('appearance.themes.activate'))
                                         <button
@@ -172,16 +171,6 @@
                                     </a>
 
                                     @if (bouncer()->hasPermission('appearance.sections'))
-                                        <a
-                                            class="secondary-button"
-                                            :href="previewUrl(theme)"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            v-if="theme.is_installed"
-                                        >
-                                            @lang('admin::app.appearance.themes.index.preview-btn')
-                                        </a>
-
                                         <a
                                             class="secondary-button"
                                             :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
@@ -245,10 +234,7 @@
                                         </p>
                                     </x-admin::form.control-group>
 
-                                    <!--
-                                        Customizations are keyed by theme code, so switching a channel
-                                        leaves the ones built for the outgoing theme behind.
-                                    -->
+                                    <!-- Impact Warning -->
                                     <div
                                         class="mt-2 grid gap-1 rounded border border-orange-200 bg-orange-50 p-3 text-xs text-orange-800 dark:border-orange-900 dark:bg-orange-950 dark:text-orange-200"
                                         v-if="impact.length"
@@ -286,7 +272,7 @@
             app.component('v-appearance-themes', {
                 template: '#v-appearance-themes-template',
 
-                props: ['themes', 'channels', 'defaultChannelId'],
+                props: ['themes', 'channels'],
 
                 data() {
                     return {
@@ -304,9 +290,7 @@
 
                 computed: {
                     /**
-                     * The themes under the heading each belongs to, so the ones this store
-                     * already has are told apart from the ones it would have to buy. A
-                     * heading with nothing under it is left out.
+                     * Installed themes and themes on offer under headings of their own, leaving out an empty one.
                      */
                     groups() {
                         return [
@@ -336,17 +320,6 @@
                         const live = theme.active_on.map(channel => channel.id);
 
                         return this.channels.filter(channel => ! live.includes(channel.id));
-                    },
-
-                    /**
-                     * Storefront preview of an installed theme, on a channel it runs or the default one.
-                     */
-                    previewUrl(theme) {
-                        const channel = theme.active_on[0]?.id ?? this.defaultChannelId;
-
-                        return @json(route('shop.appearance.preview', ['theme' => 'THEME_CODE', 'channel' => 'CHANNEL_ID']))
-                            .replace('THEME_CODE', encodeURIComponent(theme.code))
-                            .replace('CHANNEL_ID', channel);
                     },
 
                     /**

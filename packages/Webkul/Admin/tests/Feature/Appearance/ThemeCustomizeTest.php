@@ -153,13 +153,13 @@ it('should report a theme active only on the channels that run it', function () 
         ->and($catalog->isActive($code, core()->getDefaultChannel()->id))->toBeFalse();
 });
 
-it('should offer customize only to an active theme and preview to every installed one', function () {
+it('should offer customize only to an active theme and leave previewing to the editor', function () {
     $this->loginAsAdmin();
 
     get(route('admin.appearance.themes.index'))
         ->assertOk()
         ->assertSee('v-if="theme.status === \'active\'"', false)
-        ->assertSee('previewUrl(theme)', false);
+        ->assertDontSee('appearance-preview', false);
 });
 
 it('should preview the requested theme with that theme own sections', function () {

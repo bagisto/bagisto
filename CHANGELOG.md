@@ -10,7 +10,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the Customize action being offered for installed themes that no channel runs; only an active theme can be customized now, and the server enforces it.
 
-- Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited, and an installed theme can be previewed from the gallery.
+- Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited.
 
 - Footer links now take any number of columns instead of a fixed two, wrapping to fit every screen and leaving out empty columns, and existing footers keep working.
 
