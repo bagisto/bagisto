@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'Dupliquer',
                 'empty' => 'Aucune section pour le moment.',
                 'gone' => 'Cette section n\'existe plus.',
+                'inactive-theme' => 'Seul un thème actif sur un canal peut être personnalisé.',
                 'locale' => 'Langue',
                 'mobile' => 'Mobile',
+                'no-fields' => 'Cette section n\'a aucun paramètre à modifier dans ce thème.',
+                'no-types' => 'Ce thème ne propose aucun type de section à ajouter.',
                 'pinned' => 'Épinglé au bas de la page.',
                 'preview-btn' => 'Aperçu',
                 'publish-btn' => 'Publier',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Ce canal n\'affiche qu\'une seule section de liens de pied de page.',
                 'name' => 'Nom',
                 'save-btn' => 'Enregistrer la section',
+                'singleton-exists' => 'Ce canal n\'affiche qu\'une seule section :type.',
                 'title' => 'Créer une section',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'Actif',
+                'add-column' => 'Ajouter une colonne',
                 'add-filter-btn' => 'Ajouter un filtre',
                 'add-footer-link-btn' => 'Ajouter un lien de pied de page',
                 'add-image-btn' => 'Ajouter une image',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'ID de catégorie',
                 'channels' => 'Canaux',
                 'column' => 'Colonne',
+                'columns' => 'Colonnes',
                 'create-filter' => 'Créer un filtre',
                 'css' => 'CSS',
                 'delete' => 'Supprimer',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache échouera si un fichier de configuration retourne des closures.',
                 'warning-permissions' => 'Les problèmes de permissions du système de fichiers peuvent empêcher la génération ou la suppression du cache.',
                 'invalid-action' => 'Action de cache invalide demandée.',
-                'action-success' => 'Commande ":action" exécutée avec succès.',
-                'action-failed' => 'Commande ":action" échouée. Vérifiez la sortie ci-dessous.',
+                'action-success' => ':action terminée avec succès.',
+                'action-failed' => ':action a échoué. Vérifiez la sortie ci-dessous.',
                 'action-exception' => 'L\'action de cache a échoué : :message',
                 'clear-console' => 'Effacer la console',
                 'console-title' => 'Console de sortie',
                 'console-entries' => 'entrées',
                 'console-empty' => 'Exécutez une action de cache pour voir la sortie ici...',
                 'console-unknown-error' => 'Une erreur inattendue s\'est produite.',
+
+                'results' => [
+                    'clear-all' => 'Tous les caches ont été vidés.',
+                    'clear-config' => 'Le cache de configuration a été vidé.',
+                    'clear-cache' => 'Le cache de l’application a été vidé.',
+                    'clear-compiled' => 'Les fichiers de classes compilés ont été supprimés.',
+                    'clear-events' => 'Le cache des événements a été vidé.',
+                    'clear-routes' => 'Le cache des routes a été vidé.',
+                    'clear-views' => 'Les vues compilées ont été vidées.',
+                    'clear-page-cache' => 'Le cache des pages a été vidé. Chaque page de la boutique sera régénérée lors de la prochaine visite.',
+                    'build-all' => 'Tous les caches ont été reconstruits.',
+                    'build-config' => 'Le cache de configuration a été généré.',
+                    'build-routes' => 'Le cache des routes a été généré.',
+                    'build-views' => 'Les vues ont été compilées.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'Vider tout le cache',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'Vider le cache des événements',
                     'clear-routes' => 'Vider le cache des routes',
                     'clear-views' => 'Vider le cache des vues',
+                    'clear-page-cache' => 'Vider le cache des pages',
                     'build-all' => 'Reconstruire tout le cache',
                     'build-config' => 'Mettre en cache la configuration',
                     'build-routes' => 'Mettre en cache les routes',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'Vider le cache des pages',
+                        'flush-info' => 'Vide le cache des pages afin que chaque page de la boutique soit régénérée lors de la prochaine visite.',
                     ],
                 ],
             ],

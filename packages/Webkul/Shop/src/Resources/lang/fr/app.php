@@ -42,7 +42,6 @@ return [
             'page-title' => 'Connexion client',
             'password' => 'Mot de passe',
             'resend-verification' => 'Renvoyer l\'e-mail de vérification',
-            'show-password' => 'Afficher le mot de passe',
             'title' => 'Se connecter',
             'verify-first' => 'Vérifiez d\'abord votre compte e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Basculer par défaut',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Afficher le mot de passe',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Carrousel de catégories',
             'image-carousel' => 'Carrousel d\'images',
             'offer' => 'Obtenez JUSQU\'À 40% DE RÉDUCTION sur votre 1ère commande, ACHETEZ MAINTENANT',
+            'preview-banner' => 'Aperçu du thème :theme sur le canal :channel. Les liens sont désactivés dans l\'aperçu.',
             'product-carousel' => 'Carrousel de produits',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email' => 'Vérifiez votre compte e-mail',

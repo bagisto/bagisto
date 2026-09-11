@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'අනුපිටපත',
                 'empty' => 'තවම කොටස් නැත.',
                 'gone' => 'මෙම කොටස තවදුරටත් නොපවතී.',
+                'inactive-theme' => 'නාලිකාවක සක්‍රිය තේමාවක් පමණක් අභිරුචිකරණය කළ හැක.',
                 'locale' => 'පෙදෙසිය',
                 'mobile' => 'ජංගම',
+                'no-fields' => 'මෙම තේමාවේ මෙම කොටසට සංස්කරණය කිරීමට සැකසුම් නොමැත.',
+                'no-types' => 'මෙම තේමාව එක් කිරීමට කොටස් වර්ග කිසිවක් ලබා නොදේ.',
                 'pinned' => 'පිටුවේ පහළට අමුණා ඇත.',
                 'preview-btn' => 'පෙරදසුන',
                 'publish-btn' => 'ප්‍රකාශනය',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'මෙම නාලිකාව පාදක සබැඳි කොටසක් පමණක් පෙන්වයි.',
                 'name' => 'නම',
                 'save-btn' => 'කොටස සුරකින්න',
+                'singleton-exists' => 'මෙම නාලිකාව :type කොටසක් පමණක් පෙන්වයි.',
                 'title' => 'කොටසක් සාදන්න',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'ක්‍රියාකාරී',
+                'add-column' => 'තීරුවක් එක් කරන්න',
                 'add-filter-btn' => 'ශ්‍රිතයක් එක්කරන්න',
                 'add-footer-link-btn' => 'පිටු සල්ලිකරන්න',
                 'add-image-btn' => 'පින්තූරයක් එක්කරන්න',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'ප්‍රවර්ගය අංකය',
                 'channels' => 'චැනල්',
                 'column' => 'තීරුව',
+                'columns' => 'තීරු',
                 'create-filter' => 'ශ්‍රිතකරන්න',
                 'css' => 'CSS',
                 'delete' => 'මකනවා',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache, වින්‍යාස ගොනුවක් closures ආපසු ලබා දෙන්නේ නම් අසාර්ථක වේ.',
                 'warning-permissions' => 'ගොනු පද්ධති අවසර ගැටලු හැඹිලි උත්පාදනය හෝ මැකීම වළක්වා ගත හැක.',
                 'invalid-action' => 'අවලංගු හැඹිලි ක්‍රියාවක් ඉල්ලා ඇත.',
-                'action-success' => '":action" විධානය සාර්ථකව ක්‍රියාත්මක විය.',
-                'action-failed' => '":action" විධානය අසාර්ථක විය. පහත ප්‍රතිදානය පරීක්ෂා කරන්න.',
+                'action-success' => ':action සාර්ථකව සම්පූර්ණ විය.',
+                'action-failed' => ':action අසාර්ථක විය. පහත ප්‍රතිදානය පරීක්ෂා කරන්න.',
                 'action-exception' => 'හැඹිලි ක්‍රියාව අසාර්ථක විය: :message',
                 'clear-console' => 'කොන්සෝලය මකන්න',
                 'console-title' => 'ප්‍රතිදාන කොන්සෝලය',
                 'console-entries' => 'ඇතුළත් කිරීම්',
                 'console-empty' => 'ප්‍රතිදානය මෙහි බැලීමට හැඹිලි ක්‍රියාවක් ධාවනය කරන්න...',
                 'console-unknown-error' => 'අනපේක්ෂිත දෝෂයක් සිදු විය.',
+
+                'results' => [
+                    'clear-all' => 'සියලුම හැඹිලි හිස් කරන ලදී.',
+                    'clear-config' => 'වින්‍යාස හැඹිලිය හිස් කරන ලදී.',
+                    'clear-cache' => 'යෙදුම් හැඹිලිය හිස් කරන ලදී.',
+                    'clear-compiled' => 'සම්පාදිත පන්ති ගොනු ඉවත් කරන ලදී.',
+                    'clear-events' => 'සිදුවීම් හැඹිලිය හිස් කරන ලදී.',
+                    'clear-routes' => 'මාර්ග හැඹිලිය හිස් කරන ලදී.',
+                    'clear-views' => 'සම්පාදිත දර්ශන හිස් කරන ලදී.',
+                    'clear-page-cache' => 'පිටු හැඹිලිය හිස් කරන ලදී. සෑම වෙළඳසැල් පිටුවක්ම ඊළඟ පිවිසුමේදී නැවත සාදනු ලැබේ.',
+                    'build-all' => 'සියලුම හැඹිලි නැවත ගොඩනගන ලදී.',
+                    'build-config' => 'වින්‍යාස හැඹිලිය ගොඩනගන ලදී.',
+                    'build-routes' => 'මාර්ග හැඹිලිය ගොඩනගන ලදී.',
+                    'build-views' => 'දර්ශන සම්පාදනය කරන ලදී.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'සියලු හැඹිලි මකන්න',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'සිද්ධි හැඹිලිය මකන්න',
                     'clear-routes' => 'මාර්ග හැඹිලිය මකන්න',
                     'clear-views' => 'දර්ශන හැඹිලිය මකන්න',
+                    'clear-page-cache' => 'පිටු හැඹිලිය හිස් කරන්න',
                     'build-all' => 'සියලු හැඹිලි නැවත ගොඩනඟන්න',
                     'build-config' => 'වින්‍යාසය හැඹිලි කරන්න',
                     'build-routes' => 'මාර්ග හැඹිලි කරන්න',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'පිටු හැඹිලිය හිස් කරන්න',
+                        'flush-info' => 'පිටු හැඹිලිය හිස් කර ඊළඟ පිවිසුමේදී සෑම වෙළඳසැල් පිටුවක්ම නැවත සාදන්න.',
                     ],
                 ],
             ],

@@ -6,11 +6,15 @@
     $channel = core()->getCurrentChannel();
 
     $section = $sectionRepository->findOneOfType(
-        'footer_links',
+        \Webkul\Theme\Enums\SectionTypeEnum::FOOTER_LINKS->value,
         $channel->id,
         $channel->theme,
         app()->getLocale()
     );
+
+    $columns = collect($section?->options)
+        ->map(fn ($links) => array_filter((array) $links, fn ($link) => filled($link['title'] ?? null)))
+        ->filter();
 @endphp
 
 <footer
@@ -23,22 +27,20 @@
     <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
         <!-- For Desktop View -->
         <div
-            class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden"
+            class="grid min-w-0 flex-1 grid-cols-[repeat(auto-fill,minmax(160px,1fr))] items-start gap-x-6 gap-y-10 max-1060:hidden"
             v-pre
         >
-            @if ($section?->options)
-                @foreach ($section->options as $footerLinkSection)
-                    <ul class="grid gap-5 text-sm">
-                        @foreach ($footerLinkSection as $link)
-                            <li>
-                                <a href="{{ $link['url'] }}">
-                                    {{ $link['title'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endforeach
-            @endif
+            @foreach ($columns as $footerLinkSection)
+                <ul class="grid gap-5 break-words text-sm">
+                    @foreach ($footerLinkSection as $link)
+                        <li>
+                            <a href="{{ $link['url'] }}">
+                                {{ $link['title'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endforeach
         </div>
 
         <!-- For Mobile view -->
@@ -50,26 +52,24 @@
                 @lang('shop::app.components.layouts.footer.footer-content')
             </x-slot>
 
-            <x-slot:content class="flex justify-between !bg-transparent !p-4">
-                @if ($section?->options)
-                    @foreach ($section->options as $footerLinkSection)
-                        <ul
-                            class="grid gap-5 text-sm"
-                            v-pre
-                        >
-                            @foreach ($footerLinkSection as $link)
-                                <li>
-                                    <a
-                                        href="{{ $link['url'] }}"
-                                        class="text-sm font-medium max-sm:text-xs"
-                                    >
-                                        {{ $link['title'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endforeach
-                @endif
+            <x-slot:content class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] items-start gap-x-6 gap-y-8 !bg-transparent !p-4">
+                @foreach ($columns as $footerLinkSection)
+                    <ul
+                        class="grid gap-5 break-words text-sm"
+                        v-pre
+                    >
+                        @foreach ($footerLinkSection as $link)
+                            <li>
+                                <a
+                                    href="{{ $link['url'] }}"
+                                    class="text-sm font-medium max-sm:text-xs"
+                                >
+                                    {{ $link['title'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endforeach
             </x-slot>
         </x-shop::accordion>
 
@@ -77,7 +77,7 @@
 
         <!-- News Letter subscription -->
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-2.5">
+            <div class="grid content-start gap-2.5">
                 <p
                     class="max-w-[288px] text-3xl italic leading-[45px] text-navyBlue max-md:text-2xl max-sm:text-lg"
                     role="heading"

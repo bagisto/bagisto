@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Encara no hi ha seccions.',
                 'gone' => 'Aquesta secció ja no existeix.',
+                'inactive-theme' => 'Només es pot personalitzar un tema que estigui actiu en un canal.',
                 'locale' => 'Idioma',
                 'mobile' => 'Mòbil',
+                'no-fields' => 'Aquesta secció no té cap configuració per editar en aquest tema.',
+                'no-types' => 'Aquest tema no ofereix cap tipus de secció per afegir.',
                 'pinned' => 'Fixat a la part inferior de la pàgina.',
                 'preview-btn' => 'Vista prèvia',
                 'publish-btn' => 'Publica',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Aquest canal només mostra una secció d\'enllaços de peu de pàgina.',
                 'name' => 'Nom',
                 'save-btn' => 'Desa la secció',
+                'singleton-exists' => 'Aquest canal només mostra una secció de :type.',
                 'title' => 'Crea una secció',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'Actiu',
+                'add-column' => 'Afegeix una columna',
                 'add-filter-btn' => 'Afegir Filtres',
                 'add-footer-link-btn' => 'Afegir Enllaç al Peu de Pàgina',
                 'add-image-btn' => 'Afegir Imatge',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'ID de categoria',
                 'channels' => 'Canals',
                 'column' => 'Columna',
+                'columns' => 'Columnes',
                 'create-filter' => 'Crear Filtre',
                 'css' => 'CSS',
                 'delete' => 'Eliminar',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache fallarà si algun fitxer de configuració retorna closures.',
                 'warning-permissions' => 'Els problemes de permisos del sistema de fitxers poden impedir la generació o l\'esborrat de la memòria cau.',
                 'invalid-action' => 'Acció de memòria cau no vàlida.',
-                'action-success' => 'L\'ordre ":action" s\'ha executat correctament.',
-                'action-failed' => 'L\'ordre ":action" ha fallat. Consulteu la sortida a continuació.',
+                'action-success' => ':action s’ha completat correctament.',
+                'action-failed' => ':action ha fallat. Reviseu la sortida de sota.',
                 'action-exception' => 'L\'acció de memòria cau ha fallat: :message',
                 'clear-console' => 'Esborrar consola',
                 'console-title' => 'Consola de sortida',
                 'console-entries' => 'entrades',
                 'console-empty' => 'Executeu una acció de memòria cau per veure la sortida aquí...',
                 'console-unknown-error' => 'S\'ha produït un error inesperat.',
+
+                'results' => [
+                    'clear-all' => 'S’han buidat totes les memòries cau.',
+                    'clear-config' => 'S’ha buidat la memòria cau de configuració.',
+                    'clear-cache' => 'S’ha buidat la memòria cau de l’aplicació.',
+                    'clear-compiled' => 'S’han eliminat els fitxers de classes compilats.',
+                    'clear-events' => 'S’ha buidat la memòria cau d’esdeveniments.',
+                    'clear-routes' => 'S’ha buidat la memòria cau de rutes.',
+                    'clear-views' => 'S’han buidat les vistes compilades.',
+                    'clear-page-cache' => 'S’ha buidat la memòria cau de pàgines. Cada pàgina de la botiga es tornarà a generar en la següent visita.',
+                    'build-all' => 'S’han reconstruït totes les memòries cau.',
+                    'build-config' => 'S’ha creat la memòria cau de configuració.',
+                    'build-routes' => 'S’ha creat la memòria cau de rutes.',
+                    'build-views' => 'S’han compilat les vistes.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'Esborrar tota la memòria cau',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'Esborrar memòria cau d\'esdeveniments',
                     'clear-routes' => 'Esborrar memòria cau de rutes',
                     'clear-views' => 'Esborrar memòria cau de vistes',
+                    'clear-page-cache' => 'Buida la memòria cau de pàgines',
                     'build-all' => 'Reconstruir tota la memòria cau',
                     'build-config' => 'Posar en memòria cau la configuració',
                     'build-routes' => 'Posar en memòria cau les rutes',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'Buida la memòria cau de pàgines',
+                        'flush-info' => 'Buida la memòria cau perquè cada pàgina de la botiga es torni a generar en la següent visita.',
                     ],
                 ],
             ],

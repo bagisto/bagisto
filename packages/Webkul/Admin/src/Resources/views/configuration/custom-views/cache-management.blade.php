@@ -1,19 +1,20 @@
 @php
     $clearActions = [
-        'clear-all'      => trans('admin::app.configuration.index.cache-management.actions.clear-all'),
-        'clear-config'   => trans('admin::app.configuration.index.cache-management.actions.clear-config'),
-        'clear-cache'    => trans('admin::app.configuration.index.cache-management.actions.clear-cache'),
+        'clear-all' => trans('admin::app.configuration.index.cache-management.actions.clear-all'),
+        'clear-config' => trans('admin::app.configuration.index.cache-management.actions.clear-config'),
+        'clear-cache' => trans('admin::app.configuration.index.cache-management.actions.clear-cache'),
         'clear-compiled' => trans('admin::app.configuration.index.cache-management.actions.clear-compiled'),
-        'clear-events'   => trans('admin::app.configuration.index.cache-management.actions.clear-events'),
-        'clear-routes'   => trans('admin::app.configuration.index.cache-management.actions.clear-routes'),
-        'clear-views'    => trans('admin::app.configuration.index.cache-management.actions.clear-views'),
+        'clear-events' => trans('admin::app.configuration.index.cache-management.actions.clear-events'),
+        'clear-routes' => trans('admin::app.configuration.index.cache-management.actions.clear-routes'),
+        'clear-views' => trans('admin::app.configuration.index.cache-management.actions.clear-views'),
+        'clear-page-cache' => trans('admin::app.configuration.index.cache-management.actions.clear-page-cache'),
     ];
 
     $buildActions = [
-        'build-all'    => trans('admin::app.configuration.index.cache-management.actions.build-all'),
+        'build-all' => trans('admin::app.configuration.index.cache-management.actions.build-all'),
         'build-config' => trans('admin::app.configuration.index.cache-management.actions.build-config'),
         'build-routes' => trans('admin::app.configuration.index.cache-management.actions.build-routes'),
-        'build-views'  => trans('admin::app.configuration.index.cache-management.actions.build-views'),
+        'build-views' => trans('admin::app.configuration.index.cache-management.actions.build-views'),
     ];
 @endphp
 

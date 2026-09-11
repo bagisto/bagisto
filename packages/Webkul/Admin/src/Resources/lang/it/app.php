@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Nessuna sezione per ora.',
                 'gone' => 'Questa sezione non esiste più.',
+                'inactive-theme' => 'Si può personalizzare solo un tema attivo su un canale.',
                 'locale' => 'Lingua',
                 'mobile' => 'Mobile',
+                'no-fields' => 'Questa sezione non ha impostazioni da modificare in questo tema.',
+                'no-types' => 'Questo tema non offre tipi di sezione da aggiungere.',
                 'pinned' => 'Fissato in fondo alla pagina.',
                 'preview-btn' => 'Anteprima',
                 'publish-btn' => 'Pubblica',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Questo canale mostra una sola sezione di link a piè di pagina.',
                 'name' => 'Nome',
                 'save-btn' => 'Salva sezione',
+                'singleton-exists' => 'Questo canale mostra una sola sezione :type.',
                 'title' => 'Crea sezione',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'Attivo',
+                'add-column' => 'Aggiungi colonna',
                 'add-filter-btn' => 'Aggiungi Filtro',
                 'add-footer-link-btn' => 'Aggiungi Link Piè di Pagina',
                 'add-image-btn' => 'Aggiungi Immagine',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'ID categoria',
                 'channels' => 'Canali',
                 'column' => 'Colonna',
+                'columns' => 'Colonne',
                 'create-filter' => 'Crea Filtro',
                 'css' => 'CSS',
                 'delete' => 'Elimina',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache fallirà se un file di configurazione restituisce closure.',
                 'warning-permissions' => 'I problemi di permessi del filesystem possono impedire la generazione o la cancellazione della cache.',
                 'invalid-action' => 'Azione cache non valida.',
-                'action-success' => 'Comando ":action" eseguito con successo.',
-                'action-failed' => 'Comando ":action" fallito. Controlla l\'output qui sotto.',
+                'action-success' => ':action completata con successo.',
+                'action-failed' => ':action non riuscita. Controlla l’output qui sotto.',
                 'action-exception' => 'Azione cache fallita: :message',
                 'clear-console' => 'Pulisci console',
                 'console-title' => 'Console di output',
                 'console-entries' => 'voci',
                 'console-empty' => 'Esegui un\'azione cache per vedere l\'output qui...',
                 'console-unknown-error' => 'Si è verificato un errore imprevisto.',
+
+                'results' => [
+                    'clear-all' => 'Tutte le cache sono state svuotate.',
+                    'clear-config' => 'La cache di configurazione è stata svuotata.',
+                    'clear-cache' => 'La cache dell’applicazione è stata svuotata.',
+                    'clear-compiled' => 'I file delle classi compilate sono stati rimossi.',
+                    'clear-events' => 'La cache degli eventi è stata svuotata.',
+                    'clear-routes' => 'La cache delle rotte è stata svuotata.',
+                    'clear-views' => 'Le viste compilate sono state svuotate.',
+                    'clear-page-cache' => 'La cache delle pagine è stata svuotata. Ogni pagina del negozio verrà rigenerata alla visita successiva.',
+                    'build-all' => 'Tutte le cache sono state ricostruite.',
+                    'build-config' => 'La cache di configurazione è stata creata.',
+                    'build-routes' => 'La cache delle rotte è stata creata.',
+                    'build-views' => 'Le viste sono state compilate.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'Svuota tutta la cache',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'Svuota cache eventi',
                     'clear-routes' => 'Svuota cache rotte',
                     'clear-views' => 'Svuota cache viste',
+                    'clear-page-cache' => 'Svuota la cache delle pagine',
                     'build-all' => 'Ricostruisci tutta la cache',
                     'build-config' => 'Metti in cache la configurazione',
                     'build-routes' => 'Metti in cache le rotte',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'Svuota la cache delle pagine',
+                        'flush-info' => 'Svuota la cache delle pagine così ogni pagina del negozio viene rigenerata alla visita successiva.',
                     ],
                 ],
             ],

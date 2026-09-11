@@ -38,13 +38,8 @@
     @foreach ($sections as $section)
         @php ($data = $section->options) @endphp
 
-        {{-- Only the types this page renders; the layout marks the ones it draws. --}}
-        @php ($marks = ($preview ?? false) && in_array($section->type, [
-            $section::IMAGE_CAROUSEL,
-            $section::STATIC_CONTENT,
-            $section::CATEGORY_CAROUSEL,
-            $section::PRODUCT_CAROUSEL,
-        ]))
+        {{-- The layout marks the types it draws on every page, so this page marks the rest. --}}
+        @php ($marks = ($preview ?? false) && ! $section->getTypeInstance()?->rendersInLayout())
 
         @if ($marks)
             <div
@@ -55,7 +50,7 @@
 
         <!-- Static Content -->
         @switch ($section->type)
-            @case ($section::IMAGE_CAROUSEL)
+            @case (\Webkul\Theme\Enums\SectionTypeEnum::IMAGE_CAROUSEL->value)
                 <!-- Image Carousel -->
                 <x-shop::carousel
                     :options="$data"
@@ -63,7 +58,7 @@
                 />
 
                 @break
-            @case ($section::STATIC_CONTENT)
+            @case (\Webkul\Theme\Enums\SectionTypeEnum::STATIC_CONTENT->value)
                 <!-- Push Style -->
                 @if (! empty($data['css']))
                     @push ('styles')
@@ -79,7 +74,7 @@
                 @endif
 
                 @break
-            @case ($section::CATEGORY_CAROUSEL)
+            @case (\Webkul\Theme\Enums\SectionTypeEnum::CATEGORY_CAROUSEL->value)
                 <!-- Categories carousel -->
                 <x-shop::categories.carousel
                     :title="$data['title'] ?? ''"
@@ -89,7 +84,7 @@
                 />
 
                 @break
-            @case ($section::PRODUCT_CAROUSEL)
+            @case (\Webkul\Theme\Enums\SectionTypeEnum::PRODUCT_CAROUSEL->value)
                 <!-- Product Carousel -->
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"

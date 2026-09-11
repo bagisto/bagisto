@@ -10,29 +10,22 @@ class CatalogApiCache
     /**
      * Cache key that stores the current catalog version.
      */
-    const VERSION_KEY = 'shop_api_catalog_version';
+    public const VERSION_KEY = 'shop_api_catalog_version';
 
     /**
-     * Lifetime (in seconds) of the catalog version counter.
-     *
-     * The counter only has to outlive any cached catalog response, so a long,
-     * effectively-permanent TTL is used. An explicit (non-null) TTL is what
-     * lets `Cache::add()` seed the counter through the store's atomic path -
-     * never-expiring entries fall back to a non-atomic check-then-write.
+     * Lifetime (in seconds) of the catalog version counter, long and explicit so `Cache::add()`
+     * can seed it atomically while it outlives every cached response.
      */
-    const VERSION_TTL = 31536000;
+    public const VERSION_TTL = 31536000;
 
     /**
      * Time (in seconds) a cached catalog response is kept.
      */
-    const TTL = 3600;
+    public const TTL = 3600;
 
     /**
-     * Current catalog version.
-     *
-     * Every product/category change increments this number, which changes the
-     * cache key of every catalog response and therefore serves fresh data
-     * immediately without having to purge individual cache entries.
+     * Current catalog version, which every product or category change increments to move every
+     * cached response onto a fresh key.
      */
     public function version(): int
     {
@@ -40,12 +33,8 @@ class CatalogApiCache
     }
 
     /**
-     * Bump the catalog version so every cached catalog response is invalidated.
-     *
-     * The counter is advanced with an atomic increment - seeded by an atomic
-     * `add()` on first use - so concurrent invalidations are each counted. A
-     * read-then-write would let two simultaneous flushes settle on the same
-     * value and lose an update.
+     * Bump the catalog version so every cached catalog response is invalidated, atomically so
+     * concurrent flushes are each counted.
      */
     public function flush(): void
     {
@@ -55,9 +44,8 @@ class CatalogApiCache
     }
 
     /**
-     * Catalog responses are only cached for guests. Logged-in customers receive
-     * personalised data (wishlist state, customer-group prices) that must not
-     * be shared across users.
+     * Whether a catalog response may be cached, which is only for guests since customers receive
+     * personalised data such as wishlist state and group prices.
      */
     public function shouldCache(): bool
     {
@@ -77,7 +65,8 @@ class CatalogApiCache
     }
 
     /**
-     * Build a version-aware cache key scoped to channel, locale and currency.
+     * Build a version-aware cache key scoped to channel, theme, locale and currency, the theme
+     * because image urls follow the image templates the channel's theme registers.
      */
     protected function key(string $segment, array $params): string
     {
@@ -86,6 +75,7 @@ class CatalogApiCache
             $this->version(),
             $segment,
             core()->getCurrentChannel()->id,
+            core()->getCurrentChannel()->theme,
             core()->getCurrentLocale()->code,
             core()->getCurrentCurrencyCode(),
             md5(json_encode($params)),

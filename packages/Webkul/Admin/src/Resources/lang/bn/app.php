@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'অনুলিপি',
                 'empty' => 'এখনও কোনো সেকশন নেই।',
                 'gone' => 'এই সেকশনটি আর নেই।',
+                'inactive-theme' => 'কেবল কোনো চ্যানেলে সক্রিয় থিমই কাস্টমাইজ করা যায়।',
                 'locale' => 'ভাষা',
                 'mobile' => 'মোবাইল',
+                'no-fields' => 'এই থিমে এই বিভাগের সম্পাদনা করার মতো কোনো সেটিং নেই।',
+                'no-types' => 'এই থিমে যোগ করার মতো কোনো বিভাগের ধরন নেই।',
                 'pinned' => 'পৃষ্ঠার নীচে পিন করা হয়েছে।',
                 'preview-btn' => 'প্রিভিউ',
                 'publish-btn' => 'প্রকাশ করুন',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'এই চ্যানেলটি কেবল একটি ফুটার লিঙ্ক বিভাগ দেখায়।',
                 'name' => 'নাম',
                 'save-btn' => 'সেকশন সংরক্ষণ করুন',
+                'singleton-exists' => 'এই চ্যানেলটি কেবল একটি :type বিভাগ দেখায়।',
                 'title' => 'সেকশন তৈরি করুন',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'সক্রিয়',
+                'add-column' => 'কলাম যোগ করুন',
                 'add-filter-btn' => 'ফিল্টার যোগ করুন',
                 'add-footer-link-btn' => 'ফুটার লিংক যোগ করুন',
                 'add-image-btn' => 'ছবি যোগ করুন',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'বিভাগ আইডি',
                 'channels' => 'চ্যানেল',
                 'column' => 'কলাম',
+                'columns' => 'কলামগুলি',
                 'create-filter' => 'ফিল্টার তৈরি করুন',
                 'css' => 'সিএসএস',
                 'delete' => 'মুছে ফেলুন',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache ব্যর্থ হবে যদি কোনো কনফিগারেশন ফাইল closures রিটার্ন করে।',
                 'warning-permissions' => 'ফাইলসিস্টেম অনুমতি সমস্যা ক্যাশ তৈরি বা পরিষ্কার করতে বাধা দিতে পারে।',
                 'invalid-action' => 'অবৈধ ক্যাশ অ্যাকশন অনুরোধ করা হয়েছে।',
-                'action-success' => 'কমান্ড ":action" সফলভাবে কার্যকর হয়েছে।',
-                'action-failed' => 'কমান্ড ":action" ব্যর্থ হয়েছে। নিচের আউটপুট দেখুন।',
+                'action-success' => ':action সফলভাবে সম্পন্ন হয়েছে।',
+                'action-failed' => ':action ব্যর্থ হয়েছে। নিচের আউটপুট দেখুন।',
                 'action-exception' => 'ক্যাশ অ্যাকশন ব্যর্থ: :message',
                 'clear-console' => 'কনসোল পরিষ্কার করুন',
                 'console-title' => 'আউটপুট কনসোল',
                 'console-entries' => 'এন্ট্রি',
                 'console-empty' => 'আউটপুট দেখতে একটি ক্যাশ অ্যাকশন চালান...',
                 'console-unknown-error' => 'একটি অপ্রত্যাশিত ত্রুটি ঘটেছে।',
+
+                'results' => [
+                    'clear-all' => 'সব ক্যাশ সাফ করা হয়েছে।',
+                    'clear-config' => 'কনফিগারেশন ক্যাশ সাফ করা হয়েছে।',
+                    'clear-cache' => 'অ্যাপ্লিকেশন ক্যাশ সাফ করা হয়েছে।',
+                    'clear-compiled' => 'কম্পাইল করা ক্লাস ফাইল সরানো হয়েছে।',
+                    'clear-events' => 'ইভেন্ট ক্যাশ সাফ করা হয়েছে।',
+                    'clear-routes' => 'রুট ক্যাশ সাফ করা হয়েছে।',
+                    'clear-views' => 'কম্পাইল করা ভিউ সাফ করা হয়েছে।',
+                    'clear-page-cache' => 'পেজ ক্যাশ সাফ করা হয়েছে। প্রতিটি স্টোরফ্রন্ট পেজ পরবর্তী ভিজিটে আবার তৈরি হবে।',
+                    'build-all' => 'সব ক্যাশ পুনর্নির্মাণ করা হয়েছে।',
+                    'build-config' => 'কনফিগারেশন ক্যাশ তৈরি করা হয়েছে।',
+                    'build-routes' => 'রুট ক্যাশ তৈরি করা হয়েছে।',
+                    'build-views' => 'ভিউ কম্পাইল করা হয়েছে।',
+                ],
 
                 'actions' => [
                     'clear-all' => 'সমস্ত ক্যাশ পরিষ্কার করুন',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'ইভেন্ট ক্যাশ পরিষ্কার করুন',
                     'clear-routes' => 'রুট ক্যাশ পরিষ্কার করুন',
                     'clear-views' => 'ভিউ ক্যাশ পরিষ্কার করুন',
+                    'clear-page-cache' => 'পেজ ক্যাশ সাফ করুন',
                     'build-all' => 'সমস্ত ক্যাশ পুনর্নির্মাণ করুন',
                     'build-config' => 'কনফিগ ক্যাশ করুন',
                     'build-routes' => 'রুট ক্যাশ করুন',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'পেজ ক্যাশ ফ্লাশ করুন',
+                        'flush-info' => 'পেজ ক্যাশ খালি করুন যাতে প্রতিটি স্টোরফ্রন্ট পেজ পরবর্তী ভিজিটে আবার তৈরি হয়।',
                     ],
                 ],
             ],

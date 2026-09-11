@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'تكرار',
                 'empty' => 'لا توجد أقسام بعد.',
                 'gone' => 'لم يعد هذا القسم موجودًا.',
+                'inactive-theme' => 'لا يمكن تخصيص إلا السمة النشطة على قناة.',
                 'locale' => 'اللغة',
                 'mobile' => 'جوال',
+                'no-fields' => 'لا يحتوي هذا القسم على إعدادات لتعديلها في هذه السمة.',
+                'no-types' => 'لا تقدم هذه السمة أي أنواع أقسام لإضافتها.',
                 'pinned' => 'مثبت في أسفل الصفحة.',
                 'preview-btn' => 'معاينة',
                 'publish-btn' => 'نشر',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'تعرض هذه القناة قسم روابط تذييل واحدًا فقط.',
                 'name' => 'الاسم',
                 'save-btn' => 'حفظ القسم',
+                'singleton-exists' => 'تعرض هذه القناة قسم :type واحدًا فقط.',
                 'title' => 'إنشاء قسم',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'نشط',
+                'add-column' => 'إضافة عمود',
                 'add-filter-btn' => 'إضافة مرشح',
                 'add-footer-link-btn' => 'إضافة رابط التذييل',
                 'add-image-btn' => 'إضافة صورة',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'معرف الفئة',
                 'channels' => 'القنوات',
                 'column' => 'عمود',
+                'columns' => 'الأعمدة',
                 'create-filter' => 'إنشاء مرشح',
                 'css' => 'نمط التنسيق',
                 'delete' => 'حذف',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'سيفشل config:cache إذا كان أي ملف إعدادات يُرجع closures.',
                 'warning-permissions' => 'قد تمنع مشاكل أذونات نظام الملفات إنشاء أو مسح ذاكرة التخزين المؤقت.',
                 'invalid-action' => 'إجراء ذاكرة تخزين مؤقت غير صالح.',
-                'action-success' => 'تم تنفيذ الأمر ":action" بنجاح.',
-                'action-failed' => 'فشل الأمر ":action". تحقق من المخرجات أدناه.',
+                'action-success' => ':action تم بنجاح.',
+                'action-failed' => ':action فشل. راجع المخرجات أدناه.',
                 'action-exception' => 'فشل إجراء ذاكرة التخزين المؤقت: :message',
                 'clear-console' => 'مسح وحدة التحكم',
                 'console-title' => 'وحدة تحكم المخرجات',
                 'console-entries' => 'إدخالات',
                 'console-empty' => 'قم بتشغيل إجراء لرؤية المخرجات هنا...',
                 'console-unknown-error' => 'حدث خطأ غير متوقع.',
+
+                'results' => [
+                    'clear-all' => 'تم مسح جميع ذواكر التخزين المؤقت.',
+                    'clear-config' => 'تم مسح ذاكرة تخزين الإعدادات.',
+                    'clear-cache' => 'تم مسح ذاكرة تخزين التطبيق.',
+                    'clear-compiled' => 'تمت إزالة ملفات الفئات المُجمَّعة.',
+                    'clear-events' => 'تم مسح ذاكرة تخزين الأحداث.',
+                    'clear-routes' => 'تم مسح ذاكرة تخزين المسارات.',
+                    'clear-views' => 'تم مسح العروض المُجمَّعة.',
+                    'clear-page-cache' => 'تم مسح ذاكرة تخزين الصفحات. ستُبنى كل صفحة في المتجر من جديد عند الزيارة التالية.',
+                    'build-all' => 'تمت إعادة بناء جميع ذواكر التخزين المؤقت.',
+                    'build-config' => 'تم بناء ذاكرة تخزين الإعدادات.',
+                    'build-routes' => 'تم بناء ذاكرة تخزين المسارات.',
+                    'build-views' => 'تم تجميع العروض.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'مسح كل ذاكرة التخزين المؤقت',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'مسح ذاكرة الأحداث',
                     'clear-routes' => 'مسح ذاكرة المسارات',
                     'clear-views' => 'مسح ذاكرة العروض',
+                    'clear-page-cache' => 'مسح ذاكرة تخزين الصفحات',
                     'build-all' => 'إعادة بناء كل ذاكرة التخزين المؤقت',
                     'build-config' => 'تخزين الإعدادات مؤقتاً',
                     'build-routes' => 'تخزين المسارات مؤقتاً',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'إفراغ ذاكرة تخزين الصفحات',
+                        'flush-info' => 'أفرغ ذاكرة تخزين الصفحات ليُعاد إنشاء كل صفحة في المتجر عند الزيارة التالية.',
                     ],
                 ],
             ],

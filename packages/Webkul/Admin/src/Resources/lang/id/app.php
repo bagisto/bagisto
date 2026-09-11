@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'Duplikat',
                 'empty' => 'Belum ada bagian.',
                 'gone' => 'Bagian ini sudah tidak ada.',
+                'inactive-theme' => 'Hanya tema yang aktif pada saluran yang dapat disesuaikan.',
                 'locale' => 'Bahasa',
                 'mobile' => 'Ponsel',
+                'no-fields' => 'Bagian ini tidak memiliki pengaturan untuk diedit pada tema ini.',
+                'no-types' => 'Tema ini tidak menawarkan jenis bagian untuk ditambahkan.',
                 'pinned' => 'Disematkan di bagian bawah halaman.',
                 'preview-btn' => 'Pratinjau',
                 'publish-btn' => 'Terbitkan',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Saluran ini hanya menampilkan satu bagian tautan footer.',
                 'name' => 'Nama',
                 'save-btn' => 'Simpan Bagian',
+                'singleton-exists' => 'Saluran ini hanya menampilkan satu bagian :type.',
                 'title' => 'Buat Bagian',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktif',
+                'add-column' => 'Tambah Kolom',
                 'add-filter-btn' => 'Tambah Filter',
                 'add-footer-link-btn' => 'Tambah Tautan Footer',
                 'add-image-btn' => 'Tambah Gambar',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'ID Kategori',
                 'channels' => 'Channel',
                 'column' => 'Kolom',
+                'columns' => 'Kolom',
                 'create-filter' => 'Buat Filter',
                 'css' => 'CSS',
                 'delete' => 'Hapus',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache akan gagal jika ada file konfigurasi yang mengembalikan closure.',
                 'warning-permissions' => 'Masalah izin sistem file dapat mencegah pembuatan atau penghapusan cache.',
                 'invalid-action' => 'Tindakan cache tidak valid.',
-                'action-success' => 'Perintah ":action" berhasil dijalankan.',
-                'action-failed' => 'Perintah ":action" gagal. Periksa output di bawah.',
+                'action-success' => ':action berhasil diselesaikan.',
+                'action-failed' => ':action gagal. Periksa keluaran di bawah ini.',
                 'action-exception' => 'Tindakan cache gagal: :message',
                 'clear-console' => 'Bersihkan Konsol',
                 'console-title' => 'Konsol Output',
                 'console-entries' => 'entri',
                 'console-empty' => 'Jalankan tindakan cache untuk melihat output di sini...',
                 'console-unknown-error' => 'Terjadi kesalahan tak terduga.',
+
+                'results' => [
+                    'clear-all' => 'Semua cache telah dibersihkan.',
+                    'clear-config' => 'Cache konfigurasi telah dibersihkan.',
+                    'clear-cache' => 'Cache aplikasi telah dibersihkan.',
+                    'clear-compiled' => 'Berkas kelas terkompilasi telah dihapus.',
+                    'clear-events' => 'Cache event telah dibersihkan.',
+                    'clear-routes' => 'Cache rute telah dibersihkan.',
+                    'clear-views' => 'Tampilan terkompilasi telah dibersihkan.',
+                    'clear-page-cache' => 'Cache halaman telah dibersihkan. Setiap halaman toko akan dibuat ulang pada kunjungan berikutnya.',
+                    'build-all' => 'Semua cache telah dibangun ulang.',
+                    'build-config' => 'Cache konfigurasi telah dibuat.',
+                    'build-routes' => 'Cache rute telah dibuat.',
+                    'build-views' => 'Tampilan telah dikompilasi.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'Hapus Semua Cache',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'Hapus Cache Event',
                     'clear-routes' => 'Hapus Cache Rute',
                     'clear-views' => 'Hapus Cache Tampilan',
+                    'clear-page-cache' => 'Bersihkan Cache Halaman',
                     'build-all' => 'Bangun Ulang Semua Cache',
                     'build-config' => 'Cache Konfigurasi',
                     'build-routes' => 'Cache Rute',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'Bersihkan Cache Halaman',
+                        'flush-info' => 'Kosongkan cache halaman agar setiap halaman toko dibuat ulang pada kunjungan berikutnya.',
                     ],
                 ],
             ],

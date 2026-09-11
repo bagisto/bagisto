@@ -42,7 +42,6 @@ return [
             'page-title' => 'Müşteri Girişi',
             'password' => 'Şifre',
             'resend-verification' => 'Doğrulama E-postasını Yeniden Gönder',
-            'show-password' => 'Şifreyi Göster',
             'title' => 'Oturum Aç',
             'verify-first' => 'Lütfen önce e-posta adresinizi doğrulayın.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Aç/Kapat',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Şifreyi Göster',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Kategoriler',
             'image-carousel' => 'Görseller',
             'offer' => 'İlk siparişe özel %40 indirim fırsatı!',
+            'preview-banner' => ':channel kanalında :theme teması önizleniyor. Önizlemede bağlantılar devre dışıdır.',
             'product-carousel' => 'Ürünler',
             'resend-verify-email' => 'Doğrulama e-postasını tekrar gönder',
             'verify-email' => 'E-posta adresinizi doğrulayın',

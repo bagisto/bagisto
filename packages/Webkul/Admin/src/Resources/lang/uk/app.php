@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'Дублювати',
                 'empty' => 'Розділів поки немає.',
                 'gone' => 'Цей розділ більше не існує.',
+                'inactive-theme' => 'Налаштувати можна лише тему, активну на каналі.',
                 'locale' => 'Локаль',
                 'mobile' => 'Телефон',
+                'no-fields' => 'Цей розділ не має налаштувань для редагування в цій темі.',
+                'no-types' => 'Ця тема не пропонує типів розділів для додавання.',
                 'pinned' => 'Закріплено внизу сторінки.',
                 'preview-btn' => 'Попередній перегляд',
                 'publish-btn' => 'Опублікувати',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Цей канал показує лише один розділ посилань у нижньому колонтитулі.',
                 'name' => 'Назва',
                 'save-btn' => 'Зберегти розділ',
+                'singleton-exists' => 'Цей канал показує лише один розділ «:type».',
                 'title' => 'Створити розділ',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'Активна',
+                'add-column' => 'Додати колонку',
                 'add-filter-btn' => 'Додати Фільтр',
                 'add-footer-link-btn' => 'Додати Посилання У Підвалі',
                 'add-image-btn' => 'Додати Зображення',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'Ідентифікатор категорії',
                 'channels' => 'Канали',
                 'column' => 'Колонка',
+                'columns' => 'Колонки',
                 'create-filter' => 'Створити Фільтр',
                 'css' => 'CSS',
                 'delete' => 'Видалити',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache не спрацює, якщо файл конфігурації повертає замикання.',
                 'warning-permissions' => 'Проблеми з правами файлової системи можуть перешкодити створенню або очищенню кешу.',
                 'invalid-action' => 'Запитано недійсну дію з кешем.',
-                'action-success' => 'Команда ":action" успішно виконана.',
-                'action-failed' => 'Команда ":action" не виконана. Перевірте вивід нижче.',
+                'action-success' => ':action успішно виконано.',
+                'action-failed' => ':action не виконано. Перевірте вивід нижче.',
                 'action-exception' => 'Дія з кешем не виконана: :message',
                 'clear-console' => 'Очистити консоль',
                 'console-title' => 'Консоль виводу',
                 'console-entries' => 'записів',
                 'console-empty' => 'Виконайте дію з кешем, щоб побачити вивід тут...',
                 'console-unknown-error' => 'Виникла непередбачена помилка.',
+
+                'results' => [
+                    'clear-all' => 'Усі кеші очищено.',
+                    'clear-config' => 'Кеш конфігурації очищено.',
+                    'clear-cache' => 'Кеш застосунку очищено.',
+                    'clear-compiled' => 'Скомпільовані файли класів видалено.',
+                    'clear-events' => 'Кеш подій очищено.',
+                    'clear-routes' => 'Кеш маршрутів очищено.',
+                    'clear-views' => 'Скомпільовані подання очищено.',
+                    'clear-page-cache' => 'Кеш сторінок очищено. Кожна сторінка магазину буде створена заново під час наступного відвідування.',
+                    'build-all' => 'Усі кеші перебудовано.',
+                    'build-config' => 'Кеш конфігурації створено.',
+                    'build-routes' => 'Кеш маршрутів створено.',
+                    'build-views' => 'Подання скомпільовано.',
+                ],
 
                 'actions' => [
                     'clear-all' => 'Очистити весь кеш',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'Очистити кеш подій',
                     'clear-routes' => 'Очистити кеш маршрутів',
                     'clear-views' => 'Очистити кеш представлень',
+                    'clear-page-cache' => 'Очистити кеш сторінок',
                     'build-all' => 'Перебудувати весь кеш',
                     'build-config' => 'Кешувати конфігурацію',
                     'build-routes' => 'Кешувати маршрути',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'Очистити кеш сторінок',
+                        'flush-info' => 'Очистіть кеш сторінок, щоб кожна сторінка магазину створювалася заново під час наступного відвідування.',
                     ],
                 ],
             ],

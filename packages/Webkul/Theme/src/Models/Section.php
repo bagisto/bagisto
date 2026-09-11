@@ -7,57 +7,60 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Admin\Database\Factories\SectionFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Theme\Contracts\Section as SectionContract;
+use Webkul\Theme\Enums\SectionTypeEnum;
+use Webkul\Theme\Sections\SectionType;
+use Webkul\Theme\SectionSchema;
 
 class Section extends TranslatableModel implements SectionContract
 {
     use HasFactory;
 
     /**
-     * Image carousel precision.
+     * Image carousel type.
      *
-     * @var string
+     * @deprecated Use SectionTypeEnum::IMAGE_CAROUSEL instead.
      */
-    public const IMAGE_CAROUSEL = 'image_carousel';
+    public const IMAGE_CAROUSEL = SectionTypeEnum::IMAGE_CAROUSEL->value;
 
     /**
-     * Product carousel precision.
+     * Product carousel type.
      *
-     * @var string
+     * @deprecated Use SectionTypeEnum::PRODUCT_CAROUSEL instead.
      */
-    public const PRODUCT_CAROUSEL = 'product_carousel';
+    public const PRODUCT_CAROUSEL = SectionTypeEnum::PRODUCT_CAROUSEL->value;
 
     /**
-     * Category carousel precision.
+     * Category carousel type.
      *
-     * @var string
+     * @deprecated Use SectionTypeEnum::CATEGORY_CAROUSEL instead.
      */
-    public const CATEGORY_CAROUSEL = 'category_carousel';
+    public const CATEGORY_CAROUSEL = SectionTypeEnum::CATEGORY_CAROUSEL->value;
 
     /**
-     * Footer links precision.
+     * Footer links type.
      *
-     * @var string
+     * @deprecated Use SectionTypeEnum::FOOTER_LINKS instead.
      */
-    public const FOOTER_LINKS = 'footer_links';
+    public const FOOTER_LINKS = SectionTypeEnum::FOOTER_LINKS->value;
 
     /**
-     * Static precision.
+     * Static content type.
      *
-     * @var string
+     * @deprecated Use SectionTypeEnum::STATIC_CONTENT instead.
      */
-    public const STATIC_CONTENT = 'static_content';
+    public const STATIC_CONTENT = SectionTypeEnum::STATIC_CONTENT->value;
 
     /**
-     * Services Content.
+     * Services content type.
      *
-     * @var string
+     * @deprecated Use SectionTypeEnum::SERVICES_CONTENT instead.
      */
-    public const SERVICES_CONTENT = 'services_content';
+    public const SERVICES_CONTENT = SectionTypeEnum::SERVICES_CONTENT->value;
 
     /**
-     * Every type a section may take.
+     * Every core section type.
      *
-     * @var array
+     * @deprecated Use SectionSchema::types() for the types a theme offers.
      */
     public const TYPES = [
         self::IMAGE_CAROUSEL,
@@ -69,13 +72,6 @@ class Section extends TranslatableModel implements SectionContract
     ];
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'theme_sections';
-
-    /**
      * The attributes that are translatable.
      *
      * @var array
@@ -84,6 +80,13 @@ class Section extends TranslatableModel implements SectionContract
         'options',
         'draft_options',
     ];
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'theme_sections';
 
     /**
      * With the translations given attributes.
@@ -119,6 +122,14 @@ class Section extends TranslatableModel implements SectionContract
         'channel_id',
         'theme_code',
     ];
+
+    /**
+     * Get the section type the section's theme handles it with.
+     */
+    public function getTypeInstance(): ?SectionType
+    {
+        return app(SectionSchema::class)->type($this->theme_code, $this->type);
+    }
 
     /**
      * Create a new factory instance for the model.

@@ -4,6 +4,22 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product, category and swatch image URLs carry.
+
+- Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
+
+- Fixed the Customize action being offered for installed themes that no channel runs; only an active theme can be customized now, and the server enforces it.
+
+- Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited.
+
+- Footer links now take any number of columns instead of a fixed two, wrapping to fit every screen and leaving out empty columns, and existing footers keep working.
+
+- Fixed My Reviews, the RMA pages and product rich snippets loading full-size product image files directly; they now go through the product image helper, with its sizes, placeholders and theme templates.
+
+- Fixed category logos and banners, and image swatches, not loading from a storage disk that is not local, and the image carousel section rewriting stored paths into image sizes and drawing slides without an image.
+
+- An attribute option's `swatch_value_url` is now the URL of its stored file, as every model image URL is; sized swatch URLs come from the configurable product config or `image_urls()`.
+
 - Corrected the titles and descriptions in Admin → Configuration that named settings which no longer exist or defined the concept rather than the setting, in all 22 locales.
 
 - Fixed the LinkedIn social login button never appearing, because the configuration field was named after the Socialite driver while the installer seeded the plain provider name.
@@ -13,6 +29,16 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed Admin → Configuration pages keeping a two-column layout on small screens, which squeezed the settings panel; the description and panel now stack.
 
 - Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
+
+- Fixed a created, updated or removed catalog rule, and the nightly price reindex, leaving product pages and storefront listings on the old price; their cached pages are now dropped once prices are reindexed.
+
+- #11481 [fixed] - Fixed editing or deleting a CMS page leaving the old page cached for other locales, currencies, channel domains and signed-in customers; signed-in customers are no longer served cached pages.
+
+- #11479 [fixed] - Fixed the storefront password fields offering no way to see the password outside sign in, which only had a checkbox. Every password field now has an eye icon inside it, which also stands in for Microsoft Edge's own reveal button.
+
+- #11477 [fixed] - Fixed logging in as a customer from the admin landing on the default channel rather than the customer's own. A signed-in customer is now sent to their assigned channel and cannot open the account area on a channel their account is not registered on.
+
+- #11473 [fixed] - Fixed a configurable product's parent disappearing from the Elasticsearch index when one of its variants was deleted. Only the products actually removed are now deleted from the index, and the surviving parent is reindexed.
 
 - #11458 [fixed] - Fixed a category still filtering by an attribute after Use Layered Navigation was turned off for it, which left the filter on the storefront with no way to untick it in the category. A category now filters only by attributes that are still in layered navigation, and turning one back on restores the categories it was chosen for.
 

@@ -42,7 +42,6 @@ return [
             'page-title' => 'Accesso Cliente',
             'password' => 'Password',
             'resend-verification' => 'Reinvia email di verifica',
-            'show-password' => 'Mostra Password',
             'title' => 'Accedi',
             'verify-first' => 'Verifica prima il tuo account email.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Attivazione predefinita',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostra Password',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Carosello delle categorie',
             'image-carousel' => 'Carosello delle immagini',
             'offer' => 'Ottieni fino al 40% di sconto sul tuo primo ordine, ACQUISTA ORA',
+            'preview-banner' => 'Anteprima del tema :theme sul canale :channel. I link sono disattivati nell\'anteprima.',
             'product-carousel' => 'Carosello dei prodotti',
             'resend-verify-email' => 'Reinvia l\'email di verifica',
             'verify-email' => 'Verifica il tuo account email',

@@ -3281,8 +3281,11 @@ return [
                 'duplicate-btn' => 'डुप्लिकेट',
                 'empty' => 'अभी कोई सेक्शन नहीं है।',
                 'gone' => 'यह सेक्शन अब मौजूद नहीं है।',
+                'inactive-theme' => 'केवल वही थीम कस्टमाइज़ की जा सकती है जो किसी चैनल पर सक्रिय हो।',
                 'locale' => 'भाषा',
                 'mobile' => 'मोबाइल',
+                'no-fields' => 'इस थीम में इस अनुभाग की संपादित करने योग्य कोई सेटिंग नहीं है।',
+                'no-types' => 'यह थीम जोड़ने के लिए कोई अनुभाग प्रकार नहीं देती।',
                 'pinned' => 'पृष्ठ के नीचे पिन किया गया।',
                 'preview-btn' => 'पूर्वावलोकन',
                 'publish-btn' => 'प्रकाशित करें',
@@ -3308,9 +3311,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'यह चैनल केवल एक फ़ुटर लिंक अनुभाग दिखाता है।',
                 'name' => 'नाम',
                 'save-btn' => 'सेक्शन सहेजें',
+                'singleton-exists' => 'यह चैनल केवल एक :type अनुभाग दिखाता है।',
                 'title' => 'सेक्शन बनाएँ',
 
                 'type' => [
@@ -3326,6 +3329,7 @@ return [
 
             'edit' => [
                 'active' => 'सक्रिय',
+                'add-column' => 'स्तंभ जोड़ें',
                 'add-filter-btn' => 'फ़िल्टर जोड़ें',
                 'add-footer-link-btn' => 'फ़ुटर लिंक जोड़ें',
                 'add-image-btn' => 'छवि जोड़ें',
@@ -3338,6 +3342,7 @@ return [
                 'category-id' => 'श्रेणी आईडी',
                 'channels' => 'चैनल्स',
                 'column' => 'स्तंभ',
+                'columns' => 'स्तंभ',
                 'create-filter' => 'फ़िल्टर बनाएं',
                 'css' => 'सीएसएस',
                 'delete' => 'हटाएँ',
@@ -5472,14 +5477,29 @@ return [
                 'warning-config-closures' => 'config:cache विफल होगा यदि कोई कॉन्फ़िगरेशन फ़ाइल closures लौटाती है।',
                 'warning-permissions' => 'फ़ाइलसिस्टम अनुमति समस्याएँ कैश निर्माण या सफ़ाई को रोक सकती हैं।',
                 'invalid-action' => 'अमान्य कैश क्रिया अनुरोधित।',
-                'action-success' => 'कमांड ":action" सफलतापूर्वक निष्पादित हुई।',
-                'action-failed' => 'कमांड ":action" विफल। नीचे आउटपुट देखें।',
+                'action-success' => ':action सफलतापूर्वक पूरा हुआ।',
+                'action-failed' => ':action विफल रहा। नीचे दिया गया आउटपुट देखें।',
                 'action-exception' => 'कैश क्रिया विफल: :message',
                 'clear-console' => 'कंसोल साफ़ करें',
                 'console-title' => 'आउटपुट कंसोल',
                 'console-entries' => 'प्रविष्टियाँ',
                 'console-empty' => 'आउटपुट देखने के लिए कैश क्रिया चलाएँ...',
                 'console-unknown-error' => 'एक अप्रत्याशित त्रुटि हुई।',
+
+                'results' => [
+                    'clear-all' => 'सभी कैश साफ़ कर दिए गए।',
+                    'clear-config' => 'कॉन्फ़िगरेशन कैश साफ़ कर दिया गया।',
+                    'clear-cache' => 'एप्लिकेशन कैश साफ़ कर दिया गया।',
+                    'clear-compiled' => 'कंपाइल की गई क्लास फ़ाइलें हटा दी गईं।',
+                    'clear-events' => 'इवेंट कैश साफ़ कर दिया गया।',
+                    'clear-routes' => 'रूट कैश साफ़ कर दिया गया।',
+                    'clear-views' => 'कंपाइल किए गए व्यू साफ़ कर दिए गए।',
+                    'clear-page-cache' => 'पेज कैश साफ़ कर दिया गया। हर स्टोरफ़्रंट पेज अगली विज़िट पर दोबारा बनेगा।',
+                    'build-all' => 'सभी कैश दोबारा बनाए गए।',
+                    'build-config' => 'कॉन्फ़िगरेशन कैश बना दिया गया।',
+                    'build-routes' => 'रूट कैश बना दिया गया।',
+                    'build-views' => 'व्यू कंपाइल कर दिए गए।',
+                ],
 
                 'actions' => [
                     'clear-all' => 'सभी कैश साफ़ करें',
@@ -5489,6 +5509,7 @@ return [
                     'clear-events' => 'इवेंट कैश साफ़ करें',
                     'clear-routes' => 'रूट कैश साफ़ करें',
                     'clear-views' => 'व्यू कैश साफ़ करें',
+                    'clear-page-cache' => 'पेज कैश साफ़ करें',
                     'build-all' => 'सभी कैश पुनर्निर्माण करें',
                     'build-config' => 'कॉन्फ़िग कैश करें',
                     'build-routes' => 'रूट कैश करें',
@@ -5506,6 +5527,8 @@ return [
                         'enabled-info' => 'Storefront pages are served from the cache. Turning this off makes every page render again on each visit.',
                         'lifetime' => 'Cache Lifetime (Minutes)',
                         'lifetime-info' => 'How long a cached page is kept before it is rendered again. Leave empty to use the application default.',
+                        'flush' => 'पेज कैश फ़्लश करें',
+                        'flush-info' => 'पेज कैश खाली करें ताकि हर स्टोरफ़्रंट पेज अगली विज़िट पर दोबारा बने।',
                     ],
                 ],
             ],

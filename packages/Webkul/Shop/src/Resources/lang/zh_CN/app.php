@@ -42,7 +42,6 @@ return [
             'page-title' => '用户登录',
             'password' => '密码',
             'resend-verification' => '重新发送验证邮件',
-            'show-password' => '显示密码',
             'title' => '登录',
             'verify-first' => '请先验证您的电子邮件。',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => '默认切换',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => '显示密码',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => '分类轮播',
             'image-carousel' => '图片轮播',
             'offer' => '首单最高可享40%折扣，立即购买',
+            'preview-banner' => '正在预览 :channel 渠道中的 :theme 主题。预览中的链接已禁用。',
             'product-carousel' => '产品轮播',
             'resend-verify-email' => '重新发送验证邮件',
             'verify-email' => '验证您的邮箱账户',

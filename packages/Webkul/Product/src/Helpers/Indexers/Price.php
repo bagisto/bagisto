@@ -3,6 +3,7 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -10,23 +11,25 @@ use Webkul\Product\Repositories\ProductRepository;
 class Price extends AbstractIndexer
 {
     /**
-     * @var int
-     */
-    private $batchSize;
-
-    /**
-     * Channels
+     * The channels prices are indexed for.
      *
      * @var array
      */
     protected $channels;
 
     /**
-     * Customer Groups
+     * The customer groups prices are indexed for.
      *
      * @var array
      */
     protected $customerGroups;
+
+    /**
+     * Number of products reindexed per batch.
+     *
+     * @var int
+     */
+    private $batchSize;
 
     /**
      * Create a new indexer instance.
@@ -42,12 +45,14 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Reindex all products
+     * Reindex every product's price, announcing it without product ids since any price may have changed.
      *
      * @return void
      */
     public function reindexFull()
     {
+        Event::dispatch('catalog.product.price.reindex.before');
+
         while (true) {
             $paginator = $this->productRepository
                 ->with([
@@ -77,15 +82,21 @@ class Price extends AbstractIndexer
         }
 
         request()->query->remove('cursor');
+
+        Event::dispatch('catalog.product.price.reindex.after');
     }
 
     /**
-     * Reindexed products with price which depends on date
+     * Reindex the products whose price depends on today's date, announcing the ids of those reindexed.
      *
      * @return void
      */
     public function reindexSelective()
     {
+        Event::dispatch('catalog.product.price.reindex.before');
+
+        $productIds = [];
+
         while (true) {
             $paginator = $this->productRepository
                 ->distinct()
@@ -121,6 +132,8 @@ class Price extends AbstractIndexer
 
             $this->reindexBatch($paginator->items());
 
+            $productIds = array_merge($productIds, collect($paginator->items())->pluck('id')->all());
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
@@ -129,10 +142,12 @@ class Price extends AbstractIndexer
         }
 
         request()->query->remove('cursor');
+
+        Event::dispatch('catalog.product.price.reindex.after', [array_values(array_unique($productIds))]);
     }
 
     /**
-     * Reindex products by batch size
+     * Reindex the given products' prices for every channel and customer group.
      *
      * @return void
      */
@@ -181,7 +196,7 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Check if index value changed
+     * Whether an index value changed.
      *
      * @return bool
      */
@@ -191,7 +206,7 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Returns indexer for product type
+     * Get the price indexer of a product's type.
      *
      * @return string
      */
@@ -207,7 +222,7 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Returns all customer groups
+     * Get every channel.
      *
      * @return Collection
      */
@@ -221,7 +236,7 @@ class Price extends AbstractIndexer
     }
 
     /**
-     * Returns all customer groups
+     * Get every customer group.
      *
      * @return Collection
      */

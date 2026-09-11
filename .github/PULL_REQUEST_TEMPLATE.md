@@ -13,7 +13,7 @@
 
 ## Branch Selection
 <!--- Please specify the target branch for this pull request. -->
-- [ ] Target Branch: master 
+- [ ] Target Branch: `2.4` for bug fixes and minor changes, `master` for major features and breaking changes
 
 ## Tailwind Reordering
 <!--- Please make sure all the Tailwind classes are reordered. -->
