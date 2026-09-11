@@ -4,8 +4,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Added a Parent Category column to the admin category listing, so where a category sits in the tree shows at a glance. It can be sorted, searched and filtered through a dropdown of the categories that have children; root categories show an empty cell.
-
 - Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product, category and swatch image URLs carry.
 
 - Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
@@ -55,6 +53,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - #11441 [fixed] - Fixed numeric datagrid filters ignoring a value's decimal part, so an order-total filter of 50.20 matched on 50. Integer and decimal columns now compare the value exactly and can be filtered by operator — equals, greater than, less than, or a range.
 
 - #11440 [fixed] - Fixed the checkout payment-method radio button overlapping the method's logo and name on a mobile viewport; the card now reserves space for the radio so its content stays clear.
+
+- #10762 [feature] - Added a Parent Category column to the admin category listing, so where a category sits in the tree shows at a glance. It can be sorted, searched and filtered through a dropdown of the categories that have children; root categories show an empty cell.
 
 ## **v2.4.10 (21st of August 2026)** - *Release*
 
