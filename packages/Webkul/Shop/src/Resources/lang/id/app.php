@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'Carousel Kategori',
             'image-carousel' => 'Carousel Gambar',
             'offer' => 'Dapatkan DISKON HINGGA 40% untuk pesanan pertama Anda BELI SEKARANG',
+            'preview-banner' => 'Pratinjau tema :theme pada saluran :channel. Tautan dinonaktifkan dalam pratinjau.',
             'product-carousel' => 'Carousel Produk',
             'resend-verify-email' => 'Kirim Ulang Email Verifikasi',
             'verify-email' => 'Verifikasi akun email Anda',

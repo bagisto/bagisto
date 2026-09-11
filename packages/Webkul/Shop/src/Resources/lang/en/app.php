@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'Categories Carousel',
             'image-carousel' => 'Image Carousel',
             'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'preview-banner' => 'Previewing the :theme theme on the :channel channel. Links are turned off in the preview.',
             'product-carousel' => 'Product Carousel',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email' => 'Verify your email account',

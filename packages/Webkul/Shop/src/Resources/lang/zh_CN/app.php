@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => '分类轮播',
             'image-carousel' => '图片轮播',
             'offer' => '首单最高可享40%折扣，立即购买',
+            'preview-banner' => '正在预览 :channel 渠道中的 :theme 主题。预览中的链接已禁用。',
             'product-carousel' => '产品轮播',
             'resend-verify-email' => '重新发送验证邮件',
             'verify-email' => '验证您的邮箱账户',

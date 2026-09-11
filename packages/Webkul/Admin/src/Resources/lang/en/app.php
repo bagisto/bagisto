@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Duplicate',
                 'empty' => 'No sections yet.',
                 'gone' => 'This section no longer exists.',
+                'inactive-theme' => 'Only a theme that is active on a channel can be customized.',
                 'locale' => 'Locale',
                 'mobile' => 'Mobile',
+                'no-fields' => 'This section has no settings to edit in this theme.',
+                'no-types' => 'This theme offers no section types to add.',
                 'pinned' => 'Pinned to the bottom of the page.',
                 'preview-btn' => 'Preview',
                 'publish-btn' => 'Publish',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'This channel shows only one footer links section.',
                 'name' => 'Name',
                 'save-btn' => 'Save Section',
+                'singleton-exists' => 'This channel shows only one :type section.',
                 'title' => 'Create Section',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Active',
+                'add-column' => 'Add Column',
                 'add-filter-btn' => 'Add Filter',
                 'add-footer-link-btn' => 'Add Footer Link',
                 'add-image-btn' => 'Add Image',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'Category ID',
                 'channels' => 'Channels',
                 'column' => 'Column',
+                'columns' => 'Columns',
                 'create-filter' => 'Create Filter',
                 'css' => 'CSS',
                 'delete' => 'Delete',

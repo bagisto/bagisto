@@ -52,7 +52,8 @@
 
                     <button
                         type="button"
-                        class="secondary-button mt-2"
+                        class="secondary-button mt-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        :disabled="isFull(field)"
                         @click="addRow(field)"
                     >
                         @{{ field.add_label ?? field.label }}
@@ -360,9 +361,20 @@
                 },
 
                 /**
-                 * Append an empty row to a repeater.
+                 * Whether a repeater already holds the most rows its field allows.
+                 */
+                isFull(field) {
+                    return !! field.max && this.rowsOf(field).length >= field.max;
+                },
+
+                /**
+                 * Append an empty row to a repeater, up to the most its field allows.
                  */
                 addRow(field) {
+                    if (this.isFull(field)) {
+                        return;
+                    }
+
                     const row = {};
 
                     field.fields.forEach(child => row[child.key] = '');

@@ -18,6 +18,12 @@
 
 - [Magic AI — Laravel AI SDK Migration](#magic-ai--laravel-ai-sdk-migration)
 
+## Low Impact Changes
+
+- [Theme Image Cache Templates](#theme-image-cache-templates)
+
+- [Full Page Cache No Longer Caches Signed-In Customers](#full-page-cache-no-longer-caches-signed-in-customers)
+
 ## Upgrading To v2.4 From v2.3
 
 > [!NOTE]
@@ -153,8 +159,510 @@ The `settings.themes.*` permission keys no longer exist. Roles are rebuilt aroun
 appearance permissions after upgrading, and update any code calling
 `bouncer()->hasPermission('settings.themes…')`.
 
+#### Section types
+
+A section type is now a class that extends `Webkul\Theme\Sections\SectionType`.
+The class owns everything about the type — its code, title, icon, editor fields
+and behaviour — so the Appearance editor no longer hardcodes any of it.
+
+There are two kinds of section type, and each is always written the same way:
+
+| | Core section type | Theme section type |
+|---|---|---|
+| **What it is** | One of the six types Bagisto ships | A type your theme package adds |
+| **Defined by** | `Webkul\Theme\Enums\SectionTypeEnum` | Your class extending `SectionType` |
+| **Written in `config/themes.php` as** | Its enum case — `SectionTypeEnum::PRODUCT_CAROUSEL` | Its class — `Lookbook::class` |
+| **Stored in `theme_sections.type` as** | The case's value — `product_carousel` | The class's `$code` — `lookbook` |
+
+The core section types:
+
+| Enum case | Stored code | What it renders |
+|---|---|---|
+| `SectionTypeEnum::IMAGE_CAROUSEL` | `image_carousel` | A slider of linked images |
+| `SectionTypeEnum::PRODUCT_CAROUSEL` | `product_carousel` | A strip of products, chosen by filters |
+| `SectionTypeEnum::CATEGORY_CAROUSEL` | `category_carousel` | A strip of categories, chosen by filters |
+| `SectionTypeEnum::FOOTER_LINKS` | `footer_links` | The footer's link columns, one per channel |
+| `SectionTypeEnum::STATIC_CONTENT` | `static_content` | Author-supplied HTML and CSS |
+| `SectionTypeEnum::SERVICES_CONTENT` | `services_content` | The service promises drawn on every page |
+
+Code that referred to the old constants and helpers:
+
+| Before | Now |
+|---|---|
+| `Section::IMAGE_CAROUSEL` and the other type constants | `SectionTypeEnum::IMAGE_CAROUSEL->value` — the constants remain as deprecated aliases |
+| `Section::TYPES` | `app(SectionSchema::class)->types($themeCode)` — the constant remains, deprecated |
+| `SectionSchema::for($type)` | `app(SectionSchema::class)->for($type, $themeCode)` — the theme is optional, as it is for `all()` and `keysFor()` |
+| `SectionSchema`'s constructor and its protected per-type builders (`productCarousel()` and the rest) | Removed; each type's fields live in its class under `Webkul\Theme\Sections`, in `getFields()` and, for the carousels, `filterKeys()` — a subclass of `SectionSchema` must move its changes there |
+| — | New: `app(SectionSchema::class)->type($themeCode, $code)` and `$section->getTypeInstance()` resolve the `SectionType` a theme handles a section with |
+| `FPC\Listeners\Section::LAYOUT_TYPES` | Removed; a type draws on every page when it sets `$layout` |
+| `SectionRepository::sanitizeStaticCss()` | Moved to `SectionType::sanitizeCss()` |
+
+#### Adding sections to a theme
+
+Everything below happens in your theme package and its entry in
+`config/themes.php`. No core file — the enum, the controller or the editor —
+changes when a theme adds, removes or reorders a section type. The examples use a
+`fashion` theme whose classes live in `Webkul\Fashion\Sections`.
+
+##### Step 1 — Choose the section types your theme offers
+
+List them under `customize.sections` in the theme's entry. `customize` is where a
+theme registers everything it customizes in the storefront — its section types
+here, and its image cache templates beside them (see
+[Theme Image Cache Templates](#theme-image-cache-templates)). The list decides both
+**which** types the Add Section tiles offer and **the order** they appear in:
+
+```php
+use Webkul\Theme\Enums\SectionTypeEnum;
+
+return [
+    'shop' => [
+        'fashion' => [
+            'name' => 'Fashion',
+            'assets_path' => 'public/themes/shop/fashion',
+            'views_path' => 'resources/themes/fashion/views',
+
+            'vite' => [
+                'hot_file' => 'shop-fashion-vite.hot',
+                'build_directory' => 'themes/shop/fashion/build',
+                'package_assets_directory' => 'src/Resources/assets',
+            ],
+
+            'customize' => [
+                'sections' => [
+                    SectionTypeEnum::IMAGE_CAROUSEL,
+                    SectionTypeEnum::PRODUCT_CAROUSEL,
+                    SectionTypeEnum::CATEGORY_CAROUSEL,
+                    SectionTypeEnum::FOOTER_LINKS,
+                ],
+            ],
+        ],
+    ],
+];
+```
+
+This theme offers four core types; static content and service promises have no
+tile. The rules the list follows:
+
+- **The list order is the tile order.** A type that is not listed has no tile, and
+  creating one is refused.
+- **Without a `customize.sections` key** a theme offers every core type in enum order, so a
+  theme — or a published `config/themes.php` — from before this release needs no
+  change. The `default` theme lists all six explicitly.
+- **The first entry for a code wins**, keeping both its position and its class. A
+  later entry for the same code is ignored, so a type never gets two tiles.
+- **An entry that is neither an enum case nor a `SectionType` class** is reported
+  to the log and skipped; the rest of the list still loads.
+- **An empty list, `'sections' => []`, offers no types at all.**
+- **The list does not affect sections already placed on a page.** They keep their
+  own order, and one whose type the theme stops listing stays on the page: a core
+  type remains editable, while a type of your own opens with no fields, and its
+  `sanitize()` no longer runs when it is saved or published.
+
+If your theme only needs the core types, you are done. The remaining steps add a
+section type of your own.
+
+##### Step 2 — Create the section type class
+
+Only `$code` is required. Every other property has a default: the title falls back
+to the code in headline case, the icon to `icon-cms`, and the flags to `false`.
+
+```php
+namespace Webkul\Fashion\Sections;
+
+use Webkul\Theme\Sections\SectionType;
+use Webkul\Theme\SectionSchema;
+
+class Lookbook extends SectionType
+{
+    /**
+     * Code the section is stored under.
+     */
+    protected string $code = 'lookbook';
+
+    /**
+     * Translation key of the name the editor shows.
+     */
+    protected ?string $title = 'fashion::app.sections.lookbook.title';
+
+    /**
+     * Icon class drawn on the type's tile in the editor.
+     */
+    protected string $icon = 'icon-image';
+
+    /**
+     * The fields the editor draws.
+     */
+    public function getFields(): array
+    {
+        return [
+            [
+                'key' => 'heading',
+                'type' => SectionSchema::TEXT,
+                'label' => trans('fashion::app.sections.lookbook.heading'),
+            ],
+            [
+                'key' => 'looks',
+                'type' => SectionSchema::REPEATER,
+                'label' => trans('fashion::app.sections.lookbook.looks'),
+                'add_label' => trans('fashion::app.sections.lookbook.add-look'),
+                'max' => 6,
+                'fields' => [
+                    ['key' => 'image', 'type' => SectionSchema::IMAGE, 'label' => trans('fashion::app.sections.lookbook.image')],
+                    ['key' => 'link', 'type' => SectionSchema::TEXT, 'label' => trans('fashion::app.sections.lookbook.link')],
+                ],
+            ],
+        ];
+    }
+}
+```
+
+What a section type can declare:
+
+| Member | Default | Purpose |
+|---|---|---|
+| `$code` | *required* | The code stored in `theme_sections.type` |
+| `$title` | The code in headline case | Translation key of the tile's name |
+| `$icon` | `icon-cms` | Admin icon class drawn on the tile |
+| `$singleton` | `false` | A channel may hold only one |
+| `$pinned` | `false` | Fixed to the bottom of the list, not draggable |
+| `$layout` | `false` | Drawn on every page, so editing it clears the whole page cache |
+| `getFields()` | No fields | The fields the editor draws, from the kinds below |
+| `sanitize()` | Unchanged | Cleans options on every draft save, publish and preview |
+| `prepareForEditor()` / `prepareForStorage()` | Unchanged | Convert between the stored shape and the edited shape |
+
+The field kinds `getFields()` can use:
+
+| Kind | Control | Extra keys |
+|---|---|---|
+| `SectionSchema::TEXT` | A single line input | — |
+| `SectionSchema::TEXTAREA` | A multi-line input | — |
+| `SectionSchema::NUMBER` | A whole number input | — |
+| `SectionSchema::IMAGE` | An upload, stored as the file's path | — |
+| `SectionSchema::CODE` | A highlighted code editor | `language` (`html` or `css`) |
+| `SectionSchema::REPEATER` | Repeating, draggable rows of nested fields | `fields`, `add_label`, `max` |
+| `SectionSchema::FILTERS` | Key and value filter rows | `keys` — each with `value`, `label`, `options`, and `multiple` for a comma-separated list |
+
+##### Step 3 — List the class in `customize.sections`
+
+Add the class where its tile should appear, alongside the enum cases:
+
+```php
+use Webkul\Fashion\Sections\Lookbook;
+use Webkul\Theme\Enums\SectionTypeEnum;
+
+'customize' => [
+    'sections' => [
+        SectionTypeEnum::IMAGE_CAROUSEL,
+        Lookbook::class,
+        SectionTypeEnum::PRODUCT_CAROUSEL,
+        SectionTypeEnum::CATEGORY_CAROUSEL,
+        SectionTypeEnum::FOOTER_LINKS,
+    ],
+],
+```
+
+The Lookbook tile now appears second in the Add Section drawer for this theme, and
+nowhere else.
+
+##### Step 4 — Render it on the storefront
+
+The core `shop::home.index` only draws the core types, so render your own type from
+the theme's override of that view, under its `views_path`. The home page receives `$sections` — the live sections in page order on the
+storefront, and the drafts with `$preview` set in the Appearance preview. Match
+each section on its stored code: the enum case's `->value` for a core type, your
+class's `$code` for your own. While previewing, wrap each section in the two data
+attributes so the editor can highlight it, and include the preview bridge once:
+
+```blade
+@foreach ($sections as $section)
+    @php ($marks = ($preview ?? false) && ! $section->getTypeInstance()?->rendersInLayout())
+
+    @if ($marks)
+        <div
+            data-section-id="{{ $section->id }}"
+            data-section-name="{{ $section->name }}"
+        >
+    @endif
+
+    @switch ($section->type)
+        @case (\Webkul\Theme\Enums\SectionTypeEnum::PRODUCT_CAROUSEL->value)
+            <x-shop::products.carousel
+                :title="$section->options['title'] ?? ''"
+                :src="route('shop.api.products.index', $section->options['filters'] ?? [])"
+            />
+
+            @break
+
+        @case ('lookbook')
+            @include('fashion::sections.lookbook', ['options' => $section->options ?? []])
+
+            @break
+    @endswitch
+
+    @if ($marks)
+        </div>
+    @endif
+@endforeach
+
+@if ($preview ?? false)
+    @include('shop::home.preview-bridge')
+@endif
+```
+
+A section is created before it has any content, so its partial must render
+nothing, rather than fail, while its options are empty.
+
+##### Step 5 — Translate its labels
+
+Add every key the class uses — its `$title` and its field labels — to your theme's
+own language files, in every locale the store runs.
+
+#### Section type recipes
+
+Each recipe builds on the steps above.
+
+##### Reorder or remove core types
+
+List only the core types you want, in the order you want them:
+
+```php
+'customize' => [
+    'sections' => [
+        SectionTypeEnum::PRODUCT_CAROUSEL,
+        SectionTypeEnum::IMAGE_CAROUSEL,
+        SectionTypeEnum::FOOTER_LINKS,
+    ],
+],
+```
+
+##### Put a few types first, keep the rest in enum order
+
+List the types that lead, then spread every enum case after them. The cases
+already listed are ignored the second time, so the rest follow in enum order:
+
+```php
+'customize' => [
+    'sections' => [
+        Lookbook::class,
+        SectionTypeEnum::STATIC_CONTENT,
+        ...SectionTypeEnum::cases(),
+    ],
+],
+```
+
+This offers Lookbook, Static Content, then Image, Product and Category Carousel,
+Footer Links and Services Content.
+
+##### Extend a core type under a new code
+
+Extend the core class and give it a code of its own. It keeps everything the core
+type does and gets its own tile, beside the core one. `ProductCarousel` and
+`CategoryCarousel` expose `filterKeys()` for adding filters:
+
+```php
+namespace Webkul\Fashion\Sections;
+
+use Webkul\Theme\Sections\ProductCarousel;
+
+class SaleCarousel extends ProductCarousel
+{
+    /**
+     * Code the section is stored under.
+     */
+    protected string $code = 'sale_carousel';
+
+    /**
+     * Translation key of the name the editor shows.
+     */
+    protected ?string $title = 'fashion::app.sections.sale-carousel.title';
+
+    /**
+     * The core product filters, plus one this theme's storefront reads.
+     */
+    protected function filterKeys(): array
+    {
+        return [
+            ...parent::filterKeys(),
+            ['value' => 'on_sale', 'label' => trans('fashion::app.sections.sale-carousel.on-sale'), 'options' => []],
+        ];
+    }
+}
+```
+
+```php
+'customize' => [
+    'sections' => [
+        SectionTypeEnum::PRODUCT_CAROUSEL,
+        SaleCarousel::class,
+    ],
+],
+```
+
+##### Replace a core type, keeping its code
+
+Extend the core class **without** changing its code, and list your class instead
+of that enum case. Existing sections of that type are handled by your class from
+then on. This theme's footer lays out at most four columns:
+
+```php
+namespace Webkul\Fashion\Sections;
+
+use Webkul\Theme\Sections\FooterLinks as CoreFooterLinks;
+
+class FooterLinks extends CoreFooterLinks
+{
+    /**
+     * Most columns this theme's footer lays out.
+     */
+    protected ?int $maxColumns = 4;
+}
+```
+
+```php
+use Webkul\Fashion\Sections\FooterLinks;
+
+'customize' => [
+    'sections' => [
+        FooterLinks::class,
+        ...SectionTypeEnum::cases(),
+    ],
+],
+```
+
+Here the rest of the core types are spread after it. Your class is listed first,
+so it wins over `SectionTypeEnum::FOOTER_LINKS` when the spread repeats that code.
+
+##### Draw a section on every page
+
+Set `$layout`, and render the section from a layout partial rather than the home
+page. Editing it then clears the whole page cache instead of the home page alone:
+
+```php
+/**
+ * Whether the layout draws the section on every page.
+ */
+protected bool $layout = true;
+```
+
+```blade
+@inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
+
+@php
+    $channel = core()->getCurrentChannel();
+
+    $section = $sectionRepository->findOneOfType('promo_bar', $channel->id, $channel->theme, app()->getLocale());
+@endphp
+
+@if (! empty($section?->options['message']))
+    <div
+        @if ($sectionRepository->isPreviewing())
+            data-section-id="{{ $section->id }}"
+            data-section-name="{{ $section->name }}"
+        @endif
+    >
+        {{ $section->options['message'] }}
+    </div>
+@endif
+```
+
+`findOneOfType()` returns the live section on the storefront and its draft in the
+preview. Use `findAllOfType()` when a channel may hold more than one.
+
+##### Allow one per channel, or pin it to the bottom
+
+```php
+/**
+ * Whether a channel may hold only one section of this type.
+ */
+protected bool $singleton = true;
+
+/**
+ * Whether the section is fixed to the bottom of the page.
+ */
+protected bool $pinned = true;
+```
+
+A singleton's tile is withdrawn once the channel has one, and a second is refused
+on the server however it is reached. A pinned section stays at the end of the list
+and cannot be dragged.
+
+##### Accept author-supplied markup
+
+Anything written into the page unescaped must be cleaned. Override `sanitize()`
+with the `sanitizeHtml()` and `sanitizeCss()` helpers every section type inherits:
+
+```php
+/**
+ * Clean the markup and styles, which are written into the page rather than escaped.
+ */
+public function sanitize(array $options): array
+{
+    if (array_key_exists('html', $options)) {
+        $options['html'] = $this->sanitizeHtml($options['html']);
+    }
+
+    if (array_key_exists('css', $options)) {
+        $options['css'] = $this->sanitizeCss($options['css']);
+    }
+
+    return $options;
+}
+```
+
+##### Edit a different shape from the one you store
+
+When the storefront reads a shape the editor cannot edit directly, convert between
+the two. `prepareForEditor()` shapes the stored options for the editor's fields,
+and `prepareForStorage()` shapes each saved draft back. The core `FooterLinks`
+does this, editing a list of columns while storing `column_1`, `column_2`, ….
+A section storing its tags as one comma-separated string, but editing them as
+rows, would do:
+
+```php
+/**
+ * Shape the stored tags as the rows the editor's repeater reads.
+ */
+public function prepareForEditor(array $options): array
+{
+    $options['tags'] = collect(explode(',', $options['tags'] ?? ''))
+        ->filter()
+        ->map(fn ($tag) => ['name' => $tag])
+        ->values()
+        ->all();
+
+    return $options;
+}
+
+/**
+ * Write the edited rows back as the comma-separated tags the storefront reads.
+ */
+public function prepareForStorage(array $options): array
+{
+    if (is_array($options['tags'] ?? null)) {
+        $options['tags'] = collect($options['tags'])->pluck('name')->filter()->implode(',');
+    }
+
+    return $options;
+}
+```
+
 #### Behavioural changes
 
+- **A section type is offered only to the themes that list it** (a theme without a
+  `customize.sections` key offers every core type), in the order the theme lists it,
+  and creating one of a type the theme does not offer is refused.
+- **Only a theme that a channel runs can be customized.** The gallery hides
+  Customize for any other theme, opening the editor for one sends you back to the
+  gallery with a warning, and the section actions answer with a 403 for a theme its
+  channel no longer runs. A theme this installation does not have answers with a 404.
+- **The preview renders the theme it is asked for**, through a `theme` parameter,
+  and an installed theme can be previewed from the gallery before it is activated.
+- **Footer links take any number of columns.** The editor edits a list of columns
+  and stores them as the same `column_1`, `column_2`, … keys, so saved footers and
+  theme footer views keep working. Link rows left blank, and the columns they leave
+  empty, are not stored. A theme caps the count by extending `FooterLinks` and
+  setting `$maxColumns`.
 - **Sections are edited beside a live storefront preview**, not on a form of their
   own. The six per-type pages are replaced by one panel built from the section's
   type.
@@ -163,8 +671,8 @@ appearance permissions after upgrading, and update any code calling
   switched off with a pending change.
 - **Each channel is previewed and edited on its own**, so a theme customised on
   two channels is two independent sets of sections.
-- **Only one footer links section per channel** is allowed; the type is withdrawn
-  once a channel has one.
+- **Only one footer links section per channel** is allowed, because the core type is
+  a singleton; its tile is withdrawn once a channel has one.
 
 #### Migration steps
 
@@ -173,6 +681,11 @@ appearance permissions after upgrading, and update any code calling
 3. **Re-grant appearance permissions** to any custom role that had
    `settings.themes`.
 4. **Update bookmarks and links** pointing at `admin/settings/themes`.
+5. **Replace `Section::*` type constants** with `SectionTypeEnum` in theme views
+   and custom code — the constants still work, but are deprecated.
+6. **Declare `customize.sections`** in a theme's `config/themes.php` entry if it adds,
+   removes or reorders section types; a theme that offers the core types as they
+   are needs nothing.
 
 ### Google reCAPTCHA Enterprise Integration
 
@@ -585,3 +1098,415 @@ Bagisto v2.4 has migrated the Magic AI feature from direct OpenAI integration to
    ```
 
 3. **Update AI configuration** in Admin > Configuration > Magic AI to select your preferred provider and model.
+
+### Theme Image Cache Templates
+
+**Impact Probability: Low**
+
+A theme can now register its own image cache templates — the resizes served from
+`cache/{template}/{path}` — without touching `config/imagecache.php`. A theme that
+registers none keeps using the core templates exactly as before. Nothing is required
+on upgrade unless custom code reads `AttributeOption::$swatch_value_url`, calls the
+admin configurable options endpoint, or extends `ImageCacheController` — see
+[Rules](#rules).
+
+#### How the templates for a request are resolved
+
+1. **Core templates** come from `imagecache.templates`: `small`, `medium` and
+   `large`, which a published `config/imagecache.php` maps to
+   `Webkul\Shop\CacheFilters\*`.
+2. **The theme's templates** come from `customize.image_cache.templates` in its
+   entry in `config/themes.php`. A name the core already has is overridden; a new name is
+   added.
+3. **The theme is the one the requesting channel runs**, found from the request's
+   host, so every channel resolves its own templates. A channel whose theme is not
+   installed uses the templates of `themes.shop-default`.
+4. **An admin request uses the core templates only**, whatever theme its channel runs.
+
+A theme's templates never leak into another theme, and `config/imagecache.php`
+itself is never changed.
+
+#### Adding a new image template
+
+This walkthrough adds a `product_card` template — a 240 × 320 portrait crop for the
+product cards of a `fashion` theme — without touching `config/imagecache.php`.
+
+##### Step 1 — Create the template class
+
+A template is a class with a public `applyFilter()` method. It receives the
+original image and returns the processed one; any Intervention Image method can be
+used. Put it in your theme package, for example
+`packages/Webkul/Fashion/src/ImageTemplates/ProductCard.php`:
+
+```php
+namespace Webkul\Fashion\ImageTemplates;
+
+use Intervention\Image\Interfaces\ImageInterface;
+
+class ProductCard
+{
+    /**
+     * The width of a product card image.
+     */
+    protected int $width = 240;
+
+    /**
+     * The height of a product card image.
+     */
+    protected int $height = 320;
+
+    /**
+     * Crop the image to a portrait product card and sharpen the downscale.
+     */
+    public function applyFilter(ImageInterface $image): ImageInterface
+    {
+        return $image
+            ->cover($this->width, $this->height)
+            ->sharpen(5);
+    }
+}
+```
+
+##### Step 2 — Register it for the theme
+
+Map the template's name to its class under `customize.image_cache.templates` in
+the theme's entry in `config/themes.php`. The name is what appears in the URL.
+Because `product_card` is meant for product images, also list it under
+`product_images`:
+
+```php
+use Webkul\Fashion\ImageTemplates\ProductCard;
+
+'shop' => [
+    'fashion' => [
+        'name' => 'Fashion',
+        'assets_path' => 'public/themes/shop/fashion',
+        'views_path' => 'resources/themes/fashion/views',
+
+        'customize' => [
+            'image_cache' => [
+                'templates' => [
+                    'product_card' => ProductCard::class,
+                ],
+
+                'product_images' => [
+                    'product_card',
+                ],
+            ],
+        ],
+    ],
+],
+```
+
+- `templates` makes `cache/product_card/{path}` resolve for the theme's channels.
+  The effective templates are the core `small`, `medium` and `large`, plus
+  `product_card`; themes that do not register it have no `product_card` template.
+- `product_images` adds a `product_card_image_url` to every product image array for
+  those channels. A template that is not listed — a banner, say — still resolves,
+  but product images never carry it.
+
+If your configuration is cached, run `php artisan optimize:clear`.
+
+##### Step 3 — Use it in the theme's views
+
+Product images carry the URL beside the core sizes, wherever the product image
+helper builds them — `product_image()`, the product gallery, cart items and the
+storefront product APIs:
+
+```blade
+@php($baseImage = product_image()->getProductBaseImage($product))
+
+<img
+    src="{{ $baseImage['product_card_image_url'] }}"
+    alt="{{ $baseImage['alt'] }}"
+    width="240"
+    height="320"
+/>
+```
+
+In a Vue component fed by the product APIs, the same URL is
+`product.base_image.product_card_image_url`, and each entry of `product.images`
+carries one too. A product without an image gets the large placeholder for it.
+
+Category logos and banners, and image swatches, get theme templates the same way
+(see [Adding a template to category and swatch images](#adding-a-template-to-category-and-swatch-images)).
+For any other stored image, `image_urls()` builds the same array — the core sizes,
+the templates the theme lists under the key you pass, and the original — and links
+every name to the stored file on a disk that is not local:
+
+```blade
+@php($bannerImage = image_urls($path, 'mobile_banner_images'))
+
+<img src="{{ $bannerImage['mobile_banner_image_url'] }}" alt="" />
+```
+
+List `mobile_banner` under a `mobile_banner_images` key of `customize.image_cache` for
+it to be included, as the [configuration below](#templates-that-do-more-than-resize)
+does; a key the theme does not declare gives only the core sizes. The core keys are
+available as constants: `TemplateRegistry::PRODUCT_IMAGES`, `CATEGORY_IMAGES` and
+`SWATCH_IMAGES`.
+
+##### Step 4 — Check it
+
+Open the URL on a channel that runs the theme, for example
+`https://fashion.example.com/cache/product_card/product/1/front.webp`. It returns
+the image cropped to 240 × 320. The same URL on a channel running another theme
+answers with a 404, because that theme does not register `product_card`.
+
+#### Adding a template to category and swatch images
+
+Category logos and banners, and attribute option image swatches, work like product
+images. Register the template under `templates`, then list its name under
+`category_images` or `swatch_images`:
+
+```php
+use Webkul\Fashion\ImageTemplates\CategoryBanner;
+use Webkul\Fashion\ImageTemplates\CategoryCard;
+use Webkul\Fashion\ImageTemplates\SwatchCard;
+
+'customize' => [
+    'image_cache' => [
+        'templates' => [
+            'category_card' => CategoryCard::class,
+            'category_banner' => CategoryBanner::class,
+            'swatch_card' => SwatchCard::class,
+        ],
+
+        'category_images' => [
+            'category_card',
+            'category_banner',
+        ],
+
+        'swatch_images' => [
+            'swatch_card',
+        ],
+    ],
+],
+```
+
+On the channels that run the theme:
+
+- Every category the storefront category API returns carries each name listed under
+  `category_images` on both its `logo` and its `banner` — here
+  `logo.category_card_image_url`, `logo.category_banner_image_url` and the same under
+  `banner` — beside the core `small`, `medium`, `large` and `original`. A category
+  without a stored logo or banner has no `logo` or `banner` key, as before.
+- Every option in a configurable product's config carries a `swatch_image` key. For
+  an image swatch it is an array — `swatch_image.swatch_card_image_url` beside the core
+  sizes, and an `alt`; for a color or text swatch, or an image swatch with no stored
+  file, it is `null`. The existing `swatch_value` stays the core `small` URL, so views
+  that read it keep working. `getAttributesData($product, $options, false)` leaves
+  `swatch_image` out and gives an image swatch's `swatch_value` as its stored file.
+
+The core `small`, `medium` and `large` templates crop every image under `category/` to
+a small square, logos and banners alike, so the category page keeps showing its banner
+at full size. To show a sized banner, register a banner-shaped template as above and
+use it in the theme's own `shop::categories.view`:
+
+```blade
+@php($bannerImage = image_urls($category->banner_path, \Webkul\ImageCache\TemplateRegistry::CATEGORY_IMAGES))
+
+<img src="{{ $bannerImage['category_banner_image_url'] }}" alt="{{ $category->banner_alt ?: $category->name }}" />
+```
+
+The image carousel section sizes its slides through the core `small`, `medium` and
+`large` templates, so overriding those for slider images — the path branch the core
+filters size as sliders — resizes the carousel too.
+
+#### Overriding a core template
+
+Register the class under a core name — `small`, `medium` or `large` — to replace
+that template for the theme's channels only. Every other theme keeps the core one.
+
+To give every image the same fixed size, extend the package's fixed-size template:
+
+```php
+namespace Webkul\Fashion\ImageTemplates;
+
+use Webkul\ImageCache\Templates\Small as CoreSmall;
+
+class Small extends CoreSmall
+{
+    /**
+     * The width for small images.
+     */
+    protected int $width = 300;
+
+    /**
+     * The height for small images.
+     */
+    protected int $height = 200;
+}
+```
+
+The published core `Webkul\Shop\CacheFilters\*` size by the kind of image —
+product, category, attribute option or slider — from the request path. To change
+one kind and keep the rest, extend that filter and hand everything else back to it:
+
+```php
+namespace Webkul\Fashion\ImageTemplates;
+
+use Illuminate\Support\Str;
+use Webkul\Shop\CacheFilters\Small as CoreSmall;
+
+class ProductSmall extends CoreSmall
+{
+    /**
+     * Crop product thumbnails to a portrait shape, leaving every other image to the core filter.
+     */
+    public function applyFilter($image)
+    {
+        if (Str::contains(url()->current(), '/product')) {
+            return $image->cover(160, 200);
+        }
+
+        return parent::applyFilter($image);
+    }
+}
+```
+
+```php
+'customize' => [
+    'image_cache' => [
+        'templates' => [
+            'small' => ProductSmall::class,
+        ],
+    ],
+],
+```
+
+Existing views keep requesting `cache/small/…`, so nothing else changes.
+
+#### Templates that do more than resize
+
+`applyFilter()` may run any sequence of Intervention Image calls. A greyscale
+mobile banner, served at `cache/mobile_banner/{path}`:
+
+```php
+namespace Webkul\Fashion\ImageTemplates;
+
+use Intervention\Image\Interfaces\ImageInterface;
+
+class MobileBanner
+{
+    /**
+     * Crop a banner for small screens and turn it greyscale.
+     */
+    public function applyFilter(ImageInterface $image): ImageInterface
+    {
+        return $image
+            ->cover(768, 400)
+            ->greyscale();
+    }
+}
+```
+
+```php
+'customize' => [
+    'image_cache' => [
+        'templates' => [
+            'product_card' => ProductCard::class,
+            'mobile_banner' => MobileBanner::class,
+            'small' => ProductSmall::class,
+        ],
+
+        'product_images' => [
+            'product_card',
+        ],
+
+        'mobile_banner_images' => [
+            'mobile_banner',
+        ],
+    ],
+],
+```
+
+`mobile_banner` is not listed under `product_images`, so it resolves at
+`cache/mobile_banner/{path}` without being added to product image arrays; listed under
+`mobile_banner_images`, it is added to what `image_urls($path, 'mobile_banner_images')`
+builds. `small` needs no listing: every image array carries the core sizes.
+
+#### Rules
+
+- **Only registered names resolve.** The name in the URL is only ever looked up
+  among the registered templates; it is never used as a class. An unknown name
+  answers with a 404, as before.
+- **A template name uses letters, digits, dashes and underscores**, since it
+  becomes a URL segment and part of a `{name}_image_url` array key.
+- **A theme's template is a class name.** Only `config/imagecache.php` may map a name
+  to a closure.
+- **An invalid entry is skipped and reported to the log** — a name with other
+  characters, a class that does not exist, is abstract, or has no public
+  `applyFilter()`. The core template of that name, if any, is used instead. A name
+  listed under `product_images`, `category_images`, `swatch_images` or any other key
+  passed to `image_urls()` that is not a registered template is skipped and reported
+  the same way. It is reported each time the templates are resolved, so fix the entry
+  rather than leave it in place.
+- **`original`, `download` and `logo` are reserved** in any letter case and cannot be
+  overridden; a theme template named `Original` is refused like `original`.
+- **Models give the stored file, the storefront sizes it.** A model's image URL is the
+  stored file's own URL, so the admin panel and every theme read the same value.
+  `AttributeOption::$swatch_value_url` follows this now: it returns
+  `Storage::url($swatch_value)` where it used to return `cache/small/…`. For a sized
+  swatch, read `swatch_value` or `swatch_image` from the configurable product config,
+  or call `image_urls($option->swatch_value, TemplateRegistry::SWATCH_IMAGES)`.
+- **Image arrays are opt-in.** Product images, category logos and banners, and image
+  swatches keep exactly the core `small`, `medium`, `large` and `original` unless the
+  theme lists more under `product_images`, `category_images` or `swatch_images`.
+- **A storage disk that is not local links every name to the stored file.** The
+  image cache only reads local files, so on a disk such as S3 every
+  `{name}_image_url` that `image_urls()` builds — product, category, swatch and
+  carousel images alike — is the file's own URL.
+- **The admin panel always uses the core templates**, whatever theme a channel
+  runs, so product images built during an admin request never carry theme
+  templates. The images the admin panel itself shows, attribute swatches included,
+  are the original files, so no storefront theme resizes them. The admin
+  `admin.catalog.products.configurable.options` endpoint follows suit: it returns only
+  `attributes` and `index`, with an image swatch's `swatch_value` as its stored file,
+  and no longer carries `variant_prices`, `variant_images`, `variant_videos`,
+  `regular` or `final`, which the admin panel never read. The storefront keeps them in `getConfigurationConfig()`.
+- **Cached listings follow the theme.** The storefront product and category APIs
+  cache a guest listing per channel and theme, so after a channel switches theme its
+  listings carry the new theme's images straight away.
+- **The Appearance preview of a theme a channel does not run** builds product images
+  for the previewed theme, but its images are served by the channel's active
+  theme; a template only the previewed theme registers does not load there.
+- **Images are resized per request for the requesting channel**, and each response
+  carries an ETag of its own bytes, so two themes never share an image. After a
+  channel switches theme, browsers may keep images they already cached for up to
+  `imagecache.lifetime` minutes.
+
+`Webkul\ImageCache\Http\Controllers\ImageCacheController` now takes a
+`Webkul\ImageCache\TemplateRegistry` in its constructor; a subclass that defines its
+own constructor must pass it on.
+
+### Full Page Cache No Longer Caches Signed-In Customers
+
+**Impact Probability: Low**
+
+The full page cache now runs for guests only. A signed-in customer's page carries their
+own name, customer group prices and account state, so it was cached per customer — a
+copy no listener could find again, which kept serving the old page after the content
+changed. `FullPageCacheProfile::enabled()` now answers `false` for a signed-in customer:
+their pages are rendered fresh, neither served from nor written to the cache, and
+`FullPageCache::willCache()` reports them as uncached.
+
+What this changes for custom code:
+
+- **Forget pages through `Webkul\FPC\Concerns\ForgetsPages`.** `forgetPages($paths)`
+  drops a path for every channel, locale and currency, on each channel's own host as
+  well as the host the forget runs on — the host is part of every cache key.
+  `ResponseCache::forget()` only reaches the scope of the request it runs in, so a
+  listener calling it misses other locales, currencies and channel domains.
+- **`ForgetsPages::cacheScopes()` is replaced by `channelScopes($channel)`**, which lists
+  one channel's scopes; `forgetPages()` walks every channel itself.
+- The CMS page, section, review, URL rewrite, order and refund listeners now forget
+  their pages through `ForgetsPages`. The CMS page listener forgets the page under the
+  URL key of each of its translations.
+- **Price reindexes now announce themselves once prices are written.** The catalog rule
+  jobs fire `promotions.catalog_rule.reindex.before` and `.after`, and the price
+  indexer's `reindexSelective()` and `reindexFull()` fire
+  `catalog.product.price.reindex.before` and `.after`. Each `after` event carries the
+  reindexed product ids, or none for a full reindex. The page cache forgets those
+  products' pages — every page after a full reindex — and the storefront catalog API
+  cache is flushed, so a saved catalog rule or the nightly reindex shows the new price.

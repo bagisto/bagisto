@@ -6,6 +6,7 @@ use Webkul\FPC\Listeners\Channel;
 use Webkul\FPC\Listeners\CoreConfig;
 use Webkul\FPC\Listeners\Order;
 use Webkul\FPC\Listeners\Page;
+use Webkul\FPC\Listeners\Price;
 use Webkul\FPC\Listeners\Product;
 use Webkul\FPC\Listeners\Refund;
 use Webkul\FPC\Listeners\Review;
@@ -25,6 +26,8 @@ it('subscribes the page cache to the event', function (string $event, string $li
     'category created' => ['catalog.category.create.after', Category::class, 'afterCreate'],
     'category updated' => ['catalog.category.update.after', Category::class, 'afterUpdate'],
     'category deleted' => ['catalog.category.delete.before', Category::class, 'beforeDelete'],
+    'product prices reindexed' => ['catalog.product.price.reindex.after', Price::class, 'afterReindex'],
+    'catalog rule prices reindexed' => ['promotions.catalog_rule.reindex.after', Price::class, 'afterReindex'],
     'review updated' => ['customer.review.update.after', Review::class, 'afterUpdate'],
     'review deleted' => ['customer.review.delete.before', Review::class, 'beforeDelete'],
     'order placed' => ['checkout.order.save.after', Order::class, 'afterCancelOrCreate'],

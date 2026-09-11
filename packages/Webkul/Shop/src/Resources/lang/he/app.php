@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'קרוסלת קטגוריות',
             'image-carousel' => 'קרוסלת תמונות',
             'offer' => 'קבל עד 40% הנחה על ההזמנה הראשונה שלך, קנה עכשיו',
+            'preview-banner' => 'תצוגה מקדימה של ערכת הנושא :theme בערוץ :channel. הקישורים מושבתים בתצוגה המקדימה.',
             'product-carousel' => 'קרוסלת מוצרים',
             'resend-verify-email' => 'שלח מחדש את מייל האימות',
             'verify-email' => 'אמת את חשבון האימייל שלך',

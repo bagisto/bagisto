@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Duplicar',
                 'empty' => 'Ainda não há seções.',
                 'gone' => 'Esta seção não existe mais.',
+                'inactive-theme' => 'Apenas um tema ativo em um canal pode ser personalizado.',
                 'locale' => 'Idioma',
                 'mobile' => 'Celular',
+                'no-fields' => 'Esta seção não tem configurações para editar neste tema.',
+                'no-types' => 'Este tema não oferece tipos de seção para adicionar.',
                 'pinned' => 'Fixado na parte inferior da página.',
                 'preview-btn' => 'Pré-visualizar',
                 'publish-btn' => 'Publicar',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Este canal exibe apenas uma seção de links de rodapé.',
                 'name' => 'Nome',
                 'save-btn' => 'Salvar seção',
+                'singleton-exists' => 'Este canal exibe apenas uma seção de :type.',
                 'title' => 'Criar seção',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Ativo',
+                'add-column' => 'Adicionar Coluna',
                 'add-filter-btn' => 'Adicionar Filtro',
                 'add-footer-link-btn' => 'Adicionar Link do Rodapé',
                 'add-image-btn' => 'Adicionar Imagem',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'ID de categoria',
                 'channels' => 'Canais',
                 'column' => 'Coluna',
+                'columns' => 'Colunas',
                 'create-filter' => 'Criar Filtro',
                 'css' => 'CSS',
                 'delete' => 'Excluir',

@@ -3,8 +3,9 @@
 namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use Webkul\Customer\Contracts\Wishlist;
+use Webkul\ImageCache\ImageUrlBuilder;
+use Webkul\ImageCache\TemplateRegistry;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -18,7 +19,8 @@ class ProductImage
     public function __construct(protected ProductRepository $productRepository) {}
 
     /**
-     * Retrieve collection of gallery images.
+     * Retrieve the gallery images of a product, falling back to its parent's when a variant
+     * has none of its own.
      *
      * @param  Product  $product
      * @return array
@@ -47,11 +49,6 @@ class ProductImage
             $images[] = $this->getFallbackImageUrls($product?->name);
         }
 
-        /*
-         * Product parent checked already above. If the case reached here that means the
-         * parent is available. So recursing the method for getting the parent image if
-         * images of the child are not found.
-         */
         if (empty($images)) {
             $images = $this->getGalleryImages($product->parent);
         }
@@ -81,12 +78,10 @@ class ProductImage
     }
 
     /**
-     * This method will first check whether the gallery images are already
-     * present or not. If not then it will load from the product.
+     * Get the first of the given gallery images, otherwise load the base image from the product.
      *
      * @param  Product  $product
-     * @param  array
-     * @return array
+     * @return array|null
      */
     public function getProductBaseImage($product, ?array $galleryImages = null)
     {
@@ -135,62 +130,45 @@ class ProductImage
     }
 
     /**
-     * Get cached urls configured for intervention package.
+     * Get an image's url through every template product images carry for the current theme.
      *
      * @param  string  $path
      */
     private function getCachedImageUrls($path, string $altText = ''): array
     {
-        if (! $this->isDriverLocal()) {
-            return [
-                'small_image_url' => Storage::url($path),
-                'medium_image_url' => Storage::url($path),
-                'large_image_url' => Storage::url($path),
-                'original_image_url' => Storage::url($path),
-                'alt' => $altText,
-            ];
-        }
-
-        return [
-            'small_image_url' => url('cache/small/'.$path),
-            'medium_image_url' => url('cache/medium/'.$path),
-            'large_image_url' => url('cache/large/'.$path),
-            'original_image_url' => url('cache/original/'.$path),
-            'alt' => $altText,
-        ];
+        return image_urls($path, TemplateRegistry::PRODUCT_IMAGES) + ['alt' => $altText];
     }
 
     /**
-     * Get fallback urls.
+     * Get the placeholder urls of a product without an image, one for every template an image gets.
      */
     private function getFallbackImageUrls(?string $altText = ''): array
     {
-        $smallImageUrl = core()->getConfigData('catalog.products.cache_small_image.url')
-                        ? Storage::url(core()->getConfigData('catalog.products.cache_small_image.url'))
-                        : bagisto_asset('images/small-product-placeholder.webp', 'shop');
+        $urls = [];
 
-        $mediumImageUrl = core()->getConfigData('catalog.products.cache_medium_image.url')
-                        ? Storage::url(core()->getConfigData('catalog.products.cache_medium_image.url'))
-                        : bagisto_asset('images/medium-product-placeholder.webp', 'shop');
+        foreach (app(ImageUrlBuilder::class)->templateNames(TemplateRegistry::PRODUCT_IMAGES) as $template) {
+            $urls[$template.'_image_url'] = $this->placeholderUrl($template);
+        }
 
-        $largeImageUrl = core()->getConfigData('catalog.products.cache_large_image.url')
-                        ? Storage::url(core()->getConfigData('catalog.products.cache_large_image.url'))
-                        : bagisto_asset('images/large-product-placeholder.webp', 'shop');
-
-        return [
-            'small_image_url' => $smallImageUrl,
-            'medium_image_url' => $mediumImageUrl,
-            'large_image_url' => $largeImageUrl,
-            'original_image_url' => bagisto_asset('images/large-product-placeholder.webp', 'shop'),
-            'alt' => (string) $altText,
-        ];
+        return $urls + ['alt' => (string) $altText];
     }
 
     /**
-     * Is driver local.
+     * The placeholder a template shows for a missing image: the configured one of a core size, or
+     * the large one for any other template.
      */
-    private function isDriverLocal(): bool
+    private function placeholderUrl(string $template): string
     {
-        return Storage::getAdapter() instanceof LocalFilesystemAdapter;
+        if ($template === 'original') {
+            return bagisto_asset('images/large-product-placeholder.webp', 'shop');
+        }
+
+        $size = in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true) ? $template : 'large';
+
+        $configured = core()->getConfigData('catalog.products.cache_'.$size.'_image.url');
+
+        return $configured
+            ? Storage::url($configured)
+            : bagisto_asset('images/'.$size.'-product-placeholder.webp', 'shop');
     }
 }

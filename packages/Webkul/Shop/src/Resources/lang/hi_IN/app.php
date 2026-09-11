@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'श्रेणियाँ कैरोसेल',
             'image-carousel' => 'चित्र कैरोसेल',
             'offer' => 'अपनी पहली ऑर्डर पर 40% तक छूट पाएं, अभी खरीदारी करें',
+            'preview-banner' => ':channel चैनल पर :theme थीम का पूर्वावलोकन। पूर्वावलोकन में लिंक बंद हैं।',
             'product-carousel' => 'उत्पाद कैरोसेल',
             'resend-verify-email' => 'सत्यापन ईमेल फिर से भेजें',
             'verify-email' => 'अपने ईमेल खाते की पुष्टि करें',

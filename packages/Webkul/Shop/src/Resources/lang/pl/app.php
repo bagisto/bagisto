@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'Karuzela kategorii',
             'image-carousel' => 'Karuzela obrazów',
             'offer' => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie, ZAKUP TERAZ',
+            'preview-banner' => 'Podgląd motywu :theme w kanale :channel. Linki są wyłączone w podglądzie.',
             'product-carousel' => 'Karuzela produktów',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email' => 'Zweryfikuj swoje konto e-mail',

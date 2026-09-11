@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Duplikat',
                 'empty' => 'Belum ada bagian.',
                 'gone' => 'Bagian ini sudah tidak ada.',
+                'inactive-theme' => 'Hanya tema yang aktif pada saluran yang dapat disesuaikan.',
                 'locale' => 'Bahasa',
                 'mobile' => 'Ponsel',
+                'no-fields' => 'Bagian ini tidak memiliki pengaturan untuk diedit pada tema ini.',
+                'no-types' => 'Tema ini tidak menawarkan jenis bagian untuk ditambahkan.',
                 'pinned' => 'Disematkan di bagian bawah halaman.',
                 'preview-btn' => 'Pratinjau',
                 'publish-btn' => 'Terbitkan',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Saluran ini hanya menampilkan satu bagian tautan footer.',
                 'name' => 'Nama',
                 'save-btn' => 'Simpan Bagian',
+                'singleton-exists' => 'Saluran ini hanya menampilkan satu bagian :type.',
                 'title' => 'Buat Bagian',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktif',
+                'add-column' => 'Tambah Kolom',
                 'add-filter-btn' => 'Tambah Filter',
                 'add-footer-link-btn' => 'Tambah Tautan Footer',
                 'add-image-btn' => 'Tambah Gambar',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'ID Kategori',
                 'channels' => 'Channel',
                 'column' => 'Kolom',
+                'columns' => 'Kolom',
                 'create-filter' => 'Buat Filter',
                 'css' => 'CSS',
                 'delete' => 'Hapus',

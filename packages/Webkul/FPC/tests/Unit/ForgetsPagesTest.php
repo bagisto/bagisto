@@ -10,11 +10,11 @@ beforeEach(function () {
         use ForgetsPages;
 
         /**
-         * Expose the trait's scope list to the test.
+         * Expose the trait's scope list for a channel to the test.
          */
-        public function scopes(): array
+        public function scopes($channel): array
         {
-            return $this->cacheScopes();
+            return $this->channelScopes($channel);
         }
 
         /**
@@ -40,12 +40,12 @@ it('names the home page as the path every listing change has to drop', function 
     expect($this->forgetter->home())->toBe('/');
 });
 
-it('builds a cache scope for every channel, locale and currency combination', function () {
+it('builds a cache scope for every locale and currency combination of a channel', function () {
     // Arrange
     $secondScope = $this->addSecondScope();
 
     // Act
-    $scopes = $this->forgetter->scopes();
+    $scopes = $this->forgetter->scopes(core()->getCurrentChannel()->fresh());
 
     // Assert
     expect($scopes)->toContain($this->currentScope());
@@ -68,6 +68,23 @@ it('forgets a path in every scope, not only the one the admin is browsing', func
     $this->assertPageNotCached($browsed);
 
     $this->assertPageNotCached($other, 'A page cached under a second locale or currency survived.');
+});
+
+it('forgets a path on the host of a channel served on its own domain', function () {
+    // Arrange
+    $otherHostScope = $this->addChannelOnHost('shop-two.test');
+
+    $onOtherHost = $this->cachePage('/summer-sale', $otherHostScope, 'shop-two.test');
+
+    $onThisHost = $this->cachePage('/summer-sale', $otherHostScope);
+
+    // Act
+    $this->forgetter->forget(['/summer-sale']);
+
+    // Assert
+    $this->assertPageNotCached($onOtherHost, 'A channel on its own domain kept the page, since the host is part of the key.');
+
+    $this->assertPageNotCached($onThisHost);
 });
 
 it('leaves pages under other paths alone', function () {

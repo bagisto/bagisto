@@ -1,11 +1,24 @@
 @props(['options'])
 
 @php
-    $carouselImages = $options['images'] ?? [];
+    $carouselImages = collect($options['images'] ?? [])
+        ->filter(fn ($image) => filled($image['image'] ?? null))
+        ->map(function ($image) {
+            $path = \Illuminate\Support\Str::chopStart($image['image'], 'storage/');
 
-    $firstImage = data_get($carouselImages, '0.image');
+            $urls = image_urls($path);
 
-    $firstImageTitle = data_get($carouselImages, '0.title');
+            $original = \Illuminate\Support\Facades\Storage::url($path);
+
+            return array_merge($image, [
+                'src' => $original,
+                'srcset' => $original.' 1920w, '.$urls['large_image_url'].' 1280w, '.$urls['medium_image_url'].' 1024w, '.$urls['small_image_url'].' 768w',
+            ]);
+        })
+        ->values()
+        ->all();
+
+    $firstImage = $carouselImages[0] ?? null;
 @endphp
 
 @if ($firstImage)
@@ -19,8 +32,8 @@
         <link
             rel="preload"
             as="image"
-            href="{{ str_replace('storage', 'cache/small', $firstImage) }}"
-            imagesrcset="{{ $firstImage }} 1920w, {{ str_replace('storage', 'cache/large', $firstImage) }} 1280w, {{ str_replace('storage', 'cache/medium', $firstImage) }} 1024w, {{ str_replace('storage', 'cache/small', $firstImage) }} 768w"
+            href="{{ $firstImage['src'] }}"
+            imagesrcset="{{ $firstImage['srcset'] }}"
             imagesizes="100vw"
             fetchpriority="high"
         >
@@ -42,12 +55,12 @@
                 mobile CPU.
             --}}
             <img
-                src="{{ $firstImage }}"
-                srcset="{{ $firstImage }} 1920w, {{ str_replace('storage', 'cache/large', $firstImage) }} 1280w, {{ str_replace('storage', 'cache/medium', $firstImage) }} 1024w, {{ str_replace('storage', 'cache/small', $firstImage) }} 768w"
+                src="{{ $firstImage['src'] }}"
+                srcset="{{ $firstImage['srcset'] }}"
                 sizes="100vw"
                 class="aspect-[2.743/1] max-h-screen w-screen select-none object-cover"
                 style="width:100vw;aspect-ratio:2.743/1;max-height:100vh;object-fit:cover;display:block"
-                alt="{{ $firstImageTitle ?? trans('shop::app.home.index.image-carousel') }}"
+                alt="{{ $firstImage['title'] ?? trans('shop::app.home.index.image-carousel') }}"
                 fetchpriority="high"
                 decoding="sync"
             >
@@ -78,8 +91,8 @@
                     <x-shop::media.images.lazy
                         class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
                         ::lazy="index === 0 ? false : true"
-                        ::src="image.image"
-                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 768w'"
+                        ::src="image.src"
+                        ::srcset="image.srcset"
                         sizes="100vw"
                         ::alt="image?.title || 'Carousel Image ' + (index + 1)"
                         tabindex="0"

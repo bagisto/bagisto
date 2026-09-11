@@ -5,6 +5,7 @@ namespace Webkul\FPC\Tests\Concerns;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\Locale;
 
@@ -35,11 +36,11 @@ trait FPCTestBench
     }
 
     /**
-     * Store a rendered page for the given storefront path, in the given cache scope.
+     * Store a rendered page for the given storefront path, in the given cache scope and on the given host.
      */
-    public function cachePage(string $path, ?string $scope = null): Request
+    public function cachePage(string $path, ?string $scope = null, ?string $host = null): Request
     {
-        $request = $this->pageRequest($path, $scope);
+        $request = $this->pageRequest($path, $scope, $host);
 
         ResponseCache::cacheResponse(
             $request,
@@ -51,11 +52,11 @@ trait FPCTestBench
     }
 
     /**
-     * The request the page cache keys a storefront path under, in the given scope.
+     * The request the page cache keys a storefront path under, in the given scope and on the given host.
      */
-    public function pageRequest(string $path, ?string $scope = null): Request
+    public function pageRequest(string $path, ?string $scope = null, ?string $host = null): Request
     {
-        $request = Request::create(url($path), 'GET');
+        $request = Request::create($host ? 'http://'.$host.$path : url($path), 'GET');
 
         $request->attributes->add([
             'responsecache.cacheNameSuffix' => $scope ?? $this->currentScope(),
@@ -94,6 +95,18 @@ trait FPCTestBench
         $channel->currencies()->attach($this->secondCurrency->id);
 
         return $channel->code.'-'.$this->secondLocale->code.'-'.$this->secondCurrency->code.'-';
+    }
+
+    /**
+     * Add a channel served on its own host, and return the scope a guest's page on it is cached under.
+     */
+    public function addChannelOnHost(string $host): string
+    {
+        $channel = Channel::factory()->create(['hostname' => 'http://'.$host]);
+
+        $channel->load('locales', 'currencies');
+
+        return $channel->code.'-'.$channel->locales->first()->code.'-'.$channel->currencies->first()->code.'-';
     }
 
     /**

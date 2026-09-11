@@ -41,6 +41,10 @@ export class ThemeGalleryPage extends BasePage {
         ).toBeVisible();
 
         await expect(
+            installed.getByRole("link", { name: "Preview" }).first(),
+        ).toBeVisible();
+
+        await expect(
             installed.getByRole("link", { name: "View & Buy" }),
         ).toHaveCount(0);
 

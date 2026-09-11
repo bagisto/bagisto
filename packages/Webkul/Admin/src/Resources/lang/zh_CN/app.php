@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => '复制',
                 'empty' => '暂无版块。',
                 'gone' => '该区块已不存在。',
+                'inactive-theme' => '只有在渠道中启用的主题才能自定义。',
                 'locale' => '语言',
                 'mobile' => '手机',
+                'no-fields' => '此板块在该主题中没有可编辑的设置。',
+                'no-types' => '该主题没有可添加的板块类型。',
                 'pinned' => '已固定在页面底部。',
                 'preview-btn' => '预览',
                 'publish-btn' => '发布',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => '此渠道仅显示一个页脚链接板块。',
                 'name' => '名称',
                 'save-btn' => '保存版块',
+                'singleton-exists' => '此渠道仅显示一个 :type 板块。',
                 'title' => '创建版块',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => '活动',
+                'add-column' => '添加列',
                 'add-filter-btn' => '添加过滤器',
                 'add-footer-link-btn' => '添加页脚链接',
                 'add-image-btn' => '添加图片',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => '类别ID',
                 'channels' => '频道',
                 'column' => '列',
+                'columns' => '列',
                 'create-filter' => '创建过滤器',
                 'css' => 'CSS',
                 'delete' => '删除',

@@ -8,6 +8,7 @@ use Webkul\FPC\Listeners\Channel;
 use Webkul\FPC\Listeners\CoreConfig;
 use Webkul\FPC\Listeners\Order;
 use Webkul\FPC\Listeners\Page;
+use Webkul\FPC\Listeners\Price;
 use Webkul\FPC\Listeners\Product;
 use Webkul\FPC\Listeners\Refund;
 use Webkul\FPC\Listeners\Review;
@@ -47,6 +48,17 @@ class EventServiceProvider extends ServiceProvider
 
         'catalog.category.delete.before' => [
             [Category::class, 'beforeDelete'],
+        ],
+
+        'catalog.product.price.reindex.after' => [
+            [Price::class, 'afterReindex'],
+        ],
+
+        /**
+         * Promotion events.
+         */
+        'promotions.catalog_rule.reindex.after' => [
+            [Price::class, 'afterReindex'],
         ],
 
         /**

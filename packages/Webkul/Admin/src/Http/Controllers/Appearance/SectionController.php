@@ -11,9 +11,10 @@ use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Contracts\Section;
-use Webkul\Theme\Models\Section as SectionModel;
 use Webkul\Theme\Repositories\SectionRepository;
+use Webkul\Theme\Sections\SectionType;
 use Webkul\Theme\SectionSchema;
+use Webkul\Theme\ThemeCatalog;
 
 class SectionController extends Controller
 {
@@ -22,33 +23,45 @@ class SectionController extends Controller
      *
      * @return void
      */
-    public function __construct(public SectionRepository $sectionRepository) {}
+    public function __construct(
+        public SectionRepository $sectionRepository,
+        protected ThemeCatalog $themeCatalog,
+        protected SectionSchema $sectionSchema
+    ) {}
 
     /**
-     * Display a listing resource for the available tax rates.
+     * Display the section editor for a theme, on a channel that runs it.
      *
-     * @return View
+     * @return View|RedirectResponse
      */
     public function index(string $code)
     {
         $theme = $this->themeOrFail($code);
 
-        $channel = $this->requestedChannel();
+        $channel = $this->channelRunning($code);
+
+        if (! $channel) {
+            session()->flash('warning', trans('admin::app.appearance.sections.index.inactive-theme'));
+
+            return redirect()->route('admin.appearance.themes.index');
+        }
 
         $locale = $this->requestedLocale($channel);
 
-        $sections = $this->editableSections($code, $channel->id);
-
         return view('admin::appearance.sections.index', [
             'scopedTheme' => $code,
-            'scopedThemeName' => $theme['name'] ?? $code,
+            'scopedThemeName' => $theme['name'],
             'scopedChannel' => $channel,
             'scopedLocale' => $locale,
             'channels' => core()->getAllChannels(),
             'locales' => $channel->locales,
-            'sections' => $sections,
-            'typeLabels' => $this->typeLabels(),
+            'sections' => $this->editableSections($code, $channel->id),
+            'sectionTypes' => $this->sectionSchema->types($code)
+                ->map(fn (SectionType $type) => $type->toArray())
+                ->values()
+                ->all(),
             'previewUrl' => route('shop.appearance.preview', [
+                'theme' => $code,
                 'channel' => $channel->id,
                 'locale' => $locale->code,
             ]),
@@ -59,23 +72,23 @@ class SectionController extends Controller
     }
 
     /**
-     * Create a section against the theme and channel the editor is already scoped to.
+     * Create a section against the theme and channel the editor is scoped to, held back from the
+     * storefront until it is published.
      *
-     * Switching it on is held as a pending change, so an empty one is not put in front of
-     * shoppers before it has been built, while the editor and its preview draw it.
+     * @return JsonResponse
      */
     public function store(string $code)
     {
-        $validated = $this->validate(request(), [
-            'name' => 'required',
-            'type' => ['required', Rule::in(SectionModel::TYPES)],
-        ]);
-
         $this->themeOrFail($code);
 
-        $channel = $this->requestedChannel();
+        $validated = $this->validate(request(), [
+            'name' => 'required',
+            'type' => ['required', Rule::in($this->sectionSchema->types($code)->keys()->all())],
+        ]);
 
-        $this->guardSingleFooter($validated['type'], $code, $channel->id);
+        $channel = $this->customizableChannel($code);
+
+        $this->guardSingleton($validated['type'], $code, $channel->id);
 
         Event::dispatch('section.create.before');
 
@@ -100,7 +113,7 @@ class SectionController extends Controller
     }
 
     /**
-     * Update the specified resource
+     * Update the specified section.
      *
      * @return RedirectResponse
      */
@@ -109,12 +122,19 @@ class SectionController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'sort_order' => 'required|numeric',
-            'type' => ['required', Rule::in(SectionModel::TYPES)],
+            'type' => ['required', Rule::in($this->sectionSchema->types(request('theme_code'))->keys()->all())],
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
             'theme_code' => 'required',
         ]);
 
-        $this->guardSingleFooter(
+        $this->sectionOrFail($id);
+
+        abort_unless(
+            $this->themeCatalog->isActive((string) request('theme_code'), (int) request('channel_id')),
+            $this->inactiveThemeResponse()
+        );
+
+        $this->guardSingleton(
             request('type'),
             request('theme_code'),
             (int) request('channel_id'),
@@ -148,7 +168,7 @@ class SectionController extends Controller
     }
 
     /**
-     * Delete a specified theme.
+     * Delete the specified section.
      *
      * @return JsonResponse
      */
@@ -168,8 +188,8 @@ class SectionController extends Controller
     }
 
     /**
-     * The field schema for a section together with the values the editor should show,
-     * which are its draft when one is pending and its published options otherwise.
+     * The field schema for a section together with the values the editor should show, which are
+     * its draft when one is pending and its published options otherwise.
      */
     public function fields(int $id): JsonResponse
     {
@@ -177,9 +197,13 @@ class SectionController extends Controller
 
         $translation = $section->translate(core()->getRequestedLocaleCode());
 
+        $type = $section->getTypeInstance();
+
+        $options = $translation?->draft_options ?? $translation?->options ?? [];
+
         return new JsonResponse([
-            'schema' => app(SectionSchema::class)->for($section->type),
-            'options' => $translation?->draft_options ?? $translation?->options ?? (object) [],
+            'schema' => $type?->getFields() ?? [],
+            'options' => ($type?->prepareForEditor($options) ?? $options) ?: (object) [],
         ]);
     }
 
@@ -210,8 +234,7 @@ class SectionController extends Controller
     }
 
     /**
-     * Store one uploaded image for a section and hand back the path to record in its
-     * options, so a schema driven field can upload without knowing the form shape.
+     * Store one uploaded file for a section and hand back the path to record in its options.
      */
     public function uploadMedia(int $id): JsonResponse
     {
@@ -231,16 +254,14 @@ class SectionController extends Controller
     }
 
     /**
-     * Publish every pending edit of a theme's channel to the storefront.
-     *
-     * Publishing is a whole-set operation: ordering is relative across the sections, so
-     * releasing one on its own would leave the rest holding the positions it moved away from.
+     * Publish every pending edit of a theme's channel to the storefront, as a whole set because
+     * ordering is relative across the sections.
      */
     public function publish(string $code): JsonResponse
     {
         $this->themeOrFail($code);
 
-        $channel = $this->requestedChannel();
+        $channel = $this->customizableChannel($code);
 
         $drafted = $this->sectionRepository->draftedSections($channel->id, $code);
 
@@ -264,7 +285,7 @@ class SectionController extends Controller
     {
         $this->themeOrFail($code);
 
-        $channel = $this->requestedChannel();
+        $channel = $this->customizableChannel($code);
 
         $drafted = $this->sectionRepository->draftedSections($channel->id, $code);
 
@@ -307,7 +328,7 @@ class SectionController extends Controller
     {
         $section = $this->sectionOrFail($id);
 
-        $this->guardSingleFooter($section->type, $section->theme_code, $section->channel_id);
+        $this->guardSingleton($section->type, $section->theme_code, $section->channel_id);
 
         Event::dispatch('section.create.before');
 
@@ -331,7 +352,14 @@ class SectionController extends Controller
             'sections.*' => 'required|integer',
         ]);
 
-        $sectionIds = $this->withPinnedLast(request()->input('sections'));
+        $sections = $this->sectionRepository->findWhereIn('id', request()->input('sections'));
+
+        abort_if(
+            $sections->contains(fn ($section) => ! $this->isCustomizable($section)),
+            $this->inactiveThemeResponse()
+        );
+
+        $sectionIds = $this->withPinnedLast(request()->input('sections'), $sections);
 
         Event::dispatch('section.reorder.before', $sectionIds);
 
@@ -364,25 +392,9 @@ class SectionController extends Controller
     }
 
     /**
-     * Display name for each section type, keyed by the stored value.
-     */
-    protected function typeLabels(): array
-    {
-        $prefix = 'admin::app.appearance.sections.create.type.';
-
-        return [
-            SectionModel::IMAGE_CAROUSEL => trans($prefix.'image-carousel'),
-            SectionModel::PRODUCT_CAROUSEL => trans($prefix.'product-carousel'),
-            SectionModel::CATEGORY_CAROUSEL => trans($prefix.'category-carousel'),
-            SectionModel::FOOTER_LINKS => trans($prefix.'footer-links'),
-            SectionModel::STATIC_CONTENT => trans($prefix.'static-content'),
-            SectionModel::SERVICES_CONTENT => trans($prefix.'services-content'),
-        ];
-    }
-
-    /**
-     * Channel the editor is scoped to. Sections are per channel, so the editor edits one
-     * at a time and falls back to the default channel.
+     * The channel a request names, falling back to the default channel.
+     *
+     * @return Channel
      */
     protected function requestedChannel()
     {
@@ -392,10 +404,33 @@ class SectionController extends Controller
     }
 
     /**
-     * The locale being edited, which has to be one the channel actually runs.
+     * The requested channel when it runs the theme, otherwise the first channel that does.
      *
-     * A section's content is per locale, so an unknown one would edit a translation the
-     * storefront never renders.
+     * @return Channel|null
+     */
+    protected function channelRunning(string $code)
+    {
+        $channels = $this->themeCatalog->activeChannels($code);
+
+        return $channels->firstWhere('id', (int) request('channel')) ?? $channels->first();
+    }
+
+    /**
+     * The requested channel, refused unless it currently runs the theme.
+     *
+     * @return Channel
+     */
+    protected function customizableChannel(string $code)
+    {
+        $channel = $this->requestedChannel();
+
+        abort_unless($this->themeCatalog->isActive($code, $channel->id), $this->inactiveThemeResponse());
+
+        return $channel;
+    }
+
+    /**
+     * The locale being edited, which has to be one the channel actually runs.
      *
      * @param  Channel  $channel
      */
@@ -410,10 +445,7 @@ class SectionController extends Controller
     }
 
     /**
-     * The section being acted on, or a 404 once it is gone.
-     *
-     * A section may already have been deleted by the time an action reaches it, which is
-     * answered here rather than left to surface as a query error.
+     * The section being acted on, as a 404 once it is gone or a 403 when its theme is inactive.
      */
     protected function sectionOrFail(int $id): Section
     {
@@ -423,47 +455,65 @@ class SectionController extends Controller
             'message' => trans('admin::app.appearance.sections.index.gone'),
         ], 404));
 
+        abort_unless($this->isCustomizable($section), $this->inactiveThemeResponse());
+
         return $section;
     }
 
     /**
-     * The requested theme, or a 404 when the url names one this installation does not
-     * have. A theme is part of the path now, so an unknown code is a missing page rather
-     * than something to quietly fall back from.
+     * Whether a section belongs to the theme its channel currently runs.
+     *
+     * @param  Section  $section
      */
-    protected function themeOrFail(string $code): array
+    protected function isCustomizable($section): bool
     {
-        return config('themes.shop.'.$code) ?? abort(404);
+        return $this->themeCatalog->isActive((string) $section->theme_code, (int) $section->channel_id);
     }
 
     /**
-     * Sections of a theme, in render order, shaped for the editor list.
+     * The answer given when a theme that is not active is asked to be customized.
+     */
+    protected function inactiveThemeResponse(): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => trans('admin::app.appearance.sections.index.inactive-theme'),
+        ], 403);
+    }
+
+    /**
+     * The requested theme from the catalog, or a 404 when this installation does not have it.
+     */
+    protected function themeOrFail(string $code): array
+    {
+        abort_unless($this->themeCatalog->isInstalled($code), 404);
+
+        return $this->themeCatalog->find($code);
+    }
+
+    /**
+     * Sections of a theme, in render order with the pinned ones last, shaped for the editor list.
      */
     protected function editableSections(string $themeCode, int $channelId): array
     {
-        $locale = core()->getRequestedLocaleCode();
-
         return $this->sectionRepository
             ->orderBy('sort_order')
             ->findWhere([
                 'channel_id' => $channelId,
                 'theme_code' => $themeCode,
             ])
-            ->sortBy(fn ($section) => $section->type === SectionModel::FOOTER_LINKS ? 1 : 0)
+            ->sortBy(fn ($section) => $this->isPinned($section) ? 1 : 0)
             ->map(fn ($section) => $this->sectionRow($section))
             ->values()
             ->toArray();
     }
 
     /**
-     * The given order with the pinned sections moved to the end, so a reorder cannot
-     * lift the footer out of the bottom of the page.
+     * The given order with the pinned sections moved to the end, so a reorder cannot lift them.
      */
-    protected function withPinnedLast(array $sectionIds): array
+    protected function withPinnedLast(array $sectionIds, $sections): array
     {
-        $pinned = $this->sectionRepository
-            ->findWhereIn('id', $sectionIds)
-            ->where('type', SectionModel::FOOTER_LINKS)
+        $pinned = $sections
+            ->filter(fn ($section) => $this->isPinned($section))
             ->pluck('id')
             ->all();
 
@@ -473,18 +523,22 @@ class SectionController extends Controller
     }
 
     /**
-     * Refuse a second footer for a channel, which the storefront has nowhere to draw.
-     *
-     * A section reaches the footer type by being created as one, copied from one, or
-     * switched to one, so the rule belongs here rather than on the form alone.
+     * Refuse a second section of a type a channel may hold only one of, however it is reached.
      */
-    protected function guardSingleFooter(?string $type, ?string $themeCode, int $channelId, ?int $ignoreId = null): void
+    protected function guardSingleton(?string $type, ?string $themeCode, int $channelId, ?int $ignoreId = null): void
     {
-        if ($type !== SectionModel::FOOTER_LINKS) {
+        $sectionType = $this->sectionSchema->type($themeCode, $type);
+
+        if (! $sectionType?->isSingleton()) {
             return;
         }
 
-        $existing = $this->footerLinksOf($themeCode, $channelId)
+        $existing = $this->sectionRepository
+            ->findWhere([
+                'type' => $type,
+                'theme_code' => $themeCode,
+                'channel_id' => $channelId,
+            ])
             ->filter(fn ($section) => $section->id !== $ignoreId);
 
         if ($existing->isEmpty()) {
@@ -492,20 +546,20 @@ class SectionController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'type' => trans('admin::app.appearance.sections.create.footer-links-exists'),
+            'type' => trans('admin::app.appearance.sections.create.singleton-exists', [
+                'type' => $sectionType->getTitle(),
+            ]),
         ]);
     }
 
     /**
-     * Every footer links section a channel has of a theme.
+     * Whether a section is fixed to the bottom of the page.
+     *
+     * @param  Section  $section
      */
-    protected function footerLinksOf(?string $themeCode, int $channelId)
+    protected function isPinned($section): bool
     {
-        return $this->sectionRepository->findWhere([
-            'type' => SectionModel::FOOTER_LINKS,
-            'theme_code' => $themeCode,
-            'channel_id' => $channelId,
-        ]);
+        return (bool) $section->getTypeInstance()?->isPinned();
     }
 
     /**
@@ -521,7 +575,7 @@ class SectionController extends Controller
             'type' => $section->type,
             'status' => (bool) ($section->draft_status ?? $section->status),
             'has_draft' => $this->sectionRepository->hasDraft($section),
-            'is_pinned' => $section->type === SectionModel::FOOTER_LINKS,
+            'is_pinned' => $this->isPinned($section),
         ];
     }
 }

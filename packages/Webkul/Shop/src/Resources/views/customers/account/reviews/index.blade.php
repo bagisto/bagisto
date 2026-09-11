@@ -56,6 +56,10 @@
                         <!-- Review Information -->
                         <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
                             @foreach($reviews as $review)
+                                @php
+                                    $productBaseImage = product_image()->getProductBaseImage($review->product);
+                                @endphp
+
                                 <a
                                     href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
                                     id="{{ $review->product_id }}"
@@ -67,8 +71,8 @@
 
                                         <x-shop::media.images.lazy
                                             class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl"
-                                            src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
-                                            alt="Review Image"                   
+                                            src="{{ $productBaseImage['medium_image_url'] }}"
+                                            alt="{{ $productBaseImage['alt'] }}"
                                         />
 
                                         {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}
@@ -129,8 +133,8 @@
     
                                             <x-shop::media.images.lazy
                                                 class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-md:h-20 max-md:w-20 max-md:min-w-20 max-md:rounded-lg"
-                                                src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
-                                                alt="Review Image"                   
+                                                src="{{ $productBaseImage['medium_image_url'] }}"
+                                                alt="{{ $productBaseImage['alt'] }}"
                                             />
     
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}

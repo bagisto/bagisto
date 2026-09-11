@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'Categorieën Carrousel',
             'image-carousel' => 'Afbeeldingen Carrousel',
             'offer' => 'Krijg TOT 40% KORTING op je eerste bestelling, WINKEL NU',
+            'preview-banner' => 'Voorbeeld van het thema :theme op kanaal :channel. Links zijn uitgeschakeld in het voorbeeld.',
             'product-carousel' => 'Producten Carrousel',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email' => 'Verifieer je e-mailaccount',

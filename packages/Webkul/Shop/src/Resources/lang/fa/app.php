@@ -1274,6 +1274,7 @@ return [
             'categories-carousel' => 'چرخ فلک دسته‌ها',
             'image-carousel' => 'چرخ فلک تصاویر',
             'offer' => 'تا ۴۰% تخفیف برای سفارش اول شما، اکنون خرید کنید',
+            'preview-banner' => 'پیش‌نمایش قالب :theme در کانال :channel. پیوندها در پیش‌نمایش غیرفعال هستند.',
             'product-carousel' => 'چرخ فلک محصولات',
             'resend-verify-email' => 'ارسال دوباره ایمیل تایید',
             'verify-email' => 'ایمیل خود را تأیید کنید',

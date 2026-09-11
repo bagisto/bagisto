@@ -3280,8 +3280,11 @@ return [
                 'duplicate-btn' => 'Dupliceren',
                 'empty' => 'Nog geen secties.',
                 'gone' => 'Deze sectie bestaat niet meer.',
+                'inactive-theme' => 'Alleen een thema dat actief is op een kanaal kan worden aangepast.',
                 'locale' => 'Taal',
                 'mobile' => 'Mobiel',
+                'no-fields' => 'Deze sectie heeft in dit thema geen instellingen om te bewerken.',
+                'no-types' => 'Dit thema biedt geen sectietypen om toe te voegen.',
                 'pinned' => 'Vastgezet onderaan de pagina.',
                 'preview-btn' => 'Voorbeeld',
                 'publish-btn' => 'Publiceren',
@@ -3307,9 +3310,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Dit kanaal toont slechts één sectie met voettekstlinks.',
                 'name' => 'Naam',
                 'save-btn' => 'Sectie opslaan',
+                'singleton-exists' => 'Dit kanaal toont slechts één sectie van het type :type.',
                 'title' => 'Sectie aanmaken',
 
                 'type' => [
@@ -3325,6 +3328,7 @@ return [
 
             'edit' => [
                 'active' => 'Actief',
+                'add-column' => 'Kolom toevoegen',
                 'add-filter-btn' => 'Filter toevoegen',
                 'add-footer-link-btn' => 'Voettekstlink toevoegen',
                 'add-image-btn' => 'Afbeelding toevoegen',
@@ -3337,6 +3341,7 @@ return [
                 'category-id' => 'Categorie-ID',
                 'channels' => 'Kanalen',
                 'column' => 'Kolom',
+                'columns' => 'Kolommen',
                 'create-filter' => 'Filter aanmaken',
                 'css' => 'CSS',
                 'delete' => 'Verwijderen',

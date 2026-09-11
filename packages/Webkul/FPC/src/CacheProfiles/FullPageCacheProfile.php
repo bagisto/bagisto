@@ -11,12 +11,15 @@ use Throwable;
 class FullPageCacheProfile extends CacheAllSuccessfulGetRequests
 {
     /**
-     * Whether the page cache should run for this request, which Configure → Cache
-     * Management → Full Page Cache alone decides.
+     * Whether the page cache should run for this request, which Full Page Cache configuration decides,
+     * except for a signed-in customer, whose pages carry their own name, prices and account state.
      */
     public function enabled(Request $request): bool
     {
-        if (! config('responsecache.enabled')) {
+        if (
+            ! config('responsecache.enabled')
+            || auth()->guard('customer')->check()
+        ) {
             return false;
         }
 
