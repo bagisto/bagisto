@@ -306,7 +306,7 @@
                     tinyMCEHelper.initTinyMCE({
                         selector: this.selector,
                         plugins: 'image media wordcount save fullscreen code table lists link',
-                        toolbar: 'blocks | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
+                        toolbar1: 'blocks | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr | numlist bullist outdent indent | removeformat | code | table | aibutton',
                         image_advtab: true,
                         directionality : "{{ core()->getCurrentLocale()->direction }}",
 

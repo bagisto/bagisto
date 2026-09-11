@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed the paragraph and heading dropdown missing from the rich text editor toolbar, which still named TinyMCE 5's `formatselect` control instead of TinyMCE 6's `blocks`.
+
 - Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product, category and swatch image URLs carry.
 
 - Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
