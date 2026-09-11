@@ -42,7 +42,6 @@ return [
             'page-title' => 'Вхід користувача',
             'password' => 'Пароль',
             'resend-verification' => 'Надіслати лист підтвердження повторно',
-            'show-password' => 'Показати пароль',
             'title' => 'Увійти',
             'verify-first' => 'Спершу перевірте свою електронну пошту.',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'Перемикач за замовчуванням',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Показати пароль',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'Додати вкладення',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'Очистити все',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'Карусель категорій',
             'image-carousel' => 'Карусель зображень',
             'offer' => 'Отримайте ДО 40% ЗНИЖКИ на перше замовлення, КУПИТИ ЗАРАЗ',
+            'preview-banner' => 'Попередній перегляд теми :theme для каналу :channel. Посилання в попередньому перегляді вимкнено.',
             'product-carousel' => 'Карусель продуктів',
             'resend-verify-email' => 'Повторно надіслати лист з підтвердженням',
             'verify-email' => 'Підтвердіть свою електронну пошту',

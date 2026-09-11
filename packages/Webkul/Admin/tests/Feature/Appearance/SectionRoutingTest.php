@@ -8,7 +8,7 @@ use function Pest\Laravel\getJson;
 it('should render the customize screen at its new location', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+    get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->assertOk()
         ->assertSee(trans('admin::app.components.layouts.sidebar.sections'));
 });
@@ -34,7 +34,7 @@ it('should no longer answer on the settings theme urls', function () {
 });
 
 it('should no longer offer a section picker on the channel form', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $this->loginAsAdmin();
 
@@ -45,7 +45,7 @@ it('should no longer offer a section picker on the channel form', function () {
 });
 
 it('should scope the section listing to a theme when one is requested', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     Section::factory()->create([
         'channel_id' => $channel->id,
@@ -68,7 +68,7 @@ it('should scope the section listing to a theme when one is requested', function
 });
 
 it('should list the sections of the channel current theme', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     Section::factory()->create([
         'channel_id' => $channel->id,
@@ -78,7 +78,7 @@ it('should list the sections of the channel current theme', function () {
 
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+    get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->assertOk()
         ->assertSee('Belongs To Current Theme');
 });

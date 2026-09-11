@@ -262,6 +262,10 @@ class Cart
      */
     public function addProduct(ProductContract $product, array $data): Contracts\Cart|\Exception
     {
+        if (! $product->isAvailableInChannel($this->cart?->channel_id)) {
+            throw new \Exception(trans('shop::app.checkout.cart.inactive-add'));
+        }
+
         Event::dispatch('checkout.cart.add.before', $product->id);
 
         if (! $this->cart) {

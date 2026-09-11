@@ -169,7 +169,7 @@ class Tax
 
                 $this->state = core()->getConfigData('sales.shipping.origin.state');
 
-                $this->postcode = core()->getConfigData('sales.shipping.origin.postcode');
+                $this->postcode = core()->getConfigData('sales.shipping.origin.zipcode');
             }
         };
     }

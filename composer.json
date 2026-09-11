@@ -121,6 +121,7 @@
             "Webkul\\Customer\\Tests\\": "packages/Webkul/Customer/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
             "Webkul\\EUWithdrawal\\Tests\\": "packages/Webkul/EUWithdrawal/tests",
+            "Webkul\\FPC\\Tests\\": "packages/Webkul/FPC/tests",
             "Webkul\\Installer\\Tests\\": "packages/Webkul/Installer/tests",
             "Webkul\\PayGlocal\\Tests\\": "packages/Webkul/PayGlocal/tests",
             "Webkul\\Payment\\Tests\\": "packages/Webkul/Payment/tests",

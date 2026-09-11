@@ -4,19 +4,19 @@ namespace Webkul\Theme\Repositories;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Theme\Contracts\Section;
+use Webkul\Theme\Enums\SectionTypeEnum;
+use Webkul\Theme\SectionSchema;
 
 class SectionRepository extends Repository
 {
     /**
-     * Set on the request while the appearance preview is rendering.
-     *
-     * Kept in the internal attribute bag rather than the query, so a visitor cannot ask a
-     * storefront page to render unpublished drafts.
+     * Set on the request's internal attribute bag while the appearance preview renders, so a
+     * visitor cannot ask a storefront page for unpublished drafts.
      */
     public const PREVIEWING = 'appearance_previewing';
 
@@ -38,20 +38,26 @@ class SectionRepository extends Repository
     {
         $locale = core()->getRequestedLocaleCode();
 
-        if ($data['type'] == 'static_content') {
+        $withUploads = in_array($data['type'], [
+            SectionTypeEnum::IMAGE_CAROUSEL->value,
+            SectionTypeEnum::SERVICES_CONTENT->value,
+        ]);
+
+        if ($data['type'] == SectionTypeEnum::STATIC_CONTENT->value) {
             $data[$locale]['options'] = $this->sanitizeOptions(
                 $data['type'],
-                $data[$locale]['options'] ?? []
+                $data[$locale]['options'] ?? [],
+                $data['theme_code'] ?? null
             );
         }
 
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+        if ($withUploads) {
             unset($data[$locale]['options']);
         }
 
         $section = parent::update($data, $id);
 
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+        if ($withUploads) {
             $this->uploadImage(request()->all(), $section);
         }
 
@@ -61,13 +67,9 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Mass update the status of sections in the repository.
+     * Mass update the status of the given sections, returning how many were updated.
      *
-     * This method updates multiple records in the database based on the provided
-     * section ids.
-     *
-     * @param  int  $sectionIds
-     * @return int The number of records updated.
+     * @return int
      */
     public function massUpdateStatus(array $data, array $sectionIds)
     {
@@ -75,7 +77,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Upload images
+     * Upload the images posted with the legacy section form.
      *
      * @return void|string
      */
@@ -115,7 +117,7 @@ class SectionRepository extends Repository
                     return redirect()->back();
                 }
 
-                if (($data['type'] ?? '') == 'static_content') {
+                if (($data['type'] ?? '') == SectionTypeEnum::STATIC_CONTENT->value) {
                     return Storage::url($path);
                 }
 
@@ -136,7 +138,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Store unpublished edits for a section, in the given locale.
+     * Store unpublished edits for a section in the given locale, shaped the way the storefront reads them.
      *
      * @param  int  $id
      */
@@ -144,7 +146,9 @@ class SectionRepository extends Repository
     {
         $section = $this->findOrFail($id);
 
-        $section->translateOrNew($locale)->draft_options = $this->sanitizeOptions($section->type, $options);
+        $options = $section->getTypeInstance()?->prepareForStorage($options) ?? $options;
+
+        $section->translateOrNew($locale)->draft_options = $this->sanitizeOptions($section->type, $options, $section->theme_code);
 
         $section->save();
 
@@ -194,30 +198,6 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Number the sections from one, without changing the order they are already in.
-     *
-     * Copying and deleting leave gaps in the stored numbers, and a dragged list is read
-     * back as positions. Comparing the two would report every section as moved the moment
-     * any one of them was, so the gaps are closed before the new positions are held.
-     */
-    protected function closeOrderGaps(Collection $sections): void
-    {
-        $position = 0;
-
-        foreach ($sections->sortBy('sort_order') as $section) {
-            $position++;
-
-            if ((int) $section->sort_order === $position) {
-                continue;
-            }
-
-            $section->sort_order = $position;
-
-            $section->save();
-        }
-    }
-
-    /**
      * Whether a section is holding any change the storefront has not been given yet.
      *
      * @param  Section  $section
@@ -230,8 +210,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Promote every pending draft of a section, in every locale, to what the storefront
-     * renders.
+     * Promote every pending draft of a section, in every locale, to what the storefront renders.
      *
      * @param  int  $id
      */
@@ -244,7 +223,7 @@ class SectionRepository extends Repository
                 continue;
             }
 
-            $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
+            $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options, $section->theme_code);
 
             $translation->draft_options = null;
 
@@ -301,27 +280,35 @@ class SectionRepository extends Repository
     }
 
     /**
-     * The sections matching the criteria that are live on the storefront.
+     * The sections of a theme's channel that are holding a change.
      */
-    protected function live(array $criteria)
+    public function draftedSections(int $channelId, string $themeCode): Collection
     {
-        return $this->orderBy('sort_order')->findWhere($criteria + ['status' => 1]);
+        return $this->findWhere([
+            'channel_id' => $channelId,
+            'theme_code' => $themeCode,
+        ])->filter(fn ($section) => $this->hasDraft($section))->values();
     }
 
     /**
-     * The sections matching the criteria as the editor is holding them.
+     * Promote the given sections' pending drafts in one transaction, since ordering is relative
+     * across the whole set.
      *
-     * A staged change lives beside the column it will replace, so it is resolved once the
-     * rows are in hand rather than in the query.
+     * @return Collection The sections as they now stand.
      */
-    protected function drafted(array $criteria, string $locale)
+    public function publishDrafts(Collection $sections): Collection
     {
-        return $this->orderBy('sort_order')
-            ->findWhere($criteria)
-            ->each(fn ($section) => $this->applyDraft($section, $locale))
-            ->filter(fn ($section) => (bool) $section->status)
-            ->sortBy('sort_order')
-            ->values();
+        return $this->runOnDrafted($sections, fn ($section) => $this->publishDraft($section->id));
+    }
+
+    /**
+     * Throw away the given sections' pending drafts in one transaction.
+     *
+     * @return Collection The sections as they now stand.
+     */
+    public function discardDrafts(Collection $sections): Collection
+    {
+        return $this->runOnDrafted($sections, fn ($section) => $this->discardDraft($section->id));
     }
 
     /**
@@ -360,21 +347,16 @@ class SectionRepository extends Repository
     }
 
     /**
-     * The single section of a type a channel shows, drafted when previewing.
-     *
-     * Footer links and service promises are rendered by the layout rather than the home
-     * page, so they need their own lookup rather than riding along with the section loop.
+     * The single section of a type a channel shows, drafted when previewing, for the types the
+     * layout draws rather than the home page.
      */
     public function findOneOfType(string $type, int $channelId, string $themeCode, string $locale)
     {
-        $section = $this->findAllOfType($type, $channelId, $themeCode, $locale)->first();
-
-        return $section;
+        return $this->findAllOfType($type, $channelId, $themeCode, $locale)->first();
     }
 
     /**
-     * Sections a channel renders, with each one's options resolved to its draft where a
-     * draft exists, so that the editor preview shows unpublished work.
+     * Sections a channel renders, each resolved to its draft where one exists, for the preview.
      *
      * @return Collection
      */
@@ -387,8 +369,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Copy a section, including its translated options, so a similar one does not have to
-     * be rebuilt by hand.
+     * Copy a section with its translated options, directly below the original.
      *
      * @param  int  $id
      */
@@ -416,10 +397,8 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Apply a new order to a set of sections.
-     *
-     * The sort order is written through the parent, because this repository's `update()`
-     * expects a whole section payload.
+     * Apply a new order to a set of sections, written through the parent because this
+     * repository's `update()` expects a whole section payload.
      */
     public function reorder(array $sectionIds): void
     {
@@ -429,8 +408,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Store a single uploaded image against a section, returning the path as the
-     * storefront records it.
+     * Store a single uploaded image against a section, returning the path as the storefront records it.
      *
      * @param  int  $id
      */
@@ -446,9 +424,9 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Store an uploaded image or video against a section, converting an image to webp and
-     * streaming a video to disk as uploaded.
+     * Store an uploaded image as webp, or a video as it was uploaded, against a section.
      *
+     * @param  int  $id
      * @return array{path: string, type: string}
      */
     public function storeMedia($id, UploadedFile $file): array
@@ -475,55 +453,70 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Sanitize custom static-content CSS.
-     *
-     * CSS is not HTML, so it must not be passed through the HTML purifier - doing
-     * so entity-encodes valid characters (e.g. the ">" child combinator becomes
-     * "&gt;") and breaks the stylesheet. Because the value is rendered verbatim
-     * inside a <style> block, the only way to break out of that context is a
-     * literal "</style" sequence, so that (and null bytes) is all we neutralize.
+     * Number the sections from one without changing their order, so comparing dragged positions
+     * against the stored numbers does not report every section as moved.
      */
-    /**
-     * Clean the options a section is given.
-     *
-     * Static content is written into the page as markup and styles rather than escaped,
-     * so it is cleaned wherever it is stored, not only on the form that first took it.
-     */
-    protected function sanitizeOptions(?string $type, array $options): array
+    protected function closeOrderGaps(Collection $sections): void
     {
-        if ($type !== 'static_content') {
-            return $options;
+        $position = 0;
+
+        foreach ($sections->sortBy('sort_order') as $section) {
+            $position++;
+
+            if ((int) $section->sort_order === $position) {
+                continue;
+            }
+
+            $section->sort_order = $position;
+
+            $section->save();
         }
-
-        $config = [
-            'HTML.Allowed' => null,
-            'HTML.ForbiddenElements' => 'script,iframe,form',
-            'CSS.AllowedProperties' => null,
-        ];
-
-        if (array_key_exists('html', $options)) {
-            $options['html'] = Purify::config($config)->clean((string) $options['html']);
-        }
-
-        if (array_key_exists('css', $options)) {
-            $options['css'] = $this->sanitizeStaticCss($options['css']);
-        }
-
-        return $options;
     }
 
     /**
-     * Strip what would let custom css break out of the style block it is written into.
+     * Apply the callback to each given section, settling them together.
      */
-    protected function sanitizeStaticCss(?string $css): string
+    protected function runOnDrafted(Collection $sections, callable $callback): Collection
     {
-        $css = str_replace("\0", '', (string) $css);
+        if ($sections->isEmpty()) {
+            return $sections;
+        }
 
-        return str_ireplace('</style', '<\/style', $css);
+        return DB::transaction(fn () => $sections->map($callback));
     }
 
     /**
-     * Swap a section's options for its draft, while previewing.
+     * The sections matching the criteria that are live on the storefront.
+     */
+    protected function live(array $criteria)
+    {
+        return $this->orderBy('sort_order')->findWhere($criteria + ['status' => 1]);
+    }
+
+    /**
+     * The sections matching the criteria as the editor is holding them, with each staged change
+     * resolved once the rows are in hand.
+     */
+    protected function drafted(array $criteria, string $locale)
+    {
+        return $this->orderBy('sort_order')
+            ->findWhere($criteria)
+            ->each(fn ($section) => $this->applyDraft($section, $locale))
+            ->filter(fn ($section) => (bool) $section->status)
+            ->sortBy('sort_order')
+            ->values();
+    }
+
+    /**
+     * Clean the options a section is given, through the type its theme handles it with.
+     */
+    protected function sanitizeOptions(?string $type, array $options, ?string $themeCode = null): array
+    {
+        return app(SectionSchema::class)->type($themeCode, $type)?->sanitize($options) ?? $options;
+    }
+
+    /**
+     * Swap a section's options, status and order for its drafts, while previewing.
      *
      * @param  Section  $section
      */
@@ -535,7 +528,7 @@ class SectionRepository extends Repository
             $translation
             && ! is_null($translation->draft_options)
         ) {
-            $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
+            $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options, $section->theme_code);
         }
 
         if (! is_null($section->draft_status)) {
@@ -548,12 +541,8 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Delete the uploads a section no longer points at.
-     *
-     * An upload is reachable from the options the storefront renders and from the draft
-     * waiting to replace them, in any locale, so a file is only spare once neither
-     * mentions it. Matching on the stored name covers a path recorded on its own as well
-     * as one written into custom html.
+     * Delete the uploads that neither the published nor the drafted options mention, in any
+     * locale, matching on the stored name so a path inside custom html still counts.
      *
      * @param  Section  $section
      */

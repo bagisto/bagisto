@@ -42,7 +42,6 @@ return [
             'page-title' => 'Aanmelden',
             'password' => 'Wachtwoord',
             'resend-verification' => 'Verificatie-e-mail opnieuw verzenden',
-            'show-password' => 'Wachtwoord Weergeven',
             'title' => 'Aanmelden',
             'verify-first' => 'Verifieer eerst uw e-mailaccount.',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'Standaard Schakelen',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Wachtwoord Weergeven',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'Bijlagen toevoegen',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'Alles wissen',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'Categorieën Carrousel',
             'image-carousel' => 'Afbeeldingen Carrousel',
             'offer' => 'Krijg TOT 40% KORTING op je eerste bestelling, WINKEL NU',
+            'preview-banner' => 'Voorbeeld van het thema :theme op kanaal :channel. Links zijn uitgeschakeld in het voorbeeld.',
             'product-carousel' => 'Producten Carrousel',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email' => 'Verifieer je e-mailaccount',

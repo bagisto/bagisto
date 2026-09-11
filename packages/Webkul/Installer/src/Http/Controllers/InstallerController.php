@@ -47,6 +47,8 @@ class InstallerController extends Controller
      */
     public function runMigration(Request $request)
     {
+        $this->abortIfInstalled();
+
         $this->environmentManager->generateEnv($request->all());
 
         $this->environmentManager->loadEnvConfigs();
@@ -71,6 +73,8 @@ class InstallerController extends Controller
      */
     public function runSeeder()
     {
+        $this->abortIfInstalled();
+
         $selectedParameters = request('selectedParameters');
 
         $allParameters = request('allParameters');
@@ -123,6 +127,8 @@ class InstallerController extends Controller
      */
     public function seedSampleProducts()
     {
+        $this->abortIfInstalled();
+
         $defaultLocale = config('app.locale');
 
         $allowedLocales = array_values(array_unique(array_merge(
@@ -156,6 +162,8 @@ class InstallerController extends Controller
      */
     public function createAdminUser(Request $request)
     {
+        $this->abortIfInstalled();
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
@@ -167,5 +175,16 @@ class InstallerController extends Controller
         return $this->databaseManager->createAdminUser($data)
             ? response()->json(['admin_user_created' => true])
             : response()->json(['admin_user_created' => false], 500);
+    }
+
+    /**
+     * Refuse an installer action once the application is already installed.
+     *
+     * The install routes stay registered for the life of the application, so every action that
+     * writes state re-checks the install flag itself rather than relying on the middleware alone.
+     */
+    protected function abortIfInstalled(): void
+    {
+        abort_if($this->databaseManager->isInstalled(), 403);
     }
 }

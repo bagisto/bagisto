@@ -96,6 +96,8 @@ it('wires catalog cache invalidation for every event that can change a cached li
     'catalog.category.create.after',
     'catalog.category.update.after',
     'catalog.category.delete.before',
+    'catalog.product.price.reindex.after',
+    'promotions.catalog_rule.reindex.after',
     'customer.review.update.after',
     'customer.review.delete.before',
     'checkout.order.save.after',

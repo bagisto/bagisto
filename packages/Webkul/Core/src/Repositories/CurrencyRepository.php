@@ -62,7 +62,7 @@ class CurrencyRepository extends Repository
             return false;
         }
 
-        if ($this->model->destroy($id)) {
+        if (parent::delete($id)) {
             Event::dispatch('core.currency.delete.after', $id);
 
             return true;

@@ -40,6 +40,16 @@ class ProductFactory extends Factory
     }
 
     /**
+     * Assign the default channel, which every product carries in a real install.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Product $product) {
+            $product->channels()->sync([core()->getDefaultChannel()->id]);
+        });
+    }
+
+    /**
      * Simple state.
      */
     public function simple(): ProductFactory

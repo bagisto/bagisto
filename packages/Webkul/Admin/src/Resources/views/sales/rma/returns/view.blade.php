@@ -97,7 +97,10 @@
                                             </p>
 
                                             @if ($rma->package_condition)
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p
+                                                    class="text-gray-600 dark:text-gray-300"
+                                                    v-pre
+                                                >
                                                     {{ ucwords($rma->package_condition) }}
                                                 </p>
                                             @endif

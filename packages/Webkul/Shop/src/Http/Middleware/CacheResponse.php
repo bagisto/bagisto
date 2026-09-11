@@ -44,14 +44,18 @@ class CacheResponse extends BaseCacheResponseMiddleware
                 return $next($request);
             }
 
-            $searchTerm = app(SearchTermRepository::class)->findOneWhere([
-                'term' => request()->query('query'),
-                'channel_id' => core()->getCurrentChannel()->id,
-                'locale' => app()->getLocale(),
-            ]);
+            $query = $request->query('query');
 
-            if ($searchTerm?->redirect_url) {
-                return redirect()->to($searchTerm->redirect_url);
+            if (is_string($query)) {
+                $searchTerm = app(SearchTermRepository::class)->findOneWhere([
+                    'term' => $query,
+                    'channel_id' => core()->getCurrentChannel()->id,
+                    'locale' => app()->getLocale(),
+                ]);
+
+                if ($searchTerm?->redirect_url) {
+                    return redirect()->to($searchTerm->redirect_url);
+                }
             }
         }
 

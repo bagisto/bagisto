@@ -42,7 +42,6 @@ return [
             'page-title' => 'Connexion client',
             'password' => 'Mot de passe',
             'resend-verification' => 'Renvoyer l\'e-mail de vérification',
-            'show-password' => 'Afficher le mot de passe',
             'title' => 'Se connecter',
             'verify-first' => 'Vérifiez d\'abord votre compte e-mail.',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'Basculer par défaut',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Afficher le mot de passe',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'Ajouter des pièces jointes',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'Effacer tout',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'Carrousel de catégories',
             'image-carousel' => 'Carrousel d\'images',
             'offer' => 'Obtenez JUSQU\'À 40% DE RÉDUCTION sur votre 1ère commande, ACHETEZ MAINTENANT',
+            'preview-banner' => 'Aperçu du thème :theme sur le canal :channel. Les liens sont désactivés dans l\'aperçu.',
             'product-carousel' => 'Carrousel de produits',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email' => 'Vérifiez votre compte e-mail',

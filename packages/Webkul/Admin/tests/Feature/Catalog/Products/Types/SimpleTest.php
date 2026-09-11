@@ -153,7 +153,7 @@ it('should update the simple product', function () {
         'name' => fake()->words(3, true),
         'price' => fake()->randomFloat(2, 1, 1000),
         'weight' => fake()->numberBetween(0, 100),
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'rma_rule_id' => 1,
     ])

@@ -1,4 +1,7 @@
-@props(['isMultiRow' => false])
+@props([
+    'isMultiRow'     => false,
+    'shimmerColumns' => 6,
+])
 
 <v-datagrid-table
     :is-loading="isLoading"
@@ -29,7 +32,10 @@
                     :perform-action="performAction"
                 >
                     <template v-if="isLoading">
-                        <x-shop::shimmer.datagrid.table.head :isMultiRow="$isMultiRow" />
+                        <x-shop::shimmer.datagrid.table.head
+                            :columns="$shimmerColumns"
+                            :isMultiRow="$isMultiRow"
+                        />
                     </template>
 
                     <template v-else>
@@ -100,7 +106,10 @@
                     :perform-action="performAction"
                 >
                     <template v-if="isLoading">
-                        <x-shop::shimmer.datagrid.table.body :isMultiRow="$isMultiRow" />
+                        <x-shop::shimmer.datagrid.table.body
+                            :columns="$shimmerColumns"
+                            :isMultiRow="$isMultiRow"
+                        />
                     </template>
 
                     <template v-else>

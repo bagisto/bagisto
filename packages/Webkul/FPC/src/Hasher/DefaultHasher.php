@@ -14,9 +14,9 @@ class DefaultHasher extends BaseDefaultHasher
     {
         if (
             $request->routeIs('shop.search.index')
-            && $request->has('query')
+            && is_string($request->query('query'))
         ) {
-            $queryString = "?query={$request->query('query')}";
+            $queryString = '?query='.$request->query('query');
 
             return $request->getBaseUrl().$request->getPathInfo().$queryString;
         }

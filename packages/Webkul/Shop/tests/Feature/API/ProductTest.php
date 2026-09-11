@@ -1,9 +1,14 @@
 <?php
 
 use Pest\Expectation;
+use Spatie\ResponseCache\Facades\ResponseCache;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 
 use function Pest\Laravel\getJson;
+
+beforeEach(function () {
+    ResponseCache::clear();
+});
 
 it('returns a new products listing', function () {
     // Arrange.

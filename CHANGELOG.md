@@ -2,6 +2,62 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Fixed the paragraph and heading dropdown missing from the rich text editor toolbar, which still named TinyMCE 5's `formatselect` control instead of TinyMCE 6's `blocks`.
+
+- Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product, category and swatch image URLs carry.
+
+- Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
+
+- Fixed the Customize action being offered for installed themes that no channel runs; only an active theme can be customized now, and the server enforces it.
+
+- Fixed the appearance preview always rendering the channel's own theme; it now renders the theme being edited.
+
+- Footer links now take any number of columns instead of a fixed two, wrapping to fit every screen and leaving out empty columns, and existing footers keep working.
+
+- Fixed My Reviews, the RMA pages and product rich snippets loading full-size product image files directly; they now go through the product image helper, with its sizes, placeholders and theme templates.
+
+- Fixed category logos and banners, and image swatches, not loading from a storage disk that is not local, and the image carousel section rewriting stored paths into image sizes and drawing slides without an image.
+
+- An attribute option's `swatch_value_url` is now the URL of its stored file, as every model image URL is; sized swatch URLs come from the configurable product config or `image_urls()`.
+
+- Corrected the titles and descriptions in Admin → Configuration that named settings which no longer exist or defined the concept rather than the setting, in all 22 locales.
+
+- Fixed the LinkedIn social login button never appearing, because the configuration field was named after the Socialite driver while the installer seeded the plain provider name.
+
+- Fixed tax calculated on the shipping origin ignoring its post code, which was read from a configuration key that does not exist.
+
+- Fixed Admin → Configuration pages keeping a two-column layout on small screens, which squeezed the settings panel; the description and panel now stack.
+
+- Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
+
+- Fixed a created, updated or removed catalog rule, and the nightly price reindex, leaving product pages and storefront listings on the old price; their cached pages are now dropped once prices are reindexed.
+
+- #11481 [fixed] - Fixed editing or deleting a CMS page leaving the old page cached for other locales, currencies, channel domains and signed-in customers; signed-in customers are no longer served cached pages.
+
+- #11479 [fixed] - Fixed the storefront password fields offering no way to see the password outside sign in, which only had a checkbox. Every password field now has an eye icon inside it, which also stands in for Microsoft Edge's own reveal button.
+
+- #11477 [fixed] - Fixed logging in as a customer from the admin landing on the default channel rather than the customer's own. A signed-in customer is now sent to their assigned channel and cannot open the account area on a channel their account is not registered on.
+
+- #11473 [fixed] - Fixed a configurable product's parent disappearing from the Elasticsearch index when one of its variants was deleted. Only the products actually removed are now deleted from the index, and the surviving parent is reindexed.
+
+- #11461 [fixed] - Fixed the tax category form showing an empty, required Tax Rates field when no tax rates exist, leaving nothing to save. It now says tax rates must be created first, links to create one for admins allowed to, and keeps Save disabled until a rate exists.
+
+- #11458 [fixed] - Fixed a category still filtering by an attribute after Use Layered Navigation was turned off for it, which left the filter on the storefront with no way to untick it in the category. A category now filters only by attributes that are still in layered navigation, and turning one back on restores the categories it was chosen for.
+
+- #11450 [fixed] - Fixed a guest turned back from checkout to sign in being left on the home or account page afterwards, losing the product they had chosen with Buy Now. The checkout is now returned to after signing in, registering or using a social provider.
+
+- #11446 [fixed] - Fixed the loading placeholders on the storefront customer account pages. Reviews drew its product thumbnail through the lazy image loader with no source, so the placeholder turned itself into a broken image, and it stood in for a heading the page had already drawn, leaving the cards to jump as the reviews arrived. Orders, Downloadable Products, GDPR and RMA drew a table row where each of them lists cards on a phone. Every placeholder now has the shape and height of what replaces it.
+
+- #11445 [fixed] - Fixed Full Page Cache configuration refusing to save. Its lifetime field carries Laravel's `nullable` rule, which was passed to Vee Validate in the browser and threw "No such validator 'nullable' exists"; rules only the server understands are no longer sent to it.
+
+- #11441 [fixed] - Fixed numeric datagrid filters ignoring a value's decimal part, so an order-total filter of 50.20 matched on 50. Integer and decimal columns now compare the value exactly and can be filtered by operator — equals, greater than, less than, or a range.
+
+- #11440 [fixed] - Fixed the checkout payment-method radio button overlapping the method's logo and name on a mobile viewport; the card now reserves space for the radio so its content stays clear.
+
+- #10762 [feature] - Added a Parent Category column to the admin category listing, so where a category sits in the tree shows at a glance. It can be sorted, searched and filtered through a dropdown of the categories that have children; root categories show an empty cell.
+
 ## **v2.4.10 (21st of August 2026)** - *Release*
 
 - Themes now have their own Appearance area in the admin, listing the installed and available themes and activating one across chosen channels. Theme customisations are called sections throughout, and have moved out of Settings to the theme they belong to.
@@ -40,6 +96,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Products that keep no stock are now listed as "Stock Disabled" rather than "Out of Stock", read from the product's own manage-inventory setting rather than assumed from its type.
 
+- Full Page Cache can now be switched on or off and tuned from the admin. Configuration → Cache Management gains a Full Page Cache section with an enable toggle and a cache lifetime, so the storefront page cache is controlled from one place rather than by editing the environment file and redeploying.
+
 - Fixed the Category column showing one arbitrary category for a product filed under several; it now lists them all.
 
 - Fixed the mega search leaving you on an empty tab when another tab had results, which read as nothing being found. It now opens the first tab that matched.
@@ -51,6 +109,14 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed the Bahraini Dinar being seeded with the text "BHD" in place of its symbol, which a repeated entry in the currency list had been overwriting.
 
 - Added the missing Romanian translations for PhonePe.
+
+- Fixed the full page cache holding on to a storefront page after the catalog behind it changed, so a category or product edit could keep showing the old page until the cache was cleared by hand. A change now clears the pages it affects — the home page and category listings included — across every channel, locale and currency they were cached under.
+
+- Security fixes.
+
+- #11437 [fixed] - Fixed a category whose picture has been removed from storage showing a broken image on the storefront. The strip now falls back to the placeholder, as it already does when no picture is set.
+
+- #11436 [fixed] - Fixed the dashboard statistics and configuration search endpoints answering with a 500 when their type or query value is missing, unknown, or given as an array. Both now return 404.
 
 - #11432 [fixed] - Fixed an alt text over 255 characters rejecting the whole product save with nothing shown on screen; the limit is now reported against the Alt Text field.
 

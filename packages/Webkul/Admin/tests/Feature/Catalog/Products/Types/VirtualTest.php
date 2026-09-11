@@ -125,7 +125,7 @@ it('should update the virtual product', function () {
         'name' => fake()->words(3, true),
         'price' => fake()->randomFloat(2, 1, 1000),
         'weight' => fake()->numberBetween(0, 100),
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))

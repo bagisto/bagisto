@@ -42,7 +42,6 @@ return [
             'page-title' => 'ग्राहक लॉगिन',
             'password' => 'पासवर्ड',
             'resend-verification' => 'सत्यापन ईमेल पुनः भेजें',
-            'show-password' => 'पासवर्ड दिखाएं',
             'title' => 'साइन इन करें',
             'verify-first' => 'पहले अपना ईमेल खाता सत्यापित करें।',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'डिफ़ॉल्ट टॉगल',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'पासवर्ड दिखाएं',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'अटैचमेंट जोड़ें',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'सभी साफ़ करें',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'श्रेणियाँ कैरोसेल',
             'image-carousel' => 'चित्र कैरोसेल',
             'offer' => 'अपनी पहली ऑर्डर पर 40% तक छूट पाएं, अभी खरीदारी करें',
+            'preview-banner' => ':channel चैनल पर :theme थीम का पूर्वावलोकन। पूर्वावलोकन में लिंक बंद हैं।',
             'product-carousel' => 'उत्पाद कैरोसेल',
             'resend-verify-email' => 'सत्यापन ईमेल फिर से भेजें',
             'verify-email' => 'अपने ईमेल खाते की पुष्टि करें',

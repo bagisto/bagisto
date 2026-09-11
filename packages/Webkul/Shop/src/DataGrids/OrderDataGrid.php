@@ -58,7 +58,7 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'grand_total',
             'label' => trans('shop::app.customers.account.orders.total'),
-            'type' => 'integer',
+            'type' => 'decimal',
             'searchable' => true,
             'filterable' => true,
             'sortable' => true,

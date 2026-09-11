@@ -28,7 +28,7 @@ export class TaxRateListPage extends BasePage {
     }
 
     private get applyFiltersButton() {
-        return this.page.getByRole("button", { name: "Apply Filters" });
+        return this.page.locator("button.secondary-button", { hasText: "Apply Filters" });
     }
 
     private get deleteIcons() {

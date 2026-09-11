@@ -257,8 +257,8 @@ return [
                     ],
                 ],
             ], [
-                'name' => 'agreement_label',
-                'title' => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'name' => 'preview',
+                'title' => 'admin::app.configuration.index.general.design.menu-category.preview',
                 'type' => 'blade',
                 'path' => 'admin::configuration.custom-views.category-menu',
             ],
@@ -1408,7 +1408,7 @@ return [
             [
                 'name' => 'subscription',
                 'title' => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
-                'info' => 'Enable subscription option for users in the footer section.',
+                'info' => 'admin::app.configuration.index.customer.settings.newsletter.subscription-info',
                 'type' => 'boolean',
                 'default' => 1,
             ],
@@ -1510,7 +1510,7 @@ return [
                 'default' => config('app.url').'/customer/social-login/google/callback',
                 'placeholder' => config('app.url').'/customer/social-login/google/callback',
             ], [
-                'name' => 'enable_linkedin-openid',
+                'name' => 'enable_linkedin',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.enable-linkedin',
                 'type' => 'boolean',
                 'channel_based' => true,
@@ -1519,20 +1519,20 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title-info',
                 'type' => 'text',
-                'depends' => 'enable_linkedin-openid:1',
+                'depends' => 'enable_linkedin:1',
             ], [
                 'name' => 'linkedin_client_secret',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title-info',
                 'type' => 'text',
-                'depends' => 'enable_linkedin-openid:1',
+                'depends' => 'enable_linkedin:1',
             ], [
                 'name' => 'linkedin_callback_url',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title-info',
                 'type' => 'text',
                 'validation' => 'url',
-                'depends' => 'enable_linkedin-openid:1',
+                'depends' => 'enable_linkedin:1',
                 'placeholder' => config('app.url').'/customer/social-login/linkedin-openid/callback',
                 'default' => config('app.url').'/customer/social-login/linkedin-openid/callback',
             ], [
@@ -1662,7 +1662,7 @@ return [
     ], [
         'key' => 'emails.configure.email_settings',
         'name' => 'admin::app.configuration.index.email.email-settings.title',
-        'info' => 'admin::app.configuration.index.email.email-settings.info',
+        'info' => 'admin::app.configuration.index.email.email-settings.title-info',
         'sort' => 2,
         'fields' => [
             [
@@ -1724,7 +1724,7 @@ return [
     ], [
         'key' => 'emails.general.notifications',
         'name' => 'admin::app.configuration.index.email.notifications.title',
-        'info' => 'admin::app.configuration.index.email.notifications.info',
+        'info' => 'admin::app.configuration.index.email.notifications.title-info',
         'sort' => 1,
         'fields' => [
             [
@@ -2502,7 +2502,7 @@ return [
                         'value' => 'paid',
                     ],
                 ],
-                'info' => 'admin::app.configuration.index.sales.payment-methods.set-order-status',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
@@ -3463,6 +3463,45 @@ return [
                 'title' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
                 'type' => 'blade',
                 'path' => 'admin::configuration.custom-views.cache-management',
+            ],
+        ],
+    ], [
+        'key' => 'cache_management.full_page_cache',
+        'name' => 'admin::app.configuration.index.cache-management.full-page-cache.title',
+        'info' => 'admin::app.configuration.index.cache-management.full-page-cache.info',
+        'icon' => 'settings/full-page-cache.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'cache_management.full_page_cache.settings',
+        'name' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.title',
+        'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.enabled',
+                'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.enabled-info',
+                'type' => 'boolean',
+                'default' => true,
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'lifetime',
+                'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.lifetime',
+                'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.lifetime-info',
+                'type' => 'text',
+                'validation' => 'nullable|numeric|min:1',
+                'depends' => 'enabled:1',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'flush',
+                'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.flush',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.full-page-cache-flush',
+                'depends' => 'enabled:1',
+                'channel_based' => false,
+                'locale_based' => false,
             ],
         ],
     ],

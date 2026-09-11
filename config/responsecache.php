@@ -1,16 +1,19 @@
 <?php
 
-use Spatie\ResponseCache\CacheProfiles\CacheAllSuccessfulGetRequests;
 use Spatie\ResponseCache\Replacers\CsrfTokenReplacer;
 use Spatie\ResponseCache\Serializers\DefaultSerializer;
+use Webkul\FPC\CacheProfiles\FullPageCacheProfile;
 use Webkul\FPC\Hasher\DefaultHasher;
 use Webkul\FPC\Replacers\FlashMessagesReplacer;
+use Webkul\FPC\Replacers\MiniCartReplacer;
 
 return [
     /*
-     * Determine if the response cache middleware should be enabled.
+     * Determine if the response cache middleware should be enabled. Whether pages are
+     * actually cached is decided in Configure → Cache Management → Full Page Cache,
+     * which is the only switch an operator needs.
      */
-    'enabled' => env('RESPONSE_CACHE_ENABLED', false),
+    'enabled' => true,
 
     /*
      *  The given class will determinate if a request should be cached. The
@@ -18,8 +21,12 @@ return [
      *
      *  You can provide your own class given that it implements the
      *  CacheProfile interface.
+     *
+     *  Bagisto's profile keeps this behaviour and additionally honours the Full Page Cache
+     *  settings in Configure -> Cache Management, so the cache can be turned off and its
+     *  lifetime adjusted without a deploy.
      */
-    'cache_profile' => CacheAllSuccessfulGetRequests::class,
+    'cache_profile' => FullPageCacheProfile::class,
 
     /*
      *  Optionally, you can specify a header that will force a cache bypass.
@@ -77,6 +84,7 @@ return [
     'replacers' => [
         CsrfTokenReplacer::class,
         FlashMessagesReplacer::class,
+        MiniCartReplacer::class,
     ],
 
     /*

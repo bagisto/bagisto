@@ -1,0 +1,80 @@
+name: Pest Tests
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  pest_tests:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        php: ['8.3']
+        db: [mysql, mariadb]
+        include:
+          - db: mysql
+            db-label: MySQL
+            db-image: mysql:8.0
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: mysqladmin ping
+            php-db-ext: pdo_mysql
+
+          - db: mariadb
+            db-label: MariaDB
+            db-image: mariadb:10.11
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: healthcheck.sh --connect --innodb_initialized
+            php-db-ext: pdo_mysql
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.db-label }}
+
+    services:
+      database:
+        image: ${{ matrix.db-image }}
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ matrix.db-password }}
+          MYSQL_DATABASE: bagisto
+        ports:
+          - ${{ matrix.db-port }}
+        options: --health-cmd="${{ matrix.db-health }}" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, ${{ matrix.php-db-ext }}, tokenizer, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+
+      - name: Running Composer Install
+        run: composer install
+
+      - name: Setting Environment
+        run: |
+          cp .env.example .env
+          sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
+          sed -i "s|^\(DB_CONNECTION=\s*\).*$|\1${{ matrix.db }}|" .env
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.database.ports[matrix.db-port] }}|" .env
+          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1${{ matrix.db-user }}|" .env
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ matrix.db-password }}|" .env
+          cat .env
+
+      - name: Running Bagisto Installer
+        run: php artisan bagisto:install --no-interaction
+
+      - name: Running Pest Test
+        run: vendor/bin/pest --parallel --colors=always

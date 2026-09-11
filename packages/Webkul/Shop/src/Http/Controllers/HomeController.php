@@ -11,20 +11,24 @@ use Webkul\Shop\Http\Requests\ContactRequest;
 use Webkul\Shop\Http\Resources\CategoryTreeResource;
 use Webkul\Shop\Mail\ContactUs;
 use Webkul\Theme\Repositories\SectionRepository;
+use Webkul\Theme\ThemeCatalog;
 
 class HomeController extends Controller
 {
     /**
-     * Using const variable for status
+     * Using const variable for status.
      */
-    const STATUS = 1;
+    public const STATUS = 1;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(protected SectionRepository $sectionRepository, protected CategoryRepository $categoryRepository) {}
+    public function __construct(
+        protected SectionRepository $sectionRepository,
+        protected CategoryRepository $categoryRepository
+    ) {}
 
     /**
      * Loads the home page for the storefront.
@@ -46,7 +50,8 @@ class HomeController extends Controller
     }
 
     /**
-     * Render the home page from unpublished section edits, for the appearance editor.
+     * Render a channel's home page in the requested theme from unpublished section edits, for the
+     * appearance area.
      *
      * @return View
      */
@@ -54,18 +59,26 @@ class HomeController extends Controller
     {
         abort_unless(bouncer()->hasPermission('appearance.sections'), 403);
 
+        $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'))
+            ?? core()->getCurrentChannel();
+
+        $themeCode = $this->previewedTheme($channel->theme);
+
         request()->attributes->set(SecureHeaders::FRAMABLE, true);
 
         request()->attributes->set(SectionRepository::PREVIEWING, true);
 
-        $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'))
-            ?? core()->getCurrentChannel();
+        $previewed = clone $channel;
 
-        core()->setCurrentChannel($channel);
+        $previewed->theme = $themeCode;
+
+        core()->setCurrentChannel($previewed);
+
+        themes()->set($themeCode);
 
         $sections = $this->sectionRepository->getDraftedForPreview(
             $channel->id,
-            $channel->theme,
+            $themeCode,
             app()->getLocale()
         );
 
@@ -73,7 +86,10 @@ class HomeController extends Controller
             $this->categoryRepository->getVisibleCategoryTree($channel->root_category_id)
         );
 
-        return view('shop::home.index', compact('sections', 'categories') + ['preview' => true]);
+        return view('shop::home.index', compact('sections', 'categories') + [
+            'preview' => true,
+            'previewTheme' => app(ThemeCatalog::class)->find($themeCode)['name'] ?? $themeCode,
+        ]);
     }
 
     /**
@@ -87,7 +103,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Summary of contact.
+     * Display the contact us page.
      *
      * @return View
      */
@@ -97,7 +113,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Summary of store.
+     * Send the contact us mail.
      *
      * @return RedirectResponse
      */
@@ -119,5 +135,32 @@ class HomeController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * The theme to preview, which has to be installed when named, otherwise the one the channel runs.
+     */
+    protected function previewedTheme(?string $channelTheme): string
+    {
+        $requested = request('theme');
+
+        if (filled($requested)) {
+            abort_unless(
+                is_string($requested)
+                && app(ThemeCatalog::class)->isInstalled($requested),
+                404
+            );
+
+            return $requested;
+        }
+
+        if (
+            $channelTheme
+            && app(ThemeCatalog::class)->isInstalled($channelTheme)
+        ) {
+            return $channelTheme;
+        }
+
+        return config('themes.shop-default');
     }
 }

@@ -8,6 +8,15 @@ use Webkul\DataGrid\Exceptions\InvalidColumnExpressionException;
 class Integer extends Column
 {
     /**
+     * Force single-value filtering. An integer filter is one operator-based value
+     * (or a range), never a list, so multiple values are never allowed.
+     */
+    public function setAllowMultipleValues(bool $allowMultipleValues): void
+    {
+        parent::setAllowMultipleValues(false);
+    }
+
+    /**
      * Process filter.
      */
     public function processFilter($queryBuilder, $requestedValues)

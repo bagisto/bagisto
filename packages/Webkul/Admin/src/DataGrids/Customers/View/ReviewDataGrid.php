@@ -52,7 +52,7 @@ class ReviewDataGrid extends DataGrid
                 'product_reviews.product_id',
             )
             ->where('customer_id', request()->route('id'))
-            ->where('channel', core()->getCurrentChannelCode())
+            ->where('channel', core()->getDefaultChannelCode())
             ->where('locale', app()->getLocale());
 
         $this->addFilter('product_review_id', 'product_reviews.id');

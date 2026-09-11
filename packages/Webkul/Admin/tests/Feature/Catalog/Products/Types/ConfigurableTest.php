@@ -7,6 +7,7 @@ use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -118,7 +119,7 @@ it('should update the configurable product', function () {
     putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku' => $product->sku,
         'url_key' => $product->url_key,
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'short_description' => fake()->sentence(),
         'description' => fake()->paragraph(),
@@ -191,7 +192,7 @@ it('should update the configurable product variants', function () {
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku' => $product->sku,
         'url_key' => $product->url_key,
-        'channel' => $channel = core()->getCurrentChannelCode(),
+        'channel' => $channel = core()->getDefaultChannelCode(),
         'locale' => $locale = app()->getLocale(),
         'short_description' => $product->short_description,
         'description' => $product->description,
@@ -242,4 +243,19 @@ it('should delete a configurable product', function () {
             'product_id' => $variant->id,
         ]);
     }
+});
+
+it('should give the admin panel the variations of a configurable product without the storefront image urls', function () {
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
+
+    $this->loginAsAdmin();
+
+    $response = getJson(route('admin.catalog.products.configurable.options', $product->id))
+        ->assertOk()
+        ->assertJsonStructure(['data' => ['attributes' => [['id', 'code', 'label', 'swatch_type', 'options']], 'index']])
+        ->assertJsonMissingPath('data.variant_images')
+        ->assertJsonMissingPath('data.variant_videos')
+        ->assertJsonMissingPath('data.variant_prices');
+
+    expect($response->getContent())->not->toContain('cache/');
 });

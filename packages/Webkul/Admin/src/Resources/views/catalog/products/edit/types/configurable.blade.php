@@ -599,7 +599,7 @@
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 v-model="variant.name"
-                                                label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-name')"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.variant-name')"
                                             >
                                             </v-field>
                                         </div>
@@ -666,7 +666,7 @@
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 v-model="variant.sku"
-                                                label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-sku')"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.variant-sku')"
                                                 v-slugify
                                             >
                                             </v-field>

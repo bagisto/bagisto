@@ -129,7 +129,7 @@ class SystemConfig
         }
 
         if ($slug2 = request()->route('slug2')) {
-            $activeItem = $activeItem->getChildren()[$slug2];
+            $activeItem = $activeItem->getChildren()[$slug2] ?? null;
         }
 
         return $activeItem;

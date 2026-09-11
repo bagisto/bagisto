@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-CT6Myf3G.css",
+    "file": "assets/app-D3NYIzzD.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -383,6 +383,10 @@
   "src/Resources/assets/images/settings/exchange-rate.svg": {
     "file": "assets/exchange-rate-nueYe-Ml.svg",
     "src": "src/Resources/assets/images/settings/exchange-rate.svg"
+  },
+  "src/Resources/assets/images/settings/full-page-cache.svg": {
+    "file": "assets/full-page-cache-DOxvZ_cy.svg",
+    "src": "src/Resources/assets/images/settings/full-page-cache.svg"
   },
   "src/Resources/assets/images/settings/gdpr.svg": {
     "file": "assets/gdpr-DrhhDXQJ.svg",

@@ -49,11 +49,30 @@ class DashboardController extends Controller
      */
     public function stats()
     {
-        $stats = $this->dashboardHelper->{$this->typeFunctions[request()->query('type')]}();
+        $stats = $this->dashboardHelper->{$this->resolveTypeFunction()}();
 
         return response()->json([
             'statistics' => $stats,
             'date_range' => $this->dashboardHelper->getDateRange(),
         ]);
+    }
+
+    /**
+     * Resolve the requested type into a valid function name.
+     *
+     * @return string
+     */
+    protected function resolveTypeFunction()
+    {
+        $type = request()->query('type');
+
+        if (
+            ! is_string($type)
+            || ! array_key_exists($type, $this->typeFunctions)
+        ) {
+            abort(404);
+        }
+
+        return $this->typeFunctions[$type];
     }
 }

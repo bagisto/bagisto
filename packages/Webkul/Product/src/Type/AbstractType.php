@@ -978,6 +978,10 @@ abstract class AbstractType
             return true;
         }
 
+        if (! $item->product->isAvailableInChannel($item->cart?->channel_id)) {
+            return true;
+        }
+
         switch ($item->product->type) {
             case 'bundle':
                 foreach ($item->children as $child) {

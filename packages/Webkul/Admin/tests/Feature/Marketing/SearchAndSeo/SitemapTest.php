@@ -35,7 +35,7 @@ it('should store the newly created sitemap', function () {
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path' => $filePath = '/',
-        'channels' => [core()->getCurrentChannel()->id],
+        'channels' => [core()->getDefaultChannel()->id],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create.success'));
@@ -75,7 +75,7 @@ it('should update the sitemap', function () {
         'id' => $sitemap->id,
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path' => $sitemap->path,
-        'channels' => [core()->getCurrentChannel()->id],
+        'channels' => [core()->getDefaultChannel()->id],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.edit.success'));

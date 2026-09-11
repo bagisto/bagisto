@@ -34,7 +34,10 @@
 
         <!-- For Desktop View -->
         <div class="max-md:hidden">
-            <x-shop::datagrid :src="route('shop.customers.account.orders.index')" />
+            <x-shop::datagrid
+                :src="route('shop.customers.account.orders.index')"
+                :shimmerColumns="5"
+            />
         </div>
 
         <!-- For Mobile View -->
@@ -61,7 +64,7 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-shop::shimmer.datagrid.table.body />
+                        <x-shop::shimmer.customers.account.orders />
                     </template>
     
                     <template v-else>
@@ -96,6 +99,5 @@
         </div>
     
         {!! view_render_event('bagisto.shop.customers.account.orders.list.after') !!}
-
     </div>
 </x-shop::layouts.account>

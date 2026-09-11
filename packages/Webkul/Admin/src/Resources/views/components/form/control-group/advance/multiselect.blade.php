@@ -175,12 +175,16 @@
             },
 
             watch: {
-                value(value) {
-                    const incoming = (value ?? []).map((id) => String(id));
+                value(newValue, oldValue) {
+                    const incoming = (newValue ?? []).map((id) => String(id));
 
-                    if (incoming.join(',') !== this.selectedIds.join(',')) {
-                        this.selectedIds = incoming;
+                    const previous = (oldValue ?? []).map((id) => String(id));
+
+                    if (incoming.join(',') === previous.join(',')) {
+                        return;
                     }
+
+                    this.selectedIds = incoming;
                 },
 
                 selectedIds(ids) {
@@ -219,11 +223,6 @@
                     return this.selectedIds.includes(String(id));
                 },
 
-                /**
-                 * Always reassign `selectedIds` with a fresh array reference so the
-                 * `v-model` bound VeeValidate field detects the change and revalidates
-                 * (mutating the array in place would not clear the required error).
-                 */
                 toggle(id) {
                     if (this.isSelected(id)) {
                         this.deselect(id);

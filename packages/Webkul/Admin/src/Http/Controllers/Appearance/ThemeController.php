@@ -38,8 +38,7 @@ class ThemeController extends Controller
     }
 
     /**
-     * Report what switching the given channels over to this theme would leave behind, so
-     * that the confirmation can spell it out before anything is written.
+     * Report what switching the given channels over to this theme would leave behind.
      *
      * @return JsonResponse
      */
@@ -47,12 +46,14 @@ class ThemeController extends Controller
     {
         $this->validate(request(), $this->channelRules());
 
+        $themes = $this->themeCatalog->all()->keyBy('code');
+
         $impact = $this->channelRepository
             ->findWhereIn('id', request()->input('channel_ids'))
             ->map(fn ($channel) => [
                 'channel_id' => $channel->id,
                 'channel' => $channel->name,
-                'current_theme' => $this->themeName($channel->theme),
+                'current_theme' => $channel->theme ? ($themes->get($channel->theme)['name'] ?? $channel->theme) : null,
                 'customizations' => $channel->theme && $channel->theme !== $code
                     ? $this->themeCatalog->sectionCount($channel->id, $channel->theme)
                     : 0,
@@ -72,16 +73,13 @@ class ThemeController extends Controller
     {
         $this->validate(request(), $this->channelRules());
 
-        $theme = $this->themeCatalog->find($code);
-
-        if (
-            ! $theme
-            || ! $theme['is_installed']
-        ) {
+        if (! $this->themeCatalog->isInstalled($code)) {
             return new JsonResponse([
                 'message' => trans('admin::app.appearance.themes.index.not-installed'),
             ], 404);
         }
+
+        $theme = $this->themeCatalog->find($code);
 
         $channels = $this->channelRepository->findWhereIn('id', request()->input('channel_ids'));
 
@@ -130,17 +128,5 @@ class ThemeController extends Controller
             'channel_ids' => 'required|array|min:1',
             'channel_ids.*' => 'required|in:'.implode(',', $this->channelRepository->pluck('id')->toArray()),
         ];
-    }
-
-    /**
-     * Display name of a registered theme, falling back to its code.
-     */
-    protected function themeName(?string $code): ?string
-    {
-        if (! $code) {
-            return null;
-        }
-
-        return config('themes.shop.'.$code.'.name') ?? $code;
     }
 }

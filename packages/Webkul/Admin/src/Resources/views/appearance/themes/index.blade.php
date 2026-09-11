@@ -114,7 +114,7 @@
                                     @{{ theme.description }}
                                 </p>
 
-                                <!-- Channels this theme is live on -->
+                                <!-- Active Channels -->
                                 <p
                                     class="mt-1 text-xs font-medium text-green-600"
                                     v-if="isEverywhere(theme)"
@@ -137,7 +137,7 @@
                                     @lang('admin::app.appearance.themes.index.not-in-use')
                                 </p>
 
-                                <!-- Actions, always on their own row -->
+                                <!-- Actions -->
                                 <div class="mt-auto flex w-full flex-wrap items-center gap-2 pt-3">
                                     @if (bouncer()->hasPermission('appearance.themes.activate'))
                                         <button
@@ -170,13 +170,15 @@
                                         @lang('admin::app.appearance.themes.index.preview-btn')
                                     </a>
 
-                                    <a
-                                        class="secondary-button"
-                                        :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
-                                        v-if="theme.is_installed"
-                                    >
-                                        @lang('admin::app.appearance.themes.index.customize-btn')
-                                    </a>
+                                    @if (bouncer()->hasPermission('appearance.sections'))
+                                        <a
+                                            class="secondary-button"
+                                            :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
+                                            v-if="theme.status === 'active'"
+                                        >
+                                            @lang('admin::app.appearance.themes.index.customize-btn')
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -232,10 +234,7 @@
                                         </p>
                                     </x-admin::form.control-group>
 
-                                    <!--
-                                        Customizations are keyed by theme code, so switching a channel
-                                        leaves the ones built for the outgoing theme behind.
-                                    -->
+                                    <!-- Impact Warning -->
                                     <div
                                         class="mt-2 grid gap-1 rounded border border-orange-200 bg-orange-50 p-3 text-xs text-orange-800 dark:border-orange-900 dark:bg-orange-950 dark:text-orange-200"
                                         v-if="impact.length"
@@ -291,9 +290,7 @@
 
                 computed: {
                     /**
-                     * The themes under the heading each belongs to, so the ones this store
-                     * already has are told apart from the ones it would have to buy. A
-                     * heading with nothing under it is left out.
+                     * Installed themes and themes on offer under headings of their own, leaving out an empty one.
                      */
                     groups() {
                         return [

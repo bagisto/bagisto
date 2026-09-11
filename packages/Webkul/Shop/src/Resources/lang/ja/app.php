@@ -42,7 +42,6 @@ return [
             'page-title' => '顧客ログイン',
             'password' => 'パスワード',
             'resend-verification' => '確認メールを再送信',
-            'show-password' => 'パスワードを表示',
             'title' => 'サインイン',
             'verify-first' => 'まずメールアカウントを確認してください。',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'デフォルトトグル',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'パスワードを表示',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => '添付ファイルを追加',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'すべてクリア',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'カテゴリカルーセル',
             'image-carousel' => '画像カルーセル',
             'offer' => '初回注文で最大40%オフ、今すぐ購入',
+            'preview-banner' => ':channel チャネルで :theme テーマをプレビューしています。プレビューではリンクは無効です。',
             'product-carousel' => '商品カルーセル',
             'resend-verify-email' => '確認メールを再送信',
             'verify-email' => 'メールアカウントを確認してください',

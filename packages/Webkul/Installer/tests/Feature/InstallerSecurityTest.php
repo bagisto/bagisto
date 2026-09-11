@@ -120,3 +120,45 @@ it('should return 403 for ajax request to seed sample products endpoint when alr
             'message' => trans('installer::app.installer.middleware.already-installed'),
         ]);
 });
+
+it('should block the installer index when it is reached through a percent-encoded path', function () {
+    // Act and Assert.
+    get('/%69nstall')
+        ->assertRedirect(route('shop.home.index'));
+});
+
+it('should block the run migration endpoint when it is reached through a percent-encoded path', function () {
+    // Act and Assert.
+    post('/%69nstall/api/run-migration', [
+        'app_name' => 'Bagisto',
+        'db_hostname' => '127.0.0.2',
+        'db_port' => '3306',
+        'db_name' => 'test_db',
+        'db_username' => 'root',
+        'db_password' => '',
+    ])
+        ->assertRedirect(route('shop.home.index'));
+});
+
+it('should return 403 for an ajax request to the run migration endpoint reached through a percent-encoded path', function () {
+    // Act and Assert.
+    post('/%69nstall/api/run-migration', [
+        'app_name' => 'Bagisto',
+    ], [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertStatus(403);
+});
+
+it('should not leave the .env writable to a request that reaches the installer through a percent-encoded path', function () {
+    // Arrange.
+    $before = file_get_contents(base_path('.env'));
+
+    // Act.
+    post('/%69nstall/api/run-migration', [
+        'app_name' => "Bagisto\nAPP_CONFIG_CACHE=".base_path('.env'),
+    ]);
+
+    // Assert.
+    expect(file_get_contents(base_path('.env')))->toBe($before);
+});

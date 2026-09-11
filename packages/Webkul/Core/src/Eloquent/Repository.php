@@ -5,6 +5,7 @@ namespace Webkul\Core\Eloquent;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Helpers\CacheGeneration;
 
 abstract class Repository extends BaseRepository implements CacheableInterface
 {
@@ -77,6 +78,32 @@ abstract class Repository extends BaseRepository implements CacheableInterface
         }
 
         return false;
+    }
+
+    /**
+     * Build the cache key for a read.
+     *
+     * The repository's generation token is part of the key, so invalidating its cache is
+     * a matter of moving it on to a new token rather than tracking and forgetting every
+     * key it has written. Upstream keeps that list in one shared file it rewrites on
+     * every cached read, which silently loses keys when requests overlap.
+     *
+     * @param  string  $method
+     * @param  mixed  $args
+     * @return string
+     */
+    public function getCacheKey($method, $args = null)
+    {
+        $className = get_class($this);
+
+        $token = CacheGeneration::get($className);
+
+        return sprintf(
+            '%s@%s-%s',
+            $className,
+            $method,
+            md5($token.serialize($args).$this->serializeCriteria().request()->fullUrl())
+        );
     }
 
     /**

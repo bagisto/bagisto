@@ -42,7 +42,6 @@ return [
             'page-title' => 'ورود مشتری',
             'password' => 'رمز عبور',
             'resend-verification' => 'ارسال مجدد ایمیل تأیید',
-            'show-password' => 'نمایش رمز عبور',
             'title' => 'ورود',
             'verify-first' => 'ابتدا حساب ایمیل خود را تأیید کنید.',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'کلیک کردن پیش‌فرض',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'نمایش رمز عبور',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'افزودن پیوست',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'پاک کردن همه',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'چرخ فلک دسته‌ها',
             'image-carousel' => 'چرخ فلک تصاویر',
             'offer' => 'تا ۴۰% تخفیف برای سفارش اول شما، اکنون خرید کنید',
+            'preview-banner' => 'پیش‌نمایش قالب :theme در کانال :channel. پیوندها در پیش‌نمایش غیرفعال هستند.',
             'product-carousel' => 'چرخ فلک محصولات',
             'resend-verify-email' => 'ارسال دوباره ایمیل تایید',
             'verify-email' => 'ایمیل خود را تأیید کنید',

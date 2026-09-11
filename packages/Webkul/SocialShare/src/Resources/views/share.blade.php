@@ -21,7 +21,7 @@
         <!-- For Desktop View -->
         <div class="max-md:hidden">
             <ul class="flex gap-3">
-                @foreach(['facebook', 'twitter', 'instagram', 'pinterest', 'linkedin', 'whatsapp', 'email'] as $social)
+                @foreach(['facebook', 'twitter', 'pinterest', 'linkedin', 'whatsapp', 'email'] as $social)
                     @if (! core()->getConfigData('catalog.products.social_share.' . $social))
                         @continue
                     @endif

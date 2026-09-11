@@ -38,7 +38,7 @@ function productUpdatePayload(Product $product, array $images): array
         'description' => fake()->paragraph(),
         'price' => 100,
         'weight' => 1,
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'images' => $images,
     ];

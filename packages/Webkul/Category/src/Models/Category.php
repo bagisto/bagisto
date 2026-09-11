@@ -74,6 +74,7 @@ class Category extends TranslatableModel implements CategoryContract
     public function filterableAttributes(): BelongsToMany
     {
         return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')
+            ->where('is_filterable', 1)
             ->with([
                 'options' => function ($query) {
                     $query->orderBy('sort_order');
@@ -81,6 +82,23 @@ class Category extends TranslatableModel implements CategoryContract
                 'translations',
                 'options.translations',
             ]);
+    }
+
+    /**
+     * Is within the given channel's tree, defaulting to the current one.
+     * A category belongs to a channel by sitting under that channel's root.
+     */
+    public function isAvailableInChannel(?int $channelId = null): bool
+    {
+        $channel = is_null($channelId)
+            ? core()->getCurrentChannel()
+            : core()->getAllChannels()->firstWhere('id', $channelId);
+
+        if (! $root = $channel?->root_category) {
+            return false;
+        }
+
+        return $this->isSelfOrDescendantOf($root);
     }
 
     /**

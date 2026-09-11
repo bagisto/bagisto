@@ -17,8 +17,8 @@ class CanInstall
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Str::contains($request->getPathInfo(), '/install')) {
-            if ($this->isAlreadyInstalled()) {
+        if ($this->isAlreadyInstalled()) {
+            if ($this->isInstallerRequest($request)) {
                 if (! $request->ajax()) {
                     return redirect()->route('shop.home.index');
                 }
@@ -27,10 +27,8 @@ class CanInstall
                     'message' => trans('installer::app.installer.middleware.already-installed'),
                 ], 403);
             }
-        } else {
-            if (! $this->isAlreadyInstalled()) {
-                return redirect()->route('installer.index');
-            }
+        } elseif (! $this->isInstallerRequest($request)) {
+            return redirect()->route('installer.index');
         }
 
         return $next($request);
@@ -56,5 +54,20 @@ class CanInstall
         }
 
         return false;
+    }
+
+    /**
+     * Whether the request targets the installer.
+     *
+     * The comparison is made on the decoded path. The router resolves a percent-encoded path such
+     * as `/%69nstall` to the installer, so matching the raw path here would let it slip past the
+     * guard on an installed site.
+     */
+    protected function isInstallerRequest(Request $request): bool
+    {
+        $path = trim($request->decodedPath(), '/');
+
+        return $path === 'install'
+            || Str::startsWith($path, 'install/');
     }
 }

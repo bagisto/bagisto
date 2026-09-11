@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Event;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -15,7 +16,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Default batch size
+     * Number of products reindexed per batch.
      */
     protected const BATCH_SIZE = 100;
 
@@ -31,28 +32,20 @@ class DeleteCatalogRuleIndex implements ShouldQueue
     }
 
     /**
-     * Execute the job.
+     * Reindex the prices of the products a removed rule applied to; rules an `end_other_rules` rule held
+     * back are not reapplied yet.
      *
      * @return void
      */
     public function handle()
     {
-        /**
-         * Reindex price index for the products associated with the catalog rule.
-         */
+        Event::dispatch('promotions.catalog_rule.reindex.before', [$this->productIds]);
+
         while (true) {
             $paginator = app(ProductRepository::class)
                 ->whereIn('id', $this->productIds)
                 ->cursorPaginate(self::BATCH_SIZE);
 
-            /**
-             * TODO:
-             *
-             * If the 'end_other_rules' flag is set for this catalog rule,
-             * it indicates that this rule might have preempted the
-             * application of other rules on the products. In such a scenario,
-             * it's necessary to reindex the remaining rules for these products.
-             */
             app(PriceIndexer::class)->reindexBatch($paginator->items());
 
             if (! $cursor = $paginator->nextCursor()) {
@@ -61,5 +54,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
 
             request()->query->add(['cursor' => $cursor->encode()]);
         }
+
+        Event::dispatch('promotions.catalog_rule.reindex.after', [$this->productIds]);
     }
 }

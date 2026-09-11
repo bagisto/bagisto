@@ -1,4 +1,7 @@
-@props(['isMultiRow' => false])
+@props([
+    'isMultiRow'     => false,
+    'shimmerColumns' => 6,
+])
 
 <v-datagrid {{ $attributes }}>
     {{ $slot }}
@@ -15,7 +18,10 @@
 
             <!-- Table -->
             <div class="mt-8 flex max-md:mt-0">
-                <x-shop::datagrid.table :isMultiRow="$isMultiRow">
+                <x-shop::datagrid.table
+                    :isMultiRow="$isMultiRow"
+                    :shimmerColumns="$shimmerColumns"
+                >
                     <template #header="{
                         isLoading,
                         available,

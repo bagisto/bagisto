@@ -42,7 +42,6 @@ return [
             'page-title' => 'Вход для клиентов',
             'password' => 'Пароль',
             'resend-verification' => 'Повторно отправить письмо подтверждения',
-            'show-password' => 'Показать пароль',
             'title' => 'Войти',
             'verify-first' => 'Сначала подтвердите свой адрес электронной почты.',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'Переключатель по умолчанию',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Показать пароль',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'Добавить вложения',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'Очистить все',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'Карусель категорий',
             'image-carousel' => 'Карусель изображений',
             'offer' => 'Получите ДО 40% СКИДКИ на ваш первый заказ, ПОКУПАЙТЕ СЕЙЧАС',
+            'preview-banner' => 'Предпросмотр темы :theme для канала :channel. Ссылки в предпросмотре отключены.',
             'product-carousel' => 'Карусель продуктов',
             'resend-verify-email' => 'Повторно отправить письмо с подтверждением',
             'verify-email' => 'Подтвердите вашу электронную почту',

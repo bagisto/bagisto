@@ -2,11 +2,13 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\FPC\Concerns\ForgetsPages;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 
 class URLRewrite
 {
+    use ForgetsPages;
+
     /**
      * Create a new listener instance.
      *
@@ -15,18 +17,18 @@ class URLRewrite
     public function __construct(protected URLRewriteRepository $urlRewriteRepository) {}
 
     /**
-     * After URL Rewrite update
+     * After URL rewrite update.
      *
      * @param  \Webkul\Marketing\Contracts\URLRewrite  $urlRewrite
      * @return void
      */
     public function afterUpdate($urlRewrite)
     {
-        ResponseCache::forget('/'.$urlRewrite->request_path);
+        $this->forgetPages(['/'.$urlRewrite->request_path]);
     }
 
     /**
-     * Before URL Rewrite delete
+     * Before URL rewrite delete.
      *
      * @param  int  $urlRewriteId
      * @return void
@@ -35,6 +37,10 @@ class URLRewrite
     {
         $urlRewrite = $this->urlRewriteRepository->find($urlRewriteId);
 
-        ResponseCache::forget('/'.$urlRewrite->request_path);
+        if (! $urlRewrite) {
+            return;
+        }
+
+        $this->forgetPages(['/'.$urlRewrite->request_path]);
     }
 }

@@ -42,7 +42,6 @@ return [
             'page-title' => 'ප්‍රමාණවත් වීම',
             'password' => 'මුරපදය',
             'resend-verification' => 'තහවුරු කිරීමේ විද්‍යුත් තැපෑල නැවත යවන්න',
-            'show-password' => 'මුරපදය පෙන්වන්න',
             'title' => 'සන්නියයෙන් ඇතුලත් වන්න',
             'verify-first' => 'කරුණාකර ඔබගේ ඊමේල් ගිණුමක් පෙනෙන පෙනුමට පිළිගනිමු.',
         ],
@@ -546,6 +545,14 @@ return [
             'default-toggle' => 'පෙරනි එකක් සැකසෙමින්',
         ],
 
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'මුරපදය පෙන්වන්න',
+                ],
+            ],
+        ],
+
         'media' => [
             'index' => [
                 'add-attachments' => 'ඇඩෙක්මෙන්ට් එකක් එක්කරන්න',
@@ -690,6 +697,17 @@ return [
 
                     'custom-filters' => [
                         'clear-all' => 'සියල්ල මකන්න',
+                    ],
+
+                    'number-options' => [
+                        'between' => 'Between',
+                        'equals' => 'Equals',
+                        'from' => 'From',
+                        'greater-than' => 'Greater Than',
+                        'greater-than-or-equal' => 'Greater Than Or Equal',
+                        'less-than' => 'Less Than',
+                        'less-than-or-equal' => 'Less Than Or Equal',
+                        'to' => 'To',
                     ],
                 ],
             ],
@@ -1256,6 +1274,7 @@ return [
             'categories-carousel' => 'කාණ්ඩ කාරසෙල්',
             'image-carousel' => 'රූප කාරසෙල්',
             'offer' => 'ඔබේ පළමු ඇනවුමට 40% ක විශේෂ වට්ටම් ලබා ගන්න, දැන් සෙවීම',
+            'preview-banner' => ':channel නාලිකාවේ :theme තේමාව පෙරදසුන් කරයි. පෙරදසුනේ සබැඳි අක්‍රිය කර ඇත.',
             'product-carousel' => 'නිෂ්පාදන කාරසෙල්',
             'resend-verify-email' => 'තහවුරු කිරීමේ විද්‍යුත් තැපැල් නැවත යවන්න',
             'verify-email' => 'ඔබේ විද්‍යුත් තැපෑල තහවුරු කරන්න',
