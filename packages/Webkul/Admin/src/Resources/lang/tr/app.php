@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'Pasif',
                     'name' => 'Adı',
                     'no-of-products' => 'Ürün Sayısı',
+                    'parent-category' => 'Ana Kategori',
                     'position' => 'Pozisyon',
                     'status' => 'Menüde Görünür',
                     'update-status' => 'Durumu Güncelle',

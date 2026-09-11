@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'අක්‍රීය',
                     'name' => 'නම',
                     'no-of-products' => 'නිෂ්පාදන්වල ගණන',
+                    'parent-category' => 'මූලාශ්‍ර ප්‍රවර්ගය',
                     'position' => 'ස්ථාන',
                     'status' => 'මෙනුවේ දැක්කාක්',
                     'update-status' => 'තත්ත්ව යාවත්කාලීන කරන්න',

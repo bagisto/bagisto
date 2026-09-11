@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'לא פעיל',
                     'name' => 'שם',
                     'no-of-products' => 'מספר מוצרים',
+                    'parent-category' => 'קטגוריה אב',
                     'position' => 'מיקום',
                     'status' => 'נראה בתפריט',
                     'update-status' => 'עדכן סטטוס',

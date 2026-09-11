@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'Nieaktywna',
                     'name' => 'Nazwa',
                     'no-of-products' => 'Liczba produktów',
+                    'parent-category' => 'Kategoria nadrzędna',
                     'position' => 'Pozycja',
                     'status' => 'Widoczna w menu',
                     'update-status' => 'Aktualizuj status',

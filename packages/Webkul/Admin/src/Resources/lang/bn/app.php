@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'নিষ্ক্রিয়',
                     'name' => 'নাম',
                     'no-of-products' => 'পণ্যের সংখ্যা',
+                    'parent-category' => 'মূল বিভাগ',
                     'position' => 'অবস্থান',
                     'status' => 'মেনুতে দৃশ্যমান',
                     'update-status' => 'স্থিতি আপডেট করুন',

@@ -1946,6 +1946,7 @@ return [
                     'inactive' => 'غیرفعال',
                     'name' => 'نام',
                     'no-of-products' => 'تعداد محصولات',
+                    'parent-category' => 'دسته‌بندی والد',
                     'position' => 'موقعیت',
                     'status' => 'قابل مشاهده در منو',
                     'update-status' => 'به‌روزرسانی وضعیت',

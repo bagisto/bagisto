@@ -40,6 +40,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11473 [fixed] - Fixed a configurable product's parent disappearing from the Elasticsearch index when one of its variants was deleted. Only the products actually removed are now deleted from the index, and the surviving parent is reindexed.
 
+- #11461 [fixed] - Fixed the tax category form showing an empty, required Tax Rates field when no tax rates exist, leaving nothing to save. It now says tax rates must be created first, links to create one for admins allowed to, and keeps Save disabled until a rate exists.
+
 - #11458 [fixed] - Fixed a category still filtering by an attribute after Use Layered Navigation was turned off for it, which left the filter on the storefront with no way to untick it in the category. A category now filters only by attributes that are still in layered navigation, and turning one back on restores the categories it was chosen for.
 
 - #11450 [fixed] - Fixed a guest turned back from checkout to sign in being left on the home or account page afterwards, losing the product they had chosen with Buy Now. The checkout is now returned to after signing in, registering or using a social provider.
@@ -51,6 +53,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - #11441 [fixed] - Fixed numeric datagrid filters ignoring a value's decimal part, so an order-total filter of 50.20 matched on 50. Integer and decimal columns now compare the value exactly and can be filtered by operator — equals, greater than, less than, or a range.
 
 - #11440 [fixed] - Fixed the checkout payment-method radio button overlapping the method's logo and name on a mobile viewport; the card now reserves space for the radio so its content stays clear.
+
+- #10762 [feature] - Added a Parent Category column to the admin category listing, so where a category sits in the tree shows at a glance. It can be sorted, searched and filtered through a dropdown of the categories that have children; root categories show an empty cell.
 
 ## **v2.4.10 (21st of August 2026)** - *Release*
 
