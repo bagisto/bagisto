@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Added a Parent Category column to the admin category listing, so where a category sits in the tree shows at a glance. It can be sorted, searched and filtered through a dropdown of the categories that have children; root categories show an empty cell.
+
 - Themes can now register their own image cache templates under `customize.image_cache` in `config/themes.php`, overriding or adding to the core sizes, and choose which ones product, category and swatch image URLs carry.
 
 - Section types are now declared per theme under `customize.sections` in `config/themes.php`, in Add Section tile order, so a theme can offer its own section types without core changes.
@@ -39,6 +41,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - #11477 [fixed] - Fixed logging in as a customer from the admin landing on the default channel rather than the customer's own. A signed-in customer is now sent to their assigned channel and cannot open the account area on a channel their account is not registered on.
 
 - #11473 [fixed] - Fixed a configurable product's parent disappearing from the Elasticsearch index when one of its variants was deleted. Only the products actually removed are now deleted from the index, and the surviving parent is reindexed.
+
+- #11461 [fixed] - Fixed the tax category form showing an empty, required Tax Rates field when no tax rates exist, leaving nothing to save. It now says tax rates must be created first, links to create one for admins allowed to, and keeps Save disabled until a rate exists.
 
 - #11458 [fixed] - Fixed a category still filtering by an attribute after Use Layered Navigation was turned off for it, which left the filter on the storefront with no way to untick it in the category. A category now filters only by attributes that are still in layered navigation, and turning one back on restores the categories it was chosen for.
 

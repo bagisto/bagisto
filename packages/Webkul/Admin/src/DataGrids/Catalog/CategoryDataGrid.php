@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
@@ -14,6 +15,13 @@ class CategoryDataGrid extends DataGrid
      * @var string
      */
     protected $primaryColumn = 'category_id';
+
+    /**
+     * Constructor for the class.
+     *
+     * @return void
+     */
+    public function __construct(protected CategoryRepository $categoryRepository) {}
 
     /**
      * Prepare query builder.
@@ -44,8 +52,10 @@ class CategoryDataGrid extends DataGrid
             ->groupBy('categories.id');
 
         $this->addFilter('category_id', 'categories.id');
-
+        $this->addFilter('name', 'category_translations.name');
         $this->addFilter('parent_name', 'parent_translations.name');
+        $this->addFilter('position', 'categories.position');
+        $this->addFilter('status', 'categories.status');
 
         return $queryBuilder;
     }
@@ -80,6 +90,8 @@ class CategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'filterable' => true,
+            'filterable_type' => 'dropdown',
+            'filterable_options' => $this->getParentCategoryOptions(),
             'sortable' => true,
         ]);
 
@@ -170,5 +182,29 @@ class CategoryDataGrid extends DataGrid
                 ],
             ]);
         }
+    }
+
+    /**
+     * Names of the categories that have children, in the current locale, as parent filter options.
+     */
+    protected function getParentCategoryOptions(): array
+    {
+        $parentIds = $this->categoryRepository->pluck('parent_id')
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+
+        return $this->categoryRepository->findWhereIn('id', $parentIds)
+            ->map(fn ($category) => $category->translate(app()->getLocale())?->name)
+            ->filter()
+            ->unique()
+            ->sort()
+            ->map(fn ($name) => [
+                'label' => $name,
+                'value' => $name,
+            ])
+            ->values()
+            ->toArray();
     }
 }

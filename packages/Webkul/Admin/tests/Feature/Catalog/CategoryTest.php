@@ -48,6 +48,97 @@ it('should return listing items of categories', function () {
         ->assertJsonPath('meta.total', 2);
 });
 
+it('should show the parent category of each category in the listing', function () {
+    // Arrange.
+    $parent = (new CategoryFaker)->factory()->create();
+
+    $category = (new CategoryFaker)->factory()->create([
+        'parent_id' => $parent->id,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.categories.index', [
+        'filters' => ['category_id' => [$category->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('records.0.category_id', $category->id)
+        ->assertJsonPath('records.0.parent_name', $parent->name);
+});
+
+it('should leave the parent category empty for the root category in the listing', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.categories.index', [
+        'filters' => ['category_id' => [1]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('records.0.category_id', 1)
+        ->assertJsonPath('records.0.parent_name', null);
+});
+
+it('should offer only parent categories as options in the parent category filter', function () {
+    // Arrange.
+    $parent = (new CategoryFaker)->factory()->create();
+
+    $category = (new CategoryFaker)->factory()->create([
+        'parent_id' => $parent->id,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $column = collect(getJson(route('admin.catalog.categories.index'), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])->assertOk()->json('columns'))->firstWhere('index', 'parent_name');
+
+    $values = collect($column['filterable_options'])->pluck('value')->all();
+
+    expect($column['filterable_type'])->toBe('dropdown')
+        ->and($column['filterable_options'])->toContain(['label' => $parent->name, 'value' => $parent->name])
+        ->and($values)->not->toContain($category->name);
+});
+
+it('should search and filter the listing of categories', function (string $column) {
+    // Arrange.
+    $parent = (new CategoryFaker)->factory()->create();
+
+    $category = (new CategoryFaker)->factory()->create([
+        'parent_id' => $parent->id,
+        'position' => 9,
+    ]);
+
+    $value = match ($column) {
+        'all', 'name' => $category->name,
+        'parent_name' => $parent->name,
+        'position' => $category->position,
+        'status' => $category->status,
+    };
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.categories.index', [
+        'filters' => [$column => [$value]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('records.0.category_id', $category->id);
+})->with([
+    'search box' => 'all',
+    'name' => 'name',
+    'parent category' => 'parent_name',
+    'position' => 'position',
+    'status' => 'status',
+]);
+
 it('should fail the validation with errors of logo path is not an array and image', function () {
     // Act and Assert.
     $this->loginAsAdmin();
