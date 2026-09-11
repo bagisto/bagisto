@@ -22,6 +22,8 @@
 
 - [Theme Image Cache Templates](#theme-image-cache-templates)
 
+- [Full Page Cache No Longer Caches Signed-In Customers](#full-page-cache-no-longer-caches-signed-in-customers)
+
 ## Upgrading To v2.4 From v2.3
 
 > [!NOTE]
@@ -1477,3 +1479,34 @@ builds. `small` needs no listing: every image array carries the core sizes.
 `Webkul\ImageCache\Http\Controllers\ImageCacheController` now takes a
 `Webkul\ImageCache\TemplateRegistry` in its constructor; a subclass that defines its
 own constructor must pass it on.
+
+### Full Page Cache No Longer Caches Signed-In Customers
+
+**Impact Probability: Low**
+
+The full page cache now runs for guests only. A signed-in customer's page carries their
+own name, customer group prices and account state, so it was cached per customer — a
+copy no listener could find again, which kept serving the old page after the content
+changed. `FullPageCacheProfile::enabled()` now answers `false` for a signed-in customer:
+their pages are rendered fresh, neither served from nor written to the cache, and
+`FullPageCache::willCache()` reports them as uncached.
+
+What this changes for custom code:
+
+- **Forget pages through `Webkul\FPC\Concerns\ForgetsPages`.** `forgetPages($paths)`
+  drops a path for every channel, locale and currency, on each channel's own host as
+  well as the host the forget runs on — the host is part of every cache key.
+  `ResponseCache::forget()` only reaches the scope of the request it runs in, so a
+  listener calling it misses other locales, currencies and channel domains.
+- **`ForgetsPages::cacheScopes()` is replaced by `channelScopes($channel)`**, which lists
+  one channel's scopes; `forgetPages()` walks every channel itself.
+- The CMS page, section, review, URL rewrite, order and refund listeners now forget
+  their pages through `ForgetsPages`. The CMS page listener forgets the page under the
+  URL key of each of its translations.
+- **Price reindexes now announce themselves once prices are written.** The catalog rule
+  jobs fire `promotions.catalog_rule.reindex.before` and `.after`, and the price
+  indexer's `reindexSelective()` and `reindexFull()` fire
+  `catalog.product.price.reindex.before` and `.after`. Each `after` event carries the
+  reindexed product ids, or none for a full reindex. The page cache forgets those
+  products' pages — every page after a full reindex — and the storefront catalog API
+  cache is flushed, so a saved catalog rule or the nightly reindex shows the new price.

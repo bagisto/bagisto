@@ -30,6 +30,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
 
+- Fixed a created, updated or removed catalog rule, and the nightly price reindex, leaving product pages and storefront listings on the old price; their cached pages are now dropped once prices are reindexed.
+
+- #11481 [fixed] - Fixed editing or deleting a CMS page leaving the old page cached for other locales, currencies, channel domains and signed-in customers; signed-in customers are no longer served cached pages.
+
 - #11479 [fixed] - Fixed the storefront password fields offering no way to see the password outside sign in, which only had a checkbox. Every password field now has an eye icon inside it, which also stands in for Microsoft Edge's own reveal button.
 
 - #11477 [fixed] - Fixed logging in as a customer from the admin landing on the default channel rather than the customer's own. A signed-in customer is now sent to their assigned channel and cannot open the account area on a channel their account is not registered on.

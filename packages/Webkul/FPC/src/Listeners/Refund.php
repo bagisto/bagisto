@@ -2,26 +2,26 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Spatie\ResponseCache\Facades\ResponseCache;
-
 class Refund extends Product
 {
     /**
-     * After refund is created
+     * After a refund is created, drop the pages of the products whose stock it returned.
      *
-     * @param  \Webkul\Sale\Contracts\Refund  $refund
+     * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
     public function afterCreate($refund)
     {
+        $urls = [];
+
         foreach ($refund->items as $item) {
             if (! $item->product) {
                 continue;
             }
 
-            $urls = $this->getForgettableUrls($item->product);
-
-            ResponseCache::forget($urls);
+            $urls = array_merge($urls, $this->getForgettableUrls($item->product));
         }
+
+        $this->forgetPages($urls);
     }
 }

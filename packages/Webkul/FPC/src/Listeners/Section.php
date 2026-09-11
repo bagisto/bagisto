@@ -3,10 +3,13 @@
 namespace Webkul\FPC\Listeners;
 
 use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\FPC\Concerns\ForgetsPages;
 use Webkul\Theme\Repositories\SectionRepository;
 
 class Section
 {
+    use ForgetsPages;
+
     /**
      * Create a new listener instance.
      *
@@ -60,8 +63,6 @@ class Section
             return;
         }
 
-        ResponseCache::selectCachedItems()
-            ->forUrls(config('app.url').'/')
-            ->forget();
+        $this->forgetPages([$this->homePath()]);
     }
 }

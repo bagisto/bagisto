@@ -2,11 +2,14 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\FPC\Concerns\ForgetsPages;
+use Webkul\Product\Contracts\ProductReview;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
 class Review
 {
+    use ForgetsPages;
+
     /**
      * Create a new listener instance.
      *
@@ -15,18 +18,18 @@ class Review
     public function __construct(protected ProductReviewRepository $productReviewRepository) {}
 
     /**
-     * After review is updated
+     * After review is updated.
      *
-     * @param  \Webkul\Product\Contracts\Review  $review
+     * @param  ProductReview  $review
      * @return void
      */
     public function afterUpdate($review)
     {
-        ResponseCache::forget('/'.$review->product->url_key);
+        $this->forgetPages([$this->productPath($review)]);
     }
 
     /**
-     * Before review is deleted
+     * Before review is deleted.
      *
      * @param  int  $reviewId
      * @return void
@@ -35,6 +38,22 @@ class Review
     {
         $review = $this->productReviewRepository->find($reviewId);
 
-        ResponseCache::forget('/'.$review->product->url_key);
+        if (! $review) {
+            return;
+        }
+
+        $this->forgetPages([$this->productPath($review)]);
+    }
+
+    /**
+     * The address of the product page a review is shown on.
+     *
+     * @param  ProductReview  $review
+     */
+    protected function productPath($review): ?string
+    {
+        return $review->product?->url_key
+            ? '/'.$review->product->url_key
+            : null;
     }
 }
