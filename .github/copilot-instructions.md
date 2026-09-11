@@ -29,6 +29,7 @@ Bagisto follows a modular, package-based architecture. All core features are org
 - `DataGrid` - Tabular data display component
 - `DataTransfer` - Import/export data
 - `DebugBar` - Debug toolbar
+- `EUWithdrawal` - EU right-of-withdrawal requests
 - `FPC` - Full page caching
 - `GDPR` - GDPR compliance
 - `ImageCache` - Image caching/resizing
@@ -37,9 +38,11 @@ Bagisto follows a modular, package-based architecture. All core features are org
 - `MagicAI` - AI features (Laravel AI SDK)
 - `Marketing` - SEO, URL rewrites, search terms, campaigns
 - `Notification` - Notifications
+- `PayGlocal` - PayGlocal integration
 - `Payment` - Base payment classes (CashOnDelivery, MoneyTransfer)
 - `Paypal` - PayPal integration
 - `PayU` - PayU integration
+- `PhonePe` - PhonePe integration
 - `Product` - Product management
 - `Razorpay` - Razorpay integration
 - `RMA` - Return merchandise authorization
@@ -61,7 +64,7 @@ Each package follows this structure:
 
 ```
 Package/src/
-├── Config/              # Configuration files (admin-menu.php, system.php)
+├── Config/              # Configuration files (menu.php, acl.php, system.php, carriers.php, payment-methods.php, …)
 ├── Database/
 │   ├── Migrations/     # Database migrations
 │   ├── Seeders/        # Database seeders
@@ -76,7 +79,7 @@ Package/src/
 │   ├── views/          # Blade views (admin/, shop/)
 │   ├── lang/           # Localization files
 │   └── assets/         # CSS, JS assets
-├── Routes/             # admin-routes.php, shop-routes.php
+├── Routes/             # web.php, plus area files such as catalog-routes.php or store-front-routes.php
 ├── Providers/          # Service providers
 └── Contracts/         # Interface definitions
 ```
@@ -103,7 +106,7 @@ Models use proxy classes (e.g., `ProductProxy`) for extensibility.
 ### Naming Conventions
 
 - **Namespace**: `Webkul\<PackageName>`
-- **Routes**: Separate `admin-routes.php` and `shop-routes.php`
+- **Routes**: `Routes/web.php` loading one file per area, e.g. `sales-routes.php` in Admin or `customer-routes.php` in Shop
 - **Views**: Organized in `admin/` and `shop/` folders
 - **Models**: Singular name (e.g., `Product`, `Category`)
 - **Repositories**: `<ModelName>Repository` pattern
@@ -114,7 +117,7 @@ Models use proxy classes (e.g., `ProductProxy`) for extensibility.
 1. Add namespace to `composer.json` psr-4 autoload
 2. Run `composer dump-autoload`
 3. Register ServiceProvider in `bootstrap/providers.php`
-4. Register ModuleServiceProvider in `config/concord.php`
+4. Register ModuleServiceProvider in `config/concord.php`, for a package with models
 5. Run `php artisan optimize:clear`
 
 ### Creating New Packages
@@ -133,20 +136,22 @@ Or manually create:
 ## Working with Features
 
 ### Shipping Methods
-- Extend `Webkul\Shipping\Carriers\AbstractCarrier`
-- Configure in `Config/system.php`
-- Register in service provider
+- Extend `Webkul\Shipping\Carriers\AbstractShipping`
+- Declare the carrier in `Config/carriers.php` and its settings in `Config/system.php`
+- Merge both configs in the service provider
 
 ### Payment Methods
-- Extend `Webkul\Payment\Payment\AbstractPayment`
-- Configure in `Config/system.php`
+- Extend `Webkul\Payment\Payment\Payment`
+- Declare the method in `Config/payment-methods.php` and its settings in `Config/system.php`
 
 ### Product Types
 - Extend appropriate type class in `Product\Type/`
 - Configure in `Config/product_types.php`
 
 ### Themes
-- Create in `packages/Webkul/<Theme>/`
+- Create in `packages/Webkul/<Theme>/` and register it under `shop` or `admin` in `config/themes.php`
+- A storefront theme customizes the Appearance area from its `customize` key there: the section types it offers (`customize.sections`) and its image cache templates (`customize.image_cache`)
+- Merchants manage themes and edit sections under Admin → Appearance (`admin.appearance.themes.*`, `admin.appearance.sections.*`)
 - Use Vite for asset bundling — run `npm install` and `npm run build` from within the respective package directory (Admin, Shop, or Installer), not from the project root
 - Follow Blade templating conventions
 
@@ -201,7 +206,8 @@ php artisan bagisto:translations:check
 
 ## Important Notes
 
-- Never modify core packages directly - use events/listeners or create custom packages
+- In an application built on Bagisto, extend through events/listeners or custom packages rather than editing core packages; changes to this repository itself are made in the core packages
+- Do not add or remove a Composer or npm dependency without approval
 - Clear caches after making changes: `php artisan optimize:clear`
 - Use repository pattern for all database operations
 - Follow the modular structure when adding new features

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 
 use function Pest\Laravel\deleteJson;
@@ -44,6 +45,26 @@ it('should returns attributes options', function () {
     get(route('admin.catalog.attributes.options', $attribute->id))
         ->assertOk()
         ->assertJsonIsArray();
+});
+
+it('should link an image swatch option to its stored file rather than to an image cache template', function () {
+    $attribute = Attribute::factory()->create([
+        'type' => 'select',
+        'swatch_type' => 'image',
+    ]);
+
+    $option = $attribute->options()->create([
+        'admin_name' => 'Red',
+        'sort_order' => 1,
+        'swatch_value' => 'attribute_option/red.png',
+    ]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.attributes.options', $attribute->id))
+        ->assertOk()
+        ->assertJsonPath('0.id', $option->id)
+        ->assertJsonPath('0.swatch_value_url', Storage::url('attribute_option/red.png'));
 });
 
 it('should show create page of attribute', function () {

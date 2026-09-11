@@ -11,15 +11,15 @@ use Throwable;
 class FullPageCacheProfile extends CacheAllSuccessfulGetRequests
 {
     /**
-     * Whether the page cache should run for this request.
-     *
-     * `RESPONSE_CACHE_ENABLED` stays the deployment switch — a server that cannot afford the cache
-     * turns it off there and no administrator can turn it back on. Underneath it, the setting in
-     * Configure → Cache Management → Full Page Cache is what an operator uses day to day.
+     * Whether the page cache should run for this request, which Full Page Cache configuration decides,
+     * except for a signed-in customer, whose pages carry their own name, prices and account state.
      */
     public function enabled(Request $request): bool
     {
-        if (! config('responsecache.enabled')) {
+        if (
+            ! config('responsecache.enabled')
+            || auth()->guard('customer')->check()
+        ) {
             return false;
         }
 

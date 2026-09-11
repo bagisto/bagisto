@@ -42,7 +42,6 @@ return [
             'page-title' => 'Logowanie klienta',
             'password' => 'Hasło',
             'resend-verification' => 'Wyślij ponownie e-mail weryfikacyjny',
-            'show-password' => 'Pokaż hasło',
             'title' => 'Zaloguj się',
             'verify-first' => 'Najpierw zweryfikuj swoje konto e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Domyślna zmiana',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Pokaż hasło',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Karuzela kategorii',
             'image-carousel' => 'Karuzela obrazów',
             'offer' => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie, ZAKUP TERAZ',
+            'preview-banner' => 'Podgląd motywu :theme w kanale :channel. Linki są wyłączone w podglądzie.',
             'product-carousel' => 'Karuzela produktów',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email' => 'Zweryfikuj swoje konto e-mail',

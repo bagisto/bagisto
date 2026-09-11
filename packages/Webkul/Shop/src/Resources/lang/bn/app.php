@@ -42,7 +42,6 @@ return [
             'page-title' => 'গ্রাহক লগইন',
             'password' => 'পাসওয়ার্ড',
             'resend-verification' => 'ভেরিফিকেশন ইমেইল পুনরায় পাঠান',
-            'show-password' => 'পাসওয়ার্ড দেখুন',
             'title' => 'সাইন ইন করুন',
             'verify-first' => 'প্রথমে আপনার ইমেইল অ্যাকাউন্ট যাচাই করুন।',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'ডিফল্ট টগল',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'পাসওয়ার্ড দেখুন',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'ক্যাটাগরি ক্যারোসেল',
             'image-carousel' => 'ইমেজ ক্যারোসেল',
             'offer' => 'আপনার প্রথম অর্ডারে ৪০% পর্যন্ত ছাড় পান, এখনই কেনাকাটা করুন',
+            'preview-banner' => ':channel চ্যানেলে :theme থিমের প্রিভিউ দেখানো হচ্ছে। প্রিভিউতে লিঙ্কগুলি বন্ধ থাকে।',
             'product-carousel' => 'প্রোডাক্ট ক্যারোসেল',
             'resend-verify-email' => 'যাচাইকরণ ইমেল পুনরায় পাঠান',
             'verify-email' => 'আপনার ইমেল অ্যাকাউন্ট যাচাই করুন',

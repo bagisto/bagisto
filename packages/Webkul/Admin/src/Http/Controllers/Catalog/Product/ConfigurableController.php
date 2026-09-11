@@ -18,14 +18,23 @@ class ConfigurableController extends Controller
     ) {}
 
     /**
-     * Returns the compare items of the customer.
+     * Get the attributes and variant index of a configurable product for the admin panel, without the
+     * storefront's sized image urls, so an image swatch is its stored file.
      */
     public function options(int $id): JsonResponse
     {
         $product = $this->productRepository->findOrFail($id);
 
+        $options = $this->configurableOptionHelper->getOptions(
+            $product,
+            $this->configurableOptionHelper->getAllowedVariants($product)
+        );
+
         return new JsonResponse([
-            'data' => $this->configurableOptionHelper->getConfigurationConfig($product),
+            'data' => [
+                'attributes' => $this->configurableOptionHelper->getAttributesData($product, $options, false),
+                'index' => $options['index'] ?? [],
+            ],
         ]);
     }
 }

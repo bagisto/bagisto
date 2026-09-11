@@ -42,7 +42,6 @@ return [
             'page-title' => 'Autentificare client',
             'password' => 'Parolă',
             'resend-verification' => 'Retrimite emailul de verificare',
-            'show-password' => 'Afișează parola',
             'title' => 'Autentificare',
             'verify-first' => 'Verificați mai întâi contul de e-mail.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Comutare implicită',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Afișează parola',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Carusel categorii',
             'image-carousel' => 'Carusel imagini',
             'offer' => 'Obțineți până la 40% REDUCERE la prima comandă CUMPĂRĂ ACUM',
+            'preview-banner' => 'Previzualizarea temei :theme pe canalul :channel. Linkurile sunt dezactivate în previzualizare.',
             'product-carousel' => 'Carusel produse',
             'resend-verify-email' => 'Retrimite e-mailul de verificare',
             'verify-email' => 'Verificați contul de e-mail',

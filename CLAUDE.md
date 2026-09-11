@@ -4,7 +4,7 @@ Guidance for Claude Code working in this repository.
 
 ## Project Overview
 
-Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue 3, Tailwind 3, Vite 6.
+Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3–8.4, Vue 3, Tailwind 3, Vite 6.
 
 All functionality lives in **41 self-contained packages** under `packages/Webkul/`. The Laravel app
 itself is a thin shell.
@@ -49,7 +49,7 @@ Two rules worth stating here because they are so often missed:
 ## Do not edit
 
 - `vendor/`, `node_modules/`, `composer.lock`, `package-lock.json`
-- `public/themes/*/build/` — Vite output
+- `public/themes/*/*/build/` — Vite output
 - `storage/` — runtime caches, logs, compiled views
 - `*.hot` — Vite HMR markers
 
@@ -80,9 +80,10 @@ Marketing Notification PayGlocal Payment Paypal PayU PhonePe Product Razorpay RM
 Shipping Shop Sitemap SocialLogin SocialShare Stripe Tax Theme User
 ```
 
-Each registers **twice** — its main ServiceProvider in `bootstrap/providers.php`, and its
-`ModuleServiceProvider` in `config/concord.php`. Missing either half-loads the package in a way that
-is hard to diagnose.
+Each registers its main ServiceProvider in `bootstrap/providers.php`, and a package with models
+registers its `ModuleServiceProvider` in `config/concord.php` as well — DebugBar, FPC, ImageCache,
+Installer, MagicAI, PhonePe and SocialShare have none. Missing either half-loads the package in a
+way that is hard to diagnose.
 
 Package layout, the Contract/Model/Proxy trio, repositories, routes, ACL and menus are all covered by
 `bagisto-package-development`.

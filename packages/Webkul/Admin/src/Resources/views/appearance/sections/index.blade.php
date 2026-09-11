@@ -7,7 +7,7 @@
 
     <x-admin::appearance.sections.editor
         :sections="$sections"
-        :type-labels="$typeLabels"
+        :section-types="$sectionTypes"
         :theme-name="$scopedThemeName"
         :channels="$channels->map(fn ($channel) => [
             'id' => $channel->id,

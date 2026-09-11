@@ -42,7 +42,6 @@ return [
             'page-title' => 'Customer Login',
             'password' => 'Password',
             'resend-verification' => 'Resend Verification Email',
-            'show-password' => 'Show Password',
             'title' => 'Sign In',
             'verify-first' => 'Verify your email account first.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Default Toggle',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Show Password',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Categories Carousel',
             'image-carousel' => 'Image Carousel',
             'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'preview-banner' => 'Previewing the :theme theme on the :channel channel. Links are turned off in the preview.',
             'product-carousel' => 'Product Carousel',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email' => 'Verify your email account',

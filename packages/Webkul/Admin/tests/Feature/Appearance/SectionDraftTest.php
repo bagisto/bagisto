@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Webkul\Core\Models\Channel;
+use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Repositories\SectionRepository;
 use Webkul\User\Models\Admin;
@@ -22,7 +23,7 @@ function makeSection(array $attributes = []): Section
     $section = Section::factory()->create(array_merge([
         'channel_id' => $channel->id,
         'theme_code' => $channel->theme ?: 'default',
-        'type' => Section::STATIC_CONTENT,
+        'type' => SectionTypeEnum::STATIC_CONTENT->value,
         'status' => 1,
     ], $attributes));
 
@@ -447,7 +448,7 @@ it('should preview a channel with its own sections, not another channel ones', f
     $other = Channel::factory()->create(['theme' => $current->theme]);
 
     Section::factory()->create([
-        'type' => 'footer_links',
+        'type' => SectionTypeEnum::FOOTER_LINKS->value,
         'status' => 1,
         'channel_id' => $current->id,
         'theme_code' => $current->theme,
@@ -476,7 +477,7 @@ it('should render every services section, so a duplicate of one shows up too', f
 
     foreach ($names as $name) {
         $section = Section::factory()->create([
-            'type' => 'services_content',
+            'type' => SectionTypeEnum::SERVICES_CONTENT->value,
             'name' => $name,
             'status' => 1,
             'channel_id' => $channel->id,
@@ -507,14 +508,14 @@ it('should keep a pinned footer at the end whatever order is sent', function () 
     $channel = core()->getDefaultChannel();
 
     $footer = Section::factory()->create([
-        'type' => 'footer_links',
+        'type' => SectionTypeEnum::FOOTER_LINKS->value,
         'status' => 1,
         'channel_id' => $channel->id,
         'theme_code' => $channel->theme,
     ]);
 
     $other = Section::factory()->create([
-        'type' => 'product_carousel',
+        'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
         'status' => 1,
         'channel_id' => $channel->id,
         'theme_code' => $channel->theme,
@@ -695,7 +696,7 @@ it('should hold a new section back from the storefront until it is published', f
         'channel' => $channel->id,
     ]), [
         'name' => 'Fresh Section',
-        'type' => Section::STATIC_CONTENT,
+        'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ])->assertOk()->json('section.id');
 
     $section = Section::find($id);
@@ -785,7 +786,7 @@ it('should put a staged change back where it was when it is discarded', function
 it('should delete the uploads a discarded draft brought with it', function () {
     Storage::fake();
 
-    $section = makeSection(['type' => Section::IMAGE_CAROUSEL]);
+    $section = makeSection(['type' => SectionTypeEnum::IMAGE_CAROUSEL->value]);
 
     $this->loginAsAdmin();
 
@@ -817,7 +818,7 @@ it('should delete the uploads a discarded draft brought with it', function () {
 it('should delete the upload a published draft replaced', function () {
     Storage::fake();
 
-    $section = makeSection(['type' => Section::IMAGE_CAROUSEL]);
+    $section = makeSection(['type' => SectionTypeEnum::IMAGE_CAROUSEL->value]);
 
     $this->loginAsAdmin();
 
@@ -867,7 +868,7 @@ it('should keep an upload that only custom html points at', function () {
 it('should clear a section media directory however the section is deleted', function (string $how) {
     Storage::fake();
 
-    $section = makeSection(['type' => Section::IMAGE_CAROUSEL]);
+    $section = makeSection(['type' => SectionTypeEnum::IMAGE_CAROUSEL->value]);
 
     $directory = 'themes/'.$section->theme_code.'/sections/'.$section->id;
 

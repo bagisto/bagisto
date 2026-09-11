@@ -42,7 +42,6 @@ return [
             'page-title' => 'Kundenanmeldung',
             'password' => 'Passwort',
             'resend-verification' => 'Bestätigungs-E-Mail erneut senden',
-            'show-password' => 'Passwort anzeigen',
             'title' => 'Anmelden',
             'verify-first' => 'Bitte verifizieren Sie zuerst Ihr E-Mail-Konto.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Standardumschaltung',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Passwort anzeigen',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Kategorien-Karussell',
             'image-carousel' => 'Bilder-Karussell',
             'offer' => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre erste Bestellung, JETZT einkaufen',
+            'preview-banner' => 'Vorschau des Themes :theme im Kanal :channel. Links sind in der Vorschau deaktiviert.',
             'product-carousel' => 'Produkt-Karussell',
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
             'verify-email' => 'Bestätigen Sie Ihr E-Mail-Konto',

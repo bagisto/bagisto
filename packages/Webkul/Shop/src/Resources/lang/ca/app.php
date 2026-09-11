@@ -42,7 +42,6 @@ return [
             'page-title' => 'Inici de sessió del client',
             'password' => 'Contrasenya',
             'resend-verification' => 'Reenvia el correu de verificació',
-            'show-password' => 'Mostrar contrasenya',
             'title' => 'Iniciar sessió',
             'verify-first' => 'Verifica primer el teu compte de correu electrònic.',
         ],
@@ -544,6 +543,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Alternar per defecte',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostrar contrasenya',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1267,6 +1274,7 @@ return [
             'categories-carousel' => 'Carrusel de Categories',
             'image-carousel' => 'Carrusel d\'Imatges',
             'offer' => 'Obté FINS A un 40% de DESCOMPTE en la teva primera comanda COMPRA ARA',
+            'preview-banner' => 'Previsualització del tema :theme al canal :channel. Els enllaços estan desactivats a la previsualització.',
             'product-carousel' => 'Carrusel de Productes',
             'resend-verify-email' => 'Reenviar Correu de Verificació',
             'verify-email' => 'Verifica el teu compte de correu electrònic',

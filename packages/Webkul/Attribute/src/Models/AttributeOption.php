@@ -5,6 +5,7 @@ namespace Webkul\Attribute\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Contracts\AttributeOption as AttributeOptionContract;
 use Webkul\Attribute\Database\Factories\AttributeOptionFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
@@ -13,10 +14,25 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
 {
     use HasFactory;
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * The attributes that are translatable.
+     *
+     * @var array
+     */
     public $translatedAttributes = ['label', 'swatch_alt'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'admin_name',
         'swatch_value',
@@ -25,7 +41,7 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
     ];
 
     /**
-     * Append to the model attributes
+     * The accessors to append to the model's array form.
      *
      * @var array
      */
@@ -43,7 +59,7 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
     }
 
     /**
-     * Get image url for the swatch value url.
+     * Get the url of an image swatch's stored file, or null for a color or text swatch.
      */
     public function swatch_value_url()
     {
@@ -51,14 +67,14 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
             $this->swatch_value
             && $this->attribute->swatch_type == 'image'
         ) {
-            return url('cache/small/'.$this->swatch_value);
+            return Storage::url($this->swatch_value);
         }
 
         return null;
     }
 
     /**
-     * Get image url for the product image.
+     * Get the url of an image swatch's stored file.
      */
     public function getSwatchValueUrlAttribute()
     {
@@ -79,7 +95,7 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
     }
 
     /**
-     * Create a new factory instance for the model
+     * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory
     {

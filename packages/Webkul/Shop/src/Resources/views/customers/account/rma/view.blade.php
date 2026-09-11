@@ -209,9 +209,10 @@
                             <tr>
                                 <td class="px-4 py-4 align-top">
                                     <div class="flex items-start gap-3">
-                                        @if ($item->orderItem->product?->images?->first())
+                                        @if ($productBaseImage = product_image()->getProductBaseImage($item->orderItem->product))
                                             <img
-                                                src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}"
+                                                src="{{ $productBaseImage['small_image_url'] }}"
+                                                alt="{{ $productBaseImage['alt'] }}"
                                                 class="h-16 w-16 shrink-0 rounded-lg border object-cover"
                                             />
                                         @else
@@ -287,9 +288,10 @@
                 @if($item = $rma->item)
                     <div class="rounded-xl border shadow-sm p-4 space-y-3">
                         <div class="flex items-center gap-3">
-                            @if ($item->orderItem->product?->images?->first())
-                                <img 
-                                    src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}" 
+                            @if ($productBaseImage = product_image()->getProductBaseImage($item->orderItem->product))
+                                <img
+                                    src="{{ $productBaseImage['small_image_url'] }}"
+                                    alt="{{ $productBaseImage['alt'] }}"
                                     class="w-16 h-16 object-cover rounded border"
                                 />
                             @else

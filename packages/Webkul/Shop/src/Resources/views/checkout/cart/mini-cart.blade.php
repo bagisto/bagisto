@@ -94,16 +94,15 @@
 
                             {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.image.after') !!}
 
-                        <!-- Cart Item Information -->
-                        <div class="grid flex-1 place-content-start justify-stretch gap-y-2.5">
-                            <div class="flex justify-between gap-2 max-md:gap-0 max-sm:flex-wrap">
-
+                            <!-- Cart Item Information -->
+                            <div class="grid flex-1 place-content-start justify-stretch gap-y-2.5">
+                                <div class="flex justify-between gap-2 max-md:gap-0 max-sm:flex-wrap">
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
                                     <a
-                                    class="max-w-4/5 max-md:w-full"
-                                    :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)"
-                                >
+                                        class="max-w-4/5 max-md:w-full"
+                                        :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)"
+                                    >
                                         <p class="text-base font-medium max-md:font-normal max-sm:text-sm">
                                             @{{ item.name }}
                                         </p>
@@ -145,7 +144,6 @@
                                     class="grid select-none gap-x-2.5 gap-y-1.5 max-sm:gap-y-0.5"
                                     v-if="item.options.length"
                                 >
-
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.product_details.before') !!}
 
                                     <!-- Details Toggler -->
@@ -200,30 +198,30 @@
                                 <div class="flex flex-wrap items-center gap-5 max-md:gap-2.5">
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.before') !!}
 
-                                <!-- Cart Item Quantity Changer -->
-                                <x-shop::quantity-changer
-                                    v-if="item.can_change_qty"
-                                    ::key="'qty-' + item.id + '-' + refreshKey"
-                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
-                                    name="quantity"
-                                    ::value="item?.quantity"
-                                    :removable="true"
-                                    @change="updateItem($event, item)"
-                                    @remove="removeItem(item.id)"
-                                />
+                                    <!-- Cart Item Quantity Changer -->
+                                    <x-shop::quantity-changer
+                                        v-if="item.can_change_qty"
+                                        ::key="'qty-' + item.id + '-' + refreshKey"
+                                        class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
+                                        name="quantity"
+                                        ::value="item?.quantity"
+                                        :removable="true"
+                                        @change="updateItem($event, item)"
+                                        @remove="removeItem(item.id)"
+                                    />
 
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.after') !!}
 
-                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.remove_button.before') !!}
+                                    {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.remove_button.before') !!}
 
-                                <!-- Cart Item Remove Button -->
-                                <button
-                                    type="button"
-                                    class="text-blue-700 max-md:text-sm"
-                                    @click="removeItem(item.id)"
-                                >
-                                    @lang('shop::app.checkout.cart.mini-cart.remove')
-                                </button>
+                                    <!-- Cart Item Remove Button -->
+                                    <button
+                                        type="button"
+                                        class="text-blue-700 max-md:text-sm"
+                                        @click="removeItem(item.id)"
+                                    >
+                                        @lang('shop::app.checkout.cart.mini-cart.remove')
+                                    </button>
 
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.remove_button.after') !!}
                                 </div>
@@ -256,73 +254,73 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.after') !!}
                 </x-slot>
 
-            <!-- Drawer Footer -->
-            <x-slot:footer>
-                <div
-                    v-if="cart?.items?.length"
-                    class="grid-col-1 grid gap-5 max-md:gap-2.5"
-                >
+                <!-- Drawer Footer -->
+                <x-slot:footer>
                     <div
-                        class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-md:my-0 max-md:border-t max-md:px-5 max-md:py-2"
-                        :class="{'!justify-end': isLoading}"
+                        v-if="cart?.items?.length"
+                        class="grid-col-1 grid gap-5 max-md:gap-2.5"
                     >
-                        {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
+                        <div
+                            class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-md:my-0 max-md:border-t max-md:px-5 max-md:py-2"
+                            :class="{'!justify-end': isLoading}"
+                        >
+                            {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
-                        <template v-if="! isLoading">
-                            <p class="text-sm font-medium text-zinc-500">
-                                @lang('shop::app.checkout.cart.mini-cart.subtotal')
-                            </p>
+                            <template v-if="! isLoading">
+                                <p class="text-sm font-medium text-zinc-500">
+                                    @lang('shop::app.checkout.cart.mini-cart.subtotal')
+                                </p>
 
-                        <template v-if="displayTax.subtotal == 'including_tax'">
-                            <p class="text-3xl font-semibold max-md:text-base">
-                                @{{ cart.formatted_sub_total_incl_tax }}
-                            </p>
-                        </template>
+                                <template v-if="displayTax.subtotal == 'including_tax'">
+                                    <p class="text-3xl font-semibold max-md:text-base">
+                                        @{{ cart.formatted_sub_total_incl_tax }}
+                                    </p>
+                                </template>
 
-                        <template v-else-if="displayTax.subtotal == 'both'">
-                            <p class="flex flex-col text-3xl font-semibold max-md:text-sm max-sm:text-right">
-                                @{{ cart.formatted_sub_total_incl_tax }}
+                                <template v-else-if="displayTax.subtotal == 'both'">
+                                    <p class="flex flex-col text-3xl font-semibold max-md:text-sm max-sm:text-right">
+                                        @{{ cart.formatted_sub_total_incl_tax }}
 
-                                <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">
-                                    @lang('shop::app.checkout.cart.mini-cart.excl-tax')
+                                        <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">
+                                            @lang('shop::app.checkout.cart.mini-cart.excl-tax')
 
-                                    <span class="font-medium text-black">@{{ cart.formatted_sub_total }}</span>
-                                </span>
-                            </p>
-                        </template>
+                                            <span class="font-medium text-black">@{{ cart.formatted_sub_total }}</span>
+                                        </span>
+                                    </p>
+                                </template>
 
-                        <template v-else>
-                            <p class="text-3xl font-semibold max-md:text-base">
-                                @{{ cart.formatted_sub_total }}
-                            </p>
-                        </template>
-                    </template>
+                                <template v-else>
+                                    <p class="text-3xl font-semibold max-md:text-base">
+                                        @{{ cart.formatted_sub_total }}
+                                    </p>
+                                </template>
+                            </template>
 
-                        <template v-else>
-                            <!-- Spinner -->
-                            <svg
-                                class="text-blue h-8 w-8 animate-spin text-[5px] font-semibold max-md:h-7 max-md:w-7 max-sm:h-4 max-sm:w-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                aria-hidden="true"
-                                viewBox="0 0 24 24"
-                            >
-                                <circle
-                                    class="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    stroke-width="4"
-                                ></circle>
+                            <template v-else>
+                                <!-- Spinner -->
+                                <svg
+                                    class="text-blue h-8 w-8 animate-spin text-[5px] font-semibold max-md:h-7 max-md:w-7 max-sm:h-4 max-sm:w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    aria-hidden="true"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        class="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        stroke-width="4"
+                                    ></circle>
 
-                                <path
-                                    class="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                ></path>
-                            </svg>
-                        </template>
+                                    <path
+                                        class="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    ></path>
+                                </svg>
+                            </template>
 
                             {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.after') !!}
                         </div>
@@ -333,12 +331,12 @@
                         <div class="grid gap-2.5 px-6 max-md:px-4 max-sm:gap-1.5">
                             {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.before') !!}
 
-                        <a
-                            href="{{ route('shop.checkout.onepage.index') }}"
-                            class="mx-auto block w-full cursor-pointer rounded-2xl bg-navyBlue px-11 py-4 text-center text-base font-medium text-white max-md:rounded-lg max-md:px-5 max-md:py-2"
-                        >
-                            @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
-                        </a>
+                            <a
+                                href="{{ route('shop.checkout.onepage.index') }}"
+                                class="mx-auto block w-full cursor-pointer rounded-2xl bg-navyBlue px-11 py-4 text-center text-base font-medium text-white max-md:rounded-lg max-md:px-5 max-md:py-2"
+                            >
+                                @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
+                            </a>
 
                             {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.after') !!}
 
@@ -353,7 +351,6 @@
                     </div>
                 </x-slot>
             </x-shop::drawer>
-
         @else
             <a href="{{ route('shop.checkout.onepage.index') }}">
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
@@ -382,13 +379,9 @@
     </script>
 
     @php
-        /**
-         * When the cart is empty there is nothing to fetch, so the mini-cart is
-         * seeded with an empty cart server-side. This avoids an `/api/checkout/cart`
-         * request (and a `Cart::collectTotals()` recalculation) on every page view
-         * for the common case of a guest with no cart.
-         */
         $hasCartItems = (bool) \Webkul\Checkout\Facades\Cart::getCart()?->items->isNotEmpty();
+
+        $willResponseBeCached = \Webkul\FPC\FullPageCache::willCache();
     @endphp
 
     <script type="module">
@@ -396,10 +389,16 @@
             template: '#v-mini-cart-template',
 
             data() {
+                @if ($willResponseBeCached)
+                    let miniCart = '<bagisto-response-cache-mini-cart>';
+                @else
+                    let miniCart = {!! $hasCartItems ? 'null' : json_encode(['items_qty' => 0, 'items' => []]) !!};
+                @endif
+
                 return  {
                     refreshKey: 0,
 
-                    cart: {!! $hasCartItems ? 'null' : json_encode(['items_qty' => 0, 'items' => []]) !!},
+                    cart: miniCart,
 
                     isLoading:false,
 
@@ -411,7 +410,11 @@
             },
 
             mounted() {
-                if (!this.cart) {
+                if (typeof this.cart === 'string') {
+                    this.cart = null;
+                }
+
+                if (! this.cart) {
                     this.getCart();
                 }
 
@@ -443,13 +446,6 @@
                         .then(response => {
                             this.isLoading = false;
 
-                            /**
-                             * The update endpoint returns `{ data: CartResource, message }`
-                             * on success and only `{ message }` on failure (e.g.
-                             * inventory-warning). Only treat the payload as a cart when
-                             * it has an `items` field — otherwise surface the server
-                             * message as a warning flash.
-                             */
                             const payload = response.data.data;
 
                             if (payload && payload.items !== undefined) {
@@ -461,12 +457,6 @@
                                 });
                             }
 
-                            /**
-                             * Bump the key so the quantity-changer remounts from the
-                             * current server value even when the update was rejected
-                             * (in which case `value` didn't change and the component's
-                             * `value` watcher wouldn't fire).
-                             */
                             this.refreshKey++;
                         })
                         .catch(error => {
