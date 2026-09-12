@@ -31,6 +31,7 @@ class SupportedLocales
         'ro' => ['name' => 'romanian', 'direction' => 'ltr'],
         'ru' => ['name' => 'russian', 'direction' => 'ltr'],
         'sin' => ['name' => 'sinhala', 'direction' => 'ltr'],
+        'sw' => ['name' => 'swahili', 'direction' => 'ltr'],
         'tr' => ['name' => 'turkish', 'direction' => 'ltr'],
         'uk' => ['name' => 'ukrainian', 'direction' => 'ltr'],
         'zh_CN' => ['name' => 'chinese', 'direction' => 'ltr'],
