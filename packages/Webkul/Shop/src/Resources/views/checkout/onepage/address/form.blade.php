@@ -166,6 +166,7 @@
                         rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.country')"
                         :placeholder="trans('shop::app.checkout.onepage.address.country')"
+                        @change="selectedState = ''"
                     >
                         <option value="">
                             @lang('shop::app.checkout.onepage.address.select-country')
@@ -197,6 +198,7 @@
                                 ::name="controlName + '.state'"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 ::value="address.state"
+                                v-model="selectedState"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
                             >
@@ -218,6 +220,7 @@
                                 type="text"
                                 ::name="controlName + '.state'"
                                 ::value="address.state"
+                                v-model="selectedState"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
@@ -327,6 +330,8 @@
             data() {
                 return {
                     selectedCountry: this.address.country,
+
+                    selectedState: this.address.state,
 
                     countries: [],
 

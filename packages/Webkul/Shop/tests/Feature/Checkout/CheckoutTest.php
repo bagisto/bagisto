@@ -842,6 +842,90 @@ it('should store the billing address for non stockable items for customer', func
     ]);
 });
 
+it('should store the billing address for non stockable items when use for shipping is off and no shipping address is provided for customer', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getVirtualProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id' => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating' => '0',
+        'is_buy_now' => '0',
+        'quantity' => '1',
+    ];
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => $additional['quantity'],
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax' => $convertedPrice,
+        'base_price' => $price,
+        'base_price_incl_tax' => $price,
+        'total' => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax' => $total,
+        'base_total' => $price * $additional['quantity'],
+        'weight' => $product->weight ?? 0,
+        'total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type' => $product->type,
+        'additional' => $additional,
+    ]);
+
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
+    cart()->setCart($cart);
+
+    // Act and Assert.
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => $billingAddress = [
+            ...$customerAddress,
+            'address' => [fake()->address()],
+            'use_for_shipping' => 0,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonStructure(['data' => ['payment_methods']]);
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address' => implode("\n", $billingAddress['address']),
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id' => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
+            ],
+        ],
+    ]);
+});
+
 it('should fails the certain validation errors when use for shipping is set to false in billing address and shipping address not provided for customer', function () {
     // Arrange.
     $product = (new ProductFaker([

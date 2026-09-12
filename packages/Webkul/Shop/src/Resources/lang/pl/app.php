@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Dodaj nowy adres',
                 'add-new-address' => 'Dodaj nowy adres',
+                'address-updated-payment-info' => 'Metody płatności i sumy zamówienia zostaną odświeżone dla Twojego nowego adresu. Kliknij „Kontynuuj”, aby zobaczyć najnowsze opcje.',
+                'address-updated-shipping-info' => 'Metody dostawy i stawki zostaną ponownie obliczone dla Twojego nowego adresu. Kliknij „Kontynuuj”, aby zobaczyć najnowsze opcje.',
+                'address-updated-title' => 'Twój adres został zaktualizowany',
                 'back' => 'Wstecz',
                 'billing-address' => 'Adres rozliczeniowy',
                 'check-billing-address' => 'Brakuje adresu rozliczeniowego.',

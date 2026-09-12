@@ -44,6 +44,7 @@
                         rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.cart.summary.estimate-shipping.country')"
                         :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.country')"
+                        @change="selectedState = ''"
                     >
                         <option value="">
                             @lang('shop::app.checkout.cart.summary.estimate-shipping.select-country')
@@ -73,6 +74,7 @@
                             <x-shop::form.control-group.control
                                 type="select"
                                 name="state"
+                                v-model="selectedState"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
                                 :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
@@ -94,6 +96,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="state"
+                                v-model="selectedState"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
                                 :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
@@ -174,6 +177,8 @@
             data() {
                 return {
                     selectedCountry: '',
+
+                    selectedState: '',
 
                     countries: [],
 

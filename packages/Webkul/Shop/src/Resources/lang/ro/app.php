@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Adaugă adresă nouă',
                 'add-new-address' => 'Adaugă adresă nouă',
+                'address-updated-payment-info' => 'Metodele de plată și totalurile comenzii vor fi actualizate pentru noua dumneavoastră adresă. Faceți clic pe Continuă pentru a vedea cele mai recente opțiuni.',
+                'address-updated-shipping-info' => 'Metodele de expediere și tarifele vor fi recalculate pentru noua dumneavoastră adresă. Faceți clic pe Continuă pentru a vedea cele mai recente opțiuni.',
+                'address-updated-title' => 'Adresa dumneavoastră a fost actualizată',
                 'back' => 'Înapoi',
                 'billing-address' => 'Adresa de facturare',
                 'check-billing-address' => 'Adresa de facturare lipsește.',

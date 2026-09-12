@@ -162,6 +162,7 @@
                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                     :label="trans('admin::app.sales.orders.create.cart.address.country')"
                     :placeholder="trans('admin::app.sales.orders.create.cart.address.country')"
+                    @change="selectedState = ''"
                 >
                     <option value="">
                         @lang('admin::app.sales.orders.create.cart.address.select-country')
@@ -192,6 +193,7 @@
                             type="select"
                             ::name="controlName + '.state'"
                             ::value="address.state"
+                            v-model="selectedState"
                             rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                             :label="trans('admin::app.sales.orders.create.cart.address.state')"
                             :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
@@ -214,6 +216,7 @@
                             type="text"
                             ::name="controlName + '.state'"
                             ::value="address.state"
+                            v-model="selectedState"
                             rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                             :label="trans('admin::app.sales.orders.create.cart.address.state')"
                             :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
@@ -320,6 +323,8 @@
             data() {
                 return {
                     selectedCountry: this.address.country,
+
+                    selectedState: this.address.state,
 
                     countries: [],
 

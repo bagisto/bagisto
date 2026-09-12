@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
+use Webkul\Core\Rules\StateBelongsToCountry;
 use Webkul\Customer\Rules\VatIdRule;
 
 class AddressRequest extends FormRequest
@@ -32,7 +33,7 @@ class AddressRequest extends FormRequest
             'last_name' => ['required'],
             'address' => ['required', 'array', 'min:1'],
             'country' => ['required'],
-            'state' => ['required'],
+            'state' => ['required', new StateBelongsToCountry($this->input('country'))],
             'city' => ['required'],
             'postcode' => ['required', new PostCode],
             'phone' => ['required', new PhoneNumber],

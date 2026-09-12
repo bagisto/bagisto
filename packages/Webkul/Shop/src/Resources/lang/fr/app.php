@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Ajouter une nouvelle adresse',
                 'add-new-address' => 'Ajouter une nouvelle adresse',
+                'address-updated-payment-info' => 'Les méthodes de paiement et les totaux de la commande seront actualisés pour votre nouvelle adresse. Cliquez sur Continuer pour voir les options les plus récentes.',
+                'address-updated-shipping-info' => 'Les méthodes d\'expédition et les tarifs seront recalculés pour votre nouvelle adresse. Cliquez sur Continuer pour voir les options les plus récentes.',
+                'address-updated-title' => 'Votre adresse a été mise à jour',
                 'back' => 'Retour',
                 'billing-address' => 'Adresse de facturation',
                 'check-billing-address' => 'L\'adresse de facturation est manquante.',

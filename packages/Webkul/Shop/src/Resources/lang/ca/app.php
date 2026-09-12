@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Afegir nova adreça',
                 'add-new-address' => 'Afegir nova adreça',
+                'address-updated-payment-info' => 'Els mètodes de pagament i els totals de la comanda s\'actualitzaran per a la vostra nova adreça. Feu clic a Continuar per veure les opcions més recents.',
+                'address-updated-shipping-info' => 'Els mètodes d\'enviament i les tarifes es tornaran a calcular per a la vostra nova adreça. Feu clic a Continuar per veure les opcions més recents.',
+                'address-updated-title' => 'S\'ha actualitzat la vostra adreça',
                 'back' => 'Tornar',
                 'billing-address' => 'Adreça de facturació',
                 'check-billing-address' => 'Falta l\'adreça de facturació.',
