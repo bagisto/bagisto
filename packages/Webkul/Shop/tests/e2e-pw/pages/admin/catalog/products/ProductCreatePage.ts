@@ -453,24 +453,16 @@ export class ProductCreatePage extends BasePage {
         minute: string,
     ) {
         const textbox = this.slotTimeTextbox(label, index);
-        const expected = `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
 
-        for (let attempt = 0; attempt < 3; attempt++) {
-            await textbox.click();
-            await this.flatpickrCalendar.waitFor({
-                state: "visible",
-            });
-            await this.calendarSpinbutton("Hour").fill(hour);
-            await this.calendarSpinbutton("Minute").fill(minute);
-            await this.calendarSpinbutton("Minute").press("Enter");
-            await expect(this.flatpickrCalendar).toBeHidden();
-
-            if ((await textbox.inputValue()) === expected) {
-                return;
-            }
-        }
-
-        await expect(textbox).toHaveValue(expected);
+        await textbox.click();
+        await expect(this.calendarSpinbutton("Hour")).toBeFocused();
+        await this.calendarSpinbutton("Hour").fill(hour);
+        await this.calendarSpinbutton("Minute").fill(minute);
+        await this.calendarSpinbutton("Minute").press("Enter");
+        await expect(this.flatpickrCalendar).toBeHidden();
+        await expect(textbox).toHaveValue(
+            `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`,
+        );
     }
 
     private async fillSlotTime(

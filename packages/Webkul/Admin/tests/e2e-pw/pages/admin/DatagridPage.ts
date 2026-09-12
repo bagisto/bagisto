@@ -43,6 +43,27 @@ export abstract class DatagridPage extends BasePage {
         });
     }
 
+    protected async rowWithColumnValue(
+        column: string,
+        value: string,
+    ): Promise<Locator> {
+        const headers = await this.page
+            .locator("div.row.datagrid-head > p")
+            .allInnerTexts();
+        const position =
+            headers.findIndex((header) => header.trim() === column) + 1;
+
+        if (!position) {
+            throw new Error(`The grid has no "${column}" column`);
+        }
+
+        return this.gridRows.filter({
+            has: this.page.locator(`:scope > p:nth-child(${position})`, {
+                hasText: new RegExp(`^\\s*${escapeRegExp(value)}\\s*$`),
+            }),
+        });
+    }
+
     protected editIcon(text: string): Locator {
         return this.row(text).locator("span.icon-edit");
     }

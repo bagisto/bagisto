@@ -145,7 +145,8 @@ export class CategoryPage extends DatagridPage {
     async attemptDeleteCategory(name: string): Promise<void> {
         await this.openGrid();
         await this.searchFor(name);
-        await this.rowWithCell(name).locator("span.icon-delete").click();
+        const row = await this.rowWithColumnValue("Name", name);
+        await row.locator("span.icon-delete").click();
         await this.agreeButton.click();
     }
 
@@ -196,7 +197,9 @@ export class CategoryPage extends DatagridPage {
         await this.openGrid();
         await this.searchFor("Root");
 
-        await expect(this.rowWithCell("Root")).toHaveCount(1);
+        await expect(
+            await this.rowWithColumnValue("Name", "Root"),
+        ).toHaveCount(1);
     }
 
     async expectNameInEditForm(name: string): Promise<void> {
