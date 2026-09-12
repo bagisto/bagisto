@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Zasada katalogu utworzona pomyślnie',
                 'delete-success' => 'Zasada katalogu usunięta pomyślnie',
+                'queue-note' => 'Zapisanie tej reguły aktualizuje cenę każdego produktu, którego dotyczy. Jeśli dotyczy wielu produktów, użyj sterownika kolejki database lub redis z uruchomionym workerem kolejki, aby ceny były aktualizowane w tle, zamiast spowalniać zapisywanie.',
                 'update-success' => 'Zasada katalogu zaktualizowana pomyślnie',
             ],
 

@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Règle du catalogue créée avec succès',
                 'delete-success' => 'Règle du catalogue supprimée avec succès',
+                'queue-note' => 'L\'enregistrement de cette règle met à jour le prix de chaque produit auquel elle s\'applique. Si elle s\'applique à de nombreux produits, utilisez le pilote de file d\'attente database ou redis avec un worker de file d\'attente en cours d\'exécution, afin que les prix soient mis à jour en arrière-plan au lieu de ralentir l\'enregistrement.',
                 'update-success' => 'Règle du catalogue mise à jour avec succès',
             ],
 

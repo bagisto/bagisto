@@ -36,6 +36,14 @@
             </div>
         </div>
 
+        <div class="mt-3.5 grid w-full gap-2 rounded-sm border border-blue-200 bg-blue-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white">
+            <p class="flex items-center gap-2">
+                <i class="icon-information shrink-0 rounded-full bg-blue-200 text-2xl text-blue-600 dark:!text-blue-600"></i>
+
+                @lang('admin::app.marketing.promotions.catalog-rules.queue-note')
+            </p>
+        </div>
+
         <!-- Create Catalog form -->
         <v-catalog-rule-create-form>
             <!-- Shimmer Effect -->

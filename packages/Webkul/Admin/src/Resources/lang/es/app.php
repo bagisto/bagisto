@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Regla del Catálogo creada exitosamente',
                 'delete-success' => 'Regla del Catálogo eliminada exitosamente',
+                'queue-note' => 'Guardar esta regla actualiza el precio de cada producto al que se aplica. Si se aplica a muchos productos, usa el controlador de cola database o redis con un worker de cola en ejecución, para que los precios se actualicen en segundo plano en lugar de ralentizar el guardado.',
                 'update-success' => 'Regla del Catálogo actualizada exitosamente',
             ],
 

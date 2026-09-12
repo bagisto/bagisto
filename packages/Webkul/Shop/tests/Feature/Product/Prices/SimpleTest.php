@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Pagination\Cursor;
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\CatalogRule\Models\CatalogRule;
@@ -9,7 +10,9 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Models\ProductCustomerGroupPrice;
+use Webkul\Product\Models\ProductPriceIndex;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
@@ -3106,4 +3109,28 @@ it('should check discount price if catalog rule applied for percentage price for
             $this->prepareCatalogRule($catalogRule),
         ],
     ]);
+});
+
+it('should reprice the products of a saved catalog rule when an earlier batched reindex left its cursor in the request', function () {
+    $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
+
+    request()->query->add(['cursor' => (new Cursor(['products.id' => $product->id]))->encode()]);
+
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+
+    expect((float) $product->fresh()->getTypeInstance()->getMinimalPrice())->toBe(800.0);
+});
+
+it('should reprice every product in a full price reindex when an earlier batched reindex left its cursor in the request', function () {
+    $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
+
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+
+    ProductPriceIndex::where('product_id', $product->id)->update(['min_price' => 1000]);
+
+    request()->query->add(['cursor' => (new Cursor(['products.id' => $product->id]))->encode()]);
+
+    app(PriceIndexer::class)->reindexFull();
+
+    expect((float) $product->fresh()->getTypeInstance()->getMinimalPrice())->toBe(800.0);
 });

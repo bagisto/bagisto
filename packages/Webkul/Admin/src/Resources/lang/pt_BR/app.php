@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Regra de catálogo criada com sucesso',
                 'delete-success' => 'Regra de catálogo excluída com sucesso',
+                'queue-note' => 'Salvar esta regra atualiza o preço de cada produto ao qual ela se aplica. Se ela se aplicar a muitos produtos, use o driver de fila database ou redis com um worker de fila em execução, para que os preços sejam atualizados em segundo plano em vez de deixar o salvamento lento.',
                 'update-success' => 'Regra de catálogo atualizada com sucesso',
             ],
 

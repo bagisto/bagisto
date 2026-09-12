@@ -25,7 +25,8 @@ it('should returns the create page of catalog rules', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.title'))
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.back-btn'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.save-btn'))
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.queue-note'));
 });
 
 it('should fail the validation with errors when certain field not provided when store the catalog rule', function () {
@@ -93,7 +94,8 @@ it('should returns the edit page of catalog rules', function () {
     get(route('admin.marketing.promotions.catalog_rules.edit', $catalogRule->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.title'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.save-btn'))
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.queue-note'));
 });
 
 it('should fail the validation with errors when certain field not provided when update the catalog rule', function () {

@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Katalog kuralı başarıyla oluşturuldu',
                 'delete-success' => 'Katalog kuralı başarıyla silindi',
+                'queue-note' => 'Bu kuralı kaydetmek, uygulandığı her ürünün fiyatını günceller. Çok sayıda ürüne uygulanıyorsa, kaydetme işlemini yavaşlatmak yerine fiyatların arka planda güncellenmesi için çalışan bir kuyruk işçisiyle database veya redis kuyruk sürücüsünü kullanın.',
                 'update-success' => 'Katalog kuralı başarıyla güncellendi',
             ],
 

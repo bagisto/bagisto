@@ -3532,3 +3532,11 @@ it('should check discount price if catalog rule applied for percentage price for
         ]);
     }
 });
+
+it('should reprice the grouped product as soon as a catalog rule discounts its associated products', function () {
+    $product = $this->createGroupedProduct([1000, 500]);
+
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+
+    expect((float) $product->fresh()->getTypeInstance()->getMinimalPrice())->toBe(400.0);
+});
