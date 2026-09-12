@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Adres toevoegen',
                         'add-new' => 'Nieuw adres toevoegen',
                         'add-new-address' => 'Nieuw adres toevoegen',
+                        'address-updated-payment-info' => 'Betalingsmethoden en besteltotalen worden vernieuwd voor het gewijzigde adres. Klik op "Ga verder" om de nieuwste opties te laden.',
+                        'address-updated-shipping-info' => 'Verzendmethoden en tarieven worden opnieuw berekend voor het gewijzigde adres. Klik op "Ga verder" om de nieuwste opties te laden.',
+                        'address-updated-title' => 'Adres bijgewerkt',
                         'addresses' => 'Adressen',
                         'back' => 'Terug',
                         'billing-address' => 'Factuuradres',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Inactief',
                     'name' => 'Naam',
                     'no-of-products' => 'Aantal Producten',
+                    'parent-category' => 'Ouder Categorie',
                     'position' => 'Positie',
                     'status' => 'Zichtbaar in menu',
                     'update-status' => 'Status Bijwerken',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Dupliceren',
                 'empty' => 'Nog geen secties.',
                 'gone' => 'Deze sectie bestaat niet meer.',
+                'inactive-theme' => 'Alleen een thema dat actief is op een kanaal kan worden aangepast.',
                 'locale' => 'Taal',
                 'mobile' => 'Mobiel',
+                'no-fields' => 'Deze sectie heeft in dit thema geen instellingen om te bewerken.',
+                'no-types' => 'Dit thema biedt geen sectietypen om toe te voegen.',
                 'pinned' => 'Vastgezet onderaan de pagina.',
                 'preview-btn' => 'Voorbeeld',
                 'publish-btn' => 'Publiceren',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Dit kanaal toont slechts één sectie met voettekstlinks.',
                 'name' => 'Naam',
                 'save-btn' => 'Sectie opslaan',
+                'singleton-exists' => 'Dit kanaal toont slechts één sectie van het type :type.',
                 'title' => 'Sectie aanmaken',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Actief',
+                'add-column' => 'Kolom toevoegen',
                 'add-filter-btn' => 'Filter toevoegen',
                 'add-footer-link-btn' => 'Voettekstlink toevoegen',
                 'add-image-btn' => 'Afbeelding toevoegen',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'Categorie-ID',
                 'channels' => 'Kanalen',
                 'column' => 'Kolom',
+                'columns' => 'Kolommen',
                 'create-filter' => 'Filter aanmaken',
                 'css' => 'CSS',
                 'delete' => 'Verwijderen',

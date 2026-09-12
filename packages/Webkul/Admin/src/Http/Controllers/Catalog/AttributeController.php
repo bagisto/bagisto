@@ -140,15 +140,13 @@ class AttributeController extends Controller
     }
 
     /**
-     * Get attribute options associated with attribute.
-     *
-     * @return View
+     * Get the options of an attribute, each image swatch linked to its stored file.
      */
-    public function getAttributeOptions(int $id)
+    public function getAttributeOptions(int $id): JsonResponse
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        return $attribute->options()->orderBy('sort_order')->get();
+        return new JsonResponse($attribute->options()->orderBy('sort_order')->get());
     }
 
     /**

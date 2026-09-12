@@ -51,7 +51,7 @@
 </p>
 
 <a href="https://www.youtube.com/watch?v=OHbte7hdxYU">
-    <img class="flag-img" src="https://raw.githubusercontent.com/bagisto/temp-media/master/bagisto-featured.png" alt="Chinese" width="100%">
+    <img class="flag-img" src="https://raw.githubusercontent.com/bagisto/temp-media/master/bagisto-featured.png" alt="Bagisto Featured Video" width="100%">
 </a>
 
 # Introduction

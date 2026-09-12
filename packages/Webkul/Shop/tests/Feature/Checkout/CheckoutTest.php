@@ -161,6 +161,21 @@ it('should store billing address for non-stockable items for guest', function ()
         ->assertOk();
 });
 
+it('should store only a billing address for non-stockable items when use_for_shipping is false for customer', function () {
+    $product = $this->createVirtualProduct();
+
+    $this->loginAsCustomer();
+
+    $this->addProductToCart($product->id);
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => array_merge(guestAddress(), ['use_for_shipping' => false]),
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonStructure(['data' => ['payment_methods']]);
+});
+
 // ============================================================================
 // Store Shipping Method
 // ============================================================================

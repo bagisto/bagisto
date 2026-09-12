@@ -42,7 +42,6 @@ return [
             'page-title' => 'تسجيل الدخول للعملاء',
             'password' => 'كلمة المرور',
             'resend-verification' => 'إعادة إرسال بريد التحقق',
-            'show-password' => 'عرض كلمة المرور',
             'title' => 'تسجيل الدخول',
             'verify-first' => 'الرجاء التحقق من حساب البريد الإلكتروني الخاص بك أولاً.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'التبديل الافتراضي',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'عرض كلمة المرور',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'إضافة عنوان جديد',
                 'add-new-address' => 'إضافة عنوان جديد',
+                'address-updated-payment-info' => 'سيتم تحديث طرق الدفع وإجماليات الطلب لعنوانك الجديد. انقر على «المتابعة» لعرض أحدث الخيارات.',
+                'address-updated-shipping-info' => 'ستتم إعادة احتساب طرق الشحن والأسعار لعنوانك الجديد. انقر على «المتابعة» لعرض أحدث الخيارات.',
+                'address-updated-title' => 'تم تحديث عنوانك',
                 'back' => 'العودة',
                 'billing-address' => 'عنوان الفواتير',
                 'check-billing-address' => 'العنوان الفوترة مفقود.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'سلاسل الفئات',
             'image-carousel' => 'سلاسل الصور',
             'offer' => 'احصل على خصم يصل إلى 40% على طلبك الأول، تسوق الآن',
+            'preview-banner' => 'معاينة سمة :theme على قناة :channel. الروابط معطلة في المعاينة.',
             'product-carousel' => 'سلاسل المنتجات',
             'resend-verify-email' => 'إعادة إرسال بريد التحقق',
             'verify-email' => 'تحقق من حساب بريدك الإلكتروني',

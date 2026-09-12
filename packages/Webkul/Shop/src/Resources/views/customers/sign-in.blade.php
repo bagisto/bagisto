@@ -95,28 +95,7 @@
                         <x-shop::form.control-group.error control-name="password" />
                     </x-shop::form.control-group>
 
-                    <div class="flex justify-between">
-                        <div class="flex select-none items-center gap-1.5">
-                            <input
-                                type="checkbox"
-                                id="show-password"
-                                class="peer hidden"
-                                onchange="switchVisibility()"
-                            />
-
-                            <label
-                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
-                                for="show-password"
-                            ></label>
-
-                            <label
-                                class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-sm ltr:pl-0 rtl:pr-0"
-                                for="show-password"
-                            >
-                                @lang('shop::app.customers.login-form.show-password')
-                            </label>
-                        </div>
-
+                    <div class="flex justify-end">
                         <div class="block">
                             <a
                                 href="{{ route('shop.customers.forgot_password.create') }}"
@@ -187,15 +166,5 @@
 
     @push('scripts')
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
-
-        <script>
-            function switchVisibility() {
-                let passwordField = document.getElementById("password");
-
-                passwordField.type = passwordField.type === "password"
-                    ? "text"
-                    : "password";
-            }
-        </script>
     @endpush
 </x-shop::layouts>

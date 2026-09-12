@@ -200,6 +200,7 @@
                             v-model="country"
                             :aria-label="trans('shop::app.customers.account.addresses.create.country')"
                             :label="trans('shop::app.customers.account.addresses.create.country')"
+                            @change="state = ''"
                         >
                             <option value="">
                                 @lang('shop::app.customers.account.addresses.create.select-country')
@@ -243,6 +244,7 @@
                                 type="text"
                                 name="state"
                                 :value="old('state')"
+                                v-model="state"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.customers.account.addresses.create.state')"
                                 :placeholder="trans('shop::app.customers.account.addresses.create.state')"

@@ -42,7 +42,6 @@ return [
             'page-title' => 'Inicio de Sesión del Cliente',
             'password' => 'Contraseña',
             'resend-verification' => 'Reenviar correo de verificación',
-            'show-password' => 'Mostrar Contraseña',
             'title' => 'Iniciar Sesión',
             'verify-first' => 'Verifica primero tu cuenta de correo electrónico.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Alternar predeterminado',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostrar Contraseña',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'Agregar nueva dirección',
                 'add-new-address' => 'Agregar nueva dirección',
+                'address-updated-payment-info' => 'Los métodos de pago y los totales del pedido se actualizarán para su nueva dirección. Haga clic en Continuar para ver las opciones más recientes.',
+                'address-updated-shipping-info' => 'Los métodos de envío y las tarifas se volverán a calcular para su nueva dirección. Haga clic en Continuar para ver las opciones más recientes.',
+                'address-updated-title' => 'Su dirección se ha actualizado',
                 'back' => 'Volver',
                 'billing-address' => 'Dirección de facturación',
                 'check-billing-address' => 'Falta la dirección de facturación.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'Carrusel de categorías',
             'image-carousel' => 'Carrusel de imágenes',
             'offer' => 'Obtén HASTA 40% DE DESCUENTO en tu primer pedido, COMPRA AHORA',
+            'preview-banner' => 'Vista previa del tema :theme en el canal :channel. Los enlaces están desactivados en la vista previa.',
             'product-carousel' => 'Carrusel de productos',
             'resend-verify-email' => 'Reenviar correo de verificación',
             'verify-email' => 'Verifica tu cuenta de correo electrónico',

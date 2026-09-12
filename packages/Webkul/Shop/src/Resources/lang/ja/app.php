@@ -42,7 +42,6 @@ return [
             'page-title' => '顧客ログイン',
             'password' => 'パスワード',
             'resend-verification' => '確認メールを再送信',
-            'show-password' => 'パスワードを表示',
             'title' => 'サインイン',
             'verify-first' => 'まずメールアカウントを確認してください。',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'デフォルトトグル',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'パスワードを表示',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => '新しい住所を追加',
                 'add-new-address' => '新しい住所を追加',
+                'address-updated-payment-info' => '新しい住所に合わせて支払方法と注文合計が更新されます。最新のオプションを確認するには「進む」をクリックしてください。',
+                'address-updated-shipping-info' => '新しい住所に合わせて配送方法と送料が再計算されます。最新のオプションを確認するには「進む」をクリックしてください。',
+                'address-updated-title' => '住所が更新されました',
                 'back' => '戻る',
                 'billing-address' => '請求先住所',
                 'check-billing-address' => '請求先住所がありません。',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'カテゴリカルーセル',
             'image-carousel' => '画像カルーセル',
             'offer' => '初回注文で最大40%オフ、今すぐ購入',
+            'preview-banner' => ':channel チャネルで :theme テーマをプレビューしています。プレビューではリンクは無効です。',
             'product-carousel' => '商品カルーセル',
             'resend-verify-email' => '確認メールを再送信',
             'verify-email' => 'メールアカウントを確認してください',

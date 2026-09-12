@@ -4,6 +4,11 @@
  */
 @import "tailwindcss" source("../../../");
 
+/**
+ * The section types name their editor icons in the Theme package's classes, outside `src/`.
+ */
+@source "../../../../../Theme/src/Sections";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {

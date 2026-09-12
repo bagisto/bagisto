@@ -1,11 +1,13 @@
 <?php
 
 use Webkul\Attribute\Models\AttributeFamily;
+use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -331,4 +333,19 @@ it('should delete a configurable product and all its variants', function () {
         $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $variantId]);
         $this->assertDatabaseMissing('product_inventories', ['product_id' => $variantId]);
     }
+});
+
+it('should give the admin panel the variations of a configurable product without the storefront image urls', function () {
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
+
+    $this->loginAsAdmin();
+
+    $response = getJson(route('admin.catalog.products.configurable.options', $product->id))
+        ->assertOk()
+        ->assertJsonStructure(['data' => ['attributes' => [['id', 'code', 'label', 'swatch_type', 'options']], 'index']])
+        ->assertJsonMissingPath('data.variant_images')
+        ->assertJsonMissingPath('data.variant_videos')
+        ->assertJsonMissingPath('data.variant_prices');
+
+    expect($response->getContent())->not->toContain('cache/');
 });

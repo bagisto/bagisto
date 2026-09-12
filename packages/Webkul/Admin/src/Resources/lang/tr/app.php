@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Adres Ekle',
                         'add-new' => 'Yeni adres ekle',
                         'add-new-address' => 'Yeni adres ekle',
+                        'address-updated-payment-info' => 'Ödeme yöntemleri ve sipariş toplamları değiştirilen adrese göre yenilenecek. Güncel seçenekleri yüklemek için Devam Et düğmesine tıklayın.',
+                        'address-updated-shipping-info' => 'Kargo yöntemleri ve ücretleri değiştirilen adrese göre yeniden hesaplanacak. Güncel seçenekleri yüklemek için Devam Et düğmesine tıklayın.',
+                        'address-updated-title' => 'Adres güncellendi',
                         'addresses' => 'Adresler',
                         'back' => 'Geri',
                         'billing-address' => 'Fatura Adresi',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Pasif',
                     'name' => 'Adı',
                     'no-of-products' => 'Ürün Sayısı',
+                    'parent-category' => 'Ana Kategori',
                     'position' => 'Pozisyon',
                     'status' => 'Menüde Görünür',
                     'update-status' => 'Durumu Güncelle',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Çoğalt',
                 'empty' => 'Henüz bölüm yok.',
                 'gone' => 'Bu bölüm artık mevcut değil.',
+                'inactive-theme' => 'Yalnızca bir kanalda etkin olan tema özelleştirilebilir.',
                 'locale' => 'Yerel Ayar',
                 'mobile' => 'Mobil',
+                'no-fields' => 'Bu bölümün bu temada düzenlenecek ayarı yok.',
+                'no-types' => 'Bu tema eklenecek bölüm türü sunmuyor.',
                 'pinned' => 'Sayfanın altına sabitlendi.',
                 'preview-btn' => 'Önizleme',
                 'publish-btn' => 'Yayınla',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Bu kanal yalnızca bir alt bilgi bağlantıları bölümü gösterir.',
                 'name' => 'Ad',
                 'save-btn' => 'Bölümü Kaydet',
+                'singleton-exists' => 'Bu kanal yalnızca bir :type bölümü gösterir.',
                 'title' => 'Bölüm Oluştur',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktif',
+                'add-column' => 'Sütun Ekle',
                 'add-filter-btn' => 'Filtre Ekle',
                 'add-footer-link-btn' => 'Alt Bağlantı Ekle',
                 'add-image-btn' => 'Resim Ekle',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'Kategori Kimliği',
                 'channels' => 'Kanallar',
                 'column' => 'Sütun',
+                'columns' => 'Sütunlar',
                 'create-filter' => 'Filtre Oluştur',
                 'css' => 'CSS',
                 'delete' => 'Sil',

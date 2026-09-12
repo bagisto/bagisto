@@ -42,7 +42,6 @@ return [
             'page-title' => 'Logowanie klienta',
             'password' => 'Hasło',
             'resend-verification' => 'Wyślij ponownie e-mail weryfikacyjny',
-            'show-password' => 'Pokaż hasło',
             'title' => 'Zaloguj się',
             'verify-first' => 'Najpierw zweryfikuj swoje konto e-mail.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Domyślna zmiana',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Pokaż hasło',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'Dodaj nowy adres',
                 'add-new-address' => 'Dodaj nowy adres',
+                'address-updated-payment-info' => 'Metody płatności i sumy zamówienia zostaną odświeżone dla Twojego nowego adresu. Kliknij „Kontynuuj”, aby zobaczyć najnowsze opcje.',
+                'address-updated-shipping-info' => 'Metody dostawy i stawki zostaną ponownie obliczone dla Twojego nowego adresu. Kliknij „Kontynuuj”, aby zobaczyć najnowsze opcje.',
+                'address-updated-title' => 'Twój adres został zaktualizowany',
                 'back' => 'Wstecz',
                 'billing-address' => 'Adres rozliczeniowy',
                 'check-billing-address' => 'Brakuje adresu rozliczeniowego.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'Karuzela kategorii',
             'image-carousel' => 'Karuzela obrazów',
             'offer' => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie, ZAKUP TERAZ',
+            'preview-banner' => 'Podgląd motywu :theme w kanale :channel. Linki są wyłączone w podglądzie.',
             'product-carousel' => 'Karuzela produktów',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email' => 'Zweryfikuj swoje konto e-mail',

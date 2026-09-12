@@ -42,7 +42,6 @@ return [
             'page-title' => 'Accesso Cliente',
             'password' => 'Password',
             'resend-verification' => 'Reinvia email di verifica',
-            'show-password' => 'Mostra Password',
             'title' => 'Accedi',
             'verify-first' => 'Verifica prima il tuo account email.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Attivazione predefinita',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostra Password',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'Aggiungi nuovo indirizzo',
                 'add-new-address' => 'Aggiungi nuovo indirizzo',
+                'address-updated-payment-info' => 'I metodi di pagamento e i totali dell\'ordine verranno aggiornati per il tuo nuovo indirizzo. Clicca su Procedi per vedere le opzioni più recenti.',
+                'address-updated-shipping-info' => 'I metodi di spedizione e le tariffe verranno ricalcolati per il tuo nuovo indirizzo. Clicca su Procedi per vedere le opzioni più recenti.',
+                'address-updated-title' => 'Il tuo indirizzo è stato aggiornato',
                 'back' => 'Indietro',
                 'billing-address' => 'Indirizzo di fatturazione',
                 'check-billing-address' => 'Indirizzo di fatturazione mancante.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'Carosello delle categorie',
             'image-carousel' => 'Carosello delle immagini',
             'offer' => 'Ottieni fino al 40% di sconto sul tuo primo ordine, ACQUISTA ORA',
+            'preview-banner' => 'Anteprima del tema :theme sul canale :channel. I link sono disattivati nell\'anteprima.',
             'product-carousel' => 'Carosello dei prodotti',
             'resend-verify-email' => 'Reinvia l\'email di verifica',
             'verify-email' => 'Verifica il tuo account email',

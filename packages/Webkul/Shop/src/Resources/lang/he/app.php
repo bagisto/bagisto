@@ -42,7 +42,6 @@ return [
             'page-title' => 'התחברות ללקוחות',
             'password' => 'סיסמה',
             'resend-verification' => 'שלח שוב אימייל אימות',
-            'show-password' => 'הצג סיסמה',
             'title' => 'התחברות',
             'verify-first' => 'אנא אמת את חשבון האימייל שלך תחילה.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'מתג ברירת מחדל',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'הצג סיסמה',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'הוסף כתובת חדשה',
                 'add-new-address' => 'הוסף כתובת חדשה',
+                'address-updated-payment-info' => 'אמצעי התשלום וסכומי ההזמנה יעודכנו עבור הכתובת החדשה שלך. יש ללחוץ על "המשך" כדי לראות את האפשרויות העדכניות.',
+                'address-updated-shipping-info' => 'אמצעי המשלוח והתעריפים יחושבו מחדש עבור הכתובת החדשה שלך. יש ללחוץ על "המשך" כדי לראות את האפשרויות העדכניות.',
+                'address-updated-title' => 'הכתובת שלך עודכנה',
                 'back' => 'חזור',
                 'billing-address' => 'כתובת לחיוב',
                 'check-billing-address' => 'כתובת החיוב חסרה.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'קרוסלת קטגוריות',
             'image-carousel' => 'קרוסלת תמונות',
             'offer' => 'קבל עד 40% הנחה על ההזמנה הראשונה שלך, קנה עכשיו',
+            'preview-banner' => 'תצוגה מקדימה של ערכת הנושא :theme בערוץ :channel. הקישורים מושבתים בתצוגה המקדימה.',
             'product-carousel' => 'קרוסלת מוצרים',
             'resend-verify-email' => 'שלח מחדש את מייל האימות',
             'verify-email' => 'אמת את חשבון האימייל שלך',

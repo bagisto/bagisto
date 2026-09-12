@@ -238,6 +238,7 @@
                                 rules="required"
                                 v-model="country"
                                 :label="trans('admin::app.customers.customers.view.address.create.country')"
+                                @change="state = ''"
                             >
                                 @foreach (core()->countries() as $country)
                                     <option value="{{ $country->code }}">{{ $country->name }}</option>
@@ -276,6 +277,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="state"
+                                    v-model="state"
                                     rules="required"
                                     :label="trans('admin::app.customers.customers.view.address.create.state')"
                                     :placeholder="trans('admin::app.customers.customers.view.address.create.state')"

@@ -1,22 +1,22 @@
 @props([
-    'sections'    => [],
-    'typeLabels'  => [],
-    'themeName'   => null,
-    'channels'    => [],
-    'channelId'   => null,
-    'locales'     => [],
-    'localeCode'  => null,
-    'previewUrl'  => '',
-    'reorderUrl'  => '',
-    'storeUrl'    => '',
-    'publishUrl'  => '',
-    'discardUrl'  => '',
-    'urls'        => [],
+    'sections'     => [],
+    'sectionTypes' => [],
+    'themeName'    => null,
+    'channels'     => [],
+    'channelId'    => null,
+    'locales'      => [],
+    'localeCode'   => null,
+    'previewUrl'   => '',
+    'reorderUrl'   => '',
+    'storeUrl'     => '',
+    'publishUrl'   => '',
+    'discardUrl'   => '',
+    'urls'         => [],
 ])
 
 <v-section-editor
     :sections='@json($sections)'
-    :type-labels='@json($typeLabels)'
+    :section-types='@json($sectionTypes)'
     :channels='@json($channels)'
     :locales='@json($locales)'
     publish-url="{{ $publishUrl }}"
@@ -354,10 +354,9 @@
                         class="text-sm text-gray-500 dark:text-gray-300"
                         v-else
                     >
-                        @lang('admin::app.appearance.sections.index.empty')
+                        @lang('admin::app.appearance.sections.index.no-fields')
                     </p>
                 </x-slot>
-
             </x-admin::drawer>
 
             <!-- Create Drawer -->
@@ -386,16 +385,19 @@
                                     @lang('admin::app.appearance.sections.create.type.title')
                                 </x-admin::form.control-group.label>
 
-                                <div class="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
+                                <div
+                                    class="grid grid-cols-3 gap-2 max-sm:grid-cols-2"
+                                    v-if="creatableTypes.length"
+                                >
                                     <button
                                         type="button"
                                         class="flex flex-col items-center justify-center gap-1.5 rounded border p-3 text-center transition-all"
-                                        :class="newType === option.key
+                                        :class="newType === option.code
                                             ? 'border-blue-600 bg-blue-50 text-blue-700 dark:border-blue-600 dark:bg-gray-950 dark:text-blue-400'
                                             : 'border-gray-200 text-gray-600 hover:border-gray-400 dark:border-gray-800 dark:text-gray-300'"
                                         v-for="option in creatableTypes"
-                                        :key="option.key"
-                                        @click="newType = option.key"
+                                        :key="option.code"
+                                        @click="newType = option.code"
                                     >
                                         <span
                                             class="text-2xl"
@@ -404,10 +406,17 @@
 
                                         <span
                                             class="text-xs font-medium"
-                                            v-text="option.label"
+                                            v-text="option.title"
                                         ></span>
                                     </button>
                                 </div>
+
+                                <p
+                                    class="text-sm text-gray-500 dark:text-gray-300"
+                                    v-else
+                                >
+                                    @lang('admin::app.appearance.sections.index.no-types')
+                                </p>
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -463,7 +472,7 @@
 
             props: [
                 'sections',
-                'typeLabels',
+                'sectionTypes',
                 'channels',
                 'channelId',
                 'locales',
@@ -523,7 +532,7 @@
 
                     options: {},
 
-                    newType: 'product_carousel',
+                    newType: null,
 
                     draftTimer: null,
 
@@ -531,39 +540,6 @@
                         { key: 'desktop', label: "@lang('admin::app.appearance.sections.index.desktop')" },
                         { key: 'tablet', label: "@lang('admin::app.appearance.sections.index.tablet')" },
                         { key: 'mobile', label: "@lang('admin::app.appearance.sections.index.mobile')" },
-                    ],
-
-                    sectionTypes: [
-                        {
-                            key: 'product_carousel',
-                            icon: 'icon-product',
-                            label: "@lang('admin::app.appearance.sections.create.type.product-carousel')",
-                        },
-                        {
-                            key: 'category_carousel',
-                            icon: 'icon-folder',
-                            label: "@lang('admin::app.appearance.sections.create.type.category-carousel')",
-                        },
-                        {
-                            key: 'image_carousel',
-                            icon: 'icon-image',
-                            label: "@lang('admin::app.appearance.sections.create.type.image-carousel')",
-                        },
-                        {
-                            key: 'static_content',
-                            icon: 'icon-cms',
-                            label: "@lang('admin::app.appearance.sections.create.type.static-content')",
-                        },
-                        {
-                            key: 'footer_links',
-                            icon: 'icon-list',
-                            label: "@lang('admin::app.appearance.sections.create.type.footer-links')",
-                        },
-                        {
-                            key: 'services_content',
-                            icon: 'icon-store',
-                            label: "@lang('admin::app.appearance.sections.create.type.services-content')",
-                        },
                     ],
                 };
             },
@@ -591,13 +567,11 @@
                 },
 
                 /**
-                 * Types a new section may take. A channel renders one footer at the bottom
-                 * of the page, so a second one has nowhere to go.
+                 * Types the theme offers a new section, less any the channel may hold only one of and already has.
                  */
                 creatableTypes() {
-                    const taken = this.items.some(section => section.is_pinned);
-
-                    return this.sectionTypes.filter(option => ! taken || option.key !== 'footer_links');
+                    return this.sectionTypes.filter(option => ! option.is_singleton
+                        || ! this.items.some(section => section.type === option.code));
                 },
 
                 /**
@@ -651,10 +625,10 @@
 
             methods: {
                 /**
-                 * Human readable name for a section type.
+                 * Human readable name for a section type, or its code when the theme no longer offers it.
                  */
                 typeLabel(type) {
-                    return this.typeLabels[type] ?? type;
+                    return this.sectionTypes.find(option => option.code === type)?.title ?? type;
                 },
 
                 /**
@@ -724,7 +698,7 @@
                  * Start a new section.
                  */
                 openCreate() {
-                    this.newType = this.creatableTypes[0]?.key ?? 'product_carousel';
+                    this.newType = this.creatableTypes[0]?.code ?? null;
 
                     this.$refs.createDrawer.open();
                 },

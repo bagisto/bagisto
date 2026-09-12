@@ -209,14 +209,10 @@
                             <tr>
                                 <td class="px-4 py-4 align-top">
                                     <div class="flex items-start gap-3">
-                                        @if ($item->orderItem->product?->images?->first())
-                                            @php
-                                                $baseImage = product_image()->getProductBaseImage($item->orderItem->product);
-                                            @endphp
-
+                                        @if ($productBaseImage = product_image()->getProductBaseImage($item->orderItem->product))
                                             <img
-                                                src="{{ $baseImage['small_image_url'] }}"
-                                                alt="{{ $baseImage['alt'] }}"
+                                                src="{{ $productBaseImage['small_image_url'] }}"
+                                                alt="{{ $productBaseImage['alt'] }}"
                                                 class="h-16 w-16 shrink-0 rounded-lg border object-cover"
                                             />
                                         @else
@@ -292,14 +288,10 @@
                 @if($item = $rma->item)
                     <div class="rounded-xl border shadow-xs p-4 space-y-3">
                         <div class="flex items-center gap-3">
-                            @if ($item->orderItem->product?->images?->first())
-                                @php
-                                    $baseImage = product_image()->getProductBaseImage($item->orderItem->product);
-                                @endphp
-
+                            @if ($productBaseImage = product_image()->getProductBaseImage($item->orderItem->product))
                                 <img
-                                    src="{{ $baseImage['small_image_url'] }}"
-                                    alt="{{ $baseImage['alt'] }}"
+                                    src="{{ $productBaseImage['small_image_url'] }}"
+                                    alt="{{ $productBaseImage['alt'] }}"
                                     class="w-16 h-16 object-cover rounded-sm border"
                                 />
                             @else

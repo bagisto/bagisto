@@ -350,6 +350,9 @@ return [
                         'add-btn' => '住所を追加',
                         'add-new' => '新しい住所を追加',
                         'add-new-address' => '新しい住所を追加',
+                        'address-updated-payment-info' => '変更された住所に合わせて支払方法と注文合計が更新されます。最新のオプションを読み込むには「進む」をクリックしてください。',
+                        'address-updated-shipping-info' => '変更された住所に合わせて配送方法と送料が再計算されます。最新のオプションを読み込むには「進む」をクリックしてください。',
+                        'address-updated-title' => '住所を更新しました',
                         'addresses' => '住所',
                         'back' => '戻る',
                         'billing-address' => '請求先住所',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => '非アクティブ',
                     'name' => '名前',
                     'no-of-products' => '製品数',
+                    'parent-category' => '親カテゴリ',
                     'position' => '位置',
                     'status' => 'メニューで表示',
                     'update-status' => 'ステータスを更新',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => '複製',
                 'empty' => 'セクションはまだありません。',
                 'gone' => 'このセクションは存在しません。',
+                'inactive-theme' => 'カスタマイズできるのは、チャネルで有効なテーマのみです。',
                 'locale' => 'ロケール',
                 'mobile' => 'モバイル',
+                'no-fields' => 'このテーマでは、このセクションに編集できる設定はありません。',
+                'no-types' => 'このテーマには追加できるセクションタイプがありません。',
                 'pinned' => 'ページ下部に固定されています。',
                 'preview-btn' => 'プレビュー',
                 'publish-btn' => '公開',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'このチャネルではフッターリンクのセクションは 1 つだけ表示されます。',
                 'name' => '名前',
                 'save-btn' => 'セクションを保存',
+                'singleton-exists' => 'このチャネルでは :type のセクションは 1 つだけ表示されます。',
                 'title' => 'セクションを作成',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'アクティブ',
+                'add-column' => 'カラムを追加',
                 'add-filter-btn' => 'フィルターを追加',
                 'add-footer-link-btn' => 'フッターリンクを追加',
                 'add-image-btn' => '画像を追加',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'カテゴリID',
                 'channels' => 'チャンネル',
                 'column' => 'カラム',
+                'columns' => 'カラム',
                 'create-filter' => 'フィルターを作成',
                 'css' => 'CSS',
                 'delete' => '削除',

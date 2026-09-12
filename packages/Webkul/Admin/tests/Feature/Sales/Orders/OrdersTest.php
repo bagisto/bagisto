@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
@@ -160,6 +161,42 @@ it('should fail validation when addresses are not provided', function () {
 
     postJson(route('admin.sales.cart.addresses.store', $data['cart']->id))
         ->assertUnprocessable();
+});
+
+it('should store only a billing address for a non-stockable cart when use_for_shipping is false', function () {
+    $data = createAdminCart($this);
+
+    $product = $this->createVirtualProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.cart.items.store', $data['cart']->id), [
+        'product_id' => $product->id,
+        'quantity' => 1,
+    ]);
+
+    $address = CustomerAddress::factory()->create(['customer_id' => $data['customer']->id])->toArray();
+
+    postJson(route('admin.sales.cart.addresses.store', $data['cart']->id), [
+        'billing' => array_merge($address, [
+            'address' => [fake()->streetAddress()],
+            'use_for_shipping' => false,
+        ]),
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonStructure(['data' => ['payment_methods']]);
+
+    $this->assertDatabaseHas('addresses', [
+        'cart_id' => $data['cart']->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+        'first_name' => $address['first_name'],
+    ]);
+
+    $this->assertDatabaseMissing('addresses', [
+        'cart_id' => $data['cart']->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
 });
 
 // ============================================================================

@@ -42,7 +42,6 @@ return [
             'page-title' => 'Müşteri Girişi',
             'password' => 'Şifre',
             'resend-verification' => 'Doğrulama E-postasını Yeniden Gönder',
-            'show-password' => 'Şifreyi Göster',
             'title' => 'Oturum Aç',
             'verify-first' => 'Lütfen önce e-posta adresinizi doğrulayın.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Aç/Kapat',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Şifreyi Göster',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'Yeni Adres Ekle',
                 'add-new-address' => 'Yeni Adres Ekle',
+                'address-updated-payment-info' => 'Ödeme yöntemleri ve sipariş toplamları yeni adresinize göre yenilenecek. Güncel seçenekleri görmek için Devam Et düğmesine tıklayın.',
+                'address-updated-shipping-info' => 'Kargo yöntemleri ve ücretleri yeni adresinize göre yeniden hesaplanacak. Güncel seçenekleri görmek için Devam Et düğmesine tıklayın.',
+                'address-updated-title' => 'Adresiniz güncellendi',
                 'back' => 'Geri',
                 'billing-address' => 'Fatura Adresi',
                 'check-billing-address' => 'Fatura adresi seçilmedi.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'Kategoriler',
             'image-carousel' => 'Görseller',
             'offer' => 'İlk siparişe özel %40 indirim fırsatı!',
+            'preview-banner' => ':channel kanalında :theme teması önizleniyor. Önizlemede bağlantılar devre dışıdır.',
             'product-carousel' => 'Ürünler',
             'resend-verify-email' => 'Doğrulama e-postasını tekrar gönder',
             'verify-email' => 'E-posta adresinizi doğrulayın',

@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Afegir adreça',
                         'add-new' => 'Afegir nova adreça',
                         'add-new-address' => 'Afegir nova adreça',
+                        'address-updated-payment-info' => 'Els mètodes de pagament i els totals de la comanda s\'actualitzaran per a l\'adreça modificada. Feu clic a Continuar per carregar les opcions més recents.',
+                        'address-updated-shipping-info' => 'Els mètodes d\'enviament i les tarifes es tornaran a calcular per a l\'adreça modificada. Feu clic a Continuar per carregar les opcions més recents.',
+                        'address-updated-title' => 'Adreça actualitzada',
                         'addresses' => 'Adreces',
                         'back' => 'Tornar',
                         'billing-address' => 'Adreça de facturació',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Inactiu',
                     'name' => 'Nom',
                     'no-of-products' => 'Visible al menú',
+                    'parent-category' => 'Categoria Pare',
                     'position' => 'Posició',
                     'status' => 'Estat',
                     'update-status' => 'Actualitzar Estat',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Encara no hi ha seccions.',
                 'gone' => 'Aquesta secció ja no existeix.',
+                'inactive-theme' => 'Només es pot personalitzar un tema que estigui actiu en un canal.',
                 'locale' => 'Idioma',
                 'mobile' => 'Mòbil',
+                'no-fields' => 'Aquesta secció no té cap configuració per editar en aquest tema.',
+                'no-types' => 'Aquest tema no ofereix cap tipus de secció per afegir.',
                 'pinned' => 'Fixat a la part inferior de la pàgina.',
                 'preview-btn' => 'Vista prèvia',
                 'publish-btn' => 'Publica',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Aquest canal només mostra una secció d\'enllaços de peu de pàgina.',
                 'name' => 'Nom',
                 'save-btn' => 'Desa la secció',
+                'singleton-exists' => 'Aquest canal només mostra una secció de :type.',
                 'title' => 'Crea una secció',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Actiu',
+                'add-column' => 'Afegeix una columna',
                 'add-filter-btn' => 'Afegir Filtres',
                 'add-footer-link-btn' => 'Afegir Enllaç al Peu de Pàgina',
                 'add-image-btn' => 'Afegir Imatge',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'ID de categoria',
                 'channels' => 'Canals',
                 'column' => 'Columna',
+                'columns' => 'Columnes',
                 'create-filter' => 'Crear Filtre',
                 'css' => 'CSS',
                 'delete' => 'Eliminar',

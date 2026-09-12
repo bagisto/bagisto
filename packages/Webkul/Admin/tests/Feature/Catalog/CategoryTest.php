@@ -63,6 +63,86 @@ it('should deny guest access to the category index page', function () {
         ->assertRedirect(route('admin.session.create'));
 });
 
+it('should show the parent category of each category in the listing', function () {
+    $parent = createCategory();
+
+    $category = createCategory(['parent_id' => $parent->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.categories.index', [
+        'filters' => ['category_id' => [$category->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('records.0.category_id', $category->id)
+        ->assertJsonPath('records.0.parent_name', $parent->name);
+});
+
+it('should leave the parent category empty for the root category in the listing', function () {
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.categories.index', [
+        'filters' => ['category_id' => [1]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('records.0.category_id', 1)
+        ->assertJsonPath('records.0.parent_name', null);
+});
+
+it('should offer only parent categories as options in the parent category filter', function () {
+    $parent = createCategory();
+
+    $category = createCategory(['parent_id' => $parent->id]);
+
+    $this->loginAsAdmin();
+
+    $column = collect(getJson(route('admin.catalog.categories.index'), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])->assertOk()->json('columns'))->firstWhere('index', 'parent_name');
+
+    $values = collect($column['filterable_options'])->pluck('value')->all();
+
+    expect($column['filterable_type'])->toBe('dropdown')
+        ->and($column['filterable_options'])->toContain(['label' => $parent->name, 'value' => $parent->name])
+        ->and($values)->not->toContain($category->name);
+});
+
+it('should search and filter the category listing by [column]', function (string $column) {
+    $parent = createCategory();
+
+    $category = createCategory([
+        'parent_id' => $parent->id,
+        'position' => 9,
+    ]);
+
+    $value = match ($column) {
+        'all', 'name' => $category->name,
+        'parent_name' => $parent->name,
+        'position' => $category->position,
+        'status' => $category->status,
+    };
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.categories.index', [
+        'filters' => [$column => [$value]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('records.0.category_id', $category->id);
+})->with([
+    'search box' => 'all',
+    'name' => 'name',
+    'parent category' => 'parent_name',
+    'position' => 'position',
+    'status' => 'status',
+]);
+
 // ============================================================================
 // Create
 // ============================================================================

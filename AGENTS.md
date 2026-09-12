@@ -45,7 +45,7 @@ your summary rather than silently churning the codebase either way.
 ## Do Not Edit
 
 - `vendor/`, `node_modules/`, `composer.lock`, `package-lock.json`
-- `public/themes/*/build/` — Vite build output
+- `public/themes/*/*/build/` — Vite output
 - `storage/` — runtime caches, logs, compiled views
 - `*.hot` files — Vite HMR markers
 - `packages/Webkul/*/src/Resources/assets/` — only edit if working on frontend; always run `npm run build` from the respective package directory after
@@ -59,7 +59,7 @@ your summary rather than silently churning the codebase either way.
 │   └── providers.php           # All service provider registrations
 ├── config/
 │   ├── concord.php             # Concord module (model proxy) registrations
-│   ├── themes.php              # Shop + Admin theme config (Vite paths)
+│   ├── themes.php              # Shop + Admin themes, incl. each shop theme's `customize` (sections, image cache)
 │   ├── elasticsearch.php       # Elasticsearch connection defaults (admin settings override)
 │   └── ...                     # Standard Laravel configs
 ├── database/

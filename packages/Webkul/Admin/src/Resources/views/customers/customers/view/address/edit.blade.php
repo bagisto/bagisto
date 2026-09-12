@@ -254,6 +254,7 @@
                                     rules="required"
                                     :label="trans('admin::app.customers.customers.view.address.edit.country')"
                                     v-model="address.country"
+                                    @change="address.state = ''"
                                 >
                                     @foreach (core()->countries() as $country)
                                         <option
@@ -298,6 +299,7 @@
                                         type="text"
                                         name="state"
                                         ::value="address.state"
+                                        v-model="address.state"
                                         rules="required"
                                         :label="trans('admin::app.customers.customers.view.address.edit.state')"
                                         :placeholder="trans('admin::app.customers.customers.view.address.edit.state')"

@@ -4,6 +4,8 @@ namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Customer\Contracts\Wishlist;
+use Webkul\ImageCache\ImageUrlBuilder;
+use Webkul\ImageCache\TemplateRegistry;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -17,9 +19,8 @@ class ProductImage
     public function __construct(protected ProductRepository $productRepository) {}
 
     /**
-     * Retrieve collection of gallery images.
-     *
-     * A variant with no images of its own falls back to the ones its parent carries.
+     * Retrieve the gallery images of a product, falling back to its parent's when a variant
+     * has none of its own.
      *
      * @param  Product  $product
      * @return array
@@ -77,11 +78,10 @@ class ProductImage
     }
 
     /**
-     * This method will first check whether the gallery images are already
-     * present or not. If not then it will load from the product.
+     * Get the first of the given gallery images, otherwise load the base image from the product.
      *
      * @param  Product  $product
-     * @return array
+     * @return array|null
      */
     public function getProductBaseImage($product, ?array $galleryImages = null)
     {
@@ -130,50 +130,46 @@ class ProductImage
     }
 
     /**
-     * Get the urls an image is served from, in every size.
-     *
-     * The image cache route reads through the configured disk, so a resized copy is
-     * offered whichever disk the store keeps its files on.
+     * Get the urls an image is served from, through every template product images carry for the current
+     * theme, resized by the image cache whichever disk the store keeps its files on.
      *
      * @param  string  $path
      */
     private function getCachedImageUrls($path, string $altText = ''): array
     {
-        return [
-            'small_image_url' => url('cache/small/'.$path),
-            'medium_image_url' => url('cache/medium/'.$path),
-            'large_image_url' => url('cache/large/'.$path),
-            'original_image_url' => url('cache/original/'.$path),
-            'alt' => $altText,
-        ];
+        return image_urls($path, TemplateRegistry::PRODUCT_IMAGES) + ['alt' => $altText];
     }
 
     /**
-     * The placeholder shown in place of an image the product does not have.
-     *
-     * A store may nominate its own, which is held on the configured disk; otherwise
-     * the one the theme ships with is used.
+     * Get the placeholder urls of a product without an image, one for every template an image gets.
      */
-    private function placeholderUrl(string $size): string
+    private function getFallbackImageUrls(?string $altText = ''): array
     {
+        $urls = [];
+
+        foreach (app(ImageUrlBuilder::class)->templateNames(TemplateRegistry::PRODUCT_IMAGES) as $template) {
+            $urls[$template.'_image_url'] = $this->placeholderUrl($template);
+        }
+
+        return $urls + ['alt' => (string) $altText];
+    }
+
+    /**
+     * The placeholder a template shows for a missing image: the configured one of a core size, or
+     * the large one for any other template.
+     */
+    private function placeholderUrl(string $template): string
+    {
+        if ($template === 'original') {
+            return bagisto_asset('images/large-product-placeholder.webp', 'shop');
+        }
+
+        $size = in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true) ? $template : 'large';
+
         $configured = core()->getConfigData('catalog.products.cache_'.$size.'_image.url');
 
         return $configured
             ? Storage::url($configured)
             : bagisto_asset('images/'.$size.'-product-placeholder.webp', 'shop');
-    }
-
-    /**
-     * Get fallback urls.
-     */
-    private function getFallbackImageUrls(?string $altText = ''): array
-    {
-        return [
-            'small_image_url' => $this->placeholderUrl('small'),
-            'medium_image_url' => $this->placeholderUrl('medium'),
-            'large_image_url' => $this->placeholderUrl('large'),
-            'original_image_url' => bagisto_asset('images/large-product-placeholder.webp', 'shop'),
-            'alt' => (string) $altText,
-        ];
     }
 }

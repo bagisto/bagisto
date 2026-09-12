@@ -6,7 +6,7 @@
     $channel = core()->getCurrentChannel();
 
     $sections = $sectionRepository->findAllOfType(
-        'services_content',
+        \Webkul\Theme\Enums\SectionTypeEnum::SERVICES_CONTENT->value,
         $channel->id,
         $channel->theme,
         app()->getLocale()

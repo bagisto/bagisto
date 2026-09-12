@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Product\Models\Product;
@@ -737,6 +738,27 @@ it('should return empty array for attribute without options', function () {
     get(route('admin.catalog.attributes.options', $attribute->id))
         ->assertOk()
         ->assertJsonCount(0);
+});
+
+it('should link an image swatch option to its stored file rather than to an image cache template', function () {
+    $attribute = Attribute::factory()->create([
+        'type' => 'select',
+        'swatch_type' => 'image',
+    ]);
+
+    $option = AttributeOption::factory()->create([
+        'attribute_id' => $attribute->id,
+        'admin_name' => 'Red',
+        'sort_order' => 1,
+        'swatch_value' => 'attribute_option/red.png',
+    ]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.attributes.options', $attribute->id))
+        ->assertOk()
+        ->assertJsonPath('0.id', $option->id)
+        ->assertJsonPath('0.swatch_value_url', Storage::url('attribute_option/red.png'));
 });
 
 // ============================================================================

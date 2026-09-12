@@ -325,6 +325,8 @@ Cache filters and templates type-hint the new image class:
 
 `cover()`, `contain()`, `crop()`, `resize()`, `scale()`, `rotate()`, `blur()`, `sharpen()`, `grayscale()` and the flips carry the same names, so filter bodies usually need no change.
 
+The same change applies to the image cache templates a theme registers under `customize.image_cache.templates` in `config/themes.php`. A template, there or in `config/imagecache.php`, has to be a class with a public `applyFilter()` method; a closure is no longer applied.
+
 #### Configuration
 
 The driver setting moved to the file the framework reads, and the key changed:
@@ -362,6 +364,7 @@ Two things are worth knowing before you opt in:
 
 - The chosen driver is applied at boot by `Webkul\Core\Filesystem\StorageConfigurator`, which sets `filesystems.default`. **Once a driver is recorded, it wins over `FILESYSTEM_DISK`.** With nothing recorded — the state every upgraded store is in — the environment is left alone.
 - Nothing copies existing files. Switching the disk changes where *new* uploads go; the media already under `storage/app/public` has to be moved across yourself, or the store will serve broken images.
+- Sized images keep going through the `cache/{template}/{path}` route on S3 and R2, which reads the file through the disk. That covers product images, category logos and banners, swatches, and every theme template `image_urls()` builds, where 2.4 linked each size to the stored file on a remote disk.
 
 If you maintain your own `config/filesystems.php`, add the `r2` disk from this release. `league/flysystem-aws-s3-v3` arrives with `composer install` and backs both drivers; the enum that describes them refuses a driver whose adapter is missing rather than failing at upload time.
 

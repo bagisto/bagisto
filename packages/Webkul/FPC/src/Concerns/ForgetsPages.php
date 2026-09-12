@@ -2,18 +2,15 @@
 
 namespace Webkul\FPC\Concerns;
 
+use Illuminate\Support\Str;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\Core\Contracts\Channel;
 
 trait ForgetsPages
 {
     /**
-     * Drop the given storefront paths from the page cache, in every scope they were cached under.
-     *
-     * A cached page is keyed by its path *and* a suffix of channel, locale and currency, which
-     * `ResponseCache::forget()` builds from whichever request is in flight — an admin one, when a
-     * listener runs. On a store with a second locale or currency that suffix never matches the one
-     * the visitor's page was stored under, so the entry survives and the storefront keeps serving
-     * it. Every combination is asked for explicitly instead.
+     * Drop the given storefront paths from the page cache, under every channel's host and in every
+     * channel, locale and currency a guest could have had them cached under.
      */
     protected function forgetPages(array $paths): void
     {
@@ -23,11 +20,15 @@ trait ForgetsPages
             return;
         }
 
-        foreach ($this->cacheScopes() as $suffix) {
-            ResponseCache::selectCachedItems()
-                ->usingSuffix($suffix)
-                ->forUrls($paths)
-                ->forget();
+        foreach (core()->getAllChannels() as $channel) {
+            $urls = $this->channelUrls($channel, $paths);
+
+            foreach ($this->channelScopes($channel) as $suffix) {
+                ResponseCache::selectCachedItems()
+                    ->usingSuffix($suffix)
+                    ->forUrls($urls)
+                    ->forget();
+            }
         }
     }
 
@@ -40,23 +41,64 @@ trait ForgetsPages
     }
 
     /**
-     * Every channel, locale and currency combination a page may have been cached under.
+     * Every locale and currency combination a guest's page on the channel may have been cached under,
+     * the trailing segment being the page cache's own suffix, empty for a guest.
      *
-     * The trailing segment is Spatie's own suffix, empty for a guest. A page cached for a signed-in
-     * customer carries their id there and cannot be enumerated, so it is left to expire.
+     * @param  Channel  $channel
      */
-    protected function cacheScopes(): array
+    protected function channelScopes($channel): array
     {
         $scopes = [];
 
-        foreach (core()->getAllChannels() as $channel) {
-            foreach ($channel->locales as $locale) {
-                foreach ($channel->currencies as $currency) {
-                    $scopes[] = $channel->code.'-'.$locale->code.'-'.$currency->code.'-';
-                }
+        foreach ($channel->locales as $locale) {
+            foreach ($channel->currencies as $currency) {
+                $scopes[] = $channel->code.'-'.$locale->code.'-'.$currency->code.'-';
             }
         }
 
         return array_values(array_unique($scopes));
+    }
+
+    /**
+     * The addresses the paths are cached under for the channel: on the host the forget runs on, and on
+     * the channel's own host, since the host is part of every cache key.
+     *
+     * @param  Channel  $channel
+     */
+    protected function channelUrls($channel, array $paths): array
+    {
+        $channelHost = $this->channelHost($channel);
+
+        $urls = [];
+
+        foreach ($paths as $path) {
+            $url = url($path);
+
+            $urls[] = $url;
+
+            if ($channelHost) {
+                $urls[] = Str::replaceFirst('//'.parse_url($url, PHP_URL_HOST), '//'.$channelHost, $url);
+            }
+        }
+
+        return array_values(array_unique($urls));
+    }
+
+    /**
+     * The host a channel is served on, read from its hostname with or without a scheme.
+     *
+     * @param  Channel  $channel
+     */
+    protected function channelHost($channel): ?string
+    {
+        if (blank($channel->hostname)) {
+            return null;
+        }
+
+        $hostname = str_contains($channel->hostname, '://')
+            ? $channel->hostname
+            : 'http://'.$channel->hostname;
+
+        return parse_url($hostname, PHP_URL_HOST) ?: null;
     }
 }

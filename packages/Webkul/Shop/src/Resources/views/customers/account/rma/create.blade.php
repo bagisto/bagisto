@@ -383,11 +383,11 @@
 
                             <!-- Image -->
                             <p>
-                                <template v-if="product.base_image">
+                                <template v-if="product.base_image_url">
                                     <img
                                         class="h-20 w-20 shrink-0 rounded-lg border border-zinc-200 object-cover"
-                                        :src="`${baseImageUrl}${product.base_image}`"
-                                        :alt="`${product.base_image}`"
+                                        :src="product.base_image_url"
+                                        :alt="product.name"
                                     />
                                 </template>
 
@@ -1042,7 +1042,6 @@
                         products: '',
                         resolutionType: [],
                         notAllowed: false,
-                        baseImageUrl: '{{ Storage::url('') }}',
                         returnWindowDays: parseInt('{{ core()->getConfigData('sales.rma.setting.default_allow_days') }}'),
                     }
                 },

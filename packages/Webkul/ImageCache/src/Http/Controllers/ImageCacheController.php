@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Helpers\InstalledPackages;
+use Webkul\ImageCache\TemplateRegistry;
 
 class ImageCacheController extends Controller
 {
@@ -19,6 +20,11 @@ class ImageCacheController extends Controller
      * The current cache template name.
      */
     protected string $template = '';
+
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct(protected TemplateRegistry $templateRegistry) {}
 
     /**
      * Get the HTTP response for the requested image.
@@ -60,7 +66,10 @@ class ImageCacheController extends Controller
                 && method_exists($templateConfig, 'applyFilter')
             ) {
                 $image = $templateConfig->applyFilter($image);
-            } elseif (class_exists($templateConfig)) {
+            } elseif (
+                is_string($templateConfig)
+                && class_exists($templateConfig)
+            ) {
                 $filter = new $templateConfig;
 
                 if (method_exists($filter, 'applyFilter')) {
@@ -281,13 +290,11 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Get the template class or closure.
+     * Get the template class registered under the name, for the theme of the requesting channel.
      */
     protected function getTemplate(string $template): mixed
     {
-        $templates = config('imagecache.templates', []);
-
-        return $templates[$template] ?? null;
+        return $this->templateRegistry->find($template, $this->templateRegistry->currentTheme());
     }
 
     /**
@@ -299,7 +306,7 @@ class ImageCacheController extends Controller
 
         $eTag = md5($content);
 
-        $notModified = isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] === $eTag;
+        $notModified = request()->header('If-None-Match') === $eTag;
 
         $statusCode = $notModified ? 304 : 200;
 

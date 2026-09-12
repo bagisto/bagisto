@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Tambah Alamat',
                         'add-new' => 'Tambah alamat baru',
                         'add-new-address' => 'Tambah alamat baru',
+                        'address-updated-payment-info' => 'Metode pembayaran dan total pesanan akan diperbarui untuk alamat yang diubah. Klik Lanjut untuk memuat opsi terbaru.',
+                        'address-updated-shipping-info' => 'Metode pengiriman dan tarif akan dihitung ulang untuk alamat yang diubah. Klik Lanjut untuk memuat opsi terbaru.',
+                        'address-updated-title' => 'Alamat diperbarui',
                         'addresses' => 'Daftar Alamat',
                         'back' => 'Kembali',
                         'billing-address' => 'Alamat Penagihan',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Tidak Aktif',
                     'name' => 'Nama',
                     'no-of-products' => 'Jumlah Produk',
+                    'parent-category' => 'Kategori Induk',
                     'position' => 'Posisi',
                     'status' => 'Terlihat di Menu',
                     'update-status' => 'Perbarui Status',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Duplikat',
                 'empty' => 'Belum ada bagian.',
                 'gone' => 'Bagian ini sudah tidak ada.',
+                'inactive-theme' => 'Hanya tema yang aktif pada saluran yang dapat disesuaikan.',
                 'locale' => 'Bahasa',
                 'mobile' => 'Ponsel',
+                'no-fields' => 'Bagian ini tidak memiliki pengaturan untuk diedit pada tema ini.',
+                'no-types' => 'Tema ini tidak menawarkan jenis bagian untuk ditambahkan.',
                 'pinned' => 'Disematkan di bagian bawah halaman.',
                 'preview-btn' => 'Pratinjau',
                 'publish-btn' => 'Terbitkan',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Saluran ini hanya menampilkan satu bagian tautan footer.',
                 'name' => 'Nama',
                 'save-btn' => 'Simpan Bagian',
+                'singleton-exists' => 'Saluran ini hanya menampilkan satu bagian :type.',
                 'title' => 'Buat Bagian',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktif',
+                'add-column' => 'Tambah Kolom',
                 'add-filter-btn' => 'Tambah Filter',
                 'add-footer-link-btn' => 'Tambah Tautan Footer',
                 'add-image-btn' => 'Tambah Gambar',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'ID Kategori',
                 'channels' => 'Channel',
                 'column' => 'Kolom',
+                'columns' => 'Kolom',
                 'create-filter' => 'Buat Filter',
                 'css' => 'CSS',
                 'delete' => 'Hapus',

@@ -4,6 +4,8 @@ import type { CustomerCredentials } from "../../utils/customer";
 
 export type { CustomerCredentials };
 
+export type PasswordField = "password" | "confirmPassword";
+
 export class AuthPage extends BasePage {
     constructor(page: Page) {
         super(page);
@@ -53,11 +55,25 @@ export class AuthPage extends BasePage {
         return this.page.getByText("Welcome Guest");
     }
 
+    private passwordField(field: PasswordField) {
+        return field === "password" ? this.passwordInput : this.confirmPasswordInput;
+    }
+
+    private passwordVisibilityToggle(field: PasswordField) {
+        return this.passwordField(field)
+            .locator("..")
+            .getByRole("button", { name: "Show Password" });
+    }
+
+    async openSignUpForm(): Promise<void> {
+        await this.visit("customer/register");
+    }
+
     async register(
         credentials: CustomerCredentials,
         expectedMessage = "Account created successfully.",
     ): Promise<void> {
-        await this.visit("customer/register");
+        await this.openSignUpForm();
         await this.firstNameInput.fill(credentials.firstName);
         await this.lastNameInput.fill(credentials.lastName);
         await this.emailInput.fill(credentials.email);
@@ -76,7 +92,7 @@ export class AuthPage extends BasePage {
     }
 
     async attemptRegister(credentials: CustomerCredentials): Promise<void> {
-        await this.visit("customer/register");
+        await this.openSignUpForm();
         await this.firstNameInput.fill(credentials.firstName);
         await this.lastNameInput.fill(credentials.lastName);
         await this.emailInput.fill(credentials.email);
@@ -90,18 +106,30 @@ export class AuthPage extends BasePage {
         await this.registerButton.click();
     }
 
-    async attemptLogin(email: string, password: string): Promise<void> {
+    async openSignInForm(): Promise<void> {
         await this.visit("customer/login");
         await this.waitForBackgroundRequestsToSettle();
+    }
+
+    async fillSignInForm(email: string, password: string): Promise<void> {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
+    }
+
+    async submitSignInForm(): Promise<void> {
         await this.signInButton.click();
+    }
+
+    async attemptLogin(email: string, password: string): Promise<void> {
+        await this.openSignInForm();
+        await this.fillSignInForm(email, password);
+        await this.submitSignInForm();
     }
 
     async login(credentials: CustomerCredentials): Promise<void> {
         await this.attemptLogin(credentials.email, credentials.password);
 
-        await expect(this.page).not.toHaveURL(/customer\/login/);
+        await this.expectLoginAccepted();
     }
 
     async logout(): Promise<void> {
@@ -112,6 +140,18 @@ export class AuthPage extends BasePage {
         await expect(this.page).toHaveURL(/customer\/login|\/$/);
 
         await this.waitForBackgroundRequestsToSettle();
+    }
+
+    async typePassword(field: PasswordField, value: string): Promise<void> {
+        await this.passwordField(field).fill(value);
+    }
+
+    async togglePasswordVisibility(field: PasswordField): Promise<void> {
+        await this.passwordVisibilityToggle(field).click();
+    }
+
+    async expectLoginAccepted(): Promise<void> {
+        await expect(this.page).not.toHaveURL(/customer\/login/);
     }
 
     async expectSignedIn(fullName: string): Promise<void> {
@@ -147,5 +187,16 @@ export class AuthPage extends BasePage {
     async expectRegistrationRefused(message: string): Promise<void> {
         await expect(this.page).toHaveURL(/customer\/register/);
         await expect(this.page.getByText(message).first()).toBeVisible();
+    }
+
+    async expectPasswordMasked(field: PasswordField): Promise<void> {
+        await expect(this.passwordVisibilityToggle(field)).toHaveAttribute("aria-pressed", "false");
+        await expect(this.passwordField(field)).toHaveAttribute("type", "password");
+    }
+
+    async expectPasswordRevealed(field: PasswordField, value: string): Promise<void> {
+        await expect(this.passwordVisibilityToggle(field)).toHaveAttribute("aria-pressed", "true");
+        await expect(this.passwordField(field)).toHaveAttribute("type", "text");
+        await expect(this.passwordField(field)).toHaveValue(value);
     }
 }

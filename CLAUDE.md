@@ -162,7 +162,7 @@ All core functionality lives in **`packages/Webkul/`** (42 packages). Each packa
 
 **Dual registration**: Each package registers in two places:
 1. **`bootstrap/providers.php`** - Main ServiceProvider (routes, views, events, config)
-2. **`config/concord.php`** - ModuleServiceProvider (Konekt Concord model/enum registration)
+2. **`config/concord.php`** - ModuleServiceProvider (Konekt Concord model/enum registration), for a package with models. DebugBar, FPC, ImageCache, Installer, MagicAI, PhonePe and SocialShare have none.
 
 ### Key Design Patterns
 

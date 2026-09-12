@@ -2,11 +2,13 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Spatie\ResponseCache\Facades\ResponseCache;
 use Webkul\CMS\Repositories\PageRepository;
+use Webkul\FPC\Concerns\ForgetsPages;
 
 class Page
 {
+    use ForgetsPages;
+
     /**
      * Create a new listener instance.
      *
@@ -15,18 +17,18 @@ class Page
     public function __construct(protected PageRepository $pageRepository) {}
 
     /**
-     * After page update
+     * After page update.
      *
      * @param  \Webkul\CMS\Contracts\Page  $page
      * @return void
      */
     public function afterUpdate($page)
     {
-        ResponseCache::forget('/page/'.$page->url_key);
+        $this->forgetPages($this->forgettablePaths($page));
     }
 
     /**
-     * Before page delete
+     * Before page delete.
      *
      * @param  int  $pageId
      * @return void
@@ -35,6 +37,24 @@ class Page
     {
         $page = $this->pageRepository->find($pageId);
 
-        ResponseCache::forget('/page/'.$page->url_key);
+        if (! $page) {
+            return;
+        }
+
+        $this->forgetPages($this->forgettablePaths($page));
+    }
+
+    /**
+     * The page's address in every locale, since each translation carries its own url key.
+     *
+     * @param  \Webkul\CMS\Contracts\Page  $page
+     */
+    protected function forgettablePaths($page): array
+    {
+        return $page->translations
+            ->pluck('url_key')
+            ->filter()
+            ->map(fn ($urlKey) => '/page/'.$urlKey)
+            ->all();
     }
 }

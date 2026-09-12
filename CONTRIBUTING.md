@@ -28,7 +28,7 @@ is to let someone else replicate the bug and build a fix.
 ## Which branch should you target?
 
 The active branches are **`2.4`** (the current release line) and **`master`**
-(the next major). Older lines — `1.x`, `2.1`, `2.2`, `2.3` — receive no new work.
+(the next release line, currently 2.5). Older lines — `1.x`, `2.1`, `2.2`, `2.3` — receive no new work.
 
 - **Bug fixes** go to the release line the bug affects, usually `2.4`.
 - **Minor, backwards-compatible improvements** go to the same release line.
@@ -47,7 +47,7 @@ of existing ones happens in the comments of the issue.
 
 Do not commit compiled files. Frontend sources live in
 `packages/Webkul/<Package>/src/Resources/assets/`, and the build output goes to
-`public/themes/*/build/`.
+`public/themes/*/*/build/`.
 
 Compiled bundles are large, cannot realistically be reviewed, and would be an
 easy way to slip malicious code into Bagisto. Maintainers generate and commit
@@ -123,5 +123,8 @@ End-to-end tests run per package, from that package's directory:
 ```bash
 cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
 ```
+
+In CI they run on a pull request only once it carries the **Need Playwright Testing**
+label, and again on every push to it while the label stays.
 
 Say in the description which of these you ran, and which you skipped and why.

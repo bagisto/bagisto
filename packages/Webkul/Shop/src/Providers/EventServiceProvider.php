@@ -62,6 +62,14 @@ class EventServiceProvider extends ServiceProvider
             [CatalogCache::class, 'flush'],
         ],
 
+        'catalog.product.price.reindex.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'promotions.catalog_rule.reindex.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
         'customer.review.update.after' => [
             [CatalogCache::class, 'flush'],
         ],

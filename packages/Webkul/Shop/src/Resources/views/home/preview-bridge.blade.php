@@ -1,6 +1,33 @@
-{{-- Talks to the appearance editor that frames this page. Preview only. --}}
+{{-- Talks to the appearance editor that frames this page, and names the theme when opened on its own. Preview only. --}}
+<div
+    class="appearance-preview-banner"
+    role="status"
+    hidden
+>
+    {{ trans('shop::app.home.index.preview-banner', [
+        'theme'   => $previewTheme ?? themes()->getName(),
+        'channel' => core()->getCurrentChannel()->name,
+    ]) }}
+</div>
+
 @pushOnce('styles')
     <style>
+        /**
+         * Pinned over the page, so the theme and channel being previewed stay in sight.
+         */
+        .appearance-preview-banner:not([hidden]) {
+            position: fixed;
+            inset-inline: 0;
+            bottom: 0;
+            z-index: 10000;
+            padding: 8px 16px;
+            background: #111827;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
         /**
          * The section being edited. Everything else is pushed back rather than the
          * section merely being outlined, so it stays obvious on a busy storefront.
@@ -89,6 +116,8 @@
         };
 
         markEmptySections();
+
+        document.querySelector('.appearance-preview-banner').hidden = window.self !== window.top;
 
         window.addEventListener('load', markEmptySections);
 

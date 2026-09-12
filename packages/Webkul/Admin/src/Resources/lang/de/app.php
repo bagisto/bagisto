@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Adresse hinzufügen',
                         'add-new' => 'Neue Adresse hinzufügen',
                         'add-new-address' => 'Neue Adresse hinzufügen',
+                        'address-updated-payment-info' => 'Zahlungsmethoden und Bestellsummen werden für die geänderte Adresse aktualisiert. Klicken Sie auf Fortfahren, um die aktuellen Optionen zu laden.',
+                        'address-updated-shipping-info' => 'Versandarten und Versandkosten werden für die geänderte Adresse neu berechnet. Klicken Sie auf Fortfahren, um die aktuellen Optionen zu laden.',
+                        'address-updated-title' => 'Adresse aktualisiert',
                         'addresses' => 'Adressen',
                         'back' => 'Zurück',
                         'billing-address' => 'Rechnungsadresse',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Inaktiv',
                     'name' => 'Name',
                     'no-of-products' => 'Im Menü sichtbar',
+                    'parent-category' => 'Übergeordnete Kategorie',
                     'position' => 'Position',
                     'status' => 'Status',
                     'update-status' => 'Status aktualisieren',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Duplizieren',
                 'empty' => 'Noch keine Abschnitte.',
                 'gone' => 'Dieser Abschnitt existiert nicht mehr.',
+                'inactive-theme' => 'Nur ein Theme, das in einem Kanal aktiv ist, kann angepasst werden.',
                 'locale' => 'Sprache',
                 'mobile' => 'Mobil',
+                'no-fields' => 'Dieser Abschnitt hat in diesem Theme keine bearbeitbaren Einstellungen.',
+                'no-types' => 'Dieses Theme bietet keine Abschnittstypen zum Hinzufügen an.',
                 'pinned' => 'Am Seitenende fixiert.',
                 'preview-btn' => 'Vorschau',
                 'publish-btn' => 'Veröffentlichen',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Dieser Kanal zeigt nur einen Fußzeilen-Link-Abschnitt an.',
                 'name' => 'Name',
                 'save-btn' => 'Abschnitt speichern',
+                'singleton-exists' => 'Dieser Kanal zeigt nur einen Abschnitt vom Typ :type an.',
                 'title' => 'Abschnitt erstellen',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktiv',
+                'add-column' => 'Spalte hinzufügen',
                 'add-filter-btn' => 'Filter hinzufügen',
                 'add-footer-link-btn' => 'Fußzeilen-Link hinzufügen',
                 'add-image-btn' => 'Bild hinzufügen',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'Kategorien-ID',
                 'channels' => 'Kanäle',
                 'column' => 'Spalte',
+                'columns' => 'Spalten',
                 'create-filter' => 'Filter erstellen',
                 'css' => 'CSS',
                 'delete' => 'Löschen',

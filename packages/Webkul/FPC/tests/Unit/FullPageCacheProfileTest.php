@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Webkul\Core\Facades\SystemConfig;
 use Webkul\Core\Models\CoreConfig;
+use Webkul\Customer\Models\Customer;
 use Webkul\FPC\CacheProfiles\FullPageCacheProfile;
 use Webkul\FPC\FullPageCache;
 
@@ -73,6 +74,18 @@ it('stops serving pages from the cache when the admin turns the setting off', fu
 it('serves pages from the cache when the setting has never been saved', function () {
     // Act & Assert
     expect($this->profile->enabled($this->request))->toBeTrue();
+});
+
+it('never runs the page cache for a signed-in customer, so their own pages are neither served nor stored', function () {
+    // Arrange
+    saveSetting('enabled', '1');
+
+    auth()->guard('customer')->login(Customer::factory()->create());
+
+    // Act & Assert
+    expect($this->profile->enabled($this->request))->toBeFalse();
+
+    expect(FullPageCache::willCache(cacheableRequest()))->toBeFalse();
 });
 
 it('keeps the deployment switch as the final word over the admin setting', function () {

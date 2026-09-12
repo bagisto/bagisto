@@ -2,26 +2,26 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Spatie\ResponseCache\Facades\ResponseCache;
-
 class Order extends Product
 {
     /**
-     * After order is created
+     * After an order is created or canceled, drop the pages of the products whose stock it changed.
      *
-     * @param  \Webkul\Sale\Contracts\Order  $order
+     * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */
     public function afterCancelOrCreate($order)
     {
+        $urls = [];
+
         foreach ($order->all_items as $item) {
             if (! $item->product) {
                 continue;
             }
 
-            $urls = $this->getForgettableUrls($item->product);
-
-            ResponseCache::forget($urls);
+            $urls = array_merge($urls, $this->getForgettableUrls($item->product));
         }
+
+        $this->forgetPages($urls);
     }
 }

@@ -14,7 +14,7 @@ function cacheStorefrontPage(): Request
 {
     config([
         'responsecache.enabled' => true,
-        'responsecache.cache_store' => 'array',
+        'responsecache.cache.store' => 'array',
     ]);
 
     $request = Request::create(url('/'), 'GET');

@@ -42,7 +42,6 @@ return [
             'page-title' => 'Login do Cliente',
             'password' => 'Senha',
             'resend-verification' => 'Reenviar e-mail de verificação',
-            'show-password' => 'Mostrar Senha',
             'title' => 'Entrar',
             'verify-first' => 'Verifique primeiro sua conta de e-mail.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Alternar Padrão',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Mostrar Senha',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'Adicionar novo endereço',
                 'add-new-address' => 'Adicionar novo endereço',
+                'address-updated-payment-info' => 'Os métodos de pagamento e os totais do pedido serão atualizados para o seu novo endereço. Clique em Prosseguir para ver as opções mais recentes.',
+                'address-updated-shipping-info' => 'Os métodos de entrega e as tarifas serão recalculados para o seu novo endereço. Clique em Prosseguir para ver as opções mais recentes.',
+                'address-updated-title' => 'Seu endereço foi atualizado',
                 'back' => 'Voltar',
                 'billing-address' => 'Endereço de faturamento',
                 'check-billing-address' => 'Endereço de faturação em falta.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'Carrossel de Categorias',
             'image-carousel' => 'Carrossel de Imagens',
             'offer' => 'Ganhe ATÉ 40% DE DESCONTO no seu 1º pedido, COMPRE AGORA',
+            'preview-banner' => 'Pré-visualizando o tema :theme no canal :channel. Os links ficam desativados na pré-visualização.',
             'product-carousel' => 'Carrossel de Produtos',
             'resend-verify-email' => 'Reenviar e-mail de verificação',
             'verify-email' => 'Verifique sua conta de e-mail',

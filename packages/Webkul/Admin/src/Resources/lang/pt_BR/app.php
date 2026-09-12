@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Adicionar Endereço',
                         'add-new' => 'Adicionar novo endereço',
                         'add-new-address' => 'Adicionar novo endereço',
+                        'address-updated-payment-info' => 'Os métodos de pagamento e os totais do pedido serão atualizados para o endereço alterado. Clique em Prosseguir para carregar as opções mais recentes.',
+                        'address-updated-shipping-info' => 'Os métodos de entrega e as tarifas serão recalculados para o endereço alterado. Clique em Prosseguir para carregar as opções mais recentes.',
+                        'address-updated-title' => 'Endereço atualizado',
                         'addresses' => 'Endereços',
                         'back' => 'Voltar',
                         'billing-address' => 'Endereço de Cobrança',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Inativa',
                     'name' => 'Nome',
                     'no-of-products' => 'Número de Produtos',
+                    'parent-category' => 'Categoria Pai',
                     'position' => 'Posição',
                     'status' => 'Visível no menu',
                     'update-status' => 'Atualizar Status',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Duplicar',
                 'empty' => 'Ainda não há seções.',
                 'gone' => 'Esta seção não existe mais.',
+                'inactive-theme' => 'Apenas um tema ativo em um canal pode ser personalizado.',
                 'locale' => 'Idioma',
                 'mobile' => 'Celular',
+                'no-fields' => 'Esta seção não tem configurações para editar neste tema.',
+                'no-types' => 'Este tema não oferece tipos de seção para adicionar.',
                 'pinned' => 'Fixado na parte inferior da página.',
                 'preview-btn' => 'Pré-visualizar',
                 'publish-btn' => 'Publicar',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Este canal exibe apenas uma seção de links de rodapé.',
                 'name' => 'Nome',
                 'save-btn' => 'Salvar seção',
+                'singleton-exists' => 'Este canal exibe apenas uma seção de :type.',
                 'title' => 'Criar seção',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Ativo',
+                'add-column' => 'Adicionar Coluna',
                 'add-filter-btn' => 'Adicionar Filtro',
                 'add-footer-link-btn' => 'Adicionar Link do Rodapé',
                 'add-image-btn' => 'Adicionar Imagem',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'ID de categoria',
                 'channels' => 'Canais',
                 'column' => 'Coluna',
+                'columns' => 'Colunas',
                 'create-filter' => 'Criar Filtro',
                 'css' => 'CSS',
                 'delete' => 'Excluir',

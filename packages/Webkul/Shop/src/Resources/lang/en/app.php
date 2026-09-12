@@ -42,7 +42,6 @@ return [
             'page-title' => 'Customer Login',
             'password' => 'Password',
             'resend-verification' => 'Resend Verification Email',
-            'show-password' => 'Show Password',
             'title' => 'Sign In',
             'verify-first' => 'Verify your email account first.',
         ],
@@ -550,6 +549,14 @@ return [
 
         'drawer' => [
             'default-toggle' => 'Default Toggle',
+        ],
+
+        'form' => [
+            'control-group' => [
+                'control' => [
+                    'show-password' => 'Show Password',
+                ],
+            ],
         ],
 
         'media' => [
@@ -1175,6 +1182,9 @@ return [
             'address' => [
                 'add-new' => 'Add new address',
                 'add-new-address' => 'Add new address',
+                'address-updated-payment-info' => 'Payment methods and order totals will be refreshed for your new address. Click Proceed to see the latest options.',
+                'address-updated-shipping-info' => 'Shipping methods and rates will be recalculated for your new address. Click Proceed to see the latest options.',
+                'address-updated-title' => 'Your address has been updated',
                 'back' => 'Back',
                 'billing-address' => 'Billing Address',
                 'check-billing-address' => 'Billing address is missing.',
@@ -1278,6 +1288,7 @@ return [
             'categories-carousel' => 'Categories Carousel',
             'image-carousel' => 'Image Carousel',
             'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'preview-banner' => 'Previewing the :theme theme on the :channel channel. Links are turned off in the preview.',
             'product-carousel' => 'Product Carousel',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email' => 'Verify your email account',

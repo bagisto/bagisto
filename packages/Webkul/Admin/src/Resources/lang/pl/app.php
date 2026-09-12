@@ -350,6 +350,9 @@ return [
                         'add-btn' => 'Dodaj adres',
                         'add-new' => 'Dodaj nowy adres',
                         'add-new-address' => 'Dodaj nowy adres',
+                        'address-updated-payment-info' => 'Metody płatności i sumy zamówienia zostaną odświeżone dla zmienionego adresu. Kliknij „Kontynuuj”, aby wczytać najnowsze opcje.',
+                        'address-updated-shipping-info' => 'Metody dostawy i stawki zostaną ponownie obliczone dla zmienionego adresu. Kliknij „Kontynuuj”, aby wczytać najnowsze opcje.',
+                        'address-updated-title' => 'Adres zaktualizowany',
                         'addresses' => 'Adresy',
                         'back' => 'Powrót',
                         'billing-address' => 'Adres rozliczeniowy',
@@ -1946,6 +1949,7 @@ return [
                     'inactive' => 'Nieaktywna',
                     'name' => 'Nazwa',
                     'no-of-products' => 'Liczba produktów',
+                    'parent-category' => 'Kategoria nadrzędna',
                     'position' => 'Pozycja',
                     'status' => 'Widoczna w menu',
                     'update-status' => 'Aktualizuj status',
@@ -3280,8 +3284,11 @@ return [
                 'duplicate-btn' => 'Duplikuj',
                 'empty' => 'Brak sekcji.',
                 'gone' => 'Ta sekcja już nie istnieje.',
+                'inactive-theme' => 'Dostosować można tylko motyw aktywny w kanale.',
                 'locale' => 'Język',
                 'mobile' => 'Telefon',
+                'no-fields' => 'Ta sekcja nie ma w tym motywie ustawień do edycji.',
+                'no-types' => 'Ten motyw nie oferuje typów sekcji do dodania.',
                 'pinned' => 'Przypięte do dołu strony.',
                 'preview-btn' => 'Podgląd',
                 'publish-btn' => 'Opublikuj',
@@ -3307,9 +3314,9 @@ return [
             ],
 
             'create' => [
-                'footer-links-exists' => 'Ten kanał wyświetla tylko jedną sekcję linków w stopce.',
                 'name' => 'Nazwa',
                 'save-btn' => 'Zapisz sekcję',
+                'singleton-exists' => 'Ten kanał wyświetla tylko jedną sekcję typu :type.',
                 'title' => 'Utwórz sekcję',
 
                 'type' => [
@@ -3325,6 +3332,7 @@ return [
 
             'edit' => [
                 'active' => 'Aktywny',
+                'add-column' => 'Dodaj kolumnę',
                 'add-filter-btn' => 'Dodaj filtr',
                 'add-footer-link-btn' => 'Dodaj link stopki',
                 'add-image-btn' => 'Dodaj obraz',
@@ -3337,6 +3345,7 @@ return [
                 'category-id' => 'ID kategorii',
                 'channels' => 'Kanały',
                 'column' => 'Kolumna',
+                'columns' => 'Kolumny',
                 'create-filter' => 'Utwórz filtr',
                 'css' => 'CSS',
                 'delete' => 'Usuń',
