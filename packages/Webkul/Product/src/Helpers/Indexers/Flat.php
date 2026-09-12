@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Category\Models\CategoryProxy;
+use Webkul\Core\Contracts\Channel;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
@@ -55,7 +56,7 @@ class Flat extends AbstractIndexer
     protected $familyAttributes = [];
 
     /**
-     * Create a new listener instance.
+     * Create a new indexer instance.
      *
      * @return void
      */
@@ -91,7 +92,7 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * Reindex products by batch size.
+     * Reindex products by batch size, refreshing the derived columns once for the whole batch.
      *
      * @return void
      */
@@ -103,10 +104,6 @@ class Flat extends AbstractIndexer
             $productIds = array_merge($productIds, $this->writeFlatRows($product));
         }
 
-        /**
-         * Derived once for the whole batch rather than once per product: every statement a
-         * long-running command issues costs memory it never gets back.
-         */
         $this->refreshDerivedColumns($productIds);
     }
 
@@ -122,6 +119,25 @@ class Flat extends AbstractIndexer
     }
 
     /**
+     * Write the admin locale's flat rows for products and their variants, for callers such as the
+     * product import that write the other locales' rows themselves.
+     */
+    public function refreshAdminLocale(array $products): void
+    {
+        $productIds = [];
+
+        foreach ($products as $product) {
+            foreach ($this->getProductWithVariants($product) as $item) {
+                $this->writeAdminLocaleRows($item);
+
+                $productIds[] = $item->id;
+            }
+        }
+
+        $this->refreshDerivedColumns($productIds);
+    }
+
+    /**
      * Creates product flat.
      *
      * @param  Product  $product
@@ -129,63 +145,12 @@ class Flat extends AbstractIndexer
      */
     public function updateOrCreate($product)
     {
-        $familyAttributes = $this->getCachedFamilyAttributes($product);
-
-        $channelIds = $product->channels->pluck('id')->toArray();
-
-        if (empty($channelIds)) {
-            $channelIds[] = core()->getDefaultChannel()->id;
-        }
-
-        $attributeValues = $product->attribute_values;
+        $channelIds = $this->getChannelIds($product);
 
         foreach ($this->getChannels() as $channel) {
             if (in_array($channel->id, $channelIds)) {
-                foreach ($channel->locales as $locale) {
-                    $productFlat = $this->productFlatRepository->updateOrCreate([
-                        'product_id' => $product->id,
-                        'channel' => $channel->code,
-                        'locale' => $locale->code,
-                    ], [
-                        'type' => $product->type,
-                        'sku' => $product->sku,
-                        'attribute_family_id' => $product->attribute_family_id,
-                    ]);
-
-                    foreach ($familyAttributes as $attribute) {
-                        if (
-                            ! in_array($attribute->code, $this->flatColumns)
-                            || $attribute->code == 'sku'
-                        ) {
-                            continue;
-                        }
-
-                        $productAttributeValues = $attributeValues->where('attribute_id', $attribute->id);
-
-                        if ($attribute->value_per_channel) {
-                            if ($attribute->value_per_locale) {
-                                $productAttributeValues = $productAttributeValues
-                                    ->where('channel', $channel->code)
-                                    ->where('locale', $locale->code);
-                            } else {
-                                $productAttributeValues = $productAttributeValues->where('channel', $channel->code);
-                            }
-                        } else {
-                            if ($attribute->value_per_locale) {
-                                $productAttributeValues = $productAttributeValues->where('locale', $locale->code);
-                            }
-                        }
-
-                        $productAttributeValue = $productAttributeValues->first();
-
-                        /**
-                         * Same fallback as `Product::getCustomAttributeValue()`, so an attribute a
-                         * product never saved reads the same off the flat table as off the model.
-                         */
-                        $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? $attribute->default_value;
-                    }
-
-                    $productFlat->save();
+                foreach ($this->getLocaleCodes($channel) as $localeCode) {
+                    $this->writeFlatRow($product, $channel, $localeCode);
                 }
             } else {
                 if (request()->route()?->getName() == 'admin.catalog.products.update') {
@@ -201,10 +166,8 @@ class Flat extends AbstractIndexer
     /**
      * Refresh the flat columns derived from other tables rather than from an attribute.
      *
-     * @param  array|Closure|null  $productIds  Every product when null, none when an empty array,
-     *                                          so a caller that found nothing cannot rewrite the
-     *                                          table. A closure scopes a large set without listing
-     *                                          its ids.
+     * @param  array|Closure|null  $productIds  Every product when null and none when empty, so a caller that found
+     *                                          nothing cannot rewrite the table; a closure scopes a large set.
      */
     public function refreshDerivedColumns(array|Closure|null $productIds = null): void
     {
@@ -265,10 +228,7 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * Returns all channels, with their locales, resolved once for the run.
-     *
-     * `core()->getAllChannels()` queries afresh on every call and hands back new models each
-     * time, which a reindex would otherwise pay for once per product.
+     * Returns all channels with their locales, resolved once for the run rather than once per product.
      *
      * @return mixed
      */
@@ -286,10 +246,8 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * The categories a product sits in, each read as the chain of ancestors leading down to it.
-     *
-     * The root the chain hangs from is left out, and a category is placed by its nested set bounds
-     * so that the depth of the tree does not bound the expression.
+     * The categories a product sits in, each read as its chain of ancestors below the root, placed by
+     * nested set bounds so the depth of the tree does not bound the expression.
      */
     protected function categoryPathsExpression(string $tablePrefix): string
     {
@@ -317,18 +275,107 @@ class Flat extends AbstractIndexer
      */
     protected function writeFlatRows($product)
     {
-        $this->updateOrCreate($product);
+        $productIds = [];
 
-        $productIds = [$product->id];
+        foreach ($this->getProductWithVariants($product) as $item) {
+            $this->updateOrCreate($item);
 
-        if (ProductType::hasVariants($product->type)) {
-            foreach ($product->variants as $variant) {
-                $this->updateOrCreate($variant);
-
-                $productIds[] = $variant->id;
-            }
+            $productIds[] = $item->id;
         }
 
         return $productIds;
+    }
+
+    /**
+     * Write a product's admin locale flat row on each of its channels.
+     *
+     * @param  Product  $product
+     */
+    protected function writeAdminLocaleRows($product): void
+    {
+        foreach ($this->getChannels()->whereIn('id', $this->getChannelIds($product)) as $channel) {
+            $this->writeFlatRow($product, $channel, app()->getLocale());
+        }
+    }
+
+    /**
+     * Write a product's flat row for one channel and locale, with its values read as the product
+     * model reads them on that channel.
+     *
+     * @param  Product  $product
+     * @param  Channel  $channel
+     */
+    protected function writeFlatRow($product, $channel, string $localeCode): void
+    {
+        $productFlat = $this->productFlatRepository->updateOrCreate([
+            'product_id' => $product->id,
+            'channel' => $channel->code,
+            'locale' => $localeCode,
+        ], [
+            'type' => $product->type,
+            'sku' => $product->sku,
+            'attribute_family_id' => $product->attribute_family_id,
+        ]);
+
+        $valueLocaleCode = $channel->resolveLocaleCode($localeCode);
+
+        foreach ($this->getCachedFamilyAttributes($product) as $attribute) {
+            if (
+                ! in_array($attribute->code, $this->flatColumns)
+                || $attribute->code == 'sku'
+            ) {
+                continue;
+            }
+
+            $productFlat->{$attribute->code} = $product->getCustomAttributeValueFor($attribute, $channel->code, $valueLocaleCode);
+        }
+
+        $productFlat->save();
+    }
+
+    /**
+     * The product followed by its variants, when its type has variants.
+     *
+     * @param  Product  $product
+     */
+    protected function getProductWithVariants($product): array
+    {
+        if (! ProductType::hasVariants($product->type)) {
+            return [$product];
+        }
+
+        return [$product, ...$product->variants];
+    }
+
+    /**
+     * Ids of the channels a product's flat rows are written on, the default channel when it has none.
+     *
+     * @param  Product  $product
+     */
+    protected function getChannelIds($product): array
+    {
+        $channelIds = $product->channels->pluck('id')->toArray();
+
+        if (empty($channelIds)) {
+            $channelIds[] = core()->getDefaultChannel()->id;
+        }
+
+        return $channelIds;
+    }
+
+    /**
+     * Locale codes a channel's flat rows are written in: its own, and the admin locale the admin
+     * grids read, which the channel may not have.
+     *
+     * @param  Channel  $channel
+     */
+    protected function getLocaleCodes($channel): array
+    {
+        return $channel->locales
+            ->pluck('code')
+            ->push(app()->getLocale())
+            ->unique()
+            ->values()
+            ->all();
     }
 }

@@ -303,12 +303,12 @@ class ProductDataGrid extends DataGrid
             return;
         }
 
-        /**
-         * Store all request parameters in this variable; avoid using direct request helpers afterward.
-         */
         $params = $this->validatedRequest();
 
-        if (isset($params['export']) && (bool) $params['export']) {
+        if (
+            isset($params['export'])
+            && (bool) $params['export']
+        ) {
             parent::processRequest();
 
             return;
@@ -322,10 +322,14 @@ class ProductDataGrid extends DataGrid
 
         $perPage = (int) ($pagination['per_page'] ?? $this->itemsPerPage);
 
-        $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
+        $channels = core()->getAllChannels();
 
-        $indexNames = collect($channelCodes)->map(function ($channelCode) {
-            return ElasticSearchEngine::formatIndexName($channelCode, app()->getLocale());
+        $channelCodes = request()->input('filters.channel') ?? $channels->pluck('code')->toArray();
+
+        $indexNames = collect($channelCodes)->map(function ($channelCode) use ($channels) {
+            $localeCode = $channels->firstWhere('code', $channelCode)?->resolveLocaleCode(app()->getLocale()) ?? app()->getLocale();
+
+            return ElasticSearchEngine::formatIndexName($channelCode, $localeCode);
         })->toArray();
 
         $results = ElasticSearch::search([
@@ -420,10 +424,7 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Build a text-based filter with phrase prefix matching.
-     *
-     * A name is matched on its synonyms as well, so a search for one term also finds the
-     * others it has been declared equivalent to.
+     * Build a text filter that matches each value as a phrase prefix, and a name on its synonyms as well.
      */
     protected function getTextFilterValue(string $attribute, mixed $values): array
     {
@@ -447,10 +448,8 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Build Elasticsearch sort options from DataGrid sort parameters.
-     *
-     * Analyzed text is sorted on the untouched copy beside it, and a column the index has never
-     * held leaves the results unordered rather than failing the request.
+     * Return the Elasticsearch sort for the requested column, sorting analyzed text on its keyword
+     * copy and leaving a column the index never held unordered rather than failing.
      */
     protected function getElasticSort(array $params): array
     {
