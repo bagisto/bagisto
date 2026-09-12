@@ -57,7 +57,7 @@
 
             $currentChannel = core()->getRequestedChannel();
 
-            $currentLocale = core()->getRequestedLocale();
+            $currentLocale = core()->getAllLocales()->firstWhere('code', $currentChannel->resolveLocaleCode(core()->getRequestedLocaleCode()));
         @endphp
 
         <!-- Channel and Locale Switcher -->
@@ -72,7 +72,7 @@
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                         >
                             <span class="icon-store text-2xl"></span>
-                            
+
                             <span v-pre>{{ $currentChannel->name }}</span>
 
                             <input
@@ -110,7 +110,7 @@
                             <span class="icon-language text-2xl"></span>
 
                             <span v-pre>{{ $currentLocale->name }}</span>
-                            
+
                             <input
                                 type="hidden"
                                 name="locale"
@@ -139,7 +139,7 @@
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.actions.after', ['product' => $product]) !!}
 
-        <!-- body content -->
+        <!-- Body Content -->
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.before', ['product' => $product]) !!}
 
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
@@ -157,7 +157,7 @@
                         @php $customAttributes = $product->getEditableAttributes($group); @endphp
 
                         @if (
-                            $group->code === 'inventories' 
+                            $group->code === 'inventories'
                             && (
                                 $product->getTypeInstance()->isComposite()
                                 || $product->type === 'downloadable'
@@ -168,9 +168,9 @@
 
                         @if ($group->code === 'rma')
                             @if (
-                                ! in_array($product->type, explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type'))) 
+                                ! in_array($product->type, explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type')))
                                 && (
-                                    $product->type != 'simple' 
+                                    $product->type != 'simple'
                                     && empty($product->parent_id)
                                 )
                             )
@@ -182,7 +182,7 @@
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
                             <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
-                                <p 
+                                <p
                                     class="mb-4 text-base font-semibold text-gray-800 dark:text-white"
                                     v-pre
                                 >
@@ -204,7 +204,7 @@
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
-                                                <span 
+                                                <span
                                                     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                                     v-pre
                                                 >
@@ -235,7 +235,7 @@
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
-                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')                                
+                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')
                             </div>
 
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}
@@ -268,9 +268,15 @@
                     @endif
                 </div>
 
-                @if ($isSingleColumn && ($column == 1 || $column == 2))
+                @if (
+                    $isSingleColumn
+                    && (
+                        $column == 1
+                        || $column == 2
+                    )
+                )
                     <div class="w-[360px] max-w-full max-sm:w-full">
-                        @if ($column == 2) 
+                        @if ($column == 2)
                             <!-- Images View Blade File -->
                             @include('admin::catalog.products.edit.images')
 

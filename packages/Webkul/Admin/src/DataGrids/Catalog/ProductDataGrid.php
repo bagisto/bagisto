@@ -332,12 +332,12 @@ class ProductDataGrid extends DataGrid
             return;
         }
 
-        /**
-         * Store all request parameters in this variable; avoid using direct request helpers afterward.
-         */
         $params = $this->validatedRequest();
 
-        if (isset($params['export']) && (bool) $params['export']) {
+        if (
+            isset($params['export'])
+            && (bool) $params['export']
+        ) {
             parent::processRequest();
 
             return;
@@ -347,10 +347,14 @@ class ProductDataGrid extends DataGrid
 
         $pagination = $params['pagination'];
 
-        $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
+        $channels = core()->getAllChannels();
 
-        $indexNames = collect($channelCodes)->map(function ($channelCode) {
-            return Product::formatElasticSearchIndexName($channelCode, app()->getLocale());
+        $channelCodes = request()->input('filters.channel') ?? $channels->pluck('code')->toArray();
+
+        $indexNames = collect($channelCodes)->map(function ($channelCode) use ($channels) {
+            $localeCode = $channels->firstWhere('code', $channelCode)?->resolveLocaleCode(app()->getLocale()) ?? app()->getLocale();
+
+            return Product::formatElasticSearchIndexName($channelCode, $localeCode);
         })->toArray();
 
         $results = ElasticSearch::search([
@@ -417,10 +421,8 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Return the Elasticsearch sort for the requested column.
-     *
-     * Analyzed text is sorted on the untouched copy beside it, and a column the index has never
-     * held leaves the results unordered rather than failing the request.
+     * Return the Elasticsearch sort for the requested column, sorting analyzed text on its keyword
+     * copy and leaving a column the index never held unordered rather than failing.
      */
     protected function getElasticSort($params): array
     {

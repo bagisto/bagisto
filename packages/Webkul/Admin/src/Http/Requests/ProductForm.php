@@ -210,6 +210,28 @@ class ProductForm extends FormRequest
     }
 
     /**
+     * Keep locale-scoped values in a locale the channel being edited has, which is where the product
+     * is read from.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $channel = core()->getAllChannels()->firstWhere('code', $this->input('channel') ?: core()->getDefaultChannelCode());
+
+        if (
+            ! $channel
+            || ! $this->filled('locale')
+        ) {
+            return;
+        }
+
+        $this->merge([
+            'locale' => $channel->resolveLocaleCode($this->input('locale')),
+        ]);
+    }
+
+    /**
      * Handle a passed validation attempt.
      *
      * @return void
