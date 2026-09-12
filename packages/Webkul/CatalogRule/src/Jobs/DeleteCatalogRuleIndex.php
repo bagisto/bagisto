@@ -32,29 +32,26 @@ class DeleteCatalogRuleIndex implements ShouldQueue
     }
 
     /**
-     * Reindex the prices of the products a removed rule applied to; rules an `end_other_rules` rule held
-     * back are not reapplied yet.
+     * Reindex the prices of the products a removed rule applied to and of the composite products built from them;
+     * rules an `end_other_rules` rule held back are not reapplied yet.
      *
      * @return void
      */
     public function handle()
     {
-        Event::dispatch('promotions.catalog_rule.reindex.before', [$this->productIds]);
+        $productIds = array_values(array_unique([
+            ...$this->productIds,
+            ...app(ProductRepository::class)->getCompositeParentIds($this->productIds),
+        ]));
 
-        while (true) {
-            $paginator = app(ProductRepository::class)
-                ->whereIn('id', $this->productIds)
-                ->cursorPaginate(self::BATCH_SIZE);
+        Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-            app(PriceIndexer::class)->reindexBatch($paginator->items());
+        app(ProductRepository::class)
+            ->whereIn('id', $productIds)
+            ->chunkById(self::BATCH_SIZE, function ($products) {
+                app(PriceIndexer::class)->reindexBatch($products->all());
+            });
 
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
-
-        Event::dispatch('promotions.catalog_rule.reindex.after', [$this->productIds]);
+        Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }
 }

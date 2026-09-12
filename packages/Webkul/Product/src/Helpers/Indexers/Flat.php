@@ -75,29 +75,19 @@ class Flat extends AbstractIndexer
      */
     public function reindexFull()
     {
-        while (true) {
-            $paginator = $this->productRepository
-                ->with([
-                    'channels',
-                    'variants',
-                    'variants.channels',
-                    'attribute_family',
-                    'attribute_values',
-                    'variants.attribute_family',
-                    'variants.attribute_values',
-                ])
-                ->cursorPaginate($this->batchSize);
-
-            $this->reindexBatch($paginator->items());
-
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
-
-        request()->query->remove('cursor');
+        $this->productRepository
+            ->with([
+                'channels',
+                'variants',
+                'variants.channels',
+                'attribute_family',
+                'attribute_values',
+                'variants.attribute_family',
+                'variants.attribute_values',
+            ])
+            ->chunkById($this->batchSize, function ($products) {
+                $this->reindexBatch($products->all());
+            });
     }
 
     /**

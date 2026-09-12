@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Regola del catalogo creata con successo',
                 'delete-success' => 'Regola del catalogo eliminata con successo',
+                'queue-note' => 'Il salvataggio di questa regola aggiorna il prezzo di ogni prodotto a cui si applica. Se si applica a molti prodotti, usa il gestore di code database o redis con un worker delle code in esecuzione, così i prezzi vengono aggiornati in background invece di rallentare il salvataggio.',
                 'update-success' => 'Regola del catalogo aggiornata con successo',
             ],
 

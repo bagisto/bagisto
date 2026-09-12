@@ -30,8 +30,8 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
     public function __construct(protected CatalogRule $catalogRule) {}
 
     /**
-     * Reindex the rule and the prices of the products it applies to; for a disabled rule, rules an
-     * `end_other_rules` rule held back are not reapplied yet.
+     * Reindex the rule and the prices of the products it applies to and of the composite products built from them;
+     * for a disabled rule, rules an `end_other_rules` rule held back are not reapplied yet.
      *
      * @return void
      */
@@ -49,21 +49,17 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
             app(CatalogRuleIndex::class)->cleanProductIndices($productIds);
         }
 
+        $productIds = $productIds
+            ->merge(app(ProductRepository::class)->getCompositeParentIds($productIds->all()))
+            ->unique();
+
         Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds->values()->all()]);
 
-        while (true) {
-            $paginator = app(ProductRepository::class)
-                ->whereIn('id', $productIds)
-                ->cursorPaginate(self::BATCH_SIZE);
-
-            app(PriceIndexer::class)->reindexBatch($paginator->items());
-
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
+        app(ProductRepository::class)
+            ->whereIn('id', $productIds)
+            ->chunkById(self::BATCH_SIZE, function ($products) {
+                app(PriceIndexer::class)->reindexBatch($products->all());
+            });
 
         Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds->values()->all()]);
     }

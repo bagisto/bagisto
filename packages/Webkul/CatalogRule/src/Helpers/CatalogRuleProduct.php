@@ -27,10 +27,11 @@ class CatalogRuleProduct
     ) {}
 
     /**
-     * Collect discount on cart
+     * Index the products a rule applies to, one row per channel and customer group, inserted in batches.
      *
      * @param  CatalogRule  $rule
      * @param  int  $batchCount
+     * @param  Product|null  $product
      * @return void
      */
     public function insertRuleProduct($rule, $batchCount = 1000, $product = null)
@@ -82,7 +83,7 @@ class CatalogRuleProduct
     }
 
     /**
-     * Clean catalog rule product indices
+     * Delete the product indices of a rule.
      *
      * @param  CatalogRule  $rule
      * @return void
@@ -93,7 +94,7 @@ class CatalogRuleProduct
     }
 
     /**
-     * Clean products indices
+     * Delete the rule indices of the given products, or of every product when none are given.
      *
      * @param  array  $productIds
      * @return void
@@ -110,19 +111,23 @@ class CatalogRuleProduct
     }
 
     /**
-     * Get array of product ids which are matched by rule
+     * Get the ids of the products a rule applies to, judging each variant of a configurable product on its own
+     * with the categories and values it inherits from it.
      *
      * @param  CatalogRule  $rule
-     * @param  Product  $product
+     * @param  Product|null  $product
      * @return array
      */
     public function getMatchingProductIds($rule, $product = null)
     {
-        $products = $this->productRepository->scopeQuery(function ($query) use ($rule, $product) {
+        $products = $this->productRepository->with('parent')->scopeQuery(function ($query) use ($rule, $product) {
             $query = $query->addSelect('products.*');
 
             if ($product) {
-                $query->where('products.id', $product->id);
+                $query->where(function ($query) use ($product) {
+                    $query->where('products.id', $product->id)
+                        ->orWhere('products.parent_id', $product->id);
+                });
             }
 
             if (! $rule->conditions) {
@@ -154,26 +159,25 @@ class CatalogRuleProduct
         $validatedProductIds = [];
 
         foreach ($products as $product) {
-            if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
+            if (
+                ! $product->getTypeInstance()->priceRuleCanBeApplied()
+                || $product->getTypeInstance()->isComposite()
+            ) {
                 continue;
             }
 
             if ($this->validator->validate($rule, $product)) {
-                if ($product->getTypeInstance()->isComposite()) {
-                    $validatedProductIds = array_merge($validatedProductIds, $product->getTypeInstance()->getChildrenIds());
-                } else {
-                    $validatedProductIds[] = $product->id;
-                }
+                $validatedProductIds[] = $product->id;
             }
         }
 
-        return array_unique($validatedProductIds);
+        return $validatedProductIds;
     }
 
     /**
-     * Returns catalog rule products
+     * Get the rule product indices with each product's price, for one product or for every product.
      *
-     * @param  Product  $product
+     * @param  Product|null  $product
      * @return Collection
      */
     public function getCatalogRuleProducts($product = null)
@@ -211,7 +215,7 @@ class CatalogRuleProduct
     }
 
     /**
-     * Add product attribute condition to query
+     * Join an attribute's values to the query and select them under the attribute's code.
      *
      * @param  string  $attributeCode
      * @param  Builder  $query

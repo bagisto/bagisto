@@ -143,37 +143,27 @@ class ElasticSearch extends AbstractIndexer
      */
     public function reindexFull()
     {
-        while (true) {
-            $paginator = $this->productRepository
-                ->select('products.*')
-                ->with([
-                    'channels',
-                    'categories',
-                    'inventories',
-                    'super_attributes',
-                    'variants',
-                    'variants.channels',
-                    'attribute_family',
-                    'attribute_values',
-                    'variants.attribute_family',
-                    'variants.attribute_values',
-                    'price_indices',
-                    'variants.price_indices',
-                    'inventory_indices',
-                    'variants.inventory_indices',
-                ])
-                ->cursorPaginate($this->batchSize);
-
-            $this->reindexBatch($paginator->items());
-
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
-
-        request()->query->remove('cursor');
+        $this->productRepository
+            ->select('products.*')
+            ->with([
+                'channels',
+                'categories',
+                'inventories',
+                'super_attributes',
+                'variants',
+                'variants.channels',
+                'attribute_family',
+                'attribute_values',
+                'variants.attribute_family',
+                'variants.attribute_values',
+                'price_indices',
+                'variants.price_indices',
+                'inventory_indices',
+                'variants.inventory_indices',
+            ])
+            ->chunkById($this->batchSize, function ($products) {
+                $this->reindexBatch($products->all());
+            }, 'products.id', 'id');
 
         $this->purgeOrphanedIndices();
     }

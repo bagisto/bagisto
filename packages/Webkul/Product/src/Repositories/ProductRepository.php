@@ -593,6 +593,36 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Get the ids of the configurable, bundle and grouped products whose prices are built from the given products.
+     */
+    public function getCompositeParentIds(array $productIds): array
+    {
+        if (empty($productIds)) {
+            return [];
+        }
+
+        $configurableIds = $this->findWhereIn('id', $productIds, ['parent_id'])
+            ->pluck('parent_id')
+            ->filter();
+
+        $bundleAndGroupedIds = $this->scopeQuery(function ($query) use ($productIds) {
+            return $query
+                ->whereHas('bundle_options.bundle_option_products', function ($optionProducts) use ($productIds) {
+                    $optionProducts->whereIn($optionProducts->qualifyColumn('product_id'), $productIds);
+                })
+                ->orWhereHas('grouped_products', function ($groupedProducts) use ($productIds) {
+                    $groupedProducts->whereIn($groupedProducts->qualifyColumn('associated_product_id'), $productIds);
+                });
+        })->all(['id'])->pluck('id');
+
+        return $configurableIds
+            ->merge($bundleAndGroupedIds)
+            ->unique()
+            ->values()
+            ->all();
+    }
+
+    /**
      * Return category product maximum price.
      *
      * @param  array  $params

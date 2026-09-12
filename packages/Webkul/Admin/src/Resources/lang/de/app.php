@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Katalogregel erfolgreich erstellt',
                 'delete-success' => 'Katalogregel erfolgreich gelöscht',
+                'queue-note' => 'Beim Speichern dieser Regel wird der Preis jedes Produkts aktualisiert, für das sie gilt. Gilt sie für viele Produkte, verwenden Sie den Warteschlangentreiber database oder redis mit einem laufenden Queue-Worker, damit die Preise im Hintergrund aktualisiert werden, statt das Speichern zu verlangsamen.',
                 'update-success' => 'Katalogregel erfolgreich aktualisiert',
             ],
 

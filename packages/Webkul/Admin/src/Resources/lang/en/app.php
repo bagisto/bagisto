@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Catalog rule created successfully',
                 'delete-success' => 'Catalog rule deleted successfully',
+                'queue-note' => 'Saving this rule updates the price of every product it applies to. When it applies to many products, use the database or redis queue driver with a queue worker running, so prices are updated in the background instead of slowing down the save.',
                 'update-success' => 'Catalog rule updated successfully',
             ],
 

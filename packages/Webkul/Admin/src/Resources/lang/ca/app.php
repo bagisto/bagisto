@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Regla del Catàleg creada amb éxit',
                 'delete-success' => 'Regla del Catàleg eliminada amb éxit',
+                'queue-note' => 'Desar aquesta regla actualitza el preu de cada producte al qual s\'aplica. Si s\'aplica a molts productes, utilitza el controlador de cua database o redis amb un treballador de cua en execució, perquè els preus s\'actualitzin en segon pla en lloc d\'alentir el desament.',
                 'update-success' => 'Regla del Catàleg actualitzada amb éxit',
             ],
 

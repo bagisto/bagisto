@@ -82,26 +82,16 @@ class Inventory extends AbstractIndexer
      */
     public function reindexFull()
     {
-        while (true) {
-            $paginator = $this->productRepository
-                ->with([
-                    'inventories',
-                    'ordered_inventories',
-                    'inventory_indices',
-                ])
-                ->whereIn('type', ['simple', 'virtual'])
-                ->cursorPaginate($this->batchSize);
-
-            $this->reindexBatch($paginator->items());
-
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
-
-        request()->query->remove('cursor');
+        $this->productRepository
+            ->with([
+                'inventories',
+                'ordered_inventories',
+                'inventory_indices',
+            ])
+            ->whereIn('type', ['simple', 'virtual'])
+            ->chunkById($this->batchSize, function ($products) {
+                $this->reindexBatch($products->all());
+            });
     }
 
     /**

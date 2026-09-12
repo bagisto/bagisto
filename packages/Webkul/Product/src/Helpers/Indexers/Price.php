@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
@@ -53,41 +54,32 @@ class Price extends AbstractIndexer
     {
         Event::dispatch('catalog.product.price.reindex.before');
 
-        while (true) {
-            $paginator = $this->productRepository
-                ->with([
-                    'variants',
-                    'attribute_family',
-                    'attribute_values',
-                    'variants.attribute_family',
-                    'variants.attribute_values',
-                    'price_indices',
-                    'inventory_indices',
-                    'variants.price_indices',
-                    'variants.inventory_indices',
-                    'customer_group_prices',
-                    'variants.customer_group_prices',
-                    'catalog_rule_prices',
-                    'variants.catalog_rule_prices',
-                ])
-                ->cursorPaginate($this->batchSize);
-
-            $this->reindexBatch($paginator->items());
-
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
-
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
-
-        request()->query->remove('cursor');
+        $this->productRepository
+            ->with([
+                'variants',
+                'attribute_family',
+                'attribute_values',
+                'variants.attribute_family',
+                'variants.attribute_values',
+                'price_indices',
+                'inventory_indices',
+                'variants.price_indices',
+                'variants.inventory_indices',
+                'customer_group_prices',
+                'variants.customer_group_prices',
+                'catalog_rule_prices',
+                'variants.catalog_rule_prices',
+            ])
+            ->chunkById($this->batchSize, function ($products) {
+                $this->reindexBatch($products->all());
+            });
 
         Event::dispatch('catalog.product.price.reindex.after');
     }
 
     /**
-     * Reindex the products whose price depends on today's date, announcing the ids of those reindexed.
+     * Reindex the products whose price depends on today's date and the composite products built from them,
+     * announcing the ids of those reindexed.
      *
      * @return void
      */
@@ -97,53 +89,47 @@ class Price extends AbstractIndexer
 
         $productIds = [];
 
-        while (true) {
-            $paginator = $this->productRepository
-                ->select('products.*')
-                ->with([
-                    'variants',
-                    'attribute_values',
-                    'variants.attribute_values',
-                    'price_indices',
-                    'inventory_indices',
-                    'variants.price_indices',
-                    'variants.inventory_indices',
-                    'customer_group_prices',
-                    'variants.customer_group_prices',
-                    'catalog_rule_prices',
-                    'variants.catalog_rule_prices',
-                ])
-                ->join('product_attribute_values as special_price_from_pav', function ($join) {
-                    $join->on('products.id', '=', 'special_price_from_pav.product_id')
-                        ->where('special_price_from_pav.attribute_id', self::SPECIAL_PRICE_FROM_ATTRIBUTE_ID);
-                })
-                ->join('product_attribute_values as special_price_to_pav', function ($join) {
-                    $join->on('products.id', '=', 'special_price_to_pav.product_id')
-                        ->where('special_price_to_pav.attribute_id', self::SPECIAL_PRICE_TO_ATTRIBUTE_ID);
-                })
-                ->leftJoin('catalog_rule_product_prices', 'products.id', '=', 'catalog_rule_product_prices.product_id')
-                ->where(function ($query) {
-                    return $query->orWhere('special_price_from_pav.date_value', Carbon::now()->format('Y-m-d'))
-                        ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'))
-                        ->orWhere('catalog_rule_product_prices.rule_date', Carbon::now()->subDays(1)->format('Y-m-d'));
-                })
-                ->groupBy('products.id')
-                ->cursorPaginate($this->batchSize);
+        $this->productRepository
+            ->select('products.*')
+            ->with([
+                'variants',
+                'attribute_values',
+                'variants.attribute_values',
+                'price_indices',
+                'inventory_indices',
+                'variants.price_indices',
+                'variants.inventory_indices',
+                'customer_group_prices',
+                'variants.customer_group_prices',
+                'catalog_rule_prices',
+                'variants.catalog_rule_prices',
+            ])
+            ->join('product_attribute_values as special_price_from_pav', function ($join) {
+                $join->on('products.id', '=', 'special_price_from_pav.product_id')
+                    ->where('special_price_from_pav.attribute_id', self::SPECIAL_PRICE_FROM_ATTRIBUTE_ID);
+            })
+            ->join('product_attribute_values as special_price_to_pav', function ($join) {
+                $join->on('products.id', '=', 'special_price_to_pav.product_id')
+                    ->where('special_price_to_pav.attribute_id', self::SPECIAL_PRICE_TO_ATTRIBUTE_ID);
+            })
+            ->leftJoin('catalog_rule_product_prices', 'products.id', '=', 'catalog_rule_product_prices.product_id')
+            ->where(function ($query) {
+                return $query->orWhere('special_price_from_pav.date_value', Carbon::now()->format('Y-m-d'))
+                    ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'))
+                    ->orWhere('catalog_rule_product_prices.rule_date', Carbon::now()->subDays(1)->format('Y-m-d'));
+            })
+            ->groupBy('products.id')
+            ->chunkById($this->batchSize, function ($products) use (&$productIds) {
+                $this->reindexBatch($products->all());
 
-            $this->reindexBatch($paginator->items());
+                $productIds = [...$productIds, ...$products->pluck('id')->all()];
+            }, 'products.id', 'id');
 
-            $productIds = array_merge($productIds, collect($paginator->items())->pluck('id')->all());
+        $productIds = array_values(array_unique($productIds));
 
-            if (! $cursor = $paginator->nextCursor()) {
-                break;
-            }
+        $productIds = [...$productIds, ...$this->reindexCompositeParentsOf($productIds)];
 
-            request()->query->add(['cursor' => $cursor->encode()]);
-        }
-
-        request()->query->remove('cursor');
-
-        Event::dispatch('catalog.product.price.reindex.after', [array_values(array_unique($productIds))]);
+        Event::dispatch('catalog.product.price.reindex.after', [$productIds]);
     }
 
     /**
@@ -208,7 +194,7 @@ class Price extends AbstractIndexer
     /**
      * Get the price indexer of a product's type.
      *
-     * @return string
+     * @return Price\AbstractType
      */
     public function getTypeIndexer($product)
     {
@@ -247,5 +233,27 @@ class Price extends AbstractIndexer
         }
 
         return $this->customerGroups = $this->customerGroupRepository->all();
+    }
+
+    /**
+     * Reindex the composite products built from the given products, which the date-based selective query
+     * cannot find, returning their ids.
+     */
+    protected function reindexCompositeParentsOf(array $productIds): array
+    {
+        $parentIds = array_values(array_diff($this->productRepository->getCompositeParentIds($productIds), $productIds));
+
+        foreach (array_chunk($parentIds, $this->batchSize) as $batchIds) {
+            $this->reindexBatch($this->productRepository->with([
+                'variants',
+                'price_indices',
+                'variants.attribute_values',
+                'variants.price_indices',
+                'variants.customer_group_prices',
+                'variants.catalog_rule_prices',
+            ])->findWhereIn('id', $batchIds)->all());
+        }
+
+        return $parentIds;
     }
 }

@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Aturan katalog berhasil dibuat',
                 'delete-success' => 'Aturan katalog berhasil dihapus',
+                'queue-note' => 'Menyimpan aturan ini akan memperbarui harga setiap produk yang dikenai aturan tersebut. Jika aturan ini berlaku untuk banyak produk, gunakan driver antrian database atau redis dengan worker antrian yang berjalan, agar harga diperbarui di latar belakang alih-alih memperlambat penyimpanan.',
                 'update-success' => 'Aturan katalog berhasil diperbarui',
             ],
 

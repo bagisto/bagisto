@@ -1,6 +1,62 @@
 <?php
 
+use Webkul\Category\Models\Category;
+use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Customer\Models\Customer;
+
+// ============================================================================
+// Category Conditions
+// ============================================================================
+
+it('should not apply a cart rule to a configurable product in a category a does not contain condition excludes', function () {
+    $footwear = Category::factory()->has(CategoryTranslation::factory(), 'translations')->create();
+
+    $product = $this->createConfigurableProduct([500]);
+
+    $product->categories()->attach($footwear->id);
+
+    $this->createCartRuleForPricing([
+        'action_type' => 'by_fixed',
+        'discount_amount' => 50,
+        'uses_attribute_conditions' => 1,
+        'condition_type' => 1,
+        'conditions' => [[
+            'attribute' => 'product|category_ids',
+            'operator' => '!{}',
+            'value' => [(string) $footwear->id],
+            'attribute_type' => 'multiselect',
+        ]],
+    ]);
+
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
+
+    $this->assertCartDiscount($response, 0);
+});
+
+it('should apply a cart rule to a configurable product in a category a contains condition includes', function () {
+    $footwear = Category::factory()->has(CategoryTranslation::factory(), 'translations')->create();
+
+    $product = $this->createConfigurableProduct([500]);
+
+    $product->categories()->attach($footwear->id);
+
+    $this->createCartRuleForPricing([
+        'action_type' => 'by_fixed',
+        'discount_amount' => 50,
+        'uses_attribute_conditions' => 1,
+        'condition_type' => 1,
+        'conditions' => [[
+            'attribute' => 'product|category_ids',
+            'operator' => '{}',
+            'value' => [(string) $footwear->id],
+            'attribute_type' => 'multiselect',
+        ]],
+    ]);
+
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
+
+    $this->assertCartDiscount($response, 50);
+});
 
 // ============================================================================
 // No Coupon — Fixed Discount

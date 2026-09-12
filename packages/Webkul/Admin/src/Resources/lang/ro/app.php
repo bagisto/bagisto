@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Catalog rule created successfully',
                 'delete-success' => 'Catalog rule deleted successfully',
+                'queue-note' => 'Salvarea acestei reguli actualizează prețul fiecărui produs căruia i se aplică. Dacă se aplică multor produse, folosiți driverul de coadă database sau redis cu un worker de coadă pornit, astfel încât prețurile să fie actualizate în fundal în loc să încetinească salvarea.',
                 'update-success' => 'Catalog rule updated successfully',
             ],
 

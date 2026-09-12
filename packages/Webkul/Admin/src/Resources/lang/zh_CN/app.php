@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => '目录规则创建成功',
                 'delete-success' => '目录规则删除成功',
+                'queue-note' => '保存此规则会更新其适用的每个商品的价格。如果该规则适用于大量商品，请使用 database 或 redis 队列驱动并保持队列处理进程运行，以便在后台更新价格，而不会拖慢保存。',
                 'update-success' => '目录规则更新成功',
             ],
 

@@ -3002,6 +3002,7 @@ return [
 
                 'create-success' => 'Catalogusregel succesvol aangemaakt',
                 'delete-success' => 'Catalogusregel succesvol verwijderd',
+                'queue-note' => 'Bij het opslaan van deze regel wordt de prijs bijgewerkt van elk product waarop deze van toepassing is. Geldt de regel voor veel producten, gebruik dan het wachtrijstuurprogramma database of redis met een actieve wachtrij-worker, zodat de prijzen op de achtergrond worden bijgewerkt in plaats van het opslaan te vertragen.',
                 'update-success' => 'Catalogusregel succesvol bijgewerkt',
             ],
 

@@ -53,7 +53,8 @@ it('should return the catalog rule create page', function () {
 
     get(route('admin.marketing.promotions.catalog_rules.create'))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.title'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.title'))
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.queue-note'));
 });
 
 // ============================================================================
@@ -107,7 +108,8 @@ it('should return the catalog rule edit page', function () {
 
     get(route('admin.marketing.promotions.catalog_rules.edit', $catalogRule->id))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.title'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.title'))
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.queue-note'));
 });
 
 // ============================================================================

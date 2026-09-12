@@ -123,3 +123,15 @@ it('should apply fixed catalog rule to bundle product for wholesaler', function 
 
     $this->assertCartItemPrice($response, 750);
 });
+
+// ============================================================================
+// Listed Price
+// ============================================================================
+
+it('should reprice the bundle product as soon as a catalog rule discounts its option products', function () {
+    $product = $this->createBundleProduct([1000]);
+
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+
+    expect((float) $product->fresh()->getTypeInstance()->getMinimalPrice())->toBe(800.0);
+});

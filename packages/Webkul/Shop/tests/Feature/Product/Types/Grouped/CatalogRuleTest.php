@@ -87,3 +87,15 @@ it('should apply fixed catalog rule to grouped product for wholesaler', function
     // 1000 - 250 = 750
     $this->assertCartItemPrice($response, 750, 0);
 });
+
+// ============================================================================
+// Listed Price
+// ============================================================================
+
+it('should reprice the grouped product as soon as a catalog rule discounts its associated products', function () {
+    $product = $this->createGroupedProduct([1000, 500]);
+
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+
+    expect((float) $product->fresh()->getTypeInstance()->getMinimalPrice())->toBe(400.0);
+});
