@@ -3,6 +3,7 @@
 <!-- Customer Address Vue Component -->
 <v-checkout-address-customer
     :cart="cart"
+    :current-step="currentStep"
     @processing="stepForward"
     @processed="stepProcessed"
 >
@@ -29,7 +30,10 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, addAddressToCart)">
+                    <form
+                        @submit="handleSubmit($event, addAddressToCart)"
+                        @input="handleAddressChange"
+                    >
                         <!-- Billing Address Header -->
                         <div class="mb-4 flex items-center justify-between max-md:mb-2">
                             <h2 class="text-xl font-medium max-sm:text-base max-sm:font-normal">
@@ -243,8 +247,43 @@
                             </div>
                         </template>
 
+                        <!-- Address Updated Notice -->
+                        <transition
+                            enter-from-class="scale-95 opacity-0"
+                            enter-active-class="transform transition duration-200 ease-in-out"
+                            leave-active-class="transform transition duration-200 ease-in-out"
+                            leave-to-class="scale-95 opacity-0"
+                        >
+                            <div
+                                class="mt-4 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
+                                role="status"
+                                v-if="isAddressUpdated"
+                            >
+                                <span class="icon-toast-info flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xl text-amber-800"></span>
+
+                                <div>
+                                    <p class="font-medium">
+                                        @lang('shop::app.checkout.onepage.address.address-updated-title')
+                                    </p>
+
+                                    <p class="mt-1 text-amber-800">
+                                        <template v-if="cart.have_stockable_items">
+                                            @lang('shop::app.checkout.onepage.address.address-updated-shipping-info')
+                                        </template>
+
+                                        <template v-else>
+                                            @lang('shop::app.checkout.onepage.address.address-updated-payment-info')
+                                        </template>
+                                    </p>
+                                </div>
+                            </div>
+                        </transition>
+
                         <!-- Proceed Button -->
-                        <div class="mt-4 flex justify-end max-md:my-4">
+                        <div
+                            class="mt-4 flex justify-end max-md:my-4"
+                            v-if="currentStep == 'address' || isStoring"
+                        >
                             <x-shop::button
                                 class="primary-button rounded-2xl px-11 py-3 max-md:rounded-lg max-sm:w-full max-sm:max-w-full max-sm:py-1.5"
                                 :title="trans('shop::app.checkout.onepage.address.proceed')"
@@ -262,7 +301,10 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, updateOrCreateAddress)">
+                    <form
+                        @submit="handleSubmit($event, updateOrCreateAddress)"
+                        @input="handleAddressChange"
+                    >
                         <!-- Billing Address Header -->
                         <div class="mb-4 flex items-center justify-between">
                             <h2 class="text-xl font-medium max-md:text-base max-sm:font-normal">
@@ -331,7 +373,7 @@
         app.component('v-checkout-address-customer', {
             template: '#v-checkout-address-customer-template',
 
-            props: ['cart'],
+            props: ['cart', 'currentStep'],
 
             emits: ['processing', 'processed'],
 
@@ -360,6 +402,8 @@
                     isLoading: true,
 
                     isStoring: false,
+
+                    isAddressUpdated: false,
                 }
             },
 
@@ -423,7 +467,7 @@
                 },
 
                 updateOrCreateAddress(params, { setErrors }) {
-                    this.$emit('processing', 'address');
+                    this.handleAddressChange();
 
                     params = params[this.activeAddressForm];
 
@@ -571,6 +615,8 @@
                         .then((response) => {
                             this.isStoring = false;
 
+                            this.isAddressUpdated = false;
+
                             if (response.data.data.redirect_url) {
                                 window.location.href = response.data.data.redirect_url;
                             } else {
@@ -613,6 +659,14 @@
                         ...address,
                         default_address: 0,
                     };
+                },
+
+                handleAddressChange() {
+                    if (this.currentStep != 'address') {
+                        this.isAddressUpdated = true;
+                    }
+
+                    this.$emit('processing', 'address');
                 },
 
                 moveToNextStep() {

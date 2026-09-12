@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Yeni Adres Ekle',
                 'add-new-address' => 'Yeni Adres Ekle',
+                'address-updated-payment-info' => 'Ödeme yöntemleri ve sipariş toplamları yeni adresinize göre yenilenecek. Güncel seçenekleri görmek için Devam Et düğmesine tıklayın.',
+                'address-updated-shipping-info' => 'Kargo yöntemleri ve ücretleri yeni adresinize göre yeniden hesaplanacak. Güncel seçenekleri görmek için Devam Et düğmesine tıklayın.',
+                'address-updated-title' => 'Adresiniz güncellendi',
                 'back' => 'Geri',
                 'billing-address' => 'Fatura Adresi',
                 'check-billing-address' => 'Fatura adresi seçilmedi.',

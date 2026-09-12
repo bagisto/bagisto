@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Tambah alamat baru',
                 'add-new-address' => 'Tambah alamat baru',
+                'address-updated-payment-info' => 'Metode pembayaran dan total pesanan akan diperbarui untuk alamat baru Anda. Klik Lanjut untuk melihat opsi terbaru.',
+                'address-updated-shipping-info' => 'Metode pengiriman dan tarif akan dihitung ulang untuk alamat baru Anda. Klik Lanjut untuk melihat opsi terbaru.',
+                'address-updated-title' => 'Alamat Anda telah diperbarui',
                 'back' => 'Kembali',
                 'billing-address' => 'Alamat Tagihan',
                 'check-billing-address' => 'Alamat tagihan belum diisi.',

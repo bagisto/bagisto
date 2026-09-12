@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => '添加新地址',
                 'add-new-address' => '添加新地址',
+                'address-updated-payment-info' => '系统将根据您的新地址刷新付款方式和订单总额。点击“继续”查看最新选项。',
+                'address-updated-shipping-info' => '系统将根据您的新地址重新计算送货方式和运费。点击“继续”查看最新选项。',
+                'address-updated-title' => '您的地址已更新',
                 'back' => '返回',
                 'billing-address' => '账单地址',
                 'check-billing-address' => '缺少账单地址。',

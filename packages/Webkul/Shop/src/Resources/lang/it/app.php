@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Aggiungi nuovo indirizzo',
                 'add-new-address' => 'Aggiungi nuovo indirizzo',
+                'address-updated-payment-info' => 'I metodi di pagamento e i totali dell\'ordine verranno aggiornati per il tuo nuovo indirizzo. Clicca su Procedi per vedere le opzioni più recenti.',
+                'address-updated-shipping-info' => 'I metodi di spedizione e le tariffe verranno ricalcolati per il tuo nuovo indirizzo. Clicca su Procedi per vedere le opzioni più recenti.',
+                'address-updated-title' => 'Il tuo indirizzo è stato aggiornato',
                 'back' => 'Indietro',
                 'billing-address' => 'Indirizzo di fatturazione',
                 'check-billing-address' => 'Indirizzo di fatturazione mancante.',

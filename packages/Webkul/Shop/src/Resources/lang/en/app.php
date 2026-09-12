@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Add new address',
                 'add-new-address' => 'Add new address',
+                'address-updated-payment-info' => 'Payment methods and order totals will be refreshed for your new address. Click Proceed to see the latest options.',
+                'address-updated-shipping-info' => 'Shipping methods and rates will be recalculated for your new address. Click Proceed to see the latest options.',
+                'address-updated-title' => 'Your address has been updated',
                 'back' => 'Back',
                 'billing-address' => 'Billing Address',
                 'check-billing-address' => 'Billing address is missing.',

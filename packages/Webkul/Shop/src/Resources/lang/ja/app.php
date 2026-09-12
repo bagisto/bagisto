@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => '新しい住所を追加',
                 'add-new-address' => '新しい住所を追加',
+                'address-updated-payment-info' => '新しい住所に合わせて支払方法と注文合計が更新されます。最新のオプションを確認するには「進む」をクリックしてください。',
+                'address-updated-shipping-info' => '新しい住所に合わせて配送方法と送料が再計算されます。最新のオプションを確認するには「進む」をクリックしてください。',
+                'address-updated-title' => '住所が更新されました',
                 'back' => '戻る',
                 'billing-address' => '請求先住所',
                 'check-billing-address' => '請求先住所がありません。',

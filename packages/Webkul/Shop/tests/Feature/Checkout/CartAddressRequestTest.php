@@ -1,77 +1,121 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
-use Webkul\Shop\Http\Requests\CartAddressRequest;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Faker\Helpers\Product as ProductFaker;
 
-class TestCartAddressRequest extends CartAddressRequest
-{
-    public function prepareForTest(): void
-    {
-        $this->prepareForValidation();
-    }
-}
-
-function prepareCartAddressRequest(array $payload): TestCartAddressRequest
-{
-    $request = TestCartAddressRequest::create('/', 'POST', $payload);
-
-    $request->prepareForTest();
-
-    return $request;
-}
+use function Pest\Laravel\postJson;
 
 beforeEach(function () {
-    DB::table('country_states')->insert([
-        [
-            'country_id' => null,
-            'country_code' => 'T1',
-            'code' => 'T1-A',
-            'default_name' => 'Test State A',
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+            26 => 'guest_checkout',
         ],
-        [
-            'country_id' => null,
-            'country_code' => 'T2',
-            'code' => 'T2-B',
-            'default_name' => 'Test State B',
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $cart = Cart::factory()->create();
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => 1,
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax' => $convertedPrice,
+        'base_price' => $price,
+        'base_price_incl_tax' => $price,
+        'total' => $convertedPrice,
+        'total_incl_tax' => $convertedPrice,
+        'base_total' => $price,
+        'weight' => $product->weight ?? 0,
+        'total_weight' => $product->weight ?? 0,
+        'base_total_weight' => $product->weight ?? 0,
+        'type' => $product->type,
+        'additional' => [
+            'product_id' => $product->id,
+            'rating' => '0',
+            'is_buy_now' => '0',
+            'quantity' => '1',
         ],
     ]);
+
+    cart()->setCart($cart);
+
+    $this->address = fn (string $country, string $state): array => [
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'email' => fake()->safeEmail(),
+        'address' => [fake()->streetAddress()],
+        'city' => fake()->city(),
+        'country' => $country,
+        'state' => $state,
+        'postcode' => '110001',
+        'phone' => fake()->e164PhoneNumber(),
+    ];
 });
 
-afterEach(function () {
-    DB::table('country_states')
-        ->whereIn('country_code', ['T1', 'T2'])
-        ->delete();
-});
-
-it('clears a known state code that belongs to another country', function (string $addressType) {
-    $request = prepareCartAddressRequest([
-        $addressType => [
-            'country' => 'T2',
-            'state' => 'T1-A',
-        ],
-    ]);
-
-    expect($request->input("{$addressType}.state"))->toBeNull();
-})->with(['billing', 'shipping']);
-
-it('keeps a known state code that belongs to the selected country', function () {
-    $request = prepareCartAddressRequest([
+it('should fail the validation when the billing state belongs to another country', function () {
+    // Act and Assert.
+    postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'country' => 'T2',
-            'state' => 'T2-B',
+            ...($this->address)('IN', 'CA'),
+            'use_for_shipping' => 1,
         ],
-    ]);
-
-    expect($request->input('billing.state'))->toBe('T2-B');
+    ])
+        ->assertJsonValidationErrors(['billing.state' => trans('validation.in', ['attribute' => 'billing.state'])])
+        ->assertUnprocessable();
 });
 
-it('keeps legacy free-form state values', function () {
-    $request = prepareCartAddressRequest([
+it('should fail the validation when the shipping state belongs to another country', function () {
+    // Act and Assert.
+    postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'country' => 'T2',
-            'state' => 'Legacy Province',
+            ...($this->address)('US', 'CA'),
+            'use_for_shipping' => 0,
         ],
-    ]);
-
-    expect($request->input('billing.state'))->toBe('Legacy Province');
+        'shipping' => ($this->address)('IN', 'CA'),
+    ])
+        ->assertJsonValidationErrorFor('shipping.state')
+        ->assertJsonMissingValidationErrors('billing.state')
+        ->assertUnprocessable();
 });
+
+it('should fail the validation when the state is not in the state list of the selected country', function () {
+    // Act and Assert.
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            ...($this->address)('IN', 'XX'),
+            'use_for_shipping' => 1,
+        ],
+    ])
+        ->assertJsonValidationErrorFor('billing.state')
+        ->assertUnprocessable();
+});
+
+it('should store the address when the state belongs to the selected country or the country has no state list', function (string $country, string $state) {
+    // Act and Assert.
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            ...($this->address)($country, $state),
+            'use_for_shipping' => 1,
+        ],
+    ])
+        ->assertOk();
+})->with([
+    'state from the country list' => ['US', 'CA'],
+    'free-form state for a country without a list' => ['GB', 'Greater London'],
+]);

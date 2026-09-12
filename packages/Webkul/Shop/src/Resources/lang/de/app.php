@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Neue Adresse hinzufügen',
                 'add-new-address' => 'Neue Adresse hinzufügen',
+                'address-updated-payment-info' => 'Zahlungsmethoden und Bestellsummen werden für Ihre neue Adresse aktualisiert. Klicken Sie auf Fortfahren, um die aktuellen Optionen zu sehen.',
+                'address-updated-shipping-info' => 'Versandarten und Versandkosten werden für Ihre neue Adresse neu berechnet. Klicken Sie auf Fortfahren, um die aktuellen Optionen zu sehen.',
+                'address-updated-title' => 'Ihre Adresse wurde aktualisiert',
                 'back' => 'Zurück',
                 'billing-address' => 'Rechnungsadresse',
                 'check-billing-address' => 'Rechnungsadresse fehlt.',

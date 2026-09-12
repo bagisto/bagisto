@@ -210,10 +210,11 @@
                     <x-shop::form.control-group.control
                         type="select"
                         name="country"
-                        rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                        rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                         v-model="addressData.country"
                         :aria-label="trans('shop::app.customers.account.addresses.edit.country')"
                         :label="trans('shop::app.customers.account.addresses.edit.country')"
+                        @change="addressData.state = ''"
                     >
                         @foreach (core()->countries() as $country)
                             <option 
@@ -260,6 +261,7 @@
                             name="state"
                             rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                             :value="old('state') ?? $address->state"
+                            v-model="addressData.state"
                             :label="trans('shop::app.customers.account.addresses.edit.state')"
                             :placeholder="trans('shop::app.customers.account.addresses.edit.state')"
                         />

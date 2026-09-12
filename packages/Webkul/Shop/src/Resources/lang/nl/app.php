@@ -1171,6 +1171,9 @@ return [
             'address' => [
                 'add-new' => 'Nieuw adres toevoegen',
                 'add-new-address' => 'Nieuw adres toevoegen',
+                'address-updated-payment-info' => 'Betalingsmethoden en besteltotalen worden vernieuwd voor uw nieuwe adres. Klik op "Ga verder" om de nieuwste opties te bekijken.',
+                'address-updated-shipping-info' => 'Verzendmethoden en tarieven worden opnieuw berekend voor uw nieuwe adres. Klik op "Ga verder" om de nieuwste opties te bekijken.',
+                'address-updated-title' => 'Uw adres is bijgewerkt',
                 'back' => 'Terug',
                 'billing-address' => 'Factuuradres',
                 'check-billing-address' => 'Factuuradres ontbreekt.',
