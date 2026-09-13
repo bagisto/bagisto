@@ -345,6 +345,24 @@ it('should delete self with password confirmation', function () {
     $this->assertDatabaseMissing('admins', ['id' => $admin->id]);
 });
 
+it('should not delete self when no other admin is left', function () {
+    $admin = Admin::factory()->create([
+        'password' => Hash::make($password = fake()->password()),
+    ]);
+
+    adminRepositoryCounting(['count' => 1]);
+
+    $this->loginAsAdmin($admin);
+
+    putJson(route('admin.settings.users.destroy'), [
+        'password' => $password,
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.settings.users.last-delete-error'));
+
+    $this->assertDatabaseHas('admins', ['id' => $admin->id]);
+});
+
 it('should not delete self with a wrong password', function () {
     $admin = Admin::factory()->create([
         'password' => Hash::make(fake()->password()),

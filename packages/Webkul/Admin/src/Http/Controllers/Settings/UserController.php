@@ -211,7 +211,9 @@ class UserController extends Controller
 
         if (Hash::check($password, auth()->guard('admin')->user()->password)) {
             if ($this->adminRepository->count() == 1) {
-                session()->flash('error', trans('admin::app.settings.users.delete-last'));
+                return new JsonResponse([
+                    'message' => trans('admin::app.settings.users.last-delete-error'),
+                ], 400);
             } else {
                 $id = auth()->guard('admin')->user()->id;
 
