@@ -571,7 +571,7 @@ abstract class DataGrid
          * as it will always be treated as true because of "0" and "1".
          */
         isset($requestedParams['export']) && (bool) $requestedParams['export']
-            ? $this->processRequestedExport($requestedParams['format'] ?? null)
+            ? $this->processRequestedExport($requestedParams['format'] ?? 'csv')
             : $this->processRequestedPagination($requestedParams['pagination'] ?? []);
 
         $this->dispatchEvent('process_request.after', $this);

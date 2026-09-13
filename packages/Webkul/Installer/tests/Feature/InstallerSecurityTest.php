@@ -4,13 +4,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 
 it('should block access to installer index page when application is already installed', function () {
-    // Act and Assert.
     get(route('installer.index'))
         ->assertRedirect(route('shop.home.index'));
 });
 
 it('should block access to run migration endpoint when application is already installed', function () {
-    // Act and Assert.
     post(route('installer.run_migration'), [
         'db_hostname' => 'localhost',
         'db_port' => '3306',
@@ -22,7 +20,6 @@ it('should block access to run migration endpoint when application is already in
 });
 
 it('should block access to run seeder endpoint when application is already installed', function () {
-    // Act and Assert.
     post(route('installer.run_seeder'), [
         'selectedParameters' => [
             'allowed_locales' => ['en'],
@@ -37,7 +34,6 @@ it('should block access to run seeder endpoint when application is already insta
 });
 
 it('should block access to create admin user endpoint when application is already installed', function () {
-    // Act and Assert.
     post(route('installer.create_admin_user'), [
         'admin' => 'Admin User',
         'email' => 'admin@example.com',
@@ -47,7 +43,6 @@ it('should block access to create admin user endpoint when application is alread
 });
 
 it('should block access to seed sample products endpoint when application is already installed', function () {
-    // Act and Assert.
     post(route('installer.seed_sample_products'), [
         'selectedLocales' => ['en'],
         'selectedCurrencies' => ['USD'],
@@ -56,7 +51,6 @@ it('should block access to seed sample products endpoint when application is alr
 });
 
 it('should return 403 for ajax request to run migration endpoint when already installed', function () {
-    // Act and Assert.
     post(route('installer.run_migration'), [
         'db_hostname' => 'localhost',
         'db_port' => '3306',
@@ -66,14 +60,13 @@ it('should return 403 for ajax request to run migration endpoint when already in
     ], [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
-        ->assertStatus(403)
+        ->assertForbidden()
         ->assertJson([
             'message' => trans('installer::app.installer.middleware.already-installed'),
         ]);
 });
 
 it('should return 403 for ajax request to run seeder endpoint when already installed', function () {
-    // Act and Assert.
     post(route('installer.run_seeder'), [
         'selectedParameters' => [
             'allowed_locales' => ['en'],
@@ -86,14 +79,13 @@ it('should return 403 for ajax request to run seeder endpoint when already insta
     ], [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
-        ->assertStatus(403)
+        ->assertForbidden()
         ->assertJson([
             'message' => trans('installer::app.installer.middleware.already-installed'),
         ]);
 });
 
 it('should return 403 for ajax request to create admin user endpoint when already installed', function () {
-    // Act and Assert.
     post(route('installer.create_admin_user'), [
         'admin' => 'Admin User',
         'email' => 'admin@example.com',
@@ -101,34 +93,31 @@ it('should return 403 for ajax request to create admin user endpoint when alread
     ], [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
-        ->assertStatus(403)
+        ->assertForbidden()
         ->assertJson([
             'message' => trans('installer::app.installer.middleware.already-installed'),
         ]);
 });
 
 it('should return 403 for ajax request to seed sample products endpoint when already installed', function () {
-    // Act and Assert.
     post(route('installer.seed_sample_products'), [
         'selectedLocales' => ['en'],
         'selectedCurrencies' => ['USD'],
     ], [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
-        ->assertStatus(403)
+        ->assertForbidden()
         ->assertJson([
             'message' => trans('installer::app.installer.middleware.already-installed'),
         ]);
 });
 
 it('should block the installer index when it is reached through a percent-encoded path', function () {
-    // Act and Assert.
     get('/%69nstall')
         ->assertRedirect(route('shop.home.index'));
 });
 
 it('should block the run migration endpoint when it is reached through a percent-encoded path', function () {
-    // Act and Assert.
     post('/%69nstall/api/run-migration', [
         'app_name' => 'Bagisto',
         'db_hostname' => '127.0.0.2',
@@ -141,24 +130,20 @@ it('should block the run migration endpoint when it is reached through a percent
 });
 
 it('should return 403 for an ajax request to the run migration endpoint reached through a percent-encoded path', function () {
-    // Act and Assert.
     post('/%69nstall/api/run-migration', [
         'app_name' => 'Bagisto',
     ], [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
-        ->assertStatus(403);
+        ->assertForbidden();
 });
 
 it('should not leave the .env writable to a request that reaches the installer through a percent-encoded path', function () {
-    // Arrange.
     $before = file_get_contents(base_path('.env'));
 
-    // Act.
     post('/%69nstall/api/run-migration', [
         'app_name' => "Bagisto\nAPP_CONFIG_CACHE=".base_path('.env'),
     ]);
 
-    // Assert.
     expect(file_get_contents(base_path('.env')))->toBe($before);
 });

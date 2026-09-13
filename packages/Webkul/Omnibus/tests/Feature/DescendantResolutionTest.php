@@ -91,11 +91,9 @@ it('returns option product ids for a bundle product (not the parent id)', functi
 
     $descendantIds = $provider->getDescendantProductIds($bundle);
 
-    // Must contain option products, never the bundle parent.
     expect($descendantIds)->not->toContain($bundle->id);
     expect($descendantIds)->not->toBeEmpty();
 
-    // Each id must exist as a real product distinct from the parent.
     foreach ($descendantIds as $id) {
         expect($id)->not->toBe($bundle->id);
     }

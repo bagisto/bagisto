@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
+use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\getJson;
 
 /**
- * Create a category with translation for testing.
+ * Create a category with a translation in the current locale.
  */
 function createTestCategory(): Category
 {
@@ -17,114 +19,98 @@ function createTestCategory(): Category
 }
 
 /**
- * Create multiple products attached to a category.
+ * Create products in the category, named "<prefix> a", "<prefix> b", ... with the given prices and created a day apart.
  */
-function createCategoryProducts($testContext, Category $category, int $count = 3): Collection
+function createCategoryProducts(Category $category, array $prices = [100, 200, 300]): Collection
 {
-    $products = collect();
+    $prefix = Str::lower(Str::random(8));
 
-    for ($i = 0; $i < $count; $i++) {
-        $product = $testContext->createSimpleProduct();
+    $count = count($prices);
+
+    return collect($prices)->map(function (float $price, int $index) use ($category, $prefix, $count) {
+        $product = test()->createSimpleProduct([
+            'name' => ['text_value' => $prefix.' '.chr(ord('a') + $index), 'locale' => app()->getLocale()],
+            'price' => ['float_value' => $price],
+        ]);
+
         $product->categories()->sync([$category->id]);
-        $products->push($product);
-    }
 
-    return $products;
+        Product::query()->whereKey($product->id)->update(['created_at' => now()->subDays($count - $index)]);
+
+        return $product->fresh();
+    });
+}
+
+/**
+ * The ids of the products the storefront lists for the category in the given sort order.
+ */
+function listedProductIds(Category $category, string $sort): array
+{
+    return collect(getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => $sort]))
+        ->assertOk()
+        ->json('data'))
+        ->pluck('id')
+        ->all();
 }
 
 // ============================================================================
 // Listing
 // ============================================================================
 
-it('should return category products', function () {
+it('should list the products of a category', function () {
     $category = createTestCategory();
 
     $product = $this->createSimpleProduct();
+
     $product->categories()->sync([$category->id]);
 
     getJson(route('shop.api.products.index', ['category_id' => $category->id]))
         ->assertOk()
-        ->assertJsonFragment(['id' => $product->id]);
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $product->id);
+});
+
+it('should leave out the products of other categories', function () {
+    $category = createTestCategory();
+
+    $product = $this->createSimpleProduct();
+
+    $product->categories()->sync([createTestCategory()->id]);
+
+    getJson(route('shop.api.products.index', ['category_id' => $category->id]))
+        ->assertOk()
+        ->assertJsonCount(0, 'data');
 });
 
 // ============================================================================
-// Sort by Name
+// Sorting
 // ============================================================================
 
-it('should return category products sorted by name descending', function () {
+it('should sort the products of a category by name', function () {
     $category = createTestCategory();
-    $products = createCategoryProducts($this, $category);
 
-    $expected = $products->pluck('name')->sortDesc()->values()->toArray();
+    $products = createCategoryProducts($category);
 
-    getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => 'name-desc']))
-        ->assertOk()
-        ->assertSeeTextInOrder($expected);
+    expect(listedProductIds($category, 'name-asc'))->toBe($products->pluck('id')->all())
+        ->and(listedProductIds($category, 'name-desc'))->toBe($products->pluck('id')->reverse()->values()->all());
 });
 
-it('should return category products sorted by name ascending', function () {
+it('should sort the products of a category by the date they were created', function () {
     $category = createTestCategory();
-    $products = createCategoryProducts($this, $category);
 
-    $expected = $products->pluck('name')->sort()->values()->toArray();
+    $products = createCategoryProducts($category);
 
-    getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => 'name-asc']))
-        ->assertOk()
-        ->assertSeeTextInOrder($expected);
+    expect(listedProductIds($category, 'created_at-asc'))->toBe($products->pluck('id')->all())
+        ->and(listedProductIds($category, 'created_at-desc'))->toBe($products->pluck('id')->reverse()->values()->all());
 });
 
-// ============================================================================
-// Sort by Date
-// ============================================================================
-
-it('should return category products sorted by created_at descending', function () {
+it('should sort the products of a category by price', function () {
     $category = createTestCategory();
-    $products = createCategoryProducts($this, $category);
 
-    getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => 'created_at-desc']))
-        ->assertOk()
-        ->assertJsonCount(3, 'data');
-});
+    $products = createCategoryProducts($category, [300, 100, 200]);
 
-it('should return category products sorted by created_at ascending', function () {
-    $category = createTestCategory();
-    $products = createCategoryProducts($this, $category);
+    $byPrice = $products->sortBy(fn (Product $product) => $product->getTypeInstance()->getMinimalPrice())->pluck('id');
 
-    getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => 'created_at-asc']))
-        ->assertOk()
-        ->assertJsonCount(3, 'data');
-});
-
-// ============================================================================
-// Sort by Price
-// ============================================================================
-
-it('should return category products sorted by price descending', function () {
-    $category = createTestCategory();
-    $products = createCategoryProducts($this, $category);
-
-    $expected = $products
-        ->map(fn ($p) => $p->getTypeInstance()->getMinimalPrice())
-        ->sortDesc()
-        ->map(fn ($price) => core()->formatPrice($price))
-        ->toArray();
-
-    getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => 'price-desc']))
-        ->assertOk()
-        ->assertSeeTextInOrder($expected);
-});
-
-it('should return category products sorted by price ascending', function () {
-    $category = createTestCategory();
-    $products = createCategoryProducts($this, $category);
-
-    $expected = $products
-        ->map(fn ($p) => $p->getTypeInstance()->getMinimalPrice())
-        ->sort()
-        ->map(fn ($price) => core()->formatPrice($price))
-        ->toArray();
-
-    getJson(route('shop.api.products.index', ['category_id' => $category->id, 'sort' => 'price-asc']))
-        ->assertOk()
-        ->assertSeeTextInOrder($expected);
+    expect(listedProductIds($category, 'price-asc'))->toBe($byPrice->values()->all())
+        ->and(listedProductIds($category, 'price-desc'))->toBe($byPrice->reverse()->values()->all());
 });

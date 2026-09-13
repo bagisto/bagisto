@@ -8,7 +8,6 @@ use Webkul\Faker\Helpers\Product as ProductFaker;
 use function Pest\Laravel\postJson;
 
 it('should fail the validation when the billing state does not belong to the selected country when storing the cart address', function (string $state) {
-    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -61,7 +60,6 @@ it('should fail the validation when the billing state does not belong to the sel
 
     cart()->collectTotals();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.cart.addresses.store', $cart->id), [

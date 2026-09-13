@@ -21,12 +21,6 @@ trait CoreAssertions
      */
     public function assertPrice(float $expected, float $actual, ?int $decimal = null): void
     {
-        $decimal = $decimal ?? core()->getCurrentCurrency()->decimal;
-
-        $expectedFormatted = number_format($expected, $decimal);
-
-        $actualFormatted = number_format($actual, $decimal);
-
-        $this->assertEquals($expectedFormatted, $actualFormatted);
+        expect($actual)->toBePrice($expected, $decimal);
     }
 }

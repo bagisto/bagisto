@@ -19,10 +19,8 @@ beforeEach(function () {
 });
 
 it('should fail the validation when the state does not belong to the selected country when storing the customer address', function (string $state) {
-    // Arrange.
     $customer = Customer::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.addresses.store', $customer->id), ($this->address)('IN', $state))
@@ -34,10 +32,8 @@ it('should fail the validation when the state does not belong to the selected co
 ]);
 
 it('should store the customer address when the state belongs to the selected country or the country has no state list', function (string $country, string $state) {
-    // Arrange.
     $customer = Customer::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.addresses.store', $customer->id), ($this->address)($country, $state))

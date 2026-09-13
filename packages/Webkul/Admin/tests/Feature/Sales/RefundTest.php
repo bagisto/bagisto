@@ -1,96 +1,39 @@
 <?php
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Models\CoreConfig;
-use Webkul\Customer\Models\Customer;
-use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\InvoiceItem;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderItem;
-use Webkul\Sales\Models\OrderPayment;
 use Webkul\Sales\Models\Refund;
 use Webkul\Shop\Mail\Order\RefundedNotification;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 
 /**
- * Create a refundable order (processing status with a paid invoice).
+ * Create an invoiced order for the given quantity of a simple product at the given unit price.
  */
-function createRefundableOrder(): array
+function invoicedOrder(int $qty = 2, float $price = 50): Order
 {
-    $customer = Customer::factory()->create();
+    $order = test()->createOrder(items: [['product' => test()->createSimpleProduct(), 'qty_ordered' => $qty, 'price' => $price]]);
 
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => 'processing',
-        'sub_total_invoiced' => 100,
-        'base_sub_total_invoiced' => 100,
-        'grand_total_invoiced' => 100,
-        'base_grand_total_invoiced' => 100,
-    ]);
+    test()->invoiceOrder($order);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-        'method' => 'cashondelivery',
-    ]);
+    return $order->refresh()->load('items');
+}
 
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => null,
-        'sku' => fake()->uuid(),
-        'type' => 'simple',
-        'name' => fake()->words(3, true),
-        'qty_ordered' => 2,
-        'qty_invoiced' => 2,
-        'price' => 50,
-        'base_price' => 50,
-        'total' => 100,
-        'base_total' => 100,
-        'total_invoiced' => 100,
-        'base_total_invoiced' => 100,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    $invoice = Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state' => 'paid',
-        'grand_total' => 100,
-        'base_grand_total' => 100,
-        'sub_total' => 100,
-        'base_sub_total' => 100,
-    ]);
-
-    InvoiceItem::factory()->create([
-        'invoice_id' => $invoice->id,
-        'order_item_id' => $orderItem->id,
-        'name' => $orderItem->name,
-        'sku' => $orderItem->sku,
-        'qty' => 2,
-        'price' => 50,
-        'base_price' => 50,
-        'total' => 100,
-        'base_total' => 100,
-        'product_id' => $orderItem->product_id,
-        'product_type' => $orderItem->product_type,
-    ]);
-
-    return ['order' => $order, 'orderItem' => $orderItem, 'invoice' => $invoice];
+/**
+ * The refund payload for the given quantity of an order item.
+ */
+function refundPayload(int $orderItemId, int $qty, array $overrides = []): array
+{
+    return [
+        'refund' => array_merge([
+            'items' => [$orderItemId => $qty],
+            'shipping' => 0,
+            'adjustment_refund' => 0,
+            'adjustment_fee' => 0,
+        ], $overrides),
+    ];
 }
 
 // ============================================================================
@@ -114,65 +57,183 @@ it('should deny guest access to the refunds index page', function () {
 // Store
 // ============================================================================
 
-it('should store a refund for an order', function () {
-    $data = createRefundableOrder();
+it('should refund the invoiced quantity, record it on the item and close the order when nothing is left', function () {
+    $order = invoicedOrder(qty: 2, price: 50);
+
+    $item = $order->items->first();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.store', $data['order']->id), [
-        'refund' => [
-            'items' => [$data['orderItem']->id => 1],
-            'shipping' => 0,
-            'adjustment_refund' => 0,
-            'adjustment_fee' => 0,
-        ],
-    ])
-        ->assertRedirect();
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($item->id, 2))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
+        ->assertSessionHas('success', trans('admin::app.sales.refunds.create.create-success'));
 
-    $this->assertDatabaseHas('refunds', [
-        'order_id' => $data['order']->id,
+    $refund = Refund::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect($refund->total_qty)->toBe(2)
+        ->and((float) $refund->sub_total)->toBePrice(100)
+        ->and((float) $refund->grand_total)->toBePrice(100);
+
+    $this->assertDatabaseHas('refund_items', [
+        'refund_id' => $refund->id,
+        'order_item_id' => $item->id,
+        'qty' => 2,
     ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'id' => $item->id,
+        'qty_refunded' => 2,
+    ]);
+
+    $order->refresh();
+
+    expect($order->status)->toBe(Order::STATUS_CLOSED)
+        ->and((float) $order->grand_total_refunded)->toBePrice(100);
+});
+
+it('should keep the order open after a partial refund', function () {
+    $order = invoicedOrder(qty: 2, price: 50);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseHas('order_items', [
+        'order_id' => $order->id,
+        'qty_refunded' => 1,
+    ]);
+
+    $order->refresh();
+
+    expect($order->status)->toBe(Order::STATUS_PROCESSING)
+        ->and((float) $order->grand_total_refunded)->toBePrice(50);
+});
+
+it('should subtract an adjustment fee from the refund total', function () {
+    $order = invoicedOrder(qty: 2, price: 50);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1, [
+        'adjustment_fee' => 5,
+    ]))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $refund = Refund::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect((float) $refund->base_adjustment_fee)->toBePrice(5)
+        ->and((float) $refund->grand_total)->toBePrice(45);
+
+    expect((float) $order->refresh()->grand_total_refunded)->toBePrice(45);
+});
+
+it('should return the refunded quantity of a shipped product to its inventory source', function () {
+    $product = $this->createSimpleProduct();
+
+    $product->inventories()->update(['qty' => 10]);
+
+    $order = $this->createOrder(items: [['product' => $product, 'qty_ordered' => 2, 'price' => 50]]);
+
+    $this->invoiceOrder($order);
+
+    $this->shipOrder($order);
+
+    $this->assertDatabaseHas('product_inventories', [
+        'product_id' => $product->id,
+        'qty' => 8,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 2))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseHas('product_inventories', [
+        'product_id' => $product->id,
+        'qty' => 10,
+    ]);
+});
+
+it('should refuse a refund of more than the quantity left to refund', function () {
+    $order = invoicedOrder(qty: 2);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 3))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.refunds.create.invalid-qty'));
+
+    $this->assertDatabaseMissing('refunds', ['order_id' => $order->id]);
+});
+
+it('should refuse a refund that exceeds the amount still refundable', function () {
+    $order = invoicedOrder(qty: 2, price: 50);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1, [
+        'adjustment_refund' => 1000,
+    ]))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.refunds.create.refund-limit-error', [
+            'amount' => core()->formatBasePrice(1050),
+        ]));
+
+    $this->assertDatabaseMissing('refunds', ['order_id' => $order->id]);
+});
+
+it('should refuse a refund that adds up to nothing', function () {
+    $order = invoicedOrder();
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 0))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.refunds.create.invalid-refund-amount-error'));
+
+    $this->assertDatabaseMissing('refunds', ['order_id' => $order->id]);
+});
+
+it('should refuse to refund an order that has not been invoiced', function () {
+    $order = $this->createOrder();
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.refunds.create.creation-error'));
+
+    $this->assertDatabaseMissing('refunds', ['order_id' => $order->id]);
 });
 
 it('should store a refund and send email notification', function () {
     Mail::fake();
 
-    CoreConfig::factory()->create([
-        'code' => 'emails.general.notifications.emails.general.notifications.new_refund',
-        'value' => 1,
-    ]);
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_refund', 1);
 
-    $data = createRefundableOrder();
+    $order = invoicedOrder();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.store', $data['order']->id), [
-        'refund' => [
-            'items' => [$data['orderItem']->id => 1],
-            'shipping' => 0,
-            'adjustment_refund' => 0,
-            'adjustment_fee' => 0,
-        ],
-    ])
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1))
         ->assertRedirect();
 
-    Mail::assertQueued(RefundedNotification::class);
+    $this->assertDatabaseHas('refunds', ['order_id' => $order->id]);
+
+    Mail::assertQueued(RefundedNotification::class, fn (RefundedNotification $mail) => $mail->hasTo($order->customer_email));
 });
 
-it('should redirect back when all refund item quantities are zero', function () {
-    $data = createRefundableOrder();
+it('should fail validation when a refund item quantity is not numeric', function () {
+    $order = invoicedOrder();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.store', $data['order']->id), [
-        'refund' => [
-            'items' => [$data['orderItem']->id => 0],
-            'shipping' => 0,
-            'adjustment_refund' => 0,
-            'adjustment_fee' => 0,
-        ],
-    ])
-        ->assertRedirect();
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1, [
+        'items' => [$order->items->first()->id => 'invalid'],
+    ]))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('refund.items.'.$order->items->first()->id);
 });
 
 // ============================================================================
@@ -180,37 +241,52 @@ it('should redirect back when all refund item quantities are zero', function () 
 // ============================================================================
 
 it('should return the refund view page', function () {
-    $data = createRefundableOrder();
-
-    $refund = Refund::factory()->create([
-        'order_id' => $data['order']->id,
-    ]);
+    $order = invoicedOrder();
 
     $this->loginAsAdmin();
 
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1));
+
+    $refund = Refund::query()->where('order_id', $order->id)->firstOrFail();
+
     get(route('admin.sales.refunds.view', $refund->id))
-        ->assertOk();
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id]))
+        ->assertSeeText($order->customer_email);
 });
 
 // ============================================================================
 // Update Totals
 // ============================================================================
 
-it('should calculate refund totals', function () {
-    $data = createRefundableOrder();
+it('should total up a refund before it is created', function () {
+    $order = invoicedOrder(qty: 2, price: 50);
 
     $this->loginAsAdmin();
 
-    $response = postJson(route('admin.sales.refunds.update_totals', $data['order']->id), [
-        'refund' => [
-            'items' => [$data['orderItem']->id => 1],
-            'shipping' => 0,
-            'adjustment_refund' => 0,
-            'adjustment_fee' => 0,
-        ],
-    ]);
+    postJson(route('admin.sales.refunds.update_totals', $order->id), [
+        'items' => [$order->items->first()->id => 1],
+        'shipping' => 0,
+        'adjustment_refund' => 10,
+        'adjustment_fee' => 5,
+    ])
+        ->assertOk()
+        ->assertJsonPath('subtotal.price', 50)
+        ->assertJsonPath('grand_total.price', 55)
+        ->assertJsonPath('grand_total.formatted_price', core()->formatBasePrice(55));
+});
 
-    // The endpoint returns 200 with totals or 400 if refund limit exceeded.
-    $response->assertStatus($response->status());
-    expect(in_array($response->status(), [200, 400]))->toBeTrue();
+it('should reject totals for more than the quantity left to refund', function () {
+    $order = invoicedOrder(qty: 2);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.update_totals', $order->id), [
+        'items' => [$order->items->first()->id => 3],
+        'shipping' => 0,
+        'adjustment_refund' => 0,
+        'adjustment_fee' => 0,
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.sales.refunds.create.invalid-qty'));
 });

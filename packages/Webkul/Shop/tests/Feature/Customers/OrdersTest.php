@@ -2,52 +2,10 @@
 
 use Webkul\Customer\Models\Customer;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderItem;
-use Webkul\Sales\Models\OrderPayment;
 
 use function Pest\Laravel\get;
-
-/**
- * Create an order for a customer.
- */
-function createCustomerOrder(Customer $customer): Order
-{
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => 'completed',
-    ]);
-
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-        'method' => 'cashondelivery',
-    ]);
-
-    OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => null,
-        'sku' => fake()->uuid(),
-        'type' => 'simple',
-        'name' => fake()->words(3, true),
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    return $order;
-}
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\post;
 
 // ============================================================================
 // Index
@@ -61,38 +19,104 @@ it('should return the customer orders page', function () {
         ->assertSeeText(trans('shop::app.customers.account.orders.title'));
 });
 
+it('should list only the orders of the signed-in customer', function () {
+    $customer = Customer::factory()->create();
+
+    $order = $this->createOrder(customer: $customer);
+
+    $this->createOrder();
+
+    $this->loginAsCustomer($customer);
+
+    $records = getJson(route('shop.customers.account.orders.index'), ['X-Requested-With' => 'XMLHttpRequest'])
+        ->assertOk()
+        ->json('records');
+
+    expect(collect($records)->pluck('id')->all())->toBe([$order->id]);
+});
+
 // ============================================================================
 // View
 // ============================================================================
 
-it('should return the order view page', function () {
+it('should show an order to the customer who placed it', function () {
     $customer = Customer::factory()->create();
-    $order = createCustomerOrder($customer);
+
+    $order = $this->createOrder(customer: $customer);
 
     $this->loginAsCustomer($customer);
 
     get(route('shop.customers.account.orders.view', $order->id))
-        ->assertOk();
+        ->assertOk()
+        ->assertSeeText($order->increment_id)
+        ->assertSeeText($order->items->first()->name);
+});
+
+it('should not show the order of another customer', function () {
+    $order = $this->createOrder();
+
+    $this->loginAsCustomer();
+
+    get(route('shop.customers.account.orders.view', $order->id))
+        ->assertNotFound();
 });
 
 // ============================================================================
 // Cancel
 // ============================================================================
 
-it('should cancel a pending order', function () {
+it('should cancel a pending order and mark its items canceled', function () {
     $customer = Customer::factory()->create();
 
-    $order = createCustomerOrder($customer);
-    $order->update(['status' => 'pending']);
+    $order = $this->createOrder(customer: $customer, items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2]]);
 
     $this->loginAsCustomer($customer);
 
-    $this->post(route('shop.customers.account.orders.cancel', $order->id))
-        ->assertRedirect();
+    post(route('shop.customers.account.orders.cancel', $order->id))
+        ->assertRedirect()
+        ->assertSessionHas('success');
 
     $this->assertDatabaseHas('orders', [
         'id' => $order->id,
-        'status' => 'canceled',
+        'status' => Order::STATUS_CANCELED,
+    ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'order_id' => $order->id,
+        'qty_canceled' => 2,
+    ]);
+});
+
+it('should refuse to cancel an order that has already been invoiced', function () {
+    $customer = Customer::factory()->create();
+
+    $order = $this->createOrder(customer: $customer, items: [['product' => $this->createSimpleProduct()]]);
+
+    $this->invoiceOrder($order);
+
+    $this->loginAsCustomer($customer);
+
+    post(route('shop.customers.account.orders.cancel', $order->id))
+        ->assertRedirect()
+        ->assertSessionHas('error');
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_PROCESSING,
+    ]);
+});
+
+it('should not cancel the order of another customer', function () {
+    $order = $this->createOrder();
+
+    $this->loginAsCustomer();
+
+    post(route('shop.customers.account.orders.cancel', $order->id))
+        ->assertNotFound();
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_PENDING,
     ]);
 });
 
@@ -100,36 +124,55 @@ it('should cancel a pending order', function () {
 // Reorder
 // ============================================================================
 
-it('should reorder a completed order', function () {
+it('should put the items of a previous order back into the cart', function () {
     $customer = Customer::factory()->create();
+
     $product = $this->createSimpleProduct();
 
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => 'completed',
-    ]);
-
-    OrderPayment::factory()->create(['order_id' => $order->id]);
-
-    OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => $product->id,
-        'sku' => $product->sku,
-        'type' => 'simple',
-        'name' => $product->name,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-    ]);
+    $order = $this->createOrder(['status' => Order::STATUS_COMPLETED], [['product' => $product, 'qty_ordered' => 2]], $customer);
 
     $this->loginAsCustomer($customer);
 
     get(route('shop.customers.account.orders.reorder', $order->id))
-        ->assertRedirect();
+        ->assertRedirect(route('shop.checkout.cart.index'));
+
+    $this->assertCartHasProduct($product->id, 2);
+});
+
+it('should not reorder the order of another customer', function () {
+    $order = $this->createOrder(['status' => Order::STATUS_COMPLETED], [['product' => $this->createSimpleProduct()]]);
+
+    $this->loginAsCustomer();
+
+    get(route('shop.customers.account.orders.reorder', $order->id))
+        ->assertNotFound();
+
+    $this->assertCartIsEmpty();
+});
+
+// ============================================================================
+// Invoice
+// ============================================================================
+
+it('should let the customer download the invoice of their order', function () {
+    $customer = Customer::factory()->create();
+
+    $order = $this->createOrder(customer: $customer);
+
+    $invoice = $this->invoiceOrder($order);
+
+    $this->loginAsCustomer($customer);
+
+    get(route('shop.customers.account.orders.print-invoice', $invoice->id))
+        ->assertOk()
+        ->assertHeader('content-type', 'application/pdf');
+});
+
+it('should not serve the invoice of another customer', function () {
+    $invoice = $this->invoiceOrder($this->createOrder());
+
+    $this->loginAsCustomer();
+
+    get(route('shop.customers.account.orders.print-invoice', $invoice->id))
+        ->assertNotFound();
 });

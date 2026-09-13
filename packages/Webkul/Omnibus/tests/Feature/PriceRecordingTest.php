@@ -10,9 +10,6 @@ use Webkul\Omnibus\Services\OmnibusPriceManager;
 beforeEach(function () {
     $this->manager = app(OmnibusPriceManager::class);
 
-    // Tests start with Omnibus disabled (no core_config row). Individual
-    // tests enable the feature explicitly before invoking the manager so
-    // the listener does not auto-snapshot during createSimpleProduct.
     $this->setOmnibusEnabled(false);
 
     OmnibusPrice::query()->delete();
@@ -152,8 +149,6 @@ it('invokes the progress callback once per top-level product only', function () 
         }
     );
 
-    // Callback fires for the two top-level products; variants are descendants
-    // and must not trigger additional advances.
     expect($advanced)->toBe(2);
 });
 
@@ -167,8 +162,6 @@ it('skips descendants that are already present in the top-level batch', function
 
     $this->manager->recordBulkPrice($batch);
 
-    // Each variant has exactly one snapshot despite being reachable via its
-    // parent's getChildrenIds() AND present as a top-level entry in the batch.
     foreach ($configurable->variants as $variant) {
         expect(OmnibusPrice::where('product_id', $variant->id)->count())->toBe(1);
     }

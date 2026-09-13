@@ -8,6 +8,9 @@ use function Pest\Laravel\postJson;
 
 $staleId = 999999;
 
+/**
+ * An active return reason carrying the given title.
+ */
 function makeReason(string $title): RMAReason
 {
     return RMAReason::create([
@@ -17,6 +20,9 @@ function makeReason(string $title): RMAReason
     ]);
 }
 
+/**
+ * An active, non-default return rule carrying the given name.
+ */
 function makeRule(string $name): RMARule
 {
     return RMARule::create([
@@ -28,6 +34,9 @@ function makeRule(string $name): RMARule
     ]);
 }
 
+/**
+ * An optional text custom field carrying the given code.
+ */
 function makeCustomField(string $code): RMACustomField
 {
     return RMACustomField::create([
@@ -53,18 +62,6 @@ it('should delete the reasons that remain and report the ones already gone', fun
             'deleted' => 1,
             'skipped' => 1,
         ]));
-
-    expect(RMAReason::find($reason->id))->toBeNull();
-});
-
-it('should delete the reasons listed before one that is already gone', function () use ($staleId) {
-    $reason = makeReason('reason listed first');
-
-    $this->loginAsAdmin();
-
-    postJson(route('admin.sales.rma.reasons.mass-delete'), [
-        'indices' => [$reason->id, $staleId],
-    ])->assertOk();
 
     expect(RMAReason::find($reason->id))->toBeNull();
 });

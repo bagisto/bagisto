@@ -39,14 +39,6 @@ function sectionOfTheme(string $themeCode, int $channelId, string $type, array $
     return $section;
 }
 
-it('should customize a theme a channel runs', function () {
-    $this->loginAsAdmin();
-
-    get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
-        ->assertOk()
-        ->assertSee('v-section-editor', false);
-});
-
 it('should send an installed theme no channel runs back to the gallery', function () {
     $code = installGalleryTheme();
 

@@ -9,27 +9,18 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\Customer;
-use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Tests\Concerns\ProductTestBench;
 
 trait ProvidePaymentHelpers
 {
+    use ProductTestBench;
+
     /**
-     * Create cart with items.
+     * Create a customer cart holding one simple product, addressed, shipped for free and paid by the given method.
      */
     public function createCartWithItems(string $paymentMethod, array $overrides = []): Cart
     {
-        $product = (new ProductFaker([
-            'attributes' => [
-                5 => 'new',
-            ],
-            'attribute_value' => [
-                'new' => [
-                    'boolean_value' => true,
-                ],
-            ],
-        ]))
-            ->getSimpleProductFactory()
-            ->create();
+        $product = $this->createSimpleProduct();
 
         $customer = Customer::factory()->create();
 
@@ -69,7 +60,7 @@ trait ProvidePaymentHelpers
             'additional' => $additional,
         ]);
 
-        $cartBillingAddress = CartAddress::factory()->create([
+        CartAddress::factory()->create([
             'cart_id' => $cart->id,
             'customer_id' => $customer->id,
             'address_type' => CartAddress::ADDRESS_TYPE_BILLING,

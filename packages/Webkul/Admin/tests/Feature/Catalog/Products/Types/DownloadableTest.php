@@ -59,16 +59,13 @@ it('should populate product_flat after store and update', function () {
 
     expect($flat)->not->toBeNull();
 
-    // Core fields
     expect($flat->sku)->toBe($product->sku);
     expect($flat->type)->toBe('downloadable');
     expect($flat->name)->toBe('Test Downloadable Product');
     expect((float) $flat->price)->toBe(49.99);
 
-    // Downloadable products skip weight.
     expect($flat->weight)->toBeNull();
 
-    // Boolean fields
     expect($flat->status)->toBeTruthy();
     expect($flat->visible_individually)->toBeTruthy();
 });
@@ -103,7 +100,6 @@ it('should create downloadable samples after store and update', function () {
 it('should not create inventory for a downloadable product', function () {
     $product = $this->storeAndUpdateDownloadableProduct();
 
-    // Downloadable products are not stockable.
     $this->assertDatabaseMissing('product_inventories', [
         'product_id' => $product->id,
     ]);
@@ -122,7 +118,6 @@ it('should upload a downloadable link file', function () {
         ->assertOk()
         ->assertJsonPath('file_name', $file->getClientOriginalName());
 
-    // Clean up uploaded file.
     if (Storage::disk('private')->exists($response['file'])) {
         Storage::disk('private')->delete($response['file']);
     }
@@ -137,7 +132,6 @@ it('should upload a downloadable sample file', function () {
         ->assertOk()
         ->assertJsonPath('file_name', $file->name);
 
-    // Clean up uploaded file.
     if (Storage::disk('public')->exists($response['file'])) {
         Storage::disk('public')->delete($response['file']);
     }
@@ -152,7 +146,6 @@ it('should fail validation when required fields are missing on downloadable prod
 
     $product = $this->createDownloadableProduct();
 
-    // Downloadable products do not require weight.
     putJson(route('admin.catalog.products.update', $product->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('sku')

@@ -4,414 +4,300 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Mail\Admin\BackupCodesNotification;
+use Webkul\User\Models\Admin;
+
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\post;
+
+/**
+ * Give an admin a fresh secret, the state the setup step leaves behind, and return it.
+ */
+function twoFactorSecretFor(Admin $admin): string
+{
+    $secret = (new Google2FA)->generateSecretKey();
+
+    $admin->update(['two_factor_secret' => encrypt($secret)]);
+
+    return $secret;
+}
+
+/**
+ * Turn two factor authentication on for an admin with the given backup codes, and return its secret.
+ */
+function enableTwoFactorFor(Admin $admin, array $backupCodes = ['670089', '569097']): string
+{
+    $secret = (new Google2FA)->generateSecretKey();
+
+    $admin->update([
+        'two_factor_secret' => encrypt($secret),
+        'two_factor_enabled' => true,
+        'two_factor_backup_codes' => array_map(fn ($code) => Hash::make($code), $backupCodes),
+        'two_factor_verified_at' => now(),
+    ]);
+
+    return $secret;
+}
+
+/**
+ * The one time password an authenticator app shows right now for a secret.
+ */
+function currentOtp(string $secret): string
+{
+    return (new Google2FA)->getCurrentOtp($secret);
+}
 
 beforeEach(function () {
     $this->admin = $this->loginAsAdmin();
 
-    $this->google2fa = new Google2FA;
-
     Mail::fake();
 });
 
-describe('two factor authentication setup endpoint', function () {
-    it('allows an authenticated admin to access the 2FA setup endpoint', function () {
-        // Act
-        $response = $this->getJson(route('admin.two_factor.setup'));
+// ============================================================================
+// Setup
+// ============================================================================
 
-        // Assert
-        $response->assertStatus(200)
-            ->assertJsonStructure(['qrCodeSvg', 'qrCodeUrl']);
-    });
-
-    it('denies unauthenticated users from accessing 2FA setup', function () {
-        // Arrange
-        auth('admin')->logout();
-
-        // Act
-        $response = $this->getJson(route('admin.two_factor.setup'));
-
-        // Assert
-        $response->assertStatus(401);
-    });
-
-    it('generates a secret key for a new admin on setup', function () {
-        // Arrange
-        expect($this->admin->two_factor_secret)->toBeNull();
-
-        // Act
-        $response = $this->getJson(route('admin.two_factor.setup'));
-
-        // Assert
-        $this->admin->refresh();
-
-        expect($this->admin->two_factor_secret)->not()->toBeNull();
-    });
-
-    it('returns the existing secret if the admin has already configured 2FA', function () {
-        // Arrange
-        $originalSecret = $this->google2fa->generateSecretKey();
-
-        $this->admin->update([
-            'two_factor_secret' => encrypt($originalSecret),
-        ]);
-
-        // Act
-        $response = $this->getJson(route('admin.two_factor.setup'));
-
-        // Assert
-        $response->assertStatus(200);
-
-        $this->admin->refresh();
-
-        expect(decrypt($this->admin->two_factor_secret))->toBe($originalSecret);
-    });
-
-    it('does not expose the existing secret to a session that has not passed verification', function () {
-        // Arrange - 2FA is already enabled with a secret, but the session has NOT
-        // passed verification, so the setup endpoint must not hand back the secret.
-        $this->admin->update([
-            'two_factor_secret' => encrypt($this->google2fa->generateSecretKey()),
-            'two_factor_enabled' => true,
-            'two_factor_verified_at' => now(),
-        ]);
-
-        // Act
-        $response = $this->getJson(route('admin.two_factor.setup'));
-
-        // Assert
-        $response->assertStatus(401);
-    });
+it('should hand an authenticated admin the 2FA setup', function () {
+    getJson(route('admin.two_factor.setup'))
+        ->assertOk()
+        ->assertJsonStructure(['qrCodeSvg', 'qrCodeUrl']);
 });
 
-describe('two factor authentication enable endpoint', function () {
-    beforeEach(function () {
-        // Arrange
-        $this->secret = $this->google2fa->generateSecretKey();
+it('should deny a guest the 2FA setup', function () {
+    auth('admin')->logout();
 
-        $this->admin->update([
-            'two_factor_secret' => encrypt($this->secret),
-        ]);
-    });
-
-    it('allows an admin to enable 2FA with a valid code', function () {
-        // Arrange
-        $validCode = $this->google2fa->getCurrentOtp($this->secret);
-
-        // Act
-        $response = $this->post(route('admin.two_factor.enable'), [
-            'code' => $validCode,
-        ]);
-
-        // Assert - the endpoint returns the backup codes so they can be shown and downloaded.
-        $response->assertOk()
-            ->assertJsonStructure(['message', 'backup_codes']);
-
-        $this->admin->refresh();
-
-        expect($this->admin->two_factor_enabled)->toBeTrue();
-        expect($this->admin->two_factor_verified_at)->not()->toBeNull();
-
-        Mail::assertQueued(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email));
-    });
-
-    it('prevents an admin from enabling 2FA with an invalid code', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.enable'), [
-            'code' => '123456',
-        ]);
-
-        // Assert - an invalid code is rejected with a validation error response.
-        $response->assertStatus(422);
-
-        $this->admin->refresh();
-
-        expect($this->admin->two_factor_enabled)->toBeFalse();
-        expect($this->admin->two_factor_verified_at)->toBeNull();
-
-        // Assert (no mail sent)
-        Mail::assertNotSent(BackupCodesNotification::class);
-    });
-
-    it('requires a 6-digit code to enable 2FA', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.enable'), [
-            'code' => '123',
-        ]);
-
-        // Assert
-        $response->assertSessionHasErrors('code');
-    });
-
-    it('requires the code parameter when enabling 2FA', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.enable'), []);
-
-        // Assert
-        $response->assertSessionHasErrors('code');
-    });
-
-    it('sets a session flag when 2FA is successfully enabled', function () {
-        // Arrange
-        $validCode = $this->google2fa->getCurrentOtp($this->secret);
-
-        // Act
-        $this->post(route('admin.two_factor.enable'), [
-            'code' => $validCode,
-        ]);
-
-        // Assert
-        expect(session('two_factor_passed'))->toBeTrue();
-    });
+    getJson(route('admin.two_factor.setup'))
+        ->assertUnauthorized();
 });
 
-describe('two factor authentication disable', function () {
-    beforeEach(function () {
-        // Arrange
-        $this->admin->update([
-            'two_factor_secret' => encrypt($this->google2fa->generateSecretKey()),
-            'two_factor_enabled' => true,
-            'two_factor_backup_codes' => ['123456', '789012'],
-            'two_factor_verified_at' => now(),
-        ]);
-    });
+it('should generate a secret for an admin setting up 2FA', function () {
+    expect($this->admin->two_factor_secret)->toBeNull();
 
-    it('admin can disable 2FA', function () {
-        // Act - 2FA can only be disabled once the session has passed verification.
-        $response = $this->withSession(['two_factor_passed' => true])
-            ->post(route('admin.two_factor.disable'));
+    getJson(route('admin.two_factor.setup'))->assertOk();
 
-        // Assert
-        $response->assertStatus(200)
-            ->assertJson([
-                'message' => trans('admin::app.account.messages.disabled-success'),
-            ]);
-
-        // Assert
-        $this->admin->refresh();
-
-        expect($this->admin->two_factor_secret)->toBeNull();
-        expect($this->admin->two_factor_enabled)->toBeFalse();
-        expect($this->admin->two_factor_backup_codes)->toBeNull();
-        expect($this->admin->two_factor_verified_at)->toBeNull();
-    });
-
-    it('unauthenticated user cannot disable 2FA', function () {
-        // Arrange - logout the admin
-        auth('admin')->logout();
-
-        // Act
-        $response = $this->post(route('admin.two_factor.disable'));
-
-        // Assert - the middleware redirects unauthenticated requests to the login page.
-        $response->assertRedirect(route('admin.session.create'));
-    });
-
-    it('prevents a session that has not passed verification from disabling 2FA', function () {
-        // Arrange - the admin is logged in with 2FA enabled but the session has NOT
-        // passed verification (no `two_factor_passed`), i.e. the 2FA-bypass scenario.
-
-        // Act
-        $response = $this->post(route('admin.two_factor.disable'));
-
-        // Assert - the request is redirected to verification and 2FA remains enabled.
-        $response->assertRedirect(route('admin.two_factor.verify.form'));
-
-        $this->admin->refresh();
-
-        expect($this->admin->two_factor_enabled)->toBeTrue();
-        expect($this->admin->two_factor_secret)->not()->toBeNull();
-    });
+    expect($this->admin->fresh()->two_factor_secret)->not->toBeNull();
 });
 
-describe('two factor authentication login verification', function () {
-    beforeEach(function () {
-        // Arrange
-        $this->secret = $this->google2fa->generateSecretKey();
+it('should keep the secret an admin already has on setup', function () {
+    $secret = twoFactorSecretFor($this->admin);
 
-        $this->admin->update([
-            'two_factor_secret' => encrypt($this->secret),
-            'two_factor_enabled' => true,
-            'two_factor_backup_codes' => [Hash::make('670089'), Hash::make('569097')],
-            'two_factor_verified_at' => now(),
-        ]);
-    });
+    getJson(route('admin.two_factor.setup'))->assertOk();
 
-    it('admin can verify with valid TOTP code', function () {
-        // Arrange
-        $validCode = $this->google2fa->getCurrentOtp($this->secret);
-
-        // Act
-        $response = $this->post(route('admin.two_factor.verify.store'), [
-            'code' => $validCode,
-        ]);
-
-        // Assert
-        $response->assertRedirect(route('admin.dashboard.index'));
-        expect(session('two_factor_passed'))->toBeTrue();
-    });
-
-    it('admin can verify with valid backup code', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.verify.store'), [
-            'code' => '670089',
-        ]);
-
-        // Assert
-        $response->assertRedirect(route('admin.dashboard.index'));
-        expect(session('two_factor_passed'))->toBeTrue();
-
-        $this->admin->refresh();
-
-        // The used code is removed and the remaining code is still stored (hashed).
-        $remaining = $this->admin->two_factor_backup_codes;
-
-        expect(collect($remaining)->contains(fn ($hash) => Hash::check('670089', $hash)))->toBeFalse();
-        expect(collect($remaining)->contains(fn ($hash) => Hash::check('569097', $hash)))->toBeTrue();
-    });
-
-    it('verification fails with invalid code', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.verify.store'), [
-            'code' => '999999',
-        ]);
-
-        // Assert
-        $response->assertRedirect()
-            ->assertSessionHasErrors('code');
-
-        expect(session('two_factor_passed'))->toBeNull();
-    });
-
-    it('verification requires 6-digit code', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.verify.store'), [
-            'code' => '123',
-        ]);
-
-        // Assert
-        $response->assertSessionHasErrors('code');
-    });
-
-    it('verification requires code parameter', function () {
-        // Act
-        $response = $this->post(route('admin.two_factor.verify.store'), []);
-
-        // Assert
-        $response->assertSessionHasErrors('code');
-    });
-
-    it('backup code can only be used once', function () {
-        // Act
-        $this->post(route('admin.two_factor.verify.store'), [
-            'code' => '670089',
-        ]);
-
-        $response = $this->post(route('admin.two_factor.verify.store'), [
-            'code' => '670089',
-        ]);
-
-        // Assert
-        $response->assertRedirect()
-            ->assertSessionHasErrors('code');
-    });
+    expect(decrypt($this->admin->fresh()->two_factor_secret))->toBe($secret);
 });
 
-describe('two factor authentication backup codes email notifications', function () {
-    it('sends backup codes email on successful 2FA enable', function () {
-        // Arrange
-        $secret = $this->google2fa->generateSecretKey();
+it('should not expose the secret to a session that has not passed verification', function () {
+    enableTwoFactorFor($this->admin);
 
-        $this->admin->update(['two_factor_secret' => encrypt($secret)]);
-
-        $validCode = $this->google2fa->getCurrentOtp($secret);
-
-        // Act
-        $this->post(route('admin.two_factor.enable'), [
-            'code' => $validCode,
-        ]);
-
-        // Assert
-        Mail::assertQueued(BackupCodesNotification::class, function ($mail) {
-            return $mail->hasTo($this->admin->email) && ! empty($this->admin->two_factor_backup_codes);
-        });
-    });
-
-    it('handles email failure gracefully', function () {
-        // Arrange
-        Mail::shouldReceive('to->send')->andThrow(new Exception('Mail server error'));
-
-        $secret = $this->google2fa->generateSecretKey();
-
-        $this->admin->update(['two_factor_secret' => encrypt($secret)]);
-
-        $validCode = $this->google2fa->getCurrentOtp($secret);
-
-        // Act
-        $response = $this->post(route('admin.two_factor.enable'), [
-            'code' => $validCode,
-        ]);
-
-        // Assert - a failed email delivery must not block enabling; the backup
-        // codes are still returned so they can be shown and downloaded on screen.
-        $response->assertOk()
-            ->assertJsonStructure(['message', 'backup_codes']);
-
-        $this->admin->refresh();
-
-        expect($this->admin->two_factor_enabled)->toBeTrue();
-    });
+    getJson(route('admin.two_factor.setup'))
+        ->assertUnauthorized();
 });
 
-describe('two factor authentication integration flow', function () {
-    it('complete 2FA setup and login flow', function () {
-        // Act: Step 1 Setup 2FA
-        $setupResponse = $this->getJson(route('admin.two_factor.setup'));
+// ============================================================================
+// Enable
+// ============================================================================
 
-        // Assert: Step 1 Setup Successful
-        $setupResponse->assertJsonStructure([
-            'qrCodeSvg',
-            'qrCodeUrl',
-        ]);
+it('should enable 2FA with a valid code and hand back the backup codes', function () {
+    $secret = twoFactorSecretFor($this->admin);
 
-        // Arrange: Step 2 Prepare Valid OTP Using Generated Secret
-        $this->admin->refresh();
+    post(route('admin.two_factor.enable'), [
+        'code' => currentOtp($secret),
+    ])
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.account.messages.enabled-success'))
+        ->assertJsonStructure(['message', 'backup_codes']);
 
-        $secret = decrypt($this->admin->two_factor_secret);
+    $this->admin->refresh();
 
-        $validCode = $this->google2fa->getCurrentOtp($secret);
+    expect($this->admin->two_factor_enabled)->toBeTrue()
+        ->and($this->admin->two_factor_verified_at)->not->toBeNull()
+        ->and($this->admin->two_factor_backup_codes)->not->toBeEmpty()
+        ->and(session('two_factor_passed'))->toBeTrue();
 
-        // Act: Step 2 - Enable 2FA With Valid Code
-        $enableResponse = $this->post(route('admin.two_factor.enable'), [
-            'code' => $validCode,
-        ]);
+    Mail::assertQueued(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email));
+});
 
-        // Assert: Step 2 - 2FA Enable Endpoint Returns Backup Codes
-        $enableResponse->assertOk()
-            ->assertJsonStructure(['message', 'backup_codes']);
+it('should not enable 2FA with an invalid code', function () {
+    twoFactorSecretFor($this->admin);
 
-        // Assert: Step 3 - 2FA is enabled in DB
-        $this->admin->refresh();
+    post(route('admin.two_factor.enable'), [
+        'code' => '123456',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('code');
 
-        expect($this->admin->two_factor_enabled)->toBeTrue();
+    $this->admin->refresh();
 
-        // Arrange: Step 4 - Generate Fresh Valid OTP
-        $newValidCode = $this->google2fa->getCurrentOtp($secret);
+    expect($this->admin->two_factor_enabled)->toBeFalse()
+        ->and($this->admin->two_factor_verified_at)->toBeNull()
+        ->and(session('two_factor_passed'))->toBeNull();
 
-        // Act: Step 4 - Verify 2FA During Login
-        $verifyResponse = $this->post(route('admin.two_factor.verify.store'), [
-            'code' => $newValidCode,
-        ]);
+    Mail::assertNothingOutgoing();
+});
 
-        // Assert: Step 4 - Redirect To Dashboard + Session Flag Set
-        $verifyResponse->assertRedirect(route('admin.dashboard.index'));
+it('should require a six digit code to enable 2FA', function (array $payload) {
+    twoFactorSecretFor($this->admin);
 
-        expect(session('two_factor_passed'))->toBeTrue();
+    post(route('admin.two_factor.enable'), $payload)
+        ->assertSessionHasErrors('code');
 
-        // Act: Step 5 - Disable 2FA
-        $disableResponse = $this->post(route('admin.two_factor.disable'));
+    expect($this->admin->fresh()->two_factor_enabled)->toBeFalse();
+})->with([
+    'too short' => [['code' => '123']],
+    'missing' => [[]],
+]);
 
-        $this->admin->refresh();
+it('should still enable 2FA when the backup codes email cannot be delivered', function () {
+    Mail::shouldReceive('to->send')->andThrow(new Exception('Mail server error'));
 
-        expect($this->admin->two_factor_enabled)->toBeFalse();
-    });
+    $secret = twoFactorSecretFor($this->admin);
+
+    post(route('admin.two_factor.enable'), [
+        'code' => currentOtp($secret),
+    ])
+        ->assertOk()
+        ->assertJsonStructure(['message', 'backup_codes']);
+
+    expect($this->admin->fresh()->two_factor_enabled)->toBeTrue();
+});
+
+// ============================================================================
+// Disable
+// ============================================================================
+
+it('should disable 2FA for a session that has passed verification', function () {
+    enableTwoFactorFor($this->admin);
+
+    $this->withSession(['two_factor_passed' => true])
+        ->post(route('admin.two_factor.disable'))
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.account.messages.disabled-success'));
+
+    $this->admin->refresh();
+
+    expect($this->admin->two_factor_secret)->toBeNull()
+        ->and($this->admin->two_factor_enabled)->toBeFalse()
+        ->and($this->admin->two_factor_backup_codes)->toBeNull()
+        ->and($this->admin->two_factor_verified_at)->toBeNull();
+});
+
+it('should send a guest to the login page rather than disable 2FA', function () {
+    auth('admin')->logout();
+
+    post(route('admin.two_factor.disable'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+it('should not let a session that has not passed verification disable 2FA', function () {
+    enableTwoFactorFor($this->admin);
+
+    post(route('admin.two_factor.disable'))
+        ->assertRedirect(route('admin.two_factor.verify.form'));
+
+    $this->admin->refresh();
+
+    expect($this->admin->two_factor_enabled)->toBeTrue()
+        ->and($this->admin->two_factor_secret)->not->toBeNull();
+});
+
+// ============================================================================
+// Login Verification
+// ============================================================================
+
+it('should verify the login with a valid TOTP code', function () {
+    $secret = enableTwoFactorFor($this->admin);
+
+    post(route('admin.two_factor.verify.store'), [
+        'code' => currentOtp($secret),
+    ])
+        ->assertRedirect(route('admin.dashboard.index'))
+        ->assertSessionHas('success', trans('admin::app.account.messages.verified-success'));
+
+    expect(session('two_factor_passed'))->toBeTrue();
+});
+
+it('should verify the login with a backup code and spend it', function () {
+    enableTwoFactorFor($this->admin);
+
+    post(route('admin.two_factor.verify.store'), [
+        'code' => '670089',
+    ])
+        ->assertRedirect(route('admin.dashboard.index'));
+
+    expect(session('two_factor_passed'))->toBeTrue();
+
+    $remaining = collect($this->admin->fresh()->two_factor_backup_codes);
+
+    expect($remaining->contains(fn ($hash) => Hash::check('670089', $hash)))->toBeFalse()
+        ->and($remaining->contains(fn ($hash) => Hash::check('569097', $hash)))->toBeTrue();
+});
+
+it('should not verify the login with an invalid code', function () {
+    enableTwoFactorFor($this->admin);
+
+    post(route('admin.two_factor.verify.store'), [
+        'code' => '999999',
+    ])
+        ->assertRedirect()
+        ->assertSessionHasErrors('code');
+
+    expect(session('two_factor_passed'))->toBeNull();
+});
+
+it('should require a six digit code to verify the login', function (array $payload) {
+    enableTwoFactorFor($this->admin);
+
+    post(route('admin.two_factor.verify.store'), $payload)
+        ->assertSessionHasErrors('code');
+
+    expect(session('two_factor_passed'))->toBeNull();
+})->with([
+    'too short' => [['code' => '123']],
+    'missing' => [[]],
+]);
+
+it('should accept a backup code only once', function () {
+    enableTwoFactorFor($this->admin);
+
+    post(route('admin.two_factor.verify.store'), [
+        'code' => '670089',
+    ])
+        ->assertRedirect(route('admin.dashboard.index'));
+
+    post(route('admin.two_factor.verify.store'), [
+        'code' => '670089',
+    ])
+        ->assertRedirect()
+        ->assertSessionHasErrors('code');
+});
+
+// ============================================================================
+// End To End
+// ============================================================================
+
+it('should walk an admin through setup, enabling, verification and disabling', function () {
+    getJson(route('admin.two_factor.setup'))
+        ->assertOk()
+        ->assertJsonStructure(['qrCodeSvg', 'qrCodeUrl']);
+
+    $secret = decrypt($this->admin->fresh()->two_factor_secret);
+
+    post(route('admin.two_factor.enable'), [
+        'code' => currentOtp($secret),
+    ])
+        ->assertOk()
+        ->assertJsonStructure(['message', 'backup_codes']);
+
+    expect($this->admin->fresh()->two_factor_enabled)->toBeTrue();
+
+    post(route('admin.two_factor.verify.store'), [
+        'code' => currentOtp($secret),
+    ])
+        ->assertRedirect(route('admin.dashboard.index'));
+
+    expect(session('two_factor_passed'))->toBeTrue();
+
+    post(route('admin.two_factor.disable'))
+        ->assertOk();
+
+    expect($this->admin->fresh()->two_factor_enabled)->toBeFalse();
 });

@@ -8,8 +8,6 @@ use Webkul\Omnibus\Models\OmnibusPrice;
 // ============================================================================
 
 beforeEach(function () {
-    // Tests start with Omnibus disabled (no core_config row) so the listener
-    // does not auto-snapshot during createSimpleProduct.
     $this->setOmnibusEnabled(false);
 
     OmnibusPrice::query()->delete();
@@ -115,7 +113,6 @@ it('aborts --all without --force when running non-interactively', function () {
         'recorded_at' => now()->subDays(1),
     ]);
 
-    // Non-interactive run: confirm() returns the default (false) → aborts.
     Artisan::call('omnibus:purge-old-snapshots', ['--all' => true]);
 
     expect(OmnibusPrice::count())->toBe(1);

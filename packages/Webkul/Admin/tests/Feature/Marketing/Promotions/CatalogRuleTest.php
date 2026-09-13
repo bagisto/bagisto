@@ -8,8 +8,6 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 afterEach(function () {
-    // Clean up catalog rule product price index entries to avoid interference
-    // between tests when running in parallel.
     CatalogRule::query()->delete();
 });
 

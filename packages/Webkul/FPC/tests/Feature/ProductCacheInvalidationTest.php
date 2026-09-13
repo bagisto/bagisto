@@ -41,75 +41,60 @@ beforeEach(function () {
 });
 
 it('drops the product page and the home page when a product is created', function () {
-    // Arrange
     $product = simpleProduct();
 
     $home = $this->cachePage('/');
 
     $page = $this->cachePage('/'.$product->url_key);
 
-    // Act
     $this->listener->afterCreate($product);
 
-    // Assert
     $this->assertPageNotCached($page);
 
     $this->assertPageNotCached($home, 'A new product is drawn in the home page carousels.');
 });
 
 it('drops the listing pages a product appears on when it is updated', function () {
-    // Arrange
     $product = simpleProduct();
 
     categorise($product, 'summer-sale');
 
     $listing = $this->cachePage('/summer-sale');
 
-    // Act
     $this->listener->afterUpdate($product->refresh());
 
-    // Assert
     $this->assertPageNotCached($listing, 'The category listing kept the price and image the product had before.');
 });
 
 it('drops the product pages before the product is deleted', function () {
-    // Arrange
     $product = simpleProduct();
 
     $home = $this->cachePage('/');
 
     $page = $this->cachePage('/'.$product->url_key);
 
-    // Act
     $this->listener->beforeDelete($product->id);
 
-    // Assert
     $this->assertPageNotCached($page);
 
     $this->assertPageNotCached($home);
 });
 
 it('does nothing when the product being deleted is already gone', function () {
-    // Arrange
     $home = $this->cachePage('/');
 
-    // Act
     $this->listener->beforeDelete(0);
 
-    // Assert
     $this->assertPageCached($home);
 });
 
 it('lists the home page and every listing the product is on as forgettable', function () {
-    // Arrange
     $product = simpleProduct();
 
     categorise($product, 'summer-sale');
 
-    // Act
     $urls = $this->listener->getForgettableUrls($product->refresh());
 
-    // Assert
     expect($urls)->toContain('/');
 
     expect($urls)->toContain('/'.$product->url_key);

@@ -146,30 +146,15 @@ it('should delete an email template', function () {
 });
 
 it('should refuse to delete an email template a campaign is using', function () {
-    // Arrange.
     $template = Template::factory()->create();
 
     Campaign::factory()->create(['marketing_template_id' => $template->id]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.email_templates.delete', $template->id))
-        ->assertStatus(400)
+        ->assertBadRequest()
         ->assertJsonPath('message', trans('admin::app.marketing.communications.templates.campaign-associate'));
 
     $this->assertDatabaseHas('marketing_templates', ['id' => $template->id]);
-});
-
-it('should delete an email template no campaign is using', function () {
-    // Arrange.
-    $template = Template::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    deleteJson(route('admin.marketing.communications.email_templates.delete', $template->id))
-        ->assertOk();
-
-    $this->assertDatabaseMissing('marketing_templates', ['id' => $template->id]);
 });

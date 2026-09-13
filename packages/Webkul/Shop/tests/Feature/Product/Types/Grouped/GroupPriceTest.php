@@ -1,93 +1,39 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
-
-// ============================================================================
-// Fixed Price Type
-// ============================================================================
-
-it('should apply fixed group price for guest on grouped product', function () {
+it('should apply a fixed customer group price to an associated product of a grouped product', function (array $priceGroups, ?int $customerGroupId) {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $associated = $product->grouped_products->first()->associated_product;
-    $this->setCustomerGroupPrice($associated, 1, 'fixed', 700);
+    $this->setCustomerGroupPrice($product->grouped_products->first()->associated_product, $priceGroups, 'fixed', 700);
+
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    // The first associated product should have the group price applied.
-    $this->assertCartItemPrice($response, 700, 0);
-});
+    $this->assertCartItemPrice($response, 700, 0)
+        ->assertCartItemPrice($response, 500, 1);
+})->with('customer groups');
 
-it('should apply fixed group price for general customer on grouped product', function () {
+it('should apply a percentage customer group discount to an associated product of a grouped product', function (array $priceGroups, ?int $customerGroupId) {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $associated = $product->grouped_products->first()->associated_product;
-    $this->setCustomerGroupPrice($associated, 2, 'fixed', 600);
+    $this->setCustomerGroupPrice($product->grouped_products->first()->associated_product, $priceGroups, 'discount', 20);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 600, 0);
-});
+    $this->assertCartItemPrice($response, 800, 0)
+        ->assertCartItemPrice($response, 500, 1);
+})->with('customer groups');
 
-it('should apply fixed group price for wholesale customer on grouped product', function () {
+it('should not apply a customer group price set for another group to an associated product of a grouped product', function () {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $associated = $product->grouped_products->first()->associated_product;
-    $this->setCustomerGroupPrice($associated, 3, 'fixed', 500);
+    $this->setCustomerGroupPrice($product->grouped_products->first()->associated_product, 3, 'fixed', 700);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup(2);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 500, 0);
-});
-
-// ============================================================================
-// Discount Percentage Type
-// ============================================================================
-
-it('should apply percentage group discount for guest on grouped product', function () {
-    $product = $this->createGroupedProduct([1000, 500]);
-
-    $associated = $product->grouped_products->first()->associated_product;
-    $this->setCustomerGroupPrice($associated, 1, 'discount', 20);
-
-    $response = $this->addGroupedProductToCart($product)->assertOk();
-
-    // 1000 - (1000 * 20 / 100) = 800
-    $this->assertCartItemPrice($response, 800, 0);
-});
-
-it('should apply percentage group discount for general customer on grouped product', function () {
-    $product = $this->createGroupedProduct([1000, 500]);
-
-    $associated = $product->grouped_products->first()->associated_product;
-    $this->setCustomerGroupPrice($associated, 2, 'discount', 30);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addGroupedProductToCart($product)->assertOk();
-
-    // 1000 - (1000 * 30 / 100) = 700
-    $this->assertCartItemPrice($response, 700, 0);
-});
-
-it('should apply percentage group discount for wholesale customer on grouped product', function () {
-    $product = $this->createGroupedProduct([1000, 500]);
-
-    $associated = $product->grouped_products->first()->associated_product;
-    $this->setCustomerGroupPrice($associated, 3, 'discount', 40);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addGroupedProductToCart($product)->assertOk();
-
-    // 1000 - (1000 * 40 / 100) = 600
-    $this->assertCartItemPrice($response, 600, 0);
+    $this->assertCartItemPrice($response, 1000, 0);
 });

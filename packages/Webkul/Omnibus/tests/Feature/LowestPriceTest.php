@@ -148,7 +148,6 @@ it('returns an empty string when Omnibus is disabled', function () {
 });
 
 it('returns an empty string when the product has no active discount', function () {
-    // A freshly created simple product has no special_price, so haveDiscount() is false.
     $product = $this->createSimpleProduct();
 
     expect($this->manager->getOmnibusPriceHtml($product))->toBe('');
@@ -157,6 +156,5 @@ it('returns an empty string when the product has no active discount', function (
 it('returns an empty string for a grouped product with no discounted associated items', function () {
     $grouped = $this->createGroupedProduct([100, 200]);
 
-    // No associated product has a special_price, so haveDiscount() cascades false.
     expect($this->manager->getOmnibusPriceHtml($grouped))->toBe('');
 });

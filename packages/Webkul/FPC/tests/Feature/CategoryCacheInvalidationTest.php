@@ -29,37 +29,30 @@ beforeEach(function () {
 });
 
 it('drops the home page when a category is created', function () {
-    // Arrange
     $category = categoryWithSlug('summer-sale');
 
     $home = $this->cachePage('/');
 
-    // Act
     $this->listener->afterCreate($category);
 
-    // Assert
     $this->assertPageNotCached($home, 'A new category is listed on the home page, which kept its old copy.');
 });
 
 it('drops both the category page and the home page when a category is updated', function () {
-    // Arrange
     $category = categoryWithSlug('summer-sale');
 
     $home = $this->cachePage('/');
 
     $page = $this->cachePage('/summer-sale');
 
-    // Act
     $this->listener->afterUpdate($category);
 
-    // Assert
     $this->assertPageNotCached($page);
 
     $this->assertPageNotCached($home, 'The home page carousel kept the name and image the category had before.');
 });
 
 it('drops a category page cached under a second locale', function () {
-    // Arrange
     $secondScope = $this->addSecondScope();
 
     $category = categoryWithSlug('summer-sale');
@@ -68,37 +61,29 @@ it('drops a category page cached under a second locale', function () {
 
     $translated = $this->cachePage('/sommer-schluss', $secondScope);
 
-    // Act
     $this->listener->afterUpdate($category);
 
-    // Assert
     $this->assertPageNotCached($translated, 'Only the scope the admin was browsing was forgotten.');
 });
 
 it('drops the category pages before the category is deleted', function () {
-    // Arrange
     $category = categoryWithSlug('summer-sale');
 
     $home = $this->cachePage('/');
 
     $page = $this->cachePage('/summer-sale');
 
-    // Act
     $this->listener->beforeDelete($category->id);
 
-    // Assert
     $this->assertPageNotCached($page);
 
     $this->assertPageNotCached($home);
 });
 
 it('does nothing when the category being deleted is already gone', function () {
-    // Arrange
     $home = $this->cachePage('/');
 
-    // Act
     $this->listener->beforeDelete(0);
 
-    // Assert
     $this->assertPageCached($home);
 });

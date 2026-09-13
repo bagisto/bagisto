@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Category\Models\Category;
@@ -13,21 +14,35 @@ use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Models\ProductImage;
 use Webkul\Product\Models\ProductInventory;
 
+use function Pest\Laravel\getJson;
+
+/**
+ * A simple product with its flat row already built.
+ */
 function makeProduct(): Product
 {
     return (new ProductFaker)->getSimpleProductFactory()->create();
 }
 
+/**
+ * Rebuild the whole flat row of a product.
+ */
 function reindex(Product $product): void
 {
     app(FlatIndexer::class)->refresh($product->fresh());
 }
 
+/**
+ * Recompute only the derived columns of a product's flat row.
+ */
 function refreshDerived(Product $product): void
 {
     app(FlatIndexer::class)->refreshDerivedColumns([$product->id]);
 }
 
+/**
+ * The value a product's flat row holds in the given column.
+ */
 function flatColumn(Product $product, string $column)
 {
     return ProductFlat::query()
@@ -35,6 +50,9 @@ function flatColumn(Product $product, string $column)
         ->value($column);
 }
 
+/**
+ * Stock a product in a new inventory source.
+ */
 function addInventory(Product $product, int $qty): void
 {
     ProductInventory::create([
@@ -45,6 +63,9 @@ function addInventory(Product $product, int $qty): void
     ]);
 }
 
+/**
+ * Attach an image to a product at the given position.
+ */
 function addImage(Product $product, string $name, int $position): void
 {
     ProductImage::create([
@@ -55,6 +76,26 @@ function addImage(Product $product, string $name, int $position): void
     ]);
 }
 
+/**
+ * Swap the positions of a product's first two images and recompute the derived columns.
+ */
+function reorderImages(Product $product): void
+{
+    $images = ProductImage::query()
+        ->where('product_id', $product->id)
+        ->orderBy('position')
+        ->get();
+
+    $images[0]->update(['position' => 2]);
+
+    $images[1]->update(['position' => 1]);
+
+    refreshDerived($product);
+}
+
+/**
+ * File a product under a new category carrying the given name.
+ */
 function addCategory(Product $product, string $name): Category
 {
     $category = Category::factory()->create();
@@ -150,6 +191,53 @@ it('should leave the base image empty for a product without images', function ()
     refreshDerived($product);
 
     expect(flatColumn($product, 'base_image'))->toBeNull();
+});
+
+it('should follow the image order rather than the order the images were uploaded', function () {
+    $product = makeProduct();
+
+    addImage($product, 'first-uploaded.webp', 1);
+
+    addImage($product, 'second-uploaded.webp', 2);
+
+    refreshDerived($product);
+
+    expect(flatColumn($product, 'base_image'))->toBe('product/'.$product->id.'/first-uploaded.webp');
+
+    reorderImages($product);
+
+    expect(flatColumn($product, 'base_image'))->toBe('product/'.$product->id.'/second-uploaded.webp');
+});
+
+it('should agree with the base image the product itself reports', function () {
+    $product = makeProduct();
+
+    addImage($product, 'first-uploaded.webp', 1);
+
+    addImage($product, 'second-uploaded.webp', 2);
+
+    reorderImages($product);
+
+    expect(flatColumn($product, 'base_image'))->toBe($product->fresh()->images->first()->path);
+});
+
+it('should show the reordered image in the products listing', function () {
+    $product = makeProduct();
+
+    addImage($product, 'first-uploaded.webp', 1);
+
+    addImage($product, 'second-uploaded.webp', 2);
+
+    reorderImages($product);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.products.index', [
+        'filters' => ['product_id' => [$product->id]],
+    ]), ['X-Requested-With' => 'XMLHttpRequest'])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.base_image', Storage::url('product/'.$product->id.'/second-uploaded.webp'));
 });
 
 it('should hold the name of the attribute family', function () {

@@ -212,13 +212,11 @@ it('should enforce sequential usage — second use by same customer fails', func
 
     $customer = Customer::factory()->create();
 
-    // First usage succeeds.
     app(OrderListener::class)->manageCartRule(fakeOrder($cartRule->id, $coupon->code, $customer->id));
 
     $coupon->refresh();
     expect($coupon->times_used)->toBe(1);
 
-    // Second usage by same customer fails.
     expect(fn () => app(OrderListener::class)->manageCartRule(fakeOrder($cartRule->id, $coupon->code, $customer->id)))
         ->toThrow(CouponUsageLimitExceededException::class);
 
@@ -263,13 +261,11 @@ it('should acquire row-level locks during coupon usage validation', function () 
 
     app(OrderListener::class)->manageCartRule(fakeOrder($cartRule->id, $coupon->code, $customer->id));
 
-    // Within the transaction, usage should be incremented.
     $coupon->refresh();
     expect($coupon->times_used)->toBe(1);
 
     DB::commit();
 
-    // After commit, the incremented value persists.
     $coupon->refresh();
     expect($coupon->times_used)->toBe(1);
 });
@@ -292,7 +288,6 @@ it('should roll back coupon usage when transaction fails', function () {
 
     DB::rollBack();
 
-    // After rollback, usage should revert to 0.
     $coupon->refresh();
     expect($coupon->times_used)->toBe(0);
 });
@@ -312,7 +307,6 @@ it('should return correct translated message when coupon global usage limit is e
     } catch (CouponUsageLimitExceededException $e) {
         $message = $e->getMessage();
 
-        // Ensure the message resolves to actual translated text, not a raw key.
         expect($message)->not->toContain('::')
             ->and($message)->toBe(trans('shop::app.checkout.coupon.usage-limit-exceeded'));
 
@@ -393,7 +387,6 @@ it('should increment coupon usage for guest orders without per-customer tracking
         'times_used' => 0,
     ]);
 
-    // Guest order — no customer_id.
     $order = fakeOrder($cartRule->id, $coupon->code, null);
 
     app(OrderListener::class)->manageCartRule($order);
@@ -404,7 +397,6 @@ it('should increment coupon usage for guest orders without per-customer tracking
     expect($coupon->times_used)->toBe(1);
     expect($cartRule->times_used)->toBe(1);
 
-    // No per-customer records should be created for guests.
     $this->assertDatabaseMissing('cart_rule_coupon_usage', [
         'cart_rule_coupon_id' => $coupon->id,
     ]);
@@ -437,7 +429,6 @@ it('should increment existing per-customer coupon usage instead of creating dupl
         'times_used' => 3,
     ]);
 
-    // Ensure no duplicate rows were created.
     expect(CartRuleCouponUsage::where('customer_id', $customer->id)
         ->where('cart_rule_coupon_id', $coupon->id)
         ->count()

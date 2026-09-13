@@ -119,6 +119,7 @@
         "psr-4": {
             "Tests\\": "tests/",
             "Webkul\\Admin\\Tests\\": "packages/Webkul/Admin/tests",
+            "Webkul\\Category\\Tests\\": "packages/Webkul/Category/tests",
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\Customer\\Tests\\": "packages/Webkul/Customer/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
@@ -127,11 +128,16 @@
             "Webkul\\Installer\\Tests\\": "packages/Webkul/Installer/tests",
             "Webkul\\Omnibus\\Tests\\": "packages/Webkul/Omnibus/tests",
             "Webkul\\PayGlocal\\Tests\\": "packages/Webkul/PayGlocal/tests",
-            "Webkul\\Payment\\Tests\\": "packages/Webkul/Payment/tests",
             "Webkul\\PayU\\Tests\\": "packages/Webkul/PayU/tests",
+            "Webkul\\Payment\\Tests\\": "packages/Webkul/Payment/tests",
+            "Webkul\\Product\\Tests\\": "packages/Webkul/Product/tests",
             "Webkul\\Razorpay\\Tests\\": "packages/Webkul/Razorpay/tests",
+            "Webkul\\Rule\\Tests\\": "packages/Webkul/Rule/tests",
+            "Webkul\\Sales\\Tests\\": "packages/Webkul/Sales/tests",
+            "Webkul\\Shipping\\Tests\\": "packages/Webkul/Shipping/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
-            "Webkul\\Stripe\\Tests\\": "packages/Webkul/Stripe/tests"
+            "Webkul\\Stripe\\Tests\\": "packages/Webkul/Stripe/tests",
+            "Webkul\\Tax\\Tests\\": "packages/Webkul/Tax/tests"
         }
     },
     "scripts": {
@@ -151,13 +157,15 @@
             ]
         }
     },
-    "repositories": [{
-        "type": "path",
-        "url": "packages/*/*",
-        "options": {
-            "symlink": true
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*/*",
+            "options": {
+                "symlink": true
+            }
         }
-    }],
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

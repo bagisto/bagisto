@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
-use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -103,10 +102,13 @@ it('should return attribute listing via datagrid', function () {
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.catalog.attributes.index'), [
+    getJson(route('admin.catalog.attributes.index', [
+        'filters' => ['id' => [$attribute->id]],
+    ]), [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
         ->assertOk()
+        ->assertJsonCount(1, 'records')
         ->assertJsonPath('records.0.id', $attribute->id)
         ->assertJsonPath('records.0.code', $attribute->code);
 });
@@ -306,7 +308,6 @@ it('should unset value_per_locale for [type] attributes', function (string $type
 
     $attribute = Attribute::where('code', $code)->first();
 
-    // select, multiselect, boolean types cannot be locale-specific.
     expect($attribute->value_per_locale)->toBeFalsy();
 })->with('locale_unset_types');
 
@@ -762,20 +763,10 @@ it('should link an image swatch option to its stored file rather than to an imag
 });
 
 // ============================================================================
-// Product Super Attributes
+// Regex Validation
 // ============================================================================
 
-it('should return product super attributes', function () {
-    $product = Product::factory()->create(['type' => 'configurable']);
-
-    $this->loginAsAdmin();
-
-    getJson(route('admin.catalog.products.configurable.options', $product->id))
-        ->assertOk();
-});
-
 it('should refuse an attribute whose regex is not a usable pattern', function (string $pattern) {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.attributes.store'), [
@@ -798,40 +789,37 @@ it('should refuse an attribute whose regex is not a usable pattern', function (s
 ]);
 
 it('should accept an attribute whose regex is a usable pattern', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
+    $code = fake()->unique()->lexify('regex_??????????');
+
     postJson(route('admin.catalog.attributes.store'), [
-        'code' => 'regex_usable',
+        'code' => $code,
         'admin_name' => 'Regex Probe',
         'type' => 'text',
         'validation' => 'regex',
         'regex' => '/^[A-Za-z0-9]+$/',
     ])->assertRedirectToRoute('admin.catalog.attributes.index');
 
-    $this->assertDatabaseHas('attributes', ['code' => 'regex_usable', 'regex' => '/^[A-Za-z0-9]+$/']);
+    $this->assertDatabaseHas('attributes', ['code' => $code, 'regex' => '/^[A-Za-z0-9]+$/']);
 });
 
 it('should keep an unusable regex out of the rules the product form is given', function (string $pattern) {
-    // Arrange.
     $attribute = Attribute::factory()->create([
         'type' => 'text',
         'validation' => 'regex',
         'regex' => $pattern,
     ]);
 
-    // Act and Assert.
     expect($attribute->validations)->not->toContain('regex');
 })->with(['^[A-Za-z0-9]+$', '#^[A-Za-z0-9]+$#', '~^[A-Za-z0-9]+$~', '/^[A-Za-z0-9]+$/x', '//']);
 
 it('should write a usable regex into the rules the product form is given', function () {
-    // Arrange.
     $attribute = Attribute::factory()->create([
         'type' => 'text',
         'validation' => 'regex',
         'regex' => '/^[A-Za-z0-9]+$/',
     ]);
 
-    // Act and Assert.
     expect($attribute->validations)->toContain('regex: /^[A-Za-z0-9]+$/');
 });

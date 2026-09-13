@@ -21,6 +21,17 @@ function createCartRule(array $attributes = []): CartRule
         ->create($attributes);
 }
 
+/**
+ * The copy the controller made of a cart rule, found by the name it gives a copy.
+ */
+function copiedCartRuleOf(CartRule $cartRule): CartRule
+{
+    return CartRule::query()
+        ->where('name', trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]))
+        ->latest('id')
+        ->firstOrFail();
+}
+
 // ============================================================================
 // Index
 // ============================================================================
@@ -106,8 +117,61 @@ it('should copy an existing cart rule', function () {
 
     $this->assertDatabaseHas('cart_rules', [
         'name' => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]),
-        'status' => 0,
+        'status' => false,
     ]);
+});
+
+it('should copy the channels and customer groups of a cart rule along with it', function () {
+    $cartRule = createCartRule();
+
+    $this->loginAsAdmin();
+
+    get(route('admin.marketing.promotions.cart_rules.copy', $cartRule->id))->assertOk();
+
+    $copy = copiedCartRuleOf($cartRule);
+
+    expect($copy->id)->not->toBe($cartRule->id)
+        ->and($copy->cart_rule_channels->pluck('id')->all())->toEqualCanonicalizing($cartRule->cart_rule_channels->pluck('id')->all())
+        ->and($copy->cart_rule_customer_groups->pluck('id')->all())->toEqualCanonicalizing($cartRule->cart_rule_customer_groups->pluck('id')->all());
+});
+
+it('should copy the coupon and discount settings of a cart rule and leave the copy inactive', function () {
+    $cartRule = createCartRule([
+        'status' => 1,
+        'coupon_type' => 1,
+        'use_auto_generation' => true,
+        'uses_per_coupon' => 5,
+        'usage_per_customer' => 2,
+        'action_type' => 'by_fixed',
+        'discount_amount' => 12.5,
+        'condition_type' => 1,
+        'conditions' => [
+            [
+                'attribute' => 'cart|base_sub_total',
+                'attribute_type' => 'price',
+                'operator' => '>=',
+                'value' => '100',
+            ],
+        ],
+    ]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.marketing.promotions.cart_rules.copy', $cartRule->id))->assertOk();
+
+    $copy = copiedCartRuleOf($cartRule);
+
+    expect($copy)
+        ->status->toBeFalse()
+        ->coupon_type->toBe(1)
+        ->use_auto_generation->toBeTrue()
+        ->uses_per_coupon->toBe(5)
+        ->usage_per_customer->toBe(2)
+        ->action_type->toBe('by_fixed')
+        ->condition_type->toBe(1)
+        ->conditions->toEqual($cartRule->conditions)
+        ->and((float) $copy->discount_amount)->toBePrice(12.5)
+        ->and($cartRule->fresh()->status)->toBeTrue();
 });
 
 // ============================================================================
@@ -185,7 +249,6 @@ it('should persist disabled boolean fields when updating a cart rule', function 
 
     $this->loginAsAdmin();
 
-    // Update with all boolean fields disabled.
     putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id), [
         'name' => $cartRule->name,
         'channels' => [1],

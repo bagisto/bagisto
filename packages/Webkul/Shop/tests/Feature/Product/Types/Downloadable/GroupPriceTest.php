@@ -1,86 +1,37 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
-
-// ============================================================================
-// Fixed Price Type
-// ============================================================================
-
-it('should apply fixed group price for guest customer on downloadable product', function () {
+it('should apply a fixed customer group price to a downloadable product', function (array $priceGroups, ?int $customerGroupId) {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    $this->setCustomerGroupPrice($product, customerGroupId: 1, valueType: 'fixed', value: 700);
+    $this->setCustomerGroupPrice($product, $priceGroups, 'fixed', 700);
+
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 700);
-});
+})->with('customer groups');
 
-it('should apply fixed group price for general customer on downloadable product', function () {
+it('should apply a percentage customer group discount to a downloadable product', function (array $priceGroups, ?int $customerGroupId) {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    $this->setCustomerGroupPrice($product, customerGroupId: 2, valueType: 'fixed', value: 600);
+    $this->setCustomerGroupPrice($product, $priceGroups, 'discount', 20);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addDownloadableProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 600);
-});
-
-it('should apply fixed group price for wholesale customer on downloadable product', function () {
-    $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
-
-    $this->setCustomerGroupPrice($product, customerGroupId: 3, valueType: 'fixed', value: 500);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addDownloadableProductToCart($product)->assertOk();
-
-    $this->assertCartItemPrice($response, 500);
-});
-
-// ============================================================================
-// Discount Percentage Type
-// ============================================================================
-
-it('should apply percentage group discount for guest customer on downloadable product', function () {
-    $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
-
-    $this->setCustomerGroupPrice($product, customerGroupId: 1, valueType: 'discount', value: 20);
-
-    $response = $this->addDownloadableProductToCart($product)->assertOk();
-
-    // 1000 - (1000 * 20 / 100) = 800
     $this->assertCartItemPrice($response, 800);
-});
+})->with('customer groups');
 
-it('should apply percentage group discount for general customer on downloadable product', function () {
+it('should not apply a customer group price set for another group to a downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    $this->setCustomerGroupPrice($product, customerGroupId: 2, valueType: 'discount', value: 30);
+    $this->setCustomerGroupPrice($product, 3, 'fixed', 700);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup(2);
 
     $response = $this->addDownloadableProductToCart($product)->assertOk();
 
-    // 1000 - (1000 * 30 / 100) = 700
-    $this->assertCartItemPrice($response, 700);
-});
-
-it('should apply percentage group discount for wholesale customer on downloadable product', function () {
-    $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
-
-    $this->setCustomerGroupPrice($product, 3, 'discount', 40);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addDownloadableProductToCart($product)->assertOk();
-
-    // 1000 - (1000 * 40 / 100) = 600
-    $this->assertCartItemPrice($response, 600);
+    $this->assertCartItemPrice($response, 1000);
 });

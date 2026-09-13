@@ -1,101 +1,37 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
-
-// ============================================================================
-// Fixed Price Type
-// ============================================================================
-
-it('should apply fixed group price for guest on configurable variant', function () {
+it('should apply a fixed customer group price to a configurable variant', function (array $priceGroups, ?int $customerGroupId) {
     $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
 
-    $this->setCustomerGroupPrice($variant, 1, 'fixed', 700);
+    $this->setCustomerGroupPrice($product->variants->first(), $priceGroups, 'fixed', 700);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $this->actAsCustomerGroup($customerGroupId);
+
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 700);
-});
+})->with('customer groups');
 
-it('should apply fixed group price for general customer on configurable variant', function () {
+it('should apply a percentage customer group discount to a configurable variant', function (array $priceGroups, ?int $customerGroupId) {
     $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
 
-    $this->setCustomerGroupPrice($variant, 2, 'fixed', 600);
+    $this->setCustomerGroupPrice($product->variants->first(), $priceGroups, 'discount', 20);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup($customerGroupId);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
-
-    $this->assertCartItemPrice($response, 600);
-});
-
-it('should apply fixed group price for wholesale customer on configurable variant', function () {
-    $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
-
-    $this->setCustomerGroupPrice($variant, 3, 'fixed', 500);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
-
-    $this->assertCartItemPrice($response, 500);
-});
-
-// ============================================================================
-// Discount Percentage Type
-// ============================================================================
-
-it('should apply percentage group discount for guest on configurable variant', function () {
-    $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
-
-    $this->setCustomerGroupPrice($variant, 1, 'discount', 20);
-
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 800);
-});
+})->with('customer groups');
 
-it('should apply percentage group discount for general customer on configurable variant', function () {
+it('should not apply a customer group price set for another group to a configurable variant', function () {
     $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
 
-    $this->setCustomerGroupPrice($variant, 2, 'discount', 30);
+    $this->setCustomerGroupPrice($product->variants->first(), 3, 'fixed', 700);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup(2);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 700);
-});
-
-it('should apply percentage group discount for wholesale customer on configurable variant', function () {
-    $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
-
-    $this->setCustomerGroupPrice($variant, 3, 'discount', 40);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
-
-    $this->assertCartItemPrice($response, 600);
+    $this->assertCartItemPrice($response, 1000);
 });

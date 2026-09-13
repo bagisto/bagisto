@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\Customer\NewCustomerNotification;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
+use Webkul\Sales\Models\Order;
 use Webkul\Shop\Mail\Customer\NoteNotification;
 
 use function Pest\Laravel\get;
@@ -29,10 +30,13 @@ it('should return customer listing via datagrid', function () {
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.customers.customers.index'), [
+    getJson(route('admin.customers.customers.index', [
+        'filters' => ['customer_id' => [$customer->id]],
+    ]), [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
         ->assertOk()
+        ->assertJsonCount(1, 'records')
         ->assertJsonPath('records.0.customer_id', $customer->id)
         ->assertJsonPath('records.0.email', $customer->email);
 });
@@ -265,9 +269,48 @@ it('should delete a specific customer', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.delete', $customer->id))
-        ->assertRedirect(route('admin.customers.customers.index'));
+        ->assertRedirect(route('admin.customers.customers.index'))
+        ->assertSessionHas('success', trans('admin::app.customers.customers.delete-success'));
 
     $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
+});
+
+it('should refuse to delete a customer who has a [status] order', function (string $status) {
+    $customer = Customer::factory()->create();
+
+    $this->createOrder(['status' => $status], [[]], $customer);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.delete', $customer->id))
+        ->assertRedirect(route('admin.customers.customers.index'))
+        ->assertSessionHas('error', trans('admin::app.customers.customers.delete-pending-order-error'));
+
+    $this->assertDatabaseHas('customers', ['id' => $customer->id]);
+})->with([
+    'pending' => [Order::STATUS_PENDING],
+    'processing' => [Order::STATUS_PROCESSING],
+]);
+
+it('should delete a customer whose orders are all closed', function () {
+    $customer = Customer::factory()->create();
+
+    $this->createOrder(['status' => Order::STATUS_COMPLETED], [[]], $customer);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.delete', $customer->id))
+        ->assertRedirect(route('admin.customers.customers.index'))
+        ->assertSessionHas('success', trans('admin::app.customers.customers.delete-success'));
+
+    $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
+});
+
+it('should return 404 when deleting a customer that does not exist', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.delete', 999999))
+        ->assertNotFound();
 });
 
 // ============================================================================
@@ -332,4 +375,32 @@ it('should mass delete customers', function () {
     foreach ($customers as $customer) {
         $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
     }
+});
+
+it('should refuse the whole mass delete when any customer has a pending order', function () {
+    $free = Customer::factory()->create();
+
+    $busy = Customer::factory()->create();
+
+    $this->createOrder(['status' => Order::STATUS_PENDING], [[]], $busy);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.mass_delete'), [
+        'indices' => [$free->id, $busy->id],
+    ])
+        ->assertServerError()
+        ->assertJsonPath('message', trans('admin::app.customers.customers.index.datagrid.order-pending'));
+
+    $this->assertDatabaseHas('customers', ['id' => $free->id]);
+
+    $this->assertDatabaseHas('customers', ['id' => $busy->id]);
+});
+
+it('should fail mass delete validation when indices are missing', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.mass_delete'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('indices');
 });

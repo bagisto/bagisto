@@ -1,29 +1,19 @@
 <?php
 
-// ============================================================================
-// Active Special Price
-// ============================================================================
-
-it('should apply special price to configurable variant when within date range', function () {
+it('should charge a configurable variant at its special price only while the special price is in force', function (?int $fromInDays, ?int $toInDays, float $expectedPrice) {
     $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
 
-    $this->setSpecialPriceOnProduct($variant, 800);
+    $this->setSpecialPriceInForce($product->variants->first(), 800, $fromInDays, $toInDays);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 800);
-});
+    $this->assertCartItemPrice($response, $expectedPrice);
+})->with('special price windows');
 
-it('should use regular price when configurable variant special price has expired', function () {
-    $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
+it('should list a configurable product at the special price of its cheapest variant', function () {
+    $product = $this->createConfigurableProduct([1000, 1200]);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $this->setSpecialPriceOnProduct($product->variants->first(), 750);
 
-    $this->assertCartItemPrice($response, 1000);
+    expect($this->listedPrice($product))->toBePrice(750);
 });

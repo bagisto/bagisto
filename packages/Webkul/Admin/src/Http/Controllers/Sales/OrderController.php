@@ -186,7 +186,7 @@ class OrderController extends Controller
         if ($result) {
             session()->flash('success', trans('admin::app.sales.orders.view.cancel-success'));
         } else {
-            session()->flash('error', trans('admin::app.sales.orders.view.create-error'));
+            session()->flash('error', trans('admin::app.sales.orders.view.cancel-error'));
         }
 
         return redirect()->route('admin.sales.orders.view', $id);

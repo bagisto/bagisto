@@ -1,65 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Models\CoreConfig;
-use Webkul\Customer\Models\Customer;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductOrderedInventory;
+use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderItem;
-use Webkul\Sales\Models\OrderPayment;
 use Webkul\Sales\Models\Shipment;
 use Webkul\Shop\Mail\Order\ShippedNotification;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 
 /**
- * Create a shippable order from a test context (needs $this for createSimpleProduct).
+ * Create a simple product holding the given stock in the default inventory source.
  */
-function createShippableOrder($testContext): array
+function productInStock(int $qty): Product
 {
-    $product = $testContext->createSimpleProduct();
+    $product = test()->createSimpleProduct();
 
-    $customer = Customer::factory()->create();
+    $product->inventories()->update(['qty' => $qty]);
 
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => 'processing',
-        'channel_id' => core()->getDefaultChannel()->id,
-        'shipping_method' => 'free_free',
-        'shipping_title' => 'Free Shipping - Free Shipping',
-    ]);
+    return $product->fresh();
+}
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-        'method' => 'cashondelivery',
-    ]);
+/**
+ * The shipment payload shipping the given quantity of an order item from the default source.
+ */
+function shipmentPayload(int $orderItemId, int $qty, ?int $sourceId = null): array
+{
+    $sourceId ??= test()->defaultInventorySourceId();
 
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => $product->id,
-        'sku' => $product->sku,
-        'type' => 'simple',
-        'name' => $product->name,
-        'qty_ordered' => 2,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    return ['order' => $order, 'orderItem' => $orderItem, 'product' => $product];
+    return [
+        'shipment' => [
+            'source' => $sourceId,
+            'carrier_title' => 'Free Shipping',
+            'track_number' => fake()->uuid(),
+            'items' => [$orderItemId => [$sourceId => $qty]],
+        ],
+    ];
 }
 
 // ============================================================================
@@ -83,61 +62,169 @@ it('should deny guest access to the shipments index page', function () {
 // Store
 // ============================================================================
 
-it('should store a shipment for an order', function () {
-    $data = createShippableOrder($this);
+it('should ship the ordered quantity, record it on the item and take it from the inventory source', function () {
+    $product = productInStock(10);
+
+    $order = $this->createOrder(items: [['product' => $product, 'qty_ordered' => 2]]);
+
+    ProductOrderedInventory::query()->create([
+        'product_id' => $product->id,
+        'channel_id' => $order->channel_id,
+        'qty' => 2,
+    ]);
+
+    $item = $order->items->first();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.shipments.store', $data['order']->id), [
-        'shipment' => [
-            'source' => 1,
-            'carrier_title' => 'Free Shipping',
-            'track_number' => fake()->uuid(),
-            'items' => [
-                $data['orderItem']->id => [1 => 1],
-            ],
-        ],
-    ])
-        ->assertRedirect();
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($item->id, 2))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
+        ->assertSessionHas('success', trans('admin::app.sales.shipments.create.success'));
 
-    $this->assertDatabaseHas('shipments', [
-        'order_id' => $data['order']->id,
+    $shipment = Shipment::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect($shipment->total_qty)->toBe(2)
+        ->and($shipment->inventory_source_id)->toBe($this->defaultInventorySourceId());
+
+    $this->assertDatabaseHas('shipment_items', [
+        'shipment_id' => $shipment->id,
+        'order_item_id' => $item->id,
+        'qty' => 2,
     ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'id' => $item->id,
+        'qty_shipped' => 2,
+    ]);
+
+    $this->assertDatabaseHas('product_inventories', [
+        'product_id' => $product->id,
+        'inventory_source_id' => $this->defaultInventorySourceId(),
+        'qty' => 8,
+    ]);
+
+    $this->assertDatabaseHas('product_ordered_inventories', [
+        'product_id' => $product->id,
+        'channel_id' => $order->channel_id,
+        'qty' => 0,
+    ]);
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_PROCESSING,
+    ]);
+});
+
+it('should complete the order once it is both invoiced and shipped', function () {
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 2]]);
+
+    $this->invoiceOrder($order);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 2))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_COMPLETED,
+    ]);
+});
+
+it('should hold the order in pending payment when it ships against an unpaid invoice', function () {
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 1]]);
+
+    $this->invoiceOrder($order, state: Invoice::STATUS_PENDING);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 1))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_PENDING_PAYMENT,
+    ]);
+});
+
+it('should refuse to ship more than the quantity left to ship', function () {
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 2]]);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 3))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
+
+    $this->assertDatabaseMissing('shipments', ['order_id' => $order->id]);
+
+    $this->assertDatabaseHas('order_items', [
+        'order_id' => $order->id,
+        'qty_shipped' => 0,
+    ]);
+});
+
+it('should refuse to ship more than the inventory source holds', function () {
+    $order = $this->createOrder(items: [['product' => productInStock(1), 'qty_ordered' => 2]]);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 2))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
+
+    $this->assertDatabaseMissing('shipments', ['order_id' => $order->id]);
+});
+
+it('should refuse to ship an order with nothing left to ship', function () {
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 1]]);
+
+    $this->shipOrder($order);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 1))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.shipments.create.order-error'));
+
+    expect(Shipment::query()->where('order_id', $order->id)->count())->toBe(1);
+});
+
+it('should refuse to ship an order made of non-stockable items', function () {
+    $order = $this->createOrder(items: [['product' => $this->createVirtualProduct()]]);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 1))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.shipments.create.order-error'));
+
+    $this->assertDatabaseMissing('shipments', ['order_id' => $order->id]);
 });
 
 it('should store a shipment and send email notifications', function () {
     Mail::fake();
 
-    CoreConfig::factory()->create([
-        'code' => 'emails.general.notifications.emails.general.notifications.new_shipment',
-        'value' => 1,
-    ]);
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_shipment', 1);
 
-    $data = createShippableOrder($this);
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 2]]);
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.shipments.store', $data['order']->id), [
-        'shipment' => [
-            'source' => 1,
-            'carrier_title' => 'Free Shipping',
-            'track_number' => fake()->uuid(),
-            'items' => [
-                $data['orderItem']->id => [1 => 1],
-            ],
-        ],
-    ])
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 1))
         ->assertRedirect();
 
-    Mail::assertQueued(ShippedNotification::class);
+    $this->assertDatabaseHas('shipments', ['order_id' => $order->id]);
+
+    Mail::assertQueued(ShippedNotification::class, fn (ShippedNotification $mail) => $mail->hasTo($order->customer_email));
 });
 
 it('should fail validation when shipment source is missing on store', function () {
-    $data = createShippableOrder($this);
+    $order = $this->createOrder(items: [['product' => productInStock(10)]]);
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.shipments.store', $data['order']->id))
+    postJson(route('admin.sales.shipments.store', $order->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('shipment.source');
 });
@@ -147,23 +234,14 @@ it('should fail validation when shipment source is missing on store', function (
 // ============================================================================
 
 it('should return the shipment view page', function () {
-    $data = createShippableOrder($this);
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 2]]);
+
+    $shipment = $this->shipOrder($order);
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.shipments.store', $data['order']->id), [
-        'shipment' => [
-            'source' => 1,
-            'carrier_title' => 'Free Shipping',
-            'track_number' => fake()->uuid(),
-            'items' => [
-                $data['orderItem']->id => [1 => 1],
-            ],
-        ],
-    ]);
-
-    $shipment = Shipment::where('order_id', $data['order']->id)->first();
-
     get(route('admin.sales.shipments.view', $shipment->id))
-        ->assertOk();
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id]))
+        ->assertSeeText($shipment->track_number);
 });

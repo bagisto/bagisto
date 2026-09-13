@@ -34,6 +34,23 @@ function filterableAttributeIds(): array
     return Attribute::where('is_filterable', 1)->pluck('id')->toArray();
 }
 
+/**
+ * Whether a category id appears anywhere in the given tree nodes.
+ */
+function categoryTreeHas(array $nodes, int $id): bool
+{
+    foreach ($nodes as $node) {
+        if (
+            $node['id'] === $id
+            || categoryTreeHas($node['children'], $id)
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 // ============================================================================
 // Index
 // ============================================================================
@@ -379,7 +396,6 @@ it('should disable visible in menu when status is set to zero on update', functi
 it('should enable visible in menu when status is set to one on update', function () {
     $category = createCategory();
 
-    // Ensure status starts as disabled.
     $category->update(['status' => false]);
 
     $localeCode = core()->getRequestedLocaleCode();
@@ -505,25 +521,17 @@ it('should not delete the root category', function () {
 });
 
 it('should not delete a channel root category', function () {
-    $this->loginAsAdmin();
-
-    // The default channel's root_category_id is 1, which is already the
-    // system root. Create a second root category and assign it to a channel
-    // to test the channel root guard separately.
     $rootCategory = Category::factory()->hasTranslations()->create(['parent_id' => null]);
 
-    $channel = Channel::first();
-    $originalRoot = $channel->root_category_id;
-    $channel->update(['root_category_id' => $rootCategory->id]);
+    Channel::factory()->create(['root_category_id' => $rootCategory->id]);
+
+    $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.categories.delete', $rootCategory->id))
         ->assertBadRequest()
         ->assertSeeText(trans('admin::app.catalog.categories.delete-category-root'));
 
     $this->assertDatabaseHas('categories', ['id' => $rootCategory->id]);
-
-    // Restore original root.
-    $channel->update(['root_category_id' => $originalRoot]);
 });
 
 it('should return 404 when deleting a non-existent category', function () {
@@ -578,7 +586,6 @@ it('should reject mass delete when root category is included', function () {
         ->assertBadRequest()
         ->assertSeeText(trans('admin::app.catalog.categories.delete-category-root'));
 
-    // Both should still exist.
     $this->assertDatabaseHas('categories', ['id' => 1]);
     $this->assertDatabaseHas('categories', ['id' => $category->id]);
 });
@@ -675,11 +682,17 @@ it('should return empty results for non-matching search query', function () {
 // ============================================================================
 
 it('should return the category tree', function () {
-    $category = createCategory();
+    $parent = createCategory();
+
+    $child = createCategory(['parent_id' => $parent->id]);
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.catalog.categories.tree'))
+    $tree = getJson(route('admin.catalog.categories.tree'))
         ->assertOk()
-        ->assertJsonPath('data.0.id', $category->id);
+        ->json('data');
+
+    expect(categoryTreeHas($tree, $parent->id))->toBeTrue()
+        ->and(categoryTreeHas($tree, $child->id))->toBeTrue()
+        ->and(collect($tree)->pluck('id'))->not->toContain($child->id);
 });

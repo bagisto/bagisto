@@ -125,30 +125,15 @@ it('should delete an event', function () {
 });
 
 it('should refuse to delete an event a campaign is using', function () {
-    // Arrange.
     $event = Event::factory()->create();
 
     Campaign::factory()->create(['marketing_event_id' => $event->id]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.events.delete', $event->id))
-        ->assertStatus(400)
+        ->assertBadRequest()
         ->assertJsonPath('message', trans('admin::app.marketing.communications.events.campaign-associate'));
 
     $this->assertDatabaseHas('marketing_events', ['id' => $event->id]);
-});
-
-it('should delete an event no campaign is using', function () {
-    // Arrange.
-    $event = Event::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    deleteJson(route('admin.marketing.communications.events.delete', $event->id))
-        ->assertOk();
-
-    $this->assertDatabaseMissing('marketing_events', ['id' => $event->id]);
 });

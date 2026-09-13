@@ -4,36 +4,42 @@
 // Special Price vs Catalog Rule
 // ============================================================================
 
-it('should use the lower of special price and catalog rule for configurable variant', function () {
+it('should charge a configurable variant at its special price when it beats the catalog rule', function () {
     $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
 
-    // Set special price on variant.
-    $this->setSpecialPriceOnProduct($variant, 800);
+    $this->setSpecialPriceOnProduct($product->variants->first(), 800);
 
-    // Catalog rule: 10% off → 900. MIN(800, 900) = 800.
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10]);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 800);
 });
 
-// ============================================================================
-// Group Price as Floor
-// ============================================================================
-
-it('should use group price when lower than regular price for configurable variant', function () {
+it('should charge a configurable variant at the catalog rule price when it beats the special price', function () {
     $product = $this->createConfigurableProduct([1000]);
-    $variant = $product->variants->first();
 
-    $this->setCustomerGroupPrice($variant, 1, 'fixed', 600);
+    $this->setSpecialPriceOnProduct($product->variants->first(), 800);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30]);
+
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
+
+    $this->assertCartItemPrice($response, 700);
+});
+
+// ============================================================================
+// Group Price As Floor
+// ============================================================================
+
+it('should charge a configurable variant at its customer group price when it beats the special price', function () {
+    $product = $this->createConfigurableProduct([1000]);
+
+    $this->setSpecialPriceOnProduct($product->variants->first(), 800);
+
+    $this->setCustomerGroupPrice($product->variants->first(), 1, 'fixed', 600);
+
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 600);
 });
@@ -42,16 +48,13 @@ it('should use group price when lower than regular price for configurable varian
 // Cart Rule Stacking
 // ============================================================================
 
-it('should apply cart rule discount on top of variant price for configurable product', function () {
+it('should take a cart rule discount off the variant price of a configurable product', function () {
     $product = $this->createConfigurableProduct([800]);
-    $variant = $product->variants->first();
 
     $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50]);
 
-    $response = $this->addProductToCart($product->id, 1, [
-        'selected_configurable_option' => $variant->id,
-    ])->assertOk();
+    $response = $this->addConfigurableProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 800);
-    $this->assertCartDiscount($response, 50);
+    $this->assertCartItemPrice($response, 800)
+        ->assertCartDiscount($response, 50);
 });

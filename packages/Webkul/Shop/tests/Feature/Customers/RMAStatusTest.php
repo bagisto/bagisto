@@ -30,141 +30,116 @@ function createRmaForCustomer(ModelsCustomer $customer, DefaultRMAStatusEnum $st
 }
 
 it('should close a pending rma request', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     post(route('shop.customers.account.rma.update-status', $rma->id), [
         'close_rma' => 1,
     ])->assertRedirect();
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::SOLVED->value);
 });
 
 it('should not close an rma request that is already solved', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::SOLVED);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     post(route('shop.customers.account.rma.update-status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::SOLVED->value);
 });
 
 it('should not close an rma request whose package has been received', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::RECEIVED_PACKAGE);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     post(route('shop.customers.account.rma.update-status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::RECEIVED_PACKAGE->value);
 });
 
 it('should not close an rma request that has been declined', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::DECLINED);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     post(route('shop.customers.account.rma.update-status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::DECLINED->value);
 });
 
 it('should not close an rma request belonging to a canceled order', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING, Order::STATUS_CANCELED);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     post(route('shop.customers.account.rma.update-status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::PENDING->value);
 });
 
 it('should not close an rma request belonging to another customer', function () {
-    // Arrange.
     $rma = createRmaForCustomer(ModelsCustomer::factory()->create(), DefaultRMAStatusEnum::PENDING);
 
-    // Act.
     $this->loginAsCustomer();
 
     post(route('shop.customers.account.rma.update-status', $rma->id), [
         'close_rma' => 1,
     ])->assertNotFound();
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::PENDING->value);
 });
 
 it('should cancel a pending rma request', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.customers.account.rma.cancel', $rma->id))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.rma.response.cancel-success'));
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::CANCELED->value);
 });
 
 it('should not cancel an rma request that is already solved', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::SOLVED);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.customers.account.rma.cancel', $rma->id))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.rma.response.cancel-not-allowed'));
 
-    // Assert.
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::SOLVED->value);
 });
 
 it('should offer the cancel action for a pending rma request', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING);
@@ -174,14 +149,12 @@ it('should offer the cancel action for a pending rma request', function () {
         'quantity' => 1,
     ]);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     $response = get(route('shop.customers.account.rma.index'), [
         'X-Requested-With' => 'XMLHttpRequest',
     ])->assertOk();
 
-    // Assert.
     $record = collect($response->json('records'))->firstWhere('id', $rma->id);
 
     expect(collect($record['actions'])->pluck('url'))
@@ -189,7 +162,6 @@ it('should offer the cancel action for a pending rma request', function () {
 });
 
 it('should not offer the cancel action for a solved rma request', function () {
-    // Arrange.
     $customer = ModelsCustomer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::SOLVED);
@@ -199,14 +171,12 @@ it('should not offer the cancel action for a solved rma request', function () {
         'quantity' => 1,
     ]);
 
-    // Act.
     $this->loginAsCustomer($customer);
 
     $response = get(route('shop.customers.account.rma.index'), [
         'X-Requested-With' => 'XMLHttpRequest',
     ])->assertOk();
 
-    // Assert.
     $record = collect($response->json('records'))->firstWhere('id', $rma->id);
 
     expect(collect($record['actions'])->pluck('url'))

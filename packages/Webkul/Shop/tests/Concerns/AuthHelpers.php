@@ -21,6 +21,20 @@ trait AuthHelpers
     }
 
     /**
+     * Log in a customer of the given group, or keep browsing as a guest when no group is given.
+     */
+    public function actAsCustomerGroup(?int $customerGroupId): ?CustomerContract
+    {
+        if (is_null($customerGroupId)) {
+            return null;
+        }
+
+        return $this->loginAsCustomer(Customer::factory()->create([
+            'customer_group_id' => $customerGroupId,
+        ]));
+    }
+
+    /**
      * Ensure the request is treated as a guest (no auth).
      */
     public function asGuest(): static

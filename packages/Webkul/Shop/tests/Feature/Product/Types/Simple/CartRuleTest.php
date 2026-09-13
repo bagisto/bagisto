@@ -1,175 +1,75 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
-
 // ============================================================================
-// No Coupon — Fixed Discount
+// Automatic Discounts
 // ============================================================================
 
-it('should apply fixed cart rule discount for all customer groups', function () {
+it('should apply a fixed cart rule discount to a simple product', function (array $ruleGroups, ?int $customerGroupId) {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
 
-    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50], $ruleGroups);
+
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
     $this->assertCartDiscount($response, 50);
-});
+})->with('customer groups');
 
-it('should apply fixed cart rule discount for guest customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
-
-    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 30], [1]);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartDiscount($response, 30);
-});
-
-it('should apply fixed cart rule discount for general customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
-
-    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 40], [2]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartDiscount($response, 40);
-});
-
-it('should apply fixed cart rule discount for wholesaler customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
-
-    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 60], [3]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartDiscount($response, 60);
-});
-
-// ============================================================================
-// No Coupon — Percentage Discount
-// ============================================================================
-
-it('should apply percentage cart rule discount for all customer groups', function () {
+it('should apply a percentage cart rule discount to a simple product', function (array $ruleGroups, ?int $customerGroupId) {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
 
-    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10]);
+    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 15], $ruleGroups);
 
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartDiscount($response, 100);
-});
-
-it('should apply percentage cart rule discount for guest customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
-
-    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 15], [1]);
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
     $this->assertCartDiscount($response, 150);
-});
+})->with('customer groups');
 
-it('should apply percentage cart rule discount for general customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
-
-    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [2]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartDiscount($response, 200);
-});
-
-it('should apply percentage cart rule discount for wholesaler customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
-
-    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 25], [3]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartDiscount($response, 250);
-});
-
-// ============================================================================
-// Specific Coupon
-// ============================================================================
-
-it('should apply coupon with fixed discount for all customer groups', function () {
+it('should not apply a cart rule limited to another customer group to a simple product', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
 
-    $this->createCouponCartRule('SAVE75', ['action_type' => 'by_fixed', 'discount_amount' => 75]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50], [3]);
+
+    $this->actAsCustomerGroup(2);
+
+    $response = $this->addProductToCart($product->id)->assertOk();
+
+    $this->assertCartDiscount($response, 0);
+});
+
+// ============================================================================
+// Coupons
+// ============================================================================
+
+it('should apply a fixed coupon discount to a simple product', function (array $ruleGroups, ?int $customerGroupId) {
+    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
+
+    $this->createCouponCartRule('SAVE75', ['action_type' => 'by_fixed', 'discount_amount' => 75], $ruleGroups);
+
+    $this->actAsCustomerGroup($customerGroupId);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon('SAVE75')->assertOk();
+    $response = $this->applyCoupon('SAVE75')
+        ->assertOk()
+        ->assertJsonPath('data.coupon_code', 'SAVE75');
 
     $this->assertCartDiscount($response, 75);
-    $response->assertJsonPath('data.coupon_code', 'SAVE75');
-});
+})->with('customer groups');
 
-it('should apply coupon with fixed discount for guest customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
-
-    $this->createCouponCartRule('GUEST50', ['action_type' => 'by_fixed', 'discount_amount' => 50], [1]);
-
-    $this->addProductToCart($product->id)->assertOk();
-
-    $response = $this->applyCoupon('GUEST50')->assertOk();
-
-    $this->assertCartDiscount($response, 50);
-});
-
-it('should apply coupon with fixed discount for general customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
-
-    $this->createCouponCartRule('GEN60', ['action_type' => 'by_fixed', 'discount_amount' => 60], [2]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $this->addProductToCart($product->id)->assertOk();
-
-    $response = $this->applyCoupon('GEN60')->assertOk();
-
-    $this->assertCartDiscount($response, 60);
-});
-
-it('should apply coupon with fixed discount for wholesaler customer', function () {
-    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
-
-    $this->createCouponCartRule('WHOLE80', ['action_type' => 'by_fixed', 'discount_amount' => 80], [3]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $this->addProductToCart($product->id)->assertOk();
-
-    $response = $this->applyCoupon('WHOLE80')->assertOk();
-
-    $this->assertCartDiscount($response, 80);
-});
-
-it('should apply coupon with percentage discount for all customer groups', function () {
+it('should apply a percentage coupon discount to a simple product', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 1000]]);
 
     $this->createCouponCartRule('SAVE20', ['action_type' => 'by_percent', 'discount_amount' => 20]);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon('SAVE20')->assertOk();
+    $response = $this->applyCoupon('SAVE20')
+        ->assertOk()
+        ->assertJsonPath('data.coupon_code', 'SAVE20');
 
     $this->assertCartDiscount($response, 200);
-    $response->assertJsonPath('data.coupon_code', 'SAVE20');
 });

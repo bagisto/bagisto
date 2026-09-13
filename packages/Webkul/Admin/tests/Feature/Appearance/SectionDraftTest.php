@@ -16,6 +16,10 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
+/**
+ * A live section on the default channel with published options, since the factory seeds no
+ * translation and a section without options is not a state the editor can reach.
+ */
 function makeSection(array $attributes = []): Section
 {
     $channel = core()->getDefaultChannel();
@@ -27,10 +31,6 @@ function makeSection(array $attributes = []): Section
         'status' => 1,
     ], $attributes));
 
-    /**
-     * The factory does not seed a translation, and a section with no options is not a
-     * state the editor can reach.
-     */
     $section->translateOrNew(app()->getLocale())->options = ['html' => '<p>published</p>'];
 
     $section->save();
@@ -260,14 +260,6 @@ it('should render the split editor when scoped to a theme', function () {
         ->assertSee('v-section-editor', false)
         ->assertSee('Hero Banner')
         ->assertSee(route('shop.appearance.preview'), false);
-});
-
-it('should still render the editor when no theme is asked for', function () {
-    $this->loginAsAdmin();
-
-    get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
-        ->assertOk()
-        ->assertSee('v-section-editor', false);
 });
 
 it('should flag a section that has unpublished edits in the editor list', function () {

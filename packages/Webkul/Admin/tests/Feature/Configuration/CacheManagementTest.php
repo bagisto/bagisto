@@ -28,7 +28,11 @@ function cacheStorefrontPage(): Request
     return $request;
 }
 
-it('flushes every cached storefront page from the full page cache settings', function () {
+// ============================================================================
+// Page Cache
+// ============================================================================
+
+it('should flush every cached storefront page from the full page cache settings', function () {
     $request = cacheStorefrontPage();
 
     expect(ResponseCache::hasBeenCached($request))->toBeTrue();
@@ -42,7 +46,7 @@ it('flushes every cached storefront page from the full page cache settings', fun
     expect(ResponseCache::hasBeenCached($request))->toBeFalse();
 });
 
-it('drops the page cache along with the application caches when clearing everything', function () {
+it('should drop the page cache along with the application caches when clearing everything', function () {
     $request = cacheStorefrontPage();
 
     expect(ResponseCache::hasBeenCached($request))->toBeTrue();
@@ -57,7 +61,11 @@ it('drops the page cache along with the application caches when clearing everyth
         ->and($response->json('command'))->toContain('responsecache:clear');
 });
 
-it('offers every action a sentence of its own', function () {
+// ============================================================================
+// Messages
+// ============================================================================
+
+it('should offer every action a sentence of its own', function () {
     $manager = app(CacheManagerService::class);
 
     $actions = array_keys(array_merge(
@@ -73,7 +81,7 @@ it('offers every action a sentence of its own', function () {
     }
 });
 
-it('answers a cache action with its own sentence rather than the command it ran', function (string $action) {
+it('should answer a cache action with its own sentence rather than the command it ran', function (string $action) {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.configuration.cache-management.execute'), [
@@ -94,7 +102,7 @@ it('answers a cache action with its own sentence rather than the command it ran'
     'clear-page-cache',
 ]);
 
-it('falls back to naming an action the way its button does when it has no sentence', function () {
+it('should fall back to naming an action the way its button does when it has no sentence', function () {
     app()->bind(CacheManagerService::class, fn () => new class extends CacheManagerService
     {
         protected array $clearActions = [
@@ -114,7 +122,7 @@ it('falls back to naming an action the way its button does when it has no senten
         ->not->toContain('view:clear');
 });
 
-it('still reports the command it ran, which the cache console prints', function () {
+it('should still report the command it ran, which the cache console prints', function () {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.configuration.cache-management.execute'), [
@@ -124,15 +132,29 @@ it('still reports the command it ran, which the cache console prints', function 
     expect($response->json('command'))->toBe('view:clear');
 });
 
-it('refuses a cache action it does not know', function () {
+// ============================================================================
+// Guards
+// ============================================================================
+
+it('should refuse a cache action it does not know', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.configuration.cache-management.execute'), [
         'action' => 'clear-everything-please',
-    ])->assertStatus(422);
+    ])
+        ->assertUnprocessable()
+        ->assertJsonPath('success', false);
 });
 
-it('denies a guest the cache actions', function () {
+it('should fail validation when no action is named', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.cache-management.execute'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('action');
+});
+
+it('should deny a guest the cache actions', function () {
     postJson(route('admin.configuration.cache-management.execute'), [
         'action' => 'clear-page-cache',
     ])->assertRedirect(route('admin.session.create'));

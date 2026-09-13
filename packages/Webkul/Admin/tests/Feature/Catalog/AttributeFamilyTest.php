@@ -129,7 +129,6 @@ it('should store a new attribute family with all default groups and attributes',
     expect($family->name)->toBe('Test Family');
     expect($family->attribute_groups)->toHaveCount(8);
 
-    // Verify attributes were assigned to the General group.
     $general = $family->attribute_groups->where('code', 'general')->first();
 
     expect($general)->not->toBeNull();
@@ -157,8 +156,6 @@ it('should store a family with all default groups plus an extra custom group', f
     $code = fake()->unique()->lexify('family_??????????');
     $payload = buildDefaultFamilyPayload($code, 'Extended Family');
 
-    // Add a user-defined group on top of the system groups — this is how the
-    // UI works when a user clicks "Add Group" before saving.
     $customAttribute = Attribute::factory()->create(['type' => 'text']);
 
     $payload['attribute_groups']['group_1_0'] = [
@@ -179,7 +176,6 @@ it('should store a family with all default groups plus an extra custom group', f
         ->where('code', $code)
         ->first();
 
-    // 8 default groups + 1 custom group.
     expect($family->attribute_groups)->toHaveCount(9);
 
     $customGroup = $family->attribute_groups->where('code', 'custom_info')->first();
@@ -324,7 +320,6 @@ it('should update a family name while preserving all groups and attributes', fun
         'name' => 'Default Updated',
     ]);
 
-    // All original groups should still exist.
     expect($defaultFamily->fresh()->attribute_groups()->count())->toBe($originalGroupCount);
 });
 
@@ -336,7 +331,6 @@ it('should add a new group to an existing family during update', function () {
 
     $payload = buildGroupsPayloadFromFamily($defaultFamily);
 
-    // New group uses 'group_' prefix key — this is how the UI adds groups.
     $payload['group_1_new'] = [
         'code' => 'custom_section',
         'name' => 'Custom Section',
@@ -363,7 +357,6 @@ it('should add a new group to an existing family during update', function () {
 it('should remove a user-defined group when omitted from update payload', function () {
     $this->loginAsAdmin();
 
-    // Create a family with all default groups + two custom groups.
     $code = fake()->unique()->lexify('family_??????????');
     $payload = buildDefaultFamilyPayload($code, 'Removable Groups');
 
@@ -381,13 +374,11 @@ it('should remove a user-defined group when omitted from update payload', functi
 
     $family = AttributeFamily::with('attribute_groups')->where('code', $code)->first();
 
-    // 8 default + 2 custom = 10 groups.
     expect($family->attribute_groups)->toHaveCount(10);
 
     $keepGroup = $family->attribute_groups->where('code', 'keep_me')->first();
     $removeGroup = $family->attribute_groups->where('code', 'remove_me')->first();
 
-    // Build update payload from current state, then remove the 'remove_me' group.
     $updatePayload = buildGroupsPayloadFromFamily($family);
     unset($updatePayload[(string) $removeGroup->id]);
 
@@ -398,7 +389,6 @@ it('should remove a user-defined group when omitted from update payload', functi
     ])
         ->assertRedirectToRoute('admin.catalog.families.index');
 
-    // 10 - 1 removed = 9 groups.
     expect($family->fresh()->attribute_groups()->count())->toBe(9);
 
     $this->assertDatabaseMissing('attribute_groups', ['id' => $removeGroup->id]);
@@ -549,28 +539,26 @@ it('should dispatch events when deleting a family', function () {
 });
 
 it('should refuse to delete the default attribute family', function () {
-    // Arrange.
     $attributeFamily = AttributeFamily::query()
         ->where('code', AttributeFamily::DEFAULT_CODE)
         ->firstOrFail();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.families.delete', $attributeFamily->id))
-        ->assertStatus(400)
+        ->assertBadRequest()
         ->assertJsonPath('message', trans('admin::app.catalog.families.default-delete-error'));
 
     $this->assertDatabaseHas('attribute_families', ['id' => $attributeFamily->id]);
 });
 
 it('should still open the create family screen when the default family is missing', function () {
-    // Arrange.
     AttributeFamily::factory()->create();
 
-    AttributeFamily::query()->where('code', AttributeFamily::DEFAULT_CODE)->delete();
+    AttributeFamily::query()
+        ->where('code', AttributeFamily::DEFAULT_CODE)
+        ->update(['code' => fake()->unique()->lexify('family_??????????')]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.families.create'))

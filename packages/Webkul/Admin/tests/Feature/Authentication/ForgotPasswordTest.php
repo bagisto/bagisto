@@ -16,11 +16,18 @@ it('should return the forgot password page', function () {
         ->assertOk();
 });
 
+it('should redirect an authenticated admin away from the forgot password page', function () {
+    $this->loginAsAdmin();
+
+    get(route('admin.forget_password.create'))
+        ->assertRedirect(route('admin.dashboard.index'));
+});
+
 // ============================================================================
 // Send Reset Link
 // ============================================================================
 
-it('should send the reset password link', function () {
+it('should send the reset password link to the admin who asked for it', function () {
     Notification::fake();
 
     $admin = Admin::factory()->create();
@@ -28,17 +35,42 @@ it('should send the reset password link', function () {
     postJson(route('admin.forget_password.store'), [
         'email' => $admin->email,
     ])
-        ->assertRedirect(route('admin.forget_password.create'));
+        ->assertRedirect(route('admin.forget_password.create'))
+        ->assertSessionHas('success', trans('admin::app.users.forget-password.create.reset-link-sent'));
 
     $this->assertDatabaseHas('admin_password_resets', [
         'email' => $admin->email,
     ]);
 
     Notification::assertSentTo($admin, ResetPasswordNotification::class);
+
     Notification::assertCount(1);
 });
 
-it('should redirect back when email is missing', function () {
+it('should send nothing for an email no admin has', function () {
+    Notification::fake();
+
+    $email = fake()->unique()->safeEmail();
+
+    postJson(route('admin.forget_password.store'), [
+        'email' => $email,
+    ])
+        ->assertRedirect(route('admin.forget_password.create'))
+        ->assertSessionHasErrors('email');
+
+    $this->assertDatabaseMissing('admin_password_resets', [
+        'email' => $email,
+    ]);
+
+    Notification::assertNothingSent();
+});
+
+it('should send nothing when the email is missing', function () {
+    Notification::fake();
+
     postJson(route('admin.forget_password.store'))
-        ->assertRedirect();
+        ->assertRedirect()
+        ->assertSessionHas('error');
+
+    Notification::assertNothingSent();
 });

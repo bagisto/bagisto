@@ -1,10 +1,11 @@
 <?php
 
-namespace Webkul\Admin\Tests\Concerns;
+namespace Webkul\Product\Tests\Concerns;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductInventory;
@@ -52,10 +53,6 @@ trait ProductTestBench
      */
     protected static ?array $attributeMap = null;
 
-    // ========================================================================
-    // Factory-Based Helpers (For setup/validation/delete tests.)
-    // ========================================================================
-
     /**
      * Create a fully-indexed product of any type via factory.
      */
@@ -83,16 +80,12 @@ trait ProductTestBench
             )
             ->create();
 
-        // Sync the SKU attribute value to match the product's actual SKU.
         $this->syncSkuAttributeValue($product, $attributes);
 
-        // Sync unique_id for all attribute values.
         $this->syncUniqueIds($product);
 
-        // Assign product to the current channel.
         $product->channels()->sync([$channel->id]);
 
-        // Create inventory for stockable types.
         if (in_array($type, ['simple', 'virtual'])) {
             ProductInventory::factory()->create([
                 'product_id' => $product->id,
@@ -100,7 +93,6 @@ trait ProductTestBench
             ]);
         }
 
-        // Dispatch the event that triggers product_flat indexing.
         Event::dispatch('catalog.product.update.after', $product);
 
         return $product->fresh();
@@ -133,11 +125,9 @@ trait ProductTestBench
     {
         $channel = core()->getDefaultChannel();
 
-        // Create parent configurable product.
         $parent = Product::factory()->state(['type' => 'configurable'])->create();
         $parent->channels()->sync([$channel->id]);
 
-        // Create variant simple products and attach as children.
         foreach ($variantPrices as $price) {
             $variant = $this->createSimpleProduct(['price' => ['float_value' => $price]]);
             $variant->update(['parent_id' => $parent->id]);
@@ -189,7 +179,6 @@ trait ProductTestBench
         $parent = Product::factory()->state(['type' => 'bundle'])->create();
         $parent->channels()->sync([$channel->id]);
 
-        // Create a bundle option with its translation.
         $option = $parent->bundle_options()->create([
             'type' => 'select',
             'is_required' => 1,
@@ -216,6 +205,34 @@ trait ProductTestBench
     }
 
     /**
+     * Create a sellable product of the given type, with the variants, links or options the type needs.
+     */
+    public function createProductOfType(string $type): Product
+    {
+        return match ($type) {
+            'simple' => $this->createSimpleProduct(),
+            'virtual' => $this->createVirtualProduct(),
+            'downloadable' => $this->createDownloadableProduct(),
+            'configurable' => $this->createConfigurableProduct(),
+            'grouped' => $this->createGroupedProduct(),
+            'bundle' => $this->createBundleProduct(),
+            default => throw new \InvalidArgumentException("Unsupported product type: {$type}"),
+        };
+    }
+
+    /**
+     * Put the given quantity of a product in every inventory source it has, and reindex it.
+     */
+    public function setProductStock(Product $product, int $qty): Product
+    {
+        $product->inventories()->update(['qty' => $qty]);
+
+        Event::dispatch('catalog.product.update.after', $product);
+
+        return $product->refresh();
+    }
+
+    /**
      * Create a downloadable product with links via factory.
      */
     public function createDownloadableProduct(array $overrides = [], array $linkPrices = [10, 20]): Product
@@ -236,10 +253,6 @@ trait ProductTestBench
         return $product->fresh();
     }
 
-    // ========================================================================
-    // Route-Based Helpers (For real store + update flow verification.)
-    // ========================================================================
-
     /**
      * Create a simple product via POST store + PUT update endpoints.
      */
@@ -249,7 +262,6 @@ trait ProductTestBench
 
         $sku = fake()->uuid();
 
-        // Store the product skeleton via the controller.
         $this->postJson(route('admin.catalog.products.store'), [
             'type' => 'simple',
             'attribute_family_id' => 1,
@@ -258,7 +270,6 @@ trait ProductTestBench
 
         $product = Product::where('sku', $sku)->first();
 
-        // Update with all attribute data via the controller.
         $data = array_merge([
             'sku' => $sku,
             'url_key' => fake()->unique()->slug(),
@@ -344,21 +355,19 @@ trait ProductTestBench
 
         $sku = fake()->uuid();
 
-        // Store with super_attributes to trigger variant generation.
         $this->postJson(route('admin.catalog.products.store'), [
             'type' => 'configurable',
             'attribute_family_id' => 1,
             'sku' => $sku,
             'super_attributes' => [
-                'color' => [1, 2],
-                'size' => [6, 7],
+                'color' => $this->superAttributeOptionIds('color'),
+                'size' => $this->superAttributeOptionIds('size'),
             ],
         ])->assertOk();
 
         $product = Product::where('sku', $sku)->first();
         $product->load('variants');
 
-        // Build variant update data using the auto-generated variants.
         $variants = [];
 
         foreach ($product->variants as $variant) {
@@ -372,7 +381,6 @@ trait ProductTestBench
             ];
         }
 
-        // Update parent + variants via the controller.
         $this->putJson(route('admin.catalog.products.update', $product->id), [
             'sku' => $sku,
             'url_key' => fake()->unique()->slug(),
@@ -410,7 +418,6 @@ trait ProductTestBench
 
         $product = Product::where('sku', $sku)->first();
 
-        // Create simple products to associate.
         $simpleA = $this->createSimpleProduct();
         $simpleB = $this->createSimpleProduct();
 
@@ -463,7 +470,6 @@ trait ProductTestBench
 
         $product = Product::where('sku', $sku)->first();
 
-        // Create simple products for bundle options.
         $simpleA = $this->createSimpleProduct();
         $simpleB = $this->createSimpleProduct();
 
@@ -575,10 +581,6 @@ trait ProductTestBench
         return Product::find($product->id);
     }
 
-    // ========================================================================
-    // Internal Helpers
-    // ========================================================================
-
     /**
      * Build a single attribute value row for the Sequence factory state.
      */
@@ -609,7 +611,6 @@ trait ProductTestBench
      */
     protected function getDefaultAttributeValue(string $code, string $locale, string $channel, array $overrides): array
     {
-        // Allow overrides for specific attribute values.
         if (isset($overrides[$code])) {
             return is_array($overrides[$code]) ? $overrides[$code] : ['text_value' => $overrides[$code]];
         }
@@ -726,6 +727,20 @@ trait ProductTestBench
     }
 
     /**
+     * The ids of the first options of a configurable attribute, resolved by code rather than seeded.
+     */
+    protected function superAttributeOptionIds(string $code, int $count = 2): array
+    {
+        return AttributeOption::query()
+            ->where('attribute_id', $this->getAttributeMap()[$code]->id)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->limit($count)
+            ->pluck('id')
+            ->all();
+    }
+
+    /**
      * Get the attribute map keyed by code, cached for the test suite.
      */
     protected function getAttributeMap(): array
@@ -736,7 +751,6 @@ trait ProductTestBench
                 ->keyBy('code')
                 ->toArray();
 
-            // Convert to objects for easier access.
             static::$attributeMap = array_map(
                 fn ($attr) => (object) $attr,
                 static::$attributeMap

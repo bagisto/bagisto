@@ -2,7 +2,8 @@
 
 namespace Webkul\Shop\Tests\Concerns;
 
-use Webkul\Admin\Tests\Concerns\ProductTestBench;
+use Webkul\Product\Tests\Concerns\ProductTestBench;
+use Webkul\Sales\Tests\Concerns\OrderTestBench;
 
 trait ShopTestBench
 {
@@ -10,6 +11,7 @@ trait ShopTestBench
     use AuthHelpers;
     use CartHelpers;
     use CheckoutHelpers;
+    use OrderTestBench;
     use PricingHelpers;
     use ProductTestBench;
 }

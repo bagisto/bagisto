@@ -41,18 +41,11 @@ class GDPRController extends Controller
      */
     public function edit(int $id)
     {
-        try {
-            $request = $this->gdprDataRequestRepository->findOrFail($id);
+        $request = $this->gdprDataRequestRepository->findOrFail($id);
 
-            return new JsonResponse([
-                'data' => $request,
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse([
-                'message' => trans('admin::app.customers.gdpr.index.attribute-reason-error'),
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+        return new JsonResponse([
+            'data' => $request,
+        ]);
     }
 
     /**
@@ -83,9 +76,9 @@ class GDPRController extends Controller
      */
     public function delete(int $id)
     {
-        try {
-            $gdprRequest = $this->gdprDataRequestRepository->findOrFail($id);
+        $gdprRequest = $this->gdprDataRequestRepository->findOrFail($id);
 
+        try {
             $gdprRequest->delete();
 
             return new JsonResponse([

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -42,11 +43,15 @@ it('should return product listing via datagrid', function () {
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.catalog.products.index'), [
+    getJson(route('admin.catalog.products.index', [
+        'filters' => ['product_id' => [$product->id]],
+    ]), [
         'X-Requested-With' => 'XMLHttpRequest',
     ])
         ->assertOk()
-        ->assertJsonPath('records.0.product_id', $product->id);
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.product_id', $product->id)
+        ->assertJsonPath('records.0.sku', $product->sku);
 });
 
 it('should deny guest access to the product index page', function () {
@@ -63,26 +68,26 @@ it('should store a [type] product and redirect to edit', function (string $type)
 
     $sku = fake()->uuid();
 
-    $payload = [
+    $response = postJson(route('admin.catalog.products.store'), [
         'type' => $type,
         'attribute_family_id' => 1,
         'sku' => $sku,
-    ];
-
-    $response = postJson(route('admin.catalog.products.store'), $payload)->assertOk();
+    ])->assertOk();
 
     if ($type === 'configurable') {
-        // Configurable without super_attributes returns attribute options for
-        // the UI to render the variant configuration step.
         $response->assertJsonStructure(['data' => ['attributes']]);
-    } else {
-        $response->assertJsonStructure(['data' => ['redirect_url']]);
 
-        $this->assertDatabaseHas('products', [
-            'sku' => $sku,
-            'type' => $type,
-        ]);
+        $this->assertDatabaseMissing('products', ['sku' => $sku]);
+
+        return;
     }
+
+    $response->assertJsonStructure(['data' => ['redirect_url']]);
+
+    $this->assertDatabaseHas('products', [
+        'sku' => $sku,
+        'type' => $type,
+    ]);
 })->with('product_types');
 
 // ============================================================================
@@ -130,14 +135,14 @@ it('should dispatch create events when storing a [type] product', function (stri
         ->assertOk();
 
     if ($type === 'configurable') {
-        // Without super_attributes the configurable type returns attribute
-        // options without creating a product, so no events are dispatched.
         Event::assertNotDispatched('catalog.product.create.before');
         Event::assertNotDispatched('catalog.product.create.after');
-    } else {
-        Event::assertDispatched('catalog.product.create.before');
-        Event::assertDispatched('catalog.product.create.after');
+
+        return;
     }
+
+    Event::assertDispatched('catalog.product.create.before');
+    Event::assertDispatched('catalog.product.create.after');
 })->with('product_types');
 
 // ============================================================================
@@ -193,6 +198,102 @@ it('should copy an existing product', function () {
     expect($copiedProduct->sku)->toStartWith('temporary-sku-');
 });
 
+it('should copy the existing product with customizable options', function () {
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $customizableOption = $product->customizable_options()->create([
+        'type' => 'select',
+        'is_required' => 1,
+        'sort_order' => 1,
+        'label' => 'Test Option Label',
+    ]);
+
+    $customizableOption->customizable_option_prices()->create([
+        'label' => 'Test Value Label',
+        'price' => 10.00,
+        'sort_order' => 1,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.copy', $product->id))
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.catalog.products.product-copied'));
+
+    $copiedProduct = Product::latest('id')->first();
+
+    expect($copiedProduct->customizable_options)->toHaveCount(1);
+
+    $copiedCustomizableOption = $copiedProduct->customizable_options->first();
+    expect($copiedCustomizableOption->type)->toBe('select');
+    expect($copiedCustomizableOption->is_required)->toBeTrue();
+    expect($copiedCustomizableOption->label)->toBe('Test Option Label');
+
+    expect($copiedCustomizableOption->customizable_option_prices)->toHaveCount(1);
+
+    $copiedPrice = $copiedCustomizableOption->customizable_option_prices->first();
+    expect($copiedPrice->label)->toBe('Test Value Label');
+    expect($copiedPrice->price)->toEqual(10.00);
+});
+
+it('should copy the download links and samples of a downloadable product', function () {
+    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
+
+    $product->downloadable_samples()->create([
+        'type' => 'url',
+        'url' => 'https://example.com/sample.pdf',
+        'sort_order' => 1,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.copy', $product->id))->assertOk();
+
+    $copiedProduct = Product::latest('id')->first();
+
+    expect($copiedProduct->downloadable_links()->count())->toBe($product->downloadable_links()->count())
+        ->and($copiedProduct->downloadable_samples()->count())->toBe($product->downloadable_samples()->count());
+
+    expect($copiedProduct->downloadable_links->pluck('title')->all())
+        ->toBe($product->downloadable_links->pluck('title')->all());
+});
+
+it('should copy the booking settings of a booking product', function () {
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    Product::query()->where('id', $product->id)->update(['type' => 'booking']);
+
+    $product->refresh();
+
+    $bookingProduct = BookingProduct::query()->create([
+        'type' => 'default',
+        'qty' => 5,
+        'location' => 'Studio One',
+        'show_location' => 1,
+        'product_id' => $product->id,
+    ]);
+
+    $bookingProduct->default_slot()->create([
+        'booking_type' => 'many',
+        'duration' => 60,
+        'break_time' => 15,
+        'slots' => [['day' => 0, 'from' => '09:00', 'to' => '17:00']],
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.copy', $product->id))->assertOk();
+
+    $copiedBooking = Product::latest('id')->first()->booking_products()->first();
+
+    expect($copiedBooking)->not->toBeNull()
+        ->and($copiedBooking->type)->toBe('default')
+        ->and($copiedBooking->location)->toBe('Studio One')
+        ->and($copiedBooking->default_slot)->not->toBeNull()
+        ->and($copiedBooking->default_slot->duration)->toBe(60)
+        ->and($copiedBooking->default_slot->slots)->toBe($bookingProduct->default_slot->slots);
+});
+
 // ============================================================================
 // Destroy
 // ============================================================================
@@ -207,6 +308,8 @@ it('should delete a product', function () {
         ->assertJsonPath('message', trans('admin::app.catalog.products.delete-success'));
 
     $this->assertDatabaseMissing('products', ['id' => $product->id]);
+
+    $this->assertDatabaseMissing('product_flat', ['product_id' => $product->id]);
 });
 
 it('should return error when deleting a non-existent product', function () {
@@ -241,6 +344,8 @@ it('should mass delete products', function () {
         $this->createSimpleProduct(),
     ]);
 
+    $survivor = $this->createSimpleProduct();
+
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.mass_delete'), [
@@ -251,7 +356,27 @@ it('should mass delete products', function () {
 
     foreach ($products as $product) {
         $this->assertDatabaseMissing('products', ['id' => $product->id]);
+
+        $this->assertDatabaseMissing('product_flat', ['product_id' => $product->id]);
+
+        $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $product->id]);
     }
+
+    $this->assertDatabaseHas('products', ['id' => $survivor->id]);
+});
+
+it('should skip the products already gone in a mass delete', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.mass_delete'), [
+        'indices' => [999999, $product->id],
+    ])
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-delete-success'));
+
+    $this->assertDatabaseMissing('products', ['id' => $product->id]);
 });
 
 it('should fail mass delete validation when indices are missing', function () {
@@ -268,9 +393,13 @@ it('should fail mass delete validation when indices are missing', function () {
 
 it('should mass update product status to active', function () {
     $products = collect([
-        $this->createSimpleProduct(),
-        $this->createSimpleProduct(),
+        $this->createSimpleProduct(['status' => ['boolean_value' => false, 'channel' => core()->getDefaultChannelCode()]]),
+        $this->createSimpleProduct(['status' => ['boolean_value' => false, 'channel' => core()->getDefaultChannelCode()]]),
     ]);
+
+    foreach ($products as $product) {
+        expect((bool) ProductFlat::query()->where('product_id', $product->id)->value('status'))->toBeFalse();
+    }
 
     $this->loginAsAdmin();
 
@@ -280,6 +409,11 @@ it('should mass update product status to active', function () {
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-update-success'));
+
+    foreach ($products as $product) {
+        expect((bool) $product->fresh()->status)->toBeTrue()
+            ->and((bool) ProductFlat::query()->where('product_id', $product->id)->value('status'))->toBeTrue();
+    }
 });
 
 it('should mass update product status to inactive', function () {
@@ -287,6 +421,8 @@ it('should mass update product status to inactive', function () {
         $this->createSimpleProduct(),
         $this->createSimpleProduct(),
     ]);
+
+    $untouched = $this->createSimpleProduct();
 
     $this->loginAsAdmin();
 
@@ -296,6 +432,13 @@ it('should mass update product status to inactive', function () {
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-update-success'));
+
+    foreach ($products as $product) {
+        expect((bool) $product->fresh()->status)->toBeFalse()
+            ->and((bool) ProductFlat::query()->where('product_id', $product->id)->value('status'))->toBeFalse();
+    }
+
+    expect((bool) ProductFlat::query()->where('product_id', $untouched->id)->value('status'))->toBeTrue();
 });
 
 it('should fail mass update validation when indices or value are missing', function () {
@@ -330,111 +473,4 @@ it('should return empty results for empty search query', function () {
     get(route('admin.catalog.products.search'))
         ->assertOk()
         ->assertJsonPath('data', []);
-});
-
-it('should copy the existing product with customizable options', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    // Create a customizable option for the product
-    $customizableOption = $product->customizable_options()->create([
-        'type' => 'select',
-        'is_required' => 1,
-        'sort_order' => 1,
-        'label' => 'Test Option Label',
-    ]);
-
-    // Create a price/value for the customizable option
-    $customizableOption->customizable_option_prices()->create([
-        'label' => 'Test Value Label',
-        'price' => 10.00,
-        'sort_order' => 1,
-    ]);
-
-    // Act.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.catalog.products.copy', $product->id))
-        ->assertOk()
-        ->assertJsonPath('message', trans('admin::app.catalog.products.product-copied'));
-
-    // Get the newly created product (last one).
-    $copiedProduct = Product::latest('id')->first();
-
-    // Assert the copied product has customizable options cloned
-    expect($copiedProduct->customizable_options)->toHaveCount(1);
-
-    $copiedCustomizableOption = $copiedProduct->customizable_options->first();
-    expect($copiedCustomizableOption->type)->toBe('select');
-    expect($copiedCustomizableOption->is_required)->toBeTrue();
-    expect($copiedCustomizableOption->label)->toBe('Test Option Label');
-
-    // Assert the customizable option price/value is cloned
-    expect($copiedCustomizableOption->customizable_option_prices)->toHaveCount(1);
-
-    $copiedPrice = $copiedCustomizableOption->customizable_option_prices->first();
-    expect($copiedPrice->label)->toBe('Test Value Label');
-    expect($copiedPrice->price)->toEqual(10.00);
-});
-
-it('should copy the download links and samples of a downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
-
-    $product->downloadable_samples()->create([
-        'type' => 'url',
-        'url' => 'https://example.com/sample.pdf',
-        'sort_order' => 1,
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.catalog.products.copy', $product->id))->assertOk();
-
-    $copiedProduct = Product::latest('id')->first();
-
-    expect($copiedProduct->downloadable_links()->count())->toBe($product->downloadable_links()->count())
-        ->and($copiedProduct->downloadable_samples()->count())->toBe($product->downloadable_samples()->count());
-
-    expect($copiedProduct->downloadable_links->pluck('title')->all())
-        ->toBe($product->downloadable_links->pluck('title')->all());
-});
-
-it('should copy the booking settings of a booking product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    Product::query()->where('id', $product->id)->update(['type' => 'booking']);
-
-    $product->refresh();
-
-    $bookingProduct = BookingProduct::query()->create([
-        'type' => 'default',
-        'qty' => 5,
-        'location' => 'Studio One',
-        'show_location' => 1,
-        'product_id' => $product->id,
-    ]);
-
-    $bookingProduct->default_slot()->create([
-        'booking_type' => 'many',
-        'duration' => 60,
-        'break_time' => 15,
-        'slots' => [['day' => 0, 'from' => '09:00', 'to' => '17:00']],
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.catalog.products.copy', $product->id))->assertOk();
-
-    $copiedBooking = Product::latest('id')->first()->booking_products()->first();
-
-    expect($copiedBooking)->not->toBeNull()
-        ->and($copiedBooking->type)->toBe('default')
-        ->and($copiedBooking->location)->toBe('Studio One')
-        ->and($copiedBooking->default_slot)->not->toBeNull()
-        ->and($copiedBooking->default_slot->duration)->toBe(60)
-        ->and($copiedBooking->default_slot->slots)->toBe($bookingProduct->default_slot->slots);
 });

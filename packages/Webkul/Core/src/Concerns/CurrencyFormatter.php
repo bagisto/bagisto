@@ -56,23 +56,21 @@ trait CurrencyFormatter
 
         $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formatter->format($price));
 
+        $separators = [];
+
         if (! empty($currency->group_separator)) {
-            $formattedCurrency = str_replace(
-                $formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL),
-                $currency->group_separator,
-                $formattedCurrency
-            );
+            $separators[$formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL)] = $currency->group_separator;
         }
 
         if (
             $currency->decimal > 0
             && ! empty($currency->decimal_separator)
         ) {
-            $formattedCurrency = str_replace(
-                $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
-                $currency->decimal_separator,
-                $formattedCurrency
-            );
+            $separators[$formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL)] = $currency->decimal_separator;
+        }
+
+        if (! empty($separators)) {
+            $formattedCurrency = strtr($formattedCurrency, $separators);
         }
 
         $symbol = ! empty($currency->symbol)

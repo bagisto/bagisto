@@ -5,7 +5,24 @@ use Webkul\GDPR\Models\GDPRDataRequest;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\putJson;
+
+/**
+ * A pending GDPR request of the given type, raised by a fresh customer.
+ */
+function pendingGdprRequest(string $type = 'delete'): GDPRDataRequest
+{
+    $customer = Customer::factory()->create();
+
+    return GDPRDataRequest::create([
+        'customer_id' => $customer->id,
+        'email' => $customer->email,
+        'status' => 'pending',
+        'type' => $type,
+        'message' => 'Please '.$type.' my data.',
+    ]);
+}
 
 // ============================================================================
 // Index
@@ -29,30 +46,22 @@ it('should deny guest access to the GDPR requests index page', function () {
 // ============================================================================
 
 it('should return GDPR request details', function () {
-    $customer = Customer::factory()->create();
-
-    $gdprRequest = GDPRDataRequest::create([
-        'customer_id' => $customer->id,
-        'email' => $customer->email,
-        'status' => 'pending',
-        'type' => 'delete',
-        'message' => 'Please delete my data.',
-    ]);
+    $gdprRequest = pendingGdprRequest();
 
     $this->loginAsAdmin();
 
-    get(route('admin.customers.gdpr.edit', $gdprRequest->id))
+    getJson(route('admin.customers.gdpr.edit', $gdprRequest->id))
         ->assertOk()
         ->assertJsonPath('data.id', $gdprRequest->id)
         ->assertJsonPath('data.status', 'pending')
         ->assertJsonPath('data.type', 'delete');
 });
 
-it('should return 500 for a non-existent GDPR request', function () {
+it('should return 404 for a GDPR request that does not exist', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.customers.gdpr.edit', 99999))
-        ->assertServerError();
+    getJson(route('admin.customers.gdpr.edit', 999999))
+        ->assertNotFound();
 });
 
 // ============================================================================
@@ -60,15 +69,7 @@ it('should return 500 for a non-existent GDPR request', function () {
 // ============================================================================
 
 it('should update a GDPR request status', function () {
-    $customer = Customer::factory()->create();
-
-    $gdprRequest = GDPRDataRequest::create([
-        'customer_id' => $customer->id,
-        'email' => $customer->email,
-        'status' => 'pending',
-        'type' => 'delete',
-        'message' => 'Delete my account.',
-    ]);
+    $gdprRequest = pendingGdprRequest();
 
     $this->loginAsAdmin();
 
@@ -89,15 +90,7 @@ it('should update a GDPR request status', function () {
 // ============================================================================
 
 it('should delete a GDPR request', function () {
-    $customer = Customer::factory()->create();
-
-    $gdprRequest = GDPRDataRequest::create([
-        'customer_id' => $customer->id,
-        'email' => $customer->email,
-        'status' => 'pending',
-        'type' => 'update',
-        'message' => 'Update my data.',
-    ]);
+    $gdprRequest = pendingGdprRequest('update');
 
     $this->loginAsAdmin();
 
@@ -108,9 +101,9 @@ it('should delete a GDPR request', function () {
     $this->assertDatabaseMissing('gdpr_data_request', ['id' => $gdprRequest->id]);
 });
 
-it('should return 500 when deleting a non-existent GDPR request', function () {
+it('should return 404 when deleting a GDPR request that does not exist', function () {
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.customers.gdpr.delete', 99999))
-        ->assertServerError();
+    deleteJson(route('admin.customers.gdpr.delete', 999999))
+        ->assertNotFound();
 });

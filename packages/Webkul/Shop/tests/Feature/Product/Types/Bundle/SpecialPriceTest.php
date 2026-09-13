@@ -1,57 +1,19 @@
 <?php
 
-// ============================================================================
-// Active Special Price
-// ============================================================================
-
-it('should apply special price to bundle option product when within date range', function () {
+it('should charge an option product of a bundle product at its special price only while the special price is in force', function (?int $fromInDays, ?int $toInDays, float $expectedPrice) {
     $product = $this->createBundleProduct([1000]);
 
-    $option = $product->bundle_options->first();
-    $optionSimple = $option->bundle_option_products->first()->product;
-
-    $this->setSpecialPriceOnProduct($optionSimple, 700, now()->subDay()->format('Y-m-d'), now()->addMonth()->format('Y-m-d'));
+    $this->setSpecialPriceInForce($product->bundle_options->first()->bundle_option_products->first()->product, 800, $fromInDays, $toInDays);
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 700);
-});
+    $this->assertCartItemPrice($response, $expectedPrice);
+})->with('special price windows');
 
-it('should use regular price when bundle option product special price has expired', function () {
-    $product = $this->createBundleProduct([1000]);
+it('should list a bundle product at the special price of its cheapest option product', function () {
+    $product = $this->createBundleProduct([1000, 1200]);
 
-    $option = $product->bundle_options->first();
-    $optionSimple = $option->bundle_option_products->first()->product;
+    $this->setSpecialPriceOnProduct($product->bundle_options->first()->bundle_option_products->first()->product, 750);
 
-    $this->setSpecialPriceOnProduct($optionSimple, 700, now()->subMonth()->format('Y-m-d'), now()->subDay()->format('Y-m-d'));
-
-    $response = $this->addBundleProductToCart($product)->assertOk();
-
-    $this->assertCartItemPrice($response, 1000);
-});
-
-it('should use regular price when bundle option product special price has not started', function () {
-    $product = $this->createBundleProduct([1000]);
-
-    $option = $product->bundle_options->first();
-    $optionSimple = $option->bundle_option_products->first()->product;
-
-    $this->setSpecialPriceOnProduct($optionSimple, 700, now()->addDay()->format('Y-m-d'), now()->addMonth()->format('Y-m-d'));
-
-    $response = $this->addBundleProductToCart($product)->assertOk();
-
-    $this->assertCartItemPrice($response, 1000);
-});
-
-it('should apply special price to bundle option product when no date range is set', function () {
-    $product = $this->createBundleProduct([1000]);
-
-    $option = $product->bundle_options->first();
-    $optionSimple = $option->bundle_option_products->first()->product;
-
-    $this->setSpecialPriceOnProduct($optionSimple, 750);
-
-    $response = $this->addBundleProductToCart($product)->assertOk();
-
-    $this->assertCartItemPrice($response, 750);
+    expect($this->listedPrice($product))->toBePrice(750);
 });

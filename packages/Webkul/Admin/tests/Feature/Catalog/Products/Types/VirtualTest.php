@@ -110,7 +110,6 @@ it('should persist price as float attribute value after store and update', funct
 it('should not create weight attribute value for a virtual product', function () {
     $product = $this->storeAndUpdateVirtualProduct();
 
-    // Virtual products skip weight, length, width, height, and depth.
     $weightAttr = $product->attribute_values
         ->first(fn ($av) => $av->attribute->code === 'weight');
 
@@ -128,13 +127,11 @@ it('should populate product_flat with all indexed columns after store and update
 
     expect($flat)->not->toBeNull();
 
-    // Core fields
     expect($flat->sku)->toBe($product->sku);
     expect($flat->type)->toBe('virtual');
     expect($flat->product_id)->toBe($product->id);
     expect($flat->attribute_family_id)->toBe(1);
 
-    // Text fields indexed from attribute values
     expect($flat->name)->toBe('Test Virtual Product');
     expect($flat->url_key)->not->toBeEmpty();
     expect($flat->short_description)->toBe('A short description for the virtual product.');
@@ -144,19 +141,15 @@ it('should populate product_flat with all indexed columns after store and update
     expect($flat->meta_description)->toBe('Virtual meta description for SEO.');
     expect($flat->product_number)->not->toBeEmpty();
 
-    // Numeric fields
     expect((float) $flat->price)->toBe(149.99);
 
-    // Virtual products do not have weight in product_flat.
     expect($flat->weight)->toBeNull();
 
-    // Boolean fields
     expect($flat->status)->toBeTruthy();
     expect($flat->new)->toBeTruthy();
     expect($flat->featured)->toBeTruthy();
     expect($flat->visible_individually)->toBeTruthy();
 
-    // Locale and channel
     expect($flat->locale)->toBe(app()->getLocale());
     expect($flat->channel)->toBe(core()->getDefaultChannelCode());
 });
@@ -200,7 +193,6 @@ it('should create price indices after store and update', function () {
 
     $priceIndices = ProductPriceIndex::where('product_id', $product->id)->get();
 
-    // Price indices are created per customer group (guest + seeded groups).
     expect($priceIndices->count())->toBeGreaterThanOrEqual(1);
 
     $firstIndex = $priceIndices->first();
@@ -224,10 +216,8 @@ it('should create inventory index after store and update', function () {
 // ============================================================================
 
 it('should update a virtual product and reflect changes in all related tables', function () {
-    // Create the product via the real store + update flow.
     $product = $this->storeAndUpdateVirtualProduct();
 
-    // Update again with different values to verify changes propagate.
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku' => $product->sku,
         'url_key' => $product->url_key,
@@ -245,7 +235,6 @@ it('should update a virtual product and reflect changes in all related tables', 
     ])
         ->assertRedirect(route('admin.catalog.products.index'));
 
-    // Verify product_flat reflects the changed values.
     $flat = ProductFlat::where('product_id', $product->id)->first();
 
     expect($flat->name)->toBe('Changed Virtual Name');
@@ -254,7 +243,6 @@ it('should update a virtual product and reflect changes in all related tables', 
     expect($flat->new)->toBeFalsy();
     expect($flat->featured)->toBeFalsy();
 
-    // Verify attribute values are updated.
     $updatedProduct = Product::with('attribute_values.attribute')->find($product->id);
 
     $nameAttr = $updatedProduct->attribute_values->first(fn ($av) => $av->attribute->code === 'name');
@@ -273,7 +261,6 @@ it('should fail validation when required fields are missing on virtual product u
 
     $this->loginAsAdmin();
 
-    // Virtual products do not require weight.
     putJson(route('admin.catalog.products.update', $product->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('sku')

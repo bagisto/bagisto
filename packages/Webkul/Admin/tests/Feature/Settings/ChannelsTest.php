@@ -169,11 +169,6 @@ it('should fail validation when required fields are missing on update', function
 it('should save seo for a non-default locale via the locale switcher', function () {
     $channel = Channel::factory()->create();
 
-    /**
-     * Pick a locale that is not the admin's default locale, so we can verify
-     * the per-locale switcher actually targets the chosen translation row
-     * and not just the default locale.
-     */
     $targetLocale = Locale::factory()->create();
 
     $this->loginAsAdmin();
@@ -223,4 +218,23 @@ it('should delete a channel', function () {
         ->assertSeeText(trans('admin::app.settings.channels.index.delete-success'));
 
     $this->assertDatabaseMissing('channels', ['id' => $channel->id]);
+});
+
+it('should not delete the default channel', function () {
+    $channel = core()->getDefaultChannel();
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.settings.channels.delete', $channel->id))
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.settings.channels.index.last-delete-error'));
+
+    $this->assertDatabaseHas('channels', ['id' => $channel->id]);
+});
+
+it('should return 404 when deleting a channel that does not exist', function () {
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.settings.channels.delete', 999999))
+        ->assertNotFound();
 });

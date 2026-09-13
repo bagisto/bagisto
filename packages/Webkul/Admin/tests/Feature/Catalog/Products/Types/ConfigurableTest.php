@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
@@ -10,6 +11,14 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
+
+/**
+ * A configurable attribute looked up by its code rather than by a seeded id.
+ */
+function configurableAttribute(string $code): Attribute
+{
+    return Attribute::query()->where('code', $code)->firstOrFail();
+}
 
 // ============================================================================
 // Store
@@ -26,7 +35,6 @@ it('should return configurable attributes when storing without super_attributes'
         'sku' => fake()->uuid(),
     ])->assertOk();
 
-    // Verify all configurable attributes and their options are returned.
     foreach ($attributes as $key => $attribute) {
         $response
             ->assertJsonPath("data.attributes.{$key}.id", $attribute->id)
@@ -43,16 +51,19 @@ it('should return configurable attributes when storing without super_attributes'
 it('should create a configurable product with variants when super_attributes are provided', function () {
     $this->loginAsAdmin();
 
+    $color = configurableAttribute('color');
+
+    $size = configurableAttribute('size');
+
     $sku = fake()->uuid();
 
-    // 2 colors x 2 sizes = 4 variants.
     postJson(route('admin.catalog.products.store'), [
         'type' => 'configurable',
         'attribute_family_id' => 1,
         'sku' => $sku,
         'super_attributes' => [
-            'color' => [1, 2],
-            'size' => [6, 7],
+            'color' => $color->options->take(2)->pluck('id')->all(),
+            'size' => $size->options->take(2)->pluck('id')->all(),
         ],
     ])->assertOk();
 
@@ -62,18 +73,16 @@ it('should create a configurable product with variants when super_attributes are
     expect($product->type)->toBe('configurable');
     expect($product->variants)->toHaveCount(4);
 
-    // Verify super_attributes pivot table.
     $this->assertDatabaseHas('product_super_attributes', [
         'product_id' => $product->id,
-        'attribute_id' => 23,
+        'attribute_id' => $color->id,
     ]);
 
     $this->assertDatabaseHas('product_super_attributes', [
         'product_id' => $product->id,
-        'attribute_id' => 24,
+        'attribute_id' => $size->id,
     ]);
 
-    // Verify each variant is a simple product linked to the parent.
     foreach ($product->variants as $variant) {
         expect($variant->type)->toBe('simple');
         expect($variant->parent_id)->toBe($product->id);
@@ -106,26 +115,21 @@ it('should populate parent product_flat after store and update', function () {
 
     expect($flat)->not->toBeNull();
 
-    // Core fields
     expect($flat->sku)->toBe($product->sku);
     expect($flat->type)->toBe('configurable');
     expect($flat->attribute_family_id)->toBe(1);
 
-    // Text fields
     expect($flat->name)->toBe('Test Configurable Product');
     expect($flat->short_description)->toBe('A short description for the configurable product.');
     expect($flat->description)->toBe('A full description for the configurable product.');
     expect($flat->url_key)->not->toBeEmpty();
 
-    // Configurable parent skips price and weight.
     expect($flat->price)->toBeNull();
     expect($flat->weight)->toBeNull();
 
-    // Boolean fields
     expect($flat->status)->toBeTruthy();
     expect($flat->visible_individually)->toBeTruthy();
 
-    // Locale and channel
     expect($flat->locale)->toBe(app()->getLocale());
     expect($flat->channel)->toBe(core()->getDefaultChannelCode());
 });
@@ -143,7 +147,6 @@ it('should populate variant product_flat entries after store and update', functi
         expect((float) $flat->price)->toBeGreaterThan(0);
         expect((float) $flat->weight)->toBeGreaterThan(0);
 
-        // Verify the parent-child relationship in the products table.
         expect($variant->parent_id)->toBe($product->id);
     }
 });
@@ -155,17 +158,19 @@ it('should populate variant product_flat entries after store and update', functi
 it('should store super attribute values on each variant', function () {
     $product = $this->storeAndUpdateConfigurableProduct();
 
+    $colorId = configurableAttribute('color')->id;
+
+    $sizeId = configurableAttribute('size')->id;
+
     foreach ($product->variants as $variant) {
-        // Each variant should have a color attribute value (attribute_id=23).
         $colorAttr = $variant->attribute_values
-            ->first(fn ($av) => $av->attribute_id === 23);
+            ->first(fn ($av) => $av->attribute_id === $colorId);
 
         expect($colorAttr)->not->toBeNull("Variant {$variant->id} should have a color attribute value.");
         expect($colorAttr->integer_value)->not->toBeNull();
 
-        // Each variant should have a size attribute value (attribute_id=24).
         $sizeAttr = $variant->attribute_values
-            ->first(fn ($av) => $av->attribute_id === 24);
+            ->first(fn ($av) => $av->attribute_id === $sizeId);
 
         expect($sizeAttr)->not->toBeNull("Variant {$variant->id} should have a size attribute value.");
         expect($sizeAttr->integer_value)->not->toBeNull();
@@ -186,7 +191,6 @@ it('should create inventory for each variant after update', function () {
         ]);
     }
 
-    // Parent configurable product should not have its own inventory.
     $this->assertDatabaseMissing('product_inventories', [
         'product_id' => $product->id,
     ]);
@@ -222,7 +226,6 @@ it('should update variant values and reflect changes in product_flat', function 
 
     $variant = $product->variants->first();
 
-    // Update the variant with specific known values.
     $variants = [
         $variant->id => [
             'sku' => $variant->sku,
@@ -234,7 +237,6 @@ it('should update variant values and reflect changes in product_flat', function 
         ],
     ];
 
-    // Include all other variants unchanged to prevent deletion.
     foreach ($product->variants->skip(1) as $otherVariant) {
         $variants[$otherVariant->id] = [
             'sku' => $otherVariant->sku,
@@ -260,7 +262,6 @@ it('should update variant values and reflect changes in product_flat', function 
         'variants' => $variants,
     ])->assertRedirect(route('admin.catalog.products.index'));
 
-    // Verify the updated variant in product_flat.
     $flat = ProductFlat::where('product_id', $variant->id)->first();
 
     expect($flat->name)->toBe('Updated Variant Name');
@@ -277,7 +278,6 @@ it('should fail validation when required fields are missing on configurable prod
 
     $product = $this->createConfigurableProduct();
 
-    // Configurable parent does not require price or weight.
     putJson(route('admin.catalog.products.update', $product->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('sku')
@@ -320,13 +320,11 @@ it('should delete a configurable product and all its variants', function () {
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.delete-success'));
 
-    // Parent product cleaned up.
     $this->assertDatabaseMissing('products', ['id' => $productId]);
     $this->assertDatabaseMissing('product_flat', ['product_id' => $productId]);
     $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $productId]);
     $this->assertDatabaseMissing('product_super_attributes', ['product_id' => $productId]);
 
-    // All variants cleaned up.
     foreach ($variantIds as $variantId) {
         $this->assertDatabaseMissing('products', ['id' => $variantId]);
         $this->assertDatabaseMissing('product_flat', ['product_id' => $variantId]);
@@ -334,6 +332,10 @@ it('should delete a configurable product and all its variants', function () {
         $this->assertDatabaseMissing('product_inventories', ['product_id' => $variantId]);
     }
 });
+
+// ============================================================================
+// Variations
+// ============================================================================
 
 it('should give the admin panel the variations of a configurable product without the storefront image urls', function () {
     $product = (new ProductFaker)->getConfigurableProductFactory()->create();

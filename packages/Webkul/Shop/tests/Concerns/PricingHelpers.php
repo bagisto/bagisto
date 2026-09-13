@@ -13,11 +13,7 @@ use Webkul\Product\Models\ProductCustomerGroupPrice;
 trait PricingHelpers
 {
     /**
-     * Set a special price on a product and re-index.
-     *
-     * Used for composite types (configurable variants, grouped associated
-     * products, bundle option products) where the special price must be
-     * set on the child product after creation.
+     * Set a special price on a product, optionally bounded by the given dates, and re-index it.
      */
     public function setSpecialPriceOnProduct(Product $product, float $price, ?string $from = null, ?string $to = null): void
     {
@@ -43,19 +39,42 @@ trait PricingHelpers
     }
 
     /**
-     * Set a customer group price on a product and re-index.
+     * Set a special price on a product that is in force between the given offsets in days from today.
      */
-    public function setCustomerGroupPrice(Product $product, int $customerGroupId, string $valueType, float $value, int $qty = 1): void
+    public function setSpecialPriceInForce(Product $product, float $price, ?int $fromInDays, ?int $toInDays): void
     {
-        ProductCustomerGroupPrice::factory()->create([
-            'qty' => $qty,
-            'value_type' => $valueType,
-            'value' => $value,
-            'product_id' => $product->id,
-            'customer_group_id' => $customerGroupId,
-        ]);
+        $this->setSpecialPriceOnProduct(
+            $product,
+            $price,
+            $fromInDays === null ? null : now()->addDays($fromInDays)->format('Y-m-d'),
+            $toInDays === null ? null : now()->addDays($toInDays)->format('Y-m-d'),
+        );
+    }
+
+    /**
+     * Set a customer group price on a product for each of the given groups and re-index it.
+     */
+    public function setCustomerGroupPrice(Product $product, array|int $customerGroupIds, string $valueType, float $value, int $qty = 1): void
+    {
+        foreach ((array) $customerGroupIds as $customerGroupId) {
+            ProductCustomerGroupPrice::factory()->create([
+                'qty' => $qty,
+                'value_type' => $valueType,
+                'value' => $value,
+                'product_id' => $product->id,
+                'customer_group_id' => $customerGroupId,
+            ]);
+        }
 
         Event::dispatch('catalog.product.update.after', $product);
+    }
+
+    /**
+     * The price a product is currently listed at for the customer group of the current shopper.
+     */
+    public function listedPrice(Product $product): float
+    {
+        return (float) $product->fresh()->getTypeInstance()->getMinimalPrice();
     }
 
     /**

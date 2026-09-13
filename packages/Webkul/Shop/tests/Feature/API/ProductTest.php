@@ -8,11 +8,12 @@ use function Pest\Laravel\getJson;
 // Product Listing API
 // ============================================================================
 
-it('should return new products listing', function () {
-    $this->createSimpleProduct();
+it('should list only new products when asked for them', function () {
+    $product = $this->createSimpleProduct();
 
-    $response = getJson(route('shop.api.products.index', ['new' => 1]))
+    $response = getJson(route('shop.api.products.index', ['new' => 1, 'sort' => 'created_at-desc']))
         ->assertOk()
+        ->assertJsonPath('data.0.id', $product->id)
         ->collect();
 
     expect($response['data'])->each(function (Expectation $product) {
@@ -20,11 +21,12 @@ it('should return new products listing', function () {
     });
 });
 
-it('should return featured products listing', function () {
-    $this->createSimpleProduct();
+it('should list only featured products when asked for them', function () {
+    $product = $this->createSimpleProduct();
 
-    $response = getJson(route('shop.api.products.index', ['featured' => 1]))
+    $response = getJson(route('shop.api.products.index', ['featured' => 1, 'sort' => 'created_at-desc']))
         ->assertOk()
+        ->assertJsonPath('data.0.id', $product->id)
         ->collect();
 
     expect($response['data'])->each(function (Expectation $product) {
@@ -32,11 +34,22 @@ it('should return featured products listing', function () {
     });
 });
 
-it('should return all products listing', function () {
+it('should list the newest product first when sorted by creation date', function () {
     $product = $this->createSimpleProduct();
 
-    getJson(route('shop.api.products.index'))
+    getJson(route('shop.api.products.index', ['sort' => 'created_at-desc']))
         ->assertOk()
         ->assertJsonIsArray('data')
-        ->assertJsonFragment(['id' => $product->id]);
+        ->assertJsonPath('data.0.id', $product->id)
+        ->assertJsonPath('data.0.sku', $product->sku);
+});
+
+it('should leave inactive products out of the listing', function () {
+    $product = $this->createSimpleProduct([
+        'status' => ['boolean_value' => false, 'channel' => core()->getCurrentChannelCode()],
+    ]);
+
+    getJson(route('shop.api.products.index', ['sort' => 'created_at-desc']))
+        ->assertOk()
+        ->assertJsonMissing(['id' => $product->id]);
 });

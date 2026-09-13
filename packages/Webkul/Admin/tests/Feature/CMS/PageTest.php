@@ -126,7 +126,6 @@ it('should update an existing CMS page', function () {
 
     $this->loginAsAdmin();
 
-    // Create the page via the store route so all listeners fire properly.
     postJson(route('admin.cms.store'), [
         'page_title' => 'Original Title',
         'url_key' => $originalSlug = fake()->unique()->slug(),

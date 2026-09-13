@@ -58,7 +58,7 @@ it('should store a new customer group', function () {
     $this->assertDatabaseHas('customer_groups', [
         'code' => $code,
         'name' => $name,
-        'is_user_defined' => 1,
+        'is_user_defined' => true,
     ]);
 });
 
@@ -223,7 +223,6 @@ it('should not delete a default customer group', function () {
 it('should not delete a customer group with associated customers', function () {
     $group = CustomerGroup::factory()->create(['is_user_defined' => true]);
 
-    // Associate a customer with this group.
     Customer::factory()->create(['customer_group_id' => $group->id]);
 
     $this->loginAsAdmin();

@@ -1,86 +1,37 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
+it('should apply a fixed customer group price to a virtual product', function (array $priceGroups, ?int $customerGroupId) {
+    $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-// ============================================================================
-// Fixed Price Type
-// ============================================================================
+    $this->setCustomerGroupPrice($product, $priceGroups, 'fixed', 700);
 
-it('should apply fixed group price for guest on virtual product', function () {
-    $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
-
-    $this->setCustomerGroupPrice($product, 1, 'fixed', 350);
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
-    $this->assertCartItemPrice($response, 350);
-});
+    $this->assertCartItemPrice($response, 700);
+})->with('customer groups');
 
-it('should apply fixed group price for general customer on virtual product', function () {
-    $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
+it('should apply a percentage customer group discount to a virtual product', function (array $priceGroups, ?int $customerGroupId) {
+    $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-    $this->setCustomerGroupPrice($product, 2, 'fixed', 300);
+    $this->setCustomerGroupPrice($product, $priceGroups, 'discount', 20);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    $this->assertCartItemPrice($response, 300);
-});
-
-it('should apply fixed group price for wholesale customer on virtual product', function () {
-    $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
-
-    $this->setCustomerGroupPrice($product, 3, 'fixed', 250);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
-    $this->assertCartItemPrice($response, 250);
-});
+    $this->assertCartItemPrice($response, 800);
+})->with('customer groups');
 
-// ============================================================================
-// Discount Percentage Type
-// ============================================================================
+it('should not apply a customer group price set for another group to a virtual product', function () {
+    $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-it('should apply percentage group discount for guest on virtual product', function () {
-    $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
+    $this->setCustomerGroupPrice($product, 3, 'fixed', 700);
 
-    $this->setCustomerGroupPrice($product, 1, 'discount', 20);
+    $this->actAsCustomerGroup(2);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
-    // 500 - (500 * 20 / 100) = 400
-    $this->assertCartItemPrice($response, 400);
-});
-
-it('should apply percentage group discount for general customer on virtual product', function () {
-    $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
-
-    $this->setCustomerGroupPrice($product, 2, 'discount', 30);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    // 500 - (500 * 30 / 100) = 350
-    $this->assertCartItemPrice($response, 350);
-});
-
-it('should apply percentage group discount for wholesale customer on virtual product', function () {
-    $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
-
-    $this->setCustomerGroupPrice($product, 3, 'discount', 40);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addProductToCart($product->id)->assertOk();
-
-    // 500 - (500 * 40 / 100) = 300
-    $this->assertCartItemPrice($response, 300);
+    $this->assertCartItemPrice($response, 1000);
 });

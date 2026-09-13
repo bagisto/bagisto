@@ -14,10 +14,8 @@ use Webkul\FPC\Listeners\Section;
 use Webkul\FPC\Listeners\URLRewrite;
 
 it('subscribes the page cache to the event', function (string $event, string $listener, string $method) {
-    // Act
     $registered = Event::getRawListeners()[$event] ?? [];
 
-    // Assert
     expect($registered)->toContain([$listener, $method]);
 })->with([
     'product created' => ['catalog.product.create.after', Product::class, 'afterCreate'],

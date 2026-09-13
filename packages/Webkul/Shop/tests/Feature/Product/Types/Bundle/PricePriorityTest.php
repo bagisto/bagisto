@@ -4,30 +4,24 @@
 // Special Price vs Catalog Rule
 // ============================================================================
 
-it('should use the lower of special price and catalog rule for bundle option product', function () {
+it('should charge an option product of a bundle product at its special price when it beats the catalog rule', function () {
     $product = $this->createBundleProduct([1000]);
-    $optionSimple = $product->bundle_options->first()->bundle_option_products->first()->product;
 
-    // Set special price = 800.
-    $this->setSpecialPriceOnProduct($optionSimple, 800);
+    $this->setSpecialPriceOnProduct($product->bundle_options->first()->bundle_option_products->first()->product, 800);
 
-    // Catalog rule: 10% off → 900. MIN(800, 900) = 800.
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10]);
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 800);
 });
 
-it('should use catalog rule when lower than special price for bundle option product', function () {
+it('should charge an option product of a bundle product at the catalog rule price when it beats the special price', function () {
     $product = $this->createBundleProduct([1000]);
-    $optionSimple = $product->bundle_options->first()->bundle_option_products->first()->product;
 
-    // Set special price = 800.
-    $this->setSpecialPriceOnProduct($optionSimple, 800);
+    $this->setSpecialPriceOnProduct($product->bundle_options->first()->bundle_option_products->first()->product, 800);
 
-    // Catalog rule: 30% off → 700. MIN(800, 700) = 700.
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30]);
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
@@ -35,16 +29,17 @@ it('should use catalog rule when lower than special price for bundle option prod
 });
 
 // ============================================================================
-// Group Price as Floor
+// Group Price As Floor
 // ============================================================================
 
-it('should use group price when lower than special price for bundle option product', function () {
+it('should charge an option product of a bundle product at its customer group price when it beats the special price', function () {
     $product = $this->createBundleProduct([1000]);
-    $optionSimple = $product->bundle_options->first()->bundle_option_products->first()->product;
 
-    // Set special price = 800, group price = 600. MIN(800, 600) = 600.
-    $this->setSpecialPriceOnProduct($optionSimple, 800);
-    $this->setCustomerGroupPrice($optionSimple, 1, 'fixed', 600);
+    $optionProduct = $product->bundle_options->first()->bundle_option_products->first()->product;
+
+    $this->setSpecialPriceOnProduct($optionProduct, 800);
+
+    $this->setCustomerGroupPrice($optionProduct, 1, 'fixed', 600);
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
@@ -55,13 +50,13 @@ it('should use group price when lower than special price for bundle option produ
 // Cart Rule Stacking
 // ============================================================================
 
-it('should apply cart rule discount on top of bundle option product price', function () {
+it('should take a cart rule discount off the option product price of a bundle product', function () {
     $product = $this->createBundleProduct([800]);
 
     $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50]);
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 800);
-    $this->assertCartDiscount($response, 50);
+    $this->assertCartItemPrice($response, 800)
+        ->assertCartDiscount($response, 50);
 });

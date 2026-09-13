@@ -31,65 +31,52 @@ function configField(string $sectionKey, string $name): ?array
 }
 
 it('drives the page cache through the profile that reads the admin settings', function () {
-    // Act & Assert
     expect(config('responsecache.cache_profile'))->toBe(FullPageCacheProfile::class);
 });
 
 it('offers Full Page Cache under Cache Management, after General', function () {
-    // Act
     $section = configSection('cache_management.full_page_cache');
 
     $general = configSection('cache_management.general');
 
-    // Assert
     expect($section)->not->toBeNull();
 
     expect($section['sort'])->toBeGreaterThan($general['sort']);
 });
 
 it('gives the Full Page Cache section an icon of its own', function () {
-    // Arrange
     $icon = configSection('cache_management.full_page_cache')['icon'];
 
-    // Act
     $path = base_path('packages/Webkul/Admin/src/Resources/assets/images/'.$icon);
 
-    // Assert
     expect($icon)->not->toBe(configSection('cache_management.general')['icon'] ?? null);
 
     expect(file_exists($path))->toBeTrue("The configured icon {$icon} does not exist.");
 });
 
 it('turns the page cache on by default so an upgrade does not silently disable it', function () {
-    // Act
     $field = configField('cache_management.full_page_cache.settings', 'enabled');
 
-    // Assert
     expect($field['type'])->toBe('boolean');
 
     expect($field['default'])->toBeTrue();
 });
 
 it('accepts only a positive number of minutes as the cache lifetime', function () {
-    // Act
     $field = configField('cache_management.full_page_cache.settings', 'lifetime');
 
-    // Assert
     expect($field['validation'])->toBe('nullable|numeric|min:1');
 });
 
 it('keeps the settings store wide, not per channel or per locale', function (string $name) {
-    // Act
     $field = configField('cache_management.full_page_cache.settings', $name);
 
-    // Assert
     expect($field['channel_based'])->toBeFalse();
 
     expect($field['locale_based'])->toBeFalse();
 })->with(['enabled', 'lifetime']);
 
 it('translates every Full Page Cache string in every admin locale', function (string $locale) {
-    // Arrange
     $keys = [
         'admin::app.configuration.index.cache-management.full-page-cache.title',
         'admin::app.configuration.index.cache-management.full-page-cache.info',
@@ -101,7 +88,6 @@ it('translates every Full Page Cache string in every admin locale', function (st
         'admin::app.configuration.index.cache-management.full-page-cache.settings.lifetime-info',
     ];
 
-    // Act & Assert
     foreach ($keys as $key) {
         expect(trans($key, [], $locale))->not->toBe($key, "{$key} is missing from the {$locale} locale.");
     }

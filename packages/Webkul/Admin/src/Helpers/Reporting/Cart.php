@@ -118,7 +118,7 @@ class Cart extends AbstractReporting
             ->resetModel()
             ->where('is_active', 1)
             ->whereIn('channel_id', $this->channelIds)
-            ->whereBetween('created_at', [$startDate, $endDate->subDays(2)])
+            ->whereBetween('created_at', [$startDate, $endDate->copy()->subDays(2)])
             ->count();
     }
 
@@ -151,7 +151,7 @@ class Cart extends AbstractReporting
             ->resetModel()
             ->where('is_active', 1)
             ->whereIn('channel_id', $this->channelIds)
-            ->whereBetween('created_at', [$startDate, $endDate->subDays(2)])
+            ->whereBetween('created_at', [$startDate, $endDate->copy()->subDays(2)])
             ->sum('base_grand_total');
     }
 
@@ -169,7 +169,7 @@ class Cart extends AbstractReporting
             ->addSelect(DB::raw('COUNT(*) as count'))
             ->where('is_active', 1)
             ->whereIn('cart.channel_id', $this->channelIds)
-            ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->subDays(2)])
+            ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->copy()->subDays(2)])
             ->groupBy('product_id', 'name')
             ->limit($limit)
             ->orderByDesc('count')
@@ -187,7 +187,7 @@ class Cart extends AbstractReporting
             ->leftJoin('cart', 'cart_items.cart_id', '=', 'cart.id')
             ->where('is_active', 1)
             ->whereIn('cart.channel_id', $this->channelIds)
-            ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->subDays(2)])
+            ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->copy()->subDays(2)])
             ->count();
     }
 

@@ -4,64 +4,59 @@
 // Special Price vs Catalog Rule
 // ============================================================================
 
-it('should use the lower of special price and catalog rule for grouped associated product', function () {
+it('should charge an associated product of a grouped product at its special price when it beats the catalog rule', function () {
     $product = $this->createGroupedProduct([1000]);
-    $associated = $product->grouped_products->first()->associated_product;
 
-    // Set special price = 800 on associated product.
-    $this->setSpecialPriceOnProduct($associated, 800);
+    $this->setSpecialPriceOnProduct($product->grouped_products->first()->associated_product, 800);
 
-    // Catalog rule: 10% off → 900. MIN(800, 900) = 800.
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10]);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 800, 0);
+    $this->assertCartItemPrice($response, 800);
 });
 
-it('should use catalog rule when lower than special price for grouped associated product', function () {
+it('should charge an associated product of a grouped product at the catalog rule price when it beats the special price', function () {
     $product = $this->createGroupedProduct([1000]);
-    $associated = $product->grouped_products->first()->associated_product;
 
-    // Set special price = 800 on associated product.
-    $this->setSpecialPriceOnProduct($associated, 800);
+    $this->setSpecialPriceOnProduct($product->grouped_products->first()->associated_product, 800);
 
-    // Catalog rule: 30% off → 700. MIN(800, 700) = 700.
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30]);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 700, 0);
+    $this->assertCartItemPrice($response, 700);
 });
 
 // ============================================================================
-// Group Price as Floor
+// Group Price As Floor
 // ============================================================================
 
-it('should use group price when lower than special price for grouped associated product', function () {
+it('should charge an associated product of a grouped product at its customer group price when it beats the special price', function () {
     $product = $this->createGroupedProduct([1000]);
+
     $associated = $product->grouped_products->first()->associated_product;
 
-    // Set special price = 800, group price = 600. MIN(800, 600) = 600.
     $this->setSpecialPriceOnProduct($associated, 800);
+
     $this->setCustomerGroupPrice($associated, 1, 'fixed', 600);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 600, 0);
+    $this->assertCartItemPrice($response, 600);
 });
 
 // ============================================================================
 // Cart Rule Stacking
 // ============================================================================
 
-it('should apply cart rule discount on top of associated product price for grouped product', function () {
+it('should take a cart rule discount off the associated product price of a grouped product', function () {
     $product = $this->createGroupedProduct([800]);
 
     $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50]);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    $this->assertCartItemPrice($response, 800, 0);
-    $this->assertCartDiscount($response, 50);
+    $this->assertCartItemPrice($response, 800)
+        ->assertCartDiscount($response, 50);
 });

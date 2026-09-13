@@ -57,16 +57,13 @@ it('should populate product_flat after store and update', function () {
 
     expect($flat)->not->toBeNull();
 
-    // Core fields
     expect($flat->sku)->toBe($product->sku);
     expect($flat->type)->toBe('bundle');
     expect($flat->name)->toBe('Test Bundle Product');
 
-    // Bundle products skip price and weight.
     expect($flat->price)->toBeNull();
     expect($flat->weight)->toBeNull();
 
-    // Boolean fields
     expect($flat->status)->toBeTruthy();
     expect($flat->visible_individually)->toBeTruthy();
 });
@@ -85,7 +82,6 @@ it('should create bundle options with products after store and update', function
     expect($option->is_required)->toBeTruthy();
     expect($option->bundle_option_products)->toHaveCount(2);
 
-    // Verify the option label translation.
     $this->assertDatabaseHas('product_bundle_option_translations', [
         'product_bundle_option_id' => $option->id,
         'locale' => app()->getLocale(),
@@ -98,7 +94,6 @@ it('should update bundle option products', function () {
     $option = $product->bundle_options->first();
     $locale = app()->getLocale();
 
-    // Update with changed label and product qty.
     $products = [];
 
     foreach ($option->bundle_option_products as $key => $optionProduct) {
@@ -132,13 +127,11 @@ it('should update bundle option products', function () {
         ],
     ])->assertRedirect(route('admin.catalog.products.index'));
 
-    // Verify updated option.
     $this->assertDatabaseHas('product_bundle_option_translations', [
         'product_bundle_option_id' => $option->id,
         'label' => 'Updated Option Label',
     ]);
 
-    // Verify all products have updated qty.
     foreach ($products as $id => $productData) {
         $this->assertDatabaseHas('product_bundle_option_products', [
             'id' => $id,
@@ -150,7 +143,6 @@ it('should update bundle option products', function () {
 it('should not create inventory for a bundle product', function () {
     $product = $this->storeAndUpdateBundleProduct();
 
-    // Bundle products themselves don't have inventory.
     $this->assertDatabaseMissing('product_inventories', [
         'product_id' => $product->id,
     ]);
@@ -165,7 +157,6 @@ it('should fail validation when required fields are missing on bundle product up
 
     $product = $this->createBundleProduct();
 
-    // Bundle products do not require price or weight.
     putJson(route('admin.catalog.products.update', $product->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('sku')

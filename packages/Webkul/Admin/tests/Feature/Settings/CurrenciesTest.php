@@ -8,6 +8,18 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+/**
+ * A three letter currency code no currency holds yet.
+ */
+function uniqueCurrencyCode(): string
+{
+    do {
+        $code = strtoupper(fake()->lexify('???'));
+    } while (Currency::query()->where('code', $code)->exists());
+
+    return $code;
+}
+
 // ============================================================================
 // Index
 // ============================================================================
@@ -34,7 +46,7 @@ it('should store a newly created currency', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.currencies.store'), $data = [
-        'code' => fake()->randomElement(['EUR', 'GBP', 'JPY', 'AUD', 'CHF', 'CAD', 'CNY', 'BRL']),
+        'code' => uniqueCurrencyCode(),
         'name' => fake()->name(),
         'symbol' => fake()->randomElement(['€', '£', '¥', 'A$', 'CHF', 'C$', '¥', 'R$']),
         'decimal' => rand(1, 4),
@@ -46,9 +58,25 @@ it('should store a newly created currency', function () {
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-success'));
 
     $this->assertDatabaseHas('currencies', [
-        'code' => strtoupper($data['code']),
+        'code' => $data['code'],
         'name' => $data['name'],
+        'symbol' => $data['symbol'],
+        'decimal' => $data['decimal'],
+        'currency_position' => $data['currency_position'],
     ]);
+});
+
+it('should fail validation when the code belongs to another currency on store', function () {
+    $currency = Currency::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.currencies.store'), [
+        'code' => $currency->code,
+        'name' => fake()->name(),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('code');
 });
 
 it('should fail validation when required fields are missing on store', function () {
@@ -134,7 +162,7 @@ it('should announce a currency creation exactly once from the controller', funct
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.currencies.store'), $data = [
-        'code' => 'SEK',
+        'code' => uniqueCurrencyCode(),
         'name' => fake()->name(),
         'symbol' => 'kr',
         'decimal' => 2,

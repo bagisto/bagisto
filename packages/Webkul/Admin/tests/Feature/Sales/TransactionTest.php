@@ -1,73 +1,26 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
 use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\InvoiceItem;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderItem;
-use Webkul\Sales\Models\OrderPayment;
 use Webkul\Sales\Models\OrderTransaction;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 /**
- * Create an order with a pending invoice for transaction tests.
+ * Create a money transfer order awaiting payment, with an unpaid invoice for the given amount.
  */
-function createOrderWithPendingInvoice(): array
+function orderAwaitingPayment(float $amount = 100): Order
 {
-    $customer = Customer::factory()->create();
+    $order = test()->createOrder([
+        'status' => Order::STATUS_PENDING_PAYMENT,
+        'payment_method' => 'moneytransfer',
+    ], [['product' => test()->createSimpleProduct(), 'price' => $amount]]);
 
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => 'pending_payment',
-    ]);
+    test()->invoiceOrder($order, state: Invoice::STATUS_PENDING, orderState: Order::STATUS_PENDING_PAYMENT);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-        'method' => 'moneytransfer',
-    ]);
-
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => null,
-        'sku' => fake()->uuid(),
-        'type' => 'simple',
-        'name' => fake()->words(3, true),
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    $invoice = Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state' => 'pending',
-        'grand_total' => $orderItem->price,
-        'base_grand_total' => $orderItem->base_price,
-    ]);
-
-    InvoiceItem::factory()->create([
-        'invoice_id' => $invoice->id,
-        'order_item_id' => $orderItem->id,
-        'name' => $orderItem->name,
-        'sku' => $orderItem->sku,
-        'qty' => 1,
-        'price' => $orderItem->price,
-        'base_price' => $orderItem->base_price,
-        'total' => $orderItem->price,
-        'base_total' => $orderItem->base_price,
-        'product_id' => $orderItem->product_id,
-        'product_type' => $orderItem->product_type,
-    ]);
-
-    return ['order' => $order, 'invoice' => $invoice];
+    return $order->refresh()->load('invoices');
 }
 
 // ============================================================================
@@ -91,25 +44,153 @@ it('should deny guest access to the transactions index page', function () {
 // Store
 // ============================================================================
 
-it('should store a transaction for a pending invoice', function () {
-    $data = createOrderWithPendingInvoice();
+it('should record a full payment, mark the invoice paid and move the order to processing', function () {
+    $order = orderAwaitingPayment(100);
+
+    $invoice = $order->invoices->first();
 
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.transactions.store'), [
-        'invoice_id' => $data['invoice']->id,
+        'invoice_id' => $invoice->id,
         'payment_method' => 'moneytransfer',
-        'amount' => $data['invoice']->grand_total,
+        'amount' => 100,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.sales.transactions.index.create.transaction-saved'));
 
     $this->assertDatabaseHas('order_transactions', [
-        'order_id' => $data['order']->id,
-        'invoice_id' => $data['invoice']->id,
+        'order_id' => $order->id,
+        'invoice_id' => $invoice->id,
+        'payment_method' => 'moneytransfer',
         'status' => 'paid',
     ]);
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice->id,
+        'state' => Invoice::STATUS_PAID,
+    ]);
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_PROCESSING,
+    ]);
 });
+
+it('should complete the order when the invoice it pays was already shipped', function () {
+    $order = orderAwaitingPayment(100);
+
+    $this->shipOrder($order);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.transactions.store'), [
+        'invoice_id' => $order->invoices->first()->id,
+        'payment_method' => 'moneytransfer',
+        'amount' => 100,
+    ])
+        ->assertOk();
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_COMPLETED,
+    ]);
+});
+
+it('should leave the invoice unpaid after a partial payment', function () {
+    $order = orderAwaitingPayment(100);
+
+    $invoice = $order->invoices->first();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.transactions.store'), [
+        'invoice_id' => $invoice->id,
+        'payment_method' => 'moneytransfer',
+        'amount' => 40,
+    ])
+        ->assertOk();
+
+    $this->assertDatabaseHas('order_transactions', [
+        'invoice_id' => $invoice->id,
+        'amount' => 40,
+    ]);
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice->id,
+        'state' => Invoice::STATUS_PENDING,
+    ]);
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_PENDING_PAYMENT,
+    ]);
+});
+
+it('should refuse a transaction for an invoice that does not exist', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.transactions.store'), [
+        'invoice_id' => Invoice::query()->max('id') + 1,
+        'payment_method' => 'moneytransfer',
+        'amount' => 10,
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.sales.transactions.index.create.invoice-missing'));
+});
+
+it('should refuse a transaction for an invoice that is already paid', function () {
+    $order = $this->createOrder();
+
+    $invoice = $this->invoiceOrder($order);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.transactions.store'), [
+        'invoice_id' => $invoice->id,
+        'payment_method' => 'moneytransfer',
+        'amount' => 10,
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.sales.transactions.index.create.already-paid'));
+
+    $this->assertDatabaseMissing('order_transactions', ['invoice_id' => $invoice->id]);
+});
+
+it('should refuse a transaction that exceeds the invoice total', function () {
+    $order = orderAwaitingPayment(100);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.transactions.store'), [
+        'invoice_id' => $order->invoices->first()->id,
+        'payment_method' => 'moneytransfer',
+        'amount' => 100.01,
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.sales.transactions.index.create.transaction-amount-exceeds'));
+
+    $this->assertDatabaseMissing('order_transactions', ['order_id' => $order->id]);
+});
+
+it('should refuse a transaction of a zero or negative amount', function (float $amount) {
+    $order = orderAwaitingPayment(100);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.transactions.store'), [
+        'invoice_id' => $order->invoices->first()->id,
+        'payment_method' => 'moneytransfer',
+        'amount' => $amount,
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('admin::app.sales.transactions.index.create.transaction-amount-zero'));
+
+    $this->assertDatabaseMissing('order_transactions', ['order_id' => $order->id]);
+})->with([
+    'zero' => [0],
+    'negative' => [-10],
+]);
 
 it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
@@ -126,20 +207,23 @@ it('should fail validation when required fields are missing on store', function 
 // ============================================================================
 
 it('should return the transaction details', function () {
-    $data = createOrderWithPendingInvoice();
+    $order = orderAwaitingPayment(100);
 
     $transaction = OrderTransaction::factory()->create([
         'transaction_id' => md5(uniqid()),
         'type' => 'moneytransfer',
         'payment_method' => 'moneytransfer',
         'status' => 'paid',
-        'order_id' => $data['order']->id,
-        'invoice_id' => $data['invoice']->id,
-        'amount' => $data['invoice']->grand_total,
+        'order_id' => $order->id,
+        'invoice_id' => $order->invoices->first()->id,
+        'amount' => 100,
     ]);
 
     $this->loginAsAdmin();
 
-    get(route('admin.sales.transactions.view', $transaction->id))
-        ->assertOk();
+    getJson(route('admin.sales.transactions.view', $transaction->id))
+        ->assertOk()
+        ->assertJsonPath('data.id', $transaction->id)
+        ->assertJsonPath('data.transaction_id', $transaction->transaction_id)
+        ->assertJsonPath('data.order_id', $order->id);
 });

@@ -16,6 +16,11 @@
             <directory suffix="Test.php">packages/Webkul/Admin/tests/Feature</directory>
         </testsuite>
 
+        <!-- Category package testsuites. -->
+        <testsuite name="Category Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Category/tests/Unit</directory>
+        </testsuite>
+
         <!-- Core package testsuites. -->
         <testsuite name="Core Unit Test">
             <directory suffix="Test.php">packages/Webkul/Core/tests/Unit</directory>
@@ -73,6 +78,11 @@
             <directory suffix="Test.php">packages/Webkul/PayU/tests/Feature</directory>
         </testsuite>
 
+        <!-- Product package testsuites. -->
+        <testsuite name="Product Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Product/tests/Unit</directory>
+        </testsuite>
+
         <!-- Razorpay package testsuites. -->
         <testsuite name="Razorpay Unit Test">
             <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Unit</directory>
@@ -80,6 +90,21 @@
 
         <testsuite name="Razorpay Feature Test">
             <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Feature</directory>
+        </testsuite>
+
+        <!-- Rule package testsuites. -->
+        <testsuite name="Rule Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Rule/tests/Unit</directory>
+        </testsuite>
+
+        <!-- Sales package testsuites. -->
+        <testsuite name="Sales Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Sales/tests/Unit</directory>
+        </testsuite>
+
+        <!-- Shipping package testsuites. -->
+        <testsuite name="Shipping Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Shipping/tests/Unit</directory>
         </testsuite>
 
         <!-- Shop package testsuites. -->
@@ -94,6 +119,11 @@
 
         <testsuite name="Stripe Feature Test">
             <directory suffix="Test.php">packages/Webkul/Stripe/tests/Feature</directory>
+        </testsuite>
+
+        <!-- Tax package testsuites. -->
+        <testsuite name="Tax Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Tax/tests/Unit</directory>
         </testsuite>
     </testsuites>
 
@@ -113,6 +143,7 @@
         <env name="MAIL_MAILER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="RESPONSE_CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
     </php>

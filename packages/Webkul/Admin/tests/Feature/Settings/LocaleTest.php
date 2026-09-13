@@ -10,6 +10,18 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+/**
+ * A locale code in the `xx_YY` form that no locale holds yet.
+ */
+function uniqueLocaleCode(): string
+{
+    do {
+        $code = fake()->lexify('??').'_'.strtoupper(fake()->lexify('??'));
+    } while (Locale::query()->where('code', $code)->exists());
+
+    return $code;
+}
+
 // ============================================================================
 // Index
 // ============================================================================
@@ -36,7 +48,7 @@ it('should store a newly created locale', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.locales.store'), $data = [
-        'code' => fake()->locale(),
+        'code' => uniqueLocaleCode(),
         'name' => fake()->name(),
         'direction' => fake()->randomElement(['ltr', 'rtl']),
         'logo_path' => [
@@ -53,6 +65,20 @@ it('should store a newly created locale', function () {
     ]);
 
     Storage::assertExists('locales/'.$data['code'].'.png');
+});
+
+it('should fail validation when the code belongs to another locale on store', function () {
+    $locale = Locale::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code' => $locale->code,
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('code');
 });
 
 it('should fail validation when required fields are missing on store', function () {
@@ -72,7 +98,7 @@ it('should reject a tampered file upload on store', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.locales.store'), [
-        'code' => fake()->locale(),
+        'code' => uniqueLocaleCode(),
         'name' => fake()->name(),
         'direction' => 'ltr',
         'logo_path' => [
@@ -183,7 +209,7 @@ it('should announce a locale creation exactly once from the controller', functio
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.locales.store'), $data = [
-        'code' => 'nb_NO',
+        'code' => uniqueLocaleCode(),
         'name' => fake()->name(),
         'direction' => 'ltr',
     ])->assertOk();
@@ -225,8 +251,10 @@ it('should carry the stored logo on the locale creation event', function () {
 
     $this->loginAsAdmin();
 
+    $code = uniqueLocaleCode();
+
     postJson(route('admin.settings.locales.store'), [
-        'code' => 'sv_SE',
+        'code' => $code,
         'name' => fake()->name(),
         'direction' => 'ltr',
         'logo_path' => [
@@ -234,7 +262,7 @@ it('should carry the stored logo on the locale creation event', function () {
         ],
     ])->assertOk();
 
-    Event::assertDispatched('core.locale.create.after', fn ($event, $payload) => $payload->logo_path === 'locales/sv_SE.png');
+    Event::assertDispatched('core.locale.create.after', fn ($event, $payload) => $payload->logo_path === 'locales/'.$code.'.png');
 });
 
 it('should announce a locale deletion exactly once from the repository', function () {
@@ -260,8 +288,10 @@ it('should remove the stored logo when a locale is deleted', function () {
 
     $this->loginAsAdmin();
 
+    $code = uniqueLocaleCode();
+
     postJson(route('admin.settings.locales.store'), [
-        'code' => 'da_DK',
+        'code' => $code,
         'name' => fake()->name(),
         'direction' => 'ltr',
         'logo_path' => [
@@ -269,9 +299,9 @@ it('should remove the stored logo when a locale is deleted', function () {
         ],
     ])->assertOk();
 
-    Storage::assertExists('locales/da_DK.png');
+    Storage::assertExists('locales/'.$code.'.png');
 
-    deleteJson(route('admin.settings.locales.delete', Locale::where('code', 'da_DK')->first()->id))->assertOk();
+    deleteJson(route('admin.settings.locales.delete', Locale::where('code', $code)->first()->id))->assertOk();
 
-    Storage::assertMissing('locales/da_DK.png');
+    Storage::assertMissing('locales/'.$code.'.png');
 });

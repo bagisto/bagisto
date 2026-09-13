@@ -215,7 +215,6 @@ it('should fail validation with an invalid validation strategy on store', functi
 it('should handle the process_in_queue option on store', function () {
     $this->loginAsAdmin();
 
-    // With process_in_queue enabled.
     postJson(route('admin.settings.data_transfer.imports.store'), [
         'type' => 'customers',
         'action' => 'append',
@@ -233,7 +232,6 @@ it('should handle the process_in_queue option on store', function () {
     expect($queued)->not->toBeNull();
     expect($queued->process_in_queue)->toBe(true);
 
-    // Without process_in_queue (defaults to false).
     postJson(route('admin.settings.data_transfer.imports.store'), [
         'type' => 'products',
         'action' => 'delete',

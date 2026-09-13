@@ -1,91 +1,50 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
+use Illuminate\Support\Facades\Event;
+use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
+use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
+use Webkul\Product\Models\ProductPriceIndex;
 
 // ============================================================================
-// Percentage Catalog Rule
+// Discounts
 // ============================================================================
 
-it('should apply percentage catalog rule to grouped product for guest', function () {
+it('should apply a percentage catalog rule to the associated products of a grouped product', function (array $ruleGroups, ?int $customerGroupId) {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], $ruleGroups);
+
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    // 1000 - (1000 * 20 / 100) = 800
-    $this->assertCartItemPrice($response, 800, 0);
-});
+    $this->assertCartItemPrice($response, 800, 0)
+        ->assertCartItemPrice($response, 400, 1);
+})->with('customer groups');
 
-it('should apply percentage catalog rule to grouped product for general customer', function () {
+it('should apply a fixed catalog rule to the associated products of a grouped product', function (array $ruleGroups, ?int $customerGroupId) {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 25], [2]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 150], $ruleGroups);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup($customerGroupId);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    // 1000 - (1000 * 25 / 100) = 750
-    $this->assertCartItemPrice($response, 750, 0);
-});
+    $this->assertCartItemPrice($response, 850, 0)
+        ->assertCartItemPrice($response, 350, 1);
+})->with('customer groups');
 
-it('should apply percentage catalog rule to grouped product for wholesaler', function () {
+it('should not apply a catalog rule limited to another customer group to a grouped product', function () {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30], [3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [3]);
 
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
+    $this->actAsCustomerGroup(2);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();
 
-    // 1000 - (1000 * 30 / 100) = 700
-    $this->assertCartItemPrice($response, 700, 0);
-});
-
-// ============================================================================
-// Fixed Catalog Rule
-// ============================================================================
-
-it('should apply fixed catalog rule to grouped product for guest', function () {
-    $product = $this->createGroupedProduct([1000, 500]);
-
-    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 150], [1, 2, 3]);
-
-    $response = $this->addGroupedProductToCart($product)->assertOk();
-
-    // 1000 - 150 = 850
-    $this->assertCartItemPrice($response, 850, 0);
-});
-
-it('should apply fixed catalog rule to grouped product for general customer', function () {
-    $product = $this->createGroupedProduct([1000, 500]);
-
-    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 200], [2]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 2]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addGroupedProductToCart($product)->assertOk();
-
-    // 1000 - 200 = 800
-    $this->assertCartItemPrice($response, 800, 0);
-});
-
-it('should apply fixed catalog rule to grouped product for wholesaler', function () {
-    $product = $this->createGroupedProduct([1000, 500]);
-
-    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 250], [3]);
-
-    $customer = Customer::factory()->create(['customer_group_id' => 3]);
-    $this->loginAsCustomer($customer);
-
-    $response = $this->addGroupedProductToCart($product)->assertOk();
-
-    // 1000 - 250 = 750
-    $this->assertCartItemPrice($response, 750, 0);
+    $this->assertCartItemPrice($response, 1000, 0);
 });
 
 // ============================================================================
@@ -95,7 +54,33 @@ it('should apply fixed catalog rule to grouped product for wholesaler', function
 it('should reprice the grouped product as soon as a catalog rule discounts its associated products', function () {
     $product = $this->createGroupedProduct([1000, 500]);
 
-    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20]);
 
-    expect((float) $product->fresh()->getTypeInstance()->getMinimalPrice())->toBe(400.0);
+    expect($this->listedPrice($product))->toBePrice(400);
+});
+
+it('should restore the grouped product price as soon as the catalog rule is deleted', function () {
+    $product = $this->createGroupedProduct([1000, 500]);
+
+    $catalogRule = $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20]);
+
+    ProductPriceIndex::query()->where('product_id', $product->id)->update(['min_price' => 400]);
+
+    Event::dispatch('promotions.catalog_rule.delete.before', $catalogRule->id);
+
+    app(CatalogRuleRepository::class)->delete($catalogRule->id);
+
+    expect($this->listedPrice($product))->toBePrice(500);
+});
+
+it('should reprice the grouped product when the nightly price reindex reprices its associated products', function () {
+    $product = $this->createGroupedProduct([1000, 500]);
+
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20]);
+
+    ProductPriceIndex::query()->where('product_id', $product->id)->update(['min_price' => 500]);
+
+    app(PriceIndexer::class)->reindexSelective();
+
+    expect($this->listedPrice($product))->toBePrice(400);
 });

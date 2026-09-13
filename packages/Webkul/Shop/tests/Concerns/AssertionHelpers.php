@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Tests\Concerns;
 
 use Illuminate\Testing\TestResponse;
+use Webkul\Sales\Models\Order;
 
 trait AssertionHelpers
 {
@@ -11,14 +12,15 @@ trait AssertionHelpers
      */
     public function assertCartHasProduct(int $productId, int $expectedQty = 1): static
     {
-        $response = $this->getJson(route('shop.api.checkout.cart.index'));
+        $cartId = $this->getJson(route('shop.api.checkout.cart.index'))->json('data.id');
 
-        $items = collect($response->json('data.items'));
+        expect($cartId)->not->toBeNull("Product {$productId} should be in the cart, but there is no cart.");
 
-        $item = $items->firstWhere('product_id', $productId);
-
-        expect($item)->not->toBeNull("Product {$productId} should be in the cart.");
-        expect((int) $item['quantity'])->toBe($expectedQty, "Product {$productId} quantity should be {$expectedQty}.");
+        $this->assertDatabaseHas('cart_items', [
+            'cart_id' => $cartId,
+            'product_id' => $productId,
+            'quantity' => $expectedQty,
+        ]);
 
         return $this;
     }
@@ -70,17 +72,29 @@ trait AssertionHelpers
     }
 
     /**
-     * Assert an order was placed successfully.
+     * Assert an order was placed from the response: the customer is sent to the success page,
+     * the order row exists with its payment, and the cart it came from is no longer active.
      */
-    public function assertOrderPlaced(TestResponse $response): static
+    public function assertOrderPlaced(TestResponse $response): Order
     {
-        $response->assertOk();
+        $response->assertOk()
+            ->assertJsonPath('data.redirect', true)
+            ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'))
+            ->assertSessionHas('order_id');
 
-        $data = $response->json('data');
+        $order = Order::query()->findOrFail(session('order_id'));
 
-        expect($data['redirect'])->toBeTrue('Order should redirect to success page.');
-        expect($data['redirect_url'])->toContain('checkout/onepage/success');
+        expect($order->status)->toBe(Order::STATUS_PENDING);
 
-        return $this;
+        $this->assertDatabaseHas('order_payment', ['order_id' => $order->id]);
+
+        $this->assertDatabaseHas('order_items', ['order_id' => $order->id]);
+
+        $this->assertDatabaseHas('cart', [
+            'id' => $order->cart_id,
+            'is_active' => false,
+        ]);
+
+        return $order;
     }
 }

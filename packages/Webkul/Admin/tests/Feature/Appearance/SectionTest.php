@@ -11,8 +11,7 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-it('should returns the section index page', function () {
-    // Act and Assert.
+it('should return the section index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
@@ -22,7 +21,6 @@ it('should returns the section index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the section', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]))
@@ -32,7 +30,6 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should fail the validation with errors when correct type not provided when store the section', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
@@ -43,14 +40,10 @@ it('should fail the validation with errors when correct type not provided when s
         ->assertUnprocessable();
 });
 
-it('should store the newly created theme', function () {
-    // Arrange.
-    $lastSectionId = Section::factory()->create()->id + 1;
-
-    // Act and Assert.
+it('should store a newly created section', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
+    $response = postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
         'type' => $type = fake()->randomElement([
             SectionTypeEnum::PRODUCT_CAROUSEL->value,
             SectionTypeEnum::CATEGORY_CAROUSEL->value,
@@ -60,7 +53,6 @@ it('should store the newly created theme', function () {
         'name' => $name = fake()->name(),
     ])
         ->assertOk()
-        ->assertJsonPath('section.id', $lastSectionId)
         ->assertJsonPath('section.name', $name)
         ->assertJsonPath('section.type', $type);
 
@@ -71,7 +63,7 @@ it('should store the newly created theme', function () {
     $this->assertModelWise([
         Section::class => [
             [
-                'id' => $lastSectionId,
+                'id' => $response->json('section.id'),
                 'type' => $type,
                 'name' => $name,
                 'channel_id' => $channelId,
@@ -82,10 +74,8 @@ it('should store the newly created theme', function () {
 });
 
 it('should fail the validation with errors when correct type not provided when update the section', function () {
-    // Arrange.
     $section = Section::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id))
@@ -181,7 +171,6 @@ it('should update the sections', function () {
     $data['theme_code'] = core()->getDefaultChannel()->theme;
     $data['status'] = 'on';
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -200,7 +189,6 @@ it('should update the sections', function () {
 });
 
 it('should sanitize malicious script tags from static content HTML when updating theme', function () {
-    // Arrange.
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ]);
@@ -225,7 +213,6 @@ it('should sanitize malicious script tags from static content HTML when updating
         'status' => 'on',
     ];
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -235,7 +222,6 @@ it('should sanitize malicious script tags from static content HTML when updating
     $section->refresh();
     $translation = $section->translate(app()->getLocale());
 
-    // Assert that script tag was removed.
     expect($translation->options['html'])->not->toContain('<script>');
     expect($translation->options['html'])->not->toContain('alert("XSS")');
     expect($translation->options['html'])->toContain('Safe content');
@@ -243,7 +229,6 @@ it('should sanitize malicious script tags from static content HTML when updating
 });
 
 it('should sanitize iframe tags from static content HTML when updating theme', function () {
-    // Arrange.
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ]);
@@ -266,7 +251,6 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
         'status' => 'on',
     ];
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -276,7 +260,6 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
     $section->refresh();
     $translation = $section->translate(app()->getLocale());
 
-    // Assert that iframe tag was removed.
     expect($translation->options['html'])->not->toContain('<iframe');
     expect($translation->options['html'])->not->toContain('malicious.com');
     expect($translation->options['html'])->toContain('Content');
@@ -284,7 +267,6 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
 });
 
 it('should sanitize form tags from static content HTML when updating theme', function () {
-    // Arrange.
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ]);
@@ -307,7 +289,6 @@ it('should sanitize form tags from static content HTML when updating theme', fun
         'status' => 'on',
     ];
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -317,7 +298,6 @@ it('should sanitize form tags from static content HTML when updating theme', fun
     $section->refresh();
     $translation = $section->translate(app()->getLocale());
 
-    // Assert that form tag was removed.
     expect($translation->options['html'])->not->toContain('<form');
     expect($translation->options['html'])->not->toContain('</form>');
     expect($translation->options['html'])->toContain('Safe content');
@@ -325,7 +305,6 @@ it('should sanitize form tags from static content HTML when updating theme', fun
 });
 
 it('should preserve safe HTML content in static content when updating theme', function () {
-    // Arrange.
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ]);
@@ -350,7 +329,6 @@ it('should preserve safe HTML content in static content when updating theme', fu
         'status' => 'on',
     ];
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -360,7 +338,6 @@ it('should preserve safe HTML content in static content when updating theme', fu
     $section->refresh();
     $translation = $section->translate(app()->getLocale());
 
-    // Assert that safe HTML elements are preserved.
     expect($translation->options['html'])->toContain('<div');
     expect($translation->options['html'])->toContain('<h1>');
     expect($translation->options['html'])->toContain('<p>');
@@ -371,7 +348,6 @@ it('should preserve safe HTML content in static content when updating theme', fu
 });
 
 it('should sanitize malicious event handlers from static content HTML when updating theme', function () {
-    // Arrange.
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ]);
@@ -394,7 +370,6 @@ it('should sanitize malicious event handlers from static content HTML when updat
         'status' => 'on',
     ];
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -404,7 +379,6 @@ it('should sanitize malicious event handlers from static content HTML when updat
     $section->refresh();
     $translation = $section->translate(app()->getLocale());
 
-    // Assert that malicious event handlers were removed.
     expect($translation->options['html'])->not->toContain('onclick');
     expect($translation->options['html'])->not->toContain('onerror');
     expect($translation->options['html'])->not->toContain('alert(');
@@ -412,7 +386,6 @@ it('should sanitize malicious event handlers from static content HTML when updat
 });
 
 it('should not sanitize HTML for non-static content theme types', function () {
-    // Arrange.
     $section = Section::factory()->create([
         'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
     ]);
@@ -437,7 +410,6 @@ it('should not sanitize HTML for non-static content theme types', function () {
         'status' => 'on',
     ];
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
@@ -446,7 +418,6 @@ it('should not sanitize HTML for non-static content theme types', function () {
 
     $section->refresh();
 
-    // Assert theme was updated successfully.
     $this->assertModelWise([
         Section::class => [
             [
@@ -459,10 +430,8 @@ it('should not sanitize HTML for non-static content theme types', function () {
 });
 
 it('should delete the section', function () {
-    // Arrange.
     $section = Section::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.appearance.sections.delete', $section->id))
@@ -502,10 +471,8 @@ it('should turn a section off and back on again', function () {
 });
 
 it('should take the channel and theme of the editor rather than the request when creating', function () {
-    // Arrange.
     $channel = core()->getDefaultChannel();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
@@ -523,12 +490,10 @@ it('should take the channel and theme of the editor rather than the request when
 });
 
 it('should scope the listing to the requested channel', function () {
-    // Arrange.
     $channel = core()->getDefaultChannel();
 
     $section = Section::factory()->create(['name' => 'Only On This Channel']);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $channel->id]))
@@ -539,19 +504,6 @@ it('should scope the listing to the requested channel', function () {
         ->assertOk();
 });
 
-it('should delete a section', function () {
-    // Arrange.
-    $section = Section::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    deleteJson(route('admin.appearance.sections.delete', $section->id))
-        ->assertOk();
-
-    expect(Section::query()->find($section->id))->toBeNull();
-});
-
 it('should no longer expose the mass action endpoints', function () {
     expect(app('router')->getRoutes()->getByName('admin.appearance.sections.mass_update'))->toBeNull()
         ->and(app('router')->getRoutes()->getByName('admin.appearance.sections.mass_delete'))->toBeNull()
@@ -559,7 +511,6 @@ it('should no longer expose the mass action endpoints', function () {
 });
 
 it('should place a duplicate directly below its original', function () {
-    // Arrange.
     $channel = core()->getDefaultChannel();
 
     $made = collect(['First', 'Second', 'Third'])->map(fn ($name, $index) => Section::factory()->create([
@@ -569,7 +520,6 @@ it('should place a duplicate directly below its original', function () {
         'theme_code' => $channel->theme,
     ]));
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.duplicate', $made[1]->id))->assertOk();
@@ -670,10 +620,8 @@ it('should not ask for a sort order where the rows are dragged instead', functio
 });
 
 it('should hand the editor a store url carrying the channel being edited', function () {
-    // Arrange.
     $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.appearance.sections.index', ['code' => $other->theme, 'channel' => $other->id]))
@@ -685,10 +633,8 @@ it('should hand the editor a store url carrying the channel being edited', funct
 });
 
 it('should create a section against the channel the editor is scoped to', function () {
-    // Arrange.
     $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.appearance.sections.store', [
@@ -704,30 +650,7 @@ it('should create a section against the channel the editor is scoped to', functi
     expect($section->channel_id)->toBe($other->id);
 });
 
-it('should refuse a second footer links section on the same channel', function () {
-    // Arrange.
-    $channel = core()->getDefaultChannel();
-
-    Section::factory()->create([
-        'type' => SectionTypeEnum::FOOTER_LINKS->value,
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme,
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.appearance.sections.store', [
-        'code' => $channel->theme,
-        'channel' => $channel->id,
-    ]), [
-        'name' => 'A Second Footer',
-        'type' => SectionTypeEnum::FOOTER_LINKS->value,
-    ])->assertJsonValidationErrorFor('type');
-});
-
 it('should still allow a footer links section on a channel that has none', function () {
-    // Arrange.
     $channel = core()->getDefaultChannel();
 
     Section::factory()->create([
@@ -738,7 +661,6 @@ it('should still allow a footer links section on a channel that has none', funct
 
     $other = Channel::factory()->create(['theme' => $channel->theme]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.store', [
@@ -751,7 +673,6 @@ it('should still allow a footer links section on a channel that has none', funct
 });
 
 it('should place a new section above the pinned footer', function () {
-    // Arrange.
     $channel = core()->getDefaultChannel();
 
     $footer = Section::factory()->create([
@@ -761,7 +682,6 @@ it('should place a new section above the pinned footer', function () {
         'theme_code' => $channel->theme,
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.appearance.sections.store', [

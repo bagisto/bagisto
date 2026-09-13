@@ -1,63 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Models\CoreConfig;
-use Webkul\Customer\Models\Customer;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\OrderItem;
-use Webkul\Sales\Models\OrderPayment;
 use Webkul\Shop\Mail\Order\InvoicedNotification;
-use Webkul\User\Models\Admin;
-use Webkul\User\Models\Role;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
-
-/**
- * Create an invoiceable order with a real product for qty tracking.
- */
-function createInvoiceableOrder(): array
-{
-    $customer = Customer::factory()->create();
-
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => 'pending',
-    ]);
-
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-        'method' => 'cashondelivery',
-    ]);
-
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => null,
-        'sku' => fake()->uuid(),
-        'type' => 'simple',
-        'name' => fake()->words(3, true),
-        'qty_ordered' => 2,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
-    ]);
-
-    return ['order' => $order, 'orderItem' => $orderItem];
-}
 
 // ============================================================================
 // Index
@@ -80,66 +31,167 @@ it('should deny guest access to the invoices index page', function () {
 // Store
 // ============================================================================
 
-it('should store an invoice for an order', function () {
-    $data = createInvoiceableOrder();
+it('should invoice the ordered quantity, record it on the item and move the order to processing', function () {
+    $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2, 'price' => 100]]);
+
+    $item = $order->items->first();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.store', $data['order']->id), [
-        'invoice' => [
-            'items' => [$data['orderItem']->id => 1],
-        ],
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$item->id => 2]],
     ])
-        ->assertRedirect();
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
+        ->assertSessionHas('success', trans('admin::app.sales.invoices.create.create-success'));
 
-    $this->assertDatabaseHas('invoices', [
-        'order_id' => $data['order']->id,
+    $invoice = Invoice::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect($invoice)
+        ->state->toBe(Invoice::STATUS_PAID)
+        ->total_qty->toBe(2)
+        ->and((float) $invoice->sub_total)->toBePrice(200)
+        ->and((float) $invoice->grand_total)->toBePrice(200);
+
+    $this->assertDatabaseHas('invoice_items', [
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $item->id,
+        'qty' => 2,
     ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'id' => $item->id,
+        'qty_invoiced' => 2,
+    ]);
+
+    $order->refresh();
+
+    expect($order->status)->toBe(Order::STATUS_PROCESSING)
+        ->and((float) $order->grand_total_invoiced)->toBePrice(200)
+        ->and((float) $order->total_due)->toBePrice(0);
+});
+
+it('should complete an order of non-stockable items as soon as it is invoiced', function () {
+    $order = $this->createOrder(items: [['product' => $this->createVirtualProduct(), 'qty_ordered' => 1]]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 1]],
+    ])
+        ->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_COMPLETED,
+    ]);
+});
+
+it('should accumulate partial invoices on the order item', function () {
+    $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 3]]);
+
+    $item = $order->items->first();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$item->id => 1]],
+    ])->assertRedirect();
+
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$item->id => 2]],
+    ])->assertRedirect();
+
+    expect(Invoice::query()->where('order_id', $order->id)->count())->toBe(2);
+
+    $this->assertDatabaseHas('order_items', [
+        'id' => $item->id,
+        'qty_invoiced' => 3,
+    ]);
+});
+
+it('should refuse an invoice for more than the quantity left to invoice', function () {
+    $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2]]);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 3]],
+    ])
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.invoices.create.invalid-qty'));
+
+    $this->assertDatabaseMissing('invoices', ['order_id' => $order->id]);
+});
+
+it('should refuse an invoice with no quantity at all', function () {
+    $order = $this->createOrder();
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 0]],
+    ])
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.invoices.create.product-error'));
+
+    $this->assertDatabaseMissing('invoices', ['order_id' => $order->id]);
+});
+
+it('should refuse to invoice an order with nothing left to invoice', function () {
+    $order = $this->createOrder();
+
+    $this->invoiceOrder($order);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 1]],
+    ])
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.invoices.create.creation-error'));
+
+    expect(Invoice::query()->where('order_id', $order->id)->count())->toBe(1);
 });
 
 it('should store an invoice and send email notification', function () {
     Mail::fake();
 
-    CoreConfig::factory()->create([
-        'code' => 'emails.general.notifications.emails.general.notifications.new_invoice',
-        'value' => 1,
-    ]);
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_invoice', 1);
 
-    $data = createInvoiceableOrder();
+    $order = $this->createOrder();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.store', $data['order']->id), [
-        'invoice' => [
-            'items' => [$data['orderItem']->id => 1],
-        ],
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 1]],
     ])
         ->assertRedirect();
 
-    Mail::assertQueued(InvoicedNotification::class);
+    $this->assertDatabaseHas('invoices', ['order_id' => $order->id]);
+
+    Mail::assertQueued(InvoicedNotification::class, fn (InvoicedNotification $mail) => $mail->hasTo($order->customer_email));
 });
 
 it('should fail validation when invoice items are missing on store', function () {
-    $data = createInvoiceableOrder();
+    $order = $this->createOrder();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.store', $data['order']->id))
+    postJson(route('admin.sales.invoices.store', $order->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('invoice.items');
 });
 
 it('should fail validation when invoice item quantity is not numeric', function () {
-    $data = createInvoiceableOrder();
+    $order = $this->createOrder();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.store', $data['order']->id), [
-        'invoice' => [
-            'items' => [$data['orderItem']->id => 'invalid'],
-        ],
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 'invalid']],
     ])
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('invoice.items.'.$order->items->first()->id);
 });
 
 // ============================================================================
@@ -147,63 +199,76 @@ it('should fail validation when invoice item quantity is not numeric', function 
 // ============================================================================
 
 it('should return the invoice view page', function () {
-    $data = createInvoiceableOrder();
+    $order = $this->createOrder();
+
+    $invoice = $this->invoiceOrder($order);
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.store', $data['order']->id), [
-        'invoice' => [
-            'items' => [$data['orderItem']->id => 1],
-        ],
-    ]);
-
-    $invoice = Invoice::where('order_id', $data['order']->id)->first();
-
     get(route('admin.sales.invoices.view', $invoice->id))
-        ->assertOk();
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id]))
+        ->assertSeeText($order->customer_email);
 });
 
 // ============================================================================
 // Print
 // ============================================================================
 
-it('should download the invoice PDF', function () {
-    $data = createInvoiceableOrder();
+it('should download the invoice as a pdf', function () {
+    $invoice = $this->invoiceOrder($this->createOrder());
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.store', $data['order']->id), [
-        'invoice' => [
-            'items' => [$data['orderItem']->id => 1],
-        ],
-    ]);
-
-    $invoice = Invoice::where('order_id', $data['order']->id)->first();
-
     get(route('admin.sales.invoices.print', $invoice->id))
-        ->assertOk();
+        ->assertOk()
+        ->assertHeader('content-type', 'application/pdf')
+        ->assertDownload('invoice-'.$invoice->created_at->format('d-m-Y').'.pdf');
 });
 
+// ============================================================================
+// Duplicate Email
+// ============================================================================
+
+it('should send a duplicate invoice to the given email address', function () {
+    Event::fake();
+
+    $invoice = $this->invoiceOrder($this->createOrder());
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.invoices.send_duplicate_email', $invoice->id), [
+        'email' => $email = fake()->safeEmail(),
+    ])
+        ->assertRedirect(route('admin.sales.invoices.view', $invoice->id))
+        ->assertSessionHas('success', trans('admin::app.sales.invoices.view.invoice-sent'));
+
+    Event::assertDispatched(
+        'sales.invoice.send_duplicate_email',
+        fn ($event, array $payload) => $payload['invoice']->is($invoice) && $payload['duplicate_invoice_email'] === $email
+    );
+});
+
+it('should fail validation when the duplicate invoice email is invalid', function () {
+    $invoice = $this->invoiceOrder($this->createOrder());
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.send_duplicate_email', $invoice->id), [
+        'email' => 'not-an-email',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('email');
+});
+
+// ============================================================================
+// Mass Update
+// ============================================================================
+
 it('should deny a low-privilege admin from mass updating invoice state', function () {
-    // Arrange.
-    $role = Role::factory()->create([
-        'permission_type' => 'custom',
-        'permissions' => ['dashboard'],
-    ]);
+    $invoice = $this->invoiceOrder($this->createOrder(), state: Invoice::STATUS_PENDING);
 
-    $admin = Admin::factory()->create([
-        'role_id' => $role->id,
-    ]);
-
-    $order = Order::factory()->create();
-
-    $invoice = Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state' => Invoice::STATUS_PENDING,
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin($admin);
+    $this->loginAsAdminWithPermissions(['dashboard']);
 
     postJson(route('admin.sales.invoices.mass_update.state'), [
         'indices' => [$invoice->id],
@@ -218,22 +283,16 @@ it('should deny a low-privilege admin from mass updating invoice state', functio
 });
 
 it('should allow an authorized admin to mass update invoice state', function () {
-    // Arrange.
-    $order = Order::factory()->create();
+    $invoice = $this->invoiceOrder($this->createOrder(), state: Invoice::STATUS_PENDING);
 
-    $invoice = Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state' => Invoice::STATUS_PENDING,
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.mass_update.state'), [
         'indices' => [$invoice->id],
         'value' => Invoice::STATUS_PAID,
     ])
-        ->assertOk();
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.sales.invoices.index.datagrid.mass-update-success'));
 
     $this->assertDatabaseHas('invoices', [
         'id' => $invoice->id,
@@ -242,21 +301,15 @@ it('should allow an authorized admin to mass update invoice state', function () 
 });
 
 it('should fail validation when mass updating invoice state to an invalid value', function () {
-    // Arrange.
-    $order = Order::factory()->create();
+    $invoice = $this->invoiceOrder($this->createOrder(), state: Invoice::STATUS_PENDING);
 
-    $invoice = Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state' => Invoice::STATUS_PENDING,
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.mass_update.state'), [
         'indices' => [$invoice->id],
         'value' => 'hacked',
     ])
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('value');
 
     $this->assertDatabaseHas('invoices', [

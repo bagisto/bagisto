@@ -195,7 +195,6 @@ it('emails a magic link when guest lookup matches an order', function () {
     enableEuWithdrawal();
     $order = makeGuestOrder('claimant@example.test');
 
-    // Sanity: confirm the order we expect lookup to find actually matches at the DB level.
     $found = Order::query()
         ->where('increment_id', $order->increment_id)
         ->where('customer_email', 'claimant@example.test')
@@ -203,7 +202,6 @@ it('emails a magic link when guest lookup matches an order', function () {
         ->first();
     expect($found)->not->toBeNull('order should match before HTTP lookup is exercised');
 
-    // What channel is the order on, and is config enabled for it?
     $channel = $found->channel;
     expect($channel)->not->toBeNull('order must morphTo a channel');
     $cfg = core()->getConfigData('sales.eu_withdrawal.general.enabled', $channel->code);
@@ -262,15 +260,12 @@ it('rejects the guest store endpoint without a valid signature', function () {
 });
 
 it('tells the admin the confirmation was resent in the admin\'s own language', function () {
-    // Arrange
     Mail::fake();
 
     $customer = Customer::factory()->create();
 
     $order = makeOrderForCustomer($customer);
 
-    // Filed in Arabic, so the email must go out in Arabic - but the admin reading the
-    // result is working in English.
     $withdrawal = Withdrawal::create([
         'uuid' => (string) Str::uuid(),
         'order_id' => $order->id,
@@ -287,10 +282,8 @@ it('tells the admin the confirmation was resent in the admin\'s own language', f
 
     $this->actingAs(Admin::factory()->create(), 'admin');
 
-    // Act
     post(route('admin.sales.eu-withdrawals.resend_confirmation', $withdrawal->id));
 
-    // Assert
     expect(app()->getLocale())->toBe('en')
         ->and(session('success'))->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'en'))
         ->and(session('success'))->not->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'ar'));

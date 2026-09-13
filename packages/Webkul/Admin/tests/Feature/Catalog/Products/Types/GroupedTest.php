@@ -57,16 +57,13 @@ it('should populate product_flat after store and update', function () {
 
     expect($flat)->not->toBeNull();
 
-    // Core fields
     expect($flat->sku)->toBe($product->sku);
     expect($flat->type)->toBe('grouped');
     expect($flat->name)->toBe('Test Grouped Product');
 
-    // Grouped products skip price and weight.
     expect($flat->price)->toBeNull();
     expect($flat->weight)->toBeNull();
 
-    // Boolean fields
     expect($flat->status)->toBeTruthy();
     expect($flat->visible_individually)->toBeTruthy();
 });
@@ -92,7 +89,6 @@ it('should create grouped product links after store and update', function () {
 it('should update grouped product link quantities', function () {
     $product = $this->storeAndUpdateGroupedProduct();
 
-    // Build links payload using existing grouped product IDs.
     $links = [];
 
     foreach ($product->grouped_products as $key => $groupedProduct) {
@@ -117,7 +113,6 @@ it('should update grouped product link quantities', function () {
         'links' => $links,
     ])->assertRedirect(route('admin.catalog.products.index'));
 
-    // Verify all links have updated qty.
     foreach ($links as $id => $link) {
         $this->assertDatabaseHas('product_grouped_products', [
             'id' => $id,
@@ -130,7 +125,6 @@ it('should update grouped product link quantities', function () {
 it('should not create inventory for a grouped product', function () {
     $product = $this->storeAndUpdateGroupedProduct();
 
-    // Grouped products themselves don't have inventory.
     $this->assertDatabaseMissing('product_inventories', [
         'product_id' => $product->id,
     ]);
@@ -145,7 +139,6 @@ it('should fail validation when required fields are missing on grouped product u
 
     $product = $this->createGroupedProduct();
 
-    // Grouped products do not require price or weight.
     putJson(route('admin.catalog.products.update', $product->id))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('sku')
