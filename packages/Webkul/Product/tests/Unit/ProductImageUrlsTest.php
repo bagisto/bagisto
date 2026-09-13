@@ -9,12 +9,6 @@ use Webkul\Product\ProductImage as ProductImages;
 
 use function Pest\Laravel\get;
 
-beforeEach(function () {
-    Storage::fake('s3');
-
-    config(['filesystems.default' => 's3']);
-});
-
 /**
  * Attach an image to a product, with its file on the store's disk unless told otherwise.
  */
@@ -33,6 +27,12 @@ function productImageOnStoreDisk(Product $product, bool $stored = true): Product
         'position' => 1,
     ]);
 }
+
+beforeEach(function () {
+    Storage::fake('s3');
+
+    config(['filesystems.default' => 's3']);
+});
 
 // ============================================================================
 // Remote Disk

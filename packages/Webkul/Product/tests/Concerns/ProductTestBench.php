@@ -205,6 +205,27 @@ trait ProductTestBench
     }
 
     /**
+     * Create a downloadable product with links via factory.
+     */
+    public function createDownloadableProduct(array $overrides = [], array $linkPrices = [10, 20]): Product
+    {
+        $product = $this->createProduct('downloadable', $overrides);
+
+        foreach ($linkPrices as $i => $price) {
+            $product->downloadable_links()->create([
+                'title' => "Link {$i}",
+                'price' => $price,
+                'type' => 'url',
+                'url' => "https://example.com/file{$i}.pdf",
+                'sort_order' => $i,
+                'downloads' => 0,
+            ]);
+        }
+
+        return $product->fresh();
+    }
+
+    /**
      * Create a sellable product of the given type, with the variants, links or options the type needs.
      */
     public function createProductOfType(string $type): Product
@@ -230,27 +251,6 @@ trait ProductTestBench
         Event::dispatch('catalog.product.update.after', $product);
 
         return $product->refresh();
-    }
-
-    /**
-     * Create a downloadable product with links via factory.
-     */
-    public function createDownloadableProduct(array $overrides = [], array $linkPrices = [10, 20]): Product
-    {
-        $product = $this->createProduct('downloadable', $overrides);
-
-        foreach ($linkPrices as $i => $price) {
-            $product->downloadable_links()->create([
-                'title' => "Link {$i}",
-                'price' => $price,
-                'type' => 'url',
-                'url' => "https://example.com/file{$i}.pdf",
-                'sort_order' => $i,
-                'downloads' => 0,
-            ]);
-        }
-
-        return $product->fresh();
     }
 
     /**

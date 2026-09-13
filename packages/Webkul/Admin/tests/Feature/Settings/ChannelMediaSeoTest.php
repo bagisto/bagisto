@@ -7,6 +7,9 @@ use Webkul\Core\Models\Channel;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
+/**
+ * Create a channel whose logo and favicon files exist on the storage disk.
+ */
 function makeChannelWithLogo(): Channel
 {
     $channel = Channel::factory()->create();
@@ -24,6 +27,9 @@ function makeChannelWithLogo(): Channel
     return $channel;
 }
 
+/**
+ * The payload that updates a channel, with the given fields overriding the defaults.
+ */
 function channelUpdatePayload(Channel $channel, array $extra = []): array
 {
     return array_merge([

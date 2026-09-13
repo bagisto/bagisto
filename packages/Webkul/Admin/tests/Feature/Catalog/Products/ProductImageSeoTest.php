@@ -10,6 +10,9 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
+/**
+ * Create a simple product with one image whose file exists on the storage disk.
+ */
 function makeProductWithStoredImage(): array
 {
     $product = (new ProductFaker)->getSimpleProductFactory()->create();
@@ -28,6 +31,9 @@ function makeProductWithStoredImage(): array
     return [$product, $image];
 }
 
+/**
+ * The payload that updates a product with the given images.
+ */
 function productUpdatePayload(Product $product, array $images): array
 {
     return [

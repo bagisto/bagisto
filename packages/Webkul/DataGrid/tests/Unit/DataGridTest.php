@@ -13,6 +13,40 @@ use Webkul\DataGrid\Exceptions\InvalidDataGridException;
 use Webkul\DataGrid\Exports\DataGridExport;
 use Webkul\DataGrid\Tests\Fixtures\CartRuleFixtureDataGrid;
 
+/**
+ * Create a cart rule carrying the batch marker the fixture grid scopes to.
+ */
+function fixtureRule(string $batch, array $attributes = []): CartRule
+{
+    return CartRule::factory()->create(array_merge(['description' => $batch], $attributes));
+}
+
+/**
+ * Process the fixture grid for one batch with the given request parameters and return the JSON payload.
+ */
+function runFixtureGrid(string $batch, array $request = []): array
+{
+    return processGrid(new CartRuleFixtureDataGrid($batch), $request);
+}
+
+/**
+ * Process a grid against the given request parameters and return the JSON payload.
+ */
+function processGrid(DataGrid $grid, array $request = []): array
+{
+    request()->replace($request);
+
+    return $grid->process()->getData(true);
+}
+
+/**
+ * Ids of the records in a grid payload, in the order the grid returned them.
+ */
+function recordIds(array $payload): array
+{
+    return array_column($payload['records'], 'rule_id');
+}
+
 beforeEach(function () {
     $this->batch = Str::uuid()->toString();
 });
@@ -407,37 +441,3 @@ it('should resolve a datagrid class through the helper', function () {
 it('should reject a class that is not a datagrid in the helper', function () {
     datagrid(CartRule::class);
 })->throws(InvalidDataGridException::class);
-
-/**
- * Create a cart rule carrying the batch marker the fixture grid scopes to.
- */
-function fixtureRule(string $batch, array $attributes = []): CartRule
-{
-    return CartRule::factory()->create(array_merge(['description' => $batch], $attributes));
-}
-
-/**
- * Process the fixture grid for one batch with the given request parameters and return the JSON payload.
- */
-function runFixtureGrid(string $batch, array $request = []): array
-{
-    return processGrid(new CartRuleFixtureDataGrid($batch), $request);
-}
-
-/**
- * Process a grid against the given request parameters and return the JSON payload.
- */
-function processGrid(DataGrid $grid, array $request = []): array
-{
-    request()->replace($request);
-
-    return $grid->process()->getData(true);
-}
-
-/**
- * Ids of the records in a grid payload, in the order the grid returned them.
- */
-function recordIds(array $payload): array
-{
-    return array_column($payload['records'], 'rule_id');
-}

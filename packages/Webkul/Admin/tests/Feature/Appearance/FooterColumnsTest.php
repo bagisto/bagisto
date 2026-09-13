@@ -12,10 +12,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
-beforeEach(function () {
-    config(['responsecache.enabled' => false]);
-});
-
 /**
  * The channel's only footer, holding the given stored options.
  */
@@ -51,6 +47,10 @@ function footerColumn(string ...$titles): array
 {
     return array_map(fn ($title) => ['title' => $title, 'url' => '/'.strtolower($title)], $titles);
 }
+
+beforeEach(function () {
+    config(['responsecache.enabled' => false]);
+});
 
 it('should let the operator add columns rather than fixing how many there are', function () {
     $schema = app(SectionSchema::class)->for(SectionTypeEnum::FOOTER_LINKS->value);

@@ -7,6 +7,28 @@ use Webkul\CartRule\Models\CartRule;
 use Webkul\DataGrid\Column;
 use Webkul\DataGrid\Exceptions\InvalidColumnExpressionException;
 
+/**
+ * Resolve a filterable column of the given type, optionally with a filter type.
+ */
+function filterColumn(string $type, string $index, ?string $filterableType = null): Column
+{
+    return Column::resolveType([
+        'index' => $index,
+        'label' => Str::headline($index),
+        'type' => $type,
+        'filterable' => true,
+        'filterable_type' => $filterableType,
+    ]);
+}
+
+/**
+ * The clauses of the nested where group a column filter adds to the builder.
+ */
+function nestedWheres(Builder $queryBuilder): array
+{
+    return $queryBuilder->wheres[0]['query']->wheres;
+}
+
 // ============================================================================
 // Value Parsing
 // ============================================================================
@@ -101,25 +123,3 @@ it('should match an aggregate text filter with a like on the having clause', fun
     expect($queryBuilder->havings[0]['query']->havings[0])
         ->toMatchArray(['column' => 'rule_count', 'operator' => $column->likeOperator(), 'value' => '%3%', 'boolean' => 'or']);
 });
-
-/**
- * Resolve a filterable column of the given type, optionally with a filter type.
- */
-function filterColumn(string $type, string $index, ?string $filterableType = null): Column
-{
-    return Column::resolveType([
-        'index' => $index,
-        'label' => Str::headline($index),
-        'type' => $type,
-        'filterable' => true,
-        'filterable_type' => $filterableType,
-    ]);
-}
-
-/**
- * The clauses of the nested where group a column filter adds to the builder.
- */
-function nestedWheres(Builder $queryBuilder): array
-{
-    return $queryBuilder->wheres[0]['query']->wheres;
-}

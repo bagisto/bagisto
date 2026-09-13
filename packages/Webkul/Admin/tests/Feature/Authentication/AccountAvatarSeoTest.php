@@ -7,6 +7,9 @@ use Webkul\User\Models\Admin;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
+/**
+ * Create an admin with a known password and, unless told otherwise, an avatar stored on the disk.
+ */
 function makeAdminWithAvatar(bool $withImage = true): Admin
 {
     $admin = Admin::factory()->create([
@@ -24,6 +27,9 @@ function makeAdminWithAvatar(bool $withImage = true): Admin
     return $admin;
 }
 
+/**
+ * The payload that updates the account of an admin, with the given fields overriding the defaults.
+ */
 function accountUpdatePayload(Admin $admin, array $extra = []): array
 {
     return array_merge([

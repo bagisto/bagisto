@@ -11,10 +11,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-// ============================================================================
-// Helpers
-// ============================================================================
-
 /**
  * Build the attribute_groups payload matching the real browser format.
  *

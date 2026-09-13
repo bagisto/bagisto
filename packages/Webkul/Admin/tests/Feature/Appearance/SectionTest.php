@@ -11,6 +11,19 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
+/**
+ * A channel with no footer yet, so the single footer rule can be exercised from a known
+ * starting point rather than whatever the seeder left behind.
+ */
+function channelWithoutFooter(): Channel
+{
+    $channel = core()->getDefaultChannel();
+
+    Section::where('type', SectionTypeEnum::FOOTER_LINKS->value)->get()->each->delete();
+
+    return $channel;
+}
+
 it('should return the section index page', function () {
     $this->loginAsAdmin();
 
@@ -742,19 +755,6 @@ it('should offer the same categories to both carousels', function () {
 
     expect($product['options'])->toBe($category['options']);
 });
-
-/**
- * A channel with no footer yet, so the single footer rule can be exercised from a known
- * starting point rather than whatever the seeder left behind.
- */
-function channelWithoutFooter(): Channel
-{
-    $channel = core()->getDefaultChannel();
-
-    Section::where('type', SectionTypeEnum::FOOTER_LINKS->value)->get()->each->delete();
-
-    return $channel;
-}
 
 it('should refuse a second footer however it is reached', function (string $path) {
     $channel = channelWithoutFooter();

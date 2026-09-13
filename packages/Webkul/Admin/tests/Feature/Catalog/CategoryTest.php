@@ -12,10 +12,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-// ============================================================================
-// Helpers
-// ============================================================================
-
 /**
  * Create a category with its translation record via the factory.
  */

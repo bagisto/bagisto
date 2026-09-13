@@ -32,6 +32,52 @@ function testKeyPair(): array
     ];
 }
 
+/**
+ * The smallest thing `initiatePayment` will accept: it reads the totals, the currency and the
+ * billing address off the cart, and a cart without an address simply sends no billing data.
+ */
+function cartStub(): object
+{
+    return new class
+    {
+        public $id = 1;
+
+        public $grand_total = 338.95;
+
+        public $base_grand_total = 338.95;
+
+        public $cart_currency_code = 'INR';
+
+        public $base_currency_code = 'INR';
+
+        public $billing_address = null;
+    };
+}
+
+/**
+ * Configure a complete, usable set of credentials, so that a test only has to say which single
+ * value it wants broken.
+ */
+function configureCredentials(array $overrides = []): void
+{
+    $credentials = array_merge([
+        'merchant_id' => 'test_merchant',
+        'public_key_id' => 'test_public_kid',
+        'private_key_id' => 'test_private_kid',
+        'payglocal_public_key' => testKeyPair()['public'],
+        'merchant_private_key' => testKeyPair()['private'],
+        'accepted_currencies' => 'USD,INR',
+    ], $overrides);
+
+    foreach ($credentials as $field => $value) {
+        CoreConfig::factory()->create([
+            'code' => 'sales.payment_methods.payglocal.'.$field,
+            'value' => $value,
+            'channel_code' => 'default',
+        ]);
+    }
+}
+
 beforeEach(function () {
     $this->payGlocal = app(PayGlocal::class);
 });
@@ -362,52 +408,6 @@ it('returns null without calling payglocal when there is no status url', functio
 
     Http::assertNothingSent();
 });
-
-/**
- * The smallest thing `initiatePayment` will accept: it reads the totals, the currency and the
- * billing address off the cart, and a cart without an address simply sends no billing data.
- */
-function cartStub(): object
-{
-    return new class
-    {
-        public $id = 1;
-
-        public $grand_total = 338.95;
-
-        public $base_grand_total = 338.95;
-
-        public $cart_currency_code = 'INR';
-
-        public $base_currency_code = 'INR';
-
-        public $billing_address = null;
-    };
-}
-
-/**
- * Configure a complete, usable set of credentials, so that a test only has to say which single
- * value it wants broken.
- */
-function configureCredentials(array $overrides = []): void
-{
-    $credentials = array_merge([
-        'merchant_id' => 'test_merchant',
-        'public_key_id' => 'test_public_kid',
-        'private_key_id' => 'test_private_kid',
-        'payglocal_public_key' => testKeyPair()['public'],
-        'merchant_private_key' => testKeyPair()['private'],
-        'accepted_currencies' => 'USD,INR',
-    ], $overrides);
-
-    foreach ($credentials as $field => $value) {
-        CoreConfig::factory()->create([
-            'code' => 'sales.payment_methods.payglocal.'.$field,
-            'value' => $value,
-            'channel_code' => 'default',
-        ]);
-    }
-}
 
 it('reads the cart out of a merchant transaction id', function () {
     expect($this->payGlocal->parseCartId('PGL28TPQWIXAHJ3F'))->toBe(28)

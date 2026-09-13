@@ -11,18 +11,6 @@ use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
-beforeEach(function () {
-    $this->useIsolatedPageCache();
-
-    $this->otherHostScope = $this->addChannelOnHost('shop-two.test');
-
-    $this->secondScope = $this->addSecondScope();
-
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $this->otherProduct = (new ProductFaker)->getSimpleProductFactory()->create();
-});
-
 /**
  * Cache a price-bearing path for a guest in the current scope, a second locale and currency, and a channel on its own host.
  */
@@ -64,6 +52,18 @@ function priceIndexerRecordingBatches(array &$sequence): PriceIndexer
 
     return $indexer;
 }
+
+beforeEach(function () {
+    $this->useIsolatedPageCache();
+
+    $this->otherHostScope = $this->addChannelOnHost('shop-two.test');
+
+    $this->secondScope = $this->addSecondScope();
+
+    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $this->otherProduct = (new ProductFaker)->getSimpleProductFactory()->create();
+});
 
 it('drops the pages of the products whose prices were reindexed everywhere, and leaves other products alone', function (string $event) {
     $copies = [

@@ -9,11 +9,6 @@ use function Pest\Laravel\get;
  * The full page cache keeps the storefront in a store of its own, which outlives the
  * run, so a page rendered by an earlier test would answer for this one.
  */
-beforeEach(function () {
-    config(['responsecache.enabled' => false]);
-
-    ResponseCache::clear();
-});
 
 /**
  * Give the current channel a footer with the links provided.
@@ -37,6 +32,12 @@ function makeFooterLinks(array $links): Section
 
     return $section;
 }
+
+beforeEach(function () {
+    config(['responsecache.enabled' => false]);
+
+    ResponseCache::clear();
+});
 
 it('resolves a footer link recorded as a path against the site serving the request', function () {
     makeFooterLinks([

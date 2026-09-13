@@ -11,10 +11,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-// ============================================================================
-// Datasets
-// ============================================================================
-
 dataset('attribute_types', [
     'text' => ['text'],
     'textarea' => ['textarea'],

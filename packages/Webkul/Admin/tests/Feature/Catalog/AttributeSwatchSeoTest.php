@@ -6,6 +6,9 @@ use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
+/**
+ * Create an image swatch attribute with one option that points at a swatch file.
+ */
 function makeImageSwatchOption(): AttributeOption
 {
     $attribute = Attribute::factory()->create([

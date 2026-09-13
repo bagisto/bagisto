@@ -7,30 +7,6 @@ use Illuminate\Testing\TestResponse;
 
 dataset('acl governed routes', fn () => aclGovernedRoutes());
 
-// ============================================================================
-// Access Denied
-// ============================================================================
-
-it('should deny an admin holding every permission except the one governing the route', function (string $routeName, string $permission) {
-    $this->loginAsAdminWithPermissions(
-        collect(config('acl'))->pluck('key')->reject(fn ($key) => $key === $permission)->values()->all()
-    );
-
-    requestAclRoute($routeName)->assertUnauthorized();
-})->with('acl governed routes');
-
-// ============================================================================
-// Access Granted
-// ============================================================================
-
-it('should not deny an admin holding the permission governing the route and its ancestors', function (string $routeName, string $permission) {
-    Http::fake();
-
-    $this->loginAsAdminWithPermissions(permissionWithAncestors($permission));
-
-    assertNotDeniedByAcl(requestAclRoute($routeName));
-})->with('acl governed routes');
-
 /**
  * Every route named in acl.php with the key that governs it, the last entry naming a route winning as the bouncer resolves it.
  */
@@ -76,3 +52,27 @@ function assertNotDeniedByAcl(TestResponse $response): void
 
     expect((string) $response->getContent())->not->toContain('This action is unauthorized');
 }
+
+// ============================================================================
+// Access Denied
+// ============================================================================
+
+it('should deny an admin holding every permission except the one governing the route', function (string $routeName, string $permission) {
+    $this->loginAsAdminWithPermissions(
+        collect(config('acl'))->pluck('key')->reject(fn ($key) => $key === $permission)->values()->all()
+    );
+
+    requestAclRoute($routeName)->assertUnauthorized();
+})->with('acl governed routes');
+
+// ============================================================================
+// Access Granted
+// ============================================================================
+
+it('should not deny an admin holding the permission governing the route and its ancestors', function (string $routeName, string $permission) {
+    Http::fake();
+
+    $this->loginAsAdminWithPermissions(permissionWithAncestors($permission));
+
+    assertNotDeniedByAcl(requestAclRoute($routeName));
+})->with('acl governed routes');

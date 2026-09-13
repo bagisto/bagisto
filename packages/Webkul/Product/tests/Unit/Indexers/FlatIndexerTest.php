@@ -10,22 +10,6 @@ use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 
-beforeEach(function () {
-    $defaultChannel = core()->getDefaultChannel();
-
-    $this->channelLocale = Locale::factory()->create();
-
-    $this->channel = Channel::factory()->create([
-        'root_category_id' => $defaultChannel->root_category_id,
-        'default_locale_id' => $this->channelLocale->id,
-        'base_currency_id' => $defaultChannel->base_currency_id,
-    ]);
-
-    $this->channel->locales()->sync([$this->channelLocale->id]);
-
-    CacheGeneration::bump(ChannelRepository::class);
-});
-
 /**
  * Write a product's name in the given locale without reindexing it.
  */
@@ -62,6 +46,22 @@ function flatRowOn(int $productId, string $channelCode, string $localeCode): ?Pr
         ->where('locale', $localeCode)
         ->first();
 }
+
+beforeEach(function () {
+    $defaultChannel = core()->getDefaultChannel();
+
+    $this->channelLocale = Locale::factory()->create();
+
+    $this->channel = Channel::factory()->create([
+        'root_category_id' => $defaultChannel->root_category_id,
+        'default_locale_id' => $this->channelLocale->id,
+        'base_currency_id' => $defaultChannel->base_currency_id,
+    ]);
+
+    $this->channel->locales()->sync([$this->channelLocale->id]);
+
+    CacheGeneration::bump(ChannelRepository::class);
+});
 
 // ============================================================================
 // Channel Without The Admin Locale

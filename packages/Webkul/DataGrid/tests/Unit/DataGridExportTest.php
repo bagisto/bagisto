@@ -3,6 +3,23 @@
 use Webkul\DataGrid\Exports\DataGridExport;
 use Webkul\DataGrid\Tests\Fixtures\CartRuleFixtureDataGrid;
 
+/**
+ * A raw grid row with every fixture column, overridden by the given values.
+ */
+function fixtureRecord(array $overrides = []): object
+{
+    return (object) array_merge([
+        'rule_id' => 1,
+        'name' => 'Rule',
+        'action_type' => 'by_percent',
+        'discount_amount' => '10.0000',
+        'sort_order' => 1,
+        'status' => 1,
+        'starts_from' => null,
+        'created_at' => '2024-02-01 00:00:00',
+    ], $overrides);
+}
+
 beforeEach(function () {
     $grid = new CartRuleFixtureDataGrid;
 
@@ -53,20 +70,3 @@ it('should leave harmless values untouched', function (mixed $value) {
     'integer' => 7,
     'null' => null,
 ]);
-
-/**
- * A raw grid row with every fixture column, overridden by the given values.
- */
-function fixtureRecord(array $overrides = []): object
-{
-    return (object) array_merge([
-        'rule_id' => 1,
-        'name' => 'Rule',
-        'action_type' => 'by_percent',
-        'discount_amount' => '10.0000',
-        'sort_order' => 1,
-        'status' => 1,
-        'starts_from' => null,
-        'created_at' => '2024-02-01 00:00:00',
-    ], $overrides);
-}

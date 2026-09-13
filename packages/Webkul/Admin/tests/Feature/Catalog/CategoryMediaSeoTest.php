@@ -9,6 +9,9 @@ use Webkul\Faker\Helpers\Category as CategoryFaker;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
+/**
+ * Create a category whose logo and banner files exist on the storage disk.
+ */
 function makeCategoryWithLogo(): Category
 {
     $category = (new CategoryFaker)->factory()->create();
@@ -26,6 +29,9 @@ function makeCategoryWithLogo(): Category
     return $category;
 }
 
+/**
+ * The payload that updates a category, with the given fields overriding the defaults.
+ */
 function categoryUpdatePayload(Category $category, array $extra = []): array
 {
     return array_merge([

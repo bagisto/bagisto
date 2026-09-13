@@ -551,25 +551,18 @@ abstract class DataGrid
     }
 
     /**
-     * Process request.
+     * Process the validated request parameters, whose boolean `export` flag is "0" or "1" and so never empty.
      */
     protected function processRequest(): void
     {
         $this->dispatchEvent('process_request.before', $this);
 
-        /**
-         * Store all request parameters in this variable; avoid using direct request helpers afterward.
-         */
         $requestedParams = $this->validatedRequest();
 
         $this->processRequestedFilters($requestedParams['filters'] ?? []);
 
         $this->processRequestedSorting($requestedParams['sort'] ?? []);
 
-        /**
-         * The `export` parameter is validated as a boolean in the `validatedRequest`. An `empty` function will not work,
-         * as it will always be treated as true because of "0" and "1".
-         */
         isset($requestedParams['export']) && (bool) $requestedParams['export']
             ? $this->processRequestedExport($requestedParams['format'] ?? 'csv')
             : $this->processRequestedPagination($requestedParams['pagination'] ?? []);
@@ -578,13 +571,10 @@ abstract class DataGrid
     }
 
     /**
-     * Prepare all the setup for datagrid.
+     * Strip the tags from every string column of a row.
      */
     protected function sanitizeRow($row): \stdClass
     {
-        /**
-         * Convert stdClass to array.
-         */
         $tempRow = json_decode(json_encode($row), true);
 
         foreach ($tempRow as $column => $value) {
@@ -713,45 +703,30 @@ abstract class DataGrid
     {
         $this->dispatchEvent('prepare.before', $this);
 
-        /**
-         * Prepare columns.
-         */
         $this->dispatchEvent('columns.prepare.before', $this);
 
         $this->prepareColumns();
 
         $this->dispatchEvent('columns.prepare.after', $this);
 
-        /**
-         * Prepare actions.
-         */
         $this->dispatchEvent('actions.prepare.before', $this);
 
         $this->prepareActions();
 
         $this->dispatchEvent('actions.prepare.after', $this);
 
-        /**
-         * Prepare mass actions.
-         */
         $this->dispatchEvent('mass_actions.prepare.before', $this);
 
         $this->prepareMassActions();
 
         $this->dispatchEvent('mass_actions.prepare.after', $this);
 
-        /**
-         * Prepare query builder.
-         */
         $this->dispatchEvent('query_builder.prepare.before', $this);
 
         $this->setQueryBuilder($this->prepareQueryBuilder());
 
         $this->dispatchEvent('query_builder.prepare.after', $this);
 
-        /**
-         * Process request.
-         */
         $this->processRequest();
 
         $this->dispatchEvent('prepare.after', $this);

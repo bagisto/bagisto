@@ -12,14 +12,6 @@
  */
 
 /**
- * The repository root, resolved from this file rather than the application.
- */
-function iconBasePath(string $path): string
-{
-    return dirname(__DIR__, 2).'/'.$path;
-}
-
-/**
  * The packages that carry an icon font, and the roots their stylesheet scans.
  */
 const ICON_PACKAGES = [
@@ -27,6 +19,14 @@ const ICON_PACKAGES = [
     'Shop' => 'packages/Webkul/Shop',
     'Installer' => 'packages/Webkul/Installer',
 ];
+
+/**
+ * The repository root, resolved from this file rather than the application.
+ */
+function iconBasePath(string $path): string
+{
+    return dirname(__DIR__, 2).'/'.$path;
+}
 
 /**
  * Return the stylesheet of the given package.

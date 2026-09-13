@@ -11,6 +11,69 @@ use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
 
+/**
+ * The claims PayGlocal signs into the `x-gl-token` it posts back, in the shape it really sends:
+ * the reference, the outcome, and the status url to confirm the outcome against.
+ */
+function callbackClaims($cart): array
+{
+    return [
+        'gid' => 'gl_o-test_gid',
+        'statusUrl' => 'https://api.uat.pygcl.com/gl/v1/payments/gl_o-test_gid/status?x-gl-token=token',
+        'Amount' => (string) $cart->base_grand_total,
+        'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
+        'paymentMethod' => 'CARD',
+        'status' => PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value,
+        'x-gl-merchantId' => 'test_merchant',
+    ];
+}
+
+/**
+ * The body PayGlocal's status API answers with, in the shape it really sends. That call is what
+ * an order is built from, so a payment is simulated by answering it rather than by the token.
+ */
+function statusResponse($cart, string $status, array $dataOverrides = []): array
+{
+    return [
+        'gid' => 'gl_o-test_gid',
+        'status' => $status,
+        'message' => 'Transaction is '.strtolower($status),
+        'reasonCode' => 'GL-201-001',
+        'data' => array_merge([
+            'gid' => 'gl_o-test_gid',
+            'payment-method' => 'CARD',
+            'Amount' => (string) $cart->base_grand_total,
+            'txnCurrency' => $cart->base_currency_code,
+            'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
+            'status' => $status,
+        ], $dataOverrides),
+        'errors' => null,
+    ];
+}
+
+/**
+ * Answer the status call for a captured payment on the given cart.
+ */
+function mockConfirmedStatus($payGlocalMock, $cart, array $dataOverrides = []): void
+{
+    $payGlocalMock->shouldReceive('getTransactionStatus')
+        ->with('https://api.uat.pygcl.com/gl/v1/payments/gl_o-test_gid/status?x-gl-token=token')
+        ->andReturn(statusResponse($cart, PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value, $dataOverrides));
+}
+
+/**
+ * Stand in for the signed token PayGlocal posts. Passing null models a token that does not
+ * verify, which must never settle anything.
+ */
+function mockCallbackToken(?array $claims): void
+{
+    $cryptoMock = test()->mock(Crypto::class)->makePartial();
+
+    $cryptoMock->shouldReceive('verify')->andReturn($claims);
+
+    app()->instance(Crypto::class, $cryptoMock);
+}
+
 beforeEach(function () {
     Http::preventStrayRequests();
 
@@ -323,66 +386,3 @@ it('refuses to place the order when the cart currency no longer matches what was
 
     expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
 });
-
-/**
- * The claims PayGlocal signs into the `x-gl-token` it posts back, in the shape it really sends:
- * the reference, the outcome, and the status url to confirm the outcome against.
- */
-function callbackClaims($cart): array
-{
-    return [
-        'gid' => 'gl_o-test_gid',
-        'statusUrl' => 'https://api.uat.pygcl.com/gl/v1/payments/gl_o-test_gid/status?x-gl-token=token',
-        'Amount' => (string) $cart->base_grand_total,
-        'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
-        'paymentMethod' => 'CARD',
-        'status' => PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value,
-        'x-gl-merchantId' => 'test_merchant',
-    ];
-}
-
-/**
- * The body PayGlocal's status API answers with, in the shape it really sends. That call is what
- * an order is built from, so a payment is simulated by answering it rather than by the token.
- */
-function statusResponse($cart, string $status, array $dataOverrides = []): array
-{
-    return [
-        'gid' => 'gl_o-test_gid',
-        'status' => $status,
-        'message' => 'Transaction is '.strtolower($status),
-        'reasonCode' => 'GL-201-001',
-        'data' => array_merge([
-            'gid' => 'gl_o-test_gid',
-            'payment-method' => 'CARD',
-            'Amount' => (string) $cart->base_grand_total,
-            'txnCurrency' => $cart->base_currency_code,
-            'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
-            'status' => $status,
-        ], $dataOverrides),
-        'errors' => null,
-    ];
-}
-
-/**
- * Answer the status call for a captured payment on the given cart.
- */
-function mockConfirmedStatus($payGlocalMock, $cart, array $dataOverrides = []): void
-{
-    $payGlocalMock->shouldReceive('getTransactionStatus')
-        ->with('https://api.uat.pygcl.com/gl/v1/payments/gl_o-test_gid/status?x-gl-token=token')
-        ->andReturn(statusResponse($cart, PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value, $dataOverrides));
-}
-
-/**
- * Stand in for the signed token PayGlocal posts. Passing null models a token that does not
- * verify, which must never settle anything.
- */
-function mockCallbackToken(?array $claims): void
-{
-    $cryptoMock = test()->mock(Crypto::class)->makePartial();
-
-    $cryptoMock->shouldReceive('verify')->andReturn($claims);
-
-    app()->instance(Crypto::class, $cryptoMock);
-}

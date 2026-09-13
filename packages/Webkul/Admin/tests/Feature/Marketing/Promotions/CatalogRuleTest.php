@@ -7,10 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    CatalogRule::query()->delete();
-});
-
 /**
  * Create a catalog rule with channels and customer groups synced.
  */
@@ -23,6 +19,10 @@ function createCatalogRule(array $attributes = []): CatalogRule
         })
         ->create($attributes);
 }
+
+afterEach(function () {
+    CatalogRule::query()->delete();
+});
 
 // ============================================================================
 // Index

@@ -11,10 +11,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
-// ============================================================================
-// Datasets
-// ============================================================================
-
 dataset('product_types', [
     'simple' => ['simple'],
     'virtual' => ['virtual'],

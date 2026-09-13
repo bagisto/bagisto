@@ -26,6 +26,28 @@ function activeStudioTheme(?array $sections): Channel
     return Channel::factory()->create(['theme' => 'studio']);
 }
 
+/**
+ * A live section of a type no theme offers, as one left behind by a removed theme package.
+ */
+function retiredSection(): Section
+{
+    $channel = core()->getDefaultChannel();
+
+    $section = Section::factory()->create([
+        'type' => 'retired_type',
+        'name' => 'Retired Section',
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $section->translateOrNew(app()->getLocale())->options = ['legacy' => 'kept'];
+
+    $section->save();
+
+    return $section;
+}
+
 it('should offer the default theme every core section type', function () {
     expect(app(SectionSchema::class)->types('default')->keys()->all())
         ->toBe(SectionTypeEnum::getValues());
@@ -132,28 +154,6 @@ it('should refuse a second section of a theme own singleton type', function () {
         'type' => trans('admin::app.appearance.sections.create.singleton-exists', ['type' => 'Lookbook']),
     ]);
 });
-
-/**
- * A live section of a type no theme offers, as one left behind by a removed theme package.
- */
-function retiredSection(): Section
-{
-    $channel = core()->getDefaultChannel();
-
-    $section = Section::factory()->create([
-        'type' => 'retired_type',
-        'name' => 'Retired Section',
-        'status' => 1,
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme,
-    ]);
-
-    $section->translateOrNew(app()->getLocale())->options = ['legacy' => 'kept'];
-
-    $section->save();
-
-    return $section;
-}
 
 it('should hand the editor an empty schema for a stored type the theme no longer offers', function () {
     $section = retiredSection();

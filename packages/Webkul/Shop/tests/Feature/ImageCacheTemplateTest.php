@@ -20,24 +20,6 @@ use Webkul\Shop\Tests\Fixtures\ImageCache\WideSmall;
 
 use function Pest\Laravel\get;
 
-beforeEach(function () {
-    config(['imagecache.templates' => [
-        'small' => Small::class,
-        'medium' => Medium::class,
-        'large' => Large::class,
-    ]]);
-
-    $this->source = 'imagecache-templates/source.png';
-
-    File::ensureDirectoryExists(storage_path('app/public/imagecache-templates'));
-
-    File::put(storage_path('app/public/'.$this->source), UploadedFile::fake()->image('source.png', 800, 600)->getContent());
-});
-
-afterEach(function () {
-    File::deleteDirectory(storage_path('app/public/imagecache-templates'));
-});
-
 /**
  * Register a storefront theme with the given image templates, served by a channel on its own host.
  */
@@ -73,6 +55,24 @@ function dimensionsOf(TestResponse $response): array
 
     return [$width, $height];
 }
+
+beforeEach(function () {
+    config(['imagecache.templates' => [
+        'small' => Small::class,
+        'medium' => Medium::class,
+        'large' => Large::class,
+    ]]);
+
+    $this->source = 'imagecache-templates/source.png';
+
+    File::ensureDirectoryExists(storage_path('app/public/imagecache-templates'));
+
+    File::put(storage_path('app/public/'.$this->source), UploadedFile::fake()->image('source.png', 800, 600)->getContent());
+});
+
+afterEach(function () {
+    File::deleteDirectory(storage_path('app/public/imagecache-templates'));
+});
 
 it('should resolve the core templates for a theme that registers none', function () {
     themeWithImageTemplates('plain', null);

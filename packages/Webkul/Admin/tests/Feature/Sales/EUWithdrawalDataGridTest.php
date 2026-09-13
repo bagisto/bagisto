@@ -10,6 +10,9 @@ use function Pest\Laravel\getJson;
 
 $ajax = ['X-Requested-With' => 'XMLHttpRequest'];
 
+/**
+ * Create a withdrawal request for a fresh guest order, with the given attributes overriding the defaults.
+ */
 function makeWithdrawal(array $attributes = []): Withdrawal
 {
     $order = Order::factory()->create(array_merge([

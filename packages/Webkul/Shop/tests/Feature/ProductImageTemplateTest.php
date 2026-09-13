@@ -39,31 +39,6 @@ use Webkul\Shop\Tests\Fixtures\ImageCache\WideSmall;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 
-beforeEach(function () {
-    config(['imagecache.templates' => [
-        'small' => Small::class,
-        'medium' => Medium::class,
-        'large' => Large::class,
-    ]]);
-
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $this->path = 'product/'.$this->product->id.'/front.png';
-
-    Storage::put($this->path, UploadedFile::fake()->image('front.png', 800, 600)->getContent());
-
-    ProductImage::create([
-        'product_id' => $this->product->id,
-        'type' => 'images',
-        'path' => $this->path,
-        'position' => 1,
-    ]);
-});
-
-afterEach(function () {
-    Storage::deleteDirectory('product/'.$this->product->id);
-});
-
 /**
  * Register a storefront theme with image templates and a product image list, run by a channel on its own host.
  */
@@ -125,6 +100,31 @@ function listedBaseImage($product): array
     return collect(getJson(route('shop.api.products.index', ['sort' => 'created_at-desc']))->assertOk()->json('data'))
         ->firstWhere('id', $product->id)['base_image'];
 }
+
+beforeEach(function () {
+    config(['imagecache.templates' => [
+        'small' => Small::class,
+        'medium' => Medium::class,
+        'large' => Large::class,
+    ]]);
+
+    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $this->path = 'product/'.$this->product->id.'/front.png';
+
+    Storage::put($this->path, UploadedFile::fake()->image('front.png', 800, 600)->getContent());
+
+    ProductImage::create([
+        'product_id' => $this->product->id,
+        'type' => 'images',
+        'path' => $this->path,
+        'position' => 1,
+    ]);
+});
+
+afterEach(function () {
+    Storage::deleteDirectory('product/'.$this->product->id);
+});
 
 it('should give an image the core sizes and the original, exactly as before, when the theme lists nothing', function () {
     $channel = channelRunningImageTemplates('plain', null);

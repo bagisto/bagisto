@@ -14,10 +14,9 @@ use Webkul\User\Models\Admin;
 
 use function Pest\Laravel\post;
 
-/* -----------------------------------------------------------------------
- |  HELPERS
- | -----------------------------------------------------------------------*/
-
+/**
+ * Turn the EU withdrawal feature on for the given channel.
+ */
 function enableEuWithdrawal(string $channelCode = 'default'): void
 {
     CoreConfig::query()->updateOrCreate(
@@ -26,6 +25,9 @@ function enableEuWithdrawal(string $channelCode = 'default'): void
     );
 }
 
+/**
+ * Turn the EU withdrawal feature off for the given channel.
+ */
 function disableEuWithdrawal(string $channelCode = 'default'): void
 {
     CoreConfig::query()->updateOrCreate(
@@ -34,6 +36,9 @@ function disableEuWithdrawal(string $channelCode = 'default'): void
     );
 }
 
+/**
+ * Create an order that belongs to the given customer.
+ */
 function makeOrderForCustomer(Customer $customer): Order
 {
     return Order::factory()->create([
@@ -43,6 +48,9 @@ function makeOrderForCustomer(Customer $customer): Order
     ]);
 }
 
+/**
+ * Create a guest order placed with the given email address.
+ */
 function makeGuestOrder(string $email = 'guest@example.test'): Order
 {
     return Order::factory()->create([
@@ -52,9 +60,9 @@ function makeGuestOrder(string $email = 'guest@example.test'): Order
     ]);
 }
 
-/* -----------------------------------------------------------------------
- |  OBSERVER (append-only)
- | -----------------------------------------------------------------------*/
+// ============================================================================
+// Observer (Append-Only)
+// ============================================================================
 
 it('rejects deletion of a withdrawal record', function () {
     enableEuWithdrawal();
@@ -123,9 +131,9 @@ it('allows mutation of operational columns', function () {
     expect($withdrawal->fresh()->status)->toBe(WithdrawalStatus::REFUNDED);
 });
 
-/* -----------------------------------------------------------------------
- |  AUTH FLOW
- | -----------------------------------------------------------------------*/
+// ============================================================================
+// Auth Flow
+// ============================================================================
 
 it('returns 404 on the create route when the channel toggle is off', function () {
     disableEuWithdrawal();
@@ -186,9 +194,9 @@ it('is idempotent: double submit returns the same withdrawal record', function (
     expect($withdrawal->reason_text)->toBe('first');
 });
 
-/* -----------------------------------------------------------------------
- |  GUEST FLOW
- | -----------------------------------------------------------------------*/
+// ============================================================================
+// Guest Flow
+// ============================================================================
 
 it('emails a magic link when guest lookup matches an order', function () {
     Mail::fake();

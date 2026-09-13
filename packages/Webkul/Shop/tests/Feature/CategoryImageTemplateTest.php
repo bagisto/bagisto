@@ -19,6 +19,38 @@ use Webkul\Shop\Tests\Fixtures\ImageCache\ProductCard;
 
 use function Pest\Laravel\getJson;
 
+/**
+ * Register a storefront theme with image templates and a category image list, run by a channel on its own host.
+ */
+function channelRunningCategoryTemplates(string $code, ?array $templates, array $categoryImages = [], array $productImages = []): Channel
+{
+    config(['themes.shop.'.$code => array_merge(config('themes.shop.default'), [
+        'name' => ucfirst($code),
+        'customize' => [
+            'image_cache' => [
+                'templates' => $templates,
+                'product_images' => $productImages,
+                'category_images' => $categoryImages,
+            ],
+        ],
+    ])]);
+
+    return Channel::factory()->create([
+        'theme' => $code,
+        'hostname' => 'http://'.$code.'.test',
+    ]);
+}
+
+/**
+ * The category as the storefront category resource hands it out on a channel.
+ */
+function categoryOn(Channel $channel, Category $category): array
+{
+    core()->setCurrentChannel($channel);
+
+    return (new CategoryResource($category->fresh()))->resolve(request());
+}
+
 beforeEach(function () {
     config(['imagecache.templates' => [
         'small' => Small::class,
@@ -52,38 +84,6 @@ beforeEach(function () {
 afterEach(function () {
     Storage::deleteDirectory('category/'.$this->category->id);
 });
-
-/**
- * Register a storefront theme with image templates and a category image list, run by a channel on its own host.
- */
-function channelRunningCategoryTemplates(string $code, ?array $templates, array $categoryImages = [], array $productImages = []): Channel
-{
-    config(['themes.shop.'.$code => array_merge(config('themes.shop.default'), [
-        'name' => ucfirst($code),
-        'customize' => [
-            'image_cache' => [
-                'templates' => $templates,
-                'product_images' => $productImages,
-                'category_images' => $categoryImages,
-            ],
-        ],
-    ])]);
-
-    return Channel::factory()->create([
-        'theme' => $code,
-        'hostname' => 'http://'.$code.'.test',
-    ]);
-}
-
-/**
- * The category as the storefront category resource hands it out on a channel.
- */
-function categoryOn(Channel $channel, Category $category): array
-{
-    core()->setCurrentChannel($channel);
-
-    return (new CategoryResource($category->fresh()))->resolve(request());
-}
 
 it('should give a category image the core sizes and the original, exactly as before, when the theme lists nothing', function () {
     $category = categoryOn(channelRunningCategoryTemplates('plain', null), $this->category);

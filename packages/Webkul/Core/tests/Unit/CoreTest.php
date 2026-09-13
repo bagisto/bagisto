@@ -8,6 +8,13 @@ use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\CurrencyExchangeRate;
 use Webkul\Core\Models\Locale;
 
+dataset('currency positions', [
+    'left' => [CurrencyPositionEnum::LEFT, '%1$s%2$s'],
+    'left with space' => [CurrencyPositionEnum::LEFT_WITH_SPACE, '%1$s %2$s'],
+    'right' => [CurrencyPositionEnum::RIGHT, '%2$s%1$s'],
+    'right with space' => [CurrencyPositionEnum::RIGHT_WITH_SPACE, '%2$s %1$s'],
+]);
+
 /**
  * A currency code no row carries yet, so that a lookup by code finds the currency the test creates.
  */
@@ -39,13 +46,6 @@ function currencyOfNewCurrentChannel(?string $symbol, ?string $position, ?string
 
     return $currency;
 }
-
-dataset('currency positions', [
-    'left' => [CurrencyPositionEnum::LEFT, '%1$s%2$s'],
-    'left with space' => [CurrencyPositionEnum::LEFT_WITH_SPACE, '%1$s %2$s'],
-    'right' => [CurrencyPositionEnum::RIGHT, '%2$s%1$s'],
-    'right with space' => [CurrencyPositionEnum::RIGHT_WITH_SPACE, '%2$s %1$s'],
-]);
 
 // ============================================================================
 // Channels

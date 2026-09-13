@@ -163,7 +163,6 @@ class OrderController extends Controller
             try {
                 Cart::addProduct($item->product, $item->additional);
             } catch (\Exception $e) {
-                // do nothing
             }
         }
 

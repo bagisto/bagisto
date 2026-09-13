@@ -9,10 +9,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-beforeEach(function () {
-    Storage::fake('private');
-});
-
 /**
  * Create an import record with sensible defaults.
  */
@@ -28,6 +24,10 @@ function createImport(array $attributes = []): Import
         'field_separator' => ',',
     ], $attributes));
 }
+
+beforeEach(function () {
+    Storage::fake('private');
+});
 
 // ============================================================================
 // Index

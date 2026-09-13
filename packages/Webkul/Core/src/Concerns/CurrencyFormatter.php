@@ -20,17 +20,13 @@ trait CurrencyFormatter
     }
 
     /**
-     * Use default formatter.
+     * Use the locale formatter, keeping its own symbol when the custom symbol is the same one.
      */
     public function useDefaultCurrencyFormatter(?float $price, Currency $currency): string
     {
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
         if ($currency->symbol) {
-            /**
-             * If, somehow, the currency symbol mentioned matches with the user-defined symbol,
-             * then we can simply use the 'formatCurrency' method.
-             */
             if ($this->currencySymbol($currency) == $currency->symbol) {
                 return $formatter->formatCurrency($price, $currency->code);
             }

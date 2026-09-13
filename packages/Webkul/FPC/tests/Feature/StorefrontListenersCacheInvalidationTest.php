@@ -12,18 +12,6 @@ use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\Refund;
 use Webkul\Sales\Models\RefundItem;
 
-beforeEach(function () {
-    $this->useIsolatedPageCache();
-
-    $this->otherHostScope = $this->addChannelOnHost('shop-two.test');
-
-    $this->secondScope = $this->addSecondScope();
-
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $this->productPath = '/'.$this->product->url_key;
-});
-
 /**
  * Cache a path for a guest in the current scope, a second locale and currency, and a channel on its own host.
  */
@@ -45,6 +33,18 @@ function assertNoneCached($test, array $requests): void
         $test->assertPageNotCached($request, 'A copy of '.$request->getPathInfo().' on '.$request->getHost().' survived.');
     }
 }
+
+beforeEach(function () {
+    $this->useIsolatedPageCache();
+
+    $this->otherHostScope = $this->addChannelOnHost('shop-two.test');
+
+    $this->secondScope = $this->addSecondScope();
+
+    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $this->productPath = '/'.$this->product->url_key;
+});
 
 it('drops a product page everywhere when a review of it is updated or deleted', function () {
     $review = ProductReview::factory()->create(['product_id' => $this->product->id]);

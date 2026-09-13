@@ -92,7 +92,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves total carts
+     * Retrieves total carts.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -107,7 +107,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves total abandoned carts
+     * Retrieves total abandoned carts.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -123,7 +123,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves total abandoned cart rate
+     * Retrieves total abandoned cart rate.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -140,7 +140,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves total abandoned sales
+     * Retrieves total abandoned sales.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -156,7 +156,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves abandoned cart products
+     * Retrieves abandoned cart products.
      *
      * @param  int  $limit
      */
@@ -177,7 +177,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves total abandoned cart products
+     * Retrieves total abandoned cart products.
      */
     public function getTotalAbandonedCartProducts(): int
     {
@@ -192,7 +192,7 @@ class Cart extends AbstractReporting
     }
 
     /**
-     * Retrieves total unique cart users
+     * Retrieves total unique cart users.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate

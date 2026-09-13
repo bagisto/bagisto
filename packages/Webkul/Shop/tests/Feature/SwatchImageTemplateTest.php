@@ -12,37 +12,6 @@ use Webkul\ImageCache\Templates\Small;
 use Webkul\Product\Helpers\ConfigurableOption;
 use Webkul\Shop\Tests\Fixtures\ImageCache\SquareProductCard;
 
-beforeEach(function () {
-    config(['imagecache.templates' => [
-        'small' => Small::class,
-        'medium' => Medium::class,
-        'large' => Large::class,
-    ]]);
-
-    $this->attribute = Attribute::factory()->create([
-        'type' => 'select',
-        'swatch_type' => 'image',
-    ]);
-
-    $this->path = 'attribute_option/swatch-'.$this->attribute->id.'.png';
-
-    Storage::put($this->path, UploadedFile::fake()->image('swatch.png', 300, 300)->getContent());
-
-    $this->option = $this->attribute->options()->create([
-        'admin_name' => 'Green',
-        'sort_order' => 1,
-        'swatch_value' => $this->path,
-    ]);
-
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $this->product->super_attributes()->attach($this->attribute->id);
-});
-
-afterEach(function () {
-    Storage::delete($this->path);
-});
-
 /**
  * Register a storefront theme with image templates and a swatch image list, run by a channel on its own host.
  */
@@ -77,6 +46,37 @@ function swatchOptionOn(Channel $channel, $test): array
 
     return collect($attributes)->firstWhere('id', $test->attribute->id)['options'][0];
 }
+
+beforeEach(function () {
+    config(['imagecache.templates' => [
+        'small' => Small::class,
+        'medium' => Medium::class,
+        'large' => Large::class,
+    ]]);
+
+    $this->attribute = Attribute::factory()->create([
+        'type' => 'select',
+        'swatch_type' => 'image',
+    ]);
+
+    $this->path = 'attribute_option/swatch-'.$this->attribute->id.'.png';
+
+    Storage::put($this->path, UploadedFile::fake()->image('swatch.png', 300, 300)->getContent());
+
+    $this->option = $this->attribute->options()->create([
+        'admin_name' => 'Green',
+        'sort_order' => 1,
+        'swatch_value' => $this->path,
+    ]);
+
+    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $this->product->super_attributes()->attach($this->attribute->id);
+});
+
+afterEach(function () {
+    Storage::delete($this->path);
+});
 
 it('should give the swatch value url of the model as the url of the stored file', function () {
     expect($this->option->fresh()->swatch_value_url)->toBe(Storage::url($this->path));
