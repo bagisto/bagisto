@@ -81,4 +81,4 @@ jobs:
           app-debug: "true"
 
       - name: Run Pest Tests
-        run: vendor/bin/pest --parallel --colors=always
+        run: vendor/bin/pest --colors=always
