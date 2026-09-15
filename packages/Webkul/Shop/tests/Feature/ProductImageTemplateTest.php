@@ -5,12 +5,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Exceptions;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Webkul\Core\Core as BaseCore;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
@@ -40,9 +42,9 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 
 /**
- * Register a storefront theme with image templates and a product image list, run by a channel on its own host.
+ * Register a storefront theme with image templates, product images and placeholders, run by a channel on its own host.
  */
-function channelRunningImageTemplates(string $code, ?array $templates, array $productImages = []): Channel
+function channelRunningImageTemplates(string $code, ?array $templates, array $productImages = [], array $placeholders = []): Channel
 {
     config(['themes.shop.'.$code => array_merge(config('themes.shop.default'), [
         'name' => ucfirst($code),
@@ -50,6 +52,7 @@ function channelRunningImageTemplates(string $code, ?array $templates, array $pr
             'image_cache' => [
                 'templates' => $templates,
                 'product_images' => $productImages,
+                'placeholders' => $placeholders,
             ],
         ],
     ])]);
@@ -101,6 +104,20 @@ function listedBaseImage($product): array
         ->firstWhere('id', $product->id)['base_image'];
 }
 
+/**
+ * Serve a theme's assets from a Vite dev server, which answers for any path whether or not a build has it.
+ */
+function serveThemeFromViteDevServer(string $code, string $server): void
+{
+    $hotFile = storage_path('framework/testing/vite/'.$code.'.hot');
+
+    File::ensureDirectoryExists(dirname($hotFile));
+
+    File::put($hotFile, $server);
+
+    config(['themes.shop.'.$code.'.vite.hot_file' => $hotFile]);
+}
+
 beforeEach(function () {
     config(['imagecache.templates' => [
         'small' => Small::class,
@@ -124,6 +141,8 @@ beforeEach(function () {
 
 afterEach(function () {
     Storage::deleteDirectory('product/'.$this->product->id);
+
+    File::deleteDirectory(storage_path('framework/testing/vite'));
 });
 
 it('should give an image the core sizes and the original, exactly as before, when the theme lists nothing', function () {
@@ -237,6 +256,88 @@ it('should give a product without an image a placeholder for every product image
     expect(array_keys($image))->toBe(['small_image_url', 'medium_image_url', 'large_image_url', 'product_card_image_url', 'original_image_url', 'alt'])
         ->and($image['product_card_image_url'])->toBe($image['large_image_url'])
         ->and($image['small_image_url'])->toContain('small-product-placeholder');
+});
+
+it('should give a product without an image the placeholders its theme ships in its own build', function () {
+    $channel = channelRunningImageTemplates('poster', ['product_card' => ProductCard::class], ['product_card'], [
+        'small' => 'images/poster-small.webp',
+        'large' => 'images/poster-large.webp',
+        'original' => 'images/poster-original.webp',
+    ]);
+
+    serveThemeFromViteDevServer('poster', 'http://poster-vite.test');
+
+    $image = baseImageOn($channel, (new ProductFaker)->getSimpleProductFactory()->create());
+
+    expect($image['small_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-small.webp')
+        ->and($image['large_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-large.webp')
+        ->and($image['original_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-original.webp')
+        ->and($image['product_card_image_url'])->toBe($image['large_image_url'])
+        ->and($image['medium_image_url'])->toContain('medium-product-placeholder');
+});
+
+it('should keep the placeholder the merchant uploaded for a size over the one the theme ships', function () {
+    CoreConfig::create([
+        'code' => 'catalog.products.cache_small_image.url',
+        'value' => 'configuration/small-placeholder.webp',
+    ]);
+
+    $channel = channelRunningImageTemplates('poster', null, [], [
+        'small' => 'images/poster-small.webp',
+        'medium' => 'images/poster-medium.webp',
+    ]);
+
+    serveThemeFromViteDevServer('poster', 'http://poster-vite.test');
+
+    $image = baseImageOn($channel, (new ProductFaker)->getSimpleProductFactory()->create());
+
+    expect($image['small_image_url'])->toBe(Storage::url('configuration/small-placeholder.webp'))
+        ->and($image['medium_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-medium.webp');
+});
+
+it('should show the core placeholder where the theme ships one its build cannot resolve, reporting it', function () {
+    Exceptions::fake();
+
+    $channel = channelRunningImageTemplates('broken', null, [], [
+        'small' => 'images/not-in-the-build.webp',
+        'medium' => 42,
+    ]);
+
+    $image = baseImageOn($channel, (new ProductFaker)->getSimpleProductFactory()->create());
+
+    expect($image['small_image_url'])->toContain('small-product-placeholder')
+        ->and($image['medium_image_url'])->toContain('medium-product-placeholder');
+
+    Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[images/not-in-the-build.webp]'));
+
+    Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[medium]'));
+});
+
+it('should give admin requests the core placeholders, whatever placeholders the channel theme ships', function () {
+    $channel = channelRunningImageTemplates('poster', null, [], ['small' => 'images/poster-small.webp']);
+
+    serveThemeFromViteDevServer('poster', 'http://poster-vite.test');
+
+    core()->setCurrentChannel($channel);
+
+    app()->instance('request', Request::create('http://poster.test/'.config('app.admin_url').'/sales/orders'));
+
+    expect(product_image()->getPlaceholderUrl('small'))->toContain('small-product-placeholder');
+});
+
+it('should hand the product gallery the placeholder the theme ships', function () {
+    config(['responsecache.enabled' => false]);
+
+    $theme = core()->getDefaultChannel()->theme;
+
+    config(['themes.shop.'.$theme.'.customize.image_cache.placeholders' => ['large' => 'images/gallery-placeholder.webp']]);
+
+    serveThemeFromViteDevServer($theme, 'http://theme-vite.test');
+
+    get(route('shop.product_or_category.index', $this->product->url_key))
+        ->assertOk()
+        ->assertSee('gallery-placeholder.webp', false)
+        ->assertDontSee('large-product-placeholder', false);
 });
 
 it('should carry the theme product images into the storefront product api', function () {

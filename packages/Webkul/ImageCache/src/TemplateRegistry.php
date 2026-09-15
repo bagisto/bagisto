@@ -2,8 +2,10 @@
 
 namespace Webkul\ImageCache;
 
+use Illuminate\Support\Facades\Vite;
 use ReflectionClass;
 use ReflectionMethod;
+use Throwable;
 use Webkul\ImageCache\Exceptions\InvalidTemplate;
 
 class TemplateRegistry
@@ -108,6 +110,37 @@ class TemplateRegistry
     }
 
     /**
+     * The url of the placeholder a theme ships in its Vite build for a template, or null when it ships
+     * none or one its build cannot resolve, reporting that.
+     */
+    public function placeholderUrl(?string $themeCode, string $template): ?string
+    {
+        $path = $themeCode
+            ? config('themes.shop.'.$themeCode.'.customize.image_cache.placeholders.'.$template)
+            : null;
+
+        if (is_null($path)) {
+            return null;
+        }
+
+        if (
+            is_string($path)
+            && filled($path)
+            && $url = $this->themeAssetUrl($themeCode, $path)
+        ) {
+            return $url;
+        }
+
+        report(new InvalidTemplate(
+            $themeCode,
+            $template,
+            'its placeholder must be the path of an image in the theme Vite build; ['.(is_string($path) ? $path : get_debug_type($path)).'] given'
+        ));
+
+        return null;
+    }
+
+    /**
      * The storefront theme the requesting channel renders, or none for an admin request, which uses
      * the core templates only.
      */
@@ -173,6 +206,22 @@ class TemplateRegistry
         ));
 
         return false;
+    }
+
+    /**
+     * The url of an asset in a theme's Vite build, or null when the build does not have it.
+     */
+    protected function themeAssetUrl(string $themeCode, string $path): ?string
+    {
+        $vite = config('themes.shop.'.$themeCode.'.vite');
+
+        try {
+            return Vite::useHotFile($vite['hot_file'])
+                ->useBuildDirectory($vite['build_directory'])
+                ->asset(trim($vite['package_assets_directory'], '/').'/'.trim($path, '/'));
+        } catch (Throwable) {
+            return null;
+        }
     }
 
     /**

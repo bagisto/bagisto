@@ -33,7 +33,7 @@
 
                     isMediaLoading: true,
 
-                    placeholderUrl: @js(bagisto_asset('images/large-product-placeholder.webp', 'shop')),
+                    placeholderUrl: @js(product_image()->getPlaceholderUrl('large')),
 
                     media: {
                         images: @json(product_image()->getGalleryImages($product)),

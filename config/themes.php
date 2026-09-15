@@ -161,6 +161,27 @@ return [
                     */
 
                     'swatch_images' => [],
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Placeholders
+                    |--------------------------------------------------------------------------
+                    |
+                    | The images this theme shows for a product without one, keyed by template
+                    | name, as paths in this theme's own Vite build, the way bagisto_asset()
+                    | takes them in its views. Name a core size (small, medium, large),
+                    | original, or a template listed under "product_images".
+                    |
+                    | A core size the merchant uploaded a placeholder for in the configuration
+                    | keeps that one. A core size left out shows the core placeholder, and any
+                    | other name left out shows the large placeholder.
+                    |
+                    | e.g. 'small' => 'images/small-placeholder.webp',
+                    |      'product_card' => 'images/product-card-placeholder.webp',
+                    |
+                    */
+
+                    'placeholders' => [],
                 ],
             ],
         ],

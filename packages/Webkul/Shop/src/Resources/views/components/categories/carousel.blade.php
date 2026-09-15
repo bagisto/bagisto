@@ -105,7 +105,7 @@
 
                     offset: 323,
 
-                    fallback: "{{ bagisto_asset('images/small-product-placeholder.webp') }}"
+                    fallback: "{{ product_image()->getPlaceholderUrl('small') }}"
                 };
             },
 
