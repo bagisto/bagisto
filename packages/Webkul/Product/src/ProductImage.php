@@ -95,6 +95,28 @@ class ProductImage
     }
 
     /**
+     * Get the placeholder a template shows for a product without an image: the merchant's for a core size,
+     * then the current theme's, then the core one, with any other template falling back to large.
+     */
+    public function getPlaceholderUrl(string $template): string
+    {
+        $templateRegistry = app(TemplateRegistry::class);
+
+        $url = $this->configuredPlaceholderUrl($template)
+            ?? $templateRegistry->placeholderUrl($templateRegistry->currentTheme(), $template);
+
+        if ($url) {
+            return $url;
+        }
+
+        return match (true) {
+            in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true) => bagisto_asset('images/'.$template.'-product-placeholder.webp', 'shop'),
+            $template === 'original' => bagisto_asset('images/large-product-placeholder.webp', 'shop'),
+            default => $this->getPlaceholderUrl('large'),
+        };
+    }
+
+    /**
      * Load product's base image.
      *
      * @param  Product  $product
@@ -147,28 +169,25 @@ class ProductImage
         $urls = [];
 
         foreach (app(ImageUrlBuilder::class)->templateNames(TemplateRegistry::PRODUCT_IMAGES) as $template) {
-            $urls[$template.'_image_url'] = $this->placeholderUrl($template);
+            $urls[$template.'_image_url'] = $this->getPlaceholderUrl($template);
         }
 
         return $urls + ['alt' => (string) $altText];
     }
 
     /**
-     * The placeholder a template shows for a missing image: the configured one of a core size, or
-     * the large one for any other template.
+     * Get the url of the placeholder the merchant uploaded for a core size, or null when there is none.
      */
-    private function placeholderUrl(string $template): string
+    private function configuredPlaceholderUrl(string $template): ?string
     {
-        if ($template === 'original') {
-            return bagisto_asset('images/large-product-placeholder.webp', 'shop');
+        if (! in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true)) {
+            return null;
         }
 
-        $size = in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true) ? $template : 'large';
-
-        $configured = core()->getConfigData('catalog.products.cache_'.$size.'_image.url');
+        $configured = core()->getConfigData('catalog.products.cache_'.$template.'_image.url');
 
         return $configured
             ? Storage::url($configured)
-            : bagisto_asset('images/'.$size.'-product-placeholder.webp', 'shop');
+            : null;
     }
 }

@@ -16,7 +16,9 @@ class DeleteCatalogRuleIndex implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Number of products reindexed per batch.
+     * Number of products reindexed per batch, kept for subclasses; the price indexer now batches itself.
+     *
+     * @deprecated
      */
     protected const BATCH_SIZE = 100;
 
@@ -26,10 +28,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
      * @param  array  $productIds
      * @return void
      */
-    public function __construct(protected $productIds)
-    {
-        $this->productIds = $productIds;
-    }
+    public function __construct(protected $productIds) {}
 
     /**
      * Reindex the prices of the products a removed rule applied to and of the composite products built from them;
@@ -46,11 +45,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
 
         Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(ProductRepository::class)
-            ->whereIn('id', $productIds)
-            ->chunkById(self::BATCH_SIZE, function ($products) {
-                app(PriceIndexer::class)->reindexBatch($products->all());
-            });
+        app(PriceIndexer::class)->reindexProducts($productIds);
 
         Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }

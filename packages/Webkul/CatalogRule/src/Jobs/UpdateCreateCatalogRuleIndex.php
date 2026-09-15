@@ -18,7 +18,9 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Number of products reindexed per batch.
+     * Number of products reindexed per batch, kept for subclasses; the price indexer now batches itself.
+     *
+     * @deprecated
      */
     protected const BATCH_SIZE = 100;
 
@@ -51,16 +53,14 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
 
         $productIds = $productIds
             ->merge(app(ProductRepository::class)->getCompositeParentIds($productIds->all()))
-            ->unique();
+            ->unique()
+            ->values()
+            ->all();
 
-        Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds->values()->all()]);
+        Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(ProductRepository::class)
-            ->whereIn('id', $productIds)
-            ->chunkById(self::BATCH_SIZE, function ($products) {
-                app(PriceIndexer::class)->reindexBatch($products->all());
-            });
+        app(PriceIndexer::class)->reindexProducts($productIds);
 
-        Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds->values()->all()]);
+        Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }
 }

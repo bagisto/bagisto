@@ -26,6 +26,27 @@ class Price extends AbstractIndexer
     protected $customerGroups;
 
     /**
+     * The relations the type indexers read, loaded up front so a batch costs a handful of queries.
+     *
+     * @var array
+     */
+    protected $reindexRelations = [
+        'variants',
+        'attribute_family',
+        'attribute_values',
+        'variants.attribute_family',
+        'variants.attribute_values',
+        'price_indices',
+        'inventory_indices',
+        'variants.price_indices',
+        'variants.inventory_indices',
+        'customer_group_prices',
+        'variants.customer_group_prices',
+        'catalog_rule_prices',
+        'variants.catalog_rule_prices',
+    ];
+
+    /**
      * Number of products reindexed per batch.
      *
      * @var int
@@ -55,26 +76,24 @@ class Price extends AbstractIndexer
         Event::dispatch('catalog.product.price.reindex.before');
 
         $this->productRepository
-            ->with([
-                'variants',
-                'attribute_family',
-                'attribute_values',
-                'variants.attribute_family',
-                'variants.attribute_values',
-                'price_indices',
-                'inventory_indices',
-                'variants.price_indices',
-                'variants.inventory_indices',
-                'customer_group_prices',
-                'variants.customer_group_prices',
-                'catalog_rule_prices',
-                'variants.catalog_rule_prices',
-            ])
+            ->with($this->reindexRelations)
             ->chunkById($this->batchSize, function ($products) {
                 $this->reindexBatch($products->all());
             });
 
         Event::dispatch('catalog.product.price.reindex.after');
+    }
+
+    /**
+     * Reindex the prices of the given products, batch by batch.
+     */
+    public function reindexProducts(array $productIds): void
+    {
+        foreach (array_chunk($productIds, $this->batchSize) as $batchIds) {
+            $this->reindexBatch(
+                $this->productRepository->with($this->reindexRelations)->findWhereIn('id', $batchIds)->all()
+            );
+        }
     }
 
     /**
@@ -92,19 +111,7 @@ class Price extends AbstractIndexer
         $this->productRepository
             ->distinct()
             ->select('products.*')
-            ->with([
-                'variants',
-                'attribute_values',
-                'variants.attribute_values',
-                'price_indices',
-                'inventory_indices',
-                'variants.price_indices',
-                'variants.inventory_indices',
-                'customer_group_prices',
-                'variants.customer_group_prices',
-                'catalog_rule_prices',
-                'variants.catalog_rule_prices',
-            ])
+            ->with($this->reindexRelations)
             ->join('product_attribute_values as special_price_from_pav', function ($join) {
                 $join->on('products.id', '=', 'special_price_from_pav.product_id')
                     ->where('special_price_from_pav.attribute_id', self::SPECIAL_PRICE_FROM_ATTRIBUTE_ID);
@@ -243,16 +250,7 @@ class Price extends AbstractIndexer
     {
         $parentIds = array_values(array_diff($this->productRepository->getCompositeParentIds($productIds), $productIds));
 
-        foreach (array_chunk($parentIds, $this->batchSize) as $batchIds) {
-            $this->reindexBatch($this->productRepository->with([
-                'variants',
-                'price_indices',
-                'variants.attribute_values',
-                'variants.price_indices',
-                'variants.customer_group_prices',
-                'variants.catalog_rule_prices',
-            ])->findWhereIn('id', $batchIds)->all());
-        }
+        $this->reindexProducts($parentIds);
 
         return $parentIds;
     }

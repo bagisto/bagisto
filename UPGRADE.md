@@ -1227,7 +1227,8 @@ storefront product APIs:
 
 In a Vue component fed by the product APIs, the same URL is
 `product.base_image.product_card_image_url`, and each entry of `product.images`
-carries one too. A product without an image gets the large placeholder for it.
+carries one too. A product without an image gets the large placeholder for it, or the
+theme's own (see [Shipping the theme's placeholders](#shipping-the-themes-placeholders)).
 
 Category logos and banners, and image swatches, get theme templates the same way
 (see [Adding a template to category and swatch images](#adding-a-template-to-category-and-swatch-images)).
@@ -1313,6 +1314,45 @@ use it in the theme's own `shop::categories.view`:
 The image carousel section sizes its slides through the core `small`, `medium` and
 `large` templates, so overriding those for slider images — the path branch the core
 filters size as sliders — resizes the carousel too.
+
+#### Shipping the theme's placeholders
+
+A product without an image gets a placeholder in every image URL it carries. A theme
+ships its own by mapping template names to images in its Vite build under
+`placeholders`, with no override of the product image helper or its views:
+
+```php
+'customize' => [
+    'image_cache' => [
+        'templates' => [
+            'product_card' => ProductCard::class,
+        ],
+
+        'product_images' => [
+            'product_card',
+        ],
+
+        'placeholders' => [
+            'small' => 'images/small-placeholder.webp',
+            'large' => 'images/large-placeholder.webp',
+            'product_card' => 'images/product-card-placeholder.webp',
+        ],
+    ],
+],
+```
+
+- **A path is an image in the theme's own Vite build**, the way `bagisto_asset()` takes
+  it in the theme's views, so the build must include it — the core theme's
+  `import.meta.glob(["../images/**"])` in `app.js` does that.
+- **The merchant's placeholder comes first.** A core size keeps the placeholder uploaded
+  under *Configuration → Catalog → Products*, then takes the theme's, then the core one.
+- **A name left out falls back.** A core size shows the core placeholder, `original`
+  the core large one, and any other template the large placeholder.
+- **Every storefront product placeholder follows it**: product image arrays and the
+  storefront product APIs, the product gallery, the RMA form, and the category carousel
+  for a category without a logo. In the theme's own views,
+  `product_image()->getPlaceholderUrl('product_card')` gives the same URL.
+- **The admin panel shows the core placeholders**, whatever theme a channel runs.
 
 #### Overriding a core template
 
@@ -1441,8 +1481,9 @@ builds. `small` needs no listing: every image array carries the core sizes.
   `applyFilter()`. The core template of that name, if any, is used instead. A name
   listed under `product_images`, `category_images`, `swatch_images` or any other key
   passed to `image_urls()` that is not a registered template is skipped and reported
-  the same way. It is reported each time the templates are resolved, so fix the entry
-  rather than leave it in place.
+  the same way, as is a placeholder that is not a path or that the theme's Vite build
+  does not have, which shows the core placeholder instead. It is reported each time
+  the templates are resolved, so fix the entry rather than leave it in place.
 - **`original`, `download` and `logo` are reserved** in any letter case and cannot be
   overridden; a theme template named `Original` is refused like `original`.
 - **Models give the stored file, the storefront sizes it.** A model's image URL is the

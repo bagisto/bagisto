@@ -7,6 +7,7 @@ use Webkul\CatalogRule\Jobs\UpdateCreateCatalogRuleIndex;
 use Webkul\CatalogRule\Models\CatalogRule;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\FPC\Listeners\Price as PriceListener;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -93,6 +94,16 @@ it('clears every page when every product price was reindexed', function () {
     $this->assertPageNotCached($otherProductPage, 'A full price reindex left a page with a price that may have changed.');
 });
 
+it('clears every page when more products than the per-product limit were reindexed', function () {
+    $otherProductPage = $this->cachePage('/'.$this->otherProduct->url_key);
+
+    $unrelatedIds = range($this->otherProduct->id + 1, $this->otherProduct->id + PriceListener::PER_PRODUCT_FORGET_LIMIT + 1);
+
+    Event::dispatch('promotions.catalog_rule.reindex.after', [$unrelatedIds]);
+
+    $this->assertPageNotCached($otherProductPage, 'A reindex too wide to walk product by product left a page with a price that may have changed.');
+});
+
 it('announces a saved catalog rule only after the prices of its products are reindexed', function () {
     $sequence = [];
 
@@ -103,9 +114,9 @@ it('announces a saved catalog rule only after the prices of its products are rei
     $this->mock(CatalogRuleIndex::class)->shouldReceive('cleanProductIndices')->once();
 
     $this->mock(PriceIndexer::class)
-        ->shouldReceive('reindexBatch')
-        ->andReturnUsing(function ($products) use (&$sequence) {
-            $sequence[] = ['reindex', collect($products)->pluck('id')->all()];
+        ->shouldReceive('reindexProducts')
+        ->andReturnUsing(function ($productIds) use (&$sequence) {
+            $sequence[] = ['reindex', $productIds];
         });
 
     recordReindexAnnouncements('promotions.catalog_rule.reindex', $sequence);
@@ -123,9 +134,9 @@ it('announces a removed catalog rule only after the prices of its products are r
     $sequence = [];
 
     $this->mock(PriceIndexer::class)
-        ->shouldReceive('reindexBatch')
-        ->andReturnUsing(function ($products) use (&$sequence) {
-            $sequence[] = ['reindex', collect($products)->pluck('id')->all()];
+        ->shouldReceive('reindexProducts')
+        ->andReturnUsing(function ($productIds) use (&$sequence) {
+            $sequence[] = ['reindex', $productIds];
         });
 
     recordReindexAnnouncements('promotions.catalog_rule.reindex', $sequence);

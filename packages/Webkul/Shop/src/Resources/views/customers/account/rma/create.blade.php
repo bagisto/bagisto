@@ -394,8 +394,8 @@
                                 <template v-else>
                                     <img
                                         class="h-20 w-20 shrink-0 rounded-lg border border-zinc-200 object-cover"
-                                        src="{{ bagisto_asset('images/medium-product-placeholder.webp') }}"
-                                        alt="medium-product-placeholder.webp"
+                                        src="{{ product_image()->getPlaceholderUrl('medium') }}"
+                                        :alt="product.name"
                                     >
                                 </template>
                             </p>

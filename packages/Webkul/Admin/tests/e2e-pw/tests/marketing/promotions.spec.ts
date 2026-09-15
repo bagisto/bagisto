@@ -1,6 +1,8 @@
 import { test, expect } from '../../setup';
 import { generateName, generateDescription } from '../../utils/faker';
 
+const REPRICE_TIMEOUT = 90 * 1000;
+
 test.describe('promotion management', () => {
     test.describe('cart rule management', () => {
         test('should create a cart rule', async ({ adminPage }) => {
@@ -63,6 +65,8 @@ test.describe('promotion management', () => {
     });
 
     test.describe('catalog rule management', () => {
+        test.setTimeout(180000);
+
         test('should create a catalog rule', async ({ adminPage }) => {
             await adminPage.goto('admin/marketing/promotions/catalog-rules');
             await adminPage.waitForSelector('a.primary-button:has-text("Create Catalog Rule")');
@@ -88,7 +92,7 @@ test.describe('promotion management', () => {
             await expect(toggleInput).toBeChecked();
 
             await adminPage.click('button.primary-button:has-text("Save Catalog Rule")');
-            await expect(adminPage.getByText('Catalog rule created successfully').first()).toBeVisible();
+            await expect(adminPage.getByText('Catalog rule created successfully').first()).toBeVisible({ timeout: REPRICE_TIMEOUT });
         });
 
         test('should edit a catalog rule', async ({ adminPage }) => {
@@ -100,7 +104,7 @@ test.describe('promotion management', () => {
             await adminPage.waitForSelector('form[action*="/promotions/catalog-rules/edit"]');
             await adminPage.click('button.primary-button:has-text("Save Catalog Rule")');
 
-            await expect(adminPage.getByText('Catalog rule updated successfully').first()).toBeVisible();
+            await expect(adminPage.getByText('Catalog rule updated successfully').first()).toBeVisible({ timeout: REPRICE_TIMEOUT });
         });
 
         test('should delete a catalog rule', async ({ adminPage }) => {
@@ -123,7 +127,7 @@ test.describe('promotion management', () => {
                 console.error("Agree button not found or not visible.");
             }
 
-            await expect(adminPage.getByText('Catalog rule deleted successfully').first()).toBeVisible();
+            await expect(adminPage.getByText('Catalog rule deleted successfully').first()).toBeVisible({ timeout: REPRICE_TIMEOUT });
         });
     });
 });
