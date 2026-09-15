@@ -125,10 +125,11 @@ export class ACLSharedPage extends BasePage {
     async createRole(
         permissionType: string,
         permissions?: string[],
+        name: string = this.roleName,
     ): Promise<void> {
         await this.visit("admin/settings/roles");
         await this.roleActionPage.createRole.click();
-        await this.roleActionPage.name.fill(this.roleName);
+        await this.roleActionPage.name.fill(name);
         await this.roleActionPage.selectRoleType.selectOption(permissionType);
 
         if (
@@ -144,14 +145,17 @@ export class ACLSharedPage extends BasePage {
         await expect(this.roleActionPage.successRole.first()).toBeVisible();
     }
 
-    async createUser(): Promise<void> {
+    async createUser(
+        name: string = this.userName,
+        email: string = this.userEmail,
+    ): Promise<void> {
         await this.visit("admin/settings/users");
         await this.userActionPage.createUser.click();
-        await this.userActionPage.name.fill(this.userName);
+        await this.userActionPage.name.fill(name);
         await this.userActionPage.selectRole.selectOption({
             label: this.roleName,
         });
-        await this.userActionPage.userEmail.fill(this.userEmail);
+        await this.userActionPage.userEmail.fill(email);
         await this.userActionPage.userPassword.fill("user123");
         await this.userActionPage.confirmPassword.fill("user123");
         await this.userActionPage.statusToggle.click();

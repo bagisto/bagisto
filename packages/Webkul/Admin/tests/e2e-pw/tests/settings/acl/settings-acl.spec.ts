@@ -320,6 +320,7 @@ test.describe("settings acl", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["settings.users.delete"]);
         await aclManagement.createUser();
+        await aclManagement.createDeletableUser();
         await aclManagement.verfiyAssignedRole(["settings->users"]);
         await aclManagement.deleteUserVerify();
     });
@@ -368,6 +369,7 @@ test.describe("settings acl", () => {
     }) => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["settings.roles.delete"]);
+        await aclManagement.createDeletableRole();
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["settings->roles"]);
         await aclManagement.roleDeleteVerify();

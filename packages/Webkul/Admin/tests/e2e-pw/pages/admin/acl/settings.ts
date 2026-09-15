@@ -459,10 +459,17 @@ export class SettingsAclPage extends MarketingAclPage {
         ).toBeVisible();
     }
 
+    async createDeletableUser() {
+        await this.createUser(`${this.userName}-deletable`, generateEmail());
+    }
+
     async deleteUserVerify() {
         await expect(this.userActionPage.createUser).not.toBeVisible();
         await expect(this.userActionPage.iconEdit.first()).not.toBeVisible();
-        await this.userActionPage.deleteIcon.nth(2).click();
+        await this.page
+            .locator(".row", { hasText: `${this.userName}-deletable` })
+            .locator(".icon-delete")
+            .click();
         await this.userActionPage.agreeBtn.click();
         await expect(
             this.userActionPage.successUserDelete.first(),
@@ -472,7 +479,11 @@ export class SettingsAclPage extends MarketingAclPage {
     async roleCreateVerify() {
         await this.roleActionPage.createRole.click();
         await this.roleActionPage.name.fill(this.roleName);
-        await this.roleActionPage.selectRoleType.selectOption("all");
+        await expect(
+            this.roleActionPage.selectRoleType.locator('option[value="all"]'),
+        ).toHaveCount(0);
+        await this.roleActionPage.selectRoleType.selectOption("custom");
+        await this.rolePermission(["settings.roles.create"]);
         await this.roleActionPage.roleDescription.fill("test description");
         await this.roleActionPage.saveRole.click();
         await expect(this.roleActionPage.successRole.first()).toBeVisible();
@@ -488,9 +499,20 @@ export class SettingsAclPage extends MarketingAclPage {
         ).toBeVisible();
     }
 
+    async createDeletableRole() {
+        await this.createRole(
+            "custom",
+            ["settings.roles.delete"],
+            `${this.roleName}-deletable`,
+        );
+    }
+
     async roleDeleteVerify() {
         await expect(this.roleActionPage.createRole).not.toBeVisible();
-        await this.roleActionPage.deleteIcon.nth(2).click();
+        await this.page
+            .locator(".row", { hasText: `${this.roleName}-deletable` })
+            .locator(".icon-delete")
+            .click();
         await this.roleActionPage.agreeBtn.click();
         await expect(
             this.roleActionPage.successDeleteRole.first(),
