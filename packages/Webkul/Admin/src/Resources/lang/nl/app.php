@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Onjuist wachtwoord',
             'last-delete-error' => 'Laatste gebruiker kon niet worden verwijderd.',
             'login-error' => 'Controleer uw inloggegevens en probeer het opnieuw.',
+            'role-not-grantable' => 'U kunt geen rol toewijzen met rechten die u zelf niet hebt.',
             'update-success' => 'Gebruiker succesvol bijgewerkt.',
+            'user-not-manageable' => 'U kunt geen gebruiker wijzigen wiens rol rechten heeft die u zelf niet hebt.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Rol is verwijderen mislukt',
             'delete-success' => 'Rol is succesvol verwijderd',
             'last-delete-error' => 'Laatste rol kan niet worden verwijderd',
+            'permissions-not-grantable' => 'U kunt geen rechten verlenen die u zelf niet hebt.',
             'update-success' => 'Rol is succesvol bijgewerkt',
         ],
 

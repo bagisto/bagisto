@@ -19,7 +19,8 @@ class RolesDataGrid extends DataGrid
             ->select(
                 'id',
                 'name',
-                'permission_type'
+                'permission_type',
+                'permissions'
             );
     }
 
@@ -83,6 +84,7 @@ class RolesDataGrid extends DataGrid
                 'url' => function ($row) {
                     return route('admin.settings.roles.edit', $row->id);
                 },
+                'condition' => fn ($row) => $this->isGrantable($row),
             ]);
         }
 
@@ -94,7 +96,16 @@ class RolesDataGrid extends DataGrid
                 'url' => function ($row) {
                     return route('admin.settings.roles.delete', $row->id);
                 },
+                'condition' => fn ($row) => $this->isGrantable($row),
             ]);
         }
+    }
+
+    /**
+     * Whether the signed-in admin may grant the role a row lists, and so change it.
+     */
+    protected function isGrantable(object $row): bool
+    {
+        return bouncer()->canGrantPermissions($row->permission_type, (array) json_decode((string) $row->permissions, true));
     }
 }

@@ -42,6 +42,7 @@ return [
             'page-title' => 'Kundenanmeldung',
             'password' => 'Passwort',
             'resend-verification' => 'Bestätigungs-E-Mail erneut senden',
+            'social-account-exists' => 'Ein Konto mit dieser E-Mail-Adresse existiert bereits. Bitte melden Sie sich mit Ihrer E-Mail-Adresse und Ihrem Passwort an.',
             'title' => 'Anmelden',
             'verify-first' => 'Bitte verifizieren Sie zuerst Ihr E-Mail-Konto.',
         ],

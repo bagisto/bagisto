@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Senha incorreta',
             'last-delete-error' => 'Falha ao excluir o último usuário.',
             'login-error' => 'Verifique suas credenciais e tente novamente.',
+            'role-not-grantable' => 'Você não pode atribuir uma função com permissões que você não tem.',
             'update-success' => 'Usuário atualizado com sucesso.',
+            'user-not-manageable' => 'Você não pode alterar um usuário cuja função tem permissões que você não tem.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Falha ao excluir a função',
             'delete-success' => 'Função excluída com sucesso',
             'last-delete-error' => 'A última função não pode ser excluída',
+            'permissions-not-grantable' => 'Você não pode conceder permissões que você não tem.',
             'update-success' => 'Função atualizada com sucesso',
         ],
 

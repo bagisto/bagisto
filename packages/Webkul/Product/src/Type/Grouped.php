@@ -98,27 +98,6 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Copy relationships.
-     *
-     * @param  \Webkul\Product\Models\Product  $product
-     * @return void
-     */
-    protected function copyRelationships($product)
-    {
-        parent::copyRelationships($product);
-
-        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
-
-        if (in_array('grouped_products', $attributesToSkip)) {
-            return;
-        }
-
-        foreach ($this->product->grouped_products as $groupedProduct) {
-            $product->grouped_products()->save($groupedProduct->replicate());
-        }
-    }
-
-    /**
      * Returns children ids.
      *
      * @return array
@@ -202,8 +181,13 @@ class Grouped extends AbstractType
 
         $cartProductsList = [];
 
+        $associatedProductIds = $this->product->grouped_products->pluck('associated_product_id');
+
         foreach ($data['qty'] as $productId => $qty) {
-            if (! $qty) {
+            if (
+                (int) $qty < 1
+                || ! $associatedProductIds->contains($productId)
+            ) {
                 continue;
             }
 
@@ -235,7 +219,7 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Returns price indexer class for a specific product type
+     * Returns price indexer class for a specific product type.
      *
      * @return string
      */
@@ -266,5 +250,26 @@ class Grouped extends AbstractType
                 }
             },
         ];
+    }
+
+    /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
+
+        if (in_array('grouped_products', $attributesToSkip)) {
+            return;
+        }
+
+        foreach ($this->product->grouped_products as $groupedProduct) {
+            $product->grouped_products()->save($groupedProduct->replicate());
+        }
     }
 }

@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Contrasenya incorrecta',
             'last-delete-error' => 'Error en eliminar l\'últim usuari.',
             'login-error' => 'Si us plau, verifica les teves credencials i intenta-ho de nou.',
+            'role-not-grantable' => 'No podeu assignar un rol amb permisos que no teniu.',
             'update-success' => 'Usuari actualitzat amb éxit.',
+            'user-not-manageable' => 'No podeu modificar un usuari el rol del qual té permisos que no teniu.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Error en eliminar el Rol',
             'delete-success' => 'Rol eliminat amb éxit',
             'last-delete-error' => 'No es pot eliminar l\'últim Rol',
+            'permissions-not-grantable' => 'No podeu concedir permisos que no teniu.',
             'update-success' => 'Rol actualitzat amb éxit',
         ],
 

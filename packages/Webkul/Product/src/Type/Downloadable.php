@@ -145,6 +145,12 @@ class Downloadable extends AbstractType
      */
     public function prepareForCart($data)
     {
+        $data['links'] = $this->product->downloadable_links
+            ->pluck('id')
+            ->intersect((array) ($data['links'] ?? []))
+            ->values()
+            ->all();
+
         if (empty($data['links'])) {
             return trans('product::app.checkout.cart.missing-links');
         }
@@ -223,7 +229,7 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * Validate cart item product price
+     * Validate cart item product price.
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -275,7 +281,7 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * Get product maximum price
+     * Get product maximum price.
      *
      * @return float
      */
@@ -285,7 +291,7 @@ class Downloadable extends AbstractType
     }
 
     /**
-     * Returns price indexer class for a specific product type
+     * Returns price indexer class for a specific product type.
      *
      * @return string
      */

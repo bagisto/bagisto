@@ -33,6 +33,10 @@ export class RolesPage extends DatagridPage {
         return this.page.locator('select[name="permission_type"]');
     }
 
+    private get allPermissionTypeOption() {
+        return this.permissionTypeSelect.locator('option[value="all"]');
+    }
+
     private get saveButton() {
         return this.page.getByRole("button", { name: "Save Role" });
     }
@@ -149,5 +153,16 @@ export class RolesPage extends DatagridPage {
 
     async expectStillOnCreateForm(): Promise<void> {
         await expect(this.page).toHaveURL(/settings\/roles\/create/);
+    }
+
+    async expectCreateFormGrantsOnly(
+        permission: string,
+        withheld: string,
+    ): Promise<void> {
+        await this.openCreateForm();
+
+        await expect(this.allPermissionTypeOption).toHaveCount(0);
+        await expect(this.permissionInput(permission)).toBeAttached();
+        await expect(this.permissionInput(withheld)).toHaveCount(0);
     }
 }

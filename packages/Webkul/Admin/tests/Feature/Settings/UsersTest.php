@@ -3,6 +3,7 @@
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Webkul\User\Models\Admin;
+use Webkul\User\Models\Role;
 use Webkul\User\Repositories\AdminRepository;
 
 use function Pest\Laravel\deleteJson;
@@ -262,6 +263,11 @@ it('should not deactivate the only active admin with all access', function () {
 it('should not move the only admin with all access to another role', function () {
     $admin = Admin::factory()->create();
 
+    $narrowerRole = Role::factory()->create([
+        'permission_type' => 'custom',
+        'permissions' => ['settings', 'settings.users'],
+    ]);
+
     adminRepositoryCounting(['countAdminsWithAllAccess' => 1]);
 
     $this->loginAsAdmin();
@@ -270,7 +276,7 @@ it('should not move the only admin with all access to another role', function ()
         'id' => $admin->id,
         'name' => $admin->name,
         'email' => $admin->email,
-        'role_id' => $admin->role_id + 1,
+        'role_id' => $narrowerRole->id,
         'status' => 1,
         'password' => '',
     ])

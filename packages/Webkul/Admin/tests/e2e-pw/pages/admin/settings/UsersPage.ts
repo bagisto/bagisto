@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import { escapeRegExp } from "@shared/regex";
 import { DatagridPage } from "../DatagridPage";
 
 export interface AdminUserData {
@@ -52,6 +53,12 @@ export class UsersPage extends DatagridPage {
 
     private get saveButton() {
         return this.page.getByRole("button", { name: "Save User" });
+    }
+
+    private roleOption(label: string) {
+        return this.roleSelect.locator("option", {
+            hasText: new RegExp(`^\\s*${escapeRegExp(label)}\\s*$`),
+        });
     }
 
     private async openCreateModal(): Promise<void> {
@@ -148,5 +155,15 @@ export class UsersPage extends DatagridPage {
 
     async expectErrorMessage(message: string): Promise<void> {
         await expect(this.flashMessage(message)).toBeVisible();
+    }
+
+    async expectCreateFormOffersRole(
+        offered: string,
+        withheld: string,
+    ): Promise<void> {
+        await this.openCreateModal();
+
+        await expect(this.roleOption(offered)).toHaveCount(1);
+        await expect(this.roleOption(withheld)).toHaveCount(0);
     }
 }

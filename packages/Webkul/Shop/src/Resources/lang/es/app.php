@@ -42,6 +42,7 @@ return [
             'page-title' => 'Inicio de Sesión del Cliente',
             'password' => 'Contraseña',
             'resend-verification' => 'Reenviar correo de verificación',
+            'social-account-exists' => 'Ya existe una cuenta con este correo electrónico. Inicie sesión con su correo electrónico y contraseña.',
             'title' => 'Iniciar Sesión',
             'verify-first' => 'Verifica primero tu cuenta de correo electrónico.',
         ],

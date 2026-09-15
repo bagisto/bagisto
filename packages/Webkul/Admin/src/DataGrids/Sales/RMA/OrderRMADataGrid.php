@@ -135,7 +135,7 @@ class OrderRMADataGrid extends DataGrid
             'sortable' => true,
             'filterable' => true,
             'closure' => function ($row) {
-                return '<span class="text-sm">'.core()->formatPrice($row->grand_total, $row->order_currency_code).'</span>';
+                return '<span class="text-sm">'.e(core()->formatPrice($row->grand_total, $row->order_currency_code)).'</span>';
             },
         ]);
 

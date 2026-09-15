@@ -41,4 +41,25 @@ class ImageCarousel extends SectionType
             ],
         ];
     }
+
+    /**
+     * Clear the link of any slide whose scheme could run script.
+     */
+    public function sanitize(array $options): array
+    {
+        if (! is_array($options['images'] ?? null)) {
+            return $options;
+        }
+
+        foreach ($options['images'] as $index => $image) {
+            if (
+                is_array($image)
+                && array_key_exists('link', $image)
+            ) {
+                $options['images'][$index]['link'] = $this->sanitizeUrl($image['link']);
+            }
+        }
+
+        return $options;
+    }
 }

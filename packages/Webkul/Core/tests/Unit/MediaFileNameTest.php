@@ -1,7 +1,23 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Helpers\MediaFileName;
+
+/**
+ * Build a real upload, whose type is detected from its contents rather than from its name as a fake one's is,
+ * in a temporary file removed when the run ends.
+ */
+function uploadedFileNamed(string $name, string $contents): UploadedFile
+{
+    static $handles = [];
+
+    $handles[] = $handle = tmpfile();
+
+    fwrite($handle, $contents);
+
+    return new UploadedFile(stream_get_meta_data($handle)['uri'], $name, null, null, true);
+}
 
 beforeEach(function () {
     Storage::fake();
@@ -92,4 +108,22 @@ it('should never rename a file out of its own directory', function () {
     expect($renamed)->toBe('product/1/evil.webp');
 
     Storage::assertExists('product/1/evil.webp');
+});
+
+it('should store an upload under the extension detected from its contents', function () {
+    $image = UploadedFile::fake()->image('photo.png', 10, 10);
+
+    expect($this->mediaFileName->extension(uploadedFileNamed('shell.php', $image->get())))->toBe('png');
+});
+
+it('should fall back to the client extension when the contents are not recognised but the extension is allowed', function () {
+    expect($this->mediaFileName->extension(uploadedFileNamed('clip.mp4', random_bytes(64))))->toBe('mp4');
+});
+
+it('should never store an upload under an extension outside the allowed ones', function () {
+    expect($this->mediaFileName->extension(uploadedFileNamed('page.html', '<html><script>alert(1)</script></html>')))
+        ->toBe(MediaFileName::FALLBACK_EXTENSION);
+
+    expect($this->mediaFileName->extension(uploadedFileNamed('shell.php', '<?php echo 1;')))
+        ->toBe(MediaFileName::FALLBACK_EXTENSION);
 });

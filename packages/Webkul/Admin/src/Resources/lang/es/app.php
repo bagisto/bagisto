@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Contraseña incorrecta',
             'last-delete-error' => 'Error al eliminar el último usuario.',
             'login-error' => 'Por favor, verifica tus credenciales e intenta nuevamente.',
+            'role-not-grantable' => 'No puede asignar un rol con permisos que usted no tiene.',
             'update-success' => 'Usuario actualizado con éxito.',
+            'user-not-manageable' => 'No puede modificar un usuario cuyo rol tiene permisos que usted no tiene.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Error al eliminar el Rol',
             'delete-success' => 'Rol eliminado exitosamente',
             'last-delete-error' => 'No se puede eliminar el último Rol',
+            'permissions-not-grantable' => 'No puede conceder permisos que usted no tiene.',
             'update-success' => 'Rol actualizado exitosamente',
         ],
 

@@ -4,7 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Catalog;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Validation\NestedRules;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Catalog\AttributeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -89,6 +92,7 @@ class AttributeController extends Controller
             'code' => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
             'admin_name' => 'required',
             'type' => 'required',
+            'options.*.swatch_value' => $this->swatchValueRules(),
             'options.*.swatch_alt' => ['nullable', 'string', 'max:255'],
             'options.*.swatch_file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'regex' => ['nullable', 'required_if:validation,regex', new Regex],
@@ -160,6 +164,7 @@ class AttributeController extends Controller
             'code' => ['required', 'unique:attributes,code,'.$id, new Code],
             'admin_name' => 'required',
             'type' => 'required',
+            'options.*.swatch_value' => $this->swatchValueRules(),
             'options.*.swatch_alt' => ['nullable', 'string', 'max:255'],
             'options.*.swatch_file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'regex' => ['nullable', 'required_if:validation,regex', new Regex],
@@ -284,5 +289,16 @@ class AttributeController extends Controller
         return response()->json([
             'data' => $superAttributes,
         ]);
+    }
+
+    /**
+     * Get the rules of an option's swatch value, which must be an image when it is an upload.
+     */
+    protected function swatchValueRules(): NestedRules
+    {
+        return Rule::forEach(fn ($value) => $value instanceof UploadedFile
+            ? ['image', 'mimes:bmp,jpeg,jpg,png,webp']
+            : ['nullable']
+        );
     }
 }

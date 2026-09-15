@@ -6,6 +6,9 @@ use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
+
 /**
  * Create an image swatch attribute with one option that points at a swatch file.
  */
@@ -123,9 +126,97 @@ it('should name a newly uploaded swatch after the requested file name', function
 
     $option = $option->fresh();
 
-    expect($option->swatch_value)->toBe(AttributeOptionRepository::SWATCH_DIRECTORY.'/blue-fabric-swatch.png');
+    expect($option->swatch_value)->toBe(AttributeOptionRepository::SWATCH_DIRECTORY.'/blue-fabric-swatch.webp');
 
     expect($option->swatch_alt)->toBe('Blue fabric swatch');
 
     Storage::assertExists($option->swatch_value);
+});
+
+it('should store an uploaded swatch as webp, whatever extension its name carries', function () {
+    Storage::fake();
+
+    $attribute = Attribute::factory()->create([
+        'type' => 'select',
+        'swatch_type' => 'image',
+    ]);
+
+    $option = app(AttributeOptionRepository::class)->create([
+        'attribute_id' => $attribute->id,
+        'admin_name' => 'Blue',
+        'sort_order' => 1,
+        'swatch_value' => UploadedFile::fake()->image('shell.php', 20, 20),
+        'swatch_file_name' => 'shell.php',
+    ]);
+
+    expect($option->fresh()->swatch_value)->toBe(AttributeOptionRepository::SWATCH_DIRECTORY.'/shell.webp');
+});
+
+it('should refuse a swatch upload that is not an image when an attribute is created', function () {
+    Storage::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'), [
+        'admin_name' => 'Colour',
+        'code' => 'colour_swatch',
+        'type' => 'select',
+        'swatch_type' => 'image',
+        'options' => [
+            'option_0' => [
+                'admin_name' => 'Blue',
+                'sort_order' => 1,
+                'swatch_value' => UploadedFile::fake()->createWithContent('shell.php', '<?php echo 1;'),
+            ],
+        ],
+    ])
+        ->assertJsonValidationErrorFor('options.option_0.swatch_value');
+
+    expect(Storage::allFiles(AttributeOptionRepository::SWATCH_DIRECTORY))->toBeEmpty();
+});
+
+it('should refuse a swatch upload that is not an image when an attribute is updated', function () {
+    Storage::fake();
+
+    $option = makeImageSwatchOption();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.attributes.update', $option->attribute_id), [
+        'admin_name' => 'Colour',
+        'code' => $option->attribute->code,
+        'type' => 'select',
+        'swatch_type' => 'image',
+        'options' => [
+            $option->id => [
+                'admin_name' => 'Blue',
+                'sort_order' => 1,
+                'swatch_value' => UploadedFile::fake()->createWithContent('shell.php', '<?php echo 1;'),
+            ],
+        ],
+    ])
+        ->assertJsonValidationErrorFor('options.'.$option->id.'.swatch_value');
+
+    expect($option->fresh()->swatch_value)->toBe(AttributeOptionRepository::SWATCH_DIRECTORY.'/kw82ndlq.png');
+});
+
+it('should keep accepting a colour swatch value, which is not an upload', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'), [
+        'admin_name' => 'Colour',
+        'code' => 'colour_swatch',
+        'type' => 'select',
+        'swatch_type' => 'color',
+        'options' => [
+            'option_0' => [
+                'admin_name' => 'Blue',
+                'sort_order' => 1,
+                'swatch_value' => '#0000ff',
+            ],
+        ],
+    ])
+        ->assertRedirectToRoute('admin.catalog.attributes.index');
+
+    expect(Attribute::where('code', 'colour_swatch')->first()->options->first()->swatch_value)->toBe('#0000ff');
 });

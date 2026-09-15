@@ -11,6 +11,7 @@ import {
     UsersPage,
     type AdminUserData,
 } from "../../../pages/admin/settings/UsersPage";
+import { env } from "../../../utils/env";
 import {
     generateDescription,
     generateFullName,
@@ -18,6 +19,8 @@ import {
     generateSlug,
     uniqueStamp,
 } from "../../../utils/faker";
+
+const ADMINISTRATOR_ROLE = "Administrator";
 
 function buildRole(permission: string): RoleData {
     const stamp = uniqueStamp();
@@ -238,6 +241,103 @@ test.describe("role action permissions", () => {
             await restrictedGroups.deleteGroup(group.name);
 
             await adminGroups.expectGroupAbsent(group.name);
+        });
+    });
+
+    test.describe("roles", () => {
+        let created: string[];
+
+        test.beforeEach(() => {
+            created = [];
+        });
+
+        test.afterEach(async () => {
+            await rolesPage.deleteRolesIfPresent(created);
+        });
+
+        test("should let a role with only the roles create permission add a role within its own permissions but never an all-access one", async ({
+            browser,
+        }) => {
+            const data = buildRole("settings.roles.create");
+            created.push(data.name);
+
+            await signInWithPermission(browser, "settings.roles.create");
+
+            const restrictedRoles = new RolesPage(restrictedPage);
+
+            await restrictedRoles.expectCreateFormGrantsOnly(
+                "settings.roles.create",
+                "catalog",
+            );
+            await restrictedRoles.createRole(data);
+
+            await rolesPage.expectRoleListed(data.name, "custom");
+        });
+
+        test("should let a role with only the roles delete permission remove a role within its own permissions but not one above it", async ({
+            browser,
+        }) => {
+            const data = buildRole("settings.roles.delete");
+            created.push(data.name);
+
+            await rolesPage.createRole(data);
+            await signInWithPermission(browser, "settings.roles.delete");
+
+            const restrictedRoles = new RolesPage(restrictedPage);
+
+            await restrictedRoles.expectRowDeleteUnavailable(ADMINISTRATOR_ROLE);
+            await restrictedRoles.deleteRole(data.name);
+
+            await rolesPage.expectRoleAbsent(data.name);
+        });
+    });
+
+    test.describe("users", () => {
+        let created: string[];
+
+        test.beforeEach(() => {
+            created = [];
+        });
+
+        test.afterEach(async () => {
+            await usersPage.deleteUsersIfPresent(created);
+        });
+
+        test("should let a role with only the users create permission add a user with a role it may grant and offer no other", async ({
+            browser,
+        }) => {
+            await signInWithPermission(browser, "settings.users.create");
+
+            const data = buildUser(role.name);
+            created.push(data.email);
+
+            const restrictedUsers = new UsersPage(restrictedPage);
+
+            await restrictedUsers.expectCreateFormOffersRole(
+                role.name,
+                ADMINISTRATOR_ROLE,
+            );
+            await restrictedUsers.createUser(data);
+
+            await usersPage.expectUserListed(data.email, data.name);
+        });
+
+        test("should let a role with only the users delete permission remove a user with a role it may grant but not one above it", async ({
+            browser,
+        }) => {
+            await signInWithPermission(browser, "settings.users.delete");
+
+            const data = buildUser(role.name);
+            created.push(data.email);
+
+            await usersPage.createUser(data);
+
+            const restrictedUsers = new UsersPage(restrictedPage);
+
+            await restrictedUsers.expectRowDeleteUnavailable(env.adminEmail);
+            await restrictedUsers.deleteUser(data.email);
+
+            await usersPage.expectUserAbsent(data.email);
         });
     });
 });

@@ -12,7 +12,7 @@
         app()->getLocale()
     );
 
-    $columns = collect($section?->options)
+    $columns = collect($section?->getTypeInstance()?->sanitize((array) $section->options) ?? [])
         ->map(fn ($links) => array_filter((array) $links, fn ($link) => filled($link['title'] ?? null)))
         ->filter();
 @endphp
@@ -132,7 +132,7 @@
 
         <p class="text-sm text-zinc-600 max-md:text-center">
             @if (core()->getConfigData('general.content.footer.copyright_content'))
-                {!! core()->getConfigData('general.content.footer.copyright_content') !!}
+                {!! clean_content((string) core()->getConfigData('general.content.footer.copyright_content')) !!}
             @else
                 @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
             @endif

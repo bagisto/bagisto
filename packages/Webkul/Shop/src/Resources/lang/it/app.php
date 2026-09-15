@@ -42,6 +42,7 @@ return [
             'page-title' => 'Accesso Cliente',
             'password' => 'Password',
             'resend-verification' => 'Reinvia email di verifica',
+            'social-account-exists' => 'Esiste già un account con questa email. Accedi con la tua email e la tua password.',
             'title' => 'Accedi',
             'verify-first' => 'Verifica prima il tuo account email.',
         ],

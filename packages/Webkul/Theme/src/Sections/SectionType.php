@@ -9,6 +9,11 @@ use Webkul\Category\Repositories\CategoryRepository;
 abstract class SectionType
 {
     /**
+     * Schemes a link the operator enters may use, since any other, such as `javascript:`, runs script when followed.
+     */
+    public const ALLOWED_URL_SCHEMES = ['http', 'https', 'mailto', 'tel'];
+
+    /**
      * Code the section is stored under, unique among the types a theme offers.
      */
     protected string $code;
@@ -152,6 +157,29 @@ abstract class SectionType
             'HTML.ForbiddenElements' => 'script,iframe,form',
             'CSS.AllowedProperties' => null,
         ])->clean((string) $html);
+    }
+
+    /**
+     * Get a link the operator entered, or an empty one when it carries a scheme other than the allowed ones.
+     */
+    protected function sanitizeUrl(mixed $url): string
+    {
+        if (! is_scalar($url)) {
+            return '';
+        }
+
+        $url = trim((string) $url);
+
+        $normalized = preg_replace('/[\x00-\x20\x7F]+/', '', $url);
+
+        if (
+            preg_match('/^([a-z][a-z0-9+.\-]*):/i', $normalized, $matches)
+            && ! in_array(strtolower($matches[1]), static::ALLOWED_URL_SCHEMES)
+        ) {
+            return '';
+        }
+
+        return $url;
     }
 
     /**

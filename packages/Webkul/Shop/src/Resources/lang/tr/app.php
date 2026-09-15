@@ -42,6 +42,7 @@ return [
             'page-title' => 'Müşteri Girişi',
             'password' => 'Şifre',
             'resend-verification' => 'Doğrulama E-postasını Yeniden Gönder',
+            'social-account-exists' => 'Bu e-posta adresiyle bir hesap zaten mevcut. Lütfen e-posta adresiniz ve şifrenizle giriş yapın.',
             'title' => 'Oturum Aç',
             'verify-first' => 'Lütfen önce e-posta adresinizi doğrulayın.',
         ],

@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Yanlış şifre',
             'last-delete-error' => 'Son kullanıcıyı silme başarısız.',
             'login-error' => 'Kimlik bilgilerinizi kontrol edin ve yeniden deneyin.',
+            'role-not-grantable' => 'Sahip olmadığınız izinlere sahip bir rol atayamazsınız.',
             'update-success' => 'Kullanıcı başarıyla güncellendi.',
+            'user-not-manageable' => 'Rolü sahip olmadığınız izinlere sahip olan bir kullanıcıyı değiştiremezsiniz.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Rol Silme Başarısız',
             'delete-success' => 'Rol Başarıyla Silindi',
             'last-delete-error' => 'Son Rol silinemedi',
+            'permissions-not-grantable' => 'Sahip olmadığınız izinleri veremezsiniz.',
             'update-success' => 'Rol Başarıyla Güncellendi',
         ],
 

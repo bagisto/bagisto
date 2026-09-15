@@ -512,9 +512,9 @@
 
                                     <td>
                                         @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
-                                            {!! core()->formatPrice($item->price_incl_tax, $orderCurrencyCode) !!}
+                                            {{ core()->formatPrice($item->price_incl_tax, $orderCurrencyCode) }}
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                            {!! core()->formatPrice($item->price_incl_tax, $orderCurrencyCode) !!}
+                                            {{ core()->formatPrice($item->price_incl_tax, $orderCurrencyCode) }}
 
                                             <div class="small-text">
                                                 @lang('shop::app.customers.account.orders.invoice-pdf.excl-tax')
@@ -524,7 +524,7 @@
                                                 </span>
                                             </div>
                                         @else
-                                            {!! core()->formatPrice($item->price, $orderCurrencyCode) !!}
+                                            {{ core()->formatPrice($item->price, $orderCurrencyCode) }}
                                         @endif
                                     </td>
 
@@ -534,9 +534,9 @@
 
                                     <td>
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
-                                            {!! core()->formatPrice($item->total_incl_tax, $orderCurrencyCode) !!}
+                                            {{ core()->formatPrice($item->total_incl_tax, $orderCurrencyCode) }}
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
-                                            {!! core()->formatPrice($item->total_incl_tax, $orderCurrencyCode) !!}
+                                            {{ core()->formatPrice($item->total_incl_tax, $orderCurrencyCode) }}
 
                                             <div class="small-text">
                                                 @lang('shop::app.customers.account.orders.invoice-pdf.excl-tax')
@@ -546,7 +546,7 @@
                                                 </span>
                                             </div>
                                         @else
-                                            {!! core()->formatPrice($item->total, $orderCurrencyCode) !!}
+                                            {{ core()->formatPrice($item->total, $orderCurrencyCode) }}
                                         @endif
                                     </td>
                                 </tr>
@@ -563,25 +563,25 @@
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->sub_total_incl_tax, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->sub_total_incl_tax, $orderCurrencyCode) }}</td>
                                 </tr>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal-incl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->sub_total_incl_tax, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->sub_total_incl_tax, $orderCurrencyCode) }}</td>
                                 </tr>
 
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal-excl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->sub_total, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->sub_total, $orderCurrencyCode) }}</td>
                                 </tr>
                             @else
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.subtotal')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->sub_total, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->sub_total, $orderCurrencyCode) }}</td>
                                 </tr>
                             @endif
 
@@ -589,38 +589,38 @@
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->shipping_amount_incl_tax, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->shipping_amount_incl_tax, $orderCurrencyCode) }}</td>
                                 </tr>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling-incl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->shipping_amount_incl_tax, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->shipping_amount_incl_tax, $orderCurrencyCode) }}</td>
                                 </tr>
 
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling-excl-tax')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->shipping_amount, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->shipping_amount, $orderCurrencyCode) }}</td>
                                 </tr>
                             @else
                                 <tr>
                                     <td>@lang('shop::app.customers.account.orders.invoice-pdf.shipping-handling')</td>
                                     <td>-</td>
-                                    <td>{!! core()->formatPrice($invoice->shipping_amount, $orderCurrencyCode) !!}</td>
+                                    <td>{{ core()->formatPrice($invoice->shipping_amount, $orderCurrencyCode) }}</td>
                                 </tr>
                             @endif
 
                             <tr>
                                 <td>@lang('shop::app.customers.account.orders.invoice-pdf.tax')</td>
                                 <td>-</td>
-                                <td>{!! core()->formatPrice($invoice->tax_amount, $orderCurrencyCode) !!}</td>
+                                <td>{{ core()->formatPrice($invoice->tax_amount, $orderCurrencyCode) }}</td>
                             </tr>
 
                             <tr>
                                 <td>@lang('shop::app.customers.account.orders.invoice-pdf.discount')</td>
                                 <td>-</td>
-                                <td>{!! core()->formatPrice($invoice->discount_amount, $orderCurrencyCode) !!}</td>
+                                <td>{{ core()->formatPrice($invoice->discount_amount, $orderCurrencyCode) }}</td>
                             </tr>
 
                             <tr>
@@ -629,7 +629,7 @@
                                 </td>
                                 <td style="border-top: 1px solid #FFFFFF;">-</td>
                                 <td style="border-top: 1px solid #FFFFFF;">
-                                    <b>{!! core()->formatPrice($invoice->grand_total, $orderCurrencyCode) !!}</b>
+                                    <b>{{ core()->formatPrice($invoice->grand_total, $orderCurrencyCode) }}</b>
                                 </td>
                             </tr>
                         </tbody>

@@ -42,6 +42,7 @@ return [
             'page-title' => '顧客ログイン',
             'password' => 'パスワード',
             'resend-verification' => '確認メールを再送信',
+            'social-account-exists' => 'このメールアドレスのアカウントは既に存在します。メールアドレスとパスワードでサインインしてください。',
             'title' => 'サインイン',
             'verify-first' => 'まずメールアカウントを確認してください。',
         ],

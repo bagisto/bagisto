@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => '密码错误',
             'last-delete-error' => '删除最后一个用户失败。',
             'login-error' => '请检查您的凭据并重试。',
+            'role-not-grantable' => '您不能分配包含您自己没有的权限的角色。',
             'update-success' => '用户成功更新。',
+            'user-not-manageable' => '您不能更改其角色包含您自己没有的权限的用户。',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => '角色删除失败',
             'delete-success' => '角色已成功删除',
             'last-delete-error' => '最后一个角色无法删除',
+            'permissions-not-grantable' => '您不能授予您自己没有的权限。',
             'update-success' => '角色已成功更新',
         ],
 

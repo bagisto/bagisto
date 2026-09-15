@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Helpers;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -19,10 +20,18 @@ class MediaFileName
     public const MAX_COLLISION_ATTEMPTS = 100;
 
     /**
-     * Build a unique storage path for the given directory, out of a user supplied name.
-     *
-     * The extension is always dictated by the caller, never by the supplied name, so a
-     * name can never change the type of the stored file.
+     * Extensions an uploaded media file may be stored under, none of which a web server runs or renders as a page.
+     */
+    public const ALLOWED_EXTENSIONS = ['avif', 'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'mov', 'mp4', 'ogg', 'ogv', 'png', 'webm', 'webp'];
+
+    /**
+     * Extension given to an uploaded file whose type is none of the allowed ones.
+     */
+    public const FALLBACK_EXTENSION = 'bin';
+
+    /**
+     * Build a unique storage path in the given directory out of a user supplied name, under the caller's
+     * extension, so a name can never change the type of the stored file.
      */
     public function resolve(string $directory, ?string $desiredName, string $extension): string
     {
@@ -50,11 +59,25 @@ class MediaFileName
     }
 
     /**
-     * Rename the file living at the given path.
-     *
-     * Returns the path the file can be found at afterwards. When the desired name is
-     * empty, already in use by this very file, or the move fails, the current path is
-     * returned so that the database is never left pointing at a file that is not there.
+     * Get the extension to store an uploaded file under, preferring the one detected from its contents
+     * and never one outside the allowed extensions.
+     */
+    public function extension(UploadedFile $file): string
+    {
+        foreach ([$file->guessExtension(), $file->getClientOriginalExtension()] as $extension) {
+            $extension = strtolower((string) $extension);
+
+            if (in_array($extension, self::ALLOWED_EXTENSIONS)) {
+                return $extension;
+            }
+        }
+
+        return self::FALLBACK_EXTENSION;
+    }
+
+    /**
+     * Rename the file at the given path and return where it lives afterwards, which stays the current
+     * path when the name is empty or unchanged, or the move fails.
      */
     public function rename(string $currentPath, ?string $desiredName): string
     {
@@ -88,10 +111,8 @@ class MediaFileName
     }
 
     /**
-     * Reduce a user supplied name to a safe, slugged base name.
-     *
-     * Any directory component is dropped before slugging, so a name can never escape
-     * the directory it is meant to live in.
+     * Reduce a user supplied name to a safe, slugged base name, dropping any directory component first
+     * so a name can never escape the directory it is meant to live in.
      */
     public function sanitize(?string $desiredName): string
     {

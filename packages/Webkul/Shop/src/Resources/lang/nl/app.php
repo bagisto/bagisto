@@ -42,6 +42,7 @@ return [
             'page-title' => 'Aanmelden',
             'password' => 'Wachtwoord',
             'resend-verification' => 'Verificatie-e-mail opnieuw verzenden',
+            'social-account-exists' => 'Er bestaat al een account met dit e-mailadres. Log in met uw e-mailadres en wachtwoord.',
             'title' => 'Aanmelden',
             'verify-first' => 'Verifieer eerst uw e-mailaccount.',
         ],
