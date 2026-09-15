@@ -21,10 +21,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
      * @param  array  $productIds
      * @return void
      */
-    public function __construct(protected $productIds)
-    {
-        $this->productIds = $productIds;
-    }
+    public function __construct(protected $productIds) {}
 
     /**
      * Reindex the prices of the products a removed rule applied to and of the composite products built from them;

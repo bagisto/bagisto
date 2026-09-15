@@ -46,12 +46,14 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
 
         $productIds = $productIds
             ->merge(app(ProductRepository::class)->getCompositeParentIds($productIds->all()))
-            ->unique();
+            ->unique()
+            ->values()
+            ->all();
 
-        Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds->values()->all()]);
+        Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(PriceIndexer::class)->reindexProducts($productIds->values()->all());
+        app(PriceIndexer::class)->reindexProducts($productIds);
 
-        Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds->values()->all()]);
+        Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }
 }

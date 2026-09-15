@@ -52,6 +52,26 @@ function indexedMinPriceOf(Product $product): float
 }
 
 // ============================================================================
+// Reindexing Given Products
+// ============================================================================
+
+it('should reindex every set of products handed to the same indexer', function () {
+    $first = $this->createProductOfType('simple');
+    $second = $this->createProductOfType('simple');
+
+    startSpecialPriceToday($first, 60);
+    startSpecialPriceToday($second, 70);
+
+    $indexer = app(PriceIndexer::class);
+
+    $indexer->reindexProducts([$first->id]);
+    $indexer->reindexProducts([$second->id]);
+
+    expect(indexedMinPriceOf($first))->toBePrice(60)
+        ->and(indexedMinPriceOf($second))->toBePrice(70);
+});
+
+// ============================================================================
 // Selective Reindexing
 // ============================================================================
 

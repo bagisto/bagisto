@@ -7,8 +7,13 @@ use Spatie\ResponseCache\Facades\ResponseCache;
 class Price extends Product
 {
     /**
-     * After product prices are reindexed, drop the pages of the products whose prices changed, or every
-     * page when no product ids are given because every price was reindexed.
+     * The most products whose pages are dropped one by one; above it every page is dropped instead.
+     */
+    public const PER_PRODUCT_FORGET_LIMIT = 100;
+
+    /**
+     * After product prices are reindexed, drop the pages of the products whose prices changed, or every page
+     * when no product ids are given because every price was reindexed, or when too many changed to walk.
      *
      * @param  array|null  $productIds
      * @return void
@@ -19,7 +24,10 @@ class Price extends Product
             return;
         }
 
-        if (is_null($productIds)) {
+        if (
+            is_null($productIds)
+            || count($productIds) > self::PER_PRODUCT_FORGET_LIMIT
+        ) {
             ResponseCache::clear();
 
             return;

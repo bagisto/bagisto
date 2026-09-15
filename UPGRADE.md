@@ -20,6 +20,10 @@
 - [The Omnibus Package](#the-omnibus-package)
 - [PostgreSQL Support](#postgresql-support)
 
+## Low Impact Changes
+
+- [Catalog Rule Jobs No Longer Declare a Batch Size](#catalog-rule-jobs-no-longer-declare-a-batch-size)
+
 ## Upgrading To v2.5 From v2.4
 
 > [!NOTE]
@@ -1043,3 +1047,11 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
    - The whole page in a different typeface — see "The Default Font Stack Changed" above.
 
    For any additional utility-class-level breaking changes in your custom Blade templates, refer to the official [Tailwind CSS v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide).
+
+### Catalog Rule Jobs No Longer Declare a Batch Size
+
+**Impact Probability: Low**
+
+`Webkul\CatalogRule\Jobs\UpdateCreateCatalogRuleIndex` and `DeleteCatalogRuleIndex` no longer carry a `protected const BATCH_SIZE`. Both jobs now hand their product ids to `Webkul\Product\Helpers\Indexers\Price::reindexProducts()`, which batches the reindex itself with the indexer's own `BATCH_SIZE` and loads every relation the type indexers read up front. A subclass of either job that referenced `self::BATCH_SIZE` should call `reindexProducts()` instead of paging through the product repository itself.
+
+The full page cache's price listener now drops every cached page when a reindex touches more than `Webkul\FPC\Listeners\Price::PER_PRODUCT_FORGET_LIMIT` products, rather than resolving each product's pages one by one, so a catalog rule that matches most of the catalogue no longer walks it inside the save request.
