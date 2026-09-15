@@ -2,6 +2,8 @@
 
 namespace Webkul\User;
 
+use Illuminate\Support\Collection;
+use Webkul\Core\Acl\AclItem;
 use Webkul\User\Contracts\Role;
 
 class Bouncer
@@ -62,6 +64,20 @@ class Bouncer
     }
 
     /**
+     * Get the permission tree limited to the permissions the signed-in admin holds, and so may grant.
+     */
+    public function getGrantableAclItems(): Collection
+    {
+        $role = auth()->guard('admin')->user()?->role;
+
+        if ($role?->permission_type === 'all') {
+            return acl()->getItems();
+        }
+
+        return $this->filterAclItems(acl()->getItems(), (array) $role?->permissions);
+    }
+
+    /**
      * Abort unless the signed-in admin holds the given permission.
      *
      * @param  string  $permission
@@ -75,5 +91,21 @@ class Bouncer
         ) {
             abort(401, 'This action is unauthorized');
         }
+    }
+
+    /**
+     * Keep the permission tree items, and their children, found in the given permissions.
+     */
+    protected function filterAclItems(Collection $items, array $permissions): Collection
+    {
+        return $items
+            ->filter(fn (AclItem $item) => in_array($item->key, $permissions))
+            ->map(fn (AclItem $item) => new AclItem(
+                key: $item->key,
+                name: $item->name,
+                route: $item->route,
+                sort: $item->sort,
+                children: $this->filterAclItems($item->children, $permissions),
+            ));
     }
 }

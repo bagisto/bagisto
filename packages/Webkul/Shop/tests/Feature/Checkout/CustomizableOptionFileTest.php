@@ -35,15 +35,18 @@ function makeProductWithFileOption(string $supportedExtensions): array
 }
 
 /**
- * Build a real upload, since a fake one holds a stream the cart item cannot encode.
+ * Build a real upload, since a fake one holds a stream the cart item cannot encode, in a temporary file
+ * removed when the run ends.
  */
 function makeCustomerUpload(string $name, string $contents): UploadedFile
 {
-    $path = tempnam(sys_get_temp_dir(), 'upload');
+    static $handles = [];
 
-    file_put_contents($path, $contents);
+    $handles[] = $handle = tmpfile();
 
-    return new UploadedFile($path, $name, null, null, true);
+    fwrite($handle, $contents);
+
+    return new UploadedFile(stream_get_meta_data($handle)['uri'], $name, null, null, true);
 }
 
 it('does not relocate files outside the customer upload directory when managing customizable options', function () {

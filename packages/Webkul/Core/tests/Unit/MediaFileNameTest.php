@@ -5,15 +5,18 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Helpers\MediaFileName;
 
 /**
- * Build a real upload, whose type is detected from its contents rather than from its name as a fake one's is.
+ * Build a real upload, whose type is detected from its contents rather than from its name as a fake one's is,
+ * in a temporary file removed when the run ends.
  */
 function uploadedFileNamed(string $name, string $contents): UploadedFile
 {
-    $path = tempnam(sys_get_temp_dir(), 'upload');
+    static $handles = [];
 
-    file_put_contents($path, $contents);
+    $handles[] = $handle = tmpfile();
 
-    return new UploadedFile($path, $name, null, null, true);
+    fwrite($handle, $contents);
+
+    return new UploadedFile(stream_get_meta_data($handle)['uri'], $name, null, null, true);
 }
 
 beforeEach(function () {

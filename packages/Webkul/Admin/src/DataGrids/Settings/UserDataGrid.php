@@ -39,6 +39,7 @@ class UserDataGrid extends DataGrid
                 'admins.image as user_image',
                 'admins.status',
                 'admins.email',
+                'admins.role_id',
                 'roles.name as role_name'
             );
 
@@ -141,6 +142,11 @@ class UserDataGrid extends DataGrid
      */
     public function prepareActions()
     {
+        $grantableRoleIds = $this->roleRepository->all()
+            ->filter(fn ($role) => bouncer()->canGrantRole($role))
+            ->pluck('id')
+            ->all();
+
         if (bouncer()->hasPermission('settings.users.edit')) {
             $this->addAction([
                 'index' => 'edit',
@@ -150,6 +156,7 @@ class UserDataGrid extends DataGrid
                 'url' => function ($row) {
                     return route('admin.settings.users.edit', $row->user_id);
                 },
+                'condition' => fn ($row) => in_array($row->role_id, $grantableRoleIds),
             ]);
         }
 
@@ -162,6 +169,7 @@ class UserDataGrid extends DataGrid
                 'url' => function ($row) {
                     return route('admin.settings.users.delete', $row->user_id);
                 },
+                'condition' => fn ($row) => in_array($row->role_id, $grantableRoleIds),
             ]);
         }
     }

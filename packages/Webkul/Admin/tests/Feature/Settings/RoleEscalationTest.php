@@ -4,6 +4,7 @@ use Webkul\User\Models\Admin;
 use Webkul\User\Models\Role;
 
 use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
@@ -171,4 +172,50 @@ it('should not let an admin widen their own role or change a role above them', f
     expect($this->restrictedRole->fresh()->permission_type)->toBe('custom');
 
     expect($this->administratorRole->fresh()->permission_type)->toBe('all');
+});
+
+it('should only offer the user actions an admin may take in the users listing', function () {
+    $administrator = Admin::factory()->create([
+        'role_id' => $this->administratorRole->id,
+    ]);
+
+    $this->loginAsAdmin($this->restrictedAdmin);
+
+    $recordFor = fn (Admin $admin) => getJson(route('admin.settings.users.index', [
+        'filters' => ['user_id' => [$admin->id]],
+    ]), ['X-Requested-With' => 'XMLHttpRequest'])->assertOk()->json('records.0');
+
+    expect($recordFor($administrator)['actions'])->toBeEmpty();
+
+    expect(collect($recordFor($this->restrictedAdmin)['actions'])->pluck('index')->all())->toBe(['edit', 'delete']);
+});
+
+it('should only offer the role actions an admin may take in the roles listing', function () {
+    $this->loginAsAdmin($this->restrictedAdmin);
+
+    $recordFor = fn (Role $role) => getJson(route('admin.settings.roles.index', [
+        'filters' => ['id' => [$role->id]],
+    ]), ['X-Requested-With' => 'XMLHttpRequest'])->assertOk()->json('records.0');
+
+    expect($recordFor($this->administratorRole)['actions'])->toBeEmpty();
+
+    expect($recordFor($this->restrictedRole)['actions'])->toHaveCount(2);
+});
+
+it('should only offer the permissions an admin holds when a role is created', function () {
+    $this->loginAsAdmin($this->restrictedAdmin);
+
+    $flatten = function ($items) use (&$flatten) {
+        return collect($items)->flatMap(fn ($item) => [$item->key, ...$flatten($item->children)])->all();
+    };
+
+    $keys = $flatten(bouncer()->getGrantableAclItems());
+
+    expect($keys)->toContain('settings', 'settings.users', 'settings.roles.delete');
+
+    expect($keys)->not->toContain('catalog', 'sales', 'settings.channels');
+
+    get(route('admin.settings.roles.create'))
+        ->assertOk()
+        ->assertDontSee('<option value="all">', false);
 });
