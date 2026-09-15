@@ -93,6 +93,10 @@ class WishlistController extends APIController
      */
     public function moveToCart($id): JsonResource
     {
+        $this->validate(request(), [
+            'quantity' => 'nullable|integer|min:1',
+        ]);
+
         $wishlistItem = $this->wishlistRepository->findOneWhere([
             'id' => $id,
             'customer_id' => auth()->guard('customer')->user()->id,

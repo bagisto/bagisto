@@ -60,6 +60,10 @@ class CartController extends APIController
             'product_id' => 'required|integer|exists:products,id',
             'is_buy_now' => 'integer|in:0,1',
             'quantity' => 'integer|min:1',
+            'qty' => 'array',
+            'qty.*' => 'integer|min:0',
+            'bundle_option_qty' => 'array',
+            'bundle_option_qty.*' => 'integer|min:1',
         ]);
 
         $product = $this->productRepository->with('parent')->findOrFail(request()->input('product_id'));
@@ -136,6 +140,13 @@ class CartController extends APIController
      */
     public function moveToWishlist(): JsonResource
     {
+        $this->validate(request(), [
+            'ids' => 'required|array',
+            'ids.*' => 'integer',
+            'qty' => 'required|array',
+            'qty.*' => 'integer|min:1',
+        ]);
+
         foreach (request()->input('ids') as $index => $id) {
             $qty = request()->input('qty')[$index];
 

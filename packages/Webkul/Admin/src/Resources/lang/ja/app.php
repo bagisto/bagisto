@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'パスワードが正しくありません',
             'last-delete-error' => '最後のユーザーの削除に失敗しました。',
             'login-error' => '資格情報を確認して、もう一度試してください。',
+            'role-not-grantable' => '自分が持っていない権限を含むロールは割り当てられません。',
             'update-success' => 'ユーザーが正常に更新されました。',
+            'user-not-manageable' => '自分が持っていない権限を含むロールのユーザーは変更できません。',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => '役割の削除に失敗しました',
             'delete-success' => '役割が正常に削除されました',
             'last-delete-error' => '最後の役割は削除できません',
+            'permissions-not-grantable' => '自分が持っていない権限は付与できません。',
             'update-success' => '役割が正常に更新されました',
         ],
 

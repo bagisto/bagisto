@@ -79,6 +79,29 @@ class FooterLinks extends SectionType
     }
 
     /**
+     * Clear the url of any link whose scheme could run script, in every stored column.
+     */
+    public function sanitize(array $options): array
+    {
+        foreach (array_keys($this->storedColumns($options)) as $key) {
+            if (! is_array($options[$key])) {
+                continue;
+            }
+
+            foreach ($options[$key] as $index => $link) {
+                if (
+                    is_array($link)
+                    && array_key_exists('url', $link)
+                ) {
+                    $options[$key][$index]['url'] = $this->sanitizeUrl($link['url']);
+                }
+            }
+        }
+
+        return $options;
+    }
+
+    /**
      * Read the numbered `column_N` keys the storefront renders as a list of columns.
      */
     public function prepareForEditor(array $options): array

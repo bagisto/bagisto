@@ -42,6 +42,7 @@ return [
             'page-title' => 'Inici de sessió del client',
             'password' => 'Contrasenya',
             'resend-verification' => 'Reenvia el correu de verificació',
+            'social-account-exists' => 'Ja existeix un compte amb aquest correu electrònic. Inicieu la sessió amb el vostre correu electrònic i contrasenya.',
             'title' => 'Iniciar sessió',
             'verify-first' => 'Verifica primer el teu compte de correu electrònic.',
         ],

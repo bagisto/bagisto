@@ -42,6 +42,7 @@ return [
             'page-title' => 'Connexion client',
             'password' => 'Mot de passe',
             'resend-verification' => 'Renvoyer l\'e-mail de vérification',
+            'social-account-exists' => 'Un compte existe déjà avec cette adresse e-mail. Veuillez vous connecter avec votre adresse e-mail et votre mot de passe.',
             'title' => 'Se connecter',
             'verify-first' => 'Vérifiez d\'abord votre compte e-mail.',
         ],

@@ -43,7 +43,10 @@ class SectionRepository extends Repository
             SectionTypeEnum::SERVICES_CONTENT->value,
         ]);
 
-        if ($data['type'] == SectionTypeEnum::STATIC_CONTENT->value) {
+        if (
+            ! $withUploads
+            && is_array($data[$locale]['options'] ?? null)
+        ) {
             $data[$locale]['options'] = $this->sanitizeOptions(
                 $data['type'],
                 $data[$locale]['options'] ?? [],
@@ -132,7 +135,7 @@ class SectionRepository extends Repository
         }
 
         $translatedModel = $section->translate($locale);
-        $translatedModel->options = $options ?? [];
+        $translatedModel->options = $this->sanitizeOptions($section->type, $options, $section->theme_code);
         $translatedModel->section_id = $section->id;
         $translatedModel->save();
     }

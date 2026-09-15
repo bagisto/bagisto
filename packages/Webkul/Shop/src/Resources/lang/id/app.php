@@ -42,6 +42,7 @@ return [
             'page-title' => 'Masuk Pelanggan',
             'password' => 'Kata Sandi',
             'resend-verification' => 'Kirim Ulang Email Verifikasi',
+            'social-account-exists' => 'Akun dengan email ini sudah ada. Silakan masuk dengan email dan kata sandi Anda.',
             'title' => 'Masuk',
             'verify-first' => 'Harap verifikasi akun email Anda terlebih dahulu.',
         ],

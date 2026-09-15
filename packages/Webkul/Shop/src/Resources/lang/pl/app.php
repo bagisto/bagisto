@@ -42,6 +42,7 @@ return [
             'page-title' => 'Logowanie klienta',
             'password' => 'Hasło',
             'resend-verification' => 'Wyślij ponownie e-mail weryfikacyjny',
+            'social-account-exists' => 'Konto z tym adresem e-mail już istnieje. Zaloguj się, używając adresu e-mail i hasła.',
             'title' => 'Zaloguj się',
             'verify-first' => 'Najpierw zweryfikuj swoje konto e-mail.',
         ],

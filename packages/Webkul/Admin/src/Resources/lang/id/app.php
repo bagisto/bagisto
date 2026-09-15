@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Kata sandi salah',
             'last-delete-error' => 'Setidaknya satu admin dibutuhkan.',
             'login-error' => 'Periksa kredensial Anda dan coba lagi.',
+            'role-not-grantable' => 'Anda tidak dapat menetapkan peran dengan izin yang tidak Anda miliki.',
             'update-success' => 'Pengguna berhasil diperbarui.',
+            'user-not-manageable' => 'Anda tidak dapat mengubah pengguna yang perannya memiliki izin yang tidak Anda miliki.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Peran Gagal Dihapus',
             'delete-success' => 'Peran Berhasil Dihapus',
             'last-delete-error' => 'Peran terakhir tidak dapat dihapus',
+            'permissions-not-grantable' => 'Anda tidak dapat memberikan izin yang tidak Anda miliki.',
             'update-success' => 'Peran Berhasil Diperbarui',
         ],
 

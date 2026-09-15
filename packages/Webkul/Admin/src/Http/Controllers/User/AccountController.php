@@ -84,7 +84,7 @@ class AccountController extends Controller
             $data['image'] = $mediaFileName->resolve(
                 'admins/'.$user->id,
                 $requestedFileName,
-                $file->getClientOriginalExtension()
+                $mediaFileName->extension($file)
             );
 
             Storage::put($data['image'], $file->get());

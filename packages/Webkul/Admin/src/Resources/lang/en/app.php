@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Incorrect password',
             'last-delete-error' => 'At least one admin is required.',
             'login-error' => 'Please check your credentials and try again.',
+            'role-not-grantable' => 'You cannot assign a role with permissions you do not have.',
             'update-success' => 'User updated successfully.',
+            'user-not-manageable' => 'You cannot change a user whose role has permissions you do not have.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Roles is deleted failed',
             'delete-success' => 'Roles is deleted successfully',
             'last-delete-error' => 'Last Roles can not be deleted',
+            'permissions-not-grantable' => 'You cannot grant permissions you do not have.',
             'update-success' => 'Roles is updated successfully',
         ],
 

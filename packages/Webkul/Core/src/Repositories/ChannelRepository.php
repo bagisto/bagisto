@@ -116,7 +116,7 @@ class ChannelRepository extends Repository
             $channel->{$type} = $this->mediaFileName->resolve(
                 'channel/'.$channel->id,
                 $meta['file_name'] ?? null,
-                $file->getClientOriginalExtension()
+                $this->mediaFileName->extension($file)
             );
 
             Storage::put($channel->{$type}, $file->get());

@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Mot de passe incorrect',
             'last-delete-error' => 'Échec de la suppression du dernier utilisateur.',
             'login-error' => 'Veuillez vérifier vos identifiants et réessayer.',
+            'role-not-grantable' => 'Vous ne pouvez pas attribuer un rôle disposant de permissions que vous n\'avez pas.',
             'update-success' => 'Utilisateur mis à jour avec succès.',
+            'user-not-manageable' => 'Vous ne pouvez pas modifier un utilisateur dont le rôle dispose de permissions que vous n\'avez pas.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'La suppression des rôles a échoué',
             'delete-success' => 'Rôles supprimés avec succès',
             'last-delete-error' => 'Le dernier rôle ne peut pas être supprimé',
+            'permissions-not-grantable' => 'Vous ne pouvez pas accorder des permissions que vous n\'avez pas.',
             'update-success' => 'Rôles mis à jour avec succès',
         ],
 

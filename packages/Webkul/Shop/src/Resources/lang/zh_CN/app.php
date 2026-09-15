@@ -42,6 +42,7 @@ return [
             'page-title' => '用户登录',
             'password' => '密码',
             'resend-verification' => '重新发送验证邮件',
+            'social-account-exists' => '该邮箱已存在账户。请使用您的邮箱和密码登录。',
             'title' => '登录',
             'verify-first' => '请先验证您的电子邮件。',
         ],

@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'סיסמה שגויה',
             'last-delete-error' => 'נכשל במחיקת המשתמש האחרון.',
             'login-error' => 'אנא בדוק את פרטי הכניסה שלך ונסה שוב.',
+            'role-not-grantable' => 'אינך יכול להקצות תפקיד עם הרשאות שאין לך.',
             'update-success' => 'המשתמש עודכן בהצלחה.',
+            'user-not-manageable' => 'אינך יכול לשנות משתמש שלתפקידו יש הרשאות שאין לך.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'נכשלה המחיקה של התפקיד',
             'delete-success' => 'התפקיד נמחק בהצלחה',
             'last-delete-error' => 'תפקיד האחרון לא יכול להימחק',
+            'permissions-not-grantable' => 'אינך יכול להעניק הרשאות שאין לך.',
             'update-success' => 'התפקיד עודכן בהצלחה',
         ],
 

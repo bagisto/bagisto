@@ -37,8 +37,8 @@ it('should store the newly created currencies', function () {
         'name' => fake()->name(),
         'symbol' => fake()->randomElement(['€', '£', '¥', 'A$', 'CHF', 'C$', '¥', 'R$']),
         'decimal' => rand(1, 4),
-        'group_separator' => '-',
-        'decimal_separator' => '-',
+        'group_separator' => ',',
+        'decimal_separator' => '.',
         'currency_position' => fake()->randomElement(['left', 'left_with_space', 'right', 'right_with_space']),
     ])
         ->assertOk()

@@ -97,31 +97,23 @@ class Simple extends AbstractType
     }
 
     /**
-     * Is customizable.
+     * Whether the product may carry customizable options, which a child of a configurable, grouped or
+     * bundle product may not.
      *
      * @return bool
      */
     public function isCustomizable()
     {
-        /**
-         * If the product is a child product of a configurable product, then it is not customizable.
-         */
         if ($this->product->parent) {
             return false;
         }
 
-        /**
-         * If the product is a child product of a grouped product, then it is not customizable.
-         */
         $associatedWithGroupedProduct = $this->productGroupedProductRepository->firstWhere('associated_product_id', $this->product->id);
 
         if ($associatedWithGroupedProduct) {
             return false;
         }
 
-        /**
-         * If the product is a child product of a bundle product, then it is not customizable.
-         */
         $associatedWithBundleProduct = $this->productBundleOptionProductRepository->firstWhere('product_id', $this->product->id);
 
         if ($associatedWithBundleProduct) {
@@ -169,7 +161,7 @@ class Simple extends AbstractType
     }
 
     /**
-     * Returns price indexer class for a specific product type
+     * Returns price indexer class for a specific product type.
      *
      * @return string
      */
@@ -208,28 +200,16 @@ class Simple extends AbstractType
         if (! empty($data['customizable_options'])) {
             $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($data['customizable_options']);
 
-            /**
-             * Check if the file extension is supported.
-             */
             foreach ($formattedCustomizableOptions->where('type', 'file') as $option) {
                 if (
                     isset($option['prices'][0]['label'])
                     && $option['prices'][0]['label'] instanceof UploadedFile
+                    && ! $this->isCustomizableFileAllowed($option['prices'][0]['label'], $option['supported_file_extensions'])
                 ) {
-                    $extension = $option['prices'][0]['label']->getClientOriginalExtension();
-
-                    if (
-                        ! empty($option['supported_file_extensions'])
-                        && ! in_array(strtolower($extension), $option['supported_file_extensions'])
-                    ) {
-                        return trans('product::app.checkout.cart.invalid-file-extension');
-                    }
+                    return trans('product::app.checkout.cart.invalid-file-extension');
                 }
             }
 
-            /**
-             * Store the file in the storage.
-             */
             $formattedCustomizableOptions = $formattedCustomizableOptions->map(function ($option) use ($data) {
                 if ($option['type'] === 'file') {
                     $file = $option['prices'][0]['label'];
@@ -238,9 +218,7 @@ class Simple extends AbstractType
                         ! empty($file)
                         && $file instanceof UploadedFile
                     ) {
-                        $filePath = $file->store("carts/{$data['cart_id']}");
-
-                        $option['prices'][0]['label'] = $filePath;
+                        $option['prices'][0]['label'] = $this->storeCustomizableFile($file, $data['cart_id']);
                     } else {
                         $filePath = collect($data['formatted_customizable_options'] ?? [])
                             ->firstWhere('id', $option['id']);

@@ -30,7 +30,7 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
@@ -38,6 +38,8 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
+     * Create an option, with its swatch image and alt text.
+     *
      * @return AttributeOption
      */
     public function create(array $data)
@@ -52,6 +54,8 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
+     * Update an option, with its swatch image and alt text.
+     *
      * @param  int  $id
      * @return AttributeOption
      */
@@ -67,6 +71,8 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
+     * Store an uploaded swatch image, always re-encoded to webp, or rename the one already stored.
+     *
      * @param  array  $data
      * @param  int  $optionId
      * @return void
@@ -76,13 +82,15 @@ class AttributeOptionRepository extends Repository
         $swatchValue = $data['swatch_value'] ?? null;
 
         if ($swatchValue instanceof UploadedFile) {
+            $encoded = image_manager()->read($swatchValue)->encodeByExtension('webp');
+
             $path = $this->mediaFileName->resolve(
                 self::SWATCH_DIRECTORY,
                 $data['swatch_file_name'] ?? null,
-                $swatchValue->getClientOriginalExtension()
+                'webp'
             );
 
-            Storage::put($path, $swatchValue->get());
+            Storage::put($path, (string) $encoded);
 
             parent::update(['swatch_value' => $path], $optionId);
 
@@ -90,36 +98,6 @@ class AttributeOptionRepository extends Repository
         }
 
         $this->renameSwatchImage($data, $optionId);
-    }
-
-    /**
-     * Rename the swatch image already stored for the option.
-     *
-     * Color and text swatches hold a plain value rather than a path, so only values
-     * living in the swatch directory are ever renamed.
-     *
-     * @param  array  $data
-     * @param  int  $optionId
-     */
-    protected function renameSwatchImage($data, $optionId): void
-    {
-        if (! array_key_exists('swatch_file_name', $data)) {
-            return;
-        }
-
-        if (! $option = $this->find($optionId)) {
-            return;
-        }
-
-        if (! Str::startsWith((string) $option->swatch_value, self::SWATCH_DIRECTORY.'/')) {
-            return;
-        }
-
-        $renamed = $this->mediaFileName->rename($option->swatch_value, $data['swatch_file_name']);
-
-        if ($renamed !== $option->swatch_value) {
-            parent::update(['swatch_value' => $renamed], $optionId);
-        }
     }
 
     /**
@@ -143,5 +121,33 @@ class AttributeOptionRepository extends Repository
         }
 
         $option->save();
+    }
+
+    /**
+     * Rename the swatch image stored for the option; colour and text swatches hold a value rather
+     * than a path, so only values in the swatch directory are renamed.
+     *
+     * @param  array  $data
+     * @param  int  $optionId
+     */
+    protected function renameSwatchImage($data, $optionId): void
+    {
+        if (! array_key_exists('swatch_file_name', $data)) {
+            return;
+        }
+
+        if (! $option = $this->find($optionId)) {
+            return;
+        }
+
+        if (! Str::startsWith((string) $option->swatch_value, self::SWATCH_DIRECTORY.'/')) {
+            return;
+        }
+
+        $renamed = $this->mediaFileName->rename($option->swatch_value, $data['swatch_file_name']);
+
+        if ($renamed !== $option->swatch_value) {
+            parent::update(['swatch_value' => $renamed], $optionId);
+        }
     }
 }

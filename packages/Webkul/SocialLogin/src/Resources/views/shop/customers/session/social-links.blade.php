@@ -1,15 +1,5 @@
-@php
-    $providers = [
-        'enable_facebook' => 'facebook',
-        'enable_twitter'  => 'twitter',
-        'enable_google'   => 'google',
-        'enable_linkedin' => 'linkedin-openid',
-        'enable_github'   => 'github',
-    ];
-@endphp
-
 <div class="mt-6 flex gap-3">
-    @foreach ($providers as $field => $provider)
+    @foreach (\Webkul\SocialLogin\Http\Controllers\LoginController::PROVIDERS as $provider => $field)
         @if (! core()->getConfigData('customer.settings.social_login.'.$field))
             @continue
         @endif

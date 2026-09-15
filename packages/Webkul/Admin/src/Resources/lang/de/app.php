@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Falsches Passwort',
             'last-delete-error' => 'Letzte Benutzerlöschung fehlgeschlagen.',
             'login-error' => 'Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.',
+            'role-not-grantable' => 'Sie können keine Rolle mit Berechtigungen zuweisen, die Sie selbst nicht haben.',
             'update-success' => 'Benutzer erfolgreich aktualisiert.',
+            'user-not-manageable' => 'Sie können keinen Benutzer ändern, dessen Rolle Berechtigungen hat, die Sie selbst nicht haben.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Löschen der Rolle fehlgeschlagen',
             'delete-success' => 'Rolle erfolgreich gelöscht',
             'last-delete-error' => 'Letzte Rolle kann nicht gelöscht werden',
+            'permissions-not-grantable' => 'Sie können keine Berechtigungen vergeben, die Sie selbst nicht haben.',
             'update-success' => 'Rolle erfolgreich aktualisiert',
         ],
 

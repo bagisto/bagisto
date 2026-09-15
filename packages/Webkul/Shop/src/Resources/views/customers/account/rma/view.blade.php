@@ -259,7 +259,7 @@
                                 </td>
                                 
                                 <td class="px-4 py-4 align-top text-sm text-gray-600">
-                                    {!! core()->formatPrice($item->orderItem->price, $item->orderItem->order->order_currency_code) !!}
+                                    {{ core()->formatPrice($item->orderItem->price, $item->orderItem->order->order_currency_code) }}
                                 </td>
                                 
                                 <td class="px-4 py-4 align-top text-sm text-gray-600">
@@ -340,7 +340,7 @@
 
                             <div>
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.price')</span>
-                                <p class="text-gray-600">{!! core()->formatPrice($item->orderItem->price, $item->orderItem->order->order_currency_code) !!}</p>
+                                <p class="text-gray-600">{{ core()->formatPrice($item->orderItem->price, $item->orderItem->order->order_currency_code) }}</p>
                             </div>
 
                             <div>

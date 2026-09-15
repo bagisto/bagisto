@@ -38,6 +38,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed products on a channel that does not have the admin locale missing from the admin product listing, and their edits being saved in a locale the channel cannot show.
 
+- Security fixes.
+
 - #11481 [fixed] - Fixed editing or deleting a CMS page leaving the old page cached for other locales, currencies, channel domains and signed-in customers; signed-in customers are no longer served cached pages.
 
 - #11479 [fixed] - Fixed the storefront password fields offering no way to see the password outside sign in, which only had a checkbox. Every password field now has an eye icon inside it, which also stands in for Microsoft Edge's own reveal button.

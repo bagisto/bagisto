@@ -42,6 +42,7 @@ return [
             'page-title' => 'Login do Cliente',
             'password' => 'Senha',
             'resend-verification' => 'Reenviar e-mail de verificação',
+            'social-account-exists' => 'Já existe uma conta com este e-mail. Entre com seu e-mail e senha.',
             'title' => 'Entrar',
             'verify-first' => 'Verifique primeiro sua conta de e-mail.',
         ],

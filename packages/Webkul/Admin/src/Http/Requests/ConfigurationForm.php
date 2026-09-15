@@ -21,37 +21,45 @@ class ConfigurationForm extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules of every configuration section the request submits a field of, read from
+     * the configuration itself rather than from anything the request describes.
      *
      * @return array
      */
     public function rules()
     {
-        return collect(request()->input('keys', []))->mapWithKeys(function ($item) {
-            $data = json_decode($item, true);
+        return collect(config('core'))
+            ->filter(fn ($item) => $this->submitsFieldOf($item))
+            ->mapWithKeys(function ($item) {
+                return collect($item['fields'])->mapWithKeys(function ($field) use ($item) {
+                    $key = "{$item['key']}.{$field['name']}";
 
-            return collect($data['fields'])->mapWithKeys(function ($field) use ($data) {
-                $key = "{$data['key']}.{$field['name']}";
+                    if ($this->has("{$key}.delete")) {
+                        return [];
+                    }
 
-                // Check delete key exist in the request
-                if ($this->has("{$key}.delete")) {
-                    return [];
-                }
+                    if (! $this->dependencyIsMet($item['key'], $field)) {
+                        return [];
+                    }
 
-                if (! $this->dependencyIsMet($data['key'], $field)) {
-                    return [];
-                }
-
-                return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
-            })->toArray();
-        })->toArray();
+                    return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
+                })->toArray();
+            })
+            ->toArray();
     }
 
     /**
-     * Determine whether a field's depend condition is met by the submitted values.
-     *
-     * A field the depend hides is never submitted, so validating it would reject a form the
-     * admin cannot fill.
+     * Whether the request submits a value for any field of a configuration section.
+     */
+    protected function submitsFieldOf(array $item): bool
+    {
+        return collect($item['fields'] ?? [])
+            ->contains(fn ($field) => $this->has("{$item['key']}.{$field['name']}"));
+    }
+
+    /**
+     * Determine whether a field's depend condition is met by the submitted values, since a field the
+     * depend hides is never submitted and validating it would reject a form the admin cannot fill.
      */
     protected function dependencyIsMet(string $itemKey, array $field): bool
     {
@@ -69,7 +77,7 @@ class ConfigurationForm extends FormRequest
     }
 
     /**
-     * Transform validation rules into an array and map custom validation rules
+     * Transform validation rules into an array and map custom validation rules.
      *
      * @param  string|array  $validation
      * @return array

@@ -26,19 +26,11 @@ class ProductMediaRepository extends Repository
     }
 
     /**
-     * Specify model class name.
+     * Specify model class name, which is left to `ProductImageRepository` and `ProductVideoRepository`.
      *
      * @return string
      */
-    public function model()
-    {
-        /**
-         * This repository is extended to `ProductImageRepository` and `ProductVideoRepository`
-         * repository.
-         *
-         * And currently no model is assigned to this repo.
-         */
-    }
+    public function model() {}
 
     /**
      * Get product directory.
@@ -58,14 +50,8 @@ class ProductMediaRepository extends Repository
      */
     public function upload($data, $product, string $uploadFileType): void
     {
-        /**
-         * Previous model ids for filtering.
-         */
         $previousIds = $this->resolveFileTypeQueryBuilder($product, $uploadFileType)->pluck('id');
 
-        /**
-         * Per file seo metadata, keyed the same way as the uploaded files.
-         */
         $metaData = $data[$uploadFileType]['meta'] ?? [];
 
         $position = 0;
@@ -129,10 +115,8 @@ class ProductMediaRepository extends Repository
     }
 
     /**
-     * Store a newly uploaded file and return the path it was stored at.
-     *
-     * Images are always re-encoded to webp, so the requested name only ever dictates the
-     * base name and never the resulting file type.
+     * Store a newly uploaded file and return its path; images are re-encoded to webp and anything else
+     * keeps an allowed extension, so the requested name only ever sets the base name.
      *
      * @param  Product  $product
      */
@@ -153,7 +137,7 @@ class ProductMediaRepository extends Repository
         }
 
         if (filled($requestedName)) {
-            $path = $this->mediaFileName->resolve($directory, $requestedName, $file->getClientOriginalExtension());
+            $path = $this->mediaFileName->resolve($directory, $requestedName, $this->mediaFileName->extension($file));
 
             Storage::put($path, $file->get());
 
@@ -164,9 +148,7 @@ class ProductMediaRepository extends Repository
     }
 
     /**
-     * Save the alt text of the media, for the requested locale.
-     *
-     * Silently skipped for media that does not carry translations, such as videos.
+     * Save the alt text of the media for the requested locale, skipping media without translations, such as videos.
      *
      * @param  mixed  $model
      */

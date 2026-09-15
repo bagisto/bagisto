@@ -42,6 +42,7 @@ return [
             'page-title' => 'Customer Login',
             'password' => 'Password',
             'resend-verification' => 'Resend Verification Email',
+            'social-account-exists' => 'An account with this email already exists. Please sign in with your email and password.',
             'title' => 'Sign In',
             'verify-first' => 'Verify your email account first.',
         ],

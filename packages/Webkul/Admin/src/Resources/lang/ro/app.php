@@ -4155,7 +4155,9 @@ return [
             'incorrect-password' => 'Incorrect password',
             'last-delete-error' => 'At least one admin is required.',
             'login-error' => 'Please check your credentials and try again.',
+            'role-not-grantable' => 'Nu puteți atribui un rol cu permisiuni pe care nu le aveți.',
             'update-success' => 'User updated successfully.',
+            'user-not-manageable' => 'Nu puteți modifica un utilizator al cărui rol are permisiuni pe care nu le aveți.',
         ],
 
         'roles' => [
@@ -4206,6 +4208,7 @@ return [
             'delete-failed' => 'Roles is deleted failed',
             'delete-success' => 'Roles is deleted successfully',
             'last-delete-error' => 'Last Roles can not be deleted',
+            'permissions-not-grantable' => 'Nu puteți acorda permisiuni pe care nu le aveți.',
             'update-success' => 'Roles is updated successfully',
         ],
 

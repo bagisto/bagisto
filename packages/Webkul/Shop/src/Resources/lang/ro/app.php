@@ -42,6 +42,7 @@ return [
             'page-title' => 'Autentificare client',
             'password' => 'Parolă',
             'resend-verification' => 'Retrimite emailul de verificare',
+            'social-account-exists' => 'Există deja un cont cu acest e-mail. Vă rugăm să vă autentificați cu e-mailul și parola.',
             'title' => 'Autentificare',
             'verify-first' => 'Verificați mai întâi contul de e-mail.',
         ],
