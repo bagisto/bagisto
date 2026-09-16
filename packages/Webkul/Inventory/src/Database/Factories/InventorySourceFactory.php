@@ -20,7 +20,7 @@ class InventorySourceFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $this->faker->unique()->word,
+            'code' => $this->faker->unique()->lexify('source_??????????'),
             'name' => $this->faker->unique()->word,
             'description' => $this->faker->sentence,
             'contact_name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
