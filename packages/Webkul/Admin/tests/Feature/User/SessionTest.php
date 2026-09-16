@@ -36,6 +36,24 @@ it('should sign in an admin whose first permission names several routes', functi
     'configuration' => [['configuration'], 'admin.configuration.index'],
 ]);
 
+it('should sign in an admin on a section their role actually grants, not the one a parent permission points at', function (array $permissions, string $route) {
+    $admin = adminLimitedTo($permissions);
+
+    post(route('admin.session.store'), [
+        'email' => $admin->email,
+        'password' => 'admin123',
+    ])->assertRedirect(route($route));
+})->with([
+    'users, roles and taxes' => [
+        ['settings', 'settings.users', 'settings.roles', 'settings.taxes', 'settings.taxes.tax_categories', 'settings.taxes.tax_rates'],
+        'admin.settings.users.index',
+    ],
+    'taxes and rates only' => [
+        ['settings', 'settings.taxes', 'settings.taxes.tax_rates'],
+        'admin.settings.taxes.rates.index',
+    ],
+]);
+
 it('should fall back rather than fail when a permission has nowhere to land', function () {
     $admin = adminLimitedTo(['appearance.sections.create']);
 

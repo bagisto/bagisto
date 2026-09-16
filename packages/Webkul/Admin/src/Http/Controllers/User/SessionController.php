@@ -121,20 +121,23 @@ class SessionController extends Controller
     }
 
     /**
-     * The route a permission can land an admin on, or null when it has none.
-     *
-     * A permission commonly guards several routes, and most of them are nowhere to send a
-     * browser: the ones that write answer no GET, and others want an id that signing in
-     * has no way of knowing.
+     * The route a permission can land an admin on, or null when it has none: a GET route with no
+     * required parameter, guarded by a permission the admin holds, as a parent's route is a child's.
      */
     private function navigableRoute($permission): ?string
     {
+        $guards = acl()->getRoles();
+
         foreach ((array) ($permission['route'] ?? []) as $name) {
             $route = Route::getRoutes()->getByName($name);
 
             if (
                 ! $route
                 || ! in_array('GET', $route->methods())
+                || (
+                    isset($guards[$name])
+                    && ! bouncer()->hasPermission($guards[$name])
+                )
             ) {
                 continue;
             }
