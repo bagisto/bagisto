@@ -930,12 +930,12 @@
                             let foundIndex = this.options.findIndex(item => item.id === params.id);
 
                             if (foundIndex !== -1) {
-                                Object.assign(this.options[foundIndex].params, sortedParams);
+                                Object.assign(this.options[foundIndex].params, params, sortedParams);
                             }
                         } else {
                             this.options.push({
                                 id: `option_${this.optionRowCount}`,
-                                params: { admin_name: params.admin_name, ...sortedParams }
+                                params: { ...params, ...sortedParams }
                             });
 
                             params.id = `option_${this.optionRowCount}`;

@@ -121,6 +121,29 @@ test.describe("attribute management", () => {
         );
     });
 
+    test("should keep the swatch alt text and file name when an image swatch option is edited", async ({
+        adminPage,
+    }) => {
+        const attributeCreatePage = new AttributeCreatePage(adminPage);
+        await attributeCreatePage.createAttribute(
+            buildAttributeData({
+                type: "select",
+                swatchType: "image",
+                shouldAddToDefaultFamily: false,
+                options: [
+                    { adminLabel: "Image-1", swatchImage: swatchImagePath },
+                ],
+            }),
+        );
+
+        const attributeEditPage = new AttributeEditPage(adminPage);
+        await attributeEditPage.visit();
+        await attributeEditPage.openFirstAttributeForEdit();
+        await attributeEditPage.fillSwatchSeo("Blue fabric", "blue-fabric");
+        await attributeEditPage.reopenAndSaveFirstOption();
+        await attributeEditPage.verifySwatchSeo("Blue fabric", "blue-fabric");
+    });
+
     test("should create a new select type attribute with text swatch type", async ({
         adminPage,
     }) => {

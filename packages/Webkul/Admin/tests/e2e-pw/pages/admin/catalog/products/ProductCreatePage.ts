@@ -1,6 +1,6 @@
 import { fileURLToPath } from "url";
 import path from "path";
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 import {
     generateDescription,
@@ -24,6 +24,8 @@ type BookingProductSeed = {
     weight: string;
     date: string;
     location: string;
+    availableFrom: string;
+    availableTo: string;
 };
 
 export class ProductCreatePage extends BasePage {
@@ -193,12 +195,8 @@ export class ProductCreatePage extends BasePage {
         return this.page.getByRole("textbox", { name: "Available To" });
     }
 
-    private get hourSpinbutton() {
-        return this.page.getByRole("spinbutton", { name: "Hour" });
-    }
-
-    private get minuteSpinbutton() {
-        return this.page.getByRole("spinbutton", { name: "Minute" });
+    private calendarSpinbutton(name: "Hour" | "Minute") {
+        return this.flatpickrCalendar.getByRole("spinbutton", { name });
     }
 
     private get dayStatusSelect() {
@@ -258,7 +256,9 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get tableSameSlotAllDaysSelect() {
-        return this.page.locator('select[name="booking\\[same_slot_all_days\\]\\`"]');
+        return this.page.locator(
+            'select[name="booking\\[same_slot_all_days\\]\\`"]',
+        );
     }
 
     private get escapeTarget() {
@@ -414,6 +414,11 @@ export class ProductCreatePage extends BasePage {
         ).toBeVisible();
     }
 
+    private async fillBookingAvailability(product: BookingProductSeed) {
+        await this.bookingInput("available_from").fill(product.availableFrom);
+        await this.bookingInput("available_to").fill(product.availableTo);
+    }
+
     private async createBookingProductBase(): Promise<BookingProductSeed> {
         const product: BookingProductSeed = {
             name: generateName(),
@@ -425,6 +430,8 @@ export class ProductCreatePage extends BasePage {
             weight: "25",
             date: generateRandomDateTime(),
             location: generateLocation(),
+            availableFrom: "",
+            availableTo: "",
         };
         const availableFromDate = new Date();
 
@@ -461,11 +468,12 @@ export class ProductCreatePage extends BasePage {
         });
         await productEditPage.fillPrice(product.price);
 
+        product.availableFrom = formattedAvailableFromDate;
+        product.availableTo = formattedAvailableToDate;
+
         await this.bookingInput("location").fill(product.location);
-        await this.bookingInput("available_from").fill(
-            formattedAvailableFromDate,
-        );
-        await this.bookingInput("available_to").fill(formattedAvailableToDate);
+
+        await this.fillBookingAvailability(product);
 
         return product;
     }
@@ -673,26 +681,22 @@ export class ProductCreatePage extends BasePage {
         for (let slot = 1; slot <= 2; slot++) {
             await this.addSlotsButton.click();
             await this.fromDaySelect.selectOption((slot - 1).toString());
-            await this.fromTimeTextbox.click();
-            await this.page.waitForTimeout(500);
-            await this.minuteSpinbutton.click();
-            await this.page.waitForTimeout(500);
+            await this.fillSlotTime(this.fromTimeTextbox, "12", "00");
             await this.toDaySelect.selectOption(slot.toString());
-            await this.toTimeTextbox.click();
-            await this.minuteSpinbutton.click();
-            await this.page.waitForTimeout(500);
+            await this.fillSlotTime(this.toTimeTextbox, "12", "00");
             await this.escapeTarget.press("Escape");
-            await this.modalSaveButton.click();
+            await this.saveSlotDrawer();
             await expect(this.bookingSlotIdInput(slot - 1)).toHaveValue(/.+/);
         }
 
-        await this.saveProductButton.click();
-        return product.name
+        await this.saveBookingProduct();
+        return product.name;
     }
 
     async createDefaultBookingProductWithManyBookingForOneDay() {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("booking_type").selectOption("many");
+        await this.fillBookingAvailability(product);
         await this.bookingInput("qty").fill(product.weight);
 
         const weeks = [
@@ -703,33 +707,22 @@ export class ProductCreatePage extends BasePage {
 
         for (const day of weeks) {
             await this.dayAvailabilityTrigger(day.status).click();
-            await this.slotTimeTextbox("From", 0).click();
-            await this.flatpickrCalendar.waitFor({ state: "visible" });
-            await this.hourSpinbutton.fill("10");
-            await this.minuteSpinbutton.fill("35");
-            await this.minuteSpinbutton.press("Enter");
-            await this.page.waitForTimeout(500);
+            await this.fillTimeTextbox("From", 0, "10", "35");
 
-            await this.slotTimeTextbox("To", 0).click();
-            await this.flatpickrCalendar.waitFor({ state: "visible" });
-            await this.hourSpinbutton.fill("20");
-            await this.minuteSpinbutton.fill("35");
-            await this.minuteSpinbutton.press("Enter");
-
-            await this.page.waitForTimeout(500);
+            await this.fillTimeTextbox("To", 0, "20", "35");
             await this.dayStatusSelect.selectOption(
                 day.name === "Sunday" ? "0" : "1",
             );
             await this.page.waitForTimeout(500);
             await this.escapeTarget.press("Escape");
-            await this.modalSaveButton.click();
+            await this.saveSlotDrawer();
             await expect(
                 this.bookingDaySlotIdInput(day.status - 1),
             ).toHaveValue(/.+/);
         }
 
-        await this.saveProductButton.click();
-        return product.name
+        await this.saveBookingProduct();
+        return product.name;
     }
 
     async handleDefaultBookingWithShorterTimeRangeThanSlots() {
@@ -737,27 +730,13 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("booking_type").selectOption("many");
         await this.bookingInput("qty").fill(product.weight);
 
-        const weeks = [
-            { name: "Sunday", status: 1 },
-        ];
+        const weeks = [{ name: "Sunday", status: 1 }];
 
         for (const day of weeks) {
             await this.dayAvailabilityTrigger(day.status).click();
-            await this.slotTimeTextbox("From", 0).click();
-            await this.flatpickrCalendar.waitFor({ state: "visible" });
-            await this.hourSpinbutton.fill("10");
-            await this.minuteSpinbutton.fill("35");
-            await this.minuteSpinbutton.press("Enter");
-            await this.page.waitForTimeout(500);
+            await this.fillTimeTextbox("From", 0, "10", "35");
 
-            await this.slotTimeTextbox("To", 0).click();
-            await this.page.waitForTimeout(500);
-            await this.flatpickrCalendar.waitFor({ state: "visible" });
-            await this.hourSpinbutton.fill("10");
-            await this.minuteSpinbutton.fill("50");
-            await this.minuteSpinbutton.press("Enter");
-
-            await this.page.waitForTimeout(500);
+            await this.fillTimeTextbox("To", 0, "10", "50");
             await this.escapeTarget.press("Escape");
             await this.dayStatusSelect.selectOption("1");
             await this.modalSaveButton.click();
@@ -769,15 +748,16 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("type").selectOption("appointment");
         await this.bookingInput("qty").fill(product.weight);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.bookingSelect("same_slot_all_days").selectOption("1");
         await this.addSlotsButton.click();
         await this.fillTimeTextbox("From", 0, "10", "35");
         await this.page.waitForTimeout(500);
         await this.fillTimeTextbox("To", 0, "11", "30");
         await this.escapeTarget.press("Escape");
-        await this.modalSaveButton.click();
+        await this.saveSlotDrawer();
         await expect(this.timeRangeText("10:35 - 11:30")).toBeVisible();
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -786,6 +766,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("type").selectOption("appointment");
         await this.bookingInput("qty").fill(product.weight);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.bookingSelect("same_slot_all_days").selectOption("0");
 
         const weeks = [
@@ -808,12 +789,12 @@ export class ProductCreatePage extends BasePage {
             }
 
             await this.escapeTarget.press("Escape");
-            await this.modalSaveButton.click();
+            await this.saveSlotDrawer();
         }
 
         await expect(this.timeRangeText("10:00 - 19:55")).toBeVisible();
         await expect(this.timeRangeText("09:00 - 20:55")).toBeVisible();
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -841,12 +822,12 @@ export class ProductCreatePage extends BasePage {
             }
 
             await this.escapeTarget.press("Escape");
-            await this.modalSaveButton.click();
+            await this.saveSlotDrawer();
         }
 
         await expect(this.timeRangeText("10:00 - 19:55")).toBeVisible();
         await expect(this.timeRangeText("09:00 - 20:55")).toBeVisible();
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -860,34 +841,41 @@ export class ProductCreatePage extends BasePage {
         await this.fillTimeTextbox("From", 0, "10", "35");
         await this.fillTimeTextbox("To", 0, "11", "30");
         await this.escapeTarget.press("Escape");
-        await this.modalSaveButton.click();
+        await this.saveSlotDrawer();
         await expect(this.timeRangeText(":35 - 11:30").first()).toBeVisible();
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
-
     }
 
-    async handleAppointmentBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+    async handleAppointmentBookingWithShorterTimeRangeThanSlots(
+        isAvailableEveryWeek: boolean,
+        isSameSlotAllDays: boolean,
+    ) {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("type").selectOption("appointment");
         await this.bookingInput("qty").fill(product.weight);
 
         if (!isAvailableEveryWeek) {
             await this.bookingSelect("available_every_week").selectOption("0");
+            await this.fillBookingAvailability(product);
             await this.fillAvailabilityRange(
                 "2027-04-08 16:00:00",
                 "2027-04-25 18:00",
             );
 
             if (isSameSlotAllDays) {
-                await this.bookingSelect("same_slot_all_days").selectOption("1");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "1",
+                );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "10", "35");
                 await this.fillTimeTextbox("To", 0, "11", "00");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
             } else {
-                await this.bookingSelect("same_slot_all_days").selectOption("0");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "0",
+                );
                 const weeks = [
                     { status: 0, slots: 1, fromHr: "10", toHr: "10" },
                 ];
@@ -897,29 +885,36 @@ export class ProductCreatePage extends BasePage {
 
                     for (let slot = 0; slot < day.slots; slot++) {
                         await this.slotEditorTrigger(day.status, slot).focus();
-                        await this.fillTimeTextbox("From", slot, day.fromHr, "00");
+                        await this.fillTimeTextbox(
+                            "From",
+                            slot,
+                            day.fromHr,
+                            "00",
+                        );
                         await this.fillTimeTextbox("To", slot, day.toHr, "25");
                     }
 
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
-
                 }
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
 
             if (isSameSlotAllDays) {
-                await this.bookingSelect("same_slot_all_days").selectOption("1");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "1",
+                );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "10", "35");
                 await this.page.waitForTimeout(500);
                 await this.fillTimeTextbox("To", 0, "11", "00");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-
             } else {
-                await this.bookingSelect("same_slot_all_days").selectOption("0");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "0",
+                );
                 const weeks = [
                     { status: 0, slots: 1, fromHr: "10", toHr: "10" },
                 ];
@@ -929,13 +924,17 @@ export class ProductCreatePage extends BasePage {
 
                     for (let slot = 0; slot < day.slots; slot++) {
                         await this.slotEditorTrigger(day.status, slot).focus();
-                        await this.fillTimeTextbox("From", slot, day.fromHr, "00");
+                        await this.fillTimeTextbox(
+                            "From",
+                            slot,
+                            day.fromHr,
+                            "00",
+                        );
                         await this.fillTimeTextbox("To", slot, day.toHr, "25");
                     }
 
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
-
                 }
             }
         }
@@ -949,8 +948,8 @@ export class ProductCreatePage extends BasePage {
         await this.ticketQuantityInput.fill("2");
         await this.ticketPriceInput.fill("500");
         await this.ticketDescriptionInput.fill(generateDescription());
-        await this.modalSaveButton.click();
-        await this.saveProductButton.click();
+        await this.saveSlotDrawer();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -960,6 +959,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingInput("location").fill(product.location);
         await this.bookingInput("qty").fill(product.weight);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.fillAvailabilityRange(
             "2027-04-08 16:00:00",
             "2027-04-25 18:00",
@@ -967,7 +967,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("renting_type").selectOption("daily");
         await this.dailyPriceTextbox.fill("3000");
         await this.escapeTarget.press("Escape");
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -979,7 +979,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("available_every_week").selectOption("1");
         await this.bookingSelect("renting_type").selectOption("daily");
         await this.dailyPriceTextbox.fill("3000");
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -996,8 +996,8 @@ export class ProductCreatePage extends BasePage {
         await this.fillTimeTextbox("From", 0, "14", "20");
         await this.fillTimeTextbox("To", 0, "18", "35");
         await this.escapeTarget.press("Escape");
-        await this.modalSaveButton.click();
-        await this.saveProductButton.click();
+        await this.saveSlotDrawer();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -1012,11 +1012,14 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("same_slot_all_days").selectOption("0");
         await this.fillInlineDaySlot(1, "10", "35", "13", "45", false);
         await this.fillInlineDaySlot(2, "09", "25", "13", "25", false);
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
-    async handleRentalBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+    async handleRentalBookingWithShorterTimeRangeThanSlots(
+        isAvailableEveryWeek: boolean,
+        isSameSlotAllDays: boolean,
+    ) {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("type").selectOption("rental");
         await this.bookingInput("location").fill(product.location);
@@ -1026,14 +1029,18 @@ export class ProductCreatePage extends BasePage {
             await this.bookingSelect("renting_type").selectOption("hourly");
             await this.hourlyPriceTextbox.fill("300");
             if (isSameSlotAllDays) {
-                await this.bookingSelect("same_slot_all_days").selectOption("1");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "1",
+                );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "14", "20");
                 await this.fillTimeTextbox("To", 0, "14", "50");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
             } else {
-                await this.bookingSelect("same_slot_all_days").selectOption("0");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "0",
+                );
                 await this.page.waitForLoadState("networkidle");
 
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
@@ -1041,6 +1048,7 @@ export class ProductCreatePage extends BasePage {
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("0");
+            await this.fillBookingAvailability(product);
             await this.fillAvailabilityRange(
                 "2027-04-08 16:00:00",
                 "2027-04-25 18:00",
@@ -1048,17 +1056,20 @@ export class ProductCreatePage extends BasePage {
             await this.bookingSelect("renting_type").selectOption("hourly");
             await this.hourlyPriceTextbox.fill("300");
             if (isSameSlotAllDays) {
-                await this.bookingSelect("same_slot_all_days").selectOption("1");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "1",
+                );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "14", "20");
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
             } else {
-                await this.bookingSelect("same_slot_all_days").selectOption("0");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "0",
+                );
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
                 await this.modalSaveButton.click();
-
             }
         }
     }
@@ -1077,8 +1088,8 @@ export class ProductCreatePage extends BasePage {
         await this.fillTimeTextbox("From", 0, "14", "20");
         await this.fillTimeTextbox("To", 0, "18", "35");
         await this.escapeTarget.press("Escape");
-        await this.modalSaveButton.click();
-        await this.saveProductButton.click();
+        await this.saveSlotDrawer();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -1094,12 +1105,14 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("same_slot_all_days").selectOption("0");
         await this.fillInlineDaySlot(1, "10", "35", "13", "45", true);
         await this.fillInlineDaySlot(2, "09", "25", "13", "25", true);
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
-
-    async createRentalBookingProductBothhourlyDailywith_and_withoutRange(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+    async createRentalBookingProductBothhourlyDailywith_and_withoutRange(
+        isAvailableEveryWeek: boolean,
+        isSameSlotAllDays: boolean,
+    ) {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("type").selectOption("rental");
         await this.bookingInput("location").fill(product.location);
@@ -1112,15 +1125,18 @@ export class ProductCreatePage extends BasePage {
             await this.dailyPriceTextbox.fill("3000");
             await this.hourlyPriceTextbox.fill("300");
             if (isSameSlotAllDays) {
-                await this.bookingSelect("same_slot_all_days").selectOption("1");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "1",
+                );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "14", "20");
                 await this.fillTimeTextbox("To", 0, "14", "50");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-
             } else {
-                await this.bookingSelect("same_slot_all_days").selectOption("0");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "0",
+                );
                 await this.page.waitForLoadState("networkidle");
 
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
@@ -1128,6 +1144,7 @@ export class ProductCreatePage extends BasePage {
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("0");
+            await this.fillBookingAvailability(product);
             await this.fillAvailabilityRange(
                 "2027-04-08 16:00:00",
                 "2027-04-25 18:00",
@@ -1138,17 +1155,20 @@ export class ProductCreatePage extends BasePage {
             await this.dailyPriceTextbox.fill("3000");
             await this.hourlyPriceTextbox.fill("300");
             if (isSameSlotAllDays) {
-                await this.bookingSelect("same_slot_all_days").selectOption("1");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "1",
+                );
                 await this.addSlotsButton.click();
                 await this.fillTimeTextbox("From", 0, "14", "20");
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
             } else {
-                await this.bookingSelect("same_slot_all_days").selectOption("0");
+                await this.bookingSelect("same_slot_all_days").selectOption(
+                    "0",
+                );
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
                 await this.modalSaveButton.click();
-
             }
         }
     }
@@ -1158,6 +1178,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("type").selectOption("table");
         await this.bookingInput("location").fill(product.location);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.fillAvailabilityRange(
             "2027-04-08 16:00:00",
             "2027-04-25 18:00",
@@ -1172,8 +1193,8 @@ export class ProductCreatePage extends BasePage {
         await this.fillTimeTextbox("From", 0, "14", "20");
         await this.fillTimeTextbox("To", 0, "18", "35");
         await this.escapeTarget.press("Escape");
-        await this.modalSaveButton.click();
-        await this.saveProductButton.click();
+        await this.saveSlotDrawer();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -1182,6 +1203,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("type").selectOption("table");
         await this.bookingInput("location").fill(product.location);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.fillAvailabilityRange(
             "2027-04-08 16:00:00",
             "2027-04-25 18:00",
@@ -1194,7 +1216,7 @@ export class ProductCreatePage extends BasePage {
         await this.tableSameSlotAllDaysSelect.selectOption("0");
         await this.fillInlineDaySlot(1, "10", "35", "13", "45", false);
         await this.fillInlineDaySlot(2, "09", "25", "13", "25", false);
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -1203,6 +1225,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("type").selectOption("table");
         await this.bookingInput("location").fill(product.location);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.fillAvailabilityRange(
             "2027-04-08 16:00:00",
             "2027-04-25 18:00",
@@ -1218,8 +1241,8 @@ export class ProductCreatePage extends BasePage {
         await this.fillTimeTextbox("From", 0, "14", "20");
         await this.fillTimeTextbox("To", 0, "18", "35");
         await this.escapeTarget.press("Escape");
-        await this.modalSaveButton.click();
-        await this.saveProductButton.click();
+        await this.saveSlotDrawer();
+        await this.saveBookingProduct();
         return product.name;
     }
 
@@ -1228,6 +1251,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingSelect("type").selectOption("table");
         await this.bookingInput("location").fill(product.location);
         await this.bookingSelect("available_every_week").selectOption("0");
+        await this.fillBookingAvailability(product);
         await this.fillAvailabilityRange(
             "2027-04-08 16:00:00",
             "2027-04-25 18:00",
@@ -1241,17 +1265,21 @@ export class ProductCreatePage extends BasePage {
         await this.tableSameSlotAllDaysSelect.selectOption("0");
         await this.fillInlineDaySlot(1, "10", "35", "13", "45", true);
         await this.fillInlineDaySlot(2, "09", "25", "13", "25", false);
-        await this.saveProductButton.click();
+        await this.saveBookingProduct();
         return product.name;
     }
 
-    async handleGuestTableBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+    async handleGuestTableBookingWithShorterTimeRangeThanSlots(
+        isAvailableEveryWeek: boolean,
+        isSameSlotAllDays: boolean,
+    ) {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("type").selectOption("table");
         await this.bookingInput("location").fill(product.location);
 
         if (!isAvailableEveryWeek) {
             await this.bookingSelect("available_every_week").selectOption("0");
+            await this.fillBookingAvailability(product);
             await this.fillAvailabilityRange(
                 "2027-04-08 16:00:00",
                 "2027-04-25 18:00",
@@ -1268,11 +1296,9 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "35");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "10", "55", false);
-
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
@@ -1288,7 +1314,6 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
@@ -1296,13 +1321,17 @@ export class ProductCreatePage extends BasePage {
         }
     }
 
-    async handleTable_TableBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+    async handleTable_TableBookingWithShorterTimeRangeThanSlots(
+        isAvailableEveryWeek: boolean,
+        isSameSlotAllDays: boolean,
+    ) {
         const product = await this.createBookingProductBase();
         await this.bookingSelect("type").selectOption("table");
         await this.bookingInput("location").fill(product.location);
 
         if (!isAvailableEveryWeek) {
             await this.bookingSelect("available_every_week").selectOption("0");
+            await this.fillBookingAvailability(product);
             await this.fillAvailabilityRange(
                 "2027-04-08 16:00:00",
                 "2027-04-25 18:00",
@@ -1319,11 +1348,9 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "35");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "10", "55", false);
-
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
@@ -1339,11 +1366,9 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
-
             }
         }
     }
@@ -1354,14 +1379,42 @@ export class ProductCreatePage extends BasePage {
         hour: string,
         minute: string,
     ) {
-        await this.slotTimeTextbox(label, index).click();
-        await this.flatpickrCalendar.waitFor({
-            state: "visible",
-        });
-        await this.hourSpinbutton.fill(hour);
-        await this.minuteSpinbutton.fill(minute);
-        await this.page.waitForTimeout(500);
-        await this.minuteSpinbutton.press("Enter");
+        await this.fillSlotTime(
+            this.slotTimeTextbox(label, index),
+            hour,
+            minute,
+        );
+    }
+
+    private async fillSlotTime(textbox: Locator, hour: string, minute: string) {
+        const expected = `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+
+        await textbox.evaluate((element, value) => {
+            const candidates = [
+                element,
+                element.previousElementSibling,
+                element.nextElementSibling,
+            ];
+
+            const owner = candidates.find(
+                (candidate) => candidate && (candidate as any)._flatpickr,
+            );
+
+            (owner as any)._flatpickr.setDate(value, true);
+        }, expected);
+
+        await expect(textbox).toHaveValue(expected);
+    }
+
+    private async saveSlotDrawer() {
+        await this.modalSaveButton.click();
+        await expect(this.modalSaveButton).toBeHidden();
+    }
+
+    private async saveBookingProduct() {
+        await expect(this.modalSaveButton).toBeHidden();
+
+        await this.saveProductButton.click();
     }
 
     private async fillInlineDaySlot(

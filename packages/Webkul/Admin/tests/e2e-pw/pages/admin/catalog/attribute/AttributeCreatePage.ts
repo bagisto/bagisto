@@ -238,6 +238,22 @@ export class AttributeCreatePage extends BasePage {
         }
     }
 
+    async verifyColorSwatchesAttached(colors: string[]) {
+        if (!colors.length) {
+            return;
+        }
+
+        const rowInputs = this.page.locator(
+            'input[name^="options["][name$="[swatch_value]"]',
+        );
+
+        await expect(rowInputs).toHaveCount(colors.length);
+
+        for (let index = 0; index < colors.length; index++) {
+            await expect(rowInputs.nth(index)).toHaveValue(colors[index]);
+        }
+    }
+
     async saveAttribute() {
         await this.submitButton.first().click();
     }
@@ -339,6 +355,12 @@ export class AttributeCreatePage extends BasePage {
 
             await this.verifySwatchImagesAttached(
                 data.options.filter((option) => option.swatchImage).length,
+            );
+
+            await this.verifyColorSwatchesAttached(
+                data.options
+                    .filter((option) => option.color)
+                    .map((option) => option.color as string),
             );
         }
 

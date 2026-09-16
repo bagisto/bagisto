@@ -1052,26 +1052,33 @@
                             this.optionId++;
                         }
 
-                        let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
-
-                        if (foundIndex !== -1) {
-                            params.isNew = String(params.id).startsWith('options_');
-
-                            this.optionsData.splice(foundIndex, 1, params);
-                        } else {
-                            this.optionsData.push(params);
-                        }
-
-                        let formData = new FormData(this.$refs.editOptionsForm);
+                        const formData = new FormData(this.$refs.editOptionsForm);
 
                         const sliderImage = formData.get("swatch_value[]");
 
                         if (sliderImage?.name) {
                             params.swatch_value = sliderImage;
+                        }
 
-                            if (sliderImage instanceof File) {
-                                this.setFile(sliderImage, params.id);
-                            }
+                        if (! params.swatch_value) {
+                            delete params.swatch_value;
+                        }
+
+                        let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
+
+                        if (foundIndex !== -1) {
+                            params.isNew = String(params.id).startsWith('options_');
+
+                            this.optionsData.splice(foundIndex, 1, {
+                                ...this.optionsData[foundIndex],
+                                ...params,
+                            });
+                        } else {
+                            this.optionsData.push(params);
+                        }
+
+                        if (sliderImage?.name) {
+                            this.setFile(sliderImage, params.id);
                         }
 
                         this.$refs.addOptionsRow.toggle();
