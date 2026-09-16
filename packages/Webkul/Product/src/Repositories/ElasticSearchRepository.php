@@ -69,6 +69,31 @@ class ElasticSearchRepository
     }
 
     /**
+     * Get the id of the product whose url key is exactly the given one, matched on the unanalyzed field
+     * so a key never matches another that merely contains it, such as a copy's.
+     */
+    public function findIdByUrlKey(string $urlKey): ?int
+    {
+        $results = ElasticSearch::search([
+            'index' => $this->getIndexName(),
+            'ignore_unavailable' => true,
+            'body' => [
+                'size' => 1,
+                'stored_fields' => [],
+                'query' => [
+                    'term' => [
+                        'url_key.keyword' => $urlKey,
+                    ],
+                ],
+            ],
+        ]);
+
+        $id = $results['hits']['hits'][0]['_id'] ?? null;
+
+        return $id ? (int) $id : null;
+    }
+
+    /**
      * Get suggestions based on the query text.
      */
     public function getSuggestions(?string $queryText): ?string

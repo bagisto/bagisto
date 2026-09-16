@@ -121,7 +121,7 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Copy product.
+     * Set the search engine products are searched with.
      */
     public function setSearchEngine(string $searchEngine): self
     {
@@ -192,17 +192,9 @@ class ProductRepository extends Repository
     public function findBySlug(string $slug): ?Product
     {
         if ($this->searchEngine == 'elastic') {
-            $indices = $this->elasticSearchRepository->search([
-                'url_key' => $slug,
-            ], [
-                'type' => '',
-                'from' => 0,
-                'limit' => 1,
-                'sort' => 'id',
-                'order' => 'desc',
-            ]);
+            $id = $this->elasticSearchRepository->findIdByUrlKey($slug);
 
-            return $this->find(current($indices['ids']));
+            return $id ? $this->find($id) : null;
         }
 
         return $this->findByAttributeCode('url_key', $slug);
@@ -299,9 +291,6 @@ class ProductRepository extends Repository
                 }
             }
 
-            /**
-             * Filter query by price.
-             */
             if (! empty($params['price'])) {
                 $priceRange = explode(',', $params['price']);
 
@@ -311,15 +300,8 @@ class ProductRepository extends Repository
                 ]);
             }
 
-            /**
-             * Retrieve all the filterable attributes.
-             */
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
 
-            /**
-             * Range filter for price-type attributes other than the base `price`
-             * (e.g. special_price, cost, or user-defined price attributes).
-             */
             foreach ($filterableAttributes as $priceAttribute) {
                 if (
                     $priceAttribute->type !== AttributeTypeEnum::PRICE->value
@@ -341,9 +323,6 @@ class ProductRepository extends Repository
                 ]);
             }
 
-            /**
-             * Filter the required attributes.
-             */
             $attributes = $filterableAttributes->whereIn('code', [
                 'name',
                 'status',
@@ -351,9 +330,6 @@ class ProductRepository extends Repository
                 'url_key',
             ]);
 
-            /**
-             * Filter collection by required attributes.
-             */
             foreach ($attributes as $attribute) {
                 $alias = $attribute->code.'_product_attribute_values';
 
@@ -383,9 +359,6 @@ class ProductRepository extends Repository
                 }
             }
 
-            /**
-             * Filter the filterable attributes.
-             */
             $attributes = $filterableAttributes->whereNotIn('code', [
                 'name',
                 'status',
@@ -395,9 +368,6 @@ class ProductRepository extends Repository
                 return $attribute->type !== AttributeTypeEnum::PRICE->value;
             });
 
-            /**
-             * Filter query by attributes.
-             */
             if ($attributes->isNotEmpty()) {
                 $qb->where(function ($filterQuery) use ($qb, $params, $attributes, $prefix) {
                     $aliases = [
@@ -438,9 +408,6 @@ class ProductRepository extends Repository
                 $qb->groupBy('products.id');
             }
 
-            /**
-             * Sort collection.
-             */
             $sortOptions = $this->getSortOptions($params);
 
             if ($sortOptions['order'] != 'rand') {
@@ -472,7 +439,6 @@ class ProductRepository extends Repository
                             ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
                     }
                 } else {
-                    /* `created_at` is not an attribute so it will be in else case */
                     $qb->orderBy('products.created_at', $sortOptions['order']);
                 }
             } else {
