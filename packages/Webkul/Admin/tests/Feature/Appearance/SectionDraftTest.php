@@ -148,6 +148,60 @@ it('should publish every locale of a section, not only the one being edited', fu
     expect($section->translate('fr')->draft_options)->toBeNull();
 });
 
+it('should point the publish and discard actions at the channel the editor is scoped to', function () {
+    $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
+
+    $this->loginAsAdmin();
+
+    $content = get(route('admin.appearance.sections.index', [
+        'code' => $other->theme,
+        'channel' => $other->id,
+    ]))
+        ->assertOk()
+        ->content();
+
+    foreach (['publish', 'discard'] as $action) {
+        expect($content)->toContain(route('admin.appearance.sections.'.$action, [
+            'code' => $other->theme,
+            'channel' => $other->id,
+        ]));
+    }
+});
+
+it('should publish the drafts of the channel the editor is scoped to, leaving another channel pending', function () {
+    $current = core()->getDefaultChannel();
+
+    $other = Channel::factory()->create(['theme' => $current->theme]);
+
+    $sectionOf = function (Channel $channel) {
+        $section = makeSection([
+            'channel_id' => $channel->id,
+            'theme_code' => $channel->theme,
+        ]);
+
+        $section->translateOrNew(app()->getLocale())->draft_options = ['html' => '<p>draft copy</p>'];
+
+        $section->save();
+
+        return $section->refresh();
+    };
+
+    $currentSection = $sectionOf($current);
+
+    $otherSection = $sectionOf($other);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.publish', themeCode($otherSection)), [
+        'channel' => $other->id,
+    ])->assertOk();
+
+    expect($otherSection->refresh()->translate(app()->getLocale())->draft_options)->toBeNull();
+
+    expect($currentSection->refresh()->translate(app()->getLocale())->draft_options)
+        ->toBe(['html' => '<p>draft copy</p>']);
+});
+
 it('should resolve a section to its draft for the preview', function () {
     $channel = core()->getDefaultChannel();
 

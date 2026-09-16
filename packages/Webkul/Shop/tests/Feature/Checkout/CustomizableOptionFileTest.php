@@ -49,8 +49,7 @@ function makeCustomerUpload(string $name, string $contents): UploadedFile
     return new UploadedFile(stream_get_meta_data($handle)['uri'], $name, null, null, true);
 }
 
-it('does not relocate files outside the customer upload directory when managing customizable options', function () {
-    // Arrange.
+it('should not relocate files outside the customer upload directory when managing customizable options', function () {
     Storage::fake();
 
     /**
@@ -73,7 +72,6 @@ it('does not relocate files outside the customer upload directory when managing 
                     'type' => 'file',
                     'label' => ['en' => 'Upload File'],
                     'prices' => [
-                        // Attacker-supplied path pointing at a file they never uploaded.
                         ['label' => 'product/1/victim.png'],
                     ],
                 ],
@@ -81,10 +79,8 @@ it('does not relocate files outside the customer upload directory when managing 
         ],
     ]);
 
-    // Act.
     app(OrderItemRepository::class)->manageCustomizableOptions($orderItem);
 
-    // Assert: the victim file stays put and nothing is moved into the orders directory.
     Storage::assertExists('product/1/victim.png');
     Storage::assertMissing('orders/'.$order->id.'/victim.png');
 
@@ -92,8 +88,7 @@ it('does not relocate files outside the customer upload directory when managing 
         ->toBe('product/1/victim.png');
 });
 
-it('relocates genuinely uploaded customizable option files into the orders directory', function () {
-    // Arrange.
+it('should relocate genuinely uploaded customizable option files into the orders directory', function () {
     Storage::fake();
 
     $cartId = 42;
@@ -122,10 +117,8 @@ it('relocates genuinely uploaded customizable option files into the orders direc
         ],
     ]);
 
-    // Act.
     app(OrderItemRepository::class)->manageCustomizableOptions($orderItem);
 
-    // Assert: the uploaded file is moved into the orders directory and the label is updated.
     Storage::assertMissing("carts/{$cartId}/upload.png");
     Storage::assertExists('orders/'.$order->id.'/upload.png');
 
@@ -133,7 +126,7 @@ it('relocates genuinely uploaded customizable option files into the orders direc
         ->toBe('orders/'.$order->id.'/upload.png');
 });
 
-it('stores a customer upload under its accepted extension, whatever its contents look like', function () {
+it('should store a customer upload under its accepted extension, whatever its contents look like', function () {
     Storage::fake();
 
     [$product, $option] = makeProductWithFileOption('jpg,png');
@@ -153,7 +146,7 @@ it('stores a customer upload under its accepted extension, whatever its contents
     expect($files[0])->toEndWith('.jpg');
 });
 
-it('refuses a customer upload whose extension would be served as a page, even when the option lists it', function () {
+it('should refuse a customer upload whose extension would be served as a page, even when the option lists it', function () {
     Storage::fake();
 
     [$product, $option] = makeProductWithFileOption('html,svg,jpg');
@@ -173,7 +166,7 @@ it('refuses a customer upload whose extension would be served as a page, even wh
     expect(Storage::allFiles('carts'))->toBeEmpty();
 });
 
-it('refuses a customer upload with an active or missing extension when the option lists none', function () {
+it('should refuse a customer upload with an active or missing extension when the option lists none', function () {
     Storage::fake();
 
     [$product, $option] = makeProductWithFileOption('');
@@ -191,7 +184,7 @@ it('refuses a customer upload with an active or missing extension when the optio
     expect(Storage::allFiles('carts'))->toBeEmpty();
 });
 
-it('stores a customer upload in the cart it was added to, whatever cart id the request carries', function () {
+it('should store a customer upload in the cart it was added to, whatever cart id the request carries', function () {
     Storage::fake();
 
     [$product, $option] = makeProductWithFileOption('png');

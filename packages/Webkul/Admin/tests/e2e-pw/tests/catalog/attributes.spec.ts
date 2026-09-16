@@ -1,10 +1,17 @@
 import { test } from "../../setup";
-import { expect }from "@playwright/test";
+import { expect } from "@playwright/test";
 import { AttributeCreatePage } from "../../pages/admin/catalog/attribute/AttributeCreatePage";
 import type { AttributeCreateData } from "../../pages/admin/catalog/attribute/AttributeCreatePage";
 import { AttributeDeletePage } from "../../pages/admin/catalog/attribute/AttributeDeletePage";
 import { AttributeEditPage } from "../../pages/admin/catalog/attribute/AttributeEditPage";
 import { generateName, generateSlug } from "../../utils/faker";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const swatchImagePath = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../../data/images/1.webp",
+);
 
 const buildAttributeData = (
     overrides: Partial<AttributeCreateData> = {},
@@ -105,12 +112,10 @@ test.describe("attribute management", () => {
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "select",
-                swatchType: "color",
+                swatchType: "image",
                 options: [
-                    { adminLabel: "Image-1" },
-                    { adminLabel: "Image-2" },
-                    { adminLabel: "Image-3" },
-                    { adminLabel: "Image-4" },
+                    { adminLabel: "Image-1", swatchImage: swatchImagePath },
+                    { adminLabel: "Image-2", swatchImage: swatchImagePath },
                 ],
             }),
         );

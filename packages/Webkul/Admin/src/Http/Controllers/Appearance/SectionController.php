@@ -65,8 +65,14 @@ class SectionController extends Controller
                 'channel' => $channel->id,
                 'locale' => $locale->code,
             ]),
-            'publishUrl' => route('admin.appearance.sections.publish', ['code' => $code]),
-            'discardUrl' => route('admin.appearance.sections.discard', ['code' => $code]),
+            'publishUrl' => route('admin.appearance.sections.publish', [
+                'code' => $code,
+                'channel' => $channel->id,
+            ]),
+            'discardUrl' => route('admin.appearance.sections.discard', [
+                'code' => $code,
+                'channel' => $channel->id,
+            ]),
             'urls' => $this->editorUrls(),
         ]);
     }

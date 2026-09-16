@@ -249,7 +249,7 @@
                                                         <img
                                                             src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                                             class="h-[50px] w-[50px] dark:mix-blend-exclusion dark:invert"
-                                                            :ref="'image_' + element.params.id"
+                                                            :ref="'image_' + element.id"
                                                         />
 
                                                         <input
@@ -946,7 +946,9 @@
 
                         const sliderImage = formData.get("swatch_value[]");
 
-                        if (sliderImage) params.swatch_value = sliderImage;
+                        if (sliderImage?.name) {
+                            params.swatch_value = sliderImage;
+                        }
 
                         this.$refs.addOptionsRow.toggle();
 

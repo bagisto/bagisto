@@ -18,6 +18,7 @@ export interface AttributeOptionData {
     adminLabel: string;
     localeLabel?: string;
     color?: string;
+    swatchImage?: string;
 }
 
 export class AttributeCreatePage extends BasePage {
@@ -87,6 +88,12 @@ export class AttributeCreatePage extends BasePage {
 
     private get swatchTypeSelect() {
         return this.page.locator("#swatchType");
+    }
+
+    private get swatchImageInput() {
+        return this.page
+            .locator('div.fixed input[type="file"][accept="image/*"]')
+            .first();
     }
 
     private get addRowButton() {
@@ -185,10 +192,16 @@ export class AttributeCreatePage extends BasePage {
     async addOption(option: AttributeOptionData) {
         await this.addRowButton.click();
         await this.adminOptionInput.fill(option.adminLabel);
-        await this.localeOptionInput.fill(option.localeLabel ?? option.adminLabel);
+        await this.localeOptionInput.fill(
+            option.localeLabel ?? option.adminLabel,
+        );
 
         if (option.color) {
             await this.colorOptionInput.fill(option.color);
+        }
+
+        if (option.swatchImage) {
+            await this.swatchImageInput.setInputFiles(option.swatchImage);
         }
 
         await this.saveOptionButton.click();
@@ -197,6 +210,31 @@ export class AttributeCreatePage extends BasePage {
     async addOptions(options: AttributeOptionData[]) {
         for (const option of options) {
             await this.addOption(option);
+        }
+    }
+
+    /**
+     * Every option given a swatch image carries it on its own row, ready to be posted with the attribute.
+     */
+    async verifySwatchImagesAttached(expected: number) {
+        if (!expected) {
+            return;
+        }
+
+        const rowInputs = this.page.locator(
+            'input[type="file"][name^="options["][name$="[swatch_value]"]',
+        );
+
+        await expect(rowInputs).toHaveCount(expected);
+
+        for (let index = 0; index < expected; index++) {
+            await expect(
+                rowInputs
+                    .nth(index)
+                    .evaluate(
+                        (input: HTMLInputElement) => input.files?.length ?? 0,
+                    ),
+            ).resolves.toBe(1);
         }
     }
 
@@ -251,7 +289,9 @@ export class AttributeCreatePage extends BasePage {
 
         expect(targetPoints.length).toBeGreaterThan(0);
 
-        const unassignedItems = await this.page.$$("#unassigned-attributes i.icon-drag");
+        const unassignedItems = await this.page.$$(
+            "#unassigned-attributes i.icon-drag",
+        );
 
         for (const [index, item] of unassignedItems.entries()) {
             const itemBox = await item.boundingBox();
@@ -296,6 +336,10 @@ export class AttributeCreatePage extends BasePage {
 
         if (data.options?.length) {
             await this.addOptions(data.options);
+
+            await this.verifySwatchImagesAttached(
+                data.options.filter((option) => option.swatchImage).length,
+            );
         }
 
         if (data.defaultValue) {
