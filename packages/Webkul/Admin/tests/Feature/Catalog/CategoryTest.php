@@ -91,6 +91,8 @@ it('should offer only parent categories as options in the parent category filter
         'parent_id' => $parent->id,
     ]);
 
+    $category->translate(app()->getLocale())->update(['name' => 'Child of '.$parent->name]);
+
     // Act and Assert.
     $this->loginAsAdmin();
 
