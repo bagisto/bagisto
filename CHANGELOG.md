@@ -32,6 +32,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
 
+- Fixed a configuration file download URL answering with a server error rather than a not found when the file was never uploaded or is missing from the disk.
+
 - Fixed a created, updated or removed catalog rule, and the nightly price reindex, leaving product pages and storefront listings on the old price; their cached pages are now dropped once prices are reindexed.
 
 - Fixed checkout and admin order creation rejecting the address of a virtual or downloadable only cart when its billing address was not used for shipping, as it required a shipping address.
