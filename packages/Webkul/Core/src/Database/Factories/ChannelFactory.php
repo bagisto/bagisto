@@ -36,7 +36,7 @@ class ChannelFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $code = $this->faker->unique()->word(),
+            'code' => $code = $this->faker->unique()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
             'theme' => $code,
             'hostname' => 'http://'.$this->faker->ipv4(),
             'root_category_id' => 1,

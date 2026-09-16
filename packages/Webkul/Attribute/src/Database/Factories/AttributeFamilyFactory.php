@@ -23,7 +23,7 @@ class AttributeFamilyFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'code' => $this->faker->word(),
+            'code' => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
             'is_user_defined' => random_int(0, 1),
             'status' => 0,
         ];
