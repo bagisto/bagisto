@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
-use Webkul\Core\Models\CoreConfig;
-use Webkul\Customer\Models\Customer;
 use Webkul\EUWithdrawal\Enums\WithdrawalStatus;
 use Webkul\EUWithdrawal\Models\Withdrawal;
 use Webkul\Sales\Models\Order;
@@ -12,51 +10,40 @@ use Webkul\Shop\Mail\Customer\EUWithdrawal\GuestWithdrawalLink;
 use Webkul\Shop\Mail\Customer\EUWithdrawal\WithdrawalConfirmation;
 use Webkul\User\Models\Admin;
 
+use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 
 /**
- * Turn the EU withdrawal feature on for the given channel.
+ * Turn the EU withdrawal feature on for the current channel.
  */
-function enableEuWithdrawal(string $channelCode = 'default'): void
+function enableEuWithdrawal(): void
 {
-    CoreConfig::query()->updateOrCreate(
-        ['code' => 'sales.eu_withdrawal.general.enabled', 'channel_code' => $channelCode, 'locale_code' => null],
-        ['value' => '1']
-    );
+    test()->setConfig('sales.eu_withdrawal.general.enabled', '1');
 }
 
 /**
- * Turn the EU withdrawal feature off for the given channel.
+ * Turn the EU withdrawal feature off for the current channel.
  */
-function disableEuWithdrawal(string $channelCode = 'default'): void
+function disableEuWithdrawal(): void
 {
-    CoreConfig::query()->updateOrCreate(
-        ['code' => 'sales.eu_withdrawal.general.enabled', 'channel_code' => $channelCode, 'locale_code' => null],
-        ['value' => '0']
-    );
+    test()->setConfig('sales.eu_withdrawal.general.enabled', '0');
 }
 
 /**
- * Create an order that belongs to the given customer.
+ * Record a received withdrawal for a customer order, declared in the given locale.
  */
-function makeOrderForCustomer(Customer $customer): Order
+function createWithdrawalRecord(Order $order, string $locale = 'en'): Withdrawal
 {
-    return Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'is_guest' => 0,
-    ]);
-}
-
-/**
- * Create a guest order placed with the given email address.
- */
-function makeGuestOrder(string $email = 'guest@example.test'): Order
-{
-    return Order::factory()->create([
-        'customer_id' => null,
-        'customer_email' => $email,
-        'is_guest' => 1,
+    return Withdrawal::query()->create([
+        'uuid' => (string) Str::uuid(),
+        'order_id' => $order->id,
+        'customer_id' => $order->customer_id,
+        'is_guest' => false,
+        'customer_email' => $order->customer_email,
+        'channel_id' => $order->channel_id,
+        'locale' => $locale,
+        'received_at' => now(),
+        'status' => WithdrawalStatus::RECEIVED,
     ]);
 }
 
@@ -64,63 +51,21 @@ function makeGuestOrder(string $email = 'guest@example.test'): Order
 // Observer (Append-Only)
 // ============================================================================
 
-it('rejects deletion of a withdrawal record', function () {
-    enableEuWithdrawal();
-    $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
-
-    $withdrawal = Withdrawal::create([
-        'uuid' => (string) Str::uuid(),
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'is_guest' => false,
-        'customer_email' => $customer->email,
-        'channel_id' => $order->channel_id,
-        'locale' => 'en',
-        'received_at' => now(),
-        'status' => WithdrawalStatus::RECEIVED,
-    ]);
+it('should reject the deletion of a withdrawal record', function () {
+    $withdrawal = createWithdrawalRecord($this->createOrder());
 
     expect(fn () => $withdrawal->delete())->toThrow(RuntimeException::class);
 });
 
-it('rejects mutation of evidence columns after insert', function () {
-    enableEuWithdrawal();
-    $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
-
-    $withdrawal = Withdrawal::create([
-        'uuid' => (string) Str::uuid(),
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'is_guest' => false,
-        'customer_email' => $customer->email,
-        'channel_id' => $order->channel_id,
-        'locale' => 'en',
-        'received_at' => now(),
-        'status' => WithdrawalStatus::RECEIVED,
-    ]);
+it('should reject a change to an evidence column after insert', function () {
+    $withdrawal = createWithdrawalRecord($this->createOrder());
 
     expect(fn () => $withdrawal->update(['customer_email' => 'changed@example.test']))
         ->toThrow(RuntimeException::class);
 });
 
-it('allows mutation of operational columns', function () {
-    enableEuWithdrawal();
-    $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
-
-    $withdrawal = Withdrawal::create([
-        'uuid' => (string) Str::uuid(),
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'is_guest' => false,
-        'customer_email' => $customer->email,
-        'channel_id' => $order->channel_id,
-        'locale' => 'en',
-        'received_at' => now(),
-        'status' => WithdrawalStatus::RECEIVED,
-    ]);
+it('should allow a change to an operational column', function () {
+    $withdrawal = createWithdrawalRecord($this->createOrder());
 
     $withdrawal->update([
         'status' => WithdrawalStatus::REFUNDED,
@@ -135,42 +80,47 @@ it('allows mutation of operational columns', function () {
 // Auth Flow
 // ============================================================================
 
-it('returns 404 on the create route when the channel toggle is off', function () {
+it('should answer not found on the create route when the channel toggle is off', function () {
     disableEuWithdrawal();
-    $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
 
-    $this->get(route('shop.customers.account.eu-withdrawal.create', $order->id))
+    $order = $this->createOrder(customer: $this->loginAsCustomer());
+
+    get(route('shop.customers.account.eu-withdrawal.create', $order->id))
         ->assertNotFound();
 });
 
-it('creates a withdrawal record and confirmation email on auth happy path', function () {
+it('should create a withdrawal record and send the confirmation email for a signed-in customer', function () {
     Mail::fake();
+
     enableEuWithdrawal();
+
     $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
+
+    $order = $this->createOrder(customer: $customer);
 
     $response = post(route('shop.customers.account.eu-withdrawal.store', $order->id), [
         'reason_text' => 'Changed my mind.',
     ]);
 
     $withdrawal = Withdrawal::query()->where('order_id', $order->id)->first();
-    expect($withdrawal)->not->toBeNull();
-    expect($withdrawal->status)->toBe(WithdrawalStatus::RECEIVED);
-    expect($withdrawal->customer_email)->toBe($customer->email);
-    expect($withdrawal->reason_text)->toBe('Changed my mind.');
-    expect($withdrawal->received_at)->not->toBeNull();
+
+    expect($withdrawal)->not->toBeNull()
+        ->and($withdrawal->status)->toBe(WithdrawalStatus::RECEIVED)
+        ->and($withdrawal->customer_email)->toBe($customer->email)
+        ->and($withdrawal->reason_text)->toBe('Changed my mind.')
+        ->and($withdrawal->received_at)->not->toBeNull();
 
     $response->assertRedirectToRoute('shop.customers.account.eu-withdrawal.show', $withdrawal->uuid);
 
     Mail::assertSent(WithdrawalConfirmation::class);
 });
 
-it('accepts a withdrawal with no reason (reason is legally optional)', function () {
+it('should accept a withdrawal without a reason, since a reason is legally optional', function () {
     Mail::fake();
+
     enableEuWithdrawal();
-    $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
+
+    $order = $this->createOrder(customer: $this->loginAsCustomer());
 
     post(route('shop.customers.account.eu-withdrawal.store', $order->id), [])
         ->assertRedirect();
@@ -179,67 +129,69 @@ it('accepts a withdrawal with no reason (reason is legally optional)', function 
         ->toBeNull();
 });
 
-it('is idempotent: double submit returns the same withdrawal record', function () {
+it('should keep the first withdrawal record when the declaration is submitted twice', function () {
     Mail::fake();
+
     enableEuWithdrawal();
-    $customer = $this->loginAsCustomer();
-    $order = makeOrderForCustomer($customer);
+
+    $order = $this->createOrder(customer: $this->loginAsCustomer());
 
     post(route('shop.customers.account.eu-withdrawal.store', $order->id), ['reason_text' => 'first']);
     post(route('shop.customers.account.eu-withdrawal.store', $order->id), ['reason_text' => 'second']);
 
-    expect(Withdrawal::query()->where('order_id', $order->id)->count())->toBe(1);
-
-    $withdrawal = Withdrawal::query()->where('order_id', $order->id)->first();
-    expect($withdrawal->reason_text)->toBe('first');
+    expect(Withdrawal::query()->where('order_id', $order->id)->count())->toBe(1)
+        ->and(Withdrawal::query()->where('order_id', $order->id)->first()->reason_text)->toBe('first');
 });
 
 // ============================================================================
 // Guest Flow
 // ============================================================================
 
-it('emails a magic link when guest lookup matches an order', function () {
+it('should email a magic link when a guest lookup matches an order', function () {
     Mail::fake();
+
     enableEuWithdrawal();
-    $order = makeGuestOrder('claimant@example.test');
+
+    $order = $this->createGuestOrder(['customer_email' => fake()->unique()->safeEmail()]);
 
     $found = Order::query()
         ->where('increment_id', $order->increment_id)
-        ->where('customer_email', 'claimant@example.test')
-        ->where('is_guest', 1)
+        ->where('customer_email', $order->customer_email)
+        ->where('is_guest', true)
         ->first();
-    expect($found)->not->toBeNull('order should match before HTTP lookup is exercised');
 
-    $channel = $found->channel;
-    expect($channel)->not->toBeNull('order must morphTo a channel');
-    $cfg = core()->getConfigData('sales.eu_withdrawal.general.enabled', $channel->code);
-    expect((bool) $cfg)->toBeTrue('config flag must be enabled for the order channel');
+    expect($found)->not->toBeNull('order should match before HTTP lookup is exercised')
+        ->and($found->channel)->not->toBeNull('order must morphTo a channel')
+        ->and((bool) core()->getConfigData('sales.eu_withdrawal.general.enabled', $found->channel->code))
+        ->toBeTrue('config flag must be enabled for the order channel');
 
     post(route('shop.eu-withdrawal.guest.lookup.submit'), [
         'order_increment_id' => (string) $order->increment_id,
-        'email' => 'claimant@example.test',
+        'email' => $order->customer_email,
     ])->assertRedirect()->assertSessionHas('lookup_sent', true);
 
-    Mail::assertQueued(GuestWithdrawalLink::class, fn ($mail) => $mail->toEmail === 'claimant@example.test');
+    Mail::assertQueued(GuestWithdrawalLink::class, fn ($mail) => $mail->toEmail === $order->customer_email);
 });
 
-it('does not reveal whether a guest order exists when lookup misses', function () {
+it('should not reveal whether a guest order exists when a lookup misses', function () {
     Mail::fake();
+
     enableEuWithdrawal();
 
-    $response = post(route('shop.eu-withdrawal.guest.lookup.submit'), [
+    post(route('shop.eu-withdrawal.guest.lookup.submit'), [
         'order_increment_id' => 'NON-EXISTENT',
         'email' => 'no-such@example.test',
-    ]);
+    ])->assertRedirect()->assertSessionHas('lookup_sent', true);
 
-    $response->assertRedirect()->assertSessionHas('lookup_sent', true);
     Mail::assertNothingSent();
 });
 
-it('completes the guest happy path via a signed URL', function () {
+it('should complete a guest withdrawal through a signed url', function () {
     Mail::fake();
+
     enableEuWithdrawal();
-    $order = makeGuestOrder('claimant@example.test');
+
+    $order = $this->createGuestOrder(['customer_email' => fake()->unique()->safeEmail()]);
 
     $signedStoreUrl = URL::temporarySignedRoute(
         'shop.eu-withdrawal.guest.store',
@@ -247,44 +199,36 @@ it('completes the guest happy path via a signed URL', function () {
         ['orderId' => $order->id],
     );
 
-    $this->post($signedStoreUrl, ['reason_text' => 'No longer needed.'])
+    post($signedStoreUrl, ['reason_text' => 'No longer needed.'])
         ->assertRedirect();
 
     $withdrawal = Withdrawal::query()->where('order_id', $order->id)->first();
-    expect($withdrawal)->not->toBeNull();
-    expect($withdrawal->is_guest)->toBeTrue();
-    expect($withdrawal->customer_id)->toBeNull();
-    expect($withdrawal->customer_email)->toBe('claimant@example.test');
+
+    expect($withdrawal)->not->toBeNull()
+        ->and($withdrawal->is_guest)->toBeTrue()
+        ->and($withdrawal->customer_id)->toBeNull()
+        ->and($withdrawal->customer_email)->toBe($order->customer_email);
 
     Mail::assertSent(WithdrawalConfirmation::class);
 });
 
-it('rejects the guest store endpoint without a valid signature', function () {
+it('should reject the guest store endpoint without a valid signature', function () {
     enableEuWithdrawal();
-    $order = makeGuestOrder('claimant@example.test');
 
-    $this->post(route('shop.eu-withdrawal.guest.store', $order->id), [])
+    $order = $this->createGuestOrder();
+
+    post(route('shop.eu-withdrawal.guest.store', $order->id), [])
         ->assertForbidden();
 });
 
-it('tells the admin the confirmation was resent in the admin\'s own language', function () {
+// ============================================================================
+// Admin
+// ============================================================================
+
+it('should tell the admin the confirmation was resent in the admin\'s own language', function () {
     Mail::fake();
 
-    $customer = Customer::factory()->create();
-
-    $order = makeOrderForCustomer($customer);
-
-    $withdrawal = Withdrawal::create([
-        'uuid' => (string) Str::uuid(),
-        'order_id' => $order->id,
-        'customer_id' => $customer->id,
-        'is_guest' => false,
-        'customer_email' => $customer->email,
-        'channel_id' => $order->channel_id,
-        'locale' => 'ar',
-        'received_at' => now(),
-        'status' => WithdrawalStatus::RECEIVED,
-    ]);
+    $withdrawal = createWithdrawalRecord($this->createOrder(), 'ar');
 
     app()->setLocale('en');
 

@@ -67,7 +67,7 @@ beforeEach(function () {
 // Flat Rate
 // ============================================================================
 
-it('charges the flat rate once per unit of every item that ships', function () {
+it('should charge the flat rate once per unit of every item that ships', function () {
     currentCartHolding([
         [$this->createSimpleProduct(), 3],
         [$this->createVirtualProduct(), 2],
@@ -83,7 +83,7 @@ it('charges the flat rate once per unit of every item that ships', function () {
         ->and((float) $rate->price)->toBePrice(30);
 });
 
-it('charges the flat rate once per order when it is set up that way', function () {
+it('should charge the flat rate once per order when it is set up that way', function () {
     configureCarrier('flatrate', ['type' => 'per_order']);
 
     currentCartHolding([
@@ -93,7 +93,7 @@ it('charges the flat rate once per order when it is set up that way', function (
     expect((float) (new FlatRate)->calculate()->base_price)->toBePrice(10);
 });
 
-it('converts the flat rate into the currency the shopper browses in', function () {
+it('should convert the flat rate into the currency the shopper browses in', function () {
     $product = $this->createSimpleProduct();
 
     $currency = Currency::factory()->create();
@@ -117,7 +117,7 @@ it('converts the flat rate into the currency the shopper browses in', function (
         ->and((float) $rate->price)->toBePrice(20);
 });
 
-it('offers no flat rate while the carrier is switched off', function () {
+it('should offer no flat rate while the carrier is switched off', function () {
     configureCarrier('flatrate', ['active' => '0']);
 
     currentCartHolding([
@@ -131,7 +131,7 @@ it('offers no flat rate while the carrier is switched off', function () {
 // Free Shipping
 // ============================================================================
 
-it('ships for nothing with the free carrier', function () {
+it('should ship for nothing with the free carrier', function () {
     currentCartHolding([
         [$this->createSimpleProduct(), 3],
     ]);
@@ -145,7 +145,7 @@ it('ships for nothing with the free carrier', function () {
         ->and((float) $rate->base_price)->toBePrice(0);
 });
 
-it('offers no free shipping while the carrier is switched off', function () {
+it('should offer no free shipping while the carrier is switched off', function () {
     configureCarrier('free', ['active' => '0']);
 
     currentCartHolding([
@@ -159,7 +159,7 @@ it('offers no free shipping while the carrier is switched off', function () {
 // Rate Collection
 // ============================================================================
 
-it('collects and stores the rates of every active carrier for the cart', function () {
+it('should collect and store the rates of every active carrier for the cart', function () {
     $cart = currentCartHolding([
         [$this->createSimpleProduct(), 2],
     ]);
@@ -179,7 +179,7 @@ it('collects and stores the rates of every active carrier for the cart', functio
         ->and(Shipping::isMethodCodeExists('courier_overnight'))->toBeFalse();
 });
 
-it('leaves a switched off carrier out of the collected rates', function () {
+it('should leave a switched off carrier out of the collected rates', function () {
     configureCarrier('flatrate', ['active' => '0']);
 
     currentCartHolding([
@@ -191,11 +191,11 @@ it('leaves a switched off carrier out of the collected rates', function () {
     expect($methods->keys()->all())->toBe(['free']);
 });
 
-it('collects nothing without a cart', function () {
+it('should collect nothing without a cart', function () {
     expect(Shipping::collectRates())->toBeFalse();
 });
 
-it('lists the active shipping methods with their titles', function () {
+it('should list the active shipping methods with their titles', function () {
     $methods = collect(Shipping::getShippingMethods());
 
     expect($methods->firstWhere('code', 'flatrate'))

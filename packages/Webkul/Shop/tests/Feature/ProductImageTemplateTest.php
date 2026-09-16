@@ -12,10 +12,8 @@ use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Webkul\Core\Core as BaseCore;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Models\Channel;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Models\Customer;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\ImageCache\Exceptions\InvalidTemplate;
 use Webkul\ImageCache\TemplateRegistry;
 use Webkul\ImageCache\Templates\Large;
@@ -30,7 +28,6 @@ use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Models\RMA;
 use Webkul\RMA\Models\RMAItem;
 use Webkul\RMA\Models\RMAReason;
-use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Shop\Tests\Fixtures\ImageCache\NotATemplate;
 use Webkul\Shop\Tests\Fixtures\ImageCache\PosterSmall;
@@ -125,7 +122,7 @@ beforeEach(function () {
         'large' => Large::class,
     ]]);
 
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $this->product = $this->createSimpleProduct();
 
     $this->path = 'product/'.$this->product->id.'/front.png';
 
@@ -249,7 +246,7 @@ it('should never reuse one theme image for another theme that defines the same t
 it('should give a product without an image a placeholder for every product image template', function () {
     $channel = channelRunningImageTemplates('poster', ['product_card' => ProductCard::class], ['product_card']);
 
-    $imageless = (new ProductFaker)->getSimpleProductFactory()->create();
+    $imageless = $this->createSimpleProduct();
 
     $image = baseImageOn($channel, $imageless);
 
@@ -267,7 +264,7 @@ it('should give a product without an image the placeholders its theme ships in i
 
     serveThemeFromViteDevServer('poster', 'http://poster-vite.test');
 
-    $image = baseImageOn($channel, (new ProductFaker)->getSimpleProductFactory()->create());
+    $image = baseImageOn($channel, $this->createSimpleProduct());
 
     expect($image['small_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-small.webp')
         ->and($image['large_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-large.webp')
@@ -277,10 +274,7 @@ it('should give a product without an image the placeholders its theme ships in i
 });
 
 it('should keep the placeholder the merchant uploaded for a size over the one the theme ships', function () {
-    CoreConfig::create([
-        'code' => 'catalog.products.cache_small_image.url',
-        'value' => 'configuration/small-placeholder.webp',
-    ]);
+    $this->setConfig('catalog.products.cache_small_image.url', 'configuration/small-placeholder.webp');
 
     $channel = channelRunningImageTemplates('poster', null, [], [
         'small' => 'images/poster-small.webp',
@@ -289,7 +283,7 @@ it('should keep the placeholder the merchant uploaded for a size over the one th
 
     serveThemeFromViteDevServer('poster', 'http://poster-vite.test');
 
-    $image = baseImageOn($channel, (new ProductFaker)->getSimpleProductFactory()->create());
+    $image = baseImageOn($channel, $this->createSimpleProduct());
 
     expect($image['small_image_url'])->toBe(Storage::url('configuration/small-placeholder.webp'))
         ->and($image['medium_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-medium.webp');
@@ -303,7 +297,7 @@ it('should show the core placeholder where the theme ships one its build cannot 
         'medium' => 42,
     ]);
 
-    $image = baseImageOn($channel, (new ProductFaker)->getSimpleProductFactory()->create());
+    $image = baseImageOn($channel, $this->createSimpleProduct());
 
     expect($image['small_image_url'])->toContain('small-product-placeholder')
         ->and($image['medium_image_url'])->toContain('medium-product-placeholder');
@@ -414,7 +408,7 @@ it('should give the product rich snippet the full size urls of the product image
 });
 
 it('should give the product rich snippet no images for a product without a stored one', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     expect(app(SEO::class)->getProductImages($product))->toBe([]);
 });
@@ -438,20 +432,9 @@ it('should show a customer review with the product image of the product image he
 it('should show the item of an rma request with the product image of the product image helper', function () {
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-    ]);
+    $order = $this->createOrder(items: [['product' => $this->product]], customer: $customer);
 
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => $this->product->id,
-        'sku' => $this->product->sku,
-        'type' => $this->product->type,
-        'name' => $this->product->name,
-    ]);
+    $orderItem = $order->items->first();
 
     $rma = RMA::create([
         'order_id' => $order->id,
@@ -477,7 +460,7 @@ it('should show the item of an rma request with the product image of the product
 it('should hand the rma form each order item with the product image of the product image helper', function () {
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create(['customer_id' => $customer->id]);
+    $order = $this->createOrder(customer: $customer);
 
     $this->mock(RMAHelper::class)
         ->shouldReceive('getOrderItems')

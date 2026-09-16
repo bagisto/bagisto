@@ -46,26 +46,26 @@ function applicableRate(TaxCategory $taxCategory, array $address): ?TaxRate
 // Rate Matching
 // ============================================================================
 
-it('applies a country-wide rate anywhere in the country', function () {
+it('should apply a country-wide rate anywhere in the country', function () {
     $taxCategory = taxCategoryWithRates([['tax_rate' => 10]]);
 
     expect(applicableRate($taxCategory, ['country' => 'US', 'state' => 'CA', 'postcode' => '90001']))
         ->tax_rate->toEqual(10);
 });
 
-it('applies nothing in another country', function () {
+it('should apply nothing in another country', function () {
     $taxCategory = taxCategoryWithRates([['tax_rate' => 10]]);
 
     expect(applicableRate($taxCategory, ['country' => 'IN', 'state' => 'DL', 'postcode' => '110001']))->toBeNull();
 });
 
-it('applies nothing to an address without a country', function () {
+it('should apply nothing to an address without a country', function () {
     $taxCategory = taxCategoryWithRates([['tax_rate' => 10]]);
 
     expect(applicableRate($taxCategory, ['country' => null, 'state' => 'CA', 'postcode' => '90001']))->toBeNull();
 });
 
-it('prefers the rate of the state over the country-wide one', function () {
+it('should prefer the rate of the state over the country-wide one', function () {
     $taxCategory = taxCategoryWithRates([
         ['tax_rate' => 5],
         ['tax_rate' => 18, 'state' => 'CA'],
@@ -75,14 +75,14 @@ it('prefers the rate of the state over the country-wide one', function () {
         ->and(applicableRate($taxCategory, ['country' => 'US', 'state' => 'NY', 'postcode' => '10001']))->tax_rate->toEqual(5);
 });
 
-it('matches a rate pinned to one zip code only at that zip code', function () {
+it('should match a rate pinned to one zip code only at that zip code', function () {
     $taxCategory = taxCategoryWithRates([['tax_rate' => 7, 'zip_code' => '90001']]);
 
     expect(applicableRate($taxCategory, ['country' => 'US', 'state' => 'CA', 'postcode' => '90001']))->tax_rate->toEqual(7)
         ->and(applicableRate($taxCategory, ['country' => 'US', 'state' => 'CA', 'postcode' => '90002']))->toBeNull();
 });
 
-it('matches a rate pinned to a zip code range inside that range', function () {
+it('should match a rate pinned to a zip code range inside that range', function () {
     $taxCategory = taxCategoryWithRates([[
         'tax_rate' => 7,
         'is_zip' => 1,
@@ -96,7 +96,7 @@ it('matches a rate pinned to a zip code range inside that range', function () {
         ->and(applicableRate($taxCategory, ['country' => 'US', 'state' => 'NY', 'postcode' => '20001']))->toBeNull();
 });
 
-it('takes the highest rate when several rates apply', function () {
+it('should take the highest rate when several rates apply', function () {
     $taxCategory = taxCategoryWithRates([['tax_rate' => 5], ['tax_rate' => 12]]);
 
     expect(applicableRate($taxCategory, ['country' => 'US', 'state' => 'CA', 'postcode' => '90001']))->tax_rate->toEqual(12);
@@ -106,7 +106,7 @@ it('takes the highest rate when several rates apply', function () {
 // Totals
 // ============================================================================
 
-it('sums the tax of the items and the shipping by rate', function () {
+it('should sum the tax of the items and the shipping by rate', function () {
     $cart = (object) [
         'items' => [
             (object) ['applied_tax_rate' => 'VAT', 'tax_percent' => 18, 'tax_amount' => 1.804, 'base_tax_amount' => 1.804],
@@ -122,7 +122,7 @@ it('sums the tax of the items and the shipping by rate', function () {
     ]);
 });
 
-it('leaves untaxed shipping out of the tax summary', function () {
+it('should leave untaxed shipping out of the tax summary', function () {
     $cart = (object) [
         'items' => [
             (object) ['applied_tax_rate' => 'VAT', 'tax_percent' => 18, 'tax_amount' => 1.8, 'base_tax_amount' => 1.8],
@@ -133,7 +133,7 @@ it('leaves untaxed shipping out of the tax summary', function () {
     expect(Tax::getTaxRatesWithAmount($cart))->toBe(['VAT (18%)' => 1.8]);
 });
 
-it('breaks the tax down per item on the discounted amount when tax follows the discount', function (string $applyTaxOn, float $taxableAmount) {
+it('should break the tax down per item on the discounted amount when tax follows the discount', function (string $applyTaxOn, float $taxableAmount) {
     $this->setConfig([
         'sales.taxes.calculation.product_prices' => 'excluding_tax',
         'sales.taxes.calculation.apply_tax_on' => $applyTaxOn,
@@ -173,7 +173,7 @@ it('breaks the tax down per item on the discounted amount when tax follows the d
 // Settings
 // ============================================================================
 
-it('knows whether product and shipping prices include tax', function () {
+it('should know whether product and shipping prices include tax', function () {
     $this->setConfig([
         'sales.taxes.calculation.product_prices' => 'including_tax',
         'sales.taxes.calculation.shipping_prices' => 'excluding_tax',
@@ -183,7 +183,7 @@ it('knows whether product and shipping prices include tax', function () {
         ->and(Tax::isInclusiveTaxShippingPrices())->toBeFalse();
 });
 
-it('reads the default destination from the settings', function () {
+it('should read the default destination from the settings', function () {
     $this->setConfig([
         'sales.taxes.default_destination_calculation.country' => 'IN',
         'sales.taxes.default_destination_calculation.state' => 'DL',
@@ -196,7 +196,7 @@ it('reads the default destination from the settings', function () {
         ->postcode->toBe('110001');
 });
 
-it('falls back to the application country when no default destination is set', function () {
+it('should fall back to the application country when no default destination is set', function () {
     $this->setConfig('sales.taxes.default_destination_calculation.country', '');
 
     config(['app.default_country' => 'de']);
@@ -204,7 +204,7 @@ it('falls back to the application country when no default destination is set', f
     expect(Tax::getDefaultAddress()->country)->toBe('DE');
 });
 
-it('reads the shipping origin from the settings', function () {
+it('should read the shipping origin from the settings', function () {
     $this->setConfig([
         'sales.shipping.origin.country' => 'US',
         'sales.shipping.origin.state' => 'CA',

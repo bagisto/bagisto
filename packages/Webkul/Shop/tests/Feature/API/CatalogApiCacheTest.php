@@ -1,14 +1,18 @@
 <?php
 
-use Webkul\Faker\Helpers\Category as CategoryFaker;
-use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Category\Models\Category;
+use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Shop\Helpers\CatalogApiCache;
 use Webkul\Shop\Listeners\CatalogCache;
 use Webkul\Shop\Providers\EventServiceProvider;
 
 use function Pest\Laravel\getJson;
 
-it('increments the catalog version when flushed', function () {
+// ============================================================================
+// Versioning
+// ============================================================================
+
+it('should increment the catalog version when flushed', function () {
     $cache = app(CatalogApiCache::class);
 
     $version = $cache->version();
@@ -18,7 +22,7 @@ it('increments the catalog version when flushed', function () {
     expect($cache->version())->toBe($version + 1);
 });
 
-it('counts every flush so invalidations are not collapsed', function () {
+it('should count every flush so invalidations are not collapsed', function () {
     $cache = app(CatalogApiCache::class);
 
     $version = $cache->version();
@@ -30,7 +34,7 @@ it('counts every flush so invalidations are not collapsed', function () {
     expect($cache->version())->toBe($version + 3);
 });
 
-it('caches a value until the catalog version is bumped', function () {
+it('should cache a value until the catalog version is bumped', function () {
     $cache = app(CatalogApiCache::class);
 
     $first = $cache->remember('products', ['limit' => 10], fn () => 'first');
@@ -46,7 +50,7 @@ it('caches a value until the catalog version is bumped', function () {
     expect($third)->toBe('third');
 });
 
-it('does not cache catalog responses for logged-in customers', function () {
+it('should not cache catalog responses for logged-in customers', function () {
     $cache = app(CatalogApiCache::class);
 
     expect($cache->shouldCache())->toBeTrue();
@@ -60,8 +64,12 @@ it('does not cache catalog responses for logged-in customers', function () {
     expect($resolved)->toBe('fresh-each-time');
 });
 
-it('invalidates the catalog cache when a product is updated', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+// ============================================================================
+// Invalidation
+// ============================================================================
+
+it('should invalidate the catalog cache when a product is updated', function () {
+    $product = $this->createSimpleProduct();
 
     $cache = app(CatalogApiCache::class);
 
@@ -72,8 +80,8 @@ it('invalidates the catalog cache when a product is updated', function () {
     expect($cache->version())->toBe($version + 1);
 });
 
-it('invalidates the catalog cache when a category is updated', function () {
-    $category = (new CategoryFaker)->factory()->create();
+it('should invalidate the catalog cache when a category is updated', function () {
+    $category = Category::factory()->has(CategoryTranslation::factory(), 'translations')->create();
 
     $cache = app(CatalogApiCache::class);
 
@@ -84,7 +92,7 @@ it('invalidates the catalog cache when a category is updated', function () {
     expect($cache->version())->toBe($version + 1);
 });
 
-it('wires catalog cache invalidation for every event that can change a cached listing', function (string $event) {
+it('should wire catalog cache invalidation for every event that can change a cached listing', function (string $event) {
     $listens = (new EventServiceProvider(app()))->listens();
 
     expect($listens)->toHaveKey($event)
@@ -105,21 +113,25 @@ it('wires catalog cache invalidation for every event that can change a cached li
     'sales.refund.save.after',
 ]);
 
-it('sends a public, cookie-varying cache-control header on the products listing for guests', function () {
+// ============================================================================
+// Cache Headers
+// ============================================================================
+
+it('should send a public, cookie-varying cache-control header on the products listing for guests', function () {
     getJson(route('shop.api.products.index'))
         ->assertOk()
         ->assertHeader('Cache-Control', 'max-age=60, public')
         ->assertHeader('Vary', 'Cookie');
 });
 
-it('sends a public, cookie-varying cache-control header on the categories listing for guests', function () {
+it('should send a public, cookie-varying cache-control header on the categories listing for guests', function () {
     getJson(route('shop.api.categories.index'))
         ->assertOk()
         ->assertHeader('Cache-Control', 'max-age=60, public')
         ->assertHeader('Vary', 'Cookie');
 });
 
-it('sends a private cache-control header on the products listing for customers', function () {
+it('should send a private cache-control header on the products listing for customers', function () {
     $this->loginAsCustomer();
 
     getJson(route('shop.api.products.index'))

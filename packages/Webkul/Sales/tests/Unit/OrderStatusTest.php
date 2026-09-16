@@ -22,11 +22,15 @@ function refundOrder(Order $order, int $qty): void
     ]);
 }
 
-it('starts out pending', function () {
+// ============================================================================
+// Status Lifecycle
+// ============================================================================
+
+it('should start out pending', function () {
     expect($this->createOrder()->status)->toBe(Order::STATUS_PENDING);
 });
 
-it('moves to processing once part of it is invoiced', function () {
+it('should move to processing once part of it is invoiced', function () {
     $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2]]);
 
     $this->invoiceOrder($order, [$order->items->first()->id => 1]);
@@ -34,7 +38,7 @@ it('moves to processing once part of it is invoiced', function () {
     expect($order->refresh()->status)->toBe(Order::STATUS_PROCESSING);
 });
 
-it('keeps processing while shipped items await their invoice', function () {
+it('should keep processing while shipped items await their invoice', function () {
     $order = $this->createOrder(items: [['product' => $this->setProductStock($this->createSimpleProduct(), 10), 'qty_ordered' => 2]]);
 
     $this->shipOrder($order);
@@ -42,7 +46,7 @@ it('keeps processing while shipped items await their invoice', function () {
     expect($order->refresh()->status)->toBe(Order::STATUS_PROCESSING);
 });
 
-it('completes once every item is invoiced and shipped', function () {
+it('should complete once every item is invoiced and shipped', function () {
     $order = $this->createOrder(items: [['product' => $this->setProductStock($this->createSimpleProduct(), 10), 'qty_ordered' => 2]]);
 
     $this->invoiceOrder($order);
@@ -52,7 +56,7 @@ it('completes once every item is invoiced and shipped', function () {
     expect($order->refresh()->status)->toBe(Order::STATUS_COMPLETED);
 });
 
-it('completes an order of non-stockable items as soon as it is invoiced', function () {
+it('should complete an order of non-stockable items as soon as it is invoiced', function () {
     $order = $this->createOrder(items: [['product' => $this->createVirtualProduct(), 'qty_ordered' => 2]]);
 
     $this->invoiceOrder($order);
@@ -60,7 +64,19 @@ it('completes an order of non-stockable items as soon as it is invoiced', functi
     expect($order->refresh()->status)->toBe(Order::STATUS_COMPLETED);
 });
 
-it('is canceled once every item is canceled', function () {
+it('should take the status a caller forces on it', function () {
+    $order = $this->createOrder();
+
+    app(OrderRepository::class)->updateOrderStatus($order, Order::STATUS_FRAUD);
+
+    expect($order->refresh()->status)->toBe(Order::STATUS_FRAUD);
+});
+
+// ============================================================================
+// Cancellation
+// ============================================================================
+
+it('should be canceled once every item is canceled', function () {
     $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2]]);
 
     expect(app(OrderRepository::class)->cancel($order))->toBeTrue()
@@ -68,7 +84,7 @@ it('is canceled once every item is canceled', function () {
         ->and($order->items->first()->qty_canceled)->toBe(2);
 });
 
-it('can not be canceled once it has been invoiced', function () {
+it('should not be canceled once it has been invoiced', function () {
     $order = $this->createOrder(items: [['product' => $this->createSimpleProduct()]]);
 
     $this->invoiceOrder($order);
@@ -77,7 +93,11 @@ it('can not be canceled once it has been invoiced', function () {
         ->and($order->refresh()->status)->toBe(Order::STATUS_PROCESSING);
 });
 
-it('closes once everything invoiced has been refunded', function () {
+// ============================================================================
+// Refunds
+// ============================================================================
+
+it('should close once everything invoiced has been refunded', function () {
     $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2, 'price' => 50]]);
 
     $this->invoiceOrder($order);
@@ -90,7 +110,7 @@ it('closes once everything invoiced has been refunded', function () {
         ->and((float) $order->grand_total_refunded)->toBePrice(100);
 });
 
-it('stays processing after a partial refund', function () {
+it('should stay processing after a partial refund', function () {
     $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2, 'price' => 50]]);
 
     $this->invoiceOrder($order);
@@ -103,15 +123,11 @@ it('stays processing after a partial refund', function () {
         ->and((float) $order->grand_total_refunded)->toBePrice(50);
 });
 
-it('takes the status a caller forces on it', function () {
-    $order = $this->createOrder();
+// ============================================================================
+// Totals And Numbering
+// ============================================================================
 
-    app(OrderRepository::class)->updateOrderStatus($order, Order::STATUS_FRAUD);
-
-    expect($order->refresh()->status)->toBe(Order::STATUS_FRAUD);
-});
-
-it('holds the invoice totals against the order', function () {
+it('should hold the invoice totals against the order', function () {
     $order = $this->createOrder(items: [['product' => $this->createSimpleProduct(), 'qty_ordered' => 2, 'price' => 100]]);
 
     $this->invoiceOrder($order, [$order->items->first()->id => 1], state: Invoice::STATUS_PENDING);
@@ -123,7 +139,7 @@ it('holds the invoice totals against the order', function () {
         ->and($order->hasOpenInvoice())->toBeTrue();
 });
 
-it('numbers a new order from the configured prefix, length and suffix', function () {
+it('should number a new order from the configured prefix, length and suffix', function () {
     $this->setConfig([
         'sales.order_settings.order_number.order_number_prefix' => 'ORD-',
         'sales.order_settings.order_number.order_number_length' => '6',

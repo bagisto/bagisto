@@ -15,13 +15,17 @@ beforeEach(function () {
     $this->cmsPath = '/page/'.$page->translations->first()->url_key;
 });
 
-it('stores a storefront page for a guest', function () {
+// ============================================================================
+// Guest And Customer Pages
+// ============================================================================
+
+it('should store a storefront page for a guest', function () {
     get($this->cmsPath)->assertOk();
 
     $this->assertPageCached($this->pageRequest($this->cmsPath));
 });
 
-it('never stores a storefront page for a signed-in customer', function () {
+it('should never store a storefront page for a signed-in customer', function () {
     $customer = Customer::factory()->create();
 
     $this->actingAs($customer, 'customer');
@@ -33,7 +37,7 @@ it('never stores a storefront page for a signed-in customer', function () {
     $this->assertPageNotCached($this->pageRequest($this->cmsPath));
 });
 
-it('never serves a signed-in customer a page cached for them before', function () {
+it('should never serve a signed-in customer a page cached for them before', function () {
     $customer = Customer::factory()->create();
 
     $this->cachePage($this->cmsPath, $this->currentScope().$customer->id);

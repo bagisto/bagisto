@@ -1,5 +1,4 @@
 import { expect, type Page } from "@playwright/test";
-import { escapeRegExp } from "@shared/regex";
 import { DatagridPage } from "../DatagridPage";
 
 export interface AdminUserData {
@@ -55,10 +54,8 @@ export class UsersPage extends DatagridPage {
         return this.page.getByRole("button", { name: "Save User" });
     }
 
-    private roleOption(label: string) {
-        return this.roleSelect.locator("option", {
-            hasText: new RegExp(`^\\s*${escapeRegExp(label)}\\s*$`),
-        });
+    private roleOption(name: string) {
+        return this.roleSelect.getByRole("option", { name, exact: true });
     }
 
     private async openCreateModal(): Promise<void> {

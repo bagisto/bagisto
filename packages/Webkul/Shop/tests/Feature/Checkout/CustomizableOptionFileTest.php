@@ -2,8 +2,9 @@
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Checkout\Models\Cart;
-use Webkul\Faker\Helpers\Product as ProductFaker;
+use Illuminate\Testing\TestResponse;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductCustomizableOption;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Repositories\OrderItemRepository;
@@ -12,10 +13,12 @@ use function Pest\Laravel\postJson;
 
 /**
  * Create a simple product carrying one optional file option that accepts the given extensions.
+ *
+ * @return array{0: Product, 1: ProductCustomizableOption}
  */
-function makeProductWithFileOption(string $supportedExtensions): array
+function productWithFileOption(string $supportedExtensions): array
 {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = test()->createSimpleProduct();
 
     $option = $product->customizable_options()->create([
         'type' => 'file',
@@ -35,36 +38,14 @@ function makeProductWithFileOption(string $supportedExtensions): array
 }
 
 /**
- * Build a real upload, since a fake one holds a stream the cart item cannot encode, in a temporary file
- * removed when the run ends.
+ * Create an order whose item carries a file option pointing at the given path on the disk.
+ *
+ * @return array{0: Order, 1: OrderItem}
  */
-function makeCustomerUpload(string $name, string $contents): UploadedFile
+function orderWithUploadedOptionFile(string $path): array
 {
-    static $handles = [];
-
-    $handles[] = $handle = tmpfile();
-
-    fwrite($handle, $contents);
-
-    return new UploadedFile(stream_get_meta_data($handle)['uri'], $name, null, null, true);
-}
-
-it('does not relocate files outside the customer upload directory when managing customizable options', function () {
-    Storage::fake();
-
-    /**
-     * A file that does not belong to the customer (e.g. a product image) sitting on the disk.
-     */
-    Storage::put('product/1/victim.png', 'victim-contents');
-
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $order = Order::factory()->create();
-
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => $product->id,
-        'product_type' => get_class($product),
+    $order = test()->createOrder(items: [[
+        'product' => test()->createSimpleProduct(),
         'additional' => [
             'formatted_customizable_options' => [
                 [
@@ -72,133 +53,128 @@ it('does not relocate files outside the customer upload directory when managing 
                     'type' => 'file',
                     'label' => ['en' => 'Upload File'],
                     'prices' => [
-                        ['label' => 'product/1/victim.png'],
+                        ['label' => $path],
                     ],
                 ],
             ],
         ],
+    ]]);
+
+    return [$order, $order->items->first()];
+}
+
+/**
+ * Add a product to the cart with an upload for its file option, returning the response.
+ */
+function addToCartWithUpload(Product $product, ProductCustomizableOption $option, UploadedFile $upload, array $extra = []): TestResponse
+{
+    return postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'customizable_options' => [
+            $option->id => [$upload],
+        ],
+        ...$extra,
     ]);
+}
+
+// ============================================================================
+// Order Files
+// ============================================================================
+
+it('should not relocate a file outside the customer upload directory when managing customizable options', function () {
+    Storage::fake();
+
+    Storage::put('product/1/victim.png', 'victim-contents');
+
+    [$order, $orderItem] = orderWithUploadedOptionFile('product/1/victim.png');
 
     app(OrderItemRepository::class)->manageCustomizableOptions($orderItem);
 
     Storage::assertExists('product/1/victim.png');
+
     Storage::assertMissing('orders/'.$order->id.'/victim.png');
 
     expect($orderItem->fresh()->additional['formatted_customizable_options'][0]['prices'][0]['label'])
         ->toBe('product/1/victim.png');
 });
 
-it('relocates genuinely uploaded customizable option files into the orders directory', function () {
+it('should relocate a genuinely uploaded customizable option file into the orders directory', function () {
     Storage::fake();
 
-    $cartId = 42;
+    Storage::put('carts/42/upload.png', 'upload-contents');
 
-    Storage::put("carts/{$cartId}/upload.png", 'upload-contents');
-
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $order = Order::factory()->create();
-
-    $orderItem = OrderItem::factory()->create([
-        'order_id' => $order->id,
-        'product_id' => $product->id,
-        'product_type' => get_class($product),
-        'additional' => [
-            'formatted_customizable_options' => [
-                [
-                    'id' => 1,
-                    'type' => 'file',
-                    'label' => ['en' => 'Upload File'],
-                    'prices' => [
-                        ['label' => "carts/{$cartId}/upload.png"],
-                    ],
-                ],
-            ],
-        ],
-    ]);
+    [$order, $orderItem] = orderWithUploadedOptionFile('carts/42/upload.png');
 
     app(OrderItemRepository::class)->manageCustomizableOptions($orderItem);
 
-    Storage::assertMissing("carts/{$cartId}/upload.png");
+    Storage::assertMissing('carts/42/upload.png');
+
     Storage::assertExists('orders/'.$order->id.'/upload.png');
 
     expect($orderItem->fresh()->additional['formatted_customizable_options'][0]['prices'][0]['label'])
         ->toBe('orders/'.$order->id.'/upload.png');
 });
 
-it('stores a customer upload under its accepted extension, whatever its contents look like', function () {
+// ============================================================================
+// Cart Uploads
+// ============================================================================
+
+it('should store a customer upload under its accepted extension, whatever its contents look like', function () {
     Storage::fake();
 
-    [$product, $option] = makeProductWithFileOption('jpg,png');
+    [$product, $option] = productWithFileOption('jpg,png');
 
-    postJson(route('shop.api.checkout.cart.store'), [
-        'product_id' => $product->id,
-        'quantity' => 1,
-        'customizable_options' => [
-            $option->id => [makeCustomerUpload('payload.jpg', '<script>alert(1)</script>')],
-        ],
-    ])->assertOk();
+    $cartId = addToCartWithUpload($product, $option, $this->uploadedFileWithContents('payload.jpg', '<script>alert(1)</script>'))
+        ->assertOk()
+        ->json('data.id');
 
-    $files = Storage::allFiles('carts/'.Cart::latest('id')->first()->id);
+    $files = Storage::allFiles('carts/'.$cartId);
 
-    expect($files)->toHaveCount(1);
-
-    expect($files[0])->toEndWith('.jpg');
+    expect($files)->toHaveCount(1)
+        ->and($files[0])->toEndWith('.jpg');
 });
 
-it('refuses a customer upload whose extension would be served as a page, even when the option lists it', function () {
+it('should refuse a customer upload whose extension would be served as a page, even when the option lists it', function (string $name) {
     Storage::fake();
 
-    [$product, $option] = makeProductWithFileOption('html,svg,jpg');
+    [$product, $option] = productWithFileOption('html,svg,jpg');
 
-    foreach (['payload.html', 'payload.svg'] as $name) {
-        postJson(route('shop.api.checkout.cart.store'), [
-            'product_id' => $product->id,
-            'quantity' => 1,
-            'customizable_options' => [
-                $option->id => [makeCustomerUpload($name, '<script>alert(1)</script>')],
-            ],
-        ])
-            ->assertBadRequest()
-            ->assertJsonPath('message', trans('product::app.checkout.cart.invalid-file-extension'));
-    }
+    addToCartWithUpload($product, $option, $this->uploadedFileWithContents($name, '<script>alert(1)</script>'))
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('product::app.checkout.cart.invalid-file-extension'));
 
     expect(Storage::allFiles('carts'))->toBeEmpty();
-});
+})->with([
+    'html' => ['payload.html'],
+    'svg' => ['payload.svg'],
+]);
 
-it('refuses a customer upload with an active or missing extension when the option lists none', function () {
+it('should refuse a customer upload with an active or missing extension when the option lists none', function (string $name) {
     Storage::fake();
 
-    [$product, $option] = makeProductWithFileOption('');
+    [$product, $option] = productWithFileOption('');
 
-    foreach (['payload.php', 'payload'] as $name) {
-        postJson(route('shop.api.checkout.cart.store'), [
-            'product_id' => $product->id,
-            'quantity' => 1,
-            'customizable_options' => [
-                $option->id => [makeCustomerUpload($name, '<script>alert(1)</script>')],
-            ],
-        ])->assertBadRequest();
-    }
+    addToCartWithUpload($product, $option, $this->uploadedFileWithContents($name, '<script>alert(1)</script>'))
+        ->assertBadRequest();
 
     expect(Storage::allFiles('carts'))->toBeEmpty();
-});
+})->with([
+    'a script extension' => ['payload.php'],
+    'no extension' => ['payload'],
+]);
 
-it('stores a customer upload in the cart it was added to, whatever cart id the request carries', function () {
+it('should store a customer upload in the cart it was added to, whatever cart id the request carries', function () {
     Storage::fake();
 
-    [$product, $option] = makeProductWithFileOption('png');
+    [$product, $option] = productWithFileOption('png');
 
-    postJson(route('shop.api.checkout.cart.store'), [
-        'product_id' => $product->id,
-        'quantity' => 1,
-        'cart_id' => 'elsewhere',
-        'customizable_options' => [
-            $option->id => [makeCustomerUpload('artwork.png', UploadedFile::fake()->image('artwork.png', 10, 10)->get())],
-        ],
-    ])->assertOk();
+    $upload = $this->uploadedFileWithContents('artwork.png', UploadedFile::fake()->image('artwork.png', 10, 10)->get());
 
-    expect(Storage::allFiles('carts/elsewhere'))->toBeEmpty();
+    $cartId = addToCartWithUpload($product, $option, $upload, ['cart_id' => 'elsewhere'])
+        ->assertOk()
+        ->json('data.id');
 
-    expect(Storage::allFiles('carts/'.Cart::latest('id')->first()->id))->toHaveCount(1);
+    expect(Storage::allFiles('carts/elsewhere'))->toBeEmpty()
+        ->and(Storage::allFiles('carts/'.$cartId))->toHaveCount(1);
 });

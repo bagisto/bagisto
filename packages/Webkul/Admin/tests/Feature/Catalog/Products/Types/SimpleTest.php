@@ -1,7 +1,6 @@
 <?php
 
 use Webkul\Attribute\Models\Attribute;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Models\ProductInventoryIndex;
@@ -29,11 +28,11 @@ it('should store a simple product and redirect to edit', function () {
         ->assertOk()
         ->assertJsonStructure(['data' => ['redirect_url']]);
 
-    $product = Product::where('sku', $sku)->first();
+    $product = Product::query()->where('sku', $sku)->first();
 
-    expect($product)->not->toBeNull();
-    expect($product->type)->toBe('simple');
-    expect($product->attribute_family_id)->toBe(1);
+    expect($product)->not->toBeNull()
+        ->and($product->type)->toBe('simple')
+        ->and($product->attribute_family_id)->toBe(1);
 });
 
 // ============================================================================
@@ -69,8 +68,8 @@ it('should persist text attribute values after store and update', function () {
         $attrValue = $product->attribute_values
             ->first(fn ($av) => $av->attribute->code === $code);
 
-        expect($attrValue)->not->toBeNull("Attribute value for '{$code}' should exist.");
-        expect($attrValue->text_value)->not->toBeEmpty("Text value for '{$code}' should not be empty.");
+        expect($attrValue)->not->toBeNull("Attribute value for '{$code}' should exist.")
+            ->and($attrValue->text_value)->not->toBeEmpty("Text value for '{$code}' should not be empty.");
     }
 });
 
@@ -83,13 +82,14 @@ it('should persist boolean attribute values after store and update', function ()
         $attrValue = $product->attribute_values
             ->first(fn ($av) => $av->attribute->code === $code);
 
-        expect($attrValue)->not->toBeNull("Attribute value for '{$code}' should exist.");
-        expect($attrValue->boolean_value)->toBeTrue("Boolean value for '{$code}' should be true.");
+        expect($attrValue)->not->toBeNull("Attribute value for '{$code}' should exist.")
+            ->and($attrValue->boolean_value)->toBeTrue("Boolean value for '{$code}' should be true.");
     }
 });
 
 it('should persist channel-scoped boolean attribute values after store and update', function () {
     $product = $this->storeAndUpdateSimpleProduct();
+
     $channel = core()->getDefaultChannelCode();
 
     $channelScoped = ['status'];
@@ -98,9 +98,9 @@ it('should persist channel-scoped boolean attribute values after store and updat
         $attrValue = $product->attribute_values
             ->first(fn ($av) => $av->attribute->code === $code);
 
-        expect($attrValue)->not->toBeNull("Attribute value for '{$code}' should exist.");
-        expect($attrValue->boolean_value)->toBeTrue("Boolean value for '{$code}' should be true.");
-        expect($attrValue->channel)->toBe($channel, "Channel for '{$code}' should be '{$channel}'.");
+        expect($attrValue)->not->toBeNull("Attribute value for '{$code}' should exist.")
+            ->and($attrValue->boolean_value)->toBeTrue("Boolean value for '{$code}' should be true.")
+            ->and($attrValue->channel)->toBe($channel, "Channel for '{$code}' should be '{$channel}'.");
     }
 });
 
@@ -110,8 +110,8 @@ it('should persist price as float attribute value after store and update', funct
     $priceAttr = $product->attribute_values
         ->first(fn ($av) => $av->attribute->code === 'price');
 
-    expect($priceAttr)->not->toBeNull();
-    expect((float) $priceAttr->float_value)->toBe(299.99);
+    expect($priceAttr)->not->toBeNull()
+        ->and((float) $priceAttr->float_value)->toBe(299.99);
 });
 
 it('should persist weight as text attribute value after store and update', function () {
@@ -120,8 +120,8 @@ it('should persist weight as text attribute value after store and update', funct
     $weightAttr = $product->attribute_values
         ->first(fn ($av) => $av->attribute->code === 'weight');
 
-    expect($weightAttr)->not->toBeNull();
-    expect($weightAttr->text_value)->toBe('15');
+    expect($weightAttr)->not->toBeNull()
+        ->and($weightAttr->text_value)->toBe('15');
 });
 
 // ============================================================================
@@ -131,34 +131,29 @@ it('should persist weight as text attribute value after store and update', funct
 it('should populate product_flat with all indexed columns after store and update', function () {
     $product = $this->storeAndUpdateSimpleProduct();
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
-    expect($flat)->not->toBeNull();
-
-    expect($flat->sku)->toBe($product->sku);
-    expect($flat->type)->toBe('simple');
-    expect($flat->product_id)->toBe($product->id);
-    expect($flat->attribute_family_id)->toBe(1);
-
-    expect($flat->name)->toBe('Test Simple Product');
-    expect($flat->url_key)->not->toBeEmpty();
-    expect($flat->short_description)->toBe('A short description for testing.');
-    expect($flat->description)->toBe('A full description paragraph for testing purposes.');
-    expect($flat->meta_title)->toBe('Test Meta Title');
-    expect($flat->meta_keywords)->toBe('test, simple, product');
-    expect($flat->meta_description)->toBe('Test meta description for SEO.');
-    expect($flat->product_number)->not->toBeEmpty();
-
-    expect((float) $flat->price)->toBe(299.99);
-    expect((float) $flat->weight)->toBe(15.0);
-
-    expect($flat->status)->toBeTruthy();
-    expect($flat->new)->toBeTruthy();
-    expect($flat->featured)->toBeTruthy();
-    expect($flat->visible_individually)->toBeTruthy();
-
-    expect($flat->locale)->toBe(app()->getLocale());
-    expect($flat->channel)->toBe(core()->getDefaultChannelCode());
+    expect($flat)->not->toBeNull()
+        ->and($flat->sku)->toBe($product->sku)
+        ->and($flat->type)->toBe('simple')
+        ->and($flat->product_id)->toBe($product->id)
+        ->and($flat->attribute_family_id)->toBe(1)
+        ->and($flat->name)->toBe('Test Simple Product')
+        ->and($flat->url_key)->not->toBeEmpty()
+        ->and($flat->short_description)->toBe('A short description for testing.')
+        ->and($flat->description)->toBe('A full description paragraph for testing purposes.')
+        ->and($flat->meta_title)->toBe('Test Meta Title')
+        ->and($flat->meta_keywords)->toBe('test, simple, product')
+        ->and($flat->meta_description)->toBe('Test meta description for SEO.')
+        ->and($flat->product_number)->not->toBeEmpty()
+        ->and((float) $flat->price)->toBe(299.99)
+        ->and((float) $flat->weight)->toBe(15.0)
+        ->and($flat->status)->toBeTruthy()
+        ->and($flat->new)->toBeTruthy()
+        ->and($flat->featured)->toBeTruthy()
+        ->and($flat->visible_individually)->toBeTruthy()
+        ->and($flat->locale)->toBe(app()->getLocale())
+        ->and($flat->channel)->toBe(core()->getDefaultChannelCode());
 });
 
 // ============================================================================
@@ -173,9 +168,7 @@ it('should create inventory after store and update', function () {
         'inventory_source_id' => 1,
     ]);
 
-    $inventory = $product->inventories()->first();
-
-    expect((int) $inventory->qty)->toBe(100);
+    expect((int) $product->inventories()->first()->qty)->toBe(100);
 });
 
 // ============================================================================
@@ -198,12 +191,10 @@ it('should assign the simple product to the current channel after update', funct
 it('should create price indices after store and update', function () {
     $product = $this->storeAndUpdateSimpleProduct();
 
-    $priceIndices = ProductPriceIndex::where('product_id', $product->id)->get();
+    $priceIndices = ProductPriceIndex::query()->where('product_id', $product->id)->get();
 
-    expect($priceIndices->count())->toBeGreaterThanOrEqual(1);
-
-    $firstIndex = $priceIndices->first();
-    expect((float) $firstIndex->min_price)->toBe(299.99);
+    expect($priceIndices->count())->toBeGreaterThanOrEqual(1)
+        ->and((float) $priceIndices->first()->min_price)->toBe(299.99);
 });
 
 it('should create inventory index after store and update', function () {
@@ -213,7 +204,7 @@ it('should create inventory index after store and update', function () {
         'product_id' => $product->id,
     ]);
 
-    $inventoryIndex = ProductInventoryIndex::where('product_id', $product->id)->first();
+    $inventoryIndex = ProductInventoryIndex::query()->where('product_id', $product->id)->first();
 
     expect((int) $inventoryIndex->qty)->toBe(100);
 });
@@ -243,22 +234,22 @@ it('should update a simple product and reflect changes in all related tables', f
     ])
         ->assertRedirect(route('admin.catalog.products.index'));
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
-    expect($flat->name)->toBe('Changed Name');
-    expect($flat->short_description)->toBe('Changed short.');
-    expect((float) $flat->price)->toBe(49.99);
-    expect((float) $flat->weight)->toBe(5.0);
-    expect($flat->new)->toBeFalsy();
-    expect($flat->featured)->toBeFalsy();
-
-    $updatedProduct = Product::with('attribute_values.attribute')->find($product->id);
+    $updatedProduct = Product::query()->with('attribute_values.attribute')->find($product->id);
 
     $nameAttr = $updatedProduct->attribute_values->first(fn ($av) => $av->attribute->code === 'name');
-    expect($nameAttr->text_value)->toBe('Changed Name');
 
     $priceAttr = $updatedProduct->attribute_values->first(fn ($av) => $av->attribute->code === 'price');
-    expect((float) $priceAttr->float_value)->toBe(49.99);
+
+    expect($flat->name)->toBe('Changed Name')
+        ->and($flat->short_description)->toBe('Changed short.')
+        ->and((float) $flat->price)->toBe(49.99)
+        ->and((float) $flat->weight)->toBe(5.0)
+        ->and($flat->new)->toBeFalsy()
+        ->and($flat->featured)->toBeFalsy()
+        ->and($nameAttr->text_value)->toBe('Changed Name')
+        ->and((float) $priceAttr->float_value)->toBe(49.99);
 });
 
 // ============================================================================
@@ -274,11 +265,11 @@ it('should escape the attribute admin_name on the product edit page to prevent s
         ->where('locale', app()->getLocale())
         ->update(['name' => $payload]);
 
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     $this->loginAsAdmin();
 
-    $content = $this->get(route('admin.catalog.products.edit', $product->id))
+    $content = get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
         ->getContent();
 
@@ -333,6 +324,7 @@ it('should fail validation when boolean fields have invalid values on simple pro
 
 it('should delete a simple product and clean up all related tables', function () {
     $product = $this->storeAndUpdateSimpleProduct();
+
     $productId = $product->id;
 
     deleteJson(route('admin.catalog.products.delete', $productId))
@@ -340,10 +332,16 @@ it('should delete a simple product and clean up all related tables', function ()
         ->assertJsonPath('message', trans('admin::app.catalog.products.delete-success'));
 
     $this->assertDatabaseMissing('products', ['id' => $productId]);
+
     $this->assertDatabaseMissing('product_flat', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_inventories', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_channels', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_price_indices', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_inventory_indices', ['product_id' => $productId]);
 });

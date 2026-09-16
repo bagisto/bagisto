@@ -6,12 +6,14 @@ import {
     CustomerGroupsPage,
     type CustomerGroupData,
 } from "../../../pages/admin/customers/CustomerGroupsPage";
-import { RolesPage, type RoleData } from "../../../pages/admin/settings/RolesPage";
+import {
+    RolesPage,
+    type RoleData,
+} from "../../../pages/admin/settings/RolesPage";
 import {
     UsersPage,
     type AdminUserData,
 } from "../../../pages/admin/settings/UsersPage";
-import { env } from "../../../utils/env";
 import {
     generateDescription,
     generateFullName,
@@ -20,16 +22,14 @@ import {
     uniqueStamp,
 } from "../../../utils/faker";
 
-const ADMINISTRATOR_ROLE = "Administrator";
-
-function buildRole(permission: string): RoleData {
+function buildRole(permission?: string): RoleData {
     const stamp = uniqueStamp();
 
     return {
         name: `Role ${stamp}`,
         description: `Role ${stamp} created by the acl suite.`,
-        permissionType: "custom",
-        permissions: [permission],
+        permissionType: permission ? "custom" : "all",
+        permissions: permission ? [permission] : undefined,
     };
 }
 
@@ -142,7 +142,10 @@ test.describe("role action permissions", () => {
             browser,
         }) => {
             const data = buildCmsPage();
-            const changes = { title: `${data.title} edited`, urlKey: `${data.urlKey}-edited` };
+            const changes = {
+                title: `${data.title} edited`,
+                urlKey: `${data.urlKey}-edited`,
+            };
             created.push(data.title, changes.title);
 
             await adminCms.createPage(data);
@@ -255,7 +258,7 @@ test.describe("role action permissions", () => {
             await rolesPage.deleteRolesIfPresent(created);
         });
 
-        test("should let a role with only the roles create permission add a role within its own permissions but never an all-access one", async ({
+        test("should let a role with only the create permission add a role within its own permissions but not grant any beyond them", async ({
             browser,
         }) => {
             const data = buildRole("settings.roles.create");
@@ -274,18 +277,22 @@ test.describe("role action permissions", () => {
             await rolesPage.expectRoleListed(data.name, "custom");
         });
 
-        test("should let a role with only the roles delete permission remove a role within its own permissions but not one above it", async ({
+        test("should let a role with only the delete permission remove a role within its own permissions but not an all-access one", async ({
             browser,
         }) => {
             const data = buildRole("settings.roles.delete");
-            created.push(data.name);
+            const allAccessRole = buildRole();
+            created.push(data.name, allAccessRole.name);
 
             await rolesPage.createRole(data);
+            await rolesPage.createRole(allAccessRole);
             await signInWithPermission(browser, "settings.roles.delete");
 
             const restrictedRoles = new RolesPage(restrictedPage);
 
-            await restrictedRoles.expectRowDeleteUnavailable(ADMINISTRATOR_ROLE);
+            await restrictedRoles.expectRowDeleteUnavailable(
+                allAccessRole.name,
+            );
             await restrictedRoles.deleteRole(data.name);
 
             await rolesPage.expectRoleAbsent(data.name);
@@ -293,48 +300,67 @@ test.describe("role action permissions", () => {
     });
 
     test.describe("users", () => {
-        let created: string[];
+        let createdUsers: string[];
+        let createdRoles: string[];
 
         test.beforeEach(() => {
-            created = [];
+            createdUsers = [];
+            createdRoles = [];
         });
 
         test.afterEach(async () => {
-            await usersPage.deleteUsersIfPresent(created);
+            try {
+                await usersPage.deleteUsersIfPresent(createdUsers);
+            } finally {
+                await rolesPage.deleteRolesIfPresent(createdRoles);
+            }
         });
 
-        test("should let a role with only the users create permission add a user with a role it may grant and offer no other", async ({
+        test("should let a role with only the create permission add a user with its own role but not offer an all-access role", async ({
             browser,
         }) => {
+            const allAccessRole = buildRole();
+            createdRoles.push(allAccessRole.name);
+
+            await rolesPage.createRole(allAccessRole);
             await signInWithPermission(browser, "settings.users.create");
 
             const data = buildUser(role.name);
-            created.push(data.email);
+            createdUsers.push(data.email);
 
             const restrictedUsers = new UsersPage(restrictedPage);
 
             await restrictedUsers.expectCreateFormOffersRole(
                 role.name,
-                ADMINISTRATOR_ROLE,
+                allAccessRole.name,
             );
             await restrictedUsers.createUser(data);
 
             await usersPage.expectUserListed(data.email, data.name);
         });
 
-        test("should let a role with only the users delete permission remove a user with a role it may grant but not one above it", async ({
+        test("should let a role with only the delete permission remove a user with its own role but not one with an all-access role", async ({
             browser,
         }) => {
+            const allAccessRole = buildRole();
+            const allAccessUser = buildUser(allAccessRole.name);
+            createdRoles.push(allAccessRole.name);
+            createdUsers.push(allAccessUser.email);
+
+            await rolesPage.createRole(allAccessRole);
+            await usersPage.createUser(allAccessUser);
             await signInWithPermission(browser, "settings.users.delete");
 
             const data = buildUser(role.name);
-            created.push(data.email);
+            createdUsers.push(data.email);
 
             await usersPage.createUser(data);
 
             const restrictedUsers = new UsersPage(restrictedPage);
 
-            await restrictedUsers.expectRowDeleteUnavailable(env.adminEmail);
+            await restrictedUsers.expectRowDeleteUnavailable(
+                allAccessUser.email,
+            );
             await restrictedUsers.deleteUser(data.email);
 
             await usersPage.expectUserAbsent(data.email);

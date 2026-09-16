@@ -21,7 +21,11 @@ function saveProductsPerPage(string $value): void
     ]);
 }
 
-it('builds the storefront per-page options from a comma-separated configuration without a manual cache clear', function () {
+// ============================================================================
+// Per-Page Options
+// ============================================================================
+
+it('should build the storefront per-page options from a comma-separated configuration without a manual cache clear', function () {
     app(Toolbar::class)->getAvailableLimits();
 
     saveProductsPerPage('11,22,33,44');
@@ -29,13 +33,27 @@ it('builds the storefront per-page options from a comma-separated configuration 
     expect(app(Toolbar::class)->getAvailableLimits()->all())->toBe([11, 22, 33, 44]);
 });
 
-it('normalises a messy comma-separated per-page configuration', function () {
+it('should normalise a messy comma-separated per-page configuration', function () {
     saveProductsPerPage('10, 20 ,30,30,0,abc,40');
 
     expect(app(Toolbar::class)->getAvailableLimits()->all())->toBe([10, 20, 30, 40]);
 });
 
-it('drops cached storefront pages when the per-page configuration is saved', function () {
+it('should not reuse a stale per-page response across successive configuration changes', function () {
+    saveProductsPerPage('10,20,30');
+
+    expect(app(Toolbar::class)->getAvailableLimits()->all())->toBe([10, 20, 30]);
+
+    saveProductsPerPage('15,25,35,45');
+
+    expect(app(Toolbar::class)->getAvailableLimits()->all())->toBe([15, 25, 35, 45]);
+});
+
+// ============================================================================
+// Page Invalidation
+// ============================================================================
+
+it('should drop cached storefront pages when the per-page configuration is saved', function () {
     $this->useIsolatedPageCache();
 
     $home = $this->cachePage('/');
@@ -48,14 +66,4 @@ it('drops cached storefront pages when the per-page configuration is saved', fun
         $home,
         'Saving the per-page configuration must drop cached storefront pages so the new options render.'
     );
-});
-
-it('does not reuse a stale per-page response across successive configuration changes', function () {
-    saveProductsPerPage('10,20,30');
-
-    expect(app(Toolbar::class)->getAvailableLimits()->all())->toBe([10, 20, 30]);
-
-    saveProductsPerPage('15,25,35,45');
-
-    expect(app(Toolbar::class)->getAvailableLimits()->all())->toBe([15, 25, 35, 45]);
 });

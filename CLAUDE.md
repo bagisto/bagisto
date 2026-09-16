@@ -73,7 +73,7 @@ Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), A
 
 Every package that has tests is registered above. Packages without a `tests/` directory (PhonePe, Checkout, RMA, and others) have no suite — adding a `<testsuite>` for a path that does not exist makes PHPUnit error, so write the tests first.
 
-Shared test infrastructure lives in `tests/Datasets/` (datasets registered with `sharedDataset()` so every package can `->with()` them), `packages/Webkul/Core/tests/Concerns/` (`setConfig()`, price assertions), `packages/Webkul/Product/tests/Concerns/ProductTestBench.php` (indexed products of every type) and `packages/Webkul/Sales/tests/Concerns/OrderTestBench.php` (orders, invoices, shipments).
+Shared test infrastructure lives in `tests/Datasets/` (datasets registered with `sharedDataset()` so every package can `->with()` them), `packages/Webkul/Core/tests/Concerns/` (`setConfig()`, `uploadedFileWithContents()`, price assertions), `packages/Webkul/Product/tests/Concerns/ProductTestBench.php` (indexed products of every type) and `packages/Webkul/Sales/tests/Concerns/OrderTestBench.php` (orders, invoices, shipments).
 
 Tests use **Pest 5** (PHPUnit 13) with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
 

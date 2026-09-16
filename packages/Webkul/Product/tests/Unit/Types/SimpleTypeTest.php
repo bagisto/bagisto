@@ -27,19 +27,19 @@ function repriceProduct(Product $product, float $price): Product
 // Saleability
 // ============================================================================
 
-it('is for sale while active and in stock', function () {
+it('should be for sale while active and in stock', function () {
     $product = $this->setProductStock($this->createSimpleProduct(), 5);
 
     expect($product->getTypeInstance()->isSaleable())->toBeTrue();
 });
 
-it('is not for sale once out of stock', function () {
+it('should not be for sale once out of stock', function () {
     $product = $this->setProductStock($this->createSimpleProduct(), 0);
 
     expect($product->getTypeInstance()->isSaleable())->toBeFalse();
 });
 
-it('is for sale out of stock when back orders are allowed', function () {
+it('should be for sale out of stock when back orders are allowed', function () {
     $this->setConfig('catalog.inventory.stock_options.back_orders', '1');
 
     $product = $this->setProductStock($this->createSimpleProduct(), 0);
@@ -47,7 +47,7 @@ it('is for sale out of stock when back orders are allowed', function () {
     expect($product->getTypeInstance()->isSaleable())->toBeTrue();
 });
 
-it('is not for sale while inactive', function () {
+it('should not be for sale while inactive', function () {
     $product = $this->createSimpleProduct([
         'status' => ['boolean_value' => false, 'channel' => core()->getCurrentChannelCode()],
     ]);
@@ -55,7 +55,7 @@ it('is not for sale while inactive', function () {
     expect($product->getTypeInstance()->isSaleable())->toBeFalse();
 });
 
-it('has enough of any quantity when its stock is not managed', function () {
+it('should have enough of any quantity when its stock is not managed', function () {
     $product = $this->createSimpleProduct([
         'manage_stock' => ['boolean_value' => false, 'channel' => core()->getCurrentChannelCode()],
     ]);
@@ -65,7 +65,7 @@ it('has enough of any quantity when its stock is not managed', function () {
     expect($product->getTypeInstance()->haveSufficientQuantity(1000))->toBeTrue();
 });
 
-it('is only available on the channels it is assigned to', function () {
+it('should only be available on the channels it is assigned to', function () {
     $product = $this->createSimpleProduct();
 
     expect($product->isAvailableInChannel())->toBeTrue()
@@ -76,7 +76,7 @@ it('is only available on the channels it is assigned to', function () {
 // Cart Lines
 // ============================================================================
 
-it('prices a cart line from the final price and the quantity', function () {
+it('should price a cart line from the final price and the quantity', function () {
     $product = $this->setProductStock($this->createSimpleProduct(['price' => ['float_value' => 100]]), 10);
 
     Cart::setCart(CartModel::factory()->create());
@@ -95,7 +95,7 @@ it('prices a cart line from the final price and the quantity', function () {
         ->and((float) $line['base_total'])->toBePrice(300);
 });
 
-it('refuses a cart line beyond the stock', function () {
+it('should refuse a cart line beyond the stock', function () {
     $product = $this->setProductStock($this->createSimpleProduct(), 2);
 
     Cart::setCart(CartModel::factory()->create());
@@ -104,14 +104,14 @@ it('refuses a cart line beyond the stock', function () {
         ->toThrow(InsufficientProductInventoryException::class);
 });
 
-it('treats a missing quantity as one', function () {
+it('should treat a missing quantity as one', function () {
     $product = $this->createSimpleProduct();
 
     expect($product->getTypeInstance()->handleQuantity(0))->toBe(1)
         ->and($product->getTypeInstance()->handleQuantity(4))->toBe(4);
 });
 
-it('recognises a cart line for the same product with the same customizable options', function () {
+it('should recognise a cart line for the same product with the same customizable options', function () {
     $product = $this->createSimpleProduct();
 
     $type = $product->getTypeInstance();
@@ -123,7 +123,7 @@ it('recognises a cart line for the same product with the same customizable optio
         ->and($type->compareOptions(['product_id' => $product->id, 'customizable_options' => [1 => 'red']], ['product_id' => $product->id]))->toBeFalse();
 });
 
-it('reprices a cart item once the price of its product changes', function () {
+it('should reprice a cart item once the price of its product changes', function () {
     $product = $this->setProductStock($this->createSimpleProduct(['price' => ['float_value' => 100]]), 10);
 
     $cart = CartModel::factory()->create();
@@ -155,7 +155,7 @@ it('reprices a cart item once the price of its product changes', function () {
         ->and((float) $item->base_total)->toBePrice(160);
 });
 
-it('flags a cart item whose product went inactive', function () {
+it('should flag a cart item whose product went inactive', function () {
     $product = $this->createSimpleProduct();
 
     $cart = CartModel::factory()->create();
@@ -181,7 +181,7 @@ it('flags a cart item whose product went inactive', function () {
 // Customer Group Prices
 // ============================================================================
 
-it('applies the customer group price of the quantity tier reached', function () {
+it('should apply the customer group price of the quantity tier reached', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 100]]);
 
     ProductCustomerGroupPrice::factory()->create([
@@ -199,7 +199,7 @@ it('applies the customer group price of the quantity tier reached', function () 
         ->and((float) $type->getCustomerGroupPrice($product, 9))->toBePrice(80);
 });
 
-it('applies a percentage customer group discount', function () {
+it('should apply a percentage customer group discount', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 200]]);
 
     ProductCustomerGroupPrice::factory()->create([

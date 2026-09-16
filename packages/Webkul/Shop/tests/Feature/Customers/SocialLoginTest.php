@@ -2,7 +2,6 @@
 
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\SocialLogin\Models\CustomerSocialAccount;
 
@@ -13,12 +12,7 @@ use function Pest\Laravel\get;
  */
 function setGoogleLogin(bool $enabled): void
 {
-    CoreConfig::updateOrCreate([
-        'code' => 'customer.settings.social_login.enable_google',
-        'channel_code' => core()->getCurrentChannel()->code,
-    ], [
-        'value' => $enabled ? '1' : '0',
-    ]);
+    test()->setConfig('customer.settings.social_login.enable_google', $enabled ? '1' : '0');
 }
 
 /**
@@ -33,15 +27,26 @@ function googleIdentifies(string $id, string $email): void
     ]));
 }
 
-it('should refuse a social login through a provider the store has not enabled', function () {
+// ============================================================================
+// Providers
+// ============================================================================
+
+it('should refuse a social login through a provider the store has not enabled', function (string $provider) {
     setGoogleLogin(false);
 
-    get(route('customer.social-login.index', 'google'))->assertNotFound();
+    get(route('customer.social-login.index', $provider))->assertNotFound();
 
-    get(route('customer.social-login.callback', 'google'))->assertNotFound();
+    get(route('customer.social-login.callback', $provider))->assertNotFound();
 
-    get(route('customer.social-login.callback', 'myspace'))->assertNotFound();
-});
+    $this->assertGuest('customer');
+})->with([
+    'a disabled provider' => ['google'],
+    'an unknown provider' => ['myspace'],
+]);
+
+// ============================================================================
+// Callback
+// ============================================================================
 
 it('should not sign a social identity into an existing customer who holds its email', function () {
     setGoogleLogin(true);
@@ -58,22 +63,28 @@ it('should not sign a social identity into an existing customer who holds its em
 
     $this->assertGuest('customer');
 
-    expect(CustomerSocialAccount::where('customer_id', $customer->id)->exists())->toBeFalse();
+    $this->assertDatabaseMissing('customer_social_accounts', ['customer_id' => $customer->id]);
 });
 
 it('should create a customer of the current channel for a new social identity', function () {
     setGoogleLogin(true);
 
-    googleIdentifies('google-new', 'new.social@example.com');
+    googleIdentifies('google-new', $email = fake()->unique()->safeEmail());
 
     get(route('customer.social-login.callback', 'google'))
         ->assertRedirect(route('shop.customers.account.profile.index'));
 
-    $customer = Customer::where('email', 'new.social@example.com')->firstOrFail();
+    $customer = Customer::query()->where('email', $email)->firstOrFail();
 
     expect($customer->channel_id)->toBe(core()->getCurrentChannel()->id);
 
     $this->assertAuthenticatedAs($customer, 'customer');
+
+    $this->assertDatabaseHas('customer_social_accounts', [
+        'customer_id' => $customer->id,
+        'provider_name' => 'google',
+        'provider_id' => 'google-new',
+    ]);
 });
 
 it('should not sign in an inactive customer through a linked social identity', function () {
@@ -84,7 +95,7 @@ it('should not sign in an inactive customer through a linked social identity', f
         'status' => 0,
     ]);
 
-    CustomerSocialAccount::create([
+    CustomerSocialAccount::query()->create([
         'customer_id' => $customer->id,
         'provider_name' => 'google',
         'provider_id' => 'google-linked',
@@ -93,7 +104,8 @@ it('should not sign in an inactive customer through a linked social identity', f
     googleIdentifies('google-linked', $customer->email);
 
     get(route('customer.social-login.callback', 'google'))
-        ->assertRedirect(route('shop.customer.session.index'));
+        ->assertRedirect(route('shop.customer.session.index'))
+        ->assertSessionHas('warning', trans('shop::app.customers.login-form.not-activated'));
 
     $this->assertGuest('customer');
 });

@@ -1,61 +1,77 @@
 <?php
 
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Razorpay\Payment\RazorpayPayment;
 
 beforeEach(function () {
     $this->razorpay = app(RazorpayPayment::class);
 });
 
-it('returns the correct payment method code', function () {
+// ============================================================================
+// Configuration
+// ============================================================================
+
+it('should return the correct payment method code', function () {
     $code = $this->razorpay->getCode();
 
     expect($code)->toBe('razorpay');
 });
 
-it('returns the payment method title from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.title',
-        'value' => 'Razorpay Payment Gateway',
-        'channel_code' => 'default',
-        'locale_code' => 'en',
-    ]);
+it('should return the payment method title from configuration', function () {
+    $this->setConfig('sales.payment_methods.razorpay.title', 'Razorpay Payment Gateway');
 
     $title = $this->razorpay->getTitle();
 
     expect($title)->toBe('Razorpay Payment Gateway');
 });
 
-it('returns the payment method description from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.description',
-        'value' => 'Pay securely using Razorpay',
-        'channel_code' => 'default',
-        'locale_code' => 'en',
-    ]);
+it('should return the payment method description from configuration', function () {
+    $this->setConfig('sales.payment_methods.razorpay.description', 'Pay securely using Razorpay');
 
     $description = $this->razorpay->getDescription();
 
     expect($description)->toBe('Pay securely using Razorpay');
 });
 
-it('returns the client ID based on sandbox mode', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
+it('should return the payment method image from configuration', function () {
+    $this->setConfig('sales.payment_methods.razorpay.image', 'razorpay/custom-logo.png');
 
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => 'test_key_123',
-        'channel_code' => 'default',
-    ]);
+    $image = $this->razorpay->getImage();
 
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_id',
-        'value' => 'live_key_456',
-        'channel_code' => 'default',
+    expect($image)->toContain('razorpay/custom-logo.png');
+});
+
+it('should return the default payment method image when not configured', function () {
+    $image = $this->razorpay->getImage();
+
+    expect($image)->toContain('razorpay')
+        ->and($image)->toContain('.png');
+});
+
+it('should return the merchant name from configuration', function () {
+    $this->setConfig('sales.payment_methods.razorpay.merchant_name', 'Test Merchant');
+
+    $merchantName = $this->razorpay->getMerchantName();
+
+    expect($merchantName)->toBe('Test Merchant');
+});
+
+it('should return the merchant description from configuration', function () {
+    $this->setConfig('sales.payment_methods.razorpay.merchant_desc', 'Test Description');
+
+    $merchantDescription = $this->razorpay->getMerchantDescription();
+
+    expect($merchantDescription)->toBe('Test Description');
+});
+
+// ============================================================================
+// Credentials
+// ============================================================================
+
+it('should return the test client ID when sandbox mode is enabled', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '1',
+        'sales.payment_methods.razorpay.test_client_id' => 'test_key_123',
+        'sales.payment_methods.razorpay.client_id' => 'live_key_456',
     ]);
 
     $clientId = $this->razorpay->getApiKey();
@@ -63,23 +79,11 @@ it('returns the client ID based on sandbox mode', function () {
     expect($clientId)->toBe('test_key_123');
 });
 
-it('returns the live client ID when sandbox mode is disabled', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '0',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => 'test_key_123',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_id',
-        'value' => 'live_key_456',
-        'channel_code' => 'default',
+it('should return the live client ID when sandbox mode is disabled', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '0',
+        'sales.payment_methods.razorpay.test_client_id' => 'test_key_123',
+        'sales.payment_methods.razorpay.client_id' => 'live_key_456',
     ]);
 
     $clientId = $this->razorpay->getApiKey();
@@ -87,23 +91,11 @@ it('returns the live client ID when sandbox mode is disabled', function () {
     expect($clientId)->toBe('live_key_456');
 });
 
-it('returns the client secret based on sandbox mode', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_secret',
-        'value' => 'test_secret_123',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_secret',
-        'value' => 'live_secret_456',
-        'channel_code' => 'default',
+it('should return the test client secret when sandbox mode is enabled', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '1',
+        'sales.payment_methods.razorpay.test_client_secret' => 'test_secret_123',
+        'sales.payment_methods.razorpay.client_secret' => 'live_secret_456',
     ]);
 
     $clientSecret = $this->razorpay->getApiSecret();
@@ -111,23 +103,11 @@ it('returns the client secret based on sandbox mode', function () {
     expect($clientSecret)->toBe('test_secret_123');
 });
 
-it('returns the live client secret when sandbox mode is disabled', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '0',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_secret',
-        'value' => 'test_secret_123',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_secret',
-        'value' => 'live_secret_456',
-        'channel_code' => 'default',
+it('should return the live client secret when sandbox mode is disabled', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '0',
+        'sales.payment_methods.razorpay.test_client_secret' => 'test_secret_123',
+        'sales.payment_methods.razorpay.client_secret' => 'live_secret_456',
     ]);
 
     $clientSecret = $this->razorpay->getApiSecret();
@@ -135,23 +115,11 @@ it('returns the live client secret when sandbox mode is disabled', function () {
     expect($clientSecret)->toBe('live_secret_456');
 });
 
-it('checks if credentials are valid in sandbox mode', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => 'test_key_123',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_secret',
-        'value' => 'test_secret_123',
-        'channel_code' => 'default',
+it('should report the credentials valid in sandbox mode', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '1',
+        'sales.payment_methods.razorpay.test_client_id' => 'test_key_123',
+        'sales.payment_methods.razorpay.test_client_secret' => 'test_secret_123',
     ]);
 
     $hasValidCredentials = $this->razorpay->hasValidCredentials();
@@ -159,23 +127,11 @@ it('checks if credentials are valid in sandbox mode', function () {
     expect($hasValidCredentials)->toBeTrue();
 });
 
-it('checks if credentials are valid in production mode', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '0',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_id',
-        'value' => 'live_key_456',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_secret',
-        'value' => 'live_secret_456',
-        'channel_code' => 'default',
+it('should report the credentials valid in production mode', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '0',
+        'sales.payment_methods.razorpay.client_id' => 'live_key_456',
+        'sales.payment_methods.razorpay.client_secret' => 'live_secret_456',
     ]);
 
     $hasValidCredentials = $this->razorpay->hasValidCredentials();
@@ -183,23 +139,11 @@ it('checks if credentials are valid in production mode', function () {
     expect($hasValidCredentials)->toBeTrue();
 });
 
-it('returns false if sandbox credentials are missing', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => '',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_secret',
-        'value' => 'test_secret_123',
-        'channel_code' => 'default',
+it('should report the credentials invalid when the sandbox credentials are missing', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '1',
+        'sales.payment_methods.razorpay.test_client_id' => '',
+        'sales.payment_methods.razorpay.test_client_secret' => 'test_secret_123',
     ]);
 
     $hasValidCredentials = $this->razorpay->hasValidCredentials();
@@ -207,23 +151,11 @@ it('returns false if sandbox credentials are missing', function () {
     expect($hasValidCredentials)->toBeFalse();
 });
 
-it('returns false if production credentials are missing', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '0',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_id',
-        'value' => 'live_key_456',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.client_secret',
-        'value' => '',
-        'channel_code' => 'default',
+it('should report the credentials invalid when the production credentials are missing', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.sandbox' => '0',
+        'sales.payment_methods.razorpay.client_id' => 'live_key_456',
+        'sales.payment_methods.razorpay.client_secret' => '',
     ]);
 
     $hasValidCredentials = $this->razorpay->hasValidCredentials();
@@ -231,23 +163,11 @@ it('returns false if production credentials are missing', function () {
     expect($hasValidCredentials)->toBeFalse();
 });
 
-it('is not available when credentials are invalid', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.active',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => '',
-        'channel_code' => 'default',
+it('should not be available when the credentials are invalid', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.active' => '1',
+        'sales.payment_methods.razorpay.sandbox' => '1',
+        'sales.payment_methods.razorpay.test_client_id' => '',
     ]);
 
     $isAvailable = $this->razorpay->isAvailable();
@@ -255,26 +175,11 @@ it('is not available when credentials are invalid', function () {
     expect($isAvailable)->toBeFalse();
 });
 
-it('returns payment method image from config', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.image',
-        'value' => 'razorpay/custom-logo.png',
-        'channel_code' => 'default',
-    ]);
+// ============================================================================
+// Currencies
+// ============================================================================
 
-    $image = $this->razorpay->getImage();
-
-    expect($image)->toContain('razorpay/custom-logo.png');
-});
-
-it('returns default payment method image when not configured', function () {
-    $image = $this->razorpay->getImage();
-
-    expect($image)->toContain('razorpay')
-        ->and($image)->toContain('.png');
-});
-
-it('checks if currency is supported', function () {
+it('should support INR and not USD', function () {
     $isINRSupported = $this->razorpay->isCurrencySupported('INR');
 
     $isUSDSupported = $this->razorpay->isCurrencySupported('USD');
@@ -283,33 +188,9 @@ it('checks if currency is supported', function () {
         ->and($isUSDSupported)->toBeFalse();
 });
 
-it('returns supported currencies list', function () {
+it('should return the list of supported currencies', function () {
     $currencies = $this->razorpay->getSupportedCurrencies();
 
     expect($currencies)->toBeArray()
         ->and($currencies)->toContain('INR');
-});
-
-it('returns merchant name from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.merchant_name',
-        'value' => 'Test Merchant',
-        'channel_code' => 'default',
-    ]);
-
-    $merchantName = $this->razorpay->getMerchantName();
-
-    expect($merchantName)->toBe('Test Merchant');
-});
-
-it('returns merchant description from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.merchant_desc',
-        'value' => 'Test Description',
-        'channel_code' => 'default',
-    ]);
-
-    $merchantDescription = $this->razorpay->getMerchantDescription();
-
-    expect($merchantDescription)->toBe('Test Description');
 });

@@ -3,17 +3,8 @@
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Core\Models\Locale;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\FPC\Listeners\Product as ProductListener;
 use Webkul\Product\Models\Product;
-
-/**
- * A simple product, built the way the rest of the suite builds one.
- */
-function simpleProduct(): Product
-{
-    return (new ProductFaker)->getSimpleProductFactory()->create();
-}
 
 /**
  * Put the product in a category carrying the given slug, and return that category.
@@ -40,8 +31,12 @@ beforeEach(function () {
     $this->listener = app(ProductListener::class);
 });
 
-it('drops the product page and the home page when a product is created', function () {
-    $product = simpleProduct();
+// ============================================================================
+// Created And Updated Products
+// ============================================================================
+
+it('should drop the product page and the home page when a product is created', function () {
+    $product = $this->createSimpleProduct();
 
     $home = $this->cachePage('/');
 
@@ -54,8 +49,8 @@ it('drops the product page and the home page when a product is created', functio
     $this->assertPageNotCached($home, 'A new product is drawn in the home page carousels.');
 });
 
-it('drops the listing pages a product appears on when it is updated', function () {
-    $product = simpleProduct();
+it('should drop the listing pages a product appears on when it is updated', function () {
+    $product = $this->createSimpleProduct();
 
     categorise($product, 'summer-sale');
 
@@ -66,8 +61,12 @@ it('drops the listing pages a product appears on when it is updated', function (
     $this->assertPageNotCached($listing, 'The category listing kept the price and image the product had before.');
 });
 
-it('drops the product pages before the product is deleted', function () {
-    $product = simpleProduct();
+// ============================================================================
+// Deleted Products
+// ============================================================================
+
+it('should drop the product pages before the product is deleted', function () {
+    $product = $this->createSimpleProduct();
 
     $home = $this->cachePage('/');
 
@@ -80,7 +79,7 @@ it('drops the product pages before the product is deleted', function () {
     $this->assertPageNotCached($home);
 });
 
-it('does nothing when the product being deleted is already gone', function () {
+it('should do nothing when the product being deleted is already gone', function () {
     $home = $this->cachePage('/');
 
     $this->listener->beforeDelete(0);
@@ -88,16 +87,18 @@ it('does nothing when the product being deleted is already gone', function () {
     $this->assertPageCached($home);
 });
 
-it('lists the home page and every listing the product is on as forgettable', function () {
-    $product = simpleProduct();
+// ============================================================================
+// Forgettable Urls
+// ============================================================================
+
+it('should list the home page and every listing the product is on as forgettable', function () {
+    $product = $this->createSimpleProduct();
 
     categorise($product, 'summer-sale');
 
     $urls = $this->listener->getForgettableUrls($product->refresh());
 
-    expect($urls)->toContain('/');
-
-    expect($urls)->toContain('/'.$product->url_key);
-
-    expect($urls)->toContain('/summer-sale');
+    expect($urls)->toContain('/')
+        ->toContain('/'.$product->url_key)
+        ->toContain('/summer-sale');
 });

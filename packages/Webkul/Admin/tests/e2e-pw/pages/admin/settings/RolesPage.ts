@@ -82,7 +82,9 @@ export class RolesPage extends DatagridPage {
 
     async createRole(data: RoleData): Promise<void> {
         await this.openCreateForm();
-        await this.permissionTypeSelect.selectOption(data.permissionType ?? "all");
+        await this.permissionTypeSelect.selectOption(
+            data.permissionType ?? "all",
+        );
         await this.nameInput.fill(data.name);
         await this.descriptionInput.fill(data.description);
 
@@ -129,7 +131,10 @@ export class RolesPage extends DatagridPage {
         await this.deleteRowsIfPresent(names, "Roles is deleted successfully");
     }
 
-    async expectRoleListed(name: string, permissionType: string): Promise<void> {
+    async expectRoleListed(
+        name: string,
+        permissionType: string,
+    ): Promise<void> {
         await this.expectSearchedRowCount(name, 1);
 
         await expect(this.row(name)).toContainText(permissionType);
@@ -156,13 +161,13 @@ export class RolesPage extends DatagridPage {
     }
 
     async expectCreateFormGrantsOnly(
-        permission: string,
+        offered: string,
         withheld: string,
     ): Promise<void> {
         await this.openCreateForm();
 
-        await expect(this.allPermissionTypeOption).toHaveCount(0);
-        await expect(this.permissionInput(permission)).toBeAttached();
+        await expect(this.permissionInput(offered)).toBeAttached();
         await expect(this.permissionInput(withheld)).toHaveCount(0);
+        await expect(this.allPermissionTypeOption).toHaveCount(0);
     }
 }

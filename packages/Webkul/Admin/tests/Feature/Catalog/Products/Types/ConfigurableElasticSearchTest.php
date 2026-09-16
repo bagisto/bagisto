@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use Webkul\Core\Helpers\CacheGeneration;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\CoreConfigRepository;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Enums\SearchEngineEnum;
 use Webkul\Product\Jobs\Search\DeleteProducts as DeleteSearchIndexJob;
 use Webkul\Product\Jobs\Search\IndexProducts as IndexSearchJob;
@@ -16,17 +14,10 @@ use Webkul\Product\Services\Search\SearchEngineManager;
  */
 function useElasticSearchEngine(): void
 {
-    $settings = [
+    test()->setConfig([
         SearchEngineManager::ENABLED_KEY => '1',
         SearchEngineManager::ENGINE_KEY => SearchEngineEnum::ELASTIC->value,
-    ];
-
-    foreach ($settings as $code => $value) {
-        CoreConfig::query()->updateOrCreate(
-            ['code' => $code, 'channel_code' => null, 'locale_code' => null],
-            ['value' => $value]
-        );
-    }
+    ]);
 
     CacheGeneration::bump(CoreConfigRepository::class);
 }
@@ -41,8 +32,12 @@ function searchJobProductIds($job): array
     })->call($job);
 }
 
-it('reindexes the configurable parent instead of deleting it from the search index when a variant is deleted', function () {
-    $configurable = (new ProductFaker)->getConfigurableProductFactory()->create();
+// ============================================================================
+// Deleting A Variant
+// ============================================================================
+
+it('should reindex the configurable parent instead of deleting it from the search index when a variant is deleted', function () {
+    $configurable = $this->createConfigurableProduct();
 
     $variant = $configurable->variants->first();
 
@@ -63,8 +58,8 @@ it('reindexes the configurable parent instead of deleting it from the search ind
     );
 });
 
-it('does not include a surviving parent in the search index delete job when a variant is deleted', function () {
-    $configurable = (new ProductFaker)->getConfigurableProductFactory()->create();
+it('should not include a surviving parent in the search index delete job when a variant is deleted', function () {
+    $configurable = $this->createConfigurableProduct();
 
     $variant = $configurable->variants->first();
 
@@ -80,8 +75,12 @@ it('does not include a surviving parent in the search index delete job when a va
     );
 });
 
-it('deletes the parent and every variant from the search index when the configurable itself is deleted', function () {
-    $configurable = (new ProductFaker)->getConfigurableProductFactory()->create();
+// ============================================================================
+// Deleting The Configurable
+// ============================================================================
+
+it('should delete the parent and every variant from the search index when the configurable itself is deleted', function () {
+    $configurable = $this->createConfigurableProduct();
 
     $variantIds = $configurable->variants->pluck('id')->toArray();
 

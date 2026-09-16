@@ -31,7 +31,11 @@ beforeEach(function () {
         ->byDefault();
 });
 
-it('returns true when captcha is active', function () {
+// ============================================================================
+// Configuration
+// ============================================================================
+
+it('should return true when captcha is active', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(true);
@@ -42,7 +46,7 @@ it('returns true when captcha is active', function () {
     expect($isActive)->toBeTrue();
 });
 
-it('returns false when captcha is inactive', function () {
+it('should return false when captcha is inactive', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(false);
@@ -53,7 +57,7 @@ it('returns false when captcha is inactive', function () {
     expect($isActive)->toBeFalse();
 });
 
-it('returns project id from configuration', function () {
+it('should return the project id from configuration', function () {
     $expectedProjectId = 'test-project-123';
 
     Core::shouldReceive('getConfigData')
@@ -66,7 +70,7 @@ it('returns project id from configuration', function () {
     expect($projectId)->toBe($expectedProjectId);
 });
 
-it('returns api key from configuration', function () {
+it('should return the api key from configuration', function () {
     $expectedApiKey = 'test-api-key-123';
 
     Core::shouldReceive('getConfigData')
@@ -79,7 +83,7 @@ it('returns api key from configuration', function () {
     expect($apiKey)->toBe($expectedApiKey);
 });
 
-it('returns site key from configuration', function () {
+it('should return the site key from configuration', function () {
     $expectedSiteKey = 'test-site-key-123';
 
     Core::shouldReceive('getConfigData')
@@ -92,7 +96,7 @@ it('returns site key from configuration', function () {
     expect($siteKey)->toBe($expectedSiteKey);
 });
 
-it('returns score threshold from configuration', function () {
+it('should return the score threshold from configuration', function () {
     $expectedThreshold = 0.7;
 
     Core::shouldReceive('getConfigData')
@@ -105,7 +109,7 @@ it('returns score threshold from configuration', function () {
     expect($threshold)->toBe($expectedThreshold);
 });
 
-it('returns default score threshold when not configured', function () {
+it('should return the default score threshold when none is configured', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.score_threshold')
         ->andReturn(null);
@@ -116,7 +120,7 @@ it('returns default score threshold when not configured', function () {
     expect($threshold)->toBe(0.0);
 });
 
-it('returns the client endpoint', function () {
+it('should return the client endpoint', function () {
     $expected = 'https://www.google.com/recaptcha/enterprise.js';
 
     $captcha = new Captcha;
@@ -125,7 +129,7 @@ it('returns the client endpoint', function () {
     expect($endpoint)->toBe($expected);
 });
 
-it('returns the site verify endpoint with project id', function () {
+it('should return the site verify endpoint for the project id', function () {
     $projectId = 'test-project-123';
 
     Core::shouldReceive('getConfigData')
@@ -138,7 +142,11 @@ it('returns the site verify endpoint with project id', function () {
     expect($endpoint)->toBe("https://recaptchaenterprise.googleapis.com/v1/projects/{$projectId}/assessments");
 });
 
-it('renders empty string when captcha is inactive', function () {
+// ============================================================================
+// Rendering
+// ============================================================================
+
+it('should render an empty string when captcha is inactive', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(false);
@@ -149,7 +157,7 @@ it('renders empty string when captcha is inactive', function () {
     expect($rendered)->toBe('');
 });
 
-it('renders captcha view when captcha is active', function () {
+it('should render the captcha view when captcha is active', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(true);
@@ -157,11 +165,11 @@ it('renders captcha view when captcha is active', function () {
     $captcha = new Captcha;
     $rendered = $captcha->render();
 
-    expect($rendered)->toBeString();
-    expect($rendered)->not->toBe('');
+    expect($rendered)->toBeString()
+        ->not->toBe('');
 });
 
-it('renders empty string for js when captcha is inactive', function () {
+it('should render an empty string for the script when captcha is inactive', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(false);
@@ -172,7 +180,7 @@ it('renders empty string for js when captcha is inactive', function () {
     expect($rendered)->toBe('');
 });
 
-it('renders js script when captcha is active', function () {
+it('should render the script when captcha is active', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(true);
@@ -180,25 +188,29 @@ it('renders js script when captcha is active', function () {
     $captcha = new Captcha;
     $rendered = $captcha->renderJS();
 
-    expect($rendered)->toBeString();
-    expect($rendered)->not->toBe('');
+    expect($rendered)->toBeString()
+        ->not->toBe('');
 });
 
-it('returns false when validating empty response', function () {
+// ============================================================================
+// Response Validation
+// ============================================================================
+
+it('should return false when validating an empty response', function () {
     $captcha = new Captcha;
     $result = $captcha->validateResponse('');
 
     expect($result)->toBeFalse();
 });
 
-it('returns false when validating null response', function () {
+it('should return false when validating a null response', function () {
     $captcha = new Captcha;
     $result = $captcha->validateResponse(null);
 
     expect($result)->toBeFalse();
 });
 
-it('returns false when api key is not configured', function () {
+it('should return false when the api key is not configured', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.api_key')
         ->andReturn(null);
@@ -209,7 +221,7 @@ it('returns false when api key is not configured', function () {
     expect($result)->toBeFalse();
 });
 
-it('returns false when project id is not configured', function () {
+it('should return false when the project id is not configured', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.project_id')
         ->andReturn(null);
@@ -220,7 +232,7 @@ it('returns false when project id is not configured', function () {
     expect($result)->toBeFalse();
 });
 
-it('returns false when site key is not configured', function () {
+it('should return false when the site key is not configured', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.site_key')
         ->andReturn(null);
@@ -231,7 +243,7 @@ it('returns false when site key is not configured', function () {
     expect($result)->toBeFalse();
 });
 
-it('returns true when validation succeeds with score above threshold', function () {
+it('should return true when validation succeeds with a score above the threshold', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
@@ -245,7 +257,7 @@ it('returns true when validation succeeds with score above threshold', function 
     expect($result)->toBeTrue();
 });
 
-it('returns false when validation fails with score below threshold', function () {
+it('should return false when validation fails with a score below the threshold', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
@@ -259,7 +271,21 @@ it('returns false when validation fails with score below threshold', function ()
     expect($result)->toBeFalse();
 });
 
-it('returns false when token is invalid', function () {
+it('should validate a score exactly at the threshold', function () {
+    Http::fake([
+        '*' => Http::response([
+            'tokenProperties' => ['valid' => true],
+            'riskAnalysis' => ['score' => 0.5],
+        ], 200),
+    ]);
+
+    $captcha = new Captcha;
+    $result = $captcha->validateResponse('test-token');
+
+    expect($result)->toBeTrue();
+});
+
+it('should return false when the token is invalid', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => false],
@@ -273,7 +299,7 @@ it('returns false when token is invalid', function () {
     expect($result)->toBeFalse();
 });
 
-it('returns false when api request fails', function () {
+it('should return false when the api request fails', function () {
     Http::fake([
         '*' => Http::response([], 500),
     ]);
@@ -284,7 +310,7 @@ it('returns false when api request fails', function () {
     expect($result)->toBeFalse();
 });
 
-it('returns false when response structure is invalid', function () {
+it('should return false when the response structure is invalid', function () {
     Http::fake([
         '*' => Http::response([
             'invalid' => 'response',
@@ -297,7 +323,7 @@ it('returns false when response structure is invalid', function () {
     expect($result)->toBeFalse();
 });
 
-it('returns false when exception occurs during validation', function () {
+it('should return false when an exception occurs during validation', function () {
     Http::fake(function () {
         throw new Exception('API Error');
     });
@@ -308,74 +334,7 @@ it('returns false when exception occurs during validation', function () {
     expect($result)->toBeFalse();
 });
 
-it('adds captcha validation rule when active', function () {
-    Core::shouldReceive('getConfigData')
-        ->with('customer.captcha.credentials.status')
-        ->andReturn(true);
-
-    $existingRules = [
-        'email' => 'required|email',
-    ];
-
-    $captcha = new Captcha;
-    $rules = $captcha->getValidations($existingRules);
-
-    expect($rules)->toHaveKey('recaptcha_token');
-    expect($rules['recaptcha_token'])->toBe('required|captcha');
-    expect($rules['email'])->toBe('required|email');
-});
-
-it('does not add captcha validation rule when inactive', function () {
-    Core::shouldReceive('getConfigData')
-        ->with('customer.captcha.credentials.status')
-        ->andReturn(false);
-
-    $existingRules = [
-        'email' => 'required|email',
-    ];
-
-    $captcha = new Captcha;
-    $rules = $captcha->getValidations($existingRules);
-
-    expect($rules)->not->toHaveKey('recaptcha_token');
-    expect($rules['email'])->toBe('required|email');
-});
-
-it('adds captcha validation messages when active', function () {
-    Core::shouldReceive('getConfigData')
-        ->with('customer.captcha.credentials.status')
-        ->andReturn(true);
-
-    $existingMessages = [
-        'email.required' => 'Email is required',
-    ];
-
-    $captcha = new Captcha;
-    $messages = $captcha->getValidationMessages($existingMessages);
-
-    expect($messages)->toHaveKey('recaptcha_token.required');
-    expect($messages)->toHaveKey('recaptcha_token.captcha');
-    expect($messages['email.required'])->toBe('Email is required');
-});
-
-it('does not add captcha validation messages when inactive', function () {
-    Core::shouldReceive('getConfigData')
-        ->with('customer.captcha.credentials.status')
-        ->andReturn(false);
-
-    $existingMessages = [
-        'email.required' => 'Email is required',
-    ];
-
-    $captcha = new Captcha;
-    $messages = $captcha->getValidationMessages($existingMessages);
-
-    expect($messages)->not->toHaveKey('recaptcha_token.required');
-    expect($messages)->not->toHaveKey('recaptcha_token.captcha');
-    expect($messages['email.required'])->toBe('Email is required');
-});
-
-it('sends correct payload to google api', function () {
+it('should send the correct payload to the google api', function () {
     Http::fake([
         '*' => Http::response([
             'tokenProperties' => ['valid' => true],
@@ -400,21 +359,78 @@ it('sends correct payload to google api', function () {
     });
 });
 
-it('validates with exact threshold score', function () {
-    Http::fake([
-        '*' => Http::response([
-            'tokenProperties' => ['valid' => true],
-            'riskAnalysis' => ['score' => 0.5],
-        ], 200),
-    ]);
+// ============================================================================
+// Form Validation
+// ============================================================================
+
+it('should add the captcha validation rule when active', function () {
+    Core::shouldReceive('getConfigData')
+        ->with('customer.captcha.credentials.status')
+        ->andReturn(true);
+
+    $existingRules = [
+        'email' => 'required|email',
+    ];
 
     $captcha = new Captcha;
-    $result = $captcha->validateResponse('test-token');
+    $rules = $captcha->getValidations($existingRules);
 
-    expect($result)->toBeTrue();
+    expect($rules)->toHaveKey('recaptcha_token')
+        ->and($rules['recaptcha_token'])->toBe('required|captcha')
+        ->and($rules['email'])->toBe('required|email');
 });
 
-it('returns empty array for validations when captcha is inactive', function () {
+it('should not add the captcha validation rule when inactive', function () {
+    Core::shouldReceive('getConfigData')
+        ->with('customer.captcha.credentials.status')
+        ->andReturn(false);
+
+    $existingRules = [
+        'email' => 'required|email',
+    ];
+
+    $captcha = new Captcha;
+    $rules = $captcha->getValidations($existingRules);
+
+    expect($rules)->not->toHaveKey('recaptcha_token')
+        ->and($rules['email'])->toBe('required|email');
+});
+
+it('should add the captcha validation messages when active', function () {
+    Core::shouldReceive('getConfigData')
+        ->with('customer.captcha.credentials.status')
+        ->andReturn(true);
+
+    $existingMessages = [
+        'email.required' => 'Email is required',
+    ];
+
+    $captcha = new Captcha;
+    $messages = $captcha->getValidationMessages($existingMessages);
+
+    expect($messages)->toHaveKey('recaptcha_token.required')
+        ->toHaveKey('recaptcha_token.captcha')
+        ->and($messages['email.required'])->toBe('Email is required');
+});
+
+it('should not add the captcha validation messages when inactive', function () {
+    Core::shouldReceive('getConfigData')
+        ->with('customer.captcha.credentials.status')
+        ->andReturn(false);
+
+    $existingMessages = [
+        'email.required' => 'Email is required',
+    ];
+
+    $captcha = new Captcha;
+    $messages = $captcha->getValidationMessages($existingMessages);
+
+    expect($messages)->not->toHaveKey('recaptcha_token.required')
+        ->not->toHaveKey('recaptcha_token.captcha')
+        ->and($messages['email.required'])->toBe('Email is required');
+});
+
+it('should return no validation rules when captcha is inactive', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(false);
@@ -425,7 +441,7 @@ it('returns empty array for validations when captcha is inactive', function () {
     expect($rules)->toBe([]);
 });
 
-it('returns empty array for validation messages when captcha is inactive', function () {
+it('should return no validation messages when captcha is inactive', function () {
     Core::shouldReceive('getConfigData')
         ->with('customer.captcha.credentials.status')
         ->andReturn(false);

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FilesystemAdapter;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Core\Models\Channel;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\ImageCache\Templates\Large;
 use Webkul\ImageCache\Templates\Medium;
 use Webkul\ImageCache\Templates\Small;
@@ -36,15 +35,15 @@ function channelRunningSwatchTemplates(string $code, ?array $templates, array $s
 /**
  * The swatch option the configurable product config hands the storefront on a channel.
  */
-function swatchOptionOn(Channel $channel, $test): array
+function swatchOptionOn(Channel $channel): array
 {
     core()->setCurrentChannel($channel);
 
-    $attributes = app(ConfigurableOption::class)->getAttributesData($test->product, [
-        $test->attribute->id => [$test->option->id => [$test->product->id]],
+    $attributes = app(ConfigurableOption::class)->getAttributesData(test()->product, [
+        test()->attribute->id => [test()->option->id => [test()->product->id]],
     ]);
 
-    return collect($attributes)->firstWhere('id', $test->attribute->id)['options'][0];
+    return collect($attributes)->firstWhere('id', test()->attribute->id)['options'][0];
 }
 
 beforeEach(function () {
@@ -69,7 +68,7 @@ beforeEach(function () {
         'swatch_value' => $this->path,
     ]);
 
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $this->product = $this->createSimpleProduct();
 
     $this->product->super_attributes()->attach($this->attribute->id);
 });
@@ -77,6 +76,10 @@ beforeEach(function () {
 afterEach(function () {
     Storage::delete($this->path);
 });
+
+// ============================================================================
+// Swatch Value Url
+// ============================================================================
 
 it('should give the swatch value url of the model as the url of the stored file', function () {
     expect($this->option->fresh()->swatch_value_url)->toBe(Storage::url($this->path));
@@ -89,8 +92,12 @@ it('should keep a theme template out of the swatch value url of the model', func
         ->and($this->option->fresh()->swatch_value_url)->not->toContain('cache/');
 });
 
+// ============================================================================
+// Swatch Images
+// ============================================================================
+
 it('should give an image swatch the core sizes and the original when the theme lists nothing', function () {
-    $option = swatchOptionOn(channelRunningSwatchTemplates('plain', null), $this);
+    $option = swatchOptionOn(channelRunningSwatchTemplates('plain', null));
 
     expect($option['swatch_value'])->toBe(url('cache/small/'.$this->path))
         ->and($option['swatch_image'])->toBe([
@@ -107,8 +114,8 @@ it('should give an image swatch a url for a template the theme lists for swatch 
 
     $plain = channelRunningSwatchTemplates('plain', ['swatch_card' => SquareProductCard::class]);
 
-    expect(swatchOptionOn($swatch, $this)['swatch_image']['swatch_card_image_url'])->toBe(url('cache/swatch_card/'.$this->path))
-        ->and(swatchOptionOn($plain, $this)['swatch_image'])->not->toHaveKey('swatch_card_image_url');
+    expect(swatchOptionOn($swatch)['swatch_image']['swatch_card_image_url'])->toBe(url('cache/swatch_card/'.$this->path))
+        ->and(swatchOptionOn($plain)['swatch_image'])->not->toHaveKey('swatch_card_image_url');
 });
 
 it('should give an image swatch as its stored file when the attributes are asked for without image urls', function () {
@@ -129,7 +136,7 @@ it('should give a color swatch no swatch image', function () {
 
     $this->option->update(['swatch_value' => '#33aa66']);
 
-    $option = swatchOptionOn(core()->getDefaultChannel(), $this);
+    $option = swatchOptionOn(core()->getDefaultChannel());
 
     expect($option['swatch_image'])->toBeNull()
         ->and($option['swatch_value'])->toBe('#33aa66');
@@ -142,7 +149,7 @@ it('should size an image swatch through the image cache on a disk that is not lo
 
     Storage::shouldReceive('delete');
 
-    $option = swatchOptionOn(core()->getDefaultChannel(), $this);
+    $option = swatchOptionOn(core()->getDefaultChannel());
 
     expect($option['swatch_value'])->toBe(url('cache/small/'.$this->path))
         ->and($option['swatch_image']['large_image_url'])->toBe(url('cache/large/'.$this->path));

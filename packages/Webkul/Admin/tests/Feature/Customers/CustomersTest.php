@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\Customer\NewCustomerNotification;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Sales\Models\Order;
 use Webkul\Shop\Mail\Customer\NoteNotification;
@@ -98,10 +97,7 @@ it('should create a new customer', function () {
 it('should create a customer and send notification email', function () {
     Mail::fake();
 
-    CoreConfig::factory()->create([
-        'code' => 'emails.general.notifications.emails.general.notifications.customer_account_credentials',
-        'value' => 1,
-    ]);
+    $this->setConfig('emails.general.notifications.emails.general.notifications.customer_account_credentials', 1);
 
     $this->loginAsAdmin();
 

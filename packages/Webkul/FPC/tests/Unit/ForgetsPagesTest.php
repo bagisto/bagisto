@@ -35,21 +35,28 @@ beforeEach(function () {
     };
 });
 
-it('names the home page as the path every listing change has to drop', function () {
+// ============================================================================
+// Paths And Scopes
+// ============================================================================
+
+it('should name the home page as the path every listing change has to drop', function () {
     expect($this->forgetter->home())->toBe('/');
 });
 
-it('builds a cache scope for every locale and currency combination of a channel', function () {
+it('should build a cache scope for every locale and currency combination of a channel', function () {
     $secondScope = $this->addSecondScope();
 
     $scopes = $this->forgetter->scopes(core()->getCurrentChannel()->fresh());
 
-    expect($scopes)->toContain($this->currentScope());
-
-    expect($scopes)->toContain($secondScope);
+    expect($scopes)->toContain($this->currentScope())
+        ->toContain($secondScope);
 });
 
-it('forgets a path in every scope, not only the one the admin is browsing', function () {
+// ============================================================================
+// Forgetting Pages
+// ============================================================================
+
+it('should forget a path in every scope, not only the one the admin is browsing', function () {
     $secondScope = $this->addSecondScope();
 
     $browsed = $this->cachePage('/summer-sale');
@@ -63,7 +70,7 @@ it('forgets a path in every scope, not only the one the admin is browsing', func
     $this->assertPageNotCached($other, 'A page cached under a second locale or currency survived.');
 });
 
-it('forgets a path on the host of a channel served on its own domain', function () {
+it('should forget a path on the host of a channel served on its own domain', function () {
     $otherHostScope = $this->addChannelOnHost('shop-two.test');
 
     $onOtherHost = $this->cachePage('/summer-sale', $otherHostScope, 'shop-two.test');
@@ -77,7 +84,7 @@ it('forgets a path on the host of a channel served on its own domain', function 
     $this->assertPageNotCached($onThisHost);
 });
 
-it('leaves pages under other paths alone', function () {
+it('should leave pages under other paths alone', function () {
     $target = $this->cachePage('/summer-sale');
 
     $bystander = $this->cachePage('/winter-sale');
@@ -89,7 +96,7 @@ it('leaves pages under other paths alone', function () {
     $this->assertPageCached($bystander);
 });
 
-it('drops empty entries and still forgets the real ones', function () {
+it('should drop empty entries and still forget the real ones', function () {
     $target = $this->cachePage('/summer-sale');
 
     $this->forgetter->forget(['/summer-sale', null, '', '/summer-sale']);
@@ -97,7 +104,7 @@ it('drops empty entries and still forgets the real ones', function () {
     $this->assertPageNotCached($target);
 });
 
-it('touches nothing when there is no path to forget', function () {
+it('should touch nothing when there is no path to forget', function () {
     $bystander = $this->cachePage('/summer-sale');
 
     $this->forgetter->forget([]);

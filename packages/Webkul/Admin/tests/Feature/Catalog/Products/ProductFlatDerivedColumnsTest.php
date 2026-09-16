@@ -5,7 +5,6 @@ use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Inventory\Models\InventorySource;
 use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
 use Webkul\Product\Models\Product;
@@ -15,14 +14,6 @@ use Webkul\Product\Models\ProductImage;
 use Webkul\Product\Models\ProductInventory;
 
 use function Pest\Laravel\getJson;
-
-/**
- * A simple product with its flat row already built.
- */
-function makeProduct(): Product
-{
-    return (new ProductFaker)->getSimpleProductFactory()->create();
-}
 
 /**
  * Rebuild the whole flat row of a product.
@@ -55,7 +46,7 @@ function flatColumn(Product $product, string $column)
  */
 function addInventory(Product $product, int $qty): void
 {
-    ProductInventory::create([
+    ProductInventory::query()->create([
         'product_id' => $product->id,
         'inventory_source_id' => InventorySource::factory()->create()->id,
         'qty' => $qty,
@@ -68,7 +59,7 @@ function addInventory(Product $product, int $qty): void
  */
 function addImage(Product $product, string $name, int $position): void
 {
-    ProductImage::create([
+    ProductImage::query()->create([
         'product_id' => $product->id,
         'type' => 'images',
         'path' => 'product/'.$product->id.'/'.$name,
@@ -111,8 +102,12 @@ function addCategory(Product $product, string $name): Category
     return $category;
 }
 
+// ============================================================================
+// Quantity
+// ============================================================================
+
 it('should total the quantity across every inventory source', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     $existing = (int) $product->inventories->sum('qty');
 
@@ -126,7 +121,7 @@ it('should total the quantity across every inventory source', function () {
 });
 
 it('should leave the quantity empty for a product that keeps no stock of its own', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     ProductInventory::query()->where('product_id', $product->id)->delete();
 
@@ -136,7 +131,7 @@ it('should leave the quantity empty for a product that keeps no stock of its own
 });
 
 it('should follow a change in stock', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     ProductInventory::query()->where('product_id', $product->id)->delete();
 
@@ -153,8 +148,12 @@ it('should follow a change in stock', function () {
     expect((int) flatColumn($product, 'quantity'))->toBe(9);
 });
 
+// ============================================================================
+// Images
+// ============================================================================
+
 it('should count the images of a product', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     addImage($product, 'one.webp', 1);
 
@@ -166,7 +165,7 @@ it('should count the images of a product', function () {
 });
 
 it('should count no images for a product without any', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     refreshDerived($product);
 
@@ -174,7 +173,7 @@ it('should count no images for a product without any', function () {
 });
 
 it('should hold the first image by position as the base image', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     addImage($product, 'second.webp', 2);
 
@@ -186,7 +185,7 @@ it('should hold the first image by position as the base image', function () {
 });
 
 it('should leave the base image empty for a product without images', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     refreshDerived($product);
 
@@ -194,7 +193,7 @@ it('should leave the base image empty for a product without images', function ()
 });
 
 it('should follow the image order rather than the order the images were uploaded', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     addImage($product, 'first-uploaded.webp', 1);
 
@@ -210,7 +209,7 @@ it('should follow the image order rather than the order the images were uploaded
 });
 
 it('should agree with the base image the product itself reports', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     addImage($product, 'first-uploaded.webp', 1);
 
@@ -222,7 +221,7 @@ it('should agree with the base image the product itself reports', function () {
 });
 
 it('should show the reordered image in the products listing', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     addImage($product, 'first-uploaded.webp', 1);
 
@@ -240,8 +239,12 @@ it('should show the reordered image in the products listing', function () {
         ->assertJsonPath('records.0.base_image', Storage::url('product/'.$product->id.'/second-uploaded.webp'));
 });
 
+// ============================================================================
+// Attribute Family
+// ============================================================================
+
 it('should hold the name of the attribute family', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     refreshDerived($product);
 
@@ -250,7 +253,7 @@ it('should hold the name of the attribute family', function () {
 });
 
 it('should follow a renamed attribute family', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     AttributeFamily::query()
         ->where('id', $product->attribute_family_id)
@@ -261,8 +264,12 @@ it('should follow a renamed attribute family', function () {
     expect(flatColumn($product, 'attribute_family_name'))->toBe('Renamed Family');
 });
 
+// ============================================================================
+// Categories
+// ============================================================================
+
 it('should list every category a product is filed under', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     addCategory($product, 'Alpha Category');
 
@@ -274,7 +281,7 @@ it('should list every category a product is filed under', function () {
 });
 
 it('should leave the categories empty for an uncategorised product', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     refreshDerived($product);
 
@@ -282,7 +289,7 @@ it('should leave the categories empty for an uncategorised product', function ()
 });
 
 it('should follow a renamed category', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     $category = addCategory($product, 'Before Rename');
 
@@ -300,8 +307,12 @@ it('should follow a renamed category', function () {
     expect(flatColumn($product, 'category_name'))->toBe('After Rename');
 });
 
+// ============================================================================
+// Manage Stock
+// ============================================================================
+
 it('should take the manage stock flag from the attribute default when a product never set it', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     $attribute = Attribute::query()->where('code', 'manage_stock')->first();
 
@@ -316,7 +327,7 @@ it('should take the manage stock flag from the attribute default when a product 
 });
 
 it('should hold the manage stock flag a product turned off', function () {
-    $product = makeProduct();
+    $product = $this->createSimpleProduct();
 
     $attribute = Attribute::query()->where('code', 'manage_stock')->first();
 
@@ -325,7 +336,7 @@ it('should hold the manage stock flag a product turned off', function () {
         'attribute_id' => $attribute->id,
         'channel' => core()->getDefaultChannelCode(),
     ], [
-        'boolean_value' => 0,
+        'boolean_value' => false,
         'unique_id' => core()->getDefaultChannelCode().'|'.$product->id.'|'.$attribute->id,
     ]);
 

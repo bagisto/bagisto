@@ -30,53 +30,65 @@ function configField(string $sectionKey, string $name): ?array
     return null;
 }
 
-it('drives the page cache through the profile that reads the admin settings', function () {
+// ============================================================================
+// Cache Profile
+// ============================================================================
+
+it('should drive the page cache through the profile that reads the admin settings', function () {
     expect(config('responsecache.cache_profile'))->toBe(FullPageCacheProfile::class);
 });
 
-it('offers Full Page Cache under Cache Management, after General', function () {
+// ============================================================================
+// Configuration Section
+// ============================================================================
+
+it('should offer Full Page Cache under Cache Management, after General', function () {
     $section = configSection('cache_management.full_page_cache');
 
     $general = configSection('cache_management.general');
 
-    expect($section)->not->toBeNull();
-
-    expect($section['sort'])->toBeGreaterThan($general['sort']);
+    expect($section)->not->toBeNull()
+        ->and($section['sort'])->toBeGreaterThan($general['sort']);
 });
 
-it('gives the Full Page Cache section an icon of its own', function () {
+it('should give the Full Page Cache section an icon of its own', function () {
     $icon = configSection('cache_management.full_page_cache')['icon'];
 
     $path = base_path('packages/Webkul/Admin/src/Resources/assets/images/'.$icon);
 
-    expect($icon)->not->toBe(configSection('cache_management.general')['icon'] ?? null);
-
-    expect(file_exists($path))->toBeTrue("The configured icon {$icon} does not exist.");
+    expect($icon)->not->toBe(configSection('cache_management.general')['icon'] ?? null)
+        ->and(file_exists($path))->toBeTrue("The configured icon {$icon} does not exist.");
 });
 
-it('turns the page cache on by default so an upgrade does not silently disable it', function () {
+// ============================================================================
+// Configuration Fields
+// ============================================================================
+
+it('should turn the page cache on by default so an upgrade does not silently disable it', function () {
     $field = configField('cache_management.full_page_cache.settings', 'enabled');
 
-    expect($field['type'])->toBe('boolean');
-
-    expect($field['default'])->toBeTrue();
+    expect($field['type'])->toBe('boolean')
+        ->and($field['default'])->toBeTrue();
 });
 
-it('accepts only a positive number of minutes as the cache lifetime', function () {
+it('should accept only a positive number of minutes as the cache lifetime', function () {
     $field = configField('cache_management.full_page_cache.settings', 'lifetime');
 
     expect($field['validation'])->toBe('nullable|numeric|min:1');
 });
 
-it('keeps the settings store wide, not per channel or per locale', function (string $name) {
+it('should keep the settings store wide, not per channel or per locale', function (string $name) {
     $field = configField('cache_management.full_page_cache.settings', $name);
 
-    expect($field['channel_based'])->toBeFalse();
-
-    expect($field['locale_based'])->toBeFalse();
+    expect($field['channel_based'])->toBeFalse()
+        ->and($field['locale_based'])->toBeFalse();
 })->with(['enabled', 'lifetime']);
 
-it('translates every Full Page Cache string in every admin locale', function (string $locale) {
+// ============================================================================
+// Translations
+// ============================================================================
+
+it('should translate every Full Page Cache string in every admin locale', function (string $locale) {
     $keys = [
         'admin::app.configuration.index.cache-management.full-page-cache.title',
         'admin::app.configuration.index.cache-management.full-page-cache.info',

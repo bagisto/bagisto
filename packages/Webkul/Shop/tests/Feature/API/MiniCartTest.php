@@ -5,13 +5,17 @@ use Spatie\ResponseCache\Facades\ResponseCache;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 
-it('returns a null cart without recalculating totals when the cart is empty', function () {
+// ============================================================================
+// Mini Cart
+// ============================================================================
+
+it('should return a null cart without recalculating totals when the cart is empty', function () {
     getJson(route('shop.api.checkout.cart.index'))
         ->assertOk()
         ->assertJsonPath('data', null);
 });
 
-it('seeds the mini-cart with an empty cart on the home page so no cart request is made', function () {
+it('should seed the mini-cart with an empty cart on the home page so no cart request is made', function () {
     config(['responsecache.enabled' => false]);
 
     get(route('shop.home.index'))
@@ -19,7 +23,7 @@ it('seeds the mini-cart with an empty cart on the home page so no cart request i
         ->assertSee('"items_qty":0', false);
 });
 
-it('leaves a marker on a page the cache will store, so one visitor cart never reaches another', function () {
+it('should leave a marker on a page the cache will store, so one visitor cart never reaches another', function () {
     config(['responsecache.enabled' => true]);
 
     ResponseCache::clear();

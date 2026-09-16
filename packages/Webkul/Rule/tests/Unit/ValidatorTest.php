@@ -37,7 +37,7 @@ function condition(string $attribute, string $operator, mixed $value, string $ty
 // Operators
 // ============================================================================
 
-it('compares an attribute value with a condition', function (string $operator, mixed $attributeValue, mixed $conditionValue, bool $expected) {
+it('should compare an attribute value with a condition', function (string $operator, mixed $attributeValue, mixed $conditionValue, bool $expected) {
     $result = (new Validator)->validateAttribute(condition('product|name', $operator, $conditionValue), $attributeValue);
 
     expect((bool) $result)->toBe($expected);
@@ -74,7 +74,7 @@ it('compares an attribute value with a condition', function (string $operator, m
 // Matching Rules
 // ============================================================================
 
-it('holds when every condition matches under match-all', function () {
+it('should hold when every condition matches under match-all', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 150]]);
 
     $rule = ruleWith([
@@ -85,7 +85,7 @@ it('holds when every condition matches under match-all', function () {
     expect((new Validator)->validate($rule, $product))->toBeTrue();
 });
 
-it('fails as soon as one condition misses under match-all', function () {
+it('should fail as soon as one condition misses under match-all', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 150]]);
 
     $rule = ruleWith([
@@ -96,7 +96,7 @@ it('fails as soon as one condition misses under match-all', function () {
     expect((new Validator)->validate($rule, $product))->toBeFalse();
 });
 
-it('holds when any condition matches under match-any', function () {
+it('should hold when any condition matches under match-any', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 150]]);
 
     $rule = ruleWith([
@@ -107,7 +107,7 @@ it('holds when any condition matches under match-any', function () {
     expect((new Validator)->validate($rule, $product))->toBeTrue();
 });
 
-it('fails when no condition matches under match-any', function () {
+it('should fail when no condition matches under match-any', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 150]]);
 
     $rule = ruleWith([
@@ -118,13 +118,13 @@ it('fails when no condition matches under match-any', function () {
     expect((new Validator)->validate($rule, $product))->toBeFalse();
 });
 
-it('holds for a rule without conditions', function () {
+it('should hold for a rule without conditions', function () {
     $product = $this->createSimpleProduct();
 
     expect((new Validator)->validate(ruleWith([]), $product))->toBeTrue();
 });
 
-it('skips a condition that has no value', function () {
+it('should skip a condition that has no value', function () {
     $product = $this->createSimpleProduct(['price' => ['float_value' => 150]]);
 
     $rule = ruleWith([
@@ -134,7 +134,7 @@ it('skips a condition that has no value', function () {
     expect((new Validator)->validate($rule, $product))->toBeTrue();
 });
 
-it('only weighs cart conditions when the entity is a cart', function () {
+it('should only weigh cart conditions when the entity is a cart', function () {
     $cart = Cart::factory()->create(['sub_total' => 500, 'base_sub_total' => 500]);
 
     $rule = ruleWith([
@@ -149,7 +149,7 @@ it('only weighs cart conditions when the entity is a cart', function () {
 // Attribute Values
 // ============================================================================
 
-it('reads the payment method and the shipping carrier of a cart', function () {
+it('should read the payment method and the shipping carrier of a cart', function () {
     $cart = Cart::factory()->create(['shipping_method' => 'flatrate_flatrate']);
 
     CartPayment::factory()->create([
@@ -164,7 +164,7 @@ it('reads the payment method and the shipping carrier of a cart', function () {
         ->and($validator->getAttributeValue(condition('cart|postcode', '==', ''), $cart))->toBeNull();
 });
 
-it('reads the categories of a variant from its configurable product as well', function () {
+it('should read the categories of a variant from its configurable product as well', function () {
     $configurable = $this->createConfigurableProduct([100]);
 
     $category = Category::factory()->has(CategoryTranslation::factory(), 'translations')->create();
@@ -178,7 +178,7 @@ it('reads the categories of a variant from its configurable product as well', fu
     expect($categoryIds)->toContain($category->id);
 });
 
-it('falls back to the configurable product for an attribute the variant leaves empty', function () {
+it('should fall back to the configurable product for an attribute the variant leaves empty', function () {
     $configurable = $this->createConfigurableProduct([100]);
 
     ProductAttributeValue::factory()->create([

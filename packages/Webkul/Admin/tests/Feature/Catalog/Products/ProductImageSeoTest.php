@@ -2,7 +2,6 @@
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductImage;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -15,13 +14,13 @@ use function Pest\Laravel\putJson;
  */
 function makeProductWithStoredImage(): array
 {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = test()->createSimpleProduct();
 
     $path = 'product/'.$product->id.'/hf83ndkq.webp';
 
     Storage::put($path, 'image-contents');
 
-    $image = ProductImage::create([
+    $image = ProductImage::query()->create([
         'product_id' => $product->id,
         'type' => 'images',
         'path' => $path,
@@ -50,6 +49,10 @@ function productUpdatePayload(Product $product, array $images): array
     ];
 }
 
+// ============================================================================
+// Edit Page
+// ============================================================================
+
 it('should render the seo drawer on the product edit page', function () {
     [$product] = makeProductWithStoredImage();
 
@@ -70,6 +73,10 @@ it('should not render the seo drawer where it is not enabled', function () {
         ->assertOk()
         ->assertDontSee('images[meta]');
 });
+
+// ============================================================================
+// Saving Image Meta
+// ============================================================================
 
 it('should save the alt text of an existing image', function () {
     Storage::fake();
@@ -119,7 +126,9 @@ it('should reject an alt text longer than the column allows', function () {
     putJson(route('admin.catalog.products.update', $product->id), productUpdatePayload($product, [
         'files' => [$image->id => ''],
         'meta' => [$image->id => ['alt_text' => str_repeat('a', 256)]],
-    ]))->assertUnprocessable();
+    ]))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor("images.meta.{$image->id}.alt_text");
 });
 
 it('should keep the alt text of each locale apart', function () {
@@ -137,24 +146,29 @@ it('should keep the alt text of each locale apart', function () {
     ];
 
     app()->setLocale('en');
+
     $repository->upload($payload('Blue running shoe'), $product, 'images');
 
     app()->setLocale('fr');
+
     $repository->upload($payload('Chaussure de course bleue'), $product, 'images');
+
+    app()->setLocale('en');
 
     $image = $image->fresh();
 
-    expect($image->translate('en')->alt_text)->toBe('Blue running shoe');
-
-    expect($image->translate('fr')->alt_text)->toBe('Chaussure de course bleue');
-
-    app()->setLocale('en');
+    expect($image->translate('en')->alt_text)->toBe('Blue running shoe')
+        ->and($image->translate('fr')->alt_text)->toBe('Chaussure de course bleue');
 });
+
+// ============================================================================
+// Uploads
+// ============================================================================
 
 it('should name a newly uploaded image after the requested file name', function () {
     Storage::fake();
 
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     app(ProductImageRepository::class)->upload([
         'images' => [
@@ -165,9 +179,8 @@ it('should name a newly uploaded image after the requested file name', function 
 
     $image = $product->fresh()->images->first();
 
-    expect($image->path)->toBe('product/'.$product->id.'/blue-running-shoe.webp');
-
-    expect($image->alt_text)->toBe('Blue running shoe');
+    expect($image->path)->toBe('product/'.$product->id.'/blue-running-shoe.webp')
+        ->and($image->alt_text)->toBe('Blue running shoe');
 
     Storage::assertExists($image->path);
 });
@@ -175,7 +188,7 @@ it('should name a newly uploaded image after the requested file name', function 
 it('should fall back to a random name for an upload without a requested file name', function () {
     Storage::fake();
 
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     app(ProductImageRepository::class)->upload([
         'images' => [
@@ -185,10 +198,13 @@ it('should fall back to a random name for an upload without a requested file nam
 
     $image = $product->fresh()->images->first();
 
-    expect($image->file_name)->toHaveLength(40);
-
-    expect($image->path)->toEndWith('.webp');
+    expect($image->file_name)->toHaveLength(40)
+        ->and($image->path)->toEndWith('.webp');
 });
+
+// ============================================================================
+// Storefront
+// ============================================================================
 
 it('should expose the alt text to the storefront', function () {
     [$product, $image] = makeProductWithStoredImage();

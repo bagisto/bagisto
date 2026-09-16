@@ -3,10 +3,6 @@
 use Illuminate\Support\Facades\Artisan;
 use Webkul\Omnibus\Models\OmnibusPrice;
 
-// ============================================================================
-// Setup
-// ============================================================================
-
 beforeEach(function () {
     $this->setOmnibusEnabled(false);
 
@@ -14,39 +10,39 @@ beforeEach(function () {
 });
 
 // ============================================================================
-// omnibus:snapshot-prices
+// Snapshot Prices Command
 // ============================================================================
 
-it('captures snapshots when Omnibus is enabled', function () {
+it('should capture snapshots when Omnibus is enabled', function () {
     $this->createSimpleProduct();
 
     $this->setOmnibusEnabled(true);
 
     Artisan::call('omnibus:snapshot-prices');
 
-    expect(Artisan::output())->toContain('Captured');
-    expect(OmnibusPrice::count())->toBeGreaterThan(0);
+    expect(Artisan::output())->toContain('Captured')
+        ->and(OmnibusPrice::query()->count())->toBeGreaterThan(0);
 });
 
-it('warns and exits when Omnibus is disabled on every configured channel', function () {
+it('should warn and exit when Omnibus is disabled on every configured channel', function () {
     $this->createSimpleProduct();
 
     Artisan::call('omnibus:snapshot-prices');
 
-    expect(Artisan::output())->toContain(trans('omnibus::app.console.disabled-all-channels'));
-    expect(OmnibusPrice::count())->toBe(0);
+    expect(Artisan::output())->toContain(trans('omnibus::app.console.disabled-all-channels'))
+        ->and(OmnibusPrice::query()->count())->toBe(0);
 });
 
 // ============================================================================
-// omnibus:purge-old-snapshots (default)
+// Purge Old Snapshots Command
 // ============================================================================
 
-it('purges snapshots older than the retention window and keeps recent ones', function () {
+it('should purge snapshots older than the retention window and keep recent ones', function () {
     $product = $this->createSimpleProduct();
     $channelId = core()->getCurrentChannel()->id;
     $currencyCode = core()->getCurrentCurrencyCode();
 
-    OmnibusPrice::create([
+    OmnibusPrice::query()->create([
         'product_id' => $product->id,
         'channel_id' => $channelId,
         'currency_code' => $currencyCode,
@@ -54,7 +50,7 @@ it('purges snapshots older than the retention window and keeps recent ones', fun
         'recorded_at' => now()->subDays(40),
     ]);
 
-    OmnibusPrice::create([
+    OmnibusPrice::query()->create([
         'product_id' => $product->id,
         'channel_id' => $channelId,
         'currency_code' => $currencyCode,
@@ -64,21 +60,21 @@ it('purges snapshots older than the retention window and keeps recent ones', fun
 
     Artisan::call('omnibus:purge-old-snapshots');
 
-    expect(OmnibusPrice::count())->toBe(1);
-    expect(OmnibusPrice::first()->price)->toEqual(100.00);
-    expect(Artisan::output())->toContain(trans('omnibus::app.console.old-purged'));
+    expect(OmnibusPrice::query()->count())->toBe(1)
+        ->and(OmnibusPrice::query()->first()->price)->toEqual(100.00)
+        ->and(Artisan::output())->toContain(trans('omnibus::app.console.old-purged'));
 });
 
 // ============================================================================
-// omnibus:purge-old-snapshots --all
+// Purge Every Snapshot Command
 // ============================================================================
 
-it('deletes every snapshot when --all and --force are passed', function () {
+it('should delete every snapshot when --all and --force are passed', function () {
     $product = $this->createSimpleProduct();
     $channelId = core()->getCurrentChannel()->id;
     $currencyCode = core()->getCurrentCurrencyCode();
 
-    OmnibusPrice::create([
+    OmnibusPrice::query()->create([
         'product_id' => $product->id,
         'channel_id' => $channelId,
         'currency_code' => $currencyCode,
@@ -86,7 +82,7 @@ it('deletes every snapshot when --all and --force are passed', function () {
         'recorded_at' => now()->subDays(5),
     ]);
 
-    OmnibusPrice::create([
+    OmnibusPrice::query()->create([
         'product_id' => $product->id,
         'channel_id' => $channelId,
         'currency_code' => $currencyCode,
@@ -96,16 +92,16 @@ it('deletes every snapshot when --all and --force are passed', function () {
 
     Artisan::call('omnibus:purge-old-snapshots', ['--all' => true, '--force' => true]);
 
-    expect(OmnibusPrice::count())->toBe(0);
-    expect(Artisan::output())->toContain(trans('omnibus::app.console.all-deleted'));
+    expect(OmnibusPrice::query()->count())->toBe(0)
+        ->and(Artisan::output())->toContain(trans('omnibus::app.console.all-deleted'));
 });
 
-it('aborts --all without --force when running non-interactively', function () {
+it('should abort --all without --force when running non-interactively', function () {
     $product = $this->createSimpleProduct();
     $channelId = core()->getCurrentChannel()->id;
     $currencyCode = core()->getCurrentCurrencyCode();
 
-    OmnibusPrice::create([
+    OmnibusPrice::query()->create([
         'product_id' => $product->id,
         'channel_id' => $channelId,
         'currency_code' => $currencyCode,
@@ -115,6 +111,6 @@ it('aborts --all without --force when running non-interactively', function () {
 
     Artisan::call('omnibus:purge-old-snapshots', ['--all' => true]);
 
-    expect(OmnibusPrice::count())->toBe(1);
-    expect(Artisan::output())->toContain(trans('omnibus::app.console.aborted'));
+    expect(OmnibusPrice::query()->count())->toBe(1)
+        ->and(Artisan::output())->toContain(trans('omnibus::app.console.aborted'));
 });

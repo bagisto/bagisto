@@ -2,27 +2,18 @@
 
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Faker\Helpers\Customer as CustomerFaker;
-use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Customer\Models\Customer;
 
 use function Pest\Laravel\postJson;
 
+// ============================================================================
+// Billing Address Validation
+// ============================================================================
+
 it('should fail the validation when the billing state does not belong to the selected country when storing the cart address', function (string $state) {
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
+    $product = $this->createSimpleProduct();
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = (new CustomerFaker)->factory()->create();
+    $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id' => $customer->id,
@@ -76,8 +67,8 @@ it('should fail the validation when the billing state does not belong to the sel
             'use_for_shipping' => 1,
         ],
     ])
-        ->assertJsonValidationErrorFor('billing.state')
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('billing.state');
 })->with([
     'state of another country' => 'CA',
     'unknown state code' => 'XX',

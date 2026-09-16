@@ -2,14 +2,17 @@
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductVideo;
 use Webkul\Product\Repositories\ProductVideoRepository;
 
 use function Pest\Laravel\get;
 
+// ============================================================================
+// Edit Page
+// ============================================================================
+
 it('should render the seo drawer on the product videos panel', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     $this->loginAsAdmin();
 
@@ -19,16 +22,20 @@ it('should render the seo drawer on the product videos panel', function () {
         ->assertSee(trans('admin::app.components.media.videos.seo.title'));
 });
 
+// ============================================================================
+// Renaming
+// ============================================================================
+
 it('should rename an existing product video while keeping its extension', function () {
     Storage::fake();
 
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     $path = 'product/'.$product->id.'/lk92mdow.mp4';
 
     Storage::put($path, 'video-contents');
 
-    $video = ProductVideo::create([
+    $video = ProductVideo::query()->create([
         'product_id' => $product->id,
         'type' => 'videos',
         'path' => $path,
@@ -51,10 +58,14 @@ it('should rename an existing product video while keeping its extension', functi
     Storage::assertMissing($path);
 });
 
+// ============================================================================
+// Uploads
+// ============================================================================
+
 it('should name a newly uploaded video after the requested file name', function () {
     Storage::fake();
 
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     app(ProductVideoRepository::class)->upload([
         'videos' => [
@@ -73,7 +84,7 @@ it('should name a newly uploaded video after the requested file name', function 
 it('should not attempt to store alt text against a video', function () {
     Storage::fake();
 
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     app(ProductVideoRepository::class)->upload([
         'videos' => [
@@ -84,7 +95,6 @@ it('should not attempt to store alt text against a video', function () {
 
     $video = $product->fresh()->videos->first();
 
-    expect($video->path)->toBe('product/'.$product->id.'/product-walkthrough.mp4');
-
-    expect($video->file_name)->toBe('product-walkthrough');
+    expect($video->path)->toBe('product/'.$product->id.'/product-walkthrough.mp4')
+        ->and($video->file_name)->toBe('product-walkthrough');
 });

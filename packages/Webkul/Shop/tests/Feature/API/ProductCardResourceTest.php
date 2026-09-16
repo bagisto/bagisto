@@ -1,29 +1,30 @@
 <?php
 
-use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\getJson;
 
-it('omits the heavy description and gallery fields from the products listing', function () {
-    (new ProductFaker)->getSimpleProductFactory()->create();
+/**
+ * The product card the storefront products api lists for the given product.
+ */
+function listedProductCard(Product $product): ?array
+{
+    return collect(getJson(route('shop.api.products.index', ['sort' => 'created_at-desc']))->assertOk()->json('data'))
+        ->firstWhere('id', $product->id);
+}
 
-    $product = getJson(route('shop.api.products.index'))
-        ->assertOk()
-        ->json('data.0');
+// ============================================================================
+// Product Card
+// ============================================================================
 
-    expect($product)
+it('should omit the heavy description and gallery fields from the products listing', function () {
+    expect(listedProductCard($this->createSimpleProduct()))
         ->not->toHaveKey('description')
         ->not->toHaveKey('images');
 });
 
-it('keeps the fields the product card needs in the listing', function () {
-    (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $product = getJson(route('shop.api.products.index'))
-        ->assertOk()
-        ->json('data.0');
-
-    expect($product)
+it('should keep the fields the product card needs in the listing', function () {
+    expect(listedProductCard($this->createSimpleProduct()))
         ->toHaveKeys([
             'id',
             'name',

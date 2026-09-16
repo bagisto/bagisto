@@ -1,25 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Repositories\ProductRepository;
 
 /**
  * Assert the given cached pages survived, reading the cache with it switched back on.
  */
-function assertPagesSurvived($test, array $requests): void
+function assertPagesSurvived(array $requests): void
 {
     config(['responsecache.enabled' => true]);
 
     foreach ($requests as $request) {
-        $test->assertPageCached($request, 'The page '.$request->getPathInfo().' was dropped while the page cache was disabled.');
+        test()->assertPageCached($request, 'The page '.$request->getPathInfo().' was dropped while the page cache was disabled.');
     }
 }
 
 beforeEach(function () {
     $this->useIsolatedPageCache();
 
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $this->product = $this->createSimpleProduct();
 
     $this->productPage = $this->cachePage('/'.$this->product->url_key);
 
@@ -28,10 +27,14 @@ beforeEach(function () {
     config(['responsecache.enabled' => false]);
 });
 
+// ============================================================================
+// Price Reindex With The Page Cache Disabled
+// ============================================================================
+
 it('should keep every cached page when a full price reindex is announced while the page cache is disabled', function () {
     Event::dispatch('catalog.product.price.reindex.after');
 
-    assertPagesSurvived($this, [$this->productPage, $this->homePage]);
+    assertPagesSurvived([$this->productPage, $this->homePage]);
 });
 
 it('should keep the pages of reindexed products, without looking them up, when a price reindex is announced while the page cache is disabled', function (string $event) {
@@ -39,7 +42,7 @@ it('should keep the pages of reindexed products, without looking them up, when a
 
     Event::dispatch($event, [[$this->product->id]]);
 
-    assertPagesSurvived($this, [$this->productPage, $this->homePage]);
+    assertPagesSurvived([$this->productPage, $this->homePage]);
 
     $products->shouldNotHaveReceived('with');
 

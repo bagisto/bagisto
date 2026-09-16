@@ -7,24 +7,22 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 /**
- * Get the default channel's section of a type, with the given published options.
+ * The published section of a type on the default channel, created when the channel has none, holding the given options.
  */
 function sectionOfTypeWithOptions(string $type, array $options): Section
 {
     $channel = core()->getDefaultChannel();
 
-    $section = Section::where([
+    $attributes = [
         'channel_id' => $channel->id,
         'theme_code' => $channel->theme ?: 'default',
         'type' => $type,
-    ])->first() ?? Section::factory()->create([
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme ?: 'default',
-        'type' => $type,
-        'status' => 1,
-    ]);
+    ];
 
-    $section->status = 1;
+    $section = Section::query()->where($attributes)->first()
+        ?? Section::factory()->create([...$attributes, 'status' => true]);
+
+    $section->status = true;
 
     $section->translateOrNew(app()->getLocale())->options = $options;
 
@@ -32,6 +30,18 @@ function sectionOfTypeWithOptions(string $type, array $options): Section
 
     return $section->refresh();
 }
+
+/**
+ * The draft options of a section in the current locale.
+ */
+function draftOptionsOf(Section $section): array
+{
+    return $section->refresh()->translate(app()->getLocale())->draft_options;
+}
+
+// ============================================================================
+// Drafts
+// ============================================================================
 
 it('should clear a footer link that would run script when a draft is saved', function () {
     $section = sectionOfTypeWithOptions(SectionTypeEnum::FOOTER_LINKS->value, []);
@@ -55,7 +65,7 @@ it('should clear a footer link that would run script when a draft is saved', fun
         ],
     ])->assertOk();
 
-    expect(collect($section->refresh()->translate(app()->getLocale())->draft_options['column_1'])->pluck('url')->all())
+    expect(collect(draftOptionsOf($section)['column_1'])->pluck('url')->all())
         ->toBe(['', '', '', 'https://example.com/about', '/page/contact-us', 'mailto:support@example.com']);
 });
 
@@ -73,9 +83,13 @@ it('should clear a slide link that would run script when a draft is saved', func
         ],
     ])->assertOk();
 
-    expect(collect($section->refresh()->translate(app()->getLocale())->draft_options['images'])->pluck('link')->all())
+    expect(collect(draftOptionsOf($section)['images'])->pluck('link')->all())
         ->toBe(['', 'https://example.com/sale']);
 });
+
+// ============================================================================
+// Storefront
+// ============================================================================
 
 it('should never render a stored footer link that would run script on the storefront', function () {
     sectionOfTypeWithOptions(SectionTypeEnum::FOOTER_LINKS->value, [

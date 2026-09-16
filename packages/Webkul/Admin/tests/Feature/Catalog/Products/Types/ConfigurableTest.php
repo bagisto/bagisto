@@ -2,7 +2,6 @@
 
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 
@@ -27,7 +26,7 @@ function configurableAttribute(string $code): Attribute
 it('should return configurable attributes when storing without super_attributes', function () {
     $this->loginAsAdmin();
 
-    $attributes = AttributeFamily::find(1)->configurable_attributes;
+    $attributes = AttributeFamily::query()->findOrFail(1)->configurable_attributes;
 
     $response = postJson(route('admin.catalog.products.store'), [
         'type' => 'configurable',
@@ -67,11 +66,11 @@ it('should create a configurable product with variants when super_attributes are
         ],
     ])->assertOk();
 
-    $product = Product::where('sku', $sku)->first();
+    $product = Product::query()->where('sku', $sku)->first();
 
-    expect($product)->not->toBeNull();
-    expect($product->type)->toBe('configurable');
-    expect($product->variants)->toHaveCount(4);
+    expect($product)->not->toBeNull()
+        ->and($product->type)->toBe('configurable')
+        ->and($product->variants)->toHaveCount(4);
 
     $this->assertDatabaseHas('product_super_attributes', [
         'product_id' => $product->id,
@@ -84,8 +83,8 @@ it('should create a configurable product with variants when super_attributes are
     ]);
 
     foreach ($product->variants as $variant) {
-        expect($variant->type)->toBe('simple');
-        expect($variant->parent_id)->toBe($product->id);
+        expect($variant->type)->toBe('simple')
+            ->and($variant->parent_id)->toBe($product->id);
     }
 });
 
@@ -111,43 +110,37 @@ it('should return the edit page of a configurable product', function () {
 it('should populate parent product_flat after store and update', function () {
     $product = $this->storeAndUpdateConfigurableProduct();
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
-    expect($flat)->not->toBeNull();
-
-    expect($flat->sku)->toBe($product->sku);
-    expect($flat->type)->toBe('configurable');
-    expect($flat->attribute_family_id)->toBe(1);
-
-    expect($flat->name)->toBe('Test Configurable Product');
-    expect($flat->short_description)->toBe('A short description for the configurable product.');
-    expect($flat->description)->toBe('A full description for the configurable product.');
-    expect($flat->url_key)->not->toBeEmpty();
-
-    expect($flat->price)->toBeNull();
-    expect($flat->weight)->toBeNull();
-
-    expect($flat->status)->toBeTruthy();
-    expect($flat->visible_individually)->toBeTruthy();
-
-    expect($flat->locale)->toBe(app()->getLocale());
-    expect($flat->channel)->toBe(core()->getDefaultChannelCode());
+    expect($flat)->not->toBeNull()
+        ->and($flat->sku)->toBe($product->sku)
+        ->and($flat->type)->toBe('configurable')
+        ->and($flat->attribute_family_id)->toBe(1)
+        ->and($flat->name)->toBe('Test Configurable Product')
+        ->and($flat->short_description)->toBe('A short description for the configurable product.')
+        ->and($flat->description)->toBe('A full description for the configurable product.')
+        ->and($flat->url_key)->not->toBeEmpty()
+        ->and($flat->price)->toBeNull()
+        ->and($flat->weight)->toBeNull()
+        ->and($flat->status)->toBeTruthy()
+        ->and($flat->visible_individually)->toBeTruthy()
+        ->and($flat->locale)->toBe(app()->getLocale())
+        ->and($flat->channel)->toBe(core()->getDefaultChannelCode());
 });
 
 it('should populate variant product_flat entries after store and update', function () {
     $product = $this->storeAndUpdateConfigurableProduct();
 
     foreach ($product->variants as $variant) {
-        $flat = ProductFlat::where('product_id', $variant->id)->first();
+        $flat = ProductFlat::query()->where('product_id', $variant->id)->first();
 
-        expect($flat)->not->toBeNull("product_flat for variant {$variant->id} should exist.");
-        expect($flat->type)->toBe('simple');
-        expect($flat->sku)->toBe($variant->sku);
-        expect($flat->name)->not->toBeEmpty();
-        expect((float) $flat->price)->toBeGreaterThan(0);
-        expect((float) $flat->weight)->toBeGreaterThan(0);
-
-        expect($variant->parent_id)->toBe($product->id);
+        expect($flat)->not->toBeNull("product_flat for variant {$variant->id} should exist.")
+            ->and($flat->type)->toBe('simple')
+            ->and($flat->sku)->toBe($variant->sku)
+            ->and($flat->name)->not->toBeEmpty()
+            ->and((float) $flat->price)->toBeGreaterThan(0)
+            ->and((float) $flat->weight)->toBeGreaterThan(0)
+            ->and($variant->parent_id)->toBe($product->id);
     }
 });
 
@@ -166,14 +159,13 @@ it('should store super attribute values on each variant', function () {
         $colorAttr = $variant->attribute_values
             ->first(fn ($av) => $av->attribute_id === $colorId);
 
-        expect($colorAttr)->not->toBeNull("Variant {$variant->id} should have a color attribute value.");
-        expect($colorAttr->integer_value)->not->toBeNull();
-
         $sizeAttr = $variant->attribute_values
             ->first(fn ($av) => $av->attribute_id === $sizeId);
 
-        expect($sizeAttr)->not->toBeNull("Variant {$variant->id} should have a size attribute value.");
-        expect($sizeAttr->integer_value)->not->toBeNull();
+        expect($colorAttr)->not->toBeNull("Variant {$variant->id} should have a color attribute value.")
+            ->and($colorAttr->integer_value)->not->toBeNull()
+            ->and($sizeAttr)->not->toBeNull("Variant {$variant->id} should have a size attribute value.")
+            ->and($sizeAttr->integer_value)->not->toBeNull();
     }
 });
 
@@ -202,6 +194,7 @@ it('should create inventory for each variant after update', function () {
 
 it('should assign the configurable product and variants to the current channel', function () {
     $product = $this->storeAndUpdateConfigurableProduct();
+
     $channelId = core()->getDefaultChannel()->id;
 
     $this->assertDatabaseHas('product_channels', [
@@ -262,11 +255,11 @@ it('should update variant values and reflect changes in product_flat', function 
         'variants' => $variants,
     ])->assertRedirect(route('admin.catalog.products.index'));
 
-    $flat = ProductFlat::where('product_id', $variant->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $variant->id)->first();
 
-    expect($flat->name)->toBe('Updated Variant Name');
-    expect((float) $flat->price)->toBe(79.99);
-    expect((float) $flat->weight)->toBe(3.0);
+    expect($flat->name)->toBe('Updated Variant Name')
+        ->and((float) $flat->price)->toBe(79.99)
+        ->and((float) $flat->weight)->toBe(3.0);
 });
 
 // ============================================================================
@@ -313,7 +306,9 @@ it('should fail validation when boolean fields have invalid values on configurab
 
 it('should delete a configurable product and all its variants', function () {
     $product = $this->storeAndUpdateConfigurableProduct();
+
     $productId = $product->id;
+
     $variantIds = $product->variants->pluck('id')->toArray();
 
     deleteJson(route('admin.catalog.products.delete', $productId))
@@ -321,14 +316,20 @@ it('should delete a configurable product and all its variants', function () {
         ->assertJsonPath('message', trans('admin::app.catalog.products.delete-success'));
 
     $this->assertDatabaseMissing('products', ['id' => $productId]);
+
     $this->assertDatabaseMissing('product_flat', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $productId]);
+
     $this->assertDatabaseMissing('product_super_attributes', ['product_id' => $productId]);
 
     foreach ($variantIds as $variantId) {
         $this->assertDatabaseMissing('products', ['id' => $variantId]);
+
         $this->assertDatabaseMissing('product_flat', ['product_id' => $variantId]);
+
         $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $variantId]);
+
         $this->assertDatabaseMissing('product_inventories', ['product_id' => $variantId]);
     }
 });
@@ -338,7 +339,7 @@ it('should delete a configurable product and all its variants', function () {
 // ============================================================================
 
 it('should give the admin panel the variations of a configurable product without the storefront image urls', function () {
-    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
+    $product = $this->storeAndUpdateConfigurableProduct();
 
     $this->loginAsAdmin();
 

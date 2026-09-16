@@ -10,32 +10,28 @@ use Webkul\Omnibus\Services\OmnibusPriceProviderResolver;
 // Resolver Mapping
 // ============================================================================
 
-it('resolves the default provider for leaf product types', function (string $type) {
-    $product = match ($type) {
-        'simple' => $this->createSimpleProduct(),
-        'virtual' => $this->createVirtualProduct(),
-        'downloadable' => $this->createDownloadableProduct(),
-    };
+it('should resolve the default provider for leaf product types', function (string $type) {
+    $product = $this->createProductOfType($type);
 
     expect(app(OmnibusPriceProviderResolver::class)->resolve($product))
         ->toBeInstanceOf(DefaultOmnibusPriceProvider::class);
 })->with(['simple', 'virtual', 'downloadable']);
 
-it('resolves the configurable provider for configurable products', function () {
+it('should resolve the configurable provider for configurable products', function () {
     $product = $this->createConfigurableProduct();
 
     expect(app(OmnibusPriceProviderResolver::class)->resolve($product))
         ->toBeInstanceOf(ConfigurableOmnibusPriceProvider::class);
 });
 
-it('resolves the grouped provider for grouped products', function () {
+it('should resolve the grouped provider for grouped products', function () {
     $product = $this->createGroupedProduct();
 
     expect(app(OmnibusPriceProviderResolver::class)->resolve($product))
         ->toBeInstanceOf(GroupedOmnibusPriceProvider::class);
 });
 
-it('resolves the bundle provider for bundle products', function () {
+it('should resolve the bundle provider for bundle products', function () {
     $product = $this->createBundleProduct();
 
     expect(app(OmnibusPriceProviderResolver::class)->resolve($product))
@@ -43,15 +39,11 @@ it('resolves the bundle provider for bundle products', function () {
 });
 
 // ============================================================================
-// Descendant Resolution — leaf types
+// Descendant Resolution For Leaf Types
 // ============================================================================
 
-it('returns no descendants for leaf product types', function (string $type) {
-    $product = match ($type) {
-        'simple' => $this->createSimpleProduct(),
-        'virtual' => $this->createVirtualProduct(),
-        'downloadable' => $this->createDownloadableProduct(),
-    };
+it('should return no descendants for leaf product types', function (string $type) {
+    $product = $this->createProductOfType($type);
 
     $provider = app(OmnibusPriceProviderResolver::class)->resolve($product);
 
@@ -59,10 +51,10 @@ it('returns no descendants for leaf product types', function (string $type) {
 })->with(['simple', 'virtual', 'downloadable']);
 
 // ============================================================================
-// Descendant Resolution — composite types
+// Descendant Resolution For Composite Types
 // ============================================================================
 
-it('returns every variant id for a configurable product', function () {
+it('should return every variant id for a configurable product', function () {
     $configurable = $this->createConfigurableProduct([100, 200]);
 
     $provider = app(OmnibusPriceProviderResolver::class)->resolve($configurable);
@@ -73,7 +65,7 @@ it('returns every variant id for a configurable product', function () {
     expect($descendantIds)->toBe($variantIds);
 });
 
-it('returns every associated product id for a grouped product', function () {
+it('should return every associated product id for a grouped product', function () {
     $grouped = $this->createGroupedProduct([100, 200]);
 
     $provider = app(OmnibusPriceProviderResolver::class)->resolve($grouped);
@@ -84,15 +76,15 @@ it('returns every associated product id for a grouped product', function () {
     expect($descendantIds)->toBe($associatedIds);
 });
 
-it('returns option product ids for a bundle product (not the parent id)', function () {
+it('should return the option product ids for a bundle product, not the parent id', function () {
     $bundle = $this->createBundleProduct([100, 200]);
 
     $provider = app(OmnibusPriceProviderResolver::class)->resolve($bundle);
 
     $descendantIds = $provider->getDescendantProductIds($bundle);
 
-    expect($descendantIds)->not->toContain($bundle->id);
-    expect($descendantIds)->not->toBeEmpty();
+    expect($descendantIds)->not->toContain($bundle->id)
+        ->and($descendantIds)->not->toBeEmpty();
 
     foreach ($descendantIds as $id) {
         expect($id)->not->toBe($bundle->id);

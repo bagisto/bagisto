@@ -3,10 +3,6 @@
 use Webkul\Omnibus\Models\OmnibusPrice;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
 
-// ============================================================================
-// Setup
-// ============================================================================
-
 beforeEach(function () {
     $this->manager = app(OmnibusPriceManager::class);
 
@@ -19,31 +15,31 @@ beforeEach(function () {
 // Enablement Gate
 // ============================================================================
 
-it('records no snapshots when Omnibus is disabled on every channel', function () {
+it('should record no snapshots when Omnibus is disabled on every channel', function () {
     $product = $this->createSimpleProduct();
 
     $count = $this->manager->recordPrice($product);
 
-    expect($count)->toBe(0);
-    expect(OmnibusPrice::where('product_id', $product->id)->count())->toBe(0);
+    expect($count)->toBe(0)
+        ->and(OmnibusPrice::query()->where('product_id', $product->id)->count())->toBe(0);
 });
 
-it('records a snapshot when Omnibus is enabled on the current channel', function () {
+it('should record a snapshot when Omnibus is enabled on the current channel', function () {
     $product = $this->createSimpleProduct();
 
     $this->setOmnibusEnabled(true);
 
     $count = $this->manager->recordPrice($product);
 
-    expect($count)->toBeGreaterThanOrEqual(1);
-    expect(OmnibusPrice::where('product_id', $product->id)->exists())->toBeTrue();
+    expect($count)->toBeGreaterThanOrEqual(1)
+        ->and(OmnibusPrice::query()->where('product_id', $product->id)->exists())->toBeTrue();
 });
 
 // ============================================================================
 // Deduplication
 // ============================================================================
 
-it('does not duplicate a snapshot when the price is unchanged', function () {
+it('should not duplicate a snapshot when the price is unchanged', function () {
     $product = $this->createSimpleProduct();
 
     $this->setOmnibusEnabled(true);
@@ -51,14 +47,14 @@ it('does not duplicate a snapshot when the price is unchanged', function () {
     $this->manager->recordPrice($product);
     $this->manager->recordPrice($product);
 
-    expect(OmnibusPrice::where('product_id', $product->id)->count())->toBe(1);
+    expect(OmnibusPrice::query()->where('product_id', $product->id)->count())->toBe(1);
 });
 
 // ============================================================================
 // Composite Types
 // ============================================================================
 
-it('snapshots every variant of a configurable product', function () {
+it('should snapshot every variant of a configurable product', function () {
     $configurable = $this->createConfigurableProduct([100, 200]);
 
     $this->setOmnibusEnabled(true);
@@ -68,11 +64,11 @@ it('snapshots every variant of a configurable product', function () {
 
     $variantIds = $configurable->variants->pluck('id')->toArray();
 
-    expect(OmnibusPrice::whereIn('product_id', $variantIds)->count())
+    expect(OmnibusPrice::query()->whereIn('product_id', $variantIds)->count())
         ->toBe(count($variantIds));
 });
 
-it('snapshots the associated products of a grouped product', function () {
+it('should snapshot the associated products of a grouped product', function () {
     $grouped = $this->createGroupedProduct([100, 200]);
 
     $this->setOmnibusEnabled(true);
@@ -82,11 +78,11 @@ it('snapshots the associated products of a grouped product', function () {
 
     $associatedIds = $grouped->grouped_products->pluck('associated_product_id')->toArray();
 
-    expect(OmnibusPrice::whereIn('product_id', $associatedIds)->count())
+    expect(OmnibusPrice::query()->whereIn('product_id', $associatedIds)->count())
         ->toBeGreaterThanOrEqual(count($associatedIds));
 });
 
-it('snapshots a bundle product', function () {
+it('should snapshot a bundle product', function () {
     $bundle = $this->createBundleProduct([100, 200]);
 
     $this->setOmnibusEnabled(true);
@@ -94,10 +90,10 @@ it('snapshots a bundle product', function () {
 
     $this->manager->recordPrice($bundle);
 
-    expect(OmnibusPrice::where('product_id', $bundle->id)->exists())->toBeTrue();
+    expect(OmnibusPrice::query()->where('product_id', $bundle->id)->exists())->toBeTrue();
 });
 
-it('records each variant exactly once even when walking from the parent', function () {
+it('should record each variant exactly once even when walking from the parent', function () {
     $configurable = $this->createConfigurableProduct([100, 200]);
 
     $this->setOmnibusEnabled(true);
@@ -106,7 +102,7 @@ it('records each variant exactly once even when walking from the parent', functi
     $this->manager->recordPrice($configurable);
 
     foreach ($configurable->variants as $variant) {
-        expect(OmnibusPrice::where('product_id', $variant->id)->count())->toBe(1);
+        expect(OmnibusPrice::query()->where('product_id', $variant->id)->count())->toBe(1);
     }
 });
 
@@ -114,7 +110,7 @@ it('records each variant exactly once even when walking from the parent', functi
 // Bulk Path
 // ============================================================================
 
-it('records snapshots for a batch of products in one call', function () {
+it('should record snapshots for a batch of products in one call', function () {
     $products = collect([
         $this->createSimpleProduct(['price' => ['float_value' => 100]]),
         $this->createSimpleProduct(['price' => ['float_value' => 200]]),
@@ -129,11 +125,11 @@ it('records snapshots for a batch of products in one call', function () {
     expect($count)->toBeGreaterThanOrEqual(3);
 
     foreach ($products as $product) {
-        expect(OmnibusPrice::where('product_id', $product->id)->exists())->toBeTrue();
+        expect(OmnibusPrice::query()->where('product_id', $product->id)->exists())->toBeTrue();
     }
 });
 
-it('invokes the progress callback once per top-level product only', function () {
+it('should invoke the progress callback once per top-level product only', function () {
     $configurable = $this->createConfigurableProduct([100, 200]);
     $simple = $this->createSimpleProduct();
 
@@ -152,7 +148,7 @@ it('invokes the progress callback once per top-level product only', function () 
     expect($advanced)->toBe(2);
 });
 
-it('skips descendants that are already present in the top-level batch', function () {
+it('should skip descendants that are already present in the top-level batch', function () {
     $configurable = $this->createConfigurableProduct([100, 200]);
 
     $this->setOmnibusEnabled(true);
@@ -163,6 +159,6 @@ it('skips descendants that are already present in the top-level batch', function
     $this->manager->recordBulkPrice($batch);
 
     foreach ($configurable->variants as $variant) {
-        expect(OmnibusPrice::where('product_id', $variant->id)->count())->toBe(1);
+        expect(OmnibusPrice::query()->where('product_id', $variant->id)->count())->toBe(1);
     }
 });

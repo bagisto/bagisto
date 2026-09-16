@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FilesystemAdapter;
 
-it('server-renders the first carousel image so the LCP image is discoverable', function () {
+// ============================================================================
+// Slides
+// ============================================================================
+
+it('should server-render the first carousel image so the LCP image is discoverable', function () {
     $html = Blade::render('<x-shop::carousel :options="$options" />', [
         'options' => [
             'images' => [
@@ -21,7 +25,7 @@ it('server-renders the first carousel image so the LCP image is discoverable', f
         ->not->toContain('loading="lazy"');
 });
 
-it('resolves a stored carousel path against the disk rather than assuming a storage url', function () {
+it('should resolve a stored carousel path against the disk rather than assuming a storage url', function () {
     $html = Blade::render('<x-shop::carousel :options="$options" />', [
         'options' => [
             'images' => [
@@ -35,7 +39,7 @@ it('resolves a stored carousel path against the disk rather than assuming a stor
         ->not->toContain('src="themes/default/sections/1/hero.webp"');
 });
 
-it('still renders a path recorded with the old storage prefix', function () {
+it('should still render a path recorded with the old storage prefix', function () {
     $html = Blade::render('<x-shop::carousel :options="$options" />', [
         'options' => [
             'images' => [
@@ -50,7 +54,7 @@ it('still renders a path recorded with the old storage prefix', function () {
         ->not->toContain('cache/medium/storage/');
 });
 
-it('skips a carousel entry that records no image', function () {
+it('should skip a carousel entry that records no image', function () {
     $html = Blade::render('<x-shop::carousel :options="$options" />', [
         'options' => [
             'images' => [
@@ -65,7 +69,7 @@ it('skips a carousel entry that records no image', function () {
         ->not->toContain('alt="Empty"');
 });
 
-it('falls back to a shimmer placeholder when the carousel has no images', function () {
+it('should fall back to a shimmer placeholder when the carousel has no images', function () {
     $html = Blade::render('<x-shop::carousel :options="$options" />', [
         'options' => ['images' => []],
     ]);
@@ -74,6 +78,10 @@ it('falls back to a shimmer placeholder when the carousel has no images', functi
         ->toContain('shimmer')
         ->not->toContain('fetchpriority="high"');
 });
+
+// ============================================================================
+// Image Sizes
+// ============================================================================
 
 it('should size every slide through the image cache templates rather than rewriting its path', function () {
     $html = Blade::render('<x-shop::carousel :options="$options" />', [

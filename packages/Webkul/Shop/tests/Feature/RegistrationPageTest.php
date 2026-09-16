@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\Customer\RegistrationNotification as AdminRegistrationNotification;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\RegistrationNotification as ShopRegistrationNotification;
 
@@ -25,9 +24,7 @@ it('should return the customer registration page', function () {
 // ============================================================================
 
 it('should register a new customer', function () {
-    CoreConfig::where('code', 'customer.settings.email.verification')->update([
-        'value' => 0,
-    ]);
+    $this->setConfig('customer.settings.email.verification', 0);
 
     post(route('shop.customers.register.store'), [
         'first_name' => fake()->firstName(),
@@ -43,10 +40,7 @@ it('should register a new customer', function () {
 it('should register a customer and send verification email', function () {
     Mail::fake();
 
-    CoreConfig::factory()->create([
-        'code' => 'customer.settings.email.verification',
-        'value' => 1,
-    ]);
+    $this->setConfig('customer.settings.email.verification', 1);
 
     post(route('shop.customers.register.store'), [
         'first_name' => fake()->firstName(),
@@ -64,16 +58,10 @@ it('should register a customer and send verification email', function () {
 it('should register and send notification to customer and admin', function () {
     Mail::fake();
 
-    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.registration')->update([
-        'value' => 1,
-    ]);
-
-    CoreConfig::where('code', 'emails.general.notifications.emails.general.notifications.customer_registration_confirmation_mail_to_admin')->update([
-        'value' => 1,
-    ]);
-
-    CoreConfig::where('code', 'customer.settings.email.verification')->update([
-        'value' => 0,
+    $this->setConfig([
+        'emails.general.notifications.emails.general.notifications.registration' => 1,
+        'emails.general.notifications.emails.general.notifications.customer_registration_confirmation_mail_to_admin' => 1,
+        'customer.settings.email.verification' => 0,
     ]);
 
     post(route('shop.customers.register.store'), [
@@ -87,6 +75,7 @@ it('should register and send notification to customer and admin', function () {
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
 
     Mail::assertQueued(AdminRegistrationNotification::class);
+
     Mail::assertQueued(ShopRegistrationNotification::class);
 });
 

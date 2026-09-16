@@ -28,7 +28,11 @@ beforeEach(function () {
     $this->listener = app(CategoryListener::class);
 });
 
-it('drops the home page when a category is created', function () {
+// ============================================================================
+// Created And Updated Categories
+// ============================================================================
+
+it('should drop the home page when a category is created', function () {
     $category = categoryWithSlug('summer-sale');
 
     $home = $this->cachePage('/');
@@ -38,7 +42,7 @@ it('drops the home page when a category is created', function () {
     $this->assertPageNotCached($home, 'A new category is listed on the home page, which kept its old copy.');
 });
 
-it('drops both the category page and the home page when a category is updated', function () {
+it('should drop both the category page and the home page when a category is updated', function () {
     $category = categoryWithSlug('summer-sale');
 
     $home = $this->cachePage('/');
@@ -52,7 +56,7 @@ it('drops both the category page and the home page when a category is updated', 
     $this->assertPageNotCached($home, 'The home page carousel kept the name and image the category had before.');
 });
 
-it('drops a category page cached under a second locale', function () {
+it('should drop a category page cached under a second locale', function () {
     $secondScope = $this->addSecondScope();
 
     $category = categoryWithSlug('summer-sale');
@@ -66,7 +70,11 @@ it('drops a category page cached under a second locale', function () {
     $this->assertPageNotCached($translated, 'Only the scope the admin was browsing was forgotten.');
 });
 
-it('drops the category pages before the category is deleted', function () {
+// ============================================================================
+// Deleted Categories
+// ============================================================================
+
+it('should drop the category pages before the category is deleted', function () {
     $category = categoryWithSlug('summer-sale');
 
     $home = $this->cachePage('/');
@@ -80,7 +88,7 @@ it('drops the category pages before the category is deleted', function () {
     $this->assertPageNotCached($home);
 });
 
-it('does nothing when the category being deleted is already gone', function () {
+it('should do nothing when the category being deleted is already gone', function () {
     $home = $this->cachePage('/');
 
     $this->listener->beforeDelete(0);

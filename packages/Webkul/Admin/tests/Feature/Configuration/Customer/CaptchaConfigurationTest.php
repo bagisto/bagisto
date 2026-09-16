@@ -1,11 +1,14 @@
 <?php
 
 use Webkul\Core\Models\Channel;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Models\Locale;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
+
+// ============================================================================
+// Configuration Page
+// ============================================================================
 
 it('should return the captcha configuration page', function () {
     $this->loginAsAdmin();
@@ -27,6 +30,39 @@ it('should display captcha configuration form fields', function () {
         ->assertSee('customer[captcha][credentials][site_key]', false)
         ->assertSee('customer[captcha][credentials][score_threshold]', false);
 });
+
+it('should display existing captcha configuration values', function () {
+    $credentials = [
+        'status' => '1',
+        'project_id' => 'display-test-project',
+        'site_key' => '6LeIxAcTAAAAAJcZVRqyHh71DISPLAY',
+    ];
+
+    $this->setConfig([
+        'customer.captcha.credentials.status' => $credentials['status'],
+        'customer.captcha.credentials.project_id' => $credentials['project_id'],
+        'customer.captcha.credentials.site_key' => $credentials['site_key'],
+    ]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.configuration.index', ['customer', 'captcha']))
+        ->assertOk();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'customer.captcha.credentials.project_id',
+        'value' => $credentials['project_id'],
+    ]);
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'customer.captcha.credentials.site_key',
+        'value' => $credentials['site_key'],
+    ]);
+});
+
+// ============================================================================
+// Saving
+// ============================================================================
 
 it('should save captcha configuration with all required fields', function () {
     $channel = Channel::factory()->create();
@@ -99,14 +135,9 @@ it('should update existing captcha configuration', function () {
         'score_threshold' => '0.8',
     ];
 
-    CoreConfig::create([
-        'code' => 'customer.captcha.credentials.status',
-        'value' => $oldCredentials['status'],
-    ]);
-
-    CoreConfig::create([
-        'code' => 'customer.captcha.credentials.project_id',
-        'value' => $oldCredentials['project_id'],
+    $this->setConfig([
+        'customer.captcha.credentials.status' => $oldCredentials['status'],
+        'customer.captcha.credentials.project_id' => $oldCredentials['project_id'],
     ]);
 
     $this->loginAsAdmin();
@@ -139,10 +170,7 @@ it('should save captcha configuration with status disabled', function () {
 
     $locale = Locale::factory()->create();
 
-    CoreConfig::create([
-        'code' => 'customer.captcha.credentials.status',
-        'value' => '1',
-    ]);
+    $this->setConfig('customer.captcha.credentials.status', '1');
 
     $this->loginAsAdmin();
 
@@ -167,6 +195,7 @@ it('should save captcha configuration with status disabled', function () {
 
 it('should save captcha configuration with different score thresholds', function () {
     $channel = Channel::factory()->create();
+
     $locale = Locale::factory()->create();
 
     $this->loginAsAdmin();
@@ -209,44 +238,6 @@ it('should save captcha configuration with different score thresholds', function
     $this->assertDatabaseHas('core_config', [
         'code' => 'customer.captcha.credentials.score_threshold',
         'value' => $threshold,
-    ]);
-});
-
-it('should display existing captcha configuration values', function () {
-    $credentials = [
-        'status' => '1',
-        'project_id' => 'display-test-project',
-        'site_key' => '6LeIxAcTAAAAAJcZVRqyHh71DISPLAY',
-    ];
-
-    CoreConfig::create([
-        'code' => 'customer.captcha.credentials.status',
-        'value' => $credentials['status'],
-    ]);
-
-    CoreConfig::create([
-        'code' => 'customer.captcha.credentials.project_id',
-        'value' => $credentials['project_id'],
-    ]);
-
-    CoreConfig::create([
-        'code' => 'customer.captcha.credentials.site_key',
-        'value' => $credentials['site_key'],
-    ]);
-
-    $this->loginAsAdmin();
-
-    get(route('admin.configuration.index', ['customer', 'captcha']))
-        ->assertOk();
-
-    $this->assertDatabaseHas('core_config', [
-        'code' => 'customer.captcha.credentials.project_id',
-        'value' => $credentials['project_id'],
-    ]);
-
-    $this->assertDatabaseHas('core_config', [
-        'code' => 'customer.captcha.credentials.site_key',
-        'value' => $credentials['site_key'],
     ]);
 });
 

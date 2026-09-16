@@ -2,49 +2,28 @@
 
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Razorpay\Payment\RazorpayPayment;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
 
 beforeEach(function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.active',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => 'rzp_test_fake_key',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_secret',
-        'value' => 'fake_test_secret',
-        'channel_code' => 'default',
+    $this->setConfig([
+        'sales.payment_methods.razorpay.active' => '1',
+        'sales.payment_methods.razorpay.sandbox' => '1',
+        'sales.payment_methods.razorpay.test_client_id' => 'rzp_test_fake_key',
+        'sales.payment_methods.razorpay.test_client_secret' => 'fake_test_secret',
     ]);
 });
 
-it('redirects back when razorpay credentials are invalid', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_id',
-        'value' => '',
-        'channel_code' => 'default',
-    ]);
+// ============================================================================
+// Redirect
+// ============================================================================
 
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.razorpay.test_client_secret',
-        'value' => '',
-        'channel_code' => 'default',
+it('should redirect back when the Razorpay credentials are invalid', function () {
+    $this->setConfig([
+        'sales.payment_methods.razorpay.test_client_id' => '',
+        'sales.payment_methods.razorpay.test_client_secret' => '',
     ]);
 
     $response = $this->get(route('razorpay.payment.redirect'));
@@ -54,7 +33,7 @@ it('redirects back when razorpay credentials are invalid', function () {
     $response->assertSessionHas('error');
 });
 
-it('redirects back when cart is not found', function () {
+it('should redirect back when the cart is not found', function () {
     Cart::shouldReceive('getCart')->andReturn(null);
 
     $response = $this->get(route('razorpay.payment.redirect'));
@@ -64,7 +43,7 @@ it('redirects back when cart is not found', function () {
     $response->assertSessionHas('error');
 });
 
-it('creates razorpay order and returns drop-in UI view', function () {
+it('should create the Razorpay order and return the drop-in UI view', function () {
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
     $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
@@ -94,7 +73,11 @@ it('creates razorpay order and returns drop-in UI view', function () {
     $response->assertViewHas('payment');
 });
 
-it('successfully processes razorpay payment and creates order with invoice', function () {
+// ============================================================================
+// Payment Callback
+// ============================================================================
+
+it('should process the Razorpay payment and create the order with an invoice', function () {
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
     $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
@@ -111,18 +94,18 @@ it('successfully processes razorpay payment and creates order with invoice', fun
 
     $response->assertRedirect(route('shop.checkout.onepage.success'));
 
-    $order = Order::where('cart_id', $cart->id)->first();
+    $order = Order::query()->where('cart_id', $cart->id)->first();
 
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing')
         ->and($order->customer_id)->toBe($cart->customer_id);
 
-    $invoice = Invoice::where('order_id', $order->id)->first();
+    $invoice = Invoice::query()->where('order_id', $order->id)->first();
 
     expect($invoice)->not->toBeNull()
         ->and($invoice->state)->toBe('paid');
 
-    $orderTransaction = OrderTransaction::where('order_id', $order->id)->first();
+    $orderTransaction = OrderTransaction::query()->where('order_id', $order->id)->first();
 
     expect($orderTransaction)->not->toBeNull()
         ->and($orderTransaction->transaction_id)->toBe('pay_test123')
@@ -130,7 +113,7 @@ it('successfully processes razorpay payment and creates order with invoice', fun
         ->and($orderTransaction->type)->toBe('razorpay');
 });
 
-it('handles payment failure gracefully', function () {
+it('should handle a payment failure gracefully', function () {
     $response = $this->get(route('razorpay.payment.success', [
         'razorpay_order_id' => 'order_fail_123',
         'error' => 'payment_failed',
@@ -141,7 +124,7 @@ it('handles payment failure gracefully', function () {
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when signature verification fails', function () {
+it('should redirect to the cart when the signature verification fails', function () {
     $cart = CartModel::factory()->create([
         'base_grand_total' => 100.00,
     ]);

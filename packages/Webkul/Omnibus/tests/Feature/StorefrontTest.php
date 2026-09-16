@@ -7,10 +7,6 @@ use Webkul\Product\Repositories\ProductRepository;
 
 use function Pest\Laravel\get;
 
-// ============================================================================
-// Setup
-// ============================================================================
-
 beforeEach(function () {
     $this->repository = app(OmnibusPriceRepository::class);
 
@@ -30,7 +26,7 @@ afterEach(function () {
 // Product Page Injection
 // ============================================================================
 
-it('renders the shop product page without error when Omnibus is enabled', function () {
+it('should render the shop product page without error when Omnibus is enabled', function () {
     $product = $this->createSimpleProduct();
 
     $this->repository->create([
@@ -52,7 +48,6 @@ it('renders the shop product page without error when Omnibus is enabled', functi
         'special_price_from' => $this->now->copy()->subDays(1)->toDateTimeString(),
     ], $product->id);
 
-    $response = get(route('shop.product_or_category.index', $product->url_key));
-
-    $response->assertOk();
+    get(route('shop.product_or_category.index', $product->url_key))
+        ->assertOk();
 });

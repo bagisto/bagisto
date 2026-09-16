@@ -1,24 +1,10 @@
 <?php
 
-/**
- * Guards the icon fonts against the two ways a glyph goes wrong silently.
- *
- * An icon is a class that sets `content` on `::before`, so a name that is never declared
- * paints nothing at all — no error, no warning, just an empty space where the glyph was
- * meant to be. The reverse is quieter still: a glyph declared and used nowhere ships as
- * dead CSS forever.
- *
- * Neither shows up in a build, so they are asserted here instead.
- */
-
-/**
- * The packages that carry an icon font, and the roots their stylesheet scans.
- */
-const ICON_PACKAGES = [
+dataset('icon packages', [
     'Admin' => 'packages/Webkul/Admin',
     'Shop' => 'packages/Webkul/Shop',
     'Installer' => 'packages/Webkul/Installer',
-];
+]);
 
 /**
  * The repository root, resolved from this file rather than the application.
@@ -50,7 +36,8 @@ function declaredIcons(string $path): array
 }
 
 /**
- * Return the icons the stylesheet safelists, for the ones no source file can name.
+ * Return the icons the stylesheet safelists, which another package's view or seeded content names
+ * from outside the scanned root, so they need no reference in the package itself.
  */
 function safelistedIcons(string $path): array
 {
@@ -62,8 +49,47 @@ function safelistedIcons(string $path): array
 }
 
 /**
- * Return every icon named by a class attribute anywhere in the package, with its variants
- * and important marker stripped — `peer-checked:icon-checked` counts as `icon-checked`.
+ * Whether a file names icons of its own package; a seeder writes markup for another package's theme.
+ */
+function isIconSourceFile(SplFileInfo $file): bool
+{
+    return in_array($file->getExtension(), ['php', 'js'])
+        && ! str_contains($file->getPathname(), '/Database/Seeders/');
+}
+
+/**
+ * Return the icons named by the class attributes of a source, with variants and the important marker
+ * stripped, so `peer-checked:icon-checked` counts as `icon-checked`.
+ */
+function iconsInClassAttributes(string $contents): array
+{
+    preg_match_all('/class="([^"]*)"/', $contents, $attributes);
+
+    $icons = [];
+
+    foreach ($attributes[1] as $attribute) {
+        preg_match_all('/(?:[a-z0-9-]+:)*(icon-[A-Za-z0-9-]+)!?/', $attribute, $names);
+
+        $icons = array_merge($icons, $names[1]);
+    }
+
+    return $icons;
+}
+
+/**
+ * Return the icons a source names as bare quoted strings, as menus, datagrids and scripts do,
+ * leaving out an array key such as `'icon-class' => 'promotion-icon'`, which names a setting.
+ */
+function iconsInQuotedStrings(string $contents): array
+{
+    preg_match_all("/'(icon-[A-Za-z0-9-]+)'(?!\s*=>)/", $contents, $singleQuoted);
+    preg_match_all('/"(icon-[A-Za-z0-9-]+)"/', $contents, $doubleQuoted);
+
+    return array_merge($singleQuoted[1], $doubleQuoted[1]);
+}
+
+/**
+ * Return every icon named anywhere in the package, whether in a class attribute or a quoted string.
  */
 function referencedIcons(string $path): array
 {
@@ -74,82 +100,50 @@ function referencedIcons(string $path): array
     );
 
     foreach ($files as $file) {
-        if (! in_array($file->getExtension(), ['php', 'js'])) {
-            continue;
-        }
-
-        /**
-         * A seeder writes markup for another package's theme — the installer seeds the
-         * storefront's content — so the icons it names belong to that package, not this one.
-         */
-        if (str_contains($file->getPathname(), '/Database/Seeders/')) {
+        if (! isIconSourceFile($file)) {
             continue;
         }
 
         $contents = file_get_contents($file->getPathname());
 
-        preg_match_all('/class="([^"]*)"/', $contents, $attributes);
-
-        foreach ($attributes[1] as $attribute) {
-            preg_match_all('/(?:[a-z0-9-]+:)*(icon-[A-Za-z0-9-]+)!?/', $attribute, $names);
-
-            $referenced = array_merge($referenced, $names[1]);
-        }
-
-        /**
-         * Config and datagrid files name an icon as a bare string rather than in a class
-         * attribute — the admin menu and the storefront datagrids both do. A string that
-         * is a key rather than a value is not one: `'icon-class' => 'promotion-icon'`
-         * names a menu setting, not a glyph.
-         */
-        preg_match_all("/'(icon-[A-Za-z0-9-]+)'(?!\s*=>)/", $contents, $strings);
-
-        $referenced = array_merge($referenced, $strings[1]);
-
-        /**
-         * A script may name an icon on its own to toggle it, rather than writing it into a
-         * class attribute the markup already carries.
-         */
-        preg_match_all('/"(icon-[A-Za-z0-9-]+)"/', $contents, $scripts);
-
-        $referenced = array_merge($referenced, $scripts[1]);
+        $referenced = array_merge($referenced, iconsInClassAttributes($contents), iconsInQuotedStrings($contents));
     }
 
     return array_values(array_unique($referenced));
 }
 
-it('declares every icon the package uses', function (string $path) {
+// ============================================================================
+// Icon Fonts
+// ============================================================================
+
+it('should declare every icon the package uses', function (string $path) {
     $undeclared = array_diff(referencedIcons($path), declaredIcons($path));
 
     expect($undeclared)->toBeEmpty(
         'These icons are used but never declared, so they render blank: '.implode(', ', $undeclared)
     );
-})->with(ICON_PACKAGES);
+})->with('icon packages');
 
-it('uses every icon the package declares', function (string $path) {
-    /**
-     * A safelisted icon is named from outside the scanned root — by another package's view
-     * or by seeded content — so it is exempt from having a reference in this package.
-     */
+it('should use every icon the package declares', function (string $path) {
     $unused = array_diff(declaredIcons($path), referencedIcons($path), safelistedIcons($path));
 
     expect($unused)->toBeEmpty(
         'These icons are declared but used nowhere, so they ship as dead CSS: '.implode(', ', $unused)
     );
-})->with(ICON_PACKAGES);
+})->with('icon packages');
 
-it('declares every icon it safelists', function (string $path) {
+it('should declare every icon it safelists', function (string $path) {
     $undeclared = array_diff(safelistedIcons($path), declaredIcons($path));
 
     expect($undeclared)->toBeEmpty(
         'These icons are safelisted but never declared: '.implode(', ', $undeclared)
     );
-})->with(ICON_PACKAGES);
+})->with('icon packages');
 
-it('names no icon with a numeric suffix', function (string $path) {
+it('should name no icon with a numeric suffix', function (string $path) {
     $suffixed = preg_grep('/-\d+$/', declaredIcons($path));
 
     expect($suffixed)->toBeEmpty(
         'An icon should be named for what it depicts, not numbered: '.implode(', ', $suffixed)
     );
-})->with(ICON_PACKAGES);
+})->with('icon packages');

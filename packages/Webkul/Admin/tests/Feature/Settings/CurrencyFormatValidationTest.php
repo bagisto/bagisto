@@ -1,23 +1,30 @@
 <?php
 
+use Illuminate\Support\Str;
 use Webkul\Core\Enums\CurrencyPositionEnum;
 use Webkul\Core\Models\Currency;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+// ============================================================================
+// Validation
+// ============================================================================
+
 it('should refuse a currency symbol carrying markup when a currency is created', function () {
+    $name = 'Testing '.Str::random(10);
+
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.currencies.store'), [
-        'code' => 'XTS',
-        'name' => 'Testing',
+        'code' => Str::upper(Str::random(3)),
+        'name' => $name,
         'symbol' => '<img src=x onerror=alert(1)>',
     ])
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('symbol');
 
-    expect(Currency::where('code', 'XTS')->exists())->toBeFalse();
+    $this->assertDatabaseMissing('currencies', ['name' => $name]);
 });
 
 it('should refuse a currency format that is not one the storefront can render when a currency is updated', function () {
@@ -34,11 +41,15 @@ it('should refuse a currency format that is not one the storefront can render wh
         'decimal_separator' => '<i>',
         'currency_position' => 'middle',
     ])
-        ->assertJsonValidationErrorFor('symbol')
-        ->assertJsonValidationErrorFor('decimal')
-        ->assertJsonValidationErrorFor('group_separator')
-        ->assertJsonValidationErrorFor('decimal_separator')
-        ->assertJsonValidationErrorFor('currency_position');
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['symbol', 'decimal', 'group_separator', 'decimal_separator', 'currency_position']);
+
+    $this->assertDatabaseHas('currencies', [
+        'id' => $currency->id,
+        'name' => $currency->name,
+        'group_separator' => $currency->group_separator,
+        'currency_position' => $currency->currency_position,
+    ]);
 });
 
 it('should keep accepting an ordinary currency format', function () {
@@ -57,11 +68,22 @@ it('should keep accepting an ordinary currency format', function () {
     ])
         ->assertOk();
 
-    expect($currency->fresh()->group_separator)->toBe("'");
+    $this->assertDatabaseHas('currencies', [
+        'id' => $currency->id,
+        'name' => 'Swiss Franc',
+        'symbol' => 'CHF',
+        'group_separator' => "'",
+        'decimal_separator' => '.',
+        'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
+    ]);
 });
 
+// ============================================================================
+// Storefront
+// ============================================================================
+
 it('should escape the currency symbol in a customer group price offer line', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $product = $this->createSimpleProduct();
 
     $currency = core()->getCurrentCurrency();
 
@@ -69,9 +91,7 @@ it('should escape the currency symbol in a customer group price offer line', fun
 
     $currency->currency_position = CurrencyPositionEnum::LEFT->value;
 
-    $offerLine = $product->getTypeInstance()->getOfferLines((object) ['qty' => 2]);
-
-    expect($offerLine)->not->toContain('<img');
-
-    expect($offerLine)->toContain('&lt;img src=x onerror=alert(1)&gt;');
+    expect($product->getTypeInstance()->getOfferLines((object) ['qty' => 2]))
+        ->not->toContain('<img')
+        ->toContain('&lt;img src=x onerror=alert(1)&gt;');
 });

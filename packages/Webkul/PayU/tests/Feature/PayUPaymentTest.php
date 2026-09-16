@@ -2,51 +2,29 @@
 
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\PayU\Payment\PayU as PayUPayment;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
 
 beforeEach(function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payu.active',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payu.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payu.merchant_key',
-        'value' => 'test_merchant_key',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payu.merchant_salt',
-        'value' => 'test_merchant_salt',
-        'channel_code' => 'default',
+    $this->setConfig([
+        'sales.payment_methods.payu.active' => '1',
+        'sales.payment_methods.payu.sandbox' => '1',
+        'sales.payment_methods.payu.merchant_key' => 'test_merchant_key',
+        'sales.payment_methods.payu.merchant_salt' => 'test_merchant_salt',
     ]);
 });
 
-it('redirects back when payu credentials are invalid', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payu.merchant_key',
-        'value' => '',
-        'channel_code' => 'default',
-    ]);
+// ============================================================================
+// Redirect
+// ============================================================================
 
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payu.merchant_salt',
-        'value' => '',
-        'channel_code' => 'default',
+it('should redirect back when the PayU credentials are invalid', function () {
+    $this->setConfig([
+        'sales.payment_methods.payu.merchant_key' => '',
+        'sales.payment_methods.payu.merchant_salt' => '',
     ]);
 
     $response = $this->get(route('payu.redirect'));
@@ -56,7 +34,7 @@ it('redirects back when payu credentials are invalid', function () {
     $response->assertSessionHas('error');
 });
 
-it('redirects back when cart is not found', function () {
+it('should redirect back when the cart is not found', function () {
     Cart::shouldReceive('getCart')->andReturn(null);
 
     $response = $this->get(route('payu.redirect'));
@@ -66,7 +44,7 @@ it('redirects back when cart is not found', function () {
     $response->assertSessionHas('error');
 });
 
-it('creates payu payment data and returns redirect view', function () {
+it('should create the PayU payment data and return the redirect view', function () {
     $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
 
     $response = $this->get(route('payu.redirect'));
@@ -85,7 +63,21 @@ it('creates payu payment data and returns redirect view', function () {
         ->and($paymentData['udf1'])->toBe($cart->id);
 });
 
-it('successfully processes payu payment and creates order with invoice', function () {
+it('should refuse a cart in a currency PayU does not settle', function () {
+    $this->createCartWithItems('payu', ['base_currency_code' => 'JPY']);
+
+    $response = $this->get(route('payu.redirect'));
+
+    $response->assertRedirect(route('shop.checkout.cart.index'));
+
+    $response->assertSessionHas('error');
+});
+
+// ============================================================================
+// Payment Callbacks
+// ============================================================================
+
+it('should process the PayU payment and create the order with an invoice', function () {
     $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
 
     $txnid = 'PAYU_TEST123';
@@ -114,18 +106,18 @@ it('successfully processes payu payment and creates order with invoice', functio
 
     $response->assertRedirect(route('shop.checkout.onepage.success'));
 
-    $order = Order::where('cart_id', $cart->id)->first();
+    $order = Order::query()->where('cart_id', $cart->id)->first();
 
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing')
         ->and($order->customer_id)->toBe($cart->customer_id);
 
-    $invoice = Invoice::where('order_id', $order->id)->first();
+    $invoice = Invoice::query()->where('order_id', $order->id)->first();
 
     expect($invoice)->not->toBeNull()
         ->and($invoice->state)->toBe('paid');
 
-    $orderTransaction = OrderTransaction::where('order_id', $order->id)->first();
+    $orderTransaction = OrderTransaction::query()->where('order_id', $order->id)->first();
 
     expect($orderTransaction)->not->toBeNull()
         ->and($orderTransaction->transaction_id)->toBe($txnid)
@@ -133,9 +125,7 @@ it('successfully processes payu payment and creates order with invoice', functio
         ->and($orderTransaction->type)->toBe('payu');
 });
 
-it('handles payment failure gracefully', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
+it('should handle a payment failure gracefully', function () {
     $customer = Customer::factory()->create();
 
     $cart = CartModel::factory()->create([
@@ -160,12 +150,12 @@ it('handles payment failure gracefully', function () {
 
     $response->assertSessionHas('error');
 
-    $order = Order::where('cart_id', $cart->id)->first();
+    $order = Order::query()->where('cart_id', $cart->id)->first();
 
     expect($order)->toBeNull();
 });
 
-it('redirects to cart when hash verification fails', function () {
+it('should redirect to the cart when the hash verification fails', function () {
     $cart = CartModel::factory()->create([
         'base_grand_total' => 100.00,
     ]);
@@ -190,7 +180,7 @@ it('redirects to cart when hash verification fails', function () {
     $response->assertSessionHas('error');
 });
 
-it('handles payment cancellation', function () {
+it('should handle a payment cancellation', function () {
     $cart = CartModel::factory()->create([
         'base_grand_total' => 100.00,
     ]);
@@ -207,17 +197,7 @@ it('handles payment cancellation', function () {
 
     $response->assertSessionHas('warning');
 
-    $order = Order::where('cart_id', $cart->id)->first();
+    $order = Order::query()->where('cart_id', $cart->id)->first();
 
     expect($order)->toBeNull();
-});
-
-it('refuses a cart in a currency payu does not settle', function () {
-    $this->createCartWithItems('payu', ['base_currency_code' => 'JPY']);
-
-    $response = $this->get(route('payu.redirect'));
-
-    $response->assertRedirect(route('shop.checkout.cart.index'));
-
-    $response->assertSessionHas('error');
 });

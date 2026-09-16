@@ -1,6 +1,6 @@
 <?php
 
-use Webkul\Customer\Models\Customer as ModelsCustomer;
+use Webkul\Customer\Models\Customer;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
 use Webkul\RMA\Models\RMA;
 use Webkul\RMA\Models\RMAItem;
@@ -13,15 +13,9 @@ use function Pest\Laravel\postJson;
 /**
  * Create an RMA owned by the given customer in the given status.
  */
-function createRmaForCustomer(ModelsCustomer $customer, DefaultRMAStatusEnum $status, string $orderStatus = 'pending'): RMA
+function createRmaForCustomer(Customer $customer, DefaultRMAStatusEnum $status, string $orderStatus = Order::STATUS_PENDING): RMA
 {
-    $order = Order::factory()->create([
-        'customer_id' => $customer->id,
-        'customer_email' => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name' => $customer->last_name,
-        'status' => $orderStatus,
-    ]);
+    $order = test()->createOrder(['status' => $orderStatus], customer: $customer);
 
     return RMA::create([
         'order_id' => $order->id,
@@ -29,8 +23,12 @@ function createRmaForCustomer(ModelsCustomer $customer, DefaultRMAStatusEnum $st
     ]);
 }
 
+// ============================================================================
+// Closing
+// ============================================================================
+
 it('should close a pending rma request', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING);
 
@@ -44,7 +42,7 @@ it('should close a pending rma request', function () {
 });
 
 it('should not close an rma request that is already solved', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::SOLVED);
 
@@ -58,7 +56,7 @@ it('should not close an rma request that is already solved', function () {
 });
 
 it('should not close an rma request whose package has been received', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::RECEIVED_PACKAGE);
 
@@ -72,7 +70,7 @@ it('should not close an rma request whose package has been received', function (
 });
 
 it('should not close an rma request that has been declined', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::DECLINED);
 
@@ -86,7 +84,7 @@ it('should not close an rma request that has been declined', function () {
 });
 
 it('should not close an rma request belonging to a canceled order', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING, Order::STATUS_CANCELED);
 
@@ -100,7 +98,7 @@ it('should not close an rma request belonging to a canceled order', function () 
 });
 
 it('should not close an rma request belonging to another customer', function () {
-    $rma = createRmaForCustomer(ModelsCustomer::factory()->create(), DefaultRMAStatusEnum::PENDING);
+    $rma = createRmaForCustomer(Customer::factory()->create(), DefaultRMAStatusEnum::PENDING);
 
     $this->loginAsCustomer();
 
@@ -111,8 +109,12 @@ it('should not close an rma request belonging to another customer', function () 
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::PENDING->value);
 });
 
+// ============================================================================
+// Cancelling
+// ============================================================================
+
 it('should cancel a pending rma request', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING);
 
@@ -126,7 +128,7 @@ it('should cancel a pending rma request', function () {
 });
 
 it('should not cancel an rma request that is already solved', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::SOLVED);
 
@@ -139,8 +141,12 @@ it('should not cancel an rma request that is already solved', function () {
     expect($rma->refresh()->rma_status_id)->toBe(DefaultRMAStatusEnum::SOLVED->value);
 });
 
+// ============================================================================
+// Listing Actions
+// ============================================================================
+
 it('should offer the cancel action for a pending rma request', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::PENDING);
 
@@ -162,7 +168,7 @@ it('should offer the cancel action for a pending rma request', function () {
 });
 
 it('should not offer the cancel action for a solved rma request', function () {
-    $customer = ModelsCustomer::factory()->create();
+    $customer = Customer::factory()->create();
 
     $rma = createRmaForCustomer($customer, DefaultRMAStatusEnum::SOLVED);
 

@@ -13,7 +13,11 @@ use Webkul\FPC\Listeners\Review;
 use Webkul\FPC\Listeners\Section;
 use Webkul\FPC\Listeners\URLRewrite;
 
-it('subscribes the page cache to the event', function (string $event, string $listener, string $method) {
+// ============================================================================
+// Listener Registration
+// ============================================================================
+
+it('should subscribe the page cache to the event', function (string $event, string $listener, string $method) {
     $registered = Event::getRawListeners()[$event] ?? [];
 
     expect($registered)->toContain([$listener, $method]);

@@ -1,17 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Http;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\PayGlocal\Enums\PayGlocalPaymentStatus;
 use Webkul\PayGlocal\Payment\PayGlocal;
 
 /**
- * A real RSA keypair, generated per run rather than written into the file. The payment method
- * parses whatever is configured and refuses to report itself available when the keys cannot be
- * loaded, so a dummy string would not exercise the credential checks - but a private key checked
- * into the repository is a private key checked into the repository, whatever it unlocks.
+ * A real RSA keypair generated once per run, so the credential checks parse genuine keys without a
+ * private key ever being checked into the repository.
  */
-function testKeyPair(): array
+function payGlocalTestKeyPair(): array
 {
     static $keys;
 
@@ -36,7 +33,7 @@ function testKeyPair(): array
  * The smallest thing `initiatePayment` will accept: it reads the totals, the currency and the
  * billing address off the cart, and a cart without an address simply sends no billing data.
  */
-function cartStub(): object
+function payGlocalCartStub(): object
 {
     return new class
     {
@@ -58,23 +55,19 @@ function cartStub(): object
  * Configure a complete, usable set of credentials, so that a test only has to say which single
  * value it wants broken.
  */
-function configureCredentials(array $overrides = []): void
+function configurePayGlocalCredentials(array $overrides = []): void
 {
     $credentials = array_merge([
         'merchant_id' => 'test_merchant',
         'public_key_id' => 'test_public_kid',
         'private_key_id' => 'test_private_kid',
-        'payglocal_public_key' => testKeyPair()['public'],
-        'merchant_private_key' => testKeyPair()['private'],
+        'payglocal_public_key' => payGlocalTestKeyPair()['public'],
+        'merchant_private_key' => payGlocalTestKeyPair()['private'],
         'accepted_currencies' => 'USD,INR',
     ], $overrides);
 
     foreach ($credentials as $field => $value) {
-        CoreConfig::factory()->create([
-            'code' => 'sales.payment_methods.payglocal.'.$field,
-            'value' => $value,
-            'channel_code' => 'default',
-        ]);
+        test()->setConfig('sales.payment_methods.payglocal.'.$field, $value);
     }
 }
 
@@ -82,55 +75,37 @@ beforeEach(function () {
     $this->payGlocal = app(PayGlocal::class);
 });
 
-it('returns the correct payment method code', function () {
+// ============================================================================
+// Configuration
+// ============================================================================
+
+it('should return the correct payment method code', function () {
     $code = $this->payGlocal->getCode();
 
     expect($code)->toBe('payglocal');
 });
 
-it('returns the payment method title from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.title',
-        'value' => 'PayGlocal Payment Gateway',
-        'channel_code' => 'default',
-        'locale_code' => 'en',
-    ]);
+it('should return the payment method title from configuration', function () {
+    $this->setConfig('sales.payment_methods.payglocal.title', 'PayGlocal Payment Gateway');
 
     $title = $this->payGlocal->getTitle();
 
     expect($title)->toBe('PayGlocal Payment Gateway');
 });
 
-it('returns the payment method description from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.description',
-        'value' => 'Pay securely using PayGlocal',
-        'channel_code' => 'default',
-        'locale_code' => 'en',
-    ]);
+it('should return the payment method description from configuration', function () {
+    $this->setConfig('sales.payment_methods.payglocal.description', 'Pay securely using PayGlocal');
 
     $description = $this->payGlocal->getDescription();
 
     expect($description)->toBe('Pay securely using PayGlocal');
 });
 
-it('returns the merchant credentials from configuration', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.merchant_id',
-        'value' => 'test_merchant',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.public_key_id',
-        'value' => 'test_public_kid',
-        'channel_code' => 'default',
-    ]);
-
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.private_key_id',
-        'value' => 'test_private_kid',
-        'channel_code' => 'default',
+it('should return the merchant credentials from configuration', function () {
+    $this->setConfig([
+        'sales.payment_methods.payglocal.merchant_id' => 'test_merchant',
+        'sales.payment_methods.payglocal.public_key_id' => 'test_public_kid',
+        'sales.payment_methods.payglocal.private_key_id' => 'test_private_kid',
     ]);
 
     expect($this->payGlocal->getMerchantId())->toBe('test_merchant')
@@ -138,12 +113,8 @@ it('returns the merchant credentials from configuration', function () {
         ->and($this->payGlocal->getPrivateKeyId())->toBe('test_private_kid');
 });
 
-it('returns the sandbox base url when sandbox mode is enabled', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.sandbox',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
+it('should return the sandbox base url when sandbox mode is enabled', function () {
+    $this->setConfig('sales.payment_methods.payglocal.sandbox', '1');
 
     $baseUrl = $this->payGlocal->getBaseUrl();
 
@@ -151,12 +122,8 @@ it('returns the sandbox base url when sandbox mode is enabled', function () {
         ->and($baseUrl)->toBe(PayGlocal::SANDBOX_URL);
 });
 
-it('returns the production base url when sandbox mode is disabled', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.sandbox',
-        'value' => '0',
-        'channel_code' => 'default',
-    ]);
+it('should return the production base url when sandbox mode is disabled', function () {
+    $this->setConfig('sales.payment_methods.payglocal.sandbox', '0');
 
     $baseUrl = $this->payGlocal->getBaseUrl();
 
@@ -164,40 +131,65 @@ it('returns the production base url when sandbox mode is disabled', function () 
         ->and($baseUrl)->toBe(PayGlocal::PRODUCTION_URL);
 });
 
-it('checks if credentials are valid when all are configured', function () {
-    configureCredentials();
+it('should return the payment method image from configuration', function () {
+    $this->setConfig('sales.payment_methods.payglocal.image', 'payglocal/custom-logo.png');
+
+    $image = $this->payGlocal->getImage();
+
+    expect($image)->toContain('payglocal/custom-logo.png');
+});
+
+it('should return the default payment method image when not configured', function () {
+    $image = $this->payGlocal->getImage();
+
+    expect($image)->toContain('payglocal')
+        ->and($image)->toContain('.png');
+});
+
+it('should return the correct redirect URL', function () {
+    $url = $this->payGlocal->getRedirectUrl();
+
+    expect($url)->toBe(route('payglocal.redirect'));
+});
+
+// ============================================================================
+// Credentials
+// ============================================================================
+
+it('should report the credentials valid when all are configured', function () {
+    configurePayGlocalCredentials();
 
     $hasValidCredentials = $this->payGlocal->hasValidCredentials();
 
     expect($hasValidCredentials)->toBeTrue();
 });
 
-it('returns false if the merchant id is missing', function () {
-    configureCredentials(['merchant_id' => '']);
+it('should report the credentials invalid when the merchant id is missing', function () {
+    configurePayGlocalCredentials(['merchant_id' => '']);
 
     $hasValidCredentials = $this->payGlocal->hasValidCredentials();
 
     expect($hasValidCredentials)->toBeFalse();
 });
 
-it('returns false if a key id is missing', function () {
-    configureCredentials(['public_key_id' => '']);
+it('should report the credentials invalid when a key id is missing', function () {
+    configurePayGlocalCredentials(['public_key_id' => '']);
 
     $hasValidCredentials = $this->payGlocal->hasValidCredentials();
 
     expect($hasValidCredentials)->toBeFalse();
 });
 
-it('reports the keys usable when they parse', function () {
-    configureCredentials();
+it('should report the keys usable when they parse', function () {
+    configurePayGlocalCredentials();
 
     $hasUsableKeys = $this->payGlocal->hasUsableKeys();
 
     expect($hasUsableKeys)->toBeTrue();
 });
 
-it('reports the keys unusable when they cannot be parsed', function () {
-    configureCredentials([
+it('should report the keys unusable when they cannot be parsed', function () {
+    configurePayGlocalCredentials([
         'payglocal_public_key' => 'not-a-real-pem',
         'merchant_private_key' => 'not-a-real-pem',
     ]);
@@ -206,8 +198,8 @@ it('reports the keys unusable when they cannot be parsed', function () {
         ->and($this->payGlocal->hasUsableKeys())->toBeFalse();
 });
 
-it('reports the keys unusable when they are missing', function () {
-    configureCredentials([
+it('should report the keys unusable when they are missing', function () {
+    configurePayGlocalCredentials([
         'payglocal_public_key' => '',
         'merchant_private_key' => '',
     ]);
@@ -217,38 +209,14 @@ it('reports the keys unusable when they are missing', function () {
     expect($hasUsableKeys)->toBeFalse();
 });
 
-it('returns the accepted currencies as a list', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.accepted_currencies',
-        'value' => 'USD, INR ,EUR',
-        'channel_code' => 'default',
-    ]);
+// ============================================================================
+// Availability And Currencies
+// ============================================================================
 
-    $currencies = $this->payGlocal->getAcceptedCurrencies();
+it('should not be available when the credentials are missing', function () {
+    $this->setConfig('sales.payment_methods.payglocal.active', '1');
 
-    expect($currencies)->toBe(['USD', 'INR', 'EUR']);
-});
-
-it('checks whether a currency is accepted regardless of case', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.accepted_currencies',
-        'value' => 'USD,INR',
-        'channel_code' => 'default',
-    ]);
-
-    expect($this->payGlocal->isCurrencySupported('inr'))->toBeTrue()
-        ->and($this->payGlocal->isCurrencySupported('USD'))->toBeTrue()
-        ->and($this->payGlocal->isCurrencySupported('EUR'))->toBeFalse();
-});
-
-it('is not available when credentials are missing', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.active',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
-
-    configureCredentials([
+    configurePayGlocalCredentials([
         'payglocal_public_key' => '',
         'merchant_private_key' => '',
     ]);
@@ -258,14 +226,10 @@ it('is not available when credentials are missing', function () {
     expect($isAvailable)->toBeFalse();
 });
 
-it('is still offered when the currency is not accepted', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.active',
-        'value' => '1',
-        'channel_code' => 'default',
-    ]);
+it('should still be offered when the currency is not accepted', function () {
+    $this->setConfig('sales.payment_methods.payglocal.active', '1');
 
-    configureCredentials(['accepted_currencies' => 'EUR']);
+    configurePayGlocalCredentials(['accepted_currencies' => 'EUR']);
 
     $isAvailable = $this->payGlocal->isAvailable();
 
@@ -273,40 +237,43 @@ it('is still offered when the currency is not accepted', function () {
         ->and($this->payGlocal->isCurrencySupported('USD'))->toBeFalse();
 });
 
-it('generates a merchant transaction id carrying the cart id', function () {
-    $merchantTxnId = $this->payGlocal->generateMerchantTxnId(42);
+it('should return the accepted currencies as a list', function () {
+    $this->setConfig('sales.payment_methods.payglocal.accepted_currencies', 'USD, INR ,EUR');
 
-    expect($merchantTxnId)->toStartWith('PGL42T')
-        ->and($merchantTxnId)->not->toBe($this->payGlocal->generateMerchantTxnId(42));
+    $currencies = $this->payGlocal->getAcceptedCurrencies();
+
+    expect($currencies)->toBe(['USD', 'INR', 'EUR']);
 });
 
-it('returns payment method image from config', function () {
-    CoreConfig::factory()->create([
-        'code' => 'sales.payment_methods.payglocal.image',
-        'value' => 'payglocal/custom-logo.png',
-        'channel_code' => 'default',
-    ]);
+it('should accept a currency regardless of case', function () {
+    $this->setConfig('sales.payment_methods.payglocal.accepted_currencies', 'USD,INR');
 
-    $image = $this->payGlocal->getImage();
-
-    expect($image)->toContain('payglocal/custom-logo.png');
+    expect($this->payGlocal->isCurrencySupported('inr'))->toBeTrue()
+        ->and($this->payGlocal->isCurrencySupported('USD'))->toBeTrue()
+        ->and($this->payGlocal->isCurrencySupported('EUR'))->toBeFalse();
 });
 
-it('returns default payment method image when not configured', function () {
-    $image = $this->payGlocal->getImage();
+it('should charge in the store currency rather than the one the customer is browsing in', function () {
+    $cart = new class
+    {
+        public $grand_total = 1.00;
 
-    expect($image)->toContain('payglocal')
-        ->and($image)->toContain('.png');
+        public $base_grand_total = 80.00;
+
+        public $cart_currency_code = 'USD';
+
+        public $base_currency_code = 'INR';
+    };
+
+    expect($this->payGlocal->getCurrency($cart))->toBe('INR');
 });
 
-it('returns the correct redirect URL', function () {
-    $url = $this->payGlocal->getRedirectUrl();
+// ============================================================================
+// Gateway Requests
+// ============================================================================
 
-    expect($url)->toBe(route('payglocal.redirect'));
-});
-
-it('reads the redirect and status urls out of an initiated payment', function () {
-    configureCredentials();
+it('should read the redirect and status urls out of an initiated payment', function () {
+    configurePayGlocalCredentials();
 
     Http::fake([
         '*/gl/v1/payments/initiate/paycollect' => Http::response([
@@ -320,15 +287,15 @@ it('reads the redirect and status urls out of an initiated payment', function ()
         ], 200),
     ]);
 
-    $response = $this->payGlocal->initiatePayment(cartStub(), 'PGL1TTEST');
+    $response = $this->payGlocal->initiatePayment(payGlocalCartStub(), 'PGL1TTEST');
 
     expect($response['gid'])->toBe('gl_o-a1c803266de57f693f1k0lTX2')
         ->and($response['redirectUrl'])->toBe('https://api.uat.pygcl.com/gl/payflow-ui/?x-gl-token=token')
         ->and($response['statusUrl'])->toContain('/status?x-gl-token=token');
 });
 
-it('refuses an initiated payment that carries nowhere to send the customer', function () {
-    configureCredentials();
+it('should refuse an initiated payment that carries nowhere to send the customer', function () {
+    configurePayGlocalCredentials();
 
     Http::fake([
         '*/gl/v1/payments/initiate/paycollect' => Http::response([
@@ -339,13 +306,13 @@ it('refuses an initiated payment that carries nowhere to send the customer', fun
         ], 200),
     ]);
 
-    $response = $this->payGlocal->initiatePayment(cartStub(), 'PGL1TTEST');
+    $response = $this->payGlocal->initiatePayment(payGlocalCartStub(), 'PGL1TTEST');
 
     expect($response)->toBeNull();
 });
 
-it('returns null when payglocal rejects the initiate request', function () {
-    configureCredentials();
+it('should return null when PayGlocal rejects the initiate request', function () {
+    configurePayGlocalCredentials();
 
     Http::fake([
         '*/gl/v1/payments/initiate/paycollect' => Http::response([
@@ -355,12 +322,12 @@ it('returns null when payglocal rejects the initiate request', function () {
         ], 401),
     ]);
 
-    $response = $this->payGlocal->initiatePayment(cartStub(), 'PGL1TTEST');
+    $response = $this->payGlocal->initiatePayment(payGlocalCartStub(), 'PGL1TTEST');
 
     expect($response)->toBeNull();
 });
 
-it('reads the payment status out of the status api', function () {
+it('should read the payment status out of the status api', function () {
     Http::fake([
         '*/status*' => Http::response([
             'gid' => 'gl_a1c7fa4ddc487f1cf25uut0lTX2',
@@ -385,7 +352,7 @@ it('reads the payment status out of the status api', function () {
         ->and(PayGlocalPaymentStatus::tryFrom($response['status'])->isSuccessful())->toBeTrue();
 });
 
-it('returns null when the status api cannot be read', function () {
+it('should return null when the status api cannot be read', function () {
     Http::fake([
         '*/status*' => Http::response([
             'gid' => 'gl_a1c6e3ecc919bb2c',
@@ -399,7 +366,7 @@ it('returns null when the status api cannot be read', function () {
     expect($response)->toBeNull();
 });
 
-it('returns null without calling payglocal when there is no status url', function () {
+it('should return null without calling PayGlocal when there is no status url', function () {
     Http::fake();
 
     $response = $this->payGlocal->getTransactionStatus(null);
@@ -409,35 +376,30 @@ it('returns null without calling payglocal when there is no status url', functio
     Http::assertNothingSent();
 });
 
-it('reads the cart out of a merchant transaction id', function () {
+// ============================================================================
+// Transaction References
+// ============================================================================
+
+it('should generate a merchant transaction id carrying the cart id', function () {
+    $merchantTxnId = $this->payGlocal->generateMerchantTxnId(42);
+
+    expect($merchantTxnId)->toStartWith('PGL42T')
+        ->and($merchantTxnId)->not->toBe($this->payGlocal->generateMerchantTxnId(42));
+});
+
+it('should read the cart out of a merchant transaction id', function () {
     expect($this->payGlocal->parseCartId('PGL28TPQWIXAHJ3F'))->toBe(28)
         ->and($this->payGlocal->parseCartId('nonsense'))->toBeNull()
         ->and($this->payGlocal->parseCartId(null))->toBeNull();
 });
 
-it('reads the captured amount and currency out of what payglocal reports', function () {
+it('should read the captured amount and currency out of what PayGlocal reports', function () {
     $statusBody = ['data' => ['Amount' => '42.99', 'txnCurrency' => 'inr']];
-
-    expect($this->payGlocal->getCapturedAmount($statusBody))->toBe(42.99)
-        ->and($this->payGlocal->getCapturedCurrency($statusBody))->toBe('INR');
 
     $claims = ['Amount' => '42.99', 'merchantTxnId' => 'PGL28TPQWIXAHJ3F'];
 
-    expect($this->payGlocal->getCapturedAmount($claims))->toBe(42.99)
+    expect($this->payGlocal->getCapturedAmount($statusBody))->toBe(42.99)
+        ->and($this->payGlocal->getCapturedCurrency($statusBody))->toBe('INR')
+        ->and($this->payGlocal->getCapturedAmount($claims))->toBe(42.99)
         ->and($this->payGlocal->getReportedMerchantTxnId($claims))->toBe('PGL28TPQWIXAHJ3F');
-});
-
-it('charges in the store currency rather than the one the customer is browsing in', function () {
-    $cart = new class
-    {
-        public $grand_total = 1.00;
-
-        public $base_grand_total = 80.00;
-
-        public $cart_currency_code = 'USD';
-
-        public $base_currency_code = 'INR';
-    };
-
-    expect($this->payGlocal->getCurrency($cart))->toBe('INR');
 });

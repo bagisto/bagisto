@@ -9,7 +9,6 @@ use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Importers\Product\Importer as ProductImporter;
 use Webkul\DataTransfer\Models\Import as ImportModel;
 use Webkul\DataTransfer\Models\ImportBatch;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 
@@ -35,8 +34,12 @@ beforeEach(function () {
     core()->setCurrentChannel($this->channel);
 });
 
-it('opens the product edit page in the channel locale when the channel lacks the admin locale', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+// ============================================================================
+// Channel Without The Admin Locale
+// ============================================================================
+
+it('should open the product edit page in the channel locale when the channel lacks the admin locale', function () {
+    $product = $this->createSimpleProduct();
 
     $this->loginAsAdmin();
 
@@ -47,14 +50,14 @@ it('opens the product edit page in the channel locale when the channel lacks the
     expect($content)->toMatch('/name="locale"\s+value="'.preg_quote($this->channelLocale->code, '/').'"/');
 });
 
-it('saves product content in the channel locale and lists the product in the admin grid when the channel lacks the admin locale', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+it('should save product content in the channel locale and list the product in the admin grid when the channel lacks the admin locale', function () {
+    $product = $this->createSimpleProduct();
 
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku' => $product->sku,
-        'url_key' => fake()->slug(),
+        'url_key' => fake()->unique()->slug(),
         'short_description' => fake()->sentence(),
         'description' => fake()->paragraph(),
         'name' => $name = fake()->words(3, true),
@@ -77,7 +80,9 @@ it('saves product content in the channel locale and lists the product in the adm
     ]);
 
     $record = collect(
-        getJson(route('admin.catalog.products.index'), [
+        getJson(route('admin.catalog.products.index', [
+            'filters' => ['product_id' => [$product->id]],
+        ]), [
             'X-Requested-With' => 'XMLHttpRequest',
         ])
             ->assertOk()
@@ -88,8 +93,8 @@ it('saves product content in the channel locale and lists the product in the adm
         ->and($record['name'])->toBe($name);
 });
 
-it('writes the admin locale flat row when indexing imported products on a channel that lacks it', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+it('should write the admin locale flat row when indexing imported products on a channel that lacks it', function () {
+    $product = $this->createSimpleProduct();
 
     ProductFlat::query()
         ->where('product_id', $product->id)

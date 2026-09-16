@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Core\Models\CoreConfig;
 use Webkul\PayGlocal\Enums\PayGlocalPaymentStatus;
 use Webkul\PayGlocal\Helpers\Crypto;
 use Webkul\PayGlocal\Payment\PayGlocal;
@@ -15,7 +14,7 @@ use Webkul\Sales\Models\OrderTransaction;
  * The claims PayGlocal signs into the `x-gl-token` it posts back, in the shape it really sends:
  * the reference, the outcome, and the status url to confirm the outcome against.
  */
-function callbackClaims($cart): array
+function payGlocalCallbackClaims($cart): array
 {
     return [
         'gid' => 'gl_o-test_gid',
@@ -32,7 +31,7 @@ function callbackClaims($cart): array
  * The body PayGlocal's status API answers with, in the shape it really sends. That call is what
  * an order is built from, so a payment is simulated by answering it rather than by the token.
  */
-function statusResponse($cart, string $status, array $dataOverrides = []): array
+function payGlocalStatusResponse($cart, string $status, array $dataOverrides = []): array
 {
     return [
         'gid' => 'gl_o-test_gid',
@@ -54,18 +53,18 @@ function statusResponse($cart, string $status, array $dataOverrides = []): array
 /**
  * Answer the status call for a captured payment on the given cart.
  */
-function mockConfirmedStatus($payGlocalMock, $cart, array $dataOverrides = []): void
+function mockPayGlocalConfirmedStatus($cart, array $dataOverrides = []): void
 {
-    $payGlocalMock->shouldReceive('getTransactionStatus')
+    test()->payGlocalMock->shouldReceive('getTransactionStatus')
         ->with('https://api.uat.pygcl.com/gl/v1/payments/gl_o-test_gid/status?x-gl-token=token')
-        ->andReturn(statusResponse($cart, PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value, $dataOverrides));
+        ->andReturn(payGlocalStatusResponse($cart, PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value, $dataOverrides));
 }
 
 /**
  * Stand in for the signed token PayGlocal posts. Passing null models a token that does not
  * verify, which must never settle anything.
  */
-function mockCallbackToken(?array $claims): void
+function mockPayGlocalCallbackToken(?array $claims): void
 {
     $cryptoMock = test()->mock(Crypto::class)->makePartial();
 
@@ -74,25 +73,32 @@ function mockCallbackToken(?array $claims): void
     app()->instance(Crypto::class, $cryptoMock);
 }
 
+/**
+ * Move the stored cart totals away from what its items add up to, leaving the given instance as it was.
+ */
+function driftPayGlocalCartTotals($cart, float $amount): void
+{
+    DB::table('cart')->where('id', $cart->id)->update([
+        'grand_total' => $cart->grand_total + $amount,
+        'base_grand_total' => $cart->base_grand_total + $amount,
+        'sub_total' => $cart->sub_total + $amount,
+        'base_sub_total' => $cart->base_sub_total + $amount,
+    ]);
+}
+
 beforeEach(function () {
     Http::preventStrayRequests();
 
-    foreach ([
-        'active' => '1',
-        'sandbox' => '1',
-        'merchant_id' => 'test_merchant',
-        'public_key_id' => 'test_public_kid',
-        'private_key_id' => 'test_private_kid',
-        'payglocal_public_key' => 'fake_public_key',
-        'merchant_private_key' => 'fake_private_key',
-        'accepted_currencies' => 'USD,INR',
-    ] as $field => $value) {
-        CoreConfig::factory()->create([
-            'code' => 'sales.payment_methods.payglocal.'.$field,
-            'value' => $value,
-            'channel_code' => 'default',
-        ]);
-    }
+    $this->setConfig([
+        'sales.payment_methods.payglocal.active' => '1',
+        'sales.payment_methods.payglocal.sandbox' => '1',
+        'sales.payment_methods.payglocal.merchant_id' => 'test_merchant',
+        'sales.payment_methods.payglocal.public_key_id' => 'test_public_kid',
+        'sales.payment_methods.payglocal.private_key_id' => 'test_private_kid',
+        'sales.payment_methods.payglocal.payglocal_public_key' => 'fake_public_key',
+        'sales.payment_methods.payglocal.merchant_private_key' => 'fake_private_key',
+        'sales.payment_methods.payglocal.accepted_currencies' => 'USD,INR',
+    ]);
 
     $this->payGlocalMock = $this->mock(PayGlocal::class)->makePartial();
 
@@ -101,7 +107,11 @@ beforeEach(function () {
     $this->app->instance(PayGlocal::class, $this->payGlocalMock);
 });
 
-it('redirects to cart when the configured keys cannot be used', function () {
+// ============================================================================
+// Redirect
+// ============================================================================
+
+it('should redirect to the cart when the configured keys cannot be used', function () {
     $payGlocalMock = $this->mock(PayGlocal::class)->makePartial();
 
     $payGlocalMock->shouldReceive('hasUsableKeys')->andReturn(false);
@@ -115,7 +125,7 @@ it('redirects to cart when the configured keys cannot be used', function () {
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when the cart currency is not accepted', function () {
+it('should redirect to the cart when the cart currency is not accepted', function () {
     $cart = $this->createCartWithItems('payglocal');
 
     Cart::shouldReceive('getCart')->andReturn($cart);
@@ -129,7 +139,7 @@ it('redirects to cart when the cart currency is not accepted', function () {
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when cart is not found', function () {
+it('should redirect to the cart when the cart is not found', function () {
     Cart::shouldReceive('getCart')->andReturn(null);
 
     $response = $this->get(route('payglocal.redirect'));
@@ -139,7 +149,7 @@ it('redirects to cart when cart is not found', function () {
     $response->assertSessionHas('error');
 });
 
-it('sends the customer to payglocal without recording anything of its own', function () {
+it('should send the customer to PayGlocal without recording anything of its own', function () {
     $cart = $this->createCartWithItems('payglocal');
 
     Cart::shouldReceive('getCart')->andReturn($cart);
@@ -155,7 +165,7 @@ it('sends the customer to payglocal without recording anything of its own', func
     $response->assertRedirect('https://api.uat.payglocal.in/gl/payflow-ui/?x-gl-token=token');
 });
 
-it('reports a failure when payglocal will not start the payment', function () {
+it('should report a failure when PayGlocal will not start the payment', function () {
     $cart = $this->createCartWithItems('payglocal');
 
     Cart::shouldReceive('getCart')->andReturn($cart);
@@ -169,12 +179,16 @@ it('reports a failure when payglocal will not start the payment', function () {
     $response->assertSessionHas('error');
 });
 
-it('settles the payment and creates the order with an invoice from the callback', function () {
+// ============================================================================
+// Callback
+// ============================================================================
+
+it('should settle the payment and create the order with an invoice from the callback', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart);
+    mockPayGlocalConfirmedStatus($cart);
 
     $response = $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
 
@@ -183,73 +197,73 @@ it('settles the payment and creates the order with an invoice from the callback'
         'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
     ]));
 
-    $order = Order::where('cart_id', $cart->id)->first();
+    $order = Order::query()->where('cart_id', $cart->id)->first();
 
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing');
 
-    $orderTransaction = OrderTransaction::where('transaction_id', 'gl_o-test_gid')->first();
+    $orderTransaction = OrderTransaction::query()->where('transaction_id', 'gl_o-test_gid')->first();
 
     expect($orderTransaction)->not->toBeNull()
         ->and($orderTransaction->order_id)->toBe($order->id)
         ->and($orderTransaction->status)->toBe(PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value)
-        ->and((float) $orderTransaction->amount)->toBe((float) $order->base_grand_total);
-
-    expect(Invoice::where('order_id', $order->id)->first())->not->toBeNull();
-
-    $cart->refresh();
-
-    expect($cart->is_active)->toBeFalse();
+        ->and((float) $orderTransaction->amount)->toBe((float) $order->base_grand_total)
+        ->and(Invoice::query()->where('order_id', $order->id)->first())->not->toBeNull()
+        ->and($cart->refresh()->is_active)->toBeFalse();
 });
 
-it('does not start a session when receiving the callback', function () {
+it('should not start a session when receiving the callback', function () {
     $response = $this->post(route('payglocal.callback'));
 
     expect($response->headers->getCookies())->toBeEmpty();
 });
 
-it('places no order when the callback token is not signed by payglocal', function () {
+it('should place no order when the callback token is not signed by PayGlocal', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(null);
+    mockPayGlocalCallbackToken(null);
 
     $this->post(route('payglocal.callback'), ['x-gl-token' => 'forged']);
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
-it('places no order when payglocal does not confirm the payment', function () {
+it('should place no order when PayGlocal does not confirm the payment', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
     $this->payGlocalMock->shouldReceive('getTransactionStatus')
-        ->andReturn(statusResponse($cart, PayGlocalPaymentStatus::ISSUER_DECLINE->value));
+        ->andReturn(payGlocalStatusResponse($cart, PayGlocalPaymentStatus::ISSUER_DECLINE->value));
 
     $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
-it('believes payglocal over the token when the two disagree', function () {
+it('should believe PayGlocal over the token when the two disagree', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
     $this->payGlocalMock->shouldReceive('getTransactionStatus')
-        ->andReturn(statusResponse($cart, PayGlocalPaymentStatus::CUSTOMER_CANCELLED->value));
+        ->andReturn(payGlocalStatusResponse($cart, PayGlocalPaymentStatus::CUSTOMER_CANCELLED->value));
 
     $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
-it('shows the customer the order the callback placed', function () {
+// ============================================================================
+// Success Page
+// ============================================================================
+
+it('should show the customer the order the callback placed', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart);
+    mockPayGlocalConfirmedStatus($cart);
 
     $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
 
@@ -257,10 +271,10 @@ it('shows the customer the order the callback placed', function () {
 
     $response->assertRedirect(route('shop.checkout.onepage.success'));
 
-    $response->assertSessionHas('order_id', Order::where('cart_id', $cart->id)->first()->id);
+    $response->assertSessionHas('order_id', Order::query()->where('cart_id', $cart->id)->first()->id);
 });
 
-it('cannot be made to place an order by typing a reference', function () {
+it('should not be made to place an order by typing a reference', function () {
     $cart = $this->createCartWithItems('payglocal');
 
     $response = $this->get(route('payglocal.success', [
@@ -272,15 +286,19 @@ it('cannot be made to place an order by typing a reference', function () {
 
     $response->assertSessionHas('error');
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
-it('creates the order from a webhook when the customer never came back', function () {
+// ============================================================================
+// Webhook
+// ============================================================================
+
+it('should create the order from a webhook when the customer never came back', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart);
+    mockPayGlocalConfirmedStatus($cart);
 
     $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
 
@@ -288,15 +306,15 @@ it('creates the order from a webhook when the customer never came back', functio
 
     $response->assertJsonPath('status', 'order_created');
 
-    expect(Order::where('cart_id', $cart->id)->first())->not->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->not->toBeNull();
 });
 
-it('does not create a second order when the webhook arrives after the callback', function () {
+it('should not create a second order when the webhook arrives after the callback', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart);
+    mockPayGlocalConfirmedStatus($cart);
 
     $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
 
@@ -306,13 +324,13 @@ it('does not create a second order when the webhook arrives after the callback',
 
     $response->assertJsonPath('status', 'order_already_exists');
 
-    expect(Order::where('cart_id', $cart->id)->count())->toBe(1);
+    expect(Order::query()->where('cart_id', $cart->id)->count())->toBe(1);
 });
 
-it('ignores a webhook whose token is not signed by payglocal', function () {
+it('should ignore a webhook whose token is not signed by PayGlocal', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(null);
+    mockPayGlocalCallbackToken(null);
 
     $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'forged']);
 
@@ -320,15 +338,19 @@ it('ignores a webhook whose token is not signed by payglocal', function () {
 
     $response->assertJsonPath('status', 'transaction_not_found');
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
-it('refuses to place the order when the cart no longer totals what was captured', function () {
+// ============================================================================
+// Captured Payment Verification
+// ============================================================================
+
+it('should refuse to place the order when the cart no longer totals what was captured', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart, [
+    mockPayGlocalConfirmedStatus($cart, [
         'Amount' => (string) ($cart->base_grand_total + 100),
     ]);
 
@@ -338,45 +360,34 @@ it('refuses to place the order when the cart no longer totals what was captured'
 
     $response->assertJsonPath('status', 'payment_not_confirmed');
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
-it('settles against the totals collect totals recalculated, not the stale ones it was handed', function () {
+it('should settle against the totals collectTotals recalculated, not the stale ones it was handed', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    /**
-     * Drift the stored totals away from what the items add up to. collectTotals() recomputes
-     * them from the items, so the figures on the cart instance read back before it runs are
-     * the drifted ones, and the figures it leaves behind are the true ones.
-     */
-    DB::table('cart')->where('id', $cart->id)->update([
-        'grand_total' => $cart->grand_total + 500,
-        'base_grand_total' => $cart->base_grand_total + 500,
-        'sub_total' => $cart->sub_total + 500,
-        'base_sub_total' => $cart->base_sub_total + 500,
-    ]);
+    driftPayGlocalCartTotals($cart, 500);
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart);
+    mockPayGlocalConfirmedStatus($cart);
 
     $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
 
     $response->assertOk();
 
-    $order = Order::where('cart_id', $cart->id)->first();
+    $order = Order::query()->where('cart_id', $cart->id)->first();
 
-    expect($order)->not->toBeNull();
-
-    expect((float) $order->base_grand_total)->toBe((float) $cart->base_grand_total);
+    expect($order)->not->toBeNull()
+        ->and((float) $order->base_grand_total)->toBe((float) $cart->base_grand_total);
 });
 
-it('refuses to place the order when the cart currency no longer matches what was captured', function () {
+it('should refuse to place the order when the cart currency no longer matches what was captured', function () {
     $cart = $this->createCartWithItems('payglocal');
 
-    mockCallbackToken(callbackClaims($cart));
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
 
-    mockConfirmedStatus($this->payGlocalMock, $cart, ['txnCurrency' => 'EUR']);
+    mockPayGlocalConfirmedStatus($cart, ['txnCurrency' => 'EUR']);
 
     $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
 
@@ -384,5 +395,5 @@ it('refuses to place the order when the cart currency no longer matches what was
 
     $response->assertJsonPath('status', 'payment_not_confirmed');
 
-    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });

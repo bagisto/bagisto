@@ -2,31 +2,36 @@
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Webkul\EUWithdrawal\Enums\WithdrawalStatus;
 use Webkul\EUWithdrawal\Models\Withdrawal;
-use Webkul\Sales\Models\Order;
 
 use function Pest\Laravel\getJson;
 
-$ajax = ['X-Requested-With' => 'XMLHttpRequest'];
+/**
+ * An email address no other withdrawal or order in the database carries.
+ */
+function uniqueWithdrawalEmail(): string
+{
+    return Str::lower(Str::random(16)).'@example.test';
+}
 
 /**
  * Create a withdrawal request for a fresh guest order, with the given attributes overriding the defaults.
  */
 function makeWithdrawal(array $attributes = []): Withdrawal
 {
-    $order = Order::factory()->create(array_merge([
-        'customer_email' => 'order-owner@example.test',
+    $order = test()->createGuestOrder(array_merge([
+        'customer_email' => uniqueWithdrawalEmail(),
         'status' => 'pending',
-        'is_guest' => 1,
     ], $attributes['order'] ?? []));
 
-    return Withdrawal::create(array_merge([
+    return Withdrawal::query()->create(array_merge([
         'uuid' => (string) Str::uuid(),
         'order_id' => $order->id,
         'customer_id' => null,
         'is_guest' => true,
-        'customer_email' => 'shopper@example.test',
+        'customer_email' => uniqueWithdrawalEmail(),
         'channel_id' => $order->channel_id,
         'locale' => 'en',
         'received_at' => now(),
@@ -34,77 +39,104 @@ function makeWithdrawal(array $attributes = []): Withdrawal
     ], Arr::except($attributes, ['order'])));
 }
 
-it('should filter the eu withdrawals listing by customer email', function () use ($ajax) {
-    $wanted = makeWithdrawal(['customer_email' => 'wanted@example.test']);
+/**
+ * Request the eu withdrawals listing narrowed by the given filters.
+ */
+function euWithdrawalsListing(array $filters): TestResponse
+{
+    return getJson(route('admin.sales.eu-withdrawals.index', ['filters' => $filters]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ]);
+}
 
-    makeWithdrawal(['customer_email' => 'other@example.test']);
+// ============================================================================
+// Filtering
+// ============================================================================
+
+it('should filter the eu withdrawals listing by customer email', function () {
+    $email = uniqueWithdrawalEmail();
+
+    $wanted = makeWithdrawal(['customer_email' => $email]);
+
+    makeWithdrawal();
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.sales.eu-withdrawals.index', [
-        'filters' => ['customer_email' => ['wanted@example.test']],
-    ]), $ajax)
+    euWithdrawalsListing(['customer_email' => [$email]])
         ->assertOk()
         ->assertJsonPath('meta.total', 1)
         ->assertJsonPath('records.0.uuid', $wanted->uuid);
 });
 
-it('should filter the eu withdrawals listing by status', function () use ($ajax) {
-    $refunded = makeWithdrawal(['status' => WithdrawalStatus::REFUNDED]);
+it('should filter the eu withdrawals listing by status', function () {
+    $email = uniqueWithdrawalEmail();
 
-    makeWithdrawal(['status' => WithdrawalStatus::RECEIVED]);
+    $refunded = makeWithdrawal([
+        'customer_email' => $email,
+        'status' => WithdrawalStatus::REFUNDED,
+    ]);
+
+    makeWithdrawal([
+        'customer_email' => $email,
+        'status' => WithdrawalStatus::RECEIVED,
+    ]);
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.sales.eu-withdrawals.index', [
-        'filters' => ['status' => [WithdrawalStatus::REFUNDED]],
-    ]), $ajax)
+    euWithdrawalsListing([
+        'customer_email' => [$email],
+        'status' => [WithdrawalStatus::REFUNDED],
+    ])
         ->assertOk()
         ->assertJsonPath('meta.total', 1)
         ->assertJsonPath('records.0.uuid', $refunded->uuid);
 });
 
-it('should search the eu withdrawals listing', function () use ($ajax) {
-    $wanted = makeWithdrawal(['customer_email' => 'searchable@example.test']);
+it('should search the eu withdrawals listing', function () {
+    $token = Str::lower(Str::random(16));
 
-    makeWithdrawal(['customer_email' => 'elsewhere@example.test']);
+    $wanted = makeWithdrawal(['customer_email' => "{$token}@example.test"]);
+
+    makeWithdrawal();
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.sales.eu-withdrawals.index', [
-        'filters' => ['all' => ['searchable']],
-    ]), $ajax)
+    euWithdrawalsListing(['all' => [$token]])
         ->assertOk()
         ->assertJsonPath('meta.total', 1)
         ->assertJsonPath('records.0.uuid', $wanted->uuid);
 });
 
-it('should match the withdrawal customer email rather than the one on its order', function () use ($ajax) {
+it('should match the withdrawal customer email rather than the one on its order', function () {
+    $orderEmail = uniqueWithdrawalEmail();
+
     makeWithdrawal([
-        'customer_email' => 'shopper@example.test',
-        'order' => ['customer_email' => 'order-owner@example.test'],
+        'customer_email' => uniqueWithdrawalEmail(),
+        'order' => ['customer_email' => $orderEmail],
     ]);
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.sales.eu-withdrawals.index', [
-        'filters' => ['customer_email' => ['order-owner@example.test']],
-    ]), $ajax)
+    euWithdrawalsListing(['customer_email' => [$orderEmail]])
         ->assertOk()
         ->assertJsonPath('meta.total', 0);
 });
 
-it('should match the withdrawal status rather than the one on its order', function () use ($ajax) {
+it('should match the withdrawal status rather than the one on its order', function () {
+    $email = uniqueWithdrawalEmail();
+
     makeWithdrawal([
+        'customer_email' => $email,
         'status' => WithdrawalStatus::REFUNDED,
         'order' => ['status' => 'pending'],
     ]);
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.sales.eu-withdrawals.index', [
-        'filters' => ['status' => ['pending']],
-    ]), $ajax)
+    euWithdrawalsListing([
+        'customer_email' => [$email],
+        'status' => ['pending'],
+    ])
         ->assertOk()
         ->assertJsonPath('meta.total', 0);
 });

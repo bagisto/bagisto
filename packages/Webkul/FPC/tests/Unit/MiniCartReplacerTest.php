@@ -29,7 +29,11 @@ beforeEach(function () {
     $this->replacer = new MiniCartReplacer;
 });
 
-it('seeds an empty cart into a cached page when the visitor has no items', function () {
+// ============================================================================
+// Mini Cart Seeding
+// ============================================================================
+
+it('should seed an empty cart into a cached page when the visitor has no items', function () {
     cartHolding([]);
 
     $response = renderedMiniCartPage("'<bagisto-response-cache-mini-cart>'");
@@ -39,7 +43,7 @@ it('seeds an empty cart into a cached page when the visitor has no items', funct
     expect($response->getContent())->toBe('let miniCart = {"items_qty":0,"items":[]};');
 });
 
-it('seeds nothing into a cached page when the visitor has items, so the page fetches its own cart', function () {
+it('should seed nothing into a cached page when the visitor has items, so the page fetches its own cart', function () {
     cartHolding(['an item']);
 
     $response = renderedMiniCartPage("'<bagisto-response-cache-mini-cart>'");
@@ -49,7 +53,7 @@ it('seeds nothing into a cached page when the visitor has items, so the page fet
     expect($response->getContent())->toBe('let miniCart = null;');
 });
 
-it('hands one visitor no trace of another visitor cart', function () {
+it('should hand one visitor no trace of another visitor\'s cart', function () {
     cartHolding(['an item']);
 
     $response = renderedMiniCartPage("'<bagisto-response-cache-mini-cart>'");
@@ -59,7 +63,7 @@ it('hands one visitor no trace of another visitor cart', function () {
     expect($response->getContent())->not->toContain('bagisto-response-cache-mini-cart');
 });
 
-it('leaves a response carrying no marker untouched', function () {
+it('should leave a response carrying no marker untouched', function () {
     cartHolding([]);
 
     $response = new Response('nothing to replace here', 200, ['Content-Type' => 'text/html']);

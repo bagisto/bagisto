@@ -5,10 +5,6 @@ use Webkul\Omnibus\Models\OmnibusPrice;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
 
-// ============================================================================
-// Setup
-// ============================================================================
-
 beforeEach(function () {
     $this->manager = app(OmnibusPriceManager::class);
     $this->repository = app(OmnibusPriceRepository::class);
@@ -26,10 +22,10 @@ afterEach(function () {
 });
 
 // ============================================================================
-// getLowestPrice
+// Lowest Price
 // ============================================================================
 
-it('returns the lowest snapshot price within the lookback window', function () {
+it('should return the lowest snapshot price within the lookback window', function () {
     $product = $this->createSimpleProduct();
 
     $channelId = core()->getCurrentChannel()->id;
@@ -54,7 +50,7 @@ it('returns the lowest snapshot price within the lookback window', function () {
     expect($this->manager->getLowestPrice($product))->toBe(100.0);
 });
 
-it('ignores snapshots older than the configured lookback window', function () {
+it('should ignore snapshots older than the configured lookback window', function () {
     $product = $this->createSimpleProduct();
 
     $channelId = core()->getCurrentChannel()->id;
@@ -79,7 +75,7 @@ it('ignores snapshots older than the configured lookback window', function () {
     expect($this->manager->getLowestPrice($product))->toBe(100.0);
 });
 
-it('aggregates the lowest price across configurable variants', function () {
+it('should aggregate the lowest price across configurable variants', function () {
     $configurable = $this->createConfigurableProduct([100, 200]);
 
     $channelId = core()->getCurrentChannel()->id;
@@ -98,7 +94,7 @@ it('aggregates the lowest price across configurable variants', function () {
     expect($this->manager->getLowestPrice($configurable))->toBe(45.0);
 });
 
-it('returns null when Omnibus is disabled', function () {
+it('should return null when Omnibus is disabled', function () {
     $product = $this->createSimpleProduct();
 
     $this->setOmnibusEnabled(false);
@@ -107,10 +103,10 @@ it('returns null when Omnibus is disabled', function () {
 });
 
 // ============================================================================
-// getLowestPriceFormatted
+// Formatted Lowest Price
 // ============================================================================
 
-it('formats the lowest price as a currency string', function () {
+it('should format the lowest price as a currency string', function () {
     $product = $this->createSimpleProduct();
 
     $this->repository->create([
@@ -123,11 +119,11 @@ it('formats the lowest price as a currency string', function () {
 
     $formatted = $this->manager->getLowestPriceFormatted($product);
 
-    expect($formatted)->toBeString();
-    expect($formatted)->toContain('99');
+    expect($formatted)->toBeString()
+        ->toContain('99');
 });
 
-it('returns null formatted price when Omnibus is disabled', function () {
+it('should return a null formatted price when Omnibus is disabled', function () {
     $product = $this->createSimpleProduct();
 
     $this->setOmnibusEnabled(false);
@@ -136,10 +132,10 @@ it('returns null formatted price when Omnibus is disabled', function () {
 });
 
 // ============================================================================
-// getOmnibusPriceHtml
+// Omnibus Price Html
 // ============================================================================
 
-it('returns an empty string when Omnibus is disabled', function () {
+it('should return an empty string when Omnibus is disabled', function () {
     $product = $this->createSimpleProduct();
 
     $this->setOmnibusEnabled(false);
@@ -147,13 +143,13 @@ it('returns an empty string when Omnibus is disabled', function () {
     expect($this->manager->getOmnibusPriceHtml($product))->toBe('');
 });
 
-it('returns an empty string when the product has no active discount', function () {
+it('should return an empty string when the product has no active discount', function () {
     $product = $this->createSimpleProduct();
 
     expect($this->manager->getOmnibusPriceHtml($product))->toBe('');
 });
 
-it('returns an empty string for a grouped product with no discounted associated items', function () {
+it('should return an empty string for a grouped product with no discounted associated items', function () {
     $grouped = $this->createGroupedProduct([100, 200]);
 
     expect($this->manager->getOmnibusPriceHtml($grouped))->toBe('');

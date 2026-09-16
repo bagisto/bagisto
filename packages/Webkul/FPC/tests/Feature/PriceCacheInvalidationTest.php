@@ -6,7 +6,6 @@ use Webkul\CatalogRule\Jobs\DeleteCatalogRuleIndex;
 use Webkul\CatalogRule\Jobs\UpdateCreateCatalogRuleIndex;
 use Webkul\CatalogRule\Models\CatalogRule;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\FPC\Listeners\Price as PriceListener;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
@@ -15,12 +14,12 @@ use Webkul\Product\Repositories\ProductRepository;
 /**
  * Cache a price-bearing path for a guest in the current scope, a second locale and currency, and a channel on its own host.
  */
-function cachePriceBearingPage($test, string $path): array
+function cachePriceBearingPage(string $path): array
 {
     return [
-        $test->cachePage($path),
-        $test->cachePage($path, $test->secondScope),
-        $test->cachePage($path, $test->otherHostScope, 'shop-two.test'),
+        test()->cachePage($path),
+        test()->cachePage($path, test()->secondScope),
+        test()->cachePage($path, test()->otherHostScope, 'shop-two.test'),
     ];
 }
 
@@ -61,15 +60,19 @@ beforeEach(function () {
 
     $this->secondScope = $this->addSecondScope();
 
-    $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
+    $this->product = $this->createSimpleProduct();
 
-    $this->otherProduct = (new ProductFaker)->getSimpleProductFactory()->create();
+    $this->otherProduct = $this->createSimpleProduct();
 });
 
-it('drops the pages of the products whose prices were reindexed everywhere, and leaves other products alone', function (string $event) {
+// ============================================================================
+// Page Invalidation
+// ============================================================================
+
+it('should drop the pages of the products whose prices were reindexed everywhere, and leave other products alone', function (string $event) {
     $copies = [
-        ...cachePriceBearingPage($this, '/'.$this->product->url_key),
-        ...cachePriceBearingPage($this, '/'),
+        ...cachePriceBearingPage('/'.$this->product->url_key),
+        ...cachePriceBearingPage('/'),
     ];
 
     $otherProductPage = $this->cachePage('/'.$this->otherProduct->url_key);
@@ -86,7 +89,7 @@ it('drops the pages of the products whose prices were reindexed everywhere, and 
     'a selective price reindex' => ['catalog.product.price.reindex.after'],
 ]);
 
-it('clears every page when every product price was reindexed', function () {
+it('should clear every page when every product price was reindexed', function () {
     $otherProductPage = $this->cachePage('/'.$this->otherProduct->url_key);
 
     Event::dispatch('catalog.product.price.reindex.after');
@@ -94,7 +97,7 @@ it('clears every page when every product price was reindexed', function () {
     $this->assertPageNotCached($otherProductPage, 'A full price reindex left a page with a price that may have changed.');
 });
 
-it('clears every page when more products than the per-product limit were reindexed', function () {
+it('should clear every page when more products than the per-product limit were reindexed', function () {
     $otherProductPage = $this->cachePage('/'.$this->otherProduct->url_key);
 
     $unrelatedIds = range($this->otherProduct->id + 1, $this->otherProduct->id + PriceListener::PER_PRODUCT_FORGET_LIMIT + 1);
@@ -104,7 +107,11 @@ it('clears every page when more products than the per-product limit were reindex
     $this->assertPageNotCached($otherProductPage, 'A reindex too wide to walk product by product left a page with a price that may have changed.');
 });
 
-it('announces a saved catalog rule only after the prices of its products are reindexed', function () {
+// ============================================================================
+// Reindex Announcements
+// ============================================================================
+
+it('should announce a saved catalog rule only after the prices of its products are reindexed', function () {
     $sequence = [];
 
     $catalogRule = CatalogRule::factory()->make(['status' => 0]);
@@ -130,7 +137,7 @@ it('announces a saved catalog rule only after the prices of its products are rei
     ]);
 });
 
-it('announces a removed catalog rule only after the prices of its products are reindexed', function () {
+it('should announce a removed catalog rule only after the prices of its products are reindexed', function () {
     $sequence = [];
 
     $this->mock(PriceIndexer::class)
@@ -150,7 +157,7 @@ it('announces a removed catalog rule only after the prices of its products are r
     ]);
 });
 
-it('announces a full price reindex after it runs, without product ids', function () {
+it('should announce a full price reindex after it runs, without product ids', function () {
     $sequence = [];
 
     $indexer = priceIndexerRecordingBatches($sequence);
@@ -164,7 +171,7 @@ it('announces a full price reindex after it runs, without product ids', function
         ->and($sequence)->toContain(['reindex']);
 });
 
-it('announces a selective price reindex after it runs, with the ids it reindexed', function () {
+it('should announce a selective price reindex after it runs, with the ids it reindexed', function () {
     $sequence = [];
 
     $indexer = priceIndexerRecordingBatches($sequence);

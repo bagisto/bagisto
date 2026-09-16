@@ -24,7 +24,11 @@ beforeEach(function () {
     $this->bystander = $this->cachePage('/page/some-other-page');
 });
 
-it('drops a cms page in every locale, currency and channel host when it is updated, and nothing else', function () {
+// ============================================================================
+// CMS Page Invalidation
+// ============================================================================
+
+it('should drop a cms page in every locale, currency and channel host when it is updated, and nothing else', function () {
     Event::dispatch('cms.page.update.after', $this->page);
 
     $this->assertPageNotCached($this->guestPage);
@@ -36,7 +40,7 @@ it('drops a cms page in every locale, currency and channel host when it is updat
     $this->assertPageCached($this->bystander, 'Editing one page emptied the cache of pages it has nothing to do with.');
 });
 
-it('drops a cms page in every locale, currency and channel host when it is deleted, and nothing else', function () {
+it('should drop a cms page in every locale, currency and channel host when it is deleted, and nothing else', function () {
     Event::dispatch('cms.page.delete.before', $this->page->id);
 
     $this->assertPageNotCached($this->guestPage);
@@ -48,7 +52,7 @@ it('drops a cms page in every locale, currency and channel host when it is delet
     $this->assertPageCached($this->bystander);
 });
 
-it('drops a cms page under the url key of each of its translations', function () {
+it('should drop a cms page under the url key of each of its translations', function () {
     PageTranslation::factory()->create([
         'cms_page_id' => $this->page->id,
         'locale' => $this->secondLocale->code,
