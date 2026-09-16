@@ -1,22 +1,26 @@
-import { test, expect } from "../setup";
+import { test } from "../setup";
 import { InstallerPage } from "../pages/InstallerPage";
 
 test.describe("guided installation", () => {
-    test("should install Bagisto through the guided web installer in English @en", async ({ page }) => {
+    test("should install bagisto through the guided web installer in english @en", async ({
+        page,
+    }) => {
         const installer = new InstallerPage(page);
 
         await installer.install("en");
 
-        await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
-        await expect(page.locator('a[href*="/admin/login"]')).toBeVisible();
+        await installer.expectLayoutDirection("ltr");
+        await installer.expectAdminLoginOffered();
     });
 
-    test("should install Bagisto through the guided web installer in Arabic @ar", async ({ page }) => {
+    test("should install bagisto through the guided web installer in arabic @ar", async ({
+        page,
+    }) => {
         const installer = new InstallerPage(page);
 
         await installer.install("ar");
 
-        await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
-        await expect(page.locator('a[href*="/admin/login"]')).toBeVisible();
+        await installer.expectLayoutDirection("rtl");
+        await installer.expectAdminLoginOffered();
     });
 });

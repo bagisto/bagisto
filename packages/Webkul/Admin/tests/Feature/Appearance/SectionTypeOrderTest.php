@@ -36,6 +36,10 @@ function offeredCodes(string $themeCode = 'ordered'): array
     return app(SectionSchema::class)->types($themeCode)->keys()->all();
 }
 
+// ============================================================================
+// Declared Order
+// ============================================================================
+
 it('should declare the default theme section types explicitly, in enum order', function () {
     expect(config('themes.shop.default.customize.sections'))->toBe(SectionTypeEnum::cases())
         ->and(offeredCodes('default'))->toBe(SectionTypeEnum::getValues());
@@ -116,6 +120,10 @@ it('should lead with a theme own type and fill in the rest from the spread enum 
     ]);
 });
 
+// ============================================================================
+// Type Overrides
+// ============================================================================
+
 it('should let a theme replace a core type ahead of the spread enum cases', function () {
     themeDeclaringSections([
         NarrowFooterLinks::class,
@@ -140,6 +148,10 @@ it('should keep a theme override of a core type where the theme first declares i
         ->and($types)->toHaveCount(count(SectionTypeEnum::cases()));
 });
 
+// ============================================================================
+// Duplicate Declarations
+// ============================================================================
+
 it('should list a type declared more than once a single time, where it first appears', function () {
     themeDeclaringSections([
         SectionTypeEnum::IMAGE_CAROUSEL->value,
@@ -162,6 +174,10 @@ it('should list a type declared more than once a single time, where it first app
 
     expect(substr_count($html, '"code":"'.SectionTypeEnum::IMAGE_CAROUSEL->value.'"'))->toBe(1);
 });
+
+// ============================================================================
+// Invalid Declarations
+// ============================================================================
 
 it('should skip and report a declared entry that is not a section type, keeping the rest', function () {
     Exceptions::fake();
@@ -186,6 +202,10 @@ it('should skip and report a declared entry that is not a section type, keeping 
 
     get(route('admin.appearance.sections.index', ['code' => 'ordered']))->assertOk();
 });
+
+// ============================================================================
+// Editor Order
+// ============================================================================
 
 it('should hand the editor the section types already in the theme order', function () {
     themeDeclaringSections([
@@ -232,6 +252,10 @@ it('should leave the order of the sections already placed on the page alone', fu
     expect(Section::query()->where('theme_code', 'ordered')->orderBy('sort_order')->pluck('name')->all())
         ->toBe(['First Placed Carousel', 'Second Placed Content']);
 });
+
+// ============================================================================
+// Unlisted Types
+// ============================================================================
 
 it('should still resolve a stored section of a core type the theme no longer lists', function () {
     themeDeclaringSections([SectionTypeEnum::IMAGE_CAROUSEL->value]);

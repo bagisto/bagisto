@@ -23,14 +23,16 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Attribute\Contracts\AttributeFamily';
+        return AttributeFamily::class;
     }
 
     /**
+     * Create an attribute family with its groups and their attributes.
+     *
      * @return AttributeFamily
      */
     public function create(array $data)
@@ -61,6 +63,8 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
+     * Update an attribute family, replacing the groups and attributes it holds.
+     *
      * @param  int  $id
      * @return AttributeFamily
      */
@@ -124,6 +128,8 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
+     * The id and name of every attribute family, for a select control.
+     *
      * @return array
      */
     public function getPartial()

@@ -27,7 +27,7 @@ function createCategory(array $attributes = []): Category
  */
 function filterableAttributeIds(): array
 {
-    return Attribute::where('is_filterable', 1)->pluck('id')->toArray();
+    return Attribute::query()->where('is_filterable', 1)->pluck('id')->toArray();
 }
 
 /**

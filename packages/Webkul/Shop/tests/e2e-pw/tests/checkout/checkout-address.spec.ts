@@ -1,7 +1,6 @@
 import { test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
-import { GUEST_ADDRESS } from "../../pages/shop/checkout/CheckoutHelper";
 import { SimpleProductCheckout } from "../../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { uniqueStamp } from "../../utils/faker";
 
@@ -36,9 +35,10 @@ test.describe("checkout address", () => {
 
         await checkout.addSimpleProductToCart(productName);
         await checkout.openCheckout();
-        await checkout.fillGuestAddress();
 
-        await checkout.expectGuestState(GUEST_ADDRESS.state);
+        const address = await checkout.fillGuestAddress();
+
+        await checkout.expectGuestState(address.state);
 
         await checkout.changeGuestCountry("US");
         await checkout.proceedWithEditedAddress();

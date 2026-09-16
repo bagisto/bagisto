@@ -5,6 +5,10 @@ use Webkul\Theme\Models\Section;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 
+// ============================================================================
+// Customize Screen
+// ============================================================================
+
 it('should render the customize screen at its new location', function () {
     $this->loginAsAdmin();
 
@@ -20,6 +24,10 @@ it('should say which theme the listing is scoped to', function () {
         ->assertOk()
         ->assertSee(config('themes.shop.default.name'));
 });
+
+// ============================================================================
+// Retired Routes
+// ============================================================================
 
 it('should no longer answer on the settings theme urls', function () {
     $routes = app('router')->getRoutes();
@@ -43,6 +51,10 @@ it('should no longer offer a section picker on the channel form', function () {
         ->assertSee(route('admin.appearance.themes.index'))
         ->assertDontSee('id="theme"', false);
 });
+
+// ============================================================================
+// Theme Scoping
+// ============================================================================
 
 it('should scope the section listing to a theme when one is requested', function () {
     $channel = core()->getDefaultChannel();
@@ -89,6 +101,10 @@ it('should not found a theme this installation does not have', function () {
     get(route('admin.appearance.sections.index', ['code' => 'not-a-theme']))
         ->assertNotFound();
 });
+
+// ============================================================================
+// Navigation
+// ============================================================================
 
 it('should nest the section listing under its theme', function () {
     expect(route('admin.appearance.sections.index', ['code' => 'default'], false))

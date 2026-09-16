@@ -26,7 +26,7 @@ it('should allow creating a category with catalog.categories.create permission',
 it('should allow editing a category with catalog.categories.edit permission', function () {
     $this->loginAsAdminWithPermissions(['catalog', 'catalog.categories', 'catalog.categories.edit']);
 
-    $category = Category::first();
+    $category = Category::query()->first();
 
     get(route('admin.catalog.categories.edit', $category->id))
         ->assertOk();
@@ -62,7 +62,7 @@ it('should deny category creation without catalog.categories.create permission',
 it('should deny category editing without catalog.categories.edit permission', function () {
     $this->loginAsAdminWithPermissions(['catalog', 'catalog.categories']);
 
-    $category = Category::first();
+    $category = Category::query()->first();
 
     get(route('admin.catalog.categories.edit', $category->id))
         ->assertUnauthorized();

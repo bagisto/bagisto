@@ -26,7 +26,7 @@ it('should allow creating a cms page with cms.create permission', function () {
 it('should allow editing a cms page with cms.edit permission', function () {
     $this->loginAsAdminWithPermissions(['cms', 'cms.edit']);
 
-    $page = Page::first() ?? Page::factory()->create();
+    $page = Page::query()->first() ?? Page::factory()->create();
 
     get(route('admin.cms.edit', $page->id))
         ->assertOk();
@@ -62,7 +62,7 @@ it('should deny cms page creation without cms.create permission', function () {
 it('should deny cms page editing without cms.edit permission', function () {
     $this->loginAsAdminWithPermissions(['cms']);
 
-    $page = Page::first() ?? Page::factory()->create();
+    $page = Page::query()->first() ?? Page::factory()->create();
 
     get(route('admin.cms.edit', $page->id))
         ->assertUnauthorized();

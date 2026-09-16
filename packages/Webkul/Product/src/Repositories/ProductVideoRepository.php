@@ -2,13 +2,15 @@
 
 namespace Webkul\Product\Repositories;
 
+use Webkul\Product\Contracts\ProductVideo;
+
 class ProductVideoRepository extends ProductMediaRepository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductVideo';
+        return ProductVideo::class;
     }
 }

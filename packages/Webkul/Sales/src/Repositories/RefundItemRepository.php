@@ -4,19 +4,20 @@ namespace Webkul\Sales\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
+use Webkul\Sales\Contracts\RefundItem;
 
 class RefundItemRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Sales\Contracts\RefundItem';
+        return RefundItem::class;
     }
 
     /**
-     * Returns qty to product inventory after order refund
+     * Returns qty to product inventory after order refund.
      *
      * @param  Order  $orderItem
      * @param  int  $quantity

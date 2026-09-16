@@ -227,10 +227,10 @@ it('should handle the process_in_queue option on store', function () {
         ->assertRedirect()
         ->assertSessionHas('success');
 
-    $queued = Import::where('process_in_queue', true)->latest()->first();
+    $queued = Import::query()->where('process_in_queue', true)->latest()->first();
 
     expect($queued)->not->toBeNull();
-    expect($queued->process_in_queue)->toBe(true);
+    expect($queued->process_in_queue)->toBeTrue();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
         'type' => 'products',
@@ -242,9 +242,9 @@ it('should handle the process_in_queue option on store', function () {
     ])
         ->assertRedirect();
 
-    $notQueued = Import::where('type', 'products')->where('field_separator', ';')->latest()->first();
+    $notQueued = Import::query()->where('type', 'products')->where('field_separator', ';')->latest()->first();
 
-    expect($notQueued->process_in_queue)->toBe(false);
+    expect($notQueued->process_in_queue)->toBeFalse();
 });
 
 it('should sanitize the filename on store', function () {
@@ -260,7 +260,7 @@ it('should sanitize the filename on store', function () {
     ])
         ->assertRedirect();
 
-    $import = Import::latest()->first();
+    $import = Import::query()->latest()->first();
 
     expect($import->file_path)->toContain('imports/');
     expect($import->file_path)->not()->toContain('../');

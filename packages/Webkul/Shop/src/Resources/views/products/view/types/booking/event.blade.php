@@ -1,4 +1,4 @@
-@inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\EventTicket')
+@inject ('bookingSlotHelper', \Webkul\BookingProduct\Helpers\EventTicket::class)
 
 <div class="grid grid-cols-1 gap-6">
     <div class="flex gap-3">

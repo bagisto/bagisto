@@ -12,6 +12,10 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\LocaleRepository;
 
+// ============================================================================
+// Channel Cache
+// ============================================================================
+
 it('should invalidate the channel cache once create has written its image', function () {
     Storage::fake();
 
@@ -70,6 +74,10 @@ it('should invalidate the channel cache once update has removed its image', func
     expect($repository->all()->firstWhere('id', 1)->logo)->toBeNull();
 });
 
+// ============================================================================
+// Currency Cache
+// ============================================================================
+
 it('should invalidate the currency cache when a currency is deleted', function () {
     $repository = app(CurrencyRepository::class);
 
@@ -81,6 +89,10 @@ it('should invalidate the currency cache when a currency is deleted', function (
 
     expect($repository->all()->firstWhere('id', $currency->id))->toBeNull();
 });
+
+// ============================================================================
+// Locale Cache
+// ============================================================================
 
 it('should invalidate the locale cache once create has written its image', function () {
     Storage::fake();

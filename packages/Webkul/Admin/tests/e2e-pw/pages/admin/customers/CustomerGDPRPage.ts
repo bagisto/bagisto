@@ -47,21 +47,6 @@ export class CustomerGDPRPage extends BasePage {
         await expect(requestRow).toContainText("Pending");
     }
 
-    async expectRequestState(
-        message: string,
-        expectedStatus: string,
-        expectedType: string,
-    ): Promise<void> {
-        await this.openCustomerPage();
-        const requestRow = this.page
-            .locator("#main .row")
-            .filter({ hasText: message });
-
-        await expect(requestRow).toHaveCount(1);
-        await expect(requestRow).toContainText(expectedStatus);
-        await expect(requestRow).toContainText(expectedType);
-    }
-
     async updateRequestStatus(
         message: string,
         status: "processing" | "completed" | "declined",
@@ -96,6 +81,21 @@ export class CustomerGDPRPage extends BasePage {
         await this.page
             .getByRole("button", { name: "Agree", exact: true })
             .click();
+    }
+
+    async expectRequestState(
+        message: string,
+        expectedStatus: string,
+        expectedType: string,
+    ): Promise<void> {
+        await this.openCustomerPage();
+        const requestRow = this.page
+            .locator("#main .row")
+            .filter({ hasText: message });
+
+        await expect(requestRow).toHaveCount(1);
+        await expect(requestRow).toContainText(expectedStatus);
+        await expect(requestRow).toContainText(expectedType);
     }
 
     async expectRequestAbsent(message: string): Promise<void> {

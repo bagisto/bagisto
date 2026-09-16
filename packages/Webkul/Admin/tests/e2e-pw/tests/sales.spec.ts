@@ -1,4 +1,4 @@
-import { test } from "../setup";
+import { expect, test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
 import {
@@ -13,10 +13,10 @@ import { RmaManagePage } from "../pages/admin/sales/RmaManagePage";
 import {
     RmaCustomFieldsPage,
     type RmaCustomFieldData,
-    RmaReasonsPage,
-    RmaRulesPage,
-    RmaStatusesPage,
-} from "../pages/admin/sales/RmaSettingsPage";
+} from "../pages/admin/sales/RmaCustomFieldsPage";
+import { RmaReasonsPage } from "../pages/admin/sales/RmaReasonsPage";
+import { RmaRulesPage } from "../pages/admin/sales/RmaRulesPage";
+import { RmaStatusesPage } from "../pages/admin/sales/RmaStatusesPage";
 import { RmaShopPage } from "../pages/shop/RmaShopPage";
 import {
     generateDescription,
@@ -156,7 +156,7 @@ test.describe("order management", () => {
 
         const reorderId = await orderCreatePage.completeReorder();
 
-        test.expect(reorderId).not.toBe(orderId);
+        expect(reorderId).not.toBe(orderId);
         await orderViewPage.expectStatus("Pending");
         await orderViewPage.expectItemListed(productName);
     });
@@ -174,7 +174,7 @@ test.describe("order management", () => {
         await orderViewPage.createInvoice();
         await invoicesPage.openInvoiceForOrder(orderId);
 
-        test.expect(await invoicesPage.printInvoice()).toMatch(/\.pdf$/);
+        expect(await invoicesPage.printInvoice()).toMatch(/\.pdf$/);
 
         await invoicesPage.sendDuplicateInvoice();
     });

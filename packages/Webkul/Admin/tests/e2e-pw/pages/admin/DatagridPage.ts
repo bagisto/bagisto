@@ -27,6 +27,10 @@ export abstract class DatagridPage extends BasePage {
         );
     }
 
+    protected get loadingRows(): Locator {
+        return this.page.locator("div.row:has(.shimmer)");
+    }
+
     protected get validationErrors(): Locator {
         return this.page.locator("p.text-red-600");
     }
@@ -159,6 +163,10 @@ export abstract class DatagridPage extends BasePage {
             .toBe(true);
     }
 
+    protected async waitForGridRerender(): Promise<void> {
+        await expect(this.loadingRows).toHaveCount(0);
+    }
+
     protected async searchFor(term: string): Promise<void> {
         await this.searchInput.fill(term);
 
@@ -213,20 +221,6 @@ export abstract class DatagridPage extends BasePage {
         ]);
 
         await this.expectFilterDrawerClosed();
-    }
-
-    protected async expectFilterDrawerClosed(): Promise<void> {
-        await expect(this.applyFiltersButton).toBeHidden();
-    }
-
-    protected async expectSearchedRowCount(
-        text: string,
-        count: number,
-    ): Promise<void> {
-        await this.openGrid();
-        await this.searchFor(text);
-
-        await expect(this.row(text)).toHaveCount(count);
     }
 
     protected async deleteRow(
@@ -296,26 +290,6 @@ export abstract class DatagridPage extends BasePage {
         await this.agreeButton.click();
     }
 
-    async expectRowEditUnavailable(text: string): Promise<void> {
-        await this.openGrid();
-        await this.searchFor(text);
-
-        await expect(this.rowWithCell(text)).toHaveCount(1);
-        await expect(this.editIcon(text)).toHaveCount(0);
-    }
-
-    async expectRowDeleteUnavailable(text: string): Promise<void> {
-        await this.openGrid();
-        await this.searchFor(text);
-
-        await expect(this.rowWithCell(text)).toHaveCount(1);
-        await expect(this.deleteIcon(text)).toHaveCount(0);
-    }
-
-    protected async expectValidationMessage(message: string): Promise<void> {
-        await expect(this.validationError(message).first()).toBeVisible();
-    }
-
     protected async setSwitch(
         toggle: Locator,
         input: Locator,
@@ -326,6 +300,43 @@ export abstract class DatagridPage extends BasePage {
         }
 
         await expect(input).toBeChecked({ checked: enabled });
+    }
+
+    protected async expectFilterDrawerClosed(): Promise<void> {
+        await expect(this.applyFiltersButton).toBeHidden();
+    }
+
+    protected async expectSearchedRowCount(
+        text: string,
+        count: number,
+    ): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(text);
+        await this.waitForGridRerender();
+
+        await expect(this.row(text)).toHaveCount(count);
+    }
+
+    protected async expectValidationMessage(message: string): Promise<void> {
+        await expect(this.validationError(message).first()).toBeVisible();
+    }
+
+    async expectRowEditUnavailable(text: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(text);
+        await this.waitForGridRerender();
+
+        await expect(this.rowWithCell(text)).toHaveCount(1);
+        await expect(this.editIcon(text)).toHaveCount(0);
+    }
+
+    async expectRowDeleteUnavailable(text: string): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(text);
+        await this.waitForGridRerender();
+
+        await expect(this.rowWithCell(text)).toHaveCount(1);
+        await expect(this.deleteIcon(text)).toHaveCount(0);
     }
 }
 

@@ -1,5 +1,5 @@
-@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
-@inject ('productViewHelper', 'Webkul\Product\Helpers\View')
+@inject ('reviewHelper', \Webkul\Product\Helpers\Review::class)
+@inject ('productViewHelper', \Webkul\Product\Helpers\View::class)
 
 @php
     $avgRatings = $reviewHelper->getAverageRating($product);
@@ -19,7 +19,7 @@
 
     @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
         <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
+            {!! app(\Webkul\Product\Helpers\SEO::class)->getProductJsonLd($product) !!}
         </script>
     @endif
 

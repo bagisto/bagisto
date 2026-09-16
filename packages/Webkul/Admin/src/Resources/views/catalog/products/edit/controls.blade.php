@@ -75,9 +75,9 @@
             $selectedOption = old($attribute->code) ?: $product[$attribute->code];
 
             if ($attribute->code === 'tax_category_id') {
-                $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
+                $options = app(\Webkul\Tax\Repositories\TaxCategoryRepository::class)->all();
             } else if ($attribute->code === 'rma_rule_id') {
-                $rmaRuleRepository = app('Webkul\RMA\Repositories\RMARuleRepository');
+                $rmaRuleRepository = app(\Webkul\RMA\Repositories\RMARuleRepository::class);
 
                 /**
                  * Only active RMA rules should be assignable to a product.

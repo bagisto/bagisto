@@ -2,15 +2,16 @@
 
 namespace Webkul\CatalogRule\Repositories;
 
+use Webkul\CatalogRule\Contracts\CatalogRuleProductPrice;
 use Webkul\Core\Eloquent\Repository;
 
 class CatalogRuleProductPriceRepository extends Repository
 {
     /**
-     * Specify Model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\CatalogRule\Contracts\CatalogRuleProductPrice';
+        return CatalogRuleProductPrice::class;
     }
 }

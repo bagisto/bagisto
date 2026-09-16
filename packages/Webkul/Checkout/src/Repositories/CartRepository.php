@@ -2,15 +2,16 @@
 
 namespace Webkul\Checkout\Repositories;
 
+use Webkul\Checkout\Contracts\Cart;
 use Webkul\Core\Eloquent\Repository;
 
 class CartRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Checkout\Contracts\Cart';
+        return Cart::class;
     }
 }

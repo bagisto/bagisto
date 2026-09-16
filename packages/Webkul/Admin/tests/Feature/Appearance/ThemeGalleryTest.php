@@ -10,6 +10,10 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
+// ============================================================================
+// Gallery
+// ============================================================================
+
 it('should render the theme gallery', function () {
     $this->loginAsAdmin();
 
@@ -18,6 +22,10 @@ it('should render the theme gallery', function () {
         ->assertSee(trans('admin::app.appearance.themes.index.title'))
         ->assertSee('Default');
 });
+
+// ============================================================================
+// Catalog Status
+// ============================================================================
 
 it('should mark the theme a channel runs as active', function () {
     $channel = core()->getDefaultChannel();
@@ -53,6 +61,10 @@ it('should sort active themes ahead of purchasable ones', function () {
     expect(end($statuses))->toBe(ThemeCatalog::STATUS_AVAILABLE);
 });
 
+// ============================================================================
+// Impact Report
+// ============================================================================
+
 it('should report how many customizations a theme switch would leave behind', function () {
     $channel = Channel::factory()->create(['theme' => 'default']);
 
@@ -69,6 +81,10 @@ it('should report how many customizations a theme switch would leave behind', fu
         ->assertJsonPath('impact.0.current_theme', config('themes.shop.default.name'))
         ->assertJsonPath('impact.0.customizations', 3);
 });
+
+// ============================================================================
+// Activation
+// ============================================================================
 
 it('should activate an installed theme on a channel', function () {
     $channel = Channel::factory()->create(['theme' => 'something-else']);
@@ -156,6 +172,10 @@ it('should reject an activation with no channel selected', function () {
     ])->assertUnprocessable();
 });
 
+// ============================================================================
+// Impact Report
+// ============================================================================
+
 it('should leave a channel already on the theme out of the impact report', function () {
     $channel = Channel::factory()->create(['theme' => 'default']);
 
@@ -170,6 +190,10 @@ it('should leave a channel already on the theme out of the impact report', funct
         ->assertOk()
         ->assertJsonCount(0, 'impact');
 });
+
+// ============================================================================
+// Catalog Details
+// ============================================================================
 
 it('should not offer a buy button for a theme with no store page', function () {
     $theme = app(ThemeCatalog::class)->find('elvix');
@@ -211,6 +235,10 @@ it('should serve the bundled screenshot of an installed theme from the admin bui
     expect($theme['screenshot'])->toEndWith('.jpg');
 });
 
+// ============================================================================
+// Theme Codes
+// ============================================================================
+
 it('should offer each marketplace theme under the code its package registers', function () {
     $codes = app(ThemeCatalog::class)->all()->pluck('code');
 
@@ -245,6 +273,10 @@ it('should list every theme this installation registers under the code it is reg
             ->and($catalog->isInstalled($code))->toBeTrue();
     }
 });
+
+// ============================================================================
+// Impact Report
+// ============================================================================
 
 it('should name the channel current theme in the impact report by its catalog name', function () {
     $channel = Channel::factory()->create(['theme' => 'default']);

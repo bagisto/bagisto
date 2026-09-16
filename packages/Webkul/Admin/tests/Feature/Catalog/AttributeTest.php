@@ -170,7 +170,7 @@ it('should store a [type] attribute with options', function (string $type) {
     ])
         ->assertRedirectToRoute('admin.catalog.attributes.index');
 
-    $attribute = Attribute::where('code', $code)->first();
+    $attribute = Attribute::query()->where('code', $code)->first();
 
     expect($attribute)->not->toBeNull();
     expect($attribute->options)->toHaveCount(3);
@@ -191,7 +191,7 @@ it('should ignore options for non-option [type] attributes', function (string $t
     ])
         ->assertRedirectToRoute('admin.catalog.attributes.index');
 
-    $attribute = Attribute::where('code', $code)->first();
+    $attribute = Attribute::query()->where('code', $code)->first();
 
     expect($attribute->options)->toHaveCount(0);
 })->with('non_option_types');
@@ -302,7 +302,7 @@ it('should unset value_per_locale for [type] attributes', function (string $type
     ])
         ->assertRedirectToRoute('admin.catalog.attributes.index');
 
-    $attribute = Attribute::where('code', $code)->first();
+    $attribute = Attribute::query()->where('code', $code)->first();
 
     expect($attribute->value_per_locale)->toBeFalsy();
 })->with('locale_unset_types');

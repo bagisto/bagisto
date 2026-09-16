@@ -5,15 +5,16 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductGroupedProduct;
 
 class ProductGroupedProductRepository extends Repository
 {
     /**
-     * Specify model.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductGroupedProduct';
+        return ProductGroupedProduct::class;
     }
 
     /**

@@ -9,6 +9,7 @@ use Webkul\Installer\Console\Commands\Installer as InstallerCommand;
 use Webkul\Installer\Http\Middleware\CanInstall;
 use Webkul\Installer\Http\Middleware\Locale;
 use Webkul\Installer\Http\Middleware\UseFileSession;
+use Webkul\Installer\Listeners\Installer;
 
 class InstallerServiceProvider extends ServiceProvider
 {
@@ -41,7 +42,7 @@ class InstallerServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'installer');
 
-        Event::listen('bagisto.installed', 'Webkul\Installer\Listeners\Installer@installed');
+        Event::listen('bagisto.installed', [Installer::class, 'installed']);
     }
 
     /**

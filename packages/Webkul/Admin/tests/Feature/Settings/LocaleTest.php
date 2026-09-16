@@ -301,7 +301,7 @@ it('should remove the stored logo when a locale is deleted', function () {
 
     Storage::assertExists('locales/'.$code.'.png');
 
-    deleteJson(route('admin.settings.locales.delete', Locale::where('code', $code)->first()->id))->assertOk();
+    deleteJson(route('admin.settings.locales.delete', Locale::query()->where('code', $code)->first()->id))->assertOk();
 
     Storage::assertMissing('locales/'.$code.'.png');
 });

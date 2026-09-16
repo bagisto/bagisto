@@ -73,13 +73,13 @@ test.afterEach(async ({ adminPage }) => {
 });
 
 const cases = [
-    { operator: "==", option: "Money Transfer" },
-    { operator: "!=", option: "Cash On Delivery" },
+    { operator: "==", option: "Money Transfer", label: "is equal to" },
+    { operator: "!=", option: "Cash On Delivery", label: "is not equal to" },
 ];
 
 test.describe("cart rules", () => {
-    for (const { operator, option } of cases) {
-        test(`should allow coupon for fixed amount whole cart option -> ${operator}`, async ({
+    for (const { operator, option, label } of cases) {
+        test(`should take a fixed amount off the whole cart when the payment method condition is -> ${label}`, async ({
             adminPage,
             shopPage,
         }) => {

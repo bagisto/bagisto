@@ -8,6 +8,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Contracts\Customer;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\SocialLogin\Contracts\CustomerSocialAccount;
 
 class CustomerSocialAccountRepository extends Repository
 {
@@ -25,11 +26,11 @@ class CustomerSocialAccountRepository extends Repository
     }
 
     /**
-     * Specify Model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\SocialLogin\Contracts\CustomerSocialAccount';
+        return CustomerSocialAccount::class;
     }
 
     /**

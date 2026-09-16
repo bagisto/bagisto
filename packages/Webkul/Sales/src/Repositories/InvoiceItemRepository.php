@@ -4,18 +4,21 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\InvoiceItem;
 
 class InvoiceItemRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Sales\Contracts\InvoiceItem';
+        return InvoiceItem::class;
     }
 
     /**
+     * Move the invoiced quantity of an item out of its ordered inventory.
+     *
      * @param  array  $data
      * @return void
      */

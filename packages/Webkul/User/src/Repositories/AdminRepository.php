@@ -3,15 +3,16 @@
 namespace Webkul\User\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\User\Contracts\Admin;
 
 class AdminRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\User\Contracts\Admin';
+        return Admin::class;
     }
 
     /**

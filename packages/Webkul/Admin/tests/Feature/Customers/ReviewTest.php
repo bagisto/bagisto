@@ -16,9 +16,10 @@ use function Pest\Laravel\putJson;
 /**
  * Create a product review with an optional attachment.
  */
-function createReview(object $testCase, bool $withAttachment = false): array
+function createReview(bool $withAttachment = false): array
 {
-    $product = $testCase->createSimpleProduct();
+    $product = test()->createSimpleProduct();
+
     $customer = Customer::factory()->create();
 
     $review = ProductReview::factory()->create([
@@ -66,7 +67,7 @@ it('should deny guest access to the reviews index page', function () {
 // ============================================================================
 
 it('should return review details with attachment', function () {
-    ['review' => $review, 'attachment' => $attachment] = createReview($this, withAttachment: true);
+    ['review' => $review, 'attachment' => $attachment] = createReview(withAttachment: true);
 
     $this->loginAsAdmin();
 
@@ -84,7 +85,7 @@ it('should return review details with attachment', function () {
 // ============================================================================
 
 it('should update the status of a review', function () {
-    ['review' => $review] = createReview($this);
+    ['review' => $review] = createReview();
 
     $this->loginAsAdmin();
 
@@ -103,7 +104,7 @@ it('should update the status of a review', function () {
 });
 
 it('should fail validation when status is missing on update', function () {
-    ['review' => $review] = createReview($this);
+    ['review' => $review] = createReview();
 
     $this->loginAsAdmin();
 
@@ -113,7 +114,7 @@ it('should fail validation when status is missing on update', function () {
 });
 
 it('should fail validation when status is invalid on update', function () {
-    ['review' => $review] = createReview($this);
+    ['review' => $review] = createReview();
 
     $this->loginAsAdmin();
 
@@ -127,7 +128,7 @@ it('should fail validation when status is invalid on update', function () {
 it('should dispatch events when updating a review', function () {
     Event::fake();
 
-    ['review' => $review] = createReview($this);
+    ['review' => $review] = createReview();
 
     $this->loginAsAdmin();
 
@@ -145,7 +146,7 @@ it('should dispatch events when updating a review', function () {
 // ============================================================================
 
 it('should delete a review and its attachments', function () {
-    ['review' => $review, 'attachment' => $attachment] = createReview($this, withAttachment: true);
+    ['review' => $review, 'attachment' => $attachment] = createReview(withAttachment: true);
 
     $this->loginAsAdmin();
 
@@ -160,7 +161,7 @@ it('should delete a review and its attachments', function () {
 it('should dispatch events when deleting a review', function () {
     Event::fake();
 
-    ['review' => $review] = createReview($this);
+    ['review' => $review] = createReview();
 
     $this->loginAsAdmin();
 

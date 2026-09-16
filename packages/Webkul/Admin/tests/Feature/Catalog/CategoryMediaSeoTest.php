@@ -41,12 +41,18 @@ function categoryUpdatePayload(Category $category, array $extra = []): array
             'slug' => $category->slug,
         ],
         'locale' => config('app.locale'),
-        'attributes' => Attribute::where('is_filterable', 1)->pluck('id')->toArray(),
+        'attributes' => Attribute::query()->where('is_filterable', 1)->pluck('id')->toArray(),
         'position' => 1,
     ], $extra);
 }
 
+// ============================================================================
+// Edit Page
+// ============================================================================
+
 it('should render the seo drawer on the category edit page', function () {
+    Storage::fake();
+
     $category = makeCategoryWithLogo();
 
     $this->loginAsAdmin();
@@ -57,6 +63,10 @@ it('should render the seo drawer on the category edit page', function () {
         ->assertSee('banner_meta')
         ->assertSee(trans('admin::app.components.media.images.seo.alt-text'));
 });
+
+// ============================================================================
+// Saving Image Meta
+// ============================================================================
 
 it('should save the alt text of the category logo and banner', function () {
     Storage::fake();
@@ -103,6 +113,10 @@ it('should rename the category logo file', function () {
     Storage::assertMissing($originalPath);
 });
 
+// ============================================================================
+// Uploads
+// ============================================================================
+
 it('should name a newly uploaded category logo after the requested file name', function () {
     Storage::fake();
 
@@ -123,6 +137,10 @@ it('should name a newly uploaded category logo after the requested file name', f
 
     Storage::assertExists($category->logo_path);
 });
+
+// ============================================================================
+// Validation And Removal
+// ============================================================================
 
 it('should reject a category alt text longer than the column allows', function () {
     Storage::fake();

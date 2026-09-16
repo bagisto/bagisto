@@ -4,7 +4,7 @@
 
 {!! view_render_event('bagisto.shop.categories.view.toolbar.after') !!}
 
-@inject('toolbar' , 'Webkul\Product\Helpers\Toolbar')
+@inject('toolbar' , \Webkul\Product\Helpers\Toolbar::class)
 
 @pushOnce('scripts')
     <script

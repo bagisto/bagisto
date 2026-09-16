@@ -27,7 +27,7 @@ it('should store a virtual product and redirect to edit', function () {
         ->assertOk()
         ->assertJsonStructure(['data' => ['redirect_url']]);
 
-    $product = Product::where('sku', $sku)->first();
+    $product = Product::query()->where('sku', $sku)->first();
 
     expect($product)->not->toBeNull();
     expect($product->type)->toBe('virtual');
@@ -123,7 +123,7 @@ it('should not create weight attribute value for a virtual product', function ()
 it('should populate product_flat with all indexed columns after store and update', function () {
     $product = $this->storeAndUpdateVirtualProduct();
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
     expect($flat)->not->toBeNull();
 
@@ -191,7 +191,7 @@ it('should assign the virtual product to the current channel after update', func
 it('should create price indices after store and update', function () {
     $product = $this->storeAndUpdateVirtualProduct();
 
-    $priceIndices = ProductPriceIndex::where('product_id', $product->id)->get();
+    $priceIndices = ProductPriceIndex::query()->where('product_id', $product->id)->get();
 
     expect($priceIndices->count())->toBeGreaterThanOrEqual(1);
 
@@ -206,7 +206,7 @@ it('should create inventory index after store and update', function () {
         'product_id' => $product->id,
     ]);
 
-    $inventoryIndex = ProductInventoryIndex::where('product_id', $product->id)->first();
+    $inventoryIndex = ProductInventoryIndex::query()->where('product_id', $product->id)->first();
 
     expect((int) $inventoryIndex->qty)->toBe(50);
 });
@@ -235,7 +235,7 @@ it('should update a virtual product and reflect changes in all related tables', 
     ])
         ->assertRedirect(route('admin.catalog.products.index'));
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
     expect($flat->name)->toBe('Changed Virtual Name');
     expect($flat->short_description)->toBe('Changed virtual short.');

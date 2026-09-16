@@ -2,20 +2,21 @@
 
 namespace Webkul\Core\Repositories;
 
+use Webkul\Core\Contracts\SubscribersList;
 use Webkul\Core\Eloquent\Repository;
 
 class SubscribersListRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\SubscribersList';
+        return SubscribersList::class;
     }
 
     /**
-     * Delete a slider item and delete the image from the disk or where ever it is
+     * Delete a slider item and delete the image from the disk or where ever it is.
      *
      * @param  int  $id
      * @return bool

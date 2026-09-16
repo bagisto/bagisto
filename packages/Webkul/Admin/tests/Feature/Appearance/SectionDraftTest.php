@@ -47,11 +47,7 @@ function themeCode(?Section $section = null): string
 }
 
 /**
- * Publish every pending edit of a section's theme.
- *
- * Publishing is a whole-theme action, so a test that staged one section's edit asks for it by
- * naming the theme. There is deliberately no way to publish a single section: a reorder stages a
- * new position on several of them at once, and releasing only one leaves the list half sorted.
+ * Publish every pending edit of a section's theme, which is the only granularity publishing has.
  */
 function publishDrafts(?Section $section = null): TestResponse
 {
@@ -65,6 +61,10 @@ function discardDrafts(?Section $section = null): TestResponse
 {
     return postJson(route('admin.appearance.sections.discard', themeCode($section)));
 }
+
+// ============================================================================
+// Drafts
+// ============================================================================
 
 it('should hold an edit as a draft without touching what the storefront renders', function () {
     $section = makeSection();
@@ -168,6 +168,10 @@ it('should resolve a section to its draft for the preview', function () {
     expect($previewed->translate(app()->getLocale())->options)->toBe(['html' => '<p>only in preview</p>']);
 });
 
+// ============================================================================
+// Preview Access
+// ============================================================================
+
 it('should keep the preview off limits to guests', function () {
     get(route('shop.appearance.preview'))->assertForbidden();
 });
@@ -204,6 +208,10 @@ it('should render the preview for a signed in admin', function () {
     get(route('shop.appearance.preview'))->assertOk();
 });
 
+// ============================================================================
+// Duplicating
+// ============================================================================
+
 it('should copy a section including its translated options', function () {
     $section = makeSection(['name' => 'Hero', 'status' => 1]);
 
@@ -218,6 +226,10 @@ it('should copy a section including its translated options', function () {
     expect($copy->translate(app()->getLocale())->options)
         ->toBe($section->translate(app()->getLocale())->options);
 });
+
+// ============================================================================
+// Reordering
+// ============================================================================
 
 it('should renumber sections when the list is reordered', function () {
     $first = makeSection(['sort_order' => 1]);
@@ -241,6 +253,10 @@ it('should renumber sections when the list is reordered', function () {
     expect($first->fresh()->sort_order)->toBe(2);
 });
 
+// ============================================================================
+// Draft Validation
+// ============================================================================
+
 it('should reject a draft with no options', function () {
     $section = makeSection();
 
@@ -249,6 +265,10 @@ it('should reject a draft with no options', function () {
     postJson(route('admin.appearance.sections.draft', $section->id), [])
         ->assertUnprocessable();
 });
+
+// ============================================================================
+// Editor
+// ============================================================================
 
 it('should render the split editor when scoped to a theme', function () {
     $section = makeSection(['name' => 'Hero Banner']);
@@ -302,6 +322,10 @@ it('should hand the drawer the draft once one exists', function () {
         ->assertJsonPath('options.html', '<p>in progress</p>');
 });
 
+// ============================================================================
+// Uploads
+// ============================================================================
+
 it('should store an uploaded image and return its path', function () {
     Storage::fake();
 
@@ -353,15 +377,19 @@ it('should refuse a file that is neither an image nor a video', function () {
     ])->assertJsonValidationErrorFor('file');
 });
 
-it('should reject a media upload that is not an image', function () {
+it('should refuse a media upload that carries no file at all', function () {
     $section = makeSection();
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.media', $section->id), [
-        'image' => UploadedFile::fake()->create('notes.txt', 4, 'text/plain'),
-    ])->assertUnprocessable();
+    postJson(route('admin.appearance.sections.media', $section->id), [])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('file');
 });
+
+// ============================================================================
+// Framing
+// ============================================================================
 
 it('should let the preview be framed by the admin', function () {
     $this->loginAsAdmin();
@@ -420,6 +448,10 @@ it('should stop the preview navigating itself onto a page that cannot be framed'
         ->assertSee("event.target.closest('a')", false)
         ->assertSee("addEventListener('submit'", false);
 });
+
+// ============================================================================
+// Preview Rendering
+// ============================================================================
 
 it('should mark each section in the preview exactly once', function () {
     $this->loginAsAdmin();
@@ -496,6 +528,10 @@ it('should render every services section, so a duplicate of one shows up too', f
     }
 });
 
+// ============================================================================
+// Reordering
+// ============================================================================
+
 it('should keep a pinned footer at the end whatever order is sent', function () {
     $channel = core()->getDefaultChannel();
 
@@ -521,6 +557,10 @@ it('should keep a pinned footer at the end whatever order is sent', function () 
 
     expect($footer->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
 });
+
+// ============================================================================
+// Uploads
+// ============================================================================
 
 it('should file an upload under the theme the section belongs to', function () {
     Storage::fake();
@@ -554,6 +594,10 @@ it('should clear a section media directory when the section is deleted', functio
 
     Storage::assertMissing($path);
 });
+
+// ============================================================================
+// Events
+// ============================================================================
 
 it('should announce every write it makes, before and after', function (string $route, string $event, array $payload) {
     $section = makeSection();
@@ -609,6 +653,10 @@ it('should announce a discard for each section it reverts, before and after', fu
     Event::assertDispatched('section.draft.discard.after');
 });
 
+// ============================================================================
+// Publishing
+// ============================================================================
+
 it('should offer no endpoint that releases a single section', function (string $action) {
     $section = makeSection();
 
@@ -644,6 +692,10 @@ it('should announce nothing when there is no pending edit to publish', function 
     Event::assertNotDispatched('section.update.after');
 });
 
+// ============================================================================
+// Events
+// ============================================================================
+
 it('should announce a media upload, before and after', function () {
     $section = makeSection();
 
@@ -678,6 +730,10 @@ it('should announce a reorder, before and after', function () {
     Event::assertDispatched('section.reorder.after');
 });
 
+// ============================================================================
+// Pending Changes
+// ============================================================================
+
 it('should hold a new section back from the storefront until it is published', function () {
     $channel = core()->getDefaultChannel();
 
@@ -691,7 +747,7 @@ it('should hold a new section back from the storefront until it is published', f
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ])->assertOk()->json('section.id');
 
-    $section = Section::find($id);
+    $section = Section::query()->find($id);
 
     expect((bool) $section->status)->toBeFalse()
         ->and($section->draft_status)->toBeTrue()
@@ -760,6 +816,10 @@ it('should stage only the sections a reorder actually moved', function () {
     expect($first->refresh()->draft_sort_order)->toBeNull();
 });
 
+// ============================================================================
+// Discarding
+// ============================================================================
+
 it('should put a staged change back where it was when it is discarded', function () {
     $section = makeSection(['status' => 1]);
 
@@ -774,6 +834,10 @@ it('should put a staged change back where it was when it is discarded', function
     expect($section->refresh()->draft_status)->toBeNull()
         ->and((bool) $section->status)->toBeTrue();
 });
+
+// ============================================================================
+// Media Cleanup
+// ============================================================================
 
 it('should delete the uploads a discarded draft brought with it', function () {
     Storage::fake();
@@ -871,11 +935,15 @@ it('should clear a section media directory however the section is deleted', func
     match ($how) {
         'model' => $section->delete(),
         'repository' => app(SectionRepository::class)->delete($section->id),
-        'collection' => Section::where('id', $section->id)->get()->each->delete(),
+        'collection' => Section::query()->where('id', $section->id)->get()->each->delete(),
     };
 
     expect(Storage::exists($directory))->toBeFalse();
 })->with(['model', 'repository', 'collection']);
+
+// ============================================================================
+// Duplicating
+// ============================================================================
 
 it('should copy a section as a pending change rather than straight onto the storefront', function () {
     $section = makeSection(['status' => 1]);
@@ -887,7 +955,7 @@ it('should copy a section as a pending change rather than straight onto the stor
         ->assertJsonPath('section.has_draft', true)
         ->json('section.id');
 
-    $copy = Section::find($copyId);
+    $copy = Section::query()->find($copyId);
 
     expect((bool) $copy->status)->toBeFalse()
         ->and($copy->draft_status)->toBeTrue()

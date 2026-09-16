@@ -74,6 +74,10 @@ afterEach(function () {
     File::deleteDirectory(storage_path('app/public/imagecache-templates'));
 });
 
+// ============================================================================
+// Template Registry
+// ============================================================================
+
 it('should resolve the core templates for a theme that registers none', function () {
     themeWithImageTemplates('plain', null);
 
@@ -118,6 +122,10 @@ it('should resolve the same template name to each theme own class', function () 
         ->and($registry->find('small', 'wide'))->toBe(WideSmall::class)
         ->and($registry->find('small', 'default'))->toBe(Small::class);
 });
+
+// ============================================================================
+// Serving Images
+// ============================================================================
 
 it('should serve each channel the dimensions its theme defines for the same image', function () {
     themeWithImageTemplates('poster', ['small' => PosterSmall::class, 'product_card' => ProductCard::class]);
@@ -175,6 +183,10 @@ it('should only resolve a requested name against the registered templates', func
     'php class' => ['stdClass'],
 ]);
 
+// ============================================================================
+// Invalid Templates
+// ============================================================================
+
 it('should skip and report an invalid theme template, keeping the core template of that name', function () {
     Exceptions::fake();
 
@@ -197,6 +209,10 @@ it('should skip and report an invalid theme template, keeping the core template 
     imageOn('broken.test', 'missing', $this->source)->assertNotFound();
 });
 
+// ============================================================================
+// Reserved Names
+// ============================================================================
+
 it('should not let a theme take over a reserved image route name', function () {
     themeWithImageTemplates('poster', ['original' => PosterSmall::class]);
 
@@ -218,6 +234,10 @@ it('should refuse a reserved image route name in any letter case, which the rout
 
     Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[LOGO]'));
 });
+
+// ============================================================================
+// Uninstalled Themes
+// ============================================================================
 
 it('should use the default storefront theme templates for a channel whose theme is not installed', function () {
     config(['themes.shop.'.config('themes.shop-default').'.customize.image_cache.templates' => ['small' => WideSmall::class]]);

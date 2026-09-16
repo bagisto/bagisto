@@ -12,10 +12,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 /**
- * Build the attribute_groups payload matching the real browser format.
- *
- * The UI sends groups keyed by existing group IDs (or 'group_' prefix for new
- * groups), each containing code, name, position, column, and custom_attributes.
+ * The attribute groups payload of a family, keyed by group id as the editor sends it.
  */
 function buildGroupsPayloadFromFamily(AttributeFamily $family): array
 {
@@ -272,7 +269,7 @@ it('should dispatch events when storing a family', function () {
 it('should return the attribute family edit page with all groups', function () {
     $this->loginAsAdmin();
 
-    $defaultFamily = AttributeFamily::where('code', 'default')->first();
+    $defaultFamily = AttributeFamily::query()->where('code', 'default')->first();
 
     get(route('admin.catalog.families.edit', $defaultFamily->id))
         ->assertOk()
@@ -299,7 +296,7 @@ it('should return 404 for a non-existent family edit page', function () {
 it('should update a family name while preserving all groups and attributes', function () {
     $this->loginAsAdmin();
 
-    $defaultFamily = AttributeFamily::where('code', 'default')->first();
+    $defaultFamily = AttributeFamily::query()->where('code', 'default')->first();
     $originalGroupCount = $defaultFamily->attribute_groups()->count();
 
     $payload = buildGroupsPayloadFromFamily($defaultFamily);
@@ -322,7 +319,7 @@ it('should update a family name while preserving all groups and attributes', fun
 it('should add a new group to an existing family during update', function () {
     $this->loginAsAdmin();
 
-    $defaultFamily = AttributeFamily::where('code', 'default')->first();
+    $defaultFamily = AttributeFamily::query()->where('code', 'default')->first();
     $originalGroupCount = $defaultFamily->attribute_groups()->count();
 
     $payload = buildGroupsPayloadFromFamily($defaultFamily);
@@ -405,7 +402,7 @@ it('should fail validation when required fields are missing on update', function
 it('should allow updating a family with its own code', function () {
     $this->loginAsAdmin();
 
-    $defaultFamily = AttributeFamily::where('code', 'default')->first();
+    $defaultFamily = AttributeFamily::query()->where('code', 'default')->first();
     $payload = buildGroupsPayloadFromFamily($defaultFamily);
 
     putJson(route('admin.catalog.families.update', $defaultFamily->id), [
@@ -419,7 +416,7 @@ it('should allow updating a family with its own code', function () {
 it('should keep the code of an attribute family unchanged on update', function () {
     $family = AttributeFamily::factory()->create();
 
-    $defaultFamily = AttributeFamily::where('code', AttributeFamily::DEFAULT_CODE)->firstOrFail();
+    $defaultFamily = AttributeFamily::query()->where('code', AttributeFamily::DEFAULT_CODE)->firstOrFail();
 
     $this->loginAsAdmin();
 
@@ -463,7 +460,7 @@ it('should dispatch events when updating a family', function () {
 
     $this->loginAsAdmin();
 
-    $defaultFamily = AttributeFamily::where('code', 'default')->first();
+    $defaultFamily = AttributeFamily::query()->where('code', 'default')->first();
     $payload = buildGroupsPayloadFromFamily($defaultFamily);
 
     putJson(route('admin.catalog.families.update', $defaultFamily->id), [

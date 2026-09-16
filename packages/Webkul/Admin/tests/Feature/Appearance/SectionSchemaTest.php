@@ -6,6 +6,10 @@ use Webkul\Theme\SectionSchema;
 
 use function Pest\Laravel\postJson;
 
+// ============================================================================
+// Schema
+// ============================================================================
+
 it('should describe every section type', function () {
     $schema = app(SectionSchema::class);
 
@@ -60,6 +64,10 @@ it('should describe every type a section may take', function () {
     expect(array_keys(app(SectionSchema::class)->all()))
         ->toEqualCanonicalizing(SectionTypeEnum::getValues());
 });
+
+// ============================================================================
+// Type Validation
+// ============================================================================
 
 it('should accept exactly the types the model declares', function () {
     $this->loginAsAdmin();

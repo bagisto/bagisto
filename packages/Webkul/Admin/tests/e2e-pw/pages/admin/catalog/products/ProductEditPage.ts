@@ -196,13 +196,7 @@ export class ProductEditPage extends BasePage {
         await this.openProduct(productName);
         await this.setTaxCategory(label);
         await this.saveProduct();
-        await this.verifyProductUpdated();
-    }
-
-    async expectTaxCategoryAssigned(productName: string, label: string) {
-        await this.openProduct(productName);
-
-        await expect(this.taxCategoryTrigger).toContainText(label);
+        await this.expectProductUpdated();
     }
 
     async saveProduct() {
@@ -211,7 +205,7 @@ export class ProductEditPage extends BasePage {
 
     async saveAndVerifyUpdated(redirectToList: boolean = true) {
         await this.saveProduct();
-        await this.verifyProductUpdated();
+        await this.expectProductUpdated();
 
         if (redirectToList) {
             await this.visit("admin/catalog/products");
@@ -222,14 +216,14 @@ export class ProductEditPage extends BasePage {
         await this.openProduct(name);
         await this.specialPriceInput.fill(price);
         await this.saveProduct();
-        await this.verifyProductUpdated();
+        await this.expectProductUpdated();
     }
 
     async updatePrice(name: string, price: string): Promise<void> {
         await this.openProduct(name);
         await this.fillPrice(price);
         await this.saveProduct();
-        await this.verifyProductUpdated();
+        await this.expectProductUpdated();
     }
 
     async setStatus(name: string, enabled: boolean): Promise<void> {
@@ -242,7 +236,7 @@ export class ProductEditPage extends BasePage {
         await expect(this.statusInput).toBeChecked({ checked: enabled });
 
         await this.saveProduct();
-        await this.verifyProductUpdated();
+        await this.expectProductUpdated();
     }
 
     async submitWithoutRequiredFields(name: string): Promise<void> {
@@ -252,14 +246,20 @@ export class ProductEditPage extends BasePage {
         await this.saveProduct();
     }
 
-    async verifyProductUpdated() {
+    async expectProductUpdated() {
         await expect(this.updatedMessage).toBeVisible();
     }
 
-    async verifyProductCreated() {
+    async expectProductCreated() {
         await expect(
             this.page.getByText("Product created successfully"),
         ).toBeVisible();
+    }
+
+    async expectTaxCategoryAssigned(productName: string, label: string) {
+        await this.openProduct(productName);
+
+        await expect(this.taxCategoryTrigger).toContainText(label);
     }
 
     async expectPriceInEditForm(name: string, price: string): Promise<void> {

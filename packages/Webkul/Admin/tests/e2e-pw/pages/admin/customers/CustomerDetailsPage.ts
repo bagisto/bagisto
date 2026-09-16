@@ -110,6 +110,13 @@ export class CustomerDetailsPage extends BasePage {
         return this.page.getByText("Create Order", { exact: true });
     }
 
+    private get newOrderCartPanel(): Locator {
+        return this.page
+            .locator("div.box-shadow")
+            .filter({ has: this.page.getByText("Cart Items", { exact: true }) })
+            .filter({ has: this.page.getByText("Add Product", { exact: true }) });
+    }
+
     private addressCard(street: string): Locator {
         return this.page.locator(`div:has(> p:has-text("${street}"))`);
     }
@@ -258,7 +265,9 @@ export class CustomerDetailsPage extends BasePage {
     }
 
     async expectOrderCreationStarted(): Promise<void> {
-        await expect(this.page.getByText("Cart Items").first()).toBeVisible();
+        await expect(
+            this.newOrderCartPanel.getByText("Cart Items", { exact: true }),
+        ).toBeVisible();
     }
 
     async expectValidationError(message: string): Promise<void> {

@@ -209,7 +209,7 @@
 
                 data() {
                     return {
-                        config: @json(app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($product)),
+                        config: @json(app(\Webkul\Product\Helpers\ConfigurableOption::class)->getConfigurationConfig($product)),
 
                         childAttributes: [],
 

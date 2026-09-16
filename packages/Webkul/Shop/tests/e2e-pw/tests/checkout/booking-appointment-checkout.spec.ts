@@ -43,7 +43,11 @@ test.describe("appointment booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.checkout(product.name, { hour: "10" });
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout appointment booking with all the test without cancellation", async ({
@@ -98,7 +102,11 @@ test.describe("appointment booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.checkout(product.name, { hour: "10" });
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout appointment booking with all the test without cancellation", async ({
@@ -153,7 +161,11 @@ test.describe("appointment booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.checkout(product.name, { hour: "10" });
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout appointment booking with not available every week and same slot for all days for customer checkout without cancellation", async ({
@@ -208,7 +220,11 @@ test.describe("appointment booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.checkout(product.name, { hour: "10" });
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout with not available every week and not same slot for all days for customer checkout without cancellation", async ({

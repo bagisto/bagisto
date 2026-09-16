@@ -142,6 +142,10 @@ afterEach(function () {
     File::deleteDirectory(storage_path('framework/testing/vite'));
 });
 
+// ============================================================================
+// Theme Templates
+// ============================================================================
+
 it('should give an image the core sizes and the original, exactly as before, when the theme lists nothing', function () {
     $channel = channelRunningImageTemplates('plain', null);
 
@@ -204,6 +208,10 @@ it('should give each channel the product images of the theme it runs', function 
         ->and(baseImageOn($plain, $this->product))->not->toHaveKey('product_card_image_url');
 });
 
+// ============================================================================
+// Serving Images
+// ============================================================================
+
 it('should serve the helper urls at the sizes each channel theme defines', function () {
     $poster = channelRunningImageTemplates('poster', ['small' => PosterSmall::class, 'product_card' => ProductCard::class], ['product_card']);
 
@@ -242,6 +250,10 @@ it('should never reuse one theme image for another theme that defines the same t
     expect($fromSquare->headers->get('Etag'))->not->toBe($fromPoster->headers->get('Etag'))
         ->and(sizeOfImage($fromSquare))->toBe([200, 200]);
 });
+
+// ============================================================================
+// Placeholders
+// ============================================================================
 
 it('should give a product without an image a placeholder for every product image template', function () {
     $channel = channelRunningImageTemplates('poster', ['product_card' => ProductCard::class], ['product_card']);
@@ -334,6 +346,10 @@ it('should hand the product gallery the placeholder the theme ships', function (
         ->assertDontSee('large-product-placeholder', false);
 });
 
+// ============================================================================
+// Storefront API
+// ============================================================================
+
 it('should carry the theme product images into the storefront product api', function () {
     config(['themes.shop.'.core()->getDefaultChannel()->theme.'.customize.image_cache' => [
         'templates' => ['product_card' => ProductCard::class],
@@ -368,6 +384,10 @@ it('should not serve a cached product listing built for the theme a channel ran 
     expect(listedBaseImage($this->product))->not->toHaveKey('product_card_image_url');
 });
 
+// ============================================================================
+// Admin Requests
+// ============================================================================
+
 it('should give admin requests the core product images only, whatever theme the channel runs', function () {
     $channel = channelRunningImageTemplates('poster', ['product_card' => ProductCard::class], ['product_card']);
 
@@ -383,6 +403,10 @@ it('should give admin requests the core product images only, whatever theme the 
 
     expect(app(TemplateRegistry::class)->currentTheme())->toBe('poster');
 });
+
+// ============================================================================
+// Invalid Templates
+// ============================================================================
 
 it('should leave out an unusable template or a product image name that is not registered', function () {
     Exceptions::fake();
@@ -403,6 +427,10 @@ it('should leave out an unusable template or a product image name that is not re
     Exceptions::assertReported(fn (InvalidTemplate $exception) => str_contains($exception->getMessage(), '[thumb]'));
 });
 
+// ============================================================================
+// Rich Snippets
+// ============================================================================
+
 it('should give the product rich snippet the full size urls of the product image helper', function () {
     expect(app(SEO::class)->getProductImages($this->product->fresh()))->toBe([url('cache/original/'.$this->path)]);
 });
@@ -412,6 +440,10 @@ it('should give the product rich snippet no images for a product without a store
 
     expect(app(SEO::class)->getProductImages($product))->toBe([]);
 });
+
+// ============================================================================
+// Customer Pages
+// ============================================================================
 
 it('should show a customer review with the product image of the product image helper', function () {
     $customer = Customer::factory()->create();

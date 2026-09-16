@@ -4,15 +4,16 @@ namespace Webkul\Notification\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Notification\Contracts\Notification;
 
 class NotificationRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Notification\Contracts\Notification';
+        return Notification::class;
     }
 
     /**
@@ -22,13 +23,19 @@ class NotificationRepository extends Repository
     {
         $query = $this->model->with('order');
 
-        if (isset($params['status']) && $params['status'] != 'All') {
+        if (
+            isset($params['status'])
+            && $params['status'] != 'All'
+        ) {
             $query->whereHas('order', function ($q) use ($params) {
                 $q->where(['status' => $params['status']]);
             });
         }
 
-        if (isset($params['read']) && isset($params['limit'])) {
+        if (
+            isset($params['read'])
+            && isset($params['limit'])
+        ) {
             $query->where('read', $params['read'])->limit($params['limit']);
         } elseif (isset($params['limit'])) {
             $query->limit($params['limit']);

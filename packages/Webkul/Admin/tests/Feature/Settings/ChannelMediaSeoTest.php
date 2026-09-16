@@ -53,7 +53,13 @@ function channelUpdatePayload(Channel $channel, array $extra = []): array
     ], $extra);
 }
 
+// ============================================================================
+// Edit Page
+// ============================================================================
+
 it('should render the seo drawer on the channel edit page', function () {
+    Storage::fake();
+
     $channel = makeChannelWithLogo();
 
     $this->loginAsAdmin();
@@ -63,6 +69,10 @@ it('should render the seo drawer on the channel edit page', function () {
         ->assertSee('logo_meta')
         ->assertSee('favicon_meta');
 });
+
+// ============================================================================
+// Saving Image Meta
+// ============================================================================
 
 it('should save the alt text of the channel logo', function () {
     Storage::fake();
@@ -120,6 +130,10 @@ it('should rename the channel favicon while keeping its ico extension', function
     expect($channel->fresh()->favicon)->toBe('channel/'.$channel->id.'/acme-favicon.ico');
 });
 
+// ============================================================================
+// Uploads
+// ============================================================================
+
 it('should name a newly uploaded channel logo after the requested file name', function () {
     Storage::fake();
 
@@ -140,6 +154,10 @@ it('should name a newly uploaded channel logo after the requested file name', fu
 
     Storage::assertExists($channel->logo);
 });
+
+// ============================================================================
+// Validation And Removal
+// ============================================================================
 
 it('should reject a channel alt text longer than the column allows', function () {
     Storage::fake();

@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import { env } from "../utils/env";
 
 interface DatabaseConfig {
     connection: string;
@@ -21,6 +22,14 @@ export class InstallerPage {
             username: process.env.INSTALLER_DB_USERNAME ?? "root",
             password: process.env.INSTALLER_DB_PASSWORD ?? "root",
         };
+    }
+
+    private get documentElement() {
+        return this.page.locator("html");
+    }
+
+    private get adminLoginLink() {
+        return this.page.locator('a[href*="/admin/login"]');
     }
 
     private async completeStart(): Promise<void> {
@@ -79,14 +88,18 @@ export class InstallerPage {
     }
 
     private async createAdmin(): Promise<void> {
-        await this.page.fill('input[name="password"]', "admin123");
-        await this.page.fill('input[name="password_confirmation"]', "admin123");
+        await this.page.fill('input[name="email"]', env.adminEmail);
+        await this.page.fill('input[name="password"]', env.adminPassword);
+        await this.page.fill(
+            'input[name="password_confirmation"]',
+            env.adminPassword,
+        );
 
         await this.page.locator('button[type="submit"].primary-button').click();
     }
 
     private async expectCompleted(): Promise<void> {
-        await expect(this.page.locator('a[href*="/admin/login"]')).toBeVisible({ timeout: 120 * 1000 });
+        await expect(this.adminLoginLink).toBeVisible({ timeout: 120 * 1000 });
     }
 
     async install(locale: string): Promise<void> {
@@ -100,5 +113,13 @@ export class InstallerPage {
         await this.skipSampleProducts();
         await this.createAdmin();
         await this.expectCompleted();
+    }
+
+    async expectLayoutDirection(direction: "ltr" | "rtl"): Promise<void> {
+        await expect(this.documentElement).toHaveAttribute("dir", direction);
+    }
+
+    async expectAdminLoginOffered(): Promise<void> {
+        await expect(this.adminLoginLink).toBeVisible();
     }
 }

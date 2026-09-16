@@ -4,19 +4,20 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Collection;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductReview;
 
 class ProductReviewRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductReview';
+        return ProductReview::class;
     }
 
     /**
-     * Retrieve review for customerId
+     * Retrieve review for customerId.
      *
      * @return Collection
      */

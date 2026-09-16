@@ -9,9 +9,9 @@ export class DownloadableProductCheckout extends CheckoutHelper {
     async addToCart(productName: string): Promise<void> {
         await this.openProduct(productName);
 
-        await expect(this.clickLink.first()).toBeVisible();
+        await expect(this.downloadableLinkOption).toBeVisible();
 
-        await this.clickLink.first().click();
+        await this.downloadableLinkOption.click();
         await this.addOpenProductToCart();
     }
 

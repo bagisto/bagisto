@@ -295,7 +295,7 @@
 
                 data: function() {
                     return {
-                        config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
+                        config: @json(app(\Webkul\Product\Helpers\BundleOption::class)->getBundleConfig($product)),
 
                         options: [],
 

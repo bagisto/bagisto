@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.layout.footer.before') !!}
 
-@inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
+@inject('sectionRepository', \Webkul\Theme\Repositories\SectionRepository::class)
 
 @php
     $channel = core()->getCurrentChannel();

@@ -62,14 +62,6 @@ export class DesignConfigurationPage extends ConfigurationFormPage {
         await this.save();
     }
 
-    async expectSettings(settings: Partial<DesignSettings>): Promise<void> {
-        await this.open();
-
-        if (settings.categoryView !== undefined) {
-            await this.expectSelect(CATEGORY_VIEW, settings.categoryView);
-        }
-    }
-
     async uploadMedia(field: LogoField, filePath: string): Promise<void> {
         await this.open();
 
@@ -101,6 +93,26 @@ export class DesignConfigurationPage extends ConfigurationFormPage {
         return (await this.mediaTile(field).locator("img").count()) > 0;
     }
 
+    async previewCategoryView(view: CategoryView): Promise<void> {
+        await this.open();
+        await this.setSelect(CATEGORY_VIEW, view);
+        await this.previewButton(view).click();
+
+        await expect(this.previewModal).toBeVisible();
+
+        await this.closePreviewButton.click();
+
+        await expect(this.previewModal).toHaveCount(0);
+    }
+
+    async expectSettings(settings: Partial<DesignSettings>): Promise<void> {
+        await this.open();
+
+        if (settings.categoryView !== undefined) {
+            await this.expectSelect(CATEGORY_VIEW, settings.categoryView);
+        }
+    }
+
     async expectMediaStored(field: LogoField): Promise<void> {
         await this.open();
 
@@ -114,17 +126,5 @@ export class DesignConfigurationPage extends ConfigurationFormPage {
         await this.open();
 
         await expect(this.mediaTile(field).locator("img")).toHaveCount(0);
-    }
-
-    async previewCategoryView(view: CategoryView): Promise<void> {
-        await this.open();
-        await this.setSelect(CATEGORY_VIEW, view);
-        await this.previewButton(view).click();
-
-        await expect(this.previewModal).toBeVisible();
-
-        await this.closePreviewButton.click();
-
-        await expect(this.previewModal).toHaveCount(0);
     }
 }

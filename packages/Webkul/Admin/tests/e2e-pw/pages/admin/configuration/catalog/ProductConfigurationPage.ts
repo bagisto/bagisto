@@ -156,6 +156,32 @@ export class ProductConfigurationPage extends ConfigurationFormPage {
         await this.save();
     }
 
+    async uploadImagePlaceholder(size: ImageSize, filePath: string): Promise<void> {
+        await this.open();
+
+        const [fileChooser] = await Promise.all([
+            this.page.waitForEvent("filechooser"),
+            this.imagePlaceholderLabel(size).click(),
+        ]);
+
+        await fileChooser.setFiles(filePath);
+        await expect(this.imagePlaceholderTile(size).locator("img")).toBeVisible();
+        await this.save();
+    }
+
+    async removeImagePlaceholder(size: ImageSize): Promise<void> {
+        await this.open();
+
+        const tile = this.imagePlaceholderTile(size);
+
+        if (await tile.count()) {
+            await tile.hover();
+            await tile.locator(".icon-delete").click();
+            await expect(tile).toBeHidden();
+            await this.save();
+        }
+    }
+
     async expectSettings(settings: Partial<ProductSettings>): Promise<void> {
         await this.open();
 
@@ -199,32 +225,6 @@ export class ProductConfigurationPage extends ConfigurationFormPage {
                 await this.expectText(this.imageWidthField(size), dimensions.width);
                 await this.expectText(this.imageHeightField(size), dimensions.height);
             }
-        }
-    }
-
-    async uploadImagePlaceholder(size: ImageSize, filePath: string): Promise<void> {
-        await this.open();
-
-        const [fileChooser] = await Promise.all([
-            this.page.waitForEvent("filechooser"),
-            this.imagePlaceholderLabel(size).click(),
-        ]);
-
-        await fileChooser.setFiles(filePath);
-        await expect(this.imagePlaceholderTile(size).locator("img")).toBeVisible();
-        await this.save();
-    }
-
-    async removeImagePlaceholder(size: ImageSize): Promise<void> {
-        await this.open();
-
-        const tile = this.imagePlaceholderTile(size);
-
-        if (await tile.count()) {
-            await tile.hover();
-            await tile.locator(".icon-delete").click();
-            await expect(tile).toBeHidden();
-            await this.save();
         }
     }
 

@@ -176,7 +176,7 @@
                             @lang('admin::app.settings.channels.edit.inventory-sources')
                         </x-admin::form.control-group.label>
 
-                        @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
+                        @foreach (app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]) as $inventorySource)
                             <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
@@ -216,7 +216,7 @@
                             :value="old('root_category_id') ?? $channel->root_category_id"
                             :label="trans('admin::app.settings.channels.edit.root-category')"
                         >
-                            @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
+                            @foreach (app(\Webkul\Category\Repositories\CategoryRepository::class)->getRootCategories() as $category)
                                 <option
                                     value="{{ $category->id }}"
                                     {{ old('root_category_id') == $category->id ? 'selected' : '' }}

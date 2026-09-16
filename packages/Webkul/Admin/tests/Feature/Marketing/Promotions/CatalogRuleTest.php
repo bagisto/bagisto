@@ -155,7 +155,7 @@ it('should persist boolean fields when storing a catalog rule', function () {
     ])
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'));
 
-    $catalogRule = CatalogRule::latest('id')->first();
+    $catalogRule = CatalogRule::query()->latest('id')->first();
 
     expect($catalogRule->status)->toBeTrue()
         ->and($catalogRule->end_other_rules)->toBeTrue();

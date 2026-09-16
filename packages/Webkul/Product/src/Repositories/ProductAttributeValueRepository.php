@@ -5,19 +5,20 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductAttributeValue;
 
 class ProductAttributeValueRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductAttributeValue';
+        return ProductAttributeValue::class;
     }
 
     /**
-     * Save attribute values
+     * Save attribute values.
      *
      * @param  array  $data
      * @param  Product  $product
@@ -151,6 +152,8 @@ class ProductAttributeValueRepository extends Repository
     }
 
     /**
+     * Every value column of an attribute, with the value set on the one its type uses.
+     *
      * @param  mixed  $attribute
      * @param  mixed  $value
      * @return array
@@ -165,6 +168,8 @@ class ProductAttributeValueRepository extends Repository
     }
 
     /**
+     * Whether no other product already carries this value for the attribute.
+     *
      * @param  string  $column
      * @param  int  $attributeId
      * @param  int  $productId

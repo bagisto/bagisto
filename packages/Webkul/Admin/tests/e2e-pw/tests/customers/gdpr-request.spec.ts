@@ -66,7 +66,7 @@ test.describe("gdpr request management", () => {
         );
     });
 
-    test("should delete gdpr request", async ({ adminPage }) => {
+    test("should remove a gdpr request from the grid", async ({ adminPage }) => {
         const gdprPage = new CustomerGDPRPage(adminPage);
 
         await loginAsCustomer(adminPage);
@@ -77,7 +77,7 @@ test.describe("gdpr request management", () => {
         await gdprPage.expectRequestAbsent(requestMessage);
     });
 
-    test("should decline gdpr request", async ({ adminPage }) => {
+    test("should mark a gdpr request as declined", async ({ adminPage }) => {
         const gdprPage = new CustomerGDPRPage(adminPage);
 
         await loginAsCustomer(adminPage);

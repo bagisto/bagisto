@@ -77,26 +77,17 @@ test.afterEach(async ({ adminPage }) => {
 });
 
 test.describe("cart rules", () => {
-    const cases = [
-        {
+    test("should discount the shipping price as well when the rule applies to shipping", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createRuleAndVerifyCoupon({
+            adminPage,
+            shopPage,
             operator: "==",
-            option: "India",
-            type: "fixed",
+            optionSelect: "India",
+            couponType: "fixed",
             allowShipping: "yes",
-            label: "is equal to",
-        },
-    ];
-
-    for (const { operator, option, type, allowShipping } of cases) {
-        test("should apply coupon on shipping price", async ({ adminPage, shopPage }) => {
-            await createRuleAndVerifyCoupon({
-                adminPage,
-                shopPage,
-                operator,
-                optionSelect: option,
-                couponType: type as CouponType,
-                allowShipping,
-            });
         });
-    }
+    });
 });

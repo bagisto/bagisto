@@ -3,6 +3,10 @@
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 
+// ============================================================================
+// Browser Requests
+// ============================================================================
+
 it('should block access to installer index page when application is already installed', function () {
     get(route('installer.index'))
         ->assertRedirect(route('shop.home.index'));
@@ -49,6 +53,10 @@ it('should block access to seed sample products endpoint when application is alr
     ])
         ->assertRedirect(route('shop.home.index'));
 });
+
+// ============================================================================
+// Ajax Requests
+// ============================================================================
 
 it('should return 403 for ajax request to run migration endpoint when already installed', function () {
     post(route('installer.run_migration'), [
@@ -111,6 +119,10 @@ it('should return 403 for ajax request to seed sample products endpoint when alr
             'message' => trans('installer::app.installer.middleware.already-installed'),
         ]);
 });
+
+// ============================================================================
+// Percent-Encoded Paths
+// ============================================================================
 
 it('should block the installer index when it is reached through a percent-encoded path', function () {
     get('/%69nstall')

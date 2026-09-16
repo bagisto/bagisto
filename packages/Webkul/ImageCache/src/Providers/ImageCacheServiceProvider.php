@@ -3,6 +3,7 @@
 namespace Webkul\ImageCache\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Webkul\ImageCache\Http\Controllers\ImageCacheController;
 
 class ImageCacheServiceProvider extends ServiceProvider
 {
@@ -33,7 +34,7 @@ class ImageCacheServiceProvider extends ServiceProvider
             $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
 
             $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
-                'uses' => 'Webkul\ImageCache\Http\Controllers\ImageCacheController@getResponse',
+                'uses' => [ImageCacheController::class, 'getResponse'],
                 'as' => 'imagecache',
             ])->where(['filename' => $filenamePattern]);
         }

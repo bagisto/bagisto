@@ -42,6 +42,31 @@ export class GdprShopPage extends BasePage {
         return this.page.locator(`input[type="checkbox"][name="${name}"]`);
     }
 
+    async acceptCookies(): Promise<void> {
+        await this.visit("");
+
+        await expect(this.cookieNotice).toBeVisible();
+
+        await this.acceptCookiesButton.click();
+
+        await expect(this.cookieNotice).toBeHidden();
+    }
+
+    async saveCookieConsent(): Promise<void> {
+        await this.visit("");
+        await this.customizeCookiesLink.click();
+
+        await expect(this.page).toHaveURL(/your-cookie-consent-preferences/);
+
+        await this.consentOption("basic_interaction").click();
+
+        await expect(this.consentCheckbox("basic_interaction")).toBeChecked();
+
+        await this.saveConsentButton.click();
+
+        await expect(this.page).not.toHaveURL(/your-cookie-consent-preferences/);
+    }
+
     async expectGdprRequestsOffered(offered: boolean): Promise<void> {
         await this.visit("customer/account/profile");
 
@@ -86,31 +111,6 @@ export class GdprShopPage extends BasePage {
         } else {
             expect(box!.x + box!.width).toBeGreaterThan(viewport!.width - 50);
         }
-    }
-
-    async acceptCookies(): Promise<void> {
-        await this.visit("");
-
-        await expect(this.cookieNotice).toBeVisible();
-
-        await this.acceptCookiesButton.click();
-
-        await expect(this.cookieNotice).toBeHidden();
-    }
-
-    async saveCookieConsent(): Promise<void> {
-        await this.visit("");
-        await this.customizeCookiesLink.click();
-
-        await expect(this.page).toHaveURL(/your-cookie-consent-preferences/);
-
-        await this.consentOption("basic_interaction").click();
-
-        await expect(this.consentCheckbox("basic_interaction")).toBeChecked();
-
-        await this.saveConsentButton.click();
-
-        await expect(this.page).not.toHaveURL(/your-cookie-consent-preferences/);
     }
 
     async expectPreferenceCookie(name: string, value: string): Promise<void> {

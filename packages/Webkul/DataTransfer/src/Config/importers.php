@@ -1,9 +1,13 @@
 <?php
 
+use Webkul\DataTransfer\Helpers\Importers\Customer\Importer as CustomerImporter;
+use Webkul\DataTransfer\Helpers\Importers\Product\Importer as ProductImporter;
+use Webkul\DataTransfer\Helpers\Importers\TaxRate\Importer as TaxRateImporter;
+
 return [
     'products' => [
         'title' => 'data_transfer::app.importers.products.title',
-        'importer' => 'Webkul\DataTransfer\Helpers\Importers\Product\Importer',
+        'importer' => ProductImporter::class,
 
         'sample_paths' => [
             'csv' => 'data-transfer/samples/csv/products.csv',
@@ -17,7 +21,7 @@ return [
 
     'customers' => [
         'title' => 'data_transfer::app.importers.customers.title',
-        'importer' => 'Webkul\DataTransfer\Helpers\Importers\Customer\Importer',
+        'importer' => CustomerImporter::class,
 
         'sample_paths' => [
             'csv' => 'data-transfer/samples/csv/customers.csv',
@@ -29,7 +33,7 @@ return [
 
     'tax_rates' => [
         'title' => 'data_transfer::app.importers.tax-rates.title',
-        'importer' => 'Webkul\DataTransfer\Helpers\Importers\TaxRate\Importer',
+        'importer' => TaxRateImporter::class,
 
         'sample_paths' => [
             'csv' => 'data-transfer/samples/csv/tax-rates.csv',

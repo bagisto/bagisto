@@ -91,6 +91,23 @@ export class RuleApplyPage extends CheckoutHelper {
         await this.applyButton.click();
     }
 
+    expectedDiscountedTotal(
+        subtotal: number,
+        discountValue: number,
+        couponType: CouponType,
+        quantity: number,
+    ): number {
+        if (couponType === "percentage") {
+            return round(subtotal - (subtotal * discountValue) / 100);
+        }
+
+        if (couponType === "fixedAmmountWholeCart") {
+            return subtotal < discountValue ? 0 : round(subtotal - discountValue);
+        }
+
+        return subtotal < discountValue ? 0 : round(Math.max(subtotal - quantity * discountValue, 0));
+    }
+
     async expectCouponRejected(): Promise<void> {
         await expect(this.page.getByText("Coupon code is invalid.").first()).toBeVisible();
     }
@@ -113,23 +130,6 @@ export class RuleApplyPage extends CheckoutHelper {
         await this.attemptCoupon(options.couponCode);
 
         await this.expectCouponNotApplicable(subtotal);
-    }
-
-    expectedDiscountedTotal(
-        subtotal: number,
-        discountValue: number,
-        couponType: CouponType,
-        quantity: number,
-    ): number {
-        if (couponType === "percentage") {
-            return round(subtotal - (subtotal * discountValue) / 100);
-        }
-
-        if (couponType === "fixedAmmountWholeCart") {
-            return subtotal < discountValue ? 0 : round(subtotal - discountValue);
-        }
-
-        return subtotal < discountValue ? 0 : round(Math.max(subtotal - quantity * discountValue, 0));
     }
 
     async expectGrandTotal(amount: number): Promise<void> {
@@ -166,14 +166,12 @@ export class RuleApplyPage extends CheckoutHelper {
         await this.expectGrandTotal(expected);
     }
 
-    async verifyCatalogRule(options: {
+    async expectCatalogRuleDiscount(options: {
         productName: string;
         price: number;
         value: number;
         type: string;
     }): Promise<void> {
-        await this.searchProduct(options.productName);
-
         const discounted =
             options.type === "percentage"
                 ? round(options.price - (options.price * options.value) / 100)
@@ -193,8 +191,6 @@ export class RuleApplyPage extends CheckoutHelper {
     }
 
     async expectNoCatalogDiscount(productName: string, price: number): Promise<void> {
-        await this.searchProduct(productName);
-
         await expect(this.cardSellingPrice(productName)).toHaveText(`$${price.toFixed(2)}`);
         await expect(this.cardStruckPrice(productName)).toHaveCount(0);
     }

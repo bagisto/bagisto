@@ -1,55 +1,50 @@
-import { test, withTinymce } from "../setup";
-import { loginAsAdmin } from "../utils/admin";
+import { test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
 import { RuleCreatePage } from "../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleDeletePage } from "../pages/admin/marketing/promotion/RuleDeletePage";
 import { CartPage } from "../pages/shop/CartPage";
+import type { BaseProduct } from "../pages/types/product.types";
 import { uniqueStamp } from "../utils/faker";
 import { formatPrice } from "../utils/prices";
 
 const PRICE = 199;
 
+function buildSimpleProduct(): BaseProduct {
+    return {
+        type: "simple",
+        sku: `SKU-${uniqueStamp()}`,
+        name: `Simple-${uniqueStamp()}`,
+        shortDescription: "Short desc",
+        description: "Full desc",
+        price: PRICE,
+        weight: 1,
+        inventory: 100,
+    };
+}
+
 test.describe("cart management", () => {
+    let productListPage: ProductListPage;
+    let cartPage: CartPage;
     let productName: string;
 
-    test.beforeAll(async ({ browser }) => {
-        const context = await browser.newContext();
-        const adminPage = withTinymce(await context.newPage());
+    test.beforeEach(async ({ adminPage, shopPage }) => {
+        productListPage = new ProductListPage(adminPage);
+        cartPage = new CartPage(shopPage);
 
-        await loginAsAdmin(adminPage);
+        const product = await new ProductCreatePage(adminPage).createProduct(
+            buildSimpleProduct(),
+        );
 
-        productName = `Simple-${uniqueStamp()}`;
-
-        await new ProductCreatePage(adminPage).createProduct({
-            type: "simple",
-            sku: `SKU-${uniqueStamp()}`,
-            name: productName,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: PRICE,
-            weight: 1,
-            inventory: 100,
-        });
-
-        await context.close();
+        productName = product.name;
     });
 
-    test.afterAll(async ({ browser }) => {
-        const context = await browser.newContext();
-        const page = await context.newPage();
-
-        await loginAsAdmin(page);
-        await new ProductListPage(page).deleteProductsIfPresent([productName]);
-        await context.close();
+    test.afterEach(async () => {
+        await productListPage.deleteProductsIfPresent([productName]);
     });
 
     test.describe("mini cart drawer", () => {
-        test("should add a product and show it with quantity one and a bin icon", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should add a product and show it with quantity one and a bin icon", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openMiniCart();
 
@@ -57,11 +52,7 @@ test.describe("cart management", () => {
             await cartPage.expectMiniCartBinOffered(productName, true);
         });
 
-        test("should increase and decrease the quantity and swap the bin icon for a minus", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should increase and decrease the quantity and swap the bin icon for a minus", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openMiniCart();
             await cartPage.setMiniCartQuantity(productName, 3);
@@ -75,9 +66,7 @@ test.describe("cart management", () => {
             await cartPage.expectMiniCartBinOffered(productName, true);
         });
 
-        test("should remove the item through the bin icon", async ({ shopPage }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should remove the item through the bin icon", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openMiniCart();
             await cartPage.removeFromMiniCartWithBin(productName);
@@ -87,9 +76,7 @@ test.describe("cart management", () => {
             await cartPage.expectCartEmpty();
         });
 
-        test("should remove the item through the remove button", async ({ shopPage }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should remove the item through the remove button", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openMiniCart();
             await cartPage.removeFromMiniCart(productName);
@@ -101,11 +88,7 @@ test.describe("cart management", () => {
     });
 
     test.describe("cart page", () => {
-        test("should list the added product with its price as the subtotal", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should list the added product with its price as the subtotal", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
 
@@ -114,11 +97,7 @@ test.describe("cart management", () => {
             await cartPage.expectSummaryAmount("Subtotal", formatPrice(PRICE));
         });
 
-        test("should update the quantity and recalculate the subtotal", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should update the quantity and recalculate the subtotal", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
             await cartPage.setCartQuantity(productName, 2);
@@ -137,9 +116,7 @@ test.describe("cart management", () => {
             await cartPage.expectSummaryAmount("Subtotal", formatPrice(PRICE));
         });
 
-        test("should remove the item through the bin icon", async ({ shopPage }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should remove the item through the bin icon", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
             await cartPage.removeFromCartWithBin(productName);
@@ -147,9 +124,7 @@ test.describe("cart management", () => {
             await cartPage.expectCartEmpty();
         });
 
-        test("should remove the item through the remove link", async ({ shopPage }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should remove the item through the remove link", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
             await cartPage.removeFromCart(productName);
@@ -157,9 +132,7 @@ test.describe("cart management", () => {
             await cartPage.expectCartEmpty();
         });
 
-        test("should remove every selected item at once", async ({ shopPage }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should remove every selected item at once", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
             await cartPage.removeAllFromCart();
@@ -169,20 +142,14 @@ test.describe("cart management", () => {
     });
 
     test.describe("product page quantity", () => {
-        test("should disable the minus button and hide the bin at quantity one", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should disable the minus button and hide the bin at quantity one", async () => {
             await cartPage.openProduct(productName);
 
             await cartPage.expectProductPageBinOffered(false);
             await cartPage.expectProductPageDecreaseDisabled(true);
         });
 
-        test("should enable the minus button above quantity one", async ({ shopPage }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should enable the minus button above quantity one", async () => {
             await cartPage.openProduct(productName);
             await cartPage.setProductPageQuantity(2);
 
@@ -207,11 +174,7 @@ test.describe("cart management", () => {
             await new RuleDeletePage(adminPage).deleteCartRulesIfPresent([ruleName]);
         });
 
-        test("should apply a valid coupon and discount the grand total", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should apply a valid coupon and discount the grand total", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
             await cartPage.applyCoupon(couponCode);
@@ -220,11 +183,7 @@ test.describe("cart management", () => {
             await cartPage.expectSummaryAmount("Grand Total", formatPrice(PRICE - 10));
         });
 
-        test("should refuse an unknown coupon and leave the total unchanged", async ({
-            shopPage,
-        }) => {
-            const cartPage = new CartPage(shopPage);
-
+        test("should refuse an unknown coupon and leave the total unchanged", async () => {
             await cartPage.addProductToCart(productName);
             await cartPage.openCart();
             await cartPage.attemptCoupon(`NOPE${uniqueStamp()}`);

@@ -3,14 +3,15 @@
 namespace Webkul\Inventory\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Inventory\Contracts\InventorySource;
 
 class InventorySourceRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Inventory\Contracts\InventorySource';
+        return InventorySource::class;
     }
 }

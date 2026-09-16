@@ -14,15 +14,18 @@ export class OmnibusShopPage extends BasePage {
         return this.page.locator(".omnibus-price-info");
     }
 
-    private productImage(productName: string) {
-        return this.page.locator(`img[alt="${productName}"]`);
+    private searchResultCard(productName: string) {
+        return this.page.getByRole("link", {
+            name: productName,
+            exact: true,
+        });
     }
 
     async openProductPage(productName: string): Promise<void> {
         await this.visit("");
         await this.searchInput.fill(productName);
         await this.searchInput.press("Enter");
-        await this.productImage(productName).first().click();
+        await this.searchResultCard(productName).click();
 
         await expect(
             this.page.getByRole("heading", { name: productName }),

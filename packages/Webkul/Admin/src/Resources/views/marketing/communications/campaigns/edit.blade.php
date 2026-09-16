@@ -103,7 +103,7 @@
                                 rules="required"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.event')"
                             >
-                                @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
+                                @foreach (app(\Webkul\Marketing\Repositories\EventRepository::class)->all() as $event)
                                     <option
                                         value="{{ $event->id }}"
                                         {{ $selectedOption == $event->id ? 'selected' : '' }}
@@ -182,7 +182,7 @@
                                 :value="$selectedOption"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.channel')"
                             >
-                                @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
+                                @foreach (app(\Webkul\Core\Repositories\ChannelRepository::class)->all() as $channel)
                                     <option
                                         value="{{ $channel->id }}"
                                         {{ $selectedOption == $channel->id ? 'selected' : '' }}
@@ -212,7 +212,7 @@
                                 :value="$campaign->customer_group_id"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.customer-group')"
                             >
-                                @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                @foreach (app(\Webkul\Customer\Repositories\CustomerGroupRepository::class)->all() as $customerGroup)
                                     <option
                                         value="{{ $customerGroup->id }}"
                                         {{ $selectedOption == $customerGroup->id ? 'selected' : '' }}

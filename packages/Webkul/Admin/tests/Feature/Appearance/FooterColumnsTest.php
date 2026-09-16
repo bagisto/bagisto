@@ -52,6 +52,10 @@ beforeEach(function () {
     config(['responsecache.enabled' => false]);
 });
 
+// ============================================================================
+// Schema
+// ============================================================================
+
 it('should let the operator add columns rather than fixing how many there are', function () {
     $schema = app(SectionSchema::class)->for(SectionTypeEnum::FOOTER_LINKS->value);
 
@@ -61,6 +65,10 @@ it('should let the operator add columns rather than fixing how many there are', 
         ->and($schema[0])->not->toHaveKey('max')
         ->and(collect($schema[0]['fields'])->pluck('key')->all())->toBe(['links']);
 });
+
+// ============================================================================
+// Empty Columns
+// ============================================================================
 
 it('should leave out a column the operator added and left empty', function () {
     $section = footerWith([]);
@@ -124,6 +132,10 @@ it('should not draw an empty column a footer was already saved with', function (
     expect(substr_count(Str::between($content, '<footer', '</footer>'), '<ul'))->toBe(2);
 });
 
+// ============================================================================
+// Editor
+// ============================================================================
+
 it('should hand the editor a saved two column footer as a list of columns', function () {
     $section = footerWith([
         'column_1' => footerColumn('About', 'Careers'),
@@ -150,6 +162,10 @@ it('should read stored columns in their numbered order, past nine', function () 
 
     expect(collect($columns)->pluck('links.0.title')->all())->toBe(['Column 1', 'Column 2', 'Column 10']);
 });
+
+// ============================================================================
+// Storefront Columns
+// ============================================================================
 
 it('should store edited columns as the numbered keys the storefront reads', function () {
     $section = footerWith([]);
@@ -216,6 +232,10 @@ it('should publish an edited column count as the columns the storefront renders'
         ->and($published['column_3'][0]['title'])->toBe('Third Added Link');
 });
 
+// ============================================================================
+// Theme Limits
+// ============================================================================
+
 it('should hold a theme footer to the number of columns it lays out', function () {
     config(['themes.shop.narrow' => array_merge(config('themes.shop.default'), [
         'customize' => ['sections' => [NarrowFooterLinks::class]],
@@ -239,6 +259,10 @@ it('should hold a theme footer to the number of columns it lays out', function (
         ->toBe(['column_1', 'column_2', 'column_3']);
 });
 
+// ============================================================================
+// Stored Shape
+// ============================================================================
+
 it('should keep a footer posted in the stored shape as it was sent', function () {
     $section = footerWith([]);
 
@@ -253,6 +277,10 @@ it('should keep a footer posted in the stored shape as it was sent', function ()
     expect($section->fresh()->translate(app()->getLocale())->draft_options)
         ->toEqual(['column_1' => footerColumn('Legacy Link')]);
 });
+
+// ============================================================================
+// Editor
+// ============================================================================
 
 it('should hand the editor an empty footer as no columns yet', function () {
     $section = footerWith([]);

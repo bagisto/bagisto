@@ -1,19 +1,24 @@
+import { test } from "../../../../setup";
+import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
+import type { BaseProduct } from "../../../../pages/types/product.types";
 import {
     createTaxCategory,
     createTaxRate,
     deleteTaxCategoriesIfPresent,
     deleteTaxRatesIfPresent,
 } from "../../../../utils/admin";
-import { ProductListPage } from "../../../../pages/admin/catalog/products/ProductListPage";
-import { ProductEditPage } from "../../../../pages/admin/catalog/products/ProductEditPage";
 import { uniqueStamp } from "../../../../utils/faker";
-import { test } from "../../../../setup";
-import type { BaseProduct } from "../../../../pages/types/product.types";
-import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
-import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
-import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
-import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import type { Page } from "@playwright/test";
+import {
+    addRuleCondition,
+    applyProductChange,
+    buildRuleConditionCases,
+    caseTitle,
+    createRuleProduct,
+    RULE_PRODUCT_PRICE,
+} from "../../rule-conditions";
 
 type TaxCategoryChoice = "assigned" | "other";
 
@@ -36,22 +41,13 @@ test.beforeEach(async ({ adminPage }) => {
     await createTaxCategory(adminPage, taxCategories.assigned, rateIdentifier);
     await createTaxCategory(adminPage, taxCategories.other, rateIdentifier);
 
-    product = await new ProductCreatePage(adminPage).createProduct({
-        type: "simple",
-        sku: `SKU-${uniqueStamp()}`,
-        name: `Simple-${uniqueStamp()}`,
-        shortDescription: "Short desc",
-        description: "Full desc",
-        price: 199,
-        weight: 1,
-        inventory: 100,
+    product = await createRuleProduct(adminPage);
+
+    await applyProductChange(adminPage, product.name, {
+        kind: "select",
+        code: "tax_category_id",
+        label: taxCategories.assigned,
     });
-
-    const productEditPage = new ProductEditPage(adminPage);
-
-    await productEditPage.openProduct(product.name);
-    await productEditPage.selectOption("tax_category_id", taxCategories.assigned);
-    await productEditPage.save();
 });
 
 test.afterEach(async ({ adminPage }) => {
@@ -59,7 +55,9 @@ test.afterEach(async ({ adminPage }) => {
         await new RuleDeletePage(adminPage).deleteCatalogRulesIfPresent(createdRules);
     } finally {
         try {
-            await new ProductListPage(adminPage).deleteProductsIfPresent([product.name]);
+            await new ProductListPage(adminPage).deleteProductsIfPresent([
+                product.name,
+            ]);
         } finally {
             try {
                 await deleteTaxCategoriesIfPresent(adminPage, [
@@ -73,88 +71,46 @@ test.afterEach(async ({ adminPage }) => {
     }
 });
 
-async function runCatalogRuleTest({
-    adminPage,
-    shopPage,
-    operator,
-    option,
-    type,
-}: {
-    adminPage: Page;
-    shopPage: Page;
-    operator: string;
-    option: string;
-    type: string;
-}) {
-    const ruleCreatePage = new RuleCreatePage(adminPage);
-    const ruleApplyPage = new RuleApplyPage(shopPage);
-
-    const rule = await ruleCreatePage.catalogRuleCreationFlow();
-    createdRules.push(rule.name);
-
-    const discountValue = await ruleCreatePage.addCondition({
-        scopeSku: product.sku,
+const cases = buildRuleConditionCases([
+    {
+        conditionLabel: "tax category",
         attribute: "product|tax_category_id",
-        operator,
-        optionSelect: option,
-        couponType: type,
-    });
-
-    await ruleCreatePage.saveCatalogRule();
-
-    await ruleApplyPage.verifyCatalogRule({
-        productName: product.name,
-        price: product.price ?? 0,
-        value: discountValue ?? 0,
-        type: type,
-    });
-}
-
-const testCases: {
-    operator: string;
-    option: TaxCategoryChoice;
-    label: string;
-    type: string;
-}[] = [
-    {
-        operator: "==",
-        option: "assigned",
-        label: "is equal to",
-        type: "percentage",
+        rows: [
+            { operator: "==", optionSelect: () => taxCategories.assigned },
+            { operator: "!=", optionSelect: () => taxCategories.other },
+        ],
     },
-    {
-        operator: "==",
-        option: "assigned",
-        label: "is equal to",
-        type: "fixed",
-    },
-    {
-        operator: "!=",
-        option: "other",
-        label: "is not equal to",
-        type: "percentage",
-    },
-    {
-        operator: "!=",
-        option: "other",
-        label: "is not equal to",
-        type: "fixed",
-    },
-];
+]);
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        for (const tc of testCases) {
-            test(`should apply condition when tax category condition is -> ${tc.label} (${tc.type})`, async ({
+        for (const testCase of cases) {
+            test(caseTitle(testCase, "discount the listed price"), async ({
                 adminPage,
                 shopPage,
             }) => {
-                await runCatalogRuleTest({
-                    adminPage,
-                    shopPage,
-                    operator: tc.operator,
-                    option: taxCategories[tc.option],
-                    type: tc.type,
+                const ruleCreatePage = new RuleCreatePage(adminPage);
+                const ruleApplyPage = new RuleApplyPage(shopPage);
+
+                const rule = await ruleCreatePage.catalogRuleCreationFlow();
+
+                createdRules.push(rule.name);
+
+                const discountValue = await addRuleCondition(
+                    ruleCreatePage,
+                    testCase,
+                    product.sku,
+                );
+
+                await ruleCreatePage.saveCatalogRule();
+
+                await ruleApplyPage.searchProduct(product.name);
+
+                await ruleApplyPage.expectCatalogRuleDiscount({
+                    productName: product.name,
+                    price: RULE_PRODUCT_PRICE,
+                    value: discountValue,
+                    type: testCase.couponType,
                 });
             });
         }

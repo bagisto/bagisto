@@ -5,6 +5,7 @@ namespace Webkul\Sales\Repositories;
 use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
+use Webkul\Sales\Contracts\DownloadableLinkPurchased;
 use Webkul\Sales\Contracts\OrderItem;
 
 class DownloadableLinkPurchasedRepository extends Repository
@@ -26,7 +27,7 @@ class DownloadableLinkPurchasedRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Sales\Contracts\DownloadableLinkPurchased';
+        return DownloadableLinkPurchased::class;
     }
 
     /**

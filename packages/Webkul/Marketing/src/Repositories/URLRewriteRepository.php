@@ -3,14 +3,15 @@
 namespace Webkul\Marketing\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Marketing\Contracts\URLRewrite;
 
 class URLRewriteRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Marketing\Contracts\URLRewrite';
+        return URLRewrite::class;
     }
 }

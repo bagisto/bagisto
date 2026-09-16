@@ -3,19 +3,20 @@
 namespace Webkul\Marketing\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Marketing\Contracts\SearchSynonym;
 
 class SearchSynonymRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Marketing\Contracts\SearchSynonym';
+        return SearchSynonym::class;
     }
 
     /**
-     * Returns synonyms by query
+     * Returns synonyms by query.
      *
      * @param  string  $query
      * @return array

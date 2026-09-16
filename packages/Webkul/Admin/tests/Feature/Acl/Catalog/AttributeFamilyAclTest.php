@@ -25,7 +25,7 @@ it('should allow creating an attribute family with catalog.families.create permi
 it('should allow editing an attribute family with catalog.families.edit permission', function () {
     $this->loginAsAdminWithPermissions(['catalog', 'catalog.families', 'catalog.families.edit']);
 
-    $family = AttributeFamily::first();
+    $family = AttributeFamily::query()->first();
 
     get(route('admin.catalog.families.edit', $family->id))
         ->assertOk();
@@ -52,7 +52,7 @@ it('should deny attribute family creation without catalog.families.create permis
 it('should deny attribute family editing without catalog.families.edit permission', function () {
     $this->loginAsAdminWithPermissions(['catalog', 'catalog.families']);
 
-    $family = AttributeFamily::first();
+    $family = AttributeFamily::query()->first();
 
     get(route('admin.catalog.families.edit', $family->id))
         ->assertUnauthorized();

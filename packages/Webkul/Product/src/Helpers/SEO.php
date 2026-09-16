@@ -125,7 +125,7 @@ class SEO
      */
     public function getProductAggregateRating($product)
     {
-        $reviewHelper = app('Webkul\Product\Helpers\Review');
+        $reviewHelper = app(Review::class);
 
         return [
             '@type' => 'AggregateRating',

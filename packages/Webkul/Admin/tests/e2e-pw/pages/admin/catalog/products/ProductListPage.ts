@@ -64,17 +64,6 @@ export class ProductListPage extends DatagridPage {
         return `Copy Of ${name}`;
     }
 
-    async searchByName(name: string): Promise<number> {
-        await this.open();
-        await this.searchFor(name);
-
-        return this.row(name).count();
-    }
-
-    async isListedByName(name: string): Promise<boolean> {
-        return (await this.searchByName(name)) > 0;
-    }
-
     async openProduct(name: string): Promise<void> {
         await this.open();
         await this.searchFor(name);
@@ -136,6 +125,7 @@ export class ProductListPage extends DatagridPage {
     async expectProductListed(name: string): Promise<void> {
         await this.open();
         await this.searchFor(name);
+        await this.waitForGridRerender();
 
         await expect(this.rowWithCell(name)).toHaveCount(1);
     }
@@ -143,6 +133,7 @@ export class ProductListPage extends DatagridPage {
     async expectProductAbsent(name: string): Promise<void> {
         await this.open();
         await this.searchFor(name);
+        await this.waitForGridRerender();
 
         await expect(this.rowWithCell(name)).toHaveCount(0);
     }
@@ -153,6 +144,7 @@ export class ProductListPage extends DatagridPage {
     ): Promise<void> {
         await this.open();
         await this.searchFor(name);
+        await this.waitForGridRerender();
 
         const row = this.rowWithCell(name);
 

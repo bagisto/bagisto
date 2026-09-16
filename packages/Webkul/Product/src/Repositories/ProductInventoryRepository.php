@@ -3,18 +3,21 @@
 namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductInventory;
 
 class ProductInventoryRepository extends Repository
 {
     /**
-     * Specify Model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductInventory';
+        return ProductInventory::class;
     }
 
     /**
+     * Save the quantity a product holds in each inventory source.
+     *
      * @param  Webkul\Product\Contracts\Product  $product
      * @return void
      */

@@ -49,6 +49,10 @@ function makeCustomField(string $code): RMACustomField
     ]);
 }
 
+// ============================================================================
+// Reasons
+// ============================================================================
+
 it('should delete the reasons that remain and report the ones already gone', function () use ($staleId) {
     $reason = makeReason('reason to delete');
 
@@ -63,7 +67,7 @@ it('should delete the reasons that remain and report the ones already gone', fun
             'skipped' => 1,
         ]));
 
-    expect(RMAReason::find($reason->id))->toBeNull();
+    expect(RMAReason::query()->find($reason->id))->toBeNull();
 });
 
 it('should report the ordinary success message when every selected reason exists', function () {
@@ -93,6 +97,10 @@ it('should not fail when every selected reason is already gone', function () use
         ]));
 });
 
+// ============================================================================
+// Rules
+// ============================================================================
+
 it('should delete the rules that remain and report the ones already gone', function () use ($staleId) {
     $rule = makeRule('rule to delete');
 
@@ -107,8 +115,12 @@ it('should delete the rules that remain and report the ones already gone', funct
             'skipped' => 1,
         ]));
 
-    expect(RMARule::find($rule->id))->toBeNull();
+    expect(RMARule::query()->find($rule->id))->toBeNull();
 });
+
+// ============================================================================
+// Custom Fields
+// ============================================================================
 
 it('should delete the custom fields that remain and report the ones already gone', function () use ($staleId) {
     $customField = makeCustomField('field_to_delete');
@@ -124,7 +136,7 @@ it('should delete the custom fields that remain and report the ones already gone
             'skipped' => 1,
         ]));
 
-    expect(RMACustomField::find($customField->id))->toBeNull();
+    expect(RMACustomField::query()->find($customField->id))->toBeNull();
 });
 
 it('should reject a custom field mass delete that does not name a list of records', function () {

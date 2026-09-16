@@ -3,6 +3,7 @@
 namespace Webkul\Checkout\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\Checkout\Listeners\CustomerEventsHandler;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,6 +13,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        'Webkul\Checkout\Listeners\CustomerEventsHandler',
+        CustomerEventsHandler::class,
     ];
 }

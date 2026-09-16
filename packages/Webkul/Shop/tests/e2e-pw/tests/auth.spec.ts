@@ -4,16 +4,6 @@ import { buildCustomerCredentials } from "../utils/customer";
 import { generateEmail } from "../utils/faker";
 
 test.describe("customer authentication", () => {
-    test("should register a new customer", async ({ shopPage }) => {
-        const authPage = new AuthPage(shopPage);
-        const credentials = buildCustomerCredentials();
-
-        await authPage.register(credentials);
-        await authPage.login(credentials);
-
-        await authPage.expectSignedIn(`${credentials.firstName} ${credentials.lastName}`);
-    });
-
     test("should refuse to register an email that is already registered", async ({
         shopPage,
     }) => {

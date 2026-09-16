@@ -55,7 +55,8 @@ async function deleteImported(
     await dataTransfer.waitForSuccess();
 
     if (expectedDeleted !== undefined) {
-        expect(await dataTransfer.statValue("Total Records Deleted:")).toBe(
+        await dataTransfer.expectStat(
+            "Total Records Deleted:",
             expectedDeleted,
         );
     }
@@ -82,7 +83,7 @@ test.describe("check the data transfer flow", () => {
 
                     await dataTransfer.waitForSuccess();
 
-                    expect(await dataTransfer.recordsTouched()).toBe(
+                    await dataTransfer.expectRecordsTouched(
                         PRODUCTS_IN_FIXTURE,
                     );
                 } finally {
@@ -95,9 +96,7 @@ test.describe("check the data transfer flow", () => {
                     await dataTransfer.waitForSuccess();
                 }
 
-                expect(
-                    await dataTransfer.statValue("Total Records Deleted:"),
-                ).toBeGreaterThan(0);
+                await dataTransfer.expectStatAbove("Total Records Deleted:", 0);
             });
         }
     });
@@ -118,7 +117,7 @@ test.describe("check the data transfer flow", () => {
 
                     await dataTransfer.waitForSuccess();
 
-                    expect(await dataTransfer.recordsTouched()).toBe(
+                    await dataTransfer.expectRecordsTouched(
                         CUSTOMERS_IN_FIXTURE,
                     );
                 } finally {
@@ -131,13 +130,14 @@ test.describe("check the data transfer flow", () => {
                     await dataTransfer.waitForSuccess();
                 }
 
-                expect(
-                    await dataTransfer.statValue("Total Records Deleted:"),
-                ).toBe(CUSTOMERS_IN_FIXTURE);
+                await dataTransfer.expectStat(
+                    "Total Records Deleted:",
+                    CUSTOMERS_IN_FIXTURE,
+                );
             });
         }
 
-        test("a repeated email is imported once", async ({ adminPage }) => {
+        test("should import a repeated email only once", async ({ adminPage }) => {
             const dataTransfer = new DataTransferPage(adminPage);
 
             const [customer] = customerRows(`${RUN}-twice`, 1);
@@ -155,7 +155,7 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.waitForSuccess();
 
-                expect(await dataTransfer.recordsTouched()).toBe(1);
+                await dataTransfer.expectRecordsTouched(1);
             } finally {
                 await deleteImported(dataTransfer, {
                     type: "customers",
@@ -164,7 +164,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("re-importing a file updates its customers rather than adding more", async ({
+        test("should update the customers rather than add more when the same file is re-imported", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -179,9 +179,7 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.statValue("Total Records Created:")).toBe(
-                    3,
-                );
+                await dataTransfer.expectStat("Total Records Created:", 3);
 
                 await dataTransfer.runImport({
                     type: "customers",
@@ -197,13 +195,9 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.statValue("Total Records Updated:")).toBe(
-                    3,
-                );
+                await dataTransfer.expectStat("Total Records Updated:", 3);
 
-                expect(await dataTransfer.statValue("Total Records Created:")).toBe(
-                    0,
-                );
+                await dataTransfer.expectStat("Total Records Created:", 0);
 
                 await new CustomersPage(adminPage).expectCustomerListed(
                     rows[0].email,
@@ -234,7 +228,7 @@ test.describe("check the data transfer flow", () => {
 
                     await dataTransfer.waitForSuccess();
 
-                    expect(await dataTransfer.recordsTouched()).toBe(
+                    await dataTransfer.expectRecordsTouched(
                         TAX_RATES_IN_FIXTURE,
                     );
                 } finally {
@@ -247,13 +241,14 @@ test.describe("check the data transfer flow", () => {
                     await dataTransfer.waitForSuccess();
                 }
 
-                expect(
-                    await dataTransfer.statValue("Total Records Deleted:"),
-                ).toBe(TAX_RATES_IN_FIXTURE);
+                await dataTransfer.expectStat(
+                    "Total Records Deleted:",
+                    TAX_RATES_IN_FIXTURE,
+                );
             });
         }
 
-        test("a repeated identifier is imported once", async ({
+        test("should import a repeated identifier only once", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -273,7 +268,7 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.waitForSuccess();
 
-                expect(await dataTransfer.recordsTouched()).toBe(1);
+                await dataTransfer.expectRecordsTouched(1);
             } finally {
                 await deleteImported(dataTransfer, {
                     type: "tax_rates",
@@ -282,7 +277,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("re-importing a file updates its tax rates rather than adding more", async ({
+        test("should update the tax rates rather than add more when the same file is re-imported", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -297,9 +292,7 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.statValue("Total Records Created:")).toBe(
-                    2,
-                );
+                await dataTransfer.expectStat("Total Records Created:", 2);
 
                 await dataTransfer.runImport({
                     type: "tax_rates",
@@ -311,13 +304,9 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.statValue("Total Records Updated:")).toBe(
-                    2,
-                );
+                await dataTransfer.expectStat("Total Records Updated:", 2);
 
-                expect(await dataTransfer.statValue("Total Records Created:")).toBe(
-                    0,
-                );
+                await dataTransfer.expectStat("Total Records Created:", 0);
 
                 await new TaxRatesPage(adminPage).expectTaxRateListed({
                     identifier: rows[0].identifier,
@@ -334,7 +323,7 @@ test.describe("check the data transfer flow", () => {
     });
 
     test.describe("product images", () => {
-        test("imports products with images from an uploaded archive", async ({
+        test("should import products with images from an uploaded archive", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -349,7 +338,7 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.stepLabels()).toEqual([
+                await dataTransfer.expectImportSteps([
                     "Validate",
                     "Create",
                     "Link",
@@ -358,9 +347,7 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.waitForSuccess();
 
-                expect(await dataTransfer.recordsTouched()).toBe(
-                    PRODUCTS_IN_FIXTURE,
-                );
+                await dataTransfer.expectRecordsTouched(PRODUCTS_IN_FIXTURE);
 
                 await dataTransfer.gotoEdit(dataTransfer.importId());
 
@@ -375,7 +362,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("downloads the images a file names as links", async ({
+        test("should download the images a file names as links", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -387,7 +374,7 @@ test.describe("check the data transfer flow", () => {
                     imageSource: "url",
                 });
 
-                expect(await dataTransfer.stepLabels()).toEqual([
+                await dataTransfer.expectImportSteps([
                     "Validate",
                     "Images",
                     "Create",
@@ -405,7 +392,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("stops when the images do not match the chosen source", async ({
+        test("should stop the import when the images do not match the chosen source", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -422,7 +409,7 @@ test.describe("check the data transfer flow", () => {
             await dataTransfer.expectValidationMessage("is not a web address");
         });
 
-        test("imports products with images from a folder on the server", async ({
+        test("should import products with images from a folder on the server", async ({
             adminPage,
         }) => {
             test.skip(
@@ -444,7 +431,7 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.stepLabels()).toEqual([
+                await dataTransfer.expectImportSteps([
                     "Validate",
                     "Create",
                     "Link",
@@ -453,7 +440,7 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.waitForSuccess();
 
-                expect(await dataTransfer.recordsTouched()).toBe(2);
+                await dataTransfer.expectRecordsTouched(2);
 
                 await dataTransfer.gotoEdit(dataTransfer.importId());
 
@@ -470,7 +457,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("stops when the folder does not hold the named images", async ({
+        test("should stop the import when the folder does not hold the named images", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -490,7 +477,7 @@ test.describe("check the data transfer flow", () => {
             );
         });
 
-        test("offers the image settings only to the imports that have images", async ({
+        test("should offer the image settings only to the imports that have images", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -499,18 +486,18 @@ test.describe("check the data transfer flow", () => {
 
             await dataTransfer.expectImagesPanelVisible();
 
-            for (const type of ["customers", "tax_rates"]) {
-                await adminPage.selectOption('select[name="type"]', type);
+            for (const type of ["customers", "tax_rates"] as const) {
+                await dataTransfer.selectImporterType(type);
 
                 await dataTransfer.expectImagesPanelHidden();
             }
 
-            await adminPage.selectOption('select[name="type"]', "products");
+            await dataTransfer.selectImporterType("products");
 
             await dataTransfer.expectImagesPanelVisible();
         });
 
-        test("asks for the folder when the images are on the server", async ({
+        test("should ask for the folder when the images are on the server", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -531,7 +518,7 @@ test.describe("check the data transfer flow", () => {
     });
 
     test.describe("validation", () => {
-        test("stops on an invalid file and offers the error report", async ({
+        test("should stop on an invalid file and offer the error report", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -545,9 +532,9 @@ test.describe("check the data transfer flow", () => {
 
             await dataTransfer.waitForValidationFailure();
 
-            expect(await dataTransfer.statValue("Total Errors:")).toBe(1);
+            await dataTransfer.expectStat("Total Errors:", 1);
 
-            expect(await dataTransfer.statValue("Total Invalid Rows:")).toBe(1);
+            await dataTransfer.expectStat("Total Invalid Rows:", 1);
             await dataTransfer.expectValidationMessage(
                 "Product type is invalid or not supported",
             );
@@ -557,7 +544,7 @@ test.describe("check the data transfer flow", () => {
             expect(report.suggestedFilename()).toContain(".csv");
         });
 
-        test("skips the invalid rows and imports the rest", async ({
+        test("should skip the invalid rows and import the rest", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -572,7 +559,7 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.waitForSuccess();
 
-                expect(await dataTransfer.recordsTouched()).toBe(1);
+                await dataTransfer.expectRecordsTouched(1);
             } finally {
                 await deleteImported(dataTransfer, {
                     type: "products",
@@ -583,7 +570,7 @@ test.describe("check the data transfer flow", () => {
     });
 
     test.describe("managing imports", () => {
-        test("re-runs an import from its edit page", async ({ adminPage }) => {
+        test("should re-run an import from its edit page", async ({ adminPage }) => {
             const dataTransfer = new DataTransferPage(adminPage);
 
             try {
@@ -609,7 +596,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("removes an import from the grid", async ({ adminPage }) => {
+        test("should remove an import from the grid", async ({ adminPage }) => {
             const dataTransfer = new DataTransferPage(adminPage);
 
             try {
@@ -631,31 +618,28 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("downloads the sample file of the selected importer", async ({
+        test("should download the sample file of the selected importer", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
 
             await dataTransfer.gotoCreate();
 
-            await adminPage.selectOption('select[name="type"]', "customers");
+            await dataTransfer.selectImporterType("customers");
 
             await dataTransfer.openSampleDropdown();
 
-            await expect(dataTransfer.sampleLink("XLSX")).toHaveAttribute(
-                "href",
+            await dataTransfer.expectSampleLinkHref(
+                "XLSX",
                 /download-sample\/customers\/xlsx/,
             );
 
-            const [sample] = await Promise.all([
-                adminPage.waitForEvent("download"),
-                dataTransfer.sampleLink("CSV").click(),
-            ]);
+            const sample = await dataTransfer.downloadSample("CSV");
 
             expect(sample.suggestedFilename()).toBe("customers.csv");
         });
 
-        test("downloads the sample images archive", async ({ adminPage }) => {
+        test("should download the sample images archive", async ({ adminPage }) => {
             const dataTransfer = new DataTransferPage(adminPage);
 
             await dataTransfer.gotoCreate();
@@ -693,7 +677,7 @@ test.describe("check the data transfer flow", () => {
             });
         };
 
-        test("a repeat below the first row is refused", async ({
+        test("should refuse a repeated url key below the first row", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -725,19 +709,17 @@ test.describe("check the data transfer flow", () => {
 
                 await dataTransfer.waitForSuccess();
 
-                expect(await dataTransfer.recordsTouched()).toBe(1);
+                await dataTransfer.expectRecordsTouched(1);
 
-                const products = new ProductListPage(adminPage);
-
-                expect(await products.isListedByName(`${DUP} 01 dup 002`)).toBe(
-                    false,
+                await new ProductListPage(adminPage).expectProductAbsent(
+                    `${DUP} 01 dup 002`,
                 );
             } finally {
                 await deleteProducts(dataTransfer, "01", [...taken, ...fresh]);
             }
         });
 
-        test("a repeat in the first row stops the file", async ({
+        test("should stop the file when the first row repeats a url key", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -770,7 +752,9 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("a case-only repeat is reported", async ({ adminPage }) => {
+        test("should report a url key that repeats in a different case", async ({
+            adminPage,
+        }) => {
             const dataTransfer = new DataTransferPage(adminPage);
 
             const [taken] = productRows(`${DUP}-03-seed`, 1);
@@ -797,7 +781,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("a sku keeping its own url is an update", async ({
+        test("should treat a sku that keeps its own url key as an update", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -814,9 +798,7 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.statValue("Total Records Created:")).toBe(
-                    3,
-                );
+                await dataTransfer.expectStat("Total Records Created:", 3);
 
                 await dataTransfer.runImport({
                     type: "products",
@@ -825,13 +807,9 @@ test.describe("check the data transfer flow", () => {
                     allowedErrors: 0,
                 });
 
-                expect(await dataTransfer.statValue("Total Records Updated:")).toBe(
-                    3,
-                );
+                await dataTransfer.expectStat("Total Records Updated:", 3);
 
-                expect(await dataTransfer.statValue("Total Records Created:")).toBe(
-                    0,
-                );
+                await dataTransfer.expectStat("Total Records Created:", 0);
             } finally {
                 await deleteProducts(dataTransfer, "05", rows);
             }

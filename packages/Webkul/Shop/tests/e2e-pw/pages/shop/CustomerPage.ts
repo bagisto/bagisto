@@ -75,6 +75,16 @@ export class CustomerPage extends BasePage {
         return this.page.locator('img[alt="Uploaded Image"]');
     }
 
+    private async fillRequiredExtras(changes: ProfileChanges): Promise<void> {
+        if (changes.phone !== undefined) {
+            await this.phoneInput.fill(changes.phone);
+        }
+
+        if (changes.gender !== undefined) {
+            await this.genderSelect.selectOption(changes.gender);
+        }
+    }
+
     async openProfile(): Promise<void> {
         await this.visit("customer/account/profile");
 
@@ -85,16 +95,6 @@ export class CustomerPage extends BasePage {
         await this.visit("customer/account/profile/edit");
 
         await expect(this.firstNameInput).toBeVisible();
-    }
-
-    private async fillRequiredExtras(changes: ProfileChanges): Promise<void> {
-        if (changes.phone !== undefined) {
-            await this.phoneInput.fill(changes.phone);
-        }
-
-        if (changes.gender !== undefined) {
-            await this.genderSelect.selectOption(changes.gender);
-        }
     }
 
     async updateProfile(changes: ProfileChanges): Promise<void> {

@@ -47,17 +47,9 @@ it('should display existing captcha configuration values', function () {
     $this->loginAsAdmin();
 
     get(route('admin.configuration.index', ['customer', 'captcha']))
-        ->assertOk();
-
-    $this->assertDatabaseHas('core_config', [
-        'code' => 'customer.captcha.credentials.project_id',
-        'value' => $credentials['project_id'],
-    ]);
-
-    $this->assertDatabaseHas('core_config', [
-        'code' => 'customer.captcha.credentials.site_key',
-        'value' => $credentials['site_key'],
-    ]);
+        ->assertOk()
+        ->assertSee($credentials['project_id'])
+        ->assertSee($credentials['site_key']);
 });
 
 // ============================================================================

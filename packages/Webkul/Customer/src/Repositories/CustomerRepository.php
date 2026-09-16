@@ -4,6 +4,7 @@ namespace Webkul\Customer\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Sales\Models\Order;
@@ -11,11 +12,11 @@ use Webkul\Sales\Models\Order;
 class CustomerRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Customer\Contracts\Customer';
+        return CustomerContract::class;
     }
 
     /**
@@ -32,7 +33,7 @@ class CustomerRepository extends Repository
     }
 
     /**
-     * Returns current customer group
+     * Returns current customer group.
      *
      * @return CustomerGroup
      */
@@ -82,7 +83,7 @@ class CustomerRepository extends Repository
     /**
      * Sync new registered customer data.
      *
-     * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @param  CustomerContract  $customer
      * @return mixed
      */
     public function syncNewRegisteredCustomerInformation($customer)
@@ -90,7 +91,7 @@ class CustomerRepository extends Repository
         /**
          * Setting registered customer to orders.
          */
-        Order::where('customer_email', $customer->email)->update([
+        Order::query()->where('customer_email', $customer->email)->update([
             'is_guest' => 0,
             'customer_id' => $customer->id,
             'customer_type' => Customer::class,
@@ -99,7 +100,7 @@ class CustomerRepository extends Repository
         /**
          * Grabbing orders by `customer_id`.
          */
-        $orders = Order::where('customer_id', $customer->id)->get();
+        $orders = Order::query()->where('customer_id', $customer->id)->get();
 
         /**
          * Setting registered customer to associated order's relations.

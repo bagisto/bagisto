@@ -54,6 +54,8 @@ function productUpdatePayload(Product $product, array $images): array
 // ============================================================================
 
 it('should render the seo drawer on the product edit page', function () {
+    Storage::fake();
+
     [$product] = makeProductWithStoredImage();
 
     $this->loginAsAdmin();
@@ -207,6 +209,8 @@ it('should fall back to a random name for an upload without a requested file nam
 // ============================================================================
 
 it('should expose the alt text to the storefront', function () {
+    Storage::fake();
+
     [$product, $image] = makeProductWithStoredImage();
 
     $image->translateOrNew(app()->getLocale())->alt_text = 'Blue running shoe from the side';
@@ -219,6 +223,8 @@ it('should expose the alt text to the storefront', function () {
 });
 
 it('should fall back to the product name when an image has no alt text', function () {
+    Storage::fake();
+
     [$product] = makeProductWithStoredImage();
 
     $galleryImages = product_image()->getGalleryImages($product->fresh());

@@ -100,7 +100,8 @@ it('should return the edit page of a configurable product', function () {
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'))
-        ->assertSeeText($product->name);
+        ->assertSee($product->sku)
+        ->assertSee($product->variants->first()->sku);
 });
 
 // ============================================================================

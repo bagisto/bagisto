@@ -91,8 +91,16 @@ export class BookingsAdminPage extends BasePage {
         });
     }
 
-    private bookingRowText(row: Locator, index: number) {
-        return row.locator("p").nth(index);
+    private bookingRowColumn(row: Locator, position: number) {
+        return row.locator("p").nth(position);
+    }
+
+    private bookingRowFrom(row: Locator) {
+        return this.bookingRowColumn(row, 3);
+    }
+
+    private bookingRowTill(row: Locator) {
+        return this.bookingRowColumn(row, 4);
     }
 
     private slotGraphEventsOf(customerName: string) {
@@ -108,7 +116,7 @@ export class BookingsAdminPage extends BasePage {
 
         await action();
         await bookingsLoaded;
-        await this.page.waitForLoadState("networkidle");
+        await this.waitForBackgroundRequestsToSettle();
 
         await expect(this.calendarLeavingViews).toHaveCount(0);
     }
@@ -126,11 +134,11 @@ export class BookingsAdminPage extends BasePage {
         await slotGraph.dispatchEvent("mouseup");
         await slotGraph.dispatchEvent("click");
 
-        await expect(this.bookingDialogOrderId.first()).toBeVisible();
+        await expect(this.bookingDialogOrderId).toBeVisible();
     }
 
     private async closeSlotDialog(): Promise<void> {
-        await this.bookingDialogCloseButton.first().click();
+        await this.bookingDialogCloseButton.click();
 
         await expect(this.bookingDialogCloseButton).toHaveCount(0);
     }
@@ -147,7 +155,7 @@ export class BookingsAdminPage extends BasePage {
             await this.openSlotDialog(slotGraph);
 
             const dialogOrderId = (
-                await this.bookingDialogOrderId.first().innerText()
+                await this.bookingDialogOrderId.innerText()
             ).trim();
 
             if (dialogOrderId === `#${orderId}`) {
@@ -186,8 +194,8 @@ export class BookingsAdminPage extends BasePage {
 
         const row = this.bookingRowByOrderId(orderId);
 
-        await expect(this.bookingRowText(row, 3)).toContainText(from);
-        await expect(this.bookingRowText(row, 4)).toContainText(till);
+        await expect(this.bookingRowFrom(row)).toContainText(from);
+        await expect(this.bookingRowTill(row)).toContainText(till);
     }
 
     async invoiceOrder(orderId: string): Promise<void> {
@@ -211,7 +219,6 @@ export class BookingsAdminPage extends BasePage {
         customer: CustomerCredentials,
         orderId: string,
     ): Promise<void> {
-        await this.invoiceOrder(orderId);
         await this.openBookingsCalendar();
 
         const customerName = `${customer.firstName} ${customer.lastName}`;
@@ -228,7 +235,6 @@ export class BookingsAdminPage extends BasePage {
 
         await this.closeSlotDialog();
         await this.expectListedBooking(orderId, "10:35AM", "11:20AM");
-        await this.refundOrder(orderId);
     }
 
     async expectDayBooking(

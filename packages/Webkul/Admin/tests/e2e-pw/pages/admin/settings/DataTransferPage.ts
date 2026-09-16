@@ -5,12 +5,16 @@ import {
     type Page,
 } from "@playwright/test";
 import { BasePage } from "../../BasePage";
+import { escapeRegExp } from "@shared/regex";
 import {
     dataFilePath,
     IMPORT_TIMEOUT,
     type ImageSource,
     type ImportOptions,
+    type ImportType,
 } from "../../../utils/data-transfer";
+
+type SampleFormat = "CSV" | "XLS" | "XLSX" | "XML";
 
 export class DataTransferPage extends BasePage {
     constructor(page: Page) {
@@ -88,12 +92,12 @@ export class DataTransferPage extends BasePage {
         );
     }
 
-    private get errorReportLink(): Locator {
-        return this.page.getByRole("link", { name: "Download Full Report" });
+    private get validationErrorList(): Locator {
+        return this.page.locator("div:has(> p.break-all)");
     }
 
-    private get imagesDownloadedRow(): Locator {
-        return this.page.locator("p", { hasText: "Images Downloaded:" }).last();
+    private get errorReportLink(): Locator {
+        return this.page.getByRole("link", { name: "Download Full Report" });
     }
 
     private get uploadedArchiveNote(): Locator {
@@ -102,6 +106,29 @@ export class DataTransferPage extends BasePage {
 
     private get sampleImagesLink(): Locator {
         return this.page.getByText("Download sample images");
+    }
+
+    private get importStepLabels(): Locator {
+        return this.page.locator("ol li span.absolute");
+    }
+
+    private get sampleDropdown(): Locator {
+        return this.page
+            .locator("span")
+            .filter({ hasText: /^\s*Download Sample\s*$/ })
+            .locator("xpath=following-sibling::*[1]");
+    }
+
+    private get sampleDropdownToggle(): Locator {
+        return this.sampleDropdown.locator("span.icon-arrow-down");
+    }
+
+    private statRow(label: string): Locator {
+        return this.page.locator("p").filter({
+            has: this.page.locator("span", {
+                hasText: new RegExp(`^\\s*${escapeRegExp(label)}\\s*$`),
+            }),
+        });
     }
 
     private imageSourceCard(source: ImageSource): Locator {
@@ -116,14 +143,20 @@ export class DataTransferPage extends BasePage {
         );
     }
 
-    sampleLink(format: "CSV" | "XLS" | "XLSX" | "XML"): Locator {
+    private sampleLink(format: SampleFormat): Locator {
         return this.page.getByRole("link", { name: format, exact: true });
     }
 
-    gridRow(id: number): Locator {
+    private gridRow(id: number): Locator {
         return this.page
             .locator("div.row")
             .filter({ hasText: `imports/${id}/` });
+    }
+
+    private async statValue(label: string): Promise<number> {
+        const text = await this.statRow(label).innerText();
+
+        return Number(text.replace(label, "").trim());
     }
 
     async goto(): Promise<void> {
@@ -158,6 +191,10 @@ export class DataTransferPage extends BasePage {
         }
 
         return Number(id);
+    }
+
+    async selectImporterType(type: ImportType): Promise<void> {
+        await this.typeSelect.selectOption(type);
     }
 
     async fillForm(options: ImportOptions): Promise<void> {
@@ -280,32 +317,8 @@ export class DataTransferPage extends BasePage {
         await expect(this.validationFailedMessage).toBeVisible({ timeout });
     }
 
-    async stepLabels(): Promise<string[]> {
-        const labels = await this.page
-            .locator("ol li span.absolute")
-            .allInnerTexts();
-
-        return labels.map((label) => label.trim());
-    }
-
-    async statValue(label: string): Promise<number> {
-        const text = await this.page
-            .locator("p", { hasText: label })
-            .last()
-            .innerText();
-
-        return Number(text.replace(label, "").trim());
-    }
-
-    async recordsTouched(): Promise<number> {
-        return (
-            (await this.statValue("Total Records Created:")) +
-            (await this.statValue("Total Records Updated:"))
-        );
-    }
-
     async openSampleDropdown(): Promise<void> {
-        await this.page.locator("span.icon-arrow-down").first().click();
+        await this.sampleDropdownToggle.click();
 
         await expect(this.sampleLink("CSV")).toBeVisible();
     }
@@ -323,8 +336,80 @@ export class DataTransferPage extends BasePage {
         await expect(this.gridRow(id)).toHaveCount(0);
     }
 
+    async downloadSample(format: SampleFormat): Promise<Download> {
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.sampleLink(format).click(),
+        ]);
+
+        return download;
+    }
+
+    async downloadErrorReport(): Promise<Download> {
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.errorReportLink.click(),
+        ]);
+
+        return download;
+    }
+
+    async downloadSampleImages(): Promise<Download> {
+        const [download] = await Promise.all([
+            this.page.waitForEvent("download"),
+            this.sampleImagesLink.click(),
+        ]);
+
+        return download;
+    }
+
+    async expectStat(label: string, value: number): Promise<void> {
+        await expect(this.statRow(label)).toHaveText(
+            new RegExp(`^\\s*${escapeRegExp(label)}\\s*${value}\\s*$`),
+        );
+    }
+
+    async expectStatAbove(label: string, value: number): Promise<void> {
+        await expect
+            .poll(() => this.statValue(label), {
+                message: `"${label}" never rose above ${value}`,
+                timeout: IMPORT_TIMEOUT,
+            })
+            .toBeGreaterThan(value);
+    }
+
+    async expectRecordsTouched(count: number): Promise<void> {
+        await expect
+            .poll(
+                async () =>
+                    (await this.statValue("Total Records Created:")) +
+                    (await this.statValue("Total Records Updated:")),
+                {
+                    message: `the import never reported ${count} created and updated record(s)`,
+                    timeout: IMPORT_TIMEOUT,
+                },
+            )
+            .toBe(count);
+    }
+
+    async expectImportSteps(labels: string[]): Promise<void> {
+        await expect(this.importStepLabels).toHaveText(
+            labels.map(
+                (label) => new RegExp(`^\\s*${escapeRegExp(label)}\\s*$`),
+            ),
+        );
+    }
+
+    async expectSampleLinkHref(
+        format: SampleFormat,
+        href: RegExp,
+    ): Promise<void> {
+        await expect(this.sampleLink(format)).toHaveAttribute("href", href);
+    }
+
     async expectValidationMessage(text: string): Promise<void> {
-        await expect(this.page.getByText(text).first()).toBeVisible();
+        await expect(this.validationErrorList).toBeVisible();
+        await expect(this.validationErrorList).toContainText(text);
     }
 
     async expectFormError(text: string): Promise<void> {
@@ -345,28 +430,10 @@ export class DataTransferPage extends BasePage {
     }
 
     async expectImagesDownloaded(text: string): Promise<void> {
-        await expect(this.imagesDownloadedRow).toContainText(text);
+        await expect(this.statRow("Images Downloaded:")).toContainText(text);
     }
 
     async expectUploadedArchiveNote(text: string): Promise<void> {
         await expect(this.uploadedArchiveNote).toContainText(text);
-    }
-
-    async downloadErrorReport(): Promise<Download> {
-        const [download] = await Promise.all([
-            this.page.waitForEvent("download"),
-            this.errorReportLink.click(),
-        ]);
-
-        return download;
-    }
-
-    async downloadSampleImages(): Promise<Download> {
-        const [download] = await Promise.all([
-            this.page.waitForEvent("download"),
-            this.sampleImagesLink.click(),
-        ]);
-
-        return download;
     }
 }

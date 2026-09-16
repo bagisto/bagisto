@@ -25,6 +25,12 @@ export class OrderViewPage extends DatagridPage {
         return this.orderHeading.locator("xpath=following-sibling::span[1]");
     }
 
+    private get orderItemsPanel() {
+        return this.page.locator("div.box-shadow").filter({
+            has: this.page.locator("p", { hasText: /^\s*Order Items \(\d+\)\s*$/ }),
+        });
+    }
+
     private get commentInput() {
         return this.page.locator('textarea[name="comment"]');
     }
@@ -163,7 +169,7 @@ export class OrderViewPage extends DatagridPage {
     }
 
     async expectItemListed(productName: string): Promise<void> {
-        await expect(this.page.getByText(productName).first()).toBeVisible();
+        await expect(this.orderItemsPanel.getByText(productName)).toBeVisible();
     }
 
     async expectCommentListed(comment: string): Promise<void> {

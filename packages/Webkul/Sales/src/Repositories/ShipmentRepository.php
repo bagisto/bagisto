@@ -26,11 +26,11 @@ class ShipmentRepository extends Repository
     }
 
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Sales\Contracts\Shipment';
+        return Shipment::class;
     }
 
     /**

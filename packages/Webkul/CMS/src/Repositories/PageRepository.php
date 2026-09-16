@@ -10,14 +10,16 @@ use Webkul\Core\Eloquent\Repository;
 class PageRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\CMS\Contracts\Page';
+        return Page::class;
     }
 
     /**
+     * Create a cms page and attach it to the given channels.
+     *
      * @return Page
      */
     public function create(array $data)
@@ -42,6 +44,8 @@ class PageRepository extends Repository
     }
 
     /**
+     * Update a cms page and the channels it belongs to.
+     *
      * @param  int  $id
      * @return Page
      */
@@ -61,7 +65,7 @@ class PageRepository extends Repository
     }
 
     /**
-     * Checks slug is unique or not based on locale
+     * Checks slug is unique or not based on locale.
      *
      * @param  int  $id
      * @param  string  $urlKey
@@ -79,7 +83,7 @@ class PageRepository extends Repository
     }
 
     /**
-     * Retrieve category from slug
+     * Retrieve category from slug.
      *
      * @param  string  $urlKey
      * @return Page
@@ -90,7 +94,7 @@ class PageRepository extends Repository
     }
 
     /**
-     * Retrieve category from slug
+     * Retrieve category from slug.
      *
      * @param  string  $urlKey
      * @return Page|\Exception

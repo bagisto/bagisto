@@ -26,11 +26,11 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\Channel';
+        return Channel::class;
     }
 
     /**

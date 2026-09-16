@@ -13,6 +13,7 @@ use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Sales\Contracts\InvoiceItem;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Contracts\ShipmentItem;
@@ -255,38 +256,6 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Copy relationships.
-     *
-     * @param  \Webkul\Product\Models\Product  $product
-     * @return void
-     */
-    protected function copyRelationships($product)
-    {
-        parent::copyRelationships($product);
-
-        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
-
-        if (
-            in_array('super_attributes', $attributesToSkip)
-            || in_array('variants', $attributesToSkip)
-        ) {
-            return;
-        }
-
-        foreach ($this->product->super_attributes as $superAttribute) {
-            $product->super_attributes()->save($superAttribute);
-        }
-
-        foreach ($this->product->variants as $variant) {
-            $newVariant = $variant->getTypeInstance()->copy();
-
-            $newVariant->parent_id = $product->id;
-
-            $newVariant->save();
-        }
-    }
-
-    /**
      * Returns children ids.
      *
      * @return array
@@ -469,7 +438,7 @@ class Configurable extends AbstractType
      */
     public function getAdditionalOptions($data)
     {
-        $childProduct = app('Webkul\Product\Repositories\ProductRepository')->find($data['selected_configurable_option']);
+        $childProduct = app(ProductRepository::class)->find($data['selected_configurable_option']);
 
         foreach ($this->product->super_attributes as $attribute) {
             $option = $attribute->options()->where('id', $childProduct->{$attribute->code})->first();
@@ -611,12 +580,44 @@ class Configurable extends AbstractType
     }
 
     /**
-     * Returns price indexer class for a specific product type
+     * Returns price indexer class for a specific product type.
      *
      * @return string
      */
     public function getPriceIndexer()
     {
         return app(ConfigurableIndexer::class);
+    }
+
+    /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
+
+        if (
+            in_array('super_attributes', $attributesToSkip)
+            || in_array('variants', $attributesToSkip)
+        ) {
+            return;
+        }
+
+        foreach ($this->product->super_attributes as $superAttribute) {
+            $product->super_attributes()->save($superAttribute);
+        }
+
+        foreach ($this->product->variants as $variant) {
+            $newVariant = $variant->getTypeInstance()->copy();
+
+            $newVariant->parent_id = $product->id;
+
+            $newVariant->save();
+        }
     }
 }

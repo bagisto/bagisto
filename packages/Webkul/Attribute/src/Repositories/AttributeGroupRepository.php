@@ -2,15 +2,16 @@
 
 namespace Webkul\Attribute\Repositories;
 
+use Webkul\Attribute\Contracts\AttributeGroup;
 use Webkul\Core\Eloquent\Repository;
 
 class AttributeGroupRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Attribute\Contracts\AttributeGroup';
+        return AttributeGroup::class;
     }
 }

@@ -32,6 +32,16 @@ export class RmaRequestPage extends BasePage {
         return this.page.getByText("Item Requested for RMA");
     }
 
+    private get requestedItemsTable() {
+        return this.page.locator(
+            'div:has(> h2:text-is("Item Requested for RMA")) table',
+        );
+    }
+
+    private get requestStatusBadge() {
+        return this.page.locator("span.inline-block.rounded-full");
+    }
+
     private get conversationsHeading() {
         return this.page.getByText("Conversations");
     }
@@ -58,6 +68,37 @@ export class RmaRequestPage extends BasePage {
         return response;
     }
 
+    async sendMessage(orderId: string, message: string): Promise<void> {
+        await this.openDetail(orderId);
+        await this.waitForVueMount();
+
+        await expect(this.conversationsHeading).toBeVisible();
+
+        await this.messageInput.fill(message);
+
+        await Promise.all([
+            this.page.waitForResponse(
+                (candidate) =>
+                    candidate.url().includes("rma/send-message") &&
+                    candidate.request().method() === "POST",
+            ),
+            this.sendMessageButton.click(),
+        ]);
+    }
+
+    async cancelRequest(orderId: string): Promise<void> {
+        await this.openList();
+        await this.requestRow(orderId).locator("span.icon-cancel").click();
+
+        if (await this.agreeButton.count()) {
+            await this.agreeButton.click();
+        }
+
+        await expect(
+            this.page.getByText("RMA status canceled successfully.").first(),
+        ).toBeVisible();
+    }
+
     async expectRequestListed(orderId: string, status: string): Promise<void> {
         await this.openList();
 
@@ -81,43 +122,14 @@ export class RmaRequestPage extends BasePage {
             /customer\/account\/rma\/view\/\d+/,
         );
         await expect(this.itemsRequestedHeading).toBeVisible();
-        await expect(this.page.getByText(productName).first()).toBeVisible();
-        await expect(this.page.getByText(status).first()).toBeVisible();
-    }
-
-    async sendMessage(orderId: string, message: string): Promise<void> {
-        await this.openDetail(orderId);
-        await this.waitForVueMount();
-
-        await expect(this.conversationsHeading).toBeVisible();
-
-        await this.messageInput.fill(message);
-
-        await Promise.all([
-            this.page.waitForResponse(
-                (candidate) =>
-                    candidate.url().includes("rma/send-message") &&
-                    candidate.request().method() === "POST",
-            ),
-            this.sendMessageButton.click(),
-        ]);
+        await expect(
+            this.requestedItemsTable.getByText(productName),
+        ).toBeVisible();
+        await expect(this.requestStatusBadge).toContainText(status);
     }
 
     async expectMessageInConversation(message: string): Promise<void> {
         await expect(this.page.getByText(message)).toBeVisible();
-    }
-
-    async cancelRequest(orderId: string): Promise<void> {
-        await this.openList();
-        await this.requestRow(orderId).locator("span.icon-cancel").click();
-
-        if (await this.agreeButton.count()) {
-            await this.agreeButton.click();
-        }
-
-        await expect(
-            this.page.getByText("RMA status canceled successfully.").first(),
-        ).toBeVisible();
     }
 
     async expectCancelNoLongerOffered(orderId: string): Promise<void> {

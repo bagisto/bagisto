@@ -5,7 +5,7 @@
     <x-admin::shimmer.catalog.products.edit.group-price />
 </v-product-customer-group-price>
 
-@inject('customerGroupRepository', 'Webkul\Customer\Repositories\CustomerGroupRepository')
+@inject('customerGroupRepository', \Webkul\Customer\Repositories\CustomerGroupRepository::class)
 
 @pushOnce('scripts')
     <script

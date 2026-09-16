@@ -701,7 +701,7 @@
 
                                 @php($selectedOptionIds = old('customer_groups') ?? $cartRule->cart_rule_customer_groups->pluck('id')->toArray())
 
-                                @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                @foreach(app(\Webkul\Customer\Repositories\CustomerGroupRepository::class)->all() as $customerGroup)
                                     <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                         <x-admin::form.control-group.control
                                             type="checkbox"

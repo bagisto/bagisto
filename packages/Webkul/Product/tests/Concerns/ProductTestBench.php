@@ -116,10 +116,7 @@ trait ProductTestBench
     }
 
     /**
-     * Create a configurable product with variants via factory.
-     *
-     * Returns the parent product with variants loaded. Each variant is a
-     * fully-indexed simple product with its own price.
+     * Create a configurable product whose variants are indexed simple products at the given prices.
      */
     public function createConfigurableProduct(array $variantPrices = [100, 200]): Product
     {
@@ -139,10 +136,7 @@ trait ProductTestBench
     }
 
     /**
-     * Create a grouped product with associated simple products via factory.
-     *
-     * Returns the grouped parent. Associated simple products are accessible
-     * via the `grouped_products` relationship.
+     * Create a grouped product whose associated products are indexed simple products at the given prices.
      */
     public function createGroupedProduct(array $associatedPrices = [100, 200]): Product
     {
@@ -268,7 +262,7 @@ trait ProductTestBench
             'sku' => $sku,
         ])->assertOk();
 
-        $product = Product::where('sku', $sku)->first();
+        $product = Product::query()->where('sku', $sku)->first();
 
         $data = array_merge([
             'sku' => $sku,
@@ -295,7 +289,7 @@ trait ProductTestBench
         $this->putJson(route('admin.catalog.products.update', $product->id), $data)
             ->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::find($product->id);
+        return Product::query()->find($product->id);
     }
 
     /**
@@ -315,7 +309,7 @@ trait ProductTestBench
             'sku' => $sku,
         ])->assertOk();
 
-        $product = Product::where('sku', $sku)->first();
+        $product = Product::query()->where('sku', $sku)->first();
 
         $data = array_merge([
             'sku' => $sku,
@@ -341,7 +335,7 @@ trait ProductTestBench
         $this->putJson(route('admin.catalog.products.update', $product->id), $data)
             ->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::find($product->id);
+        return Product::query()->find($product->id);
     }
 
     /**
@@ -365,7 +359,7 @@ trait ProductTestBench
             ],
         ])->assertOk();
 
-        $product = Product::where('sku', $sku)->first();
+        $product = Product::query()->where('sku', $sku)->first();
         $product->load('variants');
 
         $variants = [];
@@ -397,7 +391,7 @@ trait ProductTestBench
             'variants' => $variants,
         ])->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::find($product->id);
+        return Product::query()->find($product->id);
     }
 
     /**
@@ -416,7 +410,7 @@ trait ProductTestBench
             'sku' => $sku,
         ])->assertOk();
 
-        $product = Product::where('sku', $sku)->first();
+        $product = Product::query()->where('sku', $sku)->first();
 
         $simpleA = $this->createSimpleProduct();
         $simpleB = $this->createSimpleProduct();
@@ -448,7 +442,7 @@ trait ProductTestBench
             ],
         ])->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::find($product->id);
+        return Product::query()->find($product->id);
     }
 
     /**
@@ -468,7 +462,7 @@ trait ProductTestBench
             'sku' => $sku,
         ])->assertOk();
 
-        $product = Product::where('sku', $sku)->first();
+        $product = Product::query()->where('sku', $sku)->first();
 
         $simpleA = $this->createSimpleProduct();
         $simpleB = $this->createSimpleProduct();
@@ -510,7 +504,7 @@ trait ProductTestBench
             ],
         ])->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::find($product->id);
+        return Product::query()->find($product->id);
     }
 
     /**
@@ -530,7 +524,7 @@ trait ProductTestBench
             'sku' => $sku,
         ])->assertOk();
 
-        $product = Product::where('sku', $sku)->first();
+        $product = Product::query()->where('sku', $sku)->first();
 
         $data = array_merge([
             'sku' => $sku,
@@ -578,7 +572,7 @@ trait ProductTestBench
         $this->putJson(route('admin.catalog.products.update', $product->id), $data)
             ->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::find($product->id);
+        return Product::query()->find($product->id);
     }
 
     /**
@@ -703,10 +697,7 @@ trait ProductTestBench
     }
 
     /**
-     * Build the unique_id for each attribute value row.
-     *
-     * The unique_id format is: channel|locale|product_id|attribute_id
-     * (channel and locale are only included when the attribute is scoped).
+     * Build each attribute value's unique_id, which carries the channel and locale only where the attribute is scoped.
      */
     protected function syncUniqueIds(Product $product): void
     {

@@ -34,7 +34,7 @@ class AttributeOptionRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Attribute\Contracts\AttributeOption';
+        return AttributeOption::class;
     }
 
     /**

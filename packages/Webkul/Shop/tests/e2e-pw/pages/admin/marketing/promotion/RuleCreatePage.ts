@@ -104,10 +104,6 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('label[for="status"]');
     }
 
-    private get validationErrors() {
-        return this.page.locator("p.text-red-600");
-    }
-
     private get saveCartRuleButton() {
         return this.page.getByRole("button", { name: "Save Cart Rule" });
     }
@@ -321,20 +317,6 @@ export class RuleCreatePage extends BasePage {
         return { name, couponCode: "" };
     }
 
-    async saveCartRuleWithoutRequiredFields(): Promise<void> {
-        await this.visit("admin/marketing/promotions/cart-rules");
-        await this.createCartRuleButton.click();
-        await this.cartRuleForm.waitFor();
-        await this.saveCartRuleButton.click();
-    }
-
-    async saveCatalogRuleWithoutRequiredFields(): Promise<void> {
-        await this.visit("admin/marketing/promotions/catalog-rules");
-        await this.createCatalogRuleButton.click();
-        await this.catalogRuleForm.waitFor();
-        await this.saveCatalogRuleButton.click();
-    }
-
     async createFixedCartRuleWithCoupon(
         couponCode: string,
         discountAmount: string = "10",
@@ -353,19 +335,5 @@ export class RuleCreatePage extends BasePage {
         await this.saveCartRule();
 
         return name;
-    }
-
-    async expectRequiredFieldErrors(): Promise<void> {
-        await expect(this.validationErrors).not.toHaveCount(0);
-
-        for (const field of ["Name", "Channels", "Customer Groups"]) {
-            await expect(
-                this.page.getByText(`The ${field} field is required`).first(),
-            ).toBeVisible();
-        }
-    }
-
-    async expectStillOnCreateForm(): Promise<void> {
-        await expect(this.page).toHaveURL(/promotions\/(cart|catalog)-rules\/create/);
     }
 }

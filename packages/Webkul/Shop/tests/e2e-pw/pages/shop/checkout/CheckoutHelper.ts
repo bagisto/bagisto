@@ -1,5 +1,6 @@
 import { Page, Response, expect } from "@playwright/test";
 import { BasePage } from "../../BasePage";
+import { generateEmail } from "../../../utils/faker";
 
 export type ShippingMethod = "free" | "flatrate";
 
@@ -18,18 +19,20 @@ export interface GuestAddress {
     phone: string;
 }
 
-export const GUEST_ADDRESS: GuestAddress = {
-    companyName: "Webkul",
-    firstName: "Demo",
-    lastName: "Guest",
-    email: "demo.guest@example.com",
-    street: "North Street",
-    country: "IN",
-    state: "UP",
-    city: "Test City",
-    postcode: "123456",
-    phone: "2365432789",
-};
+export function guestAddress(): GuestAddress {
+    return {
+        companyName: "Webkul",
+        firstName: "Demo",
+        lastName: "Guest",
+        email: generateEmail(),
+        street: "North Street",
+        country: "IN",
+        state: "UP",
+        city: "Test City",
+        postcode: "123456",
+        phone: "2365432789",
+    };
+}
 
 const SHIPPING_IDS: Record<ShippingMethod, string> = {
     free: "free_free",
@@ -104,7 +107,9 @@ export class CheckoutHelper extends BasePage {
     }
 
     private get savedBillingAddressOptions() {
-        return this.page.locator('label[for^="billing_address_id_"]');
+        return this.page
+            .locator('label[for^="billing_address_id_"]')
+            .filter({ hasText: /\S/ });
     }
 
     private get guestCountrySelect() {
@@ -141,7 +146,7 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator("p.text-xl").filter({ hasText: /#\s*\d+/ });
     }
 
-    protected get clickLink() {
+    protected get downloadableLinkOption() {
         return this.page.locator("label.icon-uncheck");
     }
 
@@ -352,7 +357,9 @@ export class CheckoutHelper extends BasePage {
         await this.proceedButton.click();
     }
 
-    async fillGuestAddress(address: GuestAddress = GUEST_ADDRESS) {
+    async fillGuestAddress(
+        address: GuestAddress = guestAddress(),
+    ): Promise<GuestAddress> {
         await this.page
             .getByRole("textbox", { name: "Company Name" })
             .fill(address.companyName);
@@ -379,20 +386,30 @@ export class CheckoutHelper extends BasePage {
         await this.page
             .getByRole("textbox", { name: "Telephone" })
             .fill(address.phone);
+
+        return address;
     }
 
-    async proceedAsGuest(address: GuestAddress = GUEST_ADDRESS) {
+    async proceedAsGuest(
+        address: GuestAddress = guestAddress(),
+    ): Promise<GuestAddress> {
         await this.openCheckout();
         await this.fillGuestAddress(address);
         await this.proceedButton.click();
+
+        return address;
     }
 
-    async proceedWithNewAddress(address: GuestAddress = GUEST_ADDRESS) {
+    async proceedWithNewAddress(
+        address: GuestAddress = guestAddress(),
+    ): Promise<GuestAddress> {
         await this.openCheckout();
         await this.addNewAddressOption.click();
         await this.fillGuestAddress(address);
         await this.saveAddressButton.click();
         await this.proceedButton.click();
+
+        return address;
     }
 
     async chooseShipping(method: ShippingMethod) {

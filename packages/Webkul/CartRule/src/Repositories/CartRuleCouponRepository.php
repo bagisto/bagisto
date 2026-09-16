@@ -2,11 +2,14 @@
 
 namespace Webkul\CartRule\Repositories;
 
+use Webkul\CartRule\Contracts\CartRuleCoupon;
 use Webkul\Core\Eloquent\Repository;
 
 class CartRuleCouponRepository extends Repository
 {
     /**
+     * The characters a generated coupon code may draw on, by code format.
+     *
      * @var array
      */
     protected $charset = [
@@ -16,19 +19,19 @@ class CartRuleCouponRepository extends Repository
     ];
 
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\CartRule\Contracts\CartRuleCoupon';
+        return CartRuleCoupon::class;
     }
 
     /**
-     * Creates coupons for cart rule
+     * Creates coupons for cart rule.
      */
     public function generateCoupons(array $data, int $cartRuleId): void
     {
-        $cartRule = app('Webkul\CartRule\Repositories\CartRuleRepository')->findOrFail($cartRuleId);
+        $cartRule = app(CartRuleRepository::class)->findOrFail($cartRuleId);
 
         for ($i = 0; $i < $data['coupon_qty']; $i++) {
             parent::create([
@@ -43,7 +46,7 @@ class CartRuleCouponRepository extends Repository
     }
 
     /**
-     * Creates coupons for cart rule
+     * Creates coupons for cart rule.
      */
     public function getRandomString(string $format, int $length): string
     {

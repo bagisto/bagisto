@@ -5,16 +5,17 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductDownloadableLink;
 use Webkul\Product\Models\Product;
 
 class ProductDownloadableLinkRepository extends Repository
 {
     /**
-     * Specify model class name.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductDownloadableLink';
+        return ProductDownloadableLink::class;
     }
 
     /**

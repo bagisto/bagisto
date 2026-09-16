@@ -39,6 +39,10 @@ function sectionOfTheme(string $themeCode, int $channelId, string $type, array $
     return $section;
 }
 
+// ============================================================================
+// Inactive Themes
+// ============================================================================
+
 it('should send an installed theme no channel runs back to the gallery', function () {
     $code = installGalleryTheme();
 
@@ -100,6 +104,10 @@ it('should refuse to act on a section whose theme its channel no longer runs', f
         ->and($section->fresh()->translate(app()->getLocale())->draft_options)->toBeNull();
 })->with(['fields', 'draft', 'status', 'duplicate', 'reorder', 'delete', 'update']);
 
+// ============================================================================
+// Active Channels
+// ============================================================================
+
 it('should open the editor on a channel that runs the theme rather than the default one', function () {
     $code = installGalleryTheme();
 
@@ -145,6 +153,10 @@ it('should report a theme active only on the channels that run it', function () 
         ->and($catalog->isActive($code, core()->getDefaultChannel()->id))->toBeFalse();
 });
 
+// ============================================================================
+// Gallery Actions
+// ============================================================================
+
 it('should offer customize only to an active theme and leave previewing to the editor', function () {
     $this->loginAsAdmin();
 
@@ -153,6 +165,10 @@ it('should offer customize only to an active theme and leave previewing to the e
         ->assertSee('v-if="theme.status === \'active\'"', false)
         ->assertDontSee('appearance-preview', false);
 });
+
+// ============================================================================
+// Preview
+// ============================================================================
 
 it('should preview the requested theme with that theme own sections', function () {
     $code = installGalleryTheme();

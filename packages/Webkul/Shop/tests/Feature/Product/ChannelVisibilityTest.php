@@ -2,6 +2,10 @@
 
 use Webkul\Category\Models\Category;
 
+// ============================================================================
+// Products
+// ============================================================================
+
 it('should render a product assigned to the current channel', function () {
     $product = $this->createSimpleProduct();
 
@@ -17,6 +21,10 @@ it('should not render a product that is not assigned to the current channel', fu
     $this->get(route('shop.product_or_category.index', $product->url_key))
         ->assertNotFound();
 });
+
+// ============================================================================
+// Cart
+// ============================================================================
 
 it('should add a product assigned to the current channel to the cart', function () {
     $product = $this->createSimpleProduct();
@@ -44,6 +52,10 @@ it('should drop a cart item whose product is no longer in the current channel', 
         ->assertJsonPath('data.items', [])
         ->assertJsonPath('data.items_count', 0);
 });
+
+// ============================================================================
+// Categories
+// ============================================================================
 
 it('should render a category that sits under the current channel root', function () {
     $category = Category::factory()->hasTranslations()->create([

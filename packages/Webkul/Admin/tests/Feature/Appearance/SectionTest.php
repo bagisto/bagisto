@@ -19,10 +19,29 @@ function channelWithoutFooter(): Channel
 {
     $channel = core()->getDefaultChannel();
 
-    Section::where('type', SectionTypeEnum::FOOTER_LINKS->value)->get()->each->delete();
+    Section::query()->where('type', SectionTypeEnum::FOOTER_LINKS->value)->get()->each->delete();
 
     return $channel;
 }
+
+/**
+ * One filter a section type offers, found by the key it is stored under rather than by where it
+ * happens to sit in the schema.
+ */
+function sectionFilterKey(string $type, string $key): array
+{
+    $filters = collect(app(SectionSchema::class)->all()[$type])->firstWhere('key', 'filters');
+
+    $filter = collect($filters['keys'] ?? [])->firstWhere('value', $key);
+
+    expect($filter)->not->toBeNull("{$type} offers no {$key} filter");
+
+    return $filter;
+}
+
+// ============================================================================
+// Index
+// ============================================================================
 
 it('should return the section index page', function () {
     $this->loginAsAdmin();
@@ -32,6 +51,10 @@ it('should return the section index page', function () {
         ->assertSeeText(trans('admin::app.components.layouts.sidebar.sections'))
         ->assertSeeText(trans('admin::app.appearance.sections.index.create-btn'));
 });
+
+// ============================================================================
+// Store
+// ============================================================================
 
 it('should fail the validation with errors when certain field not provided when store the section', function () {
     $this->loginAsAdmin();
@@ -85,6 +108,10 @@ it('should store a newly created section', function () {
         ],
     ]);
 });
+
+// ============================================================================
+// Update
+// ============================================================================
 
 it('should fail the validation with errors when correct type not provided when update the section', function () {
     $section = Section::factory()->create();
@@ -200,6 +227,10 @@ it('should update the sections', function () {
         ],
     ]);
 });
+
+// ============================================================================
+// Static Content Sanitizing
+// ============================================================================
 
 it('should sanitize malicious script tags from static content HTML when updating theme', function () {
     $section = Section::factory()->create([
@@ -442,6 +473,10 @@ it('should not sanitize HTML for non-static content theme types', function () {
     ]);
 });
 
+// ============================================================================
+// Delete
+// ============================================================================
+
 it('should delete the section', function () {
     $section = Section::factory()->create();
 
@@ -459,6 +494,10 @@ it('should delete the section', function () {
         'section_id' => $section->id,
     ]);
 });
+
+// ============================================================================
+// Status
+// ============================================================================
 
 it('should turn a section off and back on again', function () {
     $section = Section::factory()->create(['status' => 1]);
@@ -483,6 +522,10 @@ it('should turn a section off and back on again', function () {
     expect((bool) $section->refresh()->status)->toBeTrue();
 });
 
+// ============================================================================
+// Channel Scope
+// ============================================================================
+
 it('should take the channel and theme of the editor rather than the request when creating', function () {
     $channel = core()->getDefaultChannel();
 
@@ -505,6 +548,8 @@ it('should take the channel and theme of the editor rather than the request when
 it('should scope the listing to the requested channel', function () {
     $channel = core()->getDefaultChannel();
 
+    $other = Channel::factory()->create(['theme' => $channel->theme]);
+
     $section = Section::factory()->create(['name' => 'Only On This Channel']);
 
     $this->loginAsAdmin();
@@ -513,15 +558,24 @@ it('should scope the listing to the requested channel', function () {
         ->assertOk()
         ->assertSee($section->name);
 
-    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => 999999]))
-        ->assertOk();
+    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $other->id]))
+        ->assertOk()
+        ->assertDontSee($section->name);
 });
+
+// ============================================================================
+// Retired Routes
+// ============================================================================
 
 it('should no longer expose the mass action endpoints', function () {
     expect(app('router')->getRoutes()->getByName('admin.appearance.sections.mass_update'))->toBeNull()
         ->and(app('router')->getRoutes()->getByName('admin.appearance.sections.mass_delete'))->toBeNull()
         ->and(app('router')->getRoutes()->getByName('admin.appearance.sections.edit'))->toBeNull();
 });
+
+// ============================================================================
+// Duplicate
+// ============================================================================
 
 it('should place a duplicate directly below its original', function () {
     $channel = core()->getDefaultChannel();
@@ -553,6 +607,10 @@ it('should place a duplicate directly below its original', function () {
         'Third',
     ]);
 });
+
+// ============================================================================
+// Field Schema
+// ============================================================================
 
 it('should label every schema field with something other than the page heading', function () {
     $suspect = [];
@@ -602,11 +660,9 @@ it('should offer each filter only once so a stored filter cannot be overwritten'
 });
 
 it('should offer the same limits to both carousels', function () {
-    $schema = app(SectionSchema::class)->all();
+    $product = sectionFilterKey(SectionTypeEnum::PRODUCT_CAROUSEL->value, 'limit');
 
-    $product = collect($schema[SectionTypeEnum::PRODUCT_CAROUSEL->value][1]['keys'])->firstWhere('value', 'limit');
-
-    $category = collect($schema[SectionTypeEnum::CATEGORY_CAROUSEL->value][0]['keys'])->firstWhere('value', 'limit');
+    $category = sectionFilterKey(SectionTypeEnum::CATEGORY_CAROUSEL->value, 'limit');
 
     expect($category['options'])->toBe($product['options'])
         ->and($category['options'])->not->toBeEmpty();
@@ -631,6 +687,10 @@ it('should not ask for a sort order where the rows are dragged instead', functio
         }
     }
 });
+
+// ============================================================================
+// Channel Scope
+// ============================================================================
 
 it('should hand the editor a store url carrying the channel being edited', function () {
     $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
@@ -662,6 +722,10 @@ it('should create a section against the channel the editor is scoped to', functi
 
     expect($section->channel_id)->toBe($other->id);
 });
+
+// ============================================================================
+// Footer Rules
+// ============================================================================
 
 it('should still allow a footer links section on a channel that has none', function () {
     $channel = core()->getDefaultChannel();
@@ -710,10 +774,12 @@ it('should place a new section above the pinned footer', function () {
     expect($created->sort_order)->toBeLessThan($footer->refresh()->sort_order);
 });
 
-it('should offer categories to search rather than an id to type', function () {
-    $schema = app(SectionSchema::class)->all();
+// ============================================================================
+// Field Schema
+// ============================================================================
 
-    $categoryId = collect($schema[SectionTypeEnum::PRODUCT_CAROUSEL->value][1]['keys'])->firstWhere('value', 'category_id');
+it('should offer categories to search rather than an id to type', function () {
+    $categoryId = sectionFilterKey(SectionTypeEnum::PRODUCT_CAROUSEL->value, 'category_id');
 
     expect($categoryId['options'])->not->toBeEmpty();
 
@@ -721,14 +787,10 @@ it('should offer categories to search rather than an id to type', function () {
 
     expect($labels->filter(fn ($label) => $label === ''))->toBeEmpty()
         ->and($labels->duplicates())->toBeEmpty();
-
 });
 
 it('should label every category a filter can hold, so none falls back to a bare id', function () {
-    $schema = app(SectionSchema::class)->all();
-
-    $options = collect($schema[SectionTypeEnum::CATEGORY_CAROUSEL->value][0]['keys'])
-        ->firstWhere('value', 'parent_id')['options'];
+    $options = sectionFilterKey(SectionTypeEnum::CATEGORY_CAROUSEL->value, 'parent_id')['options'];
 
     $offered = collect($options)->pluck('value')->sort()->values();
 
@@ -738,23 +800,23 @@ it('should label every category a filter can hold, so none falls back to a bare 
 });
 
 it('should let several categories be picked for the category carousel parent', function () {
-    $schema = app(SectionSchema::class)->all();
-
-    $parentId = collect($schema[SectionTypeEnum::CATEGORY_CAROUSEL->value][0]['keys'])->firstWhere('value', 'parent_id');
+    $parentId = sectionFilterKey(SectionTypeEnum::CATEGORY_CAROUSEL->value, 'parent_id');
 
     expect($parentId['multiple'])->toBeTrue()
         ->and($parentId['options'])->not->toBeEmpty();
 });
 
 it('should offer the same categories to both carousels', function () {
-    $schema = app(SectionSchema::class)->all();
+    $product = sectionFilterKey(SectionTypeEnum::PRODUCT_CAROUSEL->value, 'category_id');
 
-    $product = collect($schema[SectionTypeEnum::PRODUCT_CAROUSEL->value][1]['keys'])->firstWhere('value', 'category_id');
-
-    $category = collect($schema[SectionTypeEnum::CATEGORY_CAROUSEL->value][0]['keys'])->firstWhere('value', 'parent_id');
+    $category = sectionFilterKey(SectionTypeEnum::CATEGORY_CAROUSEL->value, 'parent_id');
 
     expect($product['options'])->toBe($category['options']);
 });
+
+// ============================================================================
+// Footer Rules
+// ============================================================================
 
 it('should refuse a second footer however it is reached', function (string $path) {
     $channel = channelWithoutFooter();
@@ -793,7 +855,7 @@ it('should refuse a second footer however it is reached', function (string $path
         ])->assertJsonValidationErrorFor('type'),
     };
 
-    expect(Section::where('type', SectionTypeEnum::FOOTER_LINKS->value)->count())->toBe(1);
+    expect(Section::query()->where('type', SectionTypeEnum::FOOTER_LINKS->value)->count())->toBe(1);
 })->with(['created', 'copied', 'switched']);
 
 it('should still allow the footer a channel is entitled to', function () {
@@ -806,7 +868,7 @@ it('should still allow the footer a channel is entitled to', function () {
         'type' => SectionTypeEnum::FOOTER_LINKS->value,
     ])->assertOk();
 
-    expect(Section::where('type', SectionTypeEnum::FOOTER_LINKS->value)->count())->toBe(1);
+    expect(Section::query()->where('type', SectionTypeEnum::FOOTER_LINKS->value)->count())->toBe(1);
 });
 
 it('should let the footer it already has be edited', function () {

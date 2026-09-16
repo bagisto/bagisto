@@ -3,14 +3,15 @@
 namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductFlat;
 
 class ProductFlatRepository extends Repository
 {
     /**
-     * Specify model.
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductFlat';
+        return ProductFlat::class;
     }
 }

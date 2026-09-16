@@ -3,6 +3,7 @@
 namespace Webkul\Core\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\Core\Listeners\CleanCacheRepository;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,15 +14,15 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'Prettus\Repository\Events\RepositoryEntityCreated' => [
-            'Webkul\Core\Listeners\CleanCacheRepository',
+            CleanCacheRepository::class,
         ],
 
         'Prettus\Repository\Events\RepositoryEntityUpdated' => [
-            'Webkul\Core\Listeners\CleanCacheRepository',
+            CleanCacheRepository::class,
         ],
 
         'Prettus\Repository\Events\RepositoryEntityDeleted' => [
-            'Webkul\Core\Listeners\CleanCacheRepository',
+            CleanCacheRepository::class,
         ],
     ];
 }

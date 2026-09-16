@@ -1,5 +1,6 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../BasePage";
+import { generateEmail } from "../../../utils/faker";
 import {
     appliedPercentage,
     expectedDiscountedTotals,
@@ -161,7 +162,7 @@ export class TaxRateApplyPage extends BasePage {
         await this.companyName.fill("Webkul");
         await this.firstName.fill("Tax");
         await this.lastName.fill("Tester");
-        await this.email.fill("tax.tester@example.com");
+        await this.email.fill(generateEmail());
         await this.streetAddress.fill("North Street");
         await this.billingCountry.selectOption(region.country);
         await this.billingState.selectOption(region.checkoutState);

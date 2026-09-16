@@ -4,18 +4,21 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\ShipmentItem;
 
 class ShipmentItemRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Sales\Contracts\ShipmentItem';
+        return ShipmentItem::class;
     }
 
     /**
+     * Take the shipped quantity of an item out of its inventory source.
+     *
      * @param  array  $data
      * @return void
      */

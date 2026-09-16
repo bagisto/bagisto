@@ -77,10 +77,15 @@ export class ProductCreatePage extends BasePage {
         return this.page.getByText("Basic", { exact: true });
     }
 
-    private get addOptionButton() {
+    private panelHeaderAddButton(panelTitle: string) {
         return this.page
-            .locator(".secondary-button")
-            .filter({ hasText: "Add Option" });
+            .locator("div.box-shadow > div")
+            .filter({ has: this.page.locator(`p:text-is("${panelTitle}")`) })
+            .locator("div.secondary-button");
+    }
+
+    private get addOptionButton() {
+        return this.panelHeaderAddButton("Bundle Items");
     }
 
     private get addLableInput() {
@@ -239,7 +244,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get addGroupedProductButton() {
-        return this.page.locator(".secondary-button").first();
+        return this.panelHeaderAddButton("Group Products");
     }
 
     private get selectProductsModalTitle() {
@@ -247,7 +252,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get addLinkButton() {
-        return this.page.getByText("Add Link").first();
+        return this.panelHeaderAddButton("Downloadable Links");
     }
 
     private get linkTitleInput() {
@@ -283,7 +288,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get addSampleButton() {
-        return this.page.getByText("Add Sample").first();
+        return this.panelHeaderAddButton("Downloadable Samples");
     }
 
     private get sampleTitleInput() {
@@ -307,7 +312,7 @@ export class ProductCreatePage extends BasePage {
     }
 
     private get addTicketsButton() {
-        return this.page.getByText("Add Tickets");
+        return this.page.locator('div.secondary-button:text-is("Add Tickets")');
     }
 
     private get ticketNameInput() {
@@ -332,7 +337,7 @@ export class ProductCreatePage extends BasePage {
 
 
     private get addSlotsButton() {
-        return this.page.getByText("Add Slots").first();
+        return this.page.locator('div.secondary-button:text-is("Add Slots")');
     }
 
     private get fromDaySelect() {
@@ -411,11 +416,9 @@ export class ProductCreatePage extends BasePage {
     }
 
     private dayAvailabilityTrigger(dayIndex: number) {
-        return this.page
-            .locator(
-                `.overflow-x-auto > div:nth-child(${dayIndex}) > div:nth-child(2) > .cursor-pointer`,
-            )
-            .first();
+        return this.page.locator(
+            `.overflow-x-auto > div:nth-child(${dayIndex}) > div:nth-child(2) > .cursor-pointer`,
+        );
     }
 
     private slotTimeTextbox(label: "From" | "To", index: number) {
@@ -434,11 +437,9 @@ export class ProductCreatePage extends BasePage {
     }
 
     private inlineDaySlotTrigger(dayIndex: number) {
-        const selector =
-            dayIndex === 1
-                ? ".overflow-x-auto > div > div > .cursor-pointer"
-                : `.overflow-x-auto > div:nth-child(${dayIndex}) > div > .cursor-pointer`;
-        return this.page.locator(selector).first();
+        return this.page.locator(
+            `.overflow-x-auto > div:nth-child(${dayIndex}) > div > .cursor-pointer`,
+        );
     }
 
     private calendarSpinbutton(name: "Hour" | "Minute") {
@@ -557,7 +558,7 @@ export class ProductCreatePage extends BasePage {
         title: string,
         items: string[],
     ) {
-        await this.addOptionButton.first().click();
+        await this.addOptionButton.click();
         await this.addLableInput.fill(title);
         await this.selectType.selectOption({ value: optionType });
         await this.isRequiredCheckbox.selectOption({
@@ -956,7 +957,7 @@ export class ProductCreatePage extends BasePage {
         await this.bookingInput("available_to").fill(formattedAvailableToDate);
         const ticketCount = product.numberOfTickets ?? 1;
         for (let i = 0; i < ticketCount; i++) {
-            await this.addTicketsButton.nth(0).click();
+            await this.addTicketsButton.click();
             await this.ticketNameInput.fill(generateName());
             await this.ticketQuantityInput.fill("2");
             await this.ticketPriceInput.fill("500");

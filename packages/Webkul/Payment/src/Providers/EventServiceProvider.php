@@ -4,6 +4,7 @@ namespace Webkul\Payment\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Payment\Listeners\GenerateInvoice;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen('checkout.order.save.after', 'Webkul\Payment\Listeners\GenerateInvoice@handle');
+        Event::listen('checkout.order.save.after', [GenerateInvoice::class, 'handle']);
     }
 }

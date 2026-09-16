@@ -15,7 +15,7 @@
         </div>
 
         @if ($bookingProduct->available_every_week)
-            @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\TableSlot')
+            @inject ('bookingSlotHelper', \Webkul\BookingProduct\Helpers\TableSlot::class)
 
             <div class="flex gap-3">
                 <span class="icon-calendar text-2xl"></span>

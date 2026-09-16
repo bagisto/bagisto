@@ -112,7 +112,7 @@
                             @lang('admin::app.settings.channels.create.inventory-sources')
                         </x-admin::form.control-group.label>
 
-                        @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
+                        @foreach (app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]) as $inventorySource)
                             <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
@@ -157,7 +157,7 @@
                                 @lang('admin::app.settings.channels.create.select-root-category')
                             </option>
 
-                            @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
+                            @foreach (app(\Webkul\Category\Repositories\CategoryRepository::class)->getRootCategories() as $category)
                                 <option
                                     value="{{ $category->id }}"
                                     {{ old('root_category_id') == $category->id ? 'selected' : '' }}

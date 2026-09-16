@@ -92,7 +92,11 @@ test.describe("default booking product checkout flow", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout(product.name, { hour: "10" });
-                await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+                const bookings = new BookingsAdminPage(adminPage);
+
+                await bookings.invoiceOrder(id);
+                await bookings.expectSlotBooking(customer, id);
+                await bookings.refundOrder(id);
             });
 
             test("should prevent cancellation when toggle is off in customer end", async ({

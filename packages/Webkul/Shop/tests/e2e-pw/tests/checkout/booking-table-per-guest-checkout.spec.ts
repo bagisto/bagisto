@@ -42,7 +42,11 @@ test.describe("table booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.tableCheckout(product.name, false, "10");
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout for hourly without cancellation", async ({
@@ -99,7 +103,11 @@ test.describe("table booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.tableCheckout(product.name, false, "10");
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout for customer without cancellation", async ({
@@ -156,7 +164,11 @@ test.describe("table booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.tableCheckout(product.name, false, "10");
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout without cancellation", async ({
@@ -213,7 +225,11 @@ test.describe("table booking product checkout flow", () => {
             await addAddress(shopPage);
             const checkout = new BookingProductCheckout(shopPage);
             const id = await checkout.tableCheckout(product.name, false, "10");
-            await new BookingsAdminPage(adminPage).expectSlotBooking(customer, id);
+            const bookings = new BookingsAdminPage(adminPage);
+
+            await bookings.invoiceOrder(id);
+            await bookings.expectSlotBooking(customer, id);
+            await bookings.refundOrder(id);
         });
 
         test("should allow customer to complete checkout without cancellation", async ({

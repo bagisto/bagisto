@@ -3,9 +3,7 @@
 use Webkul\Installer\Helpers\EnvironmentManager;
 
 /**
- * Invoke the protected `resolveEnvVariable` parser directly so the parsing can be
- * exercised without touching the real `.env` file (which is shared across parallel
- * test processes).
+ * Read a value through the protected parser, leaving the real `.env` that parallel runs share alone.
  */
 function resolveEnv(array $lines, string $key, $default = null)
 {
@@ -15,6 +13,10 @@ function resolveEnv(array $lines, string $key, $default = null)
 
     return $method->invoke(new EnvironmentManager, $lines, $key, $default);
 }
+
+// ============================================================================
+// Value Parsing
+// ============================================================================
 
 it('should preserve a value that contains an equals sign', function () {
     $lines = [

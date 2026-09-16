@@ -29,6 +29,6 @@ class CustomerEventsHandler
      */
     public function subscribe($events)
     {
-        $events->listen('customer.after.login', 'Webkul\Checkout\Listeners\CustomerEventsHandler@onCustomerLogin');
+        $events->listen('customer.after.login', [self::class, 'onCustomerLogin']);
     }
 }

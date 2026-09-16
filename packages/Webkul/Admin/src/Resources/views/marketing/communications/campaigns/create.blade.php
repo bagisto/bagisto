@@ -102,7 +102,7 @@
                                     @lang('admin::app.marketing.communications.campaigns.create.select-event')
                                 </option>
 
-                                @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
+                                @foreach (app(\Webkul\Marketing\Repositories\EventRepository::class)->all() as $event)
                                     <option
                                         value="{{ $event->id }}"
                                         {{ old('marketing_event_id') == $event->id ? 'selected' : '' }}
@@ -187,7 +187,7 @@
                                     @lang('admin::app.marketing.communications.campaigns.create.select-channel')
                                 </option>
 
-                                @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
+                                @foreach (app(\Webkul\Core\Repositories\ChannelRepository::class)->all() as $channel)
                                     <option
                                         value="{{ $channel->id }}"
                                         {{ old('channel_id') == $channel->id ? 'selected' : '' }}
@@ -220,7 +220,7 @@
                                     @lang('admin::app.marketing.communications.campaigns.create.select-group')
                                 </option>
 
-                                @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                @foreach (app(\Webkul\Customer\Repositories\CustomerGroupRepository::class)->all() as $customerGroup)
                                     <option
                                         value="{{ $customerGroup->id }}"
                                         {{ old('customer_group_id') == $customerGroup->id ? 'selected' : '' }}

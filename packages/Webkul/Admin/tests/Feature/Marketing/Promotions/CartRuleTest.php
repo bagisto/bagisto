@@ -236,7 +236,7 @@ it('should persist boolean fields when storing a cart rule', function () {
     ])
         ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'));
 
-    $cartRule = CartRule::latest('id')->first();
+    $cartRule = CartRule::query()->latest('id')->first();
 
     expect($cartRule->status)->toBeTrue()
         ->and($cartRule->apply_to_shipping)->toBeTrue()
@@ -323,7 +323,7 @@ it('should generate coupon codes for a cart rule', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']));
 
-    expect(CartRuleCoupon::where('cart_rule_id', $cartRule->id)->count())->toBe(3);
+    expect(CartRuleCoupon::query()->where('cart_rule_id', $cartRule->id)->count())->toBe(3);
 });
 
 it('should fail validation when coupon generation fields are missing', function () {

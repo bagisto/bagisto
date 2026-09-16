@@ -6,15 +6,7 @@ export class BookingProductCheckout extends CheckoutHelper {
         super(page);
     }
 
-    /**
-     * Picks the earliest bookable date after today.
-     *
-     * Today is skipped deliberately. A slot is only offered while its start
-     * time is still in the future, and the server re-validates that when the
-     * checkout page is requested, so a same-day slot whose start falls between
-     * adding it to the cart and placing the order is rejected as expired.
-     */
-    private async selectFirstAvailableDate() {
+    private async selectEarliestBookableDateAfterToday() {
         await this.bookingDateInput.click();
         await this.flatpickrOpenCalendar.waitFor({ state: "visible" });
 
@@ -137,16 +129,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         return this.placeOrder();
     }
 
-    async expectCancellationNotAllowedOnProduct(): Promise<void> {
-        await expect(this.cancellationNotAllowedText).toBeVisible();
-    }
-
-    async expectCancellationNotAllowedOnOrder(orderId: string): Promise<void> {
-        await this.visit(`customer/account/orders/view/${orderId}`);
-
-        await expect(this.bookingItemsWillNotBeCanceledText).toBeVisible();
-    }
-
     async checkout(
         productName: string,
         options: { hour?: string; tickets?: number; allowCancellation?: boolean } = {},
@@ -158,7 +140,7 @@ export class BookingProductCheckout extends CheckoutHelper {
                 await this.eventTicket.nth(0).click();
             }
         } else {
-            await this.selectFirstAvailableDate();
+            await this.selectEarliestBookableDateAfterToday();
             await this.selectFirstSlot();
         }
 
@@ -200,7 +182,7 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.expectCancellationNotAllowedOnProduct();
         }
 
-        await this.selectFirstAvailableDate();
+        await this.selectEarliestBookableDateAfterToday();
         await this.selectFirstSlot();
         await this.selectSlotRange();
         await this.addOpenProductToCart();
@@ -222,7 +204,7 @@ export class BookingProductCheckout extends CheckoutHelper {
 
         if (hourly) {
             await this.hourlyRadio.click();
-            await this.selectFirstAvailableDate();
+            await this.selectEarliestBookableDateAfterToday();
             await this.selectFirstSlot();
             await this.selectSlotRange();
             await this.addOpenProductToCart();
@@ -251,11 +233,21 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.expectCancellationNotAllowedOnProduct();
         }
 
-        await this.selectFirstAvailableDate();
+        await this.selectEarliestBookableDateAfterToday();
         await this.selectFirstSlot();
         await this.addOpenProductToCart();
         await this.expectCartSummaryTable(table);
 
         return this.finishCheckout(hour);
+    }
+
+    async expectCancellationNotAllowedOnProduct(): Promise<void> {
+        await expect(this.cancellationNotAllowedText).toBeVisible();
+    }
+
+    async expectCancellationNotAllowedOnOrder(orderId: string): Promise<void> {
+        await this.visit(`customer/account/orders/view/${orderId}`);
+
+        await expect(this.bookingItemsWillNotBeCanceledText).toBeVisible();
     }
 }

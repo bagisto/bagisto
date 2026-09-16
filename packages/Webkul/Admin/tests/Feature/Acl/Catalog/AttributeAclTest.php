@@ -26,7 +26,7 @@ it('should allow creating an attribute with catalog.attributes.create permission
 it('should allow editing an attribute with catalog.attributes.edit permission', function () {
     $this->loginAsAdminWithPermissions(['catalog', 'catalog.attributes', 'catalog.attributes.edit']);
 
-    $attribute = Attribute::where('is_user_defined', 1)->first()
+    $attribute = Attribute::query()->where('is_user_defined', 1)->first()
         ?? Attribute::factory()->create(['is_user_defined' => 1]);
 
     get(route('admin.catalog.attributes.edit', $attribute->id))
@@ -63,7 +63,7 @@ it('should deny attribute creation without catalog.attributes.create permission'
 it('should deny attribute editing without catalog.attributes.edit permission', function () {
     $this->loginAsAdminWithPermissions(['catalog', 'catalog.attributes']);
 
-    $attribute = Attribute::first();
+    $attribute = Attribute::query()->first();
 
     get(route('admin.catalog.attributes.edit', $attribute->id))
         ->assertUnauthorized();

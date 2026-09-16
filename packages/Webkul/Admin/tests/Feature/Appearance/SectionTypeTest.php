@@ -48,6 +48,10 @@ function retiredSection(): Section
     return $section;
 }
 
+// ============================================================================
+// Offered Types
+// ============================================================================
+
 it('should offer the default theme every core section type', function () {
     expect(app(SectionSchema::class)->types('default')->keys()->all())
         ->toBe(SectionTypeEnum::getValues());
@@ -65,6 +69,10 @@ it('should let a theme offer no section types at all', function () {
 
     expect(app(SectionSchema::class)->types('studio'))->toBeEmpty();
 });
+
+// ============================================================================
+// Type Validation
+// ============================================================================
 
 it('should keep a theme own product section type out of every other theme', function () {
     $studio = activeStudioTheme([DealsCarousel::class]);
@@ -98,6 +106,10 @@ it('should refuse a core section type the theme does not offer', function () {
     ])->assertJsonValidationErrorFor('type');
 });
 
+// ============================================================================
+// Field Schema
+// ============================================================================
+
 it('should extend a core section type field schema from the theme own type', function () {
     activeStudioTheme([DealsCarousel::class]);
 
@@ -106,6 +118,10 @@ it('should extend a core section type field schema from the theme own type', fun
     expect(collect($filters['keys'])->pluck('value'))
         ->toContain('sort', 'limit', 'on_sale');
 });
+
+// ============================================================================
+// Titles And Icons
+// ============================================================================
 
 it('should hand the editor the title, icon and flags of each type the theme offers', function () {
     activeStudioTheme([LookbookSection::class, DealsCarousel::class]);
@@ -136,6 +152,10 @@ it('should fall back to a title and icon when a section type declares neither', 
         ->and($type->getFields())->toBe([]);
 });
 
+// ============================================================================
+// Singletons
+// ============================================================================
+
 it('should refuse a second section of a theme own singleton type', function () {
     $studio = activeStudioTheme([LookbookSection::class]);
 
@@ -154,6 +174,10 @@ it('should refuse a second section of a theme own singleton type', function () {
         'type' => trans('admin::app.appearance.sections.create.singleton-exists', ['type' => 'Lookbook']),
     ]);
 });
+
+// ============================================================================
+// Retired Types
+// ============================================================================
 
 it('should hand the editor an empty schema for a stored type the theme no longer offers', function () {
     $section = retiredSection();
@@ -206,6 +230,10 @@ it('should still clean static content a theme stopped offering', function () {
         ->not->toContain('<script');
 });
 
+// ============================================================================
+// Core Types
+// ============================================================================
+
 it('should implement every core section type with a class of the same code', function (SectionTypeEnum $case) {
     expect(app($case->getClassName())->getCode())->toBe($case->value);
 })->with(SectionTypeEnum::cases());
@@ -228,6 +256,10 @@ it('should mark only the footer and the service promises as drawn by the layout'
         SectionTypeEnum::SERVICES_CONTENT->value,
     ]);
 });
+
+// ============================================================================
+// Type Resolution
+// ============================================================================
 
 it('should resolve a stored section to the type its theme handles it with', function () {
     activeStudioTheme([DealsCarousel::class]);

@@ -1,4 +1,4 @@
-<?php $paypalStandard = app('Webkul\Paypal\Payment\Standard') ?>
+<?php $paypalStandard = app(\Webkul\Paypal\Payment\Standard::class) ?>
 
 <body data-gr-c-s-loaded="true" cz-shortcut-listen="true">
     You will be redirected to the PayPal website in a few seconds.

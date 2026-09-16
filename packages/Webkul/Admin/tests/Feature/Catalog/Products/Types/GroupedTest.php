@@ -25,7 +25,7 @@ it('should store a grouped product and redirect to edit', function () {
         ->assertOk()
         ->assertJsonStructure(['data' => ['redirect_url']]);
 
-    $product = Product::where('sku', $sku)->first();
+    $product = Product::query()->where('sku', $sku)->first();
 
     expect($product)->not->toBeNull();
     expect($product->type)->toBe('grouped');
@@ -43,7 +43,7 @@ it('should return the edit page of a grouped product', function () {
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'))
-        ->assertSeeText($product->name);
+        ->assertSee($product->sku);
 });
 
 // ============================================================================
@@ -53,7 +53,7 @@ it('should return the edit page of a grouped product', function () {
 it('should populate product_flat after store and update', function () {
     $product = $this->storeAndUpdateGroupedProduct();
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
     expect($flat)->not->toBeNull();
 

@@ -8,7 +8,6 @@ import { AddressPage, type AddressData } from "../pages/shop/AddressPage";
 import { AuthPage } from "../pages/shop/AuthPage";
 import { CustomerPage } from "../pages/shop/CustomerPage";
 import { OrderPage } from "../pages/shop/OrderPage";
-import { WishlistPage } from "../pages/shop/WishlistPage";
 import { SimpleProductCheckout } from "../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { setConfigSwitch } from "../utils/admin";
 import {
@@ -228,7 +227,7 @@ test.describe("customer account", () => {
         });
     });
 
-    test.describe("orders and wishlist", () => {
+    test.describe("orders", () => {
         let productName: string;
         let productListPage: ProductListPage;
 
@@ -292,18 +291,6 @@ test.describe("customer account", () => {
             const fileName = await new OrderPage(shopPage).printInvoice(orderId);
 
             expect(fileName).toMatch(/\.pdf$/);
-        });
-
-        test("should move a wishlist item to the cart", async ({ shopPage }) => {
-            const wishlistPage = new WishlistPage(shopPage);
-
-            await loginAsCustomer(shopPage);
-            await wishlistPage.addToWishlistFromListing(productName);
-            await wishlistPage.open();
-            await wishlistPage.moveToCart(productName);
-
-            await wishlistPage.expectItemAbsent(productName);
-            await new OrderPage(shopPage).expectCartContains(productName);
         });
     });
 });

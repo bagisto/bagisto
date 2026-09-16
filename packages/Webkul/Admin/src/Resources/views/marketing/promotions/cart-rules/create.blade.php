@@ -631,7 +631,7 @@
                                     @lang('admin::app.marketing.promotions.cart-rules.create.customer-groups')
                                 </x-admin::form.control-group.label>
 
-                                @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                @foreach(app(\Webkul\Customer\Repositories\CustomerGroupRepository::class)->all() as $customerGroup)
                                     <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                         <x-admin::form.control-group.control
                                             type="checkbox"

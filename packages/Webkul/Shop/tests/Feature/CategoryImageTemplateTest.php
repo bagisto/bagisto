@@ -85,6 +85,10 @@ afterEach(function () {
     Storage::deleteDirectory('category/'.$this->category->id);
 });
 
+// ============================================================================
+// Theme Templates
+// ============================================================================
+
 it('should give a category image the core sizes and the original, exactly as before, when the theme lists nothing', function () {
     $category = categoryOn(channelRunningCategoryTemplates('plain', null), $this->category);
 
@@ -140,6 +144,10 @@ it('should give each channel the category images of the theme it runs', function
         ->and(categoryOn($plain, $this->category)['logo'])->not->toHaveKey('category_card_image_url');
 });
 
+// ============================================================================
+// Invalid Templates
+// ============================================================================
+
 it('should skip and report a category image name that is not a registered template', function () {
     Exceptions::fake();
 
@@ -152,6 +160,10 @@ it('should skip and report a category image name that is not a registered templa
         && str_contains($exception->getMessage(), 'category_images'));
 });
 
+// ============================================================================
+// Missing Files
+// ============================================================================
+
 it('should leave out the image of a category whose file is gone', function () {
     Storage::delete($this->logoPath);
 
@@ -160,6 +172,10 @@ it('should leave out the image of a category whose file is gone', function () {
     expect($category)->not->toHaveKey('logo')
         ->and($category)->toHaveKey('banner');
 });
+
+// ============================================================================
+// Remote Disks
+// ============================================================================
 
 it('should size every category image through the image cache on a disk that is not local', function () {
     Storage::shouldReceive('exists')->andReturnTrue();
@@ -181,6 +197,10 @@ it('should size every category image through the image cache on a disk that is n
         'alt' => 'Summer logo',
     ]);
 });
+
+// ============================================================================
+// Storefront API
+// ============================================================================
 
 it('should carry the theme category images into the storefront category api', function () {
     config(['themes.shop.'.core()->getDefaultChannel()->theme.'.customize.image_cache' => [

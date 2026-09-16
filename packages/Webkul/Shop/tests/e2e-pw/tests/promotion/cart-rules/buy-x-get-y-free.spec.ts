@@ -73,43 +73,43 @@ const cases: {
     qty: number;
 }[] = [
     {
-        desc: "Buy 1 Get 1 Free with 2 items",
+        desc: "should give one item free when buy 1 get 1 free is applied to 2 items",
         step: 1,
         amount: 1,
         qty: 2,
     },
     {
-        desc: "Buy 2 Get 1 Free with 3 items",
+        desc: "should give one item free when buy 2 get 1 free is applied to 3 items",
         step: 2,
         amount: 1,
         qty: 3,
     },
     {
-        desc: "Buy 2 Get 1 Free with 6 items (2 full cycles)",
+        desc: "should give two items free when buy 2 get 1 free is applied to 6 items",
         step: 2,
         amount: 1,
         qty: 6,
     },
     {
-        desc: "Buy 3 Get 2 Free with 10 items (2 full cycles)",
+        desc: "should give four items free when buy 3 get 2 free is applied to 10 items",
         step: 3,
         amount: 2,
         qty: 10,
     },
     {
-        desc: "Buy 3 Get 2 Free with 14 items (leftover exceeds step)",
+        desc: "should give five items free when buy 3 get 2 free is applied to 14 items",
         step: 3,
         amount: 2,
         qty: 14,
     },
     {
-        desc: "No discount when quantity is below one cycle",
+        desc: "should leave the grand total untouched when the quantity is below one buy x get y cycle",
         step: 1,
         amount: 1,
         qty: 1,
     },
     {
-        desc: "No discount when discount amount exceeds discount step",
+        desc: "should leave the grand total untouched when the free quantity exceeds the buy quantity",
         step: 1,
         amount: 2,
         qty: 2,

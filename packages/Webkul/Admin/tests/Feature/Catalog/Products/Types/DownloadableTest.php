@@ -27,7 +27,7 @@ it('should store a downloadable product and redirect to edit', function () {
         ->assertOk()
         ->assertJsonStructure(['data' => ['redirect_url']]);
 
-    $product = Product::where('sku', $sku)->first();
+    $product = Product::query()->where('sku', $sku)->first();
 
     expect($product)->not->toBeNull();
     expect($product->type)->toBe('downloadable');
@@ -55,7 +55,7 @@ it('should return the edit page of a downloadable product', function () {
 it('should populate product_flat after store and update', function () {
     $product = $this->storeAndUpdateDownloadableProduct();
 
-    $flat = ProductFlat::where('product_id', $product->id)->first();
+    $flat = ProductFlat::query()->where('product_id', $product->id)->first();
 
     expect($flat)->not->toBeNull();
 

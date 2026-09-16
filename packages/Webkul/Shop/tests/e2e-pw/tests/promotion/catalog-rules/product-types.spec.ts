@@ -53,7 +53,11 @@ test.describe("catalog rules", () => {
 
             await ruleCreatePage.saveCatalogRule();
 
-            await new RuleApplyPage(shopPage).verifyCatalogRule({
+            const ruleApplyPage = new RuleApplyPage(shopPage);
+
+            await ruleApplyPage.searchProduct(product.name);
+
+            await ruleApplyPage.expectCatalogRuleDiscount({
                 productName: product.name,
                 price: VARIANT_PRICE,
                 value: discountValue ?? 0,

@@ -2,19 +2,22 @@
 
 namespace Webkul\Checkout\Repositories;
 
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Core\Eloquent\Repository;
 
 class CartItemRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify the model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Checkout\Contracts\CartItem';
+        return CartItem::class;
     }
 
     /**
+     * The id of the product a cart item holds.
+     *
      * @param  int  $cartItemId
      * @return int
      */
