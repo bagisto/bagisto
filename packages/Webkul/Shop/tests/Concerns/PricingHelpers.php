@@ -78,7 +78,7 @@ trait PricingHelpers
     }
 
     /**
-     * Create and apply a catalog rule with index.
+     * Create and index a catalog rule with no date bounds, so it is priced for yesterday, today and tomorrow.
      */
     public function createCatalogRuleForPricing(array $overrides = [], array $customerGroups = [1, 2, 3]): CatalogRule
     {
@@ -88,6 +88,8 @@ trait PricingHelpers
             ->withIndex([$channelId], $customerGroups)
             ->create(array_merge([
                 'name' => 'test-catalog-rule-'.Str::uuid(),
+                'starts_from' => null,
+                'ends_till' => null,
                 'status' => 1,
                 'action_type' => 'by_percent',
                 'discount_amount' => 20,
