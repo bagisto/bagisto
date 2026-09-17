@@ -20,8 +20,14 @@ class CurrencyFactory extends Factory
      */
     public function definition(): array
     {
+        do {
+            $currencyCode = $this->faker->unique()->currencyCode;
+        } while (Currency::query()
+            ->where('code', $currencyCode)
+            ->exists());
+
         return [
-            'code' => $this->faker->unique()->currencyCode,
+            'code' => $currencyCode,
             'name' => $this->faker->word,
             'decimal' => 2,
             'group_separator' => ',',

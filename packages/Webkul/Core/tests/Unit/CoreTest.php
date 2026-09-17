@@ -16,27 +16,16 @@ dataset('currency positions', [
 ]);
 
 /**
- * A currency code no row carries yet, so that a lookup by code finds the currency the test creates.
- */
-function unusedCurrencyCode(): string
-{
-    do {
-        $code = Str::upper(Str::random(3));
-    } while (Currency::query()->where('code', $code)->exists());
-
-    return $code;
-}
-
-/**
  * Create a currency with the given symbol and position, and a channel that uses it as its base currency.
  */
 function currencyOfNewCurrentChannel(?string $symbol, ?string $position, ?string $code = null): Currency
 {
-    $currency = Currency::factory()->create([
-        'code' => $code ?? unusedCurrencyCode(),
-        'symbol' => $symbol,
-        'currency_position' => $position,
-    ]);
+    $currency = Currency::factory()
+        ->when($code, fn ($factory) => $factory->state(['code' => $code]))
+        ->create([
+            'symbol' => $symbol,
+            'currency_position' => $position,
+        ]);
 
     $channel = Channel::factory()->create(['base_currency_id' => $currency->id]);
 
@@ -184,7 +173,6 @@ it('should format a price in the currency named by its code', function () {
     currencyOfNewCurrentChannel('₹', CurrencyPositionEnum::LEFT->value);
 
     $currency = Currency::factory()->create([
-        'code' => unusedCurrencyCode(),
         'symbol' => '£',
         'currency_position' => CurrencyPositionEnum::RIGHT_WITH_SPACE->value,
     ]);
@@ -194,7 +182,6 @@ it('should format a price in the currency named by its code', function () {
 
 it('should format a base price in the currency configured as the base one', function () {
     $currency = Currency::factory()->create([
-        'code' => unusedCurrencyCode(),
         'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::LEFT_WITH_SPACE->value,
     ]);
@@ -244,7 +231,6 @@ it('should convert prices to and from the current currency at its exchange rate'
     currencyOfNewCurrentChannel('$', CurrencyPositionEnum::LEFT->value);
 
     $currency = Currency::factory()->create([
-        'code' => unusedCurrencyCode(),
         'symbol' => '₹',
         'currency_position' => CurrencyPositionEnum::LEFT->value,
     ]);
@@ -263,7 +249,7 @@ it('should convert prices to and from the current currency at its exchange rate'
 });
 
 it('should leave a price unchanged when the currency has no exchange rate', function () {
-    $currency = Currency::factory()->create(['code' => unusedCurrencyCode()]);
+    $currency = Currency::factory()->create();
 
     expect(core()->convertPrice(100, $currency->code))->toBePrice(100)
         ->and(core()->convertToBasePrice(100, $currency->code))->toBePrice(100)

@@ -32,9 +32,8 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     }
 
     /**
-     * Record price snapshots for a batch of products of this provider's type across every active channel and currency.
-     *
-     * The optional callback fires once per product after its snapshots have been queued, enabling progress reporting.
+     * Record price snapshots for a batch of products across every active channel and currency,
+     * calling the optional callback once each product's snapshots are queued.
      */
     public function recordBulkPrice(array $products, ?string $recordedAt = null, ?callable $afterEach = null): int
     {
@@ -52,7 +51,7 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
             ->filter(fn ($channel) => core()->getConfigData('catalog.products.omnibus.is_enabled', $channel->code));
 
         $originalChannel = core()->getCurrentChannel();
-        $originalCurrency = core()->getCurrentCurrency();
+        $originalCurrencyCode = core()->getCurrentCurrencyCode();
 
         try {
             foreach ($products as $product) {
@@ -60,7 +59,7 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
                     core()->setCurrentChannel($channel);
 
                     foreach ($channel->currencies as $currency) {
-                        core()->setCurrentCurrency($currency);
+                        core()->setCurrentCurrency($currency->code);
 
                         $price = $product->getTypeInstance()->getMinimalPrice();
 
@@ -102,7 +101,7 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
             }
         } finally {
             core()->setCurrentChannel($originalChannel);
-            core()->setCurrentCurrency($originalCurrency);
+            core()->setCurrentCurrency($originalCurrencyCode);
         }
 
         foreach (array_chunk($insertRows, self::INSERT_CHUNK_SIZE) as $chunk) {
@@ -113,18 +112,14 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     }
 
     /**
-     * Get the lowest price for a product within the configured lookback window prior to any active promo.
+     * Get the lowest price for a product within the lookback window before its promo started,
+     * or before now when the promo has no start date.
      */
     public function getLowestPrice(Product $product): ?float
     {
         $channelId = core()->getCurrentChannel()->id;
         $currencyCode = core()->getCurrentCurrencyCode();
 
-        // Ceiling for "prices before the promo started". When special_price_from
-        // is set, it bounds the lookback to snapshots taken before the discount
-        // kicked in. When it's null (open-ended promo, or configurable parent
-        // inheriting haveDiscount() from variants), use now() — exercising the
-        // full 30-day window up to the present moment.
         $promoStartDate = $product->special_price_from ?: now();
 
         return $this->omnibusPriceRepository->getLowestPrice(
@@ -150,7 +145,8 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     }
 
     /**
-     * Render the Omnibus price block for a product.
+     * Render the Omnibus price block for a discounted product, or nothing until a snapshot
+     * backs its lowest price.
      */
     public function getOmnibusPriceHtml(Product $product): string
     {
@@ -160,9 +156,6 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
 
         $lowestPrice = $this->getLowestPrice($product);
 
-        // No snapshot history yet — don't claim a "lowest price" we cannot
-        // substantiate. The block appears once the scheduler has recorded at
-        // least one snapshot for this product/channel/currency.
         if (
             is_null($lowestPrice)
             || $lowestPrice <= 0
@@ -176,11 +169,8 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     }
 
     /**
-     * Get the ids of descendant products whose snapshots must be recorded alongside this one.
-     *
-     * Leaf types (simple, virtual, downloadable, booking) have no descendant
-     * Products — downloadable links and booking slots are price modifiers on
-     * the parent, not separate Product records. Composite types override this.
+     * Get the ids of descendant products whose snapshots must be recorded alongside this one,
+     * none for a leaf type; composite types override this.
      */
     public function getDescendantProductIds(Product $product): array
     {

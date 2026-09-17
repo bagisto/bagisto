@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Core\Models\Currency;
 use Webkul\Omnibus\Models\OmnibusPrice;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
 
@@ -33,6 +34,41 @@ it('should record a snapshot when Omnibus is enabled on the current channel', fu
 
     expect($count)->toBeGreaterThanOrEqual(1)
         ->and(OmnibusPrice::query()->where('product_id', $product->id)->exists())->toBeTrue();
+});
+
+// ============================================================================
+// Currencies
+// ============================================================================
+
+it('should record a snapshot in every currency of the channel', function () {
+    $product = $this->createSimpleProduct();
+
+    $currency = Currency::factory()->create();
+
+    core()->getCurrentChannel()->currencies()->attach($currency->id);
+
+    $this->setOmnibusEnabled(true);
+
+    $this->manager->recordPrice($product);
+
+    expect(OmnibusPrice::query()->where('product_id', $product->id)->pluck('currency_code')->all())
+        ->toContain(core()->getChannelBaseCurrencyCode(), $currency->code);
+});
+
+it('should keep the shopper on the currency they browse in after recording a price', function () {
+    $product = $this->createSimpleProduct();
+
+    $currency = Currency::factory()->create();
+
+    core()->getCurrentChannel()->currencies()->attach($currency->id);
+
+    core()->setCurrentCurrency($currency->code);
+
+    $this->setOmnibusEnabled(true);
+
+    $this->manager->recordPrice($product);
+
+    expect(core()->getCurrentCurrencyCode())->toBe($currency->code);
 });
 
 // ============================================================================
