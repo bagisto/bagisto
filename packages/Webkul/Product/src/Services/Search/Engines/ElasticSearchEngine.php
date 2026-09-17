@@ -127,29 +127,32 @@ class ElasticSearchEngine implements SearchEngine
     }
 
     /**
-     * Find a product by URL slug via Elasticsearch.
+     * Find the product whose url key is exactly the slug, matched on the unanalyzed field so a
+     * slug never matches another key that merely contains it, such as a copy's.
      */
     public function findBySlug(string $slug): ?int
     {
-        $indices = $this->search([
-            'url_key' => $slug,
-        ], [
-            'type' => '',
-            'from' => 0,
-            'limit' => 1,
-            'sort' => 'id',
-            'order' => 'desc',
+        $results = ElasticSearch::search([
+            'index' => $this->getIndexName(),
+            'ignore_unavailable' => true,
+            'body' => [
+                'size' => 1,
+                'stored_fields' => [],
+                'query' => [
+                    'term' => [
+                        'url_key.keyword' => $slug,
+                    ],
+                ],
+            ],
         ]);
 
-        $id = current($indices['ids']);
+        $id = $results['hits']['hits'][0]['_id'] ?? null;
 
         return $id ? (int) $id : null;
     }
 
     /**
-     * Format the elastic search index name.
-     *
-     * Elasticsearch index names must be lowercase.
+     * Format the elastic search index name, which Elasticsearch requires to be lowercase.
      */
     public static function formatIndexName(string $channelCode, string $localeCode): string
     {

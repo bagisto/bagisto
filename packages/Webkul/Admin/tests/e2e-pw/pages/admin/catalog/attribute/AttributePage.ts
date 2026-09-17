@@ -4,6 +4,12 @@ import { DatagridPage } from "../../DatagridPage";
 export interface AttributeOptionData {
     label: string;
     color?: string;
+    swatchImage?: string;
+}
+
+export interface SwatchSeoData {
+    altText: string;
+    fileName: string;
 }
 
 export interface AttributeData {
@@ -78,6 +84,18 @@ export class AttributePage extends DatagridPage {
         return this.optionModal.getByPlaceholder("Color");
     }
 
+    private get optionSwatchImageUploader() {
+        return this.optionModal
+            .locator('label[for$="_imageInput"]')
+            .filter({ visible: true });
+    }
+
+    private get optionStagedSwatchImage() {
+        return this.optionModal.locator(
+            'input[type="file"][name="swatch_value[]"]',
+        );
+    }
+
     private get saveOptionButton() {
         return this.page.getByRole("button", { name: "Save Option" });
     }
@@ -96,6 +114,10 @@ export class AttributePage extends DatagridPage {
                 hasText: new RegExp(`^\\s*${label}\\s*$`),
             }),
         });
+    }
+
+    private optionRowInput(label: string, field: string): Locator {
+        return this.optionRow(label).locator(`input[name$="[${field}]"]`);
     }
 
     private async openCreateForm(): Promise<void> {
@@ -124,9 +146,37 @@ export class AttributePage extends DatagridPage {
             await this.optionColorInput.fill(option.color);
         }
 
+        if (option.swatchImage) {
+            await this.stageSwatchImage(option.swatchImage);
+        }
+
         await this.saveOptionButton.click();
 
         await expect(this.optionRow(option.label)).toBeVisible();
+    }
+
+    private async stageSwatchImage(filePath: string): Promise<void> {
+        await this.optionSwatchImageUploader.setInputFiles(filePath);
+
+        await expect
+            .poll(() =>
+                this.optionStagedSwatchImage.evaluate(
+                    (input: HTMLInputElement) => input.files?.length ?? 0,
+                ),
+            )
+            .toBe(1);
+    }
+
+    private async expectImageSwatchSeo(
+        label: string,
+        seo: SwatchSeoData,
+    ): Promise<void> {
+        await expect(this.optionRowInput(label, "swatch_alt")).toHaveValue(
+            seo.altText,
+        );
+        await expect(
+            this.optionRowInput(label, "swatch_file_name"),
+        ).toHaveValue(seo.fileName);
     }
 
     private async fillCreateForm(data: AttributeData): Promise<void> {
@@ -172,6 +222,29 @@ export class AttributePage extends DatagridPage {
     async renameAttribute(code: string, newAdminName: string): Promise<void> {
         await this.openEditForm(code);
         await this.adminNameInput.fill(newAdminName);
+        await this.saveButton.click();
+
+        await expect(
+            this.flashMessage("Attribute Updated Successfully"),
+        ).toBeVisible();
+    }
+
+    async updateImageSwatchSeo(
+        code: string,
+        label: string,
+        seo: SwatchSeoData,
+    ): Promise<void> {
+        await this.openEditForm(code);
+
+        await this.optionRowInput(label, "swatch_alt").fill(seo.altText);
+        await this.optionRowInput(label, "swatch_file_name").fill(seo.fileName);
+
+        await this.optionRow(label).locator("span.icon-edit").click();
+        await this.saveOptionButton.click();
+
+        await expect(this.saveOptionButton).toBeHidden();
+        await this.expectImageSwatchSeo(label, seo);
+
         await this.saveButton.click();
 
         await expect(
@@ -240,6 +313,43 @@ export class AttributePage extends DatagridPage {
         for (const label of labels) {
             await expect(this.optionRow(label)).toBeVisible();
         }
+    }
+
+    async expectColorSwatchesInEditForm(
+        code: string,
+        options: AttributeOptionData[],
+    ): Promise<void> {
+        await this.openEditForm(code);
+
+        for (const option of options) {
+            await expect(
+                this.optionRowInput(option.label, "swatch_value"),
+            ).toHaveValue(option.color ?? "");
+        }
+    }
+
+    async expectImageSwatchesInEditForm(
+        code: string,
+        labels: string[],
+    ): Promise<void> {
+        await this.openEditForm(code);
+
+        for (const label of labels) {
+            await expect(this.optionRow(label).locator("img")).toHaveAttribute(
+                "src",
+                /\/attribute_option\//,
+            );
+        }
+    }
+
+    async expectImageSwatchSeoInEditForm(
+        code: string,
+        label: string,
+        seo: SwatchSeoData,
+    ): Promise<void> {
+        await this.openEditForm(code);
+
+        await this.expectImageSwatchSeo(label, seo);
     }
 
     async expectWysiwygEnabledInEditForm(code: string): Promise<void> {

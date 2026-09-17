@@ -976,8 +976,13 @@
                  * Endpoint for a section scoped action.
                  */
                 actionFor(id, action) {
-                    const url = this.urls[action].replace('__ID__', id);
+                    return this.withLocale(this.urls[action].replace('__ID__', id));
+                },
 
+                /**
+                 * The url with the locale being edited added to whatever it already carries.
+                 */
+                withLocale(url) {
                     return url + (url.includes('?') ? '&' : '?') + 'locale=' + encodeURIComponent(this.locale);
                 },
 
@@ -1070,11 +1075,8 @@
                 },
 
                 /**
-                 * Publish or discard the whole set in one request.
-                 *
-                 * Ordering is relative across the sections, so the server settles them together
-                 * and answers with the list as it now stands — the client cannot work out what a
-                 * discarded section reverts to on its own.
+                 * Publish or discard the whole set of the editor's channel in one request, answered with
+                 * the list as it now stands, since only the server knows what a discarded section reverts to.
                  */
                 runOnAll(url) {
                     if (! this.pendingCount) {
@@ -1083,7 +1085,7 @@
 
                     this.isBusy = true;
 
-                    return this.$axios.post(url + '?locale=' + encodeURIComponent(this.locale))
+                    return this.$axios.post(this.withLocale(url))
                         .then(response => {
                             if (Array.isArray(response.data.sections)) {
                                 this.items = response.data.sections;

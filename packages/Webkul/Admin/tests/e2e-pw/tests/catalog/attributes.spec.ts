@@ -3,7 +3,12 @@ import {
     AttributePage,
     type AttributeData,
 } from "../../pages/admin/catalog/attribute/AttributePage";
-import { generateName, generateSlug, uniqueStamp } from "../../utils/faker";
+import {
+    generateName,
+    generateSlug,
+    getImageFile,
+    uniqueStamp,
+} from "../../utils/faker";
 
 function buildAttribute(overrides: Partial<AttributeData> = {}): AttributeData {
     return {
@@ -117,6 +122,64 @@ test.describe("attribute management", () => {
             "1 Year",
             "2 Years",
         ]);
+    });
+
+    test("should keep the color of each color swatch option after reload", async () => {
+        const options = [
+            { label: "Crimson", color: "#eb0f0f" },
+            { label: "Lime", color: "#3bdb0f" },
+        ];
+        const attribute = buildAttribute({
+            type: "select",
+            swatchType: "color",
+            options,
+        });
+        created.push(attribute.code);
+
+        await attributePage.createAttribute(attribute);
+
+        await attributePage.expectColorSwatchesInEditForm(attribute.code, options);
+    });
+
+    test("should keep the image of each image swatch option after reload", async () => {
+        const attribute = buildAttribute({
+            type: "select",
+            swatchType: "image",
+            options: [
+                { label: "Denim", swatchImage: getImageFile() },
+                { label: "Tweed", swatchImage: getImageFile() },
+            ],
+        });
+        created.push(attribute.code);
+
+        await attributePage.createAttribute(attribute);
+
+        await attributePage.expectImageSwatchesInEditForm(attribute.code, [
+            "Denim",
+            "Tweed",
+        ]);
+    });
+
+    test("should keep the swatch alt text and file name when an image swatch option is edited", async () => {
+        const attribute = buildAttribute({
+            type: "select",
+            swatchType: "image",
+            options: [{ label: "Denim", swatchImage: getImageFile() }],
+        });
+        const seo = {
+            altText: `Denim swatch ${uniqueStamp()}`,
+            fileName: `denim-swatch-${uniqueStamp()}`,
+        };
+        created.push(attribute.code);
+
+        await attributePage.createAttribute(attribute);
+        await attributePage.updateImageSwatchSeo(attribute.code, "Denim", seo);
+
+        await attributePage.expectImageSwatchSeoInEditForm(
+            attribute.code,
+            "Denim",
+            seo,
+        );
     });
 
     test("should keep the wysiwyg editor enabled on a textarea attribute after reload", async () => {

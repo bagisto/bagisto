@@ -249,7 +249,7 @@
                                                         <img
                                                             src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                                             class="h-12.5 w-12.5 dark:mix-blend-exclusion dark:invert"
-                                                            :ref="'image_' + element.params.id"
+                                                            :ref="'image_' + element.id"
                                                         />
 
                                                         <input
@@ -930,12 +930,12 @@
                             let foundIndex = this.options.findIndex(item => item.id === params.id);
 
                             if (foundIndex !== -1) {
-                                Object.assign(this.options[foundIndex].params, sortedParams);
+                                Object.assign(this.options[foundIndex].params, params, sortedParams);
                             }
                         } else {
                             this.options.push({
                                 id: `option_${this.optionRowCount}`,
-                                params: { admin_name: params.admin_name, ...sortedParams }
+                                params: { ...params, ...sortedParams }
                             });
 
                             params.id = `option_${this.optionRowCount}`;
@@ -946,7 +946,9 @@
 
                         const sliderImage = formData.get("swatch_value[]");
 
-                        if (sliderImage) params.swatch_value = sliderImage;
+                        if (sliderImage?.name) {
+                            params.swatch_value = sliderImage;
+                        }
 
                         this.$refs.addOptionsRow.toggle();
 

@@ -111,6 +111,8 @@ it('should offer only parent categories as options in the parent category filter
 
     $category = createCategory(['parent_id' => $parent->id]);
 
+    $category->translate(app()->getLocale())->update(['name' => 'Child of '.$parent->name]);
+
     $this->loginAsAdmin();
 
     $column = collect(getJson(route('admin.catalog.categories.index'), [

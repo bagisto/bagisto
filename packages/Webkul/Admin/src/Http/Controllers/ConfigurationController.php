@@ -18,7 +18,7 @@ class ConfigurationController extends Controller
     public function __construct(protected CoreConfigRepository $coreConfigRepository) {}
 
     /**
-     * Display a listing of the resource.
+     * Display every configuration section, or the fields of the requested one.
      */
     public function index(): View
     {
@@ -35,7 +35,7 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Search the configuration fields for the given term.
      */
     public function search(): JsonResponse
     {
@@ -107,16 +107,19 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Download the file for the specified resource.
+     * Download a file uploaded through a configuration field.
      */
     public function download(): StreamedResponse
     {
-        $path = request()->route()->parameters()['path'];
+        $config = $this->coreConfigRepository->findOneByField('value', 'configuration/'.request()->route('path'));
 
-        $fileName = 'configuration/'.$path;
+        if (
+            ! $config
+            || ! Storage::exists($config->value)
+        ) {
+            abort(404);
+        }
 
-        $config = $this->coreConfigRepository->findOneByField('value', $fileName);
-
-        return Storage::download($config['value']);
+        return Storage::download($config->value);
     }
 }
