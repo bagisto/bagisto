@@ -93,7 +93,7 @@ export class DataTransferPage extends BasePage {
     }
 
     private get validationErrorList(): Locator {
-        return this.page.locator("div:has(> p.break-all)");
+        return this.page.locator("div.grid:has(> p.break-all)");
     }
 
     private get errorReportLink(): Locator {
