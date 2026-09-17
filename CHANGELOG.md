@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.5.0-beta3 (17th of September 2026)** - *Release*
+
+- Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.
+
 ## **v2.5.0-beta2 (8th of September 2026)** - *Release*
 
 - #11467 [fixed] - Fixed three storefront loading skeletons — the home page View All button under a product carousel, the category Load More button and the checkout shipping method — standing at dimensions that did not match the control they hold the place of.
