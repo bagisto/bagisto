@@ -33,10 +33,10 @@ class ImageCacheServiceProvider extends ServiceProvider
         if (is_string(config('imagecache.route'))) {
             $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
 
-            $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
-                'uses' => [ImageCacheController::class, 'getResponse'],
-                'as' => 'imagecache',
-            ])->where(['filename' => $filenamePattern]);
+            $this->app['router']
+                ->get(config('imagecache.route').'/{template}/{filename}', [ImageCacheController::class, 'getResponse'])
+                ->name('imagecache')
+                ->where(['filename' => $filenamePattern]);
         }
     }
 }
