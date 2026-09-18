@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\ExchangeRatesDataGrid;
@@ -115,14 +116,16 @@ class ExchangeRateController extends Controller
     /**
      * Update rates using the configured exchange rate API service.
      */
-    public function updateRates()
+    public function updateRates(): RedirectResponse
     {
         try {
             ExchangeRate::resolve()->updateRates();
 
             session()->flash('success', trans('admin::app.settings.exchange-rates.index.update-success'));
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
+        } catch (\Throwable $e) {
+            report($e);
+
+            session()->flash('error', trans('admin::app.settings.exchange-rates.index.update-rates-error'));
         }
 
         return redirect()->route('admin.settings.exchange_rates.index');

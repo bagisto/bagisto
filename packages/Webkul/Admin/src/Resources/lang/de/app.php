@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Wechselkurs erfolgreich erstellt',
                 'delete-error' => 'Fehler beim Löschen des Wechselkurses',
                 'delete-success' => 'Wechselkurs erfolgreich gelöscht',
+                'update-rates-error' => 'Die Wechselkurse konnten nicht aktualisiert werden. Entweder ist der Wechselkursdienst nicht erreichbar, oder sein API-Schlüssel ist nicht konfiguriert.',
                 'update-success' => 'Wechselkurs erfolgreich aktualisiert',
             ],
         ],

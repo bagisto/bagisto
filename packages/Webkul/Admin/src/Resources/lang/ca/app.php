@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Tipus de Canvi Creat Exitosament',
                 'delete-error' => 'Error en Eliminar el Tipus de Canvi',
                 'delete-success' => 'Tipus de Canvi Eliminat Exitosament',
+                'update-rates-error' => 'No s\'han pogut actualitzar els tipus de canvi. O bé el servei de tipus de canvi no està disponible, o bé la seva clau API no s\'ha configurat.',
                 'update-success' => 'Tipus de Canvi Actualitzat Exitosament',
             ],
         ],

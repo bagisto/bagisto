@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Wisselkoers succesvol aangemaakt',
                 'delete-error' => 'Fout bij het verwijderen van de wisselkoers',
                 'delete-success' => 'Wisselkoers succesvol verwijderd',
+                'update-rates-error' => 'De wisselkoersen konden niet worden bijgewerkt. Ofwel is de wisselkoersservice niet beschikbaar, ofwel is de API-sleutel niet geconfigureerd.',
                 'update-success' => 'Wisselkoers succesvol bijgewerkt',
             ],
         ],

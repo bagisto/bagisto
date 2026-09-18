@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Kurs Valuta Berhasil Dibuat',
                 'delete-error' => 'Terjadi Kesalahan saat Menghapus Kurs Valuta',
                 'delete-success' => 'Kurs Valuta Berhasil Dihapus',
+                'update-rates-error' => 'Kurs valuta tidak dapat diperbarui. Layanan kurs valuta tidak tersedia, atau kunci API-nya belum dikonfigurasi.',
                 'update-success' => 'Kurs Valuta Berhasil Diperbarui',
             ],
         ],

@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Exchange Rate Created Successfully',
                 'delete-error' => 'Exchange Rate Deleted Error',
                 'delete-success' => 'Exchange Rate Deleted Successfully',
+                'update-rates-error' => 'Exchange rates could not be updated. Either the exchange rate service is unavailable, or its API key has not been configured.',
                 'update-success' => 'Exchange Rate Updated Successfully',
             ],
         ],

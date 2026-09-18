@@ -3816,6 +3816,7 @@ return [
                 'create-success' => '為替レートが正常に作成されました',
                 'delete-error' => '為替レートの削除エラー',
                 'delete-success' => '為替レートが正常に削除されました',
+                'update-rates-error' => '為替レートを更新できませんでした。為替レートサービスが利用できないか、APIキーが設定されていません。',
                 'update-success' => '為替レートが正常に更新されました',
             ],
         ],

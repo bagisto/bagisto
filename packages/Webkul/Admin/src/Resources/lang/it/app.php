@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Tasso di Cambio Creato con Successo',
                 'delete-error' => 'Errore durante l\'eliminazione del Tasso di Cambio',
                 'delete-success' => 'Tasso di Cambio Eliminato con Successo',
+                'update-rates-error' => 'Non è stato possibile aggiornare i tassi di cambio. Il servizio dei tassi di cambio non è disponibile, oppure la sua chiave API non è stata configurata.',
                 'update-success' => 'Tasso di Cambio Aggiornato con Successo',
             ],
         ],

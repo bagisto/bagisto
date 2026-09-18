@@ -3816,6 +3816,7 @@ return [
                 'create-success' => '汇率创建成功',
                 'delete-error' => '汇率删除失败',
                 'delete-success' => '汇率删除成功',
+                'update-rates-error' => '无法更新汇率。汇率服务不可用，或者尚未配置其 API 密钥。',
                 'update-success' => '汇率更新成功',
             ],
         ],

@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Kurs walutowy został pomyślnie utworzony',
                 'delete-error' => 'Błąd usuwania kursu walutowego',
                 'delete-success' => 'Kurs Walutowy został pomyślnie usunięty',
+                'update-rates-error' => 'Nie udało się zaktualizować kursów walut. Usługa kursów walut jest niedostępna lub jej klucz API nie został skonfigurowany.',
                 'update-success' => 'Kurs Walutowy został pomyślnie zaktualizowany',
             ],
         ],

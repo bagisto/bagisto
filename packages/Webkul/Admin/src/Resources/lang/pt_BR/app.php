@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Taxa de Câmbio criada com sucesso',
                 'delete-error' => 'Erro ao excluir a Taxa de Câmbio',
                 'delete-success' => 'Taxa de Câmbio excluída com sucesso',
+                'update-rates-error' => 'Não foi possível atualizar as taxas de câmbio. O serviço de taxas de câmbio está indisponível ou a sua chave de API não foi configurada.',
                 'update-success' => 'Taxa de Câmbio atualizada com sucesso',
             ],
         ],

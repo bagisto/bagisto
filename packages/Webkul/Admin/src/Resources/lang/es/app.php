@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Tipo de Cambio Creado Exitosamente',
                 'delete-error' => 'Error al Eliminar el Tipo de Cambio',
                 'delete-success' => 'Tipo de Cambio Eliminado Exitosamente',
+                'update-rates-error' => 'No se pudieron actualizar los tipos de cambio. O el servicio de tipos de cambio no está disponible, o su clave API no ha sido configurada.',
                 'update-success' => 'Tipo de Cambio Actualizado Exitosamente',
             ],
         ],

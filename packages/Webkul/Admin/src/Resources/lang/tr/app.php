@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Döviz Kuru Başarıyla Oluşturuldu',
                 'delete-error' => 'Döviz Kuru Silme Hatası',
                 'delete-success' => 'Döviz Kuru Başarıyla Silindi',
+                'update-rates-error' => 'Döviz kurları güncellenemedi. Döviz kuru servisi kullanılamıyor ya da API anahtarı yapılandırılmamış.',
                 'update-success' => 'Döviz Kuru Başarıyla Güncellendi',
             ],
         ],

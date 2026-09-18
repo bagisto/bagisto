@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\CurrencyExchangeRate;
 
@@ -116,6 +117,55 @@ it('should fail validation when required fields are missing on update', function
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('target_currency')
         ->assertJsonValidationErrorFor('rate');
+});
+
+// ============================================================================
+// Update Rates
+// ============================================================================
+
+it('should update rates from the configured exchange rate service', function () {
+    $currency = Currency::factory()->create([
+        'code' => 'EUR',
+        'name' => 'Euro',
+    ]);
+
+    Http::fake([
+        '*' => Http::response([
+            'result' => 'success',
+            'conversion_rates' => [
+                'EUR' => 0.85,
+            ],
+        ]),
+    ]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.settings.exchange_rates.update_rates'))
+        ->assertRedirect(route('admin.settings.exchange_rates.index'))
+        ->assertSessionHas('success', trans('admin::app.settings.exchange-rates.index.update-success'));
+
+    $this->assertDatabaseHas('currency_exchange_rates', [
+        'target_currency' => $currency->id,
+        'rate' => 0.85,
+    ]);
+});
+
+it('should flash a generic message instead of the raw error when the exchange rate service fails', function () {
+    Http::fake([
+        '*' => Http::response([
+            'result' => 'error',
+            'error-type' => 'invalid-key',
+        ]),
+    ]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.settings.exchange_rates.update_rates'))
+        ->assertRedirect(route('admin.settings.exchange_rates.index'))
+        ->assertSessionMissing('success')
+        ->assertSessionHas('error', trans('admin::app.settings.exchange-rates.index.update-rates-error'));
+
+    expect(session('error'))->not->toContain('invalid-key');
 });
 
 // ============================================================================

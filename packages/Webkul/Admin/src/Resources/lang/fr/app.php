@@ -3816,6 +3816,7 @@ return [
                 'create-success' => 'Taux de change créé avec succès',
                 'delete-error' => 'Erreur lors de la suppression du taux de change',
                 'delete-success' => 'Taux de change supprimé avec succès',
+                'update-rates-error' => 'Les taux de change n\'ont pas pu être mis à jour. Soit le service de taux de change est indisponible, soit sa clé API n\'a pas été configurée.',
                 'update-success' => 'Taux de change mis à jour avec succès',
             ],
         ],
