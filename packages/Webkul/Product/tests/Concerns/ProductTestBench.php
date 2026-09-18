@@ -136,7 +136,8 @@ trait ProductTestBench
     }
 
     /**
-     * Create a grouped product whose associated products are indexed simple products at the given prices.
+     * Create a grouped product whose associated products are indexed simple products at the given prices,
+     * loaded in the order the prices were given.
      */
     public function createGroupedProduct(array $associatedPrices = [100, 200]): Product
     {
@@ -159,7 +160,7 @@ trait ProductTestBench
 
         Event::dispatch('catalog.product.update.after', $parent);
 
-        return $parent->fresh()->load('grouped_products');
+        return $parent->fresh()->load(['grouped_products' => fn ($query) => $query->orderBy('sort_order')]);
     }
 
     /**

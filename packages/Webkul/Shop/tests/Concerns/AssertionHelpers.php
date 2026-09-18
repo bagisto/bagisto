@@ -40,11 +40,13 @@ trait AssertionHelpers
     }
 
     /**
-     * Assert the cart item price matches the expected value.
+     * Assert the price of the cart item at the given position, counting the items in the order they were added.
      */
     public function assertCartItemPrice(TestResponse $response, float $expectedPrice, int $itemIndex = 0): static
     {
-        $this->assertPrice($expectedPrice, $response->json("data.items.{$itemIndex}.price"));
+        $items = collect($response->json('data.items'))->sortBy('id')->values();
+
+        $this->assertPrice($expectedPrice, data_get($items, "{$itemIndex}.price"));
 
         return $this;
     }
