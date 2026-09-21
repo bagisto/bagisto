@@ -1,9 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Queue;
 use Webkul\BookingProduct\Models\BookingProduct;
+use Webkul\Core\Facades\ElasticSearch;
+use Webkul\Core\Helpers\CacheGeneration;
+use Webkul\Core\Models\Channel;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\Product\Enums\SearchEngineEnum;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Services\Search\SearchEngineManager;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -20,6 +28,34 @@ dataset('product_types', [
     'booking' => ['booking'],
 ]);
 
+/**
+ * Pin the catalog search engine to the database, so a listing assertion does not depend on
+ * how soon Elasticsearch refreshes a product it has just indexed.
+ */
+function useDatabaseSearchEngine(): void
+{
+    test()->setConfig([
+        SearchEngineManager::ENABLED_KEY => '0',
+        SearchEngineManager::ENGINE_KEY => SearchEngineEnum::DATABASE->value,
+    ]);
+
+    CacheGeneration::bump(CoreConfigRepository::class);
+}
+
+/**
+ * Answer the admin product grid from Elasticsearch.
+ */
+function useElasticSearchAdminGrid(): void
+{
+    test()->setConfig([
+        SearchEngineManager::ENABLED_KEY => '1',
+        SearchEngineManager::ENGINE_KEY => SearchEngineEnum::ELASTIC->value,
+        SearchEngineManager::ADMIN_MODE_KEY => SearchEngineEnum::ELASTIC->value,
+    ]);
+
+    CacheGeneration::bump(CoreConfigRepository::class);
+}
+
 // ============================================================================
 // Index
 // ============================================================================
@@ -34,6 +70,8 @@ it('should return the product index page', function () {
 });
 
 it('should return product listing via datagrid', function () {
+    useDatabaseSearchEngine();
+
     $product = $this->createSimpleProduct();
 
     $this->loginAsAdmin();
@@ -47,6 +85,106 @@ it('should return product listing via datagrid', function () {
         ->assertJsonCount(1, 'records')
         ->assertJsonPath('records.0.product_id', $product->id)
         ->assertJsonPath('records.0.sku', $product->sku);
+});
+
+it('should list a product carried by several channels only once', function () {
+    useDatabaseSearchEngine();
+
+    $product = $this->createSimpleProduct();
+
+    $channel = Channel::factory()->create();
+
+    CacheGeneration::bump(ChannelRepository::class);
+
+    $product->channels()->sync([core()->getDefaultChannel()->id, $channel->id]);
+
+    Event::dispatch('catalog.product.update.after', $product);
+
+    expect(ProductFlat::query()
+        ->where('product_id', $product->id)
+        ->where('locale', app()->getLocale())
+        ->count())->toBe(2);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.products.index', [
+        'filters' => ['product_id' => [$product->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('meta.total', 1)
+        ->assertJsonPath('records.0.product_id', $product->id);
+});
+
+it('should list a product once on the channel it is filtered to', function () {
+    useDatabaseSearchEngine();
+
+    $product = $this->createSimpleProduct();
+
+    $channel = Channel::factory()->create();
+
+    CacheGeneration::bump(ChannelRepository::class);
+
+    $product->channels()->sync([core()->getDefaultChannel()->id, $channel->id]);
+
+    Event::dispatch('catalog.product.update.after', $product);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.products.index', [
+        'filters' => [
+            'product_id' => [$product->id],
+            'channel' => [$channel->code],
+        ],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.product_id', $product->id)
+        ->assertJsonPath('records.0.channel', $channel->code);
+});
+
+it('should page the product grid in Elasticsearch, listing each product once in the order it returned', function () {
+    Queue::fake();
+
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $channel = Channel::factory()->create();
+
+    CacheGeneration::bump(ChannelRepository::class);
+
+    $second->channels()->sync([core()->getDefaultChannel()->id, $channel->id]);
+
+    Event::dispatch('catalog.product.update.after', $second);
+
+    useElasticSearchAdminGrid();
+
+    ElasticSearch::shouldReceive('search')->once()->andReturnUsing(function (array $params) use (&$body, $first, $second) {
+        $body = $params['body'];
+
+        return [
+            'hits' => ['hits' => [['_id' => (string) $second->id], ['_id' => (string) $first->id]]],
+            'aggregations' => ['total' => ['value' => 2]],
+        ];
+    });
+
+    $this->loginAsAdmin();
+
+    $records = getJson(route('admin.catalog.products.index'), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonPath('meta.total', 2)
+        ->json('records');
+
+    expect(array_column($records, 'product_id'))->toBe([$second->id, $first->id])
+        ->and($body['collapse'])->toBe(['field' => 'id'])
+        ->and($body['aggs']['total']['cardinality']['field'])->toBe('id');
 });
 
 it('should deny guest access to the product index page', function () {

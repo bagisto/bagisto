@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Fixed the admin product listing repeating a product once for every channel it is carried by, on both the database and Elasticsearch engines, along with the inflated total and short pages that came with it.
+
 ## **v2.5.0-beta3 (17th of September 2026)** - *Release*
 
 - Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.

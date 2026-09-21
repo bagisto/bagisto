@@ -19,6 +19,11 @@ use Webkul\Product\Services\Search\SearchEngineManager;
 class ProductDataGrid extends DataGrid
 {
     /**
+     * Product count the Elasticsearch total stays exact up to, which is its own ceiling.
+     */
+    protected const TOTAL_PRECISION_THRESHOLD = 40000;
+
+    /**
      * Primary column.
      *
      * @var string
@@ -61,25 +66,7 @@ class ProductDataGrid extends DataGrid
                 'product_flat.category_name',
                 'product_flat.attribute_family_name as attribute_family',
             )
-            ->where('product_flat.locale', app()->getLocale())
-            ->groupBy(
-                'product_flat.locale',
-                'product_flat.channel',
-                'product_flat.product_id',
-                'product_flat.sku',
-                'product_flat.name',
-                'product_flat.type',
-                'product_flat.status',
-                'product_flat.price',
-                'product_flat.url_key',
-                'product_flat.visible_individually',
-                'product_flat.quantity',
-                'product_flat.images_count',
-                'product_flat.base_image',
-                'product_flat.manage_stock',
-                'product_flat.category_name',
-                'product_flat.attribute_family_name',
-            );
+            ->where('product_flat.locale', app()->getLocale());
 
         $this->addFilter('attribute_family', 'attribute_family_id');
 
@@ -291,6 +278,22 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
+     * One flat row id per product, so a product carried by several channels is listed once, narrowed
+     * to the given products when they are already known.
+     */
+    protected function representativeRowIds(?array $productIds = null): Builder
+    {
+        $channelCodes = (array) request()->input('filters.channel');
+
+        return DB::table('product_flat')
+            ->selectRaw('MIN(id)')
+            ->where('locale', app()->getLocale())
+            ->when($channelCodes, fn ($query) => $query->whereIn('channel', $channelCodes))
+            ->when($productIds !== null, fn ($query) => $query->whereIn('product_id', $productIds))
+            ->groupBy('product_id');
+    }
+
+    /**
      * Process the request through Elasticsearch when the admin grid is set to search with it.
      */
     protected function processRequest(): void
@@ -298,7 +301,7 @@ class ProductDataGrid extends DataGrid
         $manager = app(SearchEngineManager::class);
 
         if ($manager->resolveDriver(SearchContextEnum::ADMIN) === SearchEngineEnum::DATABASE) {
-            parent::processRequest();
+            $this->processDatabaseRequest();
 
             return;
         }
@@ -309,7 +312,7 @@ class ProductDataGrid extends DataGrid
             isset($params['export'])
             && (bool) $params['export']
         ) {
-            parent::processRequest();
+            $this->processDatabaseRequest();
 
             return;
         }
@@ -324,7 +327,7 @@ class ProductDataGrid extends DataGrid
 
         $channels = core()->getAllChannels();
 
-        $channelCodes = request()->input('filters.channel') ?? $channels->pluck('code')->toArray();
+        $channelCodes = (array) request()->input('filters.channel') ?: $channels->pluck('code')->toArray();
 
         $indexNames = collect($channelCodes)->map(function ($channelCode) use ($channels) {
             $localeCode = $channels->firstWhere('code', $channelCode)?->resolveLocaleCode(app()->getLocale()) ?? app()->getLocale();
@@ -342,14 +345,28 @@ class ProductDataGrid extends DataGrid
                 'query' => [
                     'bool' => $this->getElasticFilters($params['filters'] ?? []) ?: new \stdClass,
                 ],
+                'collapse' => [
+                    'field' => 'id',
+                ],
+                'aggs' => [
+                    'total' => [
+                        'cardinality' => [
+                            'field' => 'id',
+                            'precision_threshold' => self::TOTAL_PRECISION_THRESHOLD,
+                        ],
+                    ],
+                ],
                 'sort' => $this->getElasticSort($params['sort'] ?? []),
-                'track_total_hits' => true,
             ],
         ]);
 
-        $ids = collect($results['hits']['hits'])->pluck('_id')->toArray();
+        $ids = collect($results['hits']['hits'])
+            ->pluck('_id')
+            ->map(fn ($id) => (int) $id)
+            ->all();
 
         $this->queryBuilder
+            ->whereIn('product_flat.id', $this->representativeRowIds($ids))
             ->whereIn('product_flat.product_id', $ids);
 
         if ($ids) {
@@ -357,7 +374,7 @@ class ProductDataGrid extends DataGrid
                 ->orderByRaw(db_grammar()->orderByField(DB::getTablePrefix().'product_flat.product_id', $ids));
         }
 
-        $total = $results['hits']['total']['value'];
+        $total = (int) ($results['aggregations']['total']['value'] ?? 0);
 
         $this->paginator = new LengthAwarePaginator(
             $total ? $this->queryBuilder->get() : [],
@@ -371,6 +388,16 @@ class ProductDataGrid extends DataGrid
         );
 
         $this->dispatchEvent('process_request.after', $this);
+    }
+
+    /**
+     * List one row per product and answer the request from the database.
+     */
+    protected function processDatabaseRequest(): void
+    {
+        $this->queryBuilder->whereIn('product_flat.id', $this->representativeRowIds());
+
+        parent::processRequest();
     }
 
     /**
