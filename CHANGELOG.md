@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 
 - Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.
 
