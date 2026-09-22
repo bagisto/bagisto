@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Harga',
                                 'save-btn' => 'Simpan',
                                 'supported-file-extensions' => 'Ekstensi File yang Didukung',
+                                'supported-file-extensions-info' => 'Pisahkan ekstensi dengan koma, misalnya jpg, png, pdf. Halaman web, gambar SVG, file XML, dan file skrip tidak pernah diterima, meskipun tercantum di sini.',
                                 'title' => 'Opsi',
                                 'type' => 'Tipe',
                                 'yes' => 'Ya',

@@ -333,6 +333,10 @@
                                             :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.supported-file-extensions')"
                                         />
 
+                                        <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.supported-file-extensions-info')
+                                        </p>
+
                                         <x-admin::form.control-group.error control-name="supported_file_extensions" />
                                     </x-admin::form.control-group>
 

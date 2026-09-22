@@ -17,6 +17,14 @@ class ImageCacheController extends Controller
     protected const BAGISTO_LOGO = 'https://updates.bagisto.com/bagisto.png';
 
     /**
+     * The image types the cache serves, so a stored file whose bytes read as anything else is never sent from the store.
+     */
+    protected const SERVABLE_MIME_TYPES = [
+        'image/avif', 'image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/vnd.microsoft.icon', 'image/webp',
+        'image/x-icon', 'image/x-ms-bmp',
+    ];
+
+    /**
      * The current cache template name.
      */
     protected string $template = '';
@@ -298,11 +306,15 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Build the HTTP response with the image content.
+     * Build the HTTP response with the image content, refusing content that is not a servable image.
      */
     protected function buildResponse(string $content): Response
     {
         $mime = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $content);
+
+        if (! in_array($mime, self::SERVABLE_MIME_TYPES)) {
+            abort(404, 'Image not found.');
+        }
 
         $eTag = md5($content);
 
@@ -318,7 +330,9 @@ class ImageCacheController extends Controller
             'Content-Type' => $mime,
             'Cache-Control' => 'max-age='.$maxAge.', public',
             'Content-Length' => strlen($content),
+            'Content-Security-Policy' => "default-src 'none'; style-src 'unsafe-inline'; sandbox",
             'Etag' => $eTag,
+            'X-Content-Type-Options' => 'nosniff',
         ]);
     }
 }

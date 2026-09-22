@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Fiyat',
                                 'save-btn' => 'Kaydet',
                                 'supported-file-extensions' => 'Desteklenen Dosya Uzantıları',
+                                'supported-file-extensions-info' => 'Uzantıları virgülle ayırın, örneğin jpg, png, pdf. Web sayfaları, SVG görselleri, XML ve betik dosyaları burada listelenseler bile asla kabul edilmez.',
                                 'title' => 'Seçenek',
                                 'type' => 'Tür',
                                 'yes' => 'Evet',

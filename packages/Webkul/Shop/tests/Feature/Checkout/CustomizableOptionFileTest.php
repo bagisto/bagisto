@@ -120,12 +120,14 @@ it('should relocate a genuinely uploaded customizable option file into the order
 // Cart Uploads
 // ============================================================================
 
-it('should store a customer upload under its accepted extension, whatever its contents look like', function () {
+it('should store a customer upload under its accepted extension', function () {
     Storage::fake();
 
     [$product, $option] = productWithFileOption('jpg,png');
 
-    $cartId = addToCartWithUpload($product, $option, $this->uploadedFileWithContents('payload.jpg', '<script>alert(1)</script>'))
+    $upload = $this->uploadedFileWithContents('artwork.jpg', UploadedFile::fake()->image('artwork.jpg', 10, 10)->get());
+
+    $cartId = addToCartWithUpload($product, $option, $upload)
         ->assertOk()
         ->json('data.id');
 
@@ -148,6 +150,22 @@ it('should refuse a customer upload whose extension would be served as a page, e
 })->with([
     'html' => ['payload.html'],
     'svg' => ['payload.svg'],
+]);
+
+it('should refuse a customer upload whose contents would be rendered as a page, whatever its extension', function (string $name, string $contents) {
+    Storage::fake();
+
+    [$product, $option] = productWithFileOption('jpg,png,txt');
+
+    addToCartWithUpload($product, $option, $this->uploadedFileWithContents($name, $contents))
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('product::app.checkout.cart.invalid-file-extension'));
+
+    expect(Storage::allFiles('carts'))->toBeEmpty();
+})->with([
+    'markup named as a photo' => ['payload.jpg', '<!DOCTYPE html><html><body>hello</body></html>'],
+    'vector image named as a picture' => ['payload.png', '<svg xmlns="http://www.w3.org/2000/svg"></svg>'],
+    'xml named as text' => ['payload.txt', '<?xml version="1.0"?><root/>'],
 ]);
 
 it('should refuse a customer upload with an active or missing extension when the option lists none', function (string $name) {

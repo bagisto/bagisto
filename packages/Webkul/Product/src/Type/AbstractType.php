@@ -43,6 +43,16 @@ abstract class AbstractType
     ];
 
     /**
+     * Content types a customer's upload is never stored with, whatever its extension, since a browser would render them.
+     */
+    public const BLOCKED_UPLOAD_MIME_TYPES = [
+        'application/ecmascript', 'application/javascript', 'application/rdf+xml', 'application/vnd.adobe.flash.movie',
+        'application/vnd.mozilla.xul+xml', 'application/x-httpd-php', 'application/x-php', 'application/x-shockwave-flash',
+        'application/xhtml+xml', 'application/xml', 'application/xslt+xml', 'image/svg', 'image/svg+xml',
+        'text/ecmascript', 'text/html', 'text/javascript', 'text/x-php', 'text/xml', 'text/xsl',
+    ];
+
+    /**
      * Product instance.
      *
      * @var Product
@@ -1127,8 +1137,8 @@ abstract class AbstractType
     }
 
     /**
-     * Whether a customer's upload for a file option carries an extension the option accepts and that is never
-     * served as active content.
+     * Whether a customer's upload for a file option carries an extension the option accepts, with neither that
+     * extension nor the file's contents ever served as active content.
      */
     protected function isCustomizableFileAllowed(UploadedFile $file, array $supportedExtensions): bool
     {
@@ -1137,6 +1147,7 @@ abstract class AbstractType
         if (
             ! preg_match('/^[a-z0-9]{1,10}$/', $extension)
             || in_array($extension, self::BLOCKED_UPLOAD_EXTENSIONS)
+            || in_array(strtolower((string) $file->getMimeType()), self::BLOCKED_UPLOAD_MIME_TYPES)
         ) {
             return false;
         }
