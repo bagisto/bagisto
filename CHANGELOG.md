@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Security fixes.
+
 ## **v2.4.11 (16th of September 2026)** - *Release*
 
 - Fixed the paragraph and heading dropdown missing from the rich text editor toolbar, which still named TinyMCE 5's `formatselect` control instead of TinyMCE 6's `blocks`.

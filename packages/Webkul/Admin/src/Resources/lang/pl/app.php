@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Cena',
                                 'save-btn' => 'Zapisz',
                                 'supported-file-extensions' => 'Obsługiwane rozszerzenia plików',
+                                'supported-file-extensions-info' => 'Oddziel rozszerzenia przecinkami, na przykład jpg, png, pdf. Strony internetowe, obrazy SVG, pliki XML i skrypty nigdy nie są akceptowane, nawet jeśli zostaną tu wymienione.',
                                 'title' => 'Opcja',
                                 'type' => 'Typ',
                                 'yes' => 'Tak',

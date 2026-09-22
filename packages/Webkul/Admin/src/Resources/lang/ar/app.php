@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'السعر',
                                 'save-btn' => 'حفظ',
                                 'supported-file-extensions' => 'الامتدادات المدعومة للملفات',
+                                'supported-file-extensions-info' => 'افصل الامتدادات بفواصل، مثل jpg, png, pdf. لا تُقبل صفحات الويب وصور SVG وملفات XML والبرامج النصية أبدًا، حتى لو أُدرجت هنا.',
                                 'title' => 'خيار',
                                 'type' => 'النوع',
                                 'yes' => 'نعم',

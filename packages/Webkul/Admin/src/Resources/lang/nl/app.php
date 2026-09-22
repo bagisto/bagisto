@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Prijs',
                                 'save-btn' => 'Opslaan',
                                 'supported-file-extensions' => 'Ondersteunde bestandsextensies',
+                                'supported-file-extensions-info' => 'Scheid extensies met komma\'s, bijvoorbeeld jpg, png, pdf. Webpagina\'s, SVG-afbeeldingen, XML- en scriptbestanden worden nooit geaccepteerd, ook niet als ze hier staan.',
                                 'title' => 'Optie',
                                 'type' => 'Type',
                                 'yes' => 'Ja',

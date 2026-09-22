@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Preu',
                                 'save-btn' => 'Desar',
                                 'supported-file-extensions' => 'Extensions de Fitxer Suportades',
+                                'supported-file-extensions-info' => 'Separeu les extensions amb comes, per exemple jpg, png, pdf. Les pàgines web, les imatges SVG, els fitxers XML i els scripts no s\'accepten mai, encara que figurin aquí.',
                                 'title' => 'Opció',
                                 'type' => 'Tipus',
                                 'yes' => 'Sí',

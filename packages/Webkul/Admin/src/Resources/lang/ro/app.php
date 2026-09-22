@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Price',
                                 'save-btn' => 'Save',
                                 'supported-file-extensions' => 'Supported File Extensions',
+                                'supported-file-extensions-info' => 'Separați extensiile prin virgule, de exemplu jpg, png, pdf. Paginile web, imaginile SVG, fișierele XML și scripturile nu sunt acceptate niciodată, chiar dacă sunt enumerate aici.',
                                 'title' => 'Option',
                                 'type' => 'Type',
                                 'yes' => 'Yes',

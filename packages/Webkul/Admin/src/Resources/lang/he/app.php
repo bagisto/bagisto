@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'מחיר',
                                 'save-btn' => 'שמור',
                                 'supported-file-extensions' => 'סיומות קבצים נתמכות',
+                                'supported-file-extensions-info' => 'הפרידו בין הסיומות בפסיקים, לדוגמה jpg, png, pdf. דפי אינטרנט, תמונות SVG, קובצי XML וקובצי סקריפט לעולם אינם מתקבלים, גם אם הם מופיעים כאן.',
                                 'title' => 'אפשרות',
                                 'type' => 'סוג',
                                 'yes' => 'כן',

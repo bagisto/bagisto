@@ -1291,6 +1291,7 @@ return [
                                 'price' => '价格',
                                 'save-btn' => '保存',
                                 'supported-file-extensions' => '支持的文件扩展名',
+                                'supported-file-extensions-info' => '多个扩展名请用逗号分隔，例如 jpg, png, pdf。网页、SVG 图片、XML 和脚本文件即使在此列出也不会被接受。',
                                 'title' => '选项',
                                 'type' => '类型',
                                 'yes' => '是',

@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Precio',
                                 'save-btn' => 'Guardar',
                                 'supported-file-extensions' => 'Extensiones de archivo admitidas',
+                                'supported-file-extensions-info' => 'Separa las extensiones con comas, por ejemplo jpg, png, pdf. Las páginas web, las imágenes SVG, los archivos XML y los scripts nunca se aceptan, aunque figuren aquí.',
                                 'title' => 'Opción',
                                 'type' => 'Tipo',
                                 'yes' => 'Sí',

@@ -126,7 +126,7 @@ it('should relocate genuinely uploaded customizable option files into the orders
         ->toBe('orders/'.$order->id.'/upload.png');
 });
 
-it('should store a customer upload under its accepted extension, whatever its contents look like', function () {
+it('should store a customer upload under its accepted extension', function () {
     Storage::fake();
 
     [$product, $option] = makeProductWithFileOption('jpg,png');
@@ -135,7 +135,7 @@ it('should store a customer upload under its accepted extension, whatever its co
         'product_id' => $product->id,
         'quantity' => 1,
         'customizable_options' => [
-            $option->id => [makeCustomerUpload('payload.jpg', '<script>alert(1)</script>')],
+            $option->id => [makeCustomerUpload('artwork.jpg', UploadedFile::fake()->image('artwork.jpg', 10, 10)->get())],
         ],
     ])->assertOk();
 
@@ -165,6 +165,28 @@ it('should refuse a customer upload whose extension would be served as a page, e
 
     expect(Storage::allFiles('carts'))->toBeEmpty();
 });
+
+it('should refuse a customer upload whose contents would be rendered as a page, whatever its extension', function (string $name, string $contents) {
+    Storage::fake();
+
+    [$product, $option] = makeProductWithFileOption('jpg,png,txt');
+
+    postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity' => 1,
+        'customizable_options' => [
+            $option->id => [makeCustomerUpload($name, $contents)],
+        ],
+    ])
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('product::app.checkout.cart.invalid-file-extension'));
+
+    expect(Storage::allFiles('carts'))->toBeEmpty();
+})->with([
+    'markup named as a photo' => ['payload.jpg', '<!DOCTYPE html><html><body>hello</body></html>'],
+    'vector image named as a picture' => ['payload.png', '<svg xmlns="http://www.w3.org/2000/svg"></svg>'],
+    'xml named as text' => ['payload.txt', '<?xml version="1.0"?><root/>'],
+]);
 
 it('should refuse a customer upload with an active or missing extension when the option lists none', function () {
     Storage::fake();

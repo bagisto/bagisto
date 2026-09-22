@@ -1291,6 +1291,7 @@ return [
                                 'price' => '価格',
                                 'save-btn' => '保存',
                                 'supported-file-extensions' => 'サポートされているファイル拡張子',
+                                'supported-file-extensions-info' => '拡張子はカンマで区切って入力してください（例: jpg, png, pdf）。Web ページ、SVG 画像、XML ファイル、スクリプトファイルは、ここに記載しても受け付けられません。',
                                 'title' => 'オプション',
                                 'type' => 'タイプ',
                                 'yes' => 'はい',

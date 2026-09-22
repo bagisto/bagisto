@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Prix',
                                 'save-btn' => 'Enregistrer',
                                 'supported-file-extensions' => 'Extensions de fichier prises en charge',
+                                'supported-file-extensions-info' => 'Séparez les extensions par des virgules, par exemple jpg, png, pdf. Les pages web, les images SVG, les fichiers XML et les scripts ne sont jamais acceptés, même s\'ils figurent ici.',
                                 'title' => 'Option',
                                 'type' => 'Type',
                                 'yes' => 'Oui',

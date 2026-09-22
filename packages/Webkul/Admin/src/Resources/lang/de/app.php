@@ -1291,6 +1291,7 @@ return [
                                 'price' => 'Preis',
                                 'save-btn' => 'Speichern',
                                 'supported-file-extensions' => 'Unterstützte Dateierweiterungen',
+                                'supported-file-extensions-info' => 'Trennen Sie Erweiterungen mit Kommas, zum Beispiel jpg, png, pdf. Webseiten, SVG-Bilder, XML- und Skriptdateien werden nie akzeptiert, auch wenn sie hier aufgeführt sind.',
                                 'title' => 'Option',
                                 'type' => 'Typ',
                                 'yes' => 'Ja',
