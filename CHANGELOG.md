@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed saving a product showing a not found page after a customizable option was switched between a single-price type and a type with values, and a cancelled type change still being applied.
+
+- Fixed customizable options and values added after another was removed overwriting an existing one, and values left at a price of zero never being added.
+
 - Security fixes.
 
 ## **v2.4.11 (16th of September 2026)** - *Release*

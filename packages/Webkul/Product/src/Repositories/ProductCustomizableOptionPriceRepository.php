@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Contracts\ProductCustomizableOption;
 use Webkul\Product\Contracts\ProductCustomizableOptionPrice;
@@ -18,7 +17,8 @@ class ProductCustomizableOptionPriceRepository extends Repository
     }
 
     /**
-     * Save customizable option prices.
+     * Save customizable option prices, updating the ones the option already has and creating any other,
+     * so an id from the request never reaches another option's price.
      *
      * @param  array  $data
      * @param  ProductCustomizableOption  $productCustomizableOption
@@ -30,22 +30,22 @@ class ProductCustomizableOptionPriceRepository extends Repository
 
         if (isset($data['prices'])) {
             foreach ($data['prices'] as $customizableOptionPriceId => $customizableOptionPriceInputs) {
-                if (Str::contains($customizableOptionPriceId, 'price_')) {
+                $index = $previousCustomizableOptionPriceIds->search($customizableOptionPriceId);
+
+                if ($index === false) {
                     $this->create(array_merge([
                         'product_customizable_option_id' => $productCustomizableOption->id,
                     ], $customizableOptionPriceInputs));
                 } else {
-                    if (is_numeric($index = $previousCustomizableOptionPriceIds->search($customizableOptionPriceId))) {
-                        $previousCustomizableOptionPriceIds->forget($index);
-                    }
+                    $previousCustomizableOptionPriceIds->forget($index);
 
                     $this->update($customizableOptionPriceInputs, $customizableOptionPriceId);
                 }
             }
         }
 
-        foreach ($previousCustomizableOptionPriceIds as $previouscustomizableOptionPriceId) {
-            $this->delete($previouscustomizableOptionPriceId);
+        foreach ($previousCustomizableOptionPriceIds as $previousCustomizableOptionPriceId) {
+            $this->delete($previousCustomizableOptionPriceId);
         }
     }
 }

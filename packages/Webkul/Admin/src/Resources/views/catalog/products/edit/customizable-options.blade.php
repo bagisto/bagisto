@@ -61,12 +61,7 @@
                     >
                         <template #item="{ element, index }">
                             <div>
-                                <!--
-                                    Hidden Attributes:
-
-                                    All hidden attributes are used to store form data for this component only. They are kept in a single
-                                    place to avoid confusion.
-                                -->
+                                <!-- Hidden Attributes -->
                                 <input
                                     type="hidden"
                                     :name="'customizable_options[' + element.id + '][{{$currentLocale->code}}][label]'"
@@ -112,15 +107,7 @@
                                     v-if="! canHaveMultiplePrices(element.type)"
                                 />
 
-                                <!--
-                                    This block supports the following types, which can have only a single price:
-                                    - text
-                                    - textarea
-                                    - date
-                                    - datetime
-                                    - time
-                                    - file
-                                -->
+                                <!-- Single Price Option -->
                                 <div
                                     class="mb-2.5 flex justify-between gap-5 p-4"
                                     v-if="! canHaveMultiplePrices(element.type)"
@@ -147,7 +134,7 @@
                                             <!-- Edit Option -->
                                             <p
                                                 class="cursor-pointer text-blue-600 transition-all hover:underline"
-                                                @click="selectedOption = element; $refs.updateCreateOptionModal.open()"
+                                                @click="editOption(element)"
                                             >
                                                 @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
                                             </p>
@@ -163,19 +150,7 @@
                                     </div>
                                 </div>
 
-                                <!--
-                                    Customizable Option Item Component:
-
-                                    This component is used to render customizable option items. It supports the following four types of options:
-                                    - select
-                                    - radio
-                                    - multiselect
-                                    - checkbox
-
-                                    For all other types, the option items are rendered in the parent component. This component only handles the
-                                    display and CRUD operations; all form handling is done in the parent component. The form parameters are
-                                    prepared in the parent component.
-                                -->
+                                <!-- Multiple Price Option -->
                                 <v-customizable-option-item
                                     :key="index"
                                     :title="(index + 1) + '. ' + element.label + ' - ' + types[element.type].title"
@@ -437,12 +412,7 @@
                     >
                         <template #item="{ element, index }">
                             <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
-                                <!--
-                                    Hidden Attributes:
-
-                                    All hidden attributes are used to store form data for this component only. They are kept in a single
-                                    place to avoid confusion.
-                                -->
+                                <!-- Hidden Attributes -->
                                 <input
                                     type="hidden"
                                     :name="'customizable_options[' + option.id + '][prices][' + element.id + '][label]'"
@@ -607,6 +577,19 @@
         </script>
 
         <script type="module">
+            /**
+             * Build the id of a new row from the prefix, skipping any id a row still carries after others were removed.
+             */
+            function newCustomizableRowId(prefix, rows) {
+                let count = rows.length;
+
+                while (rows.some((row) => row.id === prefix + count)) {
+                    count++;
+                }
+
+                return prefix + count;
+            }
+
             app.component('v-customizable-options', {
                 template: '#v-customizable-options-template',
 
@@ -684,7 +667,7 @@
                             is_required: 1,
                             max_characters: null,
                             supported_file_extensions: null,
-                            price: 0,
+                            price: '0',
                         },
                     };
                 },
@@ -712,18 +695,22 @@
                             is_required: option.is_required,
                             max_characters: option.max_characters,
                             supported_file_extensions: option.supported_file_extensions,
-                            price: 0,
+                            price: '0',
                             customizable_option_prices: option.customizable_option_prices,
                         };
                     });
                 },
 
                 methods: {
+                    /**
+                     * Add the option from the form, or apply it to the option being edited, starting its prices afresh
+                     * when the new type takes a single price where the old took several, or the other way round.
+                     */
                     updateOrCreate(params) {
                         if (this.selectedOption.id == undefined) {
-                            params.id = 'option_' + this.options.length;
+                            params.id = newCustomizableRowId('option_', this.options);
 
-                            if (! this.canHaveMultiplePrices(this.selectedOption.type)) {
+                            if (! this.canHaveMultiplePrices(params.type)) {
                                 params.price_id = 'price_0';
                             }
 
@@ -732,6 +719,12 @@
                             params.id = this.selectedOption.id;
 
                             const indexToUpdate = this.options.findIndex(option => option.id === this.selectedOption.id);
+
+                            if (this.canHaveMultiplePrices(this.options[indexToUpdate].type) !== this.canHaveMultiplePrices(params.type)) {
+                                params.price_id = 'price_0';
+
+                                params.customizable_option_prices = [];
+                            }
 
                             this.options[indexToUpdate] = {
                                 ...this.options[indexToUpdate],
@@ -744,6 +737,18 @@
                         this.$refs.updateCreateOptionModal.close();
                     },
 
+                    /**
+                     * Open the form on a copy of the option, so a change it is not saved with never reaches the list.
+                     */
+                    editOption(option) {
+                        this.selectedOption = { ...option };
+
+                        this.$refs.updateCreateOptionModal.open();
+                    },
+
+                    /**
+                     * Store the values an option item panel changed, or open the form for that option.
+                     */
                     updateOption($event) {
                         this.selectedOption = $event;
 
@@ -761,6 +766,9 @@
                         this.$refs.updateCreateOptionModal.open();
                     },
 
+                    /**
+                     * Remove the option once the removal is confirmed.
+                     */
                     removeOption(option) {
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
@@ -771,15 +779,21 @@
                         });
                     },
 
+                    /**
+                     * Reset the form to a new option.
+                     */
                     resetForm() {
                         this.selectedOption = {
                             label: '',
                             type: 'select',
                             is_required: 1,
-                            price: 0,
+                            price: '0',
                         };
                     },
 
+                    /**
+                     * Whether an option of the type holds several priced values rather than a single price.
+                     */
                     canHaveMultiplePrices(type) {
                         return this.types[type].canHaveMultiplePrices;
                     },
@@ -799,7 +813,7 @@
 
                         selectedOptionItem: {
                             label: '',
-                            price: 0,
+                            price: '0',
                         },
                     };
                 },
@@ -827,6 +841,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Hand the option and its items to the parent, which opens its form when asked to.
+                     */
                     updateOption(updateModal = true) {
                         this.$emit('updateOption', {
                             ...this.option,
@@ -835,13 +852,19 @@
                         });
                     },
 
+                    /**
+                     * Ask the parent to remove the option.
+                     */
                     removeOption() {
                         this.$emit('removeOption', this.option);
                     },
 
+                    /**
+                     * Add the item from the form, or apply it to the item being edited.
+                     */
                     updateOrCreateOptionItem(params) {
                         if (this.selectedOptionItem.id == undefined) {
-                            params.id = 'price_' + this.optionItems.length;
+                            params.id = newCustomizableRowId('price_', this.optionItems);
 
                             this.optionItems.push(params);
                         } else {
@@ -864,6 +887,9 @@
                         this.$refs.updateCreateOptionItemModal.close();
                     },
 
+                    /**
+                     * Remove the item once the removal is confirmed.
+                     */
                     removeOptionItem(selectedOptionItem) {
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
@@ -878,10 +904,13 @@
                         });
                     },
 
+                    /**
+                     * Reset the form to a new item.
+                     */
                     resetForm() {
                         this.selectedOptionItem = {
                             label: '',
-                            price: 0,
+                            price: '0',
                         };
                     },
                 },
