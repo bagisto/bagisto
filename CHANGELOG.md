@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.4.12 (22nd of September 2026)** - *Release*
 
 - Stripe now takes webhooks: a paid checkout becomes an order even when the customer never returns to the store, and refunds and disputes made in Stripe are recorded on the order. Set the signing secret in the Stripe payment method configuration.
 
