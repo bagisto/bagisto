@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Test Modus Client Geheim',
                     'test-mode-info' => 'Alleen voor test-/sandbox-modus.',
                     'title' => 'Titel',
+                    'webhook-secret' => 'Webhook-ondertekeningsgeheim',
+                    'webhook-secret-info' => 'Het ondertekeningsgeheim van het webhook-endpoint in het Stripe-dashboard voor uw winkel-URL gevolgd door /stripe/webhook, met de events: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Alleen voor productiemodus.',
+                    'webhook-test-secret' => 'Webhook-test-ondertekeningsgeheim',
+                    'webhook-test-secret-info' => 'Het ondertekeningsgeheim van het webhook-endpoint in het Stripe-dashboard voor uw winkel-URL gevolgd door /stripe/webhook, met de events: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Alleen voor testmodus.',
                 ],
 
                 'order-settings' => [

@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Test Mode Client Secret',
                     'test-mode-info' => 'For test/sandbox mode only.',
                     'title' => 'Title',
+                    'webhook-secret' => 'Secret de semnare webhook',
+                    'webhook-secret-info' => 'Secretul de semnare al endpointului webhook adăugat în panoul Stripe pentru URL-ul magazinului urmat de /stripe/webhook, cu evenimentele: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Se aplică doar în modul de producție.',
+                    'webhook-test-secret' => 'Secret de semnare webhook de test',
+                    'webhook-test-secret-info' => 'Secretul de semnare al endpointului webhook adăugat în panoul Stripe pentru URL-ul magazinului urmat de /stripe/webhook, cu evenimentele: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Se aplică doar în modul de test.',
                 ],
 
                 'order-settings' => [

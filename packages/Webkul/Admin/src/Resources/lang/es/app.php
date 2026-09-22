@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Clave secreta del cliente en modo de prueba',
                     'test-mode-info' => 'Solo para modo de prueba/entorno de pruebas.',
                     'title' => 'Título',
+                    'webhook-secret' => 'Secreto de firma del webhook',
+                    'webhook-secret-info' => 'El secreto de firma del webhook añadido en el panel de Stripe para la URL de tu tienda seguida de /stripe/webhook, con los eventos: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Solo en modo de producción.',
+                    'webhook-test-secret' => 'Secreto de firma del webhook de prueba',
+                    'webhook-test-secret-info' => 'El secreto de firma del webhook añadido en el panel de Stripe para la URL de tu tienda seguida de /stripe/webhook, con los eventos: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Solo en modo de prueba.',
                 ],
 
                 'order-settings' => [

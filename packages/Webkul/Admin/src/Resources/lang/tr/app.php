@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Test Modu Müşteri Sırrı',
                     'test-mode-info' => 'Yalnızca test/kum havuzu modu için.',
                     'title' => 'Başlık',
+                    'webhook-secret' => 'Webhook İmzalama Anahtarı',
+                    'webhook-secret-info' => 'Stripe panelinde mağaza URL\'nizin sonuna /stripe/webhook eklenerek oluşturulan webhook uç noktasının imzalama anahtarı, şu olaylarla: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Yalnızca canlı modda geçerlidir.',
+                    'webhook-test-secret' => 'Webhook Test İmzalama Anahtarı',
+                    'webhook-test-secret-info' => 'Stripe panelinde mağaza URL\'nizin sonuna /stripe/webhook eklenerek oluşturulan webhook uç noktasının imzalama anahtarı, şu olaylarla: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Yalnızca test modunda geçerlidir.',
                 ],
 
                 'order-settings' => [

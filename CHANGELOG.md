@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Stripe now takes webhooks: a paid checkout becomes an order even when the customer never returns to the store, and refunds and disputes made in Stripe are recorded on the order. Set the signing secret in the Stripe payment method configuration.
+
 - Fixed saving a product showing a not found page after a customizable option was switched between a single-price type and a type with values, and a cancelled type change still being applied.
 
 - Fixed customizable options and values added after another was removed overwriting an existing one, and values left at a price of zero never being added.

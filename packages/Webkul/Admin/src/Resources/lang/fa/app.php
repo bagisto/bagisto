@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'کلید مشتری حالت تست',
                     'test-mode-info' => 'فقط برای حالت تست / محیط آزمایشی.',
                     'title' => 'عنوان',
+                    'webhook-secret' => 'کلید امضای وب‌هوک',
+                    'webhook-secret-info' => 'کلید امضای نقطه وب‌هوک در داشبورد Stripe برای آدرس فروشگاه شما به‌همراه /stripe/webhook، با رویدادهای: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. فقط در حالت تولید اعمال می‌شود.',
+                    'webhook-test-secret' => 'کلید امضای وب‌هوک آزمایشی',
+                    'webhook-test-secret-info' => 'کلید امضای نقطه وب‌هوک در داشبورد Stripe برای آدرس فروشگاه شما به‌همراه /stripe/webhook، با رویدادهای: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. فقط در حالت آزمایشی اعمال می‌شود.',
                 ],
 
                 'order-settings' => [

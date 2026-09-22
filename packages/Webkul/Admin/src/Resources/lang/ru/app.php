@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Секретный ключ клиента тестового режима',
                     'test-mode-info' => 'Только для тестового режима/песочницы.',
                     'title' => 'Название',
+                    'webhook-secret' => 'Секрет подписи вебхука',
+                    'webhook-secret-info' => 'Секрет подписи вебхука, добавленного в панели Stripe для адреса магазина с /stripe/webhook в конце, с событиями: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Только для рабочего режима.',
+                    'webhook-test-secret' => 'Тестовый секрет подписи вебхука',
+                    'webhook-test-secret-info' => 'Секрет подписи вебхука, добавленного в панели Stripe для адреса магазина с /stripe/webhook в конце, с событиями: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Только для тестового режима.',
                 ],
 
                 'order-settings' => [

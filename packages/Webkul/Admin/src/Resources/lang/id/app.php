@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Kunci Rahasia Klien Mode Test',
                     'test-mode-info' => 'Hanya untuk mode test/sandbox.',
                     'title' => 'Judul',
+                    'webhook-secret' => 'Rahasia Penandatanganan Webhook',
+                    'webhook-secret-info' => 'Rahasia penandatanganan endpoint webhook di dasbor Stripe untuk URL toko Anda diikuti /stripe/webhook, dengan event: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Hanya berlaku untuk mode produksi.',
+                    'webhook-test-secret' => 'Rahasia Penandatanganan Webhook Uji',
+                    'webhook-test-secret-info' => 'Rahasia penandatanganan endpoint webhook di dasbor Stripe untuk URL toko Anda diikuti /stripe/webhook, dengan event: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Hanya berlaku untuk mode uji.',
                 ],
 
                 'order-settings' => [

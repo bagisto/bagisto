@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'סוד לקוח במצב בדיקה',
                     'test-mode-info' => 'למצב בדיקה/סנדבוקס בלבד.',
                     'title' => 'כותרת',
+                    'webhook-secret' => 'סוד חתימת Webhook',
+                    'webhook-secret-info' => 'סוד החתימה של נקודת ה-Webhook בלוח הבקרה של Stripe עבור כתובת החנות שלך ואחריה ‎/stripe/webhook, עם האירועים: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. חל במצב ייצור בלבד.',
+                    'webhook-test-secret' => 'סוד חתימת Webhook לבדיקה',
+                    'webhook-test-secret-info' => 'סוד החתימה של נקודת ה-Webhook בלוח הבקרה של Stripe עבור כתובת החנות שלך ואחריה ‎/stripe/webhook, עם האירועים: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. חל במצב בדיקה בלבד.',
                 ],
 
                 'order-settings' => [

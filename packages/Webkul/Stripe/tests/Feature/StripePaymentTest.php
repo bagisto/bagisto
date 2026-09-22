@@ -8,79 +8,64 @@ use Webkul\Sales\Models\OrderTransaction;
 use Webkul\Stripe\Payment\Stripe;
 
 beforeEach(function () {
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.active',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => 'sk_test_fake_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'sk_test_fake_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => 'pk_test_fake_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'pk_test_fake_key']);
 });
 
-it('redirects to cart when stripe credentials are invalid', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return to the cart when the stripe credentials are invalid', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => '',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => '',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '']);
 
-    // Act
     $response = $this->get(route('stripe.standard.redirect'));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when cart is not found', function () {
-    // Arrange
+it('should return to the cart when there is no cart', function () {
     Cart::shouldReceive('getCart')->andReturn(null);
 
-    // Act
     $response = $this->get(route('stripe.standard.redirect'));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when session id is missing on success callback', function () {
-    // Act
+it('should return to the cart when the success callback has no session id', function () {
     $response = $this->get(route('stripe.payment.success'));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when stripe session is invalid or not found', function () {
-    // Arrange
+it('should return to the cart when the stripe session is invalid or not found', function () {
     $stripeMock = $this->mock(Stripe::class)->makePartial();
 
     $stripeMock->shouldReceive('retrieveCheckoutSession')
@@ -89,27 +74,22 @@ it('redirects to cart when stripe session is invalid or not found', function () 
 
     $this->app->instance(Stripe::class, $stripeMock);
 
-    // Act
     $response = $this->get(route('stripe.payment.success', ['session_id' => 'invalid_session']));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
 });
 
-it('shows error message on payment cancellation', function () {
-    // Act
+it('should show an error when the payment is cancelled', function () {
     $response = $this->get(route('stripe.payment.cancel', ['session_id' => 'cs_test_123']));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
 });
 
-it('redirects to cart when cart is already processed', function () {
-    // Arrange
+it('should return to the cart when the cart was already processed', function () {
     $cart = $this->createCartWithItems('stripe', [
         'is_active' => 0,
         'base_grand_total' => 100.00,
@@ -132,10 +112,8 @@ it('redirects to cart when cart is already processed', function () {
 
     $this->app->instance(Stripe::class, $stripeMock);
 
-    // Act
     $response = $this->get(route('stripe.payment.success', ['session_id' => 'cs_test_already_processed']));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
@@ -143,8 +121,7 @@ it('redirects to cart when cart is already processed', function () {
     expect($response->getSession()->get('error'))->toContain('cart');
 });
 
-it('successfully processes stripe payment and creates order with invoice', function () {
-    // Arrange
+it('should place the order with its invoice once the payment succeeds', function () {
     $cart = $this->createCartWithItems('stripe');
 
     $mockSession = (object) [
@@ -163,35 +140,29 @@ it('successfully processes stripe payment and creates order with invoice', funct
 
     $this->app->instance(Stripe::class, $stripeMock);
 
-    // Act
     $response = $this->get(route('stripe.payment.success', ['session_id' => 'cs_test_success_123']));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.onepage.success'));
 
     $response->assertSessionHas('success');
 
     $response->assertSessionHas('order_id');
 
-    // Verify order was created
     $order = Order::where('customer_id', $cart->customer_id)->first();
 
     expect($order)->not->toBeNull()
         ->and($order->status)->toBe('processing');
 
-    // Verify order transaction was created
     $orderTransaction = OrderTransaction::where('transaction_id', 'pi_test_123')->first();
 
     expect($orderTransaction)->not->toBeNull()
         ->and($orderTransaction->order_id)->toBe($order->id)
         ->and($orderTransaction->status)->toBe('paid');
 
-    // Verify invoice was created
     $invoice = Invoice::where('order_id', $order->id)->first();
 
     expect($invoice)->not->toBeNull();
 
-    // Verify cart was deactivated
     $cart->refresh();
 
     expect($cart->is_active)->toBe(0);

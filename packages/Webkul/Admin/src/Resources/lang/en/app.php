@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Test Mode Client Secret',
                     'test-mode-info' => 'For test/sandbox mode only.',
                     'title' => 'Title',
+                    'webhook-secret' => 'Webhook Signing Secret',
+                    'webhook-secret-info' => 'The signing secret of the webhook endpoint added in the Stripe dashboard for your store URL followed by /stripe/webhook, sending the events: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Applies to production mode only.',
+                    'webhook-test-secret' => 'Webhook Test Signing Secret',
+                    'webhook-test-secret-info' => 'The signing secret of the webhook endpoint added in the Stripe dashboard for your store URL followed by /stripe/webhook, sending the events: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Applies to test mode only.',
                 ],
 
                 'order-settings' => [

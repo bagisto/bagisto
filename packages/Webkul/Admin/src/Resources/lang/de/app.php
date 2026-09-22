@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'Testmodus Client Secret',
                     'test-mode-info' => 'Nur für Test-/Sandbox-Modus.',
                     'title' => 'Titel',
+                    'webhook-secret' => 'Webhook-Signaturgeheimnis',
+                    'webhook-secret-info' => 'Das Signaturgeheimnis des Webhook-Endpunkts im Stripe-Dashboard für Ihre Shop-URL gefolgt von /stripe/webhook, mit den Ereignissen: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Gilt nur im Produktionsmodus.',
+                    'webhook-test-secret' => 'Webhook-Test-Signaturgeheimnis',
+                    'webhook-test-secret-info' => 'Das Signaturgeheimnis des Webhook-Endpunkts im Stripe-Dashboard für Ihre Shop-URL gefolgt von /stripe/webhook, mit den Ereignissen: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Gilt nur im Testmodus.',
                 ],
 
                 'order-settings' => [

@@ -7,324 +7,250 @@ beforeEach(function () {
     $this->stripe = app(Stripe::class);
 });
 
-it('returns the correct payment method code', function () {
-    // Act
+it('should return the stripe payment method code', function () {
     $code = $this->stripe->getCode();
 
-    // Assert
     expect($code)->toBe('stripe');
 });
 
-it('returns the payment method title from configuration', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return the payment method title from the configuration', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.title',
-        'value' => 'Stripe Payment Gateway',
         'channel_code' => 'default',
         'locale_code' => 'en',
-    ]);
+    ], ['value' => 'Stripe Payment Gateway']);
 
-    // Act
     $title = $this->stripe->getTitle();
 
-    // Assert
     expect($title)->toBe('Stripe Payment Gateway');
 });
 
-it('returns the payment method description from configuration', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return the payment method description from the configuration', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.description',
-        'value' => 'Pay securely using Stripe',
         'channel_code' => 'default',
         'locale_code' => 'en',
-    ]);
+    ], ['value' => 'Pay securely using Stripe']);
 
-    // Act
     $description = $this->stripe->getDescription();
 
-    // Assert
     expect($description)->toBe('Pay securely using Stripe');
 });
 
-it('returns the API key based on sandbox mode', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return the test API key in sandbox mode', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => 'test_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_key',
-        'value' => 'live_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_key']);
 
-    // Act
     $apiKey = $this->stripe->getApiKey();
 
-    // Assert
     expect($apiKey)->toBe('test_key');
 });
 
-it('returns the live API key when sandbox mode is disabled', function () {
-    // Arrange - Production mode
-    CoreConfig::factory()->create([
+it('should return the live API key when sandbox mode is off', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '0',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '0']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => 'test_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_key',
-        'value' => 'live_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_key']);
 
-    // Act
     $apiKey = $this->stripe->getApiKey();
 
-    // Assert
     expect($apiKey)->toBe('live_key');
 });
 
-it('returns the publishable key based on sandbox mode', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return the test publishable key in sandbox mode', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => 'test_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_pub_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_publishable_key',
-        'value' => 'live_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_pub_key']);
 
-    // Act
     $publishableKey = $this->stripe->getPublishableKey();
 
-    // Assert
     expect($publishableKey)->toBe('test_pub_key');
 });
 
-it('returns the live publishable key when sandbox mode is disabled', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return the live publishable key when sandbox mode is off', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '0',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '0']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => 'test_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_pub_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_publishable_key',
-        'value' => 'live_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_pub_key']);
 
-    // Act
     $publishableKey = $this->stripe->getPublishableKey();
 
-    // Assert
     expect($publishableKey)->toBe('live_pub_key');
 });
 
-it('checks if credentials are valid in sandbox mode', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should accept the credentials set for sandbox mode', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => 'test_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => 'test_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_pub_key']);
 
-    // Act
     $hasValidCredentials = $this->stripe->hasValidCredentials();
 
-    // Assert
     expect($hasValidCredentials)->toBeTrue();
 });
 
-it('checks if credentials are valid in production mode', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should accept the credentials set for production mode', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '0',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '0']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_key',
-        'value' => 'live_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_publishable_key',
-        'value' => 'live_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_pub_key']);
 
-    // Act
     $hasValidCredentials = $this->stripe->hasValidCredentials();
 
-    // Assert
     expect($hasValidCredentials)->toBeTrue();
 });
 
-it('returns false if sandbox credentials are missing', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should refuse sandbox mode when its credentials are missing', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => '',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => 'test_pub_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'test_pub_key']);
 
-    // Act
     $hasValidCredentials = $this->stripe->hasValidCredentials();
 
-    // Assert
     expect($hasValidCredentials)->toBeFalse();
 });
 
-it('returns false if production credentials are missing', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should refuse production mode when its credentials are missing', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '0',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '0']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_key',
-        'value' => 'live_key',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'live_key']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_publishable_key',
-        'value' => '',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '']);
 
-    // Act
     $hasValidCredentials = $this->stripe->hasValidCredentials();
 
-    // Assert
     expect($hasValidCredentials)->toBeFalse();
 });
 
-it('is not available when credentials are invalid', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should not be offered at checkout when the credentials are invalid', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.active',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.sandbox',
-        'value' => '1',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '1']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_key',
-        'value' => '',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '']);
 
-    CoreConfig::factory()->create([
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.api_test_publishable_key',
-        'value' => '',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => '']);
 
-    // Act
     $isAvailable = $this->stripe->isAvailable();
 
-    // Assert
     expect($isAvailable)->toBeFalse();
 });
 
-it('returns payment method image from config', function () {
-    // Arrange
-    CoreConfig::factory()->create([
+it('should return the payment method image from the configuration', function () {
+    CoreConfig::updateOrCreate([
         'code' => 'sales.payment_methods.stripe.image',
-        'value' => 'stripe/custom-logo.png',
         'channel_code' => 'default',
-    ]);
+    ], ['value' => 'stripe/custom-logo.png']);
 
-    // Act
     $image = $this->stripe->getImage();
 
-    // Assert
     expect($image)->toContain('stripe/custom-logo.png');
 });
 
-it('returns default payment method image when not configured', function () {
-    // Act
+it('should return the default payment method image when none is configured', function () {
     $image = $this->stripe->getImage();
 
-    // Assert
-    // The image path includes a Vite asset hash, so just check it contains the filename
     expect($image)->toContain('stripe')
         ->and($image)->toContain('.png');
 });
 
-it('returns the correct redirect URL', function () {
-    // Act
+it('should send the customer to the stripe redirect route', function () {
     $url = $this->stripe->getRedirectUrl();
 
-    // Assert
     expect($url)->toBe(route('stripe.standard.redirect'));
 });

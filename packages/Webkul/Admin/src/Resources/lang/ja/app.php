@@ -5224,6 +5224,10 @@ return [
                     'test-client-secret' => 'テストモードクライアントシークレット',
                     'test-mode-info' => 'テスト/サンドボックスモードのみ。',
                     'title' => 'タイトル',
+                    'webhook-secret' => 'Webhook 署名シークレット',
+                    'webhook-secret-info' => 'Stripe ダッシュボードで、ストア URL に /stripe/webhook を付けて追加した Webhook エンドポイントの署名シークレット（イベント: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed）。 本番モードのみ適用されます。',
+                    'webhook-test-secret' => 'Webhook テスト署名シークレット',
+                    'webhook-test-secret-info' => 'Stripe ダッシュボードで、ストア URL に /stripe/webhook を付けて追加した Webhook エンドポイントの署名シークレット（イベント: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed）。 テストモードのみ適用されます。',
                 ],
 
                 'order-settings' => [
