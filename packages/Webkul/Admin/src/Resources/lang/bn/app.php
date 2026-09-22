@@ -4941,6 +4941,10 @@ return [
                     'test-client-secret' => 'টেস্ট মোড ক্লায়েন্ট সিক্রেট',
                     'test-mode-info' => 'শুধুমাত্র টেস্ট/স্যান্ডবক্স মোডের জন্য।',
                     'title' => 'শিরোনাম',
+                    'webhook-secret' => 'Webhook সাইনিং সিক্রেট',
+                    'webhook-secret-info' => 'Stripe ড্যাশবোর্ডে আপনার স্টোর URL এর পরে /stripe/webhook যুক্ত Webhook এন্ডপয়েন্টের সাইনিং সিক্রেট, এই ইভেন্টগুলি সহ: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed। শুধুমাত্র প্রোডাকশন মোডে প্রযোজ্য।',
+                    'webhook-test-secret' => 'Webhook টেস্ট সাইনিং সিক্রেট',
+                    'webhook-test-secret-info' => 'Stripe ড্যাশবোর্ডে আপনার স্টোর URL এর পরে /stripe/webhook যুক্ত Webhook এন্ডপয়েন্টের সাইনিং সিক্রেট, এই ইভেন্টগুলি সহ: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed। শুধুমাত্র টেস্ট মোডে প্রযোজ্য।',
                 ],
 
                 'order-settings' => [

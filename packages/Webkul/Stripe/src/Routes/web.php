@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Support\Facades\Route;
 use Webkul\Stripe\Http\Controllers\StripeController;
 
@@ -12,4 +13,8 @@ Route::controller(StripeController::class)
         Route::get('success', 'success')->name('stripe.payment.success');
 
         Route::get('cancel', 'cancel')->name('stripe.payment.cancel');
+
+        Route::post('webhook', 'webhook')
+            ->withoutMiddleware(PreventRequestForgery::class)
+            ->name('stripe.webhook');
     });

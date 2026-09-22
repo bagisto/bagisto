@@ -4941,6 +4941,10 @@ return [
                     'test-client-secret' => 'टेस्ट मोड ग्राहक गुप्त',
                     'test-mode-info' => 'केवल टेस्ट/सैंडबॉक्स मोड के लिए।',
                     'title' => 'शीर्षक',
+                    'webhook-secret' => 'वेबहुक साइनिंग सीक्रेट',
+                    'webhook-secret-info' => 'Stripe डैशबोर्ड में आपके स्टोर URL के बाद /stripe/webhook वाले वेबहुक एंडपॉइंट का साइनिंग सीक्रेट, इन इवेंट्स के साथ: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed। केवल प्रोडक्शन मोड पर लागू।',
+                    'webhook-test-secret' => 'वेबहुक टेस्ट साइनिंग सीक्रेट',
+                    'webhook-test-secret-info' => 'Stripe डैशबोर्ड में आपके स्टोर URL के बाद /stripe/webhook वाले वेबहुक एंडपॉइंट का साइनिंग सीक्रेट, इन इवेंट्स के साथ: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed। केवल टेस्ट मोड पर लागू।',
                 ],
 
                 'order-settings' => [

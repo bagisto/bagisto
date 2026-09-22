@@ -4941,6 +4941,10 @@ return [
                     'test-client-secret' => '测试模式客户端密钥',
                     'test-mode-info' => '仅限测试/沙盒模式。',
                     'title' => '标题',
+                    'webhook-secret' => 'Webhook 签名密钥',
+                    'webhook-secret-info' => '在 Stripe 控制台中为商店 URL 加 /stripe/webhook 添加的 Webhook 端点的签名密钥，事件：checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed。 仅适用于生产模式。',
+                    'webhook-test-secret' => 'Webhook 测试签名密钥',
+                    'webhook-test-secret-info' => '在 Stripe 控制台中为商店 URL 加 /stripe/webhook 添加的 Webhook 端点的签名密钥，事件：checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed。 仅适用于测试模式。',
                 ],
 
                 'order-settings' => [

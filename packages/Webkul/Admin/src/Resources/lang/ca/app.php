@@ -4941,6 +4941,10 @@ return [
                     'test-client-secret' => 'Clau secreta del client en mode de prova',
                     'test-mode-info' => 'Només per al mode de prova/entorn de proves.',
                     'title' => 'Títol',
+                    'webhook-secret' => 'Secret de signatura del webhook',
+                    'webhook-secret-info' => 'El secret de signatura del webhook del tauler de Stripe per a l\'URL de la botiga seguida de /stripe/webhook, amb els esdeveniments: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Només en mode de producció.',
+                    'webhook-test-secret' => 'Secret de signatura del webhook de prova',
+                    'webhook-test-secret-info' => 'El secret de signatura del webhook del tauler de Stripe per a l\'URL de la botiga seguida de /stripe/webhook, amb els esdeveniments: checkout.session.completed, checkout.session.async_payment_succeeded, charge.refunded, charge.dispute.created, charge.dispute.closed. Només en mode de prova.',
                 ],
 
                 'order-settings' => [
