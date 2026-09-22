@@ -49,7 +49,10 @@
         id="v-modal-template"
     >
         <div>
-            <div @click="toggle">
+            <div
+                class="w-max max-md:w-full"
+                @click="toggle"
+            >
                 <slot name="toggle">
                 </slot>
             </div>
