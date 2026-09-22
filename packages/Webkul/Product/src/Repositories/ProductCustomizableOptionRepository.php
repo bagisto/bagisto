@@ -3,7 +3,6 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Contracts\ProductCustomizableOption;
@@ -31,7 +30,8 @@ class ProductCustomizableOptionRepository extends Repository
     }
 
     /**
-     * Save customizable options.
+     * Save customizable options, updating the ones the product already has and creating any other,
+     * so an id from the request never reaches another product's option.
      *
      * @param  array  $data
      * @param  Product  $product
@@ -43,18 +43,16 @@ class ProductCustomizableOptionRepository extends Repository
 
         if (isset($data['customizable_options'])) {
             foreach ($data['customizable_options'] as $customizableOptionId => $customizableOptionInputs) {
-                if (Str::contains($customizableOptionId, 'option_')) {
+                $index = $previousCustomizableOptionIds->search($customizableOptionId);
+
+                if ($index === false) {
                     $productCustomizableOption = $this->create(array_merge([
                         'product_id' => $product->id,
                     ], $customizableOptionInputs));
                 } else {
-                    $productCustomizableOption = $this->find($customizableOptionId);
+                    $previousCustomizableOptionIds->forget($index);
 
-                    if (is_numeric($index = $previousCustomizableOptionIds->search($customizableOptionId))) {
-                        $previousCustomizableOptionIds->forget($index);
-                    }
-
-                    $this->update($customizableOptionInputs, $customizableOptionId);
+                    $productCustomizableOption = $this->update($customizableOptionInputs, $customizableOptionId);
                 }
 
                 $this->productCustomizableOptionPriceRepository->saveCustomizableOptionPrices($customizableOptionInputs, $productCustomizableOption);
