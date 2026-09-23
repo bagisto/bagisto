@@ -4,9 +4,12 @@ namespace Webkul\Admin\Exports;
 
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Webkul\Core\Traits\Sanitizer;
 
 class ReportingExport implements FromCollection
 {
+    use Sanitizer;
+
     /**
      * Create a new instance.
      *
@@ -28,31 +31,12 @@ class ReportingExport implements FromCollection
             $data = [];
 
             foreach ($this->records['columns'] as $column) {
-                $data[$column['label']] = $this->sanitize($record[$column['key']] ?? null);
+                $data[$column['label']] = $this->sanitizeSpreadsheetValue($record[$column['key']] ?? null);
             }
 
             $rows[] = (object) $data;
         }
 
         return collect($rows);
-    }
-
-    /**
-     * Prefix a value a spreadsheet would otherwise read as a formula.
-     *
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function sanitize($value)
-    {
-        if (! is_string($value)) {
-            return $value;
-        }
-
-        if (preg_match('/^[\s]*[@=+\-|%]/u', $value)) {
-            return "'".$value;
-        }
-
-        return $value;
     }
 }

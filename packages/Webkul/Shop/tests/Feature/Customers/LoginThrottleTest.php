@@ -8,7 +8,7 @@ use function Pest\Laravel\post;
 /**
  * A customer who can sign in with the given password.
  */
-function customerWithPassword(string $password): Customer
+function throttledCustomer(string $password): Customer
 {
     return Customer::factory()->create([
         'password' => Hash::make($password),
@@ -21,7 +21,7 @@ function customerWithPassword(string $password): Customer
 // ============================================================================
 
 it('should let a customer sign in as often as they like while the password is right', function () {
-    $customer = customerWithPassword('right-password-1');
+    $customer = throttledCustomer('right-password-1');
 
     foreach (range(1, 10) as $attempt) {
         auth()->guard('customer')->logout();
@@ -36,7 +36,7 @@ it('should let a customer sign in as often as they like while the password is ri
 });
 
 it('should stop answering a run of wrong passwords', function () {
-    $customer = customerWithPassword('right-password-1');
+    $customer = throttledCustomer('right-password-1');
 
     $response = null;
 
@@ -54,7 +54,7 @@ it('should stop answering a run of wrong passwords', function () {
 });
 
 it('should let the right password in again once the attempts are forgotten', function () {
-    $customer = customerWithPassword('right-password-1');
+    $customer = throttledCustomer('right-password-1');
 
     foreach (range(1, 3) as $attempt) {
         post(route('shop.customer.session.create'), [

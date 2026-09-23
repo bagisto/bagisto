@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -33,7 +34,7 @@ class ForgotPasswordController extends Controller
         $request->validated();
 
         try {
-            $response = $this->broker()->sendResetLink($request->only(['email']));
+            $response = $this->broker()->sendResetLink($this->credentials($request));
 
             if ($response == Password::RESET_LINK_SENT) {
                 session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
@@ -71,5 +72,17 @@ class ForgotPasswordController extends Controller
     public function broker()
     {
         return Password::broker('customers');
+    }
+
+    /**
+     * The credentials a reset link is requested with, scoped to the current channel because a
+     * customer may only sign in on the channel they registered against.
+     */
+    protected function credentials(Request $request): array
+    {
+        return [
+            'email' => $request->input('email'),
+            'channel_id' => core()->getCurrentChannel()->id,
+        ];
     }
 }
