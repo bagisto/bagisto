@@ -208,12 +208,6 @@ export class AuthPage extends BasePage {
         ).toBeVisible();
     }
 
-    async expectResetRefusedForUnknownEmail(): Promise<void> {
-        await expect(
-            this.page.getByText("We cannot find a user with that email address.").first(),
-        ).toBeVisible();
-    }
-
     async expectPasswordMasked(field: PasswordField): Promise<void> {
         await expect(this.passwordVisibilityToggle(field)).toHaveAttribute("aria-pressed", "false");
         await expect(this.passwordField(field)).toHaveAttribute("type", "password");

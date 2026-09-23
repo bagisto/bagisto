@@ -268,3 +268,31 @@ it('should handle special characters in API keys and site keys', function () {
         'value' => $specialSiteKey,
     ]);
 });
+
+// ============================================================================
+// Hidden Fields
+// ============================================================================
+
+it('should not store a blank over a hidden field, so its default still applies', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.index', ['customer', 'captcha']), [
+        'customer' => [
+            'captcha' => [
+                'credentials' => [
+                    'status' => '0',
+                    'project_id' => '',
+                    'api_key' => '',
+                    'site_key' => '',
+                    'score_threshold' => '',
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseMissing('core_config', [
+        'code' => 'customer.captcha.credentials.score_threshold',
+    ]);
+
+    expect(core()->getConfigData('customer.captcha.credentials.score_threshold'))->toBe('0.5');
+});

@@ -14,6 +14,9 @@
 ## Medium Impact Changes
 
 - [Relocated Configuration Codes](#relocated-configuration-codes)
+- [Storage Directories Renamed](#storage-directories-renamed)
+- [Route Names Are snake_case](#route-names-are-snake_case)
+- [Translation Keys Are kebab-case](#translation-keys-are-kebab-case)
 - [Theme Section Media Are Stored As Bare Paths](#theme-section-media-are-stored-as-bare-paths)
 - [Image Processing Moved to Laravel's Image Component](#image-processing-moved-to-laravels-image-component)
 - [Remote Storage Drivers](#remote-storage-drivers)
@@ -22,6 +25,9 @@
 ## Low Impact Changes
 
 - [The Omnibus Package](#the-omnibus-package)
+- [Product Image Size and Placeholder Settings Removed](#product-image-size-and-placeholder-settings-removed)
+- [Snake_case Methods Renamed on the Core Helper](#snake_case-methods-renamed-on-the-core-helper)
+- [CoreConfigRepository Helpers Renamed](#coreconfigrepository-helpers-renamed)
 - [Catalog Rule Jobs No Longer Declare a Batch Size](#catalog-rule-jobs-no-longer-declare-a-batch-size)
 - [Magic AI Model Lists Follow the Providers' Current Models](#magic-ai-model-lists-follow-the-providers-current-models)
 
@@ -238,6 +244,68 @@ Custom code that reads either code is not migrated for you:
 ```
 
 The search settings moved too, and are covered in the search section below.
+
+---
+
+### Storage Directories Renamed
+
+**Impact Probability: Medium**
+
+The directories under `storage/app/public` and `storage/app/private` are now plural, kebab-case names, and a record's files sit under the record rather than in a directory of their own:
+
+| Before | After |
+|---|---|
+| `product/{id}` | `products/{id}` |
+| `category/{id}` | `categories/{id}` |
+| `channel/{id}` | `channels/{id}` |
+| `review/{id}` | `reviews/{id}` |
+| `attribute_option` | `attribute-options` |
+| `configuration` | `configurations` |
+| `product_downloadable_links/{productId}` | `products/{productId}/downloadable-links` and `downloadable-samples` |
+| `rma/{id}`, `rma-conversation/{messageId}` | `rmas/{id}/images` and `rmas/{id}/conversations/{messageId}` |
+
+A migration moves the files and rewrites every stored path — product images and videos, attribute values, category logos and banners, channel logos and favicons, review attachments, swatches, configuration uploads, downloadable files and RMA attachments. A row whose file has already gone is left pointing at the new location, and a directory that still holds unreferenced files is kept rather than deleted.
+
+Custom code that builds one of these paths itself is not migrated for you:
+
+```diff
+- $file->store('product/'.$product->id)
++ $file->store('products/'.$product->id)
+```
+
+Code that decides behaviour from a path string needs the same attention, and a grep for the old directory name will not find it. Bagisto's own image filters matched `'/category'` to pick category dimensions, which stopped matching `categories` and silently fell back to the slider size.
+
+---
+
+### Route Names Are snake_case
+
+**Impact Probability: Medium**
+
+Every hyphenated route name is now snake_case. URLs are unchanged — only the name passed to `route()`:
+
+```diff
+- route('admin.sales.rma.requests.send-message')
++ route('admin.sales.rma.requests.send_message')
+```
+
+Fifty-six names changed, among them `admin.sales.rma.custom-fields.*`, `admin.configuration.search-engines.test-connection`, `shop.customers.account.gdpr.pdf-view`, `customer.social-login.callback` and `paypal.smart-button.create-order`. A module that names a route as a string — in a controller, a Blade view, an ACL entry or a menu — has to use the new spelling.
+
+---
+
+### Translation Keys Are kebab-case
+
+**Impact Probability: Medium**
+
+Every remaining underscored translation key is now kebab-case, across all 22 locales:
+
+```diff
+- trans('admin::app.eu_withdrawal.view.received_at')
++ trans('admin::app.eu-withdrawal.view.received-at')
+```
+
+A theme or module that overrides one of these keys, or reads it with `trans()`, must be updated. Note the deliberate split from the route names above: the same feature is `admin.sales.eu_withdrawals.index` as a route and `admin::app.eu-withdrawal.…` as a translation key.
+
+Keys whose segment is data rather than a name keep their own casing — currency codes such as `seeders.core.currencies.AED` and locale codes such as `pt_BR`.
 
 ---
 
@@ -1056,6 +1124,53 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
    - The whole page in a different typeface — see "The Default Font Stack Changed" above.
 
    For any additional utility-class-level breaking changes in your custom Blade templates, refer to the official [Tailwind CSS v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide).
+
+---
+
+### Product Image Size and Placeholder Settings Removed
+
+**Impact Probability: Low**
+
+Admin → Configuration → Catalog → Products no longer carries the Small, Medium and Large Image sections. The dimensions they held are fixed in the image templates, and the placeholder is the one the theme ships:
+
+| Removed setting | Now |
+|---|---|
+| `catalog.products.cache_small_image.width` / `.height` | 100 × 100 |
+| `catalog.products.cache_medium_image.width` / `.height` | 350 × 360 |
+| `catalog.products.cache_large_image.width` / `.height` | 560 × 610 |
+| `catalog.products.cache_*_image.url` | the theme's placeholder, falling back to the one Bagisto ships |
+
+A migration deletes the stored rows. A store that had set its own dimensions or uploaded its own placeholder now gets the defaults above, so check your product listings after upgrading. To keep a custom size or placeholder, register an image template in your theme's `customize.image_cache` in `config/themes.php`.
+
+---
+
+### Snake_case Methods Renamed on the Core Helper
+
+**Impact Probability: Low**
+
+Two methods on `Webkul\Core\Core` — the helper reached through `core()` — were the only snake_case names among some sixty camelCase ones:
+
+| Before | After |
+|---|---|
+| `core()->country_name($code)` | `core()->countryName($code)` |
+| `core()->is_empty_date($date)` | `core()->isEmptyDate($date)` |
+
+Both are widely reachable, so a module or a theme that calls either — `country_name()` is common in address templates — has to use the new name. The behaviour and the arguments are unchanged.
+
+---
+
+### CoreConfigRepository Helpers Renamed
+
+**Impact Probability: Low**
+
+Two public helpers on `Webkul\Core\Repositories\CoreConfigRepository` were named after how they worked rather than what they produced:
+
+| Before | After |
+|---|---|
+| `recursiveArray($formData, $method)` | `flattenToConfigValues($formData, $prefix)` |
+| `countDim($array)` | `depthOf($array)` |
+
+Both are internal to saving a configuration form — nothing in Bagisto calls them from outside the repository — but they are public, so a module that calls one has to use the new name. The behaviour and the argument order are unchanged.
 
 ---
 

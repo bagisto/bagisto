@@ -34,11 +34,15 @@ class CoreConfigRepository extends Repository
 
         $channel = Arr::pull($data, 'channel') ?: core()->getRequestedChannelCode();
 
-        foreach ($data as $method => $fieldData) {
-            $recursiveData = $this->recursiveArray($fieldData, $method);
+        foreach ($data as $group => $fieldData) {
+            $configValues = $this->flattenToConfigValues($fieldData, $group);
 
-            foreach ($recursiveData as $fieldName => $value) {
+            foreach ($configValues as $fieldName => $value) {
                 $field = core()->getConfigField($fieldName);
+
+                if (! $this->dependencyIsMet($fieldName, $field ?? [], $configValues)) {
+                    continue;
+                }
 
                 $channelBased = ! empty($field['channel_based']);
 
@@ -121,6 +125,108 @@ class CoreConfigRepository extends Repository
     }
 
     /**
+     * Search configuration.
+     *
+     * @param  array  $items
+     */
+    public function search(Collection $items, string $searchTerm, array $path = []): array
+    {
+        $results = [];
+
+        foreach ($items as $configuration) {
+            $title = $this->getTranslatedTitle($configuration);
+
+            if (
+                stripos($title, $searchTerm) !== false
+                && count($path)
+            ) {
+                $queryParam = $path[1]['key'] ?? $configuration->getKey();
+
+                $results[] = [
+                    'title' => implode(' > ', [...Arr::pluck($path, 'title'), $title]),
+                    'url' => route('admin.configuration.index', Str::replace('.', '/', $queryParam)),
+                ];
+            }
+
+            $this->getChildrenAndFields($configuration, $searchTerm, $path, $results);
+        }
+
+        return $results;
+    }
+
+    /**
+     * Flatten the nested array a configuration form submits into the value each setting is saved
+     * under, keyed by its dotted configuration code.
+     */
+    public function flattenToConfigValues(array $formData, string $prefix, array &$sections = [], array &$values = []): array
+    {
+        foreach ($formData as $key => $value) {
+            if (! is_array($value)) {
+                continue;
+            }
+
+            $code = $prefix.'.'.$key;
+
+            $depth = $this->depthOf($value);
+
+            if ($depth > 1) {
+                $this->flattenToConfigValues($value, $code, $sections, $values);
+            } elseif ($depth === 1) {
+                $sections[$code] = $value;
+            }
+        }
+
+        foreach ($sections as $code => $fields) {
+            if (core()->getConfigField($code)) {
+                $values[$code] = $fields;
+
+                continue;
+            }
+
+            foreach ($fields as $name => $value) {
+                $values[$code.'.'.$name] = $value;
+            }
+        }
+
+        return $values;
+    }
+
+    /**
+     * How many levels of array the given array nests, counting itself as the first.
+     */
+    public function depthOf(array $array): int
+    {
+        return is_array(reset($array))
+            ? $this->depthOf(reset($array)) + 1
+            : 1;
+    }
+
+    /**
+     * Whether a field's depend condition is met by the values being saved, leaving a save that
+     * carries no value for the depended-on field to write what it does carry.
+     */
+    protected function dependencyIsMet(string $fieldName, array $field, array $values): bool
+    {
+        if (empty($field['depends'])) {
+            return true;
+        }
+
+        [$name, $expected] = array_pad(explode(':', $field['depends'], 2), 2, '');
+
+        $sibling = Str::beforeLast($fieldName, '.').'.'.$name;
+
+        if (! array_key_exists($sibling, $values)) {
+            return true;
+        }
+
+        return in_array(
+            (string) $values[$sibling],
+            explode(',', $expected),
+            true
+        );
+    }
+
+    /**
      * Get the configuration title.
      */
     protected function getTranslatedTitle(mixed $configuration): string
@@ -162,84 +268,5 @@ class CoreConfigRepository extends Repository
 
             $results = array_merge($results, $this->search($children, $searchTerm, $tempPath));
         }
-    }
-
-    /**
-     * Search configuration.
-     *
-     * @param  array  $items
-     */
-    public function search(Collection $items, string $searchTerm, array $path = []): array
-    {
-        $results = [];
-
-        foreach ($items as $configuration) {
-            $title = $this->getTranslatedTitle($configuration);
-
-            if (
-                stripos($title, $searchTerm) !== false
-                && count($path)
-            ) {
-                $queryParam = $path[1]['key'] ?? $configuration->getKey();
-
-                $results[] = [
-                    'title' => implode(' > ', [...Arr::pluck($path, 'title'), $title]),
-                    'url' => route('admin.configuration.index', Str::replace('.', '/', $queryParam)),
-                ];
-            }
-
-            $this->getChildrenAndFields($configuration, $searchTerm, $path, $results);
-        }
-
-        return $results;
-    }
-
-    /**
-     * Recursive array.
-     *
-     * @return array
-     */
-    public function recursiveArray(array $formData, string $method, array &$data = [], array &$recursiveArrayData = [])
-    {
-        foreach ($formData as $form => $formValue) {
-            $value = $method.'.'.$form;
-
-            if (is_array($formValue)) {
-                $dim = $this->countDim($formValue);
-
-                if ($dim > 1) {
-                    $this->recursiveArray($formValue, $value, $data, $recursiveArrayData);
-                } elseif ($dim == 1) {
-                    $data[$value] = $formValue;
-                }
-            }
-        }
-
-        foreach ($data as $key => $value) {
-            $field = core()->getConfigField($key);
-
-            if ($field) {
-                $recursiveArrayData[$key] = $value;
-            } else {
-                foreach ($value as $key1 => $val) {
-                    $recursiveArrayData[$key.'.'.$key1] = $val;
-                }
-            }
-        }
-
-        return $recursiveArrayData;
-    }
-
-    /**
-     * Return dimension of the array.
-     *
-     * @param  array  $array
-     * @return int
-     */
-    public function countDim($array)
-    {
-        return is_array(reset($array))
-            ? $this->countDim(reset($array)) + 1
-            : 1;
     }
 }

@@ -382,7 +382,7 @@
 
                                     <div>{{ $invoice->order->billing_address->postcode . ' ' . $invoice->order->billing_address->city }}</div>
 
-                                    <div>{{ $invoice->order->billing_address->state . ', ' . core()->country_name($invoice->order->billing_address->country) }}</div>
+                                    <div>{{ $invoice->order->billing_address->state . ', ' . core()->countryName($invoice->order->billing_address->country) }}</div>
 
                                     <div>@lang('shop::app.customers.account.orders.invoice-pdf.contact'): {{ $invoice->order->billing_address->phone }}</div>
                                 </td>
@@ -398,7 +398,7 @@
 
                                     <div>{{ $invoice->order->shipping_address->postcode . ' ' . $invoice->order->shipping_address->city }}</div>
 
-                                    <div>{{ $invoice->order->shipping_address->state . ', ' . core()->country_name($invoice->order->shipping_address->country) }}</div>
+                                    <div>{{ $invoice->order->shipping_address->state . ', ' . core()->countryName($invoice->order->shipping_address->country) }}</div>
 
                                     <div>@lang('shop::app.customers.account.orders.invoice-pdf.contact'): {{ $invoice->order->shipping_address->phone }}</div>
                                 </td>
