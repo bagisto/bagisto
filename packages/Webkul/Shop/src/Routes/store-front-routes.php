@@ -97,7 +97,9 @@ Route::get('search', [SearchController::class, 'index'])
     ->name('shop.search.index')
     ->middleware('cache.response');
 
-Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
+Route::post('search/upload', [SearchController::class, 'upload'])
+    ->middleware('throttle:10,1')
+    ->name('shop.search.upload');
 
 /**
  * Subscription routes.

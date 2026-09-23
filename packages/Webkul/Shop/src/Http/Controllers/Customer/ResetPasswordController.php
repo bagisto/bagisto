@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Webkul\Core\Helpers\SessionPurger;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 
@@ -96,6 +97,8 @@ class ResetPasswordController extends Controller
         $customer->setRememberToken(Str::random(60));
 
         $customer->save();
+
+        app(SessionPurger::class)->forget('customer', $customer->id);
 
         event(new PasswordReset($customer));
     }

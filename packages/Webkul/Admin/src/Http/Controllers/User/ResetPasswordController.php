@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\SessionPurger;
 
 class ResetPasswordController extends Controller
 {
@@ -84,6 +85,8 @@ class ResetPasswordController extends Controller
         $admin->setRememberToken(Str::random(60));
 
         $admin->save();
+
+        app(SessionPurger::class)->forget('admin', $admin->id);
 
         event(new PasswordReset($admin));
 

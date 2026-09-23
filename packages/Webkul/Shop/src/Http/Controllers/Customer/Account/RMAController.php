@@ -17,6 +17,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Enums\DefaultRMAResolution;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+use Webkul\RMA\Helpers\Attachment;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -396,6 +397,34 @@ class RMAController extends Controller
     }
 
     /**
+     * Show a photo attached to the customer's own return.
+     */
+    public function showImage(int $id)
+    {
+        $image = $this->rmaImageRepository->findOrFail($id);
+
+        if ($image->rma?->order?->customer_id != auth()->guard('customer')->id()) {
+            abort(404);
+        }
+
+        return app(Attachment::class)->inline($image->path);
+    }
+
+    /**
+     * Download an attachment of a message on the customer's own return.
+     */
+    public function downloadAttachment(int $id)
+    {
+        $message = $this->rmaMessageRepository->findOrFail($id);
+
+        if ($message->rma?->order?->customer_id != auth()->guard('customer')->id()) {
+            abort(404);
+        }
+
+        return app(Attachment::class)->download($message);
+    }
+
+    /**
      * Get messages for rma conversation.
      */
     public function getMessages(): JsonResponse
@@ -450,8 +479,9 @@ class RMAController extends Controller
                 $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
 
                 $path = $file->storeAs(
-                    'rma-conversation/'.$storedMessage->id,
-                    Str::random(40).($extension ? '.'.$extension : '')
+                    'rma/'.$storedMessage->rma_id.'/conversation/'.$storedMessage->id,
+                    Str::random(40).($extension ? '.'.$extension : ''),
+                    'private'
                 );
 
                 $this->rmaMessageRepository->update([

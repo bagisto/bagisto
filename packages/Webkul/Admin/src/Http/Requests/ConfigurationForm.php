@@ -42,7 +42,10 @@ class ConfigurationForm extends FormRequest
                         return [];
                     }
 
-                    return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
+                    return [$key => array_merge(
+                        $this->getValidationRules($field['validation'] ?? 'nullable'),
+                        $this->getTypeRules($field['type'] ?? null),
+                    )];
                 })->toArray();
             })
             ->toArray();
@@ -74,6 +77,20 @@ class ConfigurationForm extends FormRequest
             explode(',', $values),
             true
         );
+    }
+
+    /**
+     * The rules a field's own type implies, so a number cannot be saved as a word or left blank.
+     *
+     * @return array<int, string>
+     */
+    protected function getTypeRules(?string $type): array
+    {
+        return match ($type) {
+            'boolean' => ['in:0,1'],
+            'number' => ['numeric'],
+            default => [],
+        };
     }
 
     /**

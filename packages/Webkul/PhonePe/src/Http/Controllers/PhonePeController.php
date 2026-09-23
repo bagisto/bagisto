@@ -151,6 +151,15 @@ class PhonePeController extends Controller
                     return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
                 }
 
+                if (
+                    Cart::hasError()
+                    || ! $this->paidAmountCoversCart($response, $cart)
+                ) {
+                    session()->flash('warning', trans('phonepe::app.response.phonepe-payment-failed'));
+
+                    return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+                }
+
                 $data = (new OrderResource($cart))->jsonSerialize();
 
                 /**
@@ -321,6 +330,22 @@ class PhonePeController extends Controller
                 'status' => 'error',
             ], 500);
         }
+    }
+
+    /**
+     * Whether the amount PhonePe reports as paid still covers the cart being ordered.
+     *
+     * @param  object  $cart
+     */
+    protected function paidAmountCoversCart(array $response, $cart): bool
+    {
+        $paid = $response['data']['amount'] ?? null;
+
+        if ($paid === null) {
+            return true;
+        }
+
+        return (int) $paid === (int) round($cart->base_grand_total * 100);
     }
 
     /**

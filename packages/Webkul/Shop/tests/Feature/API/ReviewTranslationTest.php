@@ -119,9 +119,44 @@ it('should stop answering translation requests once the rate limit is reached', 
 it('should reject a review comment longer than the prompt budget allows', function () {
     $product = $this->createSimpleProduct();
 
+    $this->setConfig(['catalog.products.review.guest_review' => 1]);
+
     postJson(route('shop.api.products.reviews.store', $product->id), [
         'title' => 'Nice',
+        'name' => 'Guest',
         'comment' => str_repeat('a', 5001),
         'rating' => 5,
     ])->assertStatus(422)->assertJsonValidationErrors('comment');
+});
+
+it('should refuse a guest review while the store only takes them from customers', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->setConfig(['catalog.products.review.guest_review' => 0]);
+
+    postJson(route('shop.api.products.reviews.store', $product->id), [
+        'title' => 'Nice',
+        'name' => 'Guest',
+        'comment' => 'Nice product!',
+        'rating' => 5,
+    ])->assertForbidden();
+});
+
+it('should take a guest review while the store accepts them', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->setConfig(['catalog.products.review.guest_review' => 1]);
+
+    postJson(route('shop.api.products.reviews.store', $product->id), [
+        'title' => 'Nice',
+        'name' => 'Guest',
+        'comment' => 'Nice product!',
+        'rating' => 5,
+    ])->assertOk();
+
+    $this->assertDatabaseHas('product_reviews', [
+        'product_id' => $product->id,
+        'name' => 'Guest',
+        'status' => 'pending',
+    ]);
 });

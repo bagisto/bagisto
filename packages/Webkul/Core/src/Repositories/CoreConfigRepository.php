@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Traits\Sanitizer;
 
 class CoreConfigRepository extends Repository
 {
+    use Sanitizer;
+
     /**
      * Specify model class name.
      */
@@ -75,7 +78,11 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (request()->hasFile($fieldName)) {
-                    $value = request()->file($fieldName)->store('configuration');
+                    $file = request()->file($fieldName);
+
+                    $value = $file->store('configuration');
+
+                    $this->sanitizeSVG($value, $file->getMimeType());
                 }
 
                 if (! count($coreConfigValue)) {

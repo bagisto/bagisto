@@ -23,7 +23,9 @@ Route::prefix('customer')->group(function () {
     Route::controller(ForgotPasswordController::class)->prefix('forgot-password')->group(function () {
         Route::get('', 'create')->name('shop.customers.forgot_password.create');
 
-        Route::post('', 'store')->name('shop.customers.forgot_password.store');
+        Route::post('', 'store')
+            ->middleware('throttle:6,1')
+            ->name('shop.customers.forgot_password.store');
     });
 
     /**
@@ -209,6 +211,10 @@ Route::prefix('customer')->group(function () {
                 Route::post('cancel/{id}', 'cancelRequest')->name('shop.customers.account.rma.cancel');
 
                 Route::get('get-messages', 'getMessages')->name('shop.customers.account.rma.get-messages');
+
+                Route::get('attachments/{id}', 'downloadAttachment')->name('shop.customers.account.rma.attachment');
+
+                Route::get('images/{id}', 'showImage')->name('shop.customers.account.rma.image');
 
                 Route::post('send-message', 'sendMessage')->name('shop.customers.account.rma.send-message');
             });

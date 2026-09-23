@@ -15,6 +15,13 @@ class MagicAIController extends Controller
      */
     public function content(ContentGenerationRequest $request): JsonResponse
     {
+        if (
+            ! core()->getConfigData('magic_ai.general.settings.enabled')
+            || ! core()->getConfigData('magic_ai.admin_features.text_generation.enabled')
+        ) {
+            return new JsonResponse(['message' => trans('admin::app.errors.401.title')], 403);
+        }
+
         try {
             return new JsonResponse([
                 'content' => MagicAI::generateContent(
@@ -32,6 +39,13 @@ class MagicAIController extends Controller
      */
     public function image(ImageGenerationRequest $request): JsonResponse
     {
+        if (
+            ! core()->getConfigData('magic_ai.general.settings.enabled')
+            || ! core()->getConfigData('magic_ai.admin_features.image_generation.enabled')
+        ) {
+            return new JsonResponse(['message' => trans('admin::app.errors.401.title')], 403);
+        }
+
         try {
             return new JsonResponse([
                 'images' => MagicAI::generateImage(

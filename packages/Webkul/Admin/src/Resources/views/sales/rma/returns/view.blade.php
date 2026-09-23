@@ -130,7 +130,7 @@
                                                     @foreach($rma->images as $image)
                                                         <img
                                                             class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
-                                                            src="{{ Storage::url($image->path) }}"
+                                                            src="{{ route('admin.sales.rma.requests.image', $image->id) }}"
                                                         />
                                                     @endforeach
                                                 </div>
@@ -204,7 +204,7 @@
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                    {!! $rmaItem->quantity !!}
+                                                    {{ $rmaItem->quantity }}
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">

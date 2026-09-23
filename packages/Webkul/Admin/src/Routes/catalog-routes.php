@@ -128,6 +128,10 @@ Route::prefix('catalog')->group(function () {
 
         Route::controller(DownloadableController::class)->group(function () {
             Route::get('{id}/downloadable-options', 'options')->name('admin.catalog.products.downloadable.options');
+
+            Route::get('downloadable-links/{id}/{type}', 'downloadLinkFile')->name('admin.catalog.products.downloadable.link_file');
+
+            Route::get('downloadable-samples/{id}', 'downloadSampleFile')->name('admin.catalog.products.downloadable.sample_file');
         });
 
         Route::controller(VirtualController::class)->group(function () {

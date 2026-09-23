@@ -331,7 +331,9 @@ trait DownloadsImages
      */
     protected function fetchImage(string $url): array
     {
-        if (! $this->isSafeRemoteUrl($url)) {
+        $addresses = $this->safeAddressesFor($url);
+
+        if (! $addresses) {
             return [
                 'status' => 'failed',
                 'reason' => 'unsafe-host',
@@ -340,7 +342,11 @@ trait DownloadsImages
 
         try {
             $response = Http::timeout(self::IMAGE_REQUEST_TIMEOUT)
-                ->withOptions(['stream' => false])
+                ->withOptions([
+                    'stream' => false,
+                    'allow_redirects' => false,
+                    'curl' => [CURLOPT_RESOLVE => $this->pinnedAddresses($url, $addresses)],
+                ])
                 ->get($url);
 
             if (! $response->successful()) {
@@ -416,6 +422,21 @@ trait DownloadsImages
     }
 
     /**
+     * The host to address mapping the request is pinned to, so the name is not resolved twice.
+     *
+     * @param  array<int, string>  $addresses
+     * @return array<int, string>
+     */
+    protected function pinnedAddresses(string $url, array $addresses): array
+    {
+        $parts = parse_url($url);
+
+        $port = $parts['port'] ?? (strtolower($parts['scheme']) === 'https' ? 443 : 80);
+
+        return array_map(fn ($address) => $parts['host'].':'.$port.':'.$address, $addresses);
+    }
+
+    /**
      * Would fetching this URL reach somewhere it should not?
      *
      * An import file is operator-supplied but its contents are frequently not —
@@ -426,13 +447,23 @@ trait DownloadsImages
      */
     protected function isSafeRemoteUrl(string $url): bool
     {
+        return $this->safeAddressesFor($url) !== [];
+    }
+
+    /**
+     * The addresses a url resolves to, all of them public, so the request can be pinned to them.
+     *
+     * @return array<int, string>
+     */
+    protected function safeAddressesFor(string $url): array
+    {
         $parts = parse_url($url);
 
         if (
             empty($parts['host'])
             || ! in_array(strtolower($parts['scheme'] ?? ''), ['http', 'https'], true)
         ) {
-            return false;
+            return [];
         }
 
         $host = $parts['host'];
@@ -445,7 +476,7 @@ trait DownloadsImages
             );
 
         if (empty($addresses)) {
-            return false;
+            return [];
         }
 
         foreach ($addresses as $address) {
@@ -454,11 +485,11 @@ trait DownloadsImages
                 FILTER_VALIDATE_IP,
                 FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
             )) {
-                return false;
+                return [];
             }
         }
 
-        return true;
+        return $addresses;
     }
 
     /**

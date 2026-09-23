@@ -480,7 +480,14 @@ class ProductDataGrid extends DataGrid
      */
     protected function getElasticSort(array $params): array
     {
-        $sort = $params['column'] ?? $this->primaryColumn;
+        $sortable = collect($this->getColumns())
+            ->filter(fn ($column) => $column->getSortable())
+            ->map(fn ($column) => $column->getIndex())
+            ->all();
+
+        $sort = in_array($params['column'] ?? null, $sortable, true)
+            ? $params['column']
+            : $this->primaryColumn;
 
         $sort = match ($sort) {
             'name', 'sku', 'type' => $sort.'.keyword',
@@ -489,9 +496,11 @@ class ProductDataGrid extends DataGrid
             default => $sort,
         };
 
+        $order = strtolower($params['order'] ?? '');
+
         return [
             $sort => [
-                'order' => $params['order'] ?? $this->sortOrder,
+                'order' => in_array($order, ['asc', 'desc'], true) ? $order : $this->sortOrder,
                 'unmapped_type' => 'keyword',
             ],
         ];

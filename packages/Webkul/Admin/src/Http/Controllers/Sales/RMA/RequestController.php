@@ -18,6 +18,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Enums\DefaultRMAResolution;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+use Webkul\RMA\Helpers\Attachment;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -119,6 +120,22 @@ class RequestController extends Controller
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
         return back();
+    }
+
+    /**
+     * Show a photo attached to a return.
+     */
+    public function showImage(int $id)
+    {
+        return app(Attachment::class)->inline($this->rmaImageRepository->findOrFail($id)->path);
+    }
+
+    /**
+     * Download an attachment of a message on a return.
+     */
+    public function downloadAttachment(int $id)
+    {
+        return app(Attachment::class)->download($this->rmaMessageRepository->findOrFail($id));
     }
 
     /**

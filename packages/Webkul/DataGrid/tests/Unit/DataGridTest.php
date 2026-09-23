@@ -441,3 +441,33 @@ it('should resolve a datagrid class through the helper', function () {
 it('should reject a class that is not a datagrid in the helper', function () {
     datagrid(CartRule::class);
 })->throws(InvalidDataGridException::class);
+
+// ============================================================================
+// Row Sanitization
+// ============================================================================
+
+it('should strip the tags from the strings a row holds, inside arrays as well', function () {
+    $grid = new class extends DataGrid
+    {
+        public function sanitize(object $row): object
+        {
+            return $this->sanitizeRow($row);
+        }
+
+        public function prepareQueryBuilder(): void {}
+
+        public function prepareColumns(): void {}
+    };
+
+    $row = (object) [
+        'name' => '<script>alert(1)</script>Rule',
+        'options' => ['<b>bold</b>', ['nested' => '<i>deep</i>']],
+        'count' => 7,
+    ];
+
+    $sanitized = $grid->sanitize($row);
+
+    expect($sanitized->name)->toBe('alert(1)Rule')
+        ->and($sanitized->options)->toBe(['bold', ['nested' => 'deep']])
+        ->and($sanitized->count)->toBe(7);
+});

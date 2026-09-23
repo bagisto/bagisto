@@ -149,7 +149,10 @@
                                         @lang('shop::app.checkout.cart.index.remove')
                                     </span>
 
-                                    @if (auth()->guard()->check())
+                                    @if (
+                                        auth()->guard()->check()
+                                        && core()->getConfigData('customer.settings.wishlist.wishlist_option')
+                                    )
                                         <span class="mx-2.5 border-r-2 border-zinc-200"></span>
 
                                         <span

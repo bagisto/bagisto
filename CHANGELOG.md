@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.5.0-beta5 (23rd of September 2026)** - *Release*
 
+- Applied the security fixes from an AI security audit of the codebase.
+
 - Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
 
 - Fixed Magic AI taking its orders from storefront text: a review or customer name could steer what the review translation and the checkout message returned. Shopper-supplied text is now sent as data, apart from the instructions.

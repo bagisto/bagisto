@@ -52,7 +52,7 @@ class SEO
             $data['offers'] = $this->getProductOffers($product);
         }
 
-        return json_encode($data);
+        return json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
     }
 
     /**
@@ -167,11 +167,11 @@ class SEO
         if (core()->getConfigData('catalog.rich_snippets.categories.show_search_input_field')) {
             $data['potentialAction'] = [
                 '@type' => 'SearchAction',
-                'target' => config('app.url').'/search/?term={search_term_string}',
+                'target' => route('shop.search.index').'?query={search_term_string}',
                 'query-input' => 'required name=search_term_string',
             ];
         }
 
-        return json_encode($data);
+        return json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
     }
 }

@@ -455,6 +455,32 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 - **Do not add/remove composer dependencies without approval.**
 - **Do not create documentation files unless explicitly requested.**
 
+## Security Audits — Settled False Positives
+
+Read this section **before** reporting a security finding, and again before writing the report.
+Every row below is a finding an audit has already raised and a maintainer has since settled — either
+because the claim does not hold, or because it is a trade-off the project accepts deliberately — with
+the evidence or the reasoning behind that decision. Reporting one of them again costs a review cycle
+and buries the findings that are real.
+
+Rules for using it:
+
+- **Do not re-report a row.** If a scan surfaces one, leave it out of the report, or mention it in a
+  single line noting it is known and why.
+- **A row is about the code as it stands.** If the surrounding code has changed so the reasoning no
+  longer applies, say so plainly and re-open the finding rather than trusting the row.
+- **Only a maintainer adds a row**, after reviewing the code themselves. An agent never promotes its
+  own dismissal into this table; it reports what it found and lets the maintainer decide.
+- **Verify before dismissing anything, listed or not.** These rows exist because agents are wrong in
+  both directions — they invent findings and they miss real ones. The row records a conclusion, not
+  a reason to stop looking at that area.
+
+| Claim | Where it appears | Why it is settled |
+|---|---|---|
+| The request forgery exemption covers the whole `stripe/*` prefix where only the webhook posts | `bootstrap/app.php`, `preventRequestForgery(except: ['stripe/*'])` | Deliberate. External Stripe modules register their own routes under this prefix and depend on the exemption, so narrowing it to `stripe/webhook` breaks them. The routes core ships beside the webhook are GET redirects, which the middleware does not check in any case. |
+| Custom scripts reach the admin panel and the admin login page, so a role with configuration access can run JavaScript where credentials are typed | `components/layouts/anonymous.blade.php`, `components/layouts/index.blade.php`, `general.content.custom_scripts.*` | Deliberate. Custom CSS and JavaScript are a feature of the panel as much as the storefront, and the login screen shares the anonymous layout. Configuration access is treated as trusted: a role granted it can already change how the panel behaves, so granting it is the control, not the markup. |
+| Trusting every proxy lets any client set `X-Forwarded-For`, so the address rate limits key on, and the address written to logs, are attacker-controlled | `bootstrap/app.php`, `trustProxies(at: '*')` | Deliberate. A store runs behind proxies the application cannot enumerate, and both HTTPS detection and the client address depend on the forwarded headers arriving intact, so the default trusts them. Restricting the list is a deployment decision, made at the edge by the operator, not a code change. |
+
 ## Validation Checklist (Before Marking Complete)
 
 1. `vendor/bin/pint --dirty` — no style violations

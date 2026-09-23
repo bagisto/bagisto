@@ -12,6 +12,11 @@ use Webkul\Admin\Http\Controllers\Controller as BaseController;
 class Controller extends BaseController
 {
     /**
+     * The file types a report may be exported as.
+     */
+    private const EXPORT_FORMATS = ['csv', 'xls', 'xlsx'];
+
+    /**
      * Request param functions.
      *
      * @var array
@@ -64,7 +69,11 @@ class Controller extends BaseController
     {
         $stats = $this->reportingHelper->{$this->resolveTypeFunction()}('table');
 
-        return Excel::download(new ReportingExport($stats), request()->query('type').'.'.request()->query('format'));
+        $format = in_array(request()->query('format'), self::EXPORT_FORMATS, true)
+            ? request()->query('format')
+            : self::EXPORT_FORMATS[0];
+
+        return Excel::download(new ReportingExport($stats), request()->query('type').'.'.$format);
     }
 
     /**

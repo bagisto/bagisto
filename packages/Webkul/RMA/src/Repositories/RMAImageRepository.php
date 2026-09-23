@@ -41,29 +41,13 @@ class RMAImageRepository extends Repository
         if (! empty($requestImages)) {
             foreach ($requestImages as $imageId => $image) {
                 $file = 'images.'.$imageId;
-                $dir = 'rma/'.$rma->id;
+                $dir = 'rma/'.$rma->id.'/images';
 
-                if (str_contains($imageId, '')) {
-                    if (request()->hasFile($file)) {
-                        $this->create([
-                            'path' => request()->file($file)->store($dir),
-                            'rma_id' => $rma->id,
-                        ]);
-                    }
-                } else {
-                    if (is_numeric($index = $previousImageIds->search($imageId))) {
-                        $previousImageIds->forget($index);
-                    }
-
-                    if (request()->hasFile($file)) {
-                        if ($imageModel = $this->find($imageId)) {
-                            Storage::delete($imageModel->path);
-                        }
-
-                        $this->update([
-                            'path' => request()->file($file)->store($dir),
-                        ], $imageId);
-                    }
+                if (request()->hasFile($file)) {
+                    $this->create([
+                        'path' => request()->file($file)->store($dir, 'private'),
+                        'rma_id' => $rma->id,
+                    ]);
                 }
             }
         }

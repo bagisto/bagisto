@@ -28,12 +28,31 @@ class ReportingExport implements FromCollection
             $data = [];
 
             foreach ($this->records['columns'] as $column) {
-                $data[$column['label']] = $record[$column['key']];
+                $data[$column['label']] = $this->sanitize($record[$column['key']] ?? null);
             }
 
             $rows[] = (object) $data;
         }
 
         return collect($rows);
+    }
+
+    /**
+     * Prefix a value a spreadsheet would otherwise read as a formula.
+     *
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function sanitize($value)
+    {
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        if (preg_match('/^[\s]*[@=+\-|%]/u', $value)) {
+            return "'".$value;
+        }
+
+        return $value;
     }
 }

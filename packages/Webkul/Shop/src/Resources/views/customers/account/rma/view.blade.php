@@ -98,9 +98,9 @@
 
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($rma->images as $image)
-                                    <a href="{{ Storage::url($image['path']) }}" target="_blank">
+                                    <a href="{{ route('shop.customers.account.rma.image', $image['id']) }}" target="_blank">
                                         <img
-                                            src="{{ Storage::url($image['path']) }}"
+                                            src="{{ route('shop.customers.account.rma.image', $image['id']) }}"
                                             class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded-sm border shadow-xs hover:shadow-md transition"
                                         />
                                     </a>

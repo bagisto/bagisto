@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
+use Webkul\Sales\Exceptions\InsufficientInventoryException;
 
 class OrderItemRepository extends Repository
 {
@@ -102,14 +103,31 @@ class OrderItemRepository extends Repository
             }
 
             if ($item->product->inventories->count()) {
+                $channel = $orderItem->order->channel;
+
+                $available = $item->product->inventories()
+                    ->whereIn('inventory_source_id', $channel->inventory_sources->where('status', 1)->pluck('id'))
+                    ->lockForUpdate()
+                    ->sum('qty');
+
                 $orderedInventory = $item->product->ordered_inventories()
-                    ->where('channel_id', $orderItem->order->channel_id)
+                    ->where('channel_id', $channel->id)
+                    ->lockForUpdate()
                     ->first();
 
                 if (isset($item->qty_ordered)) {
                     $qty = $item->qty_ordered;
                 } else {
                     $qty = $item?->parent?->qty_ordered ?? 1;
+                }
+
+                if (
+                    $available - ($orderedInventory->qty ?? 0) < $qty
+                    && ! core()->getConfigData('catalog.inventory.stock_options.back_orders')
+                ) {
+                    throw new InsufficientInventoryException(
+                        trans('shop::app.checkout.cart.inventory-warning')
+                    );
                 }
 
                 if ($orderedInventory) {

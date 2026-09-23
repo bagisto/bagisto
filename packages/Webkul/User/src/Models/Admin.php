@@ -34,6 +34,7 @@ class Admin extends Authenticatable implements AdminContract
         'two_factor_enabled',
         'two_factor_backup_codes',
         'two_factor_verified_at',
+        'two_factor_last_used_window',
     ];
 
     /**
@@ -44,6 +45,7 @@ class Admin extends Authenticatable implements AdminContract
     protected $casts = [
         'two_factor_backup_codes' => 'array',
         'two_factor_verified_at' => 'datetime',
+        'two_factor_last_used_window' => 'integer',
         'two_factor_enabled' => 'boolean',
     ];
 

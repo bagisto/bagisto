@@ -156,6 +156,10 @@ Route::prefix('sales')->group(function () {
 
             Route::get('get-messages', 'getMessages')->name('admin.sales.rma.requests.get-messages');
 
+            Route::get('attachments/{id}', 'downloadAttachment')->name('admin.sales.rma.requests.attachment');
+
+            Route::get('images/{id}', 'showImage')->name('admin.sales.rma.requests.image');
+
             Route::post('send-message', 'sendMessage')->name('admin.sales.rma.requests.send-message');
         });
 
