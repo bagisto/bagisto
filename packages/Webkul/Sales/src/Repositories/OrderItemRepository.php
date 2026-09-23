@@ -108,7 +108,8 @@ class OrderItemRepository extends Repository
                 $available = $item->product->inventories()
                     ->whereIn('inventory_source_id', $channel->inventory_sources->where('status', 1)->pluck('id'))
                     ->lockForUpdate()
-                    ->sum('qty');
+                    ->pluck('qty')
+                    ->sum();
 
                 $orderedInventory = $item->product->ordered_inventories()
                     ->where('channel_id', $channel->id)
