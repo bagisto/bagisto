@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.5.0-beta5 (23rd of September 2026)** - *Release*
+## **v2.5.0-beta5 (24th of September 2026)** - *Release*
 
 - Applied the security fixes from an AI security audit of the codebase.
 

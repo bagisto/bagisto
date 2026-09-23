@@ -177,3 +177,46 @@ it('should not find a configuration file missing from the disk', function () {
     get(route('admin.configuration.download', ['general', 'design', 'missing.png']))
         ->assertNotFound();
 });
+
+// ============================================================================
+// Dependent Fields
+// ============================================================================
+
+it('should save a dependent field while its depend condition is met', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.index', ['general', 'gdpr']), [
+        'general' => [
+            'gdpr' => [
+                'agreement' => [
+                    'enabled' => '1',
+                    'agreement_label' => 'I agree, truly.',
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'general.gdpr.agreement.agreement_label',
+        'value' => 'I agree, truly.',
+    ]);
+});
+
+it('should not save a dependent field while its depend condition is off', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.index', ['general', 'gdpr']), [
+        'general' => [
+            'gdpr' => [
+                'agreement' => [
+                    'enabled' => '0',
+                    'agreement_label' => '',
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseMissing('core_config', [
+        'code' => 'general.gdpr.agreement.agreement_label',
+    ]);
+});

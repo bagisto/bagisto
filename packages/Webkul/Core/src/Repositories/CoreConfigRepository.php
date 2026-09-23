@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\SystemConfig\DependsCondition;
 use Webkul\Core\Traits\Sanitizer;
 
 class CoreConfigRepository extends Repository
@@ -40,7 +41,11 @@ class CoreConfigRepository extends Repository
             foreach ($configValues as $fieldName => $value) {
                 $field = core()->getConfigField($fieldName);
 
-                if (! $this->dependencyIsMet($fieldName, $field ?? [], $configValues)) {
+                $condition = new DependsCondition($field['depends'] ?? null);
+
+                $sibling = Str::beforeLast($fieldName, '.').'.'.$condition->fieldName();
+
+                if (! $condition->permits(array_key_exists($sibling, $configValues), $configValues[$sibling] ?? null)) {
                     continue;
                 }
 
@@ -126,8 +131,6 @@ class CoreConfigRepository extends Repository
 
     /**
      * Search configuration.
-     *
-     * @param  array  $items
      */
     public function search(Collection $items, string $searchTerm, array $path = []): array
     {
@@ -199,31 +202,6 @@ class CoreConfigRepository extends Repository
         return is_array(reset($array))
             ? $this->depthOf(reset($array)) + 1
             : 1;
-    }
-
-    /**
-     * Whether a field's depend condition is met by the values being saved, leaving a save that
-     * carries no value for the depended-on field to write what it does carry.
-     */
-    protected function dependencyIsMet(string $fieldName, array $field, array $values): bool
-    {
-        if (empty($field['depends'])) {
-            return true;
-        }
-
-        [$name, $expected] = array_pad(explode(':', $field['depends'], 2), 2, '');
-
-        $sibling = Str::beforeLast($fieldName, '.').'.'.$name;
-
-        if (! array_key_exists($sibling, $values)) {
-            return true;
-        }
-
-        return in_array(
-            (string) $values[$sibling],
-            explode(',', $expected),
-            true
-        );
     }
 
     /**

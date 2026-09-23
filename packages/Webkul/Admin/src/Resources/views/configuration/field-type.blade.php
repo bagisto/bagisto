@@ -622,10 +622,15 @@
                 }
 
                 dependElement.addEventListener('change', (event) => {
-                    this.field['is_visible'] =
+                    const value =
                         event.target.type === 'checkbox'
-                        ? event.target.checked
-                        : (this.dependValue ?? '').split(',').includes(event.target.value);
+                        ? (event.target.checked ? '1' : '0')
+                        : event.target.value;
+
+                    this.field['is_visible'] = (this.dependValue ?? '')
+                        .split(',')
+                        .map((expected) => ({ true: '1', false: '0' })[expected] ?? expected)
+                        .includes(value);
                 });
 
                 dependElement.dispatchEvent(new Event('change'));
