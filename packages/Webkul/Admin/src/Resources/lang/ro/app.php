@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Cum sunt listate produsele în paginile de categorie și de căutare.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Height',
-                        'placeholder' => 'Small Image Placeholder',
-                        'title' => 'Small Image',
-                        'title-info' => 'Dimensiunea la care sunt redimensionate imaginile mici de produs și imaginea implicită când produsul nu are imagine.',
-                        'width' => 'Width',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Height',
-                        'placeholder' => 'Medium Image Placeholder',
-                        'title' => 'Medium Image',
-                        'title-info' => 'Dimensiunea la care sunt redimensionate imaginile medii de produs și imaginea implicită când produsul nu are imagine.',
-                        'width' => 'Width',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Height',
-                        'placeholder' => 'Large Image Placeholder',
-                        'title' => 'Large image',
-                        'title-info' => 'Dimensiunea la care sunt redimensionate imaginile mari de produs și imaginea implicită când produsul nu are imagine.',
-                        'width' => 'Width',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Allow Customer Review',
                         'allow-guest-review' => 'Allow Guest Review',

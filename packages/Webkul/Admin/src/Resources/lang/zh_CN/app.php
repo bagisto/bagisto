@@ -5232,30 +5232,6 @@ return [
                         'title-info' => '商品在分类页和搜索页的展示方式。',
                     ],
 
-                    'small-image' => [
-                        'height' => '高度',
-                        'placeholder' => '小图占位符',
-                        'title' => '小图',
-                        'title-info' => '小尺寸商品图片的缩放尺寸，以及商品无图片时显示的占位图。',
-                        'width' => '宽度',
-                    ],
-
-                    'medium-image' => [
-                        'height' => '高度',
-                        'placeholder' => '中图占位符',
-                        'title' => '中图',
-                        'title-info' => '中等尺寸商品图片的缩放尺寸，以及商品无图片时显示的占位图。',
-                        'width' => '宽度',
-                    ],
-
-                    'large-image' => [
-                        'height' => '高度',
-                        'placeholder' => '大图占位符',
-                        'title' => '大图',
-                        'title-info' => '大尺寸商品图片的缩放尺寸，以及商品无图片时显示的占位图。',
-                        'width' => '宽度',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => '允许客户评价',
                         'allow-guest-review' => '允许访客评价',

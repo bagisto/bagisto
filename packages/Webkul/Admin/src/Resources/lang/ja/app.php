@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'カテゴリページと検索ページでの商品の表示方法。',
                     ],
 
-                    'small-image' => [
-                        'height' => '高さ',
-                        'placeholder' => '小さい画像のプレースホルダ',
-                        'title' => '小さい画像',
-                        'title-info' => '小サイズの商品画像をリサイズする寸法と、画像がない商品に表示するプレースホルダー。',
-                        'width' => '幅',
-                    ],
-
-                    'medium-image' => [
-                        'height' => '高さ',
-                        'placeholder' => '中サイズの画像プレースホルダ',
-                        'title' => '中サイズの画像',
-                        'title-info' => '中サイズの商品画像をリサイズする寸法と、画像がない商品に表示するプレースホルダー。',
-                        'width' => '幅',
-                    ],
-
-                    'large-image' => [
-                        'height' => '高さ',
-                        'placeholder' => '大きな画像のプレースホルダ',
-                        'title' => '大きな画像',
-                        'title-info' => '大サイズの商品画像をリサイズする寸法と、画像がない商品に表示するプレースホルダー。',
-                        'width' => '幅',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => '顧客レビューを許可する',
                         'allow-guest-review' => 'ゲストレビューを許可する',

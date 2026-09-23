@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Bagaimana produk ditampilkan di halaman kategori dan pencarian.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Tinggi',
-                        'placeholder' => 'Placeholder Gambar Kecil',
-                        'title' => 'Gambar Kecil',
-                        'title-info' => 'Ukuran gambar produk kecil setelah diubah, dan gambar pengganti bila produk tidak memiliki gambar.',
-                        'width' => 'Lebar',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Tinggi',
-                        'placeholder' => 'Placeholder Gambar Sedang',
-                        'title' => 'Gambar Sedang',
-                        'title-info' => 'Ukuran gambar produk sedang setelah diubah, dan gambar pengganti bila produk tidak memiliki gambar.',
-                        'width' => 'Lebar',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Tinggi',
-                        'placeholder' => 'Placeholder Gambar Besar',
-                        'title' => 'Gambar Besar',
-                        'title-info' => 'Ukuran gambar produk besar setelah diubah, dan gambar pengganti bila produk tidak memiliki gambar.',
-                        'width' => 'Lebar',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Izinkan Ulasan dari Pelanggan',
                         'allow-guest-review' => 'Izinkan Ulasan dari Tamu',

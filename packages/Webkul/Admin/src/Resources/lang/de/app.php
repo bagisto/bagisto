@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Wie Produkte auf Kategorie- und Suchseiten aufgelistet werden.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Höhe',
-                        'placeholder' => 'Platzhalter für kleines Bild',
-                        'title' => 'Kleines Bild',
-                        'title-info' => 'Die Größe, auf die kleine Produktbilder skaliert werden, und der Platzhalter für Produkte ohne Bild.',
-                        'width' => 'Breite',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Höhe',
-                        'placeholder' => 'Platzhalter für mittleres Bild',
-                        'title' => 'Mittleres Bild',
-                        'title-info' => 'Die Größe, auf die mittlere Produktbilder skaliert werden, und der Platzhalter für Produkte ohne Bild.',
-                        'width' => 'Breite',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Höhe',
-                        'placeholder' => 'Platzhalter für großes Bild',
-                        'title' => 'Großes Bild',
-                        'title-info' => 'Die Größe, auf die große Produktbilder skaliert werden, und der Platzhalter für Produkte ohne Bild.',
-                        'width' => 'Breite',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Kundenbewertungen zulassen',
                         'allow-guest-review' => 'Gastbewertungen zulassen',

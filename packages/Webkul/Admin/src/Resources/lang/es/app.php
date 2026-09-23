@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Cómo se listan los productos en las páginas de categoría y de búsqueda.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Altura',
-                        'placeholder' => 'Marcador de posición de imagen pequeña',
-                        'title' => 'Imagen pequeña',
-                        'title-info' => 'El tamaño al que se redimensionan las imágenes pequeñas de producto, y el marcador que se muestra cuando un producto no tiene imagen.',
-                        'width' => 'Ancho',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Altura',
-                        'placeholder' => 'Marcador de posición de imagen mediana',
-                        'title' => 'Imagen mediana',
-                        'title-info' => 'El tamaño al que se redimensionan las imágenes medianas de producto, y el marcador que se muestra cuando un producto no tiene imagen.',
-                        'width' => 'Ancho',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Altura',
-                        'placeholder' => 'Marcador de posición de imagen grande',
-                        'title' => 'Imagen grande',
-                        'title-info' => 'El tamaño al que se redimensionan las imágenes grandes de producto, y el marcador que se muestra cuando un producto no tiene imagen.',
-                        'width' => 'Ancho',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Permitir reseñas de clientes',
                         'allow-guest-review' => 'Permitir reseñas de invitados',

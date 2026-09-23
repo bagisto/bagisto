@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Com es llisten els productes a les pàgines de categoria i de cerca.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Alçada',
-                        'placeholder' => 'Marcador de posició d\'imatge petita',
-                        'title' => 'Imatge petita',
-                        'title-info' => 'La mida a què es redimensionen les imatges petites de producte, i la imatge per defecte quan el producte no en té.',
-                        'width' => 'Amplada',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Alçada',
-                        'placeholder' => 'Marcador de posició d\'imatge mitjana',
-                        'title' => 'Imatge mitjana',
-                        'title-info' => 'La mida a què es redimensionen les imatges mitjanes de producte, i la imatge per defecte quan el producte no en té.',
-                        'width' => 'Amplada',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Alçada',
-                        'placeholder' => 'Marcador de posició d\'imatge gran',
-                        'title' => 'Imatge gran',
-                        'title-info' => 'La mida a què es redimensionen les imatges grans de producte, i la imatge per defecte quan el producte no en té.',
-                        'width' => 'Amplada',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Permetre ressenyes de clients',
                         'allow-guest-review' => 'Permetre ressenyes d\'invitats',

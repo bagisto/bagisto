@@ -102,8 +102,7 @@ class ProductImage
     {
         $templateRegistry = app(TemplateRegistry::class);
 
-        $url = $this->configuredPlaceholderUrl($template)
-            ?? $templateRegistry->placeholderUrl($templateRegistry->currentTheme(), $template);
+        $url = $templateRegistry->placeholderUrl($templateRegistry->currentTheme(), $template);
 
         if ($url) {
             return $url;
@@ -174,21 +173,5 @@ class ProductImage
         }
 
         return $urls + ['alt' => (string) $altText];
-    }
-
-    /**
-     * Get the url of the placeholder the merchant uploaded for a core size, or null when there is none.
-     */
-    private function configuredPlaceholderUrl(string $template): ?string
-    {
-        if (! in_array($template, ImageUrlBuilder::CORE_TEMPLATES, true)) {
-            return null;
-        }
-
-        $configured = core()->getConfigData('catalog.products.cache_'.$template.'_image.url');
-
-        return $configured
-            ? Storage::url($configured)
-            : null;
     }
 }

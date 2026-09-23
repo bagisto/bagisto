@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'How products are listed on category and search pages.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Height',
-                        'placeholder' => 'Small Image Placeholder',
-                        'title' => 'Small Image',
-                        'title-info' => 'The size small product images are resized to, and the placeholder shown when a product has no image.',
-                        'width' => 'Width',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Height',
-                        'placeholder' => 'Medium Image Placeholder',
-                        'title' => 'Medium Image',
-                        'title-info' => 'The size medium product images are resized to, and the placeholder shown when a product has no image.',
-                        'width' => 'Width',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Height',
-                        'placeholder' => 'Large Image Placeholder',
-                        'title' => 'Large image',
-                        'title-info' => 'The size large product images are resized to, and the placeholder shown when a product has no image.',
-                        'width' => 'Width',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Allow Customer Review',
                         'allow-guest-review' => 'Allow Guest Review',

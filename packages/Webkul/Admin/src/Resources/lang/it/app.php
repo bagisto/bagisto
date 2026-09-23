@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Come i prodotti sono elencati nelle pagine di categoria e di ricerca.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Altezza',
-                        'placeholder' => 'Segnaposto immagine piccola',
-                        'title' => 'Immagine piccola',
-                        'title-info' => 'La dimensione a cui vengono ridimensionate le immagini piccole dei prodotti e il segnaposto mostrato quando un prodotto non ha immagine.',
-                        'width' => 'Larghezza',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Altezza',
-                        'placeholder' => 'Segnaposto immagine media',
-                        'title' => 'Immagine media',
-                        'title-info' => 'La dimensione a cui vengono ridimensionate le immagini medie dei prodotti e il segnaposto mostrato quando un prodotto non ha immagine.',
-                        'width' => 'Larghezza',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Altezza',
-                        'placeholder' => 'Segnaposto immagine grande',
-                        'title' => 'Immagine grande',
-                        'title-info' => 'La dimensione a cui vengono ridimensionate le immagini grandi dei prodotti e il segnaposto mostrato quando un prodotto non ha immagine.',
-                        'width' => 'Larghezza',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Consenti recensioni dei clienti',
                         'allow-guest-review' => 'Consenti recensioni degli ospiti',

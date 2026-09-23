@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Como os produtos são listados nas páginas de categoria e de busca.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Altura',
-                        'placeholder' => 'Espaço Reservado para Imagem Pequena',
-                        'title' => 'Imagem Pequena',
-                        'title-info' => 'O tamanho para o qual as imagens pequenas de produto são redimensionadas, e a imagem padrão quando o produto não tem imagem.',
-                        'width' => 'Largura',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Altura',
-                        'placeholder' => 'Espaço Reservado para Imagem Média',
-                        'title' => 'Imagem Média',
-                        'title-info' => 'O tamanho para o qual as imagens médias de produto são redimensionadas, e a imagem padrão quando o produto não tem imagem.',
-                        'width' => 'Largura',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Altura',
-                        'placeholder' => 'Espaço Reservado para Imagem Grande',
-                        'title' => 'Imagem Grande',
-                        'title-info' => 'O tamanho para o qual as imagens grandes de produto são redimensionadas, e a imagem padrão quando o produto não tem imagem.',
-                        'width' => 'Largura',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Permitir Avaliação do Cliente',
                         'allow-guest-review' => 'Permitir Avaliação de Convidado',

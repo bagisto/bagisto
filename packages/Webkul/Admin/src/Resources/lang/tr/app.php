@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Ürünlerin kategori ve arama sayfalarında nasıl listeleneceği.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Yükseklik',
-                        'placeholder' => 'Küçük Resim Yer Tutucusu',
-                        'title' => 'Küçük Resim',
-                        'title-info' => 'Küçük ürün görsellerinin yeniden boyutlandırıldığı boyut ve ürünün görseli yoksa gösterilen yer tutucu.',
-                        'width' => 'Genişlik',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Yükseklik',
-                        'placeholder' => 'Orta Resim Yer Tutucusu',
-                        'title' => 'Orta Resim',
-                        'title-info' => 'Orta boy ürün görsellerinin yeniden boyutlandırıldığı boyut ve ürünün görseli yoksa gösterilen yer tutucu.',
-                        'width' => 'Genişlik',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Yükseklik',
-                        'placeholder' => 'Büyük Resim Yer Tutucusu',
-                        'title' => 'Büyük resim',
-                        'title-info' => 'Büyük ürün görsellerinin yeniden boyutlandırıldığı boyut ve ürünün görseli yoksa gösterilen yer tutucu.',
-                        'width' => 'Genişlik',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Müşteri İncelemesine İzin Ver',
                         'allow-guest-review' => 'Konuk İncelemesine İzin Ver',

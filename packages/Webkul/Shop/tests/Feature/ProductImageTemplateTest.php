@@ -285,22 +285,6 @@ it('should give a product without an image the placeholders its theme ships in i
         ->and($image['medium_image_url'])->toContain('medium-product-placeholder');
 });
 
-it('should keep the placeholder the merchant uploaded for a size over the one the theme ships', function () {
-    $this->setConfig('catalog.products.cache_small_image.url', 'configurations/small-placeholder.webp');
-
-    $channel = channelRunningImageTemplates('poster', null, [], [
-        'small' => 'images/poster-small.webp',
-        'medium' => 'images/poster-medium.webp',
-    ]);
-
-    serveThemeFromViteDevServer('poster', 'http://poster-vite.test');
-
-    $image = baseImageOn($channel, $this->createSimpleProduct());
-
-    expect($image['small_image_url'])->toBe(Storage::url('configurations/small-placeholder.webp'))
-        ->and($image['medium_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-medium.webp');
-});
-
 it('should show the core placeholder where the theme ships one its build cannot resolve, reporting it', function () {
     Exceptions::fake();
 

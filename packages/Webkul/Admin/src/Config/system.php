@@ -2641,79 +2641,10 @@ return [
             ],
         ],
     ], [
-        'key' => 'catalog.products.cache_small_image',
-        'name' => 'admin::app.configuration.index.catalog.products.small-image.title',
-        'info' => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort' => 7,
-        'fields' => [
-            [
-                'name' => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.width',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.height',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'url',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.placeholder',
-                'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],
-        ],
-    ], [
-        'key' => 'catalog.products.cache_medium_image',
-        'name' => 'admin::app.configuration.index.catalog.products.medium-image.title',
-        'info' => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort' => 8,
-        'fields' => [
-            [
-                'name' => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.width',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.height',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'url',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.placeholder',
-                'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],
-        ],
-    ], [
-        'key' => 'catalog.products.cache_large_image',
-        'name' => 'admin::app.configuration.index.catalog.products.large-image.title',
-        'info' => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort' => 9,
-        'fields' => [
-            [
-                'name' => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.width',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.height',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'url',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.placeholder',
-                'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],
-        ],
-    ], [
         'key' => 'catalog.products.attribute',
         'name' => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info' => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort' => 10,
+        'sort' => 7,
         'fields' => [
             [
                 'name' => 'image_attribute_upload_size',
@@ -2731,7 +2662,7 @@ return [
         'key' => 'catalog.products.omnibus',
         'name' => 'admin::app.configuration.index.catalog.products.omnibus.title',
         'info' => 'admin::app.configuration.index.catalog.products.omnibus.title-info',
-        'sort' => 11,
+        'sort' => 8,
         'fields' => [
             [
                 'name' => 'is_enabled',

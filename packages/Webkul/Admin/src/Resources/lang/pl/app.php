@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Jak produkty są prezentowane na stronach kategorii i wyszukiwania.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Wysokość',
-                        'placeholder' => 'Zdjęcie zastępcze (małe)',
-                        'title' => 'Małe zdjęcia (miniaturki)',
-                        'title-info' => 'Rozmiar, do którego skalowane są małe zdjęcia produktów, oraz obraz zastępczy, gdy produkt nie ma zdjęcia.',
-                        'width' => 'Szerokość',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Wysokość',
-                        'placeholder' => 'Zdjęcie zastępcze (średnie)',
-                        'title' => 'Średnie zdjęcia (katalog produktów)',
-                        'title-info' => 'Rozmiar, do którego skalowane są średnie zdjęcia produktów, oraz obraz zastępczy, gdy produkt nie ma zdjęcia.',
-                        'width' => 'Szerokość',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Wysokość',
-                        'placeholder' => 'Zdjęcie zastępcze (duże)',
-                        'title' => 'Duże zdjęcia (karta produktu)',
-                        'title-info' => 'Rozmiar, do którego skalowane są duże zdjęcia produktów, oraz obraz zastępczy, gdy produkt nie ma zdjęcia.',
-                        'width' => 'Szerokość',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Zezwalaj na recenzje klientów',
                         'allow-guest-review' => 'Zezwalaj na recenzje gości',

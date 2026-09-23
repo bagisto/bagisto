@@ -5232,30 +5232,6 @@ return [
                         'title-info' => 'Hoe producten op categorie- en zoekpagina\'s worden weergegeven.',
                     ],
 
-                    'small-image' => [
-                        'height' => 'Hoogte',
-                        'placeholder' => 'Plaatsaanduiding kleine afbeelding',
-                        'title' => 'Kleine afbeelding',
-                        'title-info' => 'De grootte waarnaar kleine productafbeeldingen worden geschaald, en de tijdelijke afbeelding als een product er geen heeft.',
-                        'width' => 'Breedte',
-                    ],
-
-                    'medium-image' => [
-                        'height' => 'Hoogte',
-                        'placeholder' => 'Plaatsaanduiding middelgrote afbeelding',
-                        'title' => 'Middelgrote afbeelding',
-                        'title-info' => 'De grootte waarnaar middelgrote productafbeeldingen worden geschaald, en de tijdelijke afbeelding als een product er geen heeft.',
-                        'width' => 'Breedte',
-                    ],
-
-                    'large-image' => [
-                        'height' => 'Hoogte',
-                        'placeholder' => 'Plaatsaanduiding grote afbeelding',
-                        'title' => 'Grote afbeelding',
-                        'title-info' => 'De grootte waarnaar grote productafbeeldingen worden geschaald, en de tijdelijke afbeelding als een product er geen heeft.',
-                        'width' => 'Breedte',
-                    ],
-
                     'review' => [
                         'allow-customer-review' => 'Klantbeoordeling toestaan',
                         'allow-guest-review' => 'Gastbeoordeling toestaan',
