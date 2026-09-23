@@ -126,7 +126,8 @@ your summary rather than silently churning the codebase either way.
 ├── phpunit.xml                 # Test suites per package
 ├── pint.json                   # Pint config (preset: laravel)
 ├── vite.config.js              # Root Vite config
-├── docker-compose.yml          # Laravel Sail: PHP 8.4, MySQL 8.0, Redis, Elasticsearch 8.19, Kibana, Mailpit
+├── docker-compose.yml          # Laravel Sail: PHP 8.4, MySQL 8.0 / MariaDB 10.11 / PostgreSQL 16, nginx or apache, Redis, Elasticsearch 8.19, Kibana, Mailpit
+├── docker/local/               # nginx and apache configs for the Sail web-server profiles
 └── docker/production/          # Production images: {nginx,apache,litespeed} x {mysql,mariadb,postgres}
 ```
 
@@ -227,6 +228,53 @@ php artisan optimize:clear      # Clear all caches (run after config/code change
 php artisan migrate             # Run migrations
 php artisan db:seed             # Seed database
 ```
+
+#### Laravel Sail
+
+`docker-compose.yml` describes the optional Docker stack. `laravel/sail` is **not** a dependency of
+this repository, so install it before the first run:
+
+```bash
+composer require laravel/sail --dev
+./vendor/bin/sail up -d
+```
+
+The database and the web server are Compose profiles, and `.env.example` carries
+`COMPOSE_PROFILES=${DB_CONNECTION}`, so the database matching `DB_CONNECTION` is the only one that
+starts. Set `DB_HOST` to the same name — each server is reachable under its service name.
+
+`COMPOSE_PROFILES` is Docker Compose's own variable, not Laravel's: Laravel ignores it, and Compose
+reads the same `.env` file. It belongs there rather than on the command line because every command
+needs it, not only `up` — a `down` run without the profile stops the database container but leaves
+it behind. For a one-off, prefix the command instead, as in
+`COMPOSE_PROFILES=pgsql ./vendor/bin/sail up -d`. `sail up --profile pgsql` does **not** work:
+Compose accepts `--profile` only before the subcommand, and Sail appends arguments after it.
+
+| Profile | Service | `DB_HOST` / `DB_PORT` |
+|---|---|---|
+| `mysql` | MySQL 8.0 (default) | `mysql` / `3306` |
+| `mariadb` | MariaDB 10.11 | `mariadb` / `3306` |
+| `pgsql` | PostgreSQL 16 | `pgsql` / `5432` |
+| `nginx`, `apache` or `litespeed` | Web server on `${FORWARD_WEB_PORT:-8080}` | — |
+
+List several profiles to combine them, e.g. `COMPOSE_PROFILES=pgsql,nginx`. Redis, Elasticsearch,
+Kibana and Mailpit carry no profile and always run.
+
+Only the container follows `DB_CONNECTION`. Every connection in `config/database.php` reads the same
+`DB_HOST` and `DB_PORT`, so both have to be set to the row above by hand — and `DB_PORT=` resolves
+to an empty string rather than to the connection's own default, so remove the line instead of
+emptying it. Switching database also leaves the data behind: reinstall into the new server with
+`sail artisan bagisto:install` and clear the cached config.
+
+Sail's own image ships `php8.4-cli` and serves the application with `artisan serve`, so the three
+web servers sit **in front** of it: they serve `public/` from the mounted project and pass everything
+else to the app container. Their configuration lives in `docker/local/` and mirrors the production
+vhosts, which is what makes rewrite, header and caching behaviour worth testing there. Port 80 still
+reaches `artisan serve` directly, and the servers are alternatives — they share
+`FORWARD_WEB_PORT`, so enable one at a time.
+
+Mount every web-server config read-only. The OpenLiteSpeed image chowns its configuration on start,
+which takes ownership of the files inside the repository when the mount is writable.
 
 ### Testing
 

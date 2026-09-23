@@ -2,11 +2,19 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.5.0-beta5 (23rd of September 2026)** - *Release*
+
+- Fixed Magic AI hiding why a generation failed — the provider's own message, such as a rejected prompt or an invalid API key, now reaches the admin.
+
+- Fixed Magic AI handing a model the store no longer offers to a different provider, which failed with an unrelated error. The unknown model is now reported.
 
 - Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
 
 - Updated the Laravel Sail setup to build on PHP 8.4, run Elasticsearch and Kibana 8.19 to match the 8.x client, keep Elasticsearch data across restarts and use the official MySQL image.
+
+- Added MariaDB and PostgreSQL to the Laravel Sail stack, and an optional nginx, apache or OpenLiteSpeed server in front of it. Each is a Compose profile, and the database container follows `DB_CONNECTION`.
+
+- Updated the production Docker images to build the 2.5.0 release by default, and let the bundled MySQL user take the server's own authentication plugin instead of the deprecated one.
 
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 

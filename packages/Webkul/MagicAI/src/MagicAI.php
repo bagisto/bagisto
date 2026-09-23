@@ -103,19 +103,20 @@ class MagicAI
     /**
      * Resolve the model for a named storefront feature from admin config.
      *
-     * Falls back to the enum's recommended default when no model is saved.
+     * Falls back to the enum's recommended default when the saved model is missing or retired.
      */
     protected function loadStorefrontModel(string $feature): ?string
     {
         $model = core()->getConfigData("magic_ai.storefront_features.{$feature}.model") ?: null;
 
-        if (! $model) {
-            $default = AiProvider::defaultTextModel(AiProvider::defaultTextProvider());
-
-            $model = $default?->value;
+        if (
+            $model
+            && AiProvider::resolveModel($model)
+        ) {
+            return $model;
         }
 
-        return $model;
+        return AiProvider::defaultTextModel(AiProvider::defaultTextProvider())?->value;
     }
 
     /**
@@ -137,7 +138,7 @@ class MagicAI
         $modelEnum = AiProvider::resolveModel($model);
 
         if (! $modelEnum) {
-            return null;
+            throw new \RuntimeException("AI model [{$model}] is not one of the models Magic AI offers.");
         }
 
         $provider = $modelEnum->provider()->value;
@@ -184,8 +185,6 @@ class MagicAI
 
         $quality = $this->resolveQuality($options['quality'] ?? null);
 
-        // For providers that don't handle size/quality via API parameters,
-        // encode these requirements directly into the prompt.
         $imagePrompt = $this->supportsNativeImageOptions($provider)
             ? $prompt
             : $this->enrichImagePrompt($prompt, $aspectRatio, $quality);

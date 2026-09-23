@@ -180,29 +180,29 @@ Select the variant with `-f <variant>/Dockerfile`. The trailing `.` is the build
 
 ### Build a specific variant
 
-Each Dockerfile clones the Git tag named by `BAGISTO_VERSION`. Its default is `v2.4.7`, a 2.4 release, so pass the release you want and tag the image to match. PostgreSQL needs a 2.5 release; 2.4 has no PostgreSQL support.
+Each Dockerfile clones the Git tag named by `BAGISTO_VERSION`. Its default is `v2.5.0`, so pass a different release if you want one and tag the image to match. A `-postgres` image needs a 2.5 release; the 2.4 line has no PostgreSQL support.
 
 ```bash
 # nginx + MySQL
-docker build -f nginx/Dockerfile     -t bagisto:2.5.0-beta4-nginx-mysql     --build-arg BAGISTO_VERSION=v2.5.0-beta4 .
+docker build -f nginx/Dockerfile     -t bagisto:2.5.0-nginx-mysql     --build-arg BAGISTO_VERSION=v2.5.0 .
 
 # apache + MySQL
-docker build -f apache/Dockerfile    -t bagisto:2.5.0-beta4-apache-mysql    --build-arg BAGISTO_VERSION=v2.5.0-beta4 .
+docker build -f apache/Dockerfile    -t bagisto:2.5.0-apache-mysql    --build-arg BAGISTO_VERSION=v2.5.0 .
 
 # litespeed + MySQL
-docker build -f litespeed/Dockerfile -t bagisto:2.5.0-beta4-litespeed-mysql --build-arg BAGISTO_VERSION=v2.5.0-beta4 .
+docker build -f litespeed/Dockerfile -t bagisto:2.5.0-litespeed-mysql --build-arg BAGISTO_VERSION=v2.5.0 .
 ```
 
 The database is chosen with `DB_ENGINE`, which defaults to `mysql`:
 
 ```bash
 # nginx + MariaDB
-docker build -f nginx/Dockerfile -t bagisto:2.5.0-beta4-nginx-mariadb \
-    --build-arg BAGISTO_VERSION=v2.5.0-beta4 --build-arg DB_ENGINE=mariadb .
+docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-mariadb \
+    --build-arg BAGISTO_VERSION=v2.5.0 --build-arg DB_ENGINE=mariadb .
 
 # nginx + PostgreSQL
-docker build -f nginx/Dockerfile -t bagisto:2.5.0-beta4-nginx-postgres \
-    --build-arg BAGISTO_VERSION=v2.5.0-beta4 --build-arg DB_ENGINE=postgres .
+docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-postgres \
+    --build-arg BAGISTO_VERSION=v2.5.0 --build-arg DB_ENGINE=postgres .
 ```
 
 Any tag from https://github.com/bagisto/bagisto/tags works as `BAGISTO_VERSION`, e.g. `--build-arg BAGISTO_VERSION=v2.4.12` for the latest 2.4 release on MySQL or MariaDB.
@@ -211,7 +211,7 @@ Any tag from https://github.com/bagisto/bagisto/tags works as `BAGISTO_VERSION`,
 
 | Build arg | Applies to | Default | Description |
 |---|---|---|---|
-| `BAGISTO_VERSION` | all images | `v2.4.7` | Git tag to clone from the Bagisto repository. The default is a 2.4 release; PostgreSQL needs a 2.5 tag. |
+| `BAGISTO_VERSION` | all images | `v2.5.0` | Git tag to clone from the Bagisto repository. A `-postgres` image needs a 2.5 tag. |
 | `DB_ENGINE` | all images | `mysql` | Database to bundle: `mysql`, `mariadb` or `postgres`. Selects everything under `shared/db/<engine>/`. |
 | `PHP_VERSION` | nginx, apache | `8.4` | PHP version to install. Only change if you know what you're doing. |
 | `LSPHP_VERSION` | litespeed | `84` | lsphp major version (`84` for PHP 8.4). |
@@ -244,84 +244,84 @@ Every release publishes all nine combinations. The canonical name carries both d
 
 The rule behind the aliases: a `-mysql` image also answers to the server-only name, and nginx + MySQL additionally answers to the bare version and `:latest`. MariaDB and PostgreSQL images are always named in full — there is no unqualified alias that silently means either one.
 
-So a stable `v2.4.7` release on the default branch produces:
+So a stable `v2.5.0` release on the default branch produces:
 
 ```
-webkul/bagisto:2.4.7
-webkul/bagisto:2.4.7-nginx
-webkul/bagisto:2.4.7-nginx-mysql
-webkul/bagisto:2.4.7-nginx-mariadb
-webkul/bagisto:2.4.7-nginx-postgres
-webkul/bagisto:2.4.7-apache
-webkul/bagisto:2.4.7-apache-mysql
-webkul/bagisto:2.4.7-apache-mariadb
-webkul/bagisto:2.4.7-apache-postgres
-webkul/bagisto:2.4.7-litespeed
-webkul/bagisto:2.4.7-litespeed-mysql
-webkul/bagisto:2.4.7-litespeed-mariadb
-webkul/bagisto:2.4.7-litespeed-postgres
+webkul/bagisto:2.5.0
+webkul/bagisto:2.5.0-nginx
+webkul/bagisto:2.5.0-nginx-mysql
+webkul/bagisto:2.5.0-nginx-mariadb
+webkul/bagisto:2.5.0-nginx-postgres
+webkul/bagisto:2.5.0-apache
+webkul/bagisto:2.5.0-apache-mysql
+webkul/bagisto:2.5.0-apache-mariadb
+webkul/bagisto:2.5.0-apache-postgres
+webkul/bagisto:2.5.0-litespeed
+webkul/bagisto:2.5.0-litespeed-mysql
+webkul/bagisto:2.5.0-litespeed-mariadb
+webkul/bagisto:2.5.0-litespeed-postgres
 ```
 
 plus the same set under `latest` (`webkul/bagisto:latest-nginx-mysql`, `webkul/bagisto:latest-nginx`, `webkul/bagisto:latest`, and so on).
 
-`docker pull webkul/bagisto:latest` (or `:2.4.7`) gives you the **nginx + MySQL** variant.
+`docker pull webkul/bagisto:latest` (or `:2.5.0`) gives you the **nginx + MySQL** variant.
 
 ### `v`-prefix convention
 
 | Where | Format | Example |
 |---|---|---|
-| Bagisto Git tag (used in `--build-arg`) | **with** `v` prefix | `v2.4.0` |
-| Docker image tag | **without** `v` prefix | `2.4.0` |
+| Bagisto Git tag (used in `--build-arg`) | **with** `v` prefix | `v2.5.0` |
+| Docker image tag | **without** `v` prefix | `2.5.0` |
 
 The `v` prefix is a Git convention. Docker Hub tags are plain version numbers.
 
 ### Tags published per release (automated)
 
-The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains multiple release lines in parallel (e.g. `2.4.x` and `2.5.x`), so `:latest` is reserved for releases that come from commits on the default branch line. When a new major/minor line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically.
+The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains multiple release lines in parallel (e.g. `2.4.x` on the `2.4` branch and `2.5.x` on `master`), so `:latest` is reserved for releases that come from commits on the default branch line. When a new major/minor line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically.
 
 How the workflow decides:
 
 - For each tagged build, GitHub's compare API is queried for `<default-branch>...<build-commit>`.
 - If the compare status is `identical` or `behind`, the build commit is on the default branch line → `:latest` is updated (for stable tags).
-- If the status is `diverged` (the commit is on a side branch like `2.3` while the default is `2.4`), `:latest` is **not** touched.
+- If the status is `diverged` (the commit is on a side branch like `2.4` while the default is `master`), `:latest` is **not** touched.
 
 Each row below is published **for every server × database combination** (with its `-<server>-<database>` suffix and the aliases from the table above); the unsuffixed tags shown are the nginx + MySQL aliases.
 
-| Git tag pushed | Default branch is `2.4` → Docker Hub tags published (per variant) |
+| Git tag pushed | Default branch is `master` (the 2.5 line) → Docker Hub tags published (per variant) |
 |---|---|
-| `v2.4.7` (commit on `2.4`, stable) | `:2.4.7-<variant>`, `:latest-<variant>` (+ nginx: `:2.4.7`, `:latest`) |
-| `v2.3.19` (commit on `2.3`, stable) | `:2.3.19-<variant>` only (does **not** touch any `:latest*`) |
-| `v2.4.7-rc1` (pre-release on `2.4`) | `:2.4.7-rc1-<variant>` only |
-| Later: default branch switched to `2.5`, then `v2.5.0` released | `:2.5.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.0`, `:latest`) |
-| Later: default branch is `2.5`, then a patch `v2.4.8` is released on `2.4` | `:2.4.8-<variant>` only (does **not** touch any `:latest*`) |
+| `v2.5.0` (commit on `master`, stable) | `:2.5.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.0`, `:latest`) |
+| `v2.4.12` (commit on `2.4`, stable) | `:2.4.12-<variant>` only (does **not** touch any `:latest*`) |
+| `v2.5.1-rc1` (pre-release on `master`) | `:2.5.1-rc1-<variant>` only |
+| Later: default branch switched to `2.6`, then `v2.6.0` released | `:2.6.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.6.0`, `:latest`) |
+| Later: default branch is `2.6`, then a patch `v2.5.1` is released on the 2.5 line | `:2.5.1-<variant>` only (does **not** touch any `:latest*`) |
 
 | Tag form | Mutability | Purpose |
 |---|---|---|
-| `:X.Y.Z` (e.g. `:2.4.4`) | Immutable once released; a manual re-run of the same version replaces it | Pins to one exact build. Use this for reproducible deployments. |
+| `:X.Y.Z` (e.g. `:2.5.0`) | Immutable once released; a manual re-run of the same version replaces it | Pins to one exact build. Use this for reproducible deployments. |
 | `:latest` | Floating | Latest stable release on the default branch line (controlled by GitHub's default-branch setting). |
 
 ### Manual tagging (local builds)
 
 ```bash
 # Tag an existing local image for Docker Hub
-docker tag bagisto:2.4.0-nginx-mysql <your-dockerhub-username>/bagisto:2.4.0
-docker tag bagisto:2.4.0-nginx-mysql <your-dockerhub-username>/bagisto:latest
+docker tag bagisto:2.5.0-nginx-mysql <your-dockerhub-username>/bagisto:2.5.0
+docker tag bagisto:2.5.0-nginx-mysql <your-dockerhub-username>/bagisto:latest
 ```
 
 Or build directly with the final name (skips the retag step):
 
 ```bash
-docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
-docker tag   <your-dockerhub-username>/bagisto:2.4.0 <your-dockerhub-username>/bagisto:latest
+docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.5.0 --build-arg BAGISTO_VERSION=v2.5.0 .
+docker tag   <your-dockerhub-username>/bagisto:2.5.0 <your-dockerhub-username>/bagisto:latest
 ```
 
 ### Avoid these tag formats
 
 | Bad | Why |
 |---|---|
-| `bagisto:v2.4.0` | Inconsistent with Docker Hub convention (no `v` prefix). |
-| `bagisto:bagisto-2.4.0` | Redundant — the repository name already says `bagisto`. |
-| `bagisto:prod-2.4.0` | Unnecessary prefix — all images in this repo are production. |
+| `bagisto:v2.5.0` | Inconsistent with Docker Hub convention (no `v` prefix). |
+| `bagisto:bagisto-2.5.0` | Redundant — the repository name already says `bagisto`. |
+| `bagisto:prod-2.5.0` | Unnecessary prefix — all images in this repo are production. |
 
 ---
 
@@ -365,28 +365,28 @@ Generate an access token at https://hub.docker.com/settings/security and paste i
 #### Step 2 — Build with the Docker Hub name
 
 ```bash
-docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.4.0 \
-  --build-arg BAGISTO_VERSION=v2.4.0 .
+docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.5.0 \
+  --build-arg BAGISTO_VERSION=v2.5.0 .
 ```
 
 #### Step 3 — Also tag as `latest`
 
 ```bash
-docker tag <your-dockerhub-username>/bagisto:2.4.0 \
+docker tag <your-dockerhub-username>/bagisto:2.5.0 \
            <your-dockerhub-username>/bagisto:latest
 ```
 
 #### Step 4 — Push both tags
 
 ```bash
-docker push <your-dockerhub-username>/bagisto:2.4.0
+docker push <your-dockerhub-username>/bagisto:2.5.0
 docker push <your-dockerhub-username>/bagisto:latest
 ```
 
 #### Step 5 — Verify
 
 ```bash
-docker manifest inspect <your-dockerhub-username>/bagisto:2.4.0
+docker manifest inspect <your-dockerhub-username>/bagisto:2.5.0
 ```
 
 Or visit `https://hub.docker.com/r/<your-dockerhub-username>/bagisto/tags` in your browser.
@@ -420,8 +420,8 @@ docker login -u <your-dockerhub-username>
 docker buildx build \
   -f nginx/Dockerfile \
   --platform linux/amd64,linux/arm64 \
-  --build-arg BAGISTO_VERSION=v2.4.0 \
-  -t <your-dockerhub-username>/bagisto:2.4.0 \
+  --build-arg BAGISTO_VERSION=v2.5.0 \
+  -t <your-dockerhub-username>/bagisto:2.5.0 \
   -t <your-dockerhub-username>/bagisto:latest \
   --push .
 ```
@@ -431,7 +431,7 @@ docker buildx build \
 #### Verify the manifest
 
 ```bash
-docker buildx imagetools inspect <your-dockerhub-username>/bagisto:2.4.0
+docker buildx imagetools inspect <your-dockerhub-username>/bagisto:2.5.0
 ```
 
 You should see entries for both `linux/amd64` and `linux/arm64`.
@@ -448,36 +448,36 @@ You should see entries for both `linux/amd64` and `linux/arm64`.
 
 ### Automated flow (standard)
 
-Releasing a Bagisto version (e.g. `2.4.0`) is a single tag push:
+Releasing a Bagisto version (e.g. `2.5.0`) is a single tag push:
 
 ```bash
 # From the Bagisto repo root
-git tag v2.4.0
-git push origin v2.4.0
+git tag v2.5.0
+git push origin v2.5.0
 ```
 
 That's the entire release. The GitHub Actions workflow at `.github/workflows/docker-publish.yml` then runs three jobs:
 
 1. **Resolve** — validates the tag matches `vX.Y.Z` (or `vX.Y.Z-suffix` for pre-releases), derives the Docker tag, and decides whether the `:latest` aliases move by comparing the build commit against the default branch.
-2. **Build** — matrix-builds every server × database combination, each from its own `docker/production/<server>/Dockerfile` (`nginx`, `apache`, `litespeed`) with `DB_ENGINE` set to `mysql`, `mariadb` or `postgres` and `BAGISTO_VERSION=v2.4.0`, for `linux/amd64` and `linux/arm64`. Each combination is pushed untagged, by digest, and its buildx layers are cached in the GitHub Actions cache.
-3. **Publish** — creates every tag from those digests in a fixed order: the version tags first (e.g. `webkul/bagisto:2.4.0-nginx-mariadb`, and the bare `webkul/bagisto:2.4.0` for nginx + MySQL), then, since the `2.4` branch **is** the GitHub default branch, the `:latest` aliases, ending with `webkul/bagisto:latest`.
+2. **Build** — matrix-builds every server × database combination, each from its own `docker/production/<server>/Dockerfile` (`nginx`, `apache`, `litespeed`) with `DB_ENGINE` set to `mysql`, `mariadb` or `postgres` and `BAGISTO_VERSION=v2.5.0`, for `linux/amd64` and `linux/arm64`. Each combination is pushed untagged, by digest, and its buildx layers are cached in the GitHub Actions cache.
+3. **Publish** — creates every tag from those digests in a fixed order: the version tags first (e.g. `webkul/bagisto:2.5.0-nginx-mariadb`, and the bare `webkul/bagisto:2.5.0` for nginx + MySQL), then, since `master` **is** the GitHub default branch, the `:latest` aliases, ending with `webkul/bagisto:latest`.
 
 Track progress in the repo's **Actions** tab. Build duration is typically **30–60 minutes** because the arm64 leg runs under QEMU emulation and Bagisto is fully installed (migrations, seeders, indexers) during the build.
 
 After the run finishes:
 
-- Tags of earlier releases (for example `webkul/bagisto:2.3.19`) still exist and still work (tags are immutable once pushed).
-- `webkul/bagisto:2.4.0` points to the new build (both archs).
-- `webkul/bagisto:latest` now points to `2.4.0` (since `2.4` is the default branch line).
+- Tags of earlier releases (for example `webkul/bagisto:2.4.12`) still exist and still work (tags are immutable once pushed).
+- `webkul/bagisto:2.5.0` points to the new build (both archs).
+- `webkul/bagisto:latest` now points to `2.5.0` (since `master` is the default branch line).
 
 ### Pre-release / RC tags
 
 Tags with a suffix do **not** update `latest`:
 
 ```bash
-git tag v2.4.0-rc1
-git push origin v2.4.0-rc1
-# → webkul/bagisto:2.4.0-rc1   (latest is untouched)
+git tag v2.5.1-rc1
+git push origin v2.5.1-rc1
+# → webkul/bagisto:2.5.1-rc1   (latest is untouched)
 ```
 
 ### Manual re-run via workflow_dispatch
@@ -486,7 +486,7 @@ Need to rebuild a previously-released version without retagging? Go to **Actions
 
 | Input | Value |
 |---|---|
-| `bagisto_version` | e.g. `v2.4.0` |
+| `bagisto_version` | e.g. `v2.5.0` |
 
 Whether `:latest` is updated is decided the same way as for a tag push, but against the commit the workflow runs on — the branch or tag you dispatch it from — not against `bagisto_version`. Dispatching from the default branch to rebuild an older version therefore moves `:latest` to that older build; dispatch from the release's own tag to avoid it. A re-run replaces the version tags it rebuilds.
 
@@ -654,7 +654,7 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 
 | Variable | Default | Description |
 |---|---|---|
-| `BAGISTO_VERSION` | `v2.4.7` | Git tag cloned from the Bagisto repository. |
+| `BAGISTO_VERSION` | `v2.5.0` | Git tag cloned from the Bagisto repository. |
 | `DB_ENGINE` | `mysql` | Database to bundle: `mysql`, `mariadb` or `postgres`. |
 | `PHP_VERSION` | `8.4` | PHP version to install (nginx, apache). |
 | `LSPHP_VERSION` | `84` | lsphp major version (litespeed). |
@@ -804,13 +804,13 @@ docker exec -it -e PGPASSWORD=bagisto bagisto psql -h 127.0.0.1 -U bagisto bagis
 
 ## 15. Upgrading Bagisto Version
 
-The Bagisto source is baked into the image at build time. New official versions are published to Docker Hub automatically when the corresponding `v*` Git tag is pushed to `bagisto/bagisto` — just `docker pull webkul/bagisto:2.4.0` (or `:latest`) to get the new image.
+The Bagisto source is baked into the image at build time. New official versions are published to Docker Hub automatically when the corresponding `v*` Git tag is pushed to `bagisto/bagisto` — just `docker pull webkul/bagisto:2.5.0` (or `:latest`) to get the new image.
 
 For custom or local rebuilds:
 
 ```bash
 cd docker/production
-docker build -f nginx/Dockerfile -t bagisto:2.4.0-nginx-mysql --build-arg BAGISTO_VERSION=v2.4.0 .
+docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-mysql --build-arg BAGISTO_VERSION=v2.5.0 .
 ```
 
 Then stop and replace the running container:
@@ -821,7 +821,7 @@ docker stop bagisto && docker rm bagisto
 docker run -d --name bagisto -p 80:80 \
   -v bagisto-mysql:/var/lib/mysql \
   -v bagisto-storage:/var/www/bagisto/storage \
-  bagisto:2.4.0-nginx-mysql
+  bagisto:2.5.0-nginx-mysql
 ```
 
 If the schema changed between versions, you may need to run Bagisto's migrations against the existing data:

@@ -13,12 +13,12 @@
 # The image boots instantly with no first-run setup needed.
 #
 # Build context is `docker/production/`:
-#   docker build -f apache/Dockerfile -t bagisto:2.4.7-apache .
+#   docker build -f apache/Dockerfile -t bagisto:2.5.0-apache .
 # =============================================================================
 
 FROM ubuntu:24.04
 
-ARG BAGISTO_VERSION=v2.4.7
+ARG BAGISTO_VERSION=v2.5.0
 ARG DB_ENGINE=mysql
 ARG PHP_VERSION=8.4
 
@@ -123,7 +123,7 @@ RUN cp .env.example .env \
 
 
 # ---------------------------------------------------------------------------
-# Install Bagisto at BUILD TIME (starts MySQL, migrates + seeds, bakes data in)
+# Install Bagisto at BUILD TIME (starts the bundled database, migrates + seeds, bakes data in)
 # ---------------------------------------------------------------------------
 COPY shared/build-install.sh /tmp/build-install.sh
 RUN mkdir -p /docker-entrypoint-initdb.d \

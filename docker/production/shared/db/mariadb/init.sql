@@ -1,6 +1,8 @@
 -- ============================================================================
--- MariaDB initial setup for Bagisto internal database
--- Executed only on first MariaDB initialization (empty /var/lib/mysql)
+-- MariaDB initial setup for the Bagisto internal database.
+--
+-- Executed once during the image build, against a freshly initialised data
+-- directory.
 -- ============================================================================
 
 CREATE DATABASE IF NOT EXISTS `bagisto`

@@ -43,7 +43,7 @@ on:
   workflow_dispatch:
     inputs:
       bagisto_version:
-        description: 'Bagisto git tag to build (e.g. v2.4.7). Defaults to the workflow ref tag.'
+        description: 'Bagisto git tag to build (e.g. v2.5.0). Defaults to the workflow ref tag.'
         required: false
         type: string
 
@@ -103,7 +103,7 @@ jobs:
           #   identical  → same commit as default tip
           #   behind     → build commit is older but on the default branch line
           #   ahead      → build commit has commits the default doesn't (unusual for releases)
-          #   diverged   → build commit is on a side branch (e.g. 2.3 while default is 2.4)
+          #   diverged   → build commit is on a side branch (e.g. 2.4 while default is master)
           # Only `identical` and `behind` mean "this release belongs to the active line".
           BUILD_SHA="${{ github.sha }}"
           COMPARE_STATUS=$(gh api "repos/${{ github.repository }}/compare/${DEFAULT_BRANCH}...${BUILD_SHA}" --jq '.status' 2>/dev/null || echo "unknown")

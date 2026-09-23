@@ -22,12 +22,49 @@ services:
         networks:
             - sail
         depends_on:
-            - mysql
             - redis
             - elasticsearch
             - kibana
             - mailpit
+    nginx:
+        profiles: ['nginx']
+        image: 'nginx:alpine'
+        ports:
+            - '${FORWARD_WEB_PORT:-8080}:80'
+        volumes:
+            - '.:/var/www/html:ro'
+            - './docker/local/nginx:/etc/nginx/conf.d:ro'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
+    apache:
+        profiles: ['apache']
+        image: 'httpd:2.4-alpine'
+        ports:
+            - '${FORWARD_WEB_PORT:-8080}:80'
+        volumes:
+            - '.:/var/www/html:ro'
+            - './docker/local/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
+    litespeed:
+        profiles: ['litespeed']
+        image: 'litespeedtech/openlitespeed:1.9.2-lsphp84'
+        ports:
+            - '${FORWARD_WEB_PORT:-8080}:80'
+        volumes:
+            - '.:/var/www/html:ro'
+            - './docker/local/litespeed/httpd_config.conf:/usr/local/lsws/conf/httpd_config.conf:ro'
+            - './docker/local/litespeed/vhosts/bagisto.conf:/usr/local/lsws/conf/vhosts/bagisto.conf:ro'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
     mysql:
+        profiles: ['mysql']
         image: 'mysql:8.0'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
@@ -50,6 +87,57 @@ services:
                 - mysqladmin
                 - ping
                 - '-p${DB_PASSWORD}'
+            retries: 3
+            timeout: 5s
+    mariadb:
+        profiles: ['mariadb']
+        image: 'mariadb:10.11'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'sail-mariadb:/var/lib/mysql'
+            - './vendor/laravel/sail/database/mariadb/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - healthcheck.sh
+                - '--connect'
+                - '--innodb_initialized'
+            retries: 3
+            timeout: 5s
+    pgsql:
+        profiles: ['pgsql']
+        image: 'postgres:16'
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            PGPASSWORD: '${DB_PASSWORD}'
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+        volumes:
+            - 'sail-pgsql:/var/lib/postgresql/data'
+            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - pg_isready
+                - '-q'
+                - '-d'
+                - '${DB_DATABASE}'
+                - '-U'
+                - '${DB_USERNAME}'
             retries: 3
             timeout: 5s
     redis:
@@ -110,6 +198,10 @@ networks:
         driver: bridge
 volumes:
     sail-mysql:
+        driver: local
+    sail-mariadb:
+        driver: local
+    sail-pgsql:
         driver: local
     sail-redis:
         driver: local

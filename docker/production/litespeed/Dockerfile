@@ -13,12 +13,12 @@
 # The image boots instantly with no first-run setup needed.
 #
 # Build context is `docker/production/`:
-#   docker build -f litespeed/Dockerfile -t bagisto:2.4.7-litespeed .
+#   docker build -f litespeed/Dockerfile -t bagisto:2.5.0-litespeed .
 # =============================================================================
 
 FROM ubuntu:24.04
 
-ARG BAGISTO_VERSION=v2.4.7
+ARG BAGISTO_VERSION=v2.5.0
 ARG DB_ENGINE=mysql
 ARG LSPHP_VERSION=84
 
@@ -27,7 +27,7 @@ ENV TZ=UTC
 
 
 # ---------------------------------------------------------------------------
-# System packages + MySQL 8.0
+# System packages + PHP PPA
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         apt-transport-https \
@@ -119,7 +119,7 @@ RUN cp .env.example .env \
 
 
 # ---------------------------------------------------------------------------
-# Install Bagisto at BUILD TIME (starts MySQL, migrates + seeds, bakes data in)
+# Install Bagisto at BUILD TIME (starts the bundled database, migrates + seeds, bakes data in)
 # ---------------------------------------------------------------------------
 COPY shared/build-install.sh /tmp/build-install.sh
 RUN mkdir -p /docker-entrypoint-initdb.d \
@@ -136,7 +136,9 @@ RUN mkdir -p /docker-entrypoint-initdb.d \
 # ---------------------------------------------------------------------------
 # PHP configuration (lsphp — LSAPI + CLI share the same binary)
 # ---------------------------------------------------------------------------
-COPY shared/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/8.4/litespeed/php.ini
+COPY shared/php.ini /tmp/php.ini
+RUN cp /tmp/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/*/litespeed/php.ini \
+    && rm /tmp/php.ini
 
 
 # ---------------------------------------------------------------------------

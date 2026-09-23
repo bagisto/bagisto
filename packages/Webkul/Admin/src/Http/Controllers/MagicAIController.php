@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Requests\MagicAI\ContentGenerationRequest;
 use Webkul\Admin\Http\Requests\MagicAI\ImageGenerationRequest;
 use Webkul\MagicAI\Facades\MagicAI;
+use Webkul\MagicAI\ProviderError;
 
 class MagicAIController extends Controller
 {
@@ -22,7 +23,7 @@ class MagicAIController extends Controller
                 ),
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage()], 500);
+            return new JsonResponse(['message' => ProviderError::message($e)], 500);
         }
     }
 
@@ -40,7 +41,7 @@ class MagicAIController extends Controller
                 ),
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage()], 500);
+            return new JsonResponse(['message' => ProviderError::message($e)], 500);
         }
     }
 }
