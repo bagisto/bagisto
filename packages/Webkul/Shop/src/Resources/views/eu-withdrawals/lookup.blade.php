@@ -23,7 +23,7 @@
 
             <form
                 method="POST"
-                action="{{ route('shop.eu-withdrawal.guest.lookup.submit') }}"
+                action="{{ route('shop.eu_withdrawal.guest.lookup.submit') }}"
                 class="mt-6 space-y-5"
             >
                 @csrf

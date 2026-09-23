@@ -582,7 +582,7 @@
                                                     <x-slot:content>
                                                         {{-- <x-admin::form
                                                             method="POST"
-                                                            :action="route('admin.sales.rma.requests.update-status', $rma->id)"
+                                                            :action="route('admin.sales.rma.requests.update_status', $rma->id)"
                                                         > --}}
                                                             <!-- RMA Status -->
                                                             <x-admin::form.control-group class="mb-2 w-full">
@@ -638,7 +638,7 @@
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.requests.re-open', $rma->id)"
+                                        :action="route('admin.sales.rma.requests.re_open', $rma->id)"
                                     >
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">
@@ -908,7 +908,7 @@
                             message: messageToShow,
 
                             agree: () => {
-                                this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                                this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                                     rma_status_id: this.rmaStatus,
                                     shipping: params.shipping,
                                 })
@@ -935,7 +935,7 @@
                             message: "@lang('admin::app.sales.rma.all-rma.view.confirm-item-canceled')",
 
                             agree: () => {
-                                this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                                this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                                     rma_status_id: {{ DefaultRMAStatusEnum::ITEM_CANCELED->value }},
                                 })
                                 .then((response) => {
@@ -955,7 +955,7 @@
                     },
 
                     refundItem(params, { setErrors }) {
-                        this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                        this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                             rma_status_id: {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }},
                             shipping: params.shipping,
                         })
@@ -978,7 +978,7 @@
                     },
 
                     getMessage() {
-                        this.$axios.get(`{{ route('admin.sales.rma.requests.get-messages') }}`, {
+                        this.$axios.get(`{{ route('admin.sales.rma.requests.get_messages') }}`, {
                             params: {
                                 id: this.rma.id,
                                 limit: this.limit,
@@ -1002,7 +1002,7 @@
 
                         formData.set('message', sanitizedMessage);
 
-                        this.$axios.post("{{ route('admin.sales.rma.requests.send-message') }}", formData)
+                        this.$axios.post("{{ route('admin.sales.rma.requests.send_message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
 

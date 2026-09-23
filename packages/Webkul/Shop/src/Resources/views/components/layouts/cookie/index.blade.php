@@ -60,7 +60,7 @@
 
                         <a
                             class="mt-2.5 box-border inline-block w-full cursor-pointer rounded-sm bg-blue-500 px-6 py-4 text-center font-sans text-sm font-bold text-white transition-colors duration-300 ease-in-out hover:bg-blue-400 hover:text-white"
-                            href="{{ route('shop.customers.gdpr.cookie-consent') }}"
+                            href="{{ route('shop.customers.gdpr.cookie_consent') }}"
                         >
                             @lang('shop::app.components.layouts.cookie.index.learn-more-and-customize')
                         </a>

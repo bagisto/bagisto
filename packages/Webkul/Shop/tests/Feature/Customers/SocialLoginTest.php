@@ -34,9 +34,9 @@ function googleIdentifies(string $id, string $email): void
 it('should refuse a social login through a provider the store has not enabled', function (string $provider) {
     setGoogleLogin(false);
 
-    get(route('customer.social-login.index', $provider))->assertNotFound();
+    get(route('customer.social_login.index', $provider))->assertNotFound();
 
-    get(route('customer.social-login.callback', $provider))->assertNotFound();
+    get(route('customer.social_login.callback', $provider))->assertNotFound();
 
     $this->assertGuest('customer');
 })->with([
@@ -57,7 +57,7 @@ it('should not sign a social identity into an existing customer who holds its em
 
     googleIdentifies('google-attacker', $customer->email);
 
-    get(route('customer.social-login.callback', 'google'))
+    get(route('customer.social_login.callback', 'google'))
         ->assertRedirect(route('shop.customer.session.index'))
         ->assertSessionHas('error', trans('shop::app.customers.login-form.social-account-exists'));
 
@@ -71,7 +71,7 @@ it('should create a customer of the current channel for a new social identity', 
 
     googleIdentifies('google-new', $email = fake()->unique()->safeEmail());
 
-    get(route('customer.social-login.callback', 'google'))
+    get(route('customer.social_login.callback', 'google'))
         ->assertRedirect(route('shop.customers.account.profile.index'));
 
     $customer = Customer::query()->where('email', $email)->firstOrFail();
@@ -103,7 +103,7 @@ it('should not sign in an inactive customer through a linked social identity', f
 
     googleIdentifies('google-linked', $customer->email);
 
-    get(route('customer.social-login.callback', 'google'))
+    get(route('customer.social_login.callback', 'google'))
         ->assertRedirect(route('shop.customer.session.index'))
         ->assertSessionHas('warning', trans('shop::app.customers.login-form.not-activated'));
 

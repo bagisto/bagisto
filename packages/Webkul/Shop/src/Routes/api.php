@@ -36,7 +36,7 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::get('{id}/related', 'relatedProducts')->name('shop.api.products.related.index');
 
-        Route::get('{id}/up-sell', 'upSellProducts')->name('shop.api.products.up-sell.index');
+        Route::get('{id}/up-sell', 'upSellProducts')->name('shop.api.products.up_sell.index');
     });
 
     Route::controller(ReviewController::class)->prefix('product/{id}')->group(function () {
@@ -82,7 +82,7 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
 
-        Route::get('cross-sell', 'crossSellProducts')->name('shop.api.checkout.cart.cross-sell.index');
+        Route::get('cross-sell', 'crossSellProducts')->name('shop.api.checkout.cart.cross_sell.index');
     });
 
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {

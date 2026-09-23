@@ -154,7 +154,7 @@ class EUWithdrawalDataGrid extends DataGrid
                 'icon' => 'icon-view',
                 'title' => trans('admin::app.eu_withdrawal.datagrid.view'),
                 'method' => 'GET',
-                'url' => fn ($row) => route('admin.sales.eu-withdrawals.view', $row->id),
+                'url' => fn ($row) => route('admin.sales.eu_withdrawals.view', $row->id),
             ]);
         }
     }

@@ -132,7 +132,7 @@ class CustomFieldDataGrid extends DataGrid
                 'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.edit'),
                 'method' => 'GET',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.custom-fields.edit', $row->id);
+                    return route('admin.sales.rma.custom_fields.edit', $row->id);
                 },
             ]);
         }
@@ -143,7 +143,7 @@ class CustomFieldDataGrid extends DataGrid
                 'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete'),
                 'method' => 'DELETE',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.custom-fields.delete', $row->id);
+                    return route('admin.sales.rma.custom_fields.delete', $row->id);
                 },
             ]);
         }
@@ -158,7 +158,7 @@ class CustomFieldDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.update'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.custom-fields.mass-update'),
+                'url' => route('admin.sales.rma.custom_fields.mass_update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.custom-field.index.datagrid.enabled'),
@@ -175,7 +175,7 @@ class CustomFieldDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.custom-fields.mass-delete'),
+                'url' => route('admin.sales.rma.custom_fields.mass_delete'),
             ]);
         }
     }

@@ -78,7 +78,7 @@ class EUWithdrawalController extends Controller
 
         session()->flash('success', trans('admin::app.eu_withdrawal.flash.declined'));
 
-        return redirect()->route('admin.sales.eu-withdrawals.view', $id);
+        return redirect()->route('admin.sales.eu_withdrawals.view', $id);
     }
 
     /**
@@ -109,7 +109,7 @@ class EUWithdrawalController extends Controller
 
         session()->flash('success', trans('admin::app.eu_withdrawal.flash.refunded'));
 
-        return redirect()->route('admin.sales.eu-withdrawals.view', $id);
+        return redirect()->route('admin.sales.eu_withdrawals.view', $id);
     }
 
     /**
@@ -150,7 +150,7 @@ class EUWithdrawalController extends Controller
             session()->flash('error', trans('admin::app.eu_withdrawal.flash.confirmation_failed'));
         }
 
-        return redirect()->route('admin.sales.eu-withdrawals.view', $id);
+        return redirect()->route('admin.sales.eu_withdrawals.view', $id);
     }
 
     /**

@@ -504,7 +504,7 @@ it('should hand the rma form each order item with the product image of the produ
 
     $this->loginAsCustomer($customer);
 
-    getJson(route('shop.customers.account.rma.get-order-items', $order->id))
+    getJson(route('shop.customers.account.rma.get_order_items', $order->id))
         ->assertOk()
         ->assertJsonPath('0.base_image_url', url('cache/small/'.$this->path))
         ->assertJsonPath('1.base_image_url', null);

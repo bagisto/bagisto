@@ -9,13 +9,13 @@
         </p>
 
         <div class="flex items-center gap-x-2.5">
-            <x-admin::datagrid.export src="{{ route('admin.sales.eu-withdrawals.index') }}" />
+            <x-admin::datagrid.export src="{{ route('admin.sales.eu_withdrawals.index') }}" />
         </div>
     </div>
 
     {!! view_render_event('bagisto.admin.sales.eu_withdrawals.index.datagrid.before') !!}
 
-    <x-admin::datagrid :src="route('admin.sales.eu-withdrawals.index')" />
+    <x-admin::datagrid :src="route('admin.sales.eu_withdrawals.index')" />
 
     {!! view_render_event('bagisto.admin.sales.eu_withdrawals.index.datagrid.after') !!}
 </x-admin::layouts>

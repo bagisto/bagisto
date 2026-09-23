@@ -82,7 +82,7 @@
         <!-- Cross-sell Product Carousal -->
         <x-shop::products.carousel
             :title="trans('shop::app.checkout.cart.index.cross-sell.title')"
-            :src="route('shop.api.checkout.cart.cross-sell.index')"
+            :src="route('shop.api.checkout.cart.cross_sell.index')"
         >
         </x-shop::products.carousel>
 

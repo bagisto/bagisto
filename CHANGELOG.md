@@ -24,6 +24,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
 
+- Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.
+
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 
 - Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.

@@ -46,7 +46,7 @@
         </div>
 
         <a
-            href="{{ route('admin.sales.eu-withdrawals.index') }}"
+            href="{{ route('admin.sales.eu_withdrawals.index') }}"
             class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
         >
             @lang('admin::app.eu_withdrawal.view.back')
@@ -363,7 +363,7 @@
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.resend_confirmation'))
                     <form
                         method="POST"
-                        action="{{ route('admin.sales.eu-withdrawals.resend_confirmation', $withdrawal->id) }}"
+                        action="{{ route('admin.sales.eu_withdrawals.resend_confirmation', $withdrawal->id) }}"
                         ref="resendConfirmationForm"
                         class="border-t border-slate-200 p-4 dark:border-gray-800"
                     >
@@ -385,7 +385,7 @@
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.mark_refunded'))
                     <form
                         method="POST"
-                        action="{{ route('admin.sales.eu-withdrawals.mark_refunded', $withdrawal->id) }}"
+                        action="{{ route('admin.sales.eu_withdrawals.mark_refunded', $withdrawal->id) }}"
                         ref="markRefundedForm"
                         class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
                     >
@@ -423,7 +423,7 @@
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.decline'))
                     <form
                         method="POST"
-                        action="{{ route('admin.sales.eu-withdrawals.decline', $withdrawal->id) }}"
+                        action="{{ route('admin.sales.eu_withdrawals.decline', $withdrawal->id) }}"
                         ref="declineForm"
                         class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
                     >

@@ -97,9 +97,9 @@ Route::prefix('sales')->group(function () {
      * Booking-product helpers for the create-order drawer.
      */
     Route::controller(BookingProductController::class)->prefix('booking-product')->group(function () {
-        Route::get('config/{productId}', 'config')->name('admin.sales.booking-product.config');
+        Route::get('config/{productId}', 'config')->name('admin.sales.booking_product.config');
 
-        Route::get('slots/{productId}', 'slots')->name('admin.sales.booking-product.slots');
+        Route::get('slots/{productId}', 'slots')->name('admin.sales.booking_product.slots');
     });
 
     Route::controller(CartController::class)->prefix('cart')->group(function () {
@@ -146,21 +146,21 @@ Route::prefix('sales')->group(function () {
 
             Route::post('store', 'store')->name('admin.sales.rma.requests.store');
 
-            Route::get('get-order-items/{orderId}', 'getOrderItems')->name('admin.sales.rma.requests.get-order-items');
+            Route::get('get-order-items/{orderId}', 'getOrderItems')->name('admin.sales.rma.requests.get_order_items');
 
-            Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('admin.sales.rma.requests.get-resolution-reasons');
+            Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('admin.sales.rma.requests.get_resolution_reasons');
 
-            Route::post('update-status/{id}', 'updateStatus')->name('admin.sales.rma.requests.update-status');
+            Route::post('update-status/{id}', 'updateStatus')->name('admin.sales.rma.requests.update_status');
 
-            Route::post('reopen/{id}', 'reOpenRequest')->name('admin.sales.rma.requests.re-open');
+            Route::post('reopen/{id}', 'reOpenRequest')->name('admin.sales.rma.requests.re_open');
 
-            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.requests.get-messages');
+            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.requests.get_messages');
 
             Route::get('attachments/{id}', 'downloadAttachment')->name('admin.sales.rma.requests.attachment');
 
             Route::get('images/{id}', 'showImage')->name('admin.sales.rma.requests.image');
 
-            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.requests.send-message');
+            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.requests.send_message');
         });
 
         /**
@@ -177,9 +177,9 @@ Route::prefix('sales')->group(function () {
 
             Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.reasons.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reasons.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reasons.mass_update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reasons.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reasons.mass_delete');
         });
 
         /**
@@ -196,9 +196,9 @@ Route::prefix('sales')->group(function () {
 
             Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.statuses.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.statuses.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.statuses.mass_update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.statuses.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.statuses.mass_delete');
         });
 
         /**
@@ -215,30 +215,30 @@ Route::prefix('sales')->group(function () {
 
             Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.rules.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rules.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rules.mass_update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.rules.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.rules.mass_delete');
         });
 
         /**
          * Custom field routes.
          */
         Route::controller(CustomFieldController::class)->prefix('custom-fields')->group(function () {
-            Route::get('', 'index')->name('admin.sales.rma.custom-fields.index');
+            Route::get('', 'index')->name('admin.sales.rma.custom_fields.index');
 
-            Route::get('create', 'create')->name('admin.sales.rma.custom-fields.create');
+            Route::get('create', 'create')->name('admin.sales.rma.custom_fields.create');
 
-            Route::post('store', 'store')->name('admin.sales.rma.custom-fields.store');
+            Route::post('store', 'store')->name('admin.sales.rma.custom_fields.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.custom-fields.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.custom_fields.edit');
 
-            Route::post('update/{id}', 'update')->name('admin.sales.rma.custom-fields.update');
+            Route::post('update/{id}', 'update')->name('admin.sales.rma.custom_fields.update');
 
-            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.custom-fields.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.custom_fields.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.custom-fields.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.custom_fields.mass_update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom-fields.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom_fields.mass_delete');
         });
     });
 
@@ -246,14 +246,14 @@ Route::prefix('sales')->group(function () {
      * EU Withdrawal routes (Directive (EU) 2023/2673, Art. 11a).
      */
     Route::controller(EUWithdrawalController::class)->prefix('eu-withdrawals')->group(function () {
-        Route::get('', 'index')->name('admin.sales.eu-withdrawals.index');
+        Route::get('', 'index')->name('admin.sales.eu_withdrawals.index');
 
-        Route::get('{id}', 'view')->name('admin.sales.eu-withdrawals.view');
+        Route::get('{id}', 'view')->name('admin.sales.eu_withdrawals.view');
 
-        Route::post('{id}/decline', 'decline')->name('admin.sales.eu-withdrawals.decline');
+        Route::post('{id}/decline', 'decline')->name('admin.sales.eu_withdrawals.decline');
 
-        Route::post('{id}/mark-refunded', 'markRefunded')->name('admin.sales.eu-withdrawals.mark_refunded');
+        Route::post('{id}/mark-refunded', 'markRefunded')->name('admin.sales.eu_withdrawals.mark_refunded');
 
-        Route::post('{id}/resend-confirmation', 'resendConfirmation')->name('admin.sales.eu-withdrawals.resend_confirmation');
+        Route::post('{id}/resend-confirmation', 'resendConfirmation')->name('admin.sales.eu_withdrawals.resend_confirmation');
     });
 });
