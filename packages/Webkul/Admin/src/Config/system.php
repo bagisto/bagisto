@@ -2002,7 +2002,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo',
                 'info' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo-info',
                 'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp|max:2048|dimensions:max_width=1000,max_height=1000',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp|max:2048',
                 'channel_based' => true,
             ], [
                 'name' => 'footer_text',
