@@ -62,8 +62,8 @@ class ReviewController extends APIController
     public function store(int $id): JsonResource
     {
         $this->validate(request(), [
-            'title' => 'required',
-            'comment' => 'required',
+            'title' => 'required|string|max:255',
+            'comment' => 'required|string|max:5000',
             'rating' => 'required|numeric|min:1|max:5',
             'attachments' => 'array',
             'attachments.*' => 'file|mimetypes:image/*,video/*',
@@ -100,6 +100,15 @@ class ReviewController extends APIController
      */
     public function translate(int $productId, int $reviewId): JsonResponse
     {
+        if (
+            ! core()->getConfigData('magic_ai.general.settings.enabled')
+            || ! core()->getConfigData('magic_ai.storefront_features.review_translation.enabled')
+        ) {
+            return new JsonResponse([
+                'message' => trans('shop::app.errors.403.title'),
+            ], 403);
+        }
+
         $review = $this->productReviewRepository->find($reviewId);
 
         if ($review?->status !== self::STATUS_APPROVED) {

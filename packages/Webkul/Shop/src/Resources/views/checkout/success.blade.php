@@ -40,7 +40,7 @@
 
 			<p class="text-xl text-zinc-500 max-md:text-center max-md:text-xs">
 				@if (! empty($order->checkout_message))
-					{!! nl2br($order->checkout_message) !!}
+					{!! nl2br(e($order->checkout_message)) !!}
 				@else
 					@lang('shop::app.checkout.success.info')
 				@endif

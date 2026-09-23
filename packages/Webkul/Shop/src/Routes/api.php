@@ -44,7 +44,9 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::post('review', 'store')->name('shop.api.products.reviews.store');
 
-        Route::get('reviews/{review_id}/translate', 'translate')->name('shop.api.products.reviews.translate');
+        Route::get('reviews/{review_id}/translate', 'translate')
+            ->middleware('throttle:10,1')
+            ->name('shop.api.products.reviews.translate');
     });
 
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
