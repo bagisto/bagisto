@@ -156,7 +156,7 @@ class InventorySourceController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.inventory-sources.delete-failed', ['name' => 'admin::app.settings.inventory_sources.index.title']),
+            'message' => trans('admin::app.settings.inventory-sources.delete-failed', ['name' => 'admin::app.settings.inventory-sources.index.title']),
         ], 500);
     }
 }

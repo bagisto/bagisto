@@ -492,6 +492,10 @@ Rules for using it:
 7. Conventions from the skills above hold for every file touched — docblocks on each method and
    property, class members ordered constants → properties → constructor → public → protected →
    private, multi-clause conditions split across lines, `:` vs `::` correct in Blade
+8. Names follow their own convention — **route names snake_case**
+   (`admin.sales.eu_withdrawals.index`), **translation keys kebab-case**
+   (`admin::app.eu-withdrawal.view.received-at`), **storage directories plural and kebab-case**
+   (`products/{id}/downloadable-links`). URL paths are governed by none of the three
 
 ## Further Reading
 

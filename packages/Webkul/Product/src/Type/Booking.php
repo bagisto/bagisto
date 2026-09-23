@@ -218,7 +218,7 @@ class Booking extends AbstractType
     public function prepareForCart($data)
     {
         if (empty($data['booking'])) {
-            return trans('shop::app.products.booking.cart.integrity.missing_options');
+            return trans('shop::app.products.booking.cart.integrity.missing-options');
         }
 
         $products = [];
@@ -230,7 +230,7 @@ class Booking extends AbstractType
                 $duration = (int) $data['booking']['slot']['to'] - (int) $data['booking']['slot']['from'];
 
                 if ($duration < 3600) {
-                    return trans('shop::app.products.booking.cart.integrity.select_hourly_duration');
+                    return trans('shop::app.products.booking.cart.integrity.select-hourly-duration');
                 }
             }
 
@@ -245,7 +245,7 @@ class Booking extends AbstractType
             });
 
             if (! count($filtered)) {
-                return trans('shop::app.products.booking.cart.integrity.missing_options');
+                return trans('shop::app.products.booking.cart.integrity.missing-options');
             }
 
             $cartProductsList = [];
@@ -284,11 +284,11 @@ class Booking extends AbstractType
                     $available = $typeHelper->getAvailableTicketQuantity($product);
 
                     $message = $available > 0
-                        ? trans('shop::app.products.booking.cart.integrity.event.ticket_exceeds_available', [
+                        ? trans('shop::app.products.booking.cart.integrity.event.ticket-exceeds-available', [
                             'ticket' => $ticketName,
                             'qty' => $available,
                         ])
-                        : trans('shop::app.products.booking.cart.integrity.event.ticket_sold_out', [
+                        : trans('shop::app.products.booking.cart.integrity.event.ticket-sold-out', [
                             'ticket' => $ticketName,
                         ]);
 
@@ -297,8 +297,8 @@ class Booking extends AbstractType
             }
 
             $messageKey = match ($bookingProduct->type) {
-                'rental' => 'shop::app.products.booking.cart.integrity.rental_unavailable',
-                default => 'shop::app.products.booking.cart.integrity.inventory_warning',
+                'rental' => 'shop::app.products.booking.cart.integrity.rental-unavailable',
+                default => 'shop::app.products.booking.cart.integrity.inventory-warning',
             };
 
             throw new InsufficientProductInventoryException(trans($messageKey));

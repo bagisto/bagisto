@@ -40,7 +40,7 @@ class SearchEngineOptions
     public function getElasticAuthOptions(): array
     {
         return array_map(fn (ElasticAuthEnum $auth) => [
-            'title' => "admin::app.configuration.index.search-engines.elastic.settings.auth-types.{$auth->value}",
+            'title' => 'admin::app.configuration.index.search-engines.elastic.settings.auth-types.'.str_replace('_', '-', $auth->value),
             'value' => $auth->value,
         ], ElasticAuthEnum::cases());
     }

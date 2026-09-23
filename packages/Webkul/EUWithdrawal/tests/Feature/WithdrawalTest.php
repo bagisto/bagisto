@@ -237,8 +237,8 @@ it('should tell the admin the confirmation was resent in the admin\'s own langua
     post(route('admin.sales.eu_withdrawals.resend_confirmation', $withdrawal->id));
 
     expect(app()->getLocale())->toBe('en')
-        ->and(session('success'))->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'en'))
-        ->and(session('success'))->not->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'ar'));
+        ->and(session('success'))->toBe(trans('admin::app.eu-withdrawal.flash.confirmation-resent', [], 'en'))
+        ->and(session('success'))->not->toBe(trans('admin::app.eu-withdrawal.flash.confirmation-resent', [], 'ar'));
 
     Mail::assertSent(WithdrawalConfirmation::class);
 });

@@ -286,27 +286,27 @@ return [
         'sort' => 3,
     ], [
         'key' => 'sales.eu_withdrawals',
-        'name' => 'admin::app.eu_withdrawal.acl.title',
+        'name' => 'admin::app.eu-withdrawal.acl.title',
         'route' => 'admin.sales.eu_withdrawals.index',
         'sort' => 10,
     ], [
         'key' => 'sales.eu_withdrawals.view',
-        'name' => 'admin::app.eu_withdrawal.acl.view',
+        'name' => 'admin::app.eu-withdrawal.acl.view',
         'route' => 'admin.sales.eu_withdrawals.view',
         'sort' => 1,
     ], [
         'key' => 'sales.eu_withdrawals.decline',
-        'name' => 'admin::app.eu_withdrawal.acl.decline',
+        'name' => 'admin::app.eu-withdrawal.acl.decline',
         'route' => 'admin.sales.eu_withdrawals.decline',
         'sort' => 2,
     ], [
         'key' => 'sales.eu_withdrawals.mark_refunded',
-        'name' => 'admin::app.eu_withdrawal.acl.mark_refunded',
+        'name' => 'admin::app.eu-withdrawal.acl.mark-refunded',
         'route' => 'admin.sales.eu_withdrawals.mark_refunded',
         'sort' => 3,
     ], [
         'key' => 'sales.eu_withdrawals.resend_confirmation',
-        'name' => 'admin::app.eu_withdrawal.acl.resend_confirmation',
+        'name' => 'admin::app.eu-withdrawal.acl.resend-confirmation',
         'route' => 'admin.sales.eu_withdrawals.resend_confirmation',
         'sort' => 4,
     ], [

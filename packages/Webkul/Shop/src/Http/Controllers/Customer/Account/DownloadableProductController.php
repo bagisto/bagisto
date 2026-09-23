@@ -32,7 +32,7 @@ class DownloadableProductController extends Controller
             return datagrid(DownloadableProductDataGrid::class)->process();
         }
 
-        return view('shop::customers.account.downloadable_products.index');
+        return view('shop::customers.account.downloadable-products.index');
     }
 
     /**

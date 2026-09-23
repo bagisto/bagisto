@@ -76,7 +76,7 @@ class EUWithdrawalController extends Controller
             'refund_note' => null,
         ]);
 
-        session()->flash('success', trans('admin::app.eu_withdrawal.flash.declined'));
+        session()->flash('success', trans('admin::app.eu-withdrawal.flash.declined'));
 
         return redirect()->route('admin.sales.eu_withdrawals.view', $id);
     }
@@ -107,7 +107,7 @@ class EUWithdrawalController extends Controller
             'declined_by_user_id' => null,
         ]);
 
-        session()->flash('success', trans('admin::app.eu_withdrawal.flash.refunded'));
+        session()->flash('success', trans('admin::app.eu-withdrawal.flash.refunded'));
 
         return redirect()->route('admin.sales.eu_withdrawals.view', $id);
     }
@@ -141,13 +141,13 @@ class EUWithdrawalController extends Controller
 
             $withdrawal->update($updates);
 
-            session()->flash('success', trans('admin::app.eu_withdrawal.flash.confirmation_resent'));
+            session()->flash('success', trans('admin::app.eu-withdrawal.flash.confirmation-resent'));
         } catch (\Throwable $e) {
             $withdrawal->update([
                 'confirmation_error' => mb_substr($e->getMessage(), 0, 500),
             ]);
 
-            session()->flash('error', trans('admin::app.eu_withdrawal.flash.confirmation_failed'));
+            session()->flash('error', trans('admin::app.eu-withdrawal.flash.confirmation-failed'));
         }
 
         return redirect()->route('admin.sales.eu_withdrawals.view', $id);

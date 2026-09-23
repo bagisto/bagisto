@@ -2419,20 +2419,20 @@ return [
         ],
     ], [
         'key' => 'sales.eu_withdrawal',
-        'name' => 'admin::app.eu_withdrawal.config.title',
-        'info' => 'admin::app.eu_withdrawal.config.info',
+        'name' => 'admin::app.eu-withdrawal.config.title',
+        'info' => 'admin::app.eu-withdrawal.config.info',
         'icon' => 'settings/eu-withdrawal.svg',
         'sort' => 9,
     ], [
         'key' => 'sales.eu_withdrawal.general',
-        'name' => 'admin::app.eu_withdrawal.config.general.title',
-        'info' => 'admin::app.eu_withdrawal.config.general.info',
+        'name' => 'admin::app.eu-withdrawal.config.general.title',
+        'info' => 'admin::app.eu-withdrawal.config.general.info',
         'sort' => 1,
         'fields' => [
             [
                 'name' => 'enabled',
-                'title' => 'admin::app.eu_withdrawal.config.general.enabled',
-                'info' => 'admin::app.eu_withdrawal.config.general.enabled_info',
+                'title' => 'admin::app.eu-withdrawal.config.general.enabled',
+                'info' => 'admin::app.eu-withdrawal.config.general.enabled-info',
                 'type' => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,

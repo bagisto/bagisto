@@ -95,7 +95,7 @@ return [
         'icon' => '',
     ], [
         'key' => 'sales.eu_withdrawals',
-        'name' => 'admin::app.eu_withdrawal.menu.eu_withdrawals',
+        'name' => 'admin::app.eu-withdrawal.menu.eu-withdrawals',
         'route' => 'admin.sales.eu_withdrawals.index',
         'sort' => 8,
         'icon' => '',

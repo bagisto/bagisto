@@ -49,7 +49,7 @@ class EUWithdrawalDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'received_at',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.received_at'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.received-at'),
             'type' => 'datetime',
             'filterable' => true,
             'filterable_type' => 'datetime_range',
@@ -63,7 +63,7 @@ class EUWithdrawalDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'order_increment_id',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.order'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.order'),
             'type' => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -78,7 +78,7 @@ class EUWithdrawalDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'customer_email',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.customer_email'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.customer-email'),
             'type' => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -86,18 +86,18 @@ class EUWithdrawalDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'status',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.status'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.status'),
             'type' => 'string',
             'filterable' => true,
             'filterable_type' => 'dropdown',
             'filterable_options' => [
-                ['label' => trans('admin::app.eu_withdrawal.status.received'), 'value' => WithdrawalStatus::RECEIVED],
-                ['label' => trans('admin::app.eu_withdrawal.status.refunded'), 'value' => WithdrawalStatus::REFUNDED],
-                ['label' => trans('admin::app.eu_withdrawal.status.declined'), 'value' => WithdrawalStatus::DECLINED],
+                ['label' => trans('admin::app.eu-withdrawal.status.received'), 'value' => WithdrawalStatus::RECEIVED],
+                ['label' => trans('admin::app.eu-withdrawal.status.refunded'), 'value' => WithdrawalStatus::REFUNDED],
+                ['label' => trans('admin::app.eu-withdrawal.status.declined'), 'value' => WithdrawalStatus::DECLINED],
             ],
             'sortable' => true,
             'closure' => function ($row) {
-                $label = e(trans('admin::app.eu_withdrawal.status.'.$row->status));
+                $label = e(trans('admin::app.eu-withdrawal.status.'.$row->status));
 
                 return match ($row->status) {
                     'refunded' => '<p class="label-active">'.$label.'</p>',
@@ -109,7 +109,7 @@ class EUWithdrawalDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'channel_code',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.channel'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.channel'),
             'type' => 'string',
             'filterable' => true,
             'filterable_type' => 'dropdown',
@@ -121,7 +121,7 @@ class EUWithdrawalDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'confirmation_sent_at',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.confirmation_sent_at'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.confirmation-sent-at'),
             'type' => 'datetime',
             'filterable' => true,
             'filterable_type' => 'datetime_range',
@@ -135,7 +135,7 @@ class EUWithdrawalDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'uuid',
-            'label' => trans('admin::app.eu_withdrawal.datagrid.uuid'),
+            'label' => trans('admin::app.eu-withdrawal.datagrid.uuid'),
             'type' => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -152,7 +152,7 @@ class EUWithdrawalDataGrid extends DataGrid
             $this->addAction([
                 'index' => 'view',
                 'icon' => 'icon-view',
-                'title' => trans('admin::app.eu_withdrawal.datagrid.view'),
+                'title' => trans('admin::app.eu-withdrawal.datagrid.view'),
                 'method' => 'GET',
                 'url' => fn ($row) => route('admin.sales.eu_withdrawals.view', $row->id),
             ]);

@@ -26,6 +26,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.
 
+- Renamed the remaining underscored translation keys to kebab-case across all 22 locales, so a module or theme overriding one of them, such as `eu_withdrawal.view.received_at`, must use the new spelling.
+
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 
 - Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.
