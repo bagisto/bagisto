@@ -479,7 +479,7 @@ class RMAController extends Controller
                 $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
 
                 $path = $file->storeAs(
-                    'rma/'.$storedMessage->rma_id.'/conversation/'.$storedMessage->id,
+                    'rmas/'.$storedMessage->rma_id.'/conversations/'.$storedMessage->id,
                     Str::random(40).($extension ? '.'.$extension : ''),
                     'private'
                 );

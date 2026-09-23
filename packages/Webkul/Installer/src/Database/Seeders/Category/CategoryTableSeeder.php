@@ -87,7 +87,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 2,
                 'position' => 1,
-                'logo_path' => $this->storeFileIfExists('category/2', '2/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/2', '2/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 2,
@@ -101,7 +101,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 3,
                 'position' => 3,
-                'logo_path' => $this->storeFileIfExists('category/3', '3/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/3', '3/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 22,
@@ -115,7 +115,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 4,
                 'position' => 2,
-                'logo_path' => $this->storeFileIfExists('category/4', '4/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/4', '4/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 12,
@@ -297,7 +297,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 17,
                 'position' => 4,
-                'logo_path' => $this->storeFileIfExists('category/17', '17/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/17', '17/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 32,
@@ -353,7 +353,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 21,
                 'position' => 5,
-                'logo_path' => $this->storeFileIfExists('category/21', '21/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/21', '21/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 40,
@@ -437,7 +437,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 27,
                 'position' => 6,
-                'logo_path' => $this->storeFileIfExists('category/27', '27/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/27', '27/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 52,
@@ -507,7 +507,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 32,
                 'position' => 7,
-                'logo_path' => $this->storeFileIfExists('category/32', '32/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/32', '32/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 62,
@@ -577,7 +577,7 @@ class CategoryTableSeeder extends Seeder
             [
                 'id' => 37,
                 'position' => 8,
-                'logo_path' => $this->storeFileIfExists('category/37', '37/1.webp'),
+                'logo_path' => $this->storeFileIfExists('categories/37', '37/1.webp'),
                 'status' => 1,
                 'display_mode' => 'products_and_description',
                 '_lft' => 72,

@@ -58,7 +58,7 @@ beforeEach(function () {
         'swatch_type' => 'image',
     ]);
 
-    $this->path = 'attribute_option/swatch-'.$this->attribute->id.'.png';
+    $this->path = 'attribute-options/swatch-'.$this->attribute->id.'.png';
 
     Storage::put($this->path, UploadedFile::fake()->image('swatch.png', 300, 300)->getContent());
 

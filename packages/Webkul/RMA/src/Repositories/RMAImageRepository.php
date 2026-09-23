@@ -41,7 +41,7 @@ class RMAImageRepository extends Repository
         if (! empty($requestImages)) {
             foreach ($requestImages as $imageId => $image) {
                 $file = 'images.'.$imageId;
-                $dir = 'rma/'.$rma->id.'/images';
+                $dir = 'rmas/'.$rma->id.'/images';
 
                 if (request()->hasFile($file)) {
                     $this->create([

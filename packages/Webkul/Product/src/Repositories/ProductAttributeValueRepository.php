@@ -115,7 +115,7 @@ class ProductAttributeValueRepository extends Repository
                 if (gettype($data[$attribute->code]) === 'object') {
                     $file = request()->file($attribute->code);
 
-                    $data[$attribute->code] = $file->store('product/'.$product->id);
+                    $data[$attribute->code] = $file->store('products/'.$product->id);
 
                     $this->sanitizeSVG($data[$attribute->code], $file->getMimeType());
                 }

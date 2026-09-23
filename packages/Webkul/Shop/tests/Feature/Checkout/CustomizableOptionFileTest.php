@@ -85,18 +85,18 @@ function addToCartWithUpload(Product $product, ProductCustomizableOption $option
 it('should not relocate a file outside the customer upload directory when managing customizable options', function () {
     Storage::fake();
 
-    Storage::put('product/1/victim.png', 'victim-contents');
+    Storage::put('products/1/victim.png', 'victim-contents');
 
-    [$order, $orderItem] = orderWithUploadedOptionFile('product/1/victim.png');
+    [$order, $orderItem] = orderWithUploadedOptionFile('products/1/victim.png');
 
     app(OrderItemRepository::class)->manageCustomizableOptions($orderItem);
 
-    Storage::assertExists('product/1/victim.png');
+    Storage::assertExists('products/1/victim.png');
 
     Storage::assertMissing('orders/'.$order->id.'/victim.png');
 
     expect($orderItem->fresh()->additional['formatted_customizable_options'][0]['prices'][0]['label'])
-        ->toBe('product/1/victim.png');
+        ->toBe('products/1/victim.png');
 });
 
 it('should relocate a genuinely uploaded customizable option file into the orders directory', function () {

@@ -1177,11 +1177,11 @@ abstract class AbstractType
     {
         $path = explode('/', $media->path);
 
-        $copiedMedia->path = 'product/'.$product->id.'/'.end($path);
+        $copiedMedia->path = 'products/'.$product->id.'/'.end($path);
 
         $copiedMedia->save();
 
-        Storage::makeDirectory('product/'.$product->id);
+        Storage::makeDirectory('products/'.$product->id);
 
         Storage::copy($media->path, $copiedMedia->path);
     }

@@ -747,7 +747,7 @@ it('should link an image swatch option to its stored file rather than to an imag
         'attribute_id' => $attribute->id,
         'admin_name' => 'Red',
         'sort_order' => 1,
-        'swatch_value' => 'attribute_option/red.png',
+        'swatch_value' => 'attribute-options/red.png',
     ]);
 
     $this->loginAsAdmin();
@@ -755,7 +755,7 @@ it('should link an image swatch option to its stored file rather than to an imag
     getJson(route('admin.catalog.attributes.options', $attribute->id))
         ->assertOk()
         ->assertJsonPath('0.id', $option->id)
-        ->assertJsonPath('0.swatch_value_url', Storage::url('attribute_option/red.png'));
+        ->assertJsonPath('0.swatch_value_url', Storage::url('attribute-options/red.png'));
 });
 
 // ============================================================================

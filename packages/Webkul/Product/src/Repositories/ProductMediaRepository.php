@@ -39,7 +39,7 @@ class ProductMediaRepository extends Repository
      */
     public function getProductDirectory($product): string
     {
-        return 'product/'.$product->id;
+        return 'products/'.$product->id;
     }
 
     /**

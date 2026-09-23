@@ -22,6 +22,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Updated the production Docker images to build the 2.5.0 release by default, and let the bundled MySQL user take the server's own authentication plugin instead of the deprecated one.
 
+- Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
+
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 
 - Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.

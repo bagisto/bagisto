@@ -51,7 +51,7 @@ it('should invalidate the channel cache once update has removed its image', func
 
     $channel = $repository->find(1);
 
-    $channel->logo = 'channel/1/before.png';
+    $channel->logo = 'channels/1/before.png';
 
     $channel->save();
 

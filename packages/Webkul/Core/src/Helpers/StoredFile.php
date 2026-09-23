@@ -25,6 +25,31 @@ class StoredFile
     }
 
     /**
+     * Move a stored file to another path, carrying it across disks when it is not already on the
+     * one it belongs to. A file that is no longer there is left alone.
+     */
+    public function move(string $path, string $target, string $targetDisk): bool
+    {
+        foreach (['private', config('filesystems.default')] as $name) {
+            $disk = Storage::disk($name);
+
+            if (! $disk->exists($path)) {
+                continue;
+            }
+
+            if ($name === $targetDisk) {
+                return $disk->move($path, $target);
+            }
+
+            Storage::disk($targetDisk)->writeStream($target, $disk->readStream($path));
+
+            return $disk->delete($path);
+        }
+
+        return false;
+    }
+
+    /**
      * The disk holding a file, preferring the private one.
      */
     public function disk(string $path): Filesystem

@@ -29,7 +29,7 @@ class ProductReviewAttachmentRepository extends Repository
 
             $fileType = explode('/', $mimeType);
 
-            $path = $attachment->store('review/'.$review->id);
+            $path = $attachment->store('reviews/'.$review->id);
 
             $this->sanitizeSVG($path, $mimeType);
 

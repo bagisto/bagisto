@@ -80,7 +80,7 @@ class CoreConfigRepository extends Repository
                 if (request()->hasFile($fieldName)) {
                     $file = request()->file($fieldName);
 
-                    $value = $file->store('configuration');
+                    $value = $file->store('configurations');
 
                     $this->sanitizeSVG($value, $file->getMimeType());
                 }

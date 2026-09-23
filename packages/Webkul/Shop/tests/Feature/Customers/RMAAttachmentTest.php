@@ -22,16 +22,19 @@ function messageWithAttachment(Customer $customer, string $disk = 'private'): RM
         'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
     ]);
 
-    $path = 'rma-conversation/1/'.Str::random(40).'.png';
+    $message = RMAMessage::create([
+        'rma_id' => $rma->id,
+        'message' => 'Here is the damage.',
+        'attachment' => 'damage.png',
+    ]);
+
+    $path = 'rmas/'.$rma->id.'/conversations/'.$message->id.'/'.Str::random(40).'.png';
 
     Storage::disk($disk)->put($path, 'attachment contents');
 
-    return RMAMessage::create([
-        'rma_id' => $rma->id,
-        'message' => 'Here is the damage.',
-        'attachment_path' => $path,
-        'attachment' => 'damage.png',
-    ]);
+    $message->update(['attachment_path' => $path]);
+
+    return $message;
 }
 
 /**
@@ -46,7 +49,7 @@ function imageOnReturn(Customer $customer): RMAImage
         'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
     ]);
 
-    $path = 'rma/'.$rma->id.'/images/'.Str::random(40).'.png';
+    $path = 'rmas/'.$rma->id.'/images/'.Str::random(40).'.png';
 
     Storage::disk('private')->put($path, 'photo contents');
 

@@ -124,7 +124,7 @@ beforeEach(function () {
 
     $this->product = $this->createSimpleProduct();
 
-    $this->path = 'product/'.$this->product->id.'/front.png';
+    $this->path = 'products/'.$this->product->id.'/front.png';
 
     Storage::put($this->path, UploadedFile::fake()->image('front.png', 800, 600)->getContent());
 
@@ -137,7 +137,7 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    Storage::deleteDirectory('product/'.$this->product->id);
+    Storage::deleteDirectory('products/'.$this->product->id);
 
     File::deleteDirectory(storage_path('framework/testing/vite'));
 });
@@ -286,7 +286,7 @@ it('should give a product without an image the placeholders its theme ships in i
 });
 
 it('should keep the placeholder the merchant uploaded for a size over the one the theme ships', function () {
-    $this->setConfig('catalog.products.cache_small_image.url', 'configuration/small-placeholder.webp');
+    $this->setConfig('catalog.products.cache_small_image.url', 'configurations/small-placeholder.webp');
 
     $channel = channelRunningImageTemplates('poster', null, [], [
         'small' => 'images/poster-small.webp',
@@ -297,7 +297,7 @@ it('should keep the placeholder the merchant uploaded for a size over the one th
 
     $image = baseImageOn($channel, $this->createSimpleProduct());
 
-    expect($image['small_image_url'])->toBe(Storage::url('configuration/small-placeholder.webp'))
+    expect($image['small_image_url'])->toBe(Storage::url('configurations/small-placeholder.webp'))
         ->and($image['medium_image_url'])->toBe('http://poster-vite.test/src/Resources/assets/images/poster-medium.webp');
 });
 
@@ -412,12 +412,12 @@ it('should leave out an unusable template or a product image name that is not re
     Exceptions::fake();
 
     $channel = channelRunningImageTemplates('broken', [
-        'product/card' => ProductCard::class,
+        'products/card' => ProductCard::class,
         'original' => PosterSmall::class,
         'logo' => ProductCard::class,
         'thumb' => NotATemplate::class,
         'card' => ProductCard::class,
-    ], ['product/card', 'original', 'thumb', 'missing', 42, 'card', 'card']);
+    ], ['products/card', 'original', 'thumb', 'missing', 42, 'card', 'card']);
 
     expect(array_keys(baseImageOn($channel, $this->product)))
         ->toBe(['small_image_url', 'medium_image_url', 'large_image_url', 'card_image_url', 'original_image_url', 'alt']);

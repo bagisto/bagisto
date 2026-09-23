@@ -14,7 +14,7 @@ use function Pest\Laravel\get;
  */
 function productImageOnStoreDisk(Product $product, bool $stored = true): ProductImage
 {
-    $path = 'product/'.$product->id.'/'.fake()->unique()->lexify('????????').'.png';
+    $path = 'products/'.$product->id.'/'.fake()->unique()->lexify('????????').'.png';
 
     if ($stored) {
         Storage::put($path, UploadedFile::fake()->image('image.png', 20, 20)->getContent());
@@ -76,7 +76,7 @@ it('should read a cached product image from the remote disk', function () {
 });
 
 it('should keep the url of every product image template on the image cache', function () {
-    expect(image_urls('product/1/image.png', TemplateRegistry::PRODUCT_IMAGES))
+    expect(image_urls('products/1/image.png', TemplateRegistry::PRODUCT_IMAGES))
         ->toHaveKeys(['small_image_url', 'medium_image_url', 'large_image_url', 'original_image_url'])
         ->each->toStartWith(url('cache/'));
 });

@@ -30,7 +30,7 @@ class ProductDownloadableSampleRepository extends Repository
         }
 
         return [
-            'file' => $path = request()->file('file')->store('product_downloadable_links/'.$productId, 'private'),
+            'file' => $path = request()->file('file')->store('products/'.$productId.'/downloadable-samples', 'private'),
             'file_name' => request()->file('file')->getClientOriginalName(),
         ];
     }

@@ -32,7 +32,7 @@ class ProductDownloadableLinkRepository extends Repository
             }
 
             return [
-                $type => request()->file($type)->store('product_downloadable_links/'.$productId, 'private'),
+                $type => request()->file($type)->store('products/'.$productId.'/downloadable-links', 'private'),
                 $type.'_name' => $file->getClientOriginalName(),
             ];
         }
