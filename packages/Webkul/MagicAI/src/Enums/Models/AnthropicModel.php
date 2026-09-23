@@ -8,20 +8,20 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum AnthropicModel: string implements AiModelContract
 {
     /**
-     * Current Anthropic text models (ordered from most to least capable). All are suitable for chat
-     * and non-chat use cases.
+     * Current Claude models, ordered from most to least capable.
      */
-    case ClaudeOpus46 = 'claude-opus-4-6';
-    case ClaudeSonnet46 = 'claude-sonnet-4-6';
+    case ClaudeFable51 = 'claude-fable-5-1';
+    case ClaudeOpus5 = 'claude-opus-5';
+    case ClaudeSonnet5 = 'claude-sonnet-5';
     case ClaudeHaiku45 = 'claude-haiku-4-5-20251001';
 
     /**
-     * Older Anthropic text models (ordered from most to least capable). All are suitable for chat
-     * and non-chat use cases.
+     * Previous Claude models, still available, ordered from most to least capable.
      */
+    case ClaudeOpus46 = 'claude-opus-4-6';
+    case ClaudeSonnet46 = 'claude-sonnet-4-6';
     case ClaudeOpus45 = 'claude-opus-4-5-20251101';
     case ClaudeSonnet45 = 'claude-sonnet-4-5-20250929';
-    case ClaudeSonnet4 = 'claude-sonnet-4-20250514';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -37,12 +37,14 @@ enum AnthropicModel: string implements AiModelContract
     public function label(): string
     {
         return match ($this) {
-            self::ClaudeOpus46 => 'Claude Opus 4.6',
-            self::ClaudeOpus45 => 'Claude Opus 4.5',
-            self::ClaudeSonnet46 => 'Claude Sonnet 4.6',
-            self::ClaudeSonnet45 => 'Claude Sonnet 4.5',
-            self::ClaudeSonnet4 => 'Claude Sonnet 4',
+            self::ClaudeFable51 => 'Claude Fable 5.1',
+            self::ClaudeOpus5 => 'Claude Opus 5',
+            self::ClaudeSonnet5 => 'Claude Sonnet 5',
             self::ClaudeHaiku45 => 'Claude Haiku 4.5',
+            self::ClaudeOpus46 => 'Claude Opus 4.6',
+            self::ClaudeSonnet46 => 'Claude Sonnet 4.6',
+            self::ClaudeOpus45 => 'Claude Opus 4.5',
+            self::ClaudeSonnet45 => 'Claude Sonnet 4.5',
         };
     }
 
@@ -67,7 +69,7 @@ enum AnthropicModel: string implements AiModelContract
      */
     public static function defaultTextModel(): ?static
     {
-        return self::ClaudeHaiku45;
+        return self::ClaudeSonnet5;
     }
 
     /**

@@ -156,7 +156,7 @@ Mobile eCommerce powered by Flutter & Laravel: https://github.com/bagisto/openso
 
 # AI Powered eCommerce
 
-You can integrate popular large language models like GPT-5, Gemini 3, Mistral, and LLaMA 4, Grok (xAI),GLM 4.6,Kimi-K2, Qwen 3, Deepseek etc to build [AI-powered eCommerce](https://bagisto.com/en/extensions/laravel-chatbot-using-openai-chatgpt-llm/) applications with Bagisto. Some of the popular use cases where you can make use of LLMs to build AI apps are chatbot, automated product descriptions, customer support, search, and recommendations.
+You can integrate popular large language models like GPT, Claude, Gemini, Grok, Mistral, DeepSeek, Qwen and LLaMA to build [AI-powered eCommerce](https://bagisto.com/en/extensions/laravel-chatbot-using-openai-chatgpt-llm/) applications with Bagisto. Some of the popular use cases where you can make use of LLMs to build AI apps are chatbot, automated product descriptions, customer support, search, and recommendations.
 
 ![AI Powered eCommerce Examples](https://raw.githubusercontent.com/bagisto/temp-media/master/ai_powered_ecommerce.png)
 
@@ -185,7 +185,7 @@ Make use of 200+ Bagisto pre-built extensions from [Bagisto Extension Marketplac
 ![Forum and Facebook Communities](https://raw.githubusercontent.com/bagisto/temp-media/master/community.png)
 
 Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto) and [Forum](https://forums.bagisto.com/)
-Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](.github/CONTRIBUTING.md)!
+Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](CONTRIBUTING.md)!
 
 # License
 
@@ -193,7 +193,7 @@ Bagisto is a fully open-source Laravel eCommerce framework that will always rema
 
 # Security Vulnerabilities
 
-If you think that you have found a security issue in Bagisto, please do not use the issue tracker and do not post it publicly. Instead, all security issues must be sent to [mailto:support@bagisto.com](mailto:support@bagisto.com).
+If you think that you have found a security issue in Bagisto, please do not use the issue tracker and do not post it publicly. Report it privately through one of the channels in our [Security Policy](SECURITY.md).
 
 # Contributors
 

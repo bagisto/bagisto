@@ -1,19 +1,20 @@
-name: 💡 Feature request
-description: Have a new idea/feature ? Share it with our team !
+name: 💡 Feature Request
+description: Have a new idea or feature? Share it with our team.
 labels: ['Feature Request']
+
 body:
   - type: textarea
     id: description
     attributes:
-      label: Is your feature request related to a problem? Please describe.
-      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+      label: Problem to Solve
+      description: A clear and concise description of the problem this feature would solve. For example, I am always frustrated when [...].
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Describe the solution you'd like
+      label: Proposed Solution
       description: A clear and concise description of what you want to happen.
     validations:
       required: true
@@ -21,15 +22,15 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: Describe alternatives you've considered
-      description: A clear and concise description of any alternative solutions or features you've considered.
+      label: Alternatives Considered
+      description: A clear and concise description of any alternative solutions or features you have considered.
     validations:
       required: false
 
   - type: textarea
     id: extrainfo
     attributes:
-      label: Additional context
+      label: Additional Context
       description: Add any other context or screenshots about the feature request here.
     validations:
       required: false

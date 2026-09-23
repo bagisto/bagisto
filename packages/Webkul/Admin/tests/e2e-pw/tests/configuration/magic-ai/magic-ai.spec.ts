@@ -114,12 +114,12 @@ test.describe("magic ai configuration", () => {
         test("should enable review translation with a model and keep it after reload", async () => {
             await featuresPage.applySettings({
                 reviewTranslation: true,
-                reviewTranslationModel: "gemini-2.5-flash",
+                reviewTranslationModel: "gemini-3.8-flash",
             });
 
             await featuresPage.expectSettings({
                 reviewTranslation: true,
-                reviewTranslationModel: "gemini-2.5-flash",
+                reviewTranslationModel: "gemini-3.8-flash",
             });
         });
 

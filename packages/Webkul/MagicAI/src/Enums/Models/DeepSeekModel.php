@@ -8,10 +8,10 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum DeepSeekModel: string implements AiModelContract
 {
     /**
-     * DeepSeek text models.
+     * Current DeepSeek V4 models, ordered from most to least capable.
      */
-    case Chat = 'deepseek-chat';
-    case Reasoner = 'deepseek-reasoner';
+    case V4Pro = 'deepseek-v4-pro';
+    case Flash = 'deepseek-flash';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -27,8 +27,8 @@ enum DeepSeekModel: string implements AiModelContract
     public function label(): string
     {
         return match ($this) {
-            self::Chat => 'DeepSeek Chat',
-            self::Reasoner => 'DeepSeek Reasoner',
+            self::V4Pro => 'DeepSeek V4 Pro',
+            self::Flash => 'DeepSeek V4.1 Flash',
         };
     }
 
@@ -53,7 +53,7 @@ enum DeepSeekModel: string implements AiModelContract
      */
     public static function defaultTextModel(): ?static
     {
-        return self::Chat;
+        return self::Flash;
     }
 
     /**

@@ -1,4 +1,4 @@
-name: 🐛 Bug report
+name: 🐛 Bug Report
 description: Report a general issue.
 labels: ['Bug']
 
@@ -8,15 +8,13 @@ body:
     attributes:
       label: Terms
       options:
-        - label: Before you openning this issue, i have checked if the issue has already been reported.
+        - label: Before opening this issue, I have checked whether it has already been reported.
           required: true
-
-  # input box
 
   - type: input
     id: versioninput
     attributes:
-      label: Bagisto Version(s) affected
+      label: Bagisto Version(s) Affected
       description: Please enter the Bagisto version(s) affected by this issue.
       placeholder: 'x.y.z'
     validations:
@@ -41,8 +39,8 @@ body:
   - type: textarea
     id: reproduce
     attributes:
-      label: Steps to reproduce
-      description: It is important to provide a set of clear steps to reproduce this bug. If relevant please include code samples.
+      label: Steps to Reproduce
+      description: It is important to provide a set of clear steps to reproduce this bug. If relevant, please include code samples.
       value: |
         1. Go to '...'
         2. Click on '....'
@@ -71,13 +69,14 @@ body:
     id: screenshots
     attributes:
       label: Screenshots
-      description: Please add screenshots if applicable
+      description: Please add screenshots if applicable.
     validations:
       required: false
 
   - type: textarea
+    id: context
     attributes:
-      label: Additional context
+      label: Additional Context
       description: Add any other context about the problem here.
     validations:
       required: false

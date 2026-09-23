@@ -1,7 +1,7 @@
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.3
+            context: ./vendor/laravel/sail/runtimes/8.4
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -28,7 +28,7 @@ services:
             - kibana
             - mailpit
     mysql:
-        image: 'mysql/mysql-server:8.0'
+        image: 'mysql:8.0'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
@@ -38,6 +38,7 @@ services:
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_EXTRA_OPTIONS: '${MYSQL_EXTRA_OPTIONS:-}'
         volumes:
             - 'sail-mysql:/var/lib/mysql'
             - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
@@ -67,7 +68,7 @@ services:
             retries: 3
             timeout: 5s
     elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.19.21
         ports:
             - '9200:9200'
             - '9300:9300'
@@ -84,11 +85,11 @@ services:
                 soft: 65536
                 hard: 65536
         volumes:
-            - 'sail-elasticsearch:/var/lib/elasticsearch/data'
+            - 'sail-elasticsearch:/usr/share/elasticsearch/data'
         networks:
             - sail
     kibana:
-        image: docker.elastic.co/kibana/kibana:7.17.0
+        image: docker.elastic.co/kibana/kibana:8.19.21
         ports:
             - 5601:5601
         environment:

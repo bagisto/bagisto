@@ -8,29 +8,26 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum GeminiModel: string implements AiModelContract
 {
     /**
-     * Gemini 3 (latest generation — preview).
+     * Current stable Gemini models, ordered from most to least capable.
+     */
+    case Gemini38Flash = 'gemini-3.8-flash';
+    case Gemini37Flash = 'gemini-3.7-flash';
+    case Gemini36Flash = 'gemini-3.6-flash';
+    case Gemini35FlashLite = 'gemini-3.5-flash-lite';
+    case Gemini31FlashLite = 'gemini-3.1-flash-lite';
+
+    /**
+     * Gemini models still in preview.
      */
     case Gemini31Pro = 'gemini-3.1-pro-preview';
     case Gemini3Flash = 'gemini-3-flash-preview';
 
     /**
-     * Gemini 2.5 (current stable — recommended for production).
+     * Image generation models (Nano Banana), ordered from most to least capable.
      */
-    case Gemini25Pro = 'gemini-2.5-pro';
-    case Gemini25Flash = 'gemini-2.5-flash';
-    case Gemini25FlashLite = 'gemini-2.5-flash-lite';
-
-    /**
-     * Imagen 4 family.
-     */
-    case Imagen4 = 'imagen-4.0-generate-001';
-    case Imagen4Ultra = 'imagen-4.0-ultra-generate-001';
-    case Imagen4Fast = 'imagen-4.0-fast-generate-001';
-
-    /**
-     * Imagen 3 (previous gen — still available).
-     */
-    case Imagen3 = 'imagen-3.0-generate-002';
+    case Gemini3ProImage = 'gemini-3-pro-image';
+    case Gemini31FlashImage = 'gemini-3.1-flash-image';
+    case Gemini31FlashLiteImage = 'gemini-3.1-flash-lite-image';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -46,15 +43,16 @@ enum GeminiModel: string implements AiModelContract
     public function label(): string
     {
         return match ($this) {
-            self::Gemini31Pro => 'Gemini 3.1 Pro',
-            self::Gemini3Flash => 'Gemini 3 Flash',
-            self::Gemini25Pro => 'Gemini 2.5 Pro',
-            self::Gemini25Flash => 'Gemini 2.5 Flash',
-            self::Gemini25FlashLite => 'Gemini 2.5 Flash Lite',
-            self::Imagen4 => 'Imagen 4',
-            self::Imagen4Ultra => 'Imagen 4 Ultra',
-            self::Imagen4Fast => 'Imagen 4 Fast',
-            self::Imagen3 => 'Imagen 3',
+            self::Gemini38Flash => 'Gemini 3.8 Flash',
+            self::Gemini37Flash => 'Gemini 3.7 Flash',
+            self::Gemini36Flash => 'Gemini 3.6 Flash',
+            self::Gemini35FlashLite => 'Gemini 3.5 Flash-Lite',
+            self::Gemini31FlashLite => 'Gemini 3.1 Flash-Lite',
+            self::Gemini31Pro => 'Gemini 3.1 Pro (Preview)',
+            self::Gemini3Flash => 'Gemini 3 Flash (Preview)',
+            self::Gemini3ProImage => 'Nano Banana Pro (Gemini 3 Pro Image)',
+            self::Gemini31FlashImage => 'Nano Banana 2 (Gemini 3.1 Flash Image)',
+            self::Gemini31FlashLiteImage => 'Nano Banana 2 Lite (Gemini 3.1 Flash-Lite Image)',
         };
     }
 
@@ -64,7 +62,7 @@ enum GeminiModel: string implements AiModelContract
     public function isImageModel(): bool
     {
         return match ($this) {
-            self::Imagen4, self::Imagen4Ultra, self::Imagen4Fast, self::Imagen3 => true,
+            self::Gemini3ProImage, self::Gemini31FlashImage, self::Gemini31FlashLiteImage => true,
             default => false,
         };
     }
@@ -82,7 +80,7 @@ enum GeminiModel: string implements AiModelContract
      */
     public static function defaultTextModel(): ?static
     {
-        return self::Gemini3Flash;
+        return self::Gemini38Flash;
     }
 
     /**
@@ -90,6 +88,6 @@ enum GeminiModel: string implements AiModelContract
      */
     public static function defaultImageModel(): ?static
     {
-        return self::Imagen4;
+        return self::Gemini31FlashImage;
     }
 }

@@ -12,18 +12,25 @@ Check the issue first for an assignee, or for someone who has already said they
 are on it. If it is claimed but has gone quiet, ask in the thread rather than
 opening a competing pull request.
 
-For a feature, agree the approach in the issue **before** building it. A feature
-that arrives as a surprise pull request is far more likely to be turned down on
-direction than on code.
+For a feature, open a
+[feature request](https://github.com/bagisto/bagisto/issues/new/choose) if one
+does not already exist, and agree the approach there **before** building it. A
+feature that arrives as a surprise pull request is far more likely to be turned
+down on direction than on code.
 
 ## Bugs
 
 Bagisto encourages pull requests, not just bug reports — a bug report may itself
 take the form of a pull request containing a failing test.
 
-A bug report needs a title, a clear description, the version you are on, and
-enough detail to reproduce it, including a code sample where one helps. The goal
-is to let someone else replicate the bug and build a fix.
+1. Search the [issues](https://github.com/bagisto/bagisto/issues) first. If no
+   open issue covers the bug,
+   [open a new one](https://github.com/bagisto/bagisto/issues/new/choose).
+2. Check that the bug is a general issue and not specific to your own setup. For
+   help with an individual setup, use the [Community Forum](https://forums.bagisto.com/).
+3. Give the report a title, a clear description, the version you are on, and
+   enough detail to reproduce it, including a code sample where one helps. The
+   goal is to let someone else replicate the bug and build a fix.
 
 ## Which branch should you target?
 
@@ -34,8 +41,14 @@ The active branches are **`2.4`** (the current release line) and **`master`**
 - **Minor, backwards-compatible improvements** go to the same release line.
 - **Major features and breaking changes** go to `master`.
 
-Branch from the line you are targeting and open the pull request against that
-same branch.
+Fork the [repository](https://github.com/bagisto/bagisto), branch from the line
+you are targeting, and open the pull request against that same branch. There is
+no `development` branch. Keep each fix on its own branch, named for the issue —
+for example `issue-1234`.
+
+Write commit subjects as [Conventional Commits](https://www.conventionalcommits.org/),
+which is what the repository history uses: `fix: <what changed>` for a bug fix,
+`feat: <what it adds>` for a feature.
 
 ## Core development ideas and discussion
 
@@ -121,10 +134,11 @@ php artisan bagisto:translations:check       # all 22 locales, if you touched an
 End-to-end tests run per package, from that package's directory:
 
 ```bash
-cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+cd packages/Webkul/Admin && npm install && npm run install:browsers && npm run test:e2e   # or Shop, or Installer
 ```
 
 In CI they run on a pull request only once it carries the **Need Playwright Testing**
 label, and again on every push to it while the label stays.
 
-Say in the description which of these you ran, and which you skipped and why.
+Fill in the [pull request template](.github/PULL_REQUEST_TEMPLATE.md), and say in
+the description which of these you ran, and which you skipped and why.

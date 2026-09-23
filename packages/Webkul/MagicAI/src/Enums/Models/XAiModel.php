@@ -8,22 +8,19 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum XAiModel: string implements AiModelContract
 {
     /**
-     * Grok 4 family (current frontier).
+     * Current Grok models, ordered from most to least capable.
      */
-    case Grok4 = 'grok-4';
-    case Grok41Fast = 'grok-4-1-fast';
+    case Grok47 = 'grok-4.7';
+    case Grok46 = 'grok-4.6';
+    case Grok45 = 'grok-4.5';
+    case Grok43 = 'grok-4.3';
+    case Grok420NonReasoning = 'grok-4.20-0309-non-reasoning';
 
     /**
-     * Grok 3 family (previous generation).
+     * Image generation models, ordered from most to least capable.
      */
-    case Grok3 = 'grok-3';
-    case Grok3Mini = 'grok-3-mini';
-
-    /**
-     * Image generation.
-     */
+    case GrokImagineImage2 = 'grok-imagine-image-2.0';
     case GrokImagineImage = 'grok-imagine-image';
-    case Grok2Image = 'grok-2-image';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -39,12 +36,13 @@ enum XAiModel: string implements AiModelContract
     public function label(): string
     {
         return match ($this) {
-            self::Grok4 => 'Grok 4',
-            self::Grok41Fast => 'Grok 4.1 Fast',
-            self::Grok3 => 'Grok 3',
-            self::Grok3Mini => 'Grok 3 Mini',
+            self::Grok47 => 'Grok 4.7',
+            self::Grok46 => 'Grok 4.6',
+            self::Grok45 => 'Grok 4.5',
+            self::Grok43 => 'Grok 4.3',
+            self::Grok420NonReasoning => 'Grok 4.20 (Non-Reasoning)',
+            self::GrokImagineImage2 => 'Grok Imagine Image 2.0',
             self::GrokImagineImage => 'Grok Imagine Image',
-            self::Grok2Image => 'Grok 2 Image',
         };
     }
 
@@ -54,7 +52,7 @@ enum XAiModel: string implements AiModelContract
     public function isImageModel(): bool
     {
         return match ($this) {
-            self::GrokImagineImage, self::Grok2Image => true,
+            self::GrokImagineImage2, self::GrokImagineImage => true,
             default => false,
         };
     }
@@ -72,7 +70,7 @@ enum XAiModel: string implements AiModelContract
      */
     public static function defaultTextModel(): ?static
     {
-        return self::Grok3;
+        return self::Grok43;
     }
 
     /**

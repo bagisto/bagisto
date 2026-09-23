@@ -17,12 +17,13 @@
 - [Theme Section Media Are Stored As Bare Paths](#theme-section-media-are-stored-as-bare-paths)
 - [Image Processing Moved to Laravel's Image Component](#image-processing-moved-to-laravels-image-component)
 - [Remote Storage Drivers](#remote-storage-drivers)
-- [The Omnibus Package](#the-omnibus-package)
 - [PostgreSQL Support](#postgresql-support)
 
 ## Low Impact Changes
 
+- [The Omnibus Package](#the-omnibus-package)
 - [Catalog Rule Jobs No Longer Declare a Batch Size](#catalog-rule-jobs-no-longer-declare-a-batch-size)
+- [Magic AI Model Lists Follow the Providers' Current Models](#magic-ai-model-lists-follow-the-providers-current-models)
 
 ## Upgrading To v2.5 From v2.4
 
@@ -35,7 +36,7 @@ Bagisto is distributed as a full Laravel application rather than as a package in
 
 1. **Move to PHP 8.4.** Part of the dependency tree now requires it, so `composer install` aborts on 8.3 rather than resolving to older packages.
 
-2. **Back up the database and `storage/`.** Four of this release's migrations rewrite existing rows in place — two rewrite JSON in `theme_section_translations`, two rename codes in `core_config` — and their `down()` methods reverse the shape, not a snapshot.
+2. **Back up the database and `storage/`.** Five of this release's migrations rewrite existing rows in place — two rewrite JSON in `theme_section_translations`, two rename codes in `core_config`, and one moves Magic AI settings off retired models. The `down()` methods of the first four reverse the shape, not a snapshot, and the Magic AI one cannot be reversed at all.
 
 3. **Check that `APP_URL` names the site you are actually serving.** The `make_theme_section_urls_portable` migration decides which stored links belong to this store by comparing their host against `config('app.url')`. If `APP_URL` is wrong or still points at a development host when you migrate, links on the real domain are left as absolute URLs and keep breaking when the domain changes.
 
@@ -46,7 +47,7 @@ Bagisto is distributed as a full Laravel application rather than as a package in
 
 ### The Upgrade Itself
 
-Start by bringing your application files up to the new release, reconciling anything you changed. The root files that carry changes are `composer.json`, `.env.example`, `artisan`, `public/index.php`, `bootstrap/app.php`, `bootstrap/providers.php`, `phpunit.xml` and `config/`. [Configuration Files You Maintain Yourself](#configuration-files-you-maintain-yourself) covers `config/` file by file.
+Start by bringing your application files up to the new release, reconciling anything you changed. The root files that carry changes are `composer.json`, `composer.lock`, `.env.example`, `artisan`, `public/index.php`, `bootstrap/app.php`, `bootstrap/providers.php`, `phpunit.xml`, `config/` and `database/migrations/`. [Configuration Files You Maintain Yourself](#configuration-files-you-maintain-yourself) covers `config/` file by file.
 
 Then run:
 
@@ -60,14 +61,10 @@ composer install
 # Run the migrations
 php artisan migrate --force
 
-# Rebuild the Admin bundle
-cd packages/Webkul/Admin && rm -rf node_modules package-lock.json && npm install && npm run build
-
-# Rebuild the Shop bundle
-cd ../Shop && rm -rf node_modules package-lock.json && npm install && npm run build
-
-# Rebuild the Installer bundle
-cd ../Installer && rm -rf node_modules package-lock.json && npm install && npm run build
+# Rebuild the Admin, Shop and Installer bundles, each from its own package directory
+(cd packages/Webkul/Admin && rm -rf node_modules package-lock.json && npm install && npm run build)
+(cd packages/Webkul/Shop && rm -rf node_modules package-lock.json && npm install && npm run build)
+(cd packages/Webkul/Installer && rm -rf node_modules package-lock.json && npm install && npm run build)
 
 # Clear every cached config, route, view and compiled service
 php artisan optimize:clear
@@ -78,7 +75,7 @@ php artisan up
 
 Tailwind 4 changes the dependency set rather than extending it, which is why each bundle is rebuilt from a clean `node_modules` rather than installed over the old one.
 
-If you run Elasticsearch, rebuild the product index afterwards — the flag name changed, see [Search Architecture Refactored to Engine-Agnostic Design](#search-architecture-refactored-to-engine-agnostic-design):
+If you run Elasticsearch, rebuild the product index afterwards — the flag name changed, see [Search Architecture Refactored to Engine-Agnostic Design](#search-architecture-refactored-to-engine-agnostic-design). A cluster that needs credentials has to have them re-entered in the admin first, as [Elasticsearch connection settings are now recorded in the admin](#elasticsearch-connection-settings-are-now-recorded-in-the-admin) explains, or the reindex cannot reach it:
 
 ```bash
 php artisan indexer:index --type=search --mode=full
@@ -99,7 +96,7 @@ php artisan migrate:status
 
 **Impact Probability: High**
 
-Bagisto v2.5 runs on Laravel 13 and requires **PHP 8.4 or newer**.
+Bagisto v2.5 runs on Laravel 13 and requires **PHP 8.4**. The committed `composer.lock` resolves on PHP 8.4.1 or newer, below 8.5.
 
 ```diff
 - "php": ">=8.3 <8.5",
@@ -152,7 +149,10 @@ PHP 8.4 deprecates an implicitly nullable parameter — a typed parameter defaul
 
 #### Renamed names that still answer to the old ones
 
-Laravel 13 renamed a handful of things Bagisto's skeleton files use. Every one of them keeps the old spelling working — as a config fallback, a deprecated method or a subclass — so these are tidying rather than a break. They are listed so a file you maintain yourself can be brought in line.
+Laravel 13 renamed a handful of things Bagisto's skeleton files use. Laravel keeps the old spelling working for every one of them — as a config fallback, a deprecated method or a subclass — so these are tidying rather than a break. They are listed so a file you maintain yourself can be brought in line.
+
+> [!WARNING]
+> Bagisto's own SMTP transport, `Webkul\Core\Mail\Transport\DynamicMailTransport`, still reads `mail.mailers.smtp.encryption`, which the new `config/mail.php` no longer defines. If you take the new file and your encryption came only from `MAIL_ENCRYPTION`, set it at `Configuration → Emails → SMTP`, or the mailer connects without TLS.
 
 | Where | Old | New |
 |---|---|---|
@@ -178,16 +178,16 @@ Options Laravel 13 added are now present rather than implied: the `deferred`, `b
 
 | File | What changed | If you skip it |
 |---|---|---|
-| `config/responsecache.php` | Restructured for responsecache v8 — see the key map below | **Full Page Cache breaks.** Bagisto reads `responsecache.cache.lifetime_in_seconds`, which does not exist in the old shape, so cached responses are given a lifetime of zero |
+| `config/responsecache.php` | Restructured for responsecache v8 — see the key map below | **Full Page Cache breaks.** Bagisto falls back to `responsecache.cache.lifetime_in_seconds` when no lifetime is saved at `Configuration → Cache Management`, and that key does not exist in the old shape, so cached responses are given a lifetime of zero |
 | `config/image.php` → `config/images.php` | The driver setting moved to the file the framework reads, and the key changed | **Image processing falls back to `gd`** whatever `config/image.php` says; nothing reads that file any more |
 | `bootstrap/providers.php` | `OmnibusServiceProvider` added | The Omnibus package does not load |
 | `config/concord.php` | `Webkul\Omnibus\Providers\ModuleServiceProvider` added | The Omnibus model is not registered |
 | `config/cache.php` | `default` moved from `file` to `database`; `storage` and `failover` stores added; `serializable_classes` set | Nothing — your `.env` value still wins. See the note below before copying Laravel 13's own version of this file |
-| `config/filesystems.php` | `r2` disk added, `report` keys added | The Cloudflare R2 driver has no disk to configure |
-| `config/logging.php`, `config/mail.php`, `config/services.php`, `config/queue.php`, `config/session.php`, `config/database.php`, `config/sanctum.php` | The Laravel 13 renames and additions listed above | Nothing — the old names still resolve |
+| `config/filesystems.php` | `r2` disk added, `report` keys added, `serve` commented out on the `private` disk | The Cloudflare R2 driver has no disk to configure, and the `private` disk keeps serving its files through temporary URLs |
+| `config/logging.php`, `config/mail.php`, `config/services.php`, `config/queue.php`, `config/session.php`, `config/database.php`, `config/sanctum.php` | The Laravel 13 renames and additions listed above | Nothing — the old names still resolve, apart from the SMTP encryption noted above |
 | `config/imagecache.php` | `cache_driver` removed | Nothing — the key is simply unread |
 | `config/purify.php` | Serializer store default follows the new cache default | Nothing — your `.env` value still wins |
-| `config/repository.php` | Comments only; every value is unchanged | Nothing. Do not bother replacing it |
+| `config/repository.php` | Unchanged since v2.4.12; earlier 2.4 releases differ in comments only | Nothing. Do not bother replacing it |
 
 #### `config/responsecache.php` key map
 
@@ -209,7 +209,7 @@ v8 also adds `debug.cache_status_header_name`, `debug.cache_key_header_name` and
 
 #### A note on `config/cache.php`
 
-Bagisto sets `serializable_classes` to `true`. Laravel 13's own skeleton ships it as `false`, which blocks every object during unserialization. Bagisto's repository layer — `Webkul\Core\Eloquent\Repository`, mixed into roughly a hundred repositories — caches Eloquent models and collections, and `false` would hand them back as `__PHP_Incomplete_Class`. Omitting the key entirely behaves as it always did, so an untouched v2.4 `config/cache.php` is safe; the danger is copying Laravel 13's version in wholesale.
+Bagisto sets `serializable_classes` to `true`. Laravel 13's own skeleton ships it as `false`, which blocks every object during unserialization. Bagisto's repository layer — the `CacheableRepository` trait on `Webkul\Core\Eloquent\Repository`, which roughly a hundred repositories extend — caches Eloquent models and collections, and `false` would hand them back as `__PHP_Incomplete_Class`. Omitting the key entirely behaves as it always did, so an untouched v2.4 `config/cache.php` is safe; the danger is copying Laravel 13's version in wholesale.
 
 The shipped default for `CACHE_STORE` also moved from `file` to `database`, and a new root migration creates the `cache` and `cache_locks` tables `php artisan migrate` needs for it. An existing `.env` almost certainly pins `CACHE_STORE` already, in which case nothing changes.
 
@@ -291,7 +291,7 @@ Laravel 13 ships its own image component, so Bagisto no longer maintains a wrapp
 > [!NOTE]
 > Intervention Image has **not** gone away — Laravel's `gd` and `imagick` drivers are built on it, so it remains a dependency and is now required at `^4.2`. What changed is that Bagisto no longer writes against its API.
 
-#### Removed Classes
+#### Removed Image Classes
 
 These were part of `webkul/imagecache` and were unreachable from the application — nothing resolved or instantiated them. They modelled Intervention's API (`brightness()`, `gamma()`, `colorize()`, `pixelate()`, `pad()`), which Laravel's component does not provide, so they were removed rather than rewritten:
 
@@ -333,7 +333,7 @@ The same change applies to the image cache templates a theme registers under `cu
 
 #### Configuration
 
-The driver setting moved to the file the framework reads, and the key changed:
+The driver is now read from `config/images.php`, under a new key:
 
 ```diff
 - // config/image.php
@@ -364,7 +364,7 @@ The `dont-discover` entry for `intervention/image` can go — v4 ships no Larave
 
 Amazon S3 and Cloudflare R2 can now be chosen at `Configuration → File Management`. The local disk remains the default and an upgraded store keeps using it, so this is opt-in.
 
-Two things are worth knowing before you opt in:
+Three things are worth knowing before you opt in:
 
 - The chosen driver is applied at boot by `Webkul\Core\Filesystem\StorageConfigurator`, which sets `filesystems.default`. **Once a driver is recorded, it wins over `FILESYSTEM_DISK`.** With nothing recorded — the state every upgraded store is in — the environment is left alone.
 - Nothing copies existing files. Switching the disk changes where *new* uploads go; the media already under `storage/app/public` has to be moved across yourself, or the store will serve broken images.
@@ -434,12 +434,12 @@ The production Docker images ship in all three flavours — see [`docker/product
 
 **Impact Probability: High**
 
-Bagisto v2.5 replaces the tightly-coupled Elasticsearch search infrastructure in the `Product` package with an engine-agnostic design using the Strategy and Manager patterns. This enables swapping search engines (e.g., Algolia, Pinecone) without modifying core code.
+Bagisto v2.5 replaces the tightly-coupled Elasticsearch search infrastructure in the `Product` package with an engine-agnostic design using the Strategy and Manager patterns. Another engine (e.g., Algolia, Pinecone) plugs in behind the same contracts, needing only a case in the core `SearchEngineEnum` — see [Adding a Custom Search Engine](#adding-a-custom-search-engine).
 
 > [!IMPORTANT]
 > If your store searches with Elasticsearch and its credentials live only in `.env`, read [Elasticsearch connection settings are now recorded in the admin](#elasticsearch-connection-settings-are-now-recorded-in-the-admin) below before you upgrade. This is the one part of the refactor that can take a working store offline.
 
-#### Removed Classes
+#### Removed Search Classes
 
 The following classes have been **deleted**:
 
@@ -475,15 +475,19 @@ The `Webkul\Product\Helpers\Product` class has been deleted. Its only method mov
 
 #### New Enums
 
-Two enums replace all hardcoded search-related strings:
+Four enums in `Webkul\Product\Enums` replace the hardcoded search-related strings:
 
-**`Webkul\Product\Enums\SearchEngineEnum`** — search driver values:
+**`SearchEngineEnum`** — search driver values:
 - `SearchEngineEnum::DATABASE` (`'database'`)
 - `SearchEngineEnum::ELASTIC` (`'elastic'`)
 
-**`Webkul\Product\Enums\SearchContextEnum`** — search context values:
+**`SearchContextEnum`** — search context values:
 - `SearchContextEnum::STOREFRONT` (`'storefront'`)
 - `SearchContextEnum::ADMIN` (`'admin'`)
+
+**`SearchEngineStatusEnum`** — the verdict of a connection probe: `available`, `unreachable`, `unauthorized`, `incompatible`, `misconfigured`.
+
+**`ElasticAuthEnum`** — how the store authenticates to Elasticsearch: `none`, `basic`, `api_key`, `cloud_api_key`, `cloud_basic`.
 
 #### New Contracts
 
@@ -506,9 +510,8 @@ Three contracts define the engine abstraction:
 | `Services\Search\SearchEngineAvailability` | Probes an engine and caches the verdict, keyed per engine |
 | `Services\Search\SearchEngineConfigurator` | Applies every connectable engine's recorded settings at boot |
 | `Services\Search\SearchEngineOptions` | The shared option list behind the three engine selects |
-| `Enums\SearchEngineStatusEnum` | `available`, `unreachable`, `unauthorized`, `incompatible`, `misconfigured` |
 
-#### Migration Steps
+#### Search Migration Steps
 
 1. **Update search engine config checks:**
 
@@ -697,7 +700,7 @@ To add a new search engine (e.g., Algolia):
    }
    ```
 
-3. Add a case to `SearchEngineEnum`:
+3. Add a case to `SearchEngineEnum`. PHP enums cannot be extended, so this is the one change to core code — the manager resolves the stored engine through `SearchEngineEnum::tryFrom()`, and an unknown value falls back to the database:
 
    ```php
    case ALGOLIA = 'algolia';
@@ -710,7 +713,7 @@ To add a new search engine (e.g., Algolia):
    $this->app->singleton('product.search.indexer.algolia', AlgoliaIndexer::class);
    ```
 
-   The `SearchEngineManager` resolves your engine as soon as the stored config value matches the enum case.
+   The `SearchEngineManager` resolves your engine once the stored engine matches the enum case and `search_engines.general.settings.enabled` is on.
 
 5. If your engine is reached over a network, implement `Webkul\Product\Contracts\SearchEngineConnection`
    and bind it as well. This is what gives it settings in the admin and a working Test Connection
@@ -801,7 +804,7 @@ If your custom package extended Bagisto's frontend build, mirror the same depend
 
 #### Vite Configuration Changes
 
-Each `vite.config.js` now registers the Tailwind Vite plugin:
+Each `vite.config.js` now registers the Tailwind Vite plugin (the Installer's config has no Vue plugin, so it adds only `tailwindcss()`):
 
 ```diff
   import { defineConfig, loadEnv } from "vite";
@@ -980,7 +983,7 @@ Bagisto's core `Admin`, `Shop`, and `Installer` packages did not ship any Tailwi
 
 #### v3 Compatibility Base Layer
 
-v4 removed two implicit defaults that Bagisto relied on. To preserve v3 behavior, `app.css` now ships a `@layer base` block:
+v4 removed three implicit defaults that Bagisto relied on. To preserve v3 behavior, each `app.css` now ships a `@layer base` block:
 
 ```css
 @layer base {
@@ -996,11 +999,17 @@ v4 removed two implicit defaults that Bagisto relied on. To preserve v3 behavior
     [role="button"]:not(:disabled) {
         cursor: pointer;
     }
+
+    input::placeholder,
+    textarea::placeholder {
+        @apply text-gray-400;
+    }
 }
 ```
 
 - **Default `border-color`**: v3 defaulted to `gray-200`; v4 defaults to `currentColor`. Without the rule above, every element with a bare `border` class would suddenly draw the text color.
 - **Button cursor**: v3 set `cursor: pointer` on `<button>`; v4 does not. Without the rule above, bare `<button>` elements without `cursor-pointer` on them would show the arrow cursor.
+- **Placeholder color**: v3 drew placeholders in `gray-400`; v4 draws them in the text color at reduced opacity. Without the rule above, placeholders would read as entered text.
 
 If your custom theme overrides `app.css` from scratch, add this block or its equivalent.
 
@@ -1024,7 +1033,7 @@ v4's Vite plugin errors out on `@apply` used inside `@keyframes` blocks. Rewrite
 
 If your custom `app.css` or theme file has similar `@apply` calls inside `@keyframes`, `@font-face`, or other non-selector blocks, inline the raw CSS.
 
-#### Migration Steps
+#### Tailwind Migration Steps
 
 If you maintain a custom Bagisto theme, extension, or admin package with its own Tailwind assets, do the following:
 
@@ -1048,6 +1057,8 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
 
    For any additional utility-class-level breaking changes in your custom Blade templates, refer to the official [Tailwind CSS v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide).
 
+---
+
 ### Catalog Rule Jobs No Longer Declare a Batch Size
 
 **Impact Probability: Low**
@@ -1055,3 +1066,13 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
 `Webkul\CatalogRule\Jobs\UpdateCreateCatalogRuleIndex` and `DeleteCatalogRuleIndex` no longer carry a `protected const BATCH_SIZE`. Both jobs now hand their product ids to `Webkul\Product\Helpers\Indexers\Price::reindexProducts()`, which batches the reindex itself with the indexer's own `BATCH_SIZE` and loads every relation the type indexers read up front. A subclass of either job that referenced `self::BATCH_SIZE` should call `reindexProducts()` instead of paging through the product repository itself.
 
 The full page cache's price listener now drops every cached page when a reindex touches more than `Webkul\FPC\Listeners\Price::PER_PRODUCT_FORGET_LIMIT` products, rather than resolving each product's pages one by one, so a catalog rule that matches most of the catalogue no longer walks it inside the save request.
+
+---
+
+### Magic AI Model Lists Follow the Providers' Current Models
+
+**Impact Probability: Low**
+
+The model enums under `Webkul\MagicAI\Enums\Models` now list each provider's current models and drop the ones the provider has retired or no longer offers, among them GPT-5.2, Claude Sonnet 4, Gemini 2.5, Imagen, `deepseek-chat` and the Groq-hosted LLaMA models. A migration moves a storefront feature (image search, review translation, checkout message) that was saved on a dropped model onto the replacement its provider recommends, so no manual database work is needed.
+
+Custom code that references a removed enum case, such as `OpenAiModel::GPT52` or `GeminiModel::Imagen4`, must switch to a current case, and a model id passed to `MagicAI::generateContent()` or `MagicAI::generateImage()` must be one the enums still offer, or the request falls back to the SDK's default provider without the key stored in the admin.

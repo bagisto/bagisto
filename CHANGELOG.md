@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
+
+- Updated the Laravel Sail setup to build on PHP 8.4, run Elasticsearch and Kibana 8.19 to match the 8.x client, keep Elasticsearch data across restarts and use the official MySQL image.
+
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 
 - Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.

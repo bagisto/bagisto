@@ -8,26 +8,25 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum OpenAiModel: string implements AiModelContract
 {
     /**
-     * GPT-5 family (frontier) — current recommended models.
+     * Current GPT models, ordered from most to least capable.
      */
-    case GPT52 = 'gpt-5.2';
-    case GPT51 = 'gpt-5.1';
-    case GPT5 = 'gpt-5';
-    case GPT5Mini = 'gpt-5-mini';
-    case GPT5Nano = 'gpt-5-nano';
+    case GPT6Astra = 'gpt-6-astra';
+    case GPT56Sol = 'gpt-5.6-sol';
+    case GPT56Terra = 'gpt-5.6-terra';
+    case GPT56Luna = 'gpt-5.6-luna';
 
     /**
-     * GPT-4 family.
+     * Previous GPT generation, still available.
      */
     case GPT41 = 'gpt-4.1';
     case GPT41Mini = 'gpt-4.1-mini';
-    case GPT41Nano = 'gpt-4.1-nano';
 
     /**
-     * Image generation models.
+     * Image generation models, ordered from most to least capable.
      */
-    case GptImage15 = 'gpt-image-1.5';
-    case GptImage1 = 'gpt-image-1';
+    case GptImage25Sunburst = 'gpt-image-2.5-sunburst';
+    case GptImage25Flare = 'gpt-image-2.5-flare';
+    case GptImage2 = 'gpt-image-2';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -43,16 +42,15 @@ enum OpenAiModel: string implements AiModelContract
     public function label(): string
     {
         return match ($this) {
-            self::GPT52 => 'GPT-5.2',
-            self::GPT51 => 'GPT-5.1',
-            self::GPT5 => 'GPT-5',
-            self::GPT5Mini => 'GPT-5 Mini',
-            self::GPT5Nano => 'GPT-5 Nano',
+            self::GPT6Astra => 'GPT-6 Astra',
+            self::GPT56Sol => 'GPT-5.6 Sol',
+            self::GPT56Terra => 'GPT-5.6 Terra',
+            self::GPT56Luna => 'GPT-5.6 Luna',
             self::GPT41 => 'GPT-4.1',
             self::GPT41Mini => 'GPT-4.1 Mini',
-            self::GPT41Nano => 'GPT-4.1 Nano',
-            self::GptImage15 => 'GPT Image 1.5',
-            self::GptImage1 => 'GPT Image 1',
+            self::GptImage25Sunburst => 'GPT Image 2.5 Sunburst',
+            self::GptImage25Flare => 'GPT Image 2.5 Flare',
+            self::GptImage2 => 'GPT Image 2',
         };
     }
 
@@ -62,7 +60,7 @@ enum OpenAiModel: string implements AiModelContract
     public function isImageModel(): bool
     {
         return match ($this) {
-            self::GptImage15, self::GptImage1 => true,
+            self::GptImage25Sunburst, self::GptImage25Flare, self::GptImage2 => true,
             default => false,
         };
     }
@@ -80,7 +78,7 @@ enum OpenAiModel: string implements AiModelContract
      */
     public static function defaultTextModel(): ?static
     {
-        return self::GPT41;
+        return self::GPT56Terra;
     }
 
     /**
@@ -88,6 +86,6 @@ enum OpenAiModel: string implements AiModelContract
      */
     public static function defaultImageModel(): ?static
     {
-        return self::GptImage1;
+        return self::GptImage25Flare;
     }
 }
