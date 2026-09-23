@@ -1,11 +1,13 @@
 <!-- Notes Form -->
-<div class="box-shadow rounded bg-white p-4 last:pb-0 dark:bg-gray-900">
-    <p class="p-4 pb-0 text-base font-semibold leading-none text-gray-800 dark:text-white">
-        @lang('admin::app.customers.customers.view.notes.add-note')
-    </p>
+<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+    <div class="flex justify-between">
+        <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
+            @lang('admin::app.customers.customers.view.notes.add-note')
+        </p>
+    </div>
 
     <x-admin::form :action="route('admin.customer.note.store', $customer->id)">
-        <div class="border-b p-4 dark:border-gray-800">
+        <div class="mt-7 {{ $customer->notes->isNotEmpty() ? 'border-b pb-4' : '' }} dark:border-gray-800">
             <!-- Note -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.control
@@ -23,7 +25,7 @@
 
             <div class="flex items-center justify-between">
                 <label
-                    class="flex w-max cursor-pointer select-none items-center gap-1 p-1.5"
+                    class="flex w-max cursor-pointer select-none items-center gap-1"
                     for="customer_notified"
                 >
                     <input
@@ -54,7 +56,7 @@
 
     <!-- Notes List -->
     @foreach ($customer->notes as $note)
-        <div class="grid gap-1.5 border-b p-4 last:border-none dark:border-gray-800">
+        <div class="grid gap-1.5 border-b py-4 last:border-none dark:border-gray-800">
             <p
                 class="break-all text-base leading-6 text-gray-800 dark:text-white"
                 v-pre
