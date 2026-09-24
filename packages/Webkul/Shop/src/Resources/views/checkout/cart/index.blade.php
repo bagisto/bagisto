@@ -82,7 +82,7 @@
         <!-- Cross-sell Product Carousal -->
         <x-shop::products.carousel
             :title="trans('shop::app.checkout.cart.index.cross-sell.title')"
-            :src="route('shop.api.checkout.cart.cross-sell.index')"
+            :src="route('shop.api.checkout.cart.cross_sell.index')"
         >
         </x-shop::products.carousel>
 
@@ -149,7 +149,10 @@
                                         @lang('shop::app.checkout.cart.index.remove')
                                     </span>
 
-                                    @if (auth()->guard()->check())
+                                    @if (
+                                        auth()->guard()->check()
+                                        && core()->getConfigData('customer.settings.wishlist.wishlist_option')
+                                    )
                                         <span class="mx-2.5 border-r-2 border-zinc-200"></span>
 
                                         <span

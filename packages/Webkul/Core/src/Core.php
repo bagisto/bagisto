@@ -585,7 +585,7 @@ class Core
 
         $now = Carbon::now($timezone);
 
-        if (! $this->is_empty_date($dateFrom)) {
+        if (! $this->isEmptyDate($dateFrom)) {
             $from = Carbon::parse($dateFrom, $timezone)->startOfDay();
 
             if ($now->lt($from)) {
@@ -593,7 +593,7 @@ class Core
             }
         }
 
-        if (! $this->is_empty_date($dateTo)) {
+        if (! $this->isEmptyDate($dateTo)) {
             $to = Carbon::parse($dateTo, $timezone)->endOfDay();
 
             if ($now->gt($to)) {
@@ -623,7 +623,7 @@ class Core
      * @param  string  $date
      * @return bool
      */
-    public function is_empty_date($date)
+    public function isEmptyDate($date)
     {
         return preg_replace('#[ 0:-]#', '', $date) === '';
     }
@@ -711,7 +711,7 @@ class Core
      * @param  string  $code
      * @return string
      */
-    public function country_name($code)
+    public function countryName($code)
     {
         $country = $this->countryRepository->findOneByField('code', $code);
 

@@ -111,7 +111,7 @@ Route::prefix('catalog')->group(function () {
         Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
 
         Route::controller(SimpleController::class)->group(function () {
-            Route::get('{id}/simple-customizable-options', 'customizableOptions')->name('admin.catalog.products.simple.customizable-options');
+            Route::get('{id}/simple-customizable-options', 'customizableOptions')->name('admin.catalog.products.simple.customizable_options');
         });
 
         Route::controller(ConfigurableController::class)->group(function () {
@@ -128,10 +128,14 @@ Route::prefix('catalog')->group(function () {
 
         Route::controller(DownloadableController::class)->group(function () {
             Route::get('{id}/downloadable-options', 'options')->name('admin.catalog.products.downloadable.options');
+
+            Route::get('downloadable-links/{id}/{type}', 'downloadLinkFile')->name('admin.catalog.products.downloadable.link_file');
+
+            Route::get('downloadable-samples/{id}', 'downloadSampleFile')->name('admin.catalog.products.downloadable.sample_file');
         });
 
         Route::controller(VirtualController::class)->group(function () {
-            Route::get('{id}/virtual-customizable-options', 'customizableOptions')->name('admin.catalog.products.virtual.customizable-options');
+            Route::get('{id}/virtual-customizable-options', 'customizableOptions')->name('admin.catalog.products.virtual.customizable_options');
         });
 
         Route::get('search', 'search')->name('admin.catalog.products.search');

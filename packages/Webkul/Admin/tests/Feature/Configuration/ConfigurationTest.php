@@ -143,11 +143,11 @@ it('should save a payment configuration that keeps one method enabled', function
 it('should download an uploaded configuration file', function () {
     Storage::fake();
 
-    Storage::put('configuration/logo.png', 'file-contents');
+    Storage::put('configurations/logo.png', 'file-contents');
 
     CoreConfig::factory()->create([
         'code' => 'general.design.admin_logo.logo_image',
-        'value' => 'configuration/logo.png',
+        'value' => 'configurations/logo.png',
     ]);
 
     $this->loginAsAdmin();
@@ -169,11 +169,54 @@ it('should not find a configuration file missing from the disk', function () {
 
     CoreConfig::factory()->create([
         'code' => 'general.design.admin_logo.logo_image',
-        'value' => 'configuration/missing.png',
+        'value' => 'configurations/missing.png',
     ]);
 
     $this->loginAsAdmin();
 
     get(route('admin.configuration.download', ['general', 'design', 'missing.png']))
         ->assertNotFound();
+});
+
+// ============================================================================
+// Dependent Fields
+// ============================================================================
+
+it('should save a dependent field while its depend condition is met', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.index', ['general', 'gdpr']), [
+        'general' => [
+            'gdpr' => [
+                'agreement' => [
+                    'enabled' => '1',
+                    'agreement_label' => 'I agree, truly.',
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'general.gdpr.agreement.agreement_label',
+        'value' => 'I agree, truly.',
+    ]);
+});
+
+it('should not save a dependent field while its depend condition is off', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.index', ['general', 'gdpr']), [
+        'general' => [
+            'gdpr' => [
+                'agreement' => [
+                    'enabled' => '0',
+                    'agreement_label' => '',
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseMissing('core_config', [
+        'code' => 'general.gdpr.agreement.agreement_label',
+    ]);
 });

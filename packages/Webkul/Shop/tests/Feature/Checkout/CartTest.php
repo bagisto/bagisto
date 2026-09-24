@@ -498,14 +498,14 @@ it('should offer the cross-sell products of the items in the cart', function () 
 
     $this->addProductToCart($product->id);
 
-    getJson(route('shop.api.checkout.cart.cross-sell.index'))
+    getJson(route('shop.api.checkout.cart.cross_sell.index'))
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $crossSell->id);
 });
 
 it('should offer nothing to cross-sell without a cart', function () {
-    getJson(route('shop.api.checkout.cart.cross-sell.index'))
+    getJson(route('shop.api.checkout.cart.cross_sell.index'))
         ->assertOk()
         ->assertJsonCount(0, 'data');
 });

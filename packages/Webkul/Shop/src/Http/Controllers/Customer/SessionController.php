@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
@@ -12,6 +13,18 @@ use Webkul\Shop\Http\Requests\Customer\LoginRequest;
 
 class SessionController extends Controller
 {
+    use ThrottlesLogins;
+
+    /**
+     * The failed login attempts an email address and caller may make before waiting.
+     */
+    protected $maxAttempts = 6;
+
+    /**
+     * How many minutes those failed attempts are remembered for.
+     */
+    protected $decayMinutes = 1;
+
     /**
      * Display the resource.
      *
@@ -27,6 +40,14 @@ class SessionController extends Controller
     }
 
     /**
+     * The request field holding the identifier login attempts are counted against.
+     */
+    public function username(): string
+    {
+        return 'email';
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return Response
@@ -37,11 +58,21 @@ class SessionController extends Controller
 
         $credentials['channel_id'] = core()->getCurrentChannel()->id;
 
+        if ($this->hasTooManyLoginAttempts($loginRequest)) {
+            $this->fireLockoutEvent($loginRequest);
+
+            return $this->sendLockoutResponse($loginRequest);
+        }
+
         if (! auth()->guard('customer')->attempt($credentials)) {
+            $this->incrementLoginAttempts($loginRequest);
+
             session()->flash('error', trans('shop::app.customers.login-form.invalid-credentials'));
 
             return redirect()->back();
         }
+
+        $this->clearLoginAttempts($loginRequest);
 
         if (! auth()->guard('customer')->user()->status) {
             auth()->guard('customer')->logout();

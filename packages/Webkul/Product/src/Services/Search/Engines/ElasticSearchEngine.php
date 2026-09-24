@@ -36,7 +36,7 @@ class ElasticSearchEngine implements SearchEngine
         }
 
         $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
+            'index' => $this->getIndexName(),
             'ignore_unavailable' => true,
             'body' => [
                 'from' => $options['from'],
@@ -106,7 +106,7 @@ class ElasticSearchEngine implements SearchEngine
             : $attributeCode;
 
         $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
+            'index' => $this->getIndexName(),
             'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
@@ -322,7 +322,7 @@ class ElasticSearchEngine implements SearchEngine
         $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
 
         $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
+            'index' => $this->getIndexName(),
             'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,

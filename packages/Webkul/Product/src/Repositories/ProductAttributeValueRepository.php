@@ -3,18 +3,62 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Traits\Sanitizer;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Contracts\ProductAttributeValue;
 
 class ProductAttributeValueRepository extends Repository
 {
+    use Sanitizer;
+
     /**
      * Specify the model class name.
      */
     public function model(): string
     {
         return ProductAttributeValue::class;
+    }
+
+    /**
+     * Upsert attribute values, cleaning the ones their attribute stores as rich text.
+     */
+    public function upsert(array $values, $uniqueBy, $update = null)
+    {
+        return $this->model->upsert($this->cleanRichTextValues($values), $uniqueBy, $update);
+    }
+
+    /**
+     * Run the values of rich text attributes through the purifier, leaving the others alone.
+     *
+     * @param  array<int|string, array<string, mixed>>  $values
+     * @return array<int|string, array<string, mixed>>
+     */
+    public function cleanRichTextValues(array $values): array
+    {
+        $richTextAttributeIds = AttributeProxy::modelClass()::query()
+            ->where('type', 'textarea')
+            ->where('enable_wysiwyg', 1)
+            ->pluck('id')
+            ->all();
+
+        if (! $richTextAttributeIds) {
+            return $values;
+        }
+
+        foreach ($values as $key => $value) {
+            if (
+                ! in_array($value['attribute_id'] ?? null, $richTextAttributeIds)
+                || ! is_string($value['text_value'] ?? null)
+            ) {
+                continue;
+            }
+
+            $values[$key]['text_value'] = clean_content($value['text_value']);
+        }
+
+        return $values;
     }
 
     /**
@@ -68,9 +112,13 @@ class ProductAttributeValueRepository extends Repository
             }
 
             if (in_array($attribute->type, ['image', 'file'])) {
-                $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/'.$product->id)
-                    : $data[$attribute->code];
+                if (gettype($data[$attribute->code]) === 'object') {
+                    $file = request()->file($attribute->code);
+
+                    $data[$attribute->code] = $file->store('products/'.$product->id);
+
+                    $this->sanitizeSVG($data[$attribute->code], $file->getMimeType());
+                }
             }
 
             $attributeValues = $product->attribute_values

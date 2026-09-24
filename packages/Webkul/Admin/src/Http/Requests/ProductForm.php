@@ -158,6 +158,16 @@ class ProductForm extends FormRequest
                 $validations[] = new Decimal;
             }
 
+            if ($attribute->type == AttributeTypeEnum::IMAGE->value) {
+                $validations[] = 'mimes:bmp,jpeg,jpg,png,webp';
+                $validations[] = 'max:'.(core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?: '2048');
+            }
+
+            if ($attribute->type == AttributeTypeEnum::FILE->value) {
+                $validations[] = 'file';
+                $validations[] = 'max:'.(core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048');
+            }
+
             if ($attribute->is_unique) {
                 array_push($validations, function ($field, $value, $fail) use ($attribute) {
                     if (

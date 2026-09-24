@@ -39,7 +39,7 @@ it('should flush every cached storefront page from the full page cache settings'
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.configuration.cache-management.execute'), [
+    postJson(route('admin.configuration.cache_management.execute'), [
         'action' => 'clear-page-cache',
     ])->assertOk();
 
@@ -53,7 +53,7 @@ it('should drop the page cache along with the application caches when clearing e
 
     $this->loginAsAdmin();
 
-    $response = postJson(route('admin.configuration.cache-management.execute'), [
+    $response = postJson(route('admin.configuration.cache_management.execute'), [
         'action' => 'clear-all',
     ])->assertOk();
 
@@ -84,7 +84,7 @@ it('should offer every action a sentence of its own', function () {
 it('should answer a cache action with its own sentence rather than the command it ran', function (string $action) {
     $this->loginAsAdmin();
 
-    $response = postJson(route('admin.configuration.cache-management.execute'), [
+    $response = postJson(route('admin.configuration.cache_management.execute'), [
         'action' => $action,
     ])->assertOk();
 
@@ -113,7 +113,7 @@ it('should fall back to naming an action the way its button does when it has no 
 
     $this->loginAsAdmin();
 
-    $response = postJson(route('admin.configuration.cache-management.execute'), [
+    $response = postJson(route('admin.configuration.cache_management.execute'), [
         'action' => 'clear-unnamed',
     ])->assertOk();
 
@@ -125,7 +125,7 @@ it('should fall back to naming an action the way its button does when it has no 
 it('should still report the command it ran, which the cache console prints', function () {
     $this->loginAsAdmin();
 
-    $response = postJson(route('admin.configuration.cache-management.execute'), [
+    $response = postJson(route('admin.configuration.cache_management.execute'), [
         'action' => 'clear-views',
     ])->assertOk();
 
@@ -139,7 +139,7 @@ it('should still report the command it ran, which the cache console prints', fun
 it('should refuse a cache action it does not know', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.configuration.cache-management.execute'), [
+    postJson(route('admin.configuration.cache_management.execute'), [
         'action' => 'clear-everything-please',
     ])
         ->assertUnprocessable()
@@ -149,13 +149,13 @@ it('should refuse a cache action it does not know', function () {
 it('should fail validation when no action is named', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.configuration.cache-management.execute'))
+    postJson(route('admin.configuration.cache_management.execute'))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('action');
 });
 
 it('should deny a guest the cache actions', function () {
-    postJson(route('admin.configuration.cache-management.execute'), [
+    postJson(route('admin.configuration.cache_management.execute'), [
         'action' => 'clear-page-cache',
     ])->assertRedirect(route('admin.session.create'));
 });

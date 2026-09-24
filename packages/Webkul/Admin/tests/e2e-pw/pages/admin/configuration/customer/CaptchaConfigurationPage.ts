@@ -6,6 +6,7 @@ export interface CaptchaSettings {
     projectId: string;
     apiKey: string;
     siteKey: string;
+    scoreThreshold: string;
 }
 
 const FIELDS = {
@@ -13,6 +14,7 @@ const FIELDS = {
     projectId: "customer[captcha][credentials][project_id]",
     apiKey: "customer[captcha][credentials][api_key]",
     siteKey: "customer[captcha][credentials][site_key]",
+    scoreThreshold: "customer[captcha][credentials][score_threshold]",
 } as const;
 
 export class CaptchaConfigurationPage extends ConfigurationFormPage {
@@ -32,6 +34,7 @@ export class CaptchaConfigurationPage extends ConfigurationFormPage {
             projectId: await this.readText(FIELDS.projectId),
             apiKey: await this.readText(FIELDS.apiKey),
             siteKey: await this.readText(FIELDS.siteKey),
+            scoreThreshold: await this.readText(FIELDS.scoreThreshold),
         };
     }
 
@@ -52,6 +55,10 @@ export class CaptchaConfigurationPage extends ConfigurationFormPage {
 
         if (settings.siteKey !== undefined) {
             await this.setText(FIELDS.siteKey, settings.siteKey);
+        }
+
+        if (settings.scoreThreshold !== undefined) {
+            await this.setText(FIELDS.scoreThreshold, settings.scoreThreshold);
         }
 
         if (settings.enabled === false) {
@@ -78,6 +85,10 @@ export class CaptchaConfigurationPage extends ConfigurationFormPage {
 
         if (settings.siteKey !== undefined) {
             await this.expectText(FIELDS.siteKey, settings.siteKey);
+        }
+
+        if (settings.scoreThreshold !== undefined) {
+            await this.expectText(FIELDS.scoreThreshold, settings.scoreThreshold);
         }
     }
 }

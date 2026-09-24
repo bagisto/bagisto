@@ -111,7 +111,7 @@ class ConfigurationController extends Controller
      */
     public function download(): StreamedResponse
     {
-        $config = $this->coreConfigRepository->findOneByField('value', 'configuration/'.request()->route('path'));
+        $config = $this->coreConfigRepository->findOneByField('value', 'configurations/'.request()->route('path'));
 
         if (
             ! $config

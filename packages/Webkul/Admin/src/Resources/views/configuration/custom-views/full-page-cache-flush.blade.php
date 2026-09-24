@@ -66,7 +66,7 @@
 
                     this.isFlushing = true;
 
-                    this.$axios.post("{{ route('admin.configuration.cache-management.execute') }}", {
+                    this.$axios.post("{{ route('admin.configuration.cache_management.execute') }}", {
                             action: 'clear-page-cache',
                         })
                         .then((response) => {

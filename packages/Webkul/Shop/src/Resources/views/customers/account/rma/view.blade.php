@@ -98,9 +98,9 @@
 
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($rma->images as $image)
-                                    <a href="{{ Storage::url($image['path']) }}" target="_blank">
+                                    <a href="{{ route('shop.customers.account.rma.image', $image['id']) }}" target="_blank">
                                         <img
-                                            src="{{ Storage::url($image['path']) }}"
+                                            src="{{ route('shop.customers.account.rma.image', $image['id']) }}"
                                             class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded-sm border shadow-xs hover:shadow-md transition"
                                         />
                                     </a>
@@ -132,8 +132,8 @@
                         <x-shop::form
                             enctype="multipart/form-data"
                             :action="$canCloseRma
-                                ? route('shop.customers.account.rma.update-status', $rma->id)
-                                : route('shop.customers.account.rma.re-open', $rma->id)"
+                                ? route('shop.customers.account.rma.update_status', $rma->id)
+                                : route('shop.customers.account.rma.re_open', $rma->id)"
                         >
                             @php $checkboxName = $canCloseRma ? 'close_rma' : 'reopen_rma'; @endphp
 
@@ -579,7 +579,7 @@
 
                 methods: {
                     getMessage() {
-                        this.$axios.get(`{{ route('shop.customers.account.rma.get-messages') }}`, {
+                        this.$axios.get(`{{ route('shop.customers.account.rma.get_messages') }}`, {
                             params: { id: this.rma.id, limit: this.limit }
                         })
                         .then(response => {
@@ -594,7 +594,7 @@
                         formData.set('message', sanitizedMessage);
                         this.isChatSend = false;
 
-                        this.$axios.post("{{ route('shop.customers.account.rma.send-message') }}", formData)
+                        this.$axios.post("{{ route('shop.customers.account.rma.send_message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
                                 attachmentPreview.innerHTML = '';

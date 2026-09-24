@@ -176,6 +176,29 @@ class RazorpayPayment extends Payment
     }
 
     /**
+     * Fetch a payment from Razorpay, so what was actually paid can be checked.
+     *
+     * @return array{order_id: string|null, amount: int|null, currency: string|null, status: string|null}|null
+     */
+    public function fetchPayment(string $paymentId): ?array
+    {
+        try {
+            $payment = $this->getApi()->payment->fetch($paymentId);
+        } catch (\Throwable $e) {
+            report($e);
+
+            return null;
+        }
+
+        return [
+            'order_id' => $payment->order_id ?? null,
+            'amount' => isset($payment->amount) ? (int) $payment->amount : null,
+            'currency' => $payment->currency ?? null,
+            'status' => $payment->status ?? null,
+        ];
+    }
+
+    /**
      * Create Razorpay order.
      *
      * @param  \Webkul\Checkout\Contracts\Cart|null  $cart

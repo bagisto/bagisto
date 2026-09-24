@@ -46,6 +46,16 @@ function currentOtp(string $secret): string
     return (new Google2FA)->getCurrentOtp($secret);
 }
 
+/**
+ * The one time password of the window after this one, which an authenticator shows next.
+ */
+function nextOtp(string $secret): string
+{
+    $google2fa = new Google2FA;
+
+    return $google2fa->oathTotp($secret, $google2fa->getTimestamp() + 1);
+}
+
 beforeEach(function () {
     $this->admin = $this->loginAsAdmin();
 
@@ -111,7 +121,7 @@ it('should enable 2FA with a valid code and hand back the backup codes', functio
     expect($this->admin->two_factor_enabled)->toBeTrue()
         ->and($this->admin->two_factor_verified_at)->not->toBeNull()
         ->and($this->admin->two_factor_backup_codes)->not->toBeEmpty()
-        ->and(session('two_factor_passed'))->toBeTrue();
+        ->and(session('two_factor_passed_for'))->toBe($this->admin->id);
 
     Mail::assertQueued(BackupCodesNotification::class, fn ($mail) => $mail->hasTo($this->admin->email));
 });
@@ -129,7 +139,7 @@ it('should not enable 2FA with an invalid code', function () {
 
     expect($this->admin->two_factor_enabled)->toBeFalse()
         ->and($this->admin->two_factor_verified_at)->toBeNull()
-        ->and(session('two_factor_passed'))->toBeNull();
+        ->and(session('two_factor_passed_for'))->toBeNull();
 
     Mail::assertNothingOutgoing();
 });
@@ -167,7 +177,7 @@ it('should still enable 2FA when the backup codes email cannot be delivered', fu
 it('should disable 2FA for a session that has passed verification', function () {
     enableTwoFactorFor($this->admin);
 
-    $this->withSession(['two_factor_passed' => true])
+    $this->withSession(['two_factor_passed_for' => $this->admin->id])
         ->post(route('admin.two_factor.disable'))
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.account.messages.disabled-success'));
@@ -212,7 +222,7 @@ it('should verify the login with a valid TOTP code', function () {
         ->assertRedirect(route('admin.dashboard.index'))
         ->assertSessionHas('success', trans('admin::app.account.messages.verified-success'));
 
-    expect(session('two_factor_passed'))->toBeTrue();
+    expect(session('two_factor_passed_for'))->toBe($this->admin->id);
 });
 
 it('should verify the login with a backup code and spend it', function () {
@@ -223,7 +233,7 @@ it('should verify the login with a backup code and spend it', function () {
     ])
         ->assertRedirect(route('admin.dashboard.index'));
 
-    expect(session('two_factor_passed'))->toBeTrue();
+    expect(session('two_factor_passed_for'))->toBe($this->admin->id);
 
     $remaining = collect($this->admin->fresh()->two_factor_backup_codes);
 
@@ -240,7 +250,7 @@ it('should not verify the login with an invalid code', function () {
         ->assertRedirect()
         ->assertSessionHasErrors('code');
 
-    expect(session('two_factor_passed'))->toBeNull();
+    expect(session('two_factor_passed_for'))->toBeNull();
 });
 
 it('should require a six digit code to verify the login', function (array $payload) {
@@ -249,7 +259,7 @@ it('should require a six digit code to verify the login', function (array $paylo
     post(route('admin.two_factor.verify.store'), $payload)
         ->assertSessionHasErrors('code');
 
-    expect(session('two_factor_passed'))->toBeNull();
+    expect(session('two_factor_passed_for'))->toBeNull();
 })->with([
     'too short' => [['code' => '123']],
     'missing' => [[]],
@@ -289,15 +299,62 @@ it('should walk an admin through setup, enabling, verification and disabling', f
 
     expect($this->admin->fresh()->two_factor_enabled)->toBeTrue();
 
+    /**
+     * Enabling spent the code of the current window, so the login is verified with the next one.
+     */
     post(route('admin.two_factor.verify.store'), [
-        'code' => currentOtp($secret),
+        'code' => nextOtp($secret),
     ])
         ->assertRedirect(route('admin.dashboard.index'));
 
-    expect(session('two_factor_passed'))->toBeTrue();
+    expect(session('two_factor_passed_for'))->toBe($this->admin->id);
 
     post(route('admin.two_factor.disable'))
         ->assertOk();
 
     expect($this->admin->fresh()->two_factor_enabled)->toBeFalse();
+});
+
+it('should not accept a verification another admin passed in the same session', function () {
+    enableTwoFactorFor($this->admin);
+
+    $otherAdmin = Admin::factory()->create();
+
+    $this->withSession(['two_factor_passed_for' => $otherAdmin->id])
+        ->post(route('admin.two_factor.disable'))
+        ->assertRedirect(route('admin.two_factor.verify.form'));
+
+    expect($this->admin->refresh()->two_factor_enabled)->toBeTrue();
+});
+
+it('should drop a passed verification when someone logs in again', function () {
+    enableTwoFactorFor($this->admin);
+
+    $password = 'admin123';
+
+    $victim = Admin::factory()->create(['password' => Hash::make($password), 'status' => 1]);
+
+    $this->withSession(['two_factor_passed_for' => $this->admin->id])
+        ->post(route('admin.session.store'), [
+            'email' => $victim->email,
+            'password' => $password,
+        ]);
+
+    expect(session('two_factor_passed_for'))->toBeNull();
+});
+
+it('should refuse a code that has already been used', function () {
+    $secret = enableTwoFactorFor($this->admin);
+
+    $code = currentOtp($secret);
+
+    post(route('admin.two_factor.verify.store'), ['code' => $code])
+        ->assertRedirect(route('admin.dashboard.index'));
+
+    session()->forget('two_factor_passed_for');
+
+    post(route('admin.two_factor.verify.store'), ['code' => $code])
+        ->assertSessionHasErrors('code');
+
+    expect(session('two_factor_passed_for'))->toBeNull();
 });

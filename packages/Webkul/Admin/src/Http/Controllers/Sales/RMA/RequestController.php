@@ -18,6 +18,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Enums\DefaultRMAResolution;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+use Webkul\RMA\Helpers\Attachment;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -122,6 +123,22 @@ class RequestController extends Controller
     }
 
     /**
+     * Show a photo attached to a return.
+     */
+    public function showImage(int $id)
+    {
+        return app(Attachment::class)->inline($this->rmaImageRepository->findOrFail($id)->path);
+    }
+
+    /**
+     * Download an attachment of a message on a return.
+     */
+    public function downloadAttachment(int $id)
+    {
+        return app(Attachment::class)->download($this->rmaMessageRepository->findOrFail($id));
+    }
+
+    /**
      * Get messages for RMA conversation.
      */
     public function getMessages(): JsonResponse
@@ -159,8 +176,9 @@ class RequestController extends Controller
                 $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
 
                 $path = $file->storeAs(
-                    'rma-conversation/'.$storedMessage->id,
-                    Str::random(40).($extension ? '.'.$extension : '')
+                    'rmas/'.$storedMessage->rma_id.'/conversations/'.$storedMessage->id,
+                    Str::random(40).($extension ? '.'.$extension : ''),
+                    'private'
                 );
 
                 $this->rmaMessageRepository->update([

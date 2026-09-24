@@ -5,7 +5,7 @@
         @endif
 
         <a
-            href="{{ route('customer.social-login.index', $provider) }}"
+            href="{{ route('customer.social_login.index', $provider) }}"
             class="transition-all hover:opacity-[0.8]"
             aria-label="{{ $provider }}"
         >

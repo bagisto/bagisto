@@ -16,9 +16,9 @@ function makeCategoryWithLogo(): Category
 {
     $category = (new CategoryFaker)->factory()->create();
 
-    $category->logo_path = 'category/'.$category->id.'/kd83nfhs.webp';
+    $category->logo_path = 'categories/'.$category->id.'/kd83nfhs.webp';
 
-    $category->banner_path = 'category/'.$category->id.'/pw81mcka.webp';
+    $category->banner_path = 'categories/'.$category->id.'/pw81mcka.webp';
 
     $category->save();
 
@@ -104,7 +104,7 @@ it('should rename the category logo file', function () {
         'banner_path' => ['banner_path' => ''],
     ]))->assertRedirect(route('admin.catalog.categories.index'));
 
-    $expected = 'category/'.$category->id.'/winter-collection-logo.webp';
+    $expected = 'categories/'.$category->id.'/winter-collection-logo.webp';
 
     expect($category->fresh()->logo_path)->toBe($expected);
 
@@ -131,7 +131,7 @@ it('should name a newly uploaded category logo after the requested file name', f
 
     $category = $category->fresh();
 
-    expect($category->logo_path)->toBe('category/'.$category->id.'/winter-collection-logo.webp');
+    expect($category->logo_path)->toBe('categories/'.$category->id.'/winter-collection-logo.webp');
 
     expect($category->logo_alt)->toBe('Winter collection logo');
 

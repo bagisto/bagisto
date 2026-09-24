@@ -35,7 +35,7 @@ function createReview(bool $withAttachment = false): array
         $fileType = explode('/', $file->getMimeType());
 
         $attachment = ProductReviewAttachment::factory()->create([
-            'path' => $file->store('review/'.$review->id),
+            'path' => $file->store('reviews/'.$review->id),
             'review_id' => $review->id,
             'type' => $fileType[0],
             'mime_type' => $fileType[1],

@@ -61,12 +61,22 @@ class ReviewController extends APIController
      */
     public function store(int $id): JsonResource
     {
+        if (
+            ! auth()->guard('customer')->check()
+            && ! core()->getConfigData('catalog.products.review.guest_review')
+        ) {
+            abort(403, trans('shop::app.errors.403.title'));
+        }
+
+        $this->productRepository->findOrFail($id);
+
         $this->validate(request(), [
-            'title' => 'required',
-            'comment' => 'required',
+            'title' => 'required|string|max:255',
+            'comment' => 'required|string|max:5000',
+            'name' => [auth()->guard('customer')->check() ? 'nullable' : 'required', 'string', 'max:255'],
             'rating' => 'required|numeric|min:1|max:5',
-            'attachments' => 'array',
-            'attachments.*' => 'file|mimetypes:image/*,video/*',
+            'attachments' => 'array|max:5',
+            'attachments.*' => 'file|mimetypes:image/*,video/*|max:10240',
         ]);
 
         $data = array_merge(request()->only([
@@ -100,6 +110,15 @@ class ReviewController extends APIController
      */
     public function translate(int $productId, int $reviewId): JsonResponse
     {
+        if (
+            ! core()->getConfigData('magic_ai.general.settings.enabled')
+            || ! core()->getConfigData('magic_ai.storefront_features.review_translation.enabled')
+        ) {
+            return new JsonResponse([
+                'message' => trans('shop::app.errors.403.title'),
+            ], 403);
+        }
+
         $review = $this->productReviewRepository->find($reviewId);
 
         if ($review?->status !== self::STATUS_APPROVED) {

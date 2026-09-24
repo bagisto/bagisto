@@ -34,13 +34,13 @@ class EUWithdrawalController extends Controller
         $this->ensureChannelEnabledOrAbort($order);
 
         if ($existing = $this->withdrawals->findForOrder($order->id)) {
-            return redirect()->route('shop.customers.account.eu-withdrawal.show', $existing->uuid);
+            return redirect()->route('shop.customers.account.eu_withdrawal.show', $existing->uuid);
         }
 
         return view('shop::customers.account.eu-withdrawals.form', [
             'order' => $order,
             'isGuest' => false,
-            'formUrl' => route('shop.customers.account.eu-withdrawal.store', $order->id),
+            'formUrl' => route('shop.customers.account.eu_withdrawal.store', $order->id),
         ]);
     }
 
@@ -61,7 +61,7 @@ class EUWithdrawalController extends Controller
             app()->getLocale(),
         );
 
-        return redirect()->route('shop.customers.account.eu-withdrawal.show', $withdrawal->uuid);
+        return redirect()->route('shop.customers.account.eu_withdrawal.show', $withdrawal->uuid);
     }
 
     /**

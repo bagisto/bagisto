@@ -213,7 +213,7 @@ class PayU extends Payment
 
         $calculatedHash = strtolower(hash('sha512', $hashString));
 
-        return $calculatedHash === $receivedHash;
+        return hash_equals($calculatedHash, (string) $receivedHash);
     }
 
     /**

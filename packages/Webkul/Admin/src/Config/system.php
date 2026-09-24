@@ -53,7 +53,7 @@ return [
                 'name' => 'shop',
                 'title' => 'admin::app.configuration.index.general.general.breadcrumbs.shop',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ],
         ],
     ], [
@@ -110,32 +110,32 @@ return [
                 'name' => 'enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.enable-speculation',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
             ], [
                 'name' => 'prerender_enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.enabled',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
             ], [
                 'name' => 'prerender_ignore_urls',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls',
                 'info' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls-info',
                 'type' => 'textarea',
                 'default' => '/customer/account/*|/checkout/*',
-                'depends' => 'prerender_enabled:true',
+                'depends' => 'prerender_enabled:1',
             ], [
                 'name' => 'prerender_ignore_url_params',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params',
                 'info' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-url-params-info',
                 'type' => 'textarea',
-                'depends' => 'prerender_enabled:true',
+                'depends' => 'prerender_enabled:1',
             ], [
                 'name' => 'prerender_eagerness',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness',
                 'info' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eagerness-info',
                 'type' => 'select',
                 'default' => 'moderate',
-                'depends' => 'prerender_enabled:true',
+                'depends' => 'prerender_enabled:1',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.eager',
@@ -154,27 +154,27 @@ return [
                 'name' => 'prefetch_enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.enabled',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
             ], [
                 'name' => 'prefetch_ignore_urls',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls',
                 'info' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-urls-info',
                 'type' => 'textarea',
                 'default' => '/customer/account/*|/checkout/*',
-                'depends' => 'prefetch_enabled:true',
+                'depends' => 'prefetch_enabled:1',
             ], [
                 'name' => 'prefetch_ignore_url_params',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params',
                 'info' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.ignore-url-params-info',
                 'type' => 'textarea',
-                'depends' => 'prefetch_enabled:true',
+                'depends' => 'prefetch_enabled:1',
             ], [
                 'name' => 'prefetch_eagerness',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness',
                 'info' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eagerness-info',
                 'type' => 'select',
                 'default' => 'moderate',
-                'depends' => 'prefetch_enabled:true',
+                'depends' => 'prefetch_enabled:1',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.general.content.speculation-rules.prefetch.eager',
@@ -326,13 +326,13 @@ return [
                 'name' => 'enabled',
                 'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.enabled',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
             ], [
                 'name' => 'frequency',
                 'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.frequency',
                 'type' => 'select',
                 'default' => 'daily',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.daily',
@@ -350,7 +350,7 @@ return [
                 'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.time',
                 'type' => 'text',
                 'default' => '00:00',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'validation' => 'date_format:H:i',
             ],
         ],
@@ -427,14 +427,14 @@ return [
                 'type' => 'text',
                 'default' => 'I agree with the terms and conditions.',
                 'validation' => 'max:255',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
                 'name' => 'agreement_content',
                 'title' => 'admin::app.configuration.index.general.gdpr.agreement.content',
                 'type' => 'editor',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ],
@@ -456,7 +456,7 @@ return [
                 'title' => 'admin::app.configuration.index.general.gdpr.cookie.position',
                 'type' => 'select',
                 'default' => 'bottom-left',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.general.gdpr.cookie.bottom-left',
@@ -483,7 +483,7 @@ return [
                 'type' => 'text',
                 'default' => 'Cookie Block',
                 'validation' => 'max:255',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -492,7 +492,7 @@ return [
                 'type' => 'textarea',
                 'default' => 'This website uses cookies to ensure you get the best experience on our website.',
                 'validation' => 'max:500',
-                'depends' => 'enabled:true',
+                'depends' => 'enabled:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ],
@@ -1761,7 +1761,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.checkout.shopping-cart.cart-page',
                 'info' => 'admin::app.configuration.index.sales.checkout.shopping-cart.cart-page-info',
                 'type' => 'boolean',
-                'default' => 2,
+                'default' => 1,
             ], [
                 'name' => 'allow_guest_checkout',
                 'title' => 'admin::app.configuration.index.sales.checkout.shopping-cart.guest-checkout',
@@ -1773,13 +1773,13 @@ return [
                 'title' => 'admin::app.configuration.index.sales.checkout.shopping-cart.cross-sell',
                 'info' => 'admin::app.configuration.index.sales.checkout.shopping-cart.cross-sell-info',
                 'type' => 'boolean',
-                'default' => 3,
+                'default' => 1,
             ], [
                 'name' => 'estimate_shipping',
                 'title' => 'admin::app.configuration.index.sales.checkout.shopping-cart.estimate-shipping',
                 'info' => 'admin::app.configuration.index.sales.checkout.shopping-cart.estimate-shipping-info',
                 'type' => 'boolean',
-                'default' => 4,
+                'default' => 1,
             ],
         ],
     ], [
@@ -1899,13 +1899,13 @@ return [
                 'title' => 'admin::app.configuration.index.sales.order-settings.reorder.admin-reorder',
                 'info' => 'admin::app.configuration.index.sales.order-settings.reorder.admin-reorder-info',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ], [
                 'name' => 'shop',
                 'title' => 'admin::app.configuration.index.sales.order-settings.reorder.shop-reorder',
                 'info' => 'admin::app.configuration.index.sales.order-settings.reorder.shop-reorder-info',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ],
         ],
     ], [
@@ -1990,19 +1990,19 @@ return [
                 'title' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.invoice-id-title',
                 'info' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.invoice-id-info',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ], [
                 'name' => 'order_id',
                 'title' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.order-id-title',
                 'info' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.order-id-info',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ], [
                 'name' => 'logo',
                 'title' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo',
                 'info' => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo-info',
                 'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp|max:2048',
                 'channel_based' => true,
             ], [
                 'name' => 'footer_text',
@@ -2243,7 +2243,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.show-tax-breakdown',
                 'info' => 'admin::app.configuration.index.sales.taxes.shopping-cart.show-tax-breakdown-info',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
             ],
         ],
     ], [
@@ -2419,20 +2419,20 @@ return [
         ],
     ], [
         'key' => 'sales.eu_withdrawal',
-        'name' => 'admin::app.eu_withdrawal.config.title',
-        'info' => 'admin::app.eu_withdrawal.config.info',
+        'name' => 'admin::app.eu-withdrawal.config.title',
+        'info' => 'admin::app.eu-withdrawal.config.info',
         'icon' => 'settings/eu-withdrawal.svg',
         'sort' => 9,
     ], [
         'key' => 'sales.eu_withdrawal.general',
-        'name' => 'admin::app.eu_withdrawal.config.general.title',
-        'info' => 'admin::app.eu_withdrawal.config.general.info',
+        'name' => 'admin::app.eu-withdrawal.config.general.title',
+        'info' => 'admin::app.eu-withdrawal.config.general.info',
         'sort' => 1,
         'fields' => [
             [
                 'name' => 'enabled',
-                'title' => 'admin::app.eu_withdrawal.config.general.enabled',
-                'info' => 'admin::app.eu_withdrawal.config.general.enabled_info',
+                'title' => 'admin::app.eu-withdrawal.config.general.enabled',
+                'info' => 'admin::app.eu-withdrawal.config.general.enabled-info',
                 'type' => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,
@@ -2560,7 +2560,7 @@ return [
                 'name' => 'customer_review',
                 'title' => 'admin::app.configuration.index.catalog.products.review.allow-customer-review',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ], [
                 'name' => 'guest_review',
                 'title' => 'admin::app.configuration.index.catalog.products.review.allow-guest-review',
@@ -2569,7 +2569,7 @@ return [
                 'name' => 'censoring_reviewer_name',
                 'title' => 'admin::app.configuration.index.catalog.products.review.censoring-reviewer-name',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ], [
                 'name' => 'summary',
                 'title' => 'admin::app.configuration.index.catalog.products.review.summary',
@@ -2641,79 +2641,10 @@ return [
             ],
         ],
     ], [
-        'key' => 'catalog.products.cache_small_image',
-        'name' => 'admin::app.configuration.index.catalog.products.small-image.title',
-        'info' => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort' => 7,
-        'fields' => [
-            [
-                'name' => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.width',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.height',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'url',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.placeholder',
-                'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],
-        ],
-    ], [
-        'key' => 'catalog.products.cache_medium_image',
-        'name' => 'admin::app.configuration.index.catalog.products.medium-image.title',
-        'info' => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort' => 8,
-        'fields' => [
-            [
-                'name' => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.width',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.height',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'url',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.placeholder',
-                'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],
-        ],
-    ], [
-        'key' => 'catalog.products.cache_large_image',
-        'name' => 'admin::app.configuration.index.catalog.products.large-image.title',
-        'info' => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort' => 9,
-        'fields' => [
-            [
-                'name' => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.width',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.height',
-                'type' => 'text',
-                'validation' => 'integer|min:1',
-            ], [
-                'name' => 'url',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.placeholder',
-                'type' => 'image',
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],
-        ],
-    ], [
         'key' => 'catalog.products.attribute',
         'name' => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info' => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort' => 10,
+        'sort' => 7,
         'fields' => [
             [
                 'name' => 'image_attribute_upload_size',
@@ -2731,7 +2662,7 @@ return [
         'key' => 'catalog.products.omnibus',
         'name' => 'admin::app.configuration.index.catalog.products.omnibus.title',
         'info' => 'admin::app.configuration.index.catalog.products.omnibus.title-info',
-        'sort' => 11,
+        'sort' => 8,
         'fields' => [
             [
                 'name' => 'is_enabled',
@@ -2739,7 +2670,7 @@ return [
                 'type' => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,
-                'default' => config('omnibus.enabled', false),
+                'default' => (int) config('omnibus.enabled', false),
             ],
         ],
     ], [
@@ -2763,6 +2694,7 @@ return [
                 'name' => 'out_of_stock_threshold',
                 'title' => 'admin::app.configuration.index.catalog.inventory.product-stock-options.out-of-stock-threshold',
                 'type' => 'number',
+                'validation' => 'nullable|integer|min:0',
                 'default' => '0',
             ],
         ],
@@ -2873,7 +2805,7 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.create-new-account-option.news-letter',
                 'info' => 'admin::app.configuration.index.customer.settings.create-new-account-option.news-letter-info',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
             ],
         ],
     ], [
@@ -3168,7 +3100,7 @@ return [
                 'title' => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold',
                 'info' => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold-info',
                 'type' => 'text',
-                'validation' => 'required_if:status,1|decimal:1',
+                'validation' => 'required_if:status,1|numeric|between:0,1',
                 'default' => '0.5',
                 'depends' => 'status:1',
                 'channel_based' => true,
@@ -3423,7 +3355,7 @@ return [
                 'title' => 'admin::app.configuration.index.search-engines.general.settings.enabled',
                 'info' => 'admin::app.configuration.index.search-engines.general.settings.enabled-info',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
             ], [
                 'name' => 'engine',
                 'title' => 'admin::app.configuration.index.search-engines.general.settings.engine',
@@ -3636,7 +3568,7 @@ return [
                 'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.use-path-style-endpoint',
                 'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.use-path-style-endpoint-info',
                 'type' => 'boolean',
-                'default' => false,
+                'default' => 0,
                 'channel_based' => false,
                 'locale_based' => false,
             ],
@@ -3742,7 +3674,7 @@ return [
                 'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.enabled',
                 'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.enabled-info',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => 1,
                 'channel_based' => false,
                 'locale_based' => false,
             ], [

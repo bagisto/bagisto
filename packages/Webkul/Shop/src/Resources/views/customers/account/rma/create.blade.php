@@ -1098,7 +1098,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("shop.customers.account.rma.get-order-items", ":id") }}'.replace(':id', this.orderId))
+                            this.$axios.get('{{ route("shop.customers.account.rma.get_order_items", ":id") }}'.replace(':id', this.orderId))
                                 .then(response => {
                                     this.isLoading = false;
 
@@ -1150,7 +1150,7 @@
 
                         this.rma_qty[product_id] = null;
 
-                        let url = '{{ route("shop.customers.account.rma.get-resolution-reasons", ":resolutionType") }}';
+                        let url = '{{ route("shop.customers.account.rma.get_resolution_reasons", ":resolutionType") }}';
 
                         url = url.replace(':resolutionType', resolutionType);
 

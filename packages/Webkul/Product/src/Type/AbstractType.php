@@ -34,6 +34,11 @@ use Webkul\Tax\Models\TaxCategory;
 abstract class AbstractType
 {
     /**
+     * The largest upload a customer may attach to a file option, in bytes.
+     */
+    public const MAX_CUSTOMIZABLE_FILE_SIZE = 10485760;
+
+    /**
      * Extensions a customer's upload is never stored under, since a web server would run or render them as a page.
      */
     public const BLOCKED_UPLOAD_EXTENSIONS = [
@@ -1148,6 +1153,7 @@ abstract class AbstractType
             ! preg_match('/^[a-z0-9]{1,10}$/', $extension)
             || in_array($extension, self::BLOCKED_UPLOAD_EXTENSIONS)
             || in_array(strtolower((string) $file->getMimeType()), self::BLOCKED_UPLOAD_MIME_TYPES)
+            || $file->getSize() > self::MAX_CUSTOMIZABLE_FILE_SIZE
         ) {
             return false;
         }
@@ -1171,11 +1177,11 @@ abstract class AbstractType
     {
         $path = explode('/', $media->path);
 
-        $copiedMedia->path = 'product/'.$product->id.'/'.end($path);
+        $copiedMedia->path = 'products/'.$product->id.'/'.end($path);
 
         $copiedMedia->save();
 
-        Storage::makeDirectory('product/'.$product->id);
+        Storage::makeDirectory('products/'.$product->id);
 
         Storage::copy($media->path, $copiedMedia->path);
     }

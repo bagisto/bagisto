@@ -20,14 +20,14 @@
 
 <x-admin::layouts>
     <x-slot:title>
-        @lang('admin::app.eu_withdrawal.view.title', ['uuid' => $withdrawal->uuid])
+        @lang('admin::app.eu-withdrawal.view.title', ['uuid' => $withdrawal->uuid])
     </x-slot>
 
     {{-- Header --}}
     <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="flex items-center gap-2.5">
             <p class="py-3 text-xl font-bold leading-6 text-gray-800 dark:text-white">
-                @lang('admin::app.eu_withdrawal.view.heading')
+                @lang('admin::app.eu-withdrawal.view.heading')
 
                 <span class="ml-1 font-mono text-base text-gray-500 dark:text-gray-400">
                     #{{ $withdrawal->id }}
@@ -35,21 +35,21 @@
             </p>
 
             <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium {{ $statusBadge }}">
-                @lang('admin::app.eu_withdrawal.status.'.$withdrawal->status)
+                @lang('admin::app.eu-withdrawal.status.'.$withdrawal->status)
             </span>
 
             @if ($withdrawal->is_guest)
                 <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                    @lang('admin::app.eu_withdrawal.view.guest_badge')
+                    @lang('admin::app.eu-withdrawal.view.guest-badge')
                 </span>
             @endif
         </div>
 
         <a
-            href="{{ route('admin.sales.eu-withdrawals.index') }}"
+            href="{{ route('admin.sales.eu_withdrawals.index') }}"
             class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
         >
-            @lang('admin::app.eu_withdrawal.view.back')
+            @lang('admin::app.eu-withdrawal.view.back')
         </a>
     </div>
 
@@ -61,18 +61,18 @@
             <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex items-center justify-between border-b border-slate-300 p-4 dark:border-gray-800">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
-                        @lang('admin::app.eu_withdrawal.view.evidence')
+                        @lang('admin::app.eu-withdrawal.view.evidence')
                     </p>
 
                     <p class="text-xs text-gray-500 dark:text-gray-400">
-                        @lang('admin::app.eu_withdrawal.view.evidence_note')
+                        @lang('admin::app.eu-withdrawal.view.evidence-note')
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 divide-y divide-slate-200 dark:divide-gray-800 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
                     <div class="px-4 py-4">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.received_at')
+                            @lang('admin::app.eu-withdrawal.view.received-at')
                         </p>
 
                         <p class="mt-1 text-sm font-medium text-gray-800 dark:text-white">
@@ -82,7 +82,7 @@
                     
                     <div class="px-4 py-4">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.uuid')
+                            @lang('admin::app.eu-withdrawal.view.uuid')
                         </p>
 
                         <div class="mt-1 flex items-center gap-2 rounded-lg border border-slate-200 bg-gray-50 px-3 py-2 dark:border-gray-800 dark:bg-gray-950">
@@ -92,9 +92,9 @@
 
                             <button
                                 type="button"
-                                title="@lang('admin::app.eu_withdrawal.view.copy_reference')"
+                                title="@lang('admin::app.eu-withdrawal.view.copy-reference')"
                                 data-eu-clipboard="{{ $withdrawal->uuid }}"
-                                data-eu-clipboard-message="@lang('admin::app.eu_withdrawal.view.reference_copied')"
+                                data-eu-clipboard-message="@lang('admin::app.eu-withdrawal.view.reference-copied')"
                                 class="grid h-7 w-7 shrink-0 place-items-center rounded-md text-gray-500 transition-all hover:bg-gray-200 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
                             >
                                 <span class="icon-copy text-lg"></span>
@@ -104,7 +104,7 @@
 
                     <div class="px-4 py-4">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.order')
+                            @lang('admin::app.eu-withdrawal.view.order')
                         </p>
 
                         <p class="mt-1 text-sm font-medium">
@@ -119,7 +119,7 @@
 
                     <div class="px-4 py-4">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.customer_email')
+                            @lang('admin::app.eu-withdrawal.view.customer-email')
                         </p>
 
                         <p class="mt-1 break-all text-sm font-medium text-gray-800 dark:text-white">
@@ -129,7 +129,7 @@
 
                     <div class="px-4 py-4">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.channel')
+                            @lang('admin::app.eu-withdrawal.view.channel')
                         </p>
 
                         <p class="mt-1 text-sm font-medium text-gray-800 dark:text-white">
@@ -139,7 +139,7 @@
 
                     <div class="px-4 py-4">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.locale')
+                            @lang('admin::app.eu-withdrawal.view.locale')
                         </p>
 
                         <p class="mt-1 text-sm font-medium text-gray-800 dark:text-white">
@@ -151,7 +151,7 @@
                 @if ($withdrawal->reason_text)
                     <div class="border-t border-slate-200 px-4 py-4 dark:border-gray-800">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.reason')
+                            @lang('admin::app.eu-withdrawal.view.reason')
                         </p>
 
                         <p class="mt-1 whitespace-pre-wrap text-sm text-gray-800 dark:text-white">{{ $withdrawal->reason_text }}</p>
@@ -163,7 +163,7 @@
             <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex justify-between p-4">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
-                        @lang('admin::app.eu_withdrawal.view.timeline')
+                        @lang('admin::app.eu-withdrawal.view.timeline')
                     </p>
                 </div>
 
@@ -173,11 +173,11 @@
 
                         <div class="flex-1">
                             <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                @lang('admin::app.eu_withdrawal.view.timeline_received')
+                                @lang('admin::app.eu-withdrawal.view.timeline-received')
                             </p>
 
                             <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                @lang('admin::app.eu_withdrawal.view.timeline_received_desc')
+                                @lang('admin::app.eu-withdrawal.view.timeline-received-desc')
                             </p>
 
                             <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
@@ -197,12 +197,12 @@
 
                         <div class="flex-1">
                             <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                @lang('admin::app.eu_withdrawal.view.timeline_initial_email')
+                                @lang('admin::app.eu-withdrawal.view.timeline-initial-email')
                             </p>
 
                             @if ($withdrawal->confirmation_sent_at)
                                 <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_initial_email_desc_sent')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-initial-email-desc-sent')
                                 </p>
 
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
@@ -210,7 +210,7 @@
                                 </p>
                             @elseif ($withdrawal->confirmation_error)
                                 <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_initial_email_desc_error')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-initial-email-desc-error')
                                 </p>
 
                                 <p class="mt-1 text-xs text-amber-700 dark:text-amber-300">
@@ -218,7 +218,7 @@
                                 </p>
                             @else
                                 <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_initial_email_desc_pending')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-initial-email-desc-pending')
                                 </p>
                             @endif
                         </div>
@@ -230,14 +230,14 @@
 
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_declined')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-declined')
                                 </p>
 
                                 <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
                                     @if ($withdrawal->declinedBy)
-                                        @lang('admin::app.eu_withdrawal.view.timeline_declined_desc', ['name' => $withdrawal->declinedBy->name])
+                                        @lang('admin::app.eu-withdrawal.view.timeline-declined-desc', ['name' => $withdrawal->declinedBy->name])
                                     @else
-                                        @lang('admin::app.eu_withdrawal.view.timeline_declined_desc_system')
+                                        @lang('admin::app.eu-withdrawal.view.timeline-declined-desc-system')
                                     @endif
                                 </p>
 
@@ -248,7 +248,7 @@
                                 @if ($withdrawal->declined_reason)
                                     <div class="mt-2 rounded-md border border-red-100 bg-red-50 p-2.5 dark:border-red-900/40 dark:bg-red-900/20">
                                         <p class="text-xs font-medium uppercase tracking-wide text-red-700 dark:text-red-300">
-                                            @lang('admin::app.eu_withdrawal.view.timeline_declined_reason_label')
+                                            @lang('admin::app.eu-withdrawal.view.timeline-declined-reason-label')
                                         </p>
 
                                         <p class="mt-1 text-sm text-red-900 dark:text-red-200">{{ $withdrawal->declined_reason }}</p>
@@ -260,14 +260,14 @@
 
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_refunded')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-refunded')
                                 </p>
 
                                 <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
                                     @if ($withdrawal->refundedBy)
-                                        @lang('admin::app.eu_withdrawal.view.timeline_refunded_desc', ['name' => $withdrawal->refundedBy->name])
+                                        @lang('admin::app.eu-withdrawal.view.timeline-refunded-desc', ['name' => $withdrawal->refundedBy->name])
                                     @else
-                                        @lang('admin::app.eu_withdrawal.view.timeline_refunded_desc_system')
+                                        @lang('admin::app.eu-withdrawal.view.timeline-refunded-desc-system')
                                     @endif
                                 </p>
 
@@ -278,7 +278,7 @@
                                 @if ($withdrawal->refund_note)
                                     <div class="mt-2 rounded-md border border-emerald-100 bg-emerald-50 p-2.5 dark:border-emerald-900/40 dark:bg-emerald-900/20">
                                         <p class="text-xs font-medium uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
-                                            @lang('admin::app.eu_withdrawal.view.timeline_refunded_note_label')
+                                            @lang('admin::app.eu-withdrawal.view.timeline-refunded-note-label')
                                         </p>
 
                                         <p class="mt-1 text-sm text-emerald-900 dark:text-emerald-200">{{ $withdrawal->refund_note }}</p>
@@ -290,11 +290,11 @@
 
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_resolution')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-resolution')
                                 </p>
 
                                 <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_resolution_desc')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-resolution-desc')
                                 </p>
                             </div>
                         @endif
@@ -310,12 +310,12 @@
 
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_final_email')
+                                    @lang('admin::app.eu-withdrawal.view.timeline-final-email')
                                 </p>
 
                                 @if ($withdrawal->final_confirmation_sent_at)
                                     <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                        @lang('admin::app.eu_withdrawal.view.timeline_final_email_desc_sent')
+                                        @lang('admin::app.eu-withdrawal.view.timeline-final-email-desc-sent')
                                     </p>
 
                                     <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
@@ -323,7 +323,7 @@
                                     </p>
                                 @else
                                     <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
-                                        @lang('admin::app.eu_withdrawal.view.timeline_final_email_desc_pending')
+                                        @lang('admin::app.eu-withdrawal.view.timeline-final-email-desc-pending')
                                     </p>
                                 @endif
                             </div>
@@ -338,13 +338,13 @@
             <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex justify-between p-4">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
-                        @lang('admin::app.eu_withdrawal.view.actions')
+                        @lang('admin::app.eu-withdrawal.view.actions')
                     </p>
                 </div>
 
                 <div class="border-t border-slate-200 p-4 dark:border-gray-800">
                     <p class="text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-                        @lang('admin::app.eu_withdrawal.view.actions_note')
+                        @lang('admin::app.eu-withdrawal.view.actions-note')
                     </p>
                 </div>
 
@@ -352,18 +352,18 @@
                     $isTerminalStatus = in_array($withdrawal->status, [WithdrawalStatus::REFUNDED, WithdrawalStatus::DECLINED], true);
 
                     $confirmationButtonLabel = $isTerminalStatus
-                        ? 'admin::app.eu_withdrawal.view.send_final_confirmation'
-                        : 'admin::app.eu_withdrawal.view.resend_confirmation';
+                        ? 'admin::app.eu-withdrawal.view.send-final-confirmation'
+                        : 'admin::app.eu-withdrawal.view.resend-confirmation';
 
                     $confirmationModalMessage = $isTerminalStatus
-                        ? 'admin::app.eu_withdrawal.view.send_final_confirmation_confirm_msg'
-                        : 'admin::app.eu_withdrawal.view.resend_confirmation_confirm_msg';
+                        ? 'admin::app.eu-withdrawal.view.send-final-confirmation-confirm-msg'
+                        : 'admin::app.eu-withdrawal.view.resend-confirmation-confirm-msg';
                 @endphp
 
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.resend_confirmation'))
                     <form
                         method="POST"
-                        action="{{ route('admin.sales.eu-withdrawals.resend_confirmation', $withdrawal->id) }}"
+                        action="{{ route('admin.sales.eu_withdrawals.resend_confirmation', $withdrawal->id) }}"
                         ref="resendConfirmationForm"
                         class="border-t border-slate-200 p-4 dark:border-gray-800"
                     >
@@ -385,21 +385,21 @@
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.mark_refunded'))
                     <form
                         method="POST"
-                        action="{{ route('admin.sales.eu-withdrawals.mark_refunded', $withdrawal->id) }}"
+                        action="{{ route('admin.sales.eu_withdrawals.mark_refunded', $withdrawal->id) }}"
                         ref="markRefundedForm"
                         class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
                     >
                         @csrf
 
                         <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
-                            @lang('admin::app.eu_withdrawal.view.refund_note_label')
+                            @lang('admin::app.eu-withdrawal.view.refund-note-label')
                         </label>
 
                         <input
                             type="text"
                             name="refund_note"
                             maxlength="500"
-                            placeholder="@lang('admin::app.eu_withdrawal.view.refund_note_placeholder')"
+                            placeholder="@lang('admin::app.eu-withdrawal.view.refund-note-placeholder')"
                             class="w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-700 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         >
 
@@ -411,11 +411,11 @@
                                 'secondary-button' => $withdrawal->status === WithdrawalStatus::REFUNDED,
                             ])
                             @click="$emitter.emit('open-confirm-modal', {
-                                message: '@lang('admin::app.eu_withdrawal.view.mark_refunded_confirm_msg')',
+                                message: '@lang('admin::app.eu-withdrawal.view.mark-refunded-confirm-msg')',
                                 agree: () => this.$refs['markRefundedForm'].submit(),
                             })"
                         >
-                            @lang('admin::app.eu_withdrawal.view.mark_refunded')
+                            @lang('admin::app.eu-withdrawal.view.mark-refunded')
                         </button>
                     </form>
                 @endif
@@ -423,14 +423,14 @@
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.decline'))
                     <form
                         method="POST"
-                        action="{{ route('admin.sales.eu-withdrawals.decline', $withdrawal->id) }}"
+                        action="{{ route('admin.sales.eu_withdrawals.decline', $withdrawal->id) }}"
                         ref="declineForm"
                         class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
                     >
                         @csrf
 
                         <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
-                            @lang('admin::app.eu_withdrawal.view.decline_reason_label')
+                            @lang('admin::app.eu-withdrawal.view.decline-reason-label')
                         </label>
 
                         <input
@@ -439,7 +439,7 @@
                             ref="declineReasonInput"
                             maxlength="500"
                             required
-                            placeholder="@lang('admin::app.eu_withdrawal.view.decline_reason_placeholder')"
+                            placeholder="@lang('admin::app.eu-withdrawal.view.decline-reason-placeholder')"
                             class="w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-700 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         >
 
@@ -452,12 +452,12 @@
                                     return;
                                 }
                                 $emitter.emit('open-confirm-modal', {
-                                    message: '@lang('admin::app.eu_withdrawal.view.decline_confirm_msg')',
+                                    message: '@lang('admin::app.eu-withdrawal.view.decline-confirm-msg')',
                                     agree: () => this.$refs['declineForm'].submit(),
                                 });
                             "
                         >
-                            @lang('admin::app.eu_withdrawal.view.decline')
+                            @lang('admin::app.eu-withdrawal.view.decline')
                         </button>
                     </form>
                 @endif

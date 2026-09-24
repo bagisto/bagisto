@@ -44,7 +44,7 @@ function makeWithdrawal(array $attributes = []): Withdrawal
  */
 function euWithdrawalsListing(array $filters): TestResponse
 {
-    return getJson(route('admin.sales.eu-withdrawals.index', ['filters' => $filters]), [
+    return getJson(route('admin.sales.eu_withdrawals.index', ['filters' => $filters]), [
         'X-Requested-With' => 'XMLHttpRequest',
     ]);
 }

@@ -23,6 +23,21 @@ class ImportController extends Controller
     protected const MAX_IMAGES_ARCHIVE_SIZE = 102400;
 
     /**
+     * The most files an images archive may carry.
+     */
+    protected const MAX_IMAGES_ARCHIVE_ENTRIES = 5000;
+
+    /**
+     * The extensions an images archive may carry, since the importer reads nothing else from it.
+     */
+    protected const IMAGE_ARCHIVE_EXTENSIONS = ['bmp', 'gif', 'jpeg', 'jpg', 'png', 'webp'];
+
+    /**
+     * The largest the files in an images archive may come to once unpacked, in bytes.
+     */
+    protected const MAX_IMAGES_ARCHIVE_UNPACKED_SIZE = 1073741824;
+
+    /**
      * Supported formats.
      */
     protected array $supportedFormats = ['csv', 'xls', 'xlsx', 'xml'];
@@ -826,6 +841,70 @@ class ImportController extends Controller
     }
 
     /**
+     * Unpack the entries of an images archive that are actually images, one by one.
+     */
+    protected function extractImages(ZipArchive $zip, $disk, string $directory): void
+    {
+        for ($index = 0; $index < $zip->numFiles; $index++) {
+            $name = $zip->getNameIndex($index);
+
+            if (! $this->isExtractableImage($name)) {
+                continue;
+            }
+
+            $stream = $zip->getStream($name);
+
+            if (! is_resource($stream)) {
+                continue;
+            }
+
+            $disk->writeStream($directory.'/'.$name, $stream);
+
+            fclose($stream);
+        }
+    }
+
+    /**
+     * Whether an archive entry is an image the importer may read, named somewhere it may write.
+     */
+    protected function isExtractableImage(string|false $name): bool
+    {
+        if (
+            ! $name
+            || str_ends_with($name, '/')
+            || str_contains($name, '..')
+            || str_contains($name, '\\')
+            || str_starts_with($name, '/')
+        ) {
+            return false;
+        }
+
+        return in_array(strtolower(pathinfo($name, PATHINFO_EXTENSION)), self::IMAGE_ARCHIVE_EXTENSIONS, true);
+    }
+
+    /**
+     * Whether an images archive stays within the file count and unpacked size an import allows.
+     */
+    protected function archiveUnpacksWithinLimits(ZipArchive $zip): bool
+    {
+        if ($zip->numFiles > self::MAX_IMAGES_ARCHIVE_ENTRIES) {
+            return false;
+        }
+
+        $unpackedSize = 0;
+
+        for ($index = 0; $index < $zip->numFiles; $index++) {
+            $unpackedSize += $zip->statIndex($index)['size'] ?? 0;
+
+            if ($unpackedSize > self::MAX_IMAGES_ARCHIVE_UNPACKED_SIZE) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Unpack an uploaded images archive into the import's own folder and return
      * the directory the importer should resolve images from.
      */
@@ -840,7 +919,9 @@ class ImportController extends Controller
         $zip = new ZipArchive;
 
         if ($zip->open($disk->path($archivePath)) === true) {
-            $zip->extractTo($disk->path($directory));
+            if ($this->archiveUnpacksWithinLimits($zip)) {
+                $this->extractImages($zip, $disk, $directory);
+            }
 
             $zip->close();
         }

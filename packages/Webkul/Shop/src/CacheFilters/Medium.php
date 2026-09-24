@@ -8,35 +8,17 @@ use Illuminate\Support\Str;
 class Medium
 {
     /**
-     * Apply filter.
-     *
-     * @param  Image  $image
-     * @return Image
+     * Apply the filter to the image, at the size the subject it is served for is shown at.
      */
-    public function applyFilter($image)
+    public function applyFilter(Image $image): Image
     {
-        /**
-         * If the current url is product image
-         */
-        if (Str::contains(url()->current(), '/product')) {
-            $width = core()->getConfigData('catalog.products.cache_medium_image.width') != ''
-                ? core()->getConfigData('catalog.products.cache_medium_image.width')
-                : 350;
+        $url = url()->current();
 
-            $height = core()->getConfigData('catalog.products.cache_medium_image.height') != ''
-                ? core()->getConfigData('catalog.products.cache_medium_image.height')
-                : 360;
-
-            return $image->cover((int) $width, (int) $height);
-        } elseif (Str::contains(url()->current(), '/category')) {
-            return $image->cover(110, 110);
-        } elseif (Str::contains(url()->current(), '/attribute_option')) {
-            return $image->cover(210, 210);
-        }
-
-        /**
-         * Slider image dimensions
-         */
-        return $image->cover(1024, 372);
+        return match (true) {
+            Str::contains($url, '/products') => $image->cover(350, 360),
+            Str::contains($url, '/categories') => $image->cover(110, 110),
+            Str::contains($url, '/attribute-options') => $image->cover(210, 210),
+            default => $image->cover(1024, 372),
+        };
     }
 }

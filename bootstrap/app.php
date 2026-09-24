@@ -8,6 +8,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
+use Webkul\Core\Http\Middleware\PreventSessionRevival;
 use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\Installer\Http\Middleware\CanInstall;
 
@@ -40,6 +41,14 @@ return Application::configure(basePath: dirname(__DIR__))
          * Add the overridden middleware at the end of the list.
          */
         $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
+
+        /**
+         * A request already in flight when a session is logged out writes that session back once it
+         * finishes, which would otherwise hand the browser a signed in session again.
+         */
+        $middleware->web(append: [
+            PreventSessionRevival::class,
+        ]);
 
         $middleware->preventRequestForgery(except: [
             'stripe/*',

@@ -337,7 +337,7 @@ export class AttributePage extends DatagridPage {
         for (const label of labels) {
             await expect(this.optionRow(label).locator("img")).toHaveAttribute(
                 "src",
-                /\/attribute_option\//,
+                /\/attribute-options\//,
             );
         }
     }

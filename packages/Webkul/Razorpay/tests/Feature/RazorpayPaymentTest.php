@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Testing\TestResponse;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Razorpay\Payment\RazorpayPayment;
@@ -15,6 +16,39 @@ beforeEach(function () {
         'sales.payment_methods.razorpay.test_client_secret' => 'fake_test_secret',
     ]);
 });
+
+/**
+ * The payment Razorpay would report for a cart paid in full.
+ */
+function razorpayPaymentFor(object $cart, array $overrides = []): array
+{
+    return array_merge([
+        'order_id' => 'order_test123',
+        'amount' => (int) round($cart->base_grand_total * 100),
+        'currency' => 'INR',
+        'status' => 'captured',
+    ], $overrides);
+}
+
+/**
+ * Hit the success route with a signature the gateway accepts.
+ */
+function razorpaySuccess(array $payment, array $query = []): TestResponse
+{
+    $mockRazorpay = test()->mock(RazorpayPayment::class)->makePartial();
+
+    $mockRazorpay->shouldReceive('verifySignature')->andReturn(true);
+
+    $mockRazorpay->shouldReceive('fetchPayment')->andReturn($payment);
+
+    app()->instance(RazorpayPayment::class, $mockRazorpay);
+
+    return test()->get(route('razorpay.payment.success', array_merge([
+        'razorpay_payment_id' => 'pay_test123',
+        'razorpay_order_id' => 'order_test123',
+        'razorpay_signature' => 'test_signature',
+    ], $query)));
+}
 
 // ============================================================================
 // Redirect
@@ -84,6 +118,8 @@ it('should process the Razorpay payment and create the order with an invoice', f
 
     $mockRazorpay->shouldReceive('verifySignature')->andReturn(true);
 
+    $mockRazorpay->shouldReceive('fetchPayment')->andReturn(razorpayPaymentFor($cart));
+
     $this->app->instance(RazorpayPayment::class, $mockRazorpay);
 
     $response = $this->get(route('razorpay.payment.success', [
@@ -144,4 +180,52 @@ it('should redirect to the cart when the signature verification fails', function
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
+});
+
+// ============================================================================
+// Payment Verification
+// ============================================================================
+
+it('should refuse a payment that does not cover the cart total', function () {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    razorpaySuccess(razorpayPaymentFor($cart, ['amount' => 100]))
+        ->assertRedirect(route('shop.checkout.cart.index'))
+        ->assertSessionHas('error');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+it('should refuse a payment the gateway has not taken money for', function () {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    razorpaySuccess(razorpayPaymentFor($cart, ['status' => 'failed']))
+        ->assertRedirect(route('shop.checkout.cart.index'))
+        ->assertSessionHas('error');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+it('should refuse a payment belonging to another razorpay order', function () {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    razorpaySuccess(razorpayPaymentFor($cart, ['order_id' => 'order_somebody_else']))
+        ->assertRedirect(route('shop.checkout.cart.index'))
+        ->assertSessionHas('error');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+it('should refuse a payment that already paid for an order', function () {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    razorpaySuccess(razorpayPaymentFor($cart))->assertRedirect(route('shop.checkout.onepage.success'));
+
+    $replayCart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    razorpaySuccess(razorpayPaymentFor($replayCart))
+        ->assertRedirect(route('shop.checkout.cart.index'))
+        ->assertSessionHas('error');
+
+    expect(Order::query()->where('cart_id', $replayCart->id)->exists())->toBeFalse();
 });

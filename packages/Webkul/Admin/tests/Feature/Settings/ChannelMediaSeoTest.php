@@ -14,9 +14,9 @@ function makeChannelWithLogo(): Channel
 {
     $channel = Channel::factory()->create();
 
-    $channel->logo = 'channel/'.$channel->id.'/mn73kdla.png';
+    $channel->logo = 'channels/'.$channel->id.'/mn73kdla.png';
 
-    $channel->favicon = 'channel/'.$channel->id.'/qp02shwe.ico';
+    $channel->favicon = 'channels/'.$channel->id.'/qp02shwe.ico';
 
     $channel->save();
 
@@ -105,7 +105,7 @@ it('should rename the channel logo while keeping its extension', function () {
         'favicon' => ['favicon' => ''],
     ]))->assertRedirect(route('admin.settings.channels.index'));
 
-    $expected = 'channel/'.$channel->id.'/acme-store-logo.png';
+    $expected = 'channels/'.$channel->id.'/acme-store-logo.png';
 
     expect($channel->fresh()->logo)->toBe($expected);
 
@@ -127,7 +127,7 @@ it('should rename the channel favicon while keeping its ico extension', function
         'favicon_meta' => ['favicon' => ['file_name' => 'Acme Favicon']],
     ]))->assertRedirect(route('admin.settings.channels.index'));
 
-    expect($channel->fresh()->favicon)->toBe('channel/'.$channel->id.'/acme-favicon.ico');
+    expect($channel->fresh()->favicon)->toBe('channels/'.$channel->id.'/acme-favicon.ico');
 });
 
 // ============================================================================
@@ -148,7 +148,7 @@ it('should name a newly uploaded channel logo after the requested file name', fu
 
     $channel = $channel->fresh();
 
-    expect($channel->logo)->toBe('channel/'.$channel->id.'/acme-store-logo.png');
+    expect($channel->logo)->toBe('channels/'.$channel->id.'/acme-store-logo.png');
 
     expect($channel->logo_alt)->toBe('Acme Store');
 

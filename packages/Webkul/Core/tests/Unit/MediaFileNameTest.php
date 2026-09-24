@@ -36,17 +36,17 @@ it('should cap the length of the requested name', function () {
 // ============================================================================
 
 it('should keep the extension dictated by the caller, not the one in the requested name', function () {
-    expect($this->mediaFileName->resolve('product/1', 'payload.php', 'webp'))->toBe('product/1/payload.webp');
+    expect($this->mediaFileName->resolve('products/1', 'payload.php', 'webp'))->toBe('products/1/payload.webp');
 });
 
 it('should suffix the name when the resolved path is already taken', function () {
-    Storage::put('product/1/blue-shoe.webp', 'first');
+    Storage::put('products/1/blue-shoe.webp', 'first');
 
-    expect($this->mediaFileName->resolve('product/1', 'blue-shoe', 'webp'))->toBe('product/1/blue-shoe-1.webp');
+    expect($this->mediaFileName->resolve('products/1', 'blue-shoe', 'webp'))->toBe('products/1/blue-shoe-1.webp');
 
-    Storage::put('product/1/blue-shoe-1.webp', 'second');
+    Storage::put('products/1/blue-shoe-1.webp', 'second');
 
-    expect($this->mediaFileName->resolve('product/1', 'blue-shoe', 'webp'))->toBe('product/1/blue-shoe-2.webp');
+    expect($this->mediaFileName->resolve('products/1', 'blue-shoe', 'webp'))->toBe('products/1/blue-shoe-2.webp');
 });
 
 // ============================================================================
@@ -54,18 +54,18 @@ it('should suffix the name when the resolved path is already taken', function ()
 // ============================================================================
 
 it('should move the file when renaming', function () {
-    Storage::put($current = 'product/1/hf83nd.webp', 'contents');
+    Storage::put($current = 'products/1/hf83nd.webp', 'contents');
 
     $renamed = $this->mediaFileName->rename($current, 'Blue Shoe');
 
-    expect($renamed)->toBe('product/1/blue-shoe.webp')
+    expect($renamed)->toBe('products/1/blue-shoe.webp')
         ->and(Storage::get($renamed))->toBe('contents');
 
     Storage::assertMissing($current);
 });
 
 it('should keep the current path when the requested name is empty', function () {
-    Storage::put($current = 'product/1/hf83nd.webp', 'contents');
+    Storage::put($current = 'products/1/hf83nd.webp', 'contents');
 
     expect($this->mediaFileName->rename($current, null))->toBe($current)
         ->and($this->mediaFileName->rename($current, ''))->toBe($current);
@@ -74,7 +74,7 @@ it('should keep the current path when the requested name is empty', function () 
 });
 
 it('should keep the current path when the requested name resolves to the current one', function () {
-    Storage::put($current = 'product/1/blue-shoe.webp', 'contents');
+    Storage::put($current = 'products/1/blue-shoe.webp', 'contents');
 
     expect($this->mediaFileName->rename($current, 'blue-shoe'))->toBe($current)
         ->and($this->mediaFileName->rename($current, 'Blue Shoe.webp'))->toBe($current);
@@ -83,15 +83,15 @@ it('should keep the current path when the requested name resolves to the current
 });
 
 it('should keep the current path when the file is not on disk', function () {
-    expect($this->mediaFileName->rename('product/1/gone.webp', 'blue-shoe'))->toBe('product/1/gone.webp');
+    expect($this->mediaFileName->rename('products/1/gone.webp', 'blue-shoe'))->toBe('products/1/gone.webp');
 });
 
 it('should never rename a file out of its own directory', function () {
-    Storage::put($current = 'product/1/hf83nd.webp', 'contents');
+    Storage::put($current = 'products/1/hf83nd.webp', 'contents');
 
-    expect($this->mediaFileName->rename($current, '../../evil'))->toBe('product/1/evil.webp');
+    expect($this->mediaFileName->rename($current, '../../evil'))->toBe('products/1/evil.webp');
 
-    Storage::assertExists('product/1/evil.webp');
+    Storage::assertExists('products/1/evil.webp');
 });
 
 // ============================================================================

@@ -134,7 +134,7 @@ it('should mass delete RMA reasons', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.reasons.mass-delete'), [
+    postJson(route('admin.sales.rma.reasons.mass_delete'), [
         'indices' => $reasons->pluck('id')->toArray(),
     ])
         ->assertOk()

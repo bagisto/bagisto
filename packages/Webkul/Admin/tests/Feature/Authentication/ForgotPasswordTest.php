@@ -56,7 +56,8 @@ it('should send nothing for an email no admin has', function () {
         'email' => $email,
     ])
         ->assertRedirect(route('admin.forget_password.create'))
-        ->assertSessionHasErrors('email');
+        ->assertSessionHas('success')
+        ->assertSessionHasNoErrors();
 
     $this->assertDatabaseMissing('admin_password_resets', [
         'email' => $email,

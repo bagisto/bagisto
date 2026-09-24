@@ -14,7 +14,7 @@
 
         {{ $address->state }}<br>
 
-        {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif<br>
+        {{ core()->countryName($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif<br>
 
         {{ trans('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
     </p>
@@ -35,7 +35,7 @@
 
         {{ $address->state }}
 
-        {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif <br>
+        {{ core()->countryName($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif <br>
 
         <span class="no-underline">
             {{ trans('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}

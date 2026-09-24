@@ -7,6 +7,7 @@ use Webkul\Core\Rules\CommaSeparatedInteger;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
+use Webkul\Core\SystemConfig\DependsCondition;
 
 class ConfigurationForm extends FormRequest
 {
@@ -38,11 +39,18 @@ class ConfigurationForm extends FormRequest
                         return [];
                     }
 
-                    if (! $this->dependencyIsMet($item['key'], $field)) {
+                    $condition = new DependsCondition($field['depends'] ?? null);
+
+                    $sibling = "{$item['key']}.{$condition->fieldName()}";
+
+                    if (! $condition->permits($this->has($sibling), $this->input($sibling))) {
                         return [];
                     }
 
-                    return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
+                    return [$key => array_merge(
+                        $this->getValidationRules($field['validation'] ?? 'nullable'),
+                        $this->getTypeRules($field['type'] ?? null),
+                    )];
                 })->toArray();
             })
             ->toArray();
@@ -58,22 +66,17 @@ class ConfigurationForm extends FormRequest
     }
 
     /**
-     * Determine whether a field's depend condition is met by the submitted values, since a field the
-     * depend hides is never submitted and validating it would reject a form the admin cannot fill.
+     * The rules a field's own type implies, so a number cannot be saved as a word or left blank.
+     *
+     * @return array<int, string>
      */
-    protected function dependencyIsMet(string $itemKey, array $field): bool
+    protected function getTypeRules(?string $type): array
     {
-        if (empty($field['depends'])) {
-            return true;
-        }
-
-        [$name, $values] = array_pad(explode(':', $field['depends'], 2), 2, '');
-
-        return in_array(
-            (string) $this->input("{$itemKey}.{$name}"),
-            explode(',', $values),
-            true
-        );
+        return match ($type) {
+            'boolean' => ['in:0,1'],
+            'number' => ['numeric'],
+            default => [],
+        };
     }
 
     /**

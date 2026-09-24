@@ -2,19 +2,31 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.5.0-beta5 (23rd of September 2026)** - *Release*
+## **v2.5.0-beta5 (24th of September 2026)** - *Release*
+
+- Applied the security fixes from an AI security audit of the codebase.
+
+- Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
+
+- Fixed Magic AI taking its orders from storefront text: a review or customer name could steer what the review translation and the checkout message returned. Shopper-supplied text is now sent as data, apart from the instructions.
+
+- Fixed the generated checkout message rendering as markup on the order success page, and closed the review translation endpoint to anonymous use while the feature is switched off, now rate limited and with a review length cap.
 
 - Fixed Magic AI hiding why a generation failed — the provider's own message, such as a rejected prompt or an invalid API key, now reaches the admin.
 
 - Fixed Magic AI handing a model the store no longer offers to a different provider, which failed with an unrelated error. The unknown model is now reported.
 
-- Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
+- Added MariaDB and PostgreSQL to the Laravel Sail stack, and an optional nginx, apache or OpenLiteSpeed server in front of it. Each is a Compose profile, and the database container follows `DB_CONNECTION`.
 
 - Updated the Laravel Sail setup to build on PHP 8.4, run Elasticsearch and Kibana 8.19 to match the 8.x client, keep Elasticsearch data across restarts and use the official MySQL image.
 
-- Added MariaDB and PostgreSQL to the Laravel Sail stack, and an optional nginx, apache or OpenLiteSpeed server in front of it. Each is a Compose profile, and the database container follows `DB_CONNECTION`.
-
 - Updated the production Docker images to build the 2.5.0 release by default, and let the bundled MySQL user take the server's own authentication plugin instead of the deprecated one.
+
+- Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
+
+- Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.
+
+- Renamed the remaining underscored translation keys to kebab-case across all 22 locales, so a module or theme overriding one of them, such as `eu_withdrawal.view.received_at`, must use the new spelling.
 
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 

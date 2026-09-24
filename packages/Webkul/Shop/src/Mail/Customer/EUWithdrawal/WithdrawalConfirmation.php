@@ -28,7 +28,7 @@ class WithdrawalConfirmation extends Mailable
         return new Envelope(
             from: new Address($sender['email'], $sender['name']),
             to: [new Address($this->withdrawal->customer_email)],
-            subject: trans('shop::app.eu_withdrawal.emails.confirmation.subject', [
+            subject: trans('shop::app.eu-withdrawal.emails.confirmation.subject', [
                 'order_id' => $this->withdrawal->order->increment_id ?? $this->withdrawal->order_id,
             ]),
         );

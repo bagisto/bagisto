@@ -6,7 +6,7 @@
 
         <p style="font-size: 16px;color: #384860;line-height: 24px;">
             {!! trans('admin::app.emails.customers.registration.greeting', [
-                'customer_name' => '<a href="' . route('admin.customers.customers.view', $customer->id) . '" style="color: #2969FF;">'.$customer->name. '</a>'
+                    'customer_name' => '<a href="' . route('admin.customers.customers.view', $customer->id) . '" style="color: #2969FF;">'.e($customer->name). '</a>'
                 ])
             !!}
         </p>

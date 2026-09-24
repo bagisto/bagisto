@@ -16,7 +16,7 @@
 
 <v-search-engine-connection
     initial="{{ json_encode($verdict) }}"
-    endpoint="{{ route('admin.configuration.search-engines.test-connection', $engine->value) }}"
+    endpoint="{{ route('admin.configuration.search_engines.test_connection', $engine->value) }}"
     prefix="{{ $prefix }}"
 ></v-search-engine-connection>
 

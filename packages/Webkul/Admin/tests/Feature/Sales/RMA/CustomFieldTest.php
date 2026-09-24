@@ -13,13 +13,13 @@ use function Pest\Laravel\postJson;
 it('should return the RMA custom fields index page', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.sales.rma.custom-fields.index'))
+    get(route('admin.sales.rma.custom_fields.index'))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.rma.custom-field.index.title'));
 });
 
 it('should deny guest access to the RMA custom fields index page', function () {
-    get(route('admin.sales.rma.custom-fields.index'))
+    get(route('admin.sales.rma.custom_fields.index'))
         ->assertRedirect(route('admin.session.create'));
 });
 
@@ -30,7 +30,7 @@ it('should deny guest access to the RMA custom fields index page', function () {
 it('should return the RMA custom field create page', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.sales.rma.custom-fields.create'))
+    get(route('admin.sales.rma.custom_fields.create'))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.rma.custom-field.create.create-title'));
 });
@@ -42,7 +42,7 @@ it('should return the RMA custom field create page', function () {
 it('should store a text type custom field', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.store'), [
+    postJson(route('admin.sales.rma.custom_fields.store'), [
         'label' => $label = fake()->words(2, true),
         'code' => $code = fake()->unique()->lexify('field_????'),
         'position' => 1,
@@ -61,7 +61,7 @@ it('should store a text type custom field', function () {
 it('should store a select type custom field with options', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.store'), [
+    postJson(route('admin.sales.rma.custom_fields.store'), [
         'label' => $label = fake()->words(2, true),
         'code' => fake()->unique()->lexify('field_????'),
         'position' => 1,
@@ -81,7 +81,7 @@ it('should store a select type custom field with options', function () {
 it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.store'))
+    postJson(route('admin.sales.rma.custom_fields.store'))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('label')
         ->assertJsonValidationErrorFor('code')
@@ -104,7 +104,7 @@ it('should return the RMA custom field edit page', function () {
 
     $this->loginAsAdmin();
 
-    get(route('admin.sales.rma.custom-fields.edit', $field->id))
+    get(route('admin.sales.rma.custom_fields.edit', $field->id))
         ->assertOk();
 });
 
@@ -123,7 +123,7 @@ it('should update an existing custom field', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.update', $field->id), [
+    postJson(route('admin.sales.rma.custom_fields.update', $field->id), [
         'label' => $label = fake()->words(2, true),
         'code' => $field->code,
         'position' => 2,
@@ -153,7 +153,7 @@ it('should delete a custom field', function () {
 
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.sales.rma.custom-fields.delete', $field->id))
+    deleteJson(route('admin.sales.rma.custom_fields.delete', $field->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'));
 
@@ -172,7 +172,7 @@ it('should mass delete custom fields', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.mass-delete'), [
+    postJson(route('admin.sales.rma.custom_fields.mass_delete'), [
         'indices' => $fields->pluck('id')->toArray(),
     ])
         ->assertOk()

@@ -85,7 +85,7 @@ it('should answer not found on the create route when the channel toggle is off',
 
     $order = $this->createOrder(customer: $this->loginAsCustomer());
 
-    get(route('shop.customers.account.eu-withdrawal.create', $order->id))
+    get(route('shop.customers.account.eu_withdrawal.create', $order->id))
         ->assertNotFound();
 });
 
@@ -98,7 +98,7 @@ it('should create a withdrawal record and send the confirmation email for a sign
 
     $order = $this->createOrder(customer: $customer);
 
-    $response = post(route('shop.customers.account.eu-withdrawal.store', $order->id), [
+    $response = post(route('shop.customers.account.eu_withdrawal.store', $order->id), [
         'reason_text' => 'Changed my mind.',
     ]);
 
@@ -110,7 +110,7 @@ it('should create a withdrawal record and send the confirmation email for a sign
         ->and($withdrawal->reason_text)->toBe('Changed my mind.')
         ->and($withdrawal->received_at)->not->toBeNull();
 
-    $response->assertRedirectToRoute('shop.customers.account.eu-withdrawal.show', $withdrawal->uuid);
+    $response->assertRedirectToRoute('shop.customers.account.eu_withdrawal.show', $withdrawal->uuid);
 
     Mail::assertSent(WithdrawalConfirmation::class);
 });
@@ -122,7 +122,7 @@ it('should accept a withdrawal without a reason, since a reason is legally optio
 
     $order = $this->createOrder(customer: $this->loginAsCustomer());
 
-    post(route('shop.customers.account.eu-withdrawal.store', $order->id), [])
+    post(route('shop.customers.account.eu_withdrawal.store', $order->id), [])
         ->assertRedirect();
 
     expect(Withdrawal::query()->where('order_id', $order->id)->first()->reason_text)
@@ -136,8 +136,8 @@ it('should keep the first withdrawal record when the declaration is submitted tw
 
     $order = $this->createOrder(customer: $this->loginAsCustomer());
 
-    post(route('shop.customers.account.eu-withdrawal.store', $order->id), ['reason_text' => 'first']);
-    post(route('shop.customers.account.eu-withdrawal.store', $order->id), ['reason_text' => 'second']);
+    post(route('shop.customers.account.eu_withdrawal.store', $order->id), ['reason_text' => 'first']);
+    post(route('shop.customers.account.eu_withdrawal.store', $order->id), ['reason_text' => 'second']);
 
     expect(Withdrawal::query()->where('order_id', $order->id)->count())->toBe(1)
         ->and(Withdrawal::query()->where('order_id', $order->id)->first()->reason_text)->toBe('first');
@@ -165,7 +165,7 @@ it('should email a magic link when a guest lookup matches an order', function ()
         ->and((bool) core()->getConfigData('sales.eu_withdrawal.general.enabled', $found->channel->code))
         ->toBeTrue('config flag must be enabled for the order channel');
 
-    post(route('shop.eu-withdrawal.guest.lookup.submit'), [
+    post(route('shop.eu_withdrawal.guest.lookup.submit'), [
         'order_increment_id' => (string) $order->increment_id,
         'email' => $order->customer_email,
     ])->assertRedirect()->assertSessionHas('lookup_sent', true);
@@ -178,7 +178,7 @@ it('should not reveal whether a guest order exists when a lookup misses', functi
 
     enableEuWithdrawal();
 
-    post(route('shop.eu-withdrawal.guest.lookup.submit'), [
+    post(route('shop.eu_withdrawal.guest.lookup.submit'), [
         'order_increment_id' => 'NON-EXISTENT',
         'email' => 'no-such@example.test',
     ])->assertRedirect()->assertSessionHas('lookup_sent', true);
@@ -194,7 +194,7 @@ it('should complete a guest withdrawal through a signed url', function () {
     $order = $this->createGuestOrder(['customer_email' => fake()->unique()->safeEmail()]);
 
     $signedStoreUrl = URL::temporarySignedRoute(
-        'shop.eu-withdrawal.guest.store',
+        'shop.eu_withdrawal.guest.store',
         now()->addHours(24),
         ['orderId' => $order->id],
     );
@@ -217,7 +217,7 @@ it('should reject the guest store endpoint without a valid signature', function 
 
     $order = $this->createGuestOrder();
 
-    post(route('shop.eu-withdrawal.guest.store', $order->id), [])
+    post(route('shop.eu_withdrawal.guest.store', $order->id), [])
         ->assertForbidden();
 });
 
@@ -234,11 +234,11 @@ it('should tell the admin the confirmation was resent in the admin\'s own langua
 
     $this->actingAs(Admin::factory()->create(), 'admin');
 
-    post(route('admin.sales.eu-withdrawals.resend_confirmation', $withdrawal->id));
+    post(route('admin.sales.eu_withdrawals.resend_confirmation', $withdrawal->id));
 
     expect(app()->getLocale())->toBe('en')
-        ->and(session('success'))->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'en'))
-        ->and(session('success'))->not->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'ar'));
+        ->and(session('success'))->toBe(trans('admin::app.eu-withdrawal.flash.confirmation-resent', [], 'en'))
+        ->and(session('success'))->not->toBe(trans('admin::app.eu-withdrawal.flash.confirmation-resent', [], 'ar'));
 
     Mail::assertSent(WithdrawalConfirmation::class);
 });

@@ -36,15 +36,19 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::get('{id}/related', 'relatedProducts')->name('shop.api.products.related.index');
 
-        Route::get('{id}/up-sell', 'upSellProducts')->name('shop.api.products.up-sell.index');
+        Route::get('{id}/up-sell', 'upSellProducts')->name('shop.api.products.up_sell.index');
     });
 
     Route::controller(ReviewController::class)->prefix('product/{id}')->group(function () {
         Route::get('reviews', 'index')->name('shop.api.products.reviews.index');
 
-        Route::post('review', 'store')->name('shop.api.products.reviews.store');
+        Route::post('review', 'store')
+            ->middleware('throttle:10,1')
+            ->name('shop.api.products.reviews.store');
 
-        Route::get('reviews/{review_id}/translate', 'translate')->name('shop.api.products.reviews.translate');
+        Route::get('reviews/{review_id}/translate', 'translate')
+            ->middleware('throttle:10,1')
+            ->name('shop.api.products.reviews.translate');
     });
 
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
@@ -70,13 +74,15 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.checkout.cart.move_to_wishlist');
 
-        Route::post('coupon', 'storeCoupon')->name('shop.api.checkout.cart.coupon.apply');
+        Route::post('coupon', 'storeCoupon')
+            ->middleware('throttle:10,1')
+            ->name('shop.api.checkout.cart.coupon.apply');
 
         Route::post('estimate-shipping-methods', 'estimateShippingMethods')->name('shop.api.checkout.cart.estimate_shipping');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
 
-        Route::get('cross-sell', 'crossSellProducts')->name('shop.api.checkout.cart.cross-sell.index');
+        Route::get('cross-sell', 'crossSellProducts')->name('shop.api.checkout.cart.cross_sell.index');
     });
 
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {

@@ -114,7 +114,7 @@ class ChannelRepository extends Repository
             $file = current(request()->file($type));
 
             $channel->{$type} = $this->mediaFileName->resolve(
-                'channel/'.$channel->id,
+                'channels/'.$channel->id,
                 $meta['file_name'] ?? null,
                 $this->mediaFileName->extension($file)
             );

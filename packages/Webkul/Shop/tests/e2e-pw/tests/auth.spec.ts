@@ -107,12 +107,14 @@ test.describe("customer authentication", () => {
         await authPage.expectResetLinkSent();
     });
 
-    test("should refuse a password reset for an unknown email", async ({ shopPage }) => {
+    test("should answer a password reset for an unknown email exactly as for a registered one", async ({
+        shopPage,
+    }) => {
         const authPage = new AuthPage(shopPage);
 
         await authPage.requestPasswordReset(generateEmail());
 
-        await authPage.expectResetRefusedForUnknownEmail();
+        await authPage.expectResetLinkSent();
     });
 
     test("should sign a customer out", async ({ shopPage }) => {

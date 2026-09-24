@@ -182,10 +182,10 @@
 
                         @if (core()->getConfigData('sales.eu_withdrawal.general.enabled', core()->getCurrentChannelCode()))
                             <a
-                                href="{{ route('shop.eu-withdrawal.guest.lookup') }}"
+                                href="{{ route('shop.eu_withdrawal.guest.lookup') }}"
                                 class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-navyBlue hover:underline"
                             >
-                                @lang('shop::app.eu_withdrawal.guest_dropdown.link')
+                                @lang('shop::app.eu-withdrawal.guest-dropdown.link')
                             </a>
                         @endif
 

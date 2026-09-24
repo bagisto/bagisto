@@ -60,9 +60,9 @@ beforeEach(function () {
 
     $this->category = Category::factory()->create();
 
-    $this->logoPath = 'category/'.$this->category->id.'/logo.png';
+    $this->logoPath = 'categories/'.$this->category->id.'/logo.png';
 
-    $this->bannerPath = 'category/'.$this->category->id.'/banner.png';
+    $this->bannerPath = 'categories/'.$this->category->id.'/banner.png';
 
     foreach ([$this->logoPath, $this->bannerPath] as $path) {
         Storage::put($path, UploadedFile::fake()->image('source.png', 400, 300)->getContent());
@@ -82,7 +82,7 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    Storage::deleteDirectory('category/'.$this->category->id);
+    Storage::deleteDirectory('categories/'.$this->category->id);
 });
 
 // ============================================================================

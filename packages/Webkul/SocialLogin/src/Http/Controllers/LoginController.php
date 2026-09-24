@@ -81,7 +81,7 @@ class LoginController extends Controller
             return redirect()->route('shop.customer.session.index');
         }
 
-        auth()->guard('customer')->login($customer, true);
+        auth()->guard('customer')->login($customer);
 
         Event::dispatch('customer.after.login', $customer);
 
