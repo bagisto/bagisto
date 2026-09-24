@@ -68,7 +68,7 @@ it('should turn the page cache on by default so an upgrade does not silently dis
     $field = configField('cache_management.full_page_cache.settings', 'enabled');
 
     expect($field['type'])->toBe('boolean')
-        ->and($field['default'])->toBeTrue();
+        ->and($field['default'])->toBe(1);
 });
 
 it('should accept only a positive number of minutes as the cache lifetime', function () {

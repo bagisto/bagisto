@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 
@@ -274,6 +275,8 @@ it('should handle special characters in API keys and site keys', function () {
 // ============================================================================
 
 it('should not store a blank over a hidden field, so its default still applies', function () {
+    DB::table('core_config')->where('code', 'customer.captcha.credentials.score_threshold')->delete();
+
     $this->loginAsAdmin();
 
     postJson(route('admin.configuration.index', ['customer', 'captcha']), [

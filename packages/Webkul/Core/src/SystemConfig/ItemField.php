@@ -32,6 +32,10 @@ class ItemField
             'text' => 'min',
             'number' => 'min_value',
         ],
+
+        'numeric' => [
+            'text' => 'decimal',
+        ],
     ];
 
     /**

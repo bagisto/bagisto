@@ -10,7 +10,7 @@ export abstract class DatagridPage extends BasePage {
     protected abstract get gridPath(): string;
 
     protected get searchInput(): Locator {
-        return this.page.locator('input[name="search"]');
+        return this.page.locator('input[name="search"]:visible');
     }
 
     protected get selectActionButton(): Locator {
