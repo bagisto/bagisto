@@ -22,9 +22,14 @@ class PreventSessionRevival
 
     /**
      * Remember a session logged out during this request, and turn away one a late write brought back.
+     * A route that runs without a session, as a payment callback does, passes straight through.
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (! $request->hasSession()) {
+            return $next($request);
+        }
+
         $session = $request->session();
 
         $identifier = $session->getId();

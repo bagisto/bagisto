@@ -63,6 +63,19 @@ function passThroughRevivalGuard(Store $session, ?Closure $during = null): Store
 }
 
 // ============================================================================
+// Requests That Carry No Session
+// ============================================================================
+
+it('should let a request whose route starts no session straight through', function () {
+    $request = Request::create('/payglocal/callback', 'POST');
+
+    $response = (new PreventSessionRevival(new RevokedSessions))->handle($request, fn () => new Response('handled'));
+
+    expect($request->hasSession())->toBeFalse()
+        ->and($response->getContent())->toBe('handled');
+});
+
+// ============================================================================
 // Turning Away A Revived Session
 // ============================================================================
 
