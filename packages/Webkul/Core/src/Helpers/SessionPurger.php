@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\DB;
 class SessionPurger
 {
     /**
+     * Create a new session purger instance.
+     */
+    public function __construct(protected RevokedSessions $revokedSessions) {}
+
+    /**
      * Drop every stored session a guard holds for the given user, on the database driver alone.
+     * The caller's own session is dropped but not revoked, so the reset does not sign them out.
      */
     public function forget(string $guard, int $userId): void
     {
@@ -20,12 +26,20 @@ class SessionPurger
 
         $key = 'login_'.$guard.'_'.sha1(SessionGuard::class);
 
+        $current = session()->getId();
+
         try {
             DB::table($table)
                 ->where('user_id', $userId)
                 ->get(['id', 'payload'])
                 ->filter(fn ($session) => $this->belongsTo($session->payload, $key, $userId))
-                ->each(fn ($session) => DB::table($table)->where('id', $session->id)->delete());
+                ->each(function ($session) use ($table, $current) {
+                    DB::table($table)->where('id', $session->id)->delete();
+
+                    if ($session->id !== $current) {
+                        $this->revokedSessions->revoke($session->id);
+                    }
+                });
         } catch (\Throwable $e) {
             report($e);
         }

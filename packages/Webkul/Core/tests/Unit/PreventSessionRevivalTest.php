@@ -5,6 +5,7 @@ use Illuminate\Http\Response;
 use Illuminate\Session\ArraySessionHandler;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Cache;
+use Webkul\Core\Helpers\RevokedSessions;
 use Webkul\Core\Http\Middleware\PreventSessionRevival;
 
 beforeEach(function () {
@@ -52,7 +53,7 @@ function passThroughRevivalGuard(Store $session, ?Closure $during = null): Store
 
     $request->setLaravelSession($session);
 
-    (new PreventSessionRevival)->handle($request, function () use ($session, $during) {
+    (new PreventSessionRevival(new RevokedSessions))->handle($request, function () use ($session, $during) {
         $during?->__invoke($session);
 
         return new Response;
