@@ -128,16 +128,97 @@ it('should start a checkout charging the items, shipping and tax, and noting the
             'cart_id' => $cart->id,
             'base_grand_total' => (string) $cart->base_grand_total,
         ])
-        ->and(array_column(array_column($params['line_items'], 'price_data'), 'unit_amount'))->toBe([
-            (int) round($cart->items->first()->base_price * $unit),
-            10 * $unit,
-            5 * $unit,
+        ->and(array_column(array_column($params['line_items'], 'price_data'), 'unit_amount_decimal'))->toBe([
+            sprintf('%.4F', $cart->items->first()->base_price * $unit),
+            sprintf('%.4F', 10 * $unit),
+            sprintf('%.4F', 5 * $unit),
         ])
         ->and(array_column(array_column(array_column($params['line_items'], 'price_data'), 'product_data'), 'name'))->toBe([
             $cart->items->first()->product->name,
             trans('stripe::app.line-items.shipping'),
             trans('stripe::app.line-items.tax'),
         ]);
+});
+
+it('should charge the total the order is placed at once the discount, shipping and tax are counted', function () {
+    $cart = $this->createCartWithItems('stripe');
+
+    $item = $cart->items->first();
+
+    $cart->base_shipping_amount = 10;
+
+    $cart->base_tax_total = 5;
+
+    $cart->base_discount_amount = round($item->base_total / 2, 2);
+
+    $cart->base_grand_total = $item->base_total
+        + $cart->base_tax_total
+        + $cart->base_shipping_amount
+        - $cart->base_discount_amount;
+
+    $client = $this->fakeStripeApi([
+        'POST /v1/coupons' => [200, ['id' => 'co_test_discount', 'object' => 'coupon']],
+        'POST /v1/checkout/sessions' => [200, stripeSessionResponse('cs_test_discounted')],
+    ]);
+
+    $this->stripe->createCheckoutSession($cart);
+
+    $unit = 10 ** (core()->getBaseCurrency()->decimal ?? 2);
+
+    $coupon = $client->requestsTo('POST', '/v1/coupons')[0]['params'];
+
+    $params = $client->requestsTo('POST', '/v1/checkout/sessions')[0]['params'];
+
+    $charged = array_sum(array_map(
+        fn ($lineItem) => (int) round($lineItem['price_data']['unit_amount_decimal'] * $lineItem['quantity']),
+        $params['line_items']
+    )) - $coupon['amount_off'];
+
+    expect($coupon['amount_off'])->toBe((int) round($cart->base_discount_amount * $unit))
+        ->and($coupon['currency'])->toBe(strtolower(core()->getBaseCurrencyCode()))
+        ->and($coupon['max_redemptions'])->toBe(1)
+        ->and($params['discounts'])->toBe([['coupon' => 'co_test_discount']])
+        ->and($charged)->toBe((int) round($cart->base_grand_total * $unit));
+});
+
+it('should charge a price the cart holds to four decimals without losing a unit to rounding', function () {
+    $cart = $this->createCartWithItems('stripe');
+
+    $item = $cart->items->first();
+
+    $item->quantity = 3;
+
+    $item->base_price = 83.3333;
+
+    $item->base_total = 250;
+
+    $cart->base_grand_total = $item->base_total;
+
+    $client = $this->fakeStripeApi([
+        'POST /v1/checkout/sessions' => [200, stripeSessionResponse('cs_test_fractional')],
+    ]);
+
+    $this->stripe->createCheckoutSession($cart);
+
+    $lineItem = $client->requestsTo('POST', '/v1/checkout/sessions')[0]['params']['line_items'][0];
+
+    $unit = 10 ** (core()->getBaseCurrency()->decimal ?? 2);
+
+    expect((int) round($lineItem['price_data']['unit_amount_decimal'] * $lineItem['quantity']))
+        ->toBe((int) round($cart->base_grand_total * $unit));
+});
+
+it('should start a checkout with no discount when the cart carries none', function () {
+    $cart = $this->createCartWithItems('stripe');
+
+    $client = $this->fakeStripeApi([
+        'POST /v1/checkout/sessions' => [200, stripeSessionResponse('cs_test_undiscounted')],
+    ]);
+
+    $this->stripe->createCheckoutSession($cart);
+
+    expect($client->requestsTo('POST', '/v1/coupons'))->toBeEmpty()
+        ->and($client->requestsTo('POST', '/v1/checkout/sessions')[0]['params'])->not->toHaveKey('discounts');
 });
 
 it('should hand back a checkout session only once it is paid', function () {

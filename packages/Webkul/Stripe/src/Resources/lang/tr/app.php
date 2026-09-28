@@ -5,6 +5,7 @@ return [
     'title' => 'Stripe',
 
     'line-items' => [
+        'discount' => 'İndirim',
         'shipping' => 'Kargo',
         'tax' => 'Vergi',
     ],

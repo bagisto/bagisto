@@ -4,6 +4,7 @@ namespace Webkul\Stripe\Payment;
 
 use Illuminate\Support\Facades\Storage;
 use Stripe\Checkout\Session;
+use Stripe\Coupon;
 use Stripe\Event;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Stripe as BaseStripe;
@@ -132,11 +133,9 @@ class Stripe extends Payment
 
         BaseStripe::setApiKey($this->getApiKey());
 
-        $lineItems = $this->prepareLineItems($cart);
-
-        return Session::create([
+        $parameters = [
             'payment_method_types' => ['card'],
-            'line_items' => $lineItems,
+            'line_items' => $this->prepareLineItems($cart),
             'mode' => 'payment',
             'success_url' => route('stripe.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('stripe.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
@@ -144,7 +143,13 @@ class Stripe extends Payment
                 'cart_id' => $cart->id,
                 'base_grand_total' => (string) $cart->base_grand_total,
             ],
-        ]);
+        ];
+
+        if ($coupon = $this->prepareDiscount($cart)) {
+            $parameters['discounts'] = [['coupon' => $coupon->id]];
+        }
+
+        return Session::create($parameters);
     }
 
     /**
@@ -234,6 +239,16 @@ class Stripe extends Payment
     }
 
     /**
+     * Convert an amount to the base currency's smallest unit as the decimal string Stripe prices a line at.
+     */
+    private function formatDecimalAmount(float $amount): string
+    {
+        $decimal = core()->getBaseCurrency()->decimal ?? 2;
+
+        return sprintf('%.4F', $amount * (10 ** $decimal));
+    }
+
+    /**
      * Prepare line items for Stripe Checkout.
      *
      * @return array
@@ -251,7 +266,7 @@ class Stripe extends Payment
                         'name' => $item->product->name,
                     ],
 
-                    'unit_amount' => $this->formatAmount($item->base_price),
+                    'unit_amount_decimal' => $this->formatDecimalAmount($item->base_price),
                 ],
 
                 'quantity' => $item->quantity,
@@ -267,7 +282,7 @@ class Stripe extends Payment
                         'name' => trans('stripe::app.line-items.shipping'),
                     ],
 
-                    'unit_amount' => $this->formatAmount($cart->base_shipping_amount),
+                    'unit_amount_decimal' => $this->formatDecimalAmount($cart->base_shipping_amount),
                 ],
 
                 'quantity' => 1,
@@ -283,7 +298,7 @@ class Stripe extends Payment
                         'name' => trans('stripe::app.line-items.tax'),
                     ],
 
-                    'unit_amount' => $this->formatAmount($cart->base_tax_total),
+                    'unit_amount_decimal' => $this->formatDecimalAmount($cart->base_tax_total),
                 ],
 
                 'quantity' => 1,
@@ -291,5 +306,25 @@ class Stripe extends Payment
         }
 
         return $lineItems;
+    }
+
+    /**
+     * Prepare a single-use coupon for the cart's discount, so Stripe charges the total the order is placed at.
+     */
+    private function prepareDiscount($cart): ?Coupon
+    {
+        $amount = $this->formatAmount($cart->base_discount_amount);
+
+        if ($amount <= 0) {
+            return null;
+        }
+
+        return Coupon::create([
+            'name' => trans('stripe::app.line-items.discount'),
+            'amount_off' => $amount,
+            'currency' => strtolower(core()->getBaseCurrencyCode()),
+            'duration' => 'once',
+            'max_redemptions' => 1,
+        ]);
     }
 }
