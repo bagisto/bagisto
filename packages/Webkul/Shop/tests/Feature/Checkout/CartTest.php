@@ -3653,3 +3653,64 @@ it('should not change the inclusive-tax grand total when apply tax on is set to 
     // only affects exclusive pricing, so inclusive tax is unchanged).
     $this->assertPrice(round($subTotalInclTax * $taxRate->tax_rate / (100 + $taxRate->tax_rate), 2), $response->json('data.tax_total'));
 });
+
+it('should report that the coupon cannot be applied when the coupon exists but its cart rule is inactive', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $cart = Cart::factory()->create();
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => 1,
+        'name' => $product->name,
+        'type' => $product->type,
+    ]);
+
+    $cartRule = CartRule::factory()
+        ->afterCreating(function (CartRule $cartRule) {
+            $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+
+            $cartRule->cart_rule_channels()->sync([core()->getCurrentChannel()->id]);
+        })
+        ->create([
+            'action_type' => 'by_percent',
+            'discount_amount' => 10,
+            'coupon_type' => 1,
+            'status' => 0,
+        ]);
+
+    CartRuleCoupon::factory()->create([
+        'cart_rule_id' => $cartRule->id,
+        'code' => $couponCode = fake()->numerify('bagisto-########'),
+    ]);
+
+    cart()->setCart($cart);
+
+    // Act and Assert: the coupon is found, so this is not an invalid code.
+    postJson(route('shop.api.checkout.cart.coupon.apply'), [
+        'code' => $couponCode,
+    ])
+        ->assertStatus(422)
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.apply-issue'))
+        ->assertJsonPath('data.id', $cart->id);
+});
