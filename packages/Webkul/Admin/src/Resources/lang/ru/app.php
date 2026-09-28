@@ -365,6 +365,7 @@ return [
                         'email' => 'Email',
                         'first-name' => 'Имя',
                         'last-name' => 'Фамилия',
+                        'phone' => 'Телефон',
                         'postcode' => 'Индекс',
                         'proceed' => 'Продолжить',
                         'same-as-billing' => 'Использовать тот же адрес для доставки?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Адрес доставки',
                         'state' => 'Регион',
                         'street-address' => 'Улица, дом',
-                        'telephone' => 'Телефон',
                         'title' => 'Адрес',
                         'vat-id' => 'ИНН',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Количество заказов',
                     'order-pending' => 'У клиента есть ожидающий заказ',
                     'partial-action' => 'Некоторые действия не были выполнены из-за ограничений системы на :resource',
-                    'phone' => 'Контактный номер',
+                    'phone' => 'Телефон',
                     'revenue' => 'Доход',
                     'status' => 'Статус',
                     'suspended' => 'Приостановлен',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Канал',
-                    'contact-number' => 'Контактный номер',
                     'create-btn' => 'Создать клиента',
                     'create-success' => 'Клиент успешно создан',
                     'customer-group' => 'Группа клиентов',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Фамилия',
                     'male' => 'Мужской',
                     'other' => 'Другой',
+                    'phone' => 'Телефон',
                     'save-btn' => 'Сохранить клиента',
                     'select-customer-group' => 'Выберите группу клиентов',
                     'select-gender' => 'Выберите пол',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'Контактный номер',
                     'customer-group' => 'Группа клиента',
                     'date-of-birth' => 'Дата рождения',
                     'edit-btn' => 'Редактировать',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Фамилия',
                     'male' => 'Мужской',
                     'other' => 'Другой',
+                    'phone' => 'Телефон',
                     'save-btn' => 'Сохранить клиента',
                     'select-customer-group' => 'Выберите группу клиента',
                     'select-gender' => 'Выберите пол',

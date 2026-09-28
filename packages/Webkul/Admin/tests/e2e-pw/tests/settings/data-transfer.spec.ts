@@ -362,7 +362,7 @@ test.describe("check the data transfer flow", () => {
             }
         });
 
-        test("should download the images a file names as links", async ({
+        test("should not count an image url it cannot reach as downloaded", async ({
             adminPage,
         }) => {
             const dataTransfer = new DataTransferPage(adminPage);
@@ -370,7 +370,7 @@ test.describe("check the data transfer flow", () => {
             try {
                 await dataTransfer.createImport({
                     type: "products",
-                    file: "products-image-urls.csv",
+                    file: "products-with-invalid-image-urls.csv",
                     imageSource: "url",
                 });
 
@@ -383,11 +383,11 @@ test.describe("check the data transfer flow", () => {
                 ]);
 
                 await dataTransfer.waitForSuccess();
-                await dataTransfer.expectImagesDownloaded("2 / 2");
+                await dataTransfer.expectImagesDownloaded("0 / 2");
             } finally {
                 await deleteImported(dataTransfer, {
                     type: "products",
-                    file: "products-image-urls.csv",
+                    file: "products-with-invalid-image-urls.csv",
                 });
             }
         });

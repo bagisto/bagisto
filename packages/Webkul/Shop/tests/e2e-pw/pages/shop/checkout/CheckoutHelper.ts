@@ -252,11 +252,23 @@ export class CheckoutHelper extends BasePage {
     }
 
     protected async goToNextFlatpickrMonth() {
-        const current = await this.flatpickrMonthLabel.innerText();
+        const current = await this.flatpickrMonthLabel.first().innerText();
 
         await this.flatpickrNextMonthButton.click();
 
-        await expect(this.flatpickrMonthLabel).not.toHaveText(current);
+        await expect
+            .poll(
+                async () => {
+                    const months = await this.flatpickrMonthLabel.allInnerTexts();
+
+                    return months.length === 1 ? months[0] : current;
+                },
+                {
+                    message:
+                        "the calendar kept sliding between months instead of settling on the next one",
+                },
+            )
+            .not.toBe(current);
     }
 
     private async assertOrderAccepted(response: Response) {
@@ -384,7 +396,7 @@ export class CheckoutHelper extends BasePage {
             .getByRole("textbox", { name: "Zip/Postcode" })
             .fill(address.postcode);
         await this.page
-            .getByRole("textbox", { name: "Telephone" })
+            .getByRole("textbox", { name: "Phone" })
             .fill(address.phone);
 
         return address;

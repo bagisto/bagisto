@@ -365,6 +365,7 @@ return [
                         'email' => '电子邮件',
                         'first-name' => '名字',
                         'last-name' => '姓氏',
+                        'phone' => '电话',
                         'postcode' => '邮政编码',
                         'proceed' => '继续',
                         'same-as-billing' => '使用相同地址作为送货地址？',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => '送货地址',
                         'state' => '省/州',
                         'street-address' => '街道地址',
-                        'telephone' => '电话',
                         'title' => '地址',
                         'vat-id' => '增值税号码',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => '订单数量',
                     'order-pending' => '客户有待处理订单',
                     'partial-action' => '由于 :resource 上的受限制的系统约束，未执行一些操作',
-                    'phone' => '联系号码',
+                    'phone' => '电话',
                     'revenue' => '收入',
                     'status' => '状态',
                     'suspended' => '已暂停',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => '渠道',
-                    'contact-number' => '联系号码',
                     'create-btn' => '创建客户',
                     'create-success' => '成功创建客户',
                     'customer-group' => '客户组',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => '姓氏',
                     'male' => '男性',
                     'other' => '其他',
+                    'phone' => '电话',
                     'save-btn' => '保存客户',
                     'select-customer-group' => '选择客户组',
                     'select-gender' => '选择性别',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => '联系号码',
                     'customer-group' => '客户组',
                     'date-of-birth' => '出生日期',
                     'edit-btn' => '编辑',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => '姓氏',
                     'male' => '男性',
                     'other' => '其他',
+                    'phone' => '电话',
                     'save-btn' => '保存客户',
                     'select-customer-group' => '选择客户组',
                     'select-gender' => '选择性别',

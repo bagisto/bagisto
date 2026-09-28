@@ -365,6 +365,7 @@ return [
                         'email' => 'Електронна пошта',
                         'first-name' => 'Ім\'я',
                         'last-name' => 'Прізвище',
+                        'phone' => 'Телефон',
                         'postcode' => 'Поштовий індекс',
                         'proceed' => 'Продовжити',
                         'same-as-billing' => 'Використовувати ту саму адресу для доставки?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Адреса доставки',
                         'state' => 'Область',
                         'street-address' => 'Вулиця, будинок',
-                        'telephone' => 'Телефон',
                         'title' => 'Адреса',
                         'vat-id' => 'ІПН',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Кількість замовлень',
                     'order-pending' => 'Клієнт має невиконані замовлення',
                     'partial-action' => 'Деякі дії не були виконані через обмеження системи щодо :resource',
-                    'phone' => 'Контактний номер',
+                    'phone' => 'Телефон',
                     'revenue' => 'Дохід',
                     'status' => 'Статус',
                     'suspended' => 'Призупинено',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Канал',
-                    'contact-number' => 'Контактний номер',
                     'create-btn' => 'Створити клієнта',
                     'create-success' => 'Клієнта успішно створено',
                     'customer-group' => 'Група клієнтів',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Прізвище',
                     'male' => 'Чоловік',
                     'other' => 'Інша',
+                    'phone' => 'Телефон',
                     'save-btn' => 'Зберегти клієнта',
                     'select-customer-group' => 'Вибрати групу клієнтів',
                     'select-gender' => 'Вибрати стать',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'Номер телефону',
                     'customer-group' => 'Група клієнтів',
                     'date-of-birth' => 'Дата народження',
                     'edit-btn' => 'Редагувати',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Прізвище',
                     'male' => 'Чоловік',
                     'other' => 'Інша',
+                    'phone' => 'Телефон',
                     'save-btn' => 'Зберегти клієнта',
                     'select-customer-group' => 'Вибрати групу клієнтів',
                     'select-gender' => 'Вибрати стать',

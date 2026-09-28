@@ -10,7 +10,7 @@ export class RuleDeletePage extends BasePage {
     }
 
     private get searchInput() {
-        return this.page.locator('input[name="search"]');
+        return this.page.locator('input[name="search"]:visible');
     }
 
     private get emptyState() {

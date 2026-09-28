@@ -73,7 +73,7 @@
                                 <a :href="record.actions[0].url">
                                     <div class="flex justify-between">
                                         <div class="text-sm font-semibold">
-                                            @lang('shop::app.customers.account.orders.order-id'): #@{{ record.id }}
+                                            @lang('shop::app.customers.account.orders.order-id'): #@{{ record.increment_id }}
     
                                             <p class="text-xs font-normal text-neutral-500">
                                                 @{{ record.created_at }}

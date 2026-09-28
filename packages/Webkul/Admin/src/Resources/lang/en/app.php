@@ -365,6 +365,7 @@ return [
                         'email' => 'Email',
                         'first-name' => 'First Name',
                         'last-name' => 'Last Name',
+                        'phone' => 'Phone',
                         'postcode' => 'Zip/Postcode',
                         'proceed' => 'Proceed',
                         'same-as-billing' => 'Use same address for shipping?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Shipping Address',
                         'state' => 'State',
                         'street-address' => 'Street Address',
-                        'telephone' => 'Telephone',
                         'title' => 'Address',
                         'vat-id' => 'Vat ID',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Order Count',
                     'order-pending' => 'Customer have pending order',
                     'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
-                    'phone' => 'Contact Number',
+                    'phone' => 'Phone',
                     'revenue' => 'Revenue',
                     'status' => 'Status',
                     'suspended' => 'Suspended',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Channel',
-                    'contact-number' => 'Contact Number',
                     'create-btn' => 'Create Customer',
                     'create-success' => 'Customer created successfully',
                     'customer-group' => 'Customer Group',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Last Name',
                     'male' => 'Male',
                     'other' => 'Other',
+                    'phone' => 'Phone',
                     'save-btn' => 'Save customer',
                     'select-customer-group' => 'Select Customer Group',
                     'select-gender' => 'Select Gender',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'Contact Number',
                     'customer-group' => 'Customer Group',
                     'date-of-birth' => 'Date of Birth',
                     'edit-btn' => 'Edit',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Last Name',
                     'male' => 'Male',
                     'other' => 'Other',
+                    'phone' => 'Phone',
                     'save-btn' => 'Save customer',
                     'select-customer-group' => 'Select Customer Group',
                     'select-gender' => 'Select Gender',

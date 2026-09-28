@@ -365,6 +365,7 @@ return [
                         'email' => 'ইমেল',
                         'first-name' => 'নামের প্রথম অংশ',
                         'last-name' => 'নামের শেষাংশ',
+                        'phone' => 'ফোন',
                         'postcode' => 'জিপ / পোস্টকোড',
                         'proceed' => 'এগিয়ে যান',
                         'same-as-billing' => 'শিপিং জন্য একই ঠিকানা ব্যবহার করবেন?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'শিপিং ঠিকানা',
                         'state' => 'রাষ্ট্র',
                         'street-address' => 'রাস্তার ঠিকানা',
-                        'telephone' => 'টেলিফোন',
                         'title' => 'ঠিকানা',
                         'vat-id' => 'ভ্যাট আইডি',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'অর্ডার সংখ্যা',
                     'order-pending' => 'গ্রাহকের মুলতুলযোগ্য অর্ডার রয়েছে',
                     'partial-action' => 'কিছু অ্যাকশন :resource এর সীমিত সিস্টেম সীমার জন্য করা হয়নি',
-                    'phone' => 'যোগাযোগ নম্বর',
+                    'phone' => 'ফোন',
                     'revenue' => 'রাজস্ব',
                     'status' => 'অবস্থা',
                     'suspended' => 'স্থগিত',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'চ্যানেল',
-                    'contact-number' => 'যোগাযোগ নম্বর',
                     'create-btn' => 'গ্রাহক তৈরি করুন',
                     'create-success' => 'গ্রাহক সফলভাবে তৈরি হয়েছে',
                     'customer-group' => 'গ্রাহক গ্রুপ',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'শেষ নাম',
                     'male' => 'পুরুষ',
                     'other' => 'অন্যান্য',
+                    'phone' => 'ফোন',
                     'save-btn' => 'গ্রাহক সংরক্ষণ করুন',
                     'select-customer-group' => 'কাস্টমার গ্রুপ নির্বাচন করুন',
                     'select-gender' => 'লিঙ্গ নির্বাচন করুন',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'যোগাযোগ নম্বর',
                     'customer-group' => 'গ্রাহক গ্রুপ',
                     'date-of-birth' => 'জন্ম তারিখ',
                     'edit-btn' => 'সম্পাদনা',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'শেষ নাম',
                     'male' => 'পুরুষ',
                     'other' => 'অন্যান্য',
+                    'phone' => 'ফোন',
                     'save-btn' => 'গ্রাহক সংরক্ষণ',
                     'select-customer-group' => 'গ্রাহক গ্রুপ নির্বাচন করুন',
                     'select-gender' => 'লিঙ্গ নির্বাচন করুন',

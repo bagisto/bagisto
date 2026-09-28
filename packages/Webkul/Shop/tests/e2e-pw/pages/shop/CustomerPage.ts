@@ -156,6 +156,24 @@ export class CustomerPage extends BasePage {
         await expect(this.page.getByText("Customer deleted successfully").first()).toBeVisible();
     }
 
+    async expectDownloadableProductsPageServed(): Promise<void> {
+        const response = await this.page.goto(
+            "customer/account/downloadable-products",
+        );
+
+        expect(
+            response?.status(),
+            "the downloadable products page answered a server error",
+        ).toBe(200);
+
+        await expect(this.page).toHaveURL(
+            /customer\/account\/downloadable-products/,
+        );
+        await expect(
+            this.page.getByRole("heading", { name: "Downloadable Products" }),
+        ).toBeVisible();
+    }
+
     async expectProfileShows(values: string[]): Promise<void> {
         await this.openProfile();
 

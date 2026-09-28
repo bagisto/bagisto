@@ -7,6 +7,18 @@ import { RmaRequestPage } from "../pages/shop/RmaRequestPage";
 import { SimpleProductCheckout } from "../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { loginAsCustomer, addAddress } from "../utils/customer";
 import { uniqueStamp } from "../utils/faker";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const photoPath = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../data/images/images.jpeg",
+);
+
+const secondPhotoPath = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../data/images/1.webp",
+);
 
 test.describe("return requests", () => {
     let productListPage: ProductListPage;
@@ -119,6 +131,23 @@ test.describe("return requests", () => {
         await requestPage.sendMessage(orderId, message);
 
         await requestPage.expectMessageInConversation(message);
+    });
+
+    test("should carry the photos a customer attaches through to the request", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const createPage = new RmaCreatePage(shopPage);
+        const requestPage = new RmaRequestPage(shopPage);
+
+        await createPage.requestReturnWithPhotos(orderId, [photoPath, secondPhotoPath]);
+
+        await createPage.expectRequestCreatedOnDetailPage();
+
+        await requestPage.expectPhotosServedOnDetailPage(2);
     });
 
     test("should let a customer cancel a return request", async ({

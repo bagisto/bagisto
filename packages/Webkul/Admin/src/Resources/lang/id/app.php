@@ -365,6 +365,7 @@ return [
                         'email' => 'Email',
                         'first-name' => 'Nama Depan',
                         'last-name' => 'Nama Belakang',
+                        'phone' => 'Telepon',
                         'postcode' => 'Kode Pos',
                         'proceed' => 'Lanjutkan',
                         'same-as-billing' => 'Gunakan alamat yang sama untuk pengiriman?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Alamat Pengiriman',
                         'state' => 'Provinsi',
                         'street-address' => 'Alamat Jalan',
-                        'telephone' => 'Telepon',
                         'title' => 'Alamat',
                         'vat-id' => 'ID Pajak',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Jumlah Pesanan',
                     'order-pending' => 'Pelanggan memiliki pesanan yang tertunda',
                     'partial-action' => 'Beberapa tindakan tidak dapat dilakukan karena batasan sistem pada :resource',
-                    'phone' => 'Nomor Kontak',
+                    'phone' => 'Telepon',
                     'revenue' => 'Pendapatan',
                     'status' => 'Status',
                     'suspended' => 'Ditangguhkan',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Saluran',
-                    'contact-number' => 'Nomor Kontak',
                     'create-btn' => 'Tambah Pelanggan',
                     'create-success' => 'Pelanggan berhasil ditambahkan',
                     'customer-group' => 'Grup Pelanggan',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Nama Belakang',
                     'male' => 'Laki-laki',
                     'other' => 'Lainnya',
+                    'phone' => 'Telepon',
                     'save-btn' => 'Simpan Pelanggan',
                     'select-customer-group' => 'Pilih Grup Pelanggan',
                     'select-gender' => 'Pilih Jenis Kelamin',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'Nomor Kontak',
                     'customer-group' => 'Grup Pelanggan',
                     'date-of-birth' => 'Tanggal Lahir',
                     'edit-btn' => 'Edit',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Nama Belakang',
                     'male' => 'Laki-laki',
                     'other' => 'Lainnya',
+                    'phone' => 'Telepon',
                     'save-btn' => 'Simpan Pelanggan',
                     'select-customer-group' => 'Pilih Grup Pelanggan',
                     'select-gender' => 'Pilih Jenis Kelamin',

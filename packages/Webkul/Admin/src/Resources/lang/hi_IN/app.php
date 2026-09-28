@@ -365,6 +365,7 @@ return [
                         'email' => 'ईमेल',
                         'first-name' => 'पहला नाम',
                         'last-name' => 'अंतिम नाम',
+                        'phone' => 'फ़ोन',
                         'postcode' => 'पिनकोड',
                         'proceed' => 'आगे बढ़ें',
                         'same-as-billing' => 'शिपिंग के लिए एक ही पता उपयोग करें?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'शिपिंग पता',
                         'state' => 'राज्य',
                         'street-address' => 'सड़क का पता',
-                        'telephone' => 'टेलीफोन',
                         'title' => 'पता',
                         'vat-id' => 'वैट आईडी',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'ऑर्डर गणना',
                     'order-pending' => 'ग्राहक के पास लंबित ऑर्डर हैं',
                     'partial-action' => 'कुछ क्रियाएँ सीमित प्रणाली की रोकथाम के कारण संपन्न नहीं की गई थीं :resource पर',
-                    'phone' => 'संपर्क नंबर',
+                    'phone' => 'फ़ोन',
                     'revenue' => 'राजस्व',
                     'status' => 'स्थिति',
                     'suspended' => 'सस्ती',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'चैनल',
-                    'contact-number' => 'संपर्क नंबर',
                     'create-btn' => 'ग्राहक बनाएं',
                     'create-success' => 'ग्राहक सफलतापूर्वक बनाया गया',
                     'customer-group' => 'ग्राहक समूह',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'उपनाम',
                     'male' => 'पुरुष',
                     'other' => 'अन्य',
+                    'phone' => 'फ़ोन',
                     'save-btn' => 'ग्राहक को सहेजें',
                     'select-customer-group' => 'ग्राहक समूह का चयन करें',
                     'select-gender' => 'लिंग का चयन करें',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'संपर्क नंबर',
                     'customer-group' => 'ग्राहक समूह',
                     'date-of-birth' => 'जन्मतिथि',
                     'edit-btn' => 'संपादित करें',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'उपनाम',
                     'male' => 'पुरुष',
                     'other' => 'अन्य',
+                    'phone' => 'फ़ोन',
                     'save-btn' => 'ग्राहक को सहेजें',
                     'select-customer-group' => 'ग्राहक समूह चुनें',
                     'select-gender' => 'लिंग चुनें',

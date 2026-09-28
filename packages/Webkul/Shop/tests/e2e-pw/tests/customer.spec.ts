@@ -227,6 +227,20 @@ test.describe("customer account", () => {
         });
     });
 
+    test.describe("downloadable products", () => {
+        let customerPage: CustomerPage;
+
+        test.beforeEach(async ({ shopPage }) => {
+            customerPage = new CustomerPage(shopPage);
+
+            await loginAsCustomer(shopPage);
+        });
+
+        test("should serve the downloadable products page", async () => {
+            await customerPage.expectDownloadableProductsPageServed();
+        });
+    });
+
     test.describe("orders", () => {
         let productName: string;
         let productListPage: ProductListPage;

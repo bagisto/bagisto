@@ -272,7 +272,7 @@
             <!-- Phone Number -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.label class="required mt-0!">
-                    @lang('admin::app.sales.orders.create.cart.address.telephone')
+                    @lang('admin::app.sales.orders.create.cart.address.phone')
                 </x-admin::form.control-group.label>
 
                 <x-admin::form.control-group.control
@@ -280,8 +280,8 @@
                     ::name="controlName + '.phone'"
                     ::value="address.phone"
                     rules="required|numeric"
-                    :label="trans('admin::app.sales.orders.create.cart.address.telephone')"
-                    :placeholder="trans('admin::app.sales.orders.create.cart.address.telephone')"
+                    :label="trans('admin::app.sales.orders.create.cart.address.phone')"
+                    :placeholder="trans('admin::app.sales.orders.create.cart.address.phone')"
                 />
 
                 <x-admin::form.control-group.error ::name="controlName + '.phone'" />

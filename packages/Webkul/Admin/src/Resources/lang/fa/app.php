@@ -365,6 +365,7 @@ return [
                         'email' => 'ایمیل',
                         'first-name' => 'نام',
                         'last-name' => 'نام خانوادگی',
+                        'phone' => 'تلفن',
                         'postcode' => 'کد پستی',
                         'proceed' => 'ادامه',
                         'same-as-billing' => 'استفاده از همان آدرس برای حمل و نقل؟',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'آدرس حمل و نقل',
                         'state' => 'استان',
                         'street-address' => 'آدرس خیابان',
-                        'telephone' => 'تلفن',
                         'title' => 'آدرس',
                         'vat-id' => 'شناسه مالیاتی',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'تعداد سفارش‌ها',
                     'order-pending' => 'مشتری دارای سفارش در انتظار است',
                     'partial-action' => 'بعضی از اقدامات به دلیل محدودیت‌های سیستمی در :resource انجام نشدند',
-                    'phone' => 'شماره تماس',
+                    'phone' => 'تلفن',
                     'revenue' => 'درآمد',
                     'status' => 'وضعیت',
                     'suspended' => 'تعلیق شده',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'کانال',
-                    'contact-number' => 'شماره تماس',
                     'create-btn' => 'ایجاد مشتری',
                     'create-success' => 'مشتری با موفقیت ایجاد شد',
                     'customer-group' => 'گروه مشتری',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'نام خانوادگی',
                     'male' => 'مرد',
                     'other' => 'دیگر',
+                    'phone' => 'تلفن',
                     'save-btn' => 'ذخیره مشتری',
                     'select-customer-group' => 'انتخاب گروه مشتری',
                     'select-gender' => 'انتخاب جنسیت',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'شماره تماس',
                     'customer-group' => 'گروه مشتری',
                     'date-of-birth' => 'تاریخ تولد',
                     'edit-btn' => 'ویرایش',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'نام خانوادگی',
                     'male' => 'مرد',
                     'other' => 'سایر',
+                    'phone' => 'تلفن',
                     'save-btn' => 'ذخیره مشتری',
                     'select-customer-group' => 'انتخاب گروه مشتری',
                     'select-gender' => 'انتخاب جنسیت',

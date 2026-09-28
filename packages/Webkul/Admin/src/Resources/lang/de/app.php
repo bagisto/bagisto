@@ -365,6 +365,7 @@ return [
                         'email' => 'E-Mail',
                         'first-name' => 'Vorname',
                         'last-name' => 'Nachname',
+                        'phone' => 'Telefon',
                         'postcode' => 'PLZ',
                         'proceed' => 'Weiter',
                         'same-as-billing' => 'Gleiche Adresse für Versand verwenden?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Lieferadresse',
                         'state' => 'Bundesland',
                         'street-address' => 'Straße und Hausnummer',
-                        'telephone' => 'Telefon',
                         'title' => 'Adresse',
                         'vat-id' => 'USt-IdNr.',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Anzahl der Bestellungen',
                     'order-pending' => 'Der Kunde hat ausstehende Bestellungen',
                     'partial-action' => 'Einige Aktionen wurden aufgrund eingeschränkter Systembeschränkungen für :resource nicht durchgeführt',
-                    'phone' => 'Kontaktnummer',
+                    'phone' => 'Telefon',
                     'revenue' => 'Umsatz',
                     'status' => 'Status',
                     'suspended' => 'Gesperrt',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Kanal',
-                    'contact-number' => 'Kontaktnummer',
                     'create-btn' => 'Kunden erstellen',
                     'create-success' => 'Kunde erfolgreich erstellt',
                     'customer-group' => 'Kundengruppe',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Nachname',
                     'male' => 'Männlich',
                     'other' => 'Andere',
+                    'phone' => 'Telefon',
                     'save-btn' => 'Kunde speichern',
                     'select-customer-group' => 'Kundengruppe auswählen',
                     'select-gender' => 'Geschlecht auswählen',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'Kontaktnummer',
                     'customer-group' => 'Kundengruppe',
                     'date-of-birth' => 'Geburtsdatum',
                     'edit-btn' => 'Bearbeiten',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Nachname',
                     'male' => 'Männlich',
                     'other' => 'Andere',
+                    'phone' => 'Telefon',
                     'save-btn' => 'Kunden speichern',
                     'select-customer-group' => 'Kundengruppe auswählen',
                     'select-gender' => 'Geschlecht auswählen',

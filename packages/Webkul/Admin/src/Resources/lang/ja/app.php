@@ -365,6 +365,7 @@ return [
                         'email' => 'メール',
                         'first-name' => '名',
                         'last-name' => '姓',
+                        'phone' => '電話',
                         'postcode' => '郵便番号',
                         'proceed' => '進む',
                         'same-as-billing' => '配送先にも同じ住所を使用しますか？',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => '配送先住所',
                         'state' => '都道府県',
                         'street-address' => '住所',
-                        'telephone' => '電話番号',
                         'title' => '住所',
                         'vat-id' => 'VAT番号',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => '注文数',
                     'order-pending' => '顧客は保留中の注文があります',
                     'partial-action' => '一部のアクションは、:resource の制約により実行されませんでした',
-                    'phone' => '連絡先番号',
+                    'phone' => '電話',
                     'revenue' => '収益',
                     'status' => 'ステータス',
                     'suspended' => '停止中',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'チャンネル',
-                    'contact-number' => '連絡先番号',
                     'create-btn' => '顧客を作成',
                     'create-success' => '顧客が正常に作成されました',
                     'customer-group' => '顧客グループ',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => '姓',
                     'male' => '男性',
                     'other' => 'その他',
+                    'phone' => '電話',
                     'save-btn' => '顧客を保存',
                     'select-customer-group' => '顧客グループを選択',
                     'select-gender' => '性別を選択',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => '連絡先番号',
                     'customer-group' => '顧客グループ',
                     'date-of-birth' => '生年月日',
                     'edit-btn' => '編集',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => '姓',
                     'male' => '男性',
                     'other' => 'その他',
+                    'phone' => '電話',
                     'save-btn' => '顧客を保存',
                     'select-customer-group' => '顧客グループを選択',
                     'select-gender' => '性別を選択',

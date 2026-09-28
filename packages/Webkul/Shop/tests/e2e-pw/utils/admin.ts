@@ -201,7 +201,7 @@ async function deleteGridRowsIfPresent(
                 })
                 .toBe(true);
 
-            await page.locator('input[name="search"]').fill(text);
+            await page.locator('input[name="search"]:visible').fill(text);
 
             await Promise.all([
                 page.waitForResponse((response) => {
@@ -209,7 +209,7 @@ async function deleteGridRowsIfPresent(
 
                     return url.includes("filters[all]") && url.includes(text);
                 }),
-                page.locator('input[name="search"]').press("Enter"),
+                page.locator('input[name="search"]:visible').press("Enter"),
             ]);
 
             const row = page.locator(GRID_ROWS).filter({ hasText: text });

@@ -365,6 +365,7 @@ return [
                         'email' => 'אימייל',
                         'first-name' => 'שם פרטי',
                         'last-name' => 'שם משפחה',
+                        'phone' => 'טלפון',
                         'postcode' => 'מיקוד',
                         'proceed' => 'המשך',
                         'same-as-billing' => 'השתמש באותה כתובת למשלוח?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'כתובת למשלוח',
                         'state' => 'מדינה',
                         'street-address' => 'כתובת',
-                        'telephone' => 'טלפון',
                         'title' => 'כתובת',
                         'vat-id' => 'מספר ת.מ.',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'סך הזמנות',
                     'order-pending' => 'יש לקוח עם הזמנות ממתינות',
                     'partial-action' => 'חלק מהפעולות לא בוצעו עקבי הגבלות במערכת על :resource',
-                    'phone' => 'מספר טלפון',
+                    'phone' => 'טלפון',
                     'revenue' => 'הכנסה',
                     'status' => 'סטטוס',
                     'suspended' => 'מושהה',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'ערוץ',
-                    'contact-number' => 'מספר טלפון',
                     'create-btn' => 'צור לקוח',
                     'create-success' => 'יצירת הלקוח בוצעה בהצלחה',
                     'customer-group' => 'קבוצת לקוח',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'שם משפחה',
                     'male' => 'זכר',
                     'other' => 'אחר',
+                    'phone' => 'טלפון',
                     'save-btn' => 'שמור לקוח',
                     'select-customer-group' => 'בחר קבוצת לקוח',
                     'select-gender' => 'בחר מגדר',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'מספר טלפון',
                     'customer-group' => 'קבוצת לקוח',
                     'date-of-birth' => 'תאריך לידה',
                     'edit-btn' => 'ערוך',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'שם משפחה',
                     'male' => 'זכר',
                     'other' => 'אחר',
+                    'phone' => 'טלפון',
                     'save-btn' => 'שמור לקוח',
                     'select-customer-group' => 'בחר קבוצת לקוח',
                     'select-gender' => 'בחר מגדר',

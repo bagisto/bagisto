@@ -365,6 +365,7 @@ return [
                         'email' => 'E-mail',
                         'first-name' => 'Voornaam',
                         'last-name' => 'Achternaam',
+                        'phone' => 'Telefoon',
                         'postcode' => 'Postcode',
                         'proceed' => 'Doorgaan',
                         'same-as-billing' => 'Hetzelfde adres gebruiken voor verzending?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Verzendadres',
                         'state' => 'Provincie',
                         'street-address' => 'Straatnaam en huisnummer',
-                        'telephone' => 'Telefoonnummer',
                         'title' => 'Adres',
                         'vat-id' => 'BTW-nummer',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Aantal bestellingen',
                     'order-pending' => 'Klant heeft een uitstaande bestelling',
                     'partial-action' => 'Sommige acties zijn niet uitgevoerd vanwege beperkte systeembeperkingen voor :resource',
-                    'phone' => 'Contactnummer',
+                    'phone' => 'Telefoon',
                     'revenue' => 'Omzet',
                     'status' => 'Status',
                     'suspended' => 'Opgeschort',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Kanaal',
-                    'contact-number' => 'Contactnummer',
                     'create-btn' => 'Klant aanmaken',
                     'create-success' => 'Klant succesvol aangemaakt',
                     'customer-group' => 'Klantengroep',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Achternaam',
                     'male' => 'Man',
                     'other' => 'Overig',
+                    'phone' => 'Telefoon',
                     'save-btn' => 'Klant opslaan',
                     'select-customer-group' => 'Selecteer klantengroep',
                     'select-gender' => 'Selecteer geslacht',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'Contactnummer',
                     'customer-group' => 'Klantengroep',
                     'date-of-birth' => 'Geboortedatum',
                     'edit-btn' => 'Bewerken',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Achternaam',
                     'male' => 'Man',
                     'other' => 'Overig',
+                    'phone' => 'Telefoon',
                     'save-btn' => 'Klant opslaan',
                     'select-customer-group' => 'Selecteer klantengroep',
                     'select-gender' => 'Selecteer geslacht',

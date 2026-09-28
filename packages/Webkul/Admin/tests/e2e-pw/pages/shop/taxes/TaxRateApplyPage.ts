@@ -73,8 +73,8 @@ export class TaxRateApplyPage extends BasePage {
         return this.page.getByRole("textbox", { name: "Zip/Postcode" });
     }
 
-    private get billingTelephone() {
-        return this.page.getByRole("textbox", { name: "Telephone" });
+    private get billingPhone() {
+        return this.page.getByRole("textbox", { name: "Phone" });
     }
 
     private get proceedButton() {
@@ -168,7 +168,7 @@ export class TaxRateApplyPage extends BasePage {
         await this.billingState.selectOption(region.checkoutState);
         await this.billingCity.fill("Test City");
         await this.billingZip.fill("123456");
-        await this.billingTelephone.fill("9876543210");
+        await this.billingPhone.fill("9876543210");
         await this.proceedButton.click();
 
         await this.freeShippingOption.click();

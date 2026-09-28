@@ -365,6 +365,7 @@ return [
                         'email' => 'E-posta',
                         'first-name' => 'Ad',
                         'last-name' => 'Soyad',
+                        'phone' => 'Telefon',
                         'postcode' => 'Posta Kodu',
                         'proceed' => 'Devam Et',
                         'same-as-billing' => 'Teslimat için aynı adresi kullan?',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'Teslimat Adresi',
                         'state' => 'Eyalet',
                         'street-address' => 'Adres',
-                        'telephone' => 'Telefon',
                         'title' => 'Adres',
                         'vat-id' => 'Vergi Kimlik Numarası',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'Sipariş Sayısı',
                     'order-pending' => 'Müşterinin bekleyen siparişi var',
                     'partial-action' => 'Bazı eylemler, :resource üzerindeki sınırlı sistem kısıtlamaları nedeniyle gerçekleştirilmedi',
-                    'phone' => 'İletişim Numarası',
+                    'phone' => 'Telefon',
                     'revenue' => 'Gelir',
                     'status' => 'Durum',
                     'suspended' => 'Askıya Alındı',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'Kanal',
-                    'contact-number' => 'İletişim Numarası',
                     'create-btn' => 'Müşteri Oluştur',
                     'create-success' => 'Müşteri başarıyla oluşturuldu',
                     'customer-group' => 'Müşteri Grubu',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'Soyadı',
                     'male' => 'Erkek',
                     'other' => 'Diğer',
+                    'phone' => 'Telefon',
                     'save-btn' => 'Müşteriyi Kaydet',
                     'select-customer-group' => 'Müşteri Grubu Seçin',
                     'select-gender' => 'Cinsiyet Seçin',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'İletişim Numarası',
                     'customer-group' => 'Müşteri Grubu',
                     'date-of-birth' => 'Doğum Tarihi',
                     'edit-btn' => 'Düzenle',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'Soyadı',
                     'male' => 'Erkek',
                     'other' => 'Diğer',
+                    'phone' => 'Telefon',
                     'save-btn' => 'Müşteriyi Kaydet',
                     'select-customer-group' => 'Müşteri Grubu Seçin',
                     'select-gender' => 'Cinsiyet Seçin',

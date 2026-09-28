@@ -365,6 +365,7 @@ return [
                         'email' => 'البريد الإلكتروني',
                         'first-name' => 'الاسم الأول',
                         'last-name' => 'الاسم الأخير',
+                        'phone' => 'الهاتف',
                         'postcode' => 'الرمز البريدي',
                         'proceed' => 'المتابعة',
                         'same-as-billing' => 'استخدم نفس العنوان للشحن؟',
@@ -375,7 +376,6 @@ return [
                         'shipping-address' => 'عنوان الشحن',
                         'state' => 'المنطقة',
                         'street-address' => 'عنوان الشارع',
-                        'telephone' => 'رقم الهاتف',
                         'title' => 'العنوان',
                         'vat-id' => 'الرقم الضريبي',
                     ],
@@ -2142,7 +2142,7 @@ return [
                     'order-count' => 'عدد الطلبات',
                     'order-pending' => 'العميل لديه طلبات قيد الانتظار',
                     'partial-action' => 'لم يتم تنفيذ بعض الإجراءات بسبب قيود النظام على :resource',
-                    'phone' => 'رقم الاتصال',
+                    'phone' => 'الهاتف',
                     'revenue' => 'الإيرادات',
                     'status' => 'الحالة',
                     'suspended' => 'معلق',
@@ -2153,7 +2153,6 @@ return [
 
                 'create' => [
                     'channel' => 'القناة',
-                    'contact-number' => 'رقم الاتصال',
                     'create-btn' => 'إنشاء عميل',
                     'create-success' => 'تم إنشاء العميل بنجاح',
                     'customer-group' => 'مجموعة العملاء',
@@ -2165,6 +2164,7 @@ return [
                     'last-name' => 'اسم العائلة',
                     'male' => 'ذكر',
                     'other' => 'أخرى',
+                    'phone' => 'الهاتف',
                     'save-btn' => 'حفظ العميل',
                     'select-customer-group' => 'اختر مجموعة العملاء',
                     'select-gender' => 'اختر الجنس',
@@ -2296,7 +2296,6 @@ return [
                 ],
 
                 'edit' => [
-                    'contact-number' => 'رقم الاتصال',
                     'customer-group' => 'مجموعة العملاء',
                     'date-of-birth' => 'تاريخ الميلاد',
                     'edit-btn' => 'تحرير',
@@ -2307,6 +2306,7 @@ return [
                     'last-name' => 'اسم العائلة',
                     'male' => 'ذكر',
                     'other' => 'آخر',
+                    'phone' => 'الهاتف',
                     'save-btn' => 'حفظ العميل',
                     'select-customer-group' => 'اختر مجموعة العملاء',
                     'select-gender' => 'اختر الجنس',
