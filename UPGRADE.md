@@ -25,6 +25,8 @@
 ## Low Impact Changes
 
 - [The Omnibus Package](#the-omnibus-package)
+- [The Phone Field Is Named Phone Everywhere](#the-phone-field-is-named-phone-everywhere)
+- [Blade View Paths Are kebab-case](#blade-view-paths-are-kebab-case)
 - [Product Image Size and Placeholder Settings Removed](#product-image-size-and-placeholder-settings-removed)
 - [Snake_case Methods Renamed on the Core Helper](#snake_case-methods-renamed-on-the-core-helper)
 - [CoreConfigRepository Helpers Renamed](#coreconfigrepository-helpers-renamed)
@@ -306,6 +308,45 @@ Every remaining underscored translation key is now kebab-case, across all 22 loc
 A theme or module that overrides one of these keys, or reads it with `trans()`, must be updated. Note the deliberate split from the route names above: the same feature is `admin.sales.eu_withdrawals.index` as a route and `admin::app.eu-withdrawal.…` as a translation key.
 
 Keys whose segment is data rather than a name keep their own casing — currency codes such as `seeders.core.currencies.AED` and locale codes such as `pt_BR`.
+
+---
+
+### The Phone Field Is Named Phone Everywhere
+
+**Impact Probability: Low**
+
+The one customer phone number was labelled three different ways. Every key that names it is now `phone`,
+in all 22 locales, and the label reads as the locale's own word for it:
+
+```diff
+- trans('shop::app.checkout.onepage.address.telephone')
+- trans('admin::app.customers.customers.index.create.contact-number')
+- trans('shop::app.customers.account.orders.invoice-pdf.contact')
++ trans('shop::app.checkout.onepage.address.phone')
++ trans('admin::app.customers.customers.index.create.phone')
++ trans('shop::app.customers.account.orders.invoice-pdf.phone')
+```
+
+The unused `shop::app.customers.account.orders.invoice-pdf.contact-number` is gone. Keys that name a
+different field keep their own wording — an inventory source's `contact-number`, the shipping origin's,
+and the contact form's `phone-number`.
+
+---
+
+### Blade View Paths Are kebab-case
+
+**Impact Probability: Low**
+
+`shop::customers.account.downloadable_products` was the last view path carrying an underscore, and is now
+`downloadable-products`. A theme that publishes or overrides that view has to move it to the new path:
+
+```diff
+- resources/themes/<theme>/views/customers/account/downloadable_products/index.blade.php
++ resources/themes/<theme>/views/customers/account/downloadable-products/index.blade.php
+```
+
+The route name stays `shop.customers.account.downloadable_products.index`, as route names are snake_case,
+and the `view_render_event` names the view fires are unchanged so existing listeners keep working.
 
 ---
 

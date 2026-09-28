@@ -495,7 +495,9 @@ Rules for using it:
 8. Names follow their own convention — **route names snake_case**
    (`admin.sales.eu_withdrawals.index`), **translation keys kebab-case**
    (`admin::app.eu-withdrawal.view.received-at`), **storage directories plural and kebab-case**
-   (`products/{id}/downloadable-links`). URL paths are governed by none of the three
+   (`products/{id}/downloadable-links`), **Blade view paths kebab-case**
+   (`shop::customers.account.downloadable-products.index`). URL paths are governed by none of them.
+   Where a view reference and the directory disagree, rename the directory rather than the reference
 
 ## Further Reading
 
