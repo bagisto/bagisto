@@ -62,16 +62,16 @@ class SectionController extends Controller
                 ->all(),
             'previewUrl' => route('shop.appearance.preview', [
                 'theme' => $code,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
                 'locale' => $locale->code,
             ]),
             'publishUrl' => route('admin.appearance.sections.publish', [
                 'code' => $code,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
             ]),
             'discardUrl' => route('admin.appearance.sections.discard', [
                 'code' => $code,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
             ]),
             'urls' => $this->editorUrls(),
         ]);
@@ -408,7 +408,7 @@ class SectionController extends Controller
      */
     protected function requestedChannel()
     {
-        $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'));
+        $channel = core()->getAllChannels()->firstWhere('code', request('channel'));
 
         return $channel ?? core()->getDefaultChannel();
     }
@@ -422,7 +422,7 @@ class SectionController extends Controller
     {
         $channels = $this->themeCatalog->activeChannels($code);
 
-        return $channels->firstWhere('id', (int) request('channel')) ?? $channels->first();
+        return $channels->firstWhere('code', request('channel')) ?? $channels->first();
     }
 
     /**

@@ -110,6 +110,17 @@ it('should fall back to the current channel when the request names none', functi
         ->and(core()->getRequestedChannelCode(false))->toBeNull();
 });
 
+it('should fall back to the current channel when the request names one the store does not have', function () {
+    $channel = Channel::factory()->create();
+
+    core()->setCurrentChannel($channel);
+
+    request()->merge(['channel' => 'not-a-channel']);
+
+    expect(core()->getRequestedChannel()->is($channel))->toBeTrue()
+        ->and(core()->getRequestedLocaleCodeInRequestedChannel())->toBe($channel->resolveLocaleCode(core()->getRequestedLocaleCode()));
+});
+
 // ============================================================================
 // Locales
 // ============================================================================

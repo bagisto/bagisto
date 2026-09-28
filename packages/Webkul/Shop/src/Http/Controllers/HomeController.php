@@ -59,7 +59,7 @@ class HomeController extends Controller
     {
         abort_unless(bouncer()->hasPermission('appearance.sections'), 403);
 
-        $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'))
+        $channel = core()->getAllChannels()->firstWhere('code', request('channel'))
             ?? core()->getCurrentChannel();
 
         $themeCode = $this->previewedTheme($channel->theme);

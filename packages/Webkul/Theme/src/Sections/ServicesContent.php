@@ -23,6 +23,16 @@ class ServicesContent extends SectionType
     protected string $icon = 'icon-store';
 
     /**
+     * Whether a channel may hold only one section of this type.
+     */
+    protected bool $singleton = true;
+
+    /**
+     * Whether the section is fixed to the bottom of the page.
+     */
+    protected bool $pinned = true;
+
+    /**
      * Whether the layout draws the section on every page.
      */
     protected bool $layout = true;

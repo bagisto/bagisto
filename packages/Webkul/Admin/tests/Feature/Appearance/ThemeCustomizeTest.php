@@ -117,7 +117,7 @@ it('should open the editor on a channel that runs the theme rather than the defa
 
     get(route('admin.appearance.sections.index', ['code' => $code]))
         ->assertOk()
-        ->assertSee(route('admin.appearance.sections.store', ['code' => $code, 'channel' => $channel->id]), false);
+        ->assertSee(route('admin.appearance.sections.store', ['code' => $code, 'channel' => $channel->code]), false);
 });
 
 it('should refuse to create on a channel that runs a different theme', function () {
@@ -129,7 +129,7 @@ it('should refuse to create on a channel that runs a different theme', function 
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => $code, 'channel' => $default->id]), [
+    postJson(route('admin.appearance.sections.store', ['code' => $code, 'channel' => $default->code]), [
         'name' => 'Wrong Channel',
         'type' => SectionTypeEnum::STATIC_CONTENT->value,
     ])->assertForbidden();
@@ -181,7 +181,7 @@ it('should preview the requested theme with that theme own sections', function (
 
     $this->loginAsAdmin();
 
-    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->id]))
+    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
         ->assertOk()
         ->assertSee('<p>Gallery hero</p>', false)
         ->assertDontSee('<p>Default hero</p>', false);
@@ -206,7 +206,7 @@ it('should hand the layout the previewed theme footer rather than the channel ow
 
     $this->loginAsAdmin();
 
-    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->id]))
+    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
         ->assertOk()
         ->assertSee('Gallery Footer Link')
         ->assertDontSee('Default Footer Link');
@@ -248,4 +248,20 @@ it('should hand the editor a preview of the theme being customized', function ()
     get(route('admin.appearance.sections.index', ['code' => $channel->theme]))
         ->assertOk()
         ->assertSee('theme='.$channel->theme, false);
+});
+
+it('should name the channel by code in every url the editor hands out', function () {
+    $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
+
+    $this->loginAsAdmin();
+
+    $content = get(route('admin.appearance.sections.index', [
+        'code' => $other->theme,
+        'channel' => $other->code,
+    ]))
+        ->assertOk()
+        ->content();
+
+    expect($content)->toContain('channel='.$other->code)
+        ->and($content)->not->toContain('channel='.$other->id);
 });
