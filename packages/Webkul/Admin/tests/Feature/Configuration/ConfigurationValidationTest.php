@@ -74,3 +74,59 @@ it('should strip script from the footer copyright content on the storefront', fu
         ->assertSee('<a href="/page/about-us">About Us</a>', false)
         ->assertDontSee('alert(document.domain)', false);
 });
+
+// ============================================================================
+// Search Query Length
+// ============================================================================
+
+/**
+ * The payload saving the storefront search box's query length bounds.
+ */
+function queryLengthPayload(string $min, string $max): array
+{
+    return [
+        'locale' => core()->getDefaultLocaleCodeFromDefaultChannel(),
+        'channel' => core()->getDefaultChannel()->code,
+        'search_engines' => [
+            'elastic' => [
+                'settings' => [
+                    'min_query_length' => $min,
+                    'max_query_length' => $max,
+                ],
+            ],
+        ],
+    ];
+}
+
+it('should refuse a search query length whose maximum is below its minimum', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.store', ['search_engines', 'elastic']), queryLengthPayload('10000', '0'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('search_engines.elastic.settings.max_query_length');
+
+    $this->assertDatabaseMissing('core_config', [
+        'code' => 'search_engines.elastic.settings.max_query_length',
+        'value' => '0',
+    ]);
+});
+
+it('should refuse a search query length that lets no character through', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.store', ['search_engines', 'elastic']), queryLengthPayload('0', '0'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('search_engines.elastic.settings.max_query_length');
+});
+
+it('should accept a search query length the storefront can use', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.store', ['search_engines', 'elastic']), queryLengthPayload('3', '128'))
+        ->assertRedirect();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'search_engines.elastic.settings.max_query_length',
+        'value' => '128',
+    ]);
+});

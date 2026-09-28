@@ -2,8 +2,8 @@
 
 namespace Webkul\RMA\Repositories;
 
-use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Helpers\StoredFile;
 use Webkul\RMA\Contracts\RMAImage;
 
 class RMAImageRepository extends Repository
@@ -17,17 +17,10 @@ class RMAImageRepository extends Repository
     }
 
     /**
-     * Manage images.
+     * Replace the photos of a return with the ones the request carries.
      */
     public function manageImages($requestImages, $rma): void
     {
-        foreach ($requestImages as $itemImage) {
-            $this->create([
-                'rma_id' => $rma->id,
-                'path' => $itemImage->getClientOriginalName(),
-            ]);
-        }
-
         $this->uploadImages($requestImages, $rma);
     }
 
@@ -54,7 +47,7 @@ class RMAImageRepository extends Repository
 
         foreach ($previousImageIds as $imageId) {
             if ($imageModel = $this->find($imageId)) {
-                Storage::delete($imageModel->path);
+                app(StoredFile::class)->delete($imageModel->path);
 
                 $this->delete($imageId);
             }

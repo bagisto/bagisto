@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Olvidar contraseña',
                 'powered-by-description' => 'Desarrollado por :bagisto, un proyecto de código abierto de :webkul.',
                 'reset-link-sent' => 'Enlace para restablecer la contraseña enviado',
+                'reset-link-failed' => 'No se ha podido enviar el enlace para restablecer la contraseña. Inténtelo de nuevo más tarde.',
                 'sign-in-link' => '¿Volver a iniciar sesión?',
                 'submit-btn' => 'Restablecer',
                 'title' => 'Recuperar contraseña',

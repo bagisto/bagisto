@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 use Webkul\User\Models\Admin;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 
 // ============================================================================
@@ -70,8 +73,31 @@ it('should send nothing when the email is missing', function () {
     Notification::fake();
 
     postJson(route('admin.forget_password.store'))
-        ->assertRedirect()
-        ->assertSessionHas('error');
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors('email');
 
     Notification::assertNothingSent();
+});
+
+// ============================================================================
+// A Mail Server That Cannot Be Reached
+// ============================================================================
+
+it('should not show the admin what the mail server said when it cannot be reached', function () {
+    $admin = Admin::factory()->create();
+
+    $broker = Mockery::mock(PasswordBroker::class);
+
+    $broker->shouldReceive('sendResetLink')
+        ->andThrow(new Exception('Connection could not be established with host "127.0.0.1:2525 (Connection refused)'));
+
+    Password::shouldReceive('broker')->with('admins')->andReturn($broker);
+
+    post(route('admin.forget_password.store'), ['email' => $admin->email])
+        ->assertRedirect();
+
+    expect(session('error'))
+        ->toBe(trans('admin::app.users.forget-password.create.reset-link-failed'))
+        ->not->toContain('2525')
+        ->not->toContain('127.0.0.1');
 });

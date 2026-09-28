@@ -231,13 +231,15 @@ class RMAController extends Controller
             } catch (\Exception) {
             }
 
+            session()->flash('success', trans('shop::app.rma.response.create-success'));
+
             return new JsonResponse([
-                'messages' => trans('shop::app.rma.response.create-success'),
                 'redirect' => route('shop.customers.account.rma.view', $rma->id),
             ]);
         } else {
+            session()->flash('error', trans('shop::app.rma.response.invalid-item'));
+
             return new JsonResponse([
-                'messages' => trans('shop::app.customer.signup-form.failed'),
                 'redirect' => route('shop.customers.account.rma.create'),
             ]);
         }

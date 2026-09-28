@@ -201,7 +201,12 @@ return new class extends Migration
                 foreach ($rows as $row) {
                     $path = $target($row->{$column}, $row);
 
-                    app(StoredFile::class)->move($row->{$column}, $path, $disk);
+                    if (
+                        ! app(StoredFile::class)->move($row->{$column}, $path, $disk)
+                        && ! Storage::disk($disk)->exists($path)
+                    ) {
+                        continue;
+                    }
 
                     DB::table($table)->where('id', $row->id)->update([$column => $path]);
                 }

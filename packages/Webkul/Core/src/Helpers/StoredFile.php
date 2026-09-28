@@ -50,6 +50,22 @@ class StoredFile
     }
 
     /**
+     * Delete a stored file from whichever disk holds it. A file that is no longer there is left alone.
+     */
+    public function delete(string $path): bool
+    {
+        foreach (['private', config('filesystems.default')] as $name) {
+            $disk = Storage::disk($name);
+
+            if ($disk->exists($path)) {
+                return $disk->delete($path);
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * The disk holding a file, preferring the private one.
      */
     public function disk(string $path): Filesystem

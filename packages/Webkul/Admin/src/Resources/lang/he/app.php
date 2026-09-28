@@ -18,6 +18,7 @@ return [
                 'page-title' => 'שכחתי סיסמה',
                 'powered-by-description' => 'מופעל על ידי :bagisto, פרויקט קוד פתוח על ידי :webkul.',
                 'reset-link-sent' => 'קישור לאיפוס סיסמה נשלח',
+                'reset-link-failed' => 'לא ניתן לשלוח את קישור איפוס הסיסמה. אנא נסו שוב מאוחר יותר.',
                 'sign-in-link' => 'חזור להתחברות?',
                 'submit-btn' => 'איפוס',
                 'title' => 'שחזור סיסמה',

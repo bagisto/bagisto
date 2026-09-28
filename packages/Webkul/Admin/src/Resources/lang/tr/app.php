@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Şifremi Unuttum',
                 'powered-by-description' => ':webkul tarafından geliştirilen açık kaynaklı bir proje olan :bagisto tarafından desteklenmektedir.',
                 'reset-link-sent' => 'Şifre Sıfırlama Bağlantısı Gönderildi',
+                'reset-link-failed' => 'Parola sıfırlama bağlantısı gönderilemedi. Lütfen daha sonra tekrar deneyin.',
                 'sign-in-link' => 'Giriş Yap’a Geri Dön ?',
                 'submit-btn' => 'Sıfırla',
                 'title' => 'Şifre Kurtarma',

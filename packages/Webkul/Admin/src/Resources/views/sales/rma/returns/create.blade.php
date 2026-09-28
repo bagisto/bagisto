@@ -864,11 +864,7 @@
                         try {
                             const response = await this.$axios.post("{{ route('admin.sales.rma.requests.store') }}", formData);
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
-
-                            setTimeout(() => {
-                                window.location.href = response.data.redirect_url;
-                            }, 1000);
+                            window.location.href = response.data.redirect_url;
                         } catch (error) {
                             this.rmaFormSubmit = true;
 

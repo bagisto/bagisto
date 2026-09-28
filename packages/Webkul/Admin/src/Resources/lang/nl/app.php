@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Wachtwoord Vergeten',
                 'powered-by-description' => 'Aangedreven door :bagisto, een open-source project van :webkul.',
                 'reset-link-sent' => 'Reset Wachtwoordlink Verzonden',
+                'reset-link-failed' => 'De link om het wachtwoord opnieuw in te stellen kon niet worden verzonden. Probeer het later opnieuw.',
                 'sign-in-link' => 'Terug naar Aanmelden?',
                 'submit-btn' => 'Herstellen',
                 'title' => 'Wachtwoord Herstellen',

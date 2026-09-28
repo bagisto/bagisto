@@ -18,6 +18,7 @@ return [
                 'page-title' => 'パスワードを忘れる',
                 'powered-by-description' => ':webkul によるオープンソースプロジェクト :bagisto によって提供されています。',
                 'reset-link-sent' => 'パスワードリセットリンク送信済み',
+                'reset-link-failed' => 'パスワードリセットリンクを送信できませんでした。しばらくしてからもう一度お試しください。',
                 'sign-in-link' => 'サインイン画面に戻る？',
                 'submit-btn' => 'リセット',
                 'title' => 'パスワードを回復',

@@ -29,17 +29,21 @@ class SessionPurger
         $current = session()->getId();
 
         try {
-            DB::table($table)
-                ->where('user_id', $userId)
-                ->get(['id', 'payload'])
+            $identifiers = DB::table($table)
+                ->select(['id', 'payload'])
+                ->orderBy('id')
+                ->lazy()
                 ->filter(fn ($session) => $this->belongsTo($session->payload, $key, $userId))
-                ->each(function ($session) use ($table, $current) {
-                    DB::table($table)->where('id', $session->id)->delete();
+                ->pluck('id')
+                ->all();
 
-                    if ($session->id !== $current) {
-                        $this->revokedSessions->revoke($session->id);
-                    }
-                });
+            DB::table($table)->whereIn('id', $identifiers)->delete();
+
+            foreach ($identifiers as $identifier) {
+                if ($identifier !== $current) {
+                    $this->revokedSessions->revoke($identifier);
+                }
+            }
         } catch (\Throwable $e) {
             report($e);
         }

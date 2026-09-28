@@ -3,6 +3,7 @@
 namespace Webkul\PayU\Http\Controllers;
 
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
@@ -97,73 +98,86 @@ class PayUController extends Controller
                 return redirect()->route('shop.checkout.cart.index');
             }
 
-            $cart = $this->cartRepository->find($cartId);
+            return Cache::lock('payu.order.'.$cartId, 30)->block(10, function () use ($cartId, $response) {
+                if ($order = $this->orderRepository->findOneWhere(['cart_id' => $cartId])) {
+                    session()->flash('order_id', $order->id);
 
-            if (! $cart || ! $cart->is_active) {
-                session()->flash('error', trans('payu::app.response.cart-not-found'));
+                    session()->flash('success', trans('payu::app.response.payment-success'));
 
-                return redirect()->route('shop.checkout.cart.index');
-            }
+                    return redirect()->route('shop.checkout.onepage.success');
+                }
 
-            Cart::setCart($cart);
+                $cart = $this->cartRepository->find($cartId);
 
-            Cart::collectTotals();
+                if (
+                    ! $cart
+                    || ! $cart->is_active
+                ) {
+                    session()->flash('error', trans('payu::app.response.cart-not-found'));
 
-            $cart = Cart::getCart();
+                    return redirect()->route('shop.checkout.cart.index');
+                }
 
-            if (! $cart) {
-                session()->flash('error', trans('payu::app.response.cart-not-found'));
+                Cart::setCart($cart);
 
-                return redirect()->route('shop.checkout.cart.index');
-            }
+                Cart::collectTotals();
 
-            if (Cart::hasError()) {
-                session()->flash('error', trans('payu::app.response.invalid-transaction'));
+                $cart = Cart::getCart();
 
-                return redirect()->route('shop.checkout.cart.index');
-            }
+                if (! $cart) {
+                    session()->flash('error', trans('payu::app.response.cart-not-found'));
 
-            if (! $this->paymentCoversCart($response, $cart)) {
-                session()->flash('error', trans('payu::app.response.invalid-transaction'));
+                    return redirect()->route('shop.checkout.cart.index');
+                }
 
-                return redirect()->route('shop.checkout.cart.index');
-            }
+                if (Cart::hasError()) {
+                    session()->flash('error', trans('payu::app.response.invalid-transaction'));
 
-            $data = (new OrderResource($cart))->jsonSerialize();
+                    return redirect()->route('shop.checkout.cart.index');
+                }
 
-            $data['payment']['additional'] = [
-                'payu_txnid' => $response['txnid'] ?? '',
-                'payu_mihpayid' => $response['mihpayid'] ?? '',
-                'payu_mode' => $response['mode'] ?? '',
-                'payu_status' => $response['status'] ?? '',
-            ];
+                if (! $this->paymentCoversCart($response, $cart)) {
+                    session()->flash('error', trans('payu::app.response.invalid-transaction'));
 
-            $order = $this->orderRepository->create($data);
+                    return redirect()->route('shop.checkout.cart.index');
+                }
 
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
+                $data = (new OrderResource($cart))->jsonSerialize();
 
-            if ($order->canInvoice()) {
-                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+                $data['payment']['additional'] = [
+                    'payu_txnid' => $response['txnid'] ?? '',
+                    'payu_mihpayid' => $response['mihpayid'] ?? '',
+                    'payu_mode' => $response['mode'] ?? '',
+                    'payu_status' => $response['status'] ?? '',
+                ];
 
-                $this->orderTransactionRepository->create([
-                    'transaction_id' => $response['txnid'] ?? '',
-                    'status' => self::PAYMENT_SUCCESS,
-                    'type' => $order->payment->method,
-                    'payment_method' => $order->payment->method,
-                    'order_id' => $order->id,
-                    'invoice_id' => $invoice->id,
-                    'amount' => $response['amount'] ?? $order->base_grand_total,
-                    'data' => json_encode($response),
-                ]);
-            }
+                $order = $this->orderRepository->create($data);
 
-            Cart::deActivateCart();
+                $this->orderRepository->update(['status' => 'processing'], $order->id);
 
-            session()->flash('order_id', $order->id);
+                if ($order->canInvoice()) {
+                    $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
 
-            session()->flash('success', trans('payu::app.response.payment-success'));
+                    $this->orderTransactionRepository->create([
+                        'transaction_id' => $response['txnid'] ?? '',
+                        'status' => self::PAYMENT_SUCCESS,
+                        'type' => $order->payment->method,
+                        'payment_method' => $order->payment->method,
+                        'order_id' => $order->id,
+                        'invoice_id' => $invoice->id,
+                        'amount' => $response['amount'] ?? $order->base_grand_total,
+                        'data' => json_encode($response),
+                    ]);
+                }
 
-            return redirect()->route('shop.checkout.onepage.success');
+                Cart::deActivateCart();
+
+                session()->flash('order_id', $order->id);
+
+                session()->flash('success', trans('payu::app.response.payment-success'));
+
+                return redirect()->route('shop.checkout.onepage.success');
+            });
         } catch (\Exception $e) {
             report($e);
 

@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Passwort vergessen',
                 'powered-by-description' => 'Powered by :bagisto, ein Open-Source-Projekt von :webkul.',
                 'reset-link-sent' => 'Link zum Zurücksetzen des Passworts gesendet',
+                'reset-link-failed' => 'Der Link zum Zurücksetzen des Passworts konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.',
                 'sign-in-link' => 'Zurück zur Anmeldung?',
                 'submit-btn' => 'Zurücksetzen',
                 'title' => 'Passwort wiederherstellen',

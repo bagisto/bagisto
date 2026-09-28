@@ -6,6 +6,7 @@ use PragmaRX\Google2FA\Google2FA;
 use Webkul\Admin\Mail\Admin\BackupCodesNotification;
 use Webkul\User\Models\Admin;
 
+use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\post;
 
@@ -273,6 +274,8 @@ it('should accept a backup code only once', function () {
     ])
         ->assertRedirect(route('admin.dashboard.index'));
 
+    session()->forget('two_factor_passed_for');
+
     post(route('admin.two_factor.verify.store'), [
         'code' => '670089',
     ])
@@ -357,4 +360,47 @@ it('should refuse a code that has already been used', function () {
         ->assertSessionHasErrors('code');
 
     expect(session('two_factor_passed_for'))->toBeNull();
+});
+
+// ============================================================================
+// Reaching The Verification Screen
+// ============================================================================
+
+it('should show the verification screen to an admin who still has to verify', function () {
+    enableTwoFactorFor($this->admin);
+
+    get(route('admin.two_factor.verify.form'))->assertOk();
+});
+
+it('should send a guest away from the verification screen', function () {
+    auth('admin')->logout();
+
+    get(route('admin.two_factor.verify.form'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+it('should send a guest away rather than fail on a posted code', function () {
+    auth('admin')->logout();
+
+    post(route('admin.two_factor.verify.store'), ['code' => '123456'])
+        ->assertRedirect(route('admin.session.create'));
+});
+
+it('should send an admin with two factor authentication off away from the verification screen', function () {
+    get(route('admin.two_factor.verify.form'))
+        ->assertRedirect(route('admin.dashboard.index'));
+});
+
+it('should send an admin with two factor authentication off away from a posted code', function () {
+    post(route('admin.two_factor.verify.store'), ['code' => '123456'])
+        ->assertRedirect(route('admin.dashboard.index'));
+});
+
+it('should send an admin who has already verified away from the verification screen', function () {
+    enableTwoFactorFor($this->admin);
+
+    session()->put('two_factor_passed_for', $this->admin->id);
+
+    get(route('admin.two_factor.verify.form'))
+        ->assertRedirect(route('admin.dashboard.index'));
 });

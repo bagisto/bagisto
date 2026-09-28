@@ -219,14 +219,22 @@
         <div class="relative w-full">
             <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
+            @php
+                $maxQueryLength = ((int) core()->getConfigData('search_engines.elastic.settings.max_query_length')) ?: 1000;
+
+                $minQueryLength = (int) core()->getConfigData('search_engines.elastic.settings.min_query_length');
+
+                $minQueryLength = $minQueryLength > 0 && $minQueryLength <= $maxQueryLength ? $minQueryLength : 0;
+            @endphp
+
             <input
                 type="text"
                 id="mobile-organic-search"
                 class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
-                minlength="{{ core()->getConfigData('search_engines.elastic.settings.min_query_length') }}"
-                maxlength="{{ core()->getConfigData('search_engines.elastic.settings.max_query_length') }}"
+                minlength="{{ $minQueryLength }}"
+                maxlength="{{ $maxQueryLength }}"
                 placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
                 pattern="[^\\]+"
                 required
@@ -314,94 +322,97 @@
 
                 <x-slot:footer>
                     <!-- Localization & Currency Section -->
-                @if(core()->getCurrentChannel()->locales()->count() > 1 || core()->getCurrentChannel()->currencies()->count() > 1 )
-                                    <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
-                                        <!-- Filter Drawer -->
-                                        <x-shop::drawer
-                                            position="bottom"
-                                            width="100%"
-                                        >
-                                            <!-- Drawer Toggler -->
-                                            <x-slot:toggle>
-                                                <button
-                                                    type="button"
-                                                    class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
-                                                    v-pre
-                                                >
-                                                    {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                                                </button>
-                                            </x-slot>
+                    @if (
+                        core()->getCurrentChannel()->locales()->count() > 1
+                        || core()->getCurrentChannel()->currencies()->count() > 1
+                    )
+                        <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
+                            <!-- Filter Drawer -->
+                            <x-shop::drawer
+                                position="bottom"
+                                width="100%"
+                            >
+                                <!-- Drawer Toggler -->
+                                <x-slot:toggle>
+                                    <button
+                                        type="button"
+                                        class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
+                                        v-pre
+                                    >
+                                        {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
+                                    </button>
+                                </x-slot>
 
-                                            <!-- Drawer Header -->
-                                            <x-slot:header>
-                                                <div class="flex items-center justify-between">
-                                                    <p class="text-lg font-semibold">
-                                                        @lang('shop::app.components.layouts.header.mobile.currencies')
-                                                    </p>
-                                                </div>
-                                            </x-slot>
-
-                                            <!-- Drawer Content -->
-                                            <x-slot:content class="px-0!">
-                                                <div
-                                                    class="overflow-auto"
-                                                    :style="{ height: getCurrentScreenHeight }"
-                                                >
-                                                    <v-currency-switcher></v-currency-switcher>
-                                                </div>
-                                            </x-slot>
-                                        </x-shop::drawer>
-
-                                        <!-- Seperator -->
-                                        <span class="h-5 w-0.5 bg-zinc-200"></span>
-
-                                        <!-- Sort Drawer -->
-                                        <x-shop::drawer
-                                            position="bottom"
-                                            width="100%"
-                                        >
-                                            <!-- Drawer Toggler -->
-                                            <x-slot:toggle>
-                                                <button
-                                                    type="button"
-                                                    class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
-                                                    v-pre
-                                                >
-                                                    <img
-                                                        src="{{ ! empty(core()->getCurrentLocale()->logo_url)
-                                                            ? core()->getCurrentLocale()->logo_url
-                                                            : bagisto_asset('images/default-language.svg')
-                                                        }}"
-                                                        class="h-full"
-                                                        alt="Default locale"
-                                                        width="24"
-                                                        height="16"
-                                                    />
-
-                                                    {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                                                </button>
-                                            </x-slot>
-
-                                            <!-- Drawer Header -->
-                                            <x-slot:header>
-                                                <div class="flex items-center justify-between">
-                                                    <p class="text-lg font-semibold">
-                                                        @lang('shop::app.components.layouts.header.mobile.locales')
-                                                    </p>
-                                                </div>
-                                            </x-slot>
-
-                                            <!-- Drawer Content -->
-                                            <x-slot:content class="px-0!">
-                                                <div
-                                                    class="overflow-auto"
-                                                    :style="{ height: getCurrentScreenHeight }"
-                                                >
-                                                    <v-locale-switcher></v-locale-switcher>
-                                                </div>
-                                            </x-slot>
-                                        </x-shop::drawer>
+                                <!-- Drawer Header -->
+                                <x-slot:header>
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-lg font-semibold">
+                                            @lang('shop::app.components.layouts.header.mobile.currencies')
+                                        </p>
                                     </div>
+                                </x-slot>
+
+                                <!-- Drawer Content -->
+                                <x-slot:content class="px-0!">
+                                    <div
+                                        class="overflow-auto"
+                                        :style="{ height: getCurrentScreenHeight }"
+                                    >
+                                        <v-currency-switcher></v-currency-switcher>
+                                    </div>
+                                </x-slot>
+                            </x-shop::drawer>
+
+                            <!-- Seperator -->
+                            <span class="h-5 w-0.5 bg-zinc-200"></span>
+
+                            <!-- Sort Drawer -->
+                            <x-shop::drawer
+                                position="bottom"
+                                width="100%"
+                            >
+                                <!-- Drawer Toggler -->
+                                <x-slot:toggle>
+                                    <button
+                                        type="button"
+                                        class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
+                                        v-pre
+                                    >
+                                        <img
+                                            src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                                ? core()->getCurrentLocale()->logo_url
+                                                : bagisto_asset('images/default-language.svg')
+                                            }}"
+                                            class="h-full"
+                                            alt="Default locale"
+                                            width="24"
+                                            height="16"
+                                        />
+
+                                        {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
+                                    </button>
+                                </x-slot>
+
+                                <!-- Drawer Header -->
+                                <x-slot:header>
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-lg font-semibold">
+                                            @lang('shop::app.components.layouts.header.mobile.locales')
+                                        </p>
+                                    </div>
+                                </x-slot>
+
+                                <!-- Drawer Content -->
+                                <x-slot:content class="px-0!">
+                                    <div
+                                        class="overflow-auto"
+                                        :style="{ height: getCurrentScreenHeight }"
+                                    >
+                                        <v-locale-switcher></v-locale-switcher>
+                                    </div>
+                                </x-slot>
+                            </x-shop::drawer>
+                        </div>
                     @endif
                 </x-slot>
             </x-shop::drawer>

@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Esqueceu a Senha',
                 'powered-by-description' => 'Desenvolvido por :bagisto, um projeto de código aberto da :webkul.',
                 'reset-link-sent' => 'Link de Redefinição de Senha enviado',
+                'reset-link-failed' => 'Não foi possível enviar o link de redefinição de senha. Tente novamente mais tarde.',
                 'sign-in-link' => 'Voltar para Entrar?',
                 'submit-btn' => 'Redefinir',
                 'title' => 'Recuperar Senha',

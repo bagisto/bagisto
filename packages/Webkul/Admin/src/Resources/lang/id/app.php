@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Lupa Kata Sandi',
                 'powered-by-description' => 'Dibuat oleh :bagisto, proyek open-source dari :webkul.',
                 'reset-link-sent' => 'Tautan Reset Kata Sandi telah dikirim',
+                'reset-link-failed' => 'Tidak dapat mengirim tautan atur ulang kata sandi. Silakan coba lagi nanti.',
                 'sign-in-link' => 'Kembali ke Halaman Masuk?',
                 'submit-btn' => 'Atur Ulang',
                 'title' => 'Pulihkan Kata Sandi',

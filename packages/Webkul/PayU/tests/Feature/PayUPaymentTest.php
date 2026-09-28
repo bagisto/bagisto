@@ -273,3 +273,15 @@ it('should refuse a response whose transaction already paid for an order', funct
 
     expect(Order::query()->where('cart_id', $replayCart->id)->exists())->toBeFalse();
 });
+
+it('should place one order however many times PayU reports the same payment', function () {
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuSuccess(payuResponseFor($cart))->assertRedirect(route('shop.checkout.onepage.success'));
+
+    $cart->update(['is_active' => 1]);
+
+    payuSuccess(payuResponseFor($cart))->assertRedirect(route('shop.checkout.onepage.success'));
+
+    expect(Order::query()->where('cart_id', $cart->id)->count())->toBe(1);
+});

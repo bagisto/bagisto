@@ -3447,14 +3447,14 @@ return [
                 'title' => 'admin::app.configuration.index.search-engines.elastic.settings.min-query-length',
                 'info' => 'admin::app.configuration.index.search-engines.elastic.settings.min-query-length-info',
                 'type' => 'number',
-                'validation' => 'numeric',
+                'validation' => 'numeric|integer|min:0|max:255',
                 'default' => '0',
             ], [
                 'name' => 'max_query_length',
                 'title' => 'admin::app.configuration.index.search-engines.elastic.settings.max-query-length',
                 'info' => 'admin::app.configuration.index.search-engines.elastic.settings.max-query-length-info',
                 'type' => 'number',
-                'validation' => 'numeric',
+                'validation' => 'numeric|integer|min:1|max:1000|gte:search_engines.elastic.settings.min_query_length',
                 'default' => '1000',
             ], [
                 'name' => 'connection',

@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Forget Password',
                 'powered-by-description' => 'Powered by :bagisto, an open-source project by :webkul.',
                 'reset-link-sent' => 'Reset Password link sent',
+                'reset-link-failed' => 'Linkul de resetare a parolei nu a putut fi trimis. Vă rugăm să încercați din nou mai târziu.',
                 'sign-in-link' => 'Back to Sign In ?',
                 'submit-btn' => 'Reset',
                 'title' => 'Recover Password',

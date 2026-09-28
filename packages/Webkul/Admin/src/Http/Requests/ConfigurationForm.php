@@ -57,6 +57,22 @@ class ConfigurationForm extends FormRequest
     }
 
     /**
+     * The name a validation message calls a configuration field, taken from the field's own title so
+     * a failure reads as the label the admin sees rather than as the stored code.
+     */
+    public function attributes(): array
+    {
+        return collect(config('core'))
+            ->filter(fn ($item) => $this->submitsFieldOf($item))
+            ->flatMap(function ($item) {
+                return collect($item['fields'] ?? [])->mapWithKeys(function ($field) use ($item) {
+                    return ["{$item['key']}.{$field['name']}" => trans($field['title'] ?? '')];
+                });
+            })
+            ->all();
+    }
+
+    /**
      * Whether the request submits a value for any field of a configuration section.
      */
     protected function submitsFieldOf(array $item): bool

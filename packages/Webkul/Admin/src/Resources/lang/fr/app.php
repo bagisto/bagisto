@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Mot de passe oublié',
                 'powered-by-description' => 'Propulsé par :bagisto, un projet open-source par :webkul.',
                 'reset-link-sent' => 'Lien de réinitialisation du mot de passe envoyé',
+                'reset-link-failed' => 'Impossible d\'envoyer le lien de réinitialisation du mot de passe. Veuillez réessayer plus tard.',
                 'sign-in-link' => 'Retour à la connexion ?',
                 'submit-btn' => 'Réinitialiser',
                 'title' => 'Récupérer le mot de passe',

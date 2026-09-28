@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Zapomniałem hasła',
                 'powered-by-description' => 'Napędzane przez :bagisto, projekt open-source autorstwa :webkul.',
                 'reset-link-sent' => 'Link do resetowania hasła wysłany',
+                'reset-link-failed' => 'Nie udało się wysłać linku do zresetowania hasła. Spróbuj ponownie później.',
                 'sign-in-link' => 'Powrót do logowania?',
                 'submit-btn' => 'Resetuj',
                 'title' => 'Odzyskaj hasło',

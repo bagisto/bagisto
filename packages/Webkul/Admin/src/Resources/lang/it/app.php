@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Password Dimenticata',
                 'powered-by-description' => 'Powered by :bagisto, un progetto open-source di :webkul.',
                 'reset-link-sent' => 'Link per il ripristino della password inviato',
+                'reset-link-failed' => 'Impossibile inviare il link per reimpostare la password. Riprova più tardi.',
                 'sign-in-link' => 'Torna al Login?',
                 'submit-btn' => 'Ripristina',
                 'title' => 'Recupera Password',

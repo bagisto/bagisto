@@ -218,7 +218,8 @@ trait DownloadsImages
     }
 
     /**
-     * Progress of a queued image download, read from the fragments on disk.
+     * Progress of a queued image download, read from the fragments on disk. Entries settled before
+     * this run count too, so a resumed download does not restart its bar at zero.
      */
     public function queuedImageProgress(): array
     {
@@ -232,10 +233,6 @@ trait DownloadsImages
             $done += count(json_decode($disk->get($file), true) ?: []);
         }
 
-        /**
-         * Images already settled in the manifest before this run count too, so a
-         * resumed download does not restart its bar at zero.
-         */
         $settled = count(array_filter(
             $manifest,
             fn ($entry) => ($entry['status'] ?? 'pending') !== 'pending'
@@ -245,9 +242,16 @@ trait DownloadsImages
 
         $processed = min($total, max($done, $settled));
 
+        $downloaded = count(array_filter(
+            $manifest,
+            fn ($entry) => ($entry['status'] ?? null) === 'downloaded'
+        ));
+
         return [
             'total' => $total,
             'processed' => $processed,
+            'downloaded' => $downloaded,
+            'failed' => max(0, $processed - $downloaded),
             'progress' => $total > 0 ? (int) floor($processed / $total * 100) : 100,
             'done' => $total === 0 || $processed >= $total || $this->imageBatchSettled(),
         ];
@@ -324,10 +328,8 @@ trait DownloadsImages
     }
 
     /**
-     * Fetch one image and return its manifest entry. Never throws: a failure is
-     * recorded against the URL so the import continues without that image, which
-     * is the right trade — one unreachable host should not fail an import of
-     * thousands of products.
+     * Fetch one image and return its manifest entry, recording a failure against the url rather than
+     * throwing. The bytes decide the type, so a server that lies about it cannot plant another file.
      */
     protected function fetchImage(string $url): array
     {
@@ -365,11 +367,6 @@ trait DownloadsImages
                 ];
             }
 
-            /**
-             * Trust the bytes, not the content-type header: a server that lies
-             * about the type would otherwise get an arbitrary file written into
-             * the media directory.
-             */
             $dimensions = @getimagesizefromstring($contents);
 
             if ($dimensions === false) {
@@ -389,17 +386,13 @@ trait DownloadsImages
     }
 
     /**
-     * Write a fetched image alongside the import's other files and return its
-     * manifest entry.
+     * Write a fetched image alongside the import's other files and return its manifest entry. Its
+     * name is a hash of the url, so a repeat fetch reuses it and no remote name can escape the directory.
      */
     protected function storeImage(string $url, string $contents, array $dimensions): array
     {
         $extension = image_type_to_extension($dimensions[2], false) ?: 'jpg';
 
-        /**
-         * Named by a hash of the URL so the same link fetched twice lands on the
-         * same file, and so nothing in a remote name can escape the directory.
-         */
         $name = sha1($url).'.'.$extension;
 
         $path = $this->imageDownloadDir().'/'.$name;
@@ -516,14 +509,23 @@ trait DownloadsImages
     {
         $total = count($manifest);
 
-        $processed = count(array_filter(
+        $settled = array_filter(
             $manifest,
             fn ($entry) => ($entry['status'] ?? 'pending') !== 'pending'
+        );
+
+        $processed = count($settled);
+
+        $downloaded = count(array_filter(
+            $settled,
+            fn ($entry) => ($entry['status'] ?? null) === 'downloaded'
         ));
 
         return [
             'total' => $total,
             'processed' => $processed,
+            'downloaded' => $downloaded,
+            'failed' => $processed - $downloaded,
             'progress' => $total > 0 ? (int) floor($processed / $total * 100) : 100,
             'done' => $processed >= $total,
         ];

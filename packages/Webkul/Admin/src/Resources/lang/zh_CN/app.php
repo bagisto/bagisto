@@ -18,6 +18,7 @@ return [
                 'page-title' => '忘记密码',
                 'powered-by-description' => '由 :bagisto 提供支持，一个由 :webkul 社区支持的项目。',
                 'reset-link-sent' => '重置密码链接已发送',
+                'reset-link-failed' => '无法发送密码重置链接，请稍后重试。',
                 'sign-in-link' => '返回登录？',
                 'submit-btn' => '重置',
                 'title' => '找回密码',

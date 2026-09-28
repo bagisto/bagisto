@@ -485,7 +485,7 @@
                                                         <hr class="mb-2"/>
 
                                                         <a
-                                                            @click="viewAttachmentModal(message.attachment_url)"
+                                                            @click="viewAttachmentModal(message.attachment_url, message.attachment)"
                                                             class="icon-attribute dark:text-black-300 text-base font-normal cursor-pointer hover:underline"
                                                         >
                                                             <span class="text-base ml-2">
@@ -876,6 +876,9 @@
                         isSent: false,
                         rma: @json($rma),
                         limit: 5,
+                        messagePath: '',
+                        attachmentName: '',
+                        getAttachmentExtension: '',
                         allowedFileTypes: @json(core()->getConfigData('sales.rma.setting.allowed_file_extension')),
                         rmaStatus: "{{ in_array($rma->rma_status_id, array_keys($statusArray)) ? $rma->rma_status_id : (array_key_first($statusArray) ?? '') }}",
                     };
@@ -995,7 +998,6 @@
 
                         let formData = new FormData(this.$refs.adminChatForm);
 
-                        // Sanitize the message input
                         const messageInput = formData.get('message');
 
                         const sanitizedMessage = this.sanitizeInput(messageInput);
@@ -1028,10 +1030,12 @@
                         return tempDiv.innerHTML;
                     },
 
-                    viewAttachmentModal(messagePath) {
+                    viewAttachmentModal(messagePath, attachmentName) {
                         this.messagePath = messagePath;
 
-                        this.getAttachmentExtension = messagePath.split('.').pop().toLowerCase();
+                        this.attachmentName = attachmentName ?? '';
+
+                        this.getAttachmentExtension = this.attachmentName.split('.').pop().toLowerCase();
 
                         this.$refs.attachmentModal.toggle();
                     },
@@ -1041,7 +1045,7 @@
 
                         link.href = messagePath;
 
-                        link.download = messagePath.split('/').pop();
+                        link.download = this.attachmentName || messagePath.split('/').pop();
 
                         document.body.appendChild(link);
                         link.click();

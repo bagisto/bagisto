@@ -18,6 +18,7 @@ return [
                 'page-title' => 'Oblidar contrasenya',
                 'powered-by-description' => 'Impulsat per :bagisto, un projecte de codi obert de :webkul.',
                 'reset-link-sent' => 'Enllaç per restablir la contrasenya enviat',
+                'reset-link-failed' => 'No s\'ha pogut enviar l\'enllaç per restablir la contrasenya. Torneu-ho a provar més tard.',
                 'sign-in-link' => 'Tornar a iniciar sessió?',
                 'submit-btn' => 'Restablir',
                 'title' => 'Recuperar contrasenya',

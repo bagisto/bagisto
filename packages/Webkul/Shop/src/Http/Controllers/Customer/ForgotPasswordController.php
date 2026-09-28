@@ -58,7 +58,7 @@ class ForgotPasswordController extends Controller
         } catch (\Exception $e) {
             report($e);
 
-            session()->flash('error', $e->getMessage());
+            session()->flash('error', trans('shop::app.customers.forgot-password.reset-link-failed'));
 
             return redirect()->route('shop.customers.forgot_password.create');
         }
