@@ -14,6 +14,7 @@
 ## Medium Impact Changes
 
 - [Relocated Configuration Codes](#relocated-configuration-codes)
+- [Storefront Breadcrumbs Moved Into the Shop Package](#storefront-breadcrumbs-moved-into-the-shop-package)
 - [Storage Directories Renamed](#storage-directories-renamed)
 - [Route Names Are snake_case](#route-names-are-snake_case)
 - [Translation Keys Are kebab-case](#translation-keys-are-kebab-case)
@@ -193,6 +194,7 @@ Options Laravel 13 added are now present rather than implied: the `deferred`, `b
 | `config/cache.php` | `default` moved from `file` to `database`; `storage` and `failover` stores added; `serializable_classes` set | Nothing — your `.env` value still wins. See the note below before copying Laravel 13's own version of this file |
 | `config/filesystems.php` | `r2` disk added, `report` keys added, `serve` commented out on the `private` disk | The Cloudflare R2 driver has no disk to configure, and the `private` disk keeps serving its files through temporary URLs |
 | `config/logging.php`, `config/mail.php`, `config/services.php`, `config/queue.php`, `config/session.php`, `config/database.php`, `config/sanctum.php` | The Laravel 13 renames and additions listed above | Nothing — the old names still resolve, apart from the SMTP encryption noted above |
+| `config/broadcasting.php` | Replaced with Laravel 13's own version: `default` reads `BROADCAST_CONNECTION` (it read the pre-Laravel 11 `BROADCAST_DRIVER`, which `.env.example` never mentioned, so broadcasting could not be switched on at all), and `reverb` and `ably` connections were added | Broadcasting stays off however `.env` is set. If you had worked around this by setting `BROADCAST_DRIVER`, rename it to `BROADCAST_CONNECTION` |
 | `config/imagecache.php` | `cache_driver` removed | Nothing — the key is simply unread |
 | `config/purify.php` | Serializer store default follows the new cache default | Nothing — your `.env` value still wins |
 | `config/repository.php` | Unchanged since v2.4.12; earlier 2.4 releases differ in comments only | Nothing. Do not bother replacing it |
@@ -225,6 +227,14 @@ The shipped default for `CACHE_STORE` also moved from `file` to `database`, and 
 
 `.env.example` gained `AWS_URL`, `AWS_ENDPOINT` and the seven `R2_*` variables for the new storage drivers. None of them are required — the disks are configurable from the admin instead — and no variable was removed or renamed, so an existing `.env` needs no edit to keep working.
 
+It also gained `BROADCAST_CONNECTION` and the `REVERB_*` and `PUSHER_*` blocks those connections read. `BROADCAST_CONNECTION` ships as `null`, which leaves broadcasting off and keeps the admin panel from loading any websocket client; setting it to `reverb` or `pusher` is what turns the live order notifications in the admin notification bell on.
+
+**Enable it together with a queue worker.** `QUEUE_CONNECTION` ships as `sync`, which broadcasts inline inside the request that placed the order. `Webkul\Notification\Listeners\Order` logs a broadcaster failure instead of letting it propagate, so an unreachable websocket server cannot fail a checkout — but a server that hangs rather than refusing the connection still holds the shopper's request open. In production point `QUEUE_CONNECTION` at `database` or `redis` and run a worker for the queue the notification events declare:
+
+```bash
+php artisan queue:work --queue=broadcastable
+```
+
 ---
 
 ### Relocated Configuration Codes
@@ -246,6 +256,22 @@ Custom code that reads either code is not migrated for you:
 ```
 
 The search settings moved too, and are covered in the search section below.
+
+---
+
+### Storefront Breadcrumbs Moved Into the Shop Package
+
+**Impact Probability: Medium**
+
+The storefront breadcrumb trails no longer live in the application. `routes/breadcrumbs.php` was deleted and its trails now ship inside the package that owns them, at `packages/Webkul/Shop/src/Routes/breadcrumbs.php`, registered by `ShopServiceProvider`. Every trail keeps its name, so a view calling `<x-shop::breadcrumbs name="orders" />` needs no change.
+
+**Delete your `routes/breadcrumbs.php`.** `config/breadcrumbs.php` still points `files` at it, and the package loads its own trails regardless — so a file left in place registers the same names twice and `Diglactic\Breadcrumbs\Manager::for()` throws `DuplicateBreadcrumbException` on the storefront pages that render a breadcrumb:
+
+```
+Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException: Breadcrumb name "home" has already been registered
+```
+
+That `files` key is deliberately left alone, because it stays useful as an extension point: a `routes/breadcrumbs.php` holding only your **own** trail names still loads and is the supported way to add breadcrumbs without touching the package. To change a trail Bagisto already defines, override it in a package of your own rather than redefining the name.
 
 ---
 

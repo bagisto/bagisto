@@ -31,6 +31,7 @@
         "laravel/cashier": "^16.0",
         "laravel/framework": "^13.0",
         "laravel/octane": "^2.3",
+        "laravel/reverb": "^1.12",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^3.0",

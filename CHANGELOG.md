@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.5.0-beta5 (29th of September 2026)** - *Release*
+## **v2.5.0-beta5 (30th of September 2026)** - *Release*
 
 - Applied the security fixes from an AI security audit of the codebase.
 
@@ -22,11 +22,15 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Updated the production Docker images to build the 2.5.0 release by default, and let the bundled MySQL user take the server's own authentication plugin instead of the deprecated one.
 
+- Added real-time admin notifications, so the notification bell updates as orders are placed instead of only on a page load. Broadcasting stays off until `BROADCAST_CONNECTION` is set, and needs a worker on the `broadcastable` queue.
+
 - Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
 
 - Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.
 
 - Renamed the remaining underscored translation keys to kebab-case across all 22 locales, so a module or theme overriding one of them, such as `eu_withdrawal.view.received_at`, must use the new spelling.
+
+- Moved the storefront breadcrumb definitions into the Shop package and removed `routes/breadcrumbs.php`. Delete your copy when upgrading, or the same trails register twice and every page carrying a breadcrumb fails.
 
 ## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
 

@@ -1,4 +1,8 @@
 {
+  "__commonjsHelpers-Bx2EM-6T.js": {
+    "file": "assets/_commonjsHelpers-Bx2EM-6T.js",
+    "name": "_commonjsHelpers"
+  },
   "node_modules/vue-cal/dist/drag-and-drop.es.js": {
     "file": "assets/drag-and-drop.es-CbCm7IHa.js",
     "name": "drag-and-drop.es",
@@ -513,10 +517,13 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-DR0_V2q7.js",
+    "file": "assets/app-C18ZOb8Z.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
+    "imports": [
+      "__commonjsHelpers-Bx2EM-6T.js"
+    ],
     "dynamicImports": [
       "node_modules/vue-cal/dist/i18n/ar.es.js",
       "node_modules/vue-cal/dist/i18n/bg.es.js",
@@ -572,5 +579,14 @@
     "name": "chart",
     "src": "src/Resources/assets/js/chart.js",
     "isEntry": true
+  },
+  "src/Resources/assets/js/echo.js": {
+    "file": "assets/echo-C0jjzWsv.js",
+    "name": "echo",
+    "src": "src/Resources/assets/js/echo.js",
+    "isEntry": true,
+    "imports": [
+      "__commonjsHelpers-Bx2EM-6T.js"
+    ]
   }
 }
