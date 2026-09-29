@@ -24,7 +24,7 @@ class DataGridController extends Controller
         /**
          * Preparing the datagrid instance and only columns.
          */
-        $datagrid = app(Crypt::decryptString($params['datagrid_id']));
+        $datagrid = datagrid(Crypt::decryptString($params['datagrid_id']));
         $datagrid->prepareColumns();
 
         /**

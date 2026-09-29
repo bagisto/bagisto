@@ -16,6 +16,7 @@ const CREDENTIALS = {
     projectId: "bagisto-test-project",
     apiKey: "AIzaSyD-EXAMPLEKEY1234567890",
     siteKey: "6LcEXAMPLEKEY1234567890",
+    scoreThreshold: "0.5",
 };
 
 test.describe("google captcha configuration", () => {

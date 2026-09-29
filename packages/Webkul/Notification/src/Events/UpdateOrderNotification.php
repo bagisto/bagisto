@@ -2,8 +2,8 @@
 
 namespace Webkul\Notification\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -15,6 +15,7 @@ class UpdateOrderNotification implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
+     * @param  array  $data
      * @return void
      */
     public function __construct(protected $data) {}
@@ -22,15 +23,15 @@ class UpdateOrderNotification implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel|array
+     * @return PrivateChannel|array
      */
     public function broadcastOn()
     {
-        return new Channel('notification');
+        return new PrivateChannel('admin.notifications');
     }
 
     /**
-     * Broadcast with data.
+     * Broadcast with data, so a listener need not fetch the order to show it.
      *
      * @return array
      */
@@ -52,7 +53,7 @@ class UpdateOrderNotification implements ShouldBroadcast
     }
 
     /**
-     * Get the channels the event should broadcast as.
+     * Get the name the event should broadcast as.
      *
      * @return string
      */

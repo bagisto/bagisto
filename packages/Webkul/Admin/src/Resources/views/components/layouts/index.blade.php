@@ -38,6 +38,18 @@
         content="Bagisto"
     >
 
+    @if ($broadcasting = app(\Webkul\Admin\Helpers\Broadcasting::class)->clientConfig())
+        <meta
+            name="broadcasting"
+            content="{{ json_encode($broadcasting) }}"
+        >
+
+        <script
+            type="module"
+            src="{{ bagisto_asset('js/echo.js') }}"
+        ></script>
+    @endif
+
     @stack('meta')
 
     @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])

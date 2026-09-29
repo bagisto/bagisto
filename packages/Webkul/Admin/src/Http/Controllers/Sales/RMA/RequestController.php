@@ -18,6 +18,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\RMA\Contracts\RMAReasonResolution;
 use Webkul\RMA\Enums\DefaultRMAResolution;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
+use Webkul\RMA\Helpers\Attachment;
 use Webkul\RMA\Helpers\Helper as RMAHelper;
 use Webkul\RMA\Repositories\RMAAdditionalFieldRepository;
 use Webkul\RMA\Repositories\RMAImageRepository;
@@ -122,6 +123,22 @@ class RequestController extends Controller
     }
 
     /**
+     * Show a photo attached to a return.
+     */
+    public function showImage(int $id)
+    {
+        return app(Attachment::class)->inline($this->rmaImageRepository->findOrFail($id)->path);
+    }
+
+    /**
+     * Download an attachment of a message on a return.
+     */
+    public function downloadAttachment(int $id)
+    {
+        return app(Attachment::class)->download($this->rmaMessageRepository->findOrFail($id));
+    }
+
+    /**
      * Get messages for RMA conversation.
      */
     public function getMessages(): JsonResponse
@@ -159,8 +176,9 @@ class RequestController extends Controller
                 $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
 
                 $path = $file->storeAs(
-                    'rma-conversation/'.$storedMessage->id,
-                    Str::random(40).($extension ? '.'.$extension : '')
+                    'rmas/'.$storedMessage->rma_id.'/conversations/'.$storedMessage->id,
+                    Str::random(40).($extension ? '.'.$extension : ''),
+                    'private'
                 );
 
                 $this->rmaMessageRepository->update([
@@ -197,7 +215,8 @@ class RequestController extends Controller
     }
 
     /**
-     * Store RMA created by admin.
+     * Store RMA created by admin. The requested quantity is capped against the trusted order item,
+     * so a crafted request cannot return or cancel more than the order actually allows.
      */
     public function store(): RedirectResponse|JsonResponse
     {
@@ -224,10 +243,6 @@ class RequestController extends Controller
             'package_condition',
         ]);
 
-        /**
-         * Cap the requested quantity against the trusted order-item state so a crafted
-         * request cannot store a quantity larger than what is actually returnable/cancelable.
-         */
         $orderItem = $this->orderItemRepository->find($data['order_item_id']);
 
         if ($orderItem) {
@@ -242,9 +257,6 @@ class RequestController extends Controller
 
         Event::dispatch('sales.rma.request.create.before', $data);
 
-        /**
-         * Creation of a new RMA record.
-         */
         $rma = $this->rmaRepository->create([
             'order_id' => $data['order_id'],
             'rma_status_id' => DefaultRMAStatusEnum::PENDING->value,
@@ -252,9 +264,6 @@ class RequestController extends Controller
             'package_condition' => $data['package_condition'] ?? null,
         ]);
 
-        /**
-         * Creation of RMA item for the newly created RMA record.
-         */
         $this->rmaItemRepository->create([
             'rma_id' => $rma->id,
             'rma_reason_id' => $data['rma_reason_id'],
@@ -264,18 +273,12 @@ class RequestController extends Controller
             'resolution' => $data['resolution_type'],
         ]);
 
-        /**
-         * Initial message indicating the processing of the RMA request.
-         */
         $this->rmaMessageRepository->create([
             'rma_id' => $rma->id,
             'message' => trans('shop::app.rma.mail.customer-conversation.process'),
             'is_admin' => 1,
         ]);
 
-        /**
-         * Creation of RMA images for the newly created RMA record.
-         */
         if (
             ! empty($data['images'])
             && ! empty(implode(',', $data['images']))
@@ -283,9 +286,6 @@ class RequestController extends Controller
             $this->rmaImageRepository->manageImages($data['images'], $rma);
         }
 
-        /**
-         * Creation of additional fields for the newly created RMA record.
-         */
         $customAttributes = request('customAttributes', []);
 
         if (! empty($customAttributes)) {
@@ -294,23 +294,22 @@ class RequestController extends Controller
 
         Event::dispatch('sales.rma.request.create.after', $rma);
 
-        /**
-         * Sending RMA creation email to the customer.
-         */
         if ($rma->item) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
             } catch (\Exception $e) {
             }
 
+            session()->flash('success', trans('admin::app.sales.rma.create-rma.create-success'));
+
             return response()->json([
-                'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
                 'redirect_url' => route('admin.sales.rma.requests.view', $rma->id),
             ]);
         }
 
+        session()->flash('error', trans('admin::app.sales.rma.create-rma.failed'));
+
         return response()->json([
-            'messages' => trans('admin::app.sales.rma.create-rma.failed'),
             'redirect_url' => route('admin.sales.rma.requests.create'),
         ]);
     }
@@ -332,7 +331,8 @@ class RequestController extends Controller
     }
 
     /**
-     * Get RMA status for request.
+     * Get RMA status for request. The order-linked actions are left out, as they belong on the item
+     * as contextual buttons rather than among the neutral status steps.
      */
     public function rmaStatusForRequest($rma): array
     {
@@ -352,10 +352,6 @@ class RequestController extends Controller
 
         $hasCancel = $rma->item->resolution === DefaultRMAResolution::CANCEL_ITEMS->value;
 
-        /**
-         * The order-linked actions (Refunded / Item Canceled) are intentionally excluded here -
-         * they are surfaced as contextual buttons on the item itself, not as neutral status steps.
-         */
         $excludedStatuses = $hasCancel
             ? [
                 DefaultRMAStatusEnum::ACCEPT->value,
@@ -601,7 +597,8 @@ class RequestController extends Controller
     }
 
     /**
-     * Finalize RMA update with message and notification.
+     * Finalize RMA update with message and notification. The confirmation is flashed so it survives
+     * the reload the front end performs once the status has been updated.
      */
     private function finalizeRmaUpdate($rma, array $data): JsonResponse
     {
@@ -621,10 +618,6 @@ class RequestController extends Controller
         } catch (\Exception $e) {
         }
 
-        /**
-         * Flashed to the session so the confirmation survives the page reload the
-         * front-end performs after a successful status update.
-         */
         session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
         return new JsonResponse([

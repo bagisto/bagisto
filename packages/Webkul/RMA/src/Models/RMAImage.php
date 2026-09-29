@@ -23,4 +23,12 @@ class RMAImage extends Model implements RMAImageContract
         'rma_id',
         'path',
     ];
+
+    /**
+     * Get the RMA that owns the image.
+     */
+    public function rma()
+    {
+        return $this->belongsTo(RMA::class);
+    }
 }

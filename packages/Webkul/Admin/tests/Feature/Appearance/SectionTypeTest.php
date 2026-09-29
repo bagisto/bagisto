@@ -83,12 +83,12 @@ it('should keep a theme own product section type out of every other theme', func
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => $channel->theme, 'channel' => $channel->id]), [
+    postJson(route('admin.appearance.sections.store', ['code' => $channel->theme, 'channel' => $channel->code]), [
         'name' => 'Deals On Default',
         'type' => 'deals_carousel',
     ])->assertJsonValidationErrorFor('type');
 
-    postJson(route('admin.appearance.sections.store', ['code' => 'studio', 'channel' => $studio->id]), [
+    postJson(route('admin.appearance.sections.store', ['code' => 'studio', 'channel' => $studio->code]), [
         'name' => 'Deals On Studio',
         'type' => 'deals_carousel',
     ])->assertOk()
@@ -100,7 +100,7 @@ it('should refuse a core section type the theme does not offer', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => 'studio', 'channel' => $studio->id]), [
+    postJson(route('admin.appearance.sections.store', ['code' => 'studio', 'channel' => $studio->code]), [
         'name' => 'Plain Carousel',
         'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
     ])->assertJsonValidationErrorFor('type');
@@ -167,7 +167,7 @@ it('should refuse a second section of a theme own singleton type', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => 'studio', 'channel' => $studio->id]), [
+    postJson(route('admin.appearance.sections.store', ['code' => 'studio', 'channel' => $studio->code]), [
         'name' => 'Second Lookbook',
         'type' => 'lookbook',
     ])->assertJsonValidationErrors([

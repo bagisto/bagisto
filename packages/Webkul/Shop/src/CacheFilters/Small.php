@@ -8,38 +8,17 @@ use Illuminate\Support\Str;
 class Small
 {
     /**
-     * Apply filter.
-     *
-     * @param  Image  $image
-     * @return Image
+     * Apply the filter to the image, at the size the subject it is served for is shown at.
      */
-    public function applyFilter($image)
+    public function applyFilter(Image $image): Image
     {
-        /**
-         * If the current url is product image
-         */
-        if (Str::contains(url()->current(), '/product')) {
-            $width = core()->getConfigData('catalog.products.cache_small_image.width')
-                ? core()->getConfigData('catalog.products.cache_small_image.width')
-                : 100;
+        $url = url()->current();
 
-            $height = core()->getConfigData('catalog.products.cache_small_image.height')
-                ? core()->getConfigData('catalog.products.cache_small_image.height')
-                : 100;
-
-            return $image->cover((int) $width, (int) $height);
-        } elseif (Str::contains(url()->current(), '/category')) {
-            return $image->cover(80, 80);
-        } elseif (Str::contains(url()->current(), '/attribute_option')) {
-            return $image->cover(60, 60);
-        }
-
-        /**
-         * Slider image dimensions. Sized so mobile devices (Moto G Power
-         * at 412 CSS px × 1.75 DPR ≈ 721 device px) pick this variant from
-         * the carousel srcset instead of the 1024w medium one — Lighthouse
-         * flags this as the #1 LCP saving on the homepage.
-         */
-        return $image->cover(768, 280);
+        return match (true) {
+            Str::contains($url, '/products') => $image->cover(100, 100),
+            Str::contains($url, '/categories') => $image->cover(80, 80),
+            Str::contains($url, '/attribute-options') => $image->cover(60, 60),
+            default => $image->cover(768, 280),
+        };
     }
 }

@@ -80,7 +80,7 @@
                         <!-- Contact Number -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label>
-                                @lang('admin::app.customers.customers.index.create.contact-number')
+                                @lang('admin::app.customers.customers.index.create.phone')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -88,8 +88,8 @@
                                 id="phone"
                                 name="phone"
                                 rules="phone"
-                                :label="trans('admin::app.customers.customers.index.create.contact-number')"
-                                :placeholder="trans('admin::app.customers.customers.index.create.contact-number')"
+                                :label="trans('admin::app.customers.customers.index.create.phone')"
+                                :placeholder="trans('admin::app.customers.customers.index.create.phone')"
                             />
 
                             <x-admin::form.control-group.error control-name="phone" />

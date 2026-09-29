@@ -386,7 +386,7 @@
                 getCustomizableOptions() {
                     this.isLoading = true;
 
-                    this.$axios.get("{{ route('admin.catalog.products.virtual.customizable-options', ':replace') }}".replace(':replace', this.productOptions.product.id))
+                    this.$axios.get("{{ route('admin.catalog.products.virtual.customizable_options', ':replace') }}".replace(':replace', this.productOptions.product.id))
                         .then(response => {
                             this.initialPrice = response.data.meta.initial_price;
 

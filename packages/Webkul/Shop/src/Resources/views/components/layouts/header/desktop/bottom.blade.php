@@ -71,6 +71,14 @@
 
                 <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl ltr:left-3 rtl:right-3"></div>
 
+                @php
+                    $maxQueryLength = ((int) core()->getConfigData('search_engines.elastic.settings.max_query_length')) ?: 1000;
+
+                    $minQueryLength = (int) core()->getConfigData('search_engines.elastic.settings.min_query_length');
+
+                    $minQueryLength = $minQueryLength > 0 && $minQueryLength <= $maxQueryLength ? $minQueryLength : 0;
+                @endphp
+
                 <input
                     type="text"
                     id="organic-search"
@@ -78,8 +86,8 @@
                     value="{{ request('query') }}"
                     toolparamdescription="{{ trans('shop::app.components.layouts.webmcp.search-products-query') }}"
                     class="block w-full py-3 text-xs font-medium text-gray-900 transition-all border border-transparent rounded-lg bg-zinc-100 px-11 hover:border-gray-400 focus:border-gray-400"
-                    minlength="{{ core()->getConfigData('search_engines.elastic.settings.min_query_length') }}"
-                    maxlength="{{ core()->getConfigData('search_engines.elastic.settings.max_query_length') }}"
+                    minlength="{{ $minQueryLength }}"
+                    maxlength="{{ $maxQueryLength }}"
                     placeholder="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
                     aria-required="true"
@@ -182,10 +190,10 @@
 
                         @if (core()->getConfigData('sales.eu_withdrawal.general.enabled', core()->getCurrentChannelCode()))
                             <a
-                                href="{{ route('shop.eu-withdrawal.guest.lookup') }}"
+                                href="{{ route('shop.eu_withdrawal.guest.lookup') }}"
                                 class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-navyBlue hover:underline"
                             >
-                                @lang('shop::app.eu_withdrawal.guest_dropdown.link')
+                                @lang('shop::app.eu-withdrawal.guest-dropdown.link')
                             </a>
                         @endif
 
@@ -639,7 +647,9 @@
 
                         const rect = dropdown.getBoundingClientRect();
 
-                        // Positive when it spills off the right edge, negative off the left, 0 when it fits.
+                        /**
+                         * Positive when it spills off the right edge, negative off the left, 0 when it fits.
+                         */
                         const overflow = Math.max(0, rect.right - (viewport - MARGIN)) - Math.max(0, MARGIN - rect.left);
 
                         if (overflow) {
@@ -653,4 +663,5 @@
         });
     </script>
 @endPushOnce
+
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.after') !!}

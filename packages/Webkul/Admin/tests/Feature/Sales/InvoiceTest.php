@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Shop\Mail\Order\InvoicedNotification;
@@ -9,6 +11,17 @@ use Webkul\Shop\Mail\Order\InvoicedNotification;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
+
+/**
+ * The markup an invoice is printed from, rendered the way the controller renders it.
+ */
+function invoiceMarkup(Invoice $invoice): string
+{
+    return view('shop::customers.account.orders.pdf', [
+        'invoice' => $invoice,
+        'orderCurrencyCode' => $invoice->order->order_currency_code,
+    ])->render();
+}
 
 // ============================================================================
 // Index
@@ -224,6 +237,29 @@ it('should download the invoice as a pdf', function () {
         ->assertOk()
         ->assertHeader('content-type', 'application/pdf')
         ->assertDownload('invoice-'.$invoice->created_at->format('d-m-Y').'.pdf');
+});
+
+it('should show the saved logo on the invoice, whatever size it was saved at', function () {
+    $logo = UploadedFile::fake()->image('logo.png', 3000, 2000)->get();
+
+    Storage::disk(config('filesystems.default'))->put('configurations/logo.png', $logo);
+
+    $this->setConfig('sales.invoice_settings.pdf_print_outs.logo', 'configurations/logo.png');
+
+    expect(invoiceMarkup($this->invoiceOrder($this->createOrder())))
+        ->toContain(base64_encode($logo));
+});
+
+it('should fall back to the default logo when the store has saved none', function () {
+    expect(invoiceMarkup($this->invoiceOrder($this->createOrder())))
+        ->toContain('data:image/png;base64,iVBORw0KGgo');
+});
+
+it('should fall back to the default logo when the saved one is no longer on disk', function () {
+    $this->setConfig('sales.invoice_settings.pdf_print_outs.logo', 'configurations/deleted.png');
+
+    expect(invoiceMarkup($this->invoiceOrder($this->createOrder())))
+        ->toContain('data:image/png;base64,iVBORw0KGgo');
 });
 
 // ============================================================================

@@ -15,6 +15,8 @@ class ItemField
         'present',
         'filled',
         'bail',
+        'gte',
+        'lte',
     ];
 
     /**
@@ -31,6 +33,10 @@ class ItemField
         'min' => [
             'text' => 'min',
             'number' => 'min_value',
+        ],
+
+        'numeric' => [
+            'text' => 'decimal',
         ],
     ];
 
@@ -123,20 +129,6 @@ class ItemField
             ->all();
 
         return implode('|', $rules);
-    }
-
-    /**
-     * A single rule under the name Vee Validate knows it by.
-     */
-    protected function toVeeValidateRule(string $rule): string
-    {
-        $name = Str::before($rule, ':');
-
-        if (! array_key_exists($this->getType(), $this->veeValidateMappings[$name] ?? [])) {
-            return $rule;
-        }
-
-        return Str::replaceFirst($name, $this->veeValidateMappings[$name][$this->getType()], $rule);
     }
 
     /**
@@ -280,6 +272,20 @@ class ItemField
         }
 
         return (string) collect(explode(':', $depends))->last();
+    }
+
+    /**
+     * A single rule under the name Vee Validate knows it by.
+     */
+    protected function toVeeValidateRule(string $rule): string
+    {
+        $name = Str::before($rule, ':');
+
+        if (! array_key_exists($this->getType(), $this->veeValidateMappings[$name] ?? [])) {
+            return $rule;
+        }
+
+        return Str::replaceFirst($name, $this->veeValidateMappings[$name][$this->getType()], $rule);
     }
 
     /**

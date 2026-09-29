@@ -130,7 +130,7 @@
                                                     @foreach($rma->images as $image)
                                                         <img
                                                             class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
-                                                            src="{{ Storage::url($image->path) }}"
+                                                            src="{{ route('admin.sales.rma.requests.image', $image->id) }}"
                                                         />
                                                     @endforeach
                                                 </div>
@@ -204,7 +204,7 @@
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                    {!! $rmaItem->quantity !!}
+                                                    {{ $rmaItem->quantity }}
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
@@ -485,7 +485,7 @@
                                                         <hr class="mb-2"/>
 
                                                         <a
-                                                            @click="viewAttachmentModal(message.attachment_url)"
+                                                            @click="viewAttachmentModal(message.attachment_url, message.attachment)"
                                                             class="icon-attribute dark:text-black-300 text-base font-normal cursor-pointer hover:underline"
                                                         >
                                                             <span class="text-base ml-2">
@@ -582,7 +582,7 @@
                                                     <x-slot:content>
                                                         {{-- <x-admin::form
                                                             method="POST"
-                                                            :action="route('admin.sales.rma.requests.update-status', $rma->id)"
+                                                            :action="route('admin.sales.rma.requests.update_status', $rma->id)"
                                                         > --}}
                                                             <!-- RMA Status -->
                                                             <x-admin::form.control-group class="mb-2 w-full">
@@ -638,7 +638,7 @@
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.requests.re-open', $rma->id)"
+                                        :action="route('admin.sales.rma.requests.re_open', $rma->id)"
                                     >
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">
@@ -876,6 +876,9 @@
                         isSent: false,
                         rma: @json($rma),
                         limit: 5,
+                        messagePath: '',
+                        attachmentName: '',
+                        getAttachmentExtension: '',
                         allowedFileTypes: @json(core()->getConfigData('sales.rma.setting.allowed_file_extension')),
                         rmaStatus: "{{ in_array($rma->rma_status_id, array_keys($statusArray)) ? $rma->rma_status_id : (array_key_first($statusArray) ?? '') }}",
                     };
@@ -908,7 +911,7 @@
                             message: messageToShow,
 
                             agree: () => {
-                                this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                                this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                                     rma_status_id: this.rmaStatus,
                                     shipping: params.shipping,
                                 })
@@ -935,7 +938,7 @@
                             message: "@lang('admin::app.sales.rma.all-rma.view.confirm-item-canceled')",
 
                             agree: () => {
-                                this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                                this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                                     rma_status_id: {{ DefaultRMAStatusEnum::ITEM_CANCELED->value }},
                                 })
                                 .then((response) => {
@@ -955,7 +958,7 @@
                     },
 
                     refundItem(params, { setErrors }) {
-                        this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                        this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                             rma_status_id: {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }},
                             shipping: params.shipping,
                         })
@@ -978,7 +981,7 @@
                     },
 
                     getMessage() {
-                        this.$axios.get(`{{ route('admin.sales.rma.requests.get-messages') }}`, {
+                        this.$axios.get(`{{ route('admin.sales.rma.requests.get_messages') }}`, {
                             params: {
                                 id: this.rma.id,
                                 limit: this.limit,
@@ -995,14 +998,13 @@
 
                         let formData = new FormData(this.$refs.adminChatForm);
 
-                        // Sanitize the message input
                         const messageInput = formData.get('message');
 
                         const sanitizedMessage = this.sanitizeInput(messageInput);
 
                         formData.set('message', sanitizedMessage);
 
-                        this.$axios.post("{{ route('admin.sales.rma.requests.send-message') }}", formData)
+                        this.$axios.post("{{ route('admin.sales.rma.requests.send_message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
 
@@ -1028,10 +1030,12 @@
                         return tempDiv.innerHTML;
                     },
 
-                    viewAttachmentModal(messagePath) {
+                    viewAttachmentModal(messagePath, attachmentName) {
                         this.messagePath = messagePath;
 
-                        this.getAttachmentExtension = messagePath.split('.').pop().toLowerCase();
+                        this.attachmentName = attachmentName ?? '';
+
+                        this.getAttachmentExtension = this.attachmentName.split('.').pop().toLowerCase();
 
                         this.$refs.attachmentModal.toggle();
                     },
@@ -1041,7 +1045,7 @@
 
                         link.href = messagePath;
 
-                        link.download = messagePath.split('/').pop();
+                        link.download = this.attachmentName || messagePath.split('/').pop();
 
                         document.body.appendChild(link);
                         link.click();

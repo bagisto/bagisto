@@ -29,7 +29,7 @@
 
         {{ $address->state }}<br>
 
-        {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif<br>
+        {{ core()->countryName($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif<br>
 
         {{ trans('admin::app.sales.orders.view.contact') }} : {{ $address->phone }}
     </p>

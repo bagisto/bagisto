@@ -62,7 +62,7 @@ function addImage(Product $product, string $name, int $position): void
     ProductImage::query()->create([
         'product_id' => $product->id,
         'type' => 'images',
-        'path' => 'product/'.$product->id.'/'.$name,
+        'path' => 'products/'.$product->id.'/'.$name,
         'position' => $position,
     ]);
 }
@@ -181,7 +181,7 @@ it('should hold the first image by position as the base image', function () {
 
     refreshDerived($product);
 
-    expect(flatColumn($product, 'base_image'))->toBe('product/'.$product->id.'/first.webp');
+    expect(flatColumn($product, 'base_image'))->toBe('products/'.$product->id.'/first.webp');
 });
 
 it('should leave the base image empty for a product without images', function () {
@@ -201,11 +201,11 @@ it('should follow the image order rather than the order the images were uploaded
 
     refreshDerived($product);
 
-    expect(flatColumn($product, 'base_image'))->toBe('product/'.$product->id.'/first-uploaded.webp');
+    expect(flatColumn($product, 'base_image'))->toBe('products/'.$product->id.'/first-uploaded.webp');
 
     reorderImages($product);
 
-    expect(flatColumn($product, 'base_image'))->toBe('product/'.$product->id.'/second-uploaded.webp');
+    expect(flatColumn($product, 'base_image'))->toBe('products/'.$product->id.'/second-uploaded.webp');
 });
 
 it('should agree with the base image the product itself reports', function () {
@@ -236,7 +236,7 @@ it('should show the reordered image in the products listing', function () {
     ]), ['X-Requested-With' => 'XMLHttpRequest'])
         ->assertOk()
         ->assertJsonCount(1, 'records')
-        ->assertJsonPath('records.0.base_image', Storage::url('product/'.$product->id.'/second-uploaded.webp'));
+        ->assertJsonPath('records.0.base_image', Storage::url('products/'.$product->id.'/second-uploaded.webp'));
 });
 
 // ============================================================================

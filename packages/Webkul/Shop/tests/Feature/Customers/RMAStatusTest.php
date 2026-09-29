@@ -34,7 +34,7 @@ it('should close a pending rma request', function () {
 
     $this->loginAsCustomer($customer);
 
-    post(route('shop.customers.account.rma.update-status', $rma->id), [
+    post(route('shop.customers.account.rma.update_status', $rma->id), [
         'close_rma' => 1,
     ])->assertRedirect();
 
@@ -48,7 +48,7 @@ it('should not close an rma request that is already solved', function () {
 
     $this->loginAsCustomer($customer);
 
-    post(route('shop.customers.account.rma.update-status', $rma->id), [
+    post(route('shop.customers.account.rma.update_status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
@@ -62,7 +62,7 @@ it('should not close an rma request whose package has been received', function (
 
     $this->loginAsCustomer($customer);
 
-    post(route('shop.customers.account.rma.update-status', $rma->id), [
+    post(route('shop.customers.account.rma.update_status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
@@ -76,7 +76,7 @@ it('should not close an rma request that has been declined', function () {
 
     $this->loginAsCustomer($customer);
 
-    post(route('shop.customers.account.rma.update-status', $rma->id), [
+    post(route('shop.customers.account.rma.update_status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
@@ -90,7 +90,7 @@ it('should not close an rma request belonging to a canceled order', function () 
 
     $this->loginAsCustomer($customer);
 
-    post(route('shop.customers.account.rma.update-status', $rma->id), [
+    post(route('shop.customers.account.rma.update_status', $rma->id), [
         'close_rma' => 1,
     ])->assertSessionHas('error', trans('shop::app.rma.response.close-not-allowed'));
 
@@ -102,7 +102,7 @@ it('should not close an rma request belonging to another customer', function () 
 
     $this->loginAsCustomer();
 
-    post(route('shop.customers.account.rma.update-status', $rma->id), [
+    post(route('shop.customers.account.rma.update_status', $rma->id), [
         'close_rma' => 1,
     ])->assertNotFound();
 

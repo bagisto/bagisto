@@ -84,7 +84,7 @@ class CustomFieldController extends Controller
 
         session()->flash('success', trans('admin::app.sales.rma.custom-field.create.success'));
 
-        return redirect()->route('admin.sales.rma.custom-fields.index');
+        return redirect()->route('admin.sales.rma.custom_fields.index');
     }
 
     /**
@@ -145,7 +145,7 @@ class CustomFieldController extends Controller
 
         session()->flash('success', trans('admin::app.sales.rma.custom-field.edit.success'));
 
-        return redirect()->route('admin.sales.rma.custom-fields.index');
+        return redirect()->route('admin.sales.rma.custom_fields.index');
     }
 
     /**

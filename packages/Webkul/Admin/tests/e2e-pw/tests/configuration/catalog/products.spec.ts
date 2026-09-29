@@ -1,10 +1,9 @@
 import { test } from "../../../setup";
 import {
     ProductConfigurationPage,
-    type ImageSize,
     type ProductSettings,
 } from "../../../pages/admin/configuration/catalog/ProductConfigurationPage";
-import { getImageFile, uniqueStamp } from "../../../utils/faker";
+import { uniqueStamp } from "../../../utils/faker";
 
 function other(current: string, first: string, second: string): string {
     return current === first ? second : first;
@@ -60,41 +59,6 @@ test.describe("product configuration", () => {
 
         await configPage.expectSettings(changed);
     });
-
-    test("should persist the cache image sizes after reload", async () => {
-        const changed = {
-            imageSizes: {
-                small: {
-                    width: other(original.imageSizes.small.width, "150", "160"),
-                    height: other(original.imageSizes.small.height, "150", "160"),
-                },
-                medium: {
-                    width: other(original.imageSizes.medium.width, "300", "320"),
-                    height: other(original.imageSizes.medium.height, "300", "320"),
-                },
-                large: {
-                    width: other(original.imageSizes.large.width, "600", "640"),
-                    height: other(original.imageSizes.large.height, "600", "640"),
-                },
-            },
-        };
-
-        await configPage.applySettings(changed);
-
-        await configPage.expectSettings(changed);
-    });
-
-    for (const size of ["small", "medium", "large"] as ImageSize[]) {
-        test(`should keep an uploaded ${size} image placeholder until it is removed`, async () => {
-            await configPage.uploadImagePlaceholder(size, getImageFile());
-
-            await configPage.expectImagePlaceholderShown(size);
-
-            await configPage.removeImagePlaceholder(size);
-
-            await configPage.expectImagePlaceholderAbsent(size);
-        });
-    }
 
     test("should persist the review settings after reload", async () => {
         const changed = {

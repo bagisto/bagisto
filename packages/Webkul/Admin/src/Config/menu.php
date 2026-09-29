@@ -90,13 +90,13 @@ return [
     ], [
         'key' => 'sales.rma.custom-fields',
         'name' => 'admin::app.components.layouts.sidebar.custom-fields',
-        'route' => 'admin.sales.rma.custom-fields.index',
+        'route' => 'admin.sales.rma.custom_fields.index',
         'sort' => 5,
         'icon' => '',
     ], [
         'key' => 'sales.eu_withdrawals',
-        'name' => 'admin::app.eu_withdrawal.menu.eu_withdrawals',
-        'route' => 'admin.sales.eu-withdrawals.index',
+        'name' => 'admin::app.eu-withdrawal.menu.eu-withdrawals',
+        'route' => 'admin.sales.eu_withdrawals.index',
         'sort' => 8,
         'icon' => '',
     ],

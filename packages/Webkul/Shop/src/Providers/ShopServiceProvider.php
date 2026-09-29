@@ -44,6 +44,8 @@ class ShopServiceProvider extends ServiceProvider
         Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/web.php');
         Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/api.php');
 
+        $this->registerBreadcrumbs();
+
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'shop');
@@ -56,6 +58,14 @@ class ShopServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
 
         $this->app->register(EventServiceProvider::class);
+    }
+
+    /**
+     * Register the storefront breadcrumb trails.
+     */
+    protected function registerBreadcrumbs(): void
+    {
+        require __DIR__.'/../Routes/breadcrumbs.php';
     }
 
     /**

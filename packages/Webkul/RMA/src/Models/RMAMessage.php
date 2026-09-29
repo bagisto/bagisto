@@ -3,7 +3,6 @@
 namespace Webkul\RMA\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Webkul\RMA\Contracts\RMAMessage as RMAMessageContract;
 
 class RMAMessage extends Model implements RMAMessageContract
@@ -58,7 +57,9 @@ class RMAMessage extends Model implements RMAMessageContract
             return null;
         }
 
-        return Storage::url($this->attachment_path);
+        return auth()->guard('admin')->check()
+            ? route('admin.sales.rma.requests.attachment', $this->id)
+            : route('shop.customers.account.rma.attachment', $this->id);
     }
 
     /**

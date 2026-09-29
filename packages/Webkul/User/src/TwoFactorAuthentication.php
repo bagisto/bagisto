@@ -83,15 +83,26 @@ class TwoFactorAuthentication
     }
 
     /**
-     * Verify a given 2FA code against the stored secret.
+     * Verify a given 2FA code against the stored secret, refusing a code from a window that has
+     * already been used so the same code cannot be presented twice.
+     *
+     * @return int|null The window the code belongs to, or null when it is not accepted.
      */
-    public function verifyQrCode(string $decryptedSecret, string $requestedCode): bool
+    public function verifyQrCode(string $decryptedSecret, string $requestedCode, ?int $lastUsedWindow = null): ?int
     {
         try {
-            return $this->google2fa->verifyKey($decryptedSecret, $requestedCode);
+            $window = $this->google2fa->verifyKeyNewer($decryptedSecret, $requestedCode, $lastUsedWindow);
         } catch (\Exception $e) {
-            return false;
+            return null;
         }
+
+        if ($window === false) {
+            return null;
+        }
+
+        return is_int($window)
+            ? $window
+            : $this->google2fa->getTimestamp();
     }
 
     /**

@@ -160,7 +160,7 @@ class ReasonDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.reasons.index.datagrid.update'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.reasons.mass-update'),
+                'url' => route('admin.sales.rma.reasons.mass_update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
@@ -177,7 +177,7 @@ class ReasonDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.reasons.mass-delete'),
+                'url' => route('admin.sales.rma.reasons.mass_delete'),
             ]);
         }
     }

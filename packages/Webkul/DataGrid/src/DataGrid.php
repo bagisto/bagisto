@@ -578,18 +578,35 @@ abstract class DataGrid
         $tempRow = json_decode(json_encode($row), true);
 
         foreach ($tempRow as $column => $value) {
-            if (! is_string($tempRow[$column])) {
+            if (is_string($value)) {
+                $row->{$column} = strip_tags($value);
+
                 continue;
             }
 
-            if (is_array($value)) {
-                return $this->sanitizeRow($tempRow[$column]);
-            } else {
-                $row->{$column} = strip_tags($value);
+            if (
+                is_array($value)
+                && is_array($row->{$column} ?? null)
+            ) {
+                $row->{$column} = $this->sanitizeValue($value);
             }
         }
 
         return $row;
+    }
+
+    /**
+     * Strip the tags from every string an array holds, however deeply.
+     */
+    protected function sanitizeValue(array $value): array
+    {
+        return array_map(function ($item) {
+            if (is_string($item)) {
+                return strip_tags($item);
+            }
+
+            return is_array($item) ? $this->sanitizeValue($item) : $item;
+        }, $value);
     }
 
     /**

@@ -1,6 +1,6 @@
 <x-shop::layouts>
     <x-slot:title>
-        @lang('shop::app.eu_withdrawal.confirmation.page_title')
+        @lang('shop::app.eu-withdrawal.confirmation.page-title')
     </x-slot>
 
     <div class="container mt-10 mx-auto max-w-3xl px-5 max-md:mt-6 max-md:px-4">

@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
 class SubscriptionController extends Controller
@@ -85,14 +86,18 @@ class SubscriptionController extends Controller
 
         $payload = [
             'is_subscribed' => 1,
-            'token' => uniqid(),
+            'token' => Str::random(64),
             'customer_id' => $customer?->id,
         ];
 
         $existing = $this->subscriptionRepository->findOneByField('email', $email);
 
         if ($existing) {
-            $existing->update($payload);
+            $existing->update(array_merge(
+                ['is_subscribed' => 1],
+                $existing->token ? [] : ['token' => $payload['token']],
+                ! $existing->customer_id && $customer?->email === $email ? ['customer_id' => $customer->id] : [],
+            ));
 
             return $existing;
         }

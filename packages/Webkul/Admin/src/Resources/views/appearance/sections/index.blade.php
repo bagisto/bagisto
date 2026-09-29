@@ -14,7 +14,7 @@
             'name' => $channel->name,
             'url' => route('admin.appearance.sections.index', [
                 'code' => $channel->theme ?: $scopedTheme,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
             ]),
         ])->values()"
         :channel-id="$scopedChannel->id"
@@ -23,7 +23,7 @@
             'name' => $locale->name,
             'url' => route('admin.appearance.sections.index', [
                 'code' => $scopedTheme,
-                'channel' => $scopedChannel->id,
+                'channel' => $scopedChannel->code,
                 'locale' => $locale->code,
             ]),
         ])->values()"
@@ -32,7 +32,7 @@
         :reorder-url="route('admin.appearance.sections.reorder')"
         :store-url="route('admin.appearance.sections.store', [
             'code' => $scopedTheme,
-            'channel' => $scopedChannel->id,
+            'channel' => $scopedChannel->code,
         ])"
         :publish-url="$publishUrl"
         :discard-url="$discardUrl"

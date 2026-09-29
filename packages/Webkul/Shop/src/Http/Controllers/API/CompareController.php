@@ -52,12 +52,16 @@ class CompareController extends APIController
      */
     public function store()
     {
+        if (! auth()->guard('customer')->check()) {
+            abort(401, trans('shop::app.errors.401.title'));
+        }
+
         $this->validate(request(), [
             'product_id' => 'required|integer|exists:products,id',
         ]);
 
         $compareProduct = $this->compareItemRepository->findOneByField([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => auth()->guard('customer')->id(),
             'product_id' => request()->input('product_id'),
         ]);
 
@@ -70,7 +74,7 @@ class CompareController extends APIController
         Event::dispatch('customer.compare.create.before');
 
         $compareProduct = $this->compareItemRepository->create([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => auth()->guard('customer')->id(),
             'product_id' => request()->input('product_id'),
         ]);
 
@@ -86,6 +90,10 @@ class CompareController extends APIController
      */
     public function destroy(): JsonResource
     {
+        if (! auth()->guard('customer')->check()) {
+            abort(401, trans('shop::app.errors.401.title'));
+        }
+
         $this->validate(request(), [
             'product_id' => 'required|integer',
         ]);
@@ -95,7 +103,7 @@ class CompareController extends APIController
         Event::dispatch('customer.compare.delete.before', $productId);
 
         $success = $this->compareItemRepository->deleteWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => auth()->guard('customer')->id(),
             'product_id' => $productId,
         ]);
 
@@ -129,10 +137,14 @@ class CompareController extends APIController
      */
     public function destroyAll(): JsonResource
     {
+        if (! auth()->guard('customer')->check()) {
+            abort(401, trans('shop::app.errors.401.title'));
+        }
+
         Event::dispatch('customer.compare.delete-all.before');
 
         $success = $this->compareItemRepository->deleteWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => auth()->guard('customer')->id(),
         ]);
 
         Event::dispatch('customer.compare.delete-all.after');

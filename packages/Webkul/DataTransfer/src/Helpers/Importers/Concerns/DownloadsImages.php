@@ -218,7 +218,8 @@ trait DownloadsImages
     }
 
     /**
-     * Progress of a queued image download, read from the fragments on disk.
+     * Progress of a queued image download, read from the fragments on disk. Entries settled before
+     * this run count too, so a resumed download does not restart its bar at zero.
      */
     public function queuedImageProgress(): array
     {
@@ -232,10 +233,6 @@ trait DownloadsImages
             $done += count(json_decode($disk->get($file), true) ?: []);
         }
 
-        /**
-         * Images already settled in the manifest before this run count too, so a
-         * resumed download does not restart its bar at zero.
-         */
         $settled = count(array_filter(
             $manifest,
             fn ($entry) => ($entry['status'] ?? 'pending') !== 'pending'
@@ -245,9 +242,16 @@ trait DownloadsImages
 
         $processed = min($total, max($done, $settled));
 
+        $downloaded = count(array_filter(
+            $manifest,
+            fn ($entry) => ($entry['status'] ?? null) === 'downloaded'
+        ));
+
         return [
             'total' => $total,
             'processed' => $processed,
+            'downloaded' => $downloaded,
+            'failed' => max(0, $processed - $downloaded),
             'progress' => $total > 0 ? (int) floor($processed / $total * 100) : 100,
             'done' => $total === 0 || $processed >= $total || $this->imageBatchSettled(),
         ];
@@ -324,14 +328,14 @@ trait DownloadsImages
     }
 
     /**
-     * Fetch one image and return its manifest entry. Never throws: a failure is
-     * recorded against the URL so the import continues without that image, which
-     * is the right trade — one unreachable host should not fail an import of
-     * thousands of products.
+     * Fetch one image and return its manifest entry, recording a failure against the url rather than
+     * throwing. The bytes decide the type, so a server that lies about it cannot plant another file.
      */
     protected function fetchImage(string $url): array
     {
-        if (! $this->isSafeRemoteUrl($url)) {
+        $addresses = $this->safeAddressesFor($url);
+
+        if (! $addresses) {
             return [
                 'status' => 'failed',
                 'reason' => 'unsafe-host',
@@ -340,7 +344,11 @@ trait DownloadsImages
 
         try {
             $response = Http::timeout(self::IMAGE_REQUEST_TIMEOUT)
-                ->withOptions(['stream' => false])
+                ->withOptions([
+                    'stream' => false,
+                    'allow_redirects' => false,
+                    'curl' => [CURLOPT_RESOLVE => $this->pinnedAddresses($url, $addresses)],
+                ])
                 ->get($url);
 
             if (! $response->successful()) {
@@ -359,11 +367,6 @@ trait DownloadsImages
                 ];
             }
 
-            /**
-             * Trust the bytes, not the content-type header: a server that lies
-             * about the type would otherwise get an arbitrary file written into
-             * the media directory.
-             */
             $dimensions = @getimagesizefromstring($contents);
 
             if ($dimensions === false) {
@@ -383,17 +386,13 @@ trait DownloadsImages
     }
 
     /**
-     * Write a fetched image alongside the import's other files and return its
-     * manifest entry.
+     * Write a fetched image alongside the import's other files and return its manifest entry. Its
+     * name is a hash of the url, so a repeat fetch reuses it and no remote name can escape the directory.
      */
     protected function storeImage(string $url, string $contents, array $dimensions): array
     {
         $extension = image_type_to_extension($dimensions[2], false) ?: 'jpg';
 
-        /**
-         * Named by a hash of the URL so the same link fetched twice lands on the
-         * same file, and so nothing in a remote name can escape the directory.
-         */
         $name = sha1($url).'.'.$extension;
 
         $path = $this->imageDownloadDir().'/'.$name;
@@ -416,6 +415,21 @@ trait DownloadsImages
     }
 
     /**
+     * The host to address mapping the request is pinned to, so the name is not resolved twice.
+     *
+     * @param  array<int, string>  $addresses
+     * @return array<int, string>
+     */
+    protected function pinnedAddresses(string $url, array $addresses): array
+    {
+        $parts = parse_url($url);
+
+        $port = $parts['port'] ?? (strtolower($parts['scheme']) === 'https' ? 443 : 80);
+
+        return array_map(fn ($address) => $parts['host'].':'.$port.':'.$address, $addresses);
+    }
+
+    /**
      * Would fetching this URL reach somewhere it should not?
      *
      * An import file is operator-supplied but its contents are frequently not —
@@ -426,13 +440,23 @@ trait DownloadsImages
      */
     protected function isSafeRemoteUrl(string $url): bool
     {
+        return $this->safeAddressesFor($url) !== [];
+    }
+
+    /**
+     * The addresses a url resolves to, all of them public, so the request can be pinned to them.
+     *
+     * @return array<int, string>
+     */
+    protected function safeAddressesFor(string $url): array
+    {
         $parts = parse_url($url);
 
         if (
             empty($parts['host'])
             || ! in_array(strtolower($parts['scheme'] ?? ''), ['http', 'https'], true)
         ) {
-            return false;
+            return [];
         }
 
         $host = $parts['host'];
@@ -445,7 +469,7 @@ trait DownloadsImages
             );
 
         if (empty($addresses)) {
-            return false;
+            return [];
         }
 
         foreach ($addresses as $address) {
@@ -454,11 +478,11 @@ trait DownloadsImages
                 FILTER_VALIDATE_IP,
                 FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
             )) {
-                return false;
+                return [];
             }
         }
 
-        return true;
+        return $addresses;
     }
 
     /**
@@ -485,14 +509,23 @@ trait DownloadsImages
     {
         $total = count($manifest);
 
-        $processed = count(array_filter(
+        $settled = array_filter(
             $manifest,
             fn ($entry) => ($entry['status'] ?? 'pending') !== 'pending'
+        );
+
+        $processed = count($settled);
+
+        $downloaded = count(array_filter(
+            $settled,
+            fn ($entry) => ($entry['status'] ?? null) === 'downloaded'
         ));
 
         return [
             'total' => $total,
             'processed' => $processed,
+            'downloaded' => $downloaded,
+            'failed' => $processed - $downloaded,
             'progress' => $total > 0 ? (int) floor($processed / $total * 100) : 100,
             'done' => $processed >= $total,
         ];

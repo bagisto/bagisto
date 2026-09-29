@@ -345,7 +345,7 @@ class CategoryRepository extends Repository
                 $encoded = image_manager()->fromUpload(request()->file($file))->toWebp()->toBytes();
 
                 $category->{$type} = $this->mediaFileName->resolve(
-                    'category/'.$category->id,
+                    'categories/'.$category->id,
                     $meta['file_name'] ?? null,
                     'webp'
                 );

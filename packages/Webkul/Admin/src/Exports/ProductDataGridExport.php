@@ -9,11 +9,14 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Webkul\Core\Traits\Sanitizer;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductDataGridExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping
 {
+    use Sanitizer;
+
     /**
      * Cached product rows from the query builder (fetched once, reused by both
      * headings() and collection() since Maatwebsite Excel calls headings() first).
@@ -113,7 +116,7 @@ class ProductDataGridExport implements FromCollection, ShouldAutoSize, WithHeadi
     {
         $datagridValues = collect($this->datagrid->getColumns())
             ->filter(fn ($column) => $column->getExportable())
-            ->map(fn ($column) => $this->sanitize($record->{$column->getIndex()}))
+            ->map(fn ($column) => $this->sanitizeSpreadsheetValue($record->{$column->getIndex()}))
             ->values()
             ->toArray();
 
@@ -370,37 +373,7 @@ class ProductDataGridExport implements FromCollection, ShouldAutoSize, WithHeadi
                 ? trans('admin::app.export.yes')
                 : trans('admin::app.export.no'),
 
-            default => $this->sanitize($value),
+            default => $this->sanitizeSpreadsheetValue($value),
         };
-    }
-
-    /**
-     * Sanitize a value to prevent formula injection in spreadsheet cells.
-     */
-    protected function sanitize(mixed $value): mixed
-    {
-        if (! is_string($value)) {
-            return $value;
-        }
-
-        $trimmed = ltrim($value);
-
-        if ($trimmed === '') {
-            return $value;
-        }
-
-        $dangerousChars = ['=', '+', '-', '@', "\t", "\r", "\n", '|', '%'];
-
-        $firstChar = mb_substr($trimmed, 0, 1);
-
-        if (in_array($firstChar, $dangerousChars, true)) {
-            return "'".$value;
-        }
-
-        if (preg_match('/^[\s]*[@=+\-|%]/u', $value)) {
-            return "'".$value;
-        }
-
-        return $value;
     }
 }

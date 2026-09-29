@@ -56,9 +56,9 @@ function indexedMinPriceOf(Product $product): float
 // ============================================================================
 
 it('should reindex every set of products handed to the same indexer', function () {
-    $first = $this->createSimpleProduct();
+    $first = $this->createSimpleProduct(['price' => ['float_value' => 100]]);
 
-    $second = $this->createSimpleProduct();
+    $second = $this->createSimpleProduct(['price' => ['float_value' => 100]]);
 
     startSpecialPriceToday($first, 60);
 

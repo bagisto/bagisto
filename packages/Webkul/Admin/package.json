@@ -33,7 +33,9 @@
     "@vee-validate/rules": "^4.9.1",
     "@vitejs/plugin-vue": "^5.2.4",
     "flatpickr": "^4.6.13",
+    "laravel-echo": "^2.5.0",
     "mitt": "^3.0.1",
+    "pusher-js": "^8.6.0",
     "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0",
     "vuedraggable": "^4.1.0"

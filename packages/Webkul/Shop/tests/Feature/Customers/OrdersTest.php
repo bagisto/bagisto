@@ -163,7 +163,7 @@ it('should let the customer download the invoice of their order', function () {
 
     $this->loginAsCustomer($customer);
 
-    get(route('shop.customers.account.orders.print-invoice', $invoice->id))
+    get(route('shop.customers.account.orders.print_invoice', $invoice->id))
         ->assertOk()
         ->assertHeader('content-type', 'application/pdf');
 });
@@ -173,6 +173,6 @@ it('should not serve the invoice of another customer', function () {
 
     $this->loginAsCustomer();
 
-    get(route('shop.customers.account.orders.print-invoice', $invoice->id))
+    get(route('shop.customers.account.orders.print_invoice', $invoice->id))
         ->assertNotFound();
 });

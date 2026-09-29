@@ -23,7 +23,7 @@ class SocialiteManager extends BaseSocialiteManager
         $clientId = core()->getConfigData('customer.settings.social_login.github_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.github_client_secret');
         $callbackUrl = core()->getConfigData('customer.settings.social_login.github_callback_url')
-            ?: route('customer.social-login.callback', ['provider' => 'github']);
+            ?: route('customer.social_login.callback', ['provider' => 'github']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -50,7 +50,7 @@ class SocialiteManager extends BaseSocialiteManager
         $clientId = core()->getConfigData('customer.settings.social_login.facebook_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.facebook_client_secret');
         $callbackUrl = core()->getConfigData('customer.settings.social_login.facebook_callback_url')
-            ?: route('customer.social-login.callback', ['provider' => 'facebook']);
+            ?: route('customer.social_login.callback', ['provider' => 'facebook']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -77,7 +77,7 @@ class SocialiteManager extends BaseSocialiteManager
         $clientId = core()->getConfigData('customer.settings.social_login.google_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.google_client_secret');
         $callbackUrl = core()->getConfigData('customer.settings.social_login.google_callback_url')
-            ?: route('customer.social-login.callback', ['provider' => 'google']);
+            ?: route('customer.social_login.callback', ['provider' => 'google']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -104,7 +104,7 @@ class SocialiteManager extends BaseSocialiteManager
         $clientId = core()->getConfigData('customer.settings.social_login.linkedin_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.linkedin_client_secret');
         $callbackUrl = core()->getConfigData('customer.settings.social_login.linkedin_callback_url')
-            ?: route('customer.social-login.callback', ['provider' => 'linkedin-openid']);
+            ?: route('customer.social_login.callback', ['provider' => 'linkedin-openid']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -131,7 +131,7 @@ class SocialiteManager extends BaseSocialiteManager
         $clientId = core()->getConfigData('customer.settings.social_login.twitter_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.twitter_client_secret');
         $callbackUrl = core()->getConfigData('customer.settings.social_login.twitter_callback_url')
-            ?: route('customer.social-login.callback', ['provider' => 'twitter']);
+            ?: route('customer.social_login.callback', ['provider' => 'twitter']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [

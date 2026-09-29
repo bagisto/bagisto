@@ -66,7 +66,7 @@ class EUWithdrawalController extends Controller
 
         if ($order && core()->getConfigData('sales.eu_withdrawal.general.enabled', optional($order->channel)->code)) {
             $signedUrl = URL::temporarySignedRoute(
-                'shop.eu-withdrawal.guest.create',
+                'shop.eu_withdrawal.guest.create',
                 now()->addHours(24),
                 ['orderId' => $order->id],
             );
@@ -86,7 +86,7 @@ class EUWithdrawalController extends Controller
         }
 
         return redirect()
-            ->route('shop.eu-withdrawal.guest.lookup')
+            ->route('shop.eu_withdrawal.guest.lookup')
             ->with('lookup_sent', true);
     }
 
@@ -102,7 +102,7 @@ class EUWithdrawalController extends Controller
         if ($existing = $this->withdrawals->findForOrder($order->id)) {
             return redirect(
                 URL::temporarySignedRoute(
-                    'shop.eu-withdrawal.guest.confirmation',
+                    'shop.eu_withdrawal.guest.confirmation',
                     now()->addHours(24),
                     ['uuid' => $existing->uuid],
                 )
@@ -113,7 +113,7 @@ class EUWithdrawalController extends Controller
             'order' => $order,
             'isGuest' => true,
             'formUrl' => URL::temporarySignedRoute(
-                'shop.eu-withdrawal.guest.store',
+                'shop.eu_withdrawal.guest.store',
                 now()->addHours(24),
                 ['orderId' => $order->id],
             ),
@@ -136,7 +136,7 @@ class EUWithdrawalController extends Controller
 
         return redirect(
             URL::temporarySignedRoute(
-                'shop.eu-withdrawal.guest.confirmation',
+                'shop.eu_withdrawal.guest.confirmation',
                 now()->addHours(24),
                 ['uuid' => $withdrawal->uuid],
             )

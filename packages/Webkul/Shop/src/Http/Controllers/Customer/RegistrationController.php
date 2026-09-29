@@ -62,7 +62,7 @@ class RegistrationController extends Controller
             'is_verified' => ! core()->getConfigData('customer.settings.email.verification'),
             'customer_group_id' => $this->customerGroupRepository->findOneWhere(['code' => $customerGroup])->id,
             'channel_id' => core()->getCurrentChannel()->id,
-            'token' => md5(uniqid(rand(), true)),
+            'token' => Str::random(64),
             'subscribed_to_news_letter' => (bool) (request()->input('is_subscribed') ?? $subscription?->is_subscribed),
         ]);
 
@@ -87,7 +87,7 @@ class RegistrationController extends Controller
                 'customer_id' => $customer->id,
                 'channel_id' => core()->getCurrentChannel()->id,
                 'is_subscribed' => 1,
-                'token' => uniqid(),
+                'token' => Str::random(64),
             ]);
 
             Event::dispatch('customer.subscription.after', $subscription);
@@ -153,7 +153,7 @@ class RegistrationController extends Controller
         }
 
         $customer = $this->customerRepository->update(
-            ['token' => md5(uniqid(rand(), true))],
+            ['token' => Str::random(64)],
             $customer->id
         );
 

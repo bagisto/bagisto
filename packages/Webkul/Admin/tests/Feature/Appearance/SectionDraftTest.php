@@ -155,7 +155,7 @@ it('should point the publish and discard actions at the channel the editor is sc
 
     $content = get(route('admin.appearance.sections.index', [
         'code' => $other->theme,
-        'channel' => $other->id,
+        'channel' => $other->code,
     ]))
         ->assertOk()
         ->content();
@@ -163,7 +163,7 @@ it('should point the publish and discard actions at the channel the editor is sc
     foreach (['publish', 'discard'] as $action) {
         expect($content)->toContain(route('admin.appearance.sections.'.$action, [
             'code' => $other->theme,
-            'channel' => $other->id,
+            'channel' => $other->code,
         ]));
     }
 });
@@ -193,7 +193,7 @@ it('should publish the drafts of the channel the editor is scoped to, leaving an
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.publish', themeCode($otherSection)), [
-        'channel' => $other->id,
+        'channel' => $other->code,
     ])->assertOk();
 
     expect($otherSection->refresh()->translate(app()->getLocale())->draft_options)->toBeNull();
@@ -534,8 +534,8 @@ it('should preview a channel with its own sections, not another channel ones', f
 
     $this->loginAsAdmin();
 
-    $marksIn = function ($channelId) {
-        $html = get(route('shop.appearance.preview', ['channel' => $channelId]))
+    $marksIn = function ($channelCode) {
+        $html = get(route('shop.appearance.preview', ['channel' => $channelCode]))
             ->assertOk()
             ->getContent();
 
@@ -544,11 +544,11 @@ it('should preview a channel with its own sections, not another channel ones', f
         return array_unique($matches[1]);
     };
 
-    expect($marksIn($other->id))->toBeEmpty()
-        ->and($marksIn($current->id))->not->toBeEmpty();
+    expect($marksIn($other->code))->toBeEmpty()
+        ->and($marksIn($current->code))->not->toBeEmpty();
 });
 
-it('should render every services section, so a duplicate of one shows up too', function () {
+it('should render every services section a channel holds, including any it had before one was the limit', function () {
     $channel = core()->getDefaultChannel();
 
     $names = ['Promises One', 'Promises Two'];
@@ -610,6 +610,32 @@ it('should keep a pinned footer at the end whatever order is sent', function () 
     ])->assertOk();
 
     expect($footer->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
+});
+
+it('should keep a services section at the end too, as the layout draws it at a fixed place', function () {
+    $channel = core()->getDefaultChannel();
+
+    $services = Section::factory()->create([
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $other = Section::factory()->create([
+        'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$services->id, $other->id],
+    ])->assertOk();
+
+    expect($services->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
 });
 
 // ============================================================================
@@ -795,7 +821,7 @@ it('should hold a new section back from the storefront until it is published', f
 
     $id = postJson(route('admin.appearance.sections.store', [
         'code' => $channel->theme ?: 'default',
-        'channel' => $channel->id,
+        'channel' => $channel->code,
     ]), [
         'name' => 'Fresh Section',
         'type' => SectionTypeEnum::STATIC_CONTENT->value,

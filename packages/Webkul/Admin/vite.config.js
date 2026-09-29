@@ -35,6 +35,7 @@ export default defineConfig(({ mode }) => {
                     "src/Resources/assets/css/app.css",
                     "src/Resources/assets/js/app.js",
                     "src/Resources/assets/js/chart.js",
+                    "src/Resources/assets/js/echo.js",
                 ],
                 refresh: true,
             }),

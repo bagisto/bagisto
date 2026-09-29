@@ -62,16 +62,16 @@ class SectionController extends Controller
                 ->all(),
             'previewUrl' => route('shop.appearance.preview', [
                 'theme' => $code,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
                 'locale' => $locale->code,
             ]),
             'publishUrl' => route('admin.appearance.sections.publish', [
                 'code' => $code,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
             ]),
             'discardUrl' => route('admin.appearance.sections.discard', [
                 'code' => $code,
-                'channel' => $channel->id,
+                'channel' => $channel->code,
             ]),
             'urls' => $this->editorUrls(),
         ]);
@@ -133,19 +133,21 @@ class SectionController extends Controller
             'theme_code' => 'required',
         ]);
 
-        $this->sectionOrFail($id);
+        $section = $this->sectionOrFail($id);
 
         abort_unless(
             $this->themeCatalog->isActive((string) request('theme_code'), (int) request('channel_id')),
             $this->inactiveThemeResponse()
         );
 
-        $this->guardSingleton(
-            request('type'),
-            request('theme_code'),
-            (int) request('channel_id'),
-            $id
-        );
+        if ($this->changesTypeOrChannel($section)) {
+            $this->guardSingleton(
+                request('type'),
+                request('theme_code'),
+                (int) request('channel_id'),
+                $id
+            );
+        }
 
         $locale = request('locale');
 
@@ -408,7 +410,7 @@ class SectionController extends Controller
      */
     protected function requestedChannel()
     {
-        $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'));
+        $channel = core()->getAllChannels()->firstWhere('code', request('channel'));
 
         return $channel ?? core()->getDefaultChannel();
     }
@@ -422,7 +424,7 @@ class SectionController extends Controller
     {
         $channels = $this->themeCatalog->activeChannels($code);
 
-        return $channels->firstWhere('id', (int) request('channel')) ?? $channels->first();
+        return $channels->firstWhere('code', request('channel')) ?? $channels->first();
     }
 
     /**
@@ -530,6 +532,17 @@ class SectionController extends Controller
         $free = array_values(array_diff($sectionIds, $pinned));
 
         return array_merge($free, array_values(array_intersect($sectionIds, $pinned)));
+    }
+
+    /**
+     * Whether an update moves a section to another type or channel, which is when a singleton type is guarded.
+     *
+     * @param  Section  $section
+     */
+    protected function changesTypeOrChannel($section): bool
+    {
+        return $section->type !== request('type')
+            || (int) $section->channel_id !== (int) request('channel_id');
     }
 
     /**

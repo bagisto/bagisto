@@ -58,7 +58,7 @@ it('should delete the reasons that remain and report the ones already gone', fun
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.reasons.mass-delete'), [
+    postJson(route('admin.sales.rma.reasons.mass_delete'), [
         'indices' => [$staleId, $reason->id],
     ])
         ->assertOk()
@@ -75,7 +75,7 @@ it('should report the ordinary success message when every selected reason exists
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.reasons.mass-delete'), [
+    postJson(route('admin.sales.rma.reasons.mass_delete'), [
         'indices' => $reasons->pluck('id')->all(),
     ])
         ->assertOk()
@@ -87,7 +87,7 @@ it('should report the ordinary success message when every selected reason exists
 it('should not fail when every selected reason is already gone', function () use ($staleId) {
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.reasons.mass-delete'), [
+    postJson(route('admin.sales.rma.reasons.mass_delete'), [
         'indices' => [$staleId, $staleId + 1],
     ])
         ->assertOk()
@@ -106,7 +106,7 @@ it('should delete the rules that remain and report the ones already gone', funct
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.rules.mass-delete'), [
+    postJson(route('admin.sales.rma.rules.mass_delete'), [
         'indices' => [$staleId, $rule->id],
     ])
         ->assertOk()
@@ -127,7 +127,7 @@ it('should delete the custom fields that remain and report the ones already gone
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.mass-delete'), [
+    postJson(route('admin.sales.rma.custom_fields.mass_delete'), [
         'indices' => [$staleId, $customField->id],
     ])
         ->assertOk()
@@ -142,7 +142,7 @@ it('should delete the custom fields that remain and report the ones already gone
 it('should reject a custom field mass delete that does not name a list of records', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.custom-fields.mass-delete'), [
+    postJson(route('admin.sales.rma.custom_fields.mass_delete'), [
         'indices' => 'not-an-array',
     ])->assertJsonValidationErrorFor('indices');
 });

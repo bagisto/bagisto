@@ -217,7 +217,7 @@
 
                     this.scrollToBottom();
 
-                    this.$axios.post("{{ route('admin.configuration.cache-management.execute') }}", {
+                    this.$axios.post("{{ route('admin.configuration.cache_management.execute') }}", {
                             action: action,
                         })
                         .then((response) => {

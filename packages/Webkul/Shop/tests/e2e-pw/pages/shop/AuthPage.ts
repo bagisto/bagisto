@@ -204,13 +204,11 @@ export class AuthPage extends BasePage {
 
     async expectResetLinkSent(): Promise<void> {
         await expect(
-            this.page.getByText("We have e-mailed your reset password link.").first(),
-        ).toBeVisible();
-    }
-
-    async expectResetRefusedForUnknownEmail(): Promise<void> {
-        await expect(
-            this.page.getByText("We cannot find a user with that email address.").first(),
+            this.page
+                .getByText(
+                    "If this email address is registered, a password reset link has been sent to it.",
+                )
+                .first(),
         ).toBeVisible();
     }
 

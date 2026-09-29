@@ -15,9 +15,9 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::prefix('paypal/smart-button')->group(function () {
-        Route::get('/create-order', [SmartButtonController::class, 'createOrder'])->name('paypal.smart-button.create-order');
+        Route::get('/create-order', [SmartButtonController::class, 'createOrder'])->name('paypal.smart_button.create_order');
 
-        Route::post('/capture-order', [SmartButtonController::class, 'captureOrder'])->name('paypal.smart-button.capture-order');
+        Route::post('/capture-order', [SmartButtonController::class, 'captureOrder'])->name('paypal.smart_button.capture_order');
     });
 });
 

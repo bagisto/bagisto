@@ -2,7 +2,6 @@
 
 namespace Webkul\Product\Models;
 
-use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Contracts\ProductDownloadableSample as ProductDownloadableSampleContract;
 
@@ -34,7 +33,7 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
      */
     public function file_url()
     {
-        return Storage::url($this->file);
+        return route('admin.catalog.products.downloadable.sample_file', $this->id);
     }
 
     /**
@@ -56,7 +55,7 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
 
         $array['title'] = $translation ? $translation->title : '';
 
-        $array['file_url'] = $this->file ? Storage::url($this->file) : null;
+        $array['file_url'] = $this->file ? $this->file_url() : null;
 
         return $array;
     }

@@ -944,7 +944,7 @@
                                             <div class="flex justify-between">
                                                 @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
 
-                                                <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                                <a href="{{ route('shop.customers.account.orders.print_invoice', $invoice->id) }}">
                                                     <div class="flex items-center gap-1 font-medium text-black">
                                                         <span class="icon-download text-sm font-semibold"></span>
 
@@ -1214,7 +1214,7 @@
                                             @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
                                         </label>
 
-                                        <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                        <a href="{{ route('shop.customers.account.orders.print_invoice', $invoice->id) }}">
                                             <div class="flex items-center gap-1 font-semibold">
                                                 <span class="icon-download text-2xl"></span>
 

@@ -128,6 +128,24 @@ export class RmaRequestPage extends BasePage {
         await expect(this.requestStatusBadge).toContainText(status);
     }
 
+    async expectPhotosServedOnDetailPage(count: number): Promise<void> {
+        const photos = this.page.locator('img[src*="/customer/account/rma/images/"]');
+
+        await expect(photos).toHaveCount(count);
+
+        for (let index = 0; index < count; index++) {
+            await expect
+                .poll(
+                    () =>
+                        photos
+                            .nth(index)
+                            .evaluate((image: HTMLImageElement) => image.naturalWidth),
+                    { message: "a photo on the return rendered no image data" },
+                )
+                .toBeGreaterThan(0);
+        }
+    }
+
     async expectMessageInConversation(message: string): Promise<void> {
         await expect(this.page.getByText(message)).toBeVisible();
     }

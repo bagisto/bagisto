@@ -31,7 +31,7 @@ it('should rename an existing product video while keeping its extension', functi
 
     $product = $this->createSimpleProduct();
 
-    $path = 'product/'.$product->id.'/lk92mdow.mp4';
+    $path = 'products/'.$product->id.'/lk92mdow.mp4';
 
     Storage::put($path, 'video-contents');
 
@@ -49,7 +49,7 @@ it('should rename an existing product video while keeping its extension', functi
         ],
     ], $product, 'videos');
 
-    $expected = 'product/'.$product->id.'/product-walkthrough.mp4';
+    $expected = 'products/'.$product->id.'/product-walkthrough.mp4';
 
     expect($video->fresh()->path)->toBe($expected);
 
@@ -76,7 +76,7 @@ it('should name a newly uploaded video after the requested file name', function 
 
     $video = $product->fresh()->videos->first();
 
-    expect($video->path)->toBe('product/'.$product->id.'/product-walkthrough.mp4');
+    expect($video->path)->toBe('products/'.$product->id.'/product-walkthrough.mp4');
 
     Storage::assertExists($video->path);
 });
@@ -95,6 +95,6 @@ it('should not attempt to store alt text against a video', function () {
 
     $video = $product->fresh()->videos->first();
 
-    expect($video->path)->toBe('product/'.$product->id.'/product-walkthrough.mp4')
+    expect($video->path)->toBe('products/'.$product->id.'/product-walkthrough.mp4')
         ->and($video->file_name)->toBe('product-walkthrough');
 });

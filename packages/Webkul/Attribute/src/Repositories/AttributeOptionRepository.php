@@ -15,7 +15,7 @@ class AttributeOptionRepository extends Repository
     /**
      * Directory the swatch images are stored in.
      */
-    public const SWATCH_DIRECTORY = 'attribute_option';
+    public const SWATCH_DIRECTORY = 'attribute-options';
 
     /**
      * Create a new repository instance.

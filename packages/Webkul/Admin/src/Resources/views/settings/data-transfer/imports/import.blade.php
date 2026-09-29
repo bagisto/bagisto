@@ -27,13 +27,11 @@
         </div>
     </div>
 
+    {{--
+        The stepper is built from the import itself rather than a fixed list, because a delete run has
+        no images to fetch and an importer carrying no image references skips that phase as well.
+    --}}
     @php
-        /**
-         * Each import walks a different set of phases, so the stepper is built
-         * from the import itself rather than from a fixed list. A delete run has
-         * no images to fetch and nothing to link; an importer that carries no
-         * image references skips that phase too.
-         */
         $isDelete = $import->action === 'delete';
 
         $prefix = 'admin::app.settings.data-transfer.imports.import.';
@@ -46,12 +44,10 @@
             'validated' => 1,
         ];
 
-        /**
-         * Images are fetched up-front, in a phase of their own, so the create
-         * step never blocks on the network — the create jobs only ever read
-         * files that are already on disk.
-         */
-        if (! $isDelete && $hasImagePhase) {
+        if (
+            ! $isDelete
+            && $hasImagePhase
+        ) {
             $importSteps[] = trans($prefix.'step-download');
 
             $stepMap['downloading'] = count($importSteps) - 1;
@@ -343,7 +339,7 @@
 
                         <p class="flex items-center gap-2">
                             <span class="font-medium text-gray-800 dark:text-white">
-                                @{{ imageProgress.processed }} / @{{ imageProgress.total }}
+                                @{{ imageProgress.downloaded }} / @{{ imageProgress.total }}
                             </span>
 
                             @lang('admin::app.settings.data-transfer.imports.import.images-progress')
@@ -505,7 +501,7 @@
                                     @lang('admin::app.settings.data-transfer.imports.import.images-downloaded')
                                 </span>
 
-                                @{{ imageProgress.processed }} / @{{ imageProgress.total }}
+                                @{{ imageProgress.downloaded }} / @{{ imageProgress.total }}
                             </p>
                         </div>
                     </div>

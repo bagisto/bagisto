@@ -32,7 +32,7 @@ class DownloadableProductController extends Controller
             return datagrid(DownloadableProductDataGrid::class)->process();
         }
 
-        return view('shop::customers.account.downloadable_products.index');
+        return view('shop::customers.account.downloadable-products.index');
     }
 
     /**
@@ -48,8 +48,12 @@ class DownloadableProductController extends Controller
             'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
+        if (! $downloadableLinkPurchased) {
+            abort(404);
+        }
+
         if ($downloadableLinkPurchased->status == 'pending') {
-            abort(403);
+            abort(404);
         }
 
         $totalInvoiceQty = 0;

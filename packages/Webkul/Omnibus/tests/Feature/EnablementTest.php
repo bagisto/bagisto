@@ -25,7 +25,7 @@ it('should wire the admin field default to the omnibus.enabled config key', func
     $field = system_config()->getConfigField('catalog.products.omnibus.is_enabled');
 
     expect($field)->not->toBeNull()
-        ->and($field['default'])->toBe(config('omnibus.enabled'));
+        ->and($field['default'])->toBe((int) config('omnibus.enabled'));
 });
 
 // ============================================================================

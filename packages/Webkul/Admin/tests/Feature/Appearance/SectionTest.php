@@ -84,7 +84,6 @@ it('should store a newly created section', function () {
             SectionTypeEnum::PRODUCT_CAROUSEL->value,
             SectionTypeEnum::CATEGORY_CAROUSEL->value,
             SectionTypeEnum::IMAGE_CAROUSEL->value,
-            SectionTypeEnum::SERVICES_CONTENT->value,
         ]),
         'name' => $name = fake()->name(),
     ])
@@ -554,11 +553,11 @@ it('should scope the listing to the requested channel', function () {
 
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $channel->id]))
+    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $channel->code]))
         ->assertOk()
         ->assertSee($section->name);
 
-    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $other->id]))
+    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $other->code]))
         ->assertOk()
         ->assertDontSee($section->name);
 });
@@ -697,11 +696,11 @@ it('should hand the editor a store url carrying the channel being edited', funct
 
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['code' => $other->theme, 'channel' => $other->id]))
+    get(route('admin.appearance.sections.index', ['code' => $other->theme, 'channel' => $other->code]))
         ->assertOk()
         ->assertSee(route('admin.appearance.sections.store', [
             'code' => $other->theme,
-            'channel' => $other->id,
+            'channel' => $other->code,
         ]), false);
 });
 
@@ -712,7 +711,7 @@ it('should create a section against the channel the editor is scoped to', functi
 
     $response = postJson(route('admin.appearance.sections.store', [
         'code' => $other->theme,
-        'channel' => $other->id,
+        'channel' => $other->code,
     ]), [
         'name' => 'Belongs To The Other Channel',
         'type' => SectionTypeEnum::FOOTER_LINKS->value,
@@ -742,7 +741,7 @@ it('should still allow a footer links section on a channel that has none', funct
 
     postJson(route('admin.appearance.sections.store', [
         'code' => $other->theme,
-        'channel' => $other->id,
+        'channel' => $other->code,
     ]), [
         'name' => 'Footer For The Other Channel',
         'type' => SectionTypeEnum::FOOTER_LINKS->value,
@@ -763,7 +762,7 @@ it('should place a new section above the pinned footer', function () {
 
     $response = postJson(route('admin.appearance.sections.store', [
         'code' => $channel->theme,
-        'channel' => $channel->id,
+        'channel' => $channel->code,
     ]), [
         'name' => 'Added After The Footer Existed',
         'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
@@ -838,7 +837,7 @@ it('should refuse a second footer however it is reached', function (string $path
     $this->loginAsAdmin();
 
     match ($path) {
-        'created' => postJson(route('admin.appearance.sections.store', ['code' => $theme, 'channel' => $channel->id]), [
+        'created' => postJson(route('admin.appearance.sections.store', ['code' => $theme, 'channel' => $channel->code]), [
             'name' => 'Second Footer',
             'type' => SectionTypeEnum::FOOTER_LINKS->value,
         ])->assertJsonValidationErrorFor('type'),
@@ -863,7 +862,7 @@ it('should still allow the footer a channel is entitled to', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => $channel->theme ?: 'default', 'channel' => $channel->id]), [
+    postJson(route('admin.appearance.sections.store', ['code' => $channel->theme ?: 'default', 'channel' => $channel->code]), [
         'name' => 'The Footer',
         'type' => SectionTypeEnum::FOOTER_LINKS->value,
     ])->assertOk();
@@ -893,4 +892,105 @@ it('should let the footer it already has be edited', function () {
     ])->assertRedirect();
 
     $this->assertDatabaseHas('theme_sections', ['id' => $footer->id, 'name' => 'Renamed Footer']);
+});
+
+// ============================================================================
+// Services Rules
+// ============================================================================
+
+it('should refuse a second services section however it is reached', function (string $path) {
+    $channel = core()->getDefaultChannel();
+
+    $theme = $channel->theme ?: 'default';
+
+    Section::query()->where('type', SectionTypeEnum::SERVICES_CONTENT->value)->get()->each->delete();
+
+    $services = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+    ]);
+
+    $other = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::STATIC_CONTENT->value,
+    ]);
+
+    $this->loginAsAdmin();
+
+    match ($path) {
+        'created' => postJson(route('admin.appearance.sections.store', ['code' => $theme, 'channel' => $channel->code]), [
+            'name' => 'Second Promises',
+            'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+        ])->assertJsonValidationErrorFor('type'),
+
+        'copied' => postJson(route('admin.appearance.sections.duplicate', $services->id))
+            ->assertJsonValidationErrorFor('type'),
+
+        'switched' => postJson(route('admin.appearance.sections.update', $other->id), [
+            'name' => 'Hijacked',
+            'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+            'sort_order' => 1,
+            'channel_id' => $channel->id,
+            'theme_code' => $theme,
+        ])->assertJsonValidationErrorFor('type'),
+    };
+
+    expect(Section::query()->where('type', SectionTypeEnum::SERVICES_CONTENT->value)->count())->toBe(1);
+})->with(['created', 'copied', 'switched']);
+
+it('should let a channel that already holds two services sections edit either of them', function () {
+    $channel = core()->getDefaultChannel();
+
+    $theme = $channel->theme ?: 'default';
+
+    $sections = collect(['First Promises', 'Second Promises'])->map(fn ($name) => Section::factory()->create([
+        'name' => $name,
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+    ]));
+
+    $this->loginAsAdmin();
+
+    $sections->each(function ($section) use ($channel, $theme) {
+        postJson(route('admin.appearance.sections.update', $section->id), [
+            'name' => $name = $section->name.' Renamed',
+            'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+            'sort_order' => $section->sort_order,
+            'channel_id' => $channel->id,
+            'theme_code' => $theme,
+        ])->assertRedirect();
+
+        $this->assertDatabaseHas('theme_sections', ['id' => $section->id, 'name' => $name]);
+    });
+});
+
+it('should still refuse a section switched to the services type on a channel that has one', function () {
+    $channel = core()->getDefaultChannel();
+
+    $theme = $channel->theme ?: 'default';
+
+    Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+    ]);
+
+    $other = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::STATIC_CONTENT->value,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.update', $other->id), [
+        'name' => 'Hijacked',
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+        'sort_order' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+    ])->assertJsonValidationErrorFor('type');
 });

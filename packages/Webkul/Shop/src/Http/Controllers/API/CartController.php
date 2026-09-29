@@ -141,6 +141,10 @@ class CartController extends APIController
      */
     public function moveToWishlist(): JsonResource
     {
+        if (! core()->getConfigData('customer.settings.wishlist.wishlist_option')) {
+            abort(403, trans('shop::app.errors.403.title'));
+        }
+
         $this->validate(request(), [
             'ids' => 'required|array',
             'ids.*' => 'integer',

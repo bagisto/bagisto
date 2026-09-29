@@ -133,7 +133,7 @@ it('should mass delete RMA rules', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.rules.mass-delete'), [
+    postJson(route('admin.sales.rma.rules.mass_delete'), [
         'indices' => $rules->pluck('id')->toArray(),
     ])
         ->assertOk()

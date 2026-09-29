@@ -61,7 +61,7 @@ it('should leave a footer link to somewhere else exactly as it was entered', fun
     'external http' => 'http://twitter.com/bagisto',
     'protocol relative' => '//cdn.example.com/promo',
     'mail address' => 'mailto:hello@example.com',
-    'telephone' => 'tel:+1234567890',
+    'phone number' => 'tel:+1234567890',
     'anchor' => '#top',
 ]);
 

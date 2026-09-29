@@ -16,13 +16,33 @@
         'method' => 'POST',
     ])
 
+    {{--
+        Laravel keys a nested field's errors with dots while the input carries the same path in
+        brackets, so each message is seeded under both spellings for the field to find its own.
+    --}}
     @php
         $method = strtoupper($method);
+
+        $initialErrors = [];
+
+        foreach ($errors->getMessages() as $key => $messages) {
+            $segments = explode('.', $key);
+
+            $bracketed = array_shift($segments);
+
+            foreach ($segments as $segment) {
+                $bracketed .= '['.$segment.']';
+            }
+
+            $initialErrors[$key] = $messages;
+
+            $initialErrors[$bracketed] = $messages;
+        }
     @endphp
 
     <v-form
         method="{{ $method === 'GET' ? 'GET' : 'POST' }}"
-        :initial-errors="{{ json_encode($errors->getMessages()) }}"
+        :initial-errors="{{ json_encode($initialErrors) }}"
         v-slot="{ meta, errors, setValues }"
         @invalid-submit="onInvalidSubmit"
         {{ $attributes }}

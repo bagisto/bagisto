@@ -10,6 +10,7 @@ use Webkul\CartRule\Exceptions\CouponUsageLimitExceededException;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductCustomizableOptionRepository;
 use Webkul\Sales\Contracts\Order as OrderContract;
+use Webkul\Sales\Exceptions\InsufficientInventoryException;
 use Webkul\Sales\Generators\OrderSequencer;
 use Webkul\Sales\Models\Order;
 
@@ -93,7 +94,10 @@ class OrderRepository extends Repository
              * Do not retry when coupon usage limits are exceeded — this is a
              * definitive business-logic failure, not a transient DB error.
              */
-            if ($e instanceof CouponUsageLimitExceededException) {
+            if (
+                $e instanceof CouponUsageLimitExceededException
+                || $e instanceof InsufficientInventoryException
+            ) {
                 throw $e;
             }
 

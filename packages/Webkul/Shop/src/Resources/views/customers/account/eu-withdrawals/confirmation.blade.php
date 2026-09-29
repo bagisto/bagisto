@@ -1,6 +1,6 @@
 <x-shop::layouts.account>
     <x-slot:title>
-        @lang('shop::app.eu_withdrawal.confirmation.page_title')
+        @lang('shop::app.eu-withdrawal.confirmation.page-title')
     </x-slot>
 
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))

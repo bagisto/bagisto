@@ -2,6 +2,7 @@ import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 import type { AdminPage } from "../../../../setup";
 import { ProductListPage } from "./ProductListPage";
+import { MediaUploadSection } from "../../components/MediaUploadSection";
 
 export interface ProductEditData {
     productNumber?: string;
@@ -109,6 +110,10 @@ export class ProductEditPage extends BasePage {
         return this.taxCategoryField
             .locator("div.max-h-60 > div")
             .filter({ hasText: new RegExp(`^\\s*${label}\\s*$`) });
+    }
+
+    mediaAttribute(code: string): MediaUploadSection {
+        return new MediaUploadSection(this.page, code);
     }
 
     async waitForForm() {

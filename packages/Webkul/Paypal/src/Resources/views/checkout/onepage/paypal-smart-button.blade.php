@@ -65,7 +65,7 @@
                             },
 
                             createOrder: (data, actions) => {
-                                return this.$axios.get("{{ route('paypal.smart-button.create-order') }}")
+                                return this.$axios.get("{{ route('paypal.smart_button.create_order') }}")
                                     .then(response => response.data.result)
                                     .then(order => order.id)
                                     .catch(error => {
@@ -80,7 +80,7 @@
                             },
 
                             onApprove: (data, actions) => {
-                                return this.$axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                                return this.$axios.post("{{ route('paypal.smart_button.capture_order') }}", {
                                     _token: "{{ csrf_token() }}",
                                     orderData: data
                                 })

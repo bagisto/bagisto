@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class TwoFactorController extends Controller
             if (
                 $admin->two_factor_enabled
                 && $admin->two_factor_secret
-                && ! session('two_factor_passed')
+                && ! $this->hasPassedTwoFactor($admin)
             ) {
                 return response()->json([
                     'message' => trans('admin::app.errors.401.title'),
@@ -54,7 +55,8 @@ class TwoFactorController extends Controller
     }
 
     /**
-     * Enable 2FA after verifying code.
+     * Enable 2FA after verifying code. The backup codes are shown on screen as well as emailed, so a
+     * delivery failure is reported rather than allowed to stop two factor authentication going on.
      */
     public function enable(Request $request)
     {
@@ -66,9 +68,9 @@ class TwoFactorController extends Controller
 
         $decryptedSecret = decrypt($admin->two_factor_secret);
 
-        $isValidCode = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code);
+        $window = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code, $admin->two_factor_last_used_window);
 
-        if (! $isValidCode) {
+        if (! $window) {
             return response()->json([
                 'errors' => [
                     'code' => [trans('admin::app.account.messages.invalid-code')],
@@ -77,27 +79,19 @@ class TwoFactorController extends Controller
         }
 
         $admin->forceFill([
+            'two_factor_last_used_window' => $window,
             'two_factor_enabled' => true,
             'two_factor_verified_at' => now(),
         ])->save();
 
-        session()->put('two_factor_passed', true);
+        session()->put('two_factor_passed_for', $admin->id);
 
         $backupCodes = two_factor_authentication()->generateBackupCodes();
 
-        /**
-         * Persist only the hashed backup codes - the plain codes are shown once
-         * on screen and emailed, but never stored in plain text.
-         */
         $admin->update([
             'two_factor_backup_codes' => two_factor_authentication()->hashBackupCodes($backupCodes),
         ]);
 
-        /**
-         * The backup codes are shown on screen for the admin to download, so a
-         * failed email delivery must not prevent two-factor authentication from
-         * being enabled - it is only a secondary copy of the codes.
-         */
         try {
             Mail::to($admin->email)->send(
                 new BackupCodesNotification($admin, $backupCodes)
@@ -113,7 +107,8 @@ class TwoFactorController extends Controller
     }
 
     /**
-     * Disable 2FA configuration.
+     * Disable 2FA configuration. A session signed in with the password alone may not turn it off,
+     * which would otherwise bypass two factor authentication by calling this endpoint.
      */
     public function disable()
     {
@@ -125,15 +120,9 @@ class TwoFactorController extends Controller
             ], 401);
         }
 
-        /**
-         * A session that has two-factor authentication enabled but has not yet
-         * passed verification must not be able to disable it, otherwise 2FA
-         * could be bypassed by simply hitting this endpoint after logging in
-         * with the password only.
-         */
         if (
             $admin->two_factor_enabled
-            && ! session('two_factor_passed')
+            && ! $this->hasPassedTwoFactor($admin)
         ) {
             return response()->json([
                 'message' => trans('admin::app.errors.401.title'),
@@ -156,6 +145,10 @@ class TwoFactorController extends Controller
      */
     public function showVerifyForm()
     {
+        if ($redirect = $this->pendingVerificationRedirect(auth('admin')->user())) {
+            return $redirect;
+        }
+
         return view('admin::account.verify');
     }
 
@@ -164,13 +157,21 @@ class TwoFactorController extends Controller
      */
     public function verifyTwoFactorCode(Request $request)
     {
-        $request->validate(['code' => 'required|digits:6']);
-
         $admin = auth('admin')->user();
+
+        if ($redirect = $this->pendingVerificationRedirect($admin)) {
+            return $redirect;
+        }
+
+        $request->validate(['code' => 'required|digits:6']);
 
         $decryptedSecret = decrypt($admin->two_factor_secret);
 
-        if (two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code)) {
+        $window = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code, $admin->two_factor_last_used_window);
+
+        if ($window) {
+            $admin->forceFill(['two_factor_last_used_window' => $window])->save();
+
             return $this->handleSuccessfulVerification();
         }
 
@@ -191,11 +192,39 @@ class TwoFactorController extends Controller
     }
 
     /**
+     * Whether this session passed two-factor verification as the given admin.
+     */
+    protected function hasPassedTwoFactor($admin): bool
+    {
+        return (int) session('two_factor_passed_for') === (int) $admin->id;
+    }
+
+    /**
+     * Where to send a caller of the verification screen that has no verification left to do.
+     */
+    protected function pendingVerificationRedirect($admin): ?RedirectResponse
+    {
+        if (! $admin) {
+            return redirect()->route('admin.session.create');
+        }
+
+        if (
+            ! $admin->two_factor_enabled
+            || ! $admin->two_factor_secret
+            || $this->hasPassedTwoFactor($admin)
+        ) {
+            return redirect()->route('admin.dashboard.index');
+        }
+
+        return null;
+    }
+
+    /**
      * Handle successful 2FA verification.
      */
     protected function handleSuccessfulVerification()
     {
-        session()->put('two_factor_passed', true);
+        session()->put('two_factor_passed_for', auth()->guard('admin')->id());
 
         return redirect()->intended(route('admin.dashboard.index'))
             ->with('success', trans('admin::app.account.messages.verified-success'));

@@ -814,7 +814,7 @@
                     <!-- Up-sell Products -->
                     <x-shop::products.carousel
                         :title="trans('shop::app.products.view.up-sell-title')"
-                        :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
+                        :src="route('shop.api.products.up_sell.index', ['id' => $product->id])"
                     />
                 </template>
             </div>

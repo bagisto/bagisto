@@ -14,6 +14,10 @@
 ## Medium Impact Changes
 
 - [Relocated Configuration Codes](#relocated-configuration-codes)
+- [Storefront Breadcrumbs Moved Into the Shop Package](#storefront-breadcrumbs-moved-into-the-shop-package)
+- [Storage Directories Renamed](#storage-directories-renamed)
+- [Route Names Are snake_case](#route-names-are-snake_case)
+- [Translation Keys Are kebab-case](#translation-keys-are-kebab-case)
 - [Theme Section Media Are Stored As Bare Paths](#theme-section-media-are-stored-as-bare-paths)
 - [Image Processing Moved to Laravel's Image Component](#image-processing-moved-to-laravels-image-component)
 - [Remote Storage Drivers](#remote-storage-drivers)
@@ -22,6 +26,11 @@
 ## Low Impact Changes
 
 - [The Omnibus Package](#the-omnibus-package)
+- [The Phone Field Is Named Phone Everywhere](#the-phone-field-is-named-phone-everywhere)
+- [Blade View Paths Are kebab-case](#blade-view-paths-are-kebab-case)
+- [Product Image Size and Placeholder Settings Removed](#product-image-size-and-placeholder-settings-removed)
+- [Snake_case Methods Renamed on the Core Helper](#snake_case-methods-renamed-on-the-core-helper)
+- [CoreConfigRepository Helpers Renamed](#coreconfigrepository-helpers-renamed)
 - [Catalog Rule Jobs No Longer Declare a Batch Size](#catalog-rule-jobs-no-longer-declare-a-batch-size)
 - [Magic AI Model Lists Follow the Providers' Current Models](#magic-ai-model-lists-follow-the-providers-current-models)
 
@@ -185,6 +194,7 @@ Options Laravel 13 added are now present rather than implied: the `deferred`, `b
 | `config/cache.php` | `default` moved from `file` to `database`; `storage` and `failover` stores added; `serializable_classes` set | Nothing — your `.env` value still wins. See the note below before copying Laravel 13's own version of this file |
 | `config/filesystems.php` | `r2` disk added, `report` keys added, `serve` commented out on the `private` disk | The Cloudflare R2 driver has no disk to configure, and the `private` disk keeps serving its files through temporary URLs |
 | `config/logging.php`, `config/mail.php`, `config/services.php`, `config/queue.php`, `config/session.php`, `config/database.php`, `config/sanctum.php` | The Laravel 13 renames and additions listed above | Nothing — the old names still resolve, apart from the SMTP encryption noted above |
+| `config/broadcasting.php` | Replaced with Laravel 13's own version: `default` reads `BROADCAST_CONNECTION` (it read the pre-Laravel 11 `BROADCAST_DRIVER`, which `.env.example` never mentioned, so broadcasting could not be switched on at all), and `reverb` and `ably` connections were added | Broadcasting stays off however `.env` is set. If you had worked around this by setting `BROADCAST_DRIVER`, rename it to `BROADCAST_CONNECTION` |
 | `config/imagecache.php` | `cache_driver` removed | Nothing — the key is simply unread |
 | `config/purify.php` | Serializer store default follows the new cache default | Nothing — your `.env` value still wins |
 | `config/repository.php` | Unchanged since v2.4.12; earlier 2.4 releases differ in comments only | Nothing. Do not bother replacing it |
@@ -217,6 +227,14 @@ The shipped default for `CACHE_STORE` also moved from `file` to `database`, and 
 
 `.env.example` gained `AWS_URL`, `AWS_ENDPOINT` and the seven `R2_*` variables for the new storage drivers. None of them are required — the disks are configurable from the admin instead — and no variable was removed or renamed, so an existing `.env` needs no edit to keep working.
 
+It also gained `BROADCAST_CONNECTION` and the `REVERB_*` and `PUSHER_*` blocks those connections read. `BROADCAST_CONNECTION` ships as `null`, which leaves broadcasting off and keeps the admin panel from loading any websocket client; setting it to `reverb` or `pusher` is what turns the live order notifications in the admin notification bell on.
+
+**Enable it together with a queue worker.** `QUEUE_CONNECTION` ships as `sync`, which broadcasts inline inside the request that placed the order. `Webkul\Notification\Listeners\Order` logs a broadcaster failure instead of letting it propagate, so an unreachable websocket server cannot fail a checkout — but a server that hangs rather than refusing the connection still holds the shopper's request open. In production point `QUEUE_CONNECTION` at `database` or `redis` and run a worker for the queue the notification events declare:
+
+```bash
+php artisan queue:work --queue=broadcastable
+```
+
 ---
 
 ### Relocated Configuration Codes
@@ -238,6 +256,123 @@ Custom code that reads either code is not migrated for you:
 ```
 
 The search settings moved too, and are covered in the search section below.
+
+---
+
+### Storefront Breadcrumbs Moved Into the Shop Package
+
+**Impact Probability: Medium**
+
+The storefront breadcrumb trails no longer live in the application. `routes/breadcrumbs.php` was deleted and its trails now ship inside the package that owns them, at `packages/Webkul/Shop/src/Routes/breadcrumbs.php`, registered by `ShopServiceProvider`. Every trail keeps its name, so a view calling `<x-shop::breadcrumbs name="orders" />` needs no change.
+
+**Delete your `routes/breadcrumbs.php`.** `config/breadcrumbs.php` still points `files` at it, and the package loads its own trails regardless — so a file left in place registers the same names twice and `Diglactic\Breadcrumbs\Manager::for()` throws `DuplicateBreadcrumbException` on the storefront pages that render a breadcrumb:
+
+```
+Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException: Breadcrumb name "home" has already been registered
+```
+
+That `files` key is deliberately left alone, because it stays useful as an extension point: a `routes/breadcrumbs.php` holding only your **own** trail names still loads and is the supported way to add breadcrumbs without touching the package. To change a trail Bagisto already defines, override it in a package of your own rather than redefining the name.
+
+---
+
+### Storage Directories Renamed
+
+**Impact Probability: Medium**
+
+The directories under `storage/app/public` and `storage/app/private` are now plural, kebab-case names, and a record's files sit under the record rather than in a directory of their own:
+
+| Before | After |
+|---|---|
+| `product/{id}` | `products/{id}` |
+| `category/{id}` | `categories/{id}` |
+| `channel/{id}` | `channels/{id}` |
+| `review/{id}` | `reviews/{id}` |
+| `attribute_option` | `attribute-options` |
+| `configuration` | `configurations` |
+| `product_downloadable_links/{productId}` | `products/{productId}/downloadable-links` and `downloadable-samples` |
+| `rma/{id}`, `rma-conversation/{messageId}` | `rmas/{id}/images` and `rmas/{id}/conversations/{messageId}` |
+
+A migration moves the files and rewrites every stored path — product images and videos, attribute values, category logos and banners, channel logos and favicons, review attachments, swatches, configuration uploads, downloadable files and RMA attachments. A row whose file has already gone is left pointing at the new location, and a directory that still holds unreferenced files is kept rather than deleted.
+
+Custom code that builds one of these paths itself is not migrated for you:
+
+```diff
+- $file->store('product/'.$product->id)
++ $file->store('products/'.$product->id)
+```
+
+Code that decides behaviour from a path string needs the same attention, and a grep for the old directory name will not find it. Bagisto's own image filters matched `'/category'` to pick category dimensions, which stopped matching `categories` and silently fell back to the slider size.
+
+---
+
+### Route Names Are snake_case
+
+**Impact Probability: Medium**
+
+Every hyphenated route name is now snake_case. URLs are unchanged — only the name passed to `route()`:
+
+```diff
+- route('admin.sales.rma.requests.send-message')
++ route('admin.sales.rma.requests.send_message')
+```
+
+Fifty-six names changed, among them `admin.sales.rma.custom-fields.*`, `admin.configuration.search-engines.test-connection`, `shop.customers.account.gdpr.pdf-view`, `customer.social-login.callback` and `paypal.smart-button.create-order`. A module that names a route as a string — in a controller, a Blade view, an ACL entry or a menu — has to use the new spelling.
+
+---
+
+### Translation Keys Are kebab-case
+
+**Impact Probability: Medium**
+
+Every remaining underscored translation key is now kebab-case, across all 22 locales:
+
+```diff
+- trans('admin::app.eu_withdrawal.view.received_at')
++ trans('admin::app.eu-withdrawal.view.received-at')
+```
+
+A theme or module that overrides one of these keys, or reads it with `trans()`, must be updated. Note the deliberate split from the route names above: the same feature is `admin.sales.eu_withdrawals.index` as a route and `admin::app.eu-withdrawal.…` as a translation key.
+
+Keys whose segment is data rather than a name keep their own casing — currency codes such as `seeders.core.currencies.AED` and locale codes such as `pt_BR`.
+
+---
+
+### The Phone Field Is Named Phone Everywhere
+
+**Impact Probability: Low**
+
+The one customer phone number was labelled three different ways. Every key that names it is now `phone`,
+in all 22 locales, and the label reads as the locale's own word for it:
+
+```diff
+- trans('shop::app.checkout.onepage.address.telephone')
+- trans('admin::app.customers.customers.index.create.contact-number')
+- trans('shop::app.customers.account.orders.invoice-pdf.contact')
++ trans('shop::app.checkout.onepage.address.phone')
++ trans('admin::app.customers.customers.index.create.phone')
++ trans('shop::app.customers.account.orders.invoice-pdf.phone')
+```
+
+The unused `shop::app.customers.account.orders.invoice-pdf.contact-number` is gone. Keys that name a
+different field keep their own wording — an inventory source's `contact-number`, the shipping origin's,
+and the contact form's `phone-number`.
+
+---
+
+### Blade View Paths Are kebab-case
+
+**Impact Probability: Low**
+
+`shop::customers.account.downloadable_products` was the last view path carrying an underscore, and is now
+`downloadable-products`. A theme that publishes or overrides that view has to move it to the new path:
+
+```diff
+- resources/themes/<theme>/views/customers/account/downloadable_products/index.blade.php
++ resources/themes/<theme>/views/customers/account/downloadable-products/index.blade.php
+```
+
+The route name stays `shop.customers.account.downloadable_products.index`, as route names are snake_case,
+and the `view_render_event` names the view fires are unchanged so existing listeners keep working.
 
 ---
 
@@ -1056,6 +1191,53 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
    - The whole page in a different typeface — see "The Default Font Stack Changed" above.
 
    For any additional utility-class-level breaking changes in your custom Blade templates, refer to the official [Tailwind CSS v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide).
+
+---
+
+### Product Image Size and Placeholder Settings Removed
+
+**Impact Probability: Low**
+
+Admin → Configuration → Catalog → Products no longer carries the Small, Medium and Large Image sections. The dimensions they held are fixed in the image templates, and the placeholder is the one the theme ships:
+
+| Removed setting | Now |
+|---|---|
+| `catalog.products.cache_small_image.width` / `.height` | 100 × 100 |
+| `catalog.products.cache_medium_image.width` / `.height` | 350 × 360 |
+| `catalog.products.cache_large_image.width` / `.height` | 560 × 610 |
+| `catalog.products.cache_*_image.url` | the theme's placeholder, falling back to the one Bagisto ships |
+
+A migration deletes the stored rows. A store that had set its own dimensions or uploaded its own placeholder now gets the defaults above, so check your product listings after upgrading. To keep a custom size or placeholder, register an image template in your theme's `customize.image_cache` in `config/themes.php`.
+
+---
+
+### Snake_case Methods Renamed on the Core Helper
+
+**Impact Probability: Low**
+
+Two methods on `Webkul\Core\Core` — the helper reached through `core()` — were the only snake_case names among some sixty camelCase ones:
+
+| Before | After |
+|---|---|
+| `core()->country_name($code)` | `core()->countryName($code)` |
+| `core()->is_empty_date($date)` | `core()->isEmptyDate($date)` |
+
+Both are widely reachable, so a module or a theme that calls either — `country_name()` is common in address templates — has to use the new name. The behaviour and the arguments are unchanged.
+
+---
+
+### CoreConfigRepository Helpers Renamed
+
+**Impact Probability: Low**
+
+Two public helpers on `Webkul\Core\Repositories\CoreConfigRepository` were named after how they worked rather than what they produced:
+
+| Before | After |
+|---|---|
+| `recursiveArray($formData, $method)` | `flattenToConfigValues($formData, $prefix)` |
+| `countDim($array)` | `depthOf($array)` |
+
+Both are internal to saving a configuration form — nothing in Bagisto calls them from outside the repository — but they are public, so a module that calls one has to use the new name. The behaviour and the argument order are unchanged.
 
 ---
 

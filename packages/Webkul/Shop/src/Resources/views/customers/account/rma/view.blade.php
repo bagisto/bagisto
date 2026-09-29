@@ -98,9 +98,9 @@
 
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($rma->images as $image)
-                                    <a href="{{ Storage::url($image['path']) }}" target="_blank">
+                                    <a href="{{ route('shop.customers.account.rma.image', $image['id']) }}" target="_blank">
                                         <img
-                                            src="{{ Storage::url($image['path']) }}"
+                                            src="{{ route('shop.customers.account.rma.image', $image['id']) }}"
                                             class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded-sm border shadow-xs hover:shadow-md transition"
                                         />
                                     </a>
@@ -127,13 +127,16 @@
                 </div>
 
                 <!-- Close / Re-open RMA -->
-                @if (! $isExpired && ($canCloseRma || $canReopenRma))
+                @if (
+                    ! $isExpired
+                    && ($canCloseRma || $canReopenRma)
+                )
                     <div class="border-t bg-gray-50 px-6 py-5 max-md:px-4">
                         <x-shop::form
                             enctype="multipart/form-data"
                             :action="$canCloseRma
-                                ? route('shop.customers.account.rma.update-status', $rma->id)
-                                : route('shop.customers.account.rma.re-open', $rma->id)"
+                                ? route('shop.customers.account.rma.update_status', $rma->id)
+                                : route('shop.customers.account.rma.re_open', $rma->id)"
                         >
                             @php $checkboxName = $canCloseRma ? 'close_rma' : 'reopen_rma'; @endphp
 
@@ -222,7 +225,10 @@
                                         @endif
 
                                         <div class="min-w-0">
-                                            @if ($item->orderItem->product?->url_key && $item->orderItem->product?->visible_individually)
+                                            @if (
+                                                $item->orderItem->product?->url_key
+                                                && $item->orderItem->product?->visible_individually
+                                            )
                                                 <a
                                                     href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}"
                                                     class="text-sm font-medium text-blue-600 hover:underline"
@@ -301,7 +307,10 @@
                             @endif
 
                             <div class="flex-1">
-                                @if ($item->orderItem->product?->url_key && $item->orderItem->product?->visible_individually)
+                                @if (
+                                    $item->orderItem->product?->url_key
+                                    && $item->orderItem->product?->visible_individually
+                                )
                                     <a
                                         href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}"
                                         class="text-blue-600 hover:underline text-sm font-medium"
@@ -484,7 +493,7 @@
                                     <div v-if="message.attachment" class="mt-2 flex items-center gap-2">
                                         <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l7.071-7.071a4 4 0 00-5.657-5.657l-7.071 7.07a6 6 0 108.485 8.486L20.485 13"/></svg>
                                         <a
-                                            @click="viewAttachmentModal(message.attachment_url)"
+                                            @click="viewAttachmentModal(message.attachment_url, message.attachment)"
                                             class="text-xs max-sm:text-xs hover:underline cursor-pointer text-blue-700"
                                         >
                                             @{{ message.attachment }}
@@ -560,6 +569,9 @@
                         message: '',
                         rma: @json($rma),
                         limit: 5,
+                        messagePath: '',
+                        attachmentName: '',
+                        getAttachmentExtension: '',
                         allowedFileTypes: @json(core()->getConfigData('sales.rma.setting.allowed_file_extension')),
                     };
                 },
@@ -579,7 +591,7 @@
 
                 methods: {
                     getMessage() {
-                        this.$axios.get(`{{ route('shop.customers.account.rma.get-messages') }}`, {
+                        this.$axios.get(`{{ route('shop.customers.account.rma.get_messages') }}`, {
                             params: { id: this.rma.id, limit: this.limit }
                         })
                         .then(response => {
@@ -594,7 +606,7 @@
                         formData.set('message', sanitizedMessage);
                         this.isChatSend = false;
 
-                        this.$axios.post("{{ route('shop.customers.account.rma.send-message') }}", formData)
+                        this.$axios.post("{{ route('shop.customers.account.rma.send_message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
                                 attachmentPreview.innerHTML = '';
@@ -610,16 +622,17 @@
                         return tempDiv.innerHTML;
                     },
 
-                    viewAttachmentModal(messagePath) {
+                    viewAttachmentModal(messagePath, attachmentName) {
                         this.messagePath = messagePath;
-                        this.getAttachmentExtension = messagePath.split('.').pop().toLowerCase();
+                        this.attachmentName = attachmentName ?? '';
+                        this.getAttachmentExtension = this.attachmentName.split('.').pop().toLowerCase();
                         this.$refs.attachmentModal.toggle();
                     },
 
                     downloadAttachment(messagePath) {
                         const link = document.createElement('a');
                         link.href = messagePath;
-                        link.download = messagePath.split('/').pop();
+                        link.download = this.attachmentName || messagePath.split('/').pop();
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);

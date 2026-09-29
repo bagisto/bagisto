@@ -828,6 +828,8 @@
 
                 mounted() {
                     this.getNotification();
+
+                    this.listenForNotifications();
                 },
 
                 methods: {
@@ -844,6 +846,16 @@
                                 this.totalUnRead =   response.data.total_unread;
                             })
                             .catch(error => console.log(error))
+                    },
+
+                    listenForNotifications() {
+                        if (! window.Echo) {
+                            return;
+                        }
+
+                        window.Echo.private('admin.notifications')
+                            .listen('.create-notification', () => this.getNotification())
+                            .listen('.update-notification', () => this.getNotification());
                     },
 
                     readAll() {

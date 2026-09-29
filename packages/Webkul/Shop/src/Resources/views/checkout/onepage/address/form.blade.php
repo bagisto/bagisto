@@ -291,7 +291,7 @@
             <!-- Phone Number -->
             <x-shop::form.control-group>
                 <x-shop::form.control-group.label class="required mt-0!" ::for="controlName + '_phone'">
-                    @lang('shop::app.checkout.onepage.address.telephone')
+                    @lang('shop::app.checkout.onepage.address.phone')
                 </x-shop::form.control-group.label>
 
                 <x-shop::form.control-group.control
@@ -299,8 +299,8 @@
                     ::name="controlName + '.phone'"
                     ::value="address.phone"
                     rules="required|phone"
-                    :label="trans('shop::app.checkout.onepage.address.telephone')"
-                    :placeholder="trans('shop::app.checkout.onepage.address.telephone')"
+                    :label="trans('shop::app.checkout.onepage.address.phone')"
+                    :placeholder="trans('shop::app.checkout.onepage.address.phone')"
                     ::id="controlName + '_phone'"
                 />
 

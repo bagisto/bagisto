@@ -9,7 +9,7 @@ use function Pest\Laravel\get;
 it('should allow access to rma custom fields with sales.rma.custom-fields permission', function () {
     $this->loginAsAdminWithPermissions(['sales', 'sales.rma', 'sales.rma.custom-fields']);
 
-    get(route('admin.sales.rma.custom-fields.index'))
+    get(route('admin.sales.rma.custom_fields.index'))
         ->assertOk();
 });
 
@@ -20,6 +20,6 @@ it('should allow access to rma custom fields with sales.rma.custom-fields permis
 it('should deny access to rma custom fields without sales.rma.custom-fields permission', function () {
     $this->loginAsAdminWithPermissions(['dashboard']);
 
-    get(route('admin.sales.rma.custom-fields.index'))
+    get(route('admin.sales.rma.custom_fields.index'))
         ->assertUnauthorized();
 });

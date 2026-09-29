@@ -140,7 +140,7 @@ class StatusDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rma-status.index.datagrid.update'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.statuses.mass-update'),
+                'url' => route('admin.sales.rma.statuses.mass_update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.rma-status.index.datagrid.enabled'),
@@ -157,7 +157,7 @@ class StatusDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rma-status.index.datagrid.delete'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.statuses.mass-delete'),
+                'url' => route('admin.sales.rma.statuses.mass_delete'),
             ]);
         }
     }

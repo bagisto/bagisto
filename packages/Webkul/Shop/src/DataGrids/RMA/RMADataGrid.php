@@ -36,6 +36,7 @@ class RMADataGrid extends DataGrid
                 'rma.order_id',
                 'rma.rma_status_id',
                 'rma.created_at',
+                'orders.increment_id',
                 'orders.customer_email',
                 'orders.status as order_status',
                 'rma_statuses.title',
@@ -48,6 +49,7 @@ class RMADataGrid extends DataGrid
                 'rma.order_id',
                 'rma.rma_status_id',
                 'rma.created_at',
+                'orders.increment_id',
                 'orders.customer_email',
                 'orders.status',
                 'rma_statuses.title',
@@ -55,7 +57,7 @@ class RMADataGrid extends DataGrid
             );
 
         $this->addFilter('id', 'rma.id');
-        $this->addFilter('order_id', 'rma.order_id');
+        $this->addFilter('order_id', 'orders.increment_id');
         $this->addFilter('rma_status_title', 'rma_statuses.title');
         $this->addFilter('customer_email', 'orders.customer_email');
         $this->addFilter('created_at', 'rma.created_at');
@@ -80,12 +82,12 @@ class RMADataGrid extends DataGrid
         $this->addColumn([
             'index' => 'order_id',
             'label' => trans('shop::app.customers.account.rma.index.datagrid.order-ref'),
-            'type' => 'integer',
+            'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true,
             'closure' => function ($row) {
-                return '<span class="text-sm text-blue-500"><a href="'.route('shop.customers.account.orders.view', ['id' => $row->order_id]).'">'.'#'.$row->order_id.'</a></span>';
+                return '<span class="text-sm text-blue-500"><a href="'.route('shop.customers.account.orders.view', ['id' => $row->order_id]).'">'.'#'.$row->increment_id.'</a></span>';
             },
         ]);
 

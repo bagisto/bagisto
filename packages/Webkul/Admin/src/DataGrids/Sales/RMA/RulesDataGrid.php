@@ -122,7 +122,7 @@ class RulesDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rules.index.datagrid.update'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.rules.mass-update'),
+                'url' => route('admin.sales.rma.rules.mass_update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.rules.index.datagrid.enabled'),
@@ -139,7 +139,7 @@ class RulesDataGrid extends DataGrid
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rules.index.datagrid.delete'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.rules.mass-delete'),
+                'url' => route('admin.sales.rma.rules.mass_delete'),
             ]);
         }
     }

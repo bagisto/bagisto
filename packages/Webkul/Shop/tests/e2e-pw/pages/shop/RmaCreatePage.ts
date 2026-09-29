@@ -50,6 +50,10 @@ export class RmaCreatePage extends BasePage {
         return this.page.getByRole("button", { name: "Submit request" });
     }
 
+    private get photoInput() {
+        return this.page.locator('input[type="file"][name="images[]"]');
+    }
+
     private get agreementError() {
         return this.page
             .locator("div.mb-4")
@@ -92,6 +96,23 @@ export class RmaCreatePage extends BasePage {
         ).toBeVisible();
     }
 
+    async requestReturnWithPhotos(orderId: string, photoPaths: string[]): Promise<void> {
+        await this.fillRequest(orderId, "1");
+        await this.packageConditionSelect.selectOption({ value: "open" });
+        await this.informationInput.fill("The item arrived damaged.");
+        await this.photoInput.setInputFiles(photoPaths);
+        await this.agreementLabel.check();
+        await this.submitButton.click();
+    }
+
+    async expectRequestCreatedOnDetailPage(): Promise<void> {
+        await expect(this.page).toHaveURL(/customer\/account\/rma\/view\/\d+/);
+
+        await expect(
+            this.page.getByText("Request created successfully").first(),
+        ).toBeVisible();
+    }
+
     async attemptReturnWithExcessQuantity(orderId: string): Promise<void> {
         await this.fillRequest(orderId, "4");
     }
@@ -116,8 +137,10 @@ export class RmaCreatePage extends BasePage {
     }
 
     async expectRequestListedFor(productName: string): Promise<void> {
+        await expect(this.page).toHaveURL(/customer\/account\/rma\/view\/\d+/);
+
         await expect(
-            this.page.getByText(productName, { exact: true }),
+            this.page.getByText(productName, { exact: true }).first(),
         ).toBeVisible();
     }
 

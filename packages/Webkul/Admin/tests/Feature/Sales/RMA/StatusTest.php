@@ -127,7 +127,7 @@ it('should mass delete non-default RMA statuses', function () {
 
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.rma.statuses.mass-delete'), [
+    postJson(route('admin.sales.rma.statuses.mass_delete'), [
         'indices' => $statuses->pluck('id')->toArray(),
     ])
         ->assertOk()

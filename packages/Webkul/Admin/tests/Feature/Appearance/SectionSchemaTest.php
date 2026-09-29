@@ -76,7 +76,7 @@ it('should accept exactly the types the model declares', function () {
 
     postJson(route('admin.appearance.sections.store', [
         'code' => $channel->theme,
-        'channel' => $channel->id,
+        'channel' => $channel->code,
     ]), [
         'name' => 'Not A Real Type',
         'type' => 'carousel_of_carousels',

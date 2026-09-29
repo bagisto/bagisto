@@ -33,7 +33,7 @@ class GuestWithdrawalLink extends Mailable implements ShouldQueue
         return new Envelope(
             from: new Address($sender['email'], $sender['name']),
             to: [new Address($this->toEmail)],
-            subject: trans('shop::app.eu_withdrawal.emails.guest_link.subject'),
+            subject: trans('shop::app.eu-withdrawal.emails.guest-link.subject'),
         );
     }
 

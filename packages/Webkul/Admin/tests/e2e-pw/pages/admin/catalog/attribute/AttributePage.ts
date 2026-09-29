@@ -198,6 +198,18 @@ export class AttributePage extends DatagridPage {
         }
     }
 
+    async readAttributeId(code: string): Promise<string> {
+        await this.openEditForm(code);
+
+        const id = this.page.url().match(/edit\/(\d+)/)?.[1];
+
+        if (!id) {
+            throw new Error(`Unable to read the id of attribute "${code}"`);
+        }
+
+        return id;
+    }
+
     async createAttribute(data: AttributeData): Promise<void> {
         await this.openCreateForm();
         await this.fillCreateForm(data);
@@ -337,7 +349,7 @@ export class AttributePage extends DatagridPage {
         for (const label of labels) {
             await expect(this.optionRow(label).locator("img")).toHaveAttribute(
                 "src",
-                /\/attribute_option\//,
+                /\/attribute-options\//,
             );
         }
     }

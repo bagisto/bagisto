@@ -164,7 +164,10 @@ class Bouncer
      */
     protected function hasPassedTwoFactor(): bool
     {
-        return (bool) session('two_factor_passed', false);
+        $passedFor = session('two_factor_passed_for');
+
+        return $passedFor
+            && (int) $passedFor === (int) auth()->guard('admin')->id();
     }
 
     /**

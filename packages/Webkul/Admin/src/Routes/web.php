@@ -6,66 +6,66 @@ use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 /**
  * Auth routes.
  */
-require 'auth-routes.php';
+require 'web/auth-routes.php';
 
 Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
     /**
      * Sales routes.
      */
-    require 'sales-routes.php';
+    require 'web/sales-routes.php';
 
     /**
      * Catalog routes.
      */
-    require 'catalog-routes.php';
+    require 'web/catalog-routes.php';
 
     /**
      * Customers routes.
      */
-    require 'customers-routes.php';
+    require 'web/customers-routes.php';
 
     /**
      * Marketing routes.
      */
-    require 'marketing-routes.php';
+    require 'web/marketing-routes.php';
 
     /**
      * CMS routes.
      */
-    require 'cms-routes.php';
+    require 'web/cms-routes.php';
 
     /**
      * Reporting routes.
      */
-    require 'reporting-routes.php';
+    require 'web/reporting-routes.php';
 
     /**
      * Appearance routes.
      */
-    require 'appearance-routes.php';
+    require 'web/appearance-routes.php';
 
     /**
      * Settings routes.
      */
-    require 'settings-routes.php';
+    require 'web/settings-routes.php';
 
     /**
      * Configuration routes.
      */
-    require 'configuration-routes.php';
+    require 'web/configuration-routes.php';
 
     /**
      * Notification routes.
      */
-    require 'notification-routes.php';
+    require 'web/notification-routes.php';
 
     /**
      * Help & Resources routes.
      */
-    require 'help-routes.php';
+    require 'web/help-routes.php';
 
     /**
      * Remaining routes.
      */
-    require 'rest-routes.php';
+    require 'web/rest-routes.php';
 });

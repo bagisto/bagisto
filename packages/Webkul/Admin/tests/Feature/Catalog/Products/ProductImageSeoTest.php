@@ -16,7 +16,7 @@ function makeProductWithStoredImage(): array
 {
     $product = test()->createSimpleProduct();
 
-    $path = 'product/'.$product->id.'/hf83ndkq.webp';
+    $path = 'products/'.$product->id.'/hf83ndkq.webp';
 
     Storage::put($path, 'image-contents');
 
@@ -109,7 +109,7 @@ it('should rename the file of an existing image', function () {
         'meta' => [$image->id => ['file_name' => 'Blue Running Shoe Side']],
     ]))->assertRedirect(route('admin.catalog.products.index'));
 
-    $expected = 'product/'.$product->id.'/blue-running-shoe-side.webp';
+    $expected = 'products/'.$product->id.'/blue-running-shoe-side.webp';
 
     expect($image->fresh()->path)->toBe($expected);
 
@@ -181,7 +181,7 @@ it('should name a newly uploaded image after the requested file name', function 
 
     $image = $product->fresh()->images->first();
 
-    expect($image->path)->toBe('product/'.$product->id.'/blue-running-shoe.webp')
+    expect($image->path)->toBe('products/'.$product->id.'/blue-running-shoe.webp')
         ->and($image->alt_text)->toBe('Blue running shoe');
 
     Storage::assertExists($image->path);

@@ -24,7 +24,6 @@ test.describe("section management", () => {
         { type: "Category Carousel", fields: ["Filters"] },
         { type: "Static Content", fields: ["HTML", "CSS"] },
         { type: "Image Carousel", fields: ["Slider"] },
-        { type: "Services Content", fields: ["Services"] },
     ];
 
     for (const { type, fields } of sectionTypes) {
@@ -48,9 +47,11 @@ test.describe("section management", () => {
         });
     }
 
-    test("should not offer a second footer links section", async () => {
-        await sectionsPage.expectTypeNotOffered("Footer Links");
-    });
+    for (const type of ["Footer Links", "Services Content"]) {
+        test(`should not offer a second ${type.toLowerCase()} section`, async () => {
+            await sectionsPage.expectTypeNotOffered(type);
+        });
+    }
 
     test("should hold typed content as a draft until it is published", async () => {
         const name = sectionName();

@@ -39,11 +39,11 @@ class ForgetPasswordController extends Controller
      */
     public function store()
     {
-        try {
-            $this->validate(request(), [
-                'email' => 'required|email',
-            ]);
+        $this->validate(request(), [
+            'email' => 'required|email',
+        ]);
 
+        try {
             $response = $this->broker()->sendResetLink(
                 request(['email'])
             );
@@ -54,13 +54,13 @@ class ForgetPasswordController extends Controller
                 return redirect()->route('admin.forget_password.create');
             }
 
-            return redirect()->route('admin.forget_password.create')
-                ->withInput(request(['email']))
-                ->withErrors([
-                    'email' => trans('admin::app.users.forget-password.create.email-not-exist'),
-                ]);
+            session()->flash('success', trans('admin::app.users.forget-password.create.reset-link-sent'));
+
+            return redirect()->route('admin.forget_password.create');
         } catch (\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
+            report($e);
+
+            session()->flash('error', trans('admin::app.users.forget-password.create.reset-link-failed'));
 
             return redirect()->back();
         }
