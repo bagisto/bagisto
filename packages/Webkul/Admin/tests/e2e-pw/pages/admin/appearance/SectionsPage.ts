@@ -318,14 +318,14 @@ export class SectionsPage extends BasePage {
     }
 
     /**
-     * A channel shows one footer links section, so the type is withdrawn once the
-     * channel already has one.
+     * A channel shows one section of a singleton type, so the type is withdrawn once
+     * the channel already has one.
      */
-    async expectFooterLinksNotOffered(): Promise<void> {
+    async expectTypeNotOffered(type: string): Promise<void> {
         await this.open();
         await this.createSectionButton.click();
         await this.createForm.waitFor();
 
-        await expect(this.typeTile("Footer Links")).toHaveCount(0);
+        await expect(this.typeTile(type)).toHaveCount(0);
     }
 }

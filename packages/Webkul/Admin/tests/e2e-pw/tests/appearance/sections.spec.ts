@@ -34,12 +34,12 @@ test.describe("section management", () => {
         await sectionsPage.createSectionOfType("Image Carousel", ["Slider"]);
     });
 
-    test("should create a services content section", async ({ adminPage }) => {
+    test("should not offer a second services content section", async ({
+        adminPage,
+    }) => {
         const sectionsPage = new SectionsPage(adminPage);
 
-        await sectionsPage.createSectionOfType("Services Content", [
-            "Services",
-        ]);
+        await sectionsPage.expectTypeNotOffered("Services Content");
     });
 
     test("should not offer a second footer links section", async ({
@@ -47,7 +47,7 @@ test.describe("section management", () => {
     }) => {
         const sectionsPage = new SectionsPage(adminPage);
 
-        await sectionsPage.expectFooterLinksNotOffered();
+        await sectionsPage.expectTypeNotOffered("Footer Links");
     });
 
     test("should hold typed content as a draft until published", async ({

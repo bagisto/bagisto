@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Fixed Stripe charging the full price when a cart rule discounted the order. The discount now shows on Stripe's payment page, and a fractional unit price no longer loses a penny to rounding.
+
+- #11501 [fixed] - Fixed a fatal error when publishing or previewing a Product Carousel section, as the Appearance editor named the channel by id where the rest of the application names it by code.
+
 ## **v2.4.12 (22nd of September 2026)** - *Release*
 
 - Stripe now takes webhooks: a paid checkout becomes an order even when the customer never returns to the store, and refunds and disputes made in Stripe are recorded on the order. Set the signing secret in the Stripe payment method configuration.

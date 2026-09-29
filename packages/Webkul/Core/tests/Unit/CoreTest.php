@@ -137,6 +137,24 @@ it('returns the current channel if the requested channel code is not provided', 
     expect($channel->code)->toBe($expectedChannel->code);
 });
 
+it('returns the current channel if the requested channel does not exist', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    core()->setCurrentChannel($expectedChannel);
+
+    request()->merge([
+        'channel' => 'not-a-channel',
+    ]);
+
+    // Act
+    $channel = core()->getRequestedChannel();
+
+    // Assert
+    expect($channel->id)->toBe($expectedChannel->id);
+    expect(core()->getRequestedLocaleCodeInRequestedChannel())->toBe($expectedChannel->resolveLocaleCode(core()->getRequestedLocaleCode()));
+});
+
 it('returns the requested channel code', function () {
     // Arrange
     $expectedChannel = Channel::factory()->create();
