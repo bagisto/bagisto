@@ -59,10 +59,13 @@ export class ProductCreatePage extends BasePage {
         await this.submitCreateModal(type, "1", sku);
     }
 
-    async createSimpleProduct(product: BaseProduct): Promise<string> {
+    async createSimpleProduct(
+        product: BaseProduct,
+        attributeFamily: string | { label: string } = "1",
+    ): Promise<string> {
         const sku = product.sku ?? `SKU-${uniqueStamp()}`;
 
-        await this.submitCreateModal("simple", "1", sku);
+        await this.submitCreateModal("simple", attributeFamily, sku);
 
         const productEditPage = new ProductEditPage(this.page);
         await productEditPage.waitForForm();

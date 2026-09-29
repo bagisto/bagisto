@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'Tambah Berkas',
+                'add-image' => 'Tambah Gambar',
+                'delete' => 'Hapus',
+                'download' => 'Unduh',
+                'replace' => 'Ganti',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
                 'allowed-types' => 'mp4, webm, mkv',

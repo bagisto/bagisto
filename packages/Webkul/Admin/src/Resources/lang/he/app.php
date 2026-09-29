@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'הוסף קובץ',
+                'add-image' => 'הוסף תמונה',
+                'delete' => 'מחק',
+                'download' => 'הורדה',
+                'replace' => 'החלפה',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'הוסף וידאו',
                 'allowed-types' => 'mp4, webm, mkv',

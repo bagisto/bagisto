@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'Agregar Archivo',
+                'add-image' => 'Agregar Imagen',
+                'delete' => 'Borrar',
+                'download' => 'Descargar',
+                'replace' => 'Reemplazar',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'Agregar Video',
                 'allowed-types' => 'mp4, webm, mkv',

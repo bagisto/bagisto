@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'ගොනුව එකතු කරන්න',
+                'add-image' => 'රූපය එකතු කරන්න',
+                'delete' => 'මකන්න',
+                'download' => 'බාගත කරන්න',
+                'replace' => 'ප්‍රතිස්ථාපනය කරන්න',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'වීඩියෝ එකතු කරන්න',
                 'allowed-types' => 'mp4, webm, mkv',

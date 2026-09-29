@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'Dosya Ekle',
+                'add-image' => 'Resim Ekle',
+                'delete' => 'Sil',
+                'download' => 'İndir',
+                'replace' => 'Değiştir',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'Video Ekle',
                 'allowed-types' => 'mp4, webm, mkv',

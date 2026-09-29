@@ -134,7 +134,10 @@ class ProductForm extends FormRequest
             $validations = [];
 
             if (! isset($this->rules[$attribute->code])) {
-                $validations[] = $attribute->is_required ? 'required' : 'nullable';
+                $isRequired = $attribute->is_required
+                    && ! $this->keepsStoredMedia($attribute);
+
+                $validations[] = $isRequired ? 'required' : 'nullable';
             } else {
                 $validations = $this->rules[$attribute->code];
             }
@@ -158,12 +161,18 @@ class ProductForm extends FormRequest
                 $validations[] = new Decimal;
             }
 
-            if ($attribute->type == AttributeTypeEnum::IMAGE->value) {
+            if (
+                $attribute->type == AttributeTypeEnum::IMAGE->value
+                && $this->hasFile($attribute->code)
+            ) {
                 $validations[] = 'mimes:bmp,jpeg,jpg,png,webp';
                 $validations[] = 'max:'.(core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?: '2048');
             }
 
-            if ($attribute->type == AttributeTypeEnum::FILE->value) {
+            if (
+                $attribute->type == AttributeTypeEnum::FILE->value
+                && $this->hasFile($attribute->code)
+            ) {
                 $validations[] = 'file';
                 $validations[] = 'max:'.(core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048');
             }
@@ -217,6 +226,16 @@ class ProductForm extends FormRequest
             'videos.meta.*.file_name' => trans('admin::app.components.media.images.seo.file-name'),
             'variants.*.sku' => trans('admin::app.catalog.products.index.datagrid.sku'),
         ];
+    }
+
+    /**
+     * Whether a media attribute keeps the file it already holds, the edit form sending none.
+     */
+    protected function keepsStoredMedia($attribute): bool
+    {
+        return in_array($attribute->type, [AttributeTypeEnum::IMAGE->value, AttributeTypeEnum::FILE->value], true)
+            && ! $this->hasFile($attribute->code)
+            && ! empty($this->product[$attribute->code]);
     }
 
     /**

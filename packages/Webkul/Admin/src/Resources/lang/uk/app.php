@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'Додати файл',
+                'add-image' => 'Додати зображення',
+                'delete' => 'Видалити',
+                'download' => 'Завантажити',
+                'replace' => 'Замінити',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'Додати відео',
                 'allowed-types' => 'mp4, webm, mkv',

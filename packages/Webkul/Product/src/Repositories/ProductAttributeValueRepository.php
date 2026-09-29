@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Core\Eloquent\Repository;
@@ -112,12 +113,14 @@ class ProductAttributeValueRepository extends Repository
             }
 
             if (in_array($attribute->type, ['image', 'file'])) {
-                if (gettype($data[$attribute->code]) === 'object') {
-                    $file = request()->file($attribute->code);
+                if ($data[$attribute->code] instanceof UploadedFile) {
+                    $file = $data[$attribute->code];
 
                     $data[$attribute->code] = $file->store('products/'.$product->id);
 
                     $this->sanitizeSVG($data[$attribute->code], $file->getMimeType());
+                } elseif (empty($data[$attribute->code]['delete'])) {
+                    continue;
                 }
             }
 

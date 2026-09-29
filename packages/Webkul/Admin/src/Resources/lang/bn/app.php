@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'ফাইল যোগ করুন',
+                'add-image' => 'চিত্র যোগ করুন',
+                'delete' => 'মুছে ফেলুন',
+                'download' => 'ডাউনলোড',
+                'replace' => 'প্রতিস্থাপন করুন',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
                 'allowed-types' => 'mp4, webm, mkv',

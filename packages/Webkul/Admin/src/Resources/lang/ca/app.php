@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'Afegir Fitxer',
+                'add-image' => 'Afegir Imatge',
+                'delete' => 'Esborrar',
+                'download' => 'Descarregar',
+                'replace' => 'Substituir',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',

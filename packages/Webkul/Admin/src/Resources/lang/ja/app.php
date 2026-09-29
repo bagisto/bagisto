@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => 'ファイルを追加',
+                'add-image' => '画像を追加',
+                'delete' => '削除',
+                'download' => 'ダウンロード',
+                'replace' => '差し替える',
+            ],
+
             'videos' => [
                 'add-video-btn' => 'ビデオを追加',
                 'allowed-types' => 'mp4、webm、mkv',

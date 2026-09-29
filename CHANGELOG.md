@@ -24,6 +24,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added real-time admin notifications, so the notification bell updates as orders are placed instead of only on a page load. Broadcasting stays off until `BROADCAST_CONNECTION` is set, and needs a worker on the `broadcastable` queue.
 
+- Upgraded the product image and file attributes to the media control the configuration screens use, with a preview tile and replace, download and remove actions.
+
 - Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
 
 - Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.

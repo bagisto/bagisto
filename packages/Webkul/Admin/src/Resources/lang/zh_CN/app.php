@@ -6097,6 +6097,14 @@ return [
                 ],
             ],
 
+            'upload' => [
+                'add-file' => '添加文件',
+                'add-image' => '添加图片',
+                'delete' => '删除',
+                'download' => '下载',
+                'replace' => '替换',
+            ],
+
             'videos' => [
                 'add-video-btn' => '添加视频',
                 'allowed-types' => 'mp4, webm, mkv',
