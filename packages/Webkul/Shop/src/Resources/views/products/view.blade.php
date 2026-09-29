@@ -87,9 +87,9 @@
                     :is-selected="true"
                 >
                     <div class="container mt-[60px] max-1180:px-5">
-                        <p class="text-lg text-zinc-500 max-1180:text-sm">
+                        <div class="rich-content max-1180:text-sm">
                             {!! $product->description !!}
-                        </p>
+                        </div>
                     </div>
                 </x-shop::tabs.item>
 
@@ -171,7 +171,7 @@
             </x-slot>
 
             <x-slot:content class="max-sm:px-0">
-                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-md:mb-1 max-md:px-4">
+                <div class="rich-content mb-5 max-1180:text-sm max-md:mb-1 max-md:px-4">
                     {!! $product->description !!}
                 </div>
             </x-slot>

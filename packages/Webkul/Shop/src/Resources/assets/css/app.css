@@ -525,4 +525,92 @@ img.lazy {
     .skip-to-main-content-link:focus {
         @apply ltr:left-1/2 rtl:right-1/2 ltr:translate-x-1/2 rtl:translate-x-[-50%] opacity-100;
     }
+
+    .rich-content {
+        @apply text-lg text-zinc-500;
+    }
+
+    .rich-content h1 {
+        @apply mt-8 mb-4 text-4xl font-semibold text-black;
+    }
+
+    .rich-content h2 {
+        @apply mt-8 mb-4 text-3xl font-semibold text-black;
+    }
+
+    .rich-content h3 {
+        @apply mt-6 mb-3 text-2xl font-semibold text-black;
+    }
+
+    .rich-content h4 {
+        @apply mt-6 mb-3 text-xl font-semibold text-black;
+    }
+
+    .rich-content h5 {
+        @apply mt-4 mb-2 text-lg font-semibold text-black;
+    }
+
+    .rich-content h6 {
+        @apply mt-4 mb-2 text-base font-semibold text-black;
+    }
+
+    .rich-content p {
+        @apply my-4 leading-7;
+    }
+
+    .rich-content ul {
+        @apply my-4 list-disc ps-8;
+    }
+
+    .rich-content ol {
+        @apply my-4 list-decimal ps-8;
+    }
+
+    .rich-content li {
+        @apply my-2 leading-7;
+    }
+
+    .rich-content a {
+        @apply text-darkBlue underline underline-offset-2 hover:opacity-80;
+    }
+
+    .rich-content strong {
+        @apply font-semibold text-black;
+    }
+
+    .rich-content blockquote {
+        @apply my-4 border-s-4 border-gray-300 bg-gray-50 p-4 italic;
+    }
+
+    .rich-content hr {
+        @apply my-8 border-gray-300;
+    }
+
+    .rich-content img {
+        @apply my-4 max-w-full h-auto rounded-lg;
+    }
+
+    .rich-content table {
+        @apply my-6 w-full border-collapse table-auto;
+    }
+
+    .rich-content th {
+        @apply border border-gray-300 bg-gray-100 px-4 py-2 text-start font-semibold text-black;
+    }
+
+    .rich-content td {
+        @apply border border-gray-300 px-4 py-2;
+    }
+
+    .rich-content pre {
+        @apply my-4 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-gray-100;
+    }
+
+    .rich-content code {
+        @apply rounded bg-gray-100 px-1.5 py-0.5 text-sm;
+    }
+
+    .rich-content pre code {
+        @apply bg-transparent p-0;
+    }
 }
