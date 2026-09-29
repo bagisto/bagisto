@@ -84,7 +84,6 @@ it('should store a newly created section', function () {
             SectionTypeEnum::PRODUCT_CAROUSEL->value,
             SectionTypeEnum::CATEGORY_CAROUSEL->value,
             SectionTypeEnum::IMAGE_CAROUSEL->value,
-            SectionTypeEnum::SERVICES_CONTENT->value,
         ]),
         'name' => $name = fake()->name(),
     ])
@@ -940,3 +939,58 @@ it('should refuse a second services section however it is reached', function (st
 
     expect(Section::query()->where('type', SectionTypeEnum::SERVICES_CONTENT->value)->count())->toBe(1);
 })->with(['created', 'copied', 'switched']);
+
+it('should let a channel that already holds two services sections edit either of them', function () {
+    $channel = core()->getDefaultChannel();
+
+    $theme = $channel->theme ?: 'default';
+
+    $sections = collect(['First Promises', 'Second Promises'])->map(fn ($name) => Section::factory()->create([
+        'name' => $name,
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+    ]));
+
+    $this->loginAsAdmin();
+
+    $sections->each(function ($section) use ($channel, $theme) {
+        postJson(route('admin.appearance.sections.update', $section->id), [
+            'name' => $name = $section->name.' Renamed',
+            'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+            'sort_order' => $section->sort_order,
+            'channel_id' => $channel->id,
+            'theme_code' => $theme,
+        ])->assertRedirect();
+
+        $this->assertDatabaseHas('theme_sections', ['id' => $section->id, 'name' => $name]);
+    });
+});
+
+it('should still refuse a section switched to the services type on a channel that has one', function () {
+    $channel = core()->getDefaultChannel();
+
+    $theme = $channel->theme ?: 'default';
+
+    Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+    ]);
+
+    $other = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => SectionTypeEnum::STATIC_CONTENT->value,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.update', $other->id), [
+        'name' => 'Hijacked',
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+        'sort_order' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+    ])->assertJsonValidationErrorFor('type');
+});

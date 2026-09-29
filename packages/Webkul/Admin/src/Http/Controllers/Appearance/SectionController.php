@@ -133,19 +133,21 @@ class SectionController extends Controller
             'theme_code' => 'required',
         ]);
 
-        $this->sectionOrFail($id);
+        $section = $this->sectionOrFail($id);
 
         abort_unless(
             $this->themeCatalog->isActive((string) request('theme_code'), (int) request('channel_id')),
             $this->inactiveThemeResponse()
         );
 
-        $this->guardSingleton(
-            request('type'),
-            request('theme_code'),
-            (int) request('channel_id'),
-            $id
-        );
+        if ($this->changesTypeOrChannel($section)) {
+            $this->guardSingleton(
+                request('type'),
+                request('theme_code'),
+                (int) request('channel_id'),
+                $id
+            );
+        }
 
         $locale = request('locale');
 
@@ -530,6 +532,17 @@ class SectionController extends Controller
         $free = array_values(array_diff($sectionIds, $pinned));
 
         return array_merge($free, array_values(array_intersect($sectionIds, $pinned)));
+    }
+
+    /**
+     * Whether an update moves a section to another type or channel, which is when a singleton type is guarded.
+     *
+     * @param  Section  $section
+     */
+    protected function changesTypeOrChannel($section): bool
+    {
+        return $section->type !== request('type')
+            || (int) $section->channel_id !== (int) request('channel_id');
     }
 
     /**

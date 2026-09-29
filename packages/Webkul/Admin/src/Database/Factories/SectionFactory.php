@@ -28,7 +28,6 @@ class SectionFactory extends Factory
                 SectionTypeEnum::PRODUCT_CAROUSEL->value,
                 SectionTypeEnum::CATEGORY_CAROUSEL->value,
                 SectionTypeEnum::IMAGE_CAROUSEL->value,
-                SectionTypeEnum::SERVICES_CONTENT->value,
             ]),
             'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'sort_order' => ($lastSection ? $lastSection->id : 0) + 1,
