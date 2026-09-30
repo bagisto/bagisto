@@ -131,11 +131,9 @@
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
 
         <p class="text-sm text-zinc-600 max-md:text-center">
-            @if (core()->getConfigData('general.content.footer.copyright_content'))
-                {!! clean_content((string) core()->getConfigData('general.content.footer.copyright_content')) !!}
-            @else
+            <x-shop::layouts.footer.copyright>
                 @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
-            @endif
+            </x-shop::layouts.footer.copyright>
         </p>
 
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.after') !!}
