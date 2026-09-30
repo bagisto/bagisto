@@ -417,6 +417,19 @@ it('should remove an applied coupon and its discount from the cart', function ()
     $this->assertCartGrandTotal(500);
 });
 
+it('should refuse a coupon that exists while its cart rule is switched off', function () {
+    $product = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
+
+    $this->createCouponCartRule('SWITCHED-OFF', ['status' => 0]);
+
+    $this->addProductToCart($product->id);
+
+    $this->applyCoupon('SWITCHED-OFF')
+        ->assertUnprocessable()
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.apply-issue'))
+        ->assertJsonPath('data.coupon_code', null);
+});
+
 // ============================================================================
 // Cart Merge On Login
 // ============================================================================
