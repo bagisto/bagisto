@@ -563,6 +563,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'שלום! :name',
+                'profile-image' => 'תמונת פרופיל',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [

@@ -8,6 +8,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Automated security auditing and fixings.
 
+- #11504 [fixed] - Fixed the account overview being titled and breadcrumbed as Orders, and the account menu's greeting and profile image description staying English in every locale.
+
+- #11503 [fixed] - Fixed the GDPR pages showing their 404 in the default theme rather than the channel's own, unlike every other storefront 404, while the feature is switched off.
+
 - #11501 [fixed] - Fixed a fatal error when publishing or previewing a Product Carousel section, as the Appearance editor named the channel by id where the rest of the application names it by code.
 
 ## **v2.4.12 (22nd of September 2026)** - *Release*

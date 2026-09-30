@@ -563,6 +563,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => '你好！:name',
+                'profile-image' => '个人资料图片',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [
