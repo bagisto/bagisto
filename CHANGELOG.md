@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed cart rules starting and ending up to an hour early or late: their start and end times were compared with a time whose minutes were the current month (`H:m:s` instead of `H:i:s`).
+
 - Fixed Stripe charging the full price when a cart rule discounted the order. The discount now shows on Stripe's payment page, and a fractional unit price no longer loses a penny to rounding.
 
 - #11501 [fixed] - Fixed a fatal error when publishing or previewing a Product Carousel section, as the Appearance editor named the channel by id where the rest of the application names it by code.
