@@ -10,6 +10,7 @@
             }
 
             return array_merge($image, [
+                'link'   => filled($image['link'] ?? null) ? url($image['link']) : null,
                 'url'    => $resolved['url'],
                 'srcset' => $resolved['url'].' 1920w, '
                     .$resolved['srcset']['large'].' 1280w, '

@@ -176,37 +176,37 @@ class SectionTableSeeder extends Seeder
                                 <div class="top-collection-grid container">
                                     <div class="top-collection-card">
                                         <a href="#electronics" aria-label="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
-                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/1.webp', 'static/en/1.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
+                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/5', 'static/'.$locale.'/1.webp', 'static/en/1.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
                                         <a href="#mens" aria-label="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
-                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/2.webp', 'static/en/2.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
+                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/5', 'static/'.$locale.'/2.webp', 'static/en/2.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
                                         <a href="#womens" aria-label="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
-                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/3.webp', 'static/en/3.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
+                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/5', 'static/'.$locale.'/3.webp', 'static/en/3.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
                                         <a href="#formal-wear-men" aria-label="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
-                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/4.webp', 'static/en/4.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
+                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/5', 'static/'.$locale.'/4.webp', 'static/en/4.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
                                         <a href="#formal-wear-female" aria-label="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
-                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/5.webp', 'static/en/5.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
+                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/5', 'static/'.$locale.'/5.webp', 'static/en/5.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
                                         <a href="#wellness" aria-label="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
-                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/6.webp', 'static/en/6.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
+                                            <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/5', 'static/'.$locale.'/6.webp', 'static/en/6.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@ class SectionTableSeeder extends Seeder
                             'html' => '<div class="section-gap bold-collections container">
                                 <div class="inline-col-wrapper">
                                     <div class="inline-col-image-wrapper">
-                                        <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/10', 'static/'.$locale.'/7.webp', 'static/en/7.webp').'" class="lazy" width="632" height="510" alt="'.trans('installer::app.seeders.shop.theme-customizations.bold-collections.content.title', [], $locale).'">
+                                        <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/6', 'static/'.$locale.'/7.webp', 'static/en/7.webp').'" class="lazy" width="632" height="510" alt="'.trans('installer::app.seeders.shop.theme-customizations.bold-collections.content.title', [], $locale).'">
                                     </div>
 
                                     <div class="inline-col-content-wrapper">
@@ -255,7 +255,7 @@ class SectionTableSeeder extends Seeder
                                     <div class="collection-card-wrapper">
                                         <div class="single-collection-card">
                                             <a href="#active-wear">
-                                                <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/12', 'static/'.$locale.'/8.webp', 'static/en/8.webp').'" class="lazy" width="615" height="600" alt="'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale).'">
+                                                <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/8.webp', 'static/en/8.webp').'" class="lazy" width="615" height="600" alt="'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale).'">
                                                 
                                                 <h3 class="overlay-text">'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.sub-title-1', [], $locale).'</h3> 
                                             </a>
@@ -263,7 +263,7 @@ class SectionTableSeeder extends Seeder
 
                                         <div class="single-collection-card">
                                             <a href="#active-wear-female">
-                                                <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/12', 'static/'.$locale.'/9.webp', 'static/en/9.webp').'" class="lazy" width="615" height="600" alt="'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale).'">
+                                                <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/8', 'static/'.$locale.'/9.webp', 'static/en/9.webp').'" class="lazy" width="615" height="600" alt="'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale).'">
                                                 
                                                 <h3 class="overlay-text"> '.trans('installer::app.seeders.shop.theme-customizations.game-container.content.sub-title-2', [], $locale).' </h3> 
                                             </a>
@@ -283,7 +283,7 @@ class SectionTableSeeder extends Seeder
                             'html' => '<div class="section-gap bold-collections container">
                                 <div class="inline-col-wrapper direction-rtl">
                                     <div class="inline-col-image-wrapper">
-                                        <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/4', 'static/'.$locale.'/10.webp', 'static/en/10.webp').'" class="lazy" width="632" height="510" alt="'.trans('installer::app.seeders.shop.theme-customizations.bold-collections-2.content.title', [], $locale).'">
+                                        <img src="" data-src="'.$this->embedFileIfExists('themes/default/sections/10', 'static/'.$locale.'/10.webp', 'static/en/10.webp').'" class="lazy" width="632" height="510" alt="'.trans('installer::app.seeders.shop.theme-customizations.bold-collections-2.content.title', [], $locale).'">
                                     </div>
 
                                     <div class="inline-col-content-wrapper direction-ltr">
@@ -565,16 +565,15 @@ class SectionTableSeeder extends Seeder
     }
 
     /**
-     * Store an image and give back the url to write into authored markup.
+     * Store an image and give back the reference to write into authored markup.
      *
-     * Markup keeps whatever url it is given, so it is addressed from the site root
-     * rather than with a domain that can later change.
+     * Markup keeps a reference rather than a url, so it follows the site wherever it is served.
      *
      * @return string|null
      */
     public function embedFileIfExists($targetPath, $file, $default = null)
     {
-        return bagisto_theme_storage()->embedUrl($this->storeFileIfExists($targetPath, $file, $default));
+        return bagisto_theme_storage()->mediaReference($this->storeFileIfExists($targetPath, $file, $default));
     }
 
     /**

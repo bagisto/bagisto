@@ -139,7 +139,8 @@
             "Webkul\\Shipping\\Tests\\": "packages/Webkul/Shipping/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
             "Webkul\\Stripe\\Tests\\": "packages/Webkul/Stripe/tests",
-            "Webkul\\Tax\\Tests\\": "packages/Webkul/Tax/tests"
+            "Webkul\\Tax\\Tests\\": "packages/Webkul/Tax/tests",
+            "Webkul\\Theme\\Tests\\": "packages/Webkul/Theme/tests"
         }
     },
     "scripts": {

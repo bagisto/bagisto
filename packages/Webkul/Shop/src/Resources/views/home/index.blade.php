@@ -63,14 +63,14 @@
                 @if (! empty($data['css']))
                     @push ('styles')
                         <style>
-                            {!! $data['css'] !!}
+                            {!! bagisto_theme_storage()->resolveMarkup($data['css']) !!}
                         </style>
                     @endpush
                 @endif
 
                 <!-- Render HTML -->
                 @if (! empty($data['html']))
-                    {!! $data['html'] !!}
+                    {!! bagisto_theme_storage()->resolveMarkup($data['html']) !!}
                 @endif
 
                 @break

@@ -242,7 +242,7 @@ class SectionController extends Controller
     }
 
     /**
-     * Store one uploaded file for a section, returning the path to record and the url
+     * Store one uploaded file for a section, returning the path to record and the reference
      * to write into markup.
      */
     public function uploadMedia(int $id): JsonResponse
@@ -260,7 +260,7 @@ class SectionController extends Controller
         Event::dispatch('section.media.upload.after', $media);
 
         return new JsonResponse(array_merge($media, [
-            'url' => bagisto_theme_storage()->embedUrl($media['path']),
+            'ref' => bagisto_theme_storage()->mediaReference($media['path']),
         ]));
     }
 
