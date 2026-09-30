@@ -4,10 +4,13 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Traits\Sanitizer;
 use Webkul\Product\Contracts\Product;
 
 class ProductAttributeValueRepository extends Repository
 {
+    use Sanitizer;
+
     /**
      * Specify Model class name
      */
@@ -67,9 +70,13 @@ class ProductAttributeValueRepository extends Repository
             }
 
             if (in_array($attribute->type, ['image', 'file'])) {
-                $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/'.$product->id)
-                    : $data[$attribute->code];
+                if (gettype($data[$attribute->code]) === 'object') {
+                    $file = request()->file($attribute->code);
+
+                    $data[$attribute->code] = $file->store('product/'.$product->id);
+
+                    $this->sanitizeSVG($data[$attribute->code], $file->getMimeType());
+                }
             }
 
             $attributeValues = $product->attribute_values

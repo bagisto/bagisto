@@ -125,6 +125,7 @@
             "Webkul\\Installer\\Tests\\": "packages/Webkul/Installer/tests",
             "Webkul\\PayGlocal\\Tests\\": "packages/Webkul/PayGlocal/tests",
             "Webkul\\Payment\\Tests\\": "packages/Webkul/Payment/tests",
+            "Webkul\\Paypal\\Tests\\": "packages/Webkul/Paypal/tests",
             "Webkul\\PayU\\Tests\\": "packages/Webkul/PayU/tests",
             "Webkul\\Razorpay\\Tests\\": "packages/Webkul/Razorpay/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",

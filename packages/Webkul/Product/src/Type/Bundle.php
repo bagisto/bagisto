@@ -321,7 +321,9 @@ class Bundle extends AbstractType
                     continue;
                 }
 
-                $qty = $data['bundle_option_qty'][$optionId] ?? $optionProduct->qty;
+                $qty = $optionProduct->is_user_defined
+                    ? ($data['bundle_option_qty'][$optionId] ?? $optionProduct->qty)
+                    : $optionProduct->qty;
 
                 if (! isset($products[$optionProduct->product_id])) {
                     $products[$optionProduct->product_id] = [

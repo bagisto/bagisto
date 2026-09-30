@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
@@ -11,6 +12,26 @@ use Webkul\Admin\Http\Controllers\Controller;
 
 class SessionController extends Controller
 {
+    use ThrottlesLogins;
+
+    /**
+     * The failed login attempts an email address and caller may make before waiting.
+     */
+    protected $maxAttempts = 5;
+
+    /**
+     * How many minutes those failed attempts are remembered for.
+     */
+    protected $decayMinutes = 1;
+
+    /**
+     * The request field holding the identifier login attempts are counted against.
+     */
+    public function username(): string
+    {
+        return 'email';
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,11 +68,21 @@ class SessionController extends Controller
 
         $remember = request('remember');
 
+        if ($this->hasTooManyLoginAttempts(request())) {
+            $this->fireLockoutEvent(request());
+
+            return $this->sendLockoutResponse(request());
+        }
+
         if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
+            $this->incrementLoginAttempts(request());
+
             session()->flash('error', trans('admin::app.settings.users.login-error'));
 
             return redirect()->back();
         }
+
+        $this->clearLoginAttempts(request());
 
         if (! auth()->guard('admin')->user()->status) {
             session()->flash('warning', trans('admin::app.settings.users.activate-warning'));
@@ -77,7 +108,7 @@ class SessionController extends Controller
     {
         auth()->guard('admin')->logout();
 
-        session()->forget('two_factor_passed');
+        session()->forget('two_factor_passed_for');
 
         return redirect()->route('admin.session.create');
     }

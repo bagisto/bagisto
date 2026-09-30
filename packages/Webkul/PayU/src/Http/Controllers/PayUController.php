@@ -117,6 +117,18 @@ class PayUController extends Controller
                 return redirect()->route('shop.checkout.cart.index');
             }
 
+            if (Cart::hasError()) {
+                session()->flash('error', trans('payu::app.response.invalid-transaction'));
+
+                return redirect()->route('shop.checkout.cart.index');
+            }
+
+            if (! $this->paymentCoversCart($response, $cart)) {
+                session()->flash('error', trans('payu::app.response.invalid-transaction'));
+
+                return redirect()->route('shop.checkout.cart.index');
+            }
+
             $data = (new OrderResource($cart))->jsonSerialize();
 
             $data['payment']['additional'] = [
@@ -183,6 +195,27 @@ class PayUController extends Controller
         session()->flash('warning', trans('payu::app.response.payment-cancelled'));
 
         return redirect()->route('shop.checkout.cart.index');
+    }
+
+    /**
+     * Whether PayU reports this response as paid, for this cart's amount, and has not been used before.
+     */
+    protected function paymentCoversCart(array $response, $cart): bool
+    {
+        if (($response['status'] ?? '') !== self::PAYMENT_SUCCESS) {
+            return false;
+        }
+
+        $transactionId = $response['txnid'] ?? '';
+
+        if (
+            ! $transactionId
+            || $this->orderTransactionRepository->findWhere(['transaction_id' => $transactionId])->isNotEmpty()
+        ) {
+            return false;
+        }
+
+        return round((float) ($response['amount'] ?? 0), 2) === round((float) $cart->base_grand_total, 2);
     }
 
     /**

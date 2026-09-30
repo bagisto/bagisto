@@ -49,7 +49,7 @@ class ElasticSearchRepository
         }
 
         $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
+            'index' => $this->getIndexName(),
             'ignore_unavailable' => true,
             'body' => [
                 'from' => $options['from'],
@@ -276,7 +276,7 @@ class ElasticSearchRepository
             : $attributeCode;
 
         $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
+            'index' => $this->getIndexName(),
             'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
@@ -314,7 +314,7 @@ class ElasticSearchRepository
         $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
 
         $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
+            'index' => $this->getIndexName(),
             'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,

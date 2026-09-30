@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
@@ -10,6 +11,26 @@ use Webkul\Shop\Http\Requests\Customer\LoginRequest;
 
 class CustomerController extends APIController
 {
+    use ThrottlesLogins;
+
+    /**
+     * The failed login attempts an email address and caller may make before waiting.
+     */
+    protected $maxAttempts = 6;
+
+    /**
+     * How many minutes those failed attempts are remembered for.
+     */
+    protected $decayMinutes = 1;
+
+    /**
+     * The request field holding the identifier login attempts are counted against.
+     */
+    public function username(): string
+    {
+        return 'email';
+    }
+
     /**
      * Login Customer
      *
@@ -17,11 +38,25 @@ class CustomerController extends APIController
      */
     public function login(LoginRequest $request)
     {
-        if (! auth()->guard('customer')->attempt($request->only(['email', 'password']))) {
+        $credentials = array_merge($request->only(['email', 'password']), [
+            'channel_id' => core()->getCurrentChannel()->id,
+        ]);
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if (! auth()->guard('customer')->attempt($credentials)) {
+            $this->incrementLoginAttempts($request);
+
             return response()->json([
                 'message' => trans('shop::app.customers.login-form.invalid-credentials'),
             ], Response::HTTP_FORBIDDEN);
         }
+
+        $this->clearLoginAttempts($request);
 
         if (! auth()->guard('customer')->user()->status) {
             auth()->guard('customer')->logout();

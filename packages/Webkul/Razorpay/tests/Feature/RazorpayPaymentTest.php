@@ -113,6 +113,13 @@ it('successfully processes razorpay payment and creates order with invoice', fun
 
     $mockRazorpay->shouldReceive('verifySignature')->andReturn(true);
 
+    $mockRazorpay->shouldReceive('fetchPayment')->andReturn([
+        'order_id' => 'order_test123',
+        'amount' => (int) round($cart->base_grand_total * 100),
+        'currency' => 'INR',
+        'status' => 'captured',
+    ]);
+
     $this->app->instance(RazorpayPayment::class, $mockRazorpay);
 
     // Act

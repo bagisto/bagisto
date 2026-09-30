@@ -63,6 +63,10 @@
             <directory suffix="Test.php">packages/Webkul/PayU/tests/Feature</directory>
         </testsuite>
 
+        <testsuite name="Paypal Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Paypal/tests/Feature</directory>
+        </testsuite>
+
         <!-- Razorpay package testsuites. -->
         <testsuite name="Razorpay Unit Test">
             <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Unit</directory>

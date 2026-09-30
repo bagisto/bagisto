@@ -26,7 +26,7 @@ class TwoFactorController extends Controller
             if (
                 $admin->two_factor_enabled
                 && $admin->two_factor_secret
-                && ! session('two_factor_passed')
+                && ! $this->hasPassedTwoFactor($admin)
             ) {
                 return response()->json([
                     'message' => trans('admin::app.errors.401.title'),
@@ -66,9 +66,9 @@ class TwoFactorController extends Controller
 
         $decryptedSecret = decrypt($admin->two_factor_secret);
 
-        $isValidCode = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code);
+        $window = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code, $admin->two_factor_last_used_window);
 
-        if (! $isValidCode) {
+        if (! $window) {
             return response()->json([
                 'errors' => [
                     'code' => [trans('admin::app.account.messages.invalid-code')],
@@ -77,11 +77,12 @@ class TwoFactorController extends Controller
         }
 
         $admin->forceFill([
+            'two_factor_last_used_window' => $window,
             'two_factor_enabled' => true,
             'two_factor_verified_at' => now(),
         ])->save();
 
-        session()->put('two_factor_passed', true);
+        session()->put('two_factor_passed_for', $admin->id);
 
         $backupCodes = two_factor_authentication()->generateBackupCodes();
 
@@ -133,7 +134,7 @@ class TwoFactorController extends Controller
          */
         if (
             $admin->two_factor_enabled
-            && ! session('two_factor_passed')
+            && ! $this->hasPassedTwoFactor($admin)
         ) {
             return response()->json([
                 'message' => trans('admin::app.errors.401.title'),
@@ -170,7 +171,11 @@ class TwoFactorController extends Controller
 
         $decryptedSecret = decrypt($admin->two_factor_secret);
 
-        if (two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code)) {
+        $window = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code, $admin->two_factor_last_used_window);
+
+        if ($window) {
+            $admin->forceFill(['two_factor_last_used_window' => $window])->save();
+
             return $this->handleSuccessfulVerification();
         }
 
@@ -191,11 +196,19 @@ class TwoFactorController extends Controller
     }
 
     /**
+     * Whether this session passed two-factor verification as the given admin.
+     */
+    protected function hasPassedTwoFactor($admin): bool
+    {
+        return (int) session('two_factor_passed_for') === (int) $admin->id;
+    }
+
+    /**
      * Handle successful 2FA verification.
      */
     protected function handleSuccessfulVerification()
     {
-        session()->put('two_factor_passed', true);
+        session()->put('two_factor_passed_for', auth()->guard('admin')->id());
 
         return redirect()->intended(route('admin.dashboard.index'))
             ->with('success', trans('admin::app.account.messages.verified-success'));

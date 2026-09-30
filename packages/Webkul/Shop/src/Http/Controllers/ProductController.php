@@ -35,6 +35,10 @@ class ProductController extends Controller
      */
     public function download($productId, $attributeId)
     {
+        if (! $this->isVisibleProduct($productId)) {
+            abort(404);
+        }
+
         $productAttribute = $this->productAttributeValueRepository->findOneWhere([
             'product_id' => $productId,
             'attribute_id' => $attributeId,
@@ -55,6 +59,10 @@ class ProductController extends Controller
         try {
             if (request('type') == 'link') {
                 $productDownloadableLink = $this->productDownloadableLinkRepository->findOrFail(request('id'));
+
+                if (! $this->isVisibleProduct($productDownloadableLink->product_id)) {
+                    abort(404);
+                }
 
                 if ($productDownloadableLink->sample_type == 'file') {
                     $privateDisk = Storage::disk('private');
@@ -103,5 +111,16 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             abort(404);
         }
+    }
+
+    /**
+     * Whether the storefront shows this product at all.
+     */
+    protected function isVisibleProduct($productId): bool
+    {
+        $product = $this->productRepository->find($productId);
+
+        return (bool) $product?->status
+            && (bool) $product?->visible_individually;
     }
 }
