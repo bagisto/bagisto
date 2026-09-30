@@ -160,7 +160,7 @@ describe('two factor authentication enable endpoint', function () {
         ]);
 
         // Assert
-        expect(session('two_factor_passed'))->toBeTrue();
+        expect(session('two_factor_passed_for'))->toBe($this->admin->id);
     });
 });
 
@@ -177,7 +177,7 @@ describe('two factor authentication disable', function () {
 
     it('admin can disable 2FA', function () {
         // Act - 2FA can only be disabled once the session has passed verification.
-        $response = $this->withSession(['two_factor_passed' => true])
+        $response = $this->withSession(['two_factor_passed_for' => $this->admin->id])
             ->post(route('admin.two_factor.disable'));
 
         // Assert
@@ -208,7 +208,7 @@ describe('two factor authentication disable', function () {
 
     it('prevents a session that has not passed verification from disabling 2FA', function () {
         // Arrange - the admin is logged in with 2FA enabled but the session has NOT
-        // passed verification (no `two_factor_passed`), i.e. the 2FA-bypass scenario.
+        // passed verification (no `two_factor_passed_for`), i.e. the 2FA-bypass scenario.
 
         // Act
         $response = $this->post(route('admin.two_factor.disable'));
@@ -247,7 +247,7 @@ describe('two factor authentication login verification', function () {
 
         // Assert
         $response->assertRedirect(route('admin.dashboard.index'));
-        expect(session('two_factor_passed'))->toBeTrue();
+        expect(session('two_factor_passed_for'))->toBe($this->admin->id);
     });
 
     it('admin can verify with valid backup code', function () {
@@ -258,7 +258,7 @@ describe('two factor authentication login verification', function () {
 
         // Assert
         $response->assertRedirect(route('admin.dashboard.index'));
-        expect(session('two_factor_passed'))->toBeTrue();
+        expect(session('two_factor_passed_for'))->toBe($this->admin->id);
 
         $this->admin->refresh();
 
@@ -279,7 +279,7 @@ describe('two factor authentication login verification', function () {
         $response->assertRedirect()
             ->assertSessionHasErrors('code');
 
-        expect(session('two_factor_passed'))->toBeNull();
+        expect(session('two_factor_passed_for'))->toBeNull();
     });
 
     it('verification requires 6-digit code', function () {
@@ -394,8 +394,8 @@ describe('two factor authentication integration flow', function () {
 
         expect($this->admin->two_factor_enabled)->toBeTrue();
 
-        // Arrange: Step 4 - Generate Fresh Valid OTP
-        $newValidCode = $this->google2fa->getCurrentOtp($secret);
+        // Arrange: Step 4 - Generate An OTP From The Next Window, Since Enabling Consumed This One
+        $newValidCode = $this->google2fa->oathTotp($secret, $this->google2fa->getTimestamp() + 1);
 
         // Act: Step 4 - Verify 2FA During Login
         $verifyResponse = $this->post(route('admin.two_factor.verify.store'), [
@@ -405,7 +405,7 @@ describe('two factor authentication integration flow', function () {
         // Assert: Step 4 - Redirect To Dashboard + Session Flag Set
         $verifyResponse->assertRedirect(route('admin.dashboard.index'));
 
-        expect(session('two_factor_passed'))->toBeTrue();
+        expect(session('two_factor_passed_for'))->toBe($this->admin->id);
 
         // Act: Step 5 - Disable 2FA
         $disableResponse = $this->post(route('admin.two_factor.disable'));
