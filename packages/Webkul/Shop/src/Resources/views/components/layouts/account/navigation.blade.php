@@ -9,7 +9,7 @@
             <img
                 src="{{ $customer->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
                 class="h-15 w-15 rounded-full"
-                alt="Profile Image"
+                alt="{{ trans('shop::app.components.layouts.account.profile-image') }}"
             >
         </div>
 
@@ -17,11 +17,11 @@
             class="flex flex-col justify-between"
             v-pre
         >
-            <p class="text-2xl break-all font-mediums max-md:text-xl"> 
-                Hello! {{ $customer->first_name }}
+            <p class="text-2xl break-all font-medium max-md:text-xl">
+                {{ trans('shop::app.components.layouts.account.greeting', ['name' => $customer->first_name]) }}
             </p>
 
-            <p class="no-underline max-md:text-md: text-zinc-500">
+            <p class="no-underline text-zinc-500">
                 {{ $customer->email }}
             </p>
         </div>

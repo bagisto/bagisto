@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'Hola! :name',
+                'profile-image' => 'Imatge de perfil',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [

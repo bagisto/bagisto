@@ -1,13 +1,13 @@
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
-        @lang('shop::app.customers.account.orders.title')
+        @lang('shop::app.layouts.my-account')
     </x-slot>
 
     <!-- Breadcrumbs -->
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
         @section('breadcrumbs')
-            <x-shop::breadcrumbs name="orders" />
+            <x-shop::breadcrumbs name="account" />
         @endSection
     @endif
 
@@ -38,4 +38,4 @@
         </div>
     @endauth
 
-</x-shop::layouts.accounts>
+</x-shop::layouts.account>

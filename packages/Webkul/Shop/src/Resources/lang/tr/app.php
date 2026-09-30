@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'Merhaba! :name',
+                'profile-image' => 'Profil Resmi',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [

@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'Hello! :name',
+                'profile-image' => 'Profile Image',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [
@@ -1081,7 +1086,7 @@ return [
 
     'checkout' => [
         'success' => [
-            'info' => 'We will email you, your order details and tracking information',
+            'info' => 'We will email you your order details and tracking information',
             'order-id-info' => 'Your order id is #:order_id',
             'thanks' => 'Thank you for your order!',
             'title' => 'Order successfully placed',

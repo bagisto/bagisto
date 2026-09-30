@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'Вітаємо! :name',
+                'profile-image' => 'Зображення профілю',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [

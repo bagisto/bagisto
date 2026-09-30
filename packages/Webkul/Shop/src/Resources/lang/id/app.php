@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'Halo! :name',
+                'profile-image' => 'Gambar Profil',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [

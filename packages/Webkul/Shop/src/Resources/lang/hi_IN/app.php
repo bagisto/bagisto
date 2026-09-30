@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'नमस्ते! :name',
+                'profile-image' => 'प्रोफ़ाइल छवि',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [

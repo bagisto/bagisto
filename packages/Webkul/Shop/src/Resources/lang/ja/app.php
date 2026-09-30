@@ -569,6 +569,11 @@ return [
         ],
 
         'layouts' => [
+            'account' => [
+                'greeting' => 'こんにちは！:name さん',
+                'profile-image' => 'プロフィール画像',
+            ],
+
             'header' => [
                 'desktop' => [
                     'top' => [
