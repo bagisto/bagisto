@@ -7,7 +7,7 @@ use Webkul\Theme\Models\Section;
 /**
  * Reduce a recorded media value to the path it names on the disk.
  */
-function storedMediaPath(string $value): string
+function seededMediaDiskPath(string $value): string
 {
     return preg_replace('#^(?:/?storage/|__media__/|/)#', '', trim($value));
 }
@@ -75,7 +75,7 @@ it('should store every seeded upload it records a path for', function () {
             $options = (array) $translation->options;
 
             foreach ((array) ($options['images'] ?? []) as $image) {
-                $path = storedMediaPath((string) ($image['image'] ?? ''));
+                $path = seededMediaDiskPath((string) ($image['image'] ?? ''));
 
                 if (
                     $path !== ''
