@@ -7,10 +7,12 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\post;
 
 /**
- * Record an order notification, as placing an order does.
+ * Record the only order notification there is, as placing an order does.
  */
 function notifyOfOrder(): Notification
 {
+    Notification::query()->delete();
+
     $order = test()->createOrder();
 
     return Notification::create([

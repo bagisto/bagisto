@@ -113,7 +113,7 @@ export class RuleApplyPage extends CheckoutHelper {
     }
 
     async expectCouponNotApplicable(subtotal: number): Promise<void> {
-        await expect(this.page.getByText("Coupon not found.").first()).toBeVisible();
+        await expect(this.page.getByText("Coupon code can't be applied.").first()).toBeVisible();
         await expect(this.summaryRow("Discount Amount")).toHaveCount(0);
         await this.expectGrandTotal(subtotal);
     }

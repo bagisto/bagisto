@@ -5,6 +5,14 @@ use Webkul\Installer\Database\Seeders\Shop\SectionTableSeeder;
 use Webkul\Theme\Models\Section;
 
 /**
+ * Reduce a recorded media value to the path it names on the disk.
+ */
+function storedMediaPath(string $value): string
+{
+    return preg_replace('#^(?:/?storage/|__media__/|/)#', '', trim($value));
+}
+
+/**
  * The section ids every seeded media path is filed under, as "section {id} -> sections/{directory}".
  */
 function seededMediaOwnership(): array
@@ -67,7 +75,7 @@ it('should store every seeded upload it records a path for', function () {
             $options = (array) $translation->options;
 
             foreach ((array) ($options['images'] ?? []) as $image) {
-                $path = (string) ($image['image'] ?? '');
+                $path = storedMediaPath((string) ($image['image'] ?? ''));
 
                 if (
                     $path !== ''
@@ -77,7 +85,7 @@ it('should store every seeded upload it records a path for', function () {
                 }
             }
 
-            preg_match_all('#__media__/(\S+?)"#', (string) ($options['html'] ?? ''), $matches);
+            preg_match_all('#(?:__media__/|/storage/|/)?(themes/\S+?)["\s)]#', (string) ($options['html'] ?? ''), $matches);
 
             foreach ($matches[1] as $path) {
                 if (! Storage::exists($path)) {
