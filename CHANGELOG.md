@@ -4,6 +4,20 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed the invoice and shipment screens accepting an order item that belongs to a different order, which recorded the document against the wrong one. Every item named is now checked against the order being acted on.
+
+- Fixed a refund accepting any shipping amount, so a crafted request could refund far more than the order was charged. The amount is now limited to the shipping invoiced less what has already been refunded, as the form already showed.
+
+- Fixed a decimal cart quantity being stored rounded while the customer was billed the unrounded figure. The quantity now has to be a whole number, and zero still empties the line.
+
+- Fixed the customer addresses url answering with a server error. Addresses are managed on the customer's own screen, which the url now opens.
+
+- Fixed the admin notification feed handing every order's details — the customer's name and email address, the totals and the status — to any signed in admin, whatever their role allowed. The feed, the notification screen and the bell now follow the permission on orders.
+
+- Fixed a product page failing with a division by zero when the product and its customer group price are both set to zero. A free product now shows no discount rather than an error.
+
+- Fixed the seeded theme sections keeping their pictures in another section's directory, so deleting or editing one section removed the pictures of another.
+
 - Fixed cart rules starting and ending up to an hour early or late: their start and end times were compared with a time whose minutes were the current month (`H:m:s` instead of `H:i:s`).
 
 - Fixed Stripe charging the full price when a cart rule discounted the order. The discount now shows on Stripe's payment page, and a fractional unit price no longer loses a penny to rounding.

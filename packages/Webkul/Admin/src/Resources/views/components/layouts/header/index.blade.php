@@ -67,15 +67,17 @@
         </a>
 
        <!-- Notification Component -->
-        <v-notifications {{ $attributes }}>
-            <span class="relative flex">
-                <span
-                    class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
-                    title="@lang('admin::app.components.layouts.header.notifications')"
-                >
+        @if (bouncer()->hasPermission('sales.orders'))
+            <v-notifications {{ $attributes }}>
+                <span class="relative flex">
+                    <span
+                        class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
+                        title="@lang('admin::app.components.layouts.header.notifications')"
+                    >
+                    </span>
                 </span>
-            </span>
-        </v-notifications>
+            </v-notifications>
+        @endif
 
         <!-- Admin Profile -->
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">

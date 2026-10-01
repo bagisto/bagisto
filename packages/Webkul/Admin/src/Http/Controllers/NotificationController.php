@@ -21,6 +21,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        abort_unless($this->readsOrderNotifications(), 401);
+
         return view('admin::notifications.index');
     }
 
@@ -31,6 +33,14 @@ class NotificationController extends Controller
      */
     public function getNotifications()
     {
+        if (! $this->readsOrderNotifications()) {
+            return [
+                'search_results' => [],
+                'status_count' => '',
+                'total_unread' => 0,
+            ];
+        }
+
         $params = request()->except('page');
 
         $searchResults = count($params)
@@ -56,6 +66,8 @@ class NotificationController extends Controller
      */
     public function viewedNotifications($orderId)
     {
+        abort_unless($this->readsOrderNotifications(), 401);
+
         if ($notification = $this->notificationRepository->where('order_id', $orderId)->first()) {
             $notification->read = 1;
 
@@ -74,6 +86,8 @@ class NotificationController extends Controller
      */
     public function readAllNotifications()
     {
+        abort_unless($this->readsOrderNotifications(), 401);
+
         $this->notificationRepository->where('read', 0)->update(['read' => 1]);
 
         $searchResults = $this->notificationRepository->getParamsData([
@@ -86,5 +100,13 @@ class NotificationController extends Controller
             'total_unread' => $this->notificationRepository->where('read', 0)->count(),
             'success_message' => trans('admin::app.notifications.marked-success'),
         ];
+    }
+
+    /**
+     * Whether the signed in admin may read the orders every notification is raised about.
+     */
+    protected function readsOrderNotifications(): bool
+    {
+        return bouncer()->hasPermission('sales.orders');
     }
 }

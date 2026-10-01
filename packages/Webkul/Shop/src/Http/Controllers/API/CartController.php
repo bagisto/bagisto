@@ -166,6 +166,11 @@ class CartController extends APIController
      */
     public function update(): JsonResource
     {
+        $this->validate(request(), [
+            'qty' => 'required|array',
+            'qty.*' => 'required|integer|min:0',
+        ]);
+
         try {
             Cart::updateItems(request()->input());
 

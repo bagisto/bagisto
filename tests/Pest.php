@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Tests\AdminTestCase;
 use Webkul\Core\Tests\CoreTestCase;
 use Webkul\Customer\Tests\CustomerTestCase;
@@ -42,6 +43,19 @@ uses(PayUTestCase::class)->in('../packages/Webkul/PayU/tests');
 uses(RazorpayTestCase::class)->in('../packages/Webkul/Razorpay/tests');
 uses(ShopTestCase::class)->in('../packages/Webkul/Shop/tests');
 uses(StripeTestCase::class)->in('../packages/Webkul/Stripe/tests');
+
+/*
+|--------------------------------------------------------------------------
+| Storage Isolation
+|--------------------------------------------------------------------------
+|
+| Editing or removing a theme section deletes its uploads from the disk, and a rolled back
+| transaction does not put a deleted file back. The screens that do it work on a temporary
+| disk, so a run against a developer's own database leaves that store's media alone.
+|
+*/
+
+uses()->beforeEach(fn () => Storage::fake())->in('../packages/Webkul/Admin/tests/Feature/Appearance');
 
 /*
 |--------------------------------------------------------------------------
