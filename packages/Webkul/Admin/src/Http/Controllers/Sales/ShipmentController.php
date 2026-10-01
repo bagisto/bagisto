@@ -77,6 +77,12 @@ class ShipmentController extends Controller
 
         $data = request()->only(['shipment', 'carrier_name']);
 
+        if (! $this->itemsBelongToOrder($order, array_keys((array) ($data['shipment']['items'] ?? [])))) {
+            session()->flash('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
+
+            return redirect()->back();
+        }
+
         if (! $this->isInventoryValidate($data)) {
             session()->flash('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
 
@@ -169,5 +175,16 @@ class ShipmentController extends Controller
         $shipment = $this->shipmentRepository->findOrFail($id);
 
         return view('admin::sales.shipments.view', compact('shipment'));
+    }
+
+    /**
+     * Whether every item the request names is one the order carries.
+     */
+    protected function itemsBelongToOrder($order, array $itemIds): bool
+    {
+        return ! array_diff(
+            array_map('intval', $itemIds),
+            $order->items->pluck('id')->map('intval')->all()
+        );
     }
 }

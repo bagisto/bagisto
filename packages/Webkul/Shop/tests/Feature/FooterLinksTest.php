@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
 use Spatie\ResponseCache\Facades\ResponseCache;
 use Webkul\Theme\Models\Section;
 
@@ -32,6 +33,8 @@ beforeEach(function () {
     config(['responsecache.enabled' => false]);
 
     ResponseCache::clear();
+
+    Storage::fake();
 });
 
 // ============================================================================

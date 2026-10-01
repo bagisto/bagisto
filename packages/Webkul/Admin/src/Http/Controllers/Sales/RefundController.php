@@ -69,6 +69,7 @@ class RefundController extends Controller
         $this->validate(request(), [
             'refund.items' => 'array',
             'refund.items.*' => 'required|numeric|min:0',
+            'refund.shipping' => 'sometimes|numeric|min:0|max:'.($order->base_shipping_invoiced - $order->base_shipping_refunded),
         ]);
 
         $data = request()->all();

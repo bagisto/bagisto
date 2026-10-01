@@ -71,14 +71,10 @@ Route::prefix('customers')->group(function () {
         Route::prefix('{id}/addresses')->group(function () {
             Route::get('', 'index')->name('admin.customers.customers.addresses.index');
 
-            Route::get('create', 'create')->name('admin.customers.customers.addresses.create');
-
             Route::post('create', 'store')->name('admin.customers.customers.addresses.store');
         });
 
         Route::prefix('addresses')->group(function () {
-            Route::get('edit/{id}', 'edit')->name('admin.customers.customers.addresses.edit');
-
             Route::put('edit/{id}', 'update')->name('admin.customers.customers.addresses.update');
 
             Route::post('default/{id}', 'makeDefault')->name('admin.customers.customers.addresses.set_default');

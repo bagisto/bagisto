@@ -45,11 +45,9 @@ Bagisto is distributed as a full Laravel application rather than as a package in
 
 1. **Move to PHP 8.4.** Part of the dependency tree now requires it, so `composer install` aborts on 8.3 rather than resolving to older packages.
 
-2. **Back up the database and `storage/`.** Five of this release's migrations rewrite existing rows in place — two rewrite JSON in `theme_section_translations`, two rename codes in `core_config`, and one moves Magic AI settings off retired models. The `down()` methods of the first four reverse the shape, not a snapshot, and the Magic AI one cannot be reversed at all.
+2. **Back up the database and `storage/`.** Several of this release's migrations rewrite existing rows in place — they rename codes in `core_config`, move Magic AI settings off retired models, rename two RMA statuses, and move uploads into their new directories. Where a `down()` exists it reverses the shape, not a snapshot, and the Magic AI one cannot be reversed at all.
 
-3. **Check that `APP_URL` names the site you are actually serving.** The `make_theme_section_urls_portable` migration decides which stored links belong to this store by comparing their host against `config('app.url')`. If `APP_URL` is wrong or still points at a development host when you migrate, links on the real domain are left as absolute URLs and keep breaking when the domain changes.
-
-4. **Plan for maintenance mode.** The migrations rewrite configuration and theme content that requests read, so the store should be down for the duration. The sequence below opens with `php artisan down` and closes with `php artisan up`.
+3. **Plan for maintenance mode.** The migrations rewrite configuration that requests read and move uploads on disk, so the store should be down for the duration. The sequence below opens with `php artisan down` and closes with `php artisan up`.
 
 > [!WARNING]
 > Do not run `php artisan bagisto:install` on an existing store. It is the fresh-install command and calls `db:wipe` followed by `migrate:fresh` — it will destroy your data. An upgrade only ever runs `php artisan migrate`.
@@ -382,14 +380,15 @@ and the `view_render_event` names the view fires are unchanged so existing liste
 
 Theme sections used to record an upload as `storage/themes/...` and a link as a whole URL on the store's domain. Neither survived a change of domain or a move to a remote disk. Sections now store the bare path — `themes/...` — and resolve it when the page is rendered.
 
-Two migrations convert what is already stored, live options and drafts alike:
+**Nothing converts what is already stored, and nothing needs to.** Every spelling a section has ever recorded is understood when it is read, so a store upgrades without a data migration and without a maintenance window for one:
 
-| Migration | What it does |
+| Stored before | Read as |
 |---|---|
-| `2026_08_25_000001_drop_storage_prefix_from_theme_section_paths` | Strips the `storage/` prefix from paths under `themes/`, `theme/` and `section/` |
-| `2026_08_25_000002_make_theme_section_urls_portable` | Reduces URLs on this store's own host to paths, and rewrites `src="storage/..."` inside authored HTML and CSS to `/storage/...` |
+| `storage/themes/...` | the path `themes/...` |
+| A whole URL on this store's own domain | a link resolved against the site serving the request |
+| `src="storage/..."` or `src="/storage/..."` in authored markup | the URL the upload is served from |
 
-The second reads `config('app.url')` to decide which host is "this store", which is why `APP_URL` has to be right before you migrate.
+Re-saving a section in Appearance rewrites it to the current spelling. Nothing obliges you to, and a store that never touches its sections keeps working.
 
 #### If you override a section view
 
@@ -410,10 +409,102 @@ A view that built its own URLs from the stored value will now build them from a 
 | `url($path)` | The URL the original is served from |
 | `resizedUrl($path, $size)` | The URL of one resized copy — `small`, `medium` or `large` |
 | `imageUrls($path)` | `['url' => ..., 'srcset' => ['small' => ..., 'medium' => ..., 'large' => ...]]` |
-| `embedUrl($path)` | The URL to write into authored markup, root-relative on a local disk |
+| `mediaReference($path)` | The reference to write into authored markup, resolved as the page renders |
+| `resolveMarkup($markup)` | Authored markup with every reference in it resolved to the URL it is served from |
+| `embedUrl($path)` | A stored path as a root-relative URL on a local disk |
 | `normalize($path)` | The stored value reduced to a disk path, tolerating an old `storage/` prefix |
 
 `bagisto_asset()` is unchanged and still resolves what a theme *ships*; `bagisto_theme_storage()` resolves what it *stores*.
+
+#### Uploads inside authored markup are references
+
+A static content section used to have the upload's URL written into its HTML when the file was added, which froze the store's directory into the markup. An install served from a subdirectory — `example.com/shop/public` — then asked for `/storage/...` at the domain root and got nothing. The editor now writes a reference instead, and it is resolved against the site serving the page each time the section renders:
+
+```html
+<img src="__media__/themes/default/sections/8/hero.webp" alt="">
+```
+
+**A theme that renders section markup itself must resolve it.** Nothing else changes for a theme that uses the core view.
+
+```diff
+- {!! $data['html'] !!}
++ {!! bagisto_theme_storage()->resolveMarkup($data['html']) !!}
+```
+
+Do the same for `$data['css']`, which may carry a reference inside `url(...)`.
+
+**There is no migration, and none is needed.** `resolveMarkup()` also resolves the `/storage/...` form written before this release, so markup already in the database keeps working and gains the same directory independence. Re-saving a section in Appearance rewrites it to a reference; nothing obliges you to.
+
+The upload endpoint changed with it. `POST admin/appearance/sections/{id}/media` now answers with `ref` where it used to answer with `url`, so a custom editor calling it reads the new key:
+
+```diff
+- this.write(`<img src="${response.data.url}" alt="" />`);
++ this.write(`<img src="${response.data.ref}" alt="" />`);
+```
+
+`path` is unchanged, and an image field still records the bare path rather than a reference — only markup authored by hand carries one.
+
+#### Seeded section media was filed under the wrong section
+
+A section's uploads live under `themes/{theme}/sections/{id}`, and both the delete observer and the routine that clears unreferenced files act on that directory. The demo content the installer seeds did not follow it: the markup of the section with id 5 pointed at `sections/8`, id 6 at `sections/10`, id 8 at `sections/12` and id 10 at `sections/4`. Only the image carousel lined up.
+
+**On a store seeded before this release, deleting one of those sections deletes another one's images.** Removing the section with id 8 clears `sections/8`, which is where the section with id 5 keeps its pictures. Editing a section has the same effect, because the unreferenced files are cleared as it is saved.
+
+The seeder now files each upload under the section that owns it, so a **fresh install is unaffected**. Anything uploaded through Appearance was always filed correctly — this is seeded demo content only.
+
+To repair a store that already has it, move each file to the section that references it and repoint the reference. Run this once, with the store in maintenance mode:
+
+```php
+// php artisan tinker
+use Illuminate\Support\Facades\Storage;
+use Webkul\Theme\Models\Section;
+
+foreach (Section::with('translations')->get() as $section) {
+    $home = 'themes/'.$section->theme_code.'/sections/'.$section->id;
+
+    foreach ($section->translations as $translation) {
+        foreach (['options', 'draft_options'] as $column) {
+            if (! is_array($translation->{$column})) {
+                continue;
+            }
+
+            $encoded = json_encode($translation->{$column});
+
+            preg_match_all('#sections\\\\/(\d+)\\\\/([^"\\\\]+)#', $encoded, $matches, PREG_SET_ORDER);
+
+            foreach ($matches as [$whole, $directory, $file]) {
+                if ((int) $directory === (int) $section->id) {
+                    continue;
+                }
+
+                $from = 'themes/'.$section->theme_code.'/sections/'.$directory.'/'.$file;
+
+                if (Storage::exists($from) && ! Storage::exists($home.'/'.$file)) {
+                    Storage::move($from, $home.'/'.$file);
+                }
+
+                $encoded = str_replace('sections\\/'.$directory.'\\/'.$file, 'sections\\/'.$section->id.'\\/'.$file, $encoded);
+            }
+
+            $translation->{$column} = json_decode($encoded, true);
+        }
+
+        $translation->save();
+    }
+}
+```
+
+It moves the files rather than the directories, because the directory a section should move into is often one another section is already using. Run it before deleting or editing any of the seeded sections. The directories it empties can then be removed:
+
+```php
+foreach (Storage::directories('themes') as $theme) {
+    foreach (Storage::directories($theme.'/sections') as $directory) {
+        if (empty(Storage::files($directory))) {
+            Storage::deleteDirectory($directory);
+        }
+    }
+}
+```
 
 ---
 

@@ -13,6 +13,11 @@ class ThemeStorage
     public const SIZES = ['large', 'medium', 'small'];
 
     /**
+     * The prefix a stored media path carries inside authored markup.
+     */
+    public const MEDIA_REFERENCE = '__media__/';
+
+    /**
      * Resolve a stored path to the url it is served from.
      *
      * A local disk is addressed through the site, so an image and its resized
@@ -84,7 +89,8 @@ class ThemeStorage
      * Resolve a stored path to the url to write into authored markup.
      *
      * Markup keeps whatever url it is given, so a local disk is addressed from the
-     * site root rather than with a domain that can later change.
+     * site root rather than with a domain that can later change. The directory the
+     * application is served from stays in, or the browser resolves past it.
      */
     public function embedUrl(?string $path): ?string
     {
@@ -101,7 +107,50 @@ class ThemeStorage
             return $this->url($path);
         }
 
-        return $this->pathOnSite($path);
+        return parse_url((string) $this->url($path), PHP_URL_PATH)
+            ?: '/'.$this->pathOnSite($path);
+    }
+
+    /**
+     * The reference to write into authored markup for a stored path.
+     *
+     * Markup keeps a reference rather than a url, so it follows the site wherever it is served.
+     */
+    public function mediaReference(?string $path): ?string
+    {
+        $path = $this->normalize($path);
+
+        if (is_null($path)) {
+            return null;
+        }
+
+        if ($this->isAbsolute($path)) {
+            return $path;
+        }
+
+        return self::MEDIA_REFERENCE.$path;
+    }
+
+    /**
+     * Resolve every media reference in authored markup to the url it is served from.
+     *
+     * Both spellings markup carried before it kept references are resolved the same way.
+     */
+    public function resolveMarkup(?string $markup): string
+    {
+        $markup = (string) $markup;
+
+        if ($markup === '') {
+            return '';
+        }
+
+        $prefixes = preg_quote(self::MEDIA_REFERENCE, '#').'|/storage/|storage/';
+
+        return (string) preg_replace_callback(
+            '#(?:(?<=[\'"(\s])|^)(?:'.$prefixes.')([^\s\'"()<>]+)#',
+            fn (array $matches): string => (string) $this->embedUrl($matches[1]),
+            $markup
+        );
     }
 
     /**
@@ -147,7 +196,9 @@ class ThemeStorage
     }
 
     /**
-     * Where a stored path is served from, as a path on this site.
+     * Where a stored path is served from, relative to the directory the application is served from.
+     *
+     * The disk's url carries that directory already, so it is taken off before `url()` puts it back.
      */
     protected function pathOnSite(string $path): string
     {
@@ -157,10 +208,19 @@ class ThemeStorage
             ! is_string($published)
             || $published === ''
         ) {
-            return '/storage/'.$path;
+            return 'storage/'.$path;
         }
 
-        return $published;
+        $base = rtrim((string) parse_url((string) config('app.url'), PHP_URL_PATH), '/');
+
+        if (
+            $base !== ''
+            && str_starts_with($published, $base.'/')
+        ) {
+            $published = substr($published, strlen($base));
+        }
+
+        return ltrim($published, '/');
     }
 
     /**

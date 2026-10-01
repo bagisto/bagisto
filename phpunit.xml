@@ -129,6 +129,11 @@
         <testsuite name="Tax Unit Test">
             <directory suffix="Test.php">packages/Webkul/Tax/tests/Unit</directory>
         </testsuite>
+
+        <!-- Theme package testsuites. -->
+        <testsuite name="Theme Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Theme/tests/Unit</directory>
+        </testsuite>
     </testsuites>
 
     <source>

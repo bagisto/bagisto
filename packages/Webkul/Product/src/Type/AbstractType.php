@@ -937,7 +937,12 @@ abstract class AbstractType
     {
         $price = $this->getCustomerGroupPrice($this->product, $customerGroupPrice->qty);
 
-        $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
+        $discount = number_format(
+            $this->product->price > 0
+                ? (($this->product->price - $price) * 100) / $this->product->price
+                : 0,
+            2
+        );
 
         $offerLines = trans('product::app.type.abstract.offers', [
             'qty' => $customerGroupPrice->qty,

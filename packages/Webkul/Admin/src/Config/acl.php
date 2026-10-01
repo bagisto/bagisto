@@ -538,16 +538,12 @@ return [
     ], [
         'key' => 'customers.addresses.create',
         'name' => 'admin::app.acl.create',
-        'route' => [
-            'admin.customers.customers.addresses.create',
-            'admin.customers.customers.addresses.store',
-        ],
+        'route' => 'admin.customers.customers.addresses.store',
         'sort' => 1,
     ], [
         'key' => 'customers.addresses.edit',
         'name' => 'admin::app.acl.edit',
         'route' => [
-            'admin.customers.customers.addresses.edit',
             'admin.customers.customers.addresses.update',
             'admin.customers.customers.addresses.set_default',
         ],

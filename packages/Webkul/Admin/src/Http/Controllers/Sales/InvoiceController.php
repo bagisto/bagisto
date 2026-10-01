@@ -80,6 +80,12 @@ class InvoiceController extends Controller
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 
+        if (! $this->itemsBelongToOrder($order, array_keys((array) request()->input('invoice.items', [])))) {
+            session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
+
+            return redirect()->back();
+        }
+
         if (! $this->invoiceRepository->haveProductToInvoice(request()->all())) {
             session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
 
@@ -181,5 +187,16 @@ class InvoiceController extends Controller
         return new JsonResponse([
             'message' => trans('admin::app.sales.invoices.index.datagrid.mass-update-success'),
         ], 200);
+    }
+
+    /**
+     * Whether every item the request names is one the order carries.
+     */
+    protected function itemsBelongToOrder($order, array $itemIds): bool
+    {
+        return ! array_diff(
+            array_map('intval', $itemIds),
+            $order->items->pluck('id')->map('intval')->all()
+        );
     }
 }

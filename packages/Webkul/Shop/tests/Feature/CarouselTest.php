@@ -80,6 +80,53 @@ it('should fall back to a shimmer placeholder when the carousel has no images', 
 });
 
 // ============================================================================
+// Slide Links
+// ============================================================================
+
+it('should resolve a slide link recorded as a path against the site serving the request', function () {
+    $html = Blade::render('<x-shop::carousel :options="$options" />', [
+        'options' => [
+            'images' => [
+                ['image' => 'themes/default/sections/1/hero.webp', 'title' => 'Hero', 'link' => 'formal-wear-female'],
+            ],
+        ],
+    ]);
+
+    expect($html)
+        ->toContain(e(json_encode(url('formal-wear-female')), false))
+        ->not->toContain('&quot;link&quot;:&quot;formal-wear-female&quot;');
+});
+
+it('should leave a slide link to somewhere else exactly as it was entered', function () {
+    $html = Blade::render('<x-shop::carousel :options="$options" />', [
+        'options' => [
+            'images' => [
+                ['image' => 'themes/default/sections/1/hero.webp', 'title' => 'Hero', 'link' => 'https://facebook.com/bagisto'],
+            ],
+        ],
+    ]);
+
+    expect($html)->toContain(e(json_encode('https://facebook.com/bagisto'), false));
+});
+
+it('should leave a slide with no link unclickable', function (string $link) {
+    $html = Blade::render('<x-shop::carousel :options="$options" />', [
+        'options' => [
+            'images' => [
+                ['image' => 'themes/default/sections/1/hero.webp', 'title' => 'Hero', 'link' => $link],
+            ],
+        ],
+    ]);
+
+    expect($html)
+        ->toContain('&quot;link&quot;:null')
+        ->not->toContain(e(json_encode(url('/')), false).',');
+})->with([
+    'empty' => '',
+    'whitespace' => '   ',
+]);
+
+// ============================================================================
 // Image Sizes
 // ============================================================================
 
