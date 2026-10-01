@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\AddressRequest;
 use Webkul\Admin\Http\Resources\AddressResource;
@@ -25,27 +25,13 @@ class AddressController extends Controller
     ) {}
 
     /**
-     * Fetch address by customer id.
-     *
-     * @return View
+     * Send the operator to the customer the addresses belong to, which is where they are managed.
      */
-    public function index(int $id)
+    public function index(int $id): RedirectResponse
     {
-        $customer = $this->customerRepository->find($id);
+        $this->customerRepository->findOrFail($id);
 
-        return view('admin::customers.addresses.index', compact('customer'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return View
-     */
-    public function create(int $id)
-    {
-        $customer = $this->customerRepository->find($id);
-
-        return view('admin::customers.addresses.create', compact('customer'));
+        return redirect()->route('admin.customers.customers.view', $id);
     }
 
     /**
@@ -89,18 +75,6 @@ class AddressController extends Controller
             'message' => trans('admin::app.customers.customers.view.address.create-success'),
             'data' => new AddressResource($address),
         ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
-    public function edit(int $id)
-    {
-        $address = $this->customerAddressRepository->find($id);
-
-        return view('admin::customers.addresses.edit', compact('address'));
     }
 
     /**
@@ -160,6 +134,8 @@ class AddressController extends Controller
             'id' => request('set_as_default'),
             'customer_id' => $id,
         ]);
+
+        abort_unless($address, 404);
 
         $address->update(['default_address' => 1]);
 
