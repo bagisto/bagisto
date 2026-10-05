@@ -49,6 +49,7 @@ it('should strip script from the footer copyright content on the storefront', fu
     CoreConfig::create([
         'code' => 'general.content.footer.copyright_content',
         'value' => '<a href="/page/about-us">About Us</a><script>alert(document.domain)</script>',
+        'channel_code' => core()->getDefaultChannel()->code,
         'locale_code' => app()->getLocale(),
     ]);
 

@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Helpers\CacheGeneration;
+use Webkul\Core\Models\CoreConfig;
+use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\Sitemap\Jobs\ProcessSitemap;
 use Webkul\Sitemap\Models\Sitemap;
 
 use function Pest\Laravel\deleteJson;
@@ -105,4 +110,32 @@ it('should delete the sitemap', function () {
     $this->assertDatabaseMissing('sitemaps', [
         'id' => $sitemap->id,
     ]);
+});
+
+it('should write a generated sitemap the web server can read', function () {
+    // Arrange.
+    Storage::fake('public');
+
+    CoreConfig::create([
+        'code' => 'general.sitemap.settings.enabled',
+        'value' => 1,
+    ]);
+
+    CacheGeneration::bump(CoreConfigRepository::class);
+
+    $sitemap = Sitemap::factory()->create();
+
+    $sitemap->channels()->sync([core()->getDefaultChannel()->id]);
+
+    // Act.
+    (new ProcessSitemap($sitemap->refresh()))->handle();
+
+    // Assert.
+    $generated = Storage::disk('public')->allFiles();
+
+    expect($generated)->not->toBeEmpty();
+
+    foreach ($generated as $path) {
+        expect(Storage::disk('public')->getVisibility($path))->toBe('public');
+    }
 });

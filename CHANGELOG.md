@@ -24,6 +24,14 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Automated security auditing and fixings.
 
+- #11513 [fixed] - Fixed a generated sitemap being written so that only its owner could read it, which left the sitemap url answering with a not found error until the permissions were corrected by hand.
+
+- #11511 [fixed] - Fixed a phone number written the way people normally write one, such as `0412 345 678`, `(555) 123-4567` or `+44 20 7946 0958`, being rejected at checkout and on the address forms.
+
+- #11510 [fixed] - Fixed the customer address form discarding the typed postcode and the second and later street lines whenever it came back with a validation error.
+
+- #11509 [fixed] - Fixed the storefront copyright notice being shared by every channel. It is now set per channel as well as per locale, and a migration carries the stored notice over.
+
 - #11504 [fixed] - Fixed the account overview being titled and breadcrumbed as Orders, and the account menu's greeting and profile image description staying English in every locale.
 
 - #11503 [fixed] - Fixed the GDPR pages showing their 404 in the default theme rather than the channel's own, unlike every other storefront 404, while the feature is switched off.

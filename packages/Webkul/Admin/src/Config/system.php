@@ -95,7 +95,7 @@ return [
                 'name' => 'copyright_content',
                 'title' => 'admin::app.configuration.index.general.content.copyright-content.title',
                 'type' => 'text',
-                'channel_based' => false,
+                'channel_based' => true,
                 'locale_based' => true,
             ],
         ],
