@@ -180,7 +180,7 @@ class ProcessSitemap implements ShouldQueue
 
         $path = $this->buildFilePath($channel, $this->batchProcessed);
 
-        $sitemap->writeToDisk('public', $path);
+        $sitemap->writeToDisk('public', $path, true);
 
         $this->generatedSitemaps[] = $path;
 
@@ -204,7 +204,7 @@ class ProcessSitemap implements ShouldQueue
 
         $path = $this->buildFilePath($channel);
 
-        $sitemap->writeToDisk('public', $path);
+        $sitemap->writeToDisk('public', $path, true);
 
         return $path;
     }

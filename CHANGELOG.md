@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Carried across the fixes released on the 2.4 line, which the v2.4 changelog lists in full.
+
 ## **v2.5.0-beta6 (1st of October 2026)** - *Release*
 
 - Theme section media now resolves against the site serving the page, so a store served from a directory below the document root shows its static content and its carousel. An upload is kept in the markup as a reference rather than as a fixed url.

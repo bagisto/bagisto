@@ -172,7 +172,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="address[{{ $i }}]"
-                                :value="old('address[{{ $i }}]')"
+                                :value="old('address.'.$i)"
                                 rules="address"
                                 :label="trans('shop::app.customers.account.addresses.create.street-address')"
                                 :placeholder="trans('shop::app.customers.account.addresses.create.street-address')"
