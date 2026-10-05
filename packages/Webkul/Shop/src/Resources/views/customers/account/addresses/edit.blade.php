@@ -186,7 +186,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="address[{{ $i }}]"
-                            :value="old('address[{{$i}}]', $addresses[$i] ?? '')"
+                            :value="old('address.'.$i, $addresses[$i] ?? '')"
                             rules="address"
                             :label="trans('shop::app.customers.account.addresses.edit.street-address')"
                             :placeholder="trans('shop::app.customers.account.addresses.edit.street-address')"
@@ -300,7 +300,7 @@
                         type="text"
                         name="postcode"
                         rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
-                        :value="old('postal-code') ?? $address->postcode"
+                        :value="old('postcode') ?? $address->postcode"
                         :label="trans('shop::app.customers.account.addresses.edit.post-code')"
                         :placeholder="trans('shop::app.customers.account.addresses.edit.post-code')"
                     />
