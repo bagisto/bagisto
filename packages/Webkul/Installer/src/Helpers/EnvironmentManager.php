@@ -4,6 +4,7 @@ namespace Webkul\Installer\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class EnvironmentManager
@@ -185,6 +186,26 @@ class EnvironmentManager
         ]);
 
         DB::reconnect($databaseConnection);
+
+        $this->forgetResolvedCacheStores();
+    }
+
+    /**
+     * Drop the cache stores resolved before the database was chosen, so they bind to the
+     * connection just configured.
+     *
+     * The default cache store is the database one, and it keeps the connection it resolved on
+     * first use — which is `mysql`, the configuration default, whatever the installer goes on to
+     * select. Left alone, every cache write during installation is sent to a connection the
+     * installer never configures, and installing on anything but MySQL fails.
+     */
+    protected function forgetResolvedCacheStores(): void
+    {
+        app()->forgetInstance('cache');
+
+        app()->forgetInstance('cache.store');
+
+        Cache::clearResolvedInstances();
     }
 
     /**
