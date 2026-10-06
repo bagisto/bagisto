@@ -73,14 +73,24 @@ it('should accept a phone number made of digits with an optional leading plus', 
     'leading plus' => '+919876543210',
 ]);
 
-it('should reject a phone number with anything but digits', function (string $value) {
+it('should accept a phone number written with the separators people use', function (string $value) {
+    expect(passesRule(new PhoneNumber, $value))->toBeTrue();
+})->with([
+    'spaces' => '0412 345 678',
+    'hyphens' => '+1-800-555-0199',
+    'parentheses' => '(555) 123-4567',
+    'dots' => '06.12.34.56.78',
+    'a country code and brackets' => '+49 (0) 30 901820',
+]);
+
+it('should reject a value that is not a phone number', function (string $value) {
     expect(passesRule(new PhoneNumber, $value))->toBeFalse();
 })->with([
-    'spaces' => '98765 43210',
-    'hyphens' => '987-654-3210',
-    'parentheses' => '(987) 6543210',
     'letters' => 'CALL-ME',
     'a plus in the middle' => '98+76543210',
+    'separators alone' => '--- ()',
+    'a leading separator' => '+-5',
+    'a trailing word' => '555 ext',
 ]);
 
 // ============================================================================
