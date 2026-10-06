@@ -54,6 +54,20 @@ it('should still take a whole quantity', function () {
         ->and((float) $response->json('data.sub_total'))->toBe(300.0);
 });
 
+it('should take the cart being updated with no quantity changed, as the cart page posts it', function () {
+    $product = $this->createSimpleProduct();
+
+    postJson(route('shop.api.checkout.cart.store'), ['product_id' => $product->id, 'quantity' => 1]);
+
+    $item = CartItem::latest('id')->first();
+
+    putJson(route('shop.api.checkout.cart.update'), ['qty' => []])
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
+
+    expect($item->refresh()->quantity)->toBe(1);
+});
+
 it('should still remove the item when the quantity is set to zero', function () {
     $product = $this->createSimpleProduct();
 
