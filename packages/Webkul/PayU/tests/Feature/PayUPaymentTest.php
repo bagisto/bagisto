@@ -242,6 +242,125 @@ it('handles payment cancellation', function () {
     expect($order)->toBeNull();
 });
 
+/**
+ * The response PayU posts for a paid transaction, to the browser and to the webhook alike.
+ */
+function payuPaidResponse($cart, string $txnid): array
+{
+    return [
+        'txnid' => $txnid,
+        'mihpayid' => 'MIHPAY_'.$txnid,
+        'mode' => 'UPI',
+        'status' => 'success',
+        'key' => 'test_merchant_key',
+        'amount' => round($cart->base_grand_total, 2),
+        'productinfo' => 'Order #'.$cart->id,
+        'firstname' => $cart->customer_first_name,
+        'email' => $cart->customer_email,
+        'hash' => 'valid_hash_value',
+        'udf1' => $cart->id,
+    ];
+}
+
+/**
+ * Accept every hash, so a test states what the handler does with a verified response.
+ */
+function payuAcceptsEveryHash(): void
+{
+    $payU = test()->mock(PayUPayment::class)->makePartial();
+
+    $payU->shouldReceive('verifyHash')->andReturn(true);
+
+    app()->instance(PayUPayment::class, $payU);
+}
+
+it('places the order from the webhook when the customer never returns to the store', function () {
+    // Arrange
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuAcceptsEveryHash();
+
+    // Act
+    $response = $this->post(route('payu.webhook'), payuPaidResponse($cart, 'PAYU_WEBHOOK_1'));
+
+    // Assert
+    $response->assertOk();
+
+    $response->assertJson(['status' => 'order_placed']);
+
+    $order = Order::where('cart_id', $cart->id)->first();
+
+    expect($order)->not->toBeNull()
+        ->and($order->status)->toBe('processing');
+
+    expect(Invoice::where('order_id', $order->id)->first())->not->toBeNull();
+
+    expect(OrderTransaction::where('order_id', $order->id)->first()?->transaction_id)->toBe('PAYU_WEBHOOK_1');
+});
+
+it('refuses a webhook whose hash does not verify', function () {
+    // Arrange
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    $payU = $this->mock(PayUPayment::class)->makePartial();
+
+    $payU->shouldReceive('verifyHash')->andReturn(false);
+
+    $this->app->instance(PayUPayment::class, $payU);
+
+    // Act
+    $response = $this->post(route('payu.webhook'), payuPaidResponse($cart, 'PAYU_WEBHOOK_2'));
+
+    // Assert
+    $response->assertStatus(400);
+
+    $response->assertJson(['status' => 'invalid_hash']);
+
+    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+});
+
+it('places no second order when the webhook follows the customer back to the store', function () {
+    // Arrange
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuAcceptsEveryHash();
+
+    $payload = payuPaidResponse($cart, 'PAYU_WEBHOOK_3');
+
+    $this->post(route('payu.success'), $payload)
+        ->assertRedirect(route('shop.checkout.onepage.success'));
+
+    // Act
+    $response = $this->post(route('payu.webhook'), $payload);
+
+    // Assert
+    $response->assertOk();
+
+    $response->assertJson(['status' => 'order_placed']);
+
+    expect(Order::where('cart_id', $cart->id)->count())->toBe(1);
+});
+
+it('places no order from a webhook reporting a payment that did not succeed', function () {
+    // Arrange
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuAcceptsEveryHash();
+
+    // Act
+    $response = $this->post(route('payu.webhook'), array_merge(
+        payuPaidResponse($cart, 'PAYU_WEBHOOK_4'),
+        ['status' => 'failure'],
+    ));
+
+    // Assert
+    $response->assertOk();
+
+    $response->assertJson(['status' => 'order_not_placed']);
+
+    expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+});
+
 it('refuses a cart in a currency payu does not settle', function () {
     // Arrange
     // The amount is sent rounded to two decimal places, so a currency with a different number

@@ -21,5 +21,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('cancel', 'cancel')
                 ->withoutMiddleware(VerifyCsrfToken::class)
                 ->name('payu.cancel');
+
+            Route::post('webhook', 'webhook')
+                ->withoutMiddleware(VerifyCsrfToken::class)
+                ->name('payu.webhook');
         });
 });

@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.4.13 (6th of October 2026)** - *Release*
 
 - Fixed the invoice and shipment screens accepting an order item that belongs to a different order, which recorded the document against the wrong one. Every item named is now checked against the order being acted on.
 
@@ -23,6 +23,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed Stripe charging the full price when a cart rule discounted the order. The discount now shows on Stripe's payment page, and a fractional unit price no longer loses a penny to rounding.
 
 - Automated security auditing and fixings.
+
+- #11516 [fixed] - Fixed a PayU payment the customer never returned from leaving no order behind, which an in-app browser made easy to hit. PayU's server to server notification now places it, once.
 
 - #11513 [fixed] - Fixed a generated sitemap being written so that only its owner could read it, which left the sitemap url answering with a not found error until the permissions were corrected by hand.
 
