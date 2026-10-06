@@ -21,5 +21,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('cancel', 'cancel')
                 ->withoutMiddleware(PreventRequestForgery::class)
                 ->name('payu.cancel');
+
+            Route::post('webhook', 'webhook')
+                ->withoutMiddleware(PreventRequestForgery::class)
+                ->name('payu.webhook');
         });
 });

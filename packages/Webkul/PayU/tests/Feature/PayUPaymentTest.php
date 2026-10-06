@@ -285,3 +285,73 @@ it('should place one order however many times PayU reports the same payment', fu
 
     expect(Order::query()->where('cart_id', $cart->id)->count())->toBe(1);
 });
+
+// ============================================================================
+// Server To Server Notification
+// ============================================================================
+
+/**
+ * Post a PayU notification whose hash the gateway accepts or rejects.
+ */
+function payuWebhook(array $response, bool $hashVerifies = true): TestResponse
+{
+    $mockPayU = test()->mock(PayUPayment::class)->makePartial();
+
+    $mockPayU->shouldReceive('verifyHash')->andReturn($hashVerifies);
+
+    app()->instance(PayUPayment::class, $mockPayU);
+
+    return test()->post(route('payu.webhook'), $response);
+}
+
+it('should place the order from the notification when the customer never returns to the store', function () {
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuWebhook(payuResponseFor($cart))
+        ->assertOk()
+        ->assertJson(['status' => 'order_placed']);
+
+    $order = Order::query()->where('cart_id', $cart->id)->first();
+
+    expect($order)->not->toBeNull()
+        ->and($order->status)->toBe('processing');
+
+    expect(Invoice::query()->where('order_id', $order->id)->exists())->toBeTrue();
+
+    expect(OrderTransaction::query()->where('order_id', $order->id)->value('transaction_id'))
+        ->toBe('PAYU_TEST_'.$cart->id);
+});
+
+it('should refuse a notification whose hash does not verify', function () {
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuWebhook(payuResponseFor($cart), false)
+        ->assertStatus(400)
+        ->assertJson(['status' => 'invalid_hash']);
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+it('should refuse a notification PayU did not mark successful', function () {
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    payuWebhook(payuResponseFor($cart, ['status' => 'failure']))
+        ->assertOk()
+        ->assertJson(['status' => 'order_not_placed']);
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+it('should place no second order when the notification follows the customer back to the store', function () {
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    $response = payuResponseFor($cart);
+
+    payuSuccess($response)->assertRedirect(route('shop.checkout.onepage.success'));
+
+    payuWebhook($response)
+        ->assertOk()
+        ->assertJson(['status' => 'order_placed']);
+
+    expect(Order::query()->where('cart_id', $cart->id)->count())->toBe(1);
+});

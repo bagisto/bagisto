@@ -2,69 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
-
-- Carried across the fixes released on the 2.4 line, which the v2.4 changelog lists in full.
-
-## **v2.5.0-beta6 (1st of October 2026)** - *Release*
-
-- Theme section media now resolves against the site serving the page, so a store served from a directory below the document root shows its static content and its carousel. An upload is kept in the markup as a reference rather than as a fixed url.
-
-- Removed the two migrations that rewrote theme section paths and urls. Every spelling a section has ever recorded is understood as it is read, so an upgrade converts nothing.
-
-- Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
-
-## **v2.5.0-beta5 (29th of September 2026)** - *Release*
-
-- Applied the security fixes from an AI security audit of the codebase.
-
-- Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
-
-- Fixed Magic AI taking its orders from storefront text: a review or customer name could steer what the review translation and the checkout message returned. Shopper-supplied text is now sent as data, apart from the instructions.
-
-- Fixed the generated checkout message rendering as markup on the order success page, and closed the review translation endpoint to anonymous use while the feature is switched off, now rate limited and with a review length cap.
-
-- Fixed Magic AI hiding why a generation failed — the provider's own message, such as a rejected prompt or an invalid API key, now reaches the admin.
-
-- Fixed Magic AI handing a model the store no longer offers to a different provider, which failed with an unrelated error. The unknown model is now reported.
-
-- Added MariaDB and PostgreSQL to the Laravel Sail stack, and an optional nginx, apache or OpenLiteSpeed server in front of it. Each is a Compose profile, and the database container follows `DB_CONNECTION`.
-
-- Updated the Laravel Sail setup to build on PHP 8.4, run Elasticsearch and Kibana 8.19 to match the 8.x client, keep Elasticsearch data across restarts and use the official MySQL image.
-
-- Updated the production Docker images to build the 2.5.0 release by default, and let the bundled MySQL user take the server's own authentication plugin instead of the deprecated one.
-
-- Added real-time admin notifications, so the notification bell updates as orders are placed instead of only on a page load. Broadcasting stays off until `BROADCAST_CONNECTION` is set, and needs a worker on the `broadcastable` queue.
-
-- Upgraded the product image and file attributes to the media control the configuration screens use, with a preview tile and replace, download and remove actions.
-
-- Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
-
-- Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.
-
-- Renamed the remaining underscored translation keys to kebab-case across all 22 locales, so a module or theme overriding one of them, such as `eu_withdrawal.view.received_at`, must use the new spelling.
-
-- Moved the storefront breadcrumb definitions into the Shop package and removed `routes/breadcrumbs.php`. Delete your copy when upgrading, or the same trails register twice and every page carrying a breadcrumb fails.
-
-## **v2.5.0-beta4 (22nd of September 2026)** - *Release*
-
-- Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.
-
-## **v2.5.0-beta3 (17th of September 2026)** - *Release*
-
-- Merged the bug fixes, security fixes and stability improvements from the 2.4 branch.
-
-## **v2.5.0-beta2 (8th of September 2026)** - *Release*
-
-- #11467 [fixed] - Fixed three storefront loading skeletons — the home page View All button under a product carousel, the category Load More button and the checkout shipping method — standing at dimensions that did not match the control they hold the place of.
-
-- #11466 [fixed] - Fixed the category Load More button collapsing to less than half its width the moment it was clicked. Its loading state now keeps the width of the button it replaces.
-
-- #11465 [fixed] - Fixed a stray slash separator rendering after the final crumb on every page carrying breadcrumbs, so a trail now ends on the current page name.
-
-- #11464 [fixed] - Fixed a pair of unused colour circles showing under the price on product listing cards in list view. They came from a placeholder that was never wired to product data, and it has been removed.
-
-## **v2.5.0-beta1 (2nd of September 2026)** - *Release*
+## **v2.5.0 (6th of October 2026)** - *Release*
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
 
@@ -72,15 +10,15 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Upgraded the Admin, Shop and Installer frontends to Tailwind CSS 4, moving configuration into each `app.css` under `@theme` and replacing the JavaScript config and PostCSS pipeline.
 
-- Reworked the icon fonts as Tailwind utilities declared in `@theme`, renaming number-named glyphs (`icon-cancel-1` → `icon-close`), dropping unused ones, and adding a test that guards every icon.
-
 - Moved image processing onto Laravel's `Illuminate\Image` component, dropping the Intervention wrapper and moving the driver setting from `config/image.php` to `config/images.php`.
 
-- Published production Docker images for PostgreSQL alongside MySQL as `<version>-<server>-<database>`, such as `2.5.0-nginx-postgres`; existing MySQL tags are unchanged.
+- Reworked the icon fonts as Tailwind utilities declared in `@theme`, renaming number-named glyphs (`icon-cancel-1` → `icon-close`), dropping unused ones, and adding a test that guards every icon.
 
 - Refactored core search architecture to engine-agnostic design using Strategy + Manager patterns.
 
 - Added a command palette to the admin, opened with Ctrl + K, which searches menus, configuration settings, actions and records from one place, or is walked from a section to a page to a record to what may be done with it, showing only what the signed-in admin may reach.
+
+- Added real-time admin notifications, so the notification bell updates as orders are placed instead of only on a page load. Broadcasting stays off until `BROADCAST_CONNECTION` is set, and needs a worker on the `broadcastable` queue.
 
 - Added Amazon S3 and Cloudflare R2 as storage drivers, chosen in Configuration → File Management; the local disk stays the default.
 
@@ -92,7 +30,51 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Reworked every image and file setting in Admin → Configuration onto one upload tile carrying its own replace, download and delete actions, replacing the bare file input and delete checkbox whose preview sat sixty pixels low over the field beneath it. Deleting a setting now removes the stored file along with the value.
 
+- Upgraded the product image and file attributes to the media control the configuration screens use, with a preview tile and replace, download and remove actions.
+
+- Updated the Magic AI model lists to each provider's current models, such as GPT-6, Claude Opus 5, Gemini 3.8 and Grok 4.7, and dropped the retired ones. Storefront features saved on a retired model move to its provider's recommended replacement.
+
+- Fixed Magic AI taking its orders from storefront text: a review or customer name could steer what the review translation and the checkout message returned. Shopper-supplied text is now sent as data, apart from the instructions.
+
+- Fixed the generated checkout message rendering as markup on the order success page, and closed the review translation endpoint to anonymous use while the feature is switched off, now rate limited and with a review length cap.
+
+- Fixed Magic AI hiding why a generation failed — the provider's own message, such as a rejected prompt or an invalid API key, now reaches the admin.
+
+- Fixed Magic AI handing a model the store no longer offers to a different provider, which failed with an unrelated error. The unknown model is now reported.
+
+- Theme section media now resolves against the site serving the page, so a store served from a directory below the document root shows its static content and its carousel. An upload is kept in the markup as a reference rather than as a fixed url.
+
+- Removed the two migrations that rewrote theme section paths and urls. Every spelling a section has ever recorded is understood as it is read, so an upgrade converts nothing.
+
+- Reorganised the storage directories into plural, kebab-case names, with each product's downloadable files and each return's attachments kept under the record they belong to. A migration moves them.
+
+- Renamed every hyphenated route name to snake_case, such as `admin.sales.rma.requests.send-message` to `send_message`. URLs are unchanged, but a module calling `route()` with an old name must be updated.
+
+- Renamed the remaining underscored translation keys to kebab-case across all 22 locales, so a module or theme overriding one of them, such as `eu_withdrawal.view.received_at`, must use the new spelling.
+
+- Moved the storefront breadcrumb definitions into the Shop package and removed `routes/breadcrumbs.php`. Delete your copy when upgrading, or the same trails register twice and every page carrying a breadcrumb fails.
+
+- Added MariaDB and PostgreSQL to the Laravel Sail stack, and an optional nginx, apache or OpenLiteSpeed server in front of it. Each is a Compose profile, and the database container follows `DB_CONNECTION`.
+
+- Updated the Laravel Sail setup to build on PHP 8.4, run Elasticsearch and Kibana 8.19 to match the 8.x client, keep Elasticsearch data across restarts and use the official MySQL image.
+
+- Published production Docker images for PostgreSQL alongside MySQL as `<version>-<server>-<database>`, such as `2.5.0-nginx-postgres`; existing MySQL tags are unchanged.
+
+- Updated the production Docker images to build the 2.5.0 release by default, and let the bundled MySQL user take the server's own authentication plugin instead of the deprecated one.
+
+- Applied the security fixes from an AI security audit of the codebase.
+
+- Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
+
 - #11209 [feature] - Added Omnibus package for EU Omnibus Directive compliance, recording per-channel lowest-price snapshots and showing the 30-day historical low for discounted products.
+
+- #11467 [fixed] - Fixed three storefront loading skeletons — the home page View All button under a product carousel, the category Load More button and the checkout shipping method — standing at dimensions that did not match the control they hold the place of.
+
+- #11466 [fixed] - Fixed the category Load More button collapsing to less than half its width the moment it was clicked. Its loading state now keeps the width of the button it replaces.
+
+- #11465 [fixed] - Fixed a stray slash separator rendering after the final crumb on every page carrying breadcrumbs, so a trail now ends on the current page name.
+
+- #11464 [fixed] - Fixed a pair of unused colour circles showing under the price on product listing cards in list view. They came from a placeholder that was never wired to product data, and it has been removed.
 
 - #11447 [fixed] - Fixed a stray pair of arrows sitting in the middle of the storefront account listings. The datagrid footer held a second previous and next control beside the paginator, invisible while its icon classes had no glyphs and revealed by the icon rework; the paginator already carries both arrows and a page number, so it is now the only one.
 

@@ -38,6 +38,10 @@ export class ProductEditPage extends BasePage {
         return this.page.locator("#name");
     }
 
+    private get urlKeyInput() {
+        return this.page.locator("#url_key");
+    }
+
     private get metaTitleInput() {
         return this.page.locator("#meta_title");
     }
@@ -135,6 +139,8 @@ export class ProductEditPage extends BasePage {
 
         if (data.name) {
             await this.nameInput.fill(data.name);
+
+            await expect(this.urlKeyInput).toHaveValue(/.+/);
         }
     }
 
