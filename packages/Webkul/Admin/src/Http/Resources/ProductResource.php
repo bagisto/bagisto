@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'qty_available' => $this->resolveAvailableQuantity(),
             'is_options_required' => ! $this->getTypeInstance()->canBeAddedToCartWithoutOptions(),
             'is_saleable' => $this->getTypeInstance()->isSaleable(),
+            'can_change_qty' => $this->getTypeInstance()->showQuantityBox(),
         ];
     }
 

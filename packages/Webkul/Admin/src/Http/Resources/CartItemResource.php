@@ -21,6 +21,7 @@ class CartItemResource extends JsonResource
             'product_id' => $this->product_id,
             'sku' => $this->sku,
             'quantity' => $this->quantity,
+            'can_change_qty' => $this->product ? $this->product->getTypeInstance()->showQuantityBox() : false,
             'type' => $this->type,
             'name' => $this->name,
             'price' => $this->base_price,

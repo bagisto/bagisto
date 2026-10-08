@@ -175,6 +175,7 @@
                             </p>
 
                             <x-admin::quantity-changer
+                                v-if="item.can_change_qty"
                                 ::name="'qty[' + item.id + ']'"
                                 ::value="item.quantity"
                                 class="w-max gap-x-4 rounded-l px-4 py-1"
@@ -315,27 +316,29 @@
                                         </p>
 
                                         <x-admin::form.control-group class="mb-0!">
-                                            <x-admin::form.control-group.label class="required justify-end">
-                                                @lang('admin::app.sales.orders.create.cart.items.search.qty')
-                                            </x-admin::form.control-group.label>
-
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="product_id"
                                                 ::value="product.id"
                                             />
 
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="qty"
-                                                class="w-20! px-2! py-1.5!"
-                                                value="1"
-                                                rules="required|numeric|min_value:1"
-                                                :label="trans('admin::app.sales.orders.create.cart.items.search.qty')"
-                                                :placeholder="trans('admin::app.sales.orders.create.cart.items.search.qty')"
-                                            />
+                                            <template v-if="product.can_change_qty">
+                                                <x-admin::form.control-group.label class="required justify-end">
+                                                    @lang('admin::app.sales.orders.create.cart.items.search.qty')
+                                                </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.error name="qty" />
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="qty"
+                                                    class="w-20! px-2! py-1.5!"
+                                                    value="1"
+                                                    rules="required|numeric|min_value:1"
+                                                    :label="trans('admin::app.sales.orders.create.cart.items.search.qty')"
+                                                    :placeholder="trans('admin::app.sales.orders.create.cart.items.search.qty')"
+                                                />
+
+                                                <x-admin::form.control-group.error name="qty" />
+                                            </template>
                                         </x-admin::form.control-group>
 
                                         <button

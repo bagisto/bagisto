@@ -225,7 +225,7 @@
                             formData = {
                                 product_id: params.product.id,
 
-                                quantity: params.qty,
+                                quantity: params.qty ?? 1,
 
                                 ...params.additional,
                             };
@@ -234,7 +234,7 @@
 
                             formData.append('product_id', this.selectedProductOptions.product.id);
 
-                            formData.append('quantity', this.selectedProductOptions.qty);
+                            formData.append('quantity', this.selectedProductOptions.qty ?? 1);
 
                             this.$refs.productConfigurationDrawer.close();
                         }
