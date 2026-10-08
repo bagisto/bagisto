@@ -39,8 +39,9 @@ class AddressController extends Controller
      */
     public function store(int $id, AddressRequest $request): JsonResponse
     {
+        $this->customerRepository->findOrFail($id);
+
         $data = array_merge($request->only([
-            'customer_id',
             'company_name',
             'vat_id',
             'first_name',
@@ -60,7 +61,7 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.create.before');
 
         if (! empty($data['default_address'])) {
-            $this->customerAddressRepository->where('customer_id', $data['customer_id'])
+            $this->customerAddressRepository->where('customer_id', $id)
                 ->where('default_address', 1)
                 ->update(['default_address' => 0]);
         }
@@ -78,12 +79,13 @@ class AddressController extends Controller
     }
 
     /**
-     * Edit's the pre made resource of customer called address.
+     * Update the customer's address, which stays with the customer it was created for.
      */
     public function update(int $id, AddressRequest $request): JsonResponse
     {
+        $customerId = $this->customerAddressRepository->findOrFail($id)->customer_id;
+
         $data = array_merge($request->only([
-            'customer_id',
             'company_name',
             'vat_id',
             'first_name',
@@ -103,7 +105,7 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.update.before', $id);
 
         if (! empty($data['default_address'])) {
-            $this->customerAddressRepository->where('customer_id', $data['customer_id'])
+            $this->customerAddressRepository->where('customer_id', $customerId)
                 ->where('default_address', 1)
                 ->update(['default_address' => 0]);
         }

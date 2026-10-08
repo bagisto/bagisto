@@ -3,6 +3,7 @@
 namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Sales\Contracts\DownloadableLinkPurchased;
@@ -107,6 +108,64 @@ class DownloadableLinkPurchasedRepository extends Repository
                 ], $purchasedLink->id);
             }
         }
+    }
+
+    /**
+     * Spend one of the purchased link's downloads, under a row lock so that concurrent requests
+     * cannot each spend the same one.
+     */
+    public function consumeDownload(int $id): bool
+    {
+        return DB::transaction(function () use ($id) {
+            $purchasedLink = $this->getModel()
+                ->newQuery()
+                ->lockForUpdate()
+                ->find($id);
+
+            if (! $purchasedLink) {
+                return false;
+            }
+
+            if ($purchasedLink->download_used >= $this->getInvoicedDownloads($purchasedLink)) {
+                return false;
+            }
+
+            if ($this->getRemainingDownloads($purchasedLink) <= 0) {
+                return false;
+            }
+
+            $purchasedLink->increment('download_used');
+
+            if ($this->getRemainingDownloads($purchasedLink) <= 0) {
+                $purchasedLink->update(['status' => 'expired']);
+            }
+
+            return true;
+        });
+    }
+
+    /**
+     * The number of downloads the invoiced quantity entitles the customer to.
+     */
+    protected function getInvoicedDownloads(DownloadableLinkPurchased $purchasedLink): float
+    {
+        $totalInvoiceQty = 0;
+
+        if (isset($purchasedLink->order->invoices)) {
+            foreach ($purchasedLink->order->invoices as $invoice) {
+                $totalInvoiceQty = $totalInvoiceQty + $invoice->total_qty;
+            }
+        }
+
+        return $totalInvoiceQty * ($purchasedLink->download_bought / $purchasedLink->order->total_qty_ordered);
+    }
+
+    /**
+     * The number of downloads left on the purchased link.
+     */
+    protected function getRemainingDownloads(DownloadableLinkPurchased $purchasedLink): int
+    {
+        return $purchasedLink->download_bought - ($purchasedLink->download_used + $purchasedLink->download_canceled);
     }
 
     /**

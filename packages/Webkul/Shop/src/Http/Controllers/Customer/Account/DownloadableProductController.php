@@ -36,7 +36,7 @@ class DownloadableProductController extends Controller
     }
 
     /**
-     * Download the for the specified resource.
+     * Serve the file or url a purchased downloadable link points to, spending one download.
      *
      * @param  int  $id
      * @return Response
@@ -56,42 +56,10 @@ class DownloadableProductController extends Controller
             abort(404);
         }
 
-        $totalInvoiceQty = 0;
-
-        if (isset($downloadableLinkPurchased->order->invoices)) {
-            foreach ($downloadableLinkPurchased->order->invoices as $invoice) {
-                $totalInvoiceQty = $totalInvoiceQty + $invoice->total_qty;
-            }
-        }
-
-        $orderedQty = $downloadableLinkPurchased->order->total_qty_ordered;
-        $totalInvoiceQty = $totalInvoiceQty * ($downloadableLinkPurchased->download_bought / $orderedQty);
-
-        if (
-            $downloadableLinkPurchased->download_used == $totalInvoiceQty
-            || $downloadableLinkPurchased->download_used > $totalInvoiceQty
-        ) {
+        if (! $this->downloadableLinkPurchasedRepository->consumeDownload($downloadableLinkPurchased->id)) {
             session()->flash('warning', trans('shop::app.customers.account.downloadable-products.download-error'));
 
             return redirect()->route('shop.customers.account.downloadable_products.index');
-        }
-
-        if (
-            $downloadableLinkPurchased->download_bought
-            && ($downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + $downloadableLinkPurchased->download_canceled)) <= 0
-        ) {
-            session()->flash('warning', trans('shop::app.customers.account.downloadable-products.download-error'));
-
-            return redirect()->route('shop.customers.account.downloadable_products.index');
-        }
-
-        $remainingDownloads = $downloadableLinkPurchased->download_bought - ($downloadableLinkPurchased->download_used + $downloadableLinkPurchased->download_canceled + 1);
-
-        if ($downloadableLinkPurchased->download_bought) {
-            $this->downloadableLinkPurchasedRepository->update([
-                'download_used' => $downloadableLinkPurchased->download_used + 1,
-                'status' => $remainingDownloads <= 0 ? 'expired' : $downloadableLinkPurchased->status,
-            ], $downloadableLinkPurchased->id);
         }
 
         if ($downloadableLinkPurchased->type == 'file') {
