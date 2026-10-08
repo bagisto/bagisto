@@ -275,6 +275,14 @@ export class ProductCreatePage extends BasePage {
         return this.openPanel.locator('input[name="url"]');
     }
 
+    private get linkFileUploadInput() {
+        return this.openPanel.locator('input[type="file"][name="file"]');
+    }
+
+    private get linkUploadedFilePath() {
+        return this.openPanel.locator('input[type="hidden"][name="file"]');
+    }
+
     private get sampleTypeSelect() {
         return this.page.locator('select[name="sample_type"]');
     }
@@ -744,7 +752,25 @@ export class ProductCreatePage extends BasePage {
         if (product.price !== undefined) {
             await this.productPrice.fill(product.price.toString());
         }
-        await this.addDownloadableLink(generateName(), generateHostname());
+
+        if (product.downloadableFile) {
+            await this.addDownloadableFileLink(
+                `${product.name} link`,
+                product.downloadableFile,
+                product.downloadsAllowed ?? 1,
+            );
+        } else {
+            await this.addDownloadableLink(generateName(), generateHostname());
+        }
+
+        if (product.downloadableExtraFile) {
+            await this.addDownloadableFileLink(
+                `${product.name} extra`,
+                product.downloadableExtraFile,
+                product.downloadsAllowed ?? 1,
+            );
+        }
+
         await this.addDownloadableSample(generateName(), generateHostname());
     }
 
@@ -1324,6 +1350,29 @@ export class ProductCreatePage extends BasePage {
         await this.sampleUrlInput.fill(url);
         await this.clickPanelSave();
         await expect(this.visibleText(linkTitle)).toBeVisible();
+    }
+
+    async addDownloadableFileLink(
+        title: string,
+        filePath: string,
+        downloads: number,
+    ) {
+        await this.addLinkButton.click();
+        await this.linkTitleInput.waitFor({ state: "visible" });
+        await this.linkTitleInput.fill(title);
+        await expect(this.linkTitleInput).toHaveValue(title);
+        await this.linkPriceInput.fill("0");
+        await this.linkDownloadsInput.fill(downloads.toString());
+        await this.linkTypeSelect.selectOption("file");
+        await this.linkFileUploadInput.setInputFiles(filePath);
+
+        await expect(this.linkUploadedFilePath).not.toHaveValue("");
+
+        await this.sampleTypeSelect.selectOption("url");
+        await this.sampleUrlInput.fill(generateHostname());
+        await this.clickPanelSave();
+
+        await expect(this.visibleText(title)).toBeVisible();
     }
 
     async addDownloadableSample(title: string, url: string) {

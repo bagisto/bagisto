@@ -150,6 +150,13 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator("label.icon-uncheck");
     }
 
+    protected downloadableLinkByTitle(title: string) {
+        return this.page
+            .locator("div.flex.select-none.items-center")
+            .filter({ hasText: title })
+            .locator("label.icon-uncheck");
+    }
+
     protected get eventTicket() {
         return this.page.locator(
             'div.place-items-end>div.flex>button.icon-plus[aria-label="Increase Quantity"]',

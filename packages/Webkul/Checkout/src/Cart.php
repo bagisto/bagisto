@@ -368,6 +368,10 @@ class Cart
                 throw new \Exception(trans('shop::app.checkout.cart.illegal'));
             }
 
+            if (! $item->getTypeInstance()->showQuantityBox()) {
+                $quantity = 1;
+            }
+
             $item->quantity = $quantity;
 
             if (! $this->isItemHaveQuantity($item)) {

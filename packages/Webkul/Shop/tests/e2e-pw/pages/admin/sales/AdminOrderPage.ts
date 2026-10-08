@@ -36,6 +36,16 @@ export class AdminOrderPage extends BasePage {
         return this.page.getByRole("button", { name: "Create Invoice" });
     }
 
+    private get refundAction() {
+        return this.page.locator("div.transparent-button").filter({
+            hasText: /^\s*Refund\s*$/,
+        });
+    }
+
+    private get refundButton() {
+        return this.page.getByRole("button", { name: "Refund", exact: true });
+    }
+
     private get statusBadge() {
         return this.orderHeading.locator("xpath=following-sibling::span[1]");
     }
@@ -72,6 +82,19 @@ export class AdminOrderPage extends BasePage {
 
         await expect(
             this.page.getByText("Invoice created successfully"),
+        ).toBeVisible();
+    }
+
+    async refundAllItems(incrementId: string): Promise<void> {
+        await this.open(incrementId);
+        await this.refundAction.click();
+
+        await expect(this.refundButton).toBeVisible();
+
+        await this.refundButton.click();
+
+        await expect(
+            this.page.getByText("Refund created successfully"),
         ).toBeVisible();
     }
 

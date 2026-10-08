@@ -20,6 +20,9 @@ export interface BaseProduct {
     allowRma?: boolean;
     groupedItems?: string[];
     bundleItems?: string[];
+    downloadableFile?: string;
+    downloadableExtraFile?: string;
+    downloadsAllowed?: number;
     bookingType?: "default" | "appointment" | "event" | "rental" | "table";
     defaultBookingType?: "one" | "many";
     rentalType?: "hourly" | "daily" | "both";

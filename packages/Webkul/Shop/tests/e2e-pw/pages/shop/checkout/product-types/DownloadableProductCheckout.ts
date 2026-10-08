@@ -6,6 +6,14 @@ export class DownloadableProductCheckout extends CheckoutHelper {
         super(page);
     }
 
+    private async placeDownloadableOrder(): Promise<string> {
+        await this.proceedWithSavedAddress();
+        await this.expectNoShippingStep();
+        await this.choosePayment("moneytransfer");
+
+        return this.placeOrder();
+    }
+
     async addToCart(productName: string): Promise<void> {
         await this.openProduct(productName);
 
@@ -15,12 +23,30 @@ export class DownloadableProductCheckout extends CheckoutHelper {
         await this.addOpenProductToCart();
     }
 
+    async addToCartWithLink(
+        productName: string,
+        linkTitle: string,
+    ): Promise<void> {
+        await this.openProduct(productName);
+
+        await expect(this.downloadableLinkByTitle(linkTitle)).toBeVisible();
+
+        await this.downloadableLinkByTitle(linkTitle).click();
+        await this.addOpenProductToCart();
+    }
+
     async checkout(productName: string): Promise<string> {
         await this.addToCart(productName);
-        await this.proceedWithSavedAddress();
-        await this.expectNoShippingStep();
-        await this.choosePayment("moneytransfer");
 
-        return this.placeOrder();
+        return this.placeDownloadableOrder();
+    }
+
+    async checkoutWithLink(
+        productName: string,
+        linkTitle: string,
+    ): Promise<string> {
+        await this.addToCartWithLink(productName, linkTitle);
+
+        return this.placeDownloadableOrder();
     }
 }
