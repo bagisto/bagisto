@@ -26,6 +26,28 @@ function sequenceSyncer(): object
 }
 
 /**
+ * The id a sequence would hand out next.
+ */
+function nextSequenceValue(string $sequence): int
+{
+    return (int) DB::selectOne("
+        SELECT CASE WHEN is_called THEN last_value + 1 ELSE last_value END AS value
+        FROM {$sequence}
+    ")->value;
+}
+
+/**
+ * The qualified name of the sequence behind a table's id column.
+ */
+function sequenceBehind(string $table, bool $prefixed = true): string
+{
+    return DB::selectOne(
+        'SELECT pg_get_serial_sequence(?, ?) AS name',
+        [($prefixed ? DB::getTablePrefix() : '').$table, 'id']
+    )->name;
+}
+
+/**
  * Every sequence owned by a table column, read from the catalogue.
  */
 function ownedSequenceColumns(): array
@@ -48,28 +70,6 @@ function ownedSequenceColumns(): array
             AND owner_table.relkind = 'r'
             AND sequence_schema.nspname = 'public'
     ");
-}
-
-/**
- * The id a table's sequence would hand out next.
- */
-function nextSequenceValue(string $sequence): int
-{
-    return (int) DB::selectOne("
-        SELECT CASE WHEN is_called THEN last_value + 1 ELSE last_value END AS value
-        FROM {$sequence}
-    ")->value;
-}
-
-/**
- * The qualified name of the sequence behind a table's id column.
- */
-function sequenceBehind(string $table): string
-{
-    return DB::selectOne(
-        'SELECT pg_get_serial_sequence(?, ?) AS name',
-        [DB::getTablePrefix().$table, 'id']
-    )->name;
 }
 
 /**
@@ -101,6 +101,30 @@ function tablesWithExhaustedSequence(): array
 
     return $exhausted;
 }
+
+// ============================================================================
+// Resolving A Sequence To Its Owner
+// ============================================================================
+
+it('should resolve a sequence to the table that owns it, not one whose name contains it', function () {
+    DB::statement('CREATE TABLE decoy_zz_sequence_owner (id serial PRIMARY KEY)');
+    DB::statement('CREATE TABLE zz_sequence_owner (id serial PRIMARY KEY)');
+    DB::statement('INSERT INTO zz_sequence_owner (id) SELECT generate_series(1, 5)');
+
+    $sequence = sequenceBehind('zz_sequence_owner', prefixed: false);
+
+    sequenceSyncer()->syncEverything();
+
+    $next = nextSequenceValue($sequence);
+
+    DB::statement('DROP TABLE zz_sequence_owner');
+    DB::statement('DROP TABLE decoy_zz_sequence_owner');
+
+    expect($next)->toBe(6);
+})->skip(
+    fn () => ! SupportedDatabaseEnum::isPostgres(),
+    'Sequences are a PostgreSQL concern; AUTO_INCREMENT needs no sync.'
+);
 
 // ============================================================================
 // Syncing Every Sequence
