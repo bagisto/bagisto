@@ -141,7 +141,7 @@ jobs:
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v6
-        if: always()
+        if: failure()
         with:
           name: installer-results-${{ matrix.locale }}-${{ matrix.db }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
@@ -265,7 +265,7 @@ jobs:
         working-directory: packages/Webkul/${{ matrix.project }}
 
       - name: Collect Server Logs
-        if: always()
+        if: failure()
         run: |
           mkdir -p server-logs
           sudo cp /var/log/nginx/error.log server-logs/nginx-error.log 2>/dev/null || true
@@ -275,7 +275,7 @@ jobs:
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v6
-        if: always()
+        if: failure()
         with:
           name: ${{ matrix.project }}-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}
           path: |

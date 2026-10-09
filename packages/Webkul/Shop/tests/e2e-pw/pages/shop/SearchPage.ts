@@ -43,7 +43,15 @@ export class SearchPage extends BasePage {
     async search(term: string): Promise<void> {
         await this.visit("");
         await this.searchInput.fill(term);
-        await this.searchInput.press("Enter");
+
+        await Promise.all([
+            this.page.waitForResponse(
+                (response) =>
+                    response.url().includes("/api/products")
+                    && response.url().includes(term),
+            ),
+            this.searchInput.press("Enter"),
+        ]);
 
         await expect(this.page).toHaveURL(/search\?/);
     }

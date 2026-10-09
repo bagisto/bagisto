@@ -14,7 +14,7 @@ trait SyncsPostgresSequences
      * statements. This causes duplicate key errors on subsequent auto-generated inserts.
      *
      * Pass specific table names for better performance. When no tables are provided,
-     * all sequences in the public schema are synced as a fallback.
+     * every sequence owned by a column in the public schema is synced as a fallback.
      *
      * On MySQL this is a no-op since AUTO_INCREMENT adjusts automatically.
      *
@@ -36,59 +36,75 @@ trait SyncsPostgresSequences
     }
 
     /**
-     * Sync sequences for specific tables using pg_get_serial_sequence.
+     * Sync the sequence behind the id column of each of the given tables.
      *
-     * This is the preferred path — one lookup per table instead of scanning
-     * all sequences in the schema. Table names are automatically prefixed
-     * with the configured database table prefix.
+     * Table names are automatically prefixed with the configured database table prefix.
      */
     private function syncSpecificTables(array $tables): void
     {
         $prefix = DB::getTablePrefix();
 
         foreach ($tables as $table) {
-            $prefixedTable = $prefix.$table;
-
-            $sequence = DB::selectOne(
-                "SELECT pg_get_serial_sequence(?, 'id') AS seq",
-                [$prefixedTable]
-            );
-
-            if ($sequence?->seq) {
-                DB::statement(
-                    "SELECT setval(?, COALESCE((SELECT MAX(id) FROM \"{$prefixedTable}\"), 0) + 1, false)",
-                    [$sequence->seq]
-                );
-            }
+            $this->advanceSequence($prefix.$table, 'id');
         }
     }
 
     /**
-     * Sync all sequences in the public schema by scanning pg_sequences.
+     * Sync every sequence owned by a table column in the public schema.
      *
-     * This is the fallback when no specific tables are provided.
+     * Ownership comes from the catalogue, so a sequence resolves to exactly the column
+     * that feeds it rather than to any column whose default merely mentions its name.
      */
     private function syncAllTables(): void
     {
-        $sequences = DB::select(
-            "SELECT sequencename FROM pg_sequences WHERE schemaname = 'public'"
-        );
+        $columns = DB::select("
+            SELECT owner_table.relname AS table_name, owner_column.attname AS column_name
+            FROM pg_class AS sequence_class
+            JOIN pg_depend AS ownership
+                ON ownership.objid = sequence_class.oid
+                AND ownership.classid = 'pg_class'::regclass
+                AND ownership.deptype IN ('a', 'i')
+            JOIN pg_class AS owner_table
+                ON owner_table.oid = ownership.refobjid
+            JOIN pg_attribute AS owner_column
+                ON owner_column.attrelid = owner_table.oid
+                AND owner_column.attnum = ownership.refobjsubid
+            JOIN pg_namespace AS sequence_schema
+                ON sequence_schema.oid = sequence_class.relnamespace
+            WHERE sequence_class.relkind = 'S'
+                AND owner_table.relkind = 'r'
+                AND sequence_schema.nspname = 'public'
+        ");
 
-        foreach ($sequences as $seq) {
-            $tableInfo = DB::selectOne("
-                SELECT table_name, column_name
-                FROM information_schema.columns
-                WHERE column_default LIKE '%' || ? || '%'
-                AND table_schema = 'public'
-                LIMIT 1
-            ", [$seq->sequencename]);
-
-            if ($tableInfo) {
-                DB::statement(
-                    "SELECT setval(?, COALESCE((SELECT MAX(\"{$tableInfo->column_name}\") FROM \"{$tableInfo->table_name}\"), 0) + 1, false)",
-                    [$seq->sequencename]
-                );
-            }
+        foreach ($columns as $column) {
+            $this->advanceSequence($column->table_name, $column->column_name);
         }
+    }
+
+    /**
+     * Point a table's sequence at the value after its largest id, never at a lower one.
+     * pg_sequences cannot report that position: its last_value is null while is_called is false.
+     */
+    private function advanceSequence(string $table, string $column): void
+    {
+        $sequence = DB::selectOne('SELECT pg_get_serial_sequence(?, ?) AS name', [$table, $column]);
+
+        if (! $sequence?->name) {
+            return;
+        }
+
+        DB::statement("
+            SELECT setval(
+                '{$sequence->name}',
+                GREATEST(
+                    COALESCE((SELECT MAX(\"{$column}\") FROM \"{$table}\"), 0) + 1,
+                    (
+                        SELECT CASE WHEN is_called THEN last_value + 1 ELSE last_value END
+                        FROM {$sequence->name}
+                    )
+                ),
+                false
+            )
+        ");
     }
 }

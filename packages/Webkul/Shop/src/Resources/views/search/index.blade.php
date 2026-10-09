@@ -260,10 +260,16 @@
                             filter: false,
                         };
 
+                        const requestedQuery = this.queryString;
+
                         this.$axios.get(("{{ route('shop.api.products.index') }}"), {
                             params: this.queryParams
                         })
                             .then(response => {
+                                if (requestedQuery !== this.queryString) {
+                                    return;
+                                }
+
                                 this.isLoading = false;
 
                                 this.products = response.data.data;
@@ -276,7 +282,13 @@
 
                     loadMoreProducts() {
                         if (this.links.next) {
+                            const requestedQuery = this.queryString;
+
                             this.$axios.get(this.links.next).then(response => {
+                                if (requestedQuery !== this.queryString) {
+                                    return;
+                                }
+
                                 this.products = [...this.products, ...response.data.data];
 
                                 this.links = response.data.links;

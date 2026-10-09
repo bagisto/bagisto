@@ -273,10 +273,16 @@
 
                         this.isLoading = true;
 
+                        const requestedQuery = this.queryString;
+
                         this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
                             params: this.queryParams
                         })
                             .then(response => {
+                                if (requestedQuery !== this.queryString) {
+                                    return;
+                                }
+
                                 this.isLoading = false;
 
                                 this.products = response.data.data;
@@ -294,8 +300,14 @@
 
                         this.loader = true;
 
+                        const requestedQuery = this.queryString;
+
                         this.$axios.get(this.links.next)
                             .then(response => {
+                                if (requestedQuery !== this.queryString) {
+                                    return;
+                                }
+
                                 this.loader = false;
 
                                 this.products = [...this.products, ...response.data.data];
