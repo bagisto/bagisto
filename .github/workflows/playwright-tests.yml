@@ -32,8 +32,8 @@ jobs:
         db: [mysql, mariadb, pgsql]
         include:
           - db: mysql
-            db-label: MySQL
-            db-image: mysql:8.0
+            db-label: MySQL 9.7
+            db-image: mysql:9.7
             db-port: 3306
             db-user: root
             db-password: root
@@ -41,8 +41,8 @@ jobs:
             php-db-ext: pdo_mysql
 
           - db: mariadb
-            db-label: MariaDB
-            db-image: mariadb:10.11
+            db-label: MariaDB 12.3
+            db-image: mariadb:12.3
             db-port: 3306
             db-user: root
             db-password: root
@@ -50,8 +50,8 @@ jobs:
             php-db-ext: pdo_mysql
 
           - db: pgsql
-            db-label: PostgreSQL
-            db-image: postgres:16
+            db-label: PostgreSQL 18
+            db-image: postgres:18
             db-port: 5432
             db-user: postgres
             db-password: postgres
@@ -171,8 +171,8 @@ jobs:
         shard-total: [10]
         include:
           - db: mysql
-            db-label: MySQL
-            db-image: mysql:8.0
+            db-label: MySQL 9.7
+            db-image: mysql:9.7
             db-port: 3306
             db-user: root
             db-password: root
@@ -180,8 +180,8 @@ jobs:
             php-db-ext: pdo_mysql
 
           - db: mariadb
-            db-label: MariaDB
-            db-image: mariadb:10.11
+            db-label: MariaDB 12.3
+            db-image: mariadb:12.3
             db-port: 3306
             db-user: root
             db-password: root
@@ -189,8 +189,8 @@ jobs:
             php-db-ext: pdo_mysql
 
           - db: pgsql
-            db-label: PostgreSQL
-            db-image: postgres:16
+            db-label: PostgreSQL 18
+            db-image: postgres:18
             db-port: 5432
             db-user: postgres
             db-password: postgres

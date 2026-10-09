@@ -14,29 +14,92 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: ['8.4']
-        db: [mysql, mariadb, pgsql]
+        db-image:
+          - 'mysql:8.0'
+          - 'mysql:8.4'
+          - 'mysql:9.7'
+          - 'mariadb:10.11'
+          - 'mariadb:11.8'
+          - 'mariadb:12.3'
+          - 'postgres:10'
+          - 'postgres:14'
+          - 'postgres:18'
         include:
-          - db: mysql
-            db-label: MySQL
-            db-image: mysql:8.0
+          - db-image: 'mysql:8.0'
+            db: mysql
+            db-label: MySQL 8.0
             db-port: 3306
             db-user: root
             db-password: root
             db-health: mysqladmin ping
             php-db-ext: pdo_mysql
 
-          - db: mariadb
-            db-label: MariaDB
-            db-image: mariadb:10.11
+          - db-image: 'mysql:8.4'
+            db: mysql
+            db-label: MySQL 8.4
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: mysqladmin ping
+            php-db-ext: pdo_mysql
+
+          - db-image: 'mysql:9.7'
+            db: mysql
+            db-label: MySQL 9.7
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: mysqladmin ping
+            php-db-ext: pdo_mysql
+
+          - db-image: 'mariadb:10.11'
+            db: mariadb
+            db-label: MariaDB 10.11
             db-port: 3306
             db-user: root
             db-password: root
             db-health: healthcheck.sh --connect --innodb_initialized
             php-db-ext: pdo_mysql
 
-          - db: pgsql
-            db-label: PostgreSQL
-            db-image: postgres:16
+          - db-image: 'mariadb:11.8'
+            db: mariadb
+            db-label: MariaDB 11.8
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: healthcheck.sh --connect --innodb_initialized
+            php-db-ext: pdo_mysql
+
+          - db-image: 'mariadb:12.3'
+            db: mariadb
+            db-label: MariaDB 12.3
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: healthcheck.sh --connect --innodb_initialized
+            php-db-ext: pdo_mysql
+
+          - db-image: 'postgres:10'
+            db: pgsql
+            db-label: PostgreSQL 10
+            db-port: 5432
+            db-user: postgres
+            db-password: postgres
+            db-health: pg_isready
+            php-db-ext: pdo_pgsql
+
+          - db-image: 'postgres:14'
+            db: pgsql
+            db-label: PostgreSQL 14
+            db-port: 5432
+            db-user: postgres
+            db-password: postgres
+            db-health: pg_isready
+            php-db-ext: pdo_pgsql
+
+          - db-image: 'postgres:18'
+            db: pgsql
+            db-label: PostgreSQL 18
             db-port: 5432
             db-user: postgres
             db-password: postgres

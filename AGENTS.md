@@ -406,7 +406,7 @@ If a line genuinely cannot be understood without prose, that is a signal to extr
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `pest-tests.yml` | push, pull request | Installs Bagisto and runs `vendor/bin/pest --parallel` on PHP 8.4 × MySQL 8.0, MariaDB 10.11 and PostgreSQL 16 |
+| `pest-tests.yml` | push, pull request | Installs Bagisto and runs `vendor/bin/pest` on PHP 8.4 against nine database versions — MySQL 8.0, 8.4 and 9.7, MariaDB 10.11, 11.8 and 12.3, PostgreSQL 10, 14 and 18 |
 | `pint-tests.yml` | push, pull request | Runs `pint --test` (style check) |
 | `playwright-tests.yml` | pull request labelled **Need Playwright Testing**, `v*` tag, manual | `installer_gate` runs the guided installer (English and Arabic × each database) and gates `playwright_tests`, which runs the Admin and Shop projects across 10 shards × each database |
 | `translation-tests.yml` | push, pull request | Translation key consistency |
