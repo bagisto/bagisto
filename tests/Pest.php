@@ -79,16 +79,23 @@ uses()->beforeEach(fn () => Storage::fake())->in('../packages/Webkul/Admin/tests
 | Expectations
 |--------------------------------------------------------------------------
 |
-| Custom expectations shared by every package suite. Prices are compared at the current
-| currency's precision, the way the storefront and the admin display them, so a test never
-| fails on a floating point tail the customer would never see.
+| Custom expectations shared by every package suite. Prices are compared within half of the
+| current currency's smallest unit, so a test never fails on a floating point tail the customer
+| would never see — including one that falls either side of a rounding boundary, which comparing
+| the formatted strings turns into a whole unit of difference.
 |
 */
 
 expect()->extend('toBePrice', function (float $expected, ?int $decimal = null) {
     $decimal ??= core()->getCurrentCurrency()->decimal;
 
-    expect(number_format((float) $this->value, $decimal))->toBe(number_format($expected, $decimal));
+    $actual = (float) $this->value;
+
+    if (abs($actual - $expected) <= 0.5 / 10 ** $decimal) {
+        $actual = $expected;
+    }
+
+    expect(number_format($actual, $decimal))->toBe(number_format($expected, $decimal));
 
     return $this;
 });
