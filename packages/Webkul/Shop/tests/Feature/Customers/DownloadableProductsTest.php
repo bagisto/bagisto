@@ -49,9 +49,9 @@ it('should not find the purchased link of another customer', function () {
 // ============================================================================
 
 /**
- * A purchased link of the given type, bought by the logged in customer.
+ * A purchased link of the given type, owned by the customer this test logs in as.
  */
-function purchasedLinkFor(array $linkOverrides): DownloadableLinkPurchased
+function purchasedLinkOwnedByCustomer(array $linkOverrides): DownloadableLinkPurchased
 {
     $customer = test()->loginAsCustomer();
 
@@ -76,7 +76,7 @@ function purchasedLinkFor(array $linkOverrides): DownloadableLinkPurchased
 }
 
 it('should not spend a download when the file is missing', function () {
-    $purchased = purchasedLinkFor([
+    $purchased = purchasedLinkOwnedByCustomer([
         'type' => 'file',
         'file' => 'downloadable/does-not-exist.pdf',
     ]);
@@ -88,7 +88,7 @@ it('should not spend a download when the file is missing', function () {
 });
 
 it('should not spend a download when the external url is refused', function () {
-    $purchased = purchasedLinkFor([
+    $purchased = purchasedLinkOwnedByCustomer([
         'type' => 'url',
         'url' => 'http://127.0.0.1/private-file.pdf',
     ]);
@@ -100,7 +100,7 @@ it('should not spend a download when the external url is refused', function () {
 });
 
 it('should refuse an external url that is not http at all', function () {
-    $purchased = purchasedLinkFor([
+    $purchased = purchasedLinkOwnedByCustomer([
         'type' => 'url',
         'url' => 'file:///etc/passwd',
     ]);

@@ -1,6 +1,14 @@
-# CHANGELOG for master
+# CHANGELOG for v2.5
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
+
+## Unreleased
+
+- Refined downloadable products: a race-safe download count scoped to its own ordered item, restored unlimited allowances, withdrawal on refund, a single quantity everywhere, and a tidier links form.
+
+- Adding a product to the cart without a quantity no longer fails with an error and is taken as one.
+
+- Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
 
 ## **v2.5.0 (6th of October 2026)** - *Release*
 
