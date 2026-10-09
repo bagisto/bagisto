@@ -14,7 +14,7 @@ jobs:
         operating-systems: [ubuntu-24.04]
         php-versions: ['8.4']
 
-    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
+    name: PHP ${{ matrix.php-versions }}
 
     steps:
       - name: Checkout
