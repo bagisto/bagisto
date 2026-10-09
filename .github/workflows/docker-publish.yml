@@ -57,7 +57,7 @@ jobs:
   # --------------------------------------------------------------------------
   resolve:
     name: Resolve Version & Tags
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     outputs:
@@ -139,7 +139,7 @@ jobs:
   build:
     name: Build ${{ matrix.variant }}-${{ matrix.database }} (amd64 + arm64)
     needs: resolve
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     strategy:
@@ -209,7 +209,7 @@ jobs:
   publish:
     name: Tag & Publish (Ordered)
     needs: [resolve, build]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     steps:

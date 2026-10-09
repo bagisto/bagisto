@@ -25,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-systems: [ubuntu-latest]
+        operating-systems: [ubuntu-24.04]
         php-versions: ["8.4"]
         node-version: ["22.13.1"]
         locale: [en, ar]
@@ -162,7 +162,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-systems: [ubuntu-latest]
+        operating-systems: [ubuntu-24.04]
         php-versions: ["8.4"]
         node-version: ["22.13.1"]
         project: [Admin, Shop]
