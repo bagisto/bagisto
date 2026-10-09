@@ -99,6 +99,36 @@ export class ProductCreatePage extends BasePage {
         return sku;
     }
 
+    async createDownloadableProduct(
+        product: BaseProduct,
+        link: { title: string; filePath: string; downloads: number | string },
+        attributeFamily: string | { label: string } = "1",
+    ): Promise<string> {
+        const sku = product.sku ?? `SKU-${uniqueStamp()}`;
+
+        await this.submitCreateModal("downloadable", attributeFamily, sku);
+
+        const productEditPage = new ProductEditPage(this.page);
+        await productEditPage.waitForForm();
+
+        await productEditPage.fillGeneralDetails({ name: product.name });
+
+        await productEditPage.fillDescriptions(
+            product.shortDescription,
+            product.description,
+        );
+
+        await productEditPage.fillPrice(product.price ?? "");
+        await productEditPage.addDownloadableLink(
+            link.title,
+            link.filePath,
+            link.downloads,
+        );
+        await productEditPage.saveAndVerifyUpdated(false);
+
+        return sku;
+    }
+
     async expectCreateRefused(message: string): Promise<void> {
         await expect(
             this.validationErrors.filter({ hasText: message }).first(),

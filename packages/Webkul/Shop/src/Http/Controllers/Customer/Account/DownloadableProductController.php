@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers\Customer\Account;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Webkul\Sales\Contracts\DownloadableLinkPurchased;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 use Webkul\Shop\DataGrids\DownloadableProductDataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -56,30 +57,50 @@ class DownloadableProductController extends Controller
             abort(404);
         }
 
+        abort_unless($this->isDeliverable($downloadableLinkPurchased), 404);
+
         if (! $this->downloadableLinkPurchasedRepository->consumeDownload($downloadableLinkPurchased->id)) {
             session()->flash('warning', trans('shop::app.customers.account.downloadable-products.download-error'));
 
             return redirect()->route('shop.customers.account.downloadable_products.index');
         }
 
-        if ($downloadableLinkPurchased->type == 'file') {
-            $privateDisk = Storage::disk('private');
+        return $this->serveLink($downloadableLinkPurchased);
+    }
 
-            return $privateDisk->exists($downloadableLinkPurchased->file)
-                ? $privateDisk->download($downloadableLinkPurchased->file)
-                : abort(404);
-        } else {
-            if (! $this->validateExternalUrl($downloadableLinkPurchased->url)) {
-                abort(404);
-            }
-
-            $fileName = $name = substr($downloadableLinkPurchased->url, strrpos($downloadableLinkPurchased->url, '/') + 1);
-
-            $tempImage = tempnam(sys_get_temp_dir(), $fileName);
-
-            copy($downloadableLinkPurchased->url, $tempImage);
-
-            return response()->download($tempImage, $fileName);
+    /**
+     * Can the purchased link be delivered at all? Answered before a download is spent, so a
+     * missing file or a refused url does not cost the customer one of the downloads they bought.
+     *
+     * @param  DownloadableLinkPurchased  $purchasedLink
+     */
+    protected function isDeliverable($purchasedLink): bool
+    {
+        if ($purchasedLink->type == 'file') {
+            return Storage::disk('private')->exists($purchasedLink->file);
         }
+
+        return $this->validateExternalUrl($purchasedLink->url);
+    }
+
+    /**
+     * Send the purchased link's file to the customer.
+     *
+     * @param  DownloadableLinkPurchased  $purchasedLink
+     * @return Response
+     */
+    protected function serveLink($purchasedLink)
+    {
+        if ($purchasedLink->type == 'file') {
+            return Storage::disk('private')->download($purchasedLink->file);
+        }
+
+        $fileName = substr($purchasedLink->url, strrpos($purchasedLink->url, '/') + 1);
+
+        $tempFile = tempnam(sys_get_temp_dir(), $fileName);
+
+        copy($purchasedLink->url, $tempFile);
+
+        return response()->download($tempFile, $fileName);
     }
 }

@@ -499,3 +499,98 @@ it('should list the recently ordered items of the customer', function () {
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.product.id', $product->id);
 });
+
+// ============================================================================
+// Types That Offer No Quantity Box
+// ============================================================================
+
+it('should add a downloadable product without being given a quantity', function () {
+    ['cart' => $cart] = createAdminCart();
+
+    $product = $this->createDownloadableProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'product_id' => $product->id,
+        'links' => $product->downloadable_links->pluck('id')->all(),
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items_qty', 1);
+});
+
+it('should hold a downloadable product at one however many the admin asks for', function () {
+    ['cart' => $cart] = createAdminCart();
+
+    $product = $this->createDownloadableProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'product_id' => $product->id,
+        'quantity' => 5,
+        'links' => $product->downloadable_links->pluck('id')->all(),
+    ])->assertOk();
+
+    $item = CartItem::query()->where('cart_id', $cart->id)->firstOrFail();
+
+    expect($item->quantity)->toBe(1)
+        ->and($item->base_total)->toEqual($item->base_price);
+});
+
+it('should hold a downloadable product at one when the admin updates its quantity', function () {
+    ['cart' => $cart] = createAdminCart();
+
+    $product = $this->createDownloadableProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'product_id' => $product->id,
+        'links' => $product->downloadable_links->pluck('id')->all(),
+    ])->assertOk();
+
+    $item = CartItem::query()->where('cart_id', $cart->id)->firstOrFail();
+
+    $this->putJson(route('admin.sales.cart.items.update', $cart->id), [
+        'qty' => [$item->id => 5],
+    ])->assertOk();
+
+    expect($item->refresh()->quantity)->toBe(1);
+});
+
+it('should tell the admin which cart items may have their quantity changed', function (string $type, bool $canChange) {
+    ['cart' => $cart] = createAdminCart();
+
+    $product = $type === 'downloadable'
+        ? $this->createDownloadableProduct()
+        : $this->createSimpleProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.cart.items.store', $cart->id), array_filter([
+        'product_id' => $product->id,
+        'links' => $type === 'downloadable' ? $product->downloadable_links->pluck('id')->all() : null,
+    ]))
+        ->assertOk()
+        ->assertJsonPath('data.items.0.can_change_qty', $canChange);
+})->with([
+    'downloadable' => ['downloadable', false],
+    'simple' => ['simple', true],
+]);
+
+it('should tell the admin which searched products may have their quantity changed', function () {
+    ['cart' => $cart] = createAdminCart();
+
+    $downloadable = $this->createDownloadableProduct();
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.catalog.products.search', [
+        'query' => $downloadable->name,
+    ]))
+        ->assertOk()
+        ->assertJsonPath('data.0.id', $downloadable->id)
+        ->assertJsonPath('data.0.can_change_qty', false);
+});

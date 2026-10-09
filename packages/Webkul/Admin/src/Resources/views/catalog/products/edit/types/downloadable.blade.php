@@ -370,7 +370,7 @@
 
                                     <!-- If Type is File -->
                                     <template v-if="selectedLink.type == 'file'">
-                                        <x-admin::form.control-group class="flex-1">
+                                        <x-admin::form.control-group class="min-w-0 flex-1">
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.file')
                                             </x-admin::form.control-group.label>
@@ -395,14 +395,38 @@
                                                 v-model="selectedLink.file_url"
                                             />
 
-                                            <input
-                                                type="file"
-                                                class="flex min-h-9.75 w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
-                                                :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                                name="file"
-                                                ref="file"
-                                                @change="uploadFile('file')"
-                                            />
+                                            <div class="flex items-center gap-2.5">
+                                                <label
+                                                    class="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                    :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                                >
+                                                    <span class="shrink-0 rounded-sm bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                                        @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.choose-file')
+                                                    </span>
+
+                                                    <span
+                                                        class="min-w-0 truncate"
+                                                        v-text="selectedLink.file_name"
+                                                        v-if="selectedLink.file_name && ! selectedLink.file_url"
+                                                    >
+                                                    </span>
+
+                                                    <input
+                                                        type="file"
+                                                        class="hidden"
+                                                        name="file"
+                                                        ref="file"
+                                                        @change="uploadFile('file')"
+                                                    />
+                                                </label>
+
+                                                <span
+                                                    class="icon-delete shrink-0 cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                    v-if="selectedLink.file_name || selectedLink.file_url"
+                                                    @click="removeFile('file')"
+                                                >
+                                                </span>
+                                            </div>
 
                                             <a
                                                 :href="selectedLink.sample_file_url"
@@ -460,7 +484,7 @@
 
                                     <!-- If Type is File -->
                                     <template v-if="selectedLink.sample_type == 'file'">
-                                        <x-admin::form.control-group class="flex-1">
+                                        <x-admin::form.control-group class="min-w-0 flex-1">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.sample')
                                             </x-admin::form.control-group.label>
@@ -483,13 +507,37 @@
                                                 v-model="selectedLink.sample_file_url"
                                             />
 
-                                            <input
-                                                type="file"
-                                                name="sample_file"
-                                                class="flex min-h-9.75 w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
-                                                ref="sample_file"
-                                                @change="uploadFile('sample_file')"
-                                            />
+                                            <div class="flex items-center gap-2.5">
+                                                <label
+                                                    class="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                >
+                                                    <span class="shrink-0 rounded-sm bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                                        @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.choose-file')
+                                                    </span>
+
+                                                    <span
+                                                        class="min-w-0 truncate"
+                                                        v-text="selectedLink.sample_file_name"
+                                                        v-if="selectedLink.sample_file_name && ! selectedLink.sample_file_url"
+                                                    >
+                                                    </span>
+
+                                                    <input
+                                                        type="file"
+                                                        class="hidden"
+                                                        name="sample_file"
+                                                        ref="sample_file"
+                                                        @change="uploadFile('sample_file')"
+                                                    />
+                                                </label>
+
+                                                <span
+                                                    class="icon-delete shrink-0 cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                    v-if="selectedLink.sample_file_name || selectedLink.sample_file_url"
+                                                    @click="removeFile('sample_file')"
+                                                >
+                                                </span>
+                                            </div>
 
                                             <a
                                                 :href="selectedLink.sample_file_url"
@@ -780,7 +828,7 @@
 
                                     <!-- If Type is File -->
                                     <template v-if="selectedSample.type == 'file'">
-                                        <x-admin::form.control-group class="flex-1">
+                                        <x-admin::form.control-group class="min-w-0 flex-1">
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.file')
                                             </x-admin::form.control-group.label>
@@ -805,14 +853,38 @@
                                                 v-model="selectedSample.file_url"
                                             />
 
-                                            <input
-                                                type="file"
-                                                name="file"
-                                                class="flex min-h-9.75 w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
-                                                :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                                ref="file"
-                                                @change="uploadFile('file')"
-                                            />
+                                            <div class="flex items-center gap-2.5">
+                                                <label
+                                                    class="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                    :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                                >
+                                                    <span class="shrink-0 rounded-sm bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                                                        @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.choose-file')
+                                                    </span>
+
+                                                    <span
+                                                        class="min-w-0 truncate"
+                                                        v-text="selectedSample.file_name"
+                                                        v-if="selectedSample.file_name && ! selectedSample.file_url"
+                                                    >
+                                                    </span>
+
+                                                    <input
+                                                        type="file"
+                                                        class="hidden"
+                                                        name="file"
+                                                        ref="file"
+                                                        @change="uploadFile('file')"
+                                                    />
+                                                </label>
+
+                                                <span
+                                                    class="icon-delete shrink-0 cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                    v-if="selectedSample.file_name || selectedSample.file_url"
+                                                    @click="removeFile('file')"
+                                                >
+                                                </span>
+                                            </div>
 
                                             <a
                                                 :href="selectedSample.sample_file_url"
@@ -883,6 +955,16 @@
                     this.resetForm();
 
                     this.$refs.updateCreateLinkDrawer.close();
+                },
+
+                removeFile(type) {
+                    this.selectedLink[type] = '';
+                    this.selectedLink[type + '_name'] = '';
+                    this.selectedLink[type + '_url'] = '';
+
+                    if (this.$refs[type]) {
+                        this.$refs[type].value = '';
+                    }
                 },
 
                 uploadFile(type) {
@@ -961,6 +1043,16 @@
                     this.resetForm();
 
                     this.$refs.updateCreateSampleDrawer.close();
+                },
+
+                removeFile(type) {
+                    this.selectedSample[type] = '';
+                    this.selectedSample[type + '_name'] = '';
+                    this.selectedSample[type + '_url'] = '';
+
+                    if (this.$refs[type]) {
+                        this.$refs[type].value = '';
+                    }
                 },
 
                 uploadFile(type) {

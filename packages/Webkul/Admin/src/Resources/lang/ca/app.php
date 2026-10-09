@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL: ',
 
                             'update-create' => [
+                                'choose-file' => 'Tria un fitxer',
                                 'downloads' => 'Descarrega permesa',
                                 'file' => 'Arxiu',
                                 'file-type' => 'Tipus d\'arxiu',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL: ',
 
                             'update-create' => [
+                                'choose-file' => 'Tria un fitxer',
                                 'file' => 'Arxiu',
                                 'file-type' => 'Tipus d\'arxiu',
                                 'name' => 'Títol',

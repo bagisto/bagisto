@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'Dosya Seç',
                                 'downloads' => 'İndirmeye İzin Verilen',
                                 'file' => 'Dosya',
                                 'file-type' => 'Dosya Türü',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'Dosya Seç',
                                 'file' => 'Dosya',
                                 'file-type' => 'Dosya Türü',
                                 'name' => 'Başlık',

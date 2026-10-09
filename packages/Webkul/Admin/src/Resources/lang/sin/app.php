@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'ගොනුව තෝරන්න',
                                 'downloads' => 'බාගත ඉඩ දක්වන්න',
                                 'file' => 'ගොනුව',
                                 'file-type' => 'ගොනු වර්ගය',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'ගොනුව තෝරන්න',
                                 'file' => 'ගොනුව',
                                 'file-type' => 'ගොනු වර්ගය',
                                 'name' => 'හේතුව',

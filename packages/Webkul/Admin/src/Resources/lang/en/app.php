@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'Choose File',
                                 'downloads' => 'Download Allowed',
                                 'file' => 'File',
                                 'file-type' => 'File Type',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'Choose File',
                                 'file' => 'File',
                                 'file-type' => 'File Type',
                                 'name' => 'Title',

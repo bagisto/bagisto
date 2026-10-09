@@ -1703,6 +1703,7 @@ return [
                             'url' => 'عنوان URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'اختر ملفًا',
                                 'downloads' => 'التنزيل مسموح به',
                                 'file' => 'الملف',
                                 'file-type' => 'نوع الملف',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'عنوان URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'اختر ملفًا',
                                 'file' => 'الملف',
                                 'file-type' => 'نوع الملف',
                                 'name' => 'العنوان',

@@ -1,3 +1,4 @@
+import path from "path";
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 import type { AdminPage } from "../../../../setup";
@@ -114,6 +115,62 @@ export class ProductEditPage extends BasePage {
         return this.taxCategoryField
             .locator("div.max-h-60 > div")
             .filter({ hasText: new RegExp(`^\\s*${label}\\s*$`) });
+    }
+
+    private get downloadablePanel() {
+        return this.page.locator("div.fixed").filter({ visible: true });
+    }
+
+    private panelHeaderAddButton(panelTitle: string) {
+        return this.page
+            .locator("div.box-shadow > div")
+            .filter({ has: this.page.locator(`p:text-is("${panelTitle}")`) })
+            .locator("div.secondary-button");
+    }
+
+    private get addDownloadableLinkButton() {
+        return this.panelHeaderAddButton("Downloadable Links");
+    }
+
+    private get linkTitleInput() {
+        return this.downloadablePanel.locator('input[name="title"]');
+    }
+
+    private get linkPriceInput() {
+        return this.downloadablePanel.locator('input[name="price"]');
+    }
+
+    private get linkDownloadsInput() {
+        return this.downloadablePanel.locator('input[name="downloads"]');
+    }
+
+    private get linkTypeSelect() {
+        return this.downloadablePanel.locator('select[name="type"]');
+    }
+
+    private get linkFileUploadInput() {
+        return this.downloadablePanel.locator('input[type="file"][name="file"]');
+    }
+
+    private get linkUploadedFilePath() {
+        return this.downloadablePanel.locator(
+            'input[type="hidden"][name="file"]',
+        );
+    }
+
+    private get linkPanelSaveButton() {
+        return this.downloadablePanel.getByRole("button", {
+            name: "Save",
+            exact: true,
+        });
+    }
+
+    private get linkPanelValidationError() {
+        return this.downloadablePanel.locator("p.text-red-600").first();
+    }
+
+    private linkRow(title: string) {
+        return this.page.getByText(title);
     }
 
     mediaAttribute(code: string): MediaUploadSection {
@@ -283,6 +340,56 @@ export class ProductEditPage extends BasePage {
         await expect(
             this.validationErrors.filter({ hasText: message }).first(),
         ).toBeVisible();
+    }
+
+    async fillDownloadableLink(
+        title: string,
+        filePath: string,
+        downloads: number | string,
+    ) {
+        await this.addDownloadableLinkButton.click();
+        await this.linkTitleInput.waitFor({ state: "visible" });
+        await this.linkTitleInput.fill(title);
+        await this.linkPriceInput.fill("0");
+        await this.linkDownloadsInput.fill(downloads.toString());
+        await this.linkTypeSelect.selectOption("file");
+        await this.linkFileUploadInput.setInputFiles(filePath);
+
+        await expect(this.linkUploadedFilePath).not.toHaveValue("");
+        await expect(
+            this.downloadablePanel.getByText(path.basename(filePath)),
+        ).toBeVisible();
+    }
+
+    async addDownloadableLink(
+        title: string,
+        filePath: string,
+        downloads: number | string,
+    ) {
+        await this.fillDownloadableLink(title, filePath, downloads);
+        await this.linkPanelSaveButton.click();
+
+        await expect(this.linkPanelSaveButton).toBeHidden();
+        await expect(this.linkRow(title)).toBeVisible();
+    }
+
+    async attemptDownloadableLink(
+        title: string,
+        filePath: string,
+        downloads: number | string,
+    ) {
+        await this.fillDownloadableLink(title, filePath, downloads);
+        await this.linkPanelSaveButton.click();
+    }
+
+    async expectDownloadableLinkRefused(title: string): Promise<void> {
+        await expect(this.linkPanelSaveButton).toBeVisible();
+        await expect(this.linkPanelValidationError).toBeVisible();
+        await expect(this.linkRow(title)).toHaveCount(0);
+    }
+
+    async expectDownloadableLinkListed(title: string): Promise<void> {
+        await expect(this.linkRow(title)).toBeVisible();
     }
 
     async expectStillOnEditForm(): Promise<void> {

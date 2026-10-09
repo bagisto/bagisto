@@ -1703,6 +1703,7 @@ return [
                             'url' => 'כתובת אינטרנט: ',
 
                             'update-create' => [
+                                'choose-file' => 'בחר קובץ',
                                 'downloads' => 'הורדה מותרת',
                                 'file' => 'קובץ',
                                 'file-type' => 'סוג הקובץ',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'כתובת אינטרנט: ',
 
                             'update-create' => [
+                                'choose-file' => 'בחר קובץ',
                                 'file' => 'קובץ',
                                 'file-type' => 'סוג הקובץ',
                                 'name' => 'כותרת',

@@ -352,7 +352,7 @@ class Configurable extends AbstractType
      */
     public function prepareForCart($data)
     {
-        $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
+        $data['quantity'] = parent::handleQuantity((int) ($data['quantity'] ?? 1));
 
         if (empty($data['selected_configurable_option'])) {
             return trans('product::app.checkout.cart.missing-options');

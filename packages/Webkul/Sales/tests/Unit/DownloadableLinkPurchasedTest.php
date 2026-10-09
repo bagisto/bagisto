@@ -153,6 +153,10 @@ it('should expire an unlimited link when revoked without cancelling a negative a
         ->and($link->download_canceled)->toBe(0);
 });
 
+// ============================================================================
+// Invoicing
+// ============================================================================
+
 it('should make the link available again when it is invoiced', function () {
     $link = purchasedLink(2, ['status' => 'pending']);
 

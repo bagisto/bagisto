@@ -32,11 +32,8 @@ class ProductResource extends JsonResource
     }
 
     /**
-     * Resolves the quantity available for sale. For stockable types this is the
-     * sum of inventory quantities; for booking products it's the booking-level
-     * `qty` (or the sum of event-ticket quantities for event bookings). Non-
-     * stockable, non-booking types return null so the UI can treat them as
-     * "unlimited / N/A" rather than displaying a misleading 0.
+     * The quantity available for sale, or null for a type that keeps no stock, so the panel can
+     * say "unlimited" rather than a misleading zero.
      */
     protected function resolveAvailableQuantity(): ?int
     {

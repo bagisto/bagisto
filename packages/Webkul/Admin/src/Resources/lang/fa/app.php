@@ -1703,6 +1703,7 @@ return [
                             'url' => 'آدرس اینترنتی : ',
 
                             'update-create' => [
+                                'choose-file' => 'انتخاب فایل',
                                 'downloads' => 'دانلود مجاز است',
                                 'file' => 'فایل',
                                 'file-type' => 'نوع فایل',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'آدرس اینترنتی : ',
 
                             'update-create' => [
+                                'choose-file' => 'انتخاب فایل',
                                 'file' => 'فایل',
                                 'file-type' => 'نوع فایل',
                                 'name' => 'عنوان',

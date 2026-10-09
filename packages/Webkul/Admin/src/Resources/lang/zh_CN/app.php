@@ -1703,6 +1703,7 @@ return [
                             'url' => '网址：',
 
                             'update-create' => [
+                                'choose-file' => '选择文件',
                                 'downloads' => '允许下载',
                                 'file' => '文件',
                                 'file-type' => '文件类型',
@@ -1728,6 +1729,7 @@ return [
                             'url' => '网址：',
 
                             'update-create' => [
+                                'choose-file' => '选择文件',
                                 'file' => '文件',
                                 'file-type' => '文件类型',
                                 'name' => '标题',

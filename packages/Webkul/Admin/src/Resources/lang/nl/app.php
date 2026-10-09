@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL: ',
 
                             'update-create' => [
+                                'choose-file' => 'Bestand kiezen',
                                 'downloads' => 'Downloaden Toegestaan',
                                 'file' => 'Bestand',
                                 'file-type' => 'Bestandstype',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL: ',
 
                             'update-create' => [
+                                'choose-file' => 'Bestand kiezen',
                                 'file' => 'Bestand',
                                 'file-type' => 'Bestandstype',
                                 'name' => 'Titel',

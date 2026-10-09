@@ -187,7 +187,7 @@ class Simple extends AbstractType
             return trans('product::app.checkout.cart.missing-options');
         }
 
-        $data['quantity'] = $this->handleQuantity((int) $data['quantity']);
+        $data['quantity'] = $this->handleQuantity((int) ($data['quantity'] ?? 1));
 
         $data = $this->getQtyRequest($data);
 

@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'फ़ाइल चुनें',
                                 'downloads' => 'डाउनलोड अनुमत',
                                 'file' => 'फ़ाइल',
                                 'file-type' => 'फ़ाइल प्रकार',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL : ',
 
                             'update-create' => [
+                                'choose-file' => 'फ़ाइल चुनें',
                                 'file' => 'फ़ाइल',
                                 'file-type' => 'फ़ाइल प्रकार',
                                 'name' => 'शीर्षक',

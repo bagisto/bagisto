@@ -1703,6 +1703,7 @@ return [
                             'url' => 'URL:',
 
                             'update-create' => [
+                                'choose-file' => 'Pilih File',
                                 'downloads' => 'Jumlah Unduhan Diizinkan',
                                 'file' => 'Berkas',
                                 'file-type' => 'Tipe Berkas',
@@ -1728,6 +1729,7 @@ return [
                             'url' => 'URL:',
 
                             'update-create' => [
+                                'choose-file' => 'Pilih File',
                                 'file' => 'Berkas',
                                 'file-type' => 'Tipe Berkas',
                                 'name' => 'Judul',
