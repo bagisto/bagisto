@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
@@ -94,9 +95,13 @@ class ReviewController extends APIController
 
         Event::dispatch('customer.review.create.before', $id);
 
-        $review = $this->productReviewRepository->create($data);
+        $review = DB::transaction(function () use ($data) {
+            $review = $this->productReviewRepository->create($data);
 
-        $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
+            $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
+
+            return $review;
+        });
 
         Event::dispatch('customer.review.create.after', $review);
 

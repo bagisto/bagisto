@@ -3,6 +3,7 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -34,9 +35,13 @@ class LocaleRepository extends Repository
     {
         Event::dispatch('core.locale.create.before');
 
-        $locale = parent::create($attributes);
+        $locale = DB::transaction(function () use ($attributes) {
+            $locale = parent::create($attributes);
 
-        $this->uploadImage($attributes, $locale);
+            $this->uploadImage($attributes, $locale);
+
+            return $locale;
+        });
 
         Event::dispatch(new RepositoryEntityCreated($this, $locale));
 
@@ -55,9 +60,13 @@ class LocaleRepository extends Repository
     {
         Event::dispatch('core.locale.update.before', $id);
 
-        $locale = parent::update($attributes, $id);
+        $locale = DB::transaction(function () use ($attributes, $id) {
+            $locale = parent::update($attributes, $id);
 
-        $this->uploadImage($attributes, $locale);
+            $this->uploadImage($attributes, $locale);
+
+            return $locale;
+        });
 
         Event::dispatch(new RepositoryEntityUpdated($this, $locale));
 
