@@ -152,7 +152,7 @@ class SearchTermDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('marketing.search_terms.delete')) {
+        if (bouncer()->hasPermission('marketing.search_seo.search_terms.delete')) {
             $this->addMassAction([
                 'title' => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.delete'),
                 'method' => 'POST',

@@ -6,6 +6,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
+
+- #11519 [fixed] - Fixed the admin transaction listing hiding its view action from a role with transaction permission, and showing it to a role with only shipment permission.
+
 ## **v2.4.13 (6th of October 2026)** - *Release*
 
 - Fixed the invoice and shipment screens accepting an order item that belongs to a different order, which recorded the document against the wrong one. Every item named is now checked against the order being acted on.
