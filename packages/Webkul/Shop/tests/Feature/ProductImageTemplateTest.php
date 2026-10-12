@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Webkul\Core\Core as BaseCore;
@@ -49,7 +50,7 @@ beforeEach(function () {
 
     $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
 
-    $this->path = 'product/'.$this->product->id.'/front.png';
+    $this->path = 'product/'.$this->product->id.'/'.Str::random(10).'.png';
 
     Storage::put($this->path, (string) image_manager()->create(800, 600)->fill('3366cc')->toPng());
 
@@ -62,7 +63,7 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    Storage::deleteDirectory('product/'.$this->product->id);
+    Storage::delete($this->path);
 
     File::deleteDirectory(storage_path('framework/testing/vite'));
 });

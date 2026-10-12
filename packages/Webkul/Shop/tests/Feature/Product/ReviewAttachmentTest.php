@@ -57,6 +57,8 @@ function svgAttachment(string $name, string $markup): UploadedFile
     return new UploadedFile($path, $name, 'image/svg+xml', null, true);
 }
 
+beforeEach(fn () => Storage::fake());
+
 // ============================================================================
 // Recording A Readable Batch
 // ============================================================================
