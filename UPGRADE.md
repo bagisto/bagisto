@@ -1,11 +1,14 @@
 # UPGRADE Guide
 
 - [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
+
 - [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
 
 ## Upgrading To v2.5.1 From v2.5.0
+
+![Upcoming Release](https://img.shields.io/badge/release-upcoming-orange)
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
