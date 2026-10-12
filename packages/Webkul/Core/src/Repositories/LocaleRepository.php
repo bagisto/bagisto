@@ -5,6 +5,7 @@ namespace Webkul\Core\Repositories;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Prettus\Repository\Events\RepositoryEntityCreated;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Webkul\Core\Contracts\Locale;
@@ -114,7 +115,11 @@ class LocaleRepository extends Repository
                     $locale->code.'.'.$image->getClientOriginalExtension()
                 );
 
-                $this->sanitizeSVG($locale->logo_path, $mimeType);
+                if (! $this->sanitizeSVG($locale->logo_path, $mimeType)) {
+                    throw ValidationException::withMessages([
+                        'logo_path' => trans('core::app.errors.invalid-svg'),
+                    ]);
+                }
 
                 $locale->save();
             }

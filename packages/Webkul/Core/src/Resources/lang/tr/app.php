@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'SVG dosyası okunamadı, bu nedenle yüklenmedi. Lütfen geçerli bir SVG dosyası yükleyin.',
+    ],
+
     'path-hint' => [
         'template' => 'Template',
         'parents' => 'Parents',

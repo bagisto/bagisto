@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'SVG ファイルを読み取れなかったため、アップロードされませんでした。有効な SVG ファイルをアップロードしてください。',
+    ],
+
     'path-hint' => [
         'template' => 'テンプレート',
         'parents' => '親',

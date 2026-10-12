@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'Het SVG-bestand kon niet worden gelezen en is daarom niet geüpload. Upload een geldig SVG-bestand.',
+    ],
+
     'path-hint' => [
         'template' => 'Sjabloon',
         'parents' => 'Ouders',

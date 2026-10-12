@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'Die SVG-Datei konnte nicht gelesen und daher nicht hochgeladen werden. Bitte laden Sie eine gültige SVG-Datei hoch.',
+    ],
+
     'path-hint' => [
         'template' => 'Vorlage',
         'parents' => 'Eltern',

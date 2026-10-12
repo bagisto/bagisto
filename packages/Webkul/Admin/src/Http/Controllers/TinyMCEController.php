@@ -93,7 +93,9 @@ class TinyMCEController extends Controller
 
         $path = $file->store($this->storagePath);
 
-        $this->sanitizeSVG($path, $mimeType);
+        if (! $this->sanitizeSVG($path, $mimeType)) {
+            return ['error' => trans('core::app.errors.invalid-svg')];
+        }
 
         return [
             'file' => $path,

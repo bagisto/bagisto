@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'Fișierul SVG nu a putut fi citit, așa că nu a fost încărcat. Încărcați un fișier SVG valid.',
+    ],
+
     'path-hint' => [
         'template' => 'Șablon',
         'parents' => 'Părinți',

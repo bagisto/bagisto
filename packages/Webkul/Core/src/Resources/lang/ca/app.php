@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'No s\'ha pogut llegir el fitxer SVG, per la qual cosa no s\'ha pujat. Pugeu un fitxer SVG vàlid.',
+    ],
+
     'path-hint' => [
         'template' => 'Plantilla',
         'parents' => 'Pares',
