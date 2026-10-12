@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
 
+- #11519 [fixed] - Fixed the admin transaction listing hiding its view action from a role with transaction permission, and showing it to a role with only shipment permission.
+
 ## **v2.5.0 (6th of October 2026)** - *Release*
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
