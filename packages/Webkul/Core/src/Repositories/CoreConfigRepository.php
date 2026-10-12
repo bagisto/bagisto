@@ -4,9 +4,11 @@ namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\SystemConfig\DependsCondition;
@@ -31,100 +33,106 @@ class CoreConfigRepository extends Repository
     {
         Event::dispatch('core.configuration.save.before');
 
-        $locale = Arr::pull($data, 'locale') ?: core()->getRequestedLocaleCode();
+        DB::transaction(function () use ($data) {
+            $locale = Arr::pull($data, 'locale') ?: core()->getRequestedLocaleCode();
 
-        $channel = Arr::pull($data, 'channel') ?: core()->getRequestedChannelCode();
+            $channel = Arr::pull($data, 'channel') ?: core()->getRequestedChannelCode();
 
-        foreach ($data as $group => $fieldData) {
-            $configValues = $this->flattenToConfigValues($fieldData, $group);
+            foreach ($data as $group => $fieldData) {
+                $configValues = $this->flattenToConfigValues($fieldData, $group);
 
-            foreach ($configValues as $fieldName => $value) {
-                $field = core()->getConfigField($fieldName);
+                foreach ($configValues as $fieldName => $value) {
+                    $field = core()->getConfigField($fieldName);
 
-                $condition = new DependsCondition($field['depends'] ?? null);
+                    $condition = new DependsCondition($field['depends'] ?? null);
 
-                $sibling = Str::beforeLast($fieldName, '.').'.'.$condition->fieldName();
+                    $sibling = Str::beforeLast($fieldName, '.').'.'.$condition->fieldName();
 
-                if (! $condition->permits(array_key_exists($sibling, $configValues), $configValues[$sibling] ?? null)) {
-                    continue;
-                }
-
-                $channelBased = ! empty($field['channel_based']);
-
-                $localeBased = ! empty($field['locale_based']);
-
-                if (
-                    gettype($value) == 'array'
-                    && ! isset($value['delete'])
-                ) {
-                    $value = implode(',', $value);
-                }
-
-                if (! empty($field['channel_based'])) {
-                    if (! empty($field['locale_based'])) {
-                        $coreConfigValue = $this->model
-                            ->where('code', $fieldName)
-                            ->where('locale_code', $locale)
-                            ->where('channel_code', $channel)
-                            ->get();
-                    } else {
-                        $coreConfigValue = $this->model
-                            ->where('code', $fieldName)
-                            ->where('channel_code', $channel)
-                            ->get();
+                    if (! $condition->permits(array_key_exists($sibling, $configValues), $configValues[$sibling] ?? null)) {
+                        continue;
                     }
-                } else {
-                    if (! empty($field['locale_based'])) {
-                        $coreConfigValue = $this->model
-                            ->where('code', $fieldName)
-                            ->where('locale_code', $locale)
-                            ->get();
-                    } else {
-                        $coreConfigValue = $this->model
-                            ->where('code', $fieldName)
-                            ->get();
+
+                    $channelBased = ! empty($field['channel_based']);
+
+                    $localeBased = ! empty($field['locale_based']);
+
+                    if (
+                        gettype($value) == 'array'
+                        && ! isset($value['delete'])
+                    ) {
+                        $value = implode(',', $value);
                     }
-                }
 
-                if (request()->hasFile($fieldName)) {
-                    $file = request()->file($fieldName);
-
-                    $value = $file->store('configurations');
-
-                    $this->sanitizeSVG($value, $file->getMimeType());
-                }
-
-                if (! count($coreConfigValue)) {
-                    parent::create([
-                        'code' => $fieldName,
-                        'value' => $value,
-                        'locale_code' => $localeBased ? $locale : null,
-                        'channel_code' => $channelBased ? $channel : null,
-                    ]);
-                } else {
-                    foreach ($coreConfigValue as $coreConfig) {
-                        if (request()->hasFile($fieldName)) {
-                            Storage::delete($coreConfig['value']);
+                    if (! empty($field['channel_based'])) {
+                        if (! empty($field['locale_based'])) {
+                            $coreConfigValue = $this->model
+                                ->where('code', $fieldName)
+                                ->where('locale_code', $locale)
+                                ->where('channel_code', $channel)
+                                ->get();
+                        } else {
+                            $coreConfigValue = $this->model
+                                ->where('code', $fieldName)
+                                ->where('channel_code', $channel)
+                                ->get();
                         }
+                    } else {
+                        if (! empty($field['locale_based'])) {
+                            $coreConfigValue = $this->model
+                                ->where('code', $fieldName)
+                                ->where('locale_code', $locale)
+                                ->get();
+                        } else {
+                            $coreConfigValue = $this->model
+                                ->where('code', $fieldName)
+                                ->get();
+                        }
+                    }
 
-                        if (isset($value['delete'])) {
-                            if (in_array($field['type'] ?? '', ['image', 'file'])) {
+                    if (request()->hasFile($fieldName)) {
+                        $file = request()->file($fieldName);
+
+                        $value = $file->store('configurations');
+
+                        if (! $this->sanitizeSVG($value, $file->getMimeType())) {
+                            throw ValidationException::withMessages([
+                                $fieldName => trans('core::app.errors.invalid-svg'),
+                            ]);
+                        }
+                    }
+
+                    if (! count($coreConfigValue)) {
+                        parent::create([
+                            'code' => $fieldName,
+                            'value' => $value,
+                            'locale_code' => $localeBased ? $locale : null,
+                            'channel_code' => $channelBased ? $channel : null,
+                        ]);
+                    } else {
+                        foreach ($coreConfigValue as $coreConfig) {
+                            if (request()->hasFile($fieldName)) {
                                 Storage::delete($coreConfig['value']);
                             }
 
-                            parent::delete($coreConfig['id']);
-                        } else {
-                            parent::update([
-                                'code' => $fieldName,
-                                'value' => $value,
-                                'locale_code' => $localeBased ? $locale : null,
-                                'channel_code' => $channelBased ? $channel : null,
-                            ], $coreConfig->id);
+                            if (isset($value['delete'])) {
+                                if (in_array($field['type'] ?? '', ['image', 'file'])) {
+                                    Storage::delete($coreConfig['value']);
+                                }
+
+                                parent::delete($coreConfig['id']);
+                            } else {
+                                parent::update([
+                                    'code' => $fieldName,
+                                    'value' => $value,
+                                    'locale_code' => $localeBased ? $locale : null,
+                                    'channel_code' => $channelBased ? $channel : null,
+                                ], $coreConfig->id);
+                            }
                         }
                     }
                 }
             }
-        }
+        });
 
         Event::dispatch('core.configuration.save.after');
     }

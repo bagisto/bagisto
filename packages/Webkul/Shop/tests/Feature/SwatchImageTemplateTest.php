@@ -47,6 +47,8 @@ function swatchOptionOn(Channel $channel): array
 }
 
 beforeEach(function () {
+    Storage::fake();
+
     config(['imagecache.templates' => [
         'small' => Small::class,
         'medium' => Medium::class,
@@ -71,10 +73,6 @@ beforeEach(function () {
     $this->product = $this->createSimpleProduct();
 
     $this->product->super_attributes()->attach($this->attribute->id);
-});
-
-afterEach(function () {
-    Storage::delete($this->path);
 });
 
 // ============================================================================

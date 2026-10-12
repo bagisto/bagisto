@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'לא ניתן היה לקרוא את קובץ ה-SVG, ולכן הוא לא הועלה. אנא העלו קובץ SVG תקין.',
+    ],
+
     'path-hint' => [
         'template' => 'תבנית',
         'parents' => 'הורים',

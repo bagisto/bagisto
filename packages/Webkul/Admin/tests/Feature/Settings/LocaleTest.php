@@ -10,6 +10,8 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+beforeEach(fn () => Storage::fake());
+
 /**
  * A locale code in the `xx_YY` form that no locale holds yet.
  */

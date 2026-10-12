@@ -161,9 +161,37 @@ export class RuleApplyPage extends CheckoutHelper {
         await this.proceedAsGuest();
         await this.chooseShipping(options.allowShipping === "yes" ? "flatrate" : "free");
         await this.choosePayment("moneytransfer");
+
+        const shipping =
+            options.allowShipping === "yes"
+                ? await this.readSummaryAmount("Delivery Charges")
+                : 0;
+
         await this.applyCoupon(options.couponCode);
 
-        await this.expectGrandTotal(expected);
+        const shippingDiscount = this.expectedShippingDiscount(
+            shipping,
+            options.discountValue,
+            options.couponType,
+        );
+
+        await this.expectGrandTotal(round(expected + shipping - shippingDiscount));
+    }
+
+    private expectedShippingDiscount(
+        shipping: number,
+        discountValue: number,
+        couponType: CouponType,
+    ): number {
+        if (shipping === 0) {
+            return 0;
+        }
+
+        if (couponType === "percentage") {
+            return round((shipping * discountValue) / 100);
+        }
+
+        return Math.min(discountValue, shipping);
     }
 
     async expectCatalogRuleDiscount(options: {

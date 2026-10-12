@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\Sanitizer;
@@ -118,7 +119,11 @@ class ProductAttributeValueRepository extends Repository
 
                     $data[$attribute->code] = $file->store('products/'.$product->id);
 
-                    $this->sanitizeSVG($data[$attribute->code], $file->getMimeType());
+                    if (! $this->sanitizeSVG($data[$attribute->code], $file->getMimeType())) {
+                        throw ValidationException::withMessages([
+                            $attribute->code => trans('core::app.errors.invalid-svg'),
+                        ]);
+                    }
                 } elseif (empty($data[$attribute->code]['delete'])) {
                     continue;
                 }

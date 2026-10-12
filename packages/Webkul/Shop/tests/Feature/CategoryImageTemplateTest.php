@@ -52,6 +52,8 @@ function categoryOn(Channel $channel, Category $category): array
 }
 
 beforeEach(function () {
+    Storage::fake();
+
     config(['imagecache.templates' => [
         'small' => Small::class,
         'medium' => Medium::class,
@@ -79,10 +81,6 @@ beforeEach(function () {
     $this->category->banner_path = $this->bannerPath;
 
     $this->category->save();
-});
-
-afterEach(function () {
-    Storage::deleteDirectory('categories/'.$this->category->id);
 });
 
 // ============================================================================

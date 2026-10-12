@@ -10,6 +10,12 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+beforeEach(function () {
+    Storage::fake('public');
+
+    Storage::fake('private');
+});
+
 // ============================================================================
 // Store
 // ============================================================================

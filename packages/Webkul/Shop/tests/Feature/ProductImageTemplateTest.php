@@ -116,6 +116,8 @@ function serveThemeFromViteDevServer(string $code, string $server): void
 }
 
 beforeEach(function () {
+    Storage::fake();
+
     config(['imagecache.templates' => [
         'small' => Small::class,
         'medium' => Medium::class,
@@ -137,8 +139,6 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    Storage::deleteDirectory('products/'.$this->product->id);
-
     File::deleteDirectory(storage_path('framework/testing/vite'));
 });
 
