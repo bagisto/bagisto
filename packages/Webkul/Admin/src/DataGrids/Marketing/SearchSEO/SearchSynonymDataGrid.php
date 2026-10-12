@@ -97,7 +97,7 @@ class SearchSynonymDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('marketing.search_synonyms.delete')) {
+        if (bouncer()->hasPermission('marketing.search_seo.search_synonyms.delete')) {
             $this->addMassAction([
                 'title' => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.delete'),
                 'method' => 'POST',
