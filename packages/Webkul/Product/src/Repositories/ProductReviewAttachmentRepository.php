@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\Sanitizer;
 use Webkul\Product\Contracts\ProductReview;
@@ -20,25 +22,38 @@ class ProductReviewAttachmentRepository extends Repository
     }
 
     /**
-     * Upload.
+     * Store every attachment and record them only once all of them are readable, so a
+     * file that cannot be sanitized refuses the batch instead of recording half of it.
      */
     public function upload(array $attachments, ProductReview $review): void
     {
+        $recorded = [];
+
         foreach ($attachments as $attachment) {
             $mimeType = $attachment->getMimeType();
 
-            $fileType = explode('/', $mimeType);
-
             $path = $attachment->store('review/'.$review->id);
 
-            $this->sanitizeSVG($path, $mimeType);
+            if (! $this->sanitizeSVG($path, $mimeType)) {
+                Storage::delete(array_column($recorded, 'path'));
 
-            $this->create([
+                throw ValidationException::withMessages([
+                    'attachments' => trans('core::app.errors.invalid-svg'),
+                ]);
+            }
+
+            $fileType = explode('/', $mimeType);
+
+            $recorded[] = [
                 'path' => $path,
                 'review_id' => $review->id,
                 'type' => $fileType[0],
                 'mime_type' => $fileType[1] ?? null,
-            ]);
+            ];
+        }
+
+        foreach ($recorded as $attributes) {
+            $this->create($attributes);
         }
     }
 }

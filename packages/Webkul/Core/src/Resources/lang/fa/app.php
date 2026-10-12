@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'فایل SVG قابل خواندن نبود، بنابراین بارگذاری نشد. لطفاً یک فایل SVG معتبر بارگذاری کنید.',
+    ],
+
     'path-hint' => [
         'template' => 'Template',
         'parents' => 'Parents',

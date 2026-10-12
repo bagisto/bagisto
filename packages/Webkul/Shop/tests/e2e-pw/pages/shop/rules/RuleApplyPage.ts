@@ -6,7 +6,6 @@ export class RuleApplyPage extends BasePage {
     constructor(page: Page) {
         super(page);
     }
-    // Shop / Cart
     get searchInput() {
         return this.page.getByRole("textbox", { name: "Search products here" });
     }
@@ -32,8 +31,6 @@ export class RuleApplyPage extends BasePage {
     get cartUpdateSuccess() {
         return this.page.getByText("Quantity updated successfully");
     }
-
-    // Coupon
     get applyCouponButton() {
         return this.page.getByRole("button", { name: "Apply Coupon" });
     }
@@ -112,6 +109,18 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByAltText("Money Transfer");
     }
 
+    get grandTotalValue() {
+        return this.page
+            .locator("text=Grand Total")
+            .locator("..")
+            .locator("p")
+            .nth(1);
+    }
+
+    get couponAppliedMessage() {
+        return this.page.getByText("Coupon code applied successfully.").first();
+    }
+
     async getSubTotalValue(): Promise<number> {
         await this.page.waitForLoadState("networkidle");
 
@@ -125,6 +134,61 @@ export class RuleApplyPage extends BasePage {
 
         const subtotalText = await subtotalRow.locator("p").last().innerText();
         return parseFloat(subtotalText.replace(/[^0-9.]/g, ""));
+    }
+
+    summaryRow(label: string) {
+        return this.page
+            .locator("div.flex.justify-between:visible", { hasText: label })
+            .first();
+    }
+
+    async getSummaryAmount(label: string): Promise<number> {
+        const row = this.summaryRow(label);
+
+        await row.waitFor({ state: "visible", timeout: 15000 });
+
+        const amount = await row.locator("p").nth(1).innerText();
+
+        return parseFloat(amount.replace(/[^0-9.]/g, ""));
+    }
+
+    async getDeliveryChargesValue(): Promise<number> {
+        return this.getSummaryAmount("Delivery Charges");
+    }
+
+    async getDiscountBreakdown(): Promise<{ items: number; shipping: number }> {
+        if (!(await this.summaryRow("Items Discount").isVisible())) {
+            await this.summaryRow("Discount Amount").click();
+        }
+
+        return {
+            items: await this.getSummaryAmount("Items Discount"),
+            shipping: await this.getSummaryAmount("Shipping Discount"),
+        };
+    }
+
+    formatAmount(amount: number): string {
+        return `$${new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(amount)}`;
+    }
+
+    async expectCouponApplied() {
+        await expect(this.couponAppliedMessage).toBeVisible();
+    }
+
+    async expectGrandTotalToBe(amount: number) {
+        await expect(this.grandTotalValue).toContainText(
+            this.formatAmount(amount),
+        );
+    }
+
+    async expectDiscountBreakdownToBe(items: number, shipping: number) {
+        const breakdown = await this.getDiscountBreakdown();
+
+        expect(breakdown.items).toBeCloseTo(items, 2);
+        expect(breakdown.shipping).toBeCloseTo(shipping, 2);
     }
 
     getSavedProduct() {

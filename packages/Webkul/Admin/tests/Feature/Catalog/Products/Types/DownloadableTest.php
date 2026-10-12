@@ -13,6 +13,12 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+beforeEach(function () {
+    Storage::fake('public');
+
+    Storage::fake('private');
+});
+
 it('should fail the validation with errors when certain inputs are not provided when store in downloadable product', function () {
     // Act and Assert.
     $this->loginAsAdmin();

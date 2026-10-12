@@ -188,7 +188,9 @@ class CustomerController extends Controller
      */
     public function reviews()
     {
-        $reviews = $this->productReviewRepository->getCustomerReview();
+        $reviews = $this->productReviewRepository->getCustomerReviews(
+            auth()->guard('customer')->id()
+        );
 
         return view('shop::customers.account.reviews.index', compact('reviews'));
     }

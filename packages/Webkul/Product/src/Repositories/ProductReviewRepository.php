@@ -2,31 +2,56 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Collection;
+use Illuminate\Container\Container;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductReview;
 
 class ProductReviewRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Create a new repository instance.
+     *
+     * @return void
      */
-    public function model(): string
-    {
-        return 'Webkul\Product\Contracts\ProductReview';
+    public function __construct(
+        protected ProductReviewAttachmentRepository $productReviewAttachmentRepository,
+        Container $container
+    ) {
+        parent::__construct($container);
     }
 
     /**
-     * Retrieve review for customerId
-     *
-     * @return Collection
+     * Specify model class name.
      */
-    public function getCustomerReview()
+    public function model(): string
     {
-        $reviews = $this->model
-            ->where(['customer_id' => auth()->guard('customer')->user()->id])
+        return ProductReview::class;
+    }
+
+    /**
+     * Create the review with its attachments, so an attachment that cannot be sanitized leaves no review behind.
+     */
+    public function createWithAttachments(array $data): ProductReview
+    {
+        return DB::transaction(function () use ($data) {
+            $review = $this->create($data);
+
+            $this->productReviewAttachmentRepository->upload($data['attachments'] ?? [], $review);
+
+            return $review;
+        });
+    }
+
+    /**
+     * Retrieve the reviews a customer has written.
+     */
+    public function getCustomerReviews(int $customerId): LengthAwarePaginator
+    {
+        return $this->model
+            ->where('customer_id', $customerId)
             ->with('product')
             ->paginate(5);
-
-        return $reviews;
     }
 }

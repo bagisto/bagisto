@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        'invalid-svg' => 'Nie udało się odczytać pliku SVG, więc nie został przesłany. Prześlij prawidłowy plik SVG.',
+    ],
+
     'path-hint' => [
         'template' => 'Szablon',
         'parents' => 'Rodzice',

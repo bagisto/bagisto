@@ -9,6 +9,8 @@ trait Sanitizer
 {
     /**
      * List of mime types which needs to check.
+     *
+     * @var array
      */
     public $mimeTypes = [
         'image/svg',
@@ -16,22 +18,49 @@ trait Sanitizer
     ];
 
     /**
-     * Sanitize SVG file.
+     * The parse issues the last refused SVG reported, for a caller that wants to log them.
+     *
+     * @var array
+     */
+    public $svgSanitizeIssues = [];
+
+    /**
+     * Sanitize the SVG file in place, reporting whether it could be read at all.
+     * A file that cannot be parsed is removed rather than left unsanitized or empty.
      *
      * @param  string  $path
-     * @return void
+     * @param  string  $mimeType
      */
-    public function sanitizeSVG($path, $mimeType)
+    public function sanitizeSVG($path, $mimeType): bool
     {
-        if ($this->checkMimeType($mimeType)) {
-            $sanitizer = new MainSanitizer;
+        $this->svgSanitizeIssues = [];
 
-            $sanitizer->removeRemoteReferences(true);
-
-            $dirtySVG = Storage::get($path);
-
-            Storage::put($path, $sanitizer->sanitize($dirtySVG));
+        if (! $this->checkMimeType($mimeType)) {
+            return true;
         }
+
+        $sanitizer = new MainSanitizer;
+
+        $sanitizer->removeRemoteReferences(true);
+
+        $dirtySVG = Storage::get($path);
+
+        $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+        if (
+            ! is_string($cleanSVG)
+            || $cleanSVG === ''
+        ) {
+            $this->svgSanitizeIssues = $sanitizer->getXmlIssues();
+
+            Storage::delete($path);
+
+            return false;
+        }
+
+        Storage::put($path, $cleanSVG);
+
+        return true;
     }
 
     /**

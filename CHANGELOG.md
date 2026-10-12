@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11519 [fixed] - Fixed the admin transaction listing hiding its view action from a role with transaction permission, and showing it to a role with only shipment permission.
 
+- #11518 [fixed] - Fixed an unreadable SVG being stored as an empty file while the upload reported success, leaving a blank image. It is now refused with a message and no file is kept.
+
 ## **v2.4.13 (6th of October 2026)** - *Release*
 
 - Fixed the invoice and shipment screens accepting an order item that belongs to a different order, which recorded the document against the wrong one. Every item named is now checked against the order being acted on.

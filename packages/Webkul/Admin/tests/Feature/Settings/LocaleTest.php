@@ -9,6 +9,8 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+beforeEach(fn () => Storage::fake());
+
 it('should returns the locale index page', function () {
     // Act and Assert.
     $this->loginAsAdmin();

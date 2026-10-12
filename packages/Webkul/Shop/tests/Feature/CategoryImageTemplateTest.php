@@ -19,6 +19,8 @@ use Webkul\Shop\Tests\Fixtures\ImageCache\ProductCard;
 use function Pest\Laravel\getJson;
 
 beforeEach(function () {
+    Storage::fake();
+
     config(['imagecache.templates' => [
         'small' => Small::class,
         'medium' => Medium::class,
@@ -46,10 +48,6 @@ beforeEach(function () {
     $this->category->banner_path = $this->bannerPath;
 
     $this->category->save();
-});
-
-afterEach(function () {
-    Storage::deleteDirectory('category/'.$this->category->id);
 });
 
 /**

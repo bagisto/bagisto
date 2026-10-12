@@ -12,6 +12,8 @@ use Webkul\Product\Helpers\ConfigurableOption;
 use Webkul\Shop\Tests\Fixtures\ImageCache\SquareProductCard;
 
 beforeEach(function () {
+    Storage::fake();
+
     config(['imagecache.templates' => [
         'small' => Small::class,
         'medium' => Medium::class,
@@ -36,10 +38,6 @@ beforeEach(function () {
     $this->product = (new ProductFaker)->getSimpleProductFactory()->create();
 
     $this->product->super_attributes()->attach($this->attribute->id);
-});
-
-afterEach(function () {
-    Storage::delete($this->path);
 });
 
 /**
