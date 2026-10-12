@@ -9,6 +9,8 @@ trait Sanitizer
 {
     /**
      * List of mime types which needs to check.
+     *
+     * @var array
      */
     public $mimeTypes = [
         'image/svg',
@@ -16,7 +18,9 @@ trait Sanitizer
     ];
 
     /**
-     * Issues the last failed sanitization reported, for a caller that wants to log them.
+     * The parse issues the last refused SVG reported, for a caller that wants to log them.
+     *
+     * @var array
      */
     public $svgSanitizeIssues = [];
 
@@ -29,6 +33,8 @@ trait Sanitizer
      */
     public function sanitizeSVG($path, $mimeType): bool
     {
+        $this->svgSanitizeIssues = [];
+
         if (! $this->checkMimeType($mimeType)) {
             return true;
         }

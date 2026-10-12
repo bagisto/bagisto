@@ -61,6 +61,20 @@ it('should expose the parse issues behind a refusal', function () {
     expect($sanitizer->svgSanitizeIssues)->not->toBeEmpty();
 });
 
+it('should forget the parse issues of an earlier refusal once a file sanitizes', function () {
+    $sanitizer = svgSanitizer();
+
+    Storage::put('uploads/broken.svg', '<svg><rect></svg>');
+
+    Storage::put('uploads/logo.svg', '<svg><rect/></svg>');
+
+    $sanitizer->sanitizeSVG('uploads/broken.svg', 'image/svg+xml');
+
+    $sanitizer->sanitizeSVG('uploads/logo.svg', 'image/svg+xml');
+
+    expect($sanitizer->svgSanitizeIssues)->toBeEmpty();
+});
+
 // ============================================================================
 // Leaving Every Other Type Alone
 // ============================================================================

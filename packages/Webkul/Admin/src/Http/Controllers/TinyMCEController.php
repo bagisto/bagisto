@@ -87,7 +87,10 @@ class TinyMCEController extends Controller
             'image/svg+xml' => ['svg'],
         ];
 
-        if (! isset($validExtensions[$mimeType]) || ! in_array($extension, $validExtensions[$mimeType])) {
+        if (
+            ! isset($validExtensions[$mimeType])
+            || ! in_array($extension, $validExtensions[$mimeType])
+        ) {
             return ['error' => trans('admin::app.components.tinymce.errors.file-extension-mismatch')];
         }
 

@@ -24,6 +24,8 @@
 
 - [Full Page Cache No Longer Caches Signed-In Customers](#full-page-cache-no-longer-caches-signed-in-customers)
 
+- [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
+
 ## Upgrading To v2.4 From v2.3
 
 > [!NOTE]
@@ -1552,3 +1554,53 @@ What this changes for custom code:
   reindexed product ids, or none for a full reindex. The page cache forgets those
   products' pages — every page after a full reindex — and the storefront catalog API
   cache is flushed, so a saved catalog rule or the nightly reindex shows the new price.
+
+### Unreadable SVG Uploads Are Refused
+
+**Impact Probability: Low**
+
+An SVG the sanitizer cannot parse used to be written to disk as an empty file while the
+upload reported success, leaving a blank image behind. `Webkul\Core\Traits\Sanitizer`
+now reports whether it could read the file: `sanitizeSVG()` returns `true` once the file
+is sanitized in place, and `false` after deleting a file it could not parse, keeping the
+parser's complaints in `$svgSanitizeIssues`.
+
+Every caller refuses the upload rather than keeping the file. Saving a configuration
+field, a locale logo, a product attribute image or file, an image search upload or a
+review attachment now fails with the validation message
+`core::app.errors.invalid-svg`, and the TinyMCE media endpoint answers with an error.
+Code that drove any of these and expected an empty file to be stored now receives a
+validation error instead.
+
+What this changes for custom code:
+
+- **`Sanitizer::sanitizeSVG()` returns `bool`.** A class that overrides it has to declare
+  the return type, and a caller that wants to keep the old behaviour has to ignore the
+  value deliberately.
+- **Review attachments are recorded as a batch.** `ProductReviewAttachmentRepository::upload()`
+  stores every file first and records them only once all of them are readable, so one
+  unreadable file leaves neither rows nor files behind.
+- **`ProductReviewRepository` takes `ProductReviewAttachmentRepository` in its constructor**,
+  so resolve it through the container rather than building it by hand. Its new
+  `createWithAttachments()` writes the review and its attachments in one transaction, and
+  `Webkul\Shop\Http\Controllers\API\ReviewController` calls that instead of creating the
+  review and uploading the attachments itself — the controller no longer injects
+  `ProductReviewAttachmentRepository`.
+- **`ProductReviewRepository::getCustomerReview()` is now `getCustomerReviews()`**, and it
+  takes the customer rather than reading the storefront guard, so it can be called outside
+  a customer's request.
+- **Configuration saves, locale saves and product updates run in a transaction**, so a
+  refused file rolls the rest of the save back. A listener on those events now runs
+  inside that transaction.
+
+The reviews a customer wrote are now read by id:
+
+```php
+// Before
+$reviews = $this->productReviewRepository->getCustomerReview();
+
+// After
+$reviews = $this->productReviewRepository->getCustomerReviews(
+    auth()->guard('customer')->id()
+);
+```

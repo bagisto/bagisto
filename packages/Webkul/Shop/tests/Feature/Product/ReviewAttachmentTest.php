@@ -5,16 +5,18 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Product\Models\ProductReviewAttachment;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 /**
- * A review for attachments to belong to.
+ * A simple product for a review to belong to.
  */
-function reviewForAttachments(): ProductReview
+function productForReviewAttachments(): Product
 {
-    $product = (new ProductFaker([
+    return (new ProductFaker([
         'attributes' => [
             5 => 'new',
         ],
@@ -27,11 +29,17 @@ function reviewForAttachments(): ProductReview
     ]))
         ->getSimpleProductFactory()
         ->create();
+}
 
+/**
+ * A review for attachments to belong to.
+ */
+function reviewForAttachments(): ProductReview
+{
     $customer = Customer::factory()->create();
 
     return ProductReview::factory()->create([
-        'product_id' => $product->id,
+        'product_id' => productForReviewAttachments()->id,
         'customer_id' => $customer->id,
         'name' => $customer->name,
     ]);
@@ -80,4 +88,24 @@ it('should record nothing and leave no file when one attachment cannot be saniti
     expect($upload)->toThrow(ValidationException::class)
         ->and(ProductReviewAttachment::where('review_id', $review->id)->count())->toBe(0)
         ->and(Storage::files('review/'.$review->id))->toBeEmpty();
+});
+
+it('should leave no review behind when an attachment cannot be sanitized', function () {
+    $product = productForReviewAttachments();
+
+    $customer = Customer::factory()->create();
+
+    $create = fn () => app(ProductReviewRepository::class)->createWithAttachments([
+        'product_id' => $product->id,
+        'customer_id' => $customer->id,
+        'name' => $customer->name,
+        'title' => 'Looks good',
+        'comment' => 'Arrived quickly.',
+        'rating' => 5,
+        'status' => 'pending',
+        'attachments' => [svgAttachment('broken.svg', '<svg><rect></svg>')],
+    ]);
+
+    expect($create)->toThrow(ValidationException::class)
+        ->and(ProductReview::where('product_id', $product->id)->count())->toBe(0);
 });

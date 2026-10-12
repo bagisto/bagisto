@@ -19,6 +19,8 @@ class ProductRepository extends Repository
 {
     /**
      * Search engine.
+     *
+     * @var string
      */
     protected $searchEngine = 'database';
 

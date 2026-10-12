@@ -4,27 +4,14 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
 
 class ReviewController extends APIController
 {
-    /**
-     * Create a controller instance.
-     *
-     * @return void
-     */
-    public function __construct(
-        protected ProductRepository $productRepository,
-        protected ProductReviewRepository $productReviewRepository,
-        protected ProductReviewAttachmentRepository $productReviewAttachmentRepository
-    ) {}
-
     /**
      * Pending review status.
      */
@@ -34,6 +21,16 @@ class ReviewController extends APIController
      * Approved review status.
      */
     const STATUS_APPROVED = 'approved';
+
+    /**
+     * Create a controller instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        protected ProductRepository $productRepository,
+        protected ProductReviewRepository $productReviewRepository
+    ) {}
 
     /**
      * Product listings.
@@ -95,13 +92,7 @@ class ReviewController extends APIController
 
         Event::dispatch('customer.review.create.before', $id);
 
-        $review = DB::transaction(function () use ($data) {
-            $review = $this->productReviewRepository->create($data);
-
-            $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
-
-            return $review;
-        });
+        $review = $this->productReviewRepository->createWithAttachments($data);
 
         Event::dispatch('customer.review.create.after', $review);
 

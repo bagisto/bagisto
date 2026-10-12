@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { expect, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { ProductCreation } from "../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -8,8 +8,53 @@ import { loginAsAdmin } from "../../../utils/admin";
 
 type CouponType = "fixed" | "percentage" | "fixedAmmountWholeCart";
 
+function expectedDiscounts(
+    discountValue: number,
+    couponType: CouponType,
+    subtotal: number,
+    shipping: number,
+) {
+    if (couponType === "percentage") {
+        return {
+            items: (subtotal * discountValue) / 100,
+            shipping: (shipping * discountValue) / 100,
+        };
+    }
+
+    return {
+        items: Math.min(discountValue, subtotal),
+        shipping: Math.min(discountValue, shipping),
+    };
+}
+
+async function expectCouponAppliedToShipping(
+    ruleApplyPage: RuleApplyPage,
+    discountValue: number,
+    couponType: CouponType,
+) {
+    const subtotal = await ruleApplyPage.getSummaryAmount("Subtotal");
+    const shipping = await ruleApplyPage.getDeliveryChargesValue();
+
+    const discounts = expectedDiscounts(
+        discountValue,
+        couponType,
+        subtotal,
+        shipping,
+    );
+
+    if (discounts.items + discounts.shipping > 0) {
+        await ruleApplyPage.expectDiscountBreakdownToBe(
+            discounts.items,
+            discounts.shipping,
+        );
+    }
+
+    await ruleApplyPage.expectGrandTotalToBe(
+        subtotal + shipping - discounts.items - discounts.shipping,
+    );
+}
+
 async function expectCouponAppliedWithGrandTotal(
-    page: Page,
     ruleApplyPage: RuleApplyPage,
     discountValue: number,
     couponType: CouponType,
@@ -22,23 +67,19 @@ async function expectCouponAppliedWithGrandTotal(
 
     await ruleApplyPage.applyCouponAtCheckout(allowShipping);
 
-    await expect(
-        page.getByText("Coupon code applied successfully.").first(),
-    ).toBeVisible();
-    if (discountedAmount === 0) {
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText("$0.00");
-    } else {
-        const formattedAmount = new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(discountedAmount);
+    await ruleApplyPage.expectCouponApplied();
 
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText(`$${formattedAmount}`);
+    if (allowShipping === "yes") {
+        await expectCouponAppliedToShipping(
+            ruleApplyPage,
+            discountValue,
+            couponType,
+        );
+
+        return;
     }
+
+    await ruleApplyPage.expectGrandTotalToBe(discountedAmount);
 }
 
 async function createRuleAndVerifyCoupon({
@@ -73,7 +114,6 @@ async function createRuleAndVerifyCoupon({
     await ruleCreatePage.saveCartRule();
 
     await expectCouponAppliedWithGrandTotal(
-        page,
         ruleApplyPage,
         discountValue,
         couponType,
