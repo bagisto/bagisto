@@ -1,21 +1,21 @@
 # UPGRADE Guide
 
 - [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
-
 - [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
 
 ## Upgrading To v2.5.1 From v2.5.0
 
-![Upcoming Release](https://img.shields.io/badge/release-upcoming-orange)
-
-> [!NOTE]
+> [!IMPORTANT]
+> **Upcoming release.** v2.5.1 is not out yet — this section covers changes already merged into the `2.5` branch and is still being added to.
+>
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
+- [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
 
 ---
 
@@ -32,10 +32,15 @@ What this changes for custom code:
 - **`Sanitizer::sanitizeSVG()` returns `bool`.** A class that overrides it has to declare the return type, and a caller that wants the old behaviour has to ignore the value deliberately.
 - **Review attachments are recorded as a batch.** `ProductReviewAttachmentRepository::upload()` stores every file first and records them only once all of them are readable, so one unreadable file leaves neither rows nor files behind.
 - **`ProductReviewRepository` takes `ProductReviewAttachmentRepository` in its constructor**, so resolve it through the container rather than building it by hand. Its new `createWithAttachments()` writes the review and its attachments in one transaction, and `Webkul\Shop\Http\Controllers\API\ReviewController` calls that instead of creating the review and uploading the attachments itself — the controller no longer injects `ProductReviewAttachmentRepository`.
-- **`ProductReviewRepository::getCustomerReview()` is now `getCustomerReviews()`**, and it takes the customer id rather than reading the storefront guard, so it can be called outside a customer's request.
 - **Configuration saves, locale saves and product updates run in a transaction**, so a refused file rolls the rest of the save back.
 
-The reviews a customer wrote are now read by id:
+---
+
+### ProductReviewRepository Reads Reviews By Customer
+
+**Impact Probability: Low**
+
+`ProductReviewRepository::getCustomerReview()` is now `getCustomerReviews()`, and it takes the customer rather than reading the storefront guard itself, so the repository no longer depends on there being a signed-in customer and can be called from a command, a job or an admin screen. It returns a `LengthAwarePaginator` instead of an untyped value.
 
 ```php
 // Before
