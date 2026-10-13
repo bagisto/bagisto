@@ -8,6 +8,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
 
+- Fixed cancelling an order of a configurable product leaving its variant's stock reserved, so those units stayed unsellable long after the order was gone.
+
+- Fixed a cancelled order keeping its stock reserved when inventory management had since been switched off for the product, which held the units back once it was switched on again.
+
 - #11522 [fixed] - Fixed a configurable product order reserving none of its variant's stock, so the same unit could be sold again until the order was shipped.
 
 - #11519 [fixed] - Fixed the admin transaction listing hiding its view action from a role with transaction permission, and showing it to a role with only shipment permission.

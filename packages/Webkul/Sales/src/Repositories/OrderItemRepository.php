@@ -128,7 +128,8 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * Returns qty to product inventory after order cancellation.
+     * Release what an order item reserved, and return its shipped quantity to inventory when
+     * the product is stock managed.
      */
     public function returnQtyToProductInventory(OrderItem $orderItem): void
     {
@@ -136,13 +137,12 @@ class OrderItemRepository extends Repository
             return;
         }
 
-        if (! $orderItem->product->manage_stock) {
-            return;
-        }
-
         $this->updateProductOrderedInventories($orderItem);
 
-        if ($orderItem->getTypeInstance()->isStockable()) {
+        if (
+            $orderItem->product->manage_stock
+            && $orderItem->getTypeInstance()->isStockable()
+        ) {
             $shipmentItems = $orderItem?->parent->shipment_items ?? $orderItem->shipment_items;
 
             foreach ($shipmentItems as $shipmentItem) {
@@ -178,11 +178,15 @@ class OrderItemRepository extends Repository
             return;
         }
 
-        $qty = (
-            $orderedInventory->qty + ($orderItem->qty_shipped ?? $orderItem->parent->qty_shipped)
-        ) - (
-            $orderItem->qty_ordered ?? $orderItem->parent->qty_ordered
-        );
+        $qtyShipped = ! empty($orderItem->qty_shipped)
+            ? $orderItem->qty_shipped
+            : ($orderItem->parent?->qty_shipped ?? 0);
+
+        $qtyOrdered = ! empty($orderItem->qty_ordered)
+            ? $orderItem->qty_ordered
+            : ($orderItem->parent?->qty_ordered ?? 0);
+
+        $qty = ($orderedInventory->qty + $qtyShipped) - $qtyOrdered;
 
         if ($qty < 0) {
             $qty = 0;
