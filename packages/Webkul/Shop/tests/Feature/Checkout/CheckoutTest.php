@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Customer\Models\Customer;
+use Webkul\Product\Models\ProductOrderedInventory;
 use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderItem;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -15,6 +18,25 @@ use function Pest\Laravel\postJson;
 function allowGuestCheckout(bool $allowed): void
 {
     test()->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', $allowed ? '1' : '0');
+}
+
+/**
+ * The quantity reserved in an order's channel against every stock-holding item it will ship,
+ * keyed by sku. A composite item's stock sits on its children, so only the leaves count.
+ */
+function reservedQuantitiesFor(Order $order): Collection
+{
+    return $order->all_items
+        ->filter(fn (OrderItem $item) => $item->children->isEmpty()
+            && (bool) $item->product?->manage_stock
+            && $item->product->inventories->isNotEmpty()
+        )
+        ->mapWithKeys(fn (OrderItem $item) => [
+            $item->sku => (int) ProductOrderedInventory::query()
+                ->where('product_id', $item->product_id)
+                ->where('channel_id', $order->channel_id)
+                ->sum('qty'),
+        ]);
 }
 
 // ============================================================================
@@ -370,6 +392,39 @@ it('should place an order for a product of every type', function (string $type) 
         ->and((float) $order->grand_total)->toBePrice($grandTotal)
         ->and($order->items()->count())->toBeGreaterThan(0);
 })->with('product types');
+
+it('should reserve stock against every product an order of any type will ship', function (string $type) {
+    $product = $this->createProductOfType($type);
+
+    $this->loginAsCustomer();
+
+    $this->prepareCartForCheckout($product);
+
+    $order = $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store')));
+
+    $reserved = reservedQuantitiesFor($order);
+
+    expect($reserved)->not->toBeEmpty()
+        ->and($reserved->filter(fn (int $qty) => $qty < 1)->all())->toBe([]);
+})->with('stockable product types');
+
+it('should reserve the ordered quantity against a configurable variant rather than its parent', function () {
+    $product = $this->createConfigurableProduct();
+
+    $variant = $this->setProductStock($product->variants->first(), 50);
+
+    $this->loginAsCustomer();
+
+    $this->prepareCartForCheckout($product, quantity: 3);
+
+    $order = $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store')));
+
+    expect(reservedQuantitiesFor($order)->all())->toBe([$variant->sku => 3]);
+
+    $this->assertDatabaseMissing('product_ordered_inventories', [
+        'product_id' => $product->id,
+    ]);
+});
 
 it('should not place a second order from a cart that has already been ordered', function () {
     $product = $this->createSimpleProduct();
