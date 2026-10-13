@@ -95,7 +95,7 @@ Some rules Pint cannot enforce, and a reviewer will ask for:
 - All database access goes through a repository; the one exception is a
   DataGrid's `prepareQueryBuilder()`.
 - Every user-facing string goes through `trans()`, with the key added to all
-  **22** locales.
+  **23** locales.
 
 ## PHPDoc
 
@@ -128,7 +128,7 @@ of an array.
 ```bash
 vendor/bin/pint --test                       # code style
 vendor/bin/pest                              # tests
-php artisan bagisto:translations:check       # all 22 locales, if you touched any
+php artisan bagisto:translations:check       # all 23 locales, if you touched any
 ```
 
 End-to-end tests run per package, from that package's directory:
