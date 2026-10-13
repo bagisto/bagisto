@@ -4,8 +4,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Fixed Razorpay creating its order one paisa short for totals such as ₹19.99 and then refusing that payment, so the customer was charged and no order was placed. The order amount is now rounded the same way as the payment check.
-
 - Security fixes.
 
 - Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
@@ -15,6 +13,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed a cancelled order keeping its stock reserved when inventory management had since been switched off for the product, which held the units back once it was switched on again.
 
 - Fixed a part invoiced or part refunded configurable product recording its variant line for the whole order rather than the quantity acted on, which also freed stock the order still owed.
+
+- #11523 [fixed] - Fixed Razorpay creating its order a paisa short on totals such as ₹19.99 and then refusing that payment, so the shopper was charged and no order was placed.
 
 - #11522 [fixed] - Fixed a configurable product order reserving none of its variant's stock, so the same unit could be sold again until the order was shipped.
 
