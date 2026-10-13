@@ -116,7 +116,7 @@ class OrderItemRepository extends Repository
                     ->lockForUpdate()
                     ->first();
 
-                if (isset($item->qty_ordered)) {
+                if (! empty($item->qty_ordered)) {
                     $qty = $item->qty_ordered;
                 } else {
                     $qty = $item?->parent?->qty_ordered ?? 1;
