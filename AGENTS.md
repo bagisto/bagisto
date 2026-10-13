@@ -450,7 +450,7 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 ## Safety Rails
 
 - **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
-- **Translations are 22 files per key.** Missing a locale fails CI.
+- **Translations are 23 files per key.** Missing a locale fails CI.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
 - **Do not add/remove composer dependencies without approval.**
 - **Do not create documentation files unless explicitly requested.**

@@ -15,6 +15,7 @@
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
+- [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
 
 ---
@@ -33,6 +34,25 @@ What this changes for custom code:
 - **Review attachments are recorded as a batch.** `ProductReviewAttachmentRepository::upload()` stores every file first and records them only once all of them are readable, so one unreadable file leaves neither rows nor files behind.
 - **`ProductReviewRepository` takes `ProductReviewAttachmentRepository` in its constructor**, so resolve it through the container rather than building it by hand. Its new `createWithAttachments()` writes the review and its attachments in one transaction, and `Webkul\Shop\Http\Controllers\API\ReviewController` calls that instead of creating the review and uploading the attachments itself — the controller no longer injects `ProductReviewAttachmentRepository`.
 - **Configuration saves, locale saves and product updates run in a transaction**, so a refused file rolls the rest of the save back.
+
+---
+
+### An SVG That Uses A Custom DTD Entity Is Refused
+
+**Impact Probability: Low**
+
+`enshrined/svg-sanitize` is now `^1.0`, up from `^0.22.0`, which closes a stored XSS where an SVG smuggled a `javascript:` link past the sanitizer by defining a DTD entity whose name collides with an HTML5 character reference (CVE-2026-107380). The sanitizer refuses such a file rather than cleaning it, so Bagisto refuses the upload with `core::app.errors.invalid-svg`, the same way it treats any SVG it cannot read.
+
+The refusal is wider than the attack: **an SVG that references any custom entity is now refused**, including a harmless one.
+
+| The SVG | Before | Now |
+|---|---|---|
+| No `DOCTYPE` | accepted | accepted |
+| A `DOCTYPE` with no internal entities, such as the SVG 1.1 DTD | accepted | accepted |
+| Declares an entity but never uses it | accepted | accepted |
+| Uses an entity, such as `<!ENTITY brand "Acme">` with `&brand;` in a `<text>` | accepted | **refused** |
+
+Nothing in Bagisto generates such a file, and few drawing tools emit one, so most catalogues are unaffected. If a store does hold one, re-save the file with the entity expanded to its literal text before uploading it again.
 
 ---
 
