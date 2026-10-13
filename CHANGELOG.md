@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a part invoiced or part refunded configurable product recording its variant line for the whole order rather than the quantity acted on, which also freed stock the order still owed.
 
+- #11523 [fixed] - Fixed Razorpay creating its order a paisa short on totals such as ₹19.99 and then refusing that payment, so the shopper was charged and no order was placed.
+
 - #11522 [fixed] - Fixed a configurable product order reserving none of its variant's stock, so the same unit could be sold again until the order was shipped.
 
 - #11519 [fixed] - Fixed the admin transaction listing hiding its view action from a role with transaction permission, and showing it to a role with only shipment permission.
