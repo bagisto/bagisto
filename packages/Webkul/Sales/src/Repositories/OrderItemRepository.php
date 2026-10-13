@@ -106,7 +106,7 @@ class OrderItemRepository extends Repository
                     ->where('channel_id', $orderItem->order->channel_id)
                     ->first();
 
-                if (isset($item->qty_ordered)) {
+                if (! empty($item->qty_ordered)) {
                     $qty = $item->qty_ordered;
                 } else {
                     $qty = $item?->parent?->qty_ordered ?? 1;

@@ -2565,10 +2565,10 @@ it('should place a configurable product order for a guest user', function () {
 
     $cartItem = CartItem::factory()->create([
         'cart_id' => $cart->id,
-        'product_id' => $childProduct->id,
-        'sku' => $childProduct->sku,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
         'quantity' => $additional['quantity'],
-        'name' => $childProduct->name,
+        'name' => $product->name,
         'price' => $convertedPrice = core()->convertPrice($price = $childProduct->price),
         'base_price' => $price,
         'total' => $convertedPrice * $additional['quantity'],
@@ -2576,8 +2576,22 @@ it('should place a configurable product order for a guest user', function () {
         'weight' => $childProduct->weight ?? 0,
         'total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
-        'type' => $childProduct->type,
+        'type' => $product->type,
         'additional' => $additional,
+    ]);
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'parent_id' => $cartItem->id,
+        'product_id' => $childProduct->id,
+        'sku' => $childProduct->sku,
+        'quantity' => 0,
+        'name' => $childProduct->name,
+        'type' => $childProduct->type,
+        'additional' => [
+            'product_id' => $childProduct->id,
+            'parent_id' => $product->id,
+        ],
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -2738,10 +2752,10 @@ it('should place a configurable product order for a guest user and send email to
 
     $cartItem = CartItem::factory()->create([
         'cart_id' => $cart->id,
-        'product_id' => $childProduct->id,
-        'sku' => $childProduct->sku,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
         'quantity' => $additional['quantity'],
-        'name' => $childProduct->name,
+        'name' => $product->name,
         'price' => $convertedPrice = core()->convertPrice($price = $childProduct->price),
         'base_price' => $price,
         'total' => $convertedPrice * $additional['quantity'],
@@ -2749,8 +2763,22 @@ it('should place a configurable product order for a guest user and send email to
         'weight' => $childProduct->weight ?? 0,
         'total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
-        'type' => $childProduct->type,
+        'type' => $product->type,
         'additional' => $additional,
+    ]);
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'parent_id' => $cartItem->id,
+        'product_id' => $childProduct->id,
+        'sku' => $childProduct->sku,
+        'quantity' => 0,
+        'name' => $childProduct->name,
+        'type' => $childProduct->type,
+        'additional' => [
+            'product_id' => $childProduct->id,
+            'parent_id' => $product->id,
+        ],
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -2919,10 +2947,10 @@ it('should place a configurable product order for a customer', function () {
 
     $cartItem = CartItem::factory()->create([
         'cart_id' => $cart->id,
-        'product_id' => $childProduct->id,
-        'sku' => $childProduct->sku,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
         'quantity' => $additional['quantity'],
-        'name' => $childProduct->name,
+        'name' => $product->name,
         'price' => $convertedPrice = core()->convertPrice($price = $childProduct->price),
         'base_price' => $price,
         'total' => $convertedPrice * $additional['quantity'],
@@ -2930,8 +2958,22 @@ it('should place a configurable product order for a customer', function () {
         'weight' => $childProduct->weight ?? 0,
         'total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
-        'type' => $childProduct->type,
+        'type' => $product->type,
         'additional' => $additional,
+    ]);
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'parent_id' => $cartItem->id,
+        'product_id' => $childProduct->id,
+        'sku' => $childProduct->sku,
+        'quantity' => 0,
+        'name' => $childProduct->name,
+        'type' => $childProduct->type,
+        'additional' => [
+            'product_id' => $childProduct->id,
+            'parent_id' => $product->id,
+        ],
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -3100,10 +3142,10 @@ it('should place a configurable product order for a customer and send email to t
 
     $cartItem = CartItem::factory()->create([
         'cart_id' => $cart->id,
-        'product_id' => $childProduct->id,
-        'sku' => $childProduct->sku,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
         'quantity' => $additional['quantity'],
-        'name' => $childProduct->name,
+        'name' => $product->name,
         'price' => $convertedPrice = core()->convertPrice($price = $childProduct->price),
         'base_price' => $price,
         'total' => $convertedPrice * $additional['quantity'],
@@ -3111,8 +3153,22 @@ it('should place a configurable product order for a customer and send email to t
         'weight' => $childProduct->weight ?? 0,
         'total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
         'base_total_weight' => ($childProduct->weight ?? 0) * $additional['quantity'],
-        'type' => $childProduct->type,
+        'type' => $product->type,
         'additional' => $additional,
+    ]);
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'parent_id' => $cartItem->id,
+        'product_id' => $childProduct->id,
+        'sku' => $childProduct->sku,
+        'quantity' => 0,
+        'name' => $childProduct->name,
+        'type' => $childProduct->type,
+        'additional' => [
+            'product_id' => $childProduct->id,
+            'parent_id' => $product->id,
+        ],
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -4577,10 +4633,10 @@ it('should place order with two products with simple and configurable product ty
 
     $configurableProductCartItem = CartItem::factory()->create([
         'cart_id' => $cart->id,
-        'product_id' => $childProduct->id,
-        'sku' => $childProduct->sku,
+        'product_id' => $configurableProduct->id,
+        'sku' => $configurableProduct->sku,
         'quantity' => $configurableProductAdditional['quantity'],
-        'name' => $childProduct->name,
+        'name' => $configurableProduct->name,
         'price' => $convertedPrice = core()->convertPrice($price = $childProduct->price),
         'price_incl_tax' => $convertedPrice,
         'base_price' => $price,
@@ -4591,8 +4647,22 @@ it('should place order with two products with simple and configurable product ty
         'weight' => $childProduct->weight ?? 0,
         'total_weight' => ($childProduct->weight ?? 0) * $configurableProductAdditional['quantity'],
         'base_total_weight' => ($childProduct->weight ?? 0) * $configurableProductAdditional['quantity'],
-        'type' => $childProduct->type,
+        'type' => $configurableProduct->type,
         'additional' => $configurableProductAdditional,
+    ]);
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'parent_id' => $configurableProductCartItem->id,
+        'product_id' => $childProduct->id,
+        'sku' => $childProduct->sku,
+        'quantity' => 0,
+        'name' => $childProduct->name,
+        'type' => $childProduct->type,
+        'additional' => [
+            'product_id' => $childProduct->id,
+            'parent_id' => $configurableProduct->id,
+        ],
     ]);
 
     $simpleProductCartItem = CartItem::factory()->create([
@@ -4706,29 +4776,13 @@ it('should place order with two products with simple and configurable product ty
 
         ProductOrderedInventory::class => [
             [
-                'qty' => $simpleProductCartItem->quantity,
-                'product_id' => $simpleProduct->id,
-            ],
-        ],
-
-        ProductInventoryIndex::class => [
-            [
-                'qty' => $simpleProduct->inventory_source_qty(1) - $simpleProduct->quantity,
-                'product_id' => $simpleProduct->id,
-            ],
-        ],
-
-        ProductOrderedInventory::class => [
-            [
-                'product_id' => $childProduct->id,
                 'qty' => $configurableProductCartItem->quantity,
+                'product_id' => $childProduct->id,
             ],
-        ],
 
-        ProductOrderedInventory::class => [
             [
-                'product_id' => $simpleProduct->id,
                 'qty' => $simpleProductCartItem->quantity,
+                'product_id' => $simpleProduct->id,
             ],
         ],
 
@@ -4737,11 +4791,9 @@ it('should place order with two products with simple and configurable product ty
                 'qty' => $childProduct->inventory_source_qty(1) - $configurableProductCartItem->quantity,
                 'product_id' => $childProduct->id,
             ],
-        ],
 
-        ProductInventoryIndex::class => [
             [
-                'qty' => $simpleProduct->inventory_source_qty(1) - $configurableProductCartItem->quantity,
+                'qty' => $simpleProduct->inventory_source_qty(1) - $simpleProductCartItem->quantity,
                 'product_id' => $simpleProduct->id,
             ],
         ],
@@ -5189,20 +5241,6 @@ it('should place order with two products with simple and downloadable product ty
         ProductInventoryIndex::class => [
             [
                 'qty' => $simpleProduct->inventory_source_qty(1) - $simpleProductCartItem->quantity,
-                'product_id' => $simpleProduct->id,
-            ],
-        ],
-
-        ProductOrderedInventory::class => [
-            [
-                'product_id' => $simpleProduct->id,
-                'qty' => 1,
-            ],
-        ],
-
-        ProductInventoryIndex::class => [
-            [
-                'qty' => $simpleProduct->inventory_source_qty(1) - 1,
                 'product_id' => $simpleProduct->id,
             ],
         ],

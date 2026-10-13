@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
 
+- #11522 [fixed] - Fixed a configurable product order reserving none of its variant's stock, so the same unit could be sold again until the order was shipped.
+
 - #11519 [fixed] - Fixed the admin transaction listing hiding its view action from a role with transaction permission, and showing it to a role with only shipment permission.
 
 - #11518 [fixed] - Fixed an unreadable SVG being stored as an empty file while the upload reported success, leaving a blank image. It is now refused with a message and no file is kept.
