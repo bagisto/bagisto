@@ -199,6 +199,16 @@ class RazorpayPayment extends Payment
     }
 
     /**
+     * Get a cart's grand total in the currency's smallest unit, which is what Razorpay charges in.
+     *
+     * @param  \Webkul\Checkout\Contracts\Cart  $cart
+     */
+    public function getAmountInSubunits($cart): int
+    {
+        return (int) round($cart->base_grand_total * 100);
+    }
+
+    /**
      * Create Razorpay order.
      *
      * @param  \Webkul\Checkout\Contracts\Cart|null  $cart
@@ -224,7 +234,7 @@ class RazorpayPayment extends Payment
         $api = $this->getApi();
 
         return $api->order->create([
-            'amount' => (int) round($cart->base_grand_total * 100),
+            'amount' => $this->getAmountInSubunits($cart),
             'currency' => $currency,
             'receipt' => self::RECEIPT_PREFIX.$cart->id,
             'payment_capture' => 1,
@@ -245,7 +255,7 @@ class RazorpayPayment extends Payment
     {
         return [
             'key' => $this->getApiKey(),
-            'amount' => (int) round($cart->base_grand_total * 100),
+            'amount' => $this->getAmountInSubunits($cart),
             'currency' => strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode()),
             'name' => $this->getMerchantName(),
             'description' => $this->getMerchantDescription(),
