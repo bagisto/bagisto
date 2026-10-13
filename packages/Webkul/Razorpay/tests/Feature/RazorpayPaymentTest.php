@@ -8,7 +8,72 @@ use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
 
+/**
+ * A Razorpay API double that is its own order and payment resource: creating an order records the
+ * amount it was charged for, and fetching the payment reports a capture of exactly that amount.
+ */
+function razorpayApiStub(string $orderId, string $currency = 'INR'): object
+{
+    return new class($orderId, $currency)
+    {
+        /**
+         * The subunit amount the order was created for.
+         */
+        public ?int $orderAmount = null;
+
+        /**
+         * The order resource, which this double serves itself.
+         */
+        public object $order;
+
+        /**
+         * The payment resource, which this double serves itself.
+         */
+        public object $payment;
+
+        /**
+         * Point both resources at this double.
+         */
+        public function __construct(private string $orderId, private string $currency)
+        {
+            $this->order = $this;
+
+            $this->payment = $this;
+        }
+
+        /**
+         * Record the amount an order is created for, as the order resource does.
+         */
+        public function create(array $data): array
+        {
+            $this->orderAmount = $data['amount'];
+
+            return [
+                'id' => $this->orderId,
+                'amount' => $data['amount'],
+                'currency' => $data['currency'],
+            ];
+        }
+
+        /**
+         * Report a captured payment for the amount the order was created for.
+         */
+        public function fetch(string $paymentId): object
+        {
+            return (object) [
+                'id' => $paymentId,
+                'order_id' => $this->orderId,
+                'amount' => $this->orderAmount,
+                'currency' => $this->currency,
+                'status' => 'captured',
+            ];
+        }
+    };
+}
+
 beforeEach(function () {
+    CoreConfig::where('code', 'like', 'sales.payment_methods.razorpay.%')->delete();
+
     CoreConfig::factory()->create([
         'code' => 'sales.payment_methods.razorpay.active',
         'value' => '1',
@@ -193,51 +258,16 @@ it('redirects to cart when signature verification fails', function () {
     $response->assertSessionHas('error');
 });
 
+// ============================================================================
+// Order Amount Rounding
+// ============================================================================
+
 it('places the order when the payment matches the amount the razorpay order was created for', function (float $price) {
-    // Arrange
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR'], [
         'price' => ['float_value' => $price],
     ]);
 
-    $razorpayApi = new class
-    {
-        public ?int $orderAmount = null;
-
-        public object $order;
-
-        public object $payment;
-
-        public function __construct()
-        {
-            $this->order = new class($this)
-            {
-                public function __construct(private object $api) {}
-
-                public function create(array $data): array
-                {
-                    $this->api->orderAmount = $data['amount'];
-
-                    return ['id' => 'order_round_1', 'amount' => $data['amount'], 'currency' => $data['currency']];
-                }
-            };
-
-            $this->payment = new class($this)
-            {
-                public function __construct(private object $api) {}
-
-                public function fetch(string $id): object
-                {
-                    return (object) [
-                        'id' => $id,
-                        'order_id' => 'order_round_1',
-                        'amount' => $this->api->orderAmount,
-                        'currency' => 'INR',
-                        'status' => 'captured',
-                    ];
-                }
-            };
-        }
-    };
+    $razorpayApi = razorpayApiStub('order_round_1');
 
     $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
 
@@ -245,7 +275,6 @@ it('places the order when the payment matches the amount the razorpay order was 
 
     $this->app->instance(RazorpayPayment::class, $mockRazorpay);
 
-    // Act
     $this->get(route('razorpay.payment.redirect'))->assertOk();
 
     $response = $this->get(route('razorpay.payment.success', [
@@ -254,7 +283,6 @@ it('places the order when the payment matches the amount the razorpay order was 
         'razorpay_signature' => hash_hmac('sha256', 'order_round_1|pay_round_1', 'fake_test_secret'),
     ]));
 
-    // Assert
     $response->assertRedirect(route('shop.checkout.onepage.success'));
 
     expect(Order::where('cart_id', $cart->id)->exists())->toBeTrue()
