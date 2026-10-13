@@ -26,7 +26,7 @@ class Invoice extends Base
     {
         $this->sendMail($invoice);
 
-        if ($invoice->can_create_transaction) {
+        if (request()->boolean('can_create_transaction')) {
             $this->createTransaction($invoice);
         }
     }
