@@ -150,7 +150,7 @@ package with its own models, controllers, routes, views, migrations, and service
 - **Repository Pattern**: all database access goes through repositories extending `Webkul\Core\Eloquent\Repository` (Prettus L5). A repository's `model()` returns the Contract class, not the Model. Never query models directly in controllers.
 - **Event-Driven Extensibility**: the framework fires dot-delimited events (`catalog.product.update.after`) at key lifecycle points, in before/after pairs. Extend behaviour through listeners rather than editing another package.
 - **Routes**: Admin routes run under the `web` and `admin` middleware with the `config('app.admin_url')` prefix. Shop routes run under `web` and the `shop` group, which applies the theme, locale and currency middleware.
-- **22 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ro, ru, sin, tr, uk, zh_CN.
+- **23 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ro, ru, sin, sw, tr, uk, zh_CN.
 
 ### Package Anatomy
 
@@ -177,7 +177,7 @@ packages/Webkul/<Package>/src/
 ├── Repositories/               # Prettus L5 repositories
 ├── Resources/
 │   ├── assets/                 # JS, CSS, images (Vite-compiled)
-│   ├── lang/{locale}/          # 22 locales
+│   ├── lang/{locale}/          # 23 locales
 │   └── views/                  # Blade templates (admin/, shop/)
 ├── Routes/                     # admin-routes.php, shop-routes.php, api.php
 └── Type/                       # (Product package) Product type classes
@@ -338,7 +338,7 @@ cd packages/Webkul/Shop && npm run dev                      # Shop dev server wi
 
 ### Translations
 
-When adding new translation keys, provide translations for **all 22 locales** in the package's `Resources/lang/` directory. Verify with:
+When adding new translation keys, provide translations for **all 23 locales** in the package's `Resources/lang/` directory. Verify with:
 
 ```bash
 php artisan bagisto:translations:check
@@ -485,7 +485,7 @@ Rules for using it:
 
 1. `vendor/bin/pint --dirty` — no style violations
 2. `php artisan test --compact` — affected tests pass
-3. `php artisan bagisto:translations:check` — translation keys exist in all 22 locale files (if changed)
+3. `php artisan bagisto:translations:check` — translation keys exist in all 23 locale files (if changed)
 4. No `env()` calls outside `config/` files
 5. New models have Contract + Model + Proxy + Repository
 6. New packages registered in `bootstrap/providers.php` and `config/concord.php`
