@@ -192,3 +192,71 @@ it('redirects to cart when signature verification fails', function () {
 
     $response->assertSessionHas('error');
 });
+
+it('places the order when the payment matches the amount the razorpay order was created for', function (float $price) {
+    // Arrange
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR'], [
+        'price' => ['float_value' => $price],
+    ]);
+
+    $razorpayApi = new class
+    {
+        public ?int $orderAmount = null;
+
+        public object $order;
+
+        public object $payment;
+
+        public function __construct()
+        {
+            $this->order = new class($this)
+            {
+                public function __construct(private object $api) {}
+
+                public function create(array $data): array
+                {
+                    $this->api->orderAmount = $data['amount'];
+
+                    return ['id' => 'order_round_1', 'amount' => $data['amount'], 'currency' => $data['currency']];
+                }
+            };
+
+            $this->payment = new class($this)
+            {
+                public function __construct(private object $api) {}
+
+                public function fetch(string $id): object
+                {
+                    return (object) [
+                        'id' => $id,
+                        'order_id' => 'order_round_1',
+                        'amount' => $this->api->orderAmount,
+                        'currency' => 'INR',
+                        'status' => 'captured',
+                    ];
+                }
+            };
+        }
+    };
+
+    $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
+
+    $mockRazorpay->shouldReceive('getApi')->andReturn($razorpayApi);
+
+    $this->app->instance(RazorpayPayment::class, $mockRazorpay);
+
+    // Act
+    $this->get(route('razorpay.payment.redirect'))->assertOk();
+
+    $response = $this->get(route('razorpay.payment.success', [
+        'razorpay_payment_id' => 'pay_round_1',
+        'razorpay_order_id' => 'order_round_1',
+        'razorpay_signature' => hash_hmac('sha256', 'order_round_1|pay_round_1', 'fake_test_secret'),
+    ]));
+
+    // Assert
+    $response->assertRedirect(route('shop.checkout.onepage.success'));
+
+    expect(Order::where('cart_id', $cart->id)->exists())->toBeTrue()
+        ->and($razorpayApi->orderAmount)->toBe((int) round($price * 100));
+})->with([19.99, 156.45, 1169.10, 250.00]);

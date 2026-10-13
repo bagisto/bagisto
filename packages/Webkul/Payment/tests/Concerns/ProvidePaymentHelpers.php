@@ -16,17 +16,17 @@ trait ProvidePaymentHelpers
     /**
      * Create cart with items.
      */
-    public function createCartWithItems(string $paymentMethod, array $overrides = []): Cart
+    public function createCartWithItems(string $paymentMethod, array $overrides = [], array $productAttributeValues = []): Cart
     {
         $product = (new ProductFaker([
             'attributes' => [
                 5 => 'new',
             ],
-            'attribute_value' => [
+            'attribute_value' => array_merge([
                 'new' => [
                     'boolean_value' => true,
                 ],
-            ],
+            ], $productAttributeValues),
         ]))
             ->getSimpleProductFactory()
             ->create();

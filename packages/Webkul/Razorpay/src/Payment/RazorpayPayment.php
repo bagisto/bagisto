@@ -224,7 +224,7 @@ class RazorpayPayment extends Payment
         $api = $this->getApi();
 
         return $api->order->create([
-            'amount' => (int) ($cart->base_grand_total * 100),
+            'amount' => (int) round($cart->base_grand_total * 100),
             'currency' => $currency,
             'receipt' => self::RECEIPT_PREFIX.$cart->id,
             'payment_capture' => 1,
@@ -245,7 +245,7 @@ class RazorpayPayment extends Payment
     {
         return [
             'key' => $this->getApiKey(),
-            'amount' => (int) ($cart->base_grand_total * 100),
+            'amount' => (int) round($cart->base_grand_total * 100),
             'currency' => strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode()),
             'name' => $this->getMerchantName(),
             'description' => $this->getMerchantDescription(),
