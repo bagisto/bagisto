@@ -112,7 +112,7 @@ class InvoiceRepository extends Repository
                     foreach ($orderItem->children as $childOrderItem) {
                         $finalQty = $childOrderItem->qty_ordered
                             ? ($childOrderItem->qty_ordered / $orderItem->qty_ordered) * $qty
-                            : $orderItem->qty_ordered;
+                            : $qty;
 
                         $this->invoiceItemRepository->create([
                             'invoice_id' => $invoice->id,
