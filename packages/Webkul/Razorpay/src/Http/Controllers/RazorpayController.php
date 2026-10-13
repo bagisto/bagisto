@@ -174,7 +174,7 @@ class RazorpayController extends Controller
             return false;
         }
 
-        return $payment['amount'] === (int) round($cart->base_grand_total * 100);
+        return $payment['amount'] === $this->razorpayPayment->getAmountInSubunits($cart);
     }
 
     /**

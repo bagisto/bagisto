@@ -18,9 +18,9 @@ trait ProvidePaymentHelpers
     /**
      * Create a customer cart holding one simple product, addressed, shipped for free and paid by the given method.
      */
-    public function createCartWithItems(string $paymentMethod, array $overrides = []): Cart
+    public function createCartWithItems(string $paymentMethod, array $overrides = [], array $productAttributeValues = []): Cart
     {
-        $product = $this->createSimpleProduct();
+        $product = $this->createSimpleProduct($productAttributeValues);
 
         $customer = Customer::factory()->create();
 
