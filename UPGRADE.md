@@ -22,6 +22,9 @@
 - [The Invoice Overdue Command Moved To Sales](#the-invoice-overdue-command-moved-to-sales)
 - [Narrowed Signatures On Order And Product Types](#narrowed-signatures-on-order-and-product-types)
 - [The Search Term Factory Is Singular](#the-search-term-factory-is-singular)
+- [Gateway Controllers Extend Their Own Base Controller](#gateway-controllers-extend-their-own-base-controller)
+- [The Price Indexer No Longer Takes A Catalog Rule Repository](#the-price-indexer-no-longer-takes-a-catalog-rule-repository)
+- [The Theme Section Factory Moved To Theme](#the-theme-section-factory-moved-to-theme)
 
 ### Before You Start
 
@@ -189,3 +192,57 @@ use Webkul\Marketing\Database\Factories\SearchTermFactory;
 ```
 
 `SearchTerm::factory()` resolves it through the model's own `newFactory()`, so only a test or seeder that named the class directly is affected.
+
+---
+
+### Gateway Controllers Extend Their Own Base Controller
+
+**Impact Probability: Low**
+
+The Stripe, PayU and PayGlocal controllers extended `Webkul\Shop\Http\Controllers\Controller`, which carries no storefront behaviour — it is `Illuminate\Routing\Controller` plus `DispatchesJobs` and `ValidatesRequests`. A payment gateway had to depend on the storefront to inherit two framework traits. Each now extends its own package's base, the way Paypal always has:
+
+```php
+// Before, in Webkul\Stripe\Http\Controllers\StripeController
+use Webkul\Shop\Http\Controllers\Controller;
+
+// After — the class in the controller's own namespace
+class StripeController extends Controller
+```
+
+Stripe and PayGlocal already shipped that base class and were not using it; PayU gained one. All four are trait-for-trait identical to the Shop base they replace, so middleware, validation, route bindings and responses are unchanged. A third-party gateway extending the Shop controller keeps working, since that class is untouched.
+
+---
+
+### The Price Indexer No Longer Takes A Catalog Rule Repository
+
+**Impact Probability: Low**
+
+`Webkul\Product\Helpers\Indexers\Price\AbstractType` was constructed with a `CatalogRuleProductPriceRepository` that nothing ever read — the catalog rule price is taken from the product's own `catalog_rule_prices` relation. The parameter is gone:
+
+```php
+// Before
+__construct(CustomerRepository, ProductCustomerGroupPriceRepository, CatalogRuleProductPriceRepository)
+
+// After
+__construct(CustomerRepository, ProductCustomerGroupPriceRepository)
+```
+
+None of the seven shipped price indexers declared its own constructor, so they are unaffected, and catalog rule pricing behaves exactly as before. A custom indexer that declared a constructor and forwarded three arguments keeps working, since PHP ignores surplus arguments to a userland function; one that type-hinted the third parameter should drop it.
+
+---
+
+### The Theme Section Factory Moved To Theme
+
+**Impact Probability: Low**
+
+`SectionFactory` builds `Webkul\Theme\Models\Section` and references only Theme classes, yet it lived in Admin and was resolved from the Theme model's `newFactory()` — the one thing making Theme depend on the admin panel:
+
+```php
+// Before
+use Webkul\Admin\Database\Factories\SectionFactory;
+
+// After
+use Webkul\Theme\Database\Factories\SectionFactory;
+```
+
+`Section::factory()` resolves it through `newFactory()`, so only code naming the class directly is affected. It was the only factory in `Webkul\Admin`, so that package no longer has a `Database/Factories` directory.
