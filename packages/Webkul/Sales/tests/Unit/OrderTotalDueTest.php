@@ -3,12 +3,12 @@
 use Webkul\Sales\Models\Order;
 
 /**
- * An order whose currency is worth twice the base currency, so a figure in one currency can
- * never be mistaken for the same figure in the other.
+ * An order placed in a currency worth twice the base currency, so a figure in one can never be
+ * mistaken for the same figure in the other.
  */
-function dualCurrencyOrder(int $qty = 2, float $price = 200, float $basePrice = 100): Order
+function orderInNonBaseCurrency(int $qty = 2, float $price = 200, float $basePrice = 100): Order
 {
-    $order = test()->createOrder([
+    return test()->createOrder([
         'order_currency_code' => 'EUR',
         'grand_total' => $price * $qty,
         'base_grand_total' => $basePrice * $qty,
@@ -19,8 +19,6 @@ function dualCurrencyOrder(int $qty = 2, float $price = 200, float $basePrice = 
         'total' => $price * $qty,
         'base_total' => $basePrice * $qty,
     ]]);
-
-    return $order;
 }
 
 // ============================================================================
@@ -35,7 +33,7 @@ it('should owe the whole order while nothing has been invoiced', function () {
 });
 
 it('should owe each currency its own grand total', function () {
-    $order = dualCurrencyOrder();
+    $order = orderInNonBaseCurrency();
 
     expect((float) $order->total_due)->toBePrice(400)
         ->and((float) $order->base_total_due)->toBePrice(200);
@@ -46,7 +44,7 @@ it('should owe each currency its own grand total', function () {
 // ============================================================================
 
 it('should take the invoiced amount off what is owed, in each currency', function () {
-    $order = dualCurrencyOrder();
+    $order = orderInNonBaseCurrency();
 
     $order->forceFill([
         'grand_total_invoiced' => 200,
@@ -71,7 +69,7 @@ it('should owe nothing once the whole order has been invoiced through the pipeli
 // ============================================================================
 
 it('should discount a cancelled quantity at the price of the currency being asked for', function () {
-    $order = dualCurrencyOrder();
+    $order = orderInNonBaseCurrency();
 
     $order->items->first()->forceFill(['qty_canceled' => 1])->save();
 
@@ -89,7 +87,7 @@ it('should discount a cancelled quantity on a single currency order', function (
 });
 
 it('should owe nothing on a cancelled order', function () {
-    $order = dualCurrencyOrder();
+    $order = orderInNonBaseCurrency();
 
     $order->forceFill(['status' => Order::STATUS_CANCELED])->save();
 
@@ -102,7 +100,7 @@ it('should owe nothing on a cancelled order', function () {
 // ============================================================================
 
 it('should take both the invoiced and the cancelled quantity off what is owed', function () {
-    $order = dualCurrencyOrder(qty: 4);
+    $order = orderInNonBaseCurrency(qty: 4);
 
     $order->forceFill([
         'grand_total_invoiced' => 200,
