@@ -369,6 +369,46 @@ it('should move a cart item to the wishlist of the customer', function () {
     $this->assertDatabaseMissing('cart_items', ['id' => $cartItemId]);
 });
 
+it('should take the cart away with the last item moved out of it', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->loginAsCustomer();
+
+    $cartItemId = $this->addProductToCart($product->id)->json('data.items.0.id');
+
+    $cartId = CartItem::query()->findOrFail($cartItemId)->cart_id;
+
+    postJson(route('shop.api.checkout.cart.move_to_wishlist'), [
+        'ids' => [$cartItemId],
+        'qty' => [1],
+    ])->assertOk();
+
+    $this->assertDatabaseMissing('cart', ['id' => $cartId]);
+});
+
+it('should keep the cart and its other items when one of several is moved out', function () {
+    $staying = $this->createSimpleProduct();
+
+    $moving = $this->createSimpleProduct();
+
+    $this->loginAsCustomer();
+
+    $this->addProductToCart($staying->id);
+
+    $cartItemId = $this->addProductToCart($moving->id)->json('data.items.0.id');
+
+    $cartId = CartItem::query()->findOrFail($cartItemId)->cart_id;
+
+    postJson(route('shop.api.checkout.cart.move_to_wishlist'), [
+        'ids' => [$cartItemId],
+        'qty' => [1],
+    ])->assertOk();
+
+    $this->assertDatabaseHas('cart', ['id' => $cartId]);
+
+    expect(CartItem::query()->where('cart_id', $cartId)->count())->toBe(1);
+});
+
 // ============================================================================
 // Coupons
 // ============================================================================
