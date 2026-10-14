@@ -3,7 +3,6 @@
 namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Illuminate\Support\Carbon;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 use Webkul\Core\Contracts\Channel;
 use Webkul\Customer\Contracts\CustomerGroup;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -40,8 +39,7 @@ abstract class AbstractType
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository
     ) {}
 
     /**
