@@ -16,6 +16,11 @@ class Installer
     protected const API_ENDPOINT = 'https://updates.bagisto.com/api/updates';
 
     /**
+     * Seconds the tracker is given to answer, so an unreachable one cannot stall the install.
+     */
+    protected const TRACKER_TIMEOUT = 5;
+
+    /**
      * Create a new listener instance.
      *
      * @return void
@@ -36,13 +41,8 @@ class Installer
     }
 
     /**
-     * Send the installation payload to the tracker, along with the packages this
-     * installation is running.
-     *
-     * The field keeps the `modules` name the tracker has always read, so an
-     * installation on an older release goes on reporting into the same place. The
-     * tracker is what decides which of the packages are core and which were
-     * installed on top.
+     * Send the installation payload to the tracker. The field keeps the `modules` name the
+     * tracker has always read, so an older release goes on reporting into the same place.
      *
      * @return void
      */
@@ -56,6 +56,8 @@ class Installer
 
         try {
             $httpClient->request('POST', self::API_ENDPOINT, [
+                'connect_timeout' => self::TRACKER_TIMEOUT,
+                'timeout' => self::TRACKER_TIMEOUT,
                 'headers' => [
                     'Accept' => 'application/json',
                 ],
@@ -67,7 +69,7 @@ class Installer
                     'modules' => $packages ?: null,
                 ],
             ]);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
     }
 }
