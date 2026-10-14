@@ -54,7 +54,8 @@ The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because 
 | **Web Server** | One of **Nginx** (default), **Apache 2**, or **OpenLiteSpeed** — listening on port 80 (see the variant table above) |
 | **PHP** | 8.4. The nginx and apache images install bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pgsql, pdo, soap, sockets, xml, zip and imagick; the litespeed image installs lsphp with common, curl, imagick, intl, mysql, pgsql and opcache. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
 | **Database** | MySQL 8.0, MariaDB 10.11 or PostgreSQL 16, bundled and pre-installed with Bagisto migrations + seed data already applied |
-| **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, and the web server) |
+| **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, the web server, and a queue worker) |
+| **Queue** | A `queue:work` worker on the `default` and `broadcastable` queues, with `QUEUE_CONNECTION=database`. Order mail, the post-order price and inventory reindex, search terms and sitemap generation run here instead of inside the request. |
 | **Application** | Bagisto — fully installed at build time |
 
 ### Two database modes
@@ -104,19 +105,19 @@ bagisto/
     │   └── config/
     │       ├── nginx.conf        # Nginx server block (port 80 → /var/www/bagisto/public)
     │       ├── php-fpm.conf      # PHP-FPM pool (www, unix socket, dynamic PM)
-    │       └── supervisord.conf  # Supervisor: php-fpm + nginx (the database is its own file)
+    │       └── supervisord.conf  # Supervisor: php-fpm + nginx + queue worker (the database is its own file)
     ├── apache/
     │   ├── Dockerfile            # Apache 2 + PHP 8.4 mod_php
     │   └── config/
     │       ├── vhost.conf        # Apache virtual host (rewrite + security headers)
-    │       └── supervisord.conf  # Supervisor: apache2 (the database is its own file)
+    │       └── supervisord.conf  # Supervisor: apache2 + queue worker (the database is its own file)
     ├── litespeed/
     │   ├── Dockerfile            # OpenLiteSpeed + lsphp 8.4 (LSAPI)
     │   └── config/
     │       ├── httpd_config.conf # OLS server config (listener :80, lsphp external app)
     │       ├── vhosts/
     │       │   └── bagisto.conf  # OLS vhost (docRoot public/, Laravel rewrite)
-    │       └── supervisord.conf  # Supervisor: lsphp + openlitespeed (the database is its own file)
+    │       └── supervisord.conf  # Supervisor: lsphp + openlitespeed + queue worker (the database is its own file)
     ├── .dockerignore             # Excludes unneeded files from the build context
     └── README.md                 # This file
 ```
@@ -675,6 +676,7 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 | `APP_CURRENCY` | from `.env.example` | Default currency (e.g., `USD`, `INR`, `EUR`). |
 | `APP_TIMEZONE` | from `.env.example` | Timezone (e.g., `UTC`, `Asia/Kolkata`). |
 | `APP_ADMIN_URL` | `admin` | Admin panel URL path. Read from the container environment; the entrypoint does not write it into `.env`. |
+| `QUEUE_CONNECTION` | `database` | Connection the queue worker drains. The image runs a worker, so queued work is taken off the request; set `sync` to run it inline instead and the worker idles. |
 
 ---
 
@@ -689,9 +691,10 @@ When the container starts, `entrypoint.sh` does this:
 | 1 | Reads `DB_HOST` to determine bundled vs. external database mode. |
 | 2 | Sets `DB_AUTOSTART=true` or `false` so Supervisor knows whether to start the bundled database. |
 | 3 | Writes any runtime overrides (`DB_*`, `APP_URL`, `APP_KEY`, `APP_LOCALE`, `APP_CURRENCY`, `APP_TIMEZONE`) into `/var/www/bagisto/.env`. |
-| 4 | If `APP_URL` is set or an external database is used, runs `php artisan optimize:clear` + `optimize` to refresh caches. |
-| 5 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
-| 6 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal) and the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed`. |
+| 4 | Sets `QUEUE_CONNECTION` (`database` unless overridden), which the build deliberately left as `.env.example`'s `sync` so the install itself needed no worker. |
+| 5 | Runs `php artisan optimize:clear` + `optimize`, since the steps above have just invalidated the cached configuration. |
+| 6 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
+| 7 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal), the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed` — and the queue worker. |
 
 ### Why the build-time install?
 
