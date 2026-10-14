@@ -7,13 +7,14 @@ use Webkul\Customer\Models\CustomerNote;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\NoteNotification;
 use Webkul\Shop\Mail\Customer\RegistrationNotification;
+use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 use Webkul\Shop\Mail\Customer\UpdatePasswordNotification;
 
 class Customer extends Base
 {
     /**
-     * After customer is created
+     * After a customer is created.
      *
      * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @return void
@@ -63,7 +64,23 @@ class Customer extends Base
     }
 
     /**
-     * Send mail on subscribe
+     * Send the storefront password reset link.
+     *
+     * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @param  string  $token
+     * @return void
+     */
+    public function sendResetLink($customer, $token)
+    {
+        try {
+            $customer->notify(new ResetPasswordNotification($token));
+        } catch (\Exception $e) {
+            report($e);
+        }
+    }
+
+    /**
+     * Send mail on subscribe.
      *
      * @param  \Webkul\Customer\Models\Customer  $customer
      * @return void
@@ -78,7 +95,7 @@ class Customer extends Base
     }
 
     /**
-     * Send mail on creating Note
+     * Send mail on creating a note.
      *
      * @param  CustomerNote  $note
      * @return void

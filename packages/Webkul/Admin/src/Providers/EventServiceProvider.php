@@ -35,6 +35,10 @@ class EventServiceProvider extends ServiceProvider
             [Admin::class, 'afterPasswordUpdated'],
         ],
 
+        'admin.password.send_reset_link' => [
+            [Admin::class, 'sendResetLink'],
+        ],
+
         'checkout.order.save.after' => [
             [Order::class, 'afterCreated'],
         ],

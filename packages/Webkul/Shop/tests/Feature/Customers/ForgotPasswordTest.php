@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Webkul\Customer\Models\Customer;
+use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 
 use function Pest\Laravel\post;
 
@@ -35,4 +37,29 @@ it('should not show the visitor what the mail server said when it cannot be reac
         ->toBe(trans('shop::app.customers.forgot-password.reset-link-failed'))
         ->not->toContain('2525')
         ->not->toContain('127.0.0.1');
+});
+
+// ============================================================================
+// Sending The Reset Link
+// ============================================================================
+
+it('should send the reset password link to the customer who asked for it', function () {
+    Notification::fake();
+
+    $customer = Customer::factory()->create();
+
+    post(route('shop.customers.forgot_password.store'), ['email' => $customer->email])
+        ->assertRedirect();
+
+    Notification::assertSentTo($customer, ResetPasswordNotification::class);
+
+    Notification::assertCount(1);
+});
+
+it('should send nothing for an email no customer has', function () {
+    Notification::fake();
+
+    post(route('shop.customers.forgot_password.store'), ['email' => 'nobody@example.com']);
+
+    Notification::assertNothingSent();
 });

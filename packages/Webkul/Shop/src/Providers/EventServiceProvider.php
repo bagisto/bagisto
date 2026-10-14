@@ -89,6 +89,10 @@ class EventServiceProvider extends ServiceProvider
             [Customer::class, 'afterPasswordUpdated'],
         ],
 
+        'customer.password.send_reset_link' => [
+            [Customer::class, 'sendResetLink'],
+        ],
+
         'customer.subscription.after' => [
             [Customer::class, 'afterSubscribed'],
         ],
@@ -131,6 +135,10 @@ class EventServiceProvider extends ServiceProvider
 
         'sales.invoice.send_duplicate_email' => [
             [Invoice::class, 'afterCreated'],
+        ],
+
+        'sales.invoice.send_overdue_reminder' => [
+            [Invoice::class, 'sendOverdueReminder'],
         ],
 
         'sales.shipment.save.after' => [
