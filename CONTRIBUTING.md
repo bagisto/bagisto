@@ -95,7 +95,8 @@ Some rules Pint cannot enforce, and a reviewer will ask for:
 - All database access goes through a repository; the one exception is a
   DataGrid's `prepareQueryBuilder()`.
 - Every user-facing string goes through `trans()`, with the key added to all
-  **23** locales.
+  **23** locales. A *new* locale also needs its `vee-validate` messages in the
+  Admin, Shop and Installer builds, which the translation check cannot see.
 
 ## PHPDoc
 
