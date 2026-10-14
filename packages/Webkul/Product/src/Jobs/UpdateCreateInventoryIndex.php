@@ -7,20 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Inventory as InventoryIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreateInventoryIndex implements ShouldQueue
 {
-    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
-
-    /**
-     * Bounded by the connection's `retry_after`, so the queue can never hand this job to a
-     * second worker while this one still holds it and have both write the same index rows.
-     */
-    public int $timeout;
+    use Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -31,8 +24,6 @@ class UpdateCreateInventoryIndex implements ShouldQueue
     public function __construct(protected $productIds)
     {
         $this->productIds = $productIds;
-
-        $this->timeout = static::timeoutWithinRetryAfter();
     }
 
     /**

@@ -10,30 +10,20 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
-use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreateCatalogRuleIndex implements ShouldQueue
 {
-    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
-
-    /**
-     * Bounded by the connection's `retry_after`, so the queue can never hand this job to a
-     * second worker while this one still holds it and have both write the same index rows.
-     */
-    public int $timeout;
+    use Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(protected CatalogRule $catalogRule)
-    {
-        $this->timeout = static::timeoutWithinRetryAfter();
-    }
+    public function __construct(protected CatalogRule $catalogRule) {}
 
     /**
      * Reindex the rule and the prices of the products it applies to and of the composite products built from them;
