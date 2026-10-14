@@ -55,7 +55,7 @@ The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because 
 | **PHP** | 8.4. The nginx and apache images install bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pgsql, pdo, soap, sockets, xml, zip and imagick; the litespeed image installs lsphp with common, curl, imagick, intl, mysql, pgsql and opcache. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
 | **Database** | MySQL 8.0, MariaDB 10.11 or PostgreSQL 16, bundled and pre-installed with Bagisto migrations + seed data already applied |
 | **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, the web server, and a queue worker) |
-| **Queue** | A `queue:work` worker on the `default` and `broadcastable` queues, with `QUEUE_CONNECTION=database`. Order mail, the post-order price and inventory reindex, search terms and sitemap generation run here instead of inside the request. |
+| **Queue** | A `queue:work` worker on the `default` and `broadcastable` queues, with `QUEUE_CONNECTION=database` and `--timeout=60` (below the connection's `retry_after`). Order mail, the post-order price and inventory reindex, search terms and sitemap generation run here instead of inside the request. |
 | **Application** | Bagisto — fully installed at build time |
 
 ### Two database modes

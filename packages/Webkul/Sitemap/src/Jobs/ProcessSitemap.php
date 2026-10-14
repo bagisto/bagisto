@@ -13,7 +13,6 @@ use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Url;
 use Webkul\Core\Contracts\Channel;
-use Webkul\Core\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\Sitemap\Contracts\Sitemap as SitemapContract;
 use Webkul\Sitemap\Models\Category;
 use Webkul\Sitemap\Models\Page;
@@ -21,13 +20,7 @@ use Webkul\Sitemap\Models\Product;
 
 class ProcessSitemap implements ShouldQueue
 {
-    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * Bounded by the connection's `retry_after`, so a catalogue large enough to outlast that
-     * window is not written twice by two workers racing over the same sitemap files.
-     */
-    public int $timeout;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Batch processed.
@@ -49,9 +42,7 @@ class ProcessSitemap implements ShouldQueue
      */
     public function __construct(
         public SitemapContract $sitemap
-    ) {
-        $this->timeout = static::timeoutWithinRetryAfter();
-    }
+    ) {}
 
     /**
      * Execute the job.

@@ -22,7 +22,7 @@
 
 - [The Queue Concerns Moved To Core](#the-queue-concerns-moved-to-core)
 - [The Invoice Overdue Command Moved To Sales](#the-invoice-overdue-command-moved-to-sales)
-- [Narrowed Signatures On Order, Product Types And Sales Controllers](#narrowed-signatures-on-order-product-types-and-sales-controllers)
+- [Narrowed Signatures On Order And Product Types](#narrowed-signatures-on-order-and-product-types)
 
 ---
 
@@ -114,15 +114,14 @@ The command's signature is unchanged — it is still `invoice:cron`, still sched
 
 ---
 
-### Narrowed Signatures On Order, Product Types And Sales Controllers
+### Narrowed Signatures On Order And Product Types
 
 **Impact Probability: Low**
 
-Three signatures gained a return type or lost a helper, each of which matters only to a subclass:
+Two signatures gained a return type, each of which matters only to a subclass:
 
 - **`Order::getTotalDueAttribute()` and `getBaseTotalDueAttribute()` declare `: float`.** A subclass overriding either has to declare it too.
 - **`AbstractType::getTaxCategory()` declares `: ?TaxCategory`**, where `TaxCategory` is `Webkul\Tax\Contracts\TaxCategory` rather than the model, so a substituted model still satisfies it. A product type overriding the method has to match.
-- **`itemsBelongToOrder()` is gone from `InvoiceController` and `ShipmentController`**, replaced by `Order::ownsItems(array $itemIds)` on the model, which `RefundController` now also uses. Call the model method instead.
 
 ## Upgrading To v2.5.1 From v2.5.0
 
@@ -138,7 +137,7 @@ Three signatures gained a return type or lost a helper, each of which matters on
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
 - [Total Due Discounts Cancelled Quantities](#total-due-discounts-cancelled-quantities)
 - [A Search Term Is Unique Within A Channel And Locale](#a-search-term-is-unique-within-a-channel-and-locale)
-- [Index Jobs Declare A Timeout](#index-jobs-declare-a-timeout)
+- [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
 - [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
 
 ---
@@ -229,16 +228,19 @@ What this changes for custom code:
 
 ---
 
-### Index Jobs Declare A Timeout
+### Index Jobs Retry A Lock Conflict
 
 **Impact Probability: Low**
 
-Past the queue connection's `retry_after`, the queue treats a job as abandoned and hands the payload to a second worker while the first still runs it. The price, inventory, search and catalog-rule index jobs and the sitemap job declared no timeout, so a long run could be executed twice over the same rows. Each now derives one from `retry_after`, as the import jobs already did, and the jobs that write the shared index tables retry a deadlock instead of failing.
+The price, inventory, search and catalog-rule index jobs write the same few tables from several workers at once, so the database picks one of them as the victim of a lock cycle sooner or later. Each now retries that write rather than failing the job, using the same `RetriesOnDeadlock` concern the import jobs already used.
+
+What counts as a lock conflict is now the framework's own judgement rather than a pair of MySQL error codes, so **the retry works on PostgreSQL and MariaDB as well as MySQL** — it previously did nothing on PostgreSQL, whose deadlock is `40P01` rather than `1213`.
 
 What this changes for custom code:
 
-- **A reindex that takes longer than the timeout now fails** rather than running on. The timeout is `retry_after` less thirty seconds, so the default ninety becomes sixty. Raise the connection's `retry_after` if a batch legitimately needs longer and the timeout follows it.
-- **A subclass of one of these jobs inherits `public int $timeout`** and has to set it in its own constructor if it declares one.
+- **`RetriesOnDeadlock::isDeadlock()` is gone**, replaced by the framework's `causedByConcurrencyError()`. A class that overrode it to recognise its own error codes no longer has a hook; the framework's detector covers MySQL, MariaDB, PostgreSQL and SQLite.
+- **The work a retry wraps has to be safe to run again from the top.** The index rebuilds are, because each recomputes from current state.
+- **Bounding how long a job may run is the worker's job, not each job's.** Run `queue:work` with a `--timeout` below the connection's `retry_after`, or the queue hands a still-running job to a second worker. The production images pass `--timeout=60` against the default `retry_after` of 90.
 
 ---
 

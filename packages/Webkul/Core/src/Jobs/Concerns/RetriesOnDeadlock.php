@@ -2,22 +2,16 @@
 
 namespace Webkul\Core\Jobs\Concerns;
 
+use Illuminate\Database\DetectsConcurrencyErrors;
 use Illuminate\Database\QueryException;
 
-/**
- * Retries a write that InnoDB rolled back to break a lock cycle — import batches and
- * index rebuilds run in parallel and write to the same handful of tables, so one can
- * be chosen as the victim through no fault of its own.
- *
- * Only deadlock and lock-wait-timeout errors are retried, with a short growing
- * pause; every other query failure is re-thrown untouched. The work it wraps has to
- * be safe to run again from the top.
- */
 trait RetriesOnDeadlock
 {
+    use DetectsConcurrencyErrors;
+
     /**
-     * Run the callback, retrying it while MySQL reports a deadlock or a lock-wait
-     * timeout. Re-throws once the attempts are spent.
+     * Run the callback again while the database reports a lock conflict, waiting longer each
+     * time so competing transactions stop retrying in lockstep. The work must be re-runnable.
      */
     protected function retryOnDeadlock(callable $callback, int $attempts = 5)
     {
@@ -26,28 +20,14 @@ trait RetriesOnDeadlock
                 return $callback();
             } catch (QueryException $e) {
                 if (
-                    ! $this->isDeadlock($e)
+                    ! $this->causedByConcurrencyError($e)
                     || $attempt >= $attempts
                 ) {
                     throw $e;
                 }
 
-                /**
-                 * Back off a little further each time so the competing
-                 * transactions stop retrying in lockstep.
-                 */
                 usleep($attempt * 100000);
             }
         }
-    }
-
-    /**
-     * Is this query failure a deadlock or a lock-wait timeout?
-     */
-    protected function isDeadlock(QueryException $e): bool
-    {
-        $code = (int) ($e->errorInfo[1] ?? 0);
-
-        return in_array($code, [1213, 1205], true);
     }
 }
