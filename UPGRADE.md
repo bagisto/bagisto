@@ -1,6 +1,8 @@
 # UPGRADE Guide
 
 - [Upgrading To v2.6.0 From v2.5](#upgrading-to-v260-from-v25)
+  - [Before You Start](#before-you-start)
+  - [The Upgrade Itself](#the-upgrade-itself)
 
 ## Upgrading To v2.6.0 From v2.5
 
@@ -19,6 +21,57 @@
 - [The Deadlock Retry Concern Moved To Core](#the-deadlock-retry-concern-moved-to-core)
 - [The Invoice Overdue Command Moved To Sales](#the-invoice-overdue-command-moved-to-sales)
 - [Narrowed Signatures On Order And Product Types](#narrowed-signatures-on-order-and-product-types)
+- [The Search Term Factory Is Singular](#the-search-term-factory-is-singular)
+
+### Before You Start
+
+Bagisto is distributed as a full Laravel application rather than as a package inside one, so an upgrade means bringing your copy of the application files up to the new release and reconciling anything you changed. Nothing republishes them for you.
+
+1. **Stay on PHP 8.4.** v2.6.0 asks for nothing newer than v2.5 did, so an installation already on 8.4 needs no platform work.
+
+2. **Back up the database.** The one migration this release adds makes a search term unique within its channel and locale, and it folds the rows a term had already accumulated into one before adding the index — summing their uses and keeping the earliest row. That is not reversible from the index alone. A store that has already taken this migration on the 2.5 line will see it skipped.
+
+3. **Maintenance mode is optional.** Nothing in this release rewrites configuration that requests read, or moves files on disk, so a short window while the assets are rebuilt is enough. The sequence below still brackets the work with `php artisan down` and `php artisan up`, which is the safer default.
+
+> [!WARNING]
+> Do not run `php artisan bagisto:install` on an existing store. It is the fresh-install command and calls `db:wipe` followed by `migrate:fresh` — it will destroy your data. An upgrade only ever runs `php artisan migrate`.
+
+### The Upgrade Itself
+
+Start by bringing your application files up to the new release, reconciling anything you changed. Then run:
+
+```bash
+# Take the store down
+php artisan down
+
+# Install the dependency tree
+composer install
+
+# Run the migrations
+php artisan migrate --force
+
+# Rebuild the Admin, Shop and Installer bundles, each from its own package directory
+(cd packages/Webkul/Admin && npm install && npm run build)
+(cd packages/Webkul/Shop && npm install && npm run build)
+(cd packages/Webkul/Installer && npm install && npm run build)
+
+# Clear every cached config, route, view and compiled service
+php artisan optimize:clear
+
+# Bring the store back up
+php artisan up
+```
+
+The bundles have to be rebuilt because this release adds Swahili to the frontend validation messages in all three. The dependency set itself is unchanged, so `npm install` over the existing `node_modules` is enough — no clean reinstall.
+
+Then verify:
+
+```bash
+php artisan bagisto:version
+php artisan migrate:status
+```
+
+`bagisto:version` should report 2.6.x, and every migration should read `Ran`. Finally load the storefront home page, a category, a product page and the admin dashboard.
 
 ---
 
@@ -118,3 +171,21 @@ Two signatures gained a return type, each of which matters only to a subclass:
 
 - **`Order::getTotalDueAttribute()` and `getBaseTotalDueAttribute()` declare `: float`.** A subclass overriding either has to declare it too.
 - **`AbstractType::getTaxCategory()` declares `: ?TaxCategory`**, where `TaxCategory` is `Webkul\Tax\Contracts\TaxCategory` rather than the model, so a substituted model still satisfies it. A product type overriding the method has to match.
+
+---
+
+### The Search Term Factory Is Singular
+
+**Impact Probability: Low**
+
+Every other factory in the codebase is named after its model, and this one was plural:
+
+```php
+// Before
+use Webkul\Marketing\Database\Factories\SearchTermsFactory;
+
+// After
+use Webkul\Marketing\Database\Factories\SearchTermFactory;
+```
+
+`SearchTerm::factory()` resolves it through the model's own `newFactory()`, so only a test or seeder that named the class directly is affected.
