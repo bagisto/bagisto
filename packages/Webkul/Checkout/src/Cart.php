@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
 use Webkul\Checkout\Exceptions\BillingAddressNotFoundException;
@@ -281,34 +282,36 @@ class Cart
 
             throw new \Exception($cartProducts);
         } else {
-            $parentCartItem = null;
+            DB::transaction(function () use ($cartProducts, $data) {
+                $parentCartItem = null;
 
-            foreach ($cartProducts as $cartProduct) {
-                $cartItem = $this->getItemByProduct($cartProduct, $data);
+                foreach ($cartProducts as $cartProduct) {
+                    $cartItem = $this->getItemByProduct($cartProduct, $data);
 
-                if (isset($cartProduct['parent_id'])) {
-                    $cartProduct['parent_id'] = $parentCartItem->id;
-                }
+                    if (isset($cartProduct['parent_id'])) {
+                        $cartProduct['parent_id'] = $parentCartItem->id;
+                    }
 
-                if (! $cartItem) {
-                    $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $this->cart->id]));
-                } else {
-                    if (
-                        isset($cartProduct['parent_id'])
-                        && $cartItem->parent_id !== $parentCartItem->id
-                    ) {
-                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
-                            'cart_id' => $this->cart->id,
-                        ]));
+                    if (! $cartItem) {
+                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $this->cart->id]));
                     } else {
-                        $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
+                        if (
+                            isset($cartProduct['parent_id'])
+                            && $cartItem->parent_id !== $parentCartItem->id
+                        ) {
+                            $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
+                                'cart_id' => $this->cart->id,
+                            ]));
+                        } else {
+                            $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
+                        }
+                    }
+
+                    if (! $parentCartItem) {
+                        $parentCartItem = $cartItem;
                     }
                 }
-
-                if (! $parentCartItem) {
-                    $parentCartItem = $cartItem;
-                }
-            }
+            });
         }
 
         $this->collectTotals();
@@ -725,46 +728,21 @@ class Cart
             }
         }
 
-        if ($existingWishlistItem) {
-            $existingAdditional = is_array($existingWishlistItem->additional) ? $existingWishlistItem->additional : [];
+        $event = $existingWishlistItem
+            ? 'customer.wishlist.update'
+            : 'customer.wishlist.create';
 
-            $existingQuantity = $existingAdditional['quantity'] ?? 1;
+        Event::dispatch($event.'.before', $cartItem->product_id);
 
-            Event::dispatch('customer.wishlist.update.before', $cartItem->product_id);
+        $emptiesCart = ! $this->cart->items->count();
 
-            $this->wishlistRepository->update([
-                'additional' => [
-                    ...$existingAdditional,
-                    'quantity' => $existingQuantity + $quantity,
-                ],
-            ], $existingWishlistItem->id);
+        $wishlistItem = $this->moveItemToWishlist($cartItem, $existingWishlistItem, $quantity, $emptiesCart);
 
-            Event::dispatch('customer.wishlist.update.after', $existingWishlistItem);
-        } else {
-            Event::dispatch('customer.wishlist.create.before', $cartItem->product_id);
+        Event::dispatch($event.'.after', $wishlistItem);
 
-            $wishlist = $this->wishlistRepository->create([
-                'channel_id' => $this->cart->channel_id,
-                'customer_id' => $this->cart->customer_id,
-                'product_id' => $cartItem->product_id,
-                'additional' => [
-                    ...$cartItem->additional,
-                    'quantity' => $quantity,
-                ],
-            ]);
+        $this->refreshCart();
 
-            Event::dispatch('customer.wishlist.create.after', $wishlist);
-        }
-
-        if (! $this->cart->items->count()) {
-            $this->cartRepository->delete($this->cart->id);
-
-            $this->refreshCart();
-        } else {
-            $this->cartItemRepository->delete($itemId);
-
-            $this->refreshCart();
-
+        if (! $emptiesCart) {
             $this->collectTotals();
         }
 
@@ -1082,7 +1060,10 @@ class Cart
                 $address = $this->cart->billing_address;
             }
 
-            if ($address === null && $this->cart->customer) {
+            if (
+                $address === null
+                && $this->cart->customer
+            ) {
                 $address = $this->cart->customer->addresses()
                     ->where('default_address', 1)->first();
             }
@@ -1203,7 +1184,10 @@ class Cart
             $address = $this->cart->billing_address;
         }
 
-        if ($address === null && $this->cart->customer) {
+        if (
+            $address === null
+            && $this->cart->customer
+        ) {
             $address = $this->cart->customer->addresses()
                 ->where('default_address', 1)->first();
         }
@@ -1266,5 +1250,49 @@ class Cart
         $shippingRate->save();
 
         Event::dispatch('checkout.cart.calculate.shipping.tax.after', $this->cart);
+    }
+
+    /**
+     * Write the wishlist item and drop what it came from in one statement, so a failure on either
+     * side cannot leave the product sitting in both the wishlist and the cart.
+     */
+    protected function moveItemToWishlist(
+        Contracts\CartItem $cartItem,
+        ?WishlistContract $existingWishlistItem,
+        int $quantity,
+        bool $emptiesCart
+    ): WishlistContract {
+        return DB::transaction(function () use ($cartItem, $existingWishlistItem, $quantity, $emptiesCart) {
+            if ($existingWishlistItem) {
+                $existingAdditional = is_array($existingWishlistItem->additional) ? $existingWishlistItem->additional : [];
+
+                $this->wishlistRepository->update([
+                    'additional' => [
+                        ...$existingAdditional,
+                        'quantity' => ($existingAdditional['quantity'] ?? 1) + $quantity,
+                    ],
+                ], $existingWishlistItem->id);
+
+                $wishlistItem = $existingWishlistItem;
+            } else {
+                $wishlistItem = $this->wishlistRepository->create([
+                    'channel_id' => $this->cart->channel_id,
+                    'customer_id' => $this->cart->customer_id,
+                    'product_id' => $cartItem->product_id,
+                    'additional' => [
+                        ...$cartItem->additional,
+                        'quantity' => $quantity,
+                    ],
+                ]);
+            }
+
+            if ($emptiesCart) {
+                $this->cartRepository->delete($this->cart->id);
+            } else {
+                $this->cartItemRepository->delete($cartItem->id);
+            }
+
+            return $wishlistItem;
+        });
     }
 }
