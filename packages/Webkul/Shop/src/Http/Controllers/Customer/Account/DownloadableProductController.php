@@ -101,6 +101,6 @@ class DownloadableProductController extends Controller
 
         copy($purchasedLink->url, $tempFile);
 
-        return response()->download($tempFile, $fileName);
+        return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
 }
