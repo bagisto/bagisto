@@ -72,17 +72,17 @@ class ProductController extends Controller
                         ? $privateDisk->download($productDownloadableLink->sample_file)
                         : abort(404);
                 } else {
-                    $fileName = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
-
-                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
-
                     if (! $this->validateExternalUrl($productDownloadableLink->sample_url)) {
                         abort(404);
                     }
 
+                    $fileName = substr($productDownloadableLink->sample_url, strrpos($productDownloadableLink->sample_url, '/') + 1);
+
+                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
                     copy($productDownloadableLink->sample_url, $tempImage);
 
-                    return response()->download($tempImage, $fileName);
+                    return response()->download($tempImage, $fileName)->deleteFileAfterSend(true);
                 }
             } else {
                 $productDownloadableSample = $this->productDownloadableSampleRepository->findOrFail(request('id'));
@@ -96,17 +96,17 @@ class ProductController extends Controller
                 if ($productDownloadableSample->type == 'file') {
                     return app(StoredFile::class)->download($productDownloadableSample->file, $productDownloadableSample->file_name);
                 } else {
-                    $fileName = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
-
-                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
-
                     if (! $this->validateExternalUrl($productDownloadableSample->url)) {
                         abort(404);
                     }
 
+                    $fileName = substr($productDownloadableSample->url, strrpos($productDownloadableSample->url, '/') + 1);
+
+                    $tempImage = tempnam(sys_get_temp_dir(), $fileName);
+
                     copy($productDownloadableSample->url, $tempImage);
 
-                    return response()->download($tempImage, $fileName);
+                    return response()->download($tempImage, $fileName)->deleteFileAfterSend(true);
                 }
             }
         } catch (\Exception $e) {
