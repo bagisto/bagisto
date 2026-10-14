@@ -109,7 +109,7 @@ it('should abort --all without --force when running non-interactively', function
         'recorded_at' => now()->subDays(1),
     ]);
 
-    Artisan::call('omnibus:purge-old-snapshots', ['--all' => true]);
+    Artisan::call('omnibus:purge-old-snapshots', ['--all' => true, '--no-interaction' => true]);
 
     expect(OmnibusPrice::query()->count())->toBe(1)
         ->and(Artisan::output())->toContain(trans('omnibus::app.console.aborted'));
