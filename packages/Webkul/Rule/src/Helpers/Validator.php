@@ -6,7 +6,6 @@ use Webkul\CartRule\Contracts\CartRule;
 use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\Checkout\Contracts\Cart as CheckoutContract;
 use Webkul\Checkout\Contracts\CartItem;
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Product\Contracts\Product;
 
 class Validator
