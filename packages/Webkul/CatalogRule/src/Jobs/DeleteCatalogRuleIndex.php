@@ -8,12 +8,20 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Event;
+use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class DeleteCatalogRuleIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
+
+    /**
+     * Bounded by the connection's `retry_after`, so the queue can never hand this job to a
+     * second worker while this one still holds it and have both write the same index rows.
+     */
+    public int $timeout;
 
     /**
      * Create a new job instance.
@@ -21,7 +29,10 @@ class DeleteCatalogRuleIndex implements ShouldQueue
      * @param  array  $productIds
      * @return void
      */
-    public function __construct(protected $productIds) {}
+    public function __construct(protected $productIds)
+    {
+        $this->timeout = static::timeoutWithinRetryAfter();
+    }
 
     /**
      * Reindex the prices of the products a removed rule applied to and of the composite products built from them;
@@ -38,7 +49,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
 
         Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(PriceIndexer::class)->reindexProducts($productIds);
+        $this->retryOnDeadlock(fn () => app(PriceIndexer::class)->reindexProducts($productIds));
 
         Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }

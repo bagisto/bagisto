@@ -7,12 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreatePriceIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
+
+    /**
+     * Bounded by the connection's `retry_after`, so the queue can never hand this job to a
+     * second worker while this one still holds it and have both write the same index rows.
+     */
+    public int $timeout;
 
     /**
      * Create a new job instance.
@@ -23,6 +31,8 @@ class UpdateCreatePriceIndex implements ShouldQueue
     public function __construct(protected $productIds)
     {
         $this->productIds = $productIds;
+
+        $this->timeout = static::timeoutWithinRetryAfter();
     }
 
     /**
@@ -41,6 +51,6 @@ class UpdateCreatePriceIndex implements ShouldQueue
             ->orderByRaw(db_grammar()->orderByField('id', $this->productIds))
             ->get();
 
-        app(PriceIndexer::class)->reindexRows($products);
+        $this->retryOnDeadlock(fn () => app(PriceIndexer::class)->reindexRows($products));
     }
 }

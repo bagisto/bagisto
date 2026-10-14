@@ -8,11 +8,12 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Contracts\Product;
 
 class UpdateCreateProductIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -32,6 +33,6 @@ class UpdateCreateProductIndex implements ShouldQueue
      */
     public function handle()
     {
-        app(CatalogRuleIndex::class)->reIndexProduct($this->product);
+        $this->retryOnDeadlock(fn () => app(CatalogRuleIndex::class)->reIndexProduct($this->product));
     }
 }

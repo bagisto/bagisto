@@ -10,19 +10,30 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreateCatalogRuleIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
+
+    /**
+     * Bounded by the connection's `retry_after`, so the queue can never hand this job to a
+     * second worker while this one still holds it and have both write the same index rows.
+     */
+    public int $timeout;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(protected CatalogRule $catalogRule) {}
+    public function __construct(protected CatalogRule $catalogRule)
+    {
+        $this->timeout = static::timeoutWithinRetryAfter();
+    }
 
     /**
      * Reindex the rule and the prices of the products it applies to and of the composite products built from them;
@@ -33,7 +44,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
     public function handle()
     {
         if ($this->catalogRule->status) {
-            app(CatalogRuleIndex::class)->reIndexRule($this->catalogRule);
+            $this->retryOnDeadlock(fn () => app(CatalogRuleIndex::class)->reIndexRule($this->catalogRule));
 
             $this->catalogRule->unsetRelation('catalog_rule_products');
 
@@ -41,7 +52,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
         } else {
             $productIds = $this->catalogRule->catalog_rule_products->pluck('product_id')->unique();
 
-            app(CatalogRuleIndex::class)->cleanProductIndices($productIds);
+            $this->retryOnDeadlock(fn () => app(CatalogRuleIndex::class)->cleanProductIndices($productIds));
         }
 
         $productIds = $productIds
@@ -52,7 +63,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
 
         Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(PriceIndexer::class)->reindexProducts($productIds);
+        $this->retryOnDeadlock(fn () => app(PriceIndexer::class)->reindexProducts($productIds));
 
         Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }
