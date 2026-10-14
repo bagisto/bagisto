@@ -4,7 +4,6 @@ namespace Webkul\PhonePe\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
@@ -224,10 +223,8 @@ class PhonePeController extends Controller
     }
 
     /**
-     * Handle incoming webhook notifications from PhonePe.
-     *
-     * PhonePe POSTs a JSON payload to this endpoint after every payment event.
-     * The raw payload is logged so it can be debugged at any time.
+     * Handle the JSON payload PhonePe posts after every payment event, logging it raw so a
+     * notification can be debugged later.
      *
      * @return JsonResponse
      */
@@ -244,7 +241,10 @@ class PhonePeController extends Controller
              * Only process CHECKOUT_ORDER_COMPLETED events (or a SUCCESS state).
              * All other events (PENDING, FAILED, etc.) are acknowledged but ignored.
              */
-            if (! $merchantOrderId || ! in_array($state, ['CHECKOUT_ORDER_COMPLETED', 'COMPLETED', 'SUCCESS'], true)) {
+            if (
+                ! $merchantOrderId
+                || ! in_array($state, ['CHECKOUT_ORDER_COMPLETED', 'COMPLETED', 'SUCCESS'], true)
+            ) {
                 return response()->json(['status' => 'skipped'], 200);
             }
 
@@ -271,7 +271,10 @@ class PhonePeController extends Controller
 
             $cart = $this->cartRepository->find($cartId);
 
-            if (! $cart || ! $cart->is_active) {
+            if (
+                ! $cart
+                || ! $cart->is_active
+            ) {
                 return response()->json(['status' => 'cart_inactive'], 200);
             }
 
