@@ -2,7 +2,7 @@
 
 namespace Webkul\Marketing\Repositories;
 
-use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Marketing\Contracts\SearchTerm;
@@ -18,44 +18,35 @@ class SearchTermRepository extends Repository
     }
 
     /**
-     * Record one use of a search term. The insert is attempted rather than guarded by a read,
-     * so two shoppers searching the same new term cannot both create it.
+     * Record one use of a search term in the single statement the database resolves against the
+     * unique index, so two shoppers searching the same new term cannot both create it.
      */
     public function recordSearch(array $attributes): void
     {
-        $identity = [
-            'term' => $attributes['term'],
-            'channel_id' => $attributes['channel_id'],
-            'locale' => $attributes['locale'],
-        ];
-
-        $results = (int) $attributes['results'];
-
-        if ($this->addUse($identity, $results)) {
-            return;
-        }
-
-        try {
-            $this->create($identity + [
+        $this->getModel()->newQuery()->upsert(
+            [[
+                'term' => $attributes['term'],
+                'channel_id' => $attributes['channel_id'],
+                'locale' => $attributes['locale'],
+                'results' => (int) $attributes['results'],
                 'uses' => 1,
-                'results' => $results,
-            ]);
-        } catch (UniqueConstraintViolationException) {
-            $this->addUse($identity, $results);
-        }
+            ]],
+            ['term', 'channel_id', 'locale'],
+            [
+                'uses' => $this->incrementedUses(),
+                'results',
+            ]
+        );
     }
 
     /**
-     * Add one to the uses of an existing term, answering whether there was one to add to.
+     * The stored use count plus one, qualified by its table because PostgreSQL reads a bare column
+     * in an upsert as ambiguous between the stored row and the one being inserted.
      */
-    protected function addUse(array $identity, int $results): bool
+    protected function incrementedUses(): Expression
     {
-        return $this->getModel()
-            ->newQuery()
-            ->where($identity)
-            ->update([
-                'uses' => DB::raw('uses + 1'),
-                'results' => $results,
-            ]) > 0;
+        $model = $this->getModel();
+
+        return DB::raw($model->getConnection()->getQueryGrammar()->wrap($model->qualifyColumn('uses')).' + 1');
     }
 }

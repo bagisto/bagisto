@@ -2,7 +2,6 @@
 
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Event;
 use Webkul\Marketing\Models\SearchTerm;
 use Webkul\Marketing\Repositories\SearchTermRepository;
 
@@ -86,19 +85,15 @@ it('should let the database refuse a second row for the same term, channel and l
     expect($duplicate)->toThrow(UniqueConstraintViolationException::class);
 });
 
-it('should still count the search when another request inserts the term first', function () {
-    Event::listen('eloquent.creating: '.SearchTerm::class, function ($searchTerm) {
-        Event::forget('eloquent.creating: '.SearchTerm::class);
-
-        DB::table('search_terms')->insert([
-            'term' => $searchTerm->term,
-            'channel_id' => $searchTerm->channel_id,
-            'locale' => $searchTerm->locale,
-            'uses' => 1,
-            'results' => 2,
-            'display_in_suggested_terms' => 0,
-        ]);
-    });
+it('should count the search against a row this request never created', function () {
+    DB::table('search_terms')->insert([
+        'term' => 'alpaca jumper',
+        'channel_id' => core()->getCurrentChannel()->id,
+        'locale' => 'en',
+        'uses' => 1,
+        'results' => 2,
+        'display_in_suggested_terms' => 0,
+    ]);
 
     recordSearchOf('alpaca jumper', results: 5);
 
@@ -107,4 +102,19 @@ it('should still count the search when another request inserts the term first', 
     expect($rows)->toHaveCount(1)
         ->and((int) $rows->first()->uses)->toBe(2)
         ->and((int) $rows->first()->results)->toBe(5);
+});
+
+it('should record a term the database has never seen in one statement', function () {
+    $channelId = core()->getCurrentChannel()->id;
+
+    $statements = [];
+
+    DB::listen(function ($query) use (&$statements) {
+        $statements[] = $query->sql;
+    });
+
+    recordSearchOf('alpaca jumper', results: 4, channelId: $channelId);
+
+    expect($statements)->toHaveCount(1)
+        ->and((int) storedTerms('alpaca jumper')->first()->uses)->toBe(1);
 });
