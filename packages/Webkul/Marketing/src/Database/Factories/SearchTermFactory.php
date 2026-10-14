@@ -5,7 +5,7 @@ namespace Webkul\Marketing\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Marketing\Models\SearchTerm;
 
-class SearchTermsFactory extends Factory
+class SearchTermFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
