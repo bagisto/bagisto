@@ -453,6 +453,20 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 - **CASE expression types**: both branches must return the same type. Use `CAST(id AS VARCHAR(255))` — `CAST(... AS CHAR)` truncates to 1 character on PostgreSQL.
 - **GROUP BY**: PostgreSQL requires every non-aggregated SELECT column in GROUP BY.
 - **`DB::raw()` in `updateOrCreate()`**: fails on INSERT; split into find + update/create.
+- **A failed statement aborts the whole PostgreSQL transaction.** MySQL lets a transaction continue
+  after a duplicate-key error, so `try { insert } catch (UniqueConstraintViolationException) { … }`
+  looks like it works. On PostgreSQL every later statement in that transaction fails with
+  `25P02 current transaction is aborted`, and the catch block can do nothing — including inside a
+  caller's transaction, which it also poisons. Resolve the conflict in one statement the database
+  settles itself (`upsert()`, which compiles to `ON CONFLICT … DO UPDATE` and
+  `ON DUPLICATE KEY UPDATE`) rather than catching the violation.
+
+  ```php
+  $query->upsert([$row], ['term', 'channel_id', 'locale'], ['uses' => $increment, 'results']);
+  ```
+
+  Qualify any column an upsert's update clause reads — PostgreSQL rejects a bare `uses` there as
+  ambiguous between the stored row and the one being inserted.
 
 ## Safety Rails
 
