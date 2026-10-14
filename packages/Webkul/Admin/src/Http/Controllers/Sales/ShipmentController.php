@@ -179,12 +179,4 @@ class ShipmentController extends Controller
 
         return view('admin::sales.shipments.view', compact('shipment'));
     }
-
-    /**
-     * Whether every item the request names is one the order carries.
-     */
-    protected function itemsBelongToOrder($order, array $itemIds): bool
-    {
-        return $order->ownsItems($itemIds);
-    }
 }

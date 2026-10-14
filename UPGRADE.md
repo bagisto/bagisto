@@ -18,6 +18,7 @@
 - [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
 - [Total Due Discounts Cancelled Quantities](#total-due-discounts-cancelled-quantities)
+- [Order Item Ownership Checks Moved Onto The Order](#order-item-ownership-checks-moved-onto-the-order)
 - [A Search Term Is Unique Within A Channel And Locale](#a-search-term-is-unique-within-a-channel-and-locale)
 - [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
 - [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
@@ -91,6 +92,24 @@ What this changes for custom code:
 - **A store whose order currency differs from its base currency sees different figures** on the admin order view and the storefront account page. They were wrong before.
 - **The accessors read `$order->items`**, so eager-load it where you read them in a loop.
 - **A template that repeated the old arithmetic should be deleted** rather than kept in step. The cancelled amount is taken at the item price only, as it was before; tax and discount on the cancelled quantity are still not apportioned.
+
+---
+
+### Order Item Ownership Checks Moved Onto The Order
+
+**Impact Probability: Low**
+
+`InvoiceController` and `ShipmentController` each carried a protected `itemsBelongToOrder()` that answered whether every item id the request named belonged to the order being documented. That check now lives on the model, as `Order::ownsItems(array $itemIds)`, so the three sales controllers share one implementation and the refund path performs it too.
+
+```php
+// Before
+if (! $this->itemsBelongToOrder($order, $itemIds)) {
+
+// After
+if (! $order->ownsItems($itemIds)) {
+```
+
+**`itemsBelongToOrder()` is gone from both controllers.** A subclass that called it has to call the model method instead; one that only overrides `store()` is unaffected.
 
 ---
 

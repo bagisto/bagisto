@@ -61,7 +61,7 @@ class InvoiceController extends Controller
     }
 
     /**
-     * (Store) a newly created resource in storage.
+     * Store a newly created resource in storage.
      *
      * @return Response
      */
@@ -187,13 +187,5 @@ class InvoiceController extends Controller
         return new JsonResponse([
             'message' => trans('admin::app.sales.invoices.index.datagrid.mass-update-success'),
         ], 200);
-    }
-
-    /**
-     * Whether every item the request names is one the order carries.
-     */
-    protected function itemsBelongToOrder($order, array $itemIds): bool
-    {
-        return $order->ownsItems($itemIds);
     }
 }
