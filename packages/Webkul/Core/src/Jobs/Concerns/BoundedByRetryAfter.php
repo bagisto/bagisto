@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\DataTransfer\Jobs\Concerns;
+namespace Webkul\Core\Jobs\Concerns;
 
 /**
  * Keeps a job's timeout under the queue connection's `retry_after`.

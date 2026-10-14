@@ -4,7 +4,7 @@ namespace Webkul\Paypal\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Theme\ViewRenderEventManager;
+use Webkul\Core\View\ViewRenderEventManager;
 
 class EventServiceProvider extends ServiceProvider
 {

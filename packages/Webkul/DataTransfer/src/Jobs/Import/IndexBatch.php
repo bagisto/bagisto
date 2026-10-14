@@ -8,9 +8,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Webkul\Core\Jobs\Concerns\BoundedByRetryAfter;
+use Webkul\Core\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\DataTransfer\Helpers\Import as ImportHelper;
-use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
-use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 
 class IndexBatch implements ShouldQueue
 {

@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Theme\Models\SectionProxy;
 use Webkul\Theme\Observers\SectionObserver;
 use Webkul\Theme\ThemeViewFinder;
-use Webkul\Theme\ViewRenderEventManager;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -27,8 +26,6 @@ class ThemeServiceProvider extends ServiceProvider
                 null
             );
         });
-
-        $this->app->singleton(ViewRenderEventManager::class);
     }
 
     /**

@@ -1,16 +1,17 @@
 <?php
 
-namespace Webkul\DataTransfer\Jobs\Concerns;
+namespace Webkul\Core\Jobs\Concerns;
 
 use Illuminate\Database\QueryException;
 
 /**
- * Retries a write that InnoDB rolled back to break a lock cycle — import batches
- * run in parallel and write to the same handful of tables, so one can be chosen
- * as the victim through no fault of its own.
+ * Retries a write that InnoDB rolled back to break a lock cycle — import batches and
+ * index rebuilds run in parallel and write to the same handful of tables, so one can
+ * be chosen as the victim through no fault of its own.
  *
  * Only deadlock and lock-wait-timeout errors are retried, with a short growing
- * pause; every other query failure is re-thrown untouched.
+ * pause; every other query failure is re-thrown untouched. The work it wraps has to
+ * be safe to run again from the top.
  */
 trait RetriesOnDeadlock
 {
