@@ -13,6 +13,7 @@ use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Url;
 use Webkul\Core\Contracts\Channel;
+use Webkul\Core\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\Sitemap\Contracts\Sitemap as SitemapContract;
 use Webkul\Sitemap\Models\Category;
 use Webkul\Sitemap\Models\Page;
@@ -20,7 +21,13 @@ use Webkul\Sitemap\Models\Product;
 
 class ProcessSitemap implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * Bounded by the connection's `retry_after`, so a catalogue large enough to outlast that
+     * window is not written twice by two workers racing over the same sitemap files.
+     */
+    public int $timeout;
 
     /**
      * Batch processed.
@@ -42,23 +49,19 @@ class ProcessSitemap implements ShouldQueue
      */
     public function __construct(
         public SitemapContract $sitemap
-    ) {}
+    ) {
+        $this->timeout = static::timeoutWithinRetryAfter();
+    }
 
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        /**
-         * If sitemap is disabled then return.
-         */
         if (! core()->getConfigData('general.sitemap.settings.enabled')) {
             return;
         }
 
-        /**
-         * If the sitemap is already generated then delete the existing sitemap.
-         */
         $this->sitemap->deleteFromStorage();
 
         if ($this->sitemap->channels->isEmpty()) {
@@ -210,11 +213,8 @@ class ProcessSitemap implements ShouldQueue
     }
 
     /**
-     * Build the sub-sitemap or index file path for the given channel.
-     *
-     * Every generated file is rooted under the fixed prefix `sitemaps/{channel_code}/`
-     * so channel isolation on disk is guaranteed regardless of what the user enters
-     * in the sitemap path field.
+     * Build the sub-sitemap or index file path for the given channel, always rooted under the
+     * fixed `sitemaps/{channel_code}/` prefix whatever the user enters as the sitemap path.
      *
      * @param  Channel  $channel
      * @param  int|null  $batch
