@@ -15188,9 +15188,7 @@ protected $defaultChannel;    // Cached default channel
 protected $currentCurrency;   // Cached current currency
 protected $baseCurrency;      // Cached base currency
 protected $currentLocale;     // Cached current locale
-protected $guestCustomerGroup; // Cached guest customer group
 protected $exchangeRates = []; // Cached exchange rates
-protected $taxCategoriesById = []; // Cached tax categories
 protected $singletonInstances = []; // Cached singleton instances
 ```
 
@@ -15600,10 +15598,10 @@ $isPostCodeRequired = core()->isPostCodeRequired();
 
 #### Get guest customer group
 
-Retrieve the guest customer group configuration:
+The guest group is read through the customer group repository, which owns it:
 
 ```php
-$guestGroup = core()->getGuestCustomerGroup();
+$guestGroup = app(\Webkul\Customer\Repositories\CustomerGroupRepository::class)->getGuestGroup();
 ```
 
 ### Utility Methods
@@ -15648,17 +15646,11 @@ $instance = core()->getSingletonInstance($className);
 
 #### Tax-related helpers
 
-Generate tax rate identifiers for view elements:
+A product's tax category comes from its type instance, which reads it through the tax
+category repository:
 
 ```php
-$taxIdentifier = core()->taxRateAsIdentifier($taxRate);
-// Returns: Tax rate with dots replaced by underscores
-```
-
-Get tax category by ID with caching:
-
-```php
-$taxCategory = core()->getTaxCategoryById($id);
+$taxCategory = $product->getTypeInstance()->getTaxCategory();
 ```
 
 #### Email configuration helpers

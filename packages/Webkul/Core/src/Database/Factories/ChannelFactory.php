@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\Locale;
-use Webkul\Inventory\Models\InventorySource;
+use Webkul\Inventory\Models\InventorySourceProxy;
 
 class ChannelFactory extends Factory
 {
@@ -24,7 +24,7 @@ class ChannelFactory extends Factory
     {
         return $this->hasAttached(Currency::inRandomOrder()->limit(1)->get())
             ->hasAttached(Locale::inRandomOrder()->limit(1)->get())
-            ->hasAttached(InventorySource::inRandomOrder()->limit(1)->get(), [], 'inventory_sources')
+            ->hasAttached(InventorySourceProxy::modelClass()::inRandomOrder()->limit(1)->get(), [], 'inventory_sources')
             ->hasTranslations();
     }
 

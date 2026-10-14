@@ -29,7 +29,8 @@ use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Sales\Contracts\InvoiceItem;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Contracts\ShipmentItem;
-use Webkul\Tax\Models\TaxCategory;
+use Webkul\Tax\Contracts\TaxCategory;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 abstract class AbstractType
 {
@@ -673,15 +674,17 @@ abstract class AbstractType
     }
 
     /**
-     * Get tax category.
-     *
-     * @return TaxCategory
+     * Get the tax category the product's prices are taxed under.
      */
-    public function getTaxCategory()
+    public function getTaxCategory(): ?TaxCategory
     {
         $taxCategoryId = $this->product->parent?->tax_category_id ?? $this->product->tax_category_id;
 
-        return core()->getTaxCategoryById($taxCategoryId);
+        if (empty($taxCategoryId)) {
+            return null;
+        }
+
+        return app(TaxCategoryRepository::class)->find($taxCategoryId);
     }
 
     /**

@@ -4,9 +4,19 @@ namespace Webkul\Customer\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Webkul\Customer\Facades\Captcha;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerServiceProvider extends ServiceProvider
 {
+    /**
+     * Register application services. The group repository is shared for the request so the
+     * guest group it memoizes is read once however many consumers ask for it.
+     */
+    public function register(): void
+    {
+        $this->app->scoped(CustomerGroupRepository::class);
+    }
+
     /**
      * Bootstrap application services.
      */

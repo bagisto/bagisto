@@ -450,6 +450,16 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 ## Safety Rails
 
 - **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
+- **Core must not depend on a feature package.** Core is the foundation every other package builds
+  on, so `Feature → Core` is the intended direction and the only one. The single reference Core may
+  make into a feature package is a **`*Proxy` class**, because Concord resolves a proxy to whichever
+  model the application registered, so Core binds to the substitutable stub rather than to the
+  feature package's implementation — that is Bagisto's own extension mechanism and has to keep
+  working. Anything else — a concrete model, a repository, a service — points the wrong way. Fix it
+  by moving the responsibility into the package that owns it, or by having the feature package
+  depend on Core instead; do **not** add an interface merely to satisfy the rule. A reference being
+  worked off goes in `CORE_BOUNDARY_PENDING` with an owner, never to make the test pass.
+  `tests/Unit/CoreBoundaryTest.php` enforces this.
 - **Translations are 23 files per key.** Missing a locale fails CI.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
 - **Do not add/remove composer dependencies without approval.**

@@ -5,6 +5,7 @@ use Webkul\Attribute\Models\Attribute;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductCustomerGroupPrice;
@@ -186,7 +187,7 @@ it('should apply the customer group price of the quantity tier reached', functio
 
     ProductCustomerGroupPrice::factory()->create([
         'product_id' => $product->id,
-        'customer_group_id' => core()->getGuestCustomerGroup()->id,
+        'customer_group_id' => app(CustomerGroupRepository::class)->getGuestGroup()->id,
         'qty' => 5,
         'value_type' => 'fixed',
         'value' => 80,
@@ -204,7 +205,7 @@ it('should apply a percentage customer group discount', function () {
 
     ProductCustomerGroupPrice::factory()->create([
         'product_id' => $product->id,
-        'customer_group_id' => core()->getGuestCustomerGroup()->id,
+        'customer_group_id' => app(CustomerGroupRepository::class)->getGuestGroup()->id,
         'qty' => 1,
         'value_type' => 'discount',
         'value' => 25,

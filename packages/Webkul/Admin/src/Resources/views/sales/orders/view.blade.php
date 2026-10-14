@@ -1,3 +1,5 @@
+@inject('customerGroupRepository', \Webkul\Customer\Repositories\CustomerGroupRepository::class)
+
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
@@ -628,7 +630,7 @@
                                     class="text-gray-600 dark:text-gray-300"
                                     v-pre
                                 >
-                                    @lang('admin::app.sales.orders.view.customer-group') : {{ $order->is_guest ? core()->getGuestCustomerGroup()?->name : ($order->customer->group->name ?? '') }}
+                                    @lang('admin::app.sales.orders.view.customer-group') : {{ $order->is_guest ? $customerGroupRepository->getGuestGroup()?->name : ($order->customer->group->name ?? '') }}
                                 </p>
 
                                 {!! view_render_event('bagisto.admin.sales.order.customer_group.after', ['order' => $order]) !!}
