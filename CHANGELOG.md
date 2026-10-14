@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
 
+- Refactored internals for clearer responsibilities.
+
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
 ## **v2.5.0 (6th of October 2026)** - *Release*
