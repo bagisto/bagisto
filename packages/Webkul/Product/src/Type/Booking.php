@@ -8,7 +8,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -96,11 +96,17 @@ class Booking extends AbstractType
                 isset($data['booking']['type'])
                 && $data['booking']['type'] != 'event'
             ) {
-                if (! empty($data['booking']['available_from']) && strlen($data['booking']['available_from']) <= 10) {
+                if (
+                    ! empty($data['booking']['available_from'])
+                    && strlen($data['booking']['available_from']) <= 10
+                ) {
                     $data['booking']['available_from'] = $data['booking']['available_from'].' 00:00:00';
                 }
 
-                if (! empty($data['booking']['available_to']) && strlen($data['booking']['available_to']) <= 10) {
+                if (
+                    ! empty($data['booking']['available_to'])
+                    && strlen($data['booking']['available_to']) <= 10
+                ) {
                     $data['booking']['available_to'] = $data['booking']['available_to'].' 23:59:59';
                 }
             }
@@ -142,9 +148,9 @@ class Booking extends AbstractType
     }
 
     /**
-     * If the product has inventory, return true if the given cart item has quantity
+     * Whether the given cart item has the quantity its booking needs.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
+     * @param  CartItem  $cartItem
      */
     public function isItemHaveQuantity($cartItem): bool
     {
@@ -153,6 +159,9 @@ class Booking extends AbstractType
         return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->isItemHaveQuantity($cartItem);
     }
 
+    /**
+     * A booking is never short of stock in its own right; its slots and tickets decide.
+     */
     public function haveSufficientQuantity(int $qty): bool
     {
         return true;
@@ -347,7 +356,10 @@ class Booking extends AbstractType
                 && (string) $booking1['slot']['to'] === (string) $booking2['slot']['to'];
         }
 
-        if (isset($booking1['date'], $booking2['date']) && isset($booking1['slot'], $booking2['slot'])) {
+        if (
+            isset($booking1['date'], $booking2['date'])
+            && isset($booking1['slot'], $booking2['slot'])
+        ) {
             return $booking1['date'] === $booking2['date']
                 && (string) $booking1['slot'] === (string) $booking2['slot'];
         }
@@ -398,9 +410,8 @@ class Booking extends AbstractType
     }
 
     /**
-     * Flag the product as discounted whenever any event ticket has an active
-     * special price, so the storefront's "Sale" badge surfaces on the card
-     * even without a catalog rule on the base product.
+     * Whether anything about the booking is discounted, which includes an event ticket on a
+     * special price even when no catalog rule touches the product itself.
      */
     public function haveDiscount($qty = null)
     {
@@ -429,11 +440,8 @@ class Booking extends AbstractType
     }
 
     /**
-     * Render the PDP/card price as "Starting from {base + cheapest extra}" for
-     * booking sub-types whose final price is composed at add-to-cart time:
-     *  - event  → base + cheapest ticket price
-     *  - rental → base + minimum unit rate (1 hour if hourly is offered, otherwise 1 day)
-     * Other sub-types fall through to the default.
+     * Render the price as "starting from" wherever the final figure is only settled at
+     * add-to-cart time, and fall through to the default price for every other sub-type.
      */
     public function getPriceHtml()
     {
@@ -481,12 +489,8 @@ class Booking extends AbstractType
     }
 
     /**
-     * Return the smallest additional amount that will be charged on top of the
-     * product's base price, split into a regular (pre-discount) and final
-     * (post-discount) value so the starting-from price can surface a
-     * strike-through when a ticket's own special price kicks in. Returns null
-     * if the booking sub-type has no computable extra (e.g. rental daily,
-     * event without tickets).
+     * The smallest amount charged on top of the base price, as a regular and a final figure
+     * so the price can be struck through, or null where the sub-type has no computable extra.
      */
     protected function getCheapestBookingExtras($bookingProduct): ?array
     {
@@ -507,11 +511,17 @@ class Booking extends AbstractType
                     ? (float) $ticket->special_price
                     : $regular;
 
-                if ($cheapestRegular === null || $regular < $cheapestRegular) {
+                if (
+                    $cheapestRegular === null
+                    || $regular < $cheapestRegular
+                ) {
                     $cheapestRegular = $regular;
                 }
 
-                if ($cheapestFinal === null || $final < $cheapestFinal) {
+                if (
+                    $cheapestFinal === null
+                    || $final < $cheapestFinal
+                ) {
                     $cheapestFinal = $final;
                 }
             }
@@ -566,7 +576,10 @@ class Booking extends AbstractType
                 function ($attribute, $value, $fail) {
                     $bookingProduct = $this->getBookingProduct($this->product->id);
 
-                    if ($bookingProduct && $value != $bookingProduct->type) {
+                    if (
+                        $bookingProduct
+                        && $value != $bookingProduct->type
+                    ) {
                         $fail(trans('admin::app.catalog.products.edit.types.booking.validations.type-mismatch'));
                     }
                 },
@@ -599,10 +612,8 @@ class Booking extends AbstractType
     }
 
     /**
-     * Rejects configurations where an admin-defined slot window is narrower than
-     * the minimum that can produce a bookable sub-slot. Without this, the saved
-     * product looks fine in the admin form but the storefront grinds out zero
-     * selectable slots on the affected days.
+     * Refuse a slot window narrower than the smallest bookable sub-slot, which would save
+     * cleanly and then offer the shopper nothing on the days it covers.
      */
     protected function validateSlotWindowDurations(array $booking, \Closure $fail): void
     {
@@ -680,7 +691,10 @@ class Booking extends AbstractType
             }
 
             foreach ($entry as $inner) {
-                if (is_array($inner) && isset($inner['from'], $inner['to'])) {
+                if (
+                    is_array($inner)
+                    && isset($inner['from'], $inner['to'])
+                ) {
                     yield $inner;
                 }
             }
@@ -688,13 +702,15 @@ class Booking extends AbstractType
     }
 
     /**
-     * Returns true if the slot window's {from, to} HH:MM strings span at least
-     * the given number of minutes. Overnight windows (to earlier than from) are
-     * treated as crossing midnight.
+     * Whether the window spans at least the given minutes, counting a window that ends
+     * before it starts as crossing midnight.
      */
     protected function slotWindowMeetsDuration(array $entry, int $minMinutes): bool
     {
-        if (empty($entry['from']) || empty($entry['to'])) {
+        if (
+            empty($entry['from'])
+            || empty($entry['to'])
+        ) {
             return true;
         }
 

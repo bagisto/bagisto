@@ -97,7 +97,10 @@ class RentalSlot extends Booking
                     }
                 }
 
-                if ($hasFromBoundary && $hasToBoundary) {
+                if (
+                    $hasFromBoundary
+                    && $hasToBoundary
+                ) {
                     return false;
                 }
             }
@@ -161,7 +164,7 @@ class RentalSlot extends Booking
     /**
      * Validate cart item product price.
      *
-     * @param  \Webkul\Checkout\Models\CartItem  $item
+     * @param  CartItem  $item
      */
     public function validateCartItem($item): CartItemValidationResult
     {
