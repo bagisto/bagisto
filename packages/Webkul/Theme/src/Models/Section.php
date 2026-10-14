@@ -4,9 +4,9 @@ namespace Webkul\Theme\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Admin\Database\Factories\SectionFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Theme\Contracts\Section as SectionContract;
+use Webkul\Theme\Database\Factories\SectionFactory;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Sections\SectionType;
 use Webkul\Theme\SectionSchema;
