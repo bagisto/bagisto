@@ -72,10 +72,8 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Point the application at the disk chosen in Configure -> File Management.
-     *
-     * This runs before anything resolves storage, so a store keeps serving from the
-     * disk it was told to use rather than the one the environment happens to name.
+     * Point the application at the disk chosen in Configure -> File Management, before anything
+     * resolves storage, so a store serves from the disk it was told to use.
      */
     protected function configureStorage(): void
     {

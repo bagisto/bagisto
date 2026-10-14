@@ -7,15 +7,17 @@ use Webkul\Theme\ViewRenderEventManager;
 class PriceNote
 {
     /**
-     * Append a customer-facing note below the product price on the product
-     * detail page when a booking product has a sub-type whose final price is
-     * composed at add-to-cart time (rental, event).
+     * Note below the product price for a booking sub-type whose final price is composed at
+     * add-to-cart time (rental, event).
      */
     public function addNote(ViewRenderEventManager $eventManager): void
     {
         $product = $eventManager->getParam('product');
 
-        if (! $product || $product->type !== 'booking') {
+        if (
+            ! $product
+            || $product->type !== 'booking'
+        ) {
             return;
         }
 

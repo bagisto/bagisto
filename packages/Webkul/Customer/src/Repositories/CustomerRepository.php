@@ -88,23 +88,14 @@ class CustomerRepository extends Repository
      */
     public function syncNewRegisteredCustomerInformation($customer)
     {
-        /**
-         * Setting registered customer to orders.
-         */
         Order::query()->where('customer_email', $customer->email)->update([
             'is_guest' => 0,
             'customer_id' => $customer->id,
             'customer_type' => Customer::class,
         ]);
 
-        /**
-         * Grabbing orders by `customer_id`.
-         */
         $orders = Order::query()->where('customer_id', $customer->id)->get();
 
-        /**
-         * Setting registered customer to associated order's relations.
-         */
         $orders->each(function ($order) use ($customer) {
             $order->addresses()->update([
                 'customer_id' => $customer->id,
