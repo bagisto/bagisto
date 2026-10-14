@@ -447,6 +447,67 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 - **GROUP BY**: PostgreSQL requires every non-aggregated SELECT column in GROUP BY.
 - **`DB::raw()` in `updateOrCreate()`**: fails on INSERT; split into find + update/create.
 
+## Merging The Release Line Into master
+
+`master` is the **2.6** development line. `2.5` is the current release line and `2.4` the previous
+one, and both keep receiving fixes. Every one of those fixes has to reach `master` as well, or the
+next major silently ships without a bug fix the release line already has — a regression nobody
+reported because it was never broken on the branch it was fixed on.
+
+**The flow is one-way.** Release line → `master`, never the reverse. A breaking change lives on
+`master` only, so merging `master` down into `2.5` would put it in a patch release.
+
+### Check what is outstanding, before anything else
+
+```bash
+git fetch origin
+
+# How many commits the release line has that master does not
+git rev-list --count origin/master..origin/2.5
+
+# What they are
+git log --oneline --no-merges origin/master..origin/2.5
+
+# And the files they touch, which is what predicts the conflicts
+git diff --stat origin/master...origin/2.5
+```
+
+A non-zero count is work owed to `master`. Run the same three commands for `origin/2.4` — a fix that
+went to `2.4` has to travel `2.4` → `2.5` → `master`, and skipping the middle leaves `2.5` behind.
+
+### Merge the behaviour, not the diff
+
+**Do not resolve conflicts by picking a side.** `master` is a major ahead of `2.5`, so the same
+behaviour often already exists there in a different shape — classes that moved package, helpers that
+were removed, signatures that were narrowed. Read `UPGRADE.md`'s `master` section before you start;
+it lists exactly what differs.
+
+For each commit that is outstanding:
+
+- **Understand what it fixes**, then apply that fix to `master`'s code. Replaying the diff is how a
+  refactor gets reverted.
+- **If the functionality already exists on `master` in another form, keep `master`'s** and bring over
+  only the behaviour or the fix that is missing from it.
+- **Never revert or overwrite a newer `master` change** to make the release-line code apply. If the
+  two genuinely cannot coexist, stop and ask rather than choosing.
+- **A test that comes with the fix comes too**, adapted to `master`'s API. A fix merged without its
+  test is a fix that will be undone again.
+
+### Verify before you call the merge done
+
+- **Nothing moved backwards.** The version markers belong to `master` and must not be dragged back
+  from the release line: `Core::BAGISTO_VERSION`, `CHANGELOG.md`'s title, this file's heading, and
+  `UPGRADE.md`'s section headings.
+- **`UPGRADE.md` still separates the lines.** A release-line entry belongs under its own release
+  heading; only a change that breaks compatibility with the previous minor belongs under `master`'s.
+- **No duplicate migration.** The same migration arriving by both merge and cherry-pick runs twice
+  under two names. Check `database/migrations` and every `src/Database/Migrations` for a pair with
+  the same intent.
+- **The gates pass on `master`, not on the branch the fix came from** — `vendor/bin/pint --test`,
+  the affected Pest suites, and `php artisan bagisto:translations:check` when a key moved.
+- **The outstanding count is zero.** Re-run `git rev-list --count origin/master..origin/2.5`; if it
+  is not zero, something was dropped in the merge.
+
 ## Safety Rails
 
 - **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
