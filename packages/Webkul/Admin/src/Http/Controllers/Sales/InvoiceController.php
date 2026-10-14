@@ -80,7 +80,7 @@ class InvoiceController extends Controller
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 
-        if (! $this->itemsBelongToOrder($order, array_keys((array) request()->input('invoice.items', [])))) {
+        if (! $order->ownsItems(array_keys((array) request()->input('invoice.items', [])))) {
             session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
 
             return redirect()->back();
@@ -194,9 +194,6 @@ class InvoiceController extends Controller
      */
     protected function itemsBelongToOrder($order, array $itemIds): bool
     {
-        return ! array_diff(
-            array_map('intval', $itemIds),
-            $order->items->pluck('id')->map('intval')->all()
-        );
+        return $order->ownsItems($itemIds);
     }
 }
