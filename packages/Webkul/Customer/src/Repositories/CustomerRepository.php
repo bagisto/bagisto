@@ -7,7 +7,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerGroup;
-use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderProxy;
 
 class CustomerRepository extends Repository
 {
@@ -88,13 +88,13 @@ class CustomerRepository extends Repository
      */
     public function syncNewRegisteredCustomerInformation($customer)
     {
-        Order::query()->where('customer_email', $customer->email)->update([
+        OrderProxy::query()->where('customer_email', $customer->email)->update([
             'is_guest' => 0,
             'customer_id' => $customer->id,
             'customer_type' => Customer::class,
         ]);
 
-        $orders = Order::query()->where('customer_id', $customer->id)->get();
+        $orders = OrderProxy::query()->where('customer_id', $customer->id)->get();
 
         $orders->each(function ($order) use ($customer) {
             $order->addresses()->update([
