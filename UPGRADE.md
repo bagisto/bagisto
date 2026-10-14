@@ -142,6 +142,7 @@ What this changes for custom code:
 - **`RetriesOnDeadlock::isDeadlock()` is gone**, replaced by the framework's `causedByConcurrencyError()`. A class that overrode it to recognise its own error codes no longer has a hook; the framework's detector covers MySQL, MariaDB, PostgreSQL and SQLite.
 - **The work a retry wraps has to be safe to run again from the top.** The index rebuilds are, because each recomputes from current state.
 - **Bounding how long a job may run is the worker's job, not each job's.** Run `queue:work` with a `--timeout` below the connection's `retry_after`, or the queue hands a still-running job to a second worker. The production images pass `--timeout=60` against the default `retry_after` of 90.
+- **`BoundedByRetryAfter` is deleted and no job declares `$timeout`.** The import jobs carried one derived from `retry_after`; they no longer do, so a subclass that read the inherited property has to set its own.
 
 ---
 
