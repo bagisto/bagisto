@@ -45,7 +45,7 @@ abstract class AbstractType
     ) {}
 
     /**
-     * Set current product
+     * Set the current product.
      *
      * @param  Product  $product
      * @return AbstractPriceIndex
@@ -58,7 +58,7 @@ abstract class AbstractType
     }
 
     /**
-     * Set channel
+     * Set the current channel.
      *
      * @param  Channel  $channel
      * @return AbstractPriceIndex
@@ -71,7 +71,7 @@ abstract class AbstractType
     }
 
     /**
-     * Set customer group
+     * Set the current customer group.
      *
      * @param  CustomerGroup  $customerGroup
      * @return AbstractPriceIndex
@@ -84,7 +84,7 @@ abstract class AbstractType
     }
 
     /**
-     * Returns product specific pricing for customer group
+     * Returns product specific pricing for the customer group.
      *
      * @return array
      */
