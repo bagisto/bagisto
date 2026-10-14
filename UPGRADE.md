@@ -15,6 +15,7 @@
 
 - [The View Render Event Manager Moved To Core](#the-view-render-event-manager-moved-to-core)
 - [Core No Longer Resolves Guest Groups Or Tax Categories](#core-no-longer-resolves-guest-groups-or-tax-categories)
+- [Cart Item Type Hints Use The Contract](#cart-item-type-hints-use-the-contract)
 
 ### Low Impact Changes
 
@@ -23,6 +24,7 @@
 - [Narrowed Signatures On Order And Product Types](#narrowed-signatures-on-order-and-product-types)
 - [The Search Term Factory Is Singular](#the-search-term-factory-is-singular)
 - [Gateway Controllers Extend Their Own Base Controller](#gateway-controllers-extend-their-own-base-controller)
+- [Password Reset And Overdue Reminder Mail Is Sent By A Listener](#password-reset-and-overdue-reminder-mail-is-sent-by-a-listener)
 - [The Price Indexer No Longer Takes A Catalog Rule Repository](#the-price-indexer-no-longer-takes-a-catalog-rule-repository)
 - [The Theme Section Factory Moved To Theme](#the-theme-section-factory-moved-to-theme)
 
@@ -246,3 +248,47 @@ use Webkul\Theme\Database\Factories\SectionFactory;
 ```
 
 `Section::factory()` resolves it through `newFactory()`, so only code naming the class directly is affected. It was the only factory in `Webkul\Admin`, so that package no longer has a `Database/Factories` directory.
+
+---
+
+### Password Reset And Overdue Reminder Mail Is Sent By A Listener
+
+**Impact Probability: Low**
+
+Three domain classes named a mail class belonging to a panel, which made `Customer`, `Sales` and `User` depend on `Shop` and `Admin`. The mail classes and their views have **not** moved — the panels keep them, since that is where the templates live. What changed is who initiates the send: the domain fires an event and the panel that owns the email listens for it.
+
+| Fired by | Event | Listened to by |
+|---|---|---|
+| `Customer::sendPasswordResetNotification()` | `customer.password.send_reset_link` | `Webkul\Shop\Listeners\Customer@sendResetLink` |
+| `Admin::sendPasswordResetNotification()` | `admin.password.send_reset_link` | `Webkul\Admin\Listeners\Admin@sendResetLink` |
+| `Invoice::sendInvoiceReminder()` | `sales.invoice.send_overdue_reminder` | `Webkul\Shop\Listeners\Invoice@sendOverdueReminder` |
+
+The emails, their subjects, their views and their recipients are unchanged, and the three public methods keep their signatures, so a store that overrode one of them still works.
+
+Two things to know:
+
+- **The mail is now conditional on a listener.** If a package removes or replaces `ShopServiceProvider`'s or the admin's `EventServiceProvider` listener map without carrying these entries across, the corresponding email silently stops being sent.
+- **These events are a new extension point.** Replacing a reset email no longer means overriding a model method — listen for the event, or unregister the shipped listener and register your own.
+
+---
+
+### Cart Item Type Hints Use The Contract
+
+**Impact Probability: Medium**
+
+`validateCartItem()` and its neighbours were type-hinted on the concrete `Webkul\Checkout\Models\CartItem` in five product types and two booking helpers, while `isCartItemInactive()` three lines away already used the contract. The concrete hint defeats the substitution Concord exists for: register your own cart item model that does not extend Bagisto's and cart validation throws a `TypeError`.
+
+Every one of them now takes `Webkul\Checkout\Contracts\CartItem`:
+
+| Class | Method |
+|---|---|
+| `Product\Type\AbstractType` | `validateCartItem()`, `isCartItemInactive()` |
+| `Product\Type\{Bundle, Configurable, Downloadable, Booking}` | `validateCartItem()` |
+| `BookingProduct\Helpers\Booking` | `validateCartItem()`, `updateCartItemPrice()` |
+| `BookingProduct\Helpers\EventTicket` | `validateCartItem()` |
+
+`Simple` and `Virtual` already used the contract and are unchanged.
+
+**A product type or booking helper that overrides one of these has to widen its own hint too.** PHP requires an override's parameter type to be the same or wider, so a subclass left on `Models\CartItem` is a fatal error once the parent takes the contract — the one thing in this release that fails at load rather than at runtime. Passing a cart item is otherwise unchanged, since the shipped model implements the contract.
+
+`tests/Unit/CartItemContractTest.php` now fails the build if a cart item is hinted on the concrete model again.
