@@ -17,6 +17,10 @@
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
 - [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
+- [Total Due Discounts Cancelled Quantities](#total-due-discounts-cancelled-quantities)
+- [A Search Term Is Unique Within A Channel And Locale](#a-search-term-is-unique-within-a-channel-and-locale)
+- [Index Jobs Declare A Timeout](#index-jobs-declare-a-timeout)
+- [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
 
 ---
 
@@ -71,6 +75,63 @@ $reviews = $this->productReviewRepository->getCustomerReviews(
     auth()->guard('customer')->id()
 );
 ```
+
+---
+
+### Total Due Discounts Cancelled Quantities
+
+**Impact Probability: Low**
+
+An order's grand total is left alone when an item is cancelled, so `grand_total - grand_total_invoiced` overstated what was still owed. `Order::getTotalDueAttribute()` and `getBaseTotalDueAttribute()` now take the cancelled quantities off that figure, each in its own currency, and both answer `0` for a cancelled order.
+
+The storefront account page computed this in the template before, and did it wrong in two different ways: the order-currency row subtracted `base_price`, mixing the two currencies, and the base-currency row rendered a base amount with the order's currency code. Both read the accessor now. The admin order view showed the raw `base_total_due` and so disagreed with the storefront; it now agrees.
+
+What this changes for custom code:
+
+- **A store whose order currency differs from its base currency sees different figures** on the admin order view and the storefront account page. They were wrong before.
+- **The accessors read `$order->items`**, so eager-load it where you read them in a loop.
+- **A template that repeated the old arithmetic should be deleted** rather than kept in step. The cancelled amount is taken at the item price only, as it was before; tax and discount on the cancelled quantity are still not apportioned.
+
+---
+
+### A Search Term Is Unique Within A Channel And Locale
+
+**Impact Probability: Low**
+
+`search_terms` carried no unique constraint, and `UpdateCreateSearchTerm` read the row before creating it, so two shoppers searching the same new term both inserted it. The counter then split across the duplicates and the admin listing showed the term twice.
+
+A migration adds `search_terms_term_channel_locale_unique` over `(term, channel_id, locale)`. **It folds existing duplicates into one row first**, so the index can be added to a table that already has them: the earliest `id` survives, `uses` is summed, `results` is taken from the most recently updated row, the first non-empty `redirect_url` is kept and `display_in_suggested_terms` takes the highest value. The rest are deleted.
+
+What this changes for custom code:
+
+- **Recording a search goes through `SearchTermRepository::recordSearch()`**, which increments an existing row atomically and falls back to the increment when its insert loses the race. Code that read the term and then created it hits the constraint instead.
+- **Inserting a duplicate now throws** `Illuminate\Database\UniqueConstraintViolationException`.
+- **`SearchTermsFactory` appends a discriminator to the term** so it can make more than one row. A test that asserted on the bare word needs the factory's value instead.
+
+---
+
+### Index Jobs Declare A Timeout
+
+**Impact Probability: Low**
+
+Past the queue connection's `retry_after`, the queue treats a job as abandoned and hands the payload to a second worker while the first still runs it. The price, inventory, search and catalog-rule index jobs and the sitemap job declared no timeout, so a long run could be executed twice over the same rows. Each now derives one from `retry_after`, as the import jobs already did, and the jobs that write the shared index tables retry a deadlock instead of failing.
+
+What this changes for custom code:
+
+- **A reindex that takes longer than the timeout now fails** rather than running on. The timeout is `retry_after` less thirty seconds, so the default ninety becomes sixty. Raise the connection's `retry_after` if a batch legitimately needs longer and the timeout follows it.
+- **A subclass of one of these jobs inherits `public int $timeout`** and has to set it in its own constructor if it declares one.
+
+---
+
+### The Production Images Run A Queue Worker
+
+**Impact Probability: Low**
+
+The images in `docker/production/` ran only the web server, PHP and the bundled database, so with `.env.example`'s `QUEUE_CONNECTION=sync` every queued job — order mail, the post-order price and inventory reindex, search terms, sitemap generation — ran inside the request that dispatched it.
+
+Supervisor now also runs `queue:work --queue=default,broadcastable`, and the entrypoint sets `QUEUE_CONNECTION` to `database` after the build-time install. Pass `QUEUE_CONNECTION=sync` to the container to go back to running that work inline; the worker then idles.
+
+This changes nothing for an installation that is not built from those images. `.env.example` still ships `sync`, which is what an installation with no worker needs: the work still happens, just inside the request.
 
 ## Upgrading To v2.5.0 From v2.4
 
