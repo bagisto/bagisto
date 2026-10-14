@@ -8,7 +8,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Webkul\Core\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\DataTransfer\Helpers\Import as ImportHelper;
 use Webkul\DataTransfer\Repositories\ImportRepository;
 
@@ -22,19 +21,13 @@ use Webkul\DataTransfer\Repositories\ImportRepository;
  */
 class ValidateChunk implements ShouldQueue
 {
-    use Batchable, BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * A row-level failure is recorded in the fragment rather than thrown, so the
      * job never needs a retry.
      */
     public int $tries = 1;
-
-    /**
-     * Bounded by the connection's `retry_after` so the queue can never hand this
-     * window to a second worker while this one still holds it.
-     */
-    public int $timeout;
 
     /**
      * Create a new job instance.
@@ -44,9 +37,7 @@ class ValidateChunk implements ShouldQueue
         protected int $offset,
         protected int $limit,
         protected int $chunkIndex,
-    ) {
-        $this->timeout = static::timeoutWithinRetryAfter();
-    }
+    ) {}
 
     /**
      * Execute the job.

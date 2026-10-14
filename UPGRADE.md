@@ -16,7 +16,7 @@
 
 ### Low Impact Changes
 
-- [The Queue Concerns Moved To Core](#the-queue-concerns-moved-to-core)
+- [The Deadlock Retry Concern Moved To Core](#the-deadlock-retry-concern-moved-to-core)
 - [The Invoice Overdue Command Moved To Sales](#the-invoice-overdue-command-moved-to-sales)
 - [Narrowed Signatures On Order And Product Types](#narrowed-signatures-on-order-and-product-types)
 
@@ -72,23 +72,23 @@ What this changes for custom code:
 
 ---
 
-### The Queue Concerns Moved To Core
+### The Deadlock Retry Concern Moved To Core
 
 **Impact Probability: Low**
 
-`BoundedByRetryAfter` and `RetriesOnDeadlock` are generic queue infrastructure, not import behaviour, and the index jobs that now use them sit below DataTransfer:
+`RetriesOnDeadlock` is generic queue infrastructure rather than import behaviour, and the index jobs that now use it sit below DataTransfer:
 
 ```php
 // Before
-use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 
 // After
-use Webkul\Core\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\Core\Jobs\Concerns\RetriesOnDeadlock;
 ```
 
-Both traits are otherwise unchanged: `timeoutWithinRetryAfter()` and `retryOnDeadlock()` keep their signatures and behaviour.
+`retryOnDeadlock()` keeps its signature. What counts as a lock conflict is now the framework's own judgement rather than a pair of MySQL error codes, so the retry works on PostgreSQL and MariaDB too; `isDeadlock()` is gone with it.
+
+`BoundedByRetryAfter` is **deleted**. A job no longer carries its own timeout — bounding how long one may run is the worker's job, so run `queue:work` with a `--timeout` below the connection's `retry_after`. The production images pass `--timeout=60` against the default `retry_after` of 90. A subclass of one of the import or index jobs that read the inherited `$timeout` has to set its own.
 
 ---
 

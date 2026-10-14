@@ -8,7 +8,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Webkul\Core\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\DataTransfer\Helpers\Import as ImportHelper;
 use Webkul\DataTransfer\Repositories\ImportRepository;
 
@@ -21,7 +20,7 @@ use Webkul\DataTransfer\Repositories\ImportRepository;
  */
 class DownloadImages implements ShouldQueue
 {
-    use Batchable, BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * A fetch failure is recorded per image rather than thrown, so the job itself
@@ -30,21 +29,13 @@ class DownloadImages implements ShouldQueue
     public int $tries = 1;
 
     /**
-     * Bounded by the connection's `retry_after` so the queue can never hand this
-     * wave to a second worker while this one still holds it.
-     */
-    public int $timeout;
-
-    /**
      * Create a new job instance.
      */
     public function __construct(
         protected int $importId,
         protected array $urls,
         protected int $chunkIndex,
-    ) {
-        $this->timeout = static::timeoutWithinRetryAfter();
-    }
+    ) {}
 
     /**
      * Execute the job.
