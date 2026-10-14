@@ -34,10 +34,10 @@ take the form of a pull request containing a failing test.
 
 ## Which branch should you target?
 
-The active branches are **`2.4`** (the current release line) and **`master`**
-(the next release line, currently 2.5). Older lines — `1.x`, `2.1`, `2.2`, `2.3` — receive no new work.
+The active branches are **`2.4`** and **`2.5`** (the current release lines) and **`master`**
+(the next release line, currently 2.6). Older lines — `1.x`, `2.1`, `2.2`, `2.3` — receive no new work.
 
-- **Bug fixes** go to the release line the bug affects, usually `2.4`.
+- **Bug fixes** go to the release line the bug affects, usually `2.5`.
 - **Minor, backwards-compatible improvements** go to the same release line.
 - **Major features and breaking changes** go to `master`.
 

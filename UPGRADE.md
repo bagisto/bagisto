@@ -1,15 +1,15 @@
 # UPGRADE Guide
 
-- [Upgrading To master From v2.5](#upgrading-to-master-from-v25)
+- [Upgrading To v2.6.0 From v2.5](#upgrading-to-v260-from-v25)
 - [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
 - [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
 
-## Upgrading To master From v2.5
+## Upgrading To v2.6.0 From v2.5
 
 > [!IMPORTANT]
-> **Next major.** `master` is the development branch for the release after 2.5, and this section covers only what breaks compatibility with v2.5. Everything merged into the `2.5` branch is documented under its own release below and applies to `master` as well.
+> **Upcoming release.** v2.6.0 is not out yet — this section covers the changes already merged into `master` that break compatibility with v2.5, and is still being added to. Everything merged into the `2.5` branch is documented under its own release below and applies to v2.6.0 as well.
 >
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 

@@ -1,6 +1,6 @@
-# AGENTS.md — Instructions for Bagisto 2.5.x
+# AGENTS.md — Instructions for Bagisto 2.6.x
 
-Bagisto 2.5.x is an open-source Laravel 13 e-commerce platform: PHP 8.4+, Vue.js 3, Tailwind CSS 4,
+Bagisto 2.6.x is an open-source Laravel 13 e-commerce platform: PHP 8.4+, Vue.js 3, Tailwind CSS 4,
 Vite 6. It runs on MySQL 8.0, MariaDB 10.11 or PostgreSQL 16; all three are first-class and CI
 covers each.
 
