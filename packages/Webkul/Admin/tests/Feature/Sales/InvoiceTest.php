@@ -83,6 +83,34 @@ it('should invoice the ordered quantity, record it on the item and move the orde
         ->and((float) $order->total_due)->toBePrice(0);
 });
 
+it('should record a payment transaction when the admin asks for one with the invoice', function () {
+    $order = $this->createOrder(['payment_method' => 'cashondelivery']);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 1]],
+        'can_create_transaction' => '1',
+    ])->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseHas('order_transactions', [
+        'order_id' => $order->id,
+        'invoice_id' => Invoice::query()->where('order_id', $order->id)->value('id'),
+    ]);
+});
+
+it('should record no payment transaction when the admin does not ask for one', function () {
+    $order = $this->createOrder(['payment_method' => 'cashondelivery']);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 1]],
+    ])->assertRedirect(route('admin.sales.orders.view', $order->id));
+
+    $this->assertDatabaseMissing('order_transactions', ['order_id' => $order->id]);
+});
+
 it('should complete an order of non-stockable items as soon as it is invoiced', function () {
     $order = $this->createOrder(items: [['product' => $this->createVirtualProduct(), 'qty_ordered' => 1]]);
 
