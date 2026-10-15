@@ -2,9 +2,11 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Paypal\Enums\IpnStatus;
 use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -82,13 +84,19 @@ class StandardController extends Controller
     }
 
     /**
-     * Paypal IPN listener.
-     *
-     * @return Response
+     * Paypal IPN listener, answering with an error only when PayPal should send it again.
      */
-    public function ipn()
+    public function ipn(): JsonResponse
     {
-        $this->ipnHelper->processIpn(request()->all());
+        try {
+            $status = $this->ipnHelper->processIpn(request()->all());
+        } catch (\Throwable $e) {
+            report($e);
+
+            return new JsonResponse(['status' => IpnStatus::ERROR->value], 500);
+        }
+
+        return new JsonResponse(['status' => $status->value]);
     }
 
     /**
