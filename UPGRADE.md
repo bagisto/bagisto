@@ -17,6 +17,7 @@
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
 - [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
+- [The Invoice Payment Transaction Is Created By The Controller](#the-invoice-payment-transaction-is-created-by-the-controller)
 
 ---
 
@@ -70,6 +71,36 @@ $reviews = $this->productReviewRepository->getCustomerReview();
 $reviews = $this->productReviewRepository->getCustomerReviews(
     auth()->guard('customer')->id()
 );
+```
+
+---
+
+### The Invoice Payment Transaction Is Created By The Controller
+
+**Impact Probability: Low**
+
+Invoicing an order from the admin with *Create Transaction* ticked used to be carried out by `Webkul\Admin\Listeners\Invoice`, which read the request inside the listener. That listener fires for every invoice, including the ones a payment gateway raises with no request behind it, so the check now sits in `Webkul\Admin\Http\Controllers\Sales\InvoiceController::store()` — the one place the form posts to — and the invoice and its transaction are written in a single database transaction.
+
+What this changes for custom code:
+
+- **`Webkul\Admin\Listeners\Invoice::createTransaction()` is gone**, together with the `OrderTransactionRepository` the listener took in its constructor. The listener now only sends the admin notification. `OrderTransactionRepository::createForInvoice()` builds the same row from the invoice.
+- **`InvoiceController` takes `OrderTransactionRepository` in its constructor**, so resolve it through the container rather than building it by hand.
+- **The invoice carried by `sales.invoice.save.after` no longer has a `can_create_transaction` attribute.** It was never a column, and setting it left the model unsaveable, so saving the invoice again in the same request failed. A listener that read it should read `request()->boolean('can_create_transaction')` itself.
+
+```php
+// Before
+$this->orderTransactionRepository->create([
+    'transaction_id' => md5(uniqid()),
+    'status' => $invoice->state,
+    'type' => $invoice->order->payment->method,
+    'payment_method' => $invoice->order->payment->method,
+    'order_id' => $invoice->order->id,
+    'invoice_id' => $invoice->id,
+    'amount' => $invoice->grand_total,
+]);
+
+// After
+$this->orderTransactionRepository->createForInvoice($invoice);
 ```
 
 ## Upgrading To v2.5.0 From v2.4
