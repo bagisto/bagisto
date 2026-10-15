@@ -3,7 +3,7 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -536,17 +536,11 @@ class Bundle extends AbstractType
      */
     public function haveSufficientQuantity(int $qty): bool
     {
-        // to consider a bundle in stock we need to check that at least one product from each required group is available for the given quantity
         foreach ($this->product->bundle_options as $option) {
-            if ($option->is_required) {
-                foreach ($option->bundle_option_products as $bundleOptionProduct) {
-                    // as long as at least one product in the required group is available we can continue checking other groups
-                    if ($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
-                        continue 2;
-                    }
-                }
-
-                // if any required option does not have any in-stock product option we will get here.
+            if (
+                $option->is_required
+                && ! $this->hasStockedOptionProduct($option, $qty)
+            ) {
                 return false;
             }
         }
@@ -555,7 +549,7 @@ class Bundle extends AbstractType
     }
 
     /**
-     * Returns price indexer class for a specific product type
+     * Returns the price indexer class for this product type.
      *
      * @return string
      */
@@ -590,5 +584,20 @@ class Bundle extends AbstractType
                 }
             },
         ];
+    }
+
+    /**
+     * Whether any one product in a bundle option can cover the quantity the bundle asks of it,
+     * which is all a required option needs for the bundle itself to be in stock.
+     */
+    protected function hasStockedOptionProduct($option, int $qty): bool
+    {
+        foreach ($option->bundle_option_products as $bundleOptionProduct) {
+            if ($bundleOptionProduct->product->haveSufficientQuantity($bundleOptionProduct->qty * $qty)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

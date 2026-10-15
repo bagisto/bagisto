@@ -10,8 +10,8 @@ use Illuminate\Support\Str;
 use Webkul\Attribute\Contracts\Attribute;
 use Webkul\Attribute\Contracts\Group;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Contracts\Wishlist;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Contracts\ProductInventoryIndex;
@@ -29,7 +29,8 @@ use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Sales\Contracts\InvoiceItem;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Contracts\ShipmentItem;
-use Webkul\Tax\Models\TaxCategory;
+use Webkul\Tax\Contracts\TaxCategory;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 abstract class AbstractType
 {
@@ -382,7 +383,7 @@ abstract class AbstractType
     }
 
     /**
-     * Is the administrator able to copy products of this type in the admin backend?
+     * Whether the admin may copy a product of this type.
      */
     public function canBeCopied(): bool
     {
@@ -410,7 +411,7 @@ abstract class AbstractType
     /**
      * Is item have quantity.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
+     * @param  CartItem  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -435,7 +436,7 @@ abstract class AbstractType
     /**
      * Return true if item can be moved to cart from wishlist.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @param  CartItem  $item
      * @return bool
      */
     public function canBeMovedFromWishlistToCart($item)
@@ -673,15 +674,17 @@ abstract class AbstractType
     }
 
     /**
-     * Get tax category.
-     *
-     * @return TaxCategory
+     * Get the tax category the product's prices are taxed under.
      */
-    public function getTaxCategory()
+    public function getTaxCategory(): ?TaxCategory
     {
         $taxCategoryId = $this->product->parent?->tax_category_id ?? $this->product->tax_category_id;
 
-        return core()->getTaxCategoryById($taxCategoryId);
+        if (empty($taxCategoryId)) {
+            return null;
+        }
+
+        return app(TaxCategoryRepository::class)->find($taxCategoryId);
     }
 
     /**
@@ -799,8 +802,8 @@ abstract class AbstractType
     /**
      * Get actual ordered item.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return \Webkul\Checkout\Contracts\CartItem|OrderItem|InvoiceItem|ShipmentItem|Wishlist
+     * @param  CartItem  $item
+     * @return CartItem|OrderItem|InvoiceItem|ShipmentItem|Wishlist
      */
     public function getOrderedItem($item)
     {
@@ -810,7 +813,7 @@ abstract class AbstractType
     /**
      * Get product base image.
      *
-     * @param  \Webkul\Customer\Contracts\CartItem|\Webkul\Checkout\Contracts\CartItem  $item
+     * @param  CartItem  $item
      * @return array
      */
     public function getBaseImage($item)
@@ -857,7 +860,7 @@ abstract class AbstractType
     /**
      * Returns true, if cart item is inactive.
      */
-    public function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
+    public function isCartItemInactive(CartItem $item): bool
     {
         if (! $item->product->status) {
             return true;

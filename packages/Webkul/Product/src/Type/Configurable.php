@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Webkul\Admin\Validations\ConfigurableUniqueSku;
 use Webkul\Checkout\Contracts\CartItem;
-use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Customer\Contracts\Wishlist;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -489,10 +488,8 @@ class Configurable extends AbstractType
 
     /**
      * Validate cart item product price.
-     *
-     * @param  \Webkul\Product\Type\CartItem  $item
      */
-    public function validateCartItem(CartItemModel $item): CartItemValidationResult
+    public function validateCartItem(CartItem $item): CartItemValidationResult
     {
         $validation = new CartItemValidationResult;
 

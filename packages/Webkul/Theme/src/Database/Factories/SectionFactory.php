@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Database\Factories;
+namespace Webkul\Theme\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Theme\Enums\SectionTypeEnum;

@@ -5,13 +5,13 @@ namespace Webkul\BookingProduct\Helpers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Webkul\BookingProduct\Contracts\BookingProduct;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class EventTicket extends Booking
 {
     /**
-     * Returns event date
+     * Returns the date the event runs on.
      *
      * @param  BookingProduct  $bookingProduct
      */
@@ -29,7 +29,10 @@ class EventTicket extends Booking
      */
     public function getCheapestTicketPrice($bookingProduct): float
     {
-        if (! $bookingProduct || ! $bookingProduct->event_tickets()->count()) {
+        if (
+            ! $bookingProduct
+            || ! $bookingProduct->event_tickets()->count()
+        ) {
             return 0;
         }
 
@@ -38,7 +41,10 @@ class EventTicket extends Booking
         foreach ($bookingProduct->event_tickets as $ticket) {
             $price = $this->isInSale($ticket) ? $ticket->special_price : $ticket->price;
 
-            if ($cheapest === null || $price < $cheapest) {
+            if (
+                $cheapest === null
+                || $price < $cheapest
+            ) {
                 $cheapest = $price;
             }
         }
@@ -47,7 +53,7 @@ class EventTicket extends Booking
     }
 
     /**
-     * Returns tickets
+     * Returns the tickets the event is sold by.
      *
      * @param  BookingProduct  $bookingProduct
      */
@@ -96,7 +102,7 @@ class EventTicket extends Booking
     /**
      * Return the item if it has a quantity.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * @param  CartItem|array  $cartItem
      */
     public function isItemHaveQuantity($cartItem): bool
     {
@@ -118,7 +124,7 @@ class EventTicket extends Booking
     /**
      * Returns the remaining available quantity for the event ticket.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * @param  CartItem|array  $cartItem
      */
     public function getAvailableTicketQuantity($cartItem): int
     {

@@ -16,7 +16,6 @@ use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Transformers\OrderResource;
-use Webkul\Shop\Http\Controllers\Controller;
 
 class PayGlocalController extends Controller
 {

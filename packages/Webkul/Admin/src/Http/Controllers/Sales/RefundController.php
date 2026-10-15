@@ -78,6 +78,12 @@ class RefundController extends Controller
             $data['refund']['shipping'] = 0;
         }
 
+        if (! $order->ownsItems(array_keys((array) ($data['refund']['items'] ?? [])))) {
+            session()->flash('error', trans('admin::app.sales.refunds.create.invalid-qty'));
+
+            return redirect()->back();
+        }
+
         try {
             $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund'], $orderId);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Theme;
+namespace Webkul\Core\View;
 
 use Illuminate\Support\Facades\Event;
 

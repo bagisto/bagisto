@@ -12,20 +12,20 @@ use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingRepository;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class Booking
 {
     /**
-     * Summary of typeRepositories
+     * The repository each booking type stores its own data through.
      *
      * @var array
      */
     protected $typeRepositories = [];
 
     /**
-     * Summary of typeHelpers
+     * The helper that knows how each booking type is sold.
      *
      * @var array
      */
@@ -38,7 +38,7 @@ class Booking
     ];
 
     /**
-     * Summary of daysOfWeek
+     * The weekday names, indexed the way the slot arrays are.
      *
      * @var array
      */
@@ -119,7 +119,10 @@ class Booking
                 : [];
 
             $filteredSlots = array_values(array_filter($convertedSlots, function ($slot) use ($minDuration) {
-                if (empty($slot['from']) || empty($slot['to'])) {
+                if (
+                    empty($slot['from'])
+                    || empty($slot['to'])
+                ) {
                     return false;
                 }
 
@@ -191,7 +194,7 @@ class Booking
     /**
      * Returns is item have quantity.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * @param  CartItem|array  $cartItem
      */
     public function isItemHaveQuantity($cartItem)
     {
@@ -224,7 +227,7 @@ class Booking
     /**
      * Returns slots that are going to expire.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * @param  CartItem|array  $cartItem
      */
     public function isSlotExpired($cartItem): bool
     {
@@ -300,11 +303,8 @@ class Booking
     }
 
     /**
-     * Returns specific dates that should be disabled in the date picker even though
-     * the weekday is otherwise valid. Primarily covers the "today with all slots
-     * already passed" case — e.g. a product with a single Monday morning slot should
-     * grey out Monday after the slot start time, instead of letting the customer
-     * click through to an empty slot list.
+     * Returns the dates the picker disables although their weekday is bookable, which is
+     * today once every slot it offers has already started.
      */
     private function getDisabledDates(BookingProduct $bookingProduct): array
     {
@@ -351,7 +351,10 @@ class Booking
             return $allDays;
         }
 
-        if ($bookingProduct->type === 'default' && ($slot->booking_type ?? null) === 'one') {
+        if (
+            $bookingProduct->type === 'default'
+            && ($slot->booking_type ?? null) === 'one'
+        ) {
             $weekdays = [];
 
             foreach ($slot->slots ?? [] as $entry) {
@@ -365,7 +368,10 @@ class Booking
          * Pure-daily rental doesn't use weekday slot config — available every day
          * within the product's overall availability window.
          */
-        if ($bookingProduct->type === 'rental' && ($slot->renting_type ?? null) === 'daily') {
+        if (
+            $bookingProduct->type === 'rental'
+            && ($slot->renting_type ?? null) === 'daily'
+        ) {
             return $allDays;
         }
 
@@ -415,9 +421,8 @@ class Booking
     }
 
     /**
-     * Checks whether any slot entry in the given list is at least one hour wide —
-     * the minimum window `slotsCalculation` needs to emit a bookable sub-slot for
-     * rental hourly products.
+     * Whether any entry is at least an hour wide, the narrowest window a bookable rental
+     * sub-slot can come out of.
      */
     private function hasUsableRentalSlotEntry(array $entries): bool
     {
@@ -510,7 +515,7 @@ class Booking
     /**
      * Returns true if the cart item is inactive.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $item
+     * @param  CartItem|array  $item
      */
     public function isCartItemInactive($item): bool
     {
@@ -635,7 +640,10 @@ class Booking
                 ) {
                     $qty = $timeDuration['qty'] ?? 1;
 
-                    if ($qty && Carbon::now() <= $from) {
+                    if (
+                        $qty
+                        && Carbon::now() <= $from
+                    ) {
                         if ($bookingProduct->type == 'rental') {
                             if (! isset($slots[$index])) {
                                 $slots[$index]['time'] = $startDayTime->format('h:i A').' - '.$endDayTime->format('h:i A');
@@ -667,7 +675,10 @@ class Booking
             }
         }
 
-        if (! empty($slots) && $bookingProduct->type != 'rental') {
+        if (
+            ! empty($slots)
+            && $bookingProduct->type != 'rental'
+        ) {
             usort($slots, fn ($first, $second) => strtotime($first['from']) <=> strtotime($second['from']));
         }
 
@@ -675,7 +686,7 @@ class Booking
     }
 
     /**
-     * Convert time from 24 to 12 hour format
+     * Convert the slot times from 24 to 12 hour format.
      */
     private function convert24To12Hours(array $slots): array
     {
@@ -880,7 +891,10 @@ class Booking
                     : trans('shop::app.products.booking.cart.per-guest'),
             ];
 
-            if ($tableSlot->price_type == 'table' && $tableSlot->guest_limit) {
+            if (
+                $tableSlot->price_type == 'table'
+                && $tableSlot->guest_limit
+            ) {
                 $attributes[] = [
                     'attribute_name' => trans('shop::app.products.booking.cart.guest-limit'),
                     'option_id' => 0,

@@ -10,7 +10,7 @@ use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
 use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\Checkout\Contracts\Cart;
-use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Rule\Helpers\Validator;
 
@@ -519,12 +519,15 @@ class CartRule
     /**
      * Distribute the parent item's discount across its children proportionally.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
+     * @param  CartItem  $item
      * @return void
      */
     protected function divideDiscount($item)
     {
-        if (! $item->discount_amount && ! $item->base_discount_amount) {
+        if (
+            ! $item->discount_amount
+            && ! $item->base_discount_amount
+        ) {
             return;
         }
 
@@ -561,11 +564,7 @@ class CartRule
                 return false;
             }
 
-            /** @var \Webkul\CartRule\Models\CartRule $rule */
-            // Use the eloquent relation rather than the coupon repository
-            // here so the `cart_rule_id` scope is applied automatically and
-            // we avoid the extra repository indirection.
-            $coupon = $rule->cart_rule_coupon()->where('code', $this->cart->coupon_code)->first();
+            $coupon = $this->couponHeldByRule($rule);
 
             if (
                 $coupon
@@ -614,5 +613,16 @@ class CartRule
         }
 
         return true;
+    }
+
+    /**
+     * The coupon a rule holds for the code the cart carries, read through the rule's own relation
+     * so its scope applies without a second trip through the coupon repository.
+     *
+     * @param  \Webkul\CartRule\Models\CartRule  $rule
+     */
+    protected function couponHeldByRule($rule)
+    {
+        return $rule->cart_rule_coupon()->where('code', $this->cart->coupon_code)->first();
     }
 }

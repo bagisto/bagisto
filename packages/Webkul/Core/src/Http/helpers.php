@@ -7,6 +7,7 @@ use Webkul\Core\Facades\Core;
 use Webkul\Core\Facades\DbGrammar;
 use Webkul\Core\Facades\Menu;
 use Webkul\Core\Facades\SystemConfig;
+use Webkul\Core\View\ViewRenderEventManager;
 
 if (! function_exists('core')) {
     /**
@@ -110,6 +111,11 @@ if (! function_exists('clean_content')) {
 }
 
 if (! function_exists('array_permutation')) {
+    /**
+     * Every combination of one value from each of the given arrays.
+     *
+     * @return array<int, array>
+     */
     function array_permutation($input)
     {
         $results = [];
@@ -144,5 +150,19 @@ if (! function_exists('array_permutation')) {
         }
 
         return $results;
+    }
+}
+
+if (! function_exists('view_render_event')) {
+    /**
+     * Collect and render whatever listeners contribute at the named point in a view.
+     *
+     * @return mixed
+     */
+    function view_render_event(string $eventName, mixed $params = null)
+    {
+        return app(ViewRenderEventManager::class)
+            ->handleRenderEvent($eventName, $params)
+            ->render();
     }
 }

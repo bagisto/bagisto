@@ -3,7 +3,6 @@
 namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Illuminate\Support\Carbon;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 use Webkul\Core\Contracts\Channel;
 use Webkul\Customer\Contracts\CustomerGroup;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -40,12 +39,11 @@ abstract class AbstractType
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository
     ) {}
 
     /**
-     * Set current product
+     * Set the current product.
      *
      * @param  Product  $product
      * @return AbstractPriceIndex
@@ -58,7 +56,7 @@ abstract class AbstractType
     }
 
     /**
-     * Set channel
+     * Set the current channel.
      *
      * @param  Channel  $channel
      * @return AbstractPriceIndex
@@ -71,7 +69,7 @@ abstract class AbstractType
     }
 
     /**
-     * Set customer group
+     * Set the current customer group.
      *
      * @param  CustomerGroup  $customerGroup
      * @return AbstractPriceIndex
@@ -84,7 +82,7 @@ abstract class AbstractType
     }
 
     /**
-     * Returns product specific pricing for customer group
+     * Returns product specific pricing for the customer group.
      *
      * @return array
      */

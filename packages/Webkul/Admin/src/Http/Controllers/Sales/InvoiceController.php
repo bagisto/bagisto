@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -15,6 +16,7 @@ use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class InvoiceController extends Controller
 {
@@ -27,6 +29,7 @@ class InvoiceController extends Controller
      */
     public function __construct(
         protected OrderRepository $orderRepository,
+        protected OrderTransactionRepository $orderTransactionRepository,
         protected InvoiceRepository $invoiceRepository,
     ) {}
 
@@ -61,7 +64,7 @@ class InvoiceController extends Controller
     }
 
     /**
-     * (Store) a newly created resource in storage.
+     * Store a newly created resource in storage.
      *
      * @return Response
      */
@@ -80,7 +83,7 @@ class InvoiceController extends Controller
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 
-        if (! $this->itemsBelongToOrder($order, array_keys((array) request()->input('invoice.items', [])))) {
+        if (! $order->ownsItems(array_keys((array) request()->input('invoice.items', [])))) {
             session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
 
             return redirect()->back();
@@ -98,9 +101,15 @@ class InvoiceController extends Controller
             return redirect()->back();
         }
 
-        $this->invoiceRepository->create(array_merge(request()->all(), [
-            'order_id' => $orderId,
-        ]));
+        DB::transaction(function () use ($orderId) {
+            $invoice = $this->invoiceRepository->create(array_merge(request()->all(), [
+                'order_id' => $orderId,
+            ]));
+
+            if (request()->boolean('can_create_transaction')) {
+                $this->orderTransactionRepository->createForInvoice($invoice);
+            }
+        });
 
         session()->flash('success', trans('admin::app.sales.invoices.create.create-success'));
 
@@ -187,16 +196,5 @@ class InvoiceController extends Controller
         return new JsonResponse([
             'message' => trans('admin::app.sales.invoices.index.datagrid.mass-update-success'),
         ], 200);
-    }
-
-    /**
-     * Whether every item the request names is one the order carries.
-     */
-    protected function itemsBelongToOrder($order, array $itemIds): bool
-    {
-        return ! array_diff(
-            array_map('intval', $itemIds),
-            $order->items->pluck('id')->map('intval')->all()
-        );
     }
 }

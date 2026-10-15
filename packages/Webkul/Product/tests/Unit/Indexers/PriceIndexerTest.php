@@ -3,6 +3,7 @@
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductPriceIndex;
@@ -46,7 +47,7 @@ function indexedMinPriceOf(Product $product): float
 {
     return (float) ProductPriceIndex::query()
         ->where('product_id', $product->id)
-        ->where('customer_group_id', core()->getGuestCustomerGroup()->id)
+        ->where('customer_group_id', app(CustomerGroupRepository::class)->getGuestGroup()->id)
         ->where('channel_id', core()->getDefaultChannel()->id)
         ->value('min_price');
 }

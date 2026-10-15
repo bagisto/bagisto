@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Console\Commands\BagistoVersion;
 use Webkul\Core\Console\Commands\ExchangeRateUpdate;
-use Webkul\Core\Console\Commands\InvoiceOverdueCron;
 use Webkul\Core\Console\Commands\TranslationsChecker;
 use Webkul\Core\Contracts\DatabaseGrammar;
 use Webkul\Core\Enums\SupportedDatabaseEnum;
@@ -22,7 +21,7 @@ use Webkul\Core\Filesystem\StorageConfigurator;
 use Webkul\Core\Helpers\Database\Grammar\MySqlGrammar;
 use Webkul\Core\Helpers\Database\Grammar\PgSqlGrammar;
 use Webkul\Core\View\Compilers\BladeCompiler;
-use Webkul\Theme\ViewRenderEventManager;
+use Webkul\Core\View\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -38,6 +37,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerOverrides();
 
         $this->registerDatabaseGrammar();
+
+        $this->app->singleton(ViewRenderEventManager::class);
     }
 
     /**
@@ -62,8 +63,6 @@ class CoreServiceProvider extends ServiceProvider
         });
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            $schedule->command('invoice:cron')->dailyAt('3:00');
-
             $this->registerExchangeRateSchedule($schedule);
         });
 
@@ -72,10 +71,8 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Point the application at the disk chosen in Configure -> File Management.
-     *
-     * This runs before anything resolves storage, so a store keeps serving from the
-     * disk it was told to use rather than the one the environment happens to name.
+     * Point the application at the disk chosen in Configure -> File Management, before anything
+     * resolves storage, so a store serves from the disk it was told to use.
      */
     protected function configureStorage(): void
     {
@@ -118,7 +115,6 @@ class CoreServiceProvider extends ServiceProvider
             $this->commands([
                 BagistoVersion::class,
                 ExchangeRateUpdate::class,
-                InvoiceOverdueCron::class,
                 TranslationsChecker::class,
             ]);
         }

@@ -8,20 +8,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Webkul\Core\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\DataTransfer\Helpers\Import as ImportHelper;
-use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
-use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 
 class ImportBatch implements ShouldQueue
 {
-    use Batchable, BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
-
-    /**
-     * Bounded by the connection's `retry_after` so the queue can never hand this
-     * batch to a second worker while this one still holds it — which would import
-     * every row in it twice.
-     */
-    public int $timeout;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -32,18 +24,11 @@ class ImportBatch implements ShouldQueue
     public function __construct(protected $importBatch)
     {
         $this->importBatch = $importBatch;
-
-        $this->timeout = static::timeoutWithinRetryAfter();
     }
 
     /**
-     * Execute the job.
-     *
-     * Batches run side by side across the fleet and touch the same tables, so
-     * InnoDB will pick one of them as the victim of a lock cycle sooner or
-     * later. The tallies are zeroed at the top of each attempt because
-     * importBatch() writes them into the batch summary — left running, a second
-     * attempt would report the first attempt's rows on top of its own.
+     * Execute the job. Batches write to the same tables side by side, so one is eventually a
+     * deadlock victim, and the tallies reset per attempt because importBatch() accumulates them.
      *
      * @return void
      */

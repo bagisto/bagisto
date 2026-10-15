@@ -2,15 +2,28 @@
 
 namespace Webkul\Customer\Repositories;
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
+use Webkul\Customer\Contracts\CustomerGroup;
 use Webkul\Customer\Models\Customer;
-use Webkul\Customer\Models\CustomerGroup;
-use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderProxy;
 
 class CustomerRepository extends Repository
 {
+    /**
+     * Create a new repository instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        protected CustomerGroupRepository $customerGroupRepository,
+        Container $container
+    ) {
+        parent::__construct($container);
+    }
+
     /**
      * Specify the model class name.
      */
@@ -41,7 +54,7 @@ class CustomerRepository extends Repository
     {
         $customer = auth()->guard()->user();
 
-        return $customer->group ?? core()->getGuestCustomerGroup();
+        return $customer->group ?? $this->customerGroupRepository->getGuestGroup();
     }
 
     /**
@@ -88,23 +101,14 @@ class CustomerRepository extends Repository
      */
     public function syncNewRegisteredCustomerInformation($customer)
     {
-        /**
-         * Setting registered customer to orders.
-         */
-        Order::query()->where('customer_email', $customer->email)->update([
+        OrderProxy::query()->where('customer_email', $customer->email)->update([
             'is_guest' => 0,
             'customer_id' => $customer->id,
             'customer_type' => Customer::class,
         ]);
 
-        /**
-         * Grabbing orders by `customer_id`.
-         */
-        $orders = Order::query()->where('customer_id', $customer->id)->get();
+        $orders = OrderProxy::query()->where('customer_id', $customer->id)->get();
 
-        /**
-         * Setting registered customer to associated order's relations.
-         */
         $orders->each(function ($order) use ($customer) {
             $order->addresses()->update([
                 'customer_id' => $customer->id,

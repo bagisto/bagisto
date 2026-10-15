@@ -18,7 +18,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Repositories\RefundRepository;
 use Webkul\Sales\Transformers\OrderResource;
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Stripe\Payment\Stripe;
 
 class StripeController extends Controller

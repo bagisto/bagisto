@@ -2,7 +2,6 @@
 
 use Webkul\Theme\Facades\Themes;
 use Webkul\Theme\ThemeStorage;
-use Webkul\Theme\ViewRenderEventManager;
 
 if (! function_exists('themes')) {
     /**
@@ -39,19 +38,5 @@ if (! function_exists('bagisto_theme_storage')) {
     function bagisto_theme_storage()
     {
         return app(ThemeStorage::class);
-    }
-}
-
-if (! function_exists('view_render_event')) {
-    /**
-     * View render event.
-     *
-     * @return mixed
-     */
-    function view_render_event(string $eventName, mixed $params = null)
-    {
-        return app(ViewRenderEventManager::class)
-            ->handleRenderEvent($eventName, $params)
-            ->render();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Console\Commands;
+namespace Webkul\Sales\Console\Commands;
 
 use Illuminate\Console\Command;
 use Webkul\Sales\Models\Invoice;

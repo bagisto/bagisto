@@ -15,9 +15,6 @@ use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\LocaleRepository;
-use Webkul\Customer\Models\CustomerGroup;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Core
 {
@@ -28,7 +25,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.5.x-dev';
+    const BAGISTO_VERSION = '2.6.x-dev';
 
     /**
      * Current Channel.
@@ -66,25 +63,11 @@ class Core
     protected $currentLocale;
 
     /**
-     * Guest Customer Group.
-     *
-     * @var CustomerGroup
-     */
-    protected $guestCustomerGroup;
-
-    /**
      * Exchange rates.
      *
      * @var array
      */
     protected $exchangeRates = [];
-
-    /**
-     * Tax categories, keyed by id.
-     *
-     * @var array
-     */
-    protected $taxCategoriesById = [];
 
     /**
      * Stores singleton instances.
@@ -104,9 +87,7 @@ class Core
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CountryRepository $countryRepository,
         protected CountryStateRepository $countryStateRepository,
-        protected LocaleRepository $localeRepository,
-        protected CustomerGroupRepository $customerGroupRepository,
-        protected TaxCategoryRepository $taxCategoryRepository
+        protected LocaleRepository $localeRepository
     ) {}
 
     /**
@@ -794,20 +775,6 @@ class Core
     }
 
     /**
-     * Return guest customer group.
-     *
-     * @return CustomerGroup
-     */
-    public function getGuestCustomerGroup()
-    {
-        if ($this->guestCustomerGroup) {
-            return $this->guestCustomerGroup;
-        }
-
-        return $this->guestCustomerGroup = $this->customerGroupRepository->findOneByField('code', 'guest');
-    }
-
-    /**
      * Convert empty strings to null.
      *
      * @param  array  $array
@@ -840,33 +807,6 @@ class Core
         }
 
         return $this->singletonInstances[$className] = app($className);
-    }
-
-    /**
-     * Returns a string as selector part for identifying elements in views.
-     */
-    public static function taxRateAsIdentifier(float $taxRate): string
-    {
-        return str_replace('.', '_', (string) $taxRate);
-    }
-
-    /**
-     * Get the tax category of the given id.
-     *
-     * @param  int  $id
-     * @return object
-     */
-    public function getTaxCategoryById($id)
-    {
-        if (empty($id)) {
-            return;
-        }
-
-        if (array_key_exists($id, $this->taxCategoriesById)) {
-            return $this->taxCategoriesById[$id];
-        }
-
-        return $this->taxCategoriesById[$id] = $this->taxCategoryRepository->find($id);
     }
 
     /**

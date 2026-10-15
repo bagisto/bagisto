@@ -3,8 +3,7 @@
 namespace Webkul\Sales\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Mail;
-use Webkul\Shop\Mail\Customer\InvoiceOverdueReminder;
+use Illuminate\Support\Facades\Event;
 
 trait InvoiceReminder
 {
@@ -39,7 +38,7 @@ trait InvoiceReminder
     }
 
     /**
-     * Send an Invoice reminder
+     * Send an invoice reminder.
      *
      * @return void
      */
@@ -53,11 +52,10 @@ trait InvoiceReminder
             }
         }
 
-        Mail::queue(new InvoiceOverdueReminder($this));
+        Event::dispatch('sales.invoice.send_overdue_reminder', $this);
 
         $this->reminders++;
 
-        // Calculate next reminder date
         $date = now();
 
         $interval = $this->getIntervalBetweenReminders();

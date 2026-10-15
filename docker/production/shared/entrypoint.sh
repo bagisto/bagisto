@@ -65,15 +65,18 @@ sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=${DB_PASSWORD}/" .env
 [ -n "$APP_CURRENCY" ] && sed -i "s/^APP_CURRENCY=.*/APP_CURRENCY=${APP_CURRENCY}/" .env
 [ -n "$APP_TIMEZONE" ] && sed -i "s/^APP_TIMEZONE=.*/APP_TIMEZONE=${APP_TIMEZONE}/" .env
 
-# ==========================================================================
-# Rebuild the cached config when anything above actually changed it
-# ==========================================================================
-if [ -n "$APP_URL" ] || ! uses_bundled_database; then
-    log "Rebuilding the cached configuration..."
+# The image runs a queue worker, so queued work belongs on a real connection rather than in the
+# request that dispatched it. The build installed with `.env.example`'s `sync`, which is right for
+# an installation without a worker; it is switched here, after the install, not before it.
+sed -i "s/^QUEUE_CONNECTION=.*/QUEUE_CONNECTION=${QUEUE_CONNECTION:-database}/" .env
 
-    php artisan optimize:clear --no-interaction 2>/dev/null || true
-    php artisan optimize --no-interaction 2>/dev/null || true
-fi
+# ==========================================================================
+# Rebuild the cached config, which the overrides above have just invalidated
+# ==========================================================================
+log "Rebuilding the cached configuration..."
+
+php artisan optimize:clear --no-interaction 2>/dev/null || true
+php artisan optimize --no-interaction 2>/dev/null || true
 
 # ==========================================================================
 # An external database has to be reachable before the web server starts

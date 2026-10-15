@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Marketing\Contracts\SearchTerm as SearchTermContract;
-use Webkul\Marketing\Database\Factories\SearchTermsFactory;
+use Webkul\Marketing\Database\Factories\SearchTermFactory;
 
 class SearchTerm extends Model implements SearchTermContract
 {
@@ -48,6 +48,6 @@ class SearchTerm extends Model implements SearchTermContract
      */
     protected static function newFactory(): Factory
     {
-        return SearchTermsFactory::new();
+        return SearchTermFactory::new();
     }
 }

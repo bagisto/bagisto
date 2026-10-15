@@ -49,16 +49,10 @@ class ProcessSitemap implements ShouldQueue
      */
     public function handle(): void
     {
-        /**
-         * If sitemap is disabled then return.
-         */
         if (! core()->getConfigData('general.sitemap.settings.enabled')) {
             return;
         }
 
-        /**
-         * If the sitemap is already generated then delete the existing sitemap.
-         */
         $this->sitemap->deleteFromStorage();
 
         if ($this->sitemap->channels->isEmpty()) {
@@ -210,11 +204,8 @@ class ProcessSitemap implements ShouldQueue
     }
 
     /**
-     * Build the sub-sitemap or index file path for the given channel.
-     *
-     * Every generated file is rooted under the fixed prefix `sitemaps/{channel_code}/`
-     * so channel isolation on disk is guaranteed regardless of what the user enters
-     * in the sitemap path field.
+     * Build the sub-sitemap or index file path for the given channel, always rooted under the
+     * fixed `sitemaps/{channel_code}/` prefix whatever the user enters as the sitemap path.
      *
      * @param  Channel  $channel
      * @param  int|null  $batch

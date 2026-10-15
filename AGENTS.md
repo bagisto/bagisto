@@ -1,6 +1,6 @@
-# AGENTS.md — Instructions for Bagisto 2.5.x
+# AGENTS.md — Instructions for Bagisto 2.6.x
 
-Bagisto 2.5.x is an open-source Laravel 13 e-commerce platform: PHP 8.4+, Vue.js 3, Tailwind CSS 4,
+Bagisto 2.6.x is an open-source Laravel 13 e-commerce platform: PHP 8.4+, Vue.js 3, Tailwind CSS 4,
 Vite 6. It runs on MySQL 8.0, MariaDB 10.11 or PostgreSQL 16; all three are first-class and CI
 covers each.
 
@@ -287,7 +287,7 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directo
 vendor/bin/pest --filter="test name"                    # Run a single test by name
 ```
 
-Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Category Unit, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, FPC Unit/Feature, Installer Feature, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Paypal Feature, Product Unit, Razorpay Unit/Feature, Rule Unit, Sales Unit, Shipping Unit, Shop Feature, Stripe Unit/Feature, Tax Unit, Theme Unit.
+Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Category Unit, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, FPC Unit/Feature, Installer Feature, Marketing Unit, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Paypal Feature, Product Unit, Razorpay Unit/Feature, Rule Unit, Sales Unit, Shipping Unit, Shop Feature, Stripe Unit/Feature, Tax Unit, Theme Unit.
 
 Packages without a `tests/` directory (PhonePe, Checkout, RMA, and others) have no suite — adding a `<testsuite>` for a path that does not exist makes PHPUnit error, so write the tests first. Payment is the one package that has tests without a suite of its own, so they run only when the path is named directly.
 
@@ -297,16 +297,23 @@ Tests use **Pest 5** (PHPUnit 13) with package-specific TestCase classes bound i
 
 #### Parallel test databases
 
-Parallel runs create one database per CPU core (`{DB_DATABASE}_test_1`, `_test_2`, …) on MySQL, MariaDB and PostgreSQL alike, and do **not** re-migrate them, so a schema change leaves them stale and the failures look like broken code. Drop them, reinstall, then re-run:
+`--parallel` gives each worker its own database — `{DB_DATABASE}_test_1`, `_test_2`, …, one per CPU core — on MySQL, MariaDB and PostgreSQL alike, and it is what CI runs. Because the suite uses `DatabaseTransactions`, Laravel runs `migrate` against each worker's database at the start of every run, so **a new migration needs nothing from you**.
+
+What is not re-run is the seeder. `ParallelTesting::setUpTestDatabase()` in `app/Providers/AppServiceProvider.php` calls `db:seed`, and Laravel fires that callback only on the run that creates the database. A change to a seeder therefore leaves every worker on the old baseline while the main database has the new one, and the failures read as broken code. Drop them and let the next run rebuild them — creating, migrating and seeding one costs about half a minute:
 
 ```bash
 # Drop parallel test databases (adjust the count to match your CPU cores)
 php artisan tinker --execute="for (\$i = 1; \$i <= 6; \$i++) { try { DB::statement(\"DROP DATABASE IF EXISTS bagisto_test_{\$i}\"); } catch (\Exception \$e) {} }"
 
-php artisan bagisto:install --no-interaction
-
-vendor/bin/pest --parallel --no-coverage
+vendor/bin/pest --parallel
 ```
+
+Pest's `--recreate-databases` is meant to do this and has no effect, so drop them by hand.
+
+Two failure modes belong to the parallel runner rather than to the code:
+
+- **A test that prompts hangs the whole run.** A worker's STDIN is a pipe the parent holds open, so a `confirm()` never gets an answer and never times out — the dots just stop. Pass `--no-interaction` wherever a test calls `Artisan::call()` on a command that can prompt.
+- **A test that passes serially and fails in parallel** is usually asserting on something the shared database does not guarantee — a global row count, or a position in a list the query does not order. Fix the assertion, not the runner.
 
 ### End-to-End Tests (Playwright)
 
@@ -406,7 +413,7 @@ If a line genuinely cannot be understood without prose, that is a signal to extr
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `pest-tests.yml` | push, pull request | Installs Bagisto and runs `vendor/bin/pest` on PHP 8.4 against nine database versions — MySQL 8.0, 8.4 and 9.7, MariaDB 10.11, 11.8 and 12.3, PostgreSQL 10, 14 and 18 |
+| `pest-tests.yml` | push, pull request | Installs Bagisto and runs `vendor/bin/pest --parallel` on PHP 8.4 against nine database versions — MySQL 8.0, 8.4 and 9.7, MariaDB 10.11, 11.8 and 12.3, PostgreSQL 10, 14 and 18 |
 | `pint-tests.yml` | push, pull request | Runs `pint --test` (style check) |
 | `playwright-tests.yml` | pull request labelled **Need Playwright Testing**, `v*` tag, manual | `installer_gate` runs the guided installer (English and Arabic × each database) and gates `playwright_tests`, which runs the Admin and Shop projects across 10 shards × each database |
 | `translation-tests.yml` | push, pull request | Translation key consistency |
@@ -446,10 +453,95 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 - **CASE expression types**: both branches must return the same type. Use `CAST(id AS VARCHAR(255))` — `CAST(... AS CHAR)` truncates to 1 character on PostgreSQL.
 - **GROUP BY**: PostgreSQL requires every non-aggregated SELECT column in GROUP BY.
 - **`DB::raw()` in `updateOrCreate()`**: fails on INSERT; split into find + update/create.
+- **A failed statement aborts the whole PostgreSQL transaction.** MySQL lets a transaction continue
+  after a duplicate-key error, so `try { insert } catch (UniqueConstraintViolationException) { … }`
+  looks like it works. On PostgreSQL every later statement in that transaction fails with
+  `25P02 current transaction is aborted`, and the catch block can do nothing — including inside a
+  caller's transaction, which it also poisons. Resolve the conflict in one statement the database
+  settles itself (`upsert()`, which compiles to `ON CONFLICT … DO UPDATE` and
+  `ON DUPLICATE KEY UPDATE`) rather than catching the violation.
+
+  ```php
+  $query->upsert([$row], ['term', 'channel_id', 'locale'], ['uses' => $increment, 'results']);
+  ```
+
+  Qualify any column an upsert's update clause reads — PostgreSQL rejects a bare `uses` there as
+  ambiguous between the stored row and the one being inserted.
+
+## Merging The Release Line Into master
+
+`master` is the **2.6** development line. `2.5` is the current release line and `2.4` the previous
+one, and both keep receiving fixes. Every one of those fixes has to reach `master` as well, or the
+next major silently ships without a bug fix the release line already has — a regression nobody
+reported because it was never broken on the branch it was fixed on.
+
+**The flow is one-way.** Release line → `master`, never the reverse. A breaking change lives on
+`master` only, so merging `master` down into `2.5` would put it in a patch release.
+
+### Check what is outstanding, before anything else
+
+```bash
+git fetch origin
+
+# How many commits the release line has that master does not
+git rev-list --count origin/master..origin/2.5
+
+# What they are
+git log --oneline --no-merges origin/master..origin/2.5
+
+# And the files they touch, which is what predicts the conflicts
+git diff --stat origin/master...origin/2.5
+```
+
+A non-zero count is work owed to `master`. Run the same three commands for `origin/2.4` — a fix that
+went to `2.4` has to travel `2.4` → `2.5` → `master`, and skipping the middle leaves `2.5` behind.
+
+### Merge the behaviour, not the diff
+
+**Do not resolve conflicts by picking a side.** `master` is a major ahead of `2.5`, so the same
+behaviour often already exists there in a different shape — classes that moved package, helpers that
+were removed, signatures that were narrowed. Read `UPGRADE.md`'s `master` section before you start;
+it lists exactly what differs.
+
+For each commit that is outstanding:
+
+- **Understand what it fixes**, then apply that fix to `master`'s code. Replaying the diff is how a
+  refactor gets reverted.
+- **If the functionality already exists on `master` in another form, keep `master`'s** and bring over
+  only the behaviour or the fix that is missing from it.
+- **Never revert or overwrite a newer `master` change** to make the release-line code apply. If the
+  two genuinely cannot coexist, stop and ask rather than choosing.
+- **A test that comes with the fix comes too**, adapted to `master`'s API. A fix merged without its
+  test is a fix that will be undone again.
+
+### Verify before you call the merge done
+
+- **Nothing moved backwards.** The version markers belong to `master` and must not be dragged back
+  from the release line: `Core::BAGISTO_VERSION`, `CHANGELOG.md`'s title, this file's heading, and
+  `UPGRADE.md`'s section headings.
+- **`UPGRADE.md` still separates the lines.** A release-line entry belongs under its own release
+  heading; only a change that breaks compatibility with the previous minor belongs under `master`'s.
+- **No duplicate migration.** The same migration arriving by both merge and cherry-pick runs twice
+  under two names. Check `database/migrations` and every `src/Database/Migrations` for a pair with
+  the same intent.
+- **The gates pass on `master`, not on the branch the fix came from** — `vendor/bin/pint --test`,
+  the affected Pest suites, and `php artisan bagisto:translations:check` when a key moved.
+- **The outstanding count is zero.** Re-run `git rev-list --count origin/master..origin/2.5`; if it
+  is not zero, something was dropped in the merge.
 
 ## Safety Rails
 
 - **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
+- **Core must not depend on a feature package.** Core is the foundation every other package builds
+  on, so `Feature → Core` is the intended direction and the only one. The single reference Core may
+  make into a feature package is a **`*Proxy` class**, because Concord resolves a proxy to whichever
+  model the application registered, so Core binds to the substitutable stub rather than to the
+  feature package's implementation — that is Bagisto's own extension mechanism and has to keep
+  working. Anything else — a concrete model, a repository, a service — points the wrong way. Fix it
+  by moving the responsibility into the package that owns it, or by having the feature package
+  depend on Core instead; do **not** add an interface merely to satisfy the rule. A reference being
+  worked off goes in `CORE_BOUNDARY_PENDING` with an owner, never to make the test pass.
+  `tests/Unit/CoreBoundaryTest.php` enforces this.
 - **Translations are 23 files per key.** Missing a locale fails CI.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
 - **Do not add/remove composer dependencies without approval.**
