@@ -23,6 +23,7 @@ import pt_BR from "@vee-validate/i18n/dist/locale/pt_BR.json";
 import ro from "../../locales/ro.json";
 import ru from "@vee-validate/i18n/dist/locale/ru.json";
 import sin from "../../locales/sin.json";
+import sw from "../../locales/sw.json";
 import tr from "@vee-validate/i18n/dist/locale/tr.json";
 import uk from "@vee-validate/i18n/dist/locale/uk.json";
 import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
@@ -302,6 +303,15 @@ export default {
                         ...sin.messages,
                         phone: "මෙම {field} වටේ වලංගු දුරකතන අංකය විය යුතුයි",
                         address: "මෙම {field} වටේ වලංගු ලිපිනය විය යුතුයි",
+                    },
+                },
+
+                sw: {
+                    ...sw,
+                    messages: {
+                        ...sw.messages,
+                        phone: "Sehemu ya {field} lazima iwe namba halali ya simu.",
+                        address: "Sehemu ya {field} lazima iwe anwani halali.",
                     },
                 },
 

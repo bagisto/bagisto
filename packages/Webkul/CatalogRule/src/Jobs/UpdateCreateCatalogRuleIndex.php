@@ -10,12 +10,13 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreateCatalogRuleIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -33,7 +34,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
     public function handle()
     {
         if ($this->catalogRule->status) {
-            app(CatalogRuleIndex::class)->reIndexRule($this->catalogRule);
+            $this->retryOnDeadlock(fn () => app(CatalogRuleIndex::class)->reIndexRule($this->catalogRule));
 
             $this->catalogRule->unsetRelation('catalog_rule_products');
 
@@ -41,7 +42,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
         } else {
             $productIds = $this->catalogRule->catalog_rule_products->pluck('product_id')->unique();
 
-            app(CatalogRuleIndex::class)->cleanProductIndices($productIds);
+            $this->retryOnDeadlock(fn () => app(CatalogRuleIndex::class)->cleanProductIndices($productIds));
         }
 
         $productIds = $productIds
@@ -52,7 +53,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
 
         Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(PriceIndexer::class)->reindexProducts($productIds);
+        $this->retryOnDeadlock(fn () => app(PriceIndexer::class)->reindexProducts($productIds));
 
         Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }

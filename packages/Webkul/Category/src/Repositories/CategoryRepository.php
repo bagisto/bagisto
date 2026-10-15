@@ -75,7 +75,10 @@ class CategoryRepository extends Repository
             }
         }
 
-        return $queryBuilder->paginate($params['limit'] ?? 10);
+        return $queryBuilder
+            ->orderBy('categories.position')
+            ->orderBy('categories.id')
+            ->paginate($params['limit'] ?? 10);
     }
 
     /**
@@ -209,7 +212,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * get visible category tree.
+     * Get the tree of categories a shopper can see.
      *
      * @param  int  $id
      * @return Collection
@@ -264,10 +267,8 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Every category under the roots, read as the chain of ancestors leading down to it.
-     *
-     * The root each chain hangs from is left out, so a category reads as `Mens › Footwear`
-     * rather than by a name several of its siblings elsewhere in the tree may share.
+     * Every category under the roots as the chain of ancestors leading down to it, less the
+     * root itself, so one reads as `Mens › Footwear` rather than by a name its cousins share.
      *
      * @param  string|null  $locale  The locale the names are read in, the current one when null.
      * @return array<int, string>
@@ -438,10 +439,8 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Set same value to all locales in category.
-     *
-     * To Do: Move column from the `category_translations` to `category` table. And remove
-     * this created method.
+     * Set the same value across every locale, until the column moves off `category_translations`
+     * onto `categories` and this is no longer needed.
      *
      * @param  string  $attributeNames
      * @return array

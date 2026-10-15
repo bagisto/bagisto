@@ -1,0 +1,32 @@
+{
+  "code": "sw",
+  "messages": {
+    "_default": "Sehemu ya {field} si sahihi.",
+    "alpha": "Sehemu ya {field} lazima iwe na herufi pekee.",
+    "alpha_num": "Sehemu ya {field} lazima iwe na herufi na namba pekee.",
+    "alpha_dash": "Sehemu ya {field} lazima iwe na herufi, namba, mistari ya kufupisha na mistari ya chini pekee.",
+    "alpha_spaces": "Sehemu ya {field} lazima iwe na herufi na nafasi pekee.",
+    "between": "Sehemu ya {field} lazima iwe kati ya 0:{min} na 1:{max}.",
+    "confirmed": "Uthibitisho wa sehemu ya {field} haulingani.",
+    "digits": "Sehemu ya {field} lazima iwe namba na iwe na tarakimu 0:{length} hasa.",
+    "dimensions": "Sehemu ya {field} lazima iwe pikseli 0:{width} kwa pikseli 1:{height}.",
+    "email": "Sehemu ya {field} lazima iwe barua pepe sahihi.",
+    "not_one_of": "Sehemu ya {field} si thamani halali.",
+    "ext": "Sehemu ya {field} lazima iwe faili halali.",
+    "image": "Sehemu ya {field} lazima iwe picha.",
+    "integer": "Sehemu ya {field} lazima iwe namba kamili.",
+    "length": "Sehemu ya {field} lazima iwe na urefu wa 0:{length}.",
+    "max_value": "Sehemu ya {field} lazima isiwe kubwa kuliko 0:{max}.",
+    "max": "Sehemu ya {field} haiwezi kuzidi herufi 0:{length}.",
+    "mimes": "Sehemu ya {field} lazima iwe faili la aina inayoruhusiwa.",
+    "min_value": "Sehemu ya {field} lazima iwe angalau 0:{min}.",
+    "min": "Sehemu ya {field} lazima iwe na angalau herufi 0:{length}.",
+    "numeric": "Sehemu ya {field} lazima iwe namba.",
+    "one_of": "Sehemu ya {field} si thamani halali.",
+    "regex": "Muundo wa sehemu ya {field} si sahihi.",
+    "required_if": "Sehemu ya {field} ni ya lazima.",
+    "required": "Sehemu ya {field} ni ya lazima.",
+    "size": "Sehemu ya {field} lazima iwe ndogo kuliko 0:{size}KB.",
+    "url": "Sehemu ya {field} lazima iwe anwani halali ya tovuti (URL)."
+  }
+}

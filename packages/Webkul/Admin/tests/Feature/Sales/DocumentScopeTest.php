@@ -1,9 +1,5 @@
 <?php
 
-use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\Refund;
-use Webkul\Sales\Models\Shipment;
-
 use function Pest\Laravel\post;
 
 /**
@@ -35,7 +31,8 @@ it('should refuse to invoice an item that belongs to another order', function ()
         'invoice' => ['items' => [$other->items->first()->id => 1]],
     ]);
 
-    expect(Invoice::count())->toBe(0);
+    expect($order->invoices()->count())->toBe(0)
+        ->and($other->invoices()->count())->toBe(0);
 });
 
 it('should refuse to ship an item that belongs to another order', function () {
@@ -53,7 +50,8 @@ it('should refuse to ship an item that belongs to another order', function () {
         ],
     ])->assertSessionHas('error');
 
-    expect(Shipment::count())->toBe(0);
+    expect($order->shipments()->count())->toBe(0)
+        ->and($other->shipments()->count())->toBe(0);
 });
 
 it('should refuse to refund an item that belongs to another order', function () {
@@ -67,7 +65,27 @@ it('should refuse to refund an item that belongs to another order', function () 
     post(route('admin.sales.refunds.store', $order->id), scopedRefundPayload([$other->items->first()->id => 1]))
         ->assertSessionHas('error');
 
-    expect(Refund::count())->toBe(0);
+    expect($order->refunds()->count())->toBe(0)
+        ->and($other->refunds()->count())->toBe(0);
+});
+
+it('should refuse to refund an item of another order that is itself refundable', function () {
+    $this->loginAsAdmin();
+
+    $order = $this->createOrder();
+    $other = $this->createOrder();
+
+    $this->invoiceOrder($order);
+    $this->invoiceOrder($other);
+
+    $foreignItem = $other->refresh()->items->first();
+
+    post(route('admin.sales.refunds.store', $order->id), scopedRefundPayload([$foreignItem->id => 1]))
+        ->assertSessionHas('error');
+
+    expect($order->refunds()->count())->toBe(0)
+        ->and($other->refunds()->count())->toBe(0)
+        ->and((float) $foreignItem->refresh()->qty_refunded)->toBe(0.0);
 });
 
 // ============================================================================
@@ -88,5 +106,5 @@ it('should refuse to refund more shipping than the order was invoiced', function
         $invoiced + 1000,
     ))->assertSessionHasErrors('refund.shipping');
 
-    expect(Refund::count())->toBe(0);
+    expect($order->refunds()->count())->toBe(0);
 });

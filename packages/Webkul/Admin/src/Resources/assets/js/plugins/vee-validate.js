@@ -23,6 +23,7 @@ import pt_BR from "@vee-validate/i18n/dist/locale/pt_BR.json";
 import ro from "../../locales/ro.json";
 import ru from "@vee-validate/i18n/dist/locale/ru.json";
 import sin from "../../locales/sin.json";
+import sw from "../../locales/sw.json";
 import tr from "@vee-validate/i18n/dist/locale/tr.json";
 import uk from "@vee-validate/i18n/dist/locale/uk.json";
 import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
@@ -420,6 +421,18 @@ export default {
                         decimal: "මෙම {field} වටේ වලංගු දශක්ෂණ අංකය විය යුතුයි.",
                         phone: "මෙම {field} වටේ වලංගු දුරකතන අංකය විය යුතුයි.",
                         regex_pattern: "මෙම {field} වලංගු නිත්‍ය ප්‍රකාශනයක් විය යුතුය, සීමා අක්ෂර ද ඇතුළුව.",
+                    },
+                },
+
+                sw: {
+                    ...sw,
+                    messages: {
+                        ...sw.messages,
+                        comma_separated_integer: "Sehemu ya {field} lazima iwe namba kamili zilizotenganishwa kwa mikato.",
+                        date_format: "Sehemu ya {field} lazima iwe katika muundo halali wa saa (mf.: 23:59).",
+                        decimal: "Sehemu ya {field} lazima iwe namba halali ya desimali.",
+                        phone: "Sehemu ya {field} lazima iwe namba halali ya simu.",
+                        regex_pattern: "Sehemu ya {field} lazima iwe usemi halali wa kawaida, pamoja na vitenganishi.",
                     },
                 },
 

@@ -287,7 +287,7 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directo
 vendor/bin/pest --filter="test name"                    # Run a single test by name
 ```
 
-Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Category Unit, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, FPC Unit/Feature, Installer Feature, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Paypal Feature, Product Unit, Razorpay Unit/Feature, Rule Unit, Sales Unit, Shipping Unit, Shop Feature, Stripe Unit/Feature, Tax Unit, Theme Unit.
+Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Category Unit, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, FPC Unit/Feature, Installer Feature, Marketing Unit, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Paypal Feature, Product Unit, Razorpay Unit/Feature, Rule Unit, Sales Unit, Shipping Unit, Shop Feature, Stripe Unit/Feature, Tax Unit, Theme Unit.
 
 Packages without a `tests/` directory (PhonePe, Checkout, RMA, and others) have no suite — adding a `<testsuite>` for a path that does not exist makes PHPUnit error, so write the tests first. Payment is the one package that has tests without a suite of its own, so they run only when the path is named directly.
 
@@ -297,16 +297,23 @@ Tests use **Pest 5** (PHPUnit 13) with package-specific TestCase classes bound i
 
 #### Parallel test databases
 
-Parallel runs create one database per CPU core (`{DB_DATABASE}_test_1`, `_test_2`, …) on MySQL, MariaDB and PostgreSQL alike, and do **not** re-migrate them, so a schema change leaves them stale and the failures look like broken code. Drop them, reinstall, then re-run:
+`--parallel` gives each worker its own database — `{DB_DATABASE}_test_1`, `_test_2`, …, one per CPU core — on MySQL, MariaDB and PostgreSQL alike, and it is what CI runs. Because the suite uses `DatabaseTransactions`, Laravel runs `migrate` against each worker's database at the start of every run, so **a new migration needs nothing from you**.
+
+What is not re-run is the seeder. `ParallelTesting::setUpTestDatabase()` in `app/Providers/AppServiceProvider.php` calls `db:seed`, and Laravel fires that callback only on the run that creates the database. A change to a seeder therefore leaves every worker on the old baseline while the main database has the new one, and the failures read as broken code. Drop them and let the next run rebuild them — creating, migrating and seeding one costs about half a minute:
 
 ```bash
 # Drop parallel test databases (adjust the count to match your CPU cores)
 php artisan tinker --execute="for (\$i = 1; \$i <= 6; \$i++) { try { DB::statement(\"DROP DATABASE IF EXISTS bagisto_test_{\$i}\"); } catch (\Exception \$e) {} }"
 
-php artisan bagisto:install --no-interaction
-
-vendor/bin/pest --parallel --no-coverage
+vendor/bin/pest --parallel
 ```
+
+Pest's `--recreate-databases` is meant to do this and has no effect, so drop them by hand.
+
+Two failure modes belong to the parallel runner rather than to the code:
+
+- **A test that prompts hangs the whole run.** A worker's STDIN is a pipe the parent holds open, so a `confirm()` never gets an answer and never times out — the dots just stop. Pass `--no-interaction` wherever a test calls `Artisan::call()` on a command that can prompt.
+- **A test that passes serially and fails in parallel** is usually asserting on something the shared database does not guarantee — a global row count, or a position in a list the query does not order. Fix the assertion, not the runner.
 
 ### End-to-End Tests (Playwright)
 
@@ -406,7 +413,7 @@ If a line genuinely cannot be understood without prose, that is a signal to extr
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `pest-tests.yml` | push, pull request | Installs Bagisto and runs `vendor/bin/pest` on PHP 8.4 against nine database versions — MySQL 8.0, 8.4 and 9.7, MariaDB 10.11, 11.8 and 12.3, PostgreSQL 10, 14 and 18 |
+| `pest-tests.yml` | push, pull request | Installs Bagisto and runs `vendor/bin/pest --parallel` on PHP 8.4 against nine database versions — MySQL 8.0, 8.4 and 9.7, MariaDB 10.11, 11.8 and 12.3, PostgreSQL 10, 14 and 18 |
 | `pint-tests.yml` | push, pull request | Runs `pint --test` (style check) |
 | `playwright-tests.yml` | pull request labelled **Need Playwright Testing**, `v*` tag, manual | `installer_gate` runs the guided installer (English and Arabic × each database) and gates `playwright_tests`, which runs the Admin and Shop projects across 10 shards × each database |
 | `translation-tests.yml` | push, pull request | Translation key consistency |
@@ -446,6 +453,20 @@ All code must work on MySQL 8.0, MariaDB 10.11 and PostgreSQL 16. Use the existi
 - **CASE expression types**: both branches must return the same type. Use `CAST(id AS VARCHAR(255))` — `CAST(... AS CHAR)` truncates to 1 character on PostgreSQL.
 - **GROUP BY**: PostgreSQL requires every non-aggregated SELECT column in GROUP BY.
 - **`DB::raw()` in `updateOrCreate()`**: fails on INSERT; split into find + update/create.
+- **A failed statement aborts the whole PostgreSQL transaction.** MySQL lets a transaction continue
+  after a duplicate-key error, so `try { insert } catch (UniqueConstraintViolationException) { … }`
+  looks like it works. On PostgreSQL every later statement in that transaction fails with
+  `25P02 current transaction is aborted`, and the catch block can do nothing — including inside a
+  caller's transaction, which it also poisons. Resolve the conflict in one statement the database
+  settles itself (`upsert()`, which compiles to `ON CONFLICT … DO UPDATE` and
+  `ON DUPLICATE KEY UPDATE`) rather than catching the violation.
+
+  ```php
+  $query->upsert([$row], ['term', 'channel_id', 'locale'], ['uses' => $increment, 'results']);
+  ```
+
+  Qualify any column an upsert's update clause reads — PostgreSQL rejects a bare `uses` there as
+  ambiguous between the stored row and the one being inserted.
 
 ## Safety Rails
 

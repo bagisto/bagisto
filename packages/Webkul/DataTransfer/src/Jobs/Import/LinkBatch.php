@@ -9,18 +9,11 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Webkul\DataTransfer\Helpers\Import as ImportHelper;
-use Webkul\DataTransfer\Jobs\Concerns\BoundedByRetryAfter;
 use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 
 class LinkBatch implements ShouldQueue
 {
-    use Batchable, BoundedByRetryAfter, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
-
-    /**
-     * Bounded by the connection's `retry_after` so the queue can never hand this
-     * batch to a second worker while this one still holds it.
-     */
-    public int $timeout;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -31,8 +24,6 @@ class LinkBatch implements ShouldQueue
     public function __construct(protected $importBatch)
     {
         $this->importBatch = $importBatch;
-
-        $this->timeout = static::timeoutWithinRetryAfter();
     }
 
     /**

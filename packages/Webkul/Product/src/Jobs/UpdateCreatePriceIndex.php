@@ -7,12 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreatePriceIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -41,6 +42,6 @@ class UpdateCreatePriceIndex implements ShouldQueue
             ->orderByRaw(db_grammar()->orderByField('id', $this->productIds))
             ->get();
 
-        app(PriceIndexer::class)->reindexRows($products);
+        $this->retryOnDeadlock(fn () => app(PriceIndexer::class)->reindexRows($products));
     }
 }

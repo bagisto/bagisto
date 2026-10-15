@@ -110,6 +110,11 @@ if (! function_exists('clean_content')) {
 }
 
 if (! function_exists('array_permutation')) {
+    /**
+     * Every combination of one value from each of the given arrays.
+     *
+     * @return array<int, array>
+     */
     function array_permutation($input)
     {
         $results = [];
