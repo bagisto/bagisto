@@ -813,7 +813,7 @@ abstract class AbstractType
     /**
      * Get product base image.
      *
-     * @param  \Webkul\Customer\Contracts\CartItem|CartItem  $item
+     * @param  CartItem  $item
      * @return array
      */
     public function getBaseImage($item)
