@@ -22,6 +22,7 @@
 - [A Search Term Is Unique Within A Channel And Locale](#a-search-term-is-unique-within-a-channel-and-locale)
 - [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
 - [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
+- [The PayPal Standard IPN Places The Order](#the-paypal-standard-ipn-places-the-order)
 
 ---
 
@@ -155,6 +156,23 @@ The images in `docker/production/` ran only the web server, PHP and the bundled 
 Supervisor now also runs `queue:work --queue=default,broadcastable`, and the entrypoint sets `QUEUE_CONNECTION` to `database` after the build-time install. Pass `QUEUE_CONNECTION=sync` to the container to go back to running that work inline; the worker then idles.
 
 This changes nothing for an installation that is not built from those images. `.env.example` still ships `sync`, which is what an installation with no worker needs: the work still happens, just inside the request.
+
+---
+
+### The PayPal Standard IPN Places The Order
+
+**Impact Probability: Low**
+
+A PayPal Standard order used to be created only when the buyer came back to the store, so a buyer who paid and closed the tab left the money at PayPal, the cart active and no order — and every one of PayPal's retries failed with a 500. `Webkul\Paypal\Helpers\Ipn` now places the order from the cart named in the notification's `invoice` field when there is none, the way the Stripe, PayU, PhonePe and PayGlocal webhooks already did, under a cache lock so the buyer's return and PayPal's retries cannot produce two orders.
+
+**Check the configured PayPal account before upgrading.** The notification is now accepted only when its `receiver_email` or `business` matches **Configuration → Sales → Payment Methods → PayPal Standard → Business Account**, and only when `mc_currency` matches the currency the order was raised in. A store whose configured address is not the one receiving the money — the shipped default is `test@webkul.com` — had its notifications processed before and will have them refused now.
+
+What this changes for custom code:
+
+- **`Ipn::processIpn()` takes an `array` and returns a `Webkul\Paypal\Enums\IpnStatus`** rather than returning nothing and rethrowing. `StandardController::ipn()` answers with that status's value as JSON, and with a 500 only when PayPal should send the notification again.
+- **`Ipn` takes `CartRepository`** as its second constructor argument, so resolve it through the container rather than building it by hand.
+- **`payment_status` is read as a `Webkul\Paypal\Enums\PaypalPaymentStatus`**, and the protocol strings the helper compares against are constants on `Ipn` — `VALIDATION_COMMAND`, `VERIFIED_RESPONSE`, `RECURRING_TRANSACTION_TYPE` and `DEFAULT_PAYMENT_TYPE`.
+- **`paypal/standard/ipn` runs in the `web` middleware group**, with request forgery prevention removed on the route, which is how every other gateway's webhook is registered. The route name is unchanged.
 
 ## Upgrading To v2.5.0 From v2.4
 

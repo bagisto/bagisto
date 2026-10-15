@@ -16,6 +16,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
+- #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
+
 ## **v2.5.0 (6th of October 2026)** - *Release*
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
