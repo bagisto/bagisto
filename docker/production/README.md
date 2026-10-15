@@ -206,7 +206,7 @@ docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-postgres \
     --build-arg BAGISTO_VERSION=v2.5.0 --build-arg DB_ENGINE=postgres .
 ```
 
-Any tag from https://github.com/bagisto/bagisto/tags works as `BAGISTO_VERSION`, e.g. `--build-arg BAGISTO_VERSION=v2.4.12` for the latest 2.4 release on MySQL or MariaDB.
+Any tag from https://github.com/bagisto/bagisto/tags works as `BAGISTO_VERSION`, e.g. `--build-arg BAGISTO_VERSION=v2.4.13` for the latest 2.4 release on MySQL or MariaDB.
 
 ### Build arguments
 
@@ -278,23 +278,24 @@ The `v` prefix is a Git convention. Docker Hub tags are plain version numbers.
 
 ### Tags published per release (automated)
 
-The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains multiple release lines in parallel (e.g. `2.4.x` on the `2.4` branch and `2.5.x` on `master`), so `:latest` is reserved for releases that come from commits on the default branch line. When a new major/minor line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically.
+The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains several release lines in parallel — `2.4.x` on the `2.4` branch, `2.5.x` on the `2.5` branch, and the next major on `master` — so `:latest` is reserved for releases that come from commits on the default branch line, which is **`2.5`** at the time of writing. When a new line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically, and nothing here has to be edited.
 
 How the workflow decides:
 
 - For each tagged build, GitHub's compare API is queried for `<default-branch>...<build-commit>`.
 - If the compare status is `identical` or `behind`, the build commit is on the default branch line → `:latest` is updated (for stable tags).
-- If the status is `diverged` (the commit is on a side branch like `2.4` while the default is `master`), `:latest` is **not** touched.
+- If the status is `diverged` (the commit is on a line other than the default, such as a `2.4` tag while the default is `2.5`), `:latest` is **not** touched.
 
 Each row below is published **for every server × database combination** (with its `-<server>-<database>` suffix and the aliases from the table above); the unsuffixed tags shown are the nginx + MySQL aliases.
 
-| Git tag pushed | Default branch is `master` (the 2.5 line) → Docker Hub tags published (per variant) |
+| Git tag pushed | Default branch is `2.5` → Docker Hub tags published (per variant) |
 |---|---|
-| `v2.5.0` (commit on `master`, stable) | `:2.5.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.0`, `:latest`) |
+| `v2.5.1` (commit on `2.5`, stable) | `:2.5.1-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.1`, `:latest`) |
 | `v2.4.12` (commit on `2.4`, stable) | `:2.4.12-<variant>` only (does **not** touch any `:latest*`) |
-| `v2.5.1-rc1` (pre-release on `master`) | `:2.5.1-rc1-<variant>` only |
-| Later: default branch switched to `2.6`, then `v2.6.0` released | `:2.6.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.6.0`, `:latest`) |
-| Later: default branch is `2.6`, then a patch `v2.5.1` is released on the 2.5 line | `:2.5.1-<variant>` only (does **not** touch any `:latest*`) |
+| `v2.5.2-rc1` (pre-release on `2.5`) | `:2.5.2-rc1-<variant>` only |
+| `v2.6.0` (commit on `master`, stable, while the default is still `2.5`) | `:2.6.0-<variant>` only (does **not** touch any `:latest*`) |
+| Later: default branch switched to `2.6`, then `v2.6.1` released | `:2.6.1-<variant>`, `:latest-<variant>` (+ nginx: `:2.6.1`, `:latest`) |
+| Later: default branch is `2.6`, then a patch `v2.5.3` is released on the 2.5 line | `:2.5.3-<variant>` only (does **not** touch any `:latest*`) |
 
 | Tag form | Mutability | Purpose |
 |---|---|---|
@@ -461,7 +462,7 @@ That's the entire release. The GitHub Actions workflow at `.github/workflows/doc
 
 1. **Resolve** — validates the tag matches `vX.Y.Z` (or `vX.Y.Z-suffix` for pre-releases), derives the Docker tag, and decides whether the `:latest` aliases move by comparing the build commit against the default branch.
 2. **Build** — matrix-builds every server × database combination, each from its own `docker/production/<server>/Dockerfile` (`nginx`, `apache`, `litespeed`) with `DB_ENGINE` set to `mysql`, `mariadb` or `postgres` and `BAGISTO_VERSION=v2.5.0`, for `linux/amd64` and `linux/arm64`. Each combination is pushed untagged, by digest, and its buildx layers are cached in the GitHub Actions cache.
-3. **Publish** — creates every tag from those digests in a fixed order: the version tags first (e.g. `webkul/bagisto:2.5.0-nginx-mariadb`, and the bare `webkul/bagisto:2.5.0` for nginx + MySQL), then, since `master` **is** the GitHub default branch, the `:latest` aliases, ending with `webkul/bagisto:latest`.
+3. **Publish** — creates every tag from those digests in a fixed order: the version tags first (e.g. `webkul/bagisto:2.5.0-nginx-mariadb`, and the bare `webkul/bagisto:2.5.0` for nginx + MySQL), then, because the tagged commit is on the default branch line, the `:latest` aliases, ending with `webkul/bagisto:latest`.
 
 Track progress in the repo's **Actions** tab. Build duration is typically **30–60 minutes** because the arm64 leg runs under QEMU emulation and Bagisto is fully installed (migrations, seeders, indexers) during the build.
 
@@ -469,7 +470,7 @@ After the run finishes:
 
 - Tags of earlier releases (for example `webkul/bagisto:2.4.12`) still exist and still work (tags are immutable once pushed).
 - `webkul/bagisto:2.5.0` points to the new build (both archs).
-- `webkul/bagisto:latest` now points to `2.5.0` (since `master` is the default branch line).
+- `webkul/bagisto:latest` now points to `2.5.0` (since the tag is on the default branch line).
 
 ### Pre-release / RC tags
 
