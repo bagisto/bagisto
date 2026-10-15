@@ -540,8 +540,7 @@ Keys whose segment is data rather than a name keep their own casing — currency
 
 **Impact Probability: Low**
 
-The one customer phone number was labelled three different ways. Every key that names it is now `phone`,
-in all 22 locales, and the label reads as the locale's own word for it:
+The one customer phone number was labelled three different ways. Every key that names it is now `phone`, in all 22 locales, and the label reads as the locale's own word for it:
 
 ```diff
 - trans('shop::app.checkout.onepage.address.telephone')
@@ -552,9 +551,7 @@ in all 22 locales, and the label reads as the locale's own word for it:
 + trans('shop::app.customers.account.orders.invoice-pdf.phone')
 ```
 
-The unused `shop::app.customers.account.orders.invoice-pdf.contact-number` is gone. Keys that name a
-different field keep their own wording — an inventory source's `contact-number`, the shipping origin's,
-and the contact form's `phone-number`.
+The unused `shop::app.customers.account.orders.invoice-pdf.contact-number` is gone. Keys that name a different field keep their own wording — an inventory source's `contact-number`, the shipping origin's, and the contact form's `phone-number`.
 
 ---
 
@@ -562,16 +559,14 @@ and the contact form's `phone-number`.
 
 **Impact Probability: Low**
 
-`shop::customers.account.downloadable_products` was the last view path carrying an underscore, and is now
-`downloadable-products`. A theme that publishes or overrides that view has to move it to the new path:
+`shop::customers.account.downloadable_products` was the last view path carrying an underscore, and is now `downloadable-products`. A theme that publishes or overrides that view has to move it to the new path:
 
 ```diff
 - resources/themes/<theme>/views/customers/account/downloadable_products/index.blade.php
 + resources/themes/<theme>/views/customers/account/downloadable-products/index.blade.php
 ```
 
-The route name stays `shop.customers.account.downloadable_products.index`, as route names are snake_case,
-and the `view_render_event` names the view fires are unchanged so existing listeners keep working.
+The route name stays `shop.customers.account.downloadable_products.index`, as route names are snake_case, and the `view_render_event` names the view fires are unchanged so existing listeners keep working.
 
 ---
 
@@ -1062,9 +1057,7 @@ Three contracts define the engine abstraction:
 
 8. **Update stored configuration codes:**
 
-   Search settings have moved out of Catalog into a **Search Engines** section of their own, at
-   `Configuration → Search Engines`. The stored `core_config` codes move with them, and a migration
-   carries existing values across:
+   Search settings have moved out of Catalog into a **Search Engines** section of their own, at `Configuration → Search Engines`. The stored `core_config` codes move with them, and a migration carries existing values across:
 
    | Before | After |
    |---|---|
@@ -1074,16 +1067,11 @@ Three contracts define the engine abstraction:
    | `catalog.products.search.min_query_length` | `search_engines.elastic.settings.min_query_length` |
    | `catalog.products.search.max_query_length` | `search_engines.elastic.settings.max_query_length` |
 
-   A new `search_engines.general.settings.enabled` switch now gates every external engine — when it
-   is off, both contexts search the database whatever the modes say. The migration turns it on for
-   any store that already had a non-database engine selected, so an upgrade keeps searching the way
-   it did before.
+   A new `search_engines.general.settings.enabled` switch now gates every external engine — when it is off, both contexts search the database whatever the modes say. The migration turns it on for any store that already had a non-database engine selected, so an upgrade keeps searching the way it did before.
 
-   The two context modes also accept an empty value meaning *use the default engine*, so a store no
-   longer has to repeat its engine choice in three places.
+   The two context modes also accept an empty value meaning *use the default engine*, so a store no longer has to repeat its engine choice in three places.
 
-   Read them through `SearchEngineManager` rather than by code, as in step 7 — its `ENABLED_KEY`,
-   `ENGINE_KEY`, `ADMIN_MODE_KEY` and `STOREFRONT_MODE_KEY` constants are the supported reference.
+   Read them through `SearchEngineManager` rather than by code, as in step 7 — its `ENABLED_KEY`, `ENGINE_KEY`, `ADMIN_MODE_KEY` and `STOREFRONT_MODE_KEY` constants are the supported reference.
 
 #### Elasticsearch connection settings are now recorded in the admin
 
@@ -1142,9 +1130,7 @@ To add a new search engine (e.g., Algolia):
 
    The `SearchEngineManager` resolves your engine once the stored engine matches the enum case and `search_engines.general.settings.enabled` is on.
 
-5. If your engine is reached over a network, implement `Webkul\Product\Contracts\SearchEngineConnection`
-   and bind it as well. This is what gives it settings in the admin and a working Test Connection
-   button; an engine without one is treated as always available.
+5. If your engine is reached over a network, implement `Webkul\Product\Contracts\SearchEngineConnection` and bind it as well. This is what gives it settings in the admin and a working Test Connection button; an engine without one is treated as always available.
 
    ```php
    class AlgoliaConnection implements SearchEngineConnection
@@ -1159,13 +1145,7 @@ To add a new search engine (e.g., Algolia):
    $this->app->singleton('product.search.connection.algolia', AlgoliaConnection::class);
    ```
 
-   `configure()` runs at boot for every bound connection, so keep it cheap and read `core_config`
-   directly rather than through a repository — the table may not exist yet on a fresh install. Return
-   early when nothing is recorded, so the environment file stays in charge of an unconfigured store.
-   `probe()` must return a `status` drawn from `SearchEngineStatusEnum`; anything else it returns is
-   passed through to the admin as detail. `describesRecorded()` lets the Test Connection button tell a
-   trial of unsaved values from a test of the saved ones — both `configure()` and `probe()` take the
-   same `$overrides` array for that purpose.
+   `configure()` runs at boot for every bound connection, so keep it cheap and read `core_config` directly rather than through a repository — the table may not exist yet on a fresh install. Return early when nothing is recorded, so the environment file stays in charge of an unconfigured store. `probe()` must return a `status` drawn from `SearchEngineStatusEnum`; anything else it returns is passed through to the admin as detail. `describesRecorded()` lets the Test Connection button tell a trial of unsaved values from a test of the saved ones — both `configure()` and `probe()` take the same `$overrides` array for that purpose.
 
 6. Add a configuration group keyed by the enum value, so the settings land on their own page:
 
@@ -1179,11 +1159,9 @@ To add a new search engine (e.g., Algolia):
    > config key and looks the rest up in `config()`, so `search_engines.algolia.<field>` would resolve
    > against a `config/algolia.php` if one existed and silently override your declared default.
 
-7. Add the engine's label at `admin::app.configuration.index.search-engines.engines.algolia` in all
-   22 locales. It names the option in every engine select and titles the settings page.
+7. Add the engine's label at `admin::app.configuration.index.search-engines.engines.algolia` in all 22 locales. It names the option in every engine select and titles the settings page.
 
-The status strings under `search-engines.test-connection.statuses.*` take an `:engine` placeholder,
-so they read correctly for your engine without being touched.
+The status strings under `search-engines.test-connection.statuses.*` take an `:engine` placeholder, so they read correctly for your engine without being touched.
 
 ---
 

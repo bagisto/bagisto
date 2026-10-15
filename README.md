@@ -184,8 +184,7 @@ Make use of 200+ Bagisto pre-built extensions from [Bagisto Extension Marketplac
 
 ![Forum and Facebook Communities](https://raw.githubusercontent.com/bagisto/temp-media/master/community.png)
 
-Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto) and [Forum](https://forums.bagisto.com/)
-Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](CONTRIBUTING.md)!
+Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto) and [Forum](https://forums.bagisto.com/) Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](CONTRIBUTING.md)!
 
 # License
 
