@@ -18,6 +18,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
 
+- #11527 [fixed] - An invoice could not be saved again after being created, failing with an unknown column error.
+
 ## **v2.5.0 (6th of October 2026)** - *Release*
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
