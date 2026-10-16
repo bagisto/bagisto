@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Synchronizuj istniejące pliki',
+                            'syncing' => 'Synchronizowanie...',
+                            'pending' => ':count plik(ów) nie ma jeszcze w skonfigurowanym magazynie',
+                            'up-to-date' => 'Wszystko znajduje się w skonfigurowanym magazynie',
+                            'info' => 'Kopiuje już przesłane pliki do skonfigurowanego magazynu. Działa w tle, pomija to, co już tam jest, i pozostawia oryginały na miejscu. W dużym sklepie użyj `php artisan bagisto:storage:sync`.',
+                            'started' => 'Synchronizacja rozpoczęta. Pliki są kopiowane w tle.',
+                            'local' => 'Skonfigurowany magazyn to dysk lokalny, więc nie ma czego kopiować.',
+                        ],
                     ],
                 ],
 

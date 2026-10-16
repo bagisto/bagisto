@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Sincronizează fișierele existente',
+                            'syncing' => 'Se sincronizează...',
+                            'pending' => ':count fișier(e) nu se află încă în stocarea configurată',
+                            'up-to-date' => 'Totul se află în stocarea configurată',
+                            'info' => 'Copiază fișierele deja încărcate în stocarea configurată. Rulează în fundal, omite ceea ce există deja și lasă originalele la locul lor. Pentru un magazin mare, rulați `php artisan bagisto:storage:sync`.',
+                            'started' => 'Sincronizarea a început. Fișierele sunt copiate în fundal.',
+                            'local' => 'Stocarea configurată este discul local, așadar nu există nimic de copiat.',
+                        ],
                     ],
                 ],
 

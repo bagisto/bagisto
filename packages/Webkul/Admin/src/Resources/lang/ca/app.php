@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Sincronitza els fitxers existents',
+                            'syncing' => 'S\'està sincronitzant...',
+                            'pending' => ':count fitxer(s) encara no són a l\'emmagatzematge configurat',
+                            'up-to-date' => 'Tot és a l\'emmagatzematge configurat',
+                            'info' => 'Copia els fitxers ja pujats a l\'emmagatzematge configurat. S\'executa en segon pla, omet el que ja hi és i manté els originals al seu lloc. Per a una botiga gran, executeu `php artisan bagisto:storage:sync`.',
+                            'started' => 'Sincronització iniciada. Els fitxers s\'estan copiant en segon pla.',
+                            'local' => 'L\'emmagatzematge configurat és el disc local, així que no hi ha res a copiar.',
+                        ],
                     ],
                 ],
 

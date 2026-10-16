@@ -8,9 +8,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refined downloadable products: a race-safe download count scoped to its own ordered item, restored unlimited allowances, withdrawal on refund, a single quantity everywhere, and a tidier links form.
 
+- Media already on the site can be copied onto Amazon S3 or Cloudflare R2, from a Sync button in Configuration → File Management or with `php artisan bagisto:storage:sync`. A file the target already holds is passed over, so an interrupted run is resumed by running it again.
+
 - Adding a product to the cart without a quantity no longer fails with an error and is taken as one.
 
 - Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
+
+- Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
 
 - Refactored internals for clearer responsibilities.
 
