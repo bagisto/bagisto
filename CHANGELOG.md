@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Added the currencies of the East African Community — the Tanzanian, Kenyan, Ugandan and Somali shillings, the Rwandan, Burundian and Congolese francs, and the South Sudanese pound — to the installer.
+
 - Added Swahili (Kiswahili) as a supported locale, translated across the admin, the storefront and the installer.
 
 - Refined downloadable products: a race-safe download count scoped to its own ordered item, restored unlimited allowances, withdrawal on refund, a single quantity everywhere, and a tidier links form.
