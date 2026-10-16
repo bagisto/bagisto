@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Console\Commands\BagistoVersion;
 use Webkul\Core\Console\Commands\ExchangeRateUpdate;
+use Webkul\Core\Console\Commands\StorageSync;
 use Webkul\Core\Console\Commands\TranslationsChecker;
 use Webkul\Core\Contracts\DatabaseGrammar;
 use Webkul\Core\Enums\SupportedDatabaseEnum;
@@ -115,6 +116,7 @@ class CoreServiceProvider extends ServiceProvider
             $this->commands([
                 BagistoVersion::class,
                 ExchangeRateUpdate::class,
+                StorageSync::class,
                 TranslationsChecker::class,
             ]);
         }

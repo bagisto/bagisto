@@ -48,6 +48,26 @@ enum SupportedFilesystemEnum: string
     }
 
     /**
+     * The disk the application is writing to right now.
+     */
+    public static function currentDriver(): self
+    {
+        return self::fromConfig(config('filesystems.default'));
+    }
+
+    /**
+     * The drivers existing files can be copied onto, as the configuration screen
+     * records them.
+     */
+    public static function syncable(): array
+    {
+        return array_values(array_map(
+            fn (self $driver) => $driver->value,
+            array_filter(self::cases(), fn (self $driver) => $driver->supportsSync())
+        ));
+    }
+
+    /**
      * Where this driver's name is kept, so it reads as the configuration screen names it.
      */
     public function title(): string
@@ -80,5 +100,17 @@ enum SupportedFilesystemEnum: string
 
         return is_null($adapter)
             || class_exists($adapter);
+    }
+
+    /**
+     * Whether files already stored can be copied onto this driver, which only a
+     * remote disk the application can reach allows.
+     */
+    public function supportsSync(): bool
+    {
+        return match ($this) {
+            self::LOCAL => false,
+            self::S3, self::R2 => $this->isAvailable(),
+        };
     }
 }

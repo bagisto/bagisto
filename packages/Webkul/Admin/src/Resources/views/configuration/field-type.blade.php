@@ -1,5 +1,11 @@
 @php
     $value = system_config()->getConfigData($field->getNameKey(), $currentChannel->code, $currentLocale->code);
+
+    $holdsFile = in_array($field->getType(), ['image', 'file'])
+        && is_string($value)
+        && $value !== '';
+
+    $source = $holdsFile ? Storage::url($value) : '';
 @endphp
 
 <input
@@ -19,7 +25,7 @@
         depend-name="{{ $field->getDependFieldName() }}"
         depend-value="{{ $field->getDependFieldValue() }}"
         placeholder="{{ $field->getPlaceholder() }}"
-        src="{{ Storage::url($value) }}"
+        src="{{ $source }}"
         field-data="{{ json_encode($field) }}"
         channel-count="{{ $channels->count() }}"
         current-channel="{{ $currentChannel }}"

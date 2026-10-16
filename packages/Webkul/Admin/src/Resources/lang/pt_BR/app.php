@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Sincronizar arquivos existentes',
+                            'syncing' => 'Sincronizando...',
+                            'pending' => ':count arquivo(s) ainda não estão no armazenamento configurado',
+                            'up-to-date' => 'Tudo está no armazenamento configurado',
+                            'info' => 'Copia os arquivos já enviados para o armazenamento configurado. É executado em segundo plano, ignora o que já existe e mantém os originais no lugar. Para uma loja grande, execute `php artisan bagisto:storage:sync`.',
+                            'started' => 'Sincronização iniciada. Os arquivos estão sendo copiados em segundo plano.',
+                            'local' => 'O armazenamento configurado é o disco local, portanto não há nada para copiar.',
+                        ],
                     ],
                 ],
 

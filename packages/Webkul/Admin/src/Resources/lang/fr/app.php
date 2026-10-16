@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Synchroniser les fichiers existants',
+                            'syncing' => 'Synchronisation...',
+                            'pending' => ':count fichier(s) ne sont pas encore sur le stockage configuré',
+                            'up-to-date' => 'Tout est sur le stockage configuré',
+                            'info' => 'Copie les fichiers déjà téléchargés vers le stockage configuré. L\'opération s\'exécute en arrière-plan, ignore ce qui est déjà présent et laisse les originaux en place. Pour une grande boutique, lancez plutôt `php artisan bagisto:storage:sync`.',
+                            'started' => 'Synchronisation lancée. Les fichiers sont copiés en arrière-plan.',
+                            'local' => 'Le stockage configuré est le disque local, il n\'y a donc rien à copier.',
+                        ],
                     ],
                 ],
 

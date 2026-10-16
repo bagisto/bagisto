@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Mevcut dosyaları eşitle',
+                            'syncing' => 'Eşitleniyor...',
+                            'pending' => ':count dosya henüz yapılandırılmış depolamada değil',
+                            'up-to-date' => 'Her şey yapılandırılmış depolamada',
+                            'info' => 'Daha önce yüklenmiş dosyaları yapılandırılmış depolamaya kopyalar. Arka planda çalışır, hâlihazırda bulunanları atlar ve özgün dosyaları yerinde bırakır. Büyük bir mağaza için `php artisan bagisto:storage:sync` komutunu çalıştırın.',
+                            'started' => 'Eşitleme başladı. Dosyalar arka planda kopyalanıyor.',
+                            'local' => 'Yapılandırılmış depolama yerel disk olduğundan kopyalanacak bir şey yok.',
+                        ],
                     ],
                 ],
 

@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Sawazisha Faili Zilizopo',
+                            'syncing' => 'Inasawazisha...',
+                            'pending' => ':count faili bado hazipo kwenye hifadhi iliyosanidiwa',
+                            'up-to-date' => 'Kila kitu kipo kwenye hifadhi iliyosanidiwa',
+                            'info' => 'Hunakili faili zilizokwisha pakiwa kwenye hifadhi iliyosanidiwa. Hufanya kazi chinichini, huruka zilizokwisha kuwepo, na huacha nakala asili mahali pake. Kwa duka kubwa, tumia `php artisan bagisto:storage:sync`.',
+                            'started' => 'Usawazishaji ulianza. Faili zinanakiliwa chinichini.',
+                            'local' => 'Hifadhi iliyosanidiwa ni diski ya ndani, kwa hivyo hakuna kitu cha kunakili.',
+                        ],
                     ],
                 ],
 
