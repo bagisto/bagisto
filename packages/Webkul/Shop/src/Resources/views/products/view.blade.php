@@ -387,7 +387,7 @@
                                 @include('shop::products.view.types.booking')
 
                                 <!-- Product Actions and Quantity Box -->
-                                <div class="mt-8 flex max-w-117.5 gap-4 max-sm:mt-4 max-sm:flex-wrap">
+                                <div ref="addToCartContainer" class="mt-8 flex max-w-117.5 gap-4 max-sm:mt-4 max-sm:flex-wrap">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -479,6 +479,9 @@
                         </div>
                     </div>
                 </form>
+
+                <!-- Mobile Sticky Add To Cart Bar -->
+                @include('shop::products.view.sticky-bar')
             </x-shop::form>
 
             <!-- Contact Us Modal -->
@@ -599,6 +602,8 @@
 
                         is_buy_now: 0,
 
+                        isStickyBarVisible: false,
+
                         isStoring: {
                             addToCart: false,
 
@@ -609,6 +614,14 @@
 
                 mounted() {
                     this.checkWishlistStatus();
+
+                    this.initStickyAddToCart();
+                },
+
+                beforeUnmount() {
+                    if (this.stickyObserver) {
+                        this.stickyObserver.disconnect();
+                    }
                 },
 
                 methods: {
@@ -794,6 +807,37 @@
                         if (! formData.has('quantity')) {
                             formData.append('quantity', 1);
                         }
+                    },
+
+                    handleStickyAddToCart() {
+                        this.is_buy_now = 0;
+
+                        if (this.$refs.formData) {
+                            if (! this.$refs.formData.checkValidity()) {
+                                if (this.$refs.addToCartContainer) {
+                                    this.$refs.addToCartContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }
+
+                            this.$refs.formData.requestSubmit();
+                        }
+                    },
+
+                    initStickyAddToCart() {
+                        if (! this.$refs.addToCartContainer) {
+                            return;
+                        }
+
+                        this.stickyObserver = new IntersectionObserver(
+                            (entries) => {
+                                entries.forEach((entry) => {
+                                    this.isStickyBarVisible = ! entry.isIntersecting && entry.boundingClientRect.top < 0;
+                                });
+                            },
+                            { threshold: 0.1 }
+                        );
+
+                        this.stickyObserver.observe(this.$refs.addToCartContainer);
                     },
                 },
             });
