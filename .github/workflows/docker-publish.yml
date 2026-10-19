@@ -103,7 +103,7 @@ jobs:
           #   identical  → same commit as default tip
           #   behind     → build commit is older but on the default branch line
           #   ahead      → build commit has commits the default doesn't (unusual for releases)
-          #   diverged   → build commit is on a side branch (e.g. 2.4 while default is master)
+          #   diverged   → build commit is on another line (e.g. a 2.4 tag while default is 2.5)
           # Only `identical` and `behind` mean "this release belongs to the active line".
           BUILD_SHA="${{ github.sha }}"
           COMPARE_STATUS=$(gh api "repos/${{ github.repository }}/compare/${DEFAULT_BRANCH}...${BUILD_SHA}" --jq '.status' 2>/dev/null || echo "unknown")

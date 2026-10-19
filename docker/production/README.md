@@ -54,7 +54,8 @@ The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because 
 | **Web Server** | One of **Nginx** (default), **Apache 2**, or **OpenLiteSpeed** — listening on port 80 (see the variant table above) |
 | **PHP** | 8.4. The nginx and apache images install bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pgsql, pdo, soap, sockets, xml, zip and imagick; the litespeed image installs lsphp with common, curl, imagick, intl, mysql, pgsql and opcache. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
 | **Database** | MySQL 8.0, MariaDB 10.11 or PostgreSQL 16, bundled and pre-installed with Bagisto migrations + seed data already applied |
-| **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, and the web server) |
+| **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, the web server, and a queue worker) |
+| **Queue** | A `queue:work` worker on the `default` and `broadcastable` queues, with `QUEUE_CONNECTION=database` and `--timeout=60` (below the connection's `retry_after`). Order mail, the post-order price and inventory reindex, search terms and sitemap generation run here instead of inside the request. |
 | **Application** | Bagisto — fully installed at build time |
 
 ### Two database modes
@@ -104,19 +105,19 @@ bagisto/
     │   └── config/
     │       ├── nginx.conf        # Nginx server block (port 80 → /var/www/bagisto/public)
     │       ├── php-fpm.conf      # PHP-FPM pool (www, unix socket, dynamic PM)
-    │       └── supervisord.conf  # Supervisor: php-fpm + nginx (the database is its own file)
+    │       └── supervisord.conf  # Supervisor: php-fpm + nginx + queue worker (the database is its own file)
     ├── apache/
     │   ├── Dockerfile            # Apache 2 + PHP 8.4 mod_php
     │   └── config/
     │       ├── vhost.conf        # Apache virtual host (rewrite + security headers)
-    │       └── supervisord.conf  # Supervisor: apache2 (the database is its own file)
+    │       └── supervisord.conf  # Supervisor: apache2 + queue worker (the database is its own file)
     ├── litespeed/
     │   ├── Dockerfile            # OpenLiteSpeed + lsphp 8.4 (LSAPI)
     │   └── config/
     │       ├── httpd_config.conf # OLS server config (listener :80, lsphp external app)
     │       ├── vhosts/
     │       │   └── bagisto.conf  # OLS vhost (docRoot public/, Laravel rewrite)
-    │       └── supervisord.conf  # Supervisor: lsphp + openlitespeed (the database is its own file)
+    │       └── supervisord.conf  # Supervisor: lsphp + openlitespeed + queue worker (the database is its own file)
     ├── .dockerignore             # Excludes unneeded files from the build context
     └── README.md                 # This file
 ```
@@ -205,7 +206,7 @@ docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-postgres \
     --build-arg BAGISTO_VERSION=v2.5.0 --build-arg DB_ENGINE=postgres .
 ```
 
-Any tag from https://github.com/bagisto/bagisto/tags works as `BAGISTO_VERSION`, e.g. `--build-arg BAGISTO_VERSION=v2.4.12` for the latest 2.4 release on MySQL or MariaDB.
+Any tag from https://github.com/bagisto/bagisto/tags works as `BAGISTO_VERSION`, e.g. `--build-arg BAGISTO_VERSION=v2.4.13` for the latest 2.4 release on MySQL or MariaDB.
 
 ### Build arguments
 
@@ -277,23 +278,24 @@ The `v` prefix is a Git convention. Docker Hub tags are plain version numbers.
 
 ### Tags published per release (automated)
 
-The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains multiple release lines in parallel (e.g. `2.4.x` on the `2.4` branch and `2.5.x` on `master`), so `:latest` is reserved for releases that come from commits on the default branch line. When a new major/minor line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically.
+The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains several release lines in parallel — `2.4.x` on the `2.4` branch, `2.5.x` on the `2.5` branch, and the next major on `master` — so `:latest` is reserved for releases that come from commits on the default branch line, which is **`2.5`** at the time of writing. When a new line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically, and nothing here has to be edited.
 
 How the workflow decides:
 
 - For each tagged build, GitHub's compare API is queried for `<default-branch>...<build-commit>`.
 - If the compare status is `identical` or `behind`, the build commit is on the default branch line → `:latest` is updated (for stable tags).
-- If the status is `diverged` (the commit is on a side branch like `2.4` while the default is `master`), `:latest` is **not** touched.
+- If the status is `diverged` (the commit is on a line other than the default, such as a `2.4` tag while the default is `2.5`), `:latest` is **not** touched.
 
 Each row below is published **for every server × database combination** (with its `-<server>-<database>` suffix and the aliases from the table above); the unsuffixed tags shown are the nginx + MySQL aliases.
 
-| Git tag pushed | Default branch is `master` (the 2.5 line) → Docker Hub tags published (per variant) |
+| Git tag pushed | Default branch is `2.5` → Docker Hub tags published (per variant) |
 |---|---|
-| `v2.5.0` (commit on `master`, stable) | `:2.5.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.0`, `:latest`) |
+| `v2.5.1` (commit on `2.5`, stable) | `:2.5.1-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.1`, `:latest`) |
 | `v2.4.12` (commit on `2.4`, stable) | `:2.4.12-<variant>` only (does **not** touch any `:latest*`) |
-| `v2.5.1-rc1` (pre-release on `master`) | `:2.5.1-rc1-<variant>` only |
-| Later: default branch switched to `2.6`, then `v2.6.0` released | `:2.6.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.6.0`, `:latest`) |
-| Later: default branch is `2.6`, then a patch `v2.5.1` is released on the 2.5 line | `:2.5.1-<variant>` only (does **not** touch any `:latest*`) |
+| `v2.5.2-rc1` (pre-release on `2.5`) | `:2.5.2-rc1-<variant>` only |
+| `v2.6.0` (commit on `master`, stable, while the default is still `2.5`) | `:2.6.0-<variant>` only (does **not** touch any `:latest*`) |
+| Later: default branch switched to `2.6`, then `v2.6.1` released | `:2.6.1-<variant>`, `:latest-<variant>` (+ nginx: `:2.6.1`, `:latest`) |
+| Later: default branch is `2.6`, then a patch `v2.5.3` is released on the 2.5 line | `:2.5.3-<variant>` only (does **not** touch any `:latest*`) |
 
 | Tag form | Mutability | Purpose |
 |---|---|---|
@@ -460,7 +462,7 @@ That's the entire release. The GitHub Actions workflow at `.github/workflows/doc
 
 1. **Resolve** — validates the tag matches `vX.Y.Z` (or `vX.Y.Z-suffix` for pre-releases), derives the Docker tag, and decides whether the `:latest` aliases move by comparing the build commit against the default branch.
 2. **Build** — matrix-builds every server × database combination, each from its own `docker/production/<server>/Dockerfile` (`nginx`, `apache`, `litespeed`) with `DB_ENGINE` set to `mysql`, `mariadb` or `postgres` and `BAGISTO_VERSION=v2.5.0`, for `linux/amd64` and `linux/arm64`. Each combination is pushed untagged, by digest, and its buildx layers are cached in the GitHub Actions cache.
-3. **Publish** — creates every tag from those digests in a fixed order: the version tags first (e.g. `webkul/bagisto:2.5.0-nginx-mariadb`, and the bare `webkul/bagisto:2.5.0` for nginx + MySQL), then, since `master` **is** the GitHub default branch, the `:latest` aliases, ending with `webkul/bagisto:latest`.
+3. **Publish** — creates every tag from those digests in a fixed order: the version tags first (e.g. `webkul/bagisto:2.5.0-nginx-mariadb`, and the bare `webkul/bagisto:2.5.0` for nginx + MySQL), then, because the tagged commit is on the default branch line, the `:latest` aliases, ending with `webkul/bagisto:latest`.
 
 Track progress in the repo's **Actions** tab. Build duration is typically **30–60 minutes** because the arm64 leg runs under QEMU emulation and Bagisto is fully installed (migrations, seeders, indexers) during the build.
 
@@ -468,7 +470,7 @@ After the run finishes:
 
 - Tags of earlier releases (for example `webkul/bagisto:2.4.12`) still exist and still work (tags are immutable once pushed).
 - `webkul/bagisto:2.5.0` points to the new build (both archs).
-- `webkul/bagisto:latest` now points to `2.5.0` (since `master` is the default branch line).
+- `webkul/bagisto:latest` now points to `2.5.0` (since the tag is on the default branch line).
 
 ### Pre-release / RC tags
 
@@ -675,6 +677,7 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 | `APP_CURRENCY` | from `.env.example` | Default currency (e.g., `USD`, `INR`, `EUR`). |
 | `APP_TIMEZONE` | from `.env.example` | Timezone (e.g., `UTC`, `Asia/Kolkata`). |
 | `APP_ADMIN_URL` | `admin` | Admin panel URL path. Read from the container environment; the entrypoint does not write it into `.env`. |
+| `QUEUE_CONNECTION` | `database` | Connection the queue worker drains. The image runs a worker, so queued work is taken off the request; set `sync` to run it inline instead and the worker idles. |
 
 ---
 
@@ -689,9 +692,10 @@ When the container starts, `entrypoint.sh` does this:
 | 1 | Reads `DB_HOST` to determine bundled vs. external database mode. |
 | 2 | Sets `DB_AUTOSTART=true` or `false` so Supervisor knows whether to start the bundled database. |
 | 3 | Writes any runtime overrides (`DB_*`, `APP_URL`, `APP_KEY`, `APP_LOCALE`, `APP_CURRENCY`, `APP_TIMEZONE`) into `/var/www/bagisto/.env`. |
-| 4 | If `APP_URL` is set or an external database is used, runs `php artisan optimize:clear` + `optimize` to refresh caches. |
-| 5 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
-| 6 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal) and the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed`. |
+| 4 | Sets `QUEUE_CONNECTION` (`database` unless overridden), which the build deliberately left as `.env.example`'s `sync` so the install itself needed no worker. |
+| 5 | Runs `php artisan optimize:clear` + `optimize`, since the steps above have just invalidated the cached configuration. |
+| 6 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
+| 7 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal), the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed` — and the queue worker. |
 
 ### Why the build-time install?
 

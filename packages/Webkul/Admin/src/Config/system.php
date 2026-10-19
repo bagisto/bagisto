@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Core\Enums\SupportedFilesystemEnum;
 use Webkul\Core\Mail\Transport\DynamicMailTransport;
 use Webkul\MagicAI\AiProvider;
 use Webkul\Product\Enums\ElasticAuthEnum;
@@ -3505,6 +3506,12 @@ return [
                         'value' => 'r2',
                     ],
                 ],
+            ], [
+                'name' => 'sync',
+                'title' => 'admin::app.configuration.index.file-management.general.settings.sync.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.storage-sync',
+                'depends' => 'default_driver:'.implode(',', SupportedFilesystemEnum::syncable()),
             ],
         ],
     ], [

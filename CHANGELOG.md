@@ -10,13 +10,23 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refined downloadable products: a race-safe download count scoped to its own ordered item, restored unlimited allowances, withdrawal on refund, a single quantity everywhere, and a tidier links form.
 
+- Media already on the site can be copied onto Amazon S3 or Cloudflare R2, from a Sync button in Configuration → File Management or with `php artisan bagisto:storage:sync`. A file the target already holds is passed over, so an interrupted run is resumed by running it again.
+
 - Adding a product to the cart without a quantity no longer fails with an error and is taken as one.
 
 - Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
 
+- Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
+
 - Fixed the installer naming the Venezuelan bolívar by its retired VEF code and its pre-redenomination symbol, while installing it as VES.
 
+- Refactored internals for clearer responsibilities.
+
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
+
+- #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
+
+- #11527 [fixed] - An invoice could not be saved again after being created, failing with an unknown column error.
 
 ## **v2.5.0 (6th of October 2026)** - *Release*
 

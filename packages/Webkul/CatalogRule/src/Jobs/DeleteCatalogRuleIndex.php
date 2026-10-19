@@ -8,12 +8,13 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Event;
+use Webkul\DataTransfer\Jobs\Concerns\RetriesOnDeadlock;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 use Webkul\Product\Repositories\ProductRepository;
 
 class DeleteCatalogRuleIndex implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, RetriesOnDeadlock, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -38,7 +39,7 @@ class DeleteCatalogRuleIndex implements ShouldQueue
 
         Event::dispatch('promotions.catalog_rule.reindex.before', [$productIds]);
 
-        app(PriceIndexer::class)->reindexProducts($productIds);
+        $this->retryOnDeadlock(fn () => app(PriceIndexer::class)->reindexProducts($productIds));
 
         Event::dispatch('promotions.catalog_rule.reindex.after', [$productIds]);
     }

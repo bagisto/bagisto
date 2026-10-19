@@ -56,6 +56,10 @@
         </testsuite>
 
         <!-- Omnibus package testsuites. -->
+        <testsuite name="Marketing Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Marketing/tests/Unit</directory>
+        </testsuite>
+
         <testsuite name="Omnibus Feature Test">
             <directory suffix="Test.php">packages/Webkul/Omnibus/tests/Feature</directory>
         </testsuite>

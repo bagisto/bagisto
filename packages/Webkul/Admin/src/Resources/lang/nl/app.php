@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Bestaande bestanden synchroniseren',
+                            'syncing' => 'Synchroniseren...',
+                            'pending' => ':count bestand(en) staan nog niet op de ingestelde opslag',
+                            'up-to-date' => 'Alles staat op de ingestelde opslag',
+                            'info' => 'Kopieert al geüploade bestanden naar de ingestelde opslag. Dit gebeurt op de achtergrond, bestanden die er al staan worden overgeslagen en de originelen blijven staan. Gebruik voor een grote winkel `php artisan bagisto:storage:sync`.',
+                            'started' => 'Synchronisatie gestart. De bestanden worden op de achtergrond gekopieerd.',
+                            'local' => 'De ingestelde opslag is de lokale schijf, dus er is niets te kopiëren.',
+                        ],
                     ],
                 ],
 

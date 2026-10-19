@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Vorhandene Dateien synchronisieren',
+                            'syncing' => 'Wird synchronisiert...',
+                            'pending' => ':count Datei(en) liegen noch nicht im konfigurierten Speicher',
+                            'up-to-date' => 'Alles liegt im konfigurierten Speicher',
+                            'info' => 'Kopiert bereits hochgeladene Dateien in den konfigurierten Speicher. Der Vorgang läuft im Hintergrund, überspringt bereits vorhandene Dateien und lässt die Originale unberührt. Für große Shops nutzen Sie stattdessen `php artisan bagisto:storage:sync`.',
+                            'started' => 'Synchronisierung gestartet. Die Dateien werden im Hintergrund kopiert.',
+                            'local' => 'Der konfigurierte Speicher ist die lokale Festplatte, es gibt also nichts zu kopieren.',
+                        ],
                     ],
                 ],
 

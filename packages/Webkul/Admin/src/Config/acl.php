@@ -1299,6 +1299,8 @@ return [
             'admin.configuration.download',
             'admin.configuration.cache_management.execute',
             'admin.configuration.search_engines.test_connection',
+            'admin.configuration.file_management.sync_status',
+            'admin.configuration.file_management.sync',
         ],
         'sort' => 9,
     ],

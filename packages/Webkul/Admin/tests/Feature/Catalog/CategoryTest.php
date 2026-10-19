@@ -658,11 +658,32 @@ it('should search categories by name', function () {
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.catalog.categories.search', [
+    $ids = getJson(route('admin.catalog.categories.search', [
         'query' => $category->name,
     ]))
         ->assertOk()
-        ->assertJsonPath('data.0.id', $category->id);
+        ->json('data.*.id');
+
+    expect($ids)->toContain($category->id);
+});
+
+it('should find a category by name when another one matches the same query', function () {
+    $category = createCategory();
+
+    $sameName = createCategory();
+
+    $sameName->translations()->update(['name' => $category->name]);
+
+    $this->loginAsAdmin();
+
+    $ids = getJson(route('admin.catalog.categories.search', [
+        'query' => $category->name,
+    ]))
+        ->assertOk()
+        ->json('data.*.id');
+
+    expect($ids)->toContain($category->id)
+        ->and($ids)->toContain($sameName->id);
 });
 
 it('should return empty results for non-matching search query', function () {

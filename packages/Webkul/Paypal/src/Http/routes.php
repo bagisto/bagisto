@@ -12,6 +12,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/success', [StandardController::class, 'success'])->name('paypal.standard.success');
 
         Route::get('/cancel', [StandardController::class, 'cancel'])->name('paypal.standard.cancel');
+
+        Route::post('/ipn', [StandardController::class, 'ipn'])
+            ->withoutMiddleware(PreventRequestForgery::class)
+            ->name('paypal.standard.ipn');
     });
 
     Route::prefix('paypal/smart-button')->group(function () {
@@ -20,7 +24,3 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/capture-order', [SmartButtonController::class, 'captureOrder'])->name('paypal.smart_button.capture_order');
     });
 });
-
-Route::post('paypal/standard/ipn', [StandardController::class, 'ipn'])
-    ->withoutMiddleware(PreventRequestForgery::class)
-    ->name('paypal.standard.ipn');

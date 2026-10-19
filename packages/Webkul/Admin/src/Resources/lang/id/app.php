@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => 'Sinkronkan Berkas yang Ada',
+                            'syncing' => 'Menyinkronkan...',
+                            'pending' => ':count berkas belum ada di penyimpanan yang dikonfigurasi',
+                            'up-to-date' => 'Semuanya sudah ada di penyimpanan yang dikonfigurasi',
+                            'info' => 'Menyalin berkas yang sudah diunggah ke penyimpanan yang dikonfigurasi. Proses ini berjalan di latar belakang, melewati berkas yang sudah ada, dan membiarkan berkas asli tetap di tempatnya. Untuk toko besar, jalankan `php artisan bagisto:storage:sync`.',
+                            'started' => 'Sinkronisasi dimulai. Berkas sedang disalin di latar belakang.',
+                            'local' => 'Penyimpanan yang dikonfigurasi adalah disk lokal, jadi tidak ada yang perlu disalin.',
+                        ],
                     ],
                 ],
 

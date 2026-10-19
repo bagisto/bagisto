@@ -15,7 +15,15 @@
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
+- [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
+- [The Invoice Payment Transaction Is Created By The Controller](#the-invoice-payment-transaction-is-created-by-the-controller)
+- [Total Due Discounts Cancelled Quantities](#total-due-discounts-cancelled-quantities)
+- [Order Item Ownership Checks Moved Onto The Order](#order-item-ownership-checks-moved-onto-the-order)
+- [A Search Term Is Unique Within A Channel And Locale](#a-search-term-is-unique-within-a-channel-and-locale)
+- [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
+- [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
+- [The PayPal Standard IPN Places The Order](#the-paypal-standard-ipn-places-the-order)
 
 ---
 
@@ -36,6 +44,25 @@ What this changes for custom code:
 
 ---
 
+### An SVG That Uses A Custom DTD Entity Is Refused
+
+**Impact Probability: Low**
+
+`enshrined/svg-sanitize` is now `^1.0`, up from `^0.22.0`, which closes a stored XSS where an SVG smuggled a `javascript:` link past the sanitizer by defining a DTD entity whose name collides with an HTML5 character reference (CVE-2026-107380). The sanitizer refuses such a file rather than cleaning it, so Bagisto refuses the upload with `core::app.errors.invalid-svg`, the same way it treats any SVG it cannot read.
+
+The refusal is wider than the attack: **an SVG that references any custom entity is now refused**, including a harmless one.
+
+| The SVG | Before | Now |
+|---|---|---|
+| No `DOCTYPE` | accepted | accepted |
+| A `DOCTYPE` with no internal entities, such as the SVG 1.1 DTD | accepted | accepted |
+| Declares an entity but never uses it | accepted | accepted |
+| Uses an entity, such as `<!ENTITY brand "Acme">` with `&brand;` in a `<text>` | accepted | **refused** |
+
+Nothing in Bagisto generates such a file, and few drawing tools emit one, so most catalogues are unaffected. If a store does hold one, re-save the file with the entity expanded to its literal text before uploading it again.
+
+---
+
 ### ProductReviewRepository Reads Reviews By Customer
 
 **Impact Probability: Low**
@@ -51,6 +78,132 @@ $reviews = $this->productReviewRepository->getCustomerReviews(
     auth()->guard('customer')->id()
 );
 ```
+
+---
+
+### The Invoice Payment Transaction Is Created By The Controller
+
+**Impact Probability: Low**
+
+Invoicing an order from the admin with *Create Transaction* ticked used to be carried out by `Webkul\Admin\Listeners\Invoice`, which read the request inside the listener. That listener fires for every invoice, including the ones a payment gateway raises with no request behind it, so the check now sits in `Webkul\Admin\Http\Controllers\Sales\InvoiceController::store()` — the one place the form posts to — and the invoice and its transaction are written in a single database transaction.
+
+What this changes for custom code:
+
+- **`Webkul\Admin\Listeners\Invoice::createTransaction()` is gone**, together with the `OrderTransactionRepository` the listener took in its constructor. The listener now only sends the admin notification. `OrderTransactionRepository::createForInvoice()` builds the same row from the invoice.
+- **`InvoiceController` takes `OrderTransactionRepository` in its constructor**, so resolve it through the container rather than building it by hand.
+- **The invoice carried by `sales.invoice.save.after` no longer has a `can_create_transaction` attribute.** It was never a column, and setting it left the model unsaveable, so saving the invoice again in the same request failed. A listener that read it should read `request()->boolean('can_create_transaction')` itself.
+
+```php
+// Before
+$this->orderTransactionRepository->create([
+    'transaction_id' => md5(uniqid()),
+    'status' => $invoice->state,
+    'type' => $invoice->order->payment->method,
+    'payment_method' => $invoice->order->payment->method,
+    'order_id' => $invoice->order->id,
+    'invoice_id' => $invoice->id,
+    'amount' => $invoice->grand_total,
+]);
+
+// After
+$this->orderTransactionRepository->createForInvoice($invoice);
+```
+
+---
+
+### Total Due Discounts Cancelled Quantities
+
+**Impact Probability: Low**
+
+An order's grand total is left alone when an item is cancelled, so `grand_total - grand_total_invoiced` overstated what was still owed. `Order::getTotalDueAttribute()` and `getBaseTotalDueAttribute()` now take the cancelled quantities off that figure, each in its own currency, and both answer `0` for a cancelled order.
+
+The storefront account page computed this in the template before, and did it wrong in two different ways: the order-currency row subtracted `base_price`, mixing the two currencies, and the base-currency row rendered a base amount with the order's currency code. Both read the accessor now. The admin order view showed the raw `base_total_due` and so disagreed with the storefront; it now agrees.
+
+What this changes for custom code:
+
+- **A store whose order currency differs from its base currency sees different figures** on the admin order view and the storefront account page. They were wrong before.
+- **The accessors read `$order->items`**, so eager-load it where you read them in a loop.
+- **A template that repeated the old arithmetic should be deleted** rather than kept in step. The cancelled amount is taken at the item price only, as it was before; tax and discount on the cancelled quantity are still not apportioned.
+
+---
+
+### Order Item Ownership Checks Moved Onto The Order
+
+**Impact Probability: Low**
+
+`InvoiceController` and `ShipmentController` each carried a protected `itemsBelongToOrder()` that answered whether every item id the request named belonged to the order being documented. That check now lives on the model, as `Order::ownsItems(array $itemIds)`, so the three sales controllers share one implementation and the refund path performs it too.
+
+```php
+// Before
+if (! $this->itemsBelongToOrder($order, $itemIds)) {
+
+// After
+if (! $order->ownsItems($itemIds)) {
+```
+
+**`itemsBelongToOrder()` is gone from both controllers.** A subclass that called it has to call the model method instead; one that only overrides `store()` is unaffected.
+
+---
+
+### A Search Term Is Unique Within A Channel And Locale
+
+**Impact Probability: Low**
+
+`search_terms` carried no unique constraint, and `UpdateCreateSearchTerm` read the row before creating it, so two shoppers searching the same new term both inserted it. The counter then split across the duplicates and the admin listing showed the term twice.
+
+A migration adds `search_terms_term_channel_locale_unique` over `(term, channel_id, locale)`. **It folds existing duplicates into one row first**, so the index can be added to a table that already has them: the earliest `id` survives, `uses` is summed, `results` is taken from the most recently updated row, the first non-empty `redirect_url` is kept and `display_in_suggested_terms` takes the highest value. The rest are deleted.
+
+What this changes for custom code:
+
+- **Recording a search goes through `SearchTermRepository::recordSearch()`**, which increments an existing row atomically and falls back to the increment when its insert loses the race. Code that read the term and then created it hits the constraint instead.
+- **Inserting a duplicate now throws** `Illuminate\Database\UniqueConstraintViolationException`.
+- **`SearchTermsFactory` appends a discriminator to the term** so it can make more than one row. A test that asserted on the bare word needs the factory's value instead.
+
+---
+
+### Index Jobs Retry A Lock Conflict
+
+**Impact Probability: Low**
+
+The price, inventory, search and catalog-rule index jobs write the same few tables from several workers at once, so the database picks one of them as the victim of a lock cycle sooner or later. Each now retries that write rather than failing the job, using the same `RetriesOnDeadlock` concern the import jobs already used.
+
+What counts as a lock conflict is now the framework's own judgement rather than a pair of MySQL error codes, so **the retry works on PostgreSQL and MariaDB as well as MySQL** — it previously did nothing on PostgreSQL, whose deadlock is `40P01` rather than `1213`.
+
+What this changes for custom code:
+
+- **`RetriesOnDeadlock::isDeadlock()` is gone**, replaced by the framework's `causedByConcurrencyError()`. A class that overrode it to recognise its own error codes no longer has a hook; the framework's detector covers MySQL, MariaDB, PostgreSQL and SQLite.
+- **The work a retry wraps has to be safe to run again from the top.** The index rebuilds are, because each recomputes from current state.
+- **Bounding how long a job may run is the worker's job, not each job's.** Run `queue:work` with a `--timeout` below the connection's `retry_after`, or the queue hands a still-running job to a second worker. The production images pass `--timeout=60` against the default `retry_after` of 90.
+- **`BoundedByRetryAfter` is deleted and no job declares `$timeout`.** The import jobs carried one derived from `retry_after`; they no longer do, so a subclass that read the inherited property has to set its own.
+
+---
+
+### The Production Images Run A Queue Worker
+
+**Impact Probability: Low**
+
+The images in `docker/production/` ran only the web server, PHP and the bundled database, so with `.env.example`'s `QUEUE_CONNECTION=sync` every queued job — order mail, the post-order price and inventory reindex, search terms, sitemap generation — ran inside the request that dispatched it.
+
+Supervisor now also runs `queue:work --queue=default,broadcastable`, and the entrypoint sets `QUEUE_CONNECTION` to `database` after the build-time install. Pass `QUEUE_CONNECTION=sync` to the container to go back to running that work inline; the worker then idles.
+
+This changes nothing for an installation that is not built from those images. `.env.example` still ships `sync`, which is what an installation with no worker needs: the work still happens, just inside the request.
+
+---
+
+### The PayPal Standard IPN Places The Order
+
+**Impact Probability: Low**
+
+A PayPal Standard order used to be created only when the buyer came back to the store, so a buyer who paid and closed the tab left the money at PayPal, the cart active and no order — and every one of PayPal's retries failed with a 500. `Webkul\Paypal\Helpers\Ipn` now places the order from the cart named in the notification's `invoice` field when there is none, the way the Stripe, PayU, PhonePe and PayGlocal webhooks already did, under a cache lock so the buyer's return and PayPal's retries cannot produce two orders.
+
+**Check the configured PayPal account before upgrading.** The notification is now accepted only when its `receiver_email` or `business` matches **Configuration → Sales → Payment Methods → PayPal Standard → Business Account**, and only when `mc_currency` matches the currency the order was raised in. A store whose configured address is not the one receiving the money — the shipped default is `test@webkul.com` — had its notifications processed before and will have them refused now.
+
+What this changes for custom code:
+
+- **`Ipn::processIpn()` takes an `array` and returns a `Webkul\Paypal\Enums\IpnStatus`** rather than returning nothing and rethrowing. `StandardController::ipn()` answers with that status's value as JSON, and with a 500 only when PayPal should send the notification again.
+- **`Ipn` takes `CartRepository`** as its second constructor argument, so resolve it through the container rather than building it by hand.
+- **`payment_status` is read as a `Webkul\Paypal\Enums\PaypalPaymentStatus`**, and the protocol strings the helper compares against are constants on `Ipn` — `VALIDATION_COMMAND`, `VERIFIED_RESPONSE`, `RECURRING_TRANSACTION_TYPE` and `DEFAULT_PAYMENT_TYPE`.
+- **`paypal/standard/ipn` runs in the `web` middleware group**, with request forgery prevention removed on the route, which is how every other gateway's webhook is registered. The route name is unchanged.
 
 ## Upgrading To v2.5.0 From v2.4
 
@@ -387,8 +540,7 @@ Keys whose segment is data rather than a name keep their own casing — currency
 
 **Impact Probability: Low**
 
-The one customer phone number was labelled three different ways. Every key that names it is now `phone`,
-in all 22 locales, and the label reads as the locale's own word for it:
+The one customer phone number was labelled three different ways. Every key that names it is now `phone`, in all 22 locales, and the label reads as the locale's own word for it:
 
 ```diff
 - trans('shop::app.checkout.onepage.address.telephone')
@@ -399,9 +551,7 @@ in all 22 locales, and the label reads as the locale's own word for it:
 + trans('shop::app.customers.account.orders.invoice-pdf.phone')
 ```
 
-The unused `shop::app.customers.account.orders.invoice-pdf.contact-number` is gone. Keys that name a
-different field keep their own wording — an inventory source's `contact-number`, the shipping origin's,
-and the contact form's `phone-number`.
+The unused `shop::app.customers.account.orders.invoice-pdf.contact-number` is gone. Keys that name a different field keep their own wording — an inventory source's `contact-number`, the shipping origin's, and the contact form's `phone-number`.
 
 ---
 
@@ -409,16 +559,14 @@ and the contact form's `phone-number`.
 
 **Impact Probability: Low**
 
-`shop::customers.account.downloadable_products` was the last view path carrying an underscore, and is now
-`downloadable-products`. A theme that publishes or overrides that view has to move it to the new path:
+`shop::customers.account.downloadable_products` was the last view path carrying an underscore, and is now `downloadable-products`. A theme that publishes or overrides that view has to move it to the new path:
 
 ```diff
 - resources/themes/<theme>/views/customers/account/downloadable_products/index.blade.php
 + resources/themes/<theme>/views/customers/account/downloadable-products/index.blade.php
 ```
 
-The route name stays `shop.customers.account.downloadable_products.index`, as route names are snake_case,
-and the `view_render_event` names the view fires are unchanged so existing listeners keep working.
+The route name stays `shop.customers.account.downloadable_products.index`, as route names are snake_case, and the `view_render_event` names the view fires are unchanged so existing listeners keep working.
 
 ---
 
@@ -909,9 +1057,7 @@ Three contracts define the engine abstraction:
 
 8. **Update stored configuration codes:**
 
-   Search settings have moved out of Catalog into a **Search Engines** section of their own, at
-   `Configuration → Search Engines`. The stored `core_config` codes move with them, and a migration
-   carries existing values across:
+   Search settings have moved out of Catalog into a **Search Engines** section of their own, at `Configuration → Search Engines`. The stored `core_config` codes move with them, and a migration carries existing values across:
 
    | Before | After |
    |---|---|
@@ -921,16 +1067,11 @@ Three contracts define the engine abstraction:
    | `catalog.products.search.min_query_length` | `search_engines.elastic.settings.min_query_length` |
    | `catalog.products.search.max_query_length` | `search_engines.elastic.settings.max_query_length` |
 
-   A new `search_engines.general.settings.enabled` switch now gates every external engine — when it
-   is off, both contexts search the database whatever the modes say. The migration turns it on for
-   any store that already had a non-database engine selected, so an upgrade keeps searching the way
-   it did before.
+   A new `search_engines.general.settings.enabled` switch now gates every external engine — when it is off, both contexts search the database whatever the modes say. The migration turns it on for any store that already had a non-database engine selected, so an upgrade keeps searching the way it did before.
 
-   The two context modes also accept an empty value meaning *use the default engine*, so a store no
-   longer has to repeat its engine choice in three places.
+   The two context modes also accept an empty value meaning *use the default engine*, so a store no longer has to repeat its engine choice in three places.
 
-   Read them through `SearchEngineManager` rather than by code, as in step 7 — its `ENABLED_KEY`,
-   `ENGINE_KEY`, `ADMIN_MODE_KEY` and `STOREFRONT_MODE_KEY` constants are the supported reference.
+   Read them through `SearchEngineManager` rather than by code, as in step 7 — its `ENABLED_KEY`, `ENGINE_KEY`, `ADMIN_MODE_KEY` and `STOREFRONT_MODE_KEY` constants are the supported reference.
 
 #### Elasticsearch connection settings are now recorded in the admin
 
@@ -989,9 +1130,7 @@ To add a new search engine (e.g., Algolia):
 
    The `SearchEngineManager` resolves your engine once the stored engine matches the enum case and `search_engines.general.settings.enabled` is on.
 
-5. If your engine is reached over a network, implement `Webkul\Product\Contracts\SearchEngineConnection`
-   and bind it as well. This is what gives it settings in the admin and a working Test Connection
-   button; an engine without one is treated as always available.
+5. If your engine is reached over a network, implement `Webkul\Product\Contracts\SearchEngineConnection` and bind it as well. This is what gives it settings in the admin and a working Test Connection button; an engine without one is treated as always available.
 
    ```php
    class AlgoliaConnection implements SearchEngineConnection
@@ -1006,13 +1145,7 @@ To add a new search engine (e.g., Algolia):
    $this->app->singleton('product.search.connection.algolia', AlgoliaConnection::class);
    ```
 
-   `configure()` runs at boot for every bound connection, so keep it cheap and read `core_config`
-   directly rather than through a repository — the table may not exist yet on a fresh install. Return
-   early when nothing is recorded, so the environment file stays in charge of an unconfigured store.
-   `probe()` must return a `status` drawn from `SearchEngineStatusEnum`; anything else it returns is
-   passed through to the admin as detail. `describesRecorded()` lets the Test Connection button tell a
-   trial of unsaved values from a test of the saved ones — both `configure()` and `probe()` take the
-   same `$overrides` array for that purpose.
+   `configure()` runs at boot for every bound connection, so keep it cheap and read `core_config` directly rather than through a repository — the table may not exist yet on a fresh install. Return early when nothing is recorded, so the environment file stays in charge of an unconfigured store. `probe()` must return a `status` drawn from `SearchEngineStatusEnum`; anything else it returns is passed through to the admin as detail. `describesRecorded()` lets the Test Connection button tell a trial of unsaved values from a test of the saved ones — both `configure()` and `probe()` take the same `$overrides` array for that purpose.
 
 6. Add a configuration group keyed by the enum value, so the settings land on their own page:
 
@@ -1026,11 +1159,9 @@ To add a new search engine (e.g., Algolia):
    > config key and looks the rest up in `config()`, so `search_engines.algolia.<field>` would resolve
    > against a `config/algolia.php` if one existed and silently override your declared default.
 
-7. Add the engine's label at `admin::app.configuration.index.search-engines.engines.algolia` in all
-   22 locales. It names the option in every engine select and titles the settings page.
+7. Add the engine's label at `admin::app.configuration.index.search-engines.engines.algolia` in all 22 locales. It names the option in every engine select and titles the settings page.
 
-The status strings under `search-engines.test-connection.statuses.*` take an `:engine` placeholder,
-so they read correctly for your engine without being touched.
+The status strings under `search-engines.test-connection.statuses.*` take an `:engine` placeholder, so they read correctly for your engine without being touched.
 
 ---
 

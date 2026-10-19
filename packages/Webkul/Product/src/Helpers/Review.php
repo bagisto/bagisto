@@ -10,7 +10,7 @@ use Webkul\Product\Contracts\Product;
 class Review
 {
     /**
-     * Returns the product's avg rating
+     * Returns the product's approved reviews.
      *
      * @param  Product  $product
      * @return HasMany
@@ -21,18 +21,18 @@ class Review
     }
 
     /**
-     * Returns the product's avg rating
+     * Returns the product's average rating, which is zero until a review is approved.
      *
      * @param  Product  $product
      * @return string
      */
     public function getAverageRating($product)
     {
-        return number_format(round($product->reviews->where('status', 'approved')->avg('rating'), 2), 1);
+        return number_format(round((float) $product->reviews->where('status', 'approved')->avg('rating'), 2), 1);
     }
 
     /**
-     * Returns the total review of the product
+     * Returns the total review of the product.
      *
      * @param  Product  $product
      * @return int
@@ -43,7 +43,7 @@ class Review
     }
 
     /**
-     * Returns the total rating of the product
+     * Returns the total rating of the product.
      *
      * @param  Product  $product
      * @return int
@@ -54,7 +54,7 @@ class Review
     }
 
     /**
-     * Returns the total active feedback of the product
+     * Returns the total active feedback of the product.
      *
      * @param  Product  $product
      * @return int
@@ -83,7 +83,7 @@ class Review
     }
 
     /**
-     * Returns the Percentage rating of the product
+     * Returns the percentage rating of the product.
      *
      * @param  Product  $product
      * @return array

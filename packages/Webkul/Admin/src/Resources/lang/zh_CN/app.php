@@ -5685,6 +5685,16 @@ return [
                             's3' => 'Amazon S3',
                             'r2' => 'Cloudflare R2',
                         ],
+
+                        'sync' => [
+                            'title' => '同步现有文件',
+                            'syncing' => '正在同步...',
+                            'pending' => '还有 :count 个文件不在已配置的存储中',
+                            'up-to-date' => '所有文件都已在已配置的存储中',
+                            'info' => '将已上传的文件复制到已配置的存储。该操作在后台运行，跳过已存在的文件，并保留原始文件。对于大型商店，请改用 `php artisan bagisto:storage:sync`。',
+                            'started' => '同步已开始。文件正在后台复制。',
+                            'local' => '已配置的存储是本地磁盘，因此无需复制。',
+                        ],
                     ],
                 ],
 
