@@ -918,7 +918,7 @@ return [
                 'united-arab-emirates-dirham' => 'Dirham ya Falme za Kiarabu (AED)',
                 'united-states-dollar' => 'Dola ya Marekani (USD)',
                 'uzbekistani-som' => 'Som ya Uzbekistan (UZS)',
-                'venezuelan-bolívar' => 'Bolivar ya Venezuela (VEF)',
+                'venezuelan-bolívar' => 'Bolivar ya Venezuela (VES)',
                 'vietnamese-dong' => 'Dong ya Vietnam (VND)',
                 'warning-message' => 'Angalia! Mipangilio ya lugha chaguomsingi ya mfumo wako na sarafu chaguomsingi ni ya kudumu na haiwezi kubadilishwa mara imewekwa.',
                 'zambian-kwacha' => 'Kwacha ya Zambia (ZMW)',

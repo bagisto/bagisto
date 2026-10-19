@@ -918,7 +918,7 @@ return [
                 'united-arab-emirates-dirham' => 'সংযুক্ত আরব আমিরাত দিরহাম (AED)',
                 'united-states-dollar' => 'মার্কিন যুক্তরাষ্ট্র ডলার (USD)',
                 'uzbekistani-som' => 'উজবেকিস্তানি সম (UZS)',
-                'venezuelan-bolívar' => 'ভেনেজুয়েলান বলিভার (VEF)',
+                'venezuelan-bolívar' => 'ভেনেজুয়েলান বলিভার (VES)',
                 'vietnamese-dong' => 'ভিয়েতনামি ডঙ্গ (VND)',
                 'warning-message' => 'সাবধান! আপনার ডিফল্ট সিস্টেম ভাষা এবং ডিফল্ট মুদ্রার সেটিংস স্থায়ী এবং একবার সেট করা হলে পরিবর্তন করা যাবে না।',
                 'zambian-kwacha' => 'জাম্বিয়ান কোয়াচা (ZMW)',

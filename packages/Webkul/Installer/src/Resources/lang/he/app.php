@@ -918,7 +918,7 @@ return [
                 'united-arab-emirates-dirham' => 'דירהם איחוד האמירויות הערביות (AED)',
                 'united-states-dollar' => 'דולר אמריקאי (USD)',
                 'uzbekistani-som' => 'סום אוזבקי (UZS)',
-                'venezuelan-bolívar' => 'בוליבר ונצואלי (VEF)',
+                'venezuelan-bolívar' => 'בוליבר ונצואלי (VES)',
                 'vietnamese-dong' => 'דונג וייטנאמי (VND)',
                 'warning-message' => 'זהירות! ההגדרות של שפת המערכת והמטבע המוגדרות כברירת מחדל הן קבועות ואינן ניתנות לשינוי לאחר ההגדרה.',
                 'zambian-kwacha' => 'קוואצ\'ה זמבית (ZMW)',

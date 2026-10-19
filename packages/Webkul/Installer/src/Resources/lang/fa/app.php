@@ -918,7 +918,7 @@ return [
                 'united-arab-emirates-dirham' => 'درهم امارات متحده عربی (AED)',
                 'united-states-dollar' => 'دلار ایالات متحده آمریکا (USD)',
                 'uzbekistani-som' => 'سوم ازبکستان (UZS)',
-                'venezuelan-bolívar' => 'بولیوار ونزوئلا (VEF)',
+                'venezuelan-bolívar' => 'بولیوار ونزوئلا (VES)',
                 'vietnamese-dong' => 'دانگ ویتنامی (VND)',
                 'warning-message' => 'مراقب باشید! تنظیمات زبان سیستم پیش‌فرض و ارز پیش‌فرض شما دائمی هستند و پس از تنظیم نمی‌توان آنها را تغییر داد.',
                 'zambian-kwacha' => 'کواچای زامبیا (ZMW)',

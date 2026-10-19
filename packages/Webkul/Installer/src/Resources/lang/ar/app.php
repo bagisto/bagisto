@@ -918,7 +918,7 @@ return [
                 'united-arab-emirates-dirham' => 'الدرهم الإماراتي (AED)',
                 'united-states-dollar' => 'الدولار الأمريكي (USD)',
                 'uzbekistani-som' => 'السوم الأوزبكستاني (UZS)',
-                'venezuelan-bolívar' => 'البوليفار الفنزويلي (VEF)',
+                'venezuelan-bolívar' => 'البوليفار الفنزويلي (VES)',
                 'vietnamese-dong' => 'الدونج الفيتنامي (VND)',
                 'warning-message' => 'احذر! إعدادات لغة النظام الافتراضية والعملات الافتراضية دائمة ولا يمكن تغييرها بمجرد تعيينها.',
                 'zambian-kwacha' => 'الكواشا الزامبي (ZMW)',

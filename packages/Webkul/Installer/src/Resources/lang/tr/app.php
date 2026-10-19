@@ -918,7 +918,7 @@ return [
                 'united-arab-emirates-dirham' => 'Birleşik Arap Emirlikleri Dirhemi (AED)',
                 'united-states-dollar' => 'Amerikan Doları (USD)',
                 'uzbekistani-som' => 'Özbekistan Somu (UZS)',
-                'venezuelan-bolívar' => 'Venezuela Bolivarı (VEF)',
+                'venezuelan-bolívar' => 'Venezuela Bolivarı (VES)',
                 'vietnamese-dong' => 'Vietnam Dongu (VND)',
                 'warning-message' => 'Dikkat! Varsayılan sistem dili ve varsayılan para birimi ayarları kalıcıdır ve bir kez ayarlandığında değiştirilemez.',
                 'zambian-kwacha' => 'Zambiya Kvaçası (ZMW)',
