@@ -16,11 +16,11 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
 
-- Fixed a cart rule set to apply to shipping losing its shipping discount whenever a shipping tax category is configured, so the shopper paid the full shipping price.
-
 - Refactored internals for clearer responsibilities.
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
+
+- #11539 [fixed] - A cart rule set to apply to shipping lost its shipping discount whenever a shipping tax category was configured, so the shopper paid the full shipping price.
 
 - #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
 

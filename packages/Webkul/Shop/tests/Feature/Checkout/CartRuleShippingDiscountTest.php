@@ -28,10 +28,6 @@ function cartShippedWith(string $shippingMethod): TestResponse
     return test()->getJson(route('shop.api.checkout.cart.index'))->assertOk();
 }
 
-// ============================================================================
-// Shipping Discount
-// ============================================================================
-
 /**
  * Tax shipping to the US at the given rate.
  */
@@ -53,6 +49,10 @@ function taxShippingToUs(float $rate): void
 
     test()->setConfig('sales.taxes.categories.shipping', $taxCategory->id);
 }
+
+// ============================================================================
+// Shipping Discount
+// ============================================================================
 
 it('should keep the discount of a cart rule that applies to shipping', function (bool $taxedShipping) {
     if ($taxedShipping) {
