@@ -57,8 +57,22 @@ class Handler extends BaseHandler
         $this->renderable(function (HttpException $exception, Request $request) {
             $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
 
-            $errorCode = in_array($exception->getStatusCode(), [401, 403, 404, 503])
-                ? $exception->getStatusCode()
+            $statusCode = $exception->getStatusCode();
+
+            // A client error without a page of its own, such as the 419 of an expired CSRF token
+            // or a 429, keeps Laravel's response and its status instead of becoming a 500.
+            if (
+                $statusCode >= 400
+                && $statusCode < 500
+                && ! in_array($statusCode, [401, 403, 404])
+            ) {
+                return $this->shouldReturnJson($request, $exception)
+                    ? $this->prepareJsonResponse($request, $exception)
+                    : $this->renderHttpException($exception);
+            }
+
+            $errorCode = in_array($statusCode, [401, 403, 404, 503])
+                ? $statusCode
                 : 500;
 
             if ($request->wantsJson()) {
