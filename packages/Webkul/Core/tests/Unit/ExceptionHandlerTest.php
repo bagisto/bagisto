@@ -65,5 +65,6 @@ it('should still answer a missing page with the 404 error', function () {
 it('should still answer any other exception with the 500 error', function () {
     $response = productionExceptionHandler()->render(adminLoginRequest(json: true), new RuntimeException('Something broke.'));
 
-    expect($response->getStatusCode())->toBe(500);
+    expect($response->getStatusCode())->toBe(500)
+        ->and($response->getData(true)['description'])->toBe(trans('admin::app.errors.500.description'));
 });

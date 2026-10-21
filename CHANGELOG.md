@@ -18,15 +18,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
 
-- Fixed the installer naming the Venezuelan bolívar by its retired VEF code and its pre-redenomination symbol, while installing it as VES.
-
 - Refactored internals for clearer responsibilities.
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
-
-- #11541 [fixed] - On a store with debug off, an expired or missing CSRF token came back as a 500 rather than a 419, as did every other client error with no page of its own, such as a throttled request's 429.
-
-- #11539 [fixed] - A cart rule set to apply to shipping lost its shipping discount whenever a shipping tax category was configured, so the shopper paid the full shipping price.
 
 - #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
 
