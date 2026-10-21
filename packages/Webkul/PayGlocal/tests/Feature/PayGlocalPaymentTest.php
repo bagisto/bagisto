@@ -241,6 +241,34 @@ it('should place no order when PayGlocal does not confirm the payment', function
     expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
 });
 
+it('should place no order when the gateway cannot be reached to confirm the payment', function () {
+    $cart = $this->createCartWithItems('payglocal');
+
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
+
+    $this->payGlocalMock->shouldReceive('getTransactionStatus')->andReturn(null);
+
+    $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
+
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
+});
+
+it('should place no order when the token carries no status url to confirm against', function () {
+    $cart = $this->createCartWithItems('payglocal');
+
+    $claims = payGlocalCallbackClaims($cart);
+
+    unset($claims['statusUrl']);
+
+    mockPayGlocalCallbackToken($claims);
+
+    $this->payGlocalMock->shouldNotReceive('getTransactionStatus');
+
+    $this->post(route('payglocal.callback'), ['x-gl-token' => 'token']);
+
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
+});
+
 it('should believe PayGlocal over the token when the two disagree', function () {
     $cart = $this->createCartWithItems('payglocal');
 
@@ -327,6 +355,22 @@ it('should not create a second order when the webhook arrives after the callback
     expect(Order::query()->where('cart_id', $cart->id)->count())->toBe(1);
 });
 
+it('should ask PayGlocal to retry the webhook when the gateway cannot be reached', function () {
+    $cart = $this->createCartWithItems('payglocal');
+
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
+
+    $this->payGlocalMock->shouldReceive('getTransactionStatus')->andReturn(null);
+
+    $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
+
+    $response->assertStatus(500);
+
+    $response->assertJsonPath('status', 'error');
+
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
+});
+
 it('should ignore a webhook whose token is not signed by PayGlocal', function () {
     $cart = $this->createCartWithItems('payglocal');
 
@@ -353,6 +397,22 @@ it('should refuse to place the order when the cart no longer totals what was cap
     mockPayGlocalConfirmedStatus($cart, [
         'Amount' => (string) ($cart->base_grand_total + 100),
     ]);
+
+    $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
+
+    $response->assertOk();
+
+    $response->assertJsonPath('status', 'payment_not_confirmed');
+
+    expect(Order::query()->where('cart_id', $cart->id)->first())->toBeNull();
+});
+
+it('should refuse to place the order when PayGlocal reports no amount at all', function () {
+    $cart = $this->createCartWithItems('payglocal');
+
+    mockPayGlocalCallbackToken(payGlocalCallbackClaims($cart));
+
+    mockPayGlocalConfirmedStatus($cart, ['Amount' => null]);
 
     $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
 

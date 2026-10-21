@@ -15,6 +15,11 @@ use Webkul\Sales\Transformers\OrderResource;
 class SmartButtonController extends Controller
 {
     /**
+     * The PayPal order status that means the shopper has approved the payment.
+     */
+    protected const APPROVED_STATUS = 'APPROVED';
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -33,6 +38,8 @@ class SmartButtonController extends Controller
      */
     public function createOrder()
     {
+        abort_if(! $this->smartButton->isAvailable(), 404);
+
         try {
             $order = $this->smartButton->createOrder($this->buildRequestBody());
 
@@ -49,7 +56,19 @@ class SmartButtonController extends Controller
      */
     public function captureOrder()
     {
+        abort_if(! $this->smartButton->isAvailable(), 404);
+
+        if (Cart::hasError()) {
+            return $this->redirectToCart();
+        }
+
         try {
+            Cart::collectTotals();
+
+            if (! $this->approvalCoversCart(Cart::getCart())) {
+                return $this->redirectToCart();
+            }
+
             $this->smartButton->captureOrder(request()->input('orderData.orderID'));
 
             return $this->saveOrder();
@@ -97,30 +116,10 @@ class SmartButtonController extends Controller
             'purchase_units' => [
                 [
                     'amount' => [
-                        'value' => $this->smartButton->formatCurrencyValue((float) $cart->sub_total + $cart->tax_total + ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0) - $cart->discount_amount),
+                        'value' => $this->smartButton->formatCurrencyValue($this->payableTotal($cart)),
                         'currency_code' => $cart->cart_currency_code,
 
-                        'breakdown' => [
-                            'item_total' => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value' => $this->smartButton->formatCurrencyValue((float) $cart->sub_total),
-                            ],
-
-                            'shipping' => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value' => $this->smartButton->formatCurrencyValue((float) ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0)),
-                            ],
-
-                            'tax_total' => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value' => $this->smartButton->formatCurrencyValue((float) $cart->tax_total),
-                            ],
-
-                            'discount' => [
-                                'currency_code' => $cart->cart_currency_code,
-                                'value' => $this->smartButton->formatCurrencyValue((float) $cart->discount_amount),
-                            ],
-                        ],
+                        'breakdown' => $this->buildAmountBreakdown($cart),
                     ],
 
                     'items' => $this->getLineItems($cart),
@@ -159,6 +158,23 @@ class SmartButtonController extends Controller
         }
 
         return $data;
+    }
+
+    /**
+     * The breakdown PayPal requires, whose parts have to add up to the amount charged.
+     */
+    protected function buildAmountBreakdown($cart): array
+    {
+        $breakdown = [];
+
+        foreach ($this->payableComponents($cart) as $component => $value) {
+            $breakdown[$component] = [
+                'currency_code' => $cart->cart_currency_code,
+                'value' => $this->smartButton->formatCurrencyValue($value),
+            ];
+        }
+
+        return $breakdown;
     }
 
     /**
@@ -209,6 +225,34 @@ class SmartButtonController extends Controller
     }
 
     /**
+     * What this cart comes to in its own currency, which is the figure PayPal is asked to
+     * charge and the figure a capture is checked against.
+     */
+    protected function payableTotal($cart): float
+    {
+        $components = $this->payableComponents($cart);
+
+        return $components['item_total']
+            + $components['shipping']
+            + $components['tax_total']
+            - $components['discount'];
+    }
+
+    /**
+     * The parts this cart's total is made up of, under the names PayPal gives them, so the
+     * breakdown sent and the total charged can never disagree.
+     */
+    protected function payableComponents($cart): array
+    {
+        return [
+            'item_total' => (float) $cart->sub_total,
+            'shipping' => (float) ($cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0),
+            'tax_total' => (float) $cart->tax_total,
+            'discount' => (float) $cart->discount_amount,
+        ];
+    }
+
+    /**
      * Saving order once captured and all formalities done.
      *
      * @return Response
@@ -216,7 +260,7 @@ class SmartButtonController extends Controller
     protected function saveOrder()
     {
         if (Cart::hasError()) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+            return $this->redirectToCart();
         }
 
         try {
@@ -225,6 +269,18 @@ class SmartButtonController extends Controller
             $this->validateOrder();
 
             $cart = Cart::getCart();
+
+            if ($placed = $this->orderRepository->findOneWhere(['cart_id' => $cart->id])) {
+                session()->flash('order_id', $placed->id);
+
+                return response()->json([
+                    'success' => true,
+                ]);
+            }
+
+            if (! $this->captureCoversCart($cart)) {
+                return $this->redirectToCart();
+            }
 
             $data = (new OrderResource($cart))->jsonSerialize();
 
@@ -270,6 +326,64 @@ class SmartButtonController extends Controller
 
             throw $e;
         }
+    }
+
+    /**
+     * Whether the approved PayPal order is for this cart, checked before anything is
+     * captured so a mismatch costs the shopper nothing.
+     */
+    protected function approvalCoversCart($cart): bool
+    {
+        $orderId = request()->input('orderData.orderID');
+
+        if (
+            ! $cart
+            || ! $orderId
+        ) {
+            return false;
+        }
+
+        $order = json_decode(json_encode($this->smartButton->getOrder($orderId)), true);
+
+        if (
+            ($order['status'] ?? null) !== self::APPROVED_STATUS
+            || count($order['purchase_units'] ?? []) !== 1
+        ) {
+            return false;
+        }
+
+        return $this->amountMatchesCart($order['purchase_units'][0]['amount'] ?? null, $cart);
+    }
+
+    /**
+     * Whether PayPal captured what this cart comes to, so a capture approved against a
+     * cheaper cart cannot pay for a dearer one.
+     */
+    protected function captureCoversCart($cart): bool
+    {
+        if (! $orderId = request()->input('orderData.orderID')) {
+            return false;
+        }
+
+        $details = json_decode(json_encode($this->smartButton->getOrder($orderId)), true);
+
+        $captured = $details['purchase_units'][0]['payments']['captures'][0]['amount'] ?? null;
+
+        return $this->amountMatchesCart($captured, $cart);
+    }
+
+    /**
+     * Whether a PayPal amount block is this cart's total in this cart's currency.
+     */
+    protected function amountMatchesCart(?array $amount, $cart): bool
+    {
+        if (! isset($amount['value'], $amount['currency_code'])) {
+            return false;
+        }
+
+        return $this->smartButton->formatCurrencyValue((float) $amount['value'])
+                === $this->smartButton->formatCurrencyValue($this->payableTotal($cart))
+            && strtoupper((string) $amount['currency_code']) === strtoupper((string) $cart->cart_currency_code);
     }
 
     /**
@@ -325,5 +439,15 @@ class SmartButtonController extends Controller
         if (! $cart->payment) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
+    }
+
+    /**
+     * The response that sends the shopper back to the cart page.
+     */
+    protected function redirectToCart(): JsonResponse
+    {
+        return response()->json([
+            'redirect_url' => route('shop.checkout.cart.index'),
+        ], 403);
     }
 }

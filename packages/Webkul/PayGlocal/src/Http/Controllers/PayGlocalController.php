@@ -82,18 +82,8 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Receive the customer coming back from PayGlocal's hosted checkout, and settle the payment.
-     *
-     * PayGlocal posts back a single `x-gl-token` field, a JWS it signed, carrying the reference,
-     * the outcome and the status URL to confirm it against. The order is placed here rather than
-     * after the redirect because this is the last point at which any of that is still covered by
-     * PayGlocal's signature - past the redirect there is only a query string a customer can type.
-     *
-     * This route runs without the session middleware, because a browser does not send the session
-     * cookie on a cross site POST under the `lax` policy Laravel defaults to: starting a session
-     * here would hand the browser a new empty one and sign the customer out of the storefront and
-     * the admin alike. Order creation does not need one, and the session writes the cart makes on
-     * the way through land in a request-lifetime store that is never sent back.
+     * Settle the payment as the customer comes back from PayGlocal's hosted checkout, here because
+     * this is the last point still covered by PayGlocal's signature.
      */
     public function callback(): RedirectResponse
     {
@@ -112,11 +102,8 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Show the customer what became of the payment settled in the callback.
-     *
-     * Nothing here is trusted: the query string only says which cart to look at, and the answer
-     * is whether an order exists for it. A customer typing a reference of their own can therefore
-     * never cause an order, only ever look for one.
+     * Show the customer what became of the payment settled in the callback, looking an order up by
+     * the reference in the query string and never creating one.
      */
     public function success(): RedirectResponse
     {
@@ -194,11 +181,8 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Confirm a payment with PayGlocal and turn it into an order.
-     *
-     * The signed claims say which payment this is and where to confirm it; the confirmation
-     * itself is read back from PayGlocal rather than taken from the token, so a replayed or
-     * stale token cannot settle anything the gateway would not settle.
+     * Confirm a payment with PayGlocal and turn it into an order, reading the outcome back from the
+     * gateway so a replayed or stale token settles nothing the gateway would not.
      */
     protected function settle(array $claims): ?OrderContract
     {
@@ -208,7 +192,17 @@ class PayGlocalController extends Controller
             return null;
         }
 
-        $response = $this->payGlocal->getTransactionStatus($claims['statusUrl'] ?? null) ?? $claims;
+        $statusUrl = $claims['statusUrl'] ?? null;
+
+        if (! $statusUrl) {
+            return null;
+        }
+
+        $response = $this->payGlocal->getTransactionStatus($statusUrl);
+
+        if (! $response) {
+            throw new \Exception('PayGlocal did not answer the status call for cart '.$cartId.'.');
+        }
 
         $status = PayGlocalPaymentStatus::tryFrom(strtoupper($response['status'] ?? ''));
 
@@ -239,7 +233,10 @@ class PayGlocalController extends Controller
 
             $cart = $this->cartRepository->find($cartId);
 
-            if (! $cart || ! $cart->is_active) {
+            if (
+                ! $cart
+                || ! $cart->is_active
+            ) {
                 return null;
             }
 
@@ -293,10 +290,8 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Check that the cart still totals what PayGlocal reports having taken.
-     *
-     * Measured against the base total, because that is the figure the payment was started for
-     * and the one the transaction is recorded against.
+     * Whether the cart still totals what PayGlocal reports having taken, measured against the
+     * base total the payment was started for and refused when no amount is reported at all.
      */
     protected function amountMatches($cart, ?array $response): bool
     {
@@ -312,7 +307,7 @@ class PayGlocalController extends Controller
         $amount = $this->payGlocal->getCapturedAmount($response);
 
         if ($amount === null) {
-            return true;
+            return false;
         }
 
         $decimal = $this->payGlocal->getCurrencyDecimal($this->payGlocal->getCurrency($cart));
