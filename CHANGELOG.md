@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Added the currencies of the East African Community — the Tanzanian, Kenyan, Ugandan and Somali shillings, the Rwandan, Burundian and Congolese francs, and the South Sudanese pound — to the installer.
+
 - Added Swahili (Kiswahili) as a supported locale, translated across the admin, the storefront and the installer.
 
 - Refined downloadable products: a race-safe download count scoped to its own ordered item, restored unlimited allowances, withdrawal on refund, a single quantity everywhere, and a tidier links form.
@@ -15,6 +17,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
 
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
+
+- Fixed the installer naming the Venezuelan bolívar by its retired VEF code and its pre-redenomination symbol, while installing it as VES.
 
 - Refactored internals for clearer responsibilities.
 
