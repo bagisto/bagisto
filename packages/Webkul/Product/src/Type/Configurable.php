@@ -391,6 +391,10 @@ class Configurable extends AbstractType
 
         $data = $this->getQtyRequest($data);
 
+        if (! in_array((int) $data['selected_configurable_option'], $this->getChildrenIds(), true)) {
+            return trans('product::app.checkout.cart.missing-options');
+        }
+
         $childProduct = $this->productRepository->find($data['selected_configurable_option']);
 
         if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
