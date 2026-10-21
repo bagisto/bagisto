@@ -1,6 +1,5 @@
 <?php
 
-use Webkul\Core\Models\CoreConfig;
 use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Models\Order;
 
@@ -68,6 +67,20 @@ function fakeSmartButton(array $order, bool $captures): void
         $mock->shouldReceive('getOrder')->andReturnUsing(function () use (&$captured, $order) {
             return $captured ? capturedPaypalOrder($order) : $order;
         });
+    });
+}
+
+/**
+ * Swap the PayPal SDK for a switched off one that must never be asked to do anything.
+ */
+function fakeDisabledSmartButton(): void
+{
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('isAvailable')->andReturn(false);
+
+        $mock->shouldNotReceive('createOrder');
+
+        $mock->shouldNotReceive('captureOrder');
     });
 }
 
@@ -154,11 +167,7 @@ it('should capture and place the order when the approved amount is the cart tota
 it('should not create or capture a PayPal order while the smart button is disabled', function () {
     $cart = $this->createCartWithItems('paypal_smart_button');
 
-    CoreConfig::query()
-        ->where('code', 'sales.payment_methods.paypal_smart_button.active')
-        ->update(['value' => 0]);
-
-    fakeSmartButton(paypalOrder($cart), captures: false);
+    fakeDisabledSmartButton();
 
     get(route('paypal.smart-button.create-order'))->assertNotFound();
 
