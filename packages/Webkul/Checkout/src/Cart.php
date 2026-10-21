@@ -311,6 +311,8 @@ class Cart
             }
         }
 
+        Shipping::removeAllShippingRates();
+
         $this->collectTotals();
 
         Event::dispatch('checkout.cart.add.after', $this->cart);
@@ -392,6 +394,8 @@ class Cart
 
             Event::dispatch('checkout.cart.update.after', $item);
         }
+
+        Shipping::removeAllShippingRates();
 
         $this->collectTotals();
 

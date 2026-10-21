@@ -12,6 +12,11 @@ use Webkul\Sales\Repositories\OrderTransactionRepository;
 class Ipn
 {
     /**
+     * The decimal places to compare a payment in when its currency does not state them.
+     */
+    public const DEFAULT_CURRENCY_DECIMAL = 2;
+
+    /**
      * IPN post data.
      *
      * @var array
@@ -94,7 +99,7 @@ class Ipn
     protected function processOrder()
     {
         if ($this->post['payment_status'] == 'Completed') {
-            if ($this->post['mc_gross'] != $this->order->grand_total) {
+            if (! $this->paymentCovers($this->order->grand_total, $this->order->order_currency_code)) {
                 return;
             }
 
@@ -130,5 +135,30 @@ class Ipn
         }
 
         return $invoiceData;
+    }
+
+    /**
+     * Whether PayPal took what this order comes to, in the currency it was placed in.
+     */
+    protected function paymentCovers($grandTotal, ?string $currencyCode): bool
+    {
+        $decimal = $this->currencyDecimal($currencyCode);
+
+        return round((float) ($this->post['mc_gross'] ?? 0), $decimal) === round((float) $grandTotal, $decimal)
+            && strtoupper((string) ($this->post['mc_currency'] ?? '')) === strtoupper((string) $currencyCode);
+    }
+
+    /**
+     * How many places a currency is paid in, so a total carried at four places is compared
+     * against what PayPal actually charged rather than refused for the difference.
+     */
+    protected function currencyDecimal(?string $currencyCode): int
+    {
+        if (! $currencyCode) {
+            return self::DEFAULT_CURRENCY_DECIMAL;
+        }
+
+        return core()->getAllCurrencies()->firstWhere('code', strtoupper($currencyCode))?->decimal
+            ?? self::DEFAULT_CURRENCY_DECIMAL;
     }
 }
