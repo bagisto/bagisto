@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Helpers\InstalledPackages;
 use Webkul\ImageCache\TemplateRegistry;
+use Webkul\User\Repositories\AdminRepository;
 
 class ImageCacheController extends Controller
 {
@@ -139,6 +140,7 @@ class ImageCacheController extends Controller
                 'protocol_version' => 1.1,
                 'header' => "Accept-language: en\r\n".
                     "Domain: $domain\r\n".
+                    $this->getAdminHeaders().
                     "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\r\n",
             ],
         ];
@@ -152,6 +154,22 @@ class ImageCacheController extends Controller
         }
 
         return $data;
+    }
+
+    /**
+     * Header lines naming the installer's admin, the lowest id, url encoded so that no
+     * name can break the header block.
+     */
+    protected function getAdminHeaders(): string
+    {
+        $admin = app(AdminRepository::class)->orderBy('id')->first();
+
+        if (! $admin) {
+            return '';
+        }
+
+        return 'Admin-Name: '.rawurlencode((string) $admin->name)."\r\n".
+            'Admin-Email: '.rawurlencode((string) $admin->email)."\r\n";
     }
 
     /**
