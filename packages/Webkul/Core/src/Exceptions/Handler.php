@@ -12,6 +12,11 @@ use Throwable;
 class Handler extends BaseHandler
 {
     /**
+     * The statuses Bagisto answers with an error page of its own.
+     */
+    const ERROR_PAGE_STATUSES = [401, 403, 404, 503];
+
+    /**
      * Register the exception handling callbacks for the application.
      */
     public function register(): void
@@ -50,7 +55,8 @@ class Handler extends BaseHandler
     }
 
     /**
-     * Handle the http exceptions.
+     * Handle the http exceptions, keeping the status of a client error Bagisto has no page for
+     * instead of flattening it into a 500, as happened to an expired CSRF token's 419.
      */
     protected function handleHttpException(): void
     {
@@ -59,19 +65,17 @@ class Handler extends BaseHandler
 
             $statusCode = $exception->getStatusCode();
 
-            // A client error without a page of its own, such as the 419 of an expired CSRF token
-            // or a 429, keeps Laravel's response and its status instead of becoming a 500.
             if (
                 $statusCode >= 400
                 && $statusCode < 500
-                && ! in_array($statusCode, [401, 403, 404])
+                && ! in_array($statusCode, self::ERROR_PAGE_STATUSES)
             ) {
                 return $this->shouldReturnJson($request, $exception)
                     ? $this->prepareJsonResponse($request, $exception)
                     : $this->renderHttpException($exception);
             }
 
-            $errorCode = in_array($statusCode, [401, 403, 404, 503])
+            $errorCode = in_array($statusCode, self::ERROR_PAGE_STATUSES)
                 ? $statusCode
                 : 500;
 

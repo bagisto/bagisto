@@ -28,33 +28,41 @@ function adminLoginRequest(bool $json = false): Request
     );
 }
 
-it('keeps the 419 of a CSRF token mismatch', function () {
+// ============================================================================
+// Client Errors Keep Their Status
+// ============================================================================
+
+it('should keep the 419 of a CSRF token mismatch', function () {
     $response = productionExceptionHandler()->render(adminLoginRequest(), new TokenMismatchException('CSRF token mismatch.'));
 
     expect($response->getStatusCode())->toBe(419);
 });
 
-it('keeps the 419 of a CSRF token mismatch for a JSON request', function () {
+it('should keep the 419 of a CSRF token mismatch for a JSON request', function () {
     $response = productionExceptionHandler()->render(adminLoginRequest(json: true), new TokenMismatchException('CSRF token mismatch.'));
 
     expect($response->getStatusCode())->toBe(419)
         ->and($response->getData(true)['message'])->toBe('CSRF token mismatch.');
 });
 
-it('keeps the 429 of a throttled request', function () {
+it('should keep the 429 of a throttled request', function () {
     $response = productionExceptionHandler()->render(adminLoginRequest(json: true), new TooManyRequestsHttpException);
 
     expect($response->getStatusCode())->toBe(429);
 });
 
-it('still answers a missing page with the 404 error', function () {
+// ============================================================================
+// Bagisto's Own Error Pages
+// ============================================================================
+
+it('should still answer a missing page with the 404 error', function () {
     $response = productionExceptionHandler()->render(adminLoginRequest(json: true), new NotFoundHttpException);
 
     expect($response->getStatusCode())->toBe(404)
         ->and($response->getData(true)['error'])->toBe(trans('admin::app.errors.404.title'));
 });
 
-it('still answers any other exception with the 500 error', function () {
+it('should still answer any other exception with the 500 error', function () {
     $response = productionExceptionHandler()->render(adminLoginRequest(json: true), new RuntimeException('Something broke.'));
 
     expect($response->getStatusCode())->toBe(500);
