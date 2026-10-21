@@ -130,6 +130,10 @@
         </testsuite>
 
         <!-- Tax package testsuites. -->
+        <testsuite name="Checkout Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Checkout/tests/Feature</directory>
+        </testsuite>
+
         <testsuite name="Tax Unit Test">
             <directory suffix="Test.php">packages/Webkul/Tax/tests/Unit</directory>
         </testsuite>

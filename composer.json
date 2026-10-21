@@ -121,6 +121,7 @@
             "Tests\\": "tests/",
             "Webkul\\Admin\\Tests\\": "packages/Webkul/Admin/tests",
             "Webkul\\Category\\Tests\\": "packages/Webkul/Category/tests",
+            "Webkul\\Checkout\\Tests\\": "packages/Webkul/Checkout/tests",
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\Customer\\Tests\\": "packages/Webkul/Customer/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
