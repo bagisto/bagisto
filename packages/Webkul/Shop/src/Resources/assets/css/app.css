@@ -23,18 +23,29 @@
 
     /**
      * Colours — the palette of named colours used in the storefront.
+     *
+     * The Its Apple palette is sampled from the logo. The core names are kept, so
+     * `navyBlue` is the deep brand indigo and `lightOrange` the lavender surface.
      */
-    --color-navyBlue:    #060C3B;
-    --color-lightOrange: #F6F2EB;
+    --color-navyBlue:    #34357A;
+    --color-lightOrange: #F5F3FB;
     --color-darkGreen:   #40994A;
-    --color-darkBlue:    #0044F2;
+    --color-darkBlue:    #6A6CAC;
     --color-darkPink:    #F85156;
+
+    --color-brandIndigo: #6A6CAC;
+    --color-brandOrange: #E68C57;
+    --color-brandPink:   #C874A5;
+    --color-brandSky:    #7C92C4;
 
     /**
      * Fonts — the named families the storefront can ask for by utility.
+     *
+     * `dmserif` keeps its core name but carries Fredoka, the rounded display face
+     * that matches the Its Apple wordmark.
      */
     --font-poppins: "Poppins", sans-serif;
-    --font-dmserif: "DM Serif Display", serif;
+    --font-dmserif: "Fredoka", "Poppins", sans-serif;
 
     /**
      * The fallback font, pinned to the stack Tailwind 3 shipped.
@@ -157,6 +168,10 @@
         margin-top: 0 !important;
     }
 
+    body {
+        @apply bg-white;
+    }
+
     input {
         @apply outline-none;
     }
@@ -176,7 +191,7 @@
     }
 
     ::selection {
-        background-color: rgba(6, 12, 59, .2);
+        background-color: rgba(230, 140, 87, .25);
     }
 }
 
@@ -305,11 +320,11 @@
     }
 
     .primary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-full text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-brandIndigo hover:border-brandIndigo;
     }
 
     .secondary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-full bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-lightOrange;
     }
 
     .shimmer {
@@ -348,7 +363,7 @@
         inset: 0;
         display: grid;
         place-content: center;
-        font-family: 'DM Serif Display';
+        font-family: 'Fredoka';
         overflow: hidden;
         letter-spacing: 24px;
     }
@@ -356,7 +371,7 @@
     .glow-404 {
         background-clip: text;
         -webkit-background-clip: text;
-        color: #060C3B;
+        color: var(--color-navyBlue);
     }
 
     .glow-shadow-404 {
