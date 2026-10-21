@@ -16,7 +16,6 @@ use Webkul\Customer\Contracts\Wishlist as WishlistContract;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Tax\Facades\Tax;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
@@ -39,6 +38,42 @@ class Cart
     const TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS = 'shipping_address';
 
     /**
+     * The request fields a billing address is built from.
+     */
+    const BILLING_ADDRESS_FIELDS = [
+        'use_for_shipping',
+        'default_address',
+        'company_name',
+        'first_name',
+        'last_name',
+        'vat_id',
+        'email',
+        'address',
+        'country',
+        'state',
+        'city',
+        'postcode',
+        'phone',
+    ];
+
+    /**
+     * The fields a shipping address is built from, whether copied from billing or posted.
+     */
+    const SHIPPING_ADDRESS_FIELDS = [
+        'default_address',
+        'company_name',
+        'first_name',
+        'last_name',
+        'email',
+        'address',
+        'country',
+        'state',
+        'city',
+        'postcode',
+        'phone',
+    ];
+
+    /**
      * The cart instance.
      *
      * @var Contracts\Cart
@@ -54,7 +89,6 @@ class Cart
         protected CartRepository $cartRepository,
         protected CartItemRepository $cartItemRepository,
         protected CartAddressRepository $cartAddressRepository,
-        protected ProductRepository $productRepository,
         protected TaxCategoryRepository $taxCategoryRepository,
         protected WishlistRepository $wishlistRepository,
         protected CustomerAddressRepository $customerAddressRepository
@@ -257,7 +291,7 @@ class Cart
     /**
      * Add items in a cart with some cart and item details.
      */
-    public function addProduct(ProductContract $product, array $data): Contracts\Cart|\Exception
+    public function addProduct(ProductContract $product, array $data): Contracts\Cart
     {
         if (! $product->isAvailableInChannel($this->cart?->channel_id)) {
             throw new \Exception(trans('shop::app.checkout.cart.inactive-add'));
@@ -350,7 +384,7 @@ class Cart
     /**
      * Update cart items information.
      */
-    public function updateItems(array $data): bool|\Exception
+    public function updateItems(array $data): bool
     {
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->find($itemId);
@@ -474,21 +508,7 @@ class Cart
     public function updateOrCreateBillingAddress(array $params): CartAddressContract
     {
         $params = collect($params)
-            ->only([
-                'use_for_shipping',
-                'default_address',
-                'company_name',
-                'first_name',
-                'last_name',
-                'vat_id',
-                'email',
-                'address',
-                'country',
-                'state',
-                'city',
-                'postcode',
-                'phone',
-            ])
+            ->only(self::BILLING_ADDRESS_FIELDS)
             ->merge([
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
                 'parent_address_id' => $this->customerAddressId($params),
@@ -523,44 +543,14 @@ class Cart
             throw new BillingAddressNotFoundException;
         }
 
-        $fillableFields = [
-            'default_address',
-            'company_name',
-            'first_name',
-            'last_name',
-            'email',
-            'address',
-            'country',
-            'state',
-            'city',
-            'postcode',
-            'phone',
-        ];
-
         if ($this->cart->billing_address->use_for_shipping) {
-            $params = $this->cart->billing_address->only($fillableFields);
-
-            $params = array_merge($params, [
-                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'parent_address_id' => $this->cart->billing_address->parent_address_id,
-                'cart_id' => $this->cart->id,
-                'customer_id' => $this->cart->customer_id,
-            ]);
+            $params = $this->shippingParamsFromBilling();
         } else {
-            if (empty($params)) {
+            $params = $this->shippingParamsFromRequest($params);
+
+            if ($params === null) {
                 return null;
             }
-
-            $params = collect($params)
-                ->only($fillableFields)
-                ->merge([
-                    'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                    'parent_address_id' => $this->customerAddressId($params),
-                    'cart_id' => $this->cart->id,
-                    'customer_id' => $this->cart->customer_id,
-                    'address' => implode(PHP_EOL, $params['address']),
-                ])
-                ->toArray();
         }
 
         if ($this->cart->shipping_address) {
@@ -874,71 +864,13 @@ class Cart
 
         $this->refreshCart();
 
-        $this->cart->sub_total = $this->cart->base_sub_total = 0;
-        $this->cart->sub_total_incl_tax = $this->cart->base_sub_total_incl_tax = 0;
+        $this->resetTotals();
 
-        $this->cart->grand_total = $this->cart->base_grand_total = 0;
-        $this->cart->tax_total = $this->cart->base_tax_total = 0;
+        $this->sumItemTotals();
 
-        $this->cart->discount_amount = $this->cart->base_discount_amount = 0;
+        $this->applySelectedShippingRate();
 
-        $this->cart->shipping_amount = $this->cart->base_shipping_amount = 0;
-        $this->cart->shipping_amount_incl_tax = $this->cart->base_shipping_amount_incl_tax = 0;
-
-        $quantities = 0;
-
-        foreach ($this->cart->items as $item) {
-            $this->cart->discount_amount += $item->discount_amount;
-            $this->cart->base_discount_amount += $item->base_discount_amount;
-
-            $this->cart->tax_total += $item->tax_amount;
-            $this->cart->base_tax_total += $item->base_tax_amount;
-
-            $this->cart->sub_total = (float) $this->cart->sub_total + $item->total;
-            $this->cart->base_sub_total = (float) $this->cart->base_sub_total + $item->base_total;
-
-            $this->cart->sub_total_incl_tax = (float) $this->cart->sub_total_incl_tax + $item->total_incl_tax;
-            $this->cart->base_sub_total_incl_tax = (float) $this->cart->base_sub_total_incl_tax + $item->base_total_incl_tax;
-
-            $quantities += $item->quantity;
-        }
-
-        $this->cart->items_qty = $quantities;
-
-        $this->cart->items_count = $this->cart->items->count();
-
-        $this->cart->grand_total = $this->cart->sub_total + $this->cart->tax_total - $this->cart->discount_amount;
-        $this->cart->base_grand_total = $this->cart->base_sub_total + $this->cart->base_tax_total - $this->cart->base_discount_amount;
-
-        if ($shipping = $this->cart->selected_shipping_rate) {
-            $this->cart->tax_total += $shipping->tax_amount;
-            $this->cart->base_tax_total += $shipping->base_tax_amount;
-
-            $this->cart->shipping_amount = $shipping->price;
-            $this->cart->base_shipping_amount = $shipping->base_price;
-
-            $this->cart->shipping_amount_incl_tax = $shipping->price_incl_tax;
-            $this->cart->base_shipping_amount_incl_tax = $shipping->base_price_incl_tax;
-
-            $this->cart->grand_total = (float) $this->cart->grand_total + $shipping->tax_amount + $shipping->price - $shipping->discount_amount;
-            $this->cart->base_grand_total = (float) $this->cart->base_grand_total + $shipping->base_tax_amount + $shipping->base_price - $shipping->base_discount_amount;
-
-            $this->cart->discount_amount += $shipping->discount_amount;
-            $this->cart->base_discount_amount += $shipping->base_discount_amount;
-        }
-
-        $this->cart->discount_amount = round($this->cart->discount_amount, 2);
-        $this->cart->base_discount_amount = round($this->cart->base_discount_amount, 2);
-
-        $this->cart->sub_total = round($this->cart->sub_total, 2);
-        $this->cart->base_sub_total = round($this->cart->base_sub_total, 2);
-
-        $this->cart->sub_total_incl_tax = round($this->cart->sub_total_incl_tax, 2);
-        $this->cart->base_sub_total_incl_tax = round($this->cart->base_sub_total_incl_tax, 2);
-
-        $this->cart->grand_total = round($this->cart->grand_total, 2);
-
-        $this->cart->base_grand_total = round($this->cart->base_grand_total, 2);
+        $this->roundTotals();
 
         $this->cart->cart_currency_code = core()->getCurrentCurrencyCode();
 
@@ -1033,33 +965,7 @@ class Cart
                 continue;
             }
 
-            $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
-
-            $address = null;
-
-            if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
-                $address = Tax::getShippingOriginAddress();
-            } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS) {
-                if ($item->getTypeInstance()->isStockable()) {
-                    $address = $this->cart->shipping_address;
-                } else {
-                    $address = $this->cart->billing_address;
-                }
-            } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_BILLING_ADDRESS) {
-                $address = $this->cart->billing_address;
-            }
-
-            if (
-                $address === null
-                && $this->cart->customer
-            ) {
-                $address = $this->cart->customer->addresses()
-                    ->where('default_address', 1)->first();
-            }
-
-            if ($address === null) {
-                $address = Tax::getDefaultAddress();
-            }
+            $address = $this->itemTaxAddress($item);
 
             $item->applied_tax_rate = null;
 
@@ -1116,32 +1022,7 @@ class Cart
 
         $taxCategory = $this->taxCategoryRepository->find($taxCategoryId);
 
-        $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
-
-        $address = null;
-
-        if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
-            $address = Tax::getShippingOriginAddress();
-        } elseif (
-            $this->cart->haveStockableItems()
-            && $calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS
-        ) {
-            $address = $this->cart->shipping_address;
-        } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_BILLING_ADDRESS) {
-            $address = $this->cart->billing_address;
-        }
-
-        if (
-            $address === null
-            && $this->cart->customer
-        ) {
-            $address = $this->cart->customer->addresses()
-                ->where('default_address', 1)->first();
-        }
-
-        if ($address === null) {
-            $address = Tax::getDefaultAddress();
-        }
+        $address = $this->shippingTaxAddress();
 
         Event::dispatch('checkout.cart.calculate.shipping.tax.before', $this->cart);
 
@@ -1210,6 +1091,133 @@ class Cart
 
             return $wishlistItem;
         });
+    }
+
+    /**
+     * A shipping address copied off the billing address, whose `address` is already a joined string.
+     */
+    protected function shippingParamsFromBilling(): array
+    {
+        return array_merge($this->cart->billing_address->only(self::SHIPPING_ADDRESS_FIELDS), [
+            'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+            'parent_address_id' => $this->cart->billing_address->parent_address_id,
+            'cart_id' => $this->cart->id,
+            'customer_id' => $this->cart->customer_id,
+        ]);
+    }
+
+    /**
+     * A shipping address built from posted fields, whose `address` arrives as lines to join, or
+     * nothing when none were posted.
+     */
+    protected function shippingParamsFromRequest(array $params): ?array
+    {
+        if (empty($params)) {
+            return null;
+        }
+
+        return collect($params)
+            ->only(self::SHIPPING_ADDRESS_FIELDS)
+            ->merge([
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'parent_address_id' => $this->customerAddressId($params),
+                'cart_id' => $this->cart->id,
+                'customer_id' => $this->cart->customer_id,
+                'address' => implode(PHP_EOL, $params['address']),
+            ])
+            ->toArray();
+    }
+
+    /**
+     * Zero every total before they are summed again from the cart's items.
+     */
+    protected function resetTotals(): void
+    {
+        $this->cart->sub_total = $this->cart->base_sub_total = 0;
+        $this->cart->sub_total_incl_tax = $this->cart->base_sub_total_incl_tax = 0;
+
+        $this->cart->grand_total = $this->cart->base_grand_total = 0;
+        $this->cart->tax_total = $this->cart->base_tax_total = 0;
+
+        $this->cart->discount_amount = $this->cart->base_discount_amount = 0;
+
+        $this->cart->shipping_amount = $this->cart->base_shipping_amount = 0;
+        $this->cart->shipping_amount_incl_tax = $this->cart->base_shipping_amount_incl_tax = 0;
+    }
+
+    /**
+     * Sum the items into the cart's totals, and count what it holds.
+     */
+    protected function sumItemTotals(): void
+    {
+        $quantities = 0;
+
+        foreach ($this->cart->items as $item) {
+            $this->cart->discount_amount += $item->discount_amount;
+            $this->cart->base_discount_amount += $item->base_discount_amount;
+
+            $this->cart->tax_total += $item->tax_amount;
+            $this->cart->base_tax_total += $item->base_tax_amount;
+
+            $this->cart->sub_total = (float) $this->cart->sub_total + $item->total;
+            $this->cart->base_sub_total = (float) $this->cart->base_sub_total + $item->base_total;
+
+            $this->cart->sub_total_incl_tax = (float) $this->cart->sub_total_incl_tax + $item->total_incl_tax;
+            $this->cart->base_sub_total_incl_tax = (float) $this->cart->base_sub_total_incl_tax + $item->base_total_incl_tax;
+
+            $quantities += $item->quantity;
+        }
+
+        $this->cart->items_qty = $quantities;
+
+        $this->cart->items_count = $this->cart->items->count();
+
+        $this->cart->grand_total = $this->cart->sub_total + $this->cart->tax_total - $this->cart->discount_amount;
+        $this->cart->base_grand_total = $this->cart->base_sub_total + $this->cart->base_tax_total - $this->cart->base_discount_amount;
+    }
+
+    /**
+     * Add the chosen shipping rate's price, tax and discount on top of the item totals.
+     */
+    protected function applySelectedShippingRate(): void
+    {
+        if (! $shipping = $this->cart->selected_shipping_rate) {
+            return;
+        }
+
+        $this->cart->tax_total += $shipping->tax_amount;
+        $this->cart->base_tax_total += $shipping->base_tax_amount;
+
+        $this->cart->shipping_amount = $shipping->price;
+        $this->cart->base_shipping_amount = $shipping->base_price;
+
+        $this->cart->shipping_amount_incl_tax = $shipping->price_incl_tax;
+        $this->cart->base_shipping_amount_incl_tax = $shipping->base_price_incl_tax;
+
+        $this->cart->grand_total = (float) $this->cart->grand_total + $shipping->tax_amount + $shipping->price - $shipping->discount_amount;
+        $this->cart->base_grand_total = (float) $this->cart->base_grand_total + $shipping->base_tax_amount + $shipping->base_price - $shipping->base_discount_amount;
+
+        $this->cart->discount_amount += $shipping->discount_amount;
+        $this->cart->base_discount_amount += $shipping->base_discount_amount;
+    }
+
+    /**
+     * Round every total the storefront displays to two places.
+     */
+    protected function roundTotals(): void
+    {
+        $this->cart->discount_amount = round($this->cart->discount_amount, 2);
+        $this->cart->base_discount_amount = round($this->cart->base_discount_amount, 2);
+
+        $this->cart->sub_total = round($this->cart->sub_total, 2);
+        $this->cart->base_sub_total = round($this->cart->base_sub_total, 2);
+
+        $this->cart->sub_total_incl_tax = round($this->cart->sub_total_incl_tax, 2);
+        $this->cart->base_sub_total_incl_tax = round($this->cart->base_sub_total_incl_tax, 2);
+
+        $this->cart->grand_total = round($this->cart->grand_total, 2);
+
+        $this->cart->base_grand_total = round($this->cart->base_grand_total, 2);
     }
 
     /**
@@ -1314,6 +1322,76 @@ class Cart
         $shippingRate->price_incl_tax = $shippingRate->price + $shippingRate->tax_amount;
 
         $shippingRate->base_price_incl_tax = $shippingRate->base_price + $shippingRate->base_tax_amount;
+    }
+
+    /**
+     * The address an item's tax is calculated against, which for a non-stockable item is the
+     * billing address even where the store taxes on the shipping address.
+     */
+    protected function itemTaxAddress(Contracts\CartItem $item)
+    {
+        $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
+
+        $address = null;
+
+        if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
+            $address = Tax::getShippingOriginAddress();
+        } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS) {
+            if ($item->getTypeInstance()->isStockable()) {
+                $address = $this->cart->shipping_address;
+            } else {
+                $address = $this->cart->billing_address;
+            }
+        } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_BILLING_ADDRESS) {
+            $address = $this->cart->billing_address;
+        }
+
+        return $this->fallbackTaxAddress($address);
+    }
+
+    /**
+     * The address the shipping tax is calculated against, which a cart carrying nothing stockable
+     * leaves to the fallback rather than the billing address.
+     */
+    protected function shippingTaxAddress()
+    {
+        $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
+
+        $address = null;
+
+        if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
+            $address = Tax::getShippingOriginAddress();
+        } elseif (
+            $this->cart->haveStockableItems()
+            && $calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS
+        ) {
+            $address = $this->cart->shipping_address;
+        } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_BILLING_ADDRESS) {
+            $address = $this->cart->billing_address;
+        }
+
+        return $this->fallbackTaxAddress($address);
+    }
+
+    /**
+     * The customer's default address, then the store's own, for a tax the configured mode left
+     * without one.
+     */
+    protected function fallbackTaxAddress($address)
+    {
+        if (
+            $address === null
+            && $this->cart->customer
+        ) {
+            $address = $this->cart->customer->addresses()
+                ->where('default_address', 1)->first();
+        }
+
+        if ($address === null) {
+            $address = Tax::getDefaultAddress();
+        }
+
+        return $address;
     }
 
     /**
