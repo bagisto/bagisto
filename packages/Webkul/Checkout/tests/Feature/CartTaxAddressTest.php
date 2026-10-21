@@ -154,6 +154,25 @@ it('should tax a non-stockable item against the billing address even when the st
 });
 
 // ============================================================================
+// A Shipping Tax Category That No Longer Exists Is Survivable
+// ============================================================================
+
+it('should collect totals when the configured shipping tax category has been deleted', function () {
+    $taxCategory = taxCategoryCharging(['US' => 10, 'IN' => 20]);
+
+    $this->setConfig([
+        'sales.taxes.calculation.based_on' => 'shipping_address',
+        'sales.taxes.categories.shipping' => $taxCategory->id + 1000,
+    ]);
+
+    cartBilledToIndiaShippedToUs('simple', $taxCategory);
+
+    Cart::collectTotals();
+
+    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(0.0);
+});
+
+// ============================================================================
 // Shipping Is Taxed Against That Same Configured Address
 // ============================================================================
 
