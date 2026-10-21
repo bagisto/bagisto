@@ -90,9 +90,6 @@ class PhonePeController extends Controller
         }
 
         try {
-            /**
-             * Check payment status with PhonePe API using the merchant order ID received in the callback request.
-             */
             $response = $this->phonePe->checkPaymentStatus($merchantOrderId);
 
             $state = strtoupper($response['data']['state'] ?? '');
@@ -111,11 +108,6 @@ class PhonePeController extends Controller
                 return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
             }
 
-            /**
-             * Retrieve the cart ID from the payment status response's meta information,
-             * which was stored during payment initiation.
-             * This cart ID will be used to create the order if the payment was successful.
-             */
             $cartId = $response['data']['metaInfo']['udf1'] ?? null;
 
             if (! $cartId) {
@@ -132,9 +124,6 @@ class PhonePeController extends Controller
                 return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
             }
 
-            /**
-             * Check if an order already exists for this cart (e.g., created by the callback).
-             */
             $existingOrder = $this->orderRepository->findOneWhere(['cart_id' => $cartId]);
 
             if (! $existingOrder) {
@@ -161,9 +150,6 @@ class PhonePeController extends Controller
 
                 $data = (new OrderResource($cart))->jsonSerialize();
 
-                /**
-                 * Prepare additional payment data for order creation, including PhonePe transaction details.
-                 */
                 $data['payment']['additional'] = [
                     'phonePe_merchant_order_id' => $merchantOrderId ?? '',
                     'phonePe_token' => $response['data']['token'] ?? '',
@@ -177,9 +163,6 @@ class PhonePeController extends Controller
                 if ($order->canInvoice()) {
                     $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
 
-                    /**
-                     * Record the order transaction with PhonePe payment details, including transaction ID and status.
-                     */
                     $this->orderTransactionRepository->create([
                         'transaction_id' => $response['data']['paymentDetails'][0]['transactionId'] ?? '',
                         'status' => self::PAYMENT_SUCCESS,
@@ -195,9 +178,6 @@ class PhonePeController extends Controller
                 Cart::deActivateCart();
             }
 
-            /**
-             * Store the order ID in the session for the success page.
-             */
             session()->flash('order_id', $existingOrder?->id);
 
             session()->flash('success', trans('phonepe::app.response.payment-success'));
@@ -237,10 +217,6 @@ class PhonePeController extends Controller
 
             $state = strtoupper($payload['payload']['state'] ?? '');
 
-            /**
-             * Only process CHECKOUT_ORDER_COMPLETED events (or a SUCCESS state).
-             * All other events (PENDING, FAILED, etc.) are acknowledged but ignored.
-             */
             if (
                 ! $merchantOrderId
                 || ! in_array($state, ['CHECKOUT_ORDER_COMPLETED', 'COMPLETED', 'SUCCESS'], true)
@@ -248,10 +224,6 @@ class PhonePeController extends Controller
                 return response()->json(['status' => 'skipped'], 200);
             }
 
-            /**
-             * Verify the actual payment status via PhonePe API before acting on
-             * the webhook to protect against forged / replayed callbacks.
-             */
             $response = $this->phonePe->checkPaymentStatus($merchantOrderId);
 
             $verifiedState = strtoupper($response['data']['state'] ?? '');
@@ -260,9 +232,6 @@ class PhonePeController extends Controller
                 return response()->json(['status' => 'payment_not_confirmed'], 200);
             }
 
-            /**
-             * Retrieve cart ID stored in metaInfo.udf1 during payment initiation.
-             */
             $cartId = $response['data']['metaInfo']['udf1'] ?? null;
 
             if (! $cartId) {
@@ -278,9 +247,6 @@ class PhonePeController extends Controller
                 return response()->json(['status' => 'cart_inactive'], 200);
             }
 
-            /**
-             * Check if an order already exists for this cart (e.g., created by the callback).
-             */
             $existingOrder = $this->orderRepository->findOneWhere(['cart_id' => $cartId]);
 
             if ($existingOrder) {
@@ -295,6 +261,10 @@ class PhonePeController extends Controller
 
             if (! $cart) {
                 return response()->json(['status' => 'cart_inactive'], 200);
+            }
+
+            if (! $this->paidAmountCoversCart($response, $cart)) {
+                return response()->json(['status' => 'amount_mismatch'], 200);
             }
 
             $data = (new OrderResource($cart))->jsonSerialize();
@@ -345,10 +315,13 @@ class PhonePeController extends Controller
         $paid = $response['data']['amount'] ?? null;
 
         if ($paid === null) {
-            return true;
+            return false;
         }
 
-        return (int) $paid === (int) round($cart->base_grand_total * 100);
+        $currency = $response['data']['currency'] ?? $cart->base_currency_code;
+
+        return (int) $paid === (int) round($cart->base_grand_total * 100)
+            && strtoupper((string) $currency) === strtoupper((string) $cart->base_currency_code);
     }
 
     /**

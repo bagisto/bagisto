@@ -49,6 +49,11 @@ class Ipn
     public const LOCK_WAIT_SECONDS = 10;
 
     /**
+     * The places a currency is paid in when the store records none for it.
+     */
+    public const DEFAULT_CURRENCY_DECIMAL = 2;
+
+    /**
      * IPN post data.
      */
     protected array $post;
@@ -216,8 +221,24 @@ class Ipn
      */
     protected function paymentCovers($grandTotal, ?string $currencyCode): bool
     {
-        return round((float) ($this->post['mc_gross'] ?? 0), 4) === round((float) $grandTotal, 4)
-            && ($this->post['mc_currency'] ?? null) === $currencyCode;
+        $decimal = $this->currencyDecimal($currencyCode);
+
+        return round((float) ($this->post['mc_gross'] ?? 0), $decimal) === round((float) $grandTotal, $decimal)
+            && strtoupper((string) ($this->post['mc_currency'] ?? '')) === strtoupper((string) $currencyCode);
+    }
+
+    /**
+     * How many places a currency is paid in, so a total carried at four places is compared
+     * against what PayPal actually charged rather than refused for the difference.
+     */
+    protected function currencyDecimal(?string $currencyCode): int
+    {
+        if (! $currencyCode) {
+            return self::DEFAULT_CURRENCY_DECIMAL;
+        }
+
+        return core()->getAllCurrencies()->firstWhere('code', strtoupper($currencyCode))?->decimal
+            ?? self::DEFAULT_CURRENCY_DECIMAL;
     }
 
     /**

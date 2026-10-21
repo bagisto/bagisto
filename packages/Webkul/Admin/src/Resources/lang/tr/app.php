@@ -5687,7 +5687,7 @@ return [
                         ],
 
                         'sync' => [
-                            'title' => 'Mevcut dosyaları eşitle',
+                            'title' => 'Mevcut Dosyaları Eşitle',
                             'syncing' => 'Eşitleniyor...',
                             'pending' => ':count dosya henüz yapılandırılmış depolamada değil',
                             'up-to-date' => 'Her şey yapılandırılmış depolamada',
