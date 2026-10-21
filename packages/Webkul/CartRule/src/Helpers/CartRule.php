@@ -362,10 +362,6 @@ class CartRule
             return;
         }
 
-        $selectedShipping->discount_amount = 0;
-
-        $selectedShipping->base_discount_amount = 0;
-
         $appliedRuleIds = [];
 
         $freeShippingApplied = false;
@@ -400,6 +396,8 @@ class CartRule
                 $selectedShipping->price_incl_tax = 0;
                 $selectedShipping->base_price = 0;
                 $selectedShipping->base_price_incl_tax = 0;
+                $selectedShipping->discount_amount = 0;
+                $selectedShipping->base_discount_amount = 0;
 
                 $selectedShipping->save();
 
