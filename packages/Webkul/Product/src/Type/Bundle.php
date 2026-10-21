@@ -234,7 +234,9 @@ class Bundle extends AbstractType
             return trans('product::app.checkout.cart.missing-options');
         }
 
-        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
+        $data['bundle_options'] = array_filter($this->validateBundleOptionForCart(
+            $this->ownBundleOptions($data['bundle_options'])
+        ));
 
         if (empty($data['bundle_options'])) {
             return trans('product::app.checkout.cart.missing-options');
@@ -362,10 +364,24 @@ class Bundle extends AbstractType
     }
 
     /**
+     * The posted options this product actually owns, so a selection cannot be priced by an
+     * option belonging to another bundle.
+     */
+    public function ownBundleOptions(array $bundleOptions): array
+    {
+        $ownIds = $this->product->bundle_options->pluck('id')->all();
+
+        return array_filter(
+            $bundleOptions,
+            fn ($optionId) => in_array((int) $optionId, $ownIds, true),
+            ARRAY_FILTER_USE_KEY
+        );
+    }
+
+    /**
      * Remove invalid options from add to cart request.
      *
      * @param  array  $data
-     * @return array
      */
     public function validateBundleOptionForCart($data)
     {
