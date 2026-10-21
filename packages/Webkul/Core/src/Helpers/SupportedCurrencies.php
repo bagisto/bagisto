@@ -72,7 +72,7 @@ class SupportedCurrencies
         'UAH' => ['name' => 'ukrainian-hryvnia', 'symbol' => '₴', 'decimal' => 2],
         'USD' => ['name' => 'united-states-dollar', 'symbol' => '$', 'decimal' => 2],
         'UZS' => ['name' => 'uzbekistani-som', 'symbol' => 'сўм', 'decimal' => 2],
-        'VES' => ['name' => 'venezuelan-bolívar', 'symbol' => 'Bs.F', 'decimal' => 2],
+        'VES' => ['name' => 'venezuelan-bolívar', 'symbol' => 'Bs.S', 'decimal' => 2],
         'VND' => ['name' => 'vietnamese-dong', 'symbol' => '₫', 'decimal' => 0],
         'XAF' => ['name' => 'cfa-franc-beac', 'symbol' => 'FCFA', 'decimal' => 0],
         'XOF' => ['name' => 'cfa-franc-bceao', 'symbol' => 'CFA', 'decimal' => 0],

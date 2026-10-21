@@ -900,7 +900,7 @@ return [
                 'united-arab-emirates-dirham' => 'Dirham din Emiratele Arabe Unite (AED)',
                 'united-states-dollar' => 'Dolar american (USD)',
                 'uzbekistani-som' => 'Som uzbek (UZS)',
-                'venezuelan-bolívar' => 'Bolívar venezuelean (VEF)',
+                'venezuelan-bolívar' => 'Bolívar venezuelean (VES)',
                 'vietnamese-dong' => 'Dong vietnamez (VND)',
                 'warning-message' => 'Atenție! Setările pentru limba implicită a sistemului și moneda implicită sunt permanente și nu pot fi modificate odată ce au fost stabilite.',
                 'zambian-kwacha' => 'Kwacha zambiană (ZMW)',

@@ -4,6 +4,7 @@ namespace Webkul\Installer\Console\Commands;
 
 use DateTimeZone;
 use Illuminate\Console\Command;
+use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -21,6 +22,8 @@ use function Laravel\Prompts\text;
 
 class Installer extends Command
 {
+    use ConfirmableTrait;
+
     /**
      * The name and signature of the console command.
      *
@@ -32,6 +35,7 @@ class Installer extends Command
         { --skip-cloud-promotion : Skip Bagisto Cloud hosting prompt. (Deprecated: use --no-interaction) }
         { --skip-github-star : Skip Bagisto Cloud hosting prompt. (Deprecated: use --no-interaction) }
         { --demo-samples : Seed demo/sample product data (useful with --no-interaction). }
+        { --force : Install without asking for confirmation, which an install into a production environment is otherwise refused without. }
     ';
 
     /**
@@ -51,7 +55,7 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $description = 'Bagisto installer. Use the global --no-interaction (-n) option for an unattended install that uses the existing `.env`, creates the default admin user and skips sample products (this supersedes the deprecated --skip-* options). Add --demo-samples to also seed demo/sample product data.';
+    protected $description = 'Bagisto installer. Use the global --no-interaction (-n) option for an unattended install that uses the existing `.env`, creates the default admin user and skips sample products (this supersedes the deprecated --skip-* options). Add --demo-samples to also seed demo/sample product data, and --force to install into a production environment, which drops every existing table.';
 
     /**
      * Environment details.
@@ -93,14 +97,12 @@ class Installer extends Command
     /**
      * Install and configure bagisto.
      */
-    public function handle(): void
+    public function handle(): int
     {
-        /**
-         * When Laravel's global `--no-interaction` (`-n`) option is used, the
-         * installer runs unattended: it asks nothing, relies on the existing
-         * `.env` for configuration, creates the default admin user and skips the
-         * sample product data.
-         */
+        if (! $this->confirmToProceed('Installing drops every table in the database.')) {
+            return self::FAILURE;
+        }
+
         $noInteraction = (bool) $this->option('no-interaction');
 
         $this->warnDeprecatedOptions();
@@ -124,16 +126,11 @@ class Installer extends Command
         $this->loadEnvConfigs();
 
         $this->warn('Step: Generating key...');
-        $this->call('key:generate');
+        $this->call('key:generate', ['--force' => true]);
 
         $this->warn('Step: Migrating all tables...');
 
-        /**
-         * When using a table prefix, `migrate:fresh` may not function as expected.
-         * To ensure a clean state, we first wipe the database and then run `migrate:fresh` again.
-         */
-        $this->call('db:wipe');
-        $this->call('migrate:fresh');
+        $this->wipeAndMigrate();
 
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
         $this->databaseManager->seed($this->getSeederConfiguration());
@@ -168,6 +165,19 @@ class Installer extends Command
         }
 
         ComposerEvents::postCreateProject();
+
+        return self::SUCCESS;
+    }
+
+    /**
+     * Drop every table and migrate, wiping first because `migrate:fresh` on its own does
+     * not clear a database that carries a table prefix.
+     */
+    protected function wipeAndMigrate(): void
+    {
+        $this->call('db:wipe', ['--force' => true]);
+
+        $this->call('migrate:fresh', ['--force' => true]);
     }
 
     /**

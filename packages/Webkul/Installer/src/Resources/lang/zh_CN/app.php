@@ -900,7 +900,7 @@ return [
                 'united-arab-emirates-dirham' => '阿联酋迪拉姆 (AED)',
                 'united-states-dollar' => '美元 (USD)',
                 'uzbekistani-som' => '乌兹别克斯坦苏姆 (UZS)',
-                'venezuelan-bolívar' => '委内瑞拉玻利瓦尔 (VEF)',
+                'venezuelan-bolívar' => '委内瑞拉玻利瓦尔 (VES)',
                 'vietnamese-dong' => '越南盾 (VND)',
                 'warning-message' => '注意！您的默认系统语言和默认货币设置是永久性的，设置后无法更改。',
                 'zambian-kwacha' => '赞比亚克瓦查 (ZMW)',

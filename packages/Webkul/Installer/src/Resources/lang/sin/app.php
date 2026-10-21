@@ -900,7 +900,7 @@ return [
                 'united-arab-emirates-dirham' => 'එක්සත් අරාබිය ඩිරුම් (AED)',
                 'united-states-dollar' => 'එක්සත් ජනපදය ඩොලර (USD)',
                 'uzbekistani-som' => 'උස්බෙකිස්ථාන සම් (UZS)',
-                'venezuelan-bolívar' => 'වෙනෙස්වීලාන් බොලිවාර් (VEF)',
+                'venezuelan-bolívar' => 'වෙනෙස්වීලාන් බොලිවාර් (VES)',
                 'vietnamese-dong' => 'වියට්නාමි ඩොන් (VND)',
                 'warning-message' => 'අවධානයෙන්! ඔබගේ පෙරනිමි පද්ධති භාෂාව සහ පෙරනිමි මුදල් සැකසුම් ස්ථිර වේ සහ ඒවා එක් වරක් සකස් කරන ලද පසු වෙනස් කළ නොහැක.',
                 'zambian-kwacha' => 'සැම්බියාව් ක්වාච් (ZMW)',

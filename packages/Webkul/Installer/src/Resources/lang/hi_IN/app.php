@@ -900,7 +900,7 @@ return [
                 'united-arab-emirates-dirham' => 'संयुक्त अरब अमीरात दिरहम (AED)',
                 'united-states-dollar' => 'संयुक्त राज्य अमेरिकी डॉलर (USD)',
                 'uzbekistani-som' => 'उज़्बेकिस्तानी सोम (UZS)',
-                'venezuelan-bolívar' => 'वेनेज़ुएलाई बोलिवार (VEF)',
+                'venezuelan-bolívar' => 'वेनेज़ुएलाई बोलिवार (VES)',
                 'vietnamese-dong' => 'वियतनामी डॉंग (VND)',
                 'warning-message' => 'सावधान! आपके डिफ़ॉल्ट सिस्टम भाषा और डिफ़ॉल्ट मुद्रा के सेटिंग्स स्थायी हैं और एक बार सेट होने पर उन्हें बदला नहीं जा सकता।',
                 'zambian-kwacha' => 'ज़ाम्बियाई क्वाचा (ZMW)',

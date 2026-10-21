@@ -14,6 +14,16 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a part invoiced or part refunded configurable product recording its variant line for the whole order rather than the quantity acted on, which also freed stock the order still owed.
 
+- Fixed every JSON 500 response describing itself with an unresolvable translation key, so the client was handed the key instead of the message.
+
+- Fixed the installer naming the Venezuelan bolívar by its retired VEF code and its pre-redenomination symbol, while installing it as VES.
+
+- Added a `--force` option to `bagisto:install`, so an unattended install into a production environment proceeds instead of stopping at a confirmation nobody can answer.
+
+- #11541 [fixed] - Fixed an expired or missing CSRF token coming back as a 500 rather than a 419 on a store with debug off, along with every other client error that has no page of its own, such as a throttled request's 429.
+
+- #11539 [fixed] - Fixed a cart rule set to apply to shipping losing its shipping discount whenever a shipping tax category was configured, so the shopper paid the full shipping price.
+
 - #11523 [fixed] - Fixed Razorpay creating its order a paisa short on totals such as ₹19.99 and then refusing that payment, so the shopper was charged and no order was placed.
 
 - #11522 [fixed] - Fixed a configurable product order reserving none of its variant's stock, so the same unit could be sold again until the order was shipped.

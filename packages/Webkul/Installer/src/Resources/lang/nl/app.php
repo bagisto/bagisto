@@ -900,7 +900,7 @@ return [
                 'united-arab-emirates-dirham' => 'Verenigde Arabische Emiraten Dirham (AED)',
                 'united-states-dollar' => 'Amerikaanse Dollar (USD)',
                 'uzbekistani-som' => 'Oezbeekse Som (UZS)',
-                'venezuelan-bolívar' => 'Venezolaanse Bolívar (VEF)',
+                'venezuelan-bolívar' => 'Venezolaanse Bolívar (VES)',
                 'vietnamese-dong' => 'Vietnamese Dong (VND)',
                 'warning-message' => 'Pas op! De instellingen voor uw standaardtaal en standaardvaluta zijn permanent en kunnen niet worden gewijzigd zodra ze zijn ingesteld.',
                 'zambian-kwacha' => 'Zambiaanse Kwacha (ZMW)',

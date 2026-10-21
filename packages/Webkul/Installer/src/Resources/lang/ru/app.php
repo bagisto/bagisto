@@ -900,7 +900,7 @@ return [
                 'united-arab-emirates-dirham' => 'Дирхам Объединенных Арабских Эмиратов (AED)',
                 'united-states-dollar' => 'Доллар США (USD)',
                 'uzbekistani-som' => 'Узбекский сум (UZS)',
-                'venezuelan-bolívar' => 'Венесуэльский боливар (VEF)',
+                'venezuelan-bolívar' => 'Венесуэльский боливар (VES)',
                 'vietnamese-dong' => 'Вьетнамский донг (VND)',
                 'warning-message' => 'Внимание! Настройки языка системы и валюты по умолчанию являются постоянными и не могут быть изменены после установки.',
                 'zambian-kwacha' => 'Замбийская квача (ZMW)',
