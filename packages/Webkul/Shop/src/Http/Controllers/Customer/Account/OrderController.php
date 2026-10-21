@@ -123,15 +123,12 @@ class OrderController extends Controller
      */
     public function cancel($id)
     {
-        $customer = auth()->guard('customer')->user();
+        $order = $this->orderRepository->findOneWhere([
+            'customer_id' => auth()->guard('customer')->id(),
+            'id' => $id,
+        ]);
 
-        /* find by order id in customer's order */
-        $order = $customer->orders()->find($id);
-
-        /* if order id not found then process should be aborted with 404 page */
-        if (! $order) {
-            abort(404);
-        }
+        abort_if(! $order, 404);
 
         $result = $this->orderRepository->cancel($order);
 
