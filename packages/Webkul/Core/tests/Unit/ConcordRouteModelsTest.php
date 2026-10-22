@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use function Pest\Laravel\get;
+
 // ============================================================================
 // Route Parameters Named After Models
 // ============================================================================
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 it('should pass a route parameter named after a model through as a plain value', function (string $parameter) {
     Route::middleware('web')->get("concord-route-parameter/{{$parameter}}", fn (string $value) => $value);
 
-    $this->get('concord-route-parameter/hello')
+    get('concord-route-parameter/hello')
         ->assertOk()
         ->assertSeeText('hello');
 })->with(['template', 'product', 'category', 'channel', 'order']);
