@@ -41,3 +41,20 @@ it('should not serve a stored file whose contents are not an image, whatever its
     'vector image named as a picture' => ['drawing.png', '<svg xmlns="http://www.w3.org/2000/svg"></svg>'],
     'markup the sniffer reads as text' => ['notes.txt', '<body>hello</body>'],
 ]);
+
+// ============================================================================
+// Missing Images
+// ============================================================================
+
+it('should render the error page of a missing image with the channel theme', function () {
+    config(['themes.shop.store-theme' => config('themes.shop.default')]);
+
+    themes()->loadThemes();
+
+    core()->getCurrentChannel()->update(['theme' => 'store-theme']);
+
+    get('cache/large/imagecache-responses/missing.png')
+        ->assertNotFound();
+
+    expect(themes()->current()?->code)->toBe('store-theme');
+});
