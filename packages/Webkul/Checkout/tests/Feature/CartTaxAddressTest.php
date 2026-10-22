@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\Cart as CartModel;
 use Webkul\Checkout\Models\CartAddress;
@@ -204,4 +205,72 @@ it('should tax shipping against the billing address when the store is set to bil
     Cart::collectTotals();
 
     expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(10.0);
+});
+
+// ============================================================================
+// The Tax Events, And When Shipping Tax Stays Quiet
+// ============================================================================
+
+it('should announce the items tax whether or not any item is taxed', function () {
+    cartBilledToIndiaShippedToUs('simple', taxCategoryCharging(['US' => 10]));
+
+    $fired = [];
+
+    foreach (['checkout.cart.calculate.items.tax.before', 'checkout.cart.calculate.items.tax.after'] as $name) {
+        Event::listen($name, function () use ($name, &$fired) {
+            $fired[] = $name;
+        });
+    }
+
+    Cart::calculateItemsTax();
+
+    expect($fired)->toBe([
+        'checkout.cart.calculate.items.tax.before',
+        'checkout.cart.calculate.items.tax.after',
+    ]);
+});
+
+it('should announce the shipping tax when there is a rate and a category to tax it under', function () {
+    $taxCategory = taxCategoryCharging(['US' => 10]);
+
+    $this->setConfig([
+        'sales.taxes.calculation.based_on' => 'shipping_address',
+        'sales.taxes.categories.shipping' => $taxCategory->id,
+    ]);
+
+    cartBilledToIndiaShippedToUs('simple', $taxCategory);
+
+    $fired = [];
+
+    foreach (['checkout.cart.calculate.shipping.tax.before', 'checkout.cart.calculate.shipping.tax.after'] as $name) {
+        Event::listen($name, function () use ($name, &$fired) {
+            $fired[] = $name;
+        });
+    }
+
+    Cart::calculateShippingTax();
+
+    expect($fired)->toBe([
+        'checkout.cart.calculate.shipping.tax.before',
+        'checkout.cart.calculate.shipping.tax.after',
+    ]);
+});
+
+it('should announce the shipping tax step even where no category is configured to tax it under', function () {
+    cartBilledToIndiaShippedToUs('simple', taxCategoryCharging(['US' => 10]));
+
+    $fired = [];
+
+    foreach (['checkout.cart.calculate.shipping.tax.before', 'checkout.cart.calculate.shipping.tax.after'] as $name) {
+        Event::listen($name, function () use ($name, &$fired) {
+            $fired[] = $name;
+        });
+    }
+
+    Cart::calculateShippingTax();
+
+    expect($fired)->toBe([
+        'checkout.cart.calculate.shipping.tax.before',
+        'checkout.cart.calculate.shipping.tax.after',
+    ]);
 });

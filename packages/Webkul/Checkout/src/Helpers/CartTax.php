@@ -2,7 +2,6 @@
 
 namespace Webkul\Checkout\Helpers;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Contracts;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Tax\Facades\Tax;
@@ -38,8 +37,6 @@ class CartTax
      */
     public function calculateItemsTax(Contracts\Cart $cart): void
     {
-        Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
-
         $taxCategories = [];
 
         foreach ($cart->items as $key => $item) {
@@ -90,7 +87,6 @@ class CartTax
             $cart->items->put($key, $item);
         }
 
-        Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
     }
 
     /**
@@ -116,8 +112,6 @@ class CartTax
 
         $address = $this->shippingTaxAddress($cart);
 
-        Event::dispatch('checkout.cart.calculate.shipping.tax.before', $cart);
-
         Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($shippingRate) {
             $shippingRate->applied_tax_rate = $rate->identifier;
 
@@ -137,8 +131,6 @@ class CartTax
         }
 
         $shippingRate->save();
-
-        Event::dispatch('checkout.cart.calculate.shipping.tax.after', $cart);
     }
 
     /**

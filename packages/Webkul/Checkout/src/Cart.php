@@ -166,6 +166,8 @@ class Cart
      */
     public function removeCart(Contracts\Cart $cart): void
     {
+        Event::dispatch('checkout.cart.destroy.before', $cart->id);
+
         $this->cartRepository->delete($cart->id);
 
         if (session()->has('cart')) {
@@ -173,6 +175,8 @@ class Cart
         }
 
         $this->resetCart();
+
+        Event::dispatch('checkout.cart.destroy.after', $cart->id);
     }
 
     /**
@@ -304,6 +308,10 @@ class Cart
         Shipping::removeAllShippingRates();
 
         $result = $this->cartItemRepository->delete($itemId);
+
+        if (! $result) {
+            return $result;
+        }
 
         Event::dispatch('checkout.cart.delete.after', $itemId);
 
@@ -740,6 +748,8 @@ class Cart
             return false;
         }
 
+        Event::dispatch('checkout.cart.validate.items.before', $this->cart);
+
         if (! $this->cart->items->count()) {
             $this->removeCart($this->cart);
 
@@ -776,6 +786,8 @@ class Cart
             $isInvalid = $isInvalid || $validationResult->isCartInvalid();
         }
 
+        Event::dispatch('checkout.cart.validate.items.after', $this->cart);
+
         return ! $isInvalid;
     }
 
@@ -788,7 +800,11 @@ class Cart
             return;
         }
 
+        Event::dispatch('checkout.cart.calculate.items.tax.before', $this->cart);
+
         $this->cartTax->calculateItemsTax($this->cart);
+
+        Event::dispatch('checkout.cart.calculate.items.tax.after', $this->cart);
     }
 
     /**
@@ -800,7 +816,11 @@ class Cart
             return;
         }
 
+        Event::dispatch('checkout.cart.calculate.shipping.tax.before', $this->cart);
+
         $this->cartTax->calculateShippingTax($this->cart);
+
+        Event::dispatch('checkout.cart.calculate.shipping.tax.after', $this->cart);
     }
 
     /**

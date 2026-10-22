@@ -160,3 +160,58 @@ it('should announce a wishlist row being updated when the product is already on 
 
     expect($fired->getArrayCopy())->toBe(['customer.wishlist.update.before', 'customer.wishlist.update.after']);
 });
+
+// ============================================================================
+// The Cart's Own Removal, And The Validation That Can Cause It
+// ============================================================================
+
+it('should announce the cart itself being destroyed', function () {
+    $product = $this->createSimpleProduct();
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    $fired = recordCartEvents(['checkout.cart.destroy.before', 'checkout.cart.destroy.after']);
+
+    Cart::removeCart(Cart::getCart());
+
+    expect($fired->getArrayCopy())->toBe(['checkout.cart.destroy.before', 'checkout.cart.destroy.after']);
+});
+
+it('should announce validation around the items it may remove', function () {
+    $product = $this->createSimpleProduct();
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    $fired = recordCartEvents(['checkout.cart.validate.items.before', 'checkout.cart.validate.items.after']);
+
+    Cart::validateItems();
+
+    expect($fired->getArrayCopy())->toBe([
+        'checkout.cart.validate.items.before',
+        'checkout.cart.validate.items.after',
+    ]);
+});
+
+it('should let validation announce itself before it empties the cart', function () {
+    $product = $this->createSimpleProduct();
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    Cart::getCart()->items->first()->delete();
+
+    Cart::setCart(Cart::getCart()->fresh());
+
+    $fired = recordCartEvents([
+        'checkout.cart.validate.items.before',
+        'checkout.cart.destroy.before',
+        'checkout.cart.destroy.after',
+    ]);
+
+    Cart::validateItems();
+
+    expect($fired->getArrayCopy())->toBe([
+        'checkout.cart.validate.items.before',
+        'checkout.cart.destroy.before',
+        'checkout.cart.destroy.after',
+    ]);
+});
