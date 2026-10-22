@@ -264,6 +264,65 @@ it('should merge the basket into the cart when the buy now purchase is left unfi
     $this->assertDatabaseMissing('cart', ['id' => $basketCartId]);
 });
 
+it('should leave the coupon of the basket behind rather than carry it into the merge', function () {
+    $first = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
+
+    $second = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
+
+    $this->createCouponCartRule('LEFTBEHIND', ['action_type' => 'by_fixed', 'discount_amount' => 50]);
+
+    $this->addProductToCart($first->id);
+
+    $this->applyCoupon('LEFTBEHIND')->assertOk();
+
+    $buyNowCartId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.id');
+
+    $response = getJson(route('shop.api.checkout.cart.index'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $buyNowCartId)
+        ->assertJsonPath('data.items_count', 2)
+        ->assertJsonPath('data.coupon_code', null);
+
+    $this->assertCartDiscount($response, 0);
+});
+
+it('should drop a coupon the merged cart no longer qualifies for', function () {
+    $first = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
+
+    $second = $this->createSimpleProduct(['price' => ['float_value' => 500]]);
+
+    $this->createCouponCartRule(
+        'GUESTONLY',
+        ['action_type' => 'by_fixed', 'discount_amount' => 50],
+        [1]
+    );
+
+    $this->addProductToCart($first->id);
+
+    $this->applyCoupon('GUESTONLY')->assertOk();
+
+    $customer = Customer::factory()->create(['password' => Hash::make('secret-password')]);
+
+    Cart::factory()->create([
+        'customer_id' => $customer->id,
+        'is_guest' => 0,
+        'is_active' => 1,
+    ]);
+
+    $this->addProductToCart($second->id);
+
+    post(route('shop.customer.session.create'), [
+        'email' => $customer->email,
+        'password' => 'secret-password',
+    ])->assertRedirect();
+
+    $response = getJson(route('shop.api.checkout.cart.index'))->assertOk();
+
+    expect($response->json('data.coupon_code'))->toBeNull();
+
+    $this->assertCartDiscount($response, 0);
+});
+
 it('should leave the basket alone while the buy now purchase is still being checked out', function () {
     $first = $this->createSimpleProduct();
 

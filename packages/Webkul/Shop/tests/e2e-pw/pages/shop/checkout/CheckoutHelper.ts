@@ -419,6 +419,24 @@ export class CheckoutHelper extends BasePage {
         return address;
     }
 
+    async completeCheckoutHere(
+        options: {
+            shipping?: ShippingMethod | null;
+            payment?: PaymentMethod;
+        } = {},
+    ): Promise<string> {
+        await this.fillGuestAddress();
+        await this.proceedButton.click();
+
+        if (options.shipping !== null) {
+            await this.chooseShipping(options.shipping ?? "free");
+        }
+
+        await this.choosePayment(options.payment ?? "moneytransfer");
+
+        return this.placeOrder();
+    }
+
     async proceedWithNewAddress(
         address: GuestAddress = guestAddress(),
     ): Promise<GuestAddress> {

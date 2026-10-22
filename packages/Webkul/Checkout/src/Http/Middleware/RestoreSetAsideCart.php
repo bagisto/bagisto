@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Middleware;
+namespace Webkul\Checkout\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
