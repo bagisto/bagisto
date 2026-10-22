@@ -45,6 +45,11 @@ class Cart
     const SHIPPING_ADDRESS_FIELDS = CartAddress::SHIPPING_FIELDS;
 
     /**
+     * The session key holding the id of the cart set aside for a buy now purchase.
+     */
+    const SET_ASIDE_CART_KEY = 'set_aside_cart_id';
+
+    /**
      * The cart instance, null until one exists.
      */
     protected ?Contracts\Cart $cart = null;
@@ -79,17 +84,11 @@ class Cart
                 'customer_id' => $customer->id,
                 'is_active' => 1,
             ]);
-        } elseif (session()->has('cart')) {
-            $cart = $this->cartRepository->find(session()->get('cart')->id);
 
-            if (
-                $cart
-                && $cart->is_active
-                && ! $cart->customer_id
-            ) {
-                $this->cart = $cart;
-            }
+            return;
         }
+
+        $this->cart = $this->sessionCart();
     }
 
     /**
@@ -169,7 +168,7 @@ class Cart
     }
 
     /**
-     * Remove cart and destroy the session.
+     * Remove the given cart, letting go of it and of the session key only where they named it.
      */
     public function removeCart(Contracts\Cart $cart): void
     {
@@ -177,7 +176,13 @@ class Cart
 
         $this->cartRepository->delete($cart->id);
 
-        $this->forgetCart();
+        if ($this->cart?->id === $cart->id) {
+            $this->resetCart();
+        }
+
+        if ($this->sessionCartId() === $cart->id) {
+            session()->forget('cart');
+        }
 
         Event::dispatch('checkout.cart.destroy.after', $cart->id);
     }
@@ -191,19 +196,21 @@ class Cart
     }
 
     /**
-     * Activate the cart by id.
+     * Activate the cart by id, doing nothing where the row has gone.
      */
     public function activateCart(int $cartId): void
     {
-        $cart = $this->cartRepository->update([
-            'is_active' => true,
-        ], $cartId);
+        if (! $this->cartRepository->find($cartId)) {
+            return;
+        }
 
-        $this->setCart($cart);
+        $this->setCart($this->cartRepository->update([
+            'is_active' => true,
+        ], $cartId));
     }
 
     /**
-     * Deactivates current cart.
+     * Deactivates current cart. A guest loses the only handle they had on it, so this is terminal.
      */
     public function deActivateCart(): void
     {
@@ -217,19 +224,76 @@ class Cart
     }
 
     /**
+     * Set the current cart aside for a buy now purchase, so the basket can be handed back once
+     * that purchase is over. The first cart set aside wins, a nested buy now leaving it alone.
+     */
+    public function setAsideCart(): void
+    {
+        if (! $this->cart) {
+            return;
+        }
+
+        $cartId = $this->cart->id;
+
+        $this->deActivateCart();
+
+        if (session()->has(self::SET_ASIDE_CART_KEY)) {
+            return;
+        }
+
+        session()->put(self::SET_ASIDE_CART_KEY, $cartId);
+    }
+
+    /**
+     * Hand back the cart set aside for a buy now purchase, doing nothing where one is already
+     * held so a basket is never restored over a cart in use.
+     */
+    public function restoreSetAsideCart(): void
+    {
+        if ($this->cart) {
+            return;
+        }
+
+        if (! $cart = $this->pullSetAsideCart()) {
+            return;
+        }
+
+        $this->activateCart($cart->id);
+
+        $customer = auth()->guard()->user();
+
+        if (
+            $customer
+            && $this->cart
+            && ! $this->cart->customer_id
+        ) {
+            $this->adoptGuestCart($customer, $this->cart);
+        }
+    }
+
+    /**
+     * Merge a basket set aside for a buy now purchase into the cart in play, for a shopper who
+     * left that purchase unfinished and is looking at their cart again.
+     */
+    public function mergeSetAsideCart(): void
+    {
+        if (! $this->cart) {
+            return;
+        }
+
+        if (! $cart = $this->pullSetAsideCart()) {
+            return;
+        }
+
+        $this->mergeGuestCartItems($cart);
+    }
+
+    /**
      * This method handles when guest has some of cart products and then logs in.
      */
     public function mergeCart(CustomerContract $customer): void
     {
-        if (! session()->has('cart')) {
-            return;
-        }
-
-        $guestCart = $this->cartRepository->find(session()->get('cart')->id);
-
-        if (! $guestCart) {
-            session()->forget('cart');
-
+        if (! $guestCart = $this->sessionCart()) {
             return;
         }
 
@@ -280,9 +344,17 @@ class Cart
 
         $this->persistCartProducts($cartProducts, $data);
 
+        $this->cart->unsetRelation('items');
+
+        $this->cart->unsetRelation('all_items');
+
         Shipping::removeAllShippingRates();
 
         $this->collectTotals();
+
+        if (! $this->cart) {
+            throw new \Exception(trans('shop::app.checkout.cart.index.empty-product'));
+        }
 
         Event::dispatch('checkout.cart.add.after', $this->cart);
 
@@ -298,7 +370,7 @@ class Cart
             return false;
         }
 
-        if (! $this->cart->items->pluck('id')->contains($itemId)) {
+        if (! $this->cart->items()->find($itemId)) {
             return false;
         }
 
@@ -311,6 +383,10 @@ class Cart
         if (! $result) {
             return $result;
         }
+
+        $this->cart->unsetRelation('items');
+
+        $this->cart->unsetRelation('all_items');
 
         Event::dispatch('checkout.cart.delete.after', $itemId);
 
@@ -351,7 +427,7 @@ class Cart
 
             Event::dispatch('checkout.cart.update.before', $item);
 
-            $this->cartItemRepository->update($this->cartItemQuantityPayload($item, $quantity), $itemId);
+            $item = $this->cartItemRepository->update($this->cartItemQuantityPayload($item, $quantity), $itemId);
 
             Event::dispatch('checkout.cart.update.after', $item);
         }
@@ -397,6 +473,10 @@ class Cart
      */
     public function customerAddressId(array $params): ?int
     {
+        if (! $this->cart) {
+            return null;
+        }
+
         return $this->cartAddress->customerAddressId($this->cart, $params);
     }
 
@@ -405,6 +485,10 @@ class Cart
      */
     public function saveAddresses(array $params): void
     {
+        if (! $this->cart) {
+            return;
+        }
+
         $this->cartAddress->save($this->cart, $params);
 
         $this->setCustomerPersonnelDetails();
@@ -417,6 +501,10 @@ class Cart
      */
     public function updateOrCreateBillingAddress(array $params): CartAddressContract
     {
+        if (! $this->cart) {
+            throw new \Exception(trans('shop::app.checkout.cart.index.empty-product'));
+        }
+
         return $this->cartAddress->updateOrCreateBilling($this->cart, $params);
     }
 
@@ -425,6 +513,10 @@ class Cart
      */
     public function updateOrCreateShippingAddress(array $params): ?CartAddressContract
     {
+        if (! $this->cart) {
+            throw new \Exception(trans('shop::app.checkout.cart.index.empty-product'));
+        }
+
         return $this->cartAddress->updateOrCreateShipping($this->cart, $params);
     }
 
@@ -721,6 +813,10 @@ class Cart
 
         $this->refreshCart();
 
+        if (! $this->cart) {
+            return $this;
+        }
+
         $this->resetTotals();
 
         $this->sumItemTotals();
@@ -848,6 +944,46 @@ class Cart
     }
 
     /**
+     * The cart id the session key names, or null where the key is absent or not the shape we wrote.
+     */
+    protected function sessionCartId(): ?int
+    {
+        $cart = session()->get('cart');
+
+        if (
+            ! is_object($cart)
+            || ! isset($cart->id)
+        ) {
+            return null;
+        }
+
+        return (int) $cart->id;
+    }
+
+    /**
+     * The guest cart the session key names, forgetting a key that no longer names a live one of
+     * their own so a dead key heals on the request that meets it.
+     */
+    protected function sessionCart(): ?Contracts\Cart
+    {
+        if ($cartId = $this->sessionCartId()) {
+            $cart = $this->cartRepository->find($cartId);
+
+            if (
+                $cart
+                && $cart->is_active
+                && ! $cart->customer_id
+            ) {
+                return $cart;
+            }
+        }
+
+        session()->forget('cart');
+
+        return null;
+    }
+
+    /**
      * Drop the cart and the session key that points at it, so neither outlives the other.
      */
     protected function forgetCart(): void
@@ -857,6 +993,35 @@ class Cart
         if (session()->has('cart')) {
             session()->forget('cart');
         }
+    }
+
+    /**
+     * The cart set aside for a buy now purchase, clearing the key on every outcome so a basket is
+     * offered back once and only to a session entitled to it.
+     */
+    protected function pullSetAsideCart(): ?Contracts\Cart
+    {
+        if (! $cartId = session()->pull(self::SET_ASIDE_CART_KEY)) {
+            return null;
+        }
+
+        $cart = $this->cartRepository->find($cartId);
+
+        if (
+            ! $cart
+            || $cart->is_active
+        ) {
+            return null;
+        }
+
+        if (
+            $cart->customer_id
+            && (int) $cart->customer_id !== (int) auth()->guard()->user()?->id
+        ) {
+            return null;
+        }
+
+        return $cart;
     }
 
     /**

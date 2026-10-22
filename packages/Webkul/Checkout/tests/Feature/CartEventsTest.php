@@ -85,6 +85,27 @@ it('should announce each item it updates, once per item', function () {
     ]);
 });
 
+it('should hand the written item to the update event that follows the write', function () {
+    $product = $this->createSimpleProduct(['price' => ['float_value' => 100]]);
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    $itemId = Cart::getCart()->items->first()->id;
+
+    $totals = new ArrayObject;
+
+    foreach (['before', 'after'] as $phase) {
+        Event::listen("checkout.cart.update.{$phase}", function ($item) use ($totals, $phase) {
+            $totals[$phase] = (float) $item->base_total;
+        });
+    }
+
+    Cart::updateItems(['qty' => [$itemId => 3]]);
+
+    expect($totals['before'])->toBe(100.0)
+        ->and($totals['after'])->toBe(300.0);
+});
+
 // ============================================================================
 // Collecting Totals Announces Its Phases In Order
 // ============================================================================
@@ -173,6 +194,22 @@ it('should announce the cart itself being destroyed', function () {
     $fired = recordCartEvents(['checkout.cart.destroy.before', 'checkout.cart.destroy.after']);
 
     Cart::removeCart(Cart::getCart());
+
+    expect($fired->getArrayCopy())->toBe(['checkout.cart.destroy.before', 'checkout.cart.destroy.after']);
+});
+
+it('should announce the cart being destroyed once its last item has been removed', function () {
+    $product = $this->createSimpleProduct();
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    $itemId = Cart::getCart()->items->first()->id;
+
+    $fired = recordCartEvents(['checkout.cart.destroy.before', 'checkout.cart.destroy.after']);
+
+    Cart::removeItem($itemId);
+
+    Cart::collectTotals();
 
     expect($fired->getArrayCopy())->toBe(['checkout.cart.destroy.before', 'checkout.cart.destroy.after']);
 });

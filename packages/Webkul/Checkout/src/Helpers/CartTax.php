@@ -43,6 +43,8 @@ class CartTax
             $taxCategoryId = $this->itemTaxCategoryId($item);
 
             if (! $taxCategoryId) {
+                $this->untaxItem($item);
+
                 continue;
             }
 
@@ -51,6 +53,8 @@ class CartTax
             }
 
             if (! $taxCategories[$taxCategoryId]) {
+                $this->untaxItem($item);
+
                 continue;
             }
 
@@ -86,7 +90,6 @@ class CartTax
 
             $cart->items->put($key, $item);
         }
-
     }
 
     /**
@@ -101,12 +104,16 @@ class CartTax
         }
 
         if (! $taxCategoryId = core()->getConfigData('sales.taxes.categories.shipping')) {
+            $this->untaxShippingRate($shippingRate);
+
             return;
         }
 
         $taxCategory = $this->taxCategoryRepository->find($taxCategoryId);
 
         if (! $taxCategory) {
+            $this->untaxShippingRate($shippingRate);
+
             return;
         }
 
@@ -193,6 +200,40 @@ class CartTax
     }
 
     /**
+     * Take the tax back off an item the configured categories no longer resolve, leaving an
+     * untouched one alone rather than writing a no-op on every pass.
+     */
+    protected function untaxItem(Contracts\CartItem $item): void
+    {
+        if (
+            empty($item->applied_tax_rate)
+            && empty($item->tax_amount)
+        ) {
+            return;
+        }
+
+        $item->applied_tax_rate = null;
+
+        $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
+
+        if (Tax::isInclusiveTaxProductPrices()) {
+            $item->price = $item->price_incl_tax;
+            $item->base_price = $item->base_price_incl_tax;
+
+            $item->total = $item->total_incl_tax;
+            $item->base_total = $item->base_total_incl_tax;
+        } else {
+            $item->price_incl_tax = $item->price;
+            $item->base_price_incl_tax = $item->base_price;
+
+            $item->total_incl_tax = $item->total;
+            $item->base_total_incl_tax = $item->base_total;
+        }
+
+        $item->save();
+    }
+
+    /**
      * Break the tax out of a shipping rate's gross price without taking the discount off the
      * taxable base, for the same reason an inclusive item price does not.
      */
@@ -229,6 +270,36 @@ class CartTax
         $shippingRate->price_incl_tax = $shippingRate->price + $shippingRate->tax_amount;
 
         $shippingRate->base_price_incl_tax = $shippingRate->base_price + $shippingRate->base_tax_amount;
+    }
+
+    /**
+     * Take the tax back off a shipping rate the configured category no longer resolves, leaving an
+     * untouched one alone rather than writing a no-op on every pass.
+     */
+    protected function untaxShippingRate(Contracts\CartShippingRate $shippingRate): void
+    {
+        if (
+            empty($shippingRate->applied_tax_rate)
+            && empty($shippingRate->tax_amount)
+        ) {
+            return;
+        }
+
+        $shippingRate->applied_tax_rate = null;
+
+        $shippingRate->tax_percent = $shippingRate->tax_amount = $shippingRate->base_tax_amount = 0;
+
+        if (Tax::isInclusiveTaxShippingPrices()) {
+            $shippingRate->price = $shippingRate->price_incl_tax;
+
+            $shippingRate->base_price = $shippingRate->base_price_incl_tax;
+        } else {
+            $shippingRate->price_incl_tax = $shippingRate->price;
+
+            $shippingRate->base_price_incl_tax = $shippingRate->base_price;
+        }
+
+        $shippingRate->save();
     }
 
     /**

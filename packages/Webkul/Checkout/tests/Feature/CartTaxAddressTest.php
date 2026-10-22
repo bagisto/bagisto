@@ -155,10 +155,10 @@ it('should tax a non-stockable item against the billing address even when the st
 });
 
 // ============================================================================
-// A Shipping Tax Category That No Longer Exists Is Survivable
+// A Shipping Tax Category That No Longer Exists
 // ============================================================================
 
-it('should collect totals when the configured shipping tax category has been deleted', function () {
+it('should collect totals when the configured shipping tax category never existed', function () {
     $taxCategory = taxCategoryCharging(['US' => 10, 'IN' => 20]);
 
     $this->setConfig([
@@ -171,6 +171,31 @@ it('should collect totals when the configured shipping tax category has been del
     Cart::collectTotals();
 
     expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(0.0);
+});
+
+it('should take the tax off the shipping rate once the configured category has been deleted', function () {
+    $taxCategory = taxCategoryCharging(['US' => 10, 'IN' => 20]);
+
+    $this->setConfig([
+        'sales.taxes.calculation.based_on' => 'shipping_address',
+        'sales.taxes.categories.shipping' => $taxCategory->id,
+    ]);
+
+    cartBilledToIndiaShippedToUs('simple', $taxCategory);
+
+    Cart::collectTotals();
+
+    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(5.0);
+
+    $taxCategory->delete();
+
+    Cart::collectTotals();
+
+    $shippingRate = Cart::getCart()->selected_shipping_rate;
+
+    expect((float) $shippingRate->tax_amount)->toBe(0.0)
+        ->and($shippingRate->applied_tax_rate)->toBeNull()
+        ->and((float) $shippingRate->price_incl_tax)->toBe((float) $shippingRate->price);
 });
 
 // ============================================================================

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\TestResponse;
+use Webkul\Checkout\Cart as CartFacadeClass;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
@@ -11,6 +12,7 @@ use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
 
 use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
@@ -196,6 +198,197 @@ it('should start a fresh cart for a buy now purchase and set the current one asi
     $this->assertDatabaseHas('cart_items', ['cart_id' => $buyNowCartId, 'product_id' => $second->id]);
 
     $this->assertDatabaseMissing('cart_items', ['cart_id' => $buyNowCartId, 'product_id' => $first->id]);
+
+    expect((int) session(CartFacadeClass::SET_ASIDE_CART_KEY))->toBe((int) $firstCartId);
+});
+
+// ============================================================================
+// Giving The Basket Back After Buy Now
+// ============================================================================
+
+it('should give the basket back once the buy now order is placed', function () {
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->assertOk();
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
+        'shipping' => $this->storefrontAddress(),
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.shipping_methods.store'), [
+        'shipping_method' => 'free_free',
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'payment' => ['method' => 'cashondelivery'],
+    ])->assertOk();
+
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store')));
+
+    getJson(route('shop.api.checkout.cart.index'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $basketCartId)
+        ->assertJsonPath('data.items_count', 1);
+
+    $this->assertDatabaseHas('cart', ['id' => $basketCartId, 'is_active' => 1]);
+});
+
+it('should merge the basket into the cart when the buy now purchase is left unfinished', function () {
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $buyNowCartId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.id');
+
+    getJson(route('shop.api.checkout.cart.index'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $buyNowCartId)
+        ->assertJsonPath('data.items_count', 2);
+
+    expect(session()->has(CartFacadeClass::SET_ASIDE_CART_KEY))->toBeFalse();
+
+    foreach ([$first->id, $second->id] as $productId) {
+        $this->assertDatabaseHas('cart_items', [
+            'cart_id' => $buyNowCartId,
+            'product_id' => $productId,
+        ]);
+    }
+
+    $this->assertDatabaseMissing('cart', ['id' => $basketCartId]);
+});
+
+it('should leave the basket alone while the buy now purchase is still being checked out', function () {
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $buyNowCartId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.id');
+
+    get(route('shop.checkout.onepage.index'))->assertOk();
+
+    getJson(route('shop.checkout.onepage.summary'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $buyNowCartId)
+        ->assertJsonPath('data.items_count', 1);
+
+    expect(session(CartFacadeClass::SET_ASIDE_CART_KEY))->toBe($basketCartId);
+
+    $this->assertDatabaseHas('cart', ['id' => $basketCartId, 'is_active' => 0]);
+
+    $this->assertDatabaseMissing('cart_items', ['cart_id' => $buyNowCartId, 'product_id' => $first->id]);
+});
+
+it('should give the basket back on a storefront page view, not only on a cart read', function () {
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->assertOk();
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
+        'shipping' => $this->storefrontAddress(),
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.shipping_methods.store'), [
+        'shipping_method' => 'free_free',
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'payment' => ['method' => 'cashondelivery'],
+    ])->assertOk();
+
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store')));
+
+    get(route('shop.home.index'))->assertOk();
+
+    $this->assertDatabaseHas('cart', ['id' => $basketCartId, 'is_active' => 1]);
+
+    expect(session()->has(CartFacadeClass::SET_ASIDE_CART_KEY))->toBeFalse();
+});
+
+it('should answer the removal that emptied the buy now cart with the basket itself', function () {
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $buyNowItemId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.items.0.id');
+
+    $this->removeCartItem($buyNowItemId)
+        ->assertOk()
+        ->assertJsonPath('data.id', $basketCartId)
+        ->assertJsonPath('data.items_count', 1);
+});
+
+it('should give the basket back once the buy now cart is emptied', function () {
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $buyNowItemId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.items.0.id');
+
+    $this->removeCartItem($buyNowItemId)->assertOk();
+
+    getJson(route('shop.api.checkout.cart.index'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $basketCartId)
+        ->assertJsonPath('data.items_count', 1);
+
+    $this->assertDatabaseHas('cart_items', ['cart_id' => $basketCartId, 'product_id' => $first->id]);
+});
+
+it('should hand the basket to the customer who signed in at checkout', function () {
+    $this->setConfig('catalog.products.storefront.allow_guest_checkout', 0);
+
+    $first = $this->createSimpleProduct();
+
+    $second = $this->createSimpleProduct();
+
+    $basketCartId = $this->addProductToCart($first->id)->json('data.id');
+
+    $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->assertOk();
+
+    $customer = $this->loginAsCustomer();
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
+        'shipping' => $this->storefrontAddress(),
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.shipping_methods.store'), [
+        'shipping_method' => 'free_free',
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'payment' => ['method' => 'cashondelivery'],
+    ])->assertOk();
+
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store')));
+
+    getJson(route('shop.api.checkout.cart.index'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $basketCartId);
+
+    $this->assertDatabaseHas('cart', [
+        'id' => $basketCartId,
+        'is_active' => 1,
+        'customer_id' => $customer->id,
+    ]);
 });
 
 // ============================================================================
@@ -299,6 +492,22 @@ it('should remove a product from the cart', function (bool $signedIn) {
     $this->assertDatabaseMissing('cart_items', ['id' => $cartItemId]);
 })->with('shoppers');
 
+it('should take the cart away with the last item removed from it', function () {
+    $product = $this->createSimpleProduct();
+
+    $cartItemId = $this->addProductToCart($product->id)->json('data.items.0.id');
+
+    $cartId = CartItem::query()->findOrFail($cartItemId)->cart_id;
+
+    $this->removeCartItem($cartItemId)
+        ->assertOk()
+        ->assertJsonPath('data', null);
+
+    $this->assertDatabaseMissing('cart_items', ['id' => $cartItemId]);
+
+    $this->assertDatabaseMissing('cart', ['id' => $cartId]);
+});
+
 it('should remove only the chosen product when the cart holds two', function () {
     $kept = $this->createSimpleProduct();
 
@@ -342,6 +551,32 @@ it('should remove the selected products from the cart', function (bool $signedIn
         $this->assertDatabaseMissing('cart_items', ['id' => $itemId]);
     }
 })->with('shoppers');
+
+it('should remove a selected product named twice over without failing on the second pass', function () {
+    $product = $this->createSimpleProduct();
+
+    $itemId = $this->addProductToCart($product->id)->json('data.items.0.id');
+
+    deleteJson(route('shop.api.checkout.cart.destroy_selected'), ['ids' => [$itemId, $itemId]])
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.index.remove-selected-success'));
+
+    $this->assertDatabaseMissing('cart_items', ['id' => $itemId]);
+});
+
+it('should reject a selection that names no item to remove', function (mixed $ids) {
+    $product = $this->createSimpleProduct();
+
+    $this->addProductToCart($product->id);
+
+    deleteJson(route('shop.api.checkout.cart.destroy_selected'), $ids)
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('ids');
+})->with([
+    'no ids at all' => [[]],
+    'an empty selection' => [['ids' => []]],
+    'a selection that is not a list' => [['ids' => 'all']],
+]);
 
 // ============================================================================
 // Move To Wishlist
@@ -580,6 +815,32 @@ it('should estimate the shipping methods for a destination and apply the chosen 
     $methods = collect($response->json('data.shipping_methods'))->pluck('rates.*.method')->flatten();
 
     expect($methods)->toContain('free_free');
+});
+
+it('should keep the shipping it quoted on the estimate instead of dropping it on the next collect', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->addProductToCart($product->id);
+
+    $estimate = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
+        'country' => 'US',
+        'state' => 'CA',
+        'postcode' => '90001',
+        'shipping_method' => 'flatrate_flatrate',
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.cart.shipping_method', 'flatrate_flatrate');
+
+    $this->assertDatabaseHas('cart_shipping_rates', [
+        'cart_id' => $estimate->json('data.cart.id'),
+        'method' => 'flatrate_flatrate',
+    ]);
+
+    getJson(route('shop.api.checkout.cart.index'))
+        ->assertOk()
+        ->assertJsonPath('data.shipping_method', 'flatrate_flatrate')
+        ->assertJsonPath('data.shipping_amount', $estimate->json('data.cart.shipping_amount'))
+        ->assertJsonPath('data.grand_total', $estimate->json('data.cart.grand_total'));
 });
 
 it('should fail validation when the shipping estimate has no destination', function () {
