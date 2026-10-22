@@ -26,7 +26,7 @@ class ImageCacheServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap the image cache routes, under the shop theme middleware so a missing image gets the channel theme's error page.
+     * Bootstrap the image cache routes.
      */
     protected function bootImageCache(): void
     {
@@ -36,7 +36,6 @@ class ImageCacheServiceProvider extends ServiceProvider
             $this->app['router']
                 ->get(config('imagecache.route').'/{template}/{filename}', [ImageCacheController::class, 'getResponse'])
                 ->name('imagecache')
-                ->middleware('theme')
                 ->where(['filename' => $filenamePattern]);
         }
     }
