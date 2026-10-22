@@ -11,6 +11,13 @@ return [
     'convention' => CoreConvention::class,
 
     /**
+     * Whether Concord binds a route parameter named after a registered model, such as `{template}`, to that model.
+     *
+     * Off, so such a parameter stays a plain value unless the route type-hints a model for it.
+     */
+    'register_route_models' => false,
+
+    /**
      * Example:
      *
      * VendorA\ModuleX\Providers\ModuleServiceProvider::class,
