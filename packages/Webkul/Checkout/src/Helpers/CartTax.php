@@ -243,7 +243,7 @@ class CartTax
      * The address an item's tax is calculated against, which for a non-stockable item is the
      * billing address even where the store taxes on the shipping address.
      */
-    protected function itemTaxAddress(Contracts\Cart $cart, Contracts\CartItem $item)
+    protected function itemTaxAddress(Contracts\Cart $cart, Contracts\CartItem $item): object
     {
         $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
 
@@ -268,7 +268,7 @@ class CartTax
      * The address the shipping tax is calculated against, which a cart carrying nothing stockable
      * leaves to the fallback rather than the billing address.
      */
-    protected function shippingTaxAddress(Contracts\Cart $cart)
+    protected function shippingTaxAddress(Contracts\Cart $cart): object
     {
         $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
 
@@ -292,7 +292,7 @@ class CartTax
      * The customer's default address, then the store's own, for a tax the configured mode left
      * without one.
      */
-    protected function fallbackTaxAddress(Contracts\Cart $cart, $address)
+    protected function fallbackTaxAddress(Contracts\Cart $cart, $address): object
     {
         if (
             $address === null

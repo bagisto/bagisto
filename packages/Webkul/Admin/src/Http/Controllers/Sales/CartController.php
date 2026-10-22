@@ -168,7 +168,7 @@ class CartController extends Controller
 
         if (Cart::hasError()) {
             return new JsonResponse([
-                'message' => implode(': ', Cart::getErrors()) ?: 'Something went wrong',
+                'message' => Cart::getErrors()['message'] ?? 'Something went wrong',
             ], Response::HTTP_BAD_REQUEST);
         }
 

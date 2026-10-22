@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
 use Webkul\Checkout\Helpers\CartAddress;
 use Webkul\Checkout\Helpers\CartTax;
-use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartPaymentRepository;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Contracts\Wishlist as WishlistContract;
@@ -45,11 +45,9 @@ class Cart
     const SHIPPING_ADDRESS_FIELDS = CartAddress::SHIPPING_FIELDS;
 
     /**
-     * The cart instance.
-     *
-     * @var Contracts\Cart
+     * The cart instance, null until one exists.
      */
-    private $cart;
+    protected ?Contracts\Cart $cart = null;
 
     /**
      * Create a new class instance.
@@ -59,6 +57,7 @@ class Cart
     public function __construct(
         protected CartRepository $cartRepository,
         protected CartItemRepository $cartItemRepository,
+        protected CartPaymentRepository $cartPaymentRepository,
         protected CartAddress $cartAddress,
         protected CartTax $cartTax,
         protected WishlistRepository $wishlistRepository
@@ -223,39 +222,28 @@ class Cart
             return;
         }
 
+        $guestCart = $this->cartRepository->find(session()->get('cart')->id);
+
+        if (! $guestCart) {
+            session()->forget('cart');
+
+            return;
+        }
+
         $cart = $this->cartRepository->findOneWhere([
             'customer_id' => $customer->id,
             'is_active' => 1,
         ]);
 
-        $guestCart = $this->cartRepository->find(session()->get('cart')->id);
-
         if (! $cart) {
-            $this->cartRepository->update([
-                'customer_id' => $customer->id,
-                'is_guest' => 0,
-                'customer_first_name' => $customer->first_name,
-                'customer_last_name' => $customer->last_name,
-                'customer_email' => $customer->email,
-            ], $guestCart->id);
-
-            session()->forget('cart');
+            $this->adoptGuestCart($customer, $guestCart);
 
             return;
         }
 
         $this->setCart($cart);
 
-        foreach ($guestCart->items as $guestCartItem) {
-            try {
-                $this->addProduct($guestCartItem->product, $guestCartItem->additional);
-            } catch (\Exception $e) {
-            }
-        }
-
-        $this->collectTotals();
-
-        $this->removeCart($guestCart);
+        $this->mergeGuestCartItems($guestCart);
     }
 
     /**
@@ -285,38 +273,9 @@ class Cart
             }
 
             throw new \Exception($cartProducts);
-        } else {
-            DB::transaction(function () use ($cartProducts, $data) {
-                $parentCartItem = null;
-
-                foreach ($cartProducts as $cartProduct) {
-                    $cartItem = $this->getItemByProduct($cartProduct, $data);
-
-                    if (isset($cartProduct['parent_id'])) {
-                        $cartProduct['parent_id'] = $parentCartItem->id;
-                    }
-
-                    if (! $cartItem) {
-                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $this->cart->id]));
-                    } else {
-                        if (
-                            isset($cartProduct['parent_id'])
-                            && $cartItem->parent_id !== $parentCartItem->id
-                        ) {
-                            $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
-                                'cart_id' => $this->cart->id,
-                            ]));
-                        } else {
-                            $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
-                        }
-                    }
-
-                    if (! $parentCartItem) {
-                        $parentCartItem = $cartItem;
-                    }
-                }
-            });
         }
+
+        $this->persistCartProducts($cartProducts, $data);
 
         Shipping::removeAllShippingRates();
 
@@ -361,18 +320,10 @@ class Cart
         }
 
         foreach ($data['qty'] ?? [] as $itemId => $quantity) {
-            $item = $this->cartItemRepository->find($itemId);
+            $item = $this->updatableCartItem($itemId);
 
             if (! $item) {
                 continue;
-            }
-
-            if ($item->cart_id !== $this->cart->id) {
-                continue;
-            }
-
-            if (! $item->product->status) {
-                throw new \Exception(trans('shop::app.checkout.cart.inactive'));
             }
 
             if ($quantity <= 0) {
@@ -393,19 +344,7 @@ class Cart
 
             Event::dispatch('checkout.cart.update.before', $item);
 
-            $this->cartItemRepository->update([
-                'quantity' => $quantity,
-                'total' => core()->convertPrice($item->base_price * $quantity),
-                'total_incl_tax' => core()->convertPrice($item->base_price_incl_tax * $quantity),
-                'base_total' => $item->base_price * $quantity,
-                'base_total_incl_tax' => $item->base_price_incl_tax * $quantity,
-                'total_weight' => $item->weight * $quantity,
-                'base_total_weight' => $item->weight * $quantity,
-                'additional' => [
-                    ...$item->additional,
-                    'quantity' => $quantity,
-                ],
-            ], $itemId);
+            $this->cartItemRepository->update($this->cartItemQuantityPayload($item, $quantity), $itemId);
 
             Event::dispatch('checkout.cart.update.after', $item);
         }
@@ -422,6 +361,10 @@ class Cart
      */
     public function getItemByProduct(array $data, ?array $parentData = null): ?Contracts\CartItem
     {
+        if (! $this->cart) {
+            return null;
+        }
+
         $items = $this->cart->all_items;
 
         foreach ($items as $item) {
@@ -451,7 +394,7 @@ class Cart
     }
 
     /**
-     * Update or create billing address.
+     * Persist the cart's addresses, sync the customer details and clear the shipping method.
      */
     public function saveAddresses(array $params): void
     {
@@ -483,6 +426,10 @@ class Cart
      */
     public function setCustomerPersonnelDetails(): void
     {
+        if (! $this->cart) {
+            return;
+        }
+
         $this->cart->customer_email = $this->cart->customer?->email ?? $this->cart->billing_address->email;
         $this->cart->customer_first_name = $this->cart->customer?->first_name ?? $this->cart->billing_address->first_name;
         $this->cart->customer_last_name = $this->cart->customer?->last_name ?? $this->cart->billing_address->last_name;
@@ -510,7 +457,7 @@ class Cart
     }
 
     /**
-     * Save shipping method for cart.
+     * Clear the chosen shipping method and drop the rates collected for it.
      */
     public function resetShippingMethod(): bool
     {
@@ -535,18 +482,29 @@ class Cart
             return false;
         }
 
-        if ($cartPayment = $this->cart->payment) {
-            $cartPayment->delete();
+        $method = $params['method'] ?? null;
+
+        if (! $method) {
+            return false;
         }
 
-        $cartPayment = new CartPayment;
+        $methodTitle = core()->getConfigData('sales.payment_methods.'.$method.'.title');
 
-        $cartPayment->method = $params['method'];
-        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$params['method'].'.title');
-        $cartPayment->cart_id = $this->cart->id;
-        $cartPayment->save();
+        return DB::transaction(function () use ($method, $methodTitle) {
+            if ($cartPayment = $this->cart->payment) {
+                $cartPayment->delete();
+            }
 
-        return $cartPayment;
+            $cartPayment = $this->cartPaymentRepository->create([
+                'method' => $method,
+                'method_title' => $methodTitle,
+                'cart_id' => $this->cart->id,
+            ]);
+
+            $this->cart->setRelation('payment', $cartPayment);
+
+            return $cartPayment;
+        });
     }
 
     /**
@@ -554,6 +512,10 @@ class Cart
      */
     public function setCouponCode(?string $code): self
     {
+        if (! $this->cart) {
+            return $this;
+        }
+
         $this->cart->coupon_code = $code;
 
         $this->cart->save();
@@ -562,7 +524,7 @@ class Cart
     }
 
     /**
-     * Set coupon code to the cart.
+     * Remove the coupon code from the cart.
      */
     public function removeCouponCode(): self
     {
@@ -603,36 +565,21 @@ class Cart
     }
 
     /**
-     * Move to wishlist items.
+     * Move a cart item to the customer's wishlist.
      */
     public function moveToWishlist(int $itemId, int $quantity = 1): bool
     {
+        if (! $this->cart) {
+            return false;
+        }
+
         $cartItem = $this->cart->items()->find($itemId);
 
         if (! $cartItem) {
             return false;
         }
 
-        $wishlistItems = $this->wishlistRepository->findWhere([
-            'customer_id' => $this->cart->customer_id,
-            'product_id' => $cartItem->product_id,
-        ]);
-
-        $existingWishlistItem = null;
-
-        foreach ($wishlistItems as $wishlistItem) {
-            $options = is_array($wishlistItem->additional) ? $wishlistItem->additional : [];
-
-            if (! $options) {
-                $options = ['product_id' => $wishlistItem->product_id];
-            }
-
-            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
-                $existingWishlistItem = $wishlistItem;
-
-                break;
-            }
-        }
+        $existingWishlistItem = $this->matchingWishlistItem($cartItem);
 
         $event = $existingWishlistItem
             ? 'customer.wishlist.update'
@@ -640,17 +587,19 @@ class Cart
 
         Event::dispatch($event.'.before', $cartItem->product_id);
 
-        $emptiesCart = ! $this->cart->items->count();
+        Shipping::removeAllShippingRates();
 
-        $wishlistItem = $this->moveItemToWishlist($cartItem, $existingWishlistItem, $quantity, $emptiesCart);
+        Event::dispatch('checkout.cart.delete.before', $cartItem->id);
 
-        Event::dispatch($event.'.after', $wishlistItem);
+        $movedWishlistItem = $this->moveItemToWishlist($cartItem, $existingWishlistItem, $quantity);
+
+        Event::dispatch('checkout.cart.delete.after', $cartItem->id);
+
+        Event::dispatch($event.'.after', $movedWishlistItem);
 
         $this->refreshCart();
 
-        if (! $emptiesCart) {
-            $this->collectTotals();
-        }
+        $this->collectTotals();
 
         return true;
     }
@@ -664,54 +613,43 @@ class Cart
     }
 
     /**
-     * Get Cart Errors.
+     * Get the cart errors, as a descriptor keyed error_code and message, plus amount on the
+     * minimum-order error, or an empty array when the cart is valid.
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         if (! $this->cart) {
-            return [
-                'error_code' => 'CART_NOT_FOUND',
-                'message' => trans('shop::app.checkout.cart.index.empty-product'),
-            ];
+            return $this->cartNotFoundError();
         }
 
         if (! $this->isItemsHaveSufficientQuantity()) {
-            return [
-                'error_code' => 'INSUFFICIENT_QUANTITY',
-                'message' => trans('shop::app.checkout.cart.inventory-warning'),
-            ];
+            return $this->insufficientQuantityError();
         }
 
         if (! $this->haveMinimumOrderAmount()) {
-            $minimumOrderDescription = core()->getConfigData('sales.order_settings.minimum_order.description');
-
-            return [
-                'error_code' => 'MINIMUM_ORDER_AMOUNT',
-                'message' => $minimumOrderDescription ?: trans('shop::app.checkout.cart.minimum-order-message'),
-                'amount' => core()->formatPrice((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: $this->getOrderAmount()),
-            ];
+            return $this->minimumOrderAmountError();
         }
 
         return [];
     }
 
     /**
-     * Check minimum Order Amount of cart.
+     * The cart amount the minimum-order rule is measured against.
      */
-    public function getOrderAmount(): int
+    public function getOrderAmount(): float
     {
+        if (! $this->cart) {
+            return 0.0;
+        }
+
         $minimumOrderAmount = $this->cart->sub_total;
+
+        if (core()->getConfigData('sales.order_settings.minimum_order.include_discount_amount')) {
+            return $minimumOrderAmount - $this->cart->discount_amount;
+        }
 
         if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
             $minimumOrderAmount += $this->cart->tax_total;
-        }
-
-        if (core()->getConfigData('sales.order_settings.minimum_order.include_discount_amount')) {
-            $minimumOrderAmount -= $this->cart->tax_total;
-
-            if ($this->cart->discount_amount) {
-                $minimumOrderAmount -= $this->cart->discount_amount;
-            }
         }
 
         return $minimumOrderAmount;
@@ -748,7 +686,7 @@ class Cart
     }
 
     /**
-     * Checks if all cart items have sufficient quantity.
+     * Checks whether one cart item has sufficient quantity.
      */
     public function isItemHaveQuantity(Contracts\CartItem $item): bool
     {
@@ -835,7 +773,7 @@ class Cart
                 }
             }
 
-            $isInvalid |= $validationResult->isCartInvalid();
+            $isInvalid = $isInvalid || $validationResult->isCartInvalid();
         }
 
         return ! $isInvalid;
@@ -866,16 +804,193 @@ class Cart
     }
 
     /**
+     * The wishlist row this cart item would merge into, matched on the options it carries.
+     */
+    protected function matchingWishlistItem(Contracts\CartItem $cartItem): ?WishlistContract
+    {
+        $wishlistItems = $this->wishlistRepository->findWhere([
+            'customer_id' => $this->cart->customer_id,
+            'product_id' => $cartItem->product_id,
+        ]);
+
+        foreach ($wishlistItems as $candidate) {
+            $options = is_array($candidate->additional) ? $candidate->additional : [];
+
+            if (! $options) {
+                $options = ['product_id' => $candidate->product_id];
+            }
+
+            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+                return $candidate;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Hand the guest's own cart to the customer who just logged in, there being nothing to merge
+     * it into.
+     */
+    protected function adoptGuestCart(CustomerContract $customer, Contracts\Cart $guestCart): void
+    {
+        $this->cartRepository->update([
+            'customer_id' => $customer->id,
+            'is_guest' => 0,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name' => $customer->last_name,
+            'customer_email' => $customer->email,
+        ], $guestCart->id);
+
+        session()->forget('cart');
+    }
+
+    /**
+     * Add what the guest had to the cart already in play, dropping any line that will no longer
+     * go in rather than refusing the login over it.
+     */
+    protected function mergeGuestCartItems(Contracts\Cart $guestCart): void
+    {
+        foreach ($guestCart->items as $guestCartItem) {
+            try {
+                $this->addProduct($guestCartItem->product, $guestCartItem->additional);
+            } catch (\Exception $e) {
+            }
+        }
+
+        $this->collectTotals();
+
+        $this->removeCart($guestCart);
+    }
+
+    /**
+     * The error that says there is no cart to check out.
+     */
+    protected function cartNotFoundError(): array
+    {
+        return [
+            'error_code' => 'CART_NOT_FOUND',
+            'message' => trans('shop::app.checkout.cart.index.empty-product'),
+        ];
+    }
+
+    /**
+     * The error that says the cart holds more of something than there is to sell.
+     */
+    protected function insufficientQuantityError(): array
+    {
+        return [
+            'error_code' => 'INSUFFICIENT_QUANTITY',
+            'message' => trans('shop::app.checkout.cart.inventory-warning'),
+        ];
+    }
+
+    /**
+     * The error that says the cart is worth less than the store will accept, carrying the amount
+     * it has to reach.
+     */
+    protected function minimumOrderAmountError(): array
+    {
+        $description = core()->getConfigData('sales.order_settings.minimum_order.description');
+
+        $configuredMinimum = (int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount');
+
+        return [
+            'error_code' => 'MINIMUM_ORDER_AMOUNT',
+            'message' => $description ?: trans('shop::app.checkout.cart.minimum-order-message'),
+            'amount' => core()->formatPrice($configuredMinimum ?: $this->getOrderAmount()),
+        ];
+    }
+
+    /**
+     * The cart item an update may touch, or nothing where it is not this cart's to update.
+     */
+    protected function updatableCartItem($itemId): ?Contracts\CartItem
+    {
+        $item = $this->cartItemRepository->find($itemId);
+
+        if (
+            ! $item
+            || $item->cart_id !== $this->cart->id
+        ) {
+            return null;
+        }
+
+        if (! $item->product->status) {
+            throw new \Exception(trans('shop::app.checkout.cart.inactive'));
+        }
+
+        return $item;
+    }
+
+    /**
+     * What a cart item's row becomes once its quantity changes.
+     */
+    protected function cartItemQuantityPayload(Contracts\CartItem $item, $quantity): array
+    {
+        return [
+            'quantity' => $quantity,
+            'total' => core()->convertPrice($item->base_price * $quantity),
+            'total_incl_tax' => core()->convertPrice($item->base_price_incl_tax * $quantity),
+            'base_total' => $item->base_price * $quantity,
+            'base_total_incl_tax' => $item->base_price_incl_tax * $quantity,
+            'total_weight' => $item->weight * $quantity,
+            'base_total_weight' => $item->weight * $quantity,
+            'additional' => [
+                ...$item->additional,
+                'quantity' => $quantity,
+            ],
+        ];
+    }
+
+    /**
+     * Write every line the product type prepared, in one statement so a composite product cannot
+     * be left half in the cart.
+     */
+    protected function persistCartProducts(array $cartProducts, array $data): void
+    {
+        DB::transaction(function () use ($cartProducts, $data) {
+            $parentCartItem = null;
+
+            foreach ($cartProducts as $cartProduct) {
+                $cartItem = $this->getItemByProduct($cartProduct, $data);
+
+                if (isset($cartProduct['parent_id'])) {
+                    $cartProduct['parent_id'] = $parentCartItem->id;
+                }
+
+                if (! $cartItem) {
+                    $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $this->cart->id]));
+                } else {
+                    if (
+                        isset($cartProduct['parent_id'])
+                        && $cartItem->parent_id !== $parentCartItem->id
+                    ) {
+                        $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
+                            'cart_id' => $this->cart->id,
+                        ]));
+                    } else {
+                        $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
+                    }
+                }
+
+                if (! $parentCartItem) {
+                    $parentCartItem = $cartItem;
+                }
+            }
+        });
+    }
+
+    /**
      * Write the wishlist item and drop what it came from in one statement, so a failure on either
      * side cannot leave the product sitting in both the wishlist and the cart.
      */
     protected function moveItemToWishlist(
         Contracts\CartItem $cartItem,
         ?WishlistContract $existingWishlistItem,
-        int $quantity,
-        bool $emptiesCart
+        int $quantity
     ): WishlistContract {
-        return DB::transaction(function () use ($cartItem, $existingWishlistItem, $quantity, $emptiesCart) {
+        return DB::transaction(function () use ($cartItem, $existingWishlistItem, $quantity) {
             if ($existingWishlistItem) {
                 $existingAdditional = is_array($existingWishlistItem->additional) ? $existingWishlistItem->additional : [];
 
@@ -899,11 +1014,7 @@ class Cart
                 ]);
             }
 
-            if ($emptiesCart) {
-                $this->cartRepository->delete($this->cart->id);
-            } else {
-                $this->cartItemRepository->delete($cartItem->id);
-            }
+            $this->cartItemRepository->delete($cartItem->id);
 
             return $wishlistItem;
         });
@@ -1005,7 +1116,7 @@ class Cart
      * Write an item's converted price back, which an inclusive price needs on every pass and an
      * exclusive one only once the exchange rate has moved.
      */
-    protected function refreshItemPrice(Contracts\CartItem $item, $basePrice, $price)
+    protected function refreshItemPrice(Contracts\CartItem $item, $basePrice, $price): Contracts\CartItem
     {
         return $this->cartItemRepository->update([
             'price' => $price,
