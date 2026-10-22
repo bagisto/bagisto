@@ -12,6 +12,13 @@
 >
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
+### Medium Impact Changes
+
+- [The Cart Facade Delegates Its Tax And Address Work](#the-cart-facade-delegates-its-tax-and-address-work)
+- [Two New Cart Events, And Two That Now Fire More Often](#two-new-cart-events-and-two-that-now-fire-more-often)
+- [The Minimum Order Amount No Longer Subtracts Untaxed Tax](#the-minimum-order-amount-no-longer-subtracts-untaxed-tax)
+- [The PayPal Smart Button Verifies Before It Captures](#the-paypal-smart-button-verifies-before-it-captures)
+
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
@@ -24,6 +31,10 @@
 - [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
 - [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
 - [The PayPal Standard IPN Places The Order](#the-paypal-standard-ipn-places-the-order)
+- [Cart Signatures Narrowed And `$cart` Is Protected](#cart-signatures-narrowed-and-cart-is-protected)
+- [The Cart Answers Instead Of Erroring Without A Cart](#the-cart-answers-instead-of-erroring-without-a-cart)
+- [A Guest Session Will Not Load A Customer's Cart](#a-guest-session-will-not-load-a-customers-cart)
+- [Cart Payments Are Written Through A Repository](#cart-payments-are-written-through-a-repository)
 
 ---
 
@@ -204,6 +215,114 @@ What this changes for custom code:
 - **`Ipn` takes `CartRepository`** as its second constructor argument, so resolve it through the container rather than building it by hand.
 - **`payment_status` is read as a `Webkul\Paypal\Enums\PaypalPaymentStatus`**, and the protocol strings the helper compares against are constants on `Ipn` — `VALIDATION_COMMAND`, `VERIFIED_RESPONSE`, `RECURRING_TRANSACTION_TYPE` and `DEFAULT_PAYMENT_TYPE`.
 - **`paypal/standard/ipn` runs in the `web` middleware group**, with request forgery prevention removed on the route, which is how every other gateway's webhook is registered. The route name is unchanged.
+
+---
+
+### The Cart Facade Delegates Its Tax And Address Work
+
+**Impact Probability: Medium**
+
+`Webkul\Checkout\Cart` had grown to carry a complete tax engine and the whole cart-address pipeline alongside its own job of holding a cart. Both have moved into collaborators — `Webkul\Checkout\Helpers\CartTax` and `Webkul\Checkout\Helpers\CartAddress` — and `Cart` now delegates to them. Every public method of the facade is unchanged and still does what it did, so storefront and admin code that goes through `Cart::` is unaffected.
+
+What this changes for custom code:
+
+- **The constructor's signature changed.** It now takes `CartRepository`, `CartItemRepository`, `CartPaymentRepository`, `CartAddress`, `CartTax` and `WishlistRepository`. `ProductRepository` is gone — it was never used — and `TaxCategoryRepository`, `CartAddressRepository` and `CustomerAddressRepository` moved to the collaborator that uses them. Code that builds the class by hand rather than resolving it from the container has to be updated; nothing in core does.
+- **`Cart::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN`, `..._BILLING_ADDRESS` and `..._SHIPPING_ADDRESS` still exist** and still hold the same strings. They now alias `CartTax::BASED_ON_SHIPPING_ORIGIN` and friends, so compare against either.
+- **`Cart::BILLING_ADDRESS_FIELDS` and `Cart::SHIPPING_ADDRESS_FIELDS`** are new constants holding the request fields each address is built from, aliasing `CartAddress::BILLING_FIELDS` and `CartAddress::SHIPPING_FIELDS`.
+- A subclass that overrode `calculateItemsTax()`, `calculateShippingTax()`, `updateOrCreateBillingAddress()`, `updateOrCreateShippingAddress()` or `customerAddressId()` still works — those remain on `Cart` as delegating methods — but the implementation it may have been copying now lives in the helper.
+
+---
+
+### Cart Signatures Narrowed And `$cart` Is Protected
+
+**Impact Probability: Low**
+
+Several `Cart` methods declared types they could not honour, and the cart property's docblock claimed a type it did not hold.
+
+What this changes for custom code:
+
+- **`addProduct()` returns `Contracts\Cart`** and **`updateItems()` returns `bool`.** Both previously declared `|\Exception` in the union; neither could ever return one, because both throw. Callers already wrap them in `try`/`catch`.
+- **`getErrors(): array`** now declares its return type. All four of its branches already returned an array, so no call can start throwing — but a subclass overriding it without a declared return type has to add one.
+- **`getOrderAmount(): float`** was `: int` over a `decimal(12,4)` column, which emitted a precision-loss deprecation on every minimum-order check. `int` to `float` is a widening, so a subclass declaring `: int` stays valid.
+- **`$cart` is `protected ?Contracts\Cart`**, previously `private` with a `@var Contracts\Cart` docblock that was wrong — the property is null until a cart exists. A subclass that redeclared `private $cart` will now fatal at class load with an incompatible-visibility error rather than quietly shadowing it.
+
+---
+
+### The Cart Answers Instead Of Erroring Without A Cart
+
+**Impact Probability: Low**
+
+Five public methods dereferenced the cart without checking it was there, so calling any of them before a cart existed raised a PHP error rather than answering. Each now returns the value that method already used for "nothing".
+
+What this changes for custom code:
+
+- `getItemByProduct()` returns `null`, `setCouponCode()` and `removeCouponCode()` return `$this`, `moveToWishlist()` returns `false`, `getOrderAmount()` returns `0.0`, and `setCustomerPersonnelDetails()` does nothing.
+- Code that relied on catching `Attempt to read property … on null` or `Call to a member function … on null` from these calls has to test the return value instead. The errors they raised were never a documented contract.
+
+---
+
+### Two New Cart Events, And Two That Now Fire More Often
+
+**Impact Probability: Medium**
+
+Every cart event is now dispatched from `Webkul\Checkout\Cart`; the new helpers dispatch nothing. Two cart mutations that announced nothing now do, and two existing pairs fire on more paths than before.
+
+What this changes for custom code:
+
+- **`checkout.cart.destroy.before` and `checkout.cart.destroy.after`** are new, carrying the cart id, and fire from `removeCart()`. The cart's own removal previously announced nothing, while `checkout.cart.delete.*` — which names item removal — made it look as though it did.
+- **`checkout.cart.validate.items.before` and `checkout.cart.validate.items.after`** are new, carrying the cart, and fire around `validateItems()`. The `before` event is the only hook that sees the cart before validation removes an invalid item or the cart itself.
+- **`checkout.cart.delete.before` and `checkout.cart.delete.after` now also fire when an item moves to the wishlist.** `cartItemRepository->delete()` is reached on that path too, and a listener reconciling cart state was being skipped. A listener that assumed these events meant "removed from the cart and not kept" will now fire for a move as well.
+- **`checkout.cart.calculate.shipping.tax.before` and `.after` now fire on every totals collection.** They previously fired only when the cart had a selected shipping rate, a configured shipping tax category and a category that resolved. They now mean "the shipping tax step ran" rather than "shipping tax was calculated", which is what the matching items-tax pair has always meant. A listener that assumed a shipping rate exists has to check.
+
+---
+
+### The Minimum Order Amount No Longer Subtracts Untaxed Tax
+
+**Impact Probability: Medium**
+
+`getOrderAmount()` subtracted the cart's tax from the measured amount whenever **Configuration → Sales → Order Settings → Minimum Order → Include Discount Amount** was on — including when **Include Tax To Amount** was off and no tax had been added in the first place. A cart with a 100.00 subtotal, 10.00 of tax and a 5.00 discount was measured at 85.00 instead of 95.00, so carts between those figures were refused.
+
+With both flags on the measured amount is unchanged, because the subtraction was cancelling the addition above it. Only the "include discount, exclude tax" combination changes.
+
+**Carts that were blocked below your configured minimum may now pass it.** Review the minimum if your store runs that combination.
+
+---
+
+### A Guest Session Will Not Load A Customer's Cart
+
+**Impact Probability: Low**
+
+`initCart()` loaded the cart named by the `cart` session key whenever that cart was active, without checking who owned it. It now also requires the cart to have no `customer_id`, so a stale key can no longer resurrect a cart that belongs to a signed-in customer for a visitor who is not signed in.
+
+`refreshCart()` also drops the session key when the row it points at has gone, rather than leaving the key behind pointing at a deleted cart.
+
+---
+
+### The PayPal Smart Button Verifies Before It Captures
+
+**Impact Probability: Medium**
+
+The Smart Button captured the PayPal order first and checked the amount afterwards, so an order approved against a cheaper cart took the money and was then refused — leaving a charged shopper with no order. The amount and currency are now verified against the cart **before** anything is captured, and the capture is checked again afterwards.
+
+What this changes for custom code:
+
+- **`createOrder` and `captureOrder` return 404 when the method is disabled.** Neither endpoint checked `isAvailable()`, so an order could be placed through a switched-off payment method.
+- **A failed call answers with a JSON body.** The controller used to run `json_decode()` over the exception message, which produced the gateway's own JSON for an SDK error and a literal `null` for one of Bagisto's own messages — so a shopper saw a 400 with nothing in it. A non-JSON message is now returned as `{"message": "…"}`, and the storefront shows it instead of a generic failure.
+- The approved order must have status `APPROVED` and exactly one purchase unit, in the cart's own currency.
+
+---
+
+### Cart Payments Are Written Through A Repository
+
+**Impact Probability: Low**
+
+`savePaymentMethod()` deleted the existing payment row and created the replacement in two unguarded statements, with `new CartPayment` bypassing the registered proxy.
+
+What this changes for custom code:
+
+- **`Webkul\Checkout\Repositories\CartPaymentRepository`** is new, and the write now goes through it — so a Concord model swap for `CartPayment` is honoured.
+- **`Webkul\Checkout\Models\CartPayment` declares `$fillable`** (`method`, `method_title`, `cart_id`). The model was previously fully guarded, so a repository `create()` would have thrown a `MassAssignmentException`.
+- **The delete and the insert run in one transaction**, and a request with no `payment.method` returns `false` instead of throwing after the delete had already committed.
 
 ## Upgrading To v2.5.0 From v2.4
 
