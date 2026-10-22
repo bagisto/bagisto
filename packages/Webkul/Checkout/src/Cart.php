@@ -85,6 +85,7 @@ class Cart
             if (
                 $cart
                 && $cart->is_active
+                && ! $cart->customer_id
             ) {
                 $this->cart = $cart;
             }
@@ -92,7 +93,7 @@ class Cart
     }
 
     /**
-     * Reload the cart from the database.
+     * Reload the cart from the database, forgetting it entirely where the row has gone.
      */
     public function refreshCart(): void
     {
@@ -100,7 +101,13 @@ class Cart
             return;
         }
 
-        $this->cart = $this->cartRepository->find($this->cart->id);
+        if (! $cart = $this->cartRepository->find($this->cart->id)) {
+            $this->forgetCart();
+
+            return;
+        }
+
+        $this->cart = $cart;
     }
 
     /**
@@ -170,11 +177,7 @@ class Cart
 
         $this->cartRepository->delete($cart->id);
 
-        if (session()->has('cart')) {
-            session()->forget('cart');
-        }
-
-        $this->resetCart();
+        $this->forgetCart();
 
         Event::dispatch('checkout.cart.destroy.after', $cart->id);
     }
@@ -210,11 +213,7 @@ class Cart
 
         $this->cartRepository->update(['is_active' => false], $this->cart->id);
 
-        $this->resetCart();
-
-        if (session()->has('cart')) {
-            session()->forget('cart');
-        }
+        $this->forgetCart();
     }
 
     /**
@@ -849,12 +848,24 @@ class Cart
     }
 
     /**
+     * Drop the cart and the session key that points at it, so neither outlives the other.
+     */
+    protected function forgetCart(): void
+    {
+        $this->resetCart();
+
+        if (session()->has('cart')) {
+            session()->forget('cart');
+        }
+    }
+
+    /**
      * Hand the guest's own cart to the customer who just logged in, there being nothing to merge
      * it into.
      */
     protected function adoptGuestCart(CustomerContract $customer, Contracts\Cart $guestCart): void
     {
-        $this->cartRepository->update([
+        $cart = $this->cartRepository->update([
             'customer_id' => $customer->id,
             'is_guest' => 0,
             'customer_first_name' => $customer->first_name,
@@ -863,6 +874,8 @@ class Cart
         ], $guestCart->id);
 
         session()->forget('cart');
+
+        $this->setCart($cart);
     }
 
     /**
