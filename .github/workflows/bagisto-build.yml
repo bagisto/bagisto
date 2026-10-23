@@ -1,0 +1,139 @@
+
+name: Build Bagisto 2.5.0
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Install Dependencies and Package
+    runs-on: ubuntu-24.04
+
+    steps:
+      # 1. 下载代码
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. 配置 PHP 8.5.12
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5.12'
+          extensions: >
+            bcmath,
+            ctype,
+            curl,
+            dom,
+            fileinfo,
+            gd,
+            intl,
+            mbstring,
+            openssl,
+            pdo,
+            pdo_pgsql,
+            tokenizer,
+            xml,
+            zip
+          tools: composer:v2
+          coverage: none
+
+      # 3. 检查 PHP 环境
+      - name: Verify PHP Environment
+        run: |
+          php -v
+          php -m
+          php -r "if (!extension_loaded('pdo_pgsql')) { exit(1); }"
+
+      # 4. 安装 PHP 依赖，生成 vendor/
+      - name: Install PHP Dependencies
+        run: |
+          composer install \
+            --no-dev \
+            --prefer-dist \
+            --optimize-autoloader \
+            --no-interaction
+
+      # 5. 配置 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # 6. 安装前端依赖，生成 node_modules/
+      - name: Install Node.js Dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f npm-shrinkwrap.json ]; then
+            npm ci
+          else
+            echo "ERROR: package-lock.json or npm-shrinkwrap.json is required."
+            exit 1
+          fi
+
+      # 7. 构建前端资源
+      - name: Build Frontend Assets
+        run: npm run build
+
+      # 8. 检查依赖及构建产物
+      - name: Verify Build Output
+        run: |
+          test -d vendor
+          test -d node_modules
+          test -f artisan
+          test -f composer.json
+          test -f package.json
+
+          echo "PHP dependencies:"
+          du -sh vendor
+
+          echo "Node.js dependencies:"
+          du -sh node_modules
+
+          if [ -d public/build ]; then
+            echo "Frontend build output:"
+            du -sh public/build
+          else
+            echo "WARNING: public/build does not exist."
+            echo "Verify the frontend build output directory."
+          fi
+
+      # 9. 打包应用、PHP 依赖、Node.js 依赖和前端资源
+      - name: Package Bagisto
+        run: |
+          tar -czf bagisto-build.tar.gz \
+            --exclude='./.git' \
+            --exclude='./.github' \
+            --exclude='./.env' \
+            --exclude='./.env.*' \
+            --exclude='./storage/logs/*' \
+            --exclude='./storage/framework/cache/data/*' \
+            --exclude='./storage/framework/sessions/*' \
+            --exclude='./storage/framework/views/*' \
+            --exclude='./bootstrap/cache/*.php' \
+            --exclude='./bagisto-build.tar.gz' \
+            .
+
+          echo "Package size:"
+          du -h bagisto-build.tar.gz
+
+          echo "Package verification:"
+          tar -tzf bagisto-build.tar.gz | grep -m 1 '^./vendor/'
+          tar -tzf bagisto-build.tar.gz | grep -m 1 '^./node_modules/'
+          tar -tzf bagisto-build.tar.gz | grep -m 1 '^./public/build/'
+
+      # 10. 上传压缩包，供宝塔下载
+      - name: Upload Deployment Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: bagisto-2.5.0-php-8.5.12-postgresql
+          path: bagisto-build.tar.gz
+          if-no-files-found: error
+          retention-days: 7
