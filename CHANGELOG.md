@@ -22,6 +22,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
+- #11546 [fixed] - A route parameter sharing its name with a Bagisto model, such as `{template}` or `{product}`, was silently looked up as that model and answered 404. Such a parameter is now a plain value unless the route type-hints a model.
+
 - #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
 
 - #11527 [fixed] - An invoice could not be saved again after being created, failing with an unknown column error.
