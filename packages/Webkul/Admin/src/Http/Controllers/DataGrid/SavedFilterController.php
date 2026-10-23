@@ -24,14 +24,16 @@ class SavedFilterController extends Controller
             'name' => 'required|unique:datagrid_saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
         ]);
 
-        Event::dispatch('datagrid.saved_filter.create.before');
-
-        $savedFilter = $this->savedFilterRepository->create([
+        $data = [
             'user_id' => $userId,
             'name' => request('name'),
             'src' => request('src'),
             'applied' => request('applied'),
-        ]);
+        ];
+
+        Event::dispatch('datagrid.saved_filter.create.before', [$data]);
+
+        $savedFilter = $this->savedFilterRepository->create($data);
 
         Event::dispatch('datagrid.saved_filter.create.after', $savedFilter);
 

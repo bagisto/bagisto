@@ -83,15 +83,17 @@ class Product
             Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
         }
 
-        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
-
-        $urlRewrite = $this->urlRewriteRepository->create([
+        $data = [
             'entity_type' => 'product',
             'request_path' => $product->url_key,
             'target_path' => $currentURLKey ?? '',
             'locale' => core()->getRequestedLocaleCode(),
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
-        ]);
+        ];
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before', [$data]);
+
+        $urlRewrite = $this->urlRewriteRepository->create($data);
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
     }

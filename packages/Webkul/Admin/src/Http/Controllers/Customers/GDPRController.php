@@ -54,7 +54,7 @@ class GDPRController extends Controller
     public function update(int $id)
     {
         try {
-            Event::dispatch('customer.gdpr-request.update.before');
+            Event::dispatch('customer.gdpr-request.update.before', $id);
 
             $gdprRequest = $this->gdprDataRequestRepository->update(request()->all(), $id);
 

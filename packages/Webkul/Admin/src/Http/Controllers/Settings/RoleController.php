@@ -73,14 +73,14 @@ class RoleController extends Controller
             return $this->cannotGrantRedirectResponse();
         }
 
-        Event::dispatch('user.role.create.before');
-
         $data = request()->only([
             'name',
             'description',
             'permission_type',
             'permissions',
         ]);
+
+        Event::dispatch('user.role.create.before', [$data]);
 
         $role = $this->roleRepository->create($data);
 

@@ -45,14 +45,16 @@ class RulesController extends Controller
             'description' => 'required',
         ]);
 
-        Event::dispatch('sales.rma.rules.create.before');
-
-        $rmaRule = $this->rmaRulesRepository->create(request()->only(
+        $data = request()->only(
             'name',
             'status',
             'description',
             'return_period'
-        ));
+        );
+
+        Event::dispatch('sales.rma.rules.create.before', [$data]);
+
+        $rmaRule = $this->rmaRulesRepository->create($data);
 
         Event::dispatch('sales.rma.rules.create.after', $rmaRule);
 

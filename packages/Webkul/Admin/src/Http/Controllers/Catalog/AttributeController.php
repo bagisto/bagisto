@@ -112,7 +112,7 @@ class AttributeController extends Controller
             $requestData[$field] = request()->boolean($field);
         }
 
-        Event::dispatch('catalog.attribute.create.before');
+        Event::dispatch('catalog.attribute.create.before', [$requestData]);
 
         $attribute = $this->attributeRepository->create($requestData);
 

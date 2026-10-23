@@ -111,15 +111,17 @@ class ProductController extends Controller
             ]);
         }
 
-        Event::dispatch('catalog.product.create.before');
-
-        $product = $this->productRepository->create(request()->only([
+        $data = request()->only([
             'type',
             'attribute_family_id',
             'sku',
             'super_attributes',
             'family',
-        ]));
+        ]);
+
+        Event::dispatch('catalog.product.create.before', [$data]);
+
+        $product = $this->productRepository->create($data);
 
         Event::dispatch('catalog.product.create.after', $product);
 
@@ -203,7 +205,7 @@ class ProductController extends Controller
     public function copy(int $id)
     {
         try {
-            Event::dispatch('catalog.product.create.before');
+            Event::dispatch('catalog.product.create.before', $id);
 
             $product = $this->productRepository->copy($id);
 

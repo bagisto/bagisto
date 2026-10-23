@@ -81,13 +81,15 @@ class AttributeFamilyController extends Controller
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
-        Event::dispatch('catalog.attribute_family.create.before');
-
-        $attributeFamily = $this->attributeFamilyRepository->create([
+        $data = [
             'attribute_groups' => request('attribute_groups'),
             'code' => request('code'),
             'name' => request('name'),
-        ]);
+        ];
+
+        Event::dispatch('catalog.attribute_family.create.before', [$data]);
+
+        $attributeFamily = $this->attributeFamilyRepository->create($data);
 
         Event::dispatch('catalog.attribute_family.create.after', $attributeFamily);
 

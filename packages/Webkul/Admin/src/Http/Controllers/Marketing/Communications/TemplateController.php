@@ -56,8 +56,6 @@ class TemplateController extends Controller
             'content' => 'required',
         ]);
 
-        Event::dispatch('marketing.templates.create.before');
-
         $data = request()->only([
             'name',
             'status',
@@ -65,6 +63,8 @@ class TemplateController extends Controller
         ]);
 
         $data['content'] = clean_content($data['content']);
+
+        Event::dispatch('marketing.templates.create.before', [$data]);
 
         $template = $this->templateRepository->create($data);
 

@@ -22,7 +22,7 @@ class OnepageController extends Controller
             abort(404);
         }
 
-        Event::dispatch('checkout.load.index');
+        Event::dispatch('checkout.load.index', Cart::getCart());
 
         /**
          * If guest checkout is not allowed then redirect back to the cart page.

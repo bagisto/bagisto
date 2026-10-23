@@ -52,12 +52,14 @@ class ExchangeRateController extends Controller
             'rate' => 'required|numeric',
         ]);
 
-        Event::dispatch('core.exchange_rate.create.before');
-
-        $exchangeRate = $this->exchangeRateRepository->create(request()->only([
+        $data = request()->only([
             'target_currency',
             'rate',
-        ]));
+        ]);
+
+        Event::dispatch('core.exchange_rate.create.before', [$data]);
+
+        $exchangeRate = $this->exchangeRateRepository->create($data);
 
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 

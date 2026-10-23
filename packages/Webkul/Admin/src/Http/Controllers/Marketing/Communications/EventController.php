@@ -45,13 +45,15 @@ class EventController extends Controller
             'date' => 'date|required',
         ]);
 
-        Event::dispatch('marketing.events.create.before');
-
-        $event = $this->eventRepository->create(request()->only([
+        $data = request()->only([
             'name',
             'description',
             'date',
-        ]));
+        ]);
+
+        Event::dispatch('marketing.events.create.before', [$data]);
+
+        $event = $this->eventRepository->create($data);
 
         Event::dispatch('marketing.events.create.after', $event);
 
