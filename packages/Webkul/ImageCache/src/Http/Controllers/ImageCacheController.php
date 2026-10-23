@@ -6,8 +6,10 @@ use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Core\Helpers\InstalledPackages;
 use Webkul\ImageCache\TemplateRegistry;
+use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\User\Repositories\AdminRepository;
 
 class ImageCacheController extends Controller
@@ -36,18 +38,24 @@ class ImageCacheController extends Controller
     public function __construct(protected TemplateRegistry $templateRegistry) {}
 
     /**
-     * Get the HTTP response for the requested image.
+     * Get the HTTP response for the requested image, applying the channel theme only when it is not found.
      */
     public function getResponse(string $template, string $filename): Response
     {
         $this->template = $template;
 
-        return match (strtolower($template)) {
-            'original' => $this->getOriginal($filename),
-            'download' => $this->getDownload($filename),
-            'logo' => $this->getLogo(),
-            default => $this->getImage($template, $filename),
-        };
+        try {
+            return match (strtolower($template)) {
+                'original' => $this->getOriginal($filename),
+                'download' => $this->getDownload($filename),
+                'logo' => $this->getLogo(),
+                default => $this->getImage($template, $filename),
+            };
+        } catch (NotFoundHttpException $exception) {
+            $this->applyChannelTheme();
+
+            throw $exception;
+        }
     }
 
     /**
@@ -352,5 +360,13 @@ class ImageCacheController extends Controller
             'Etag' => $eTag,
             'X-Content-Type-Options' => 'nosniff',
         ]);
+    }
+
+    /**
+     * Apply the current channel's shop theme for the 404 page, which the route skips so a found image costs no channel query.
+     */
+    protected function applyChannelTheme(): void
+    {
+        app(Theme::class)->handle(request(), fn () => null);
     }
 }

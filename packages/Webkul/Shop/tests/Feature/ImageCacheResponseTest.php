@@ -41,3 +41,39 @@ it('should not serve a stored file whose contents are not an image, whatever its
     'vector image named as a picture' => ['drawing.png', '<svg xmlns="http://www.w3.org/2000/svg"></svg>'],
     'markup the sniffer reads as text' => ['notes.txt', '<body>hello</body>'],
 ]);
+
+// ============================================================================
+// Channel Theme
+// ============================================================================
+
+it('should render the error page of a missing image with the channel theme', function () {
+    config(['themes.shop.store-theme' => array_merge(config('themes.shop.default'), [
+        'name' => 'Store Theme',
+    ])]);
+
+    themes()->loadThemes();
+
+    core()->getCurrentChannel()->update(['theme' => 'store-theme']);
+
+    get('cache/large/imagecache-responses/missing.png')
+        ->assertNotFound();
+
+    expect(themes()->current()?->code)->toBe('store-theme');
+});
+
+it('should leave the channel theme alone for an image it finds', function () {
+    config(['themes.shop.store-theme' => array_merge(config('themes.shop.default'), [
+        'name' => 'Store Theme',
+    ])]);
+
+    themes()->loadThemes();
+
+    core()->getCurrentChannel()->update(['theme' => 'store-theme']);
+
+    File::put(storage_path('app/public/imagecache-responses/source.png'), UploadedFile::fake()->image('source.png', 20, 10)->getContent());
+
+    get('cache/large/imagecache-responses/source.png')
+        ->assertOk();
+
+    expect(themes()->current()?->code)->not->toBe('store-theme');
+});
