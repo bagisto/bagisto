@@ -5689,9 +5689,9 @@ return [
                         'sync' => [
                             'title' => 'Sincronizar arquivos existentes',
                             'syncing' => 'Sincronizando...',
-                            'pending' => ':count arquivo(s) ainda não estão no armazenamento configurado',
+                            'pending' => 'Ainda há :count arquivo(s) fora do armazenamento configurado',
                             'up-to-date' => 'Tudo está no armazenamento configurado',
-                            'info' => 'Copia os arquivos já enviados para o armazenamento configurado. É executado em segundo plano, ignora o que já existe e mantém os originais no lugar. Para uma loja grande, execute `php artisan bagisto:storage:sync`.',
+                            'info' => 'Copia para o armazenamento configurado os arquivos já enviados. É executado em segundo plano, ignora o que já existe e não remove os originais. Para uma loja grande, execute `php artisan bagisto:storage:sync` em vez disso.',
                             'started' => 'Sincronização iniciada. Os arquivos estão sendo copiados em segundo plano.',
                             'local' => 'O armazenamento configurado é o disco local, portanto não há nada para copiar.',
                         ],

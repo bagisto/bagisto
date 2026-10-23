@@ -45,7 +45,7 @@ class OnepageController extends APIController
 
         if (
             ! auth()->guard('customer')->check()
-            && ! Cart::getCart()->hasGuestCheckoutItems()
+            && ! Cart::getCart()?->hasGuestCheckoutItems()
         ) {
             session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
 
@@ -64,11 +64,9 @@ class OnepageController extends APIController
 
         Cart::saveAddresses($params);
 
-        $cart = Cart::getCart();
-
         Cart::collectTotals();
 
-        if ($cart->haveStockableItems()) {
+        if (Cart::getCart()?->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
                     'redirect' => true,

@@ -12,10 +12,26 @@ class CartPayment extends Model implements CartPaymentContract
 {
     use HasFactory;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'cart_payment';
 
     /**
-     * Create a new factory instance for the model
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'method',
+        'method_title',
+        'cart_id',
+    ];
+
+    /**
+     * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory
     {

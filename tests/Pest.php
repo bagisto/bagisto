@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Storage;
 use Pest\Repositories\DatasetsRepository;
 use Webkul\Admin\Tests\AdminTestCase;
 use Webkul\Category\Tests\CategoryTestCase;
+use Webkul\Checkout\Tests\CheckoutTestCase;
 use Webkul\Core\Tests\CoreTestCase;
 use Webkul\Customer\Tests\CustomerTestCase;
 use Webkul\DataGrid\Tests\DataGridTestCase;
@@ -41,6 +42,7 @@ ini_set('memory_limit', '1024M');
 
 uses(AdminTestCase::class)->in('../packages/Webkul/Admin/tests');
 uses(CategoryTestCase::class)->in('../packages/Webkul/Category/tests');
+uses(CheckoutTestCase::class)->in('../packages/Webkul/Checkout/tests');
 uses(CoreTestCase::class)->in('../packages/Webkul/Core/tests');
 uses(CustomerTestCase::class)->in('../packages/Webkul/Customer/tests');
 uses(DataGridTestCase::class)->in('../packages/Webkul/DataGrid/tests');

@@ -73,6 +73,10 @@
                                             options.authorizationFailed = true;
 
                                             options.alertBox('@lang('paypal::app.errors.invalid-configs')');
+                                        } else if (error.response.data.message) {
+                                            options.authorizationFailed = true;
+
+                                            options.alertBox(error.response.data.message);
                                         }
 
                                         return error;

@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Hash;
+use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Customer\Models\Customer;
 use Webkul\Product\Models\ProductOrderedInventory;
@@ -207,6 +209,23 @@ it('should send a guest to sign in from the address step when the cart holds a p
         ->assertJsonPath('redirect', true)
         ->assertJsonPath('data', route('shop.customer.session.index'))
         ->assertSessionHas('shop.url.intended', route('shop.checkout.onepage.index'));
+});
+
+it('should send a guest to sign in from the address step when the cart row has gone since checkout loaded', function () {
+    $product = $this->createSimpleProduct();
+
+    $cartId = $this->addProductToCart($product->id)->json('data.id');
+
+    Cart::query()->whereKey($cartId)->delete();
+
+    Facade::clearResolvedInstance(Webkul\Checkout\Cart::class);
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', true)
+        ->assertJsonPath('data', route('shop.customer.session.index'));
 });
 
 // ============================================================================

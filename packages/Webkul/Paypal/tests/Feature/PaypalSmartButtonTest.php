@@ -149,6 +149,34 @@ it('should capture and place the order when the approved amount is the cart tota
 });
 
 // ============================================================================
+// A Failed Call Says Why
+// ============================================================================
+
+it('should report our own failure message rather than an empty body', function () {
+    $this->createCartWithItems('paypal_smart_button');
+
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('getOrder')->andThrow(new Exception('Please specify a payment method'));
+    });
+
+    captureSmartButtonOrder()
+        ->assertStatus(400)
+        ->assertJsonPath('message', 'Please specify a payment method');
+});
+
+it('should pass a gateway failure through as the gateway reported it', function () {
+    $this->createCartWithItems('paypal_smart_button');
+
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('getOrder')->andThrow(new Exception('{"error":"invalid_client"}'));
+    });
+
+    captureSmartButtonOrder()
+        ->assertStatus(400)
+        ->assertJsonPath('error', 'invalid_client');
+});
+
+// ============================================================================
 // A Switched Off Smart Button Serves Nothing
 // ============================================================================
 

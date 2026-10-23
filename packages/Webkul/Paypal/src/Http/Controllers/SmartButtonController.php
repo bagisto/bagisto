@@ -45,7 +45,7 @@ class SmartButtonController extends Controller
 
             return response()->json(['result' => $order]);
         } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
+            return $this->errorResponse($e);
         }
     }
 
@@ -73,7 +73,7 @@ class SmartButtonController extends Controller
 
             return $this->saveOrder();
         } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
+            return $this->errorResponse($e);
         }
     }
 
@@ -439,6 +439,20 @@ class SmartButtonController extends Controller
         if (! $cart->payment) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
+    }
+
+    /**
+     * The body of a failed PayPal call, whose message is the gateway's own JSON or, where the
+     * failure is one of ours, a sentence the shopper can act on.
+     */
+    protected function errorResponse(\Exception $e): JsonResponse
+    {
+        $decoded = json_decode($e->getMessage(), true);
+
+        return response()->json(
+            is_array($decoded) ? $decoded : ['message' => $e->getMessage()],
+            400
+        );
     }
 
     /**

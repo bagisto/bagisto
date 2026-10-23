@@ -18,6 +18,24 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
 
+- Fixed a login handing the shopper a cart belonging to a different customer, items and all, when a stale cart session key named it.
+
+- Fixed Buy Now losing whatever was already in the cart. Leaving the purchase unfinished puts those items back in the cart beside it, and completing it hands the cart back.
+
+- Fixed the shipping estimate quoting a total it then threw away, leaving the cart with a chosen shipping method and no shipping in the grand total.
+
+- Fixed a deleted tax category leaving its tax on carts, so items and shipping kept being charged a tax that no longer existed.
+
+- Fixed a product added beside one already in the cart in the same request going untaxed, which understated the tax and total on an admin reorder.
+
+- Fixed a guest login with items in both carts ending up with no cart at all, and starting a second one on the next add.
+
+- Fixed a cart emptied of its last item lingering until the next request, which reported a minimum-order error instead of an empty cart.
+
+- Fixed removing selected cart items failing when the selection repeated an item, named none, or was not a list.
+
+- Fixed the checkout address step failing for a guest whose cart had gone, instead of sending them to sign in.
+
 - Refactored internals for clearer responsibilities.
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.

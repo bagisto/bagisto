@@ -27,14 +27,13 @@ class CartController extends APIController
     ) {}
 
     /**
-     * Cart.
+     * Cart. A basket set aside for an unfinished buy now purchase is merged in here, where the
+     * shopper is looking at the cart; the buy now checkout has its own summary and never lands here.
      */
     public function index(): JsonResource
     {
-        /**
-         * Skip the totals recalculation when there is no cart - there is
-         * nothing to collect and the empty response is the same either way.
-         */
+        Cart::mergeSetAsideCart();
+
         if (! Cart::getCart()) {
             return new JsonResource(['data' => null]);
         }
@@ -77,7 +76,7 @@ class CartController extends APIController
             $response = [];
 
             if (request()->input('is_buy_now')) {
-                Cart::deActivateCart();
+                Cart::setAsideCart();
 
                 $response['redirect'] = route('shop.checkout.onepage.index');
             }
@@ -113,8 +112,10 @@ class CartController extends APIController
 
         Cart::collectTotals();
 
+        Cart::restoreSetAsideCart();
+
         return new JsonResource([
-            'data' => new CartResource(Cart::getCart()),
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
             'message' => trans('shop::app.checkout.cart.success-remove'),
         ]);
     }
@@ -124,14 +125,21 @@ class CartController extends APIController
      */
     public function destroySelected(): JsonResource
     {
+        $this->validate(request(), [
+            'ids' => 'required|array',
+            'ids.*' => 'integer',
+        ]);
+
         foreach (request()->input('ids') as $id) {
             Cart::removeItem($id);
         }
 
         Cart::collectTotals();
 
+        Cart::restoreSetAsideCart();
+
         return new JsonResource([
-            'data' => new CartResource(Cart::getCart()) ?? null,
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
             'message' => trans('shop::app.checkout.cart.index.remove-selected-success'),
         ]);
     }
@@ -225,7 +233,13 @@ class CartController extends APIController
 
         Cart::collectTotals();
 
-        $cartResource = (new CartResource(Cart::getCart()))->jsonSerialize();
+        $cart = Cart::getCart();
+
+        $cart->setRelation('billing_address', $address);
+
+        $cart->setRelation('shipping_address', $address);
+
+        $cartResource = (new CartResource($cart))->jsonSerialize();
 
         return new JsonResource([
             'data' => [
