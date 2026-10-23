@@ -24,6 +24,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11547 [fixed] - A missing cached image showed the default theme's error page on a store running its own channel theme. The error page now uses the channel's theme.
 
+- #11546 [fixed] - A route parameter sharing its name with a Bagisto model, such as `{template}` or `{product}`, was silently looked up as that model and answered 404. Such a parameter is now a plain value unless the route type-hints a model.
+
 - #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
 
 - #11527 [fixed] - An invoice could not be saved again after being created, failing with an unknown column error.
