@@ -47,7 +47,9 @@ it('should not serve a stored file whose contents are not an image, whatever its
 // ============================================================================
 
 it('should render the error page of a missing image with the channel theme', function () {
-    config(['themes.shop.store-theme' => config('themes.shop.default')]);
+    config(['themes.shop.store-theme' => array_merge(config('themes.shop.default'), [
+        'name' => 'Store Theme',
+    ])]);
 
     themes()->loadThemes();
 
@@ -60,7 +62,9 @@ it('should render the error page of a missing image with the channel theme', fun
 });
 
 it('should leave the channel theme alone for an image it finds', function () {
-    config(['themes.shop.store-theme' => config('themes.shop.default')]);
+    config(['themes.shop.store-theme' => array_merge(config('themes.shop.default'), [
+        'name' => 'Store Theme',
+    ])]);
 
     themes()->loadThemes();
 

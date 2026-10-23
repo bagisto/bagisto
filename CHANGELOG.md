@@ -22,6 +22,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
+- #11547 [fixed] - A missing cached image showed the default theme's error page on a store running its own channel theme. The error page now uses the channel's theme.
+
 - #11531 [fixed] - A PayPal Standard buyer who paid but never returned to the store got no order, and every retry of PayPal's notification failed. The notification now places the order itself.
 
 - #11527 [fixed] - An invoice could not be saved again after being created, failing with an unknown column error.
