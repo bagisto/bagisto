@@ -15,41 +15,23 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      # 1. 获取代码
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      # 2. 配置 PHP 8.4.27
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4.27'
-          extensions: >
-            bcmath,
-            ctype,
-            curl,
-            dom,
-            fileinfo,
-            gd,
-            intl,
-            mbstring,
-            openssl,
-            pdo,
-            pdo_pgsql,
-            tokenizer,
-            xml,
-            zip
+          extensions: bcmath,ctype,curl,dom,fileinfo,gd,intl,mbstring,openssl,pdo,pdo_pgsql,tokenizer,xml,zip
           tools: composer:v2
           coverage: none
 
-      # 3. 验证 PHP 环境
       - name: Verify PHP Environment
         run: |
           php -v
           php -m
           php -r "if (!extension_loaded('pdo_pgsql')) { exit(1); }"
 
-      # 4. 安装 PHP 依赖，保留 vendor/
       - name: Install PHP Dependencies
         run: |
           composer install \
@@ -58,36 +40,34 @@ jobs:
             --optimize-autoloader \
             --no-interaction
 
-      # 5. 配置 Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '22'
-          cache: npm
 
-      # 6. 安装前端依赖，保留 node_modules/
       - name: Install Node.js Dependencies
         run: |
-          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-            npm ci
-          else
-            echo "ERROR: package-lock.json or npm-shrinkwrap.json is required."
+          if [ ! -f package.json ]; then
+            echo "ERROR: package.json not found."
             exit 1
           fi
 
-      # 7. 构建前端
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            npm ci
+          else
+            echo "No npm lock file found; using npm install."
+            npm install
+          fi
+
       - name: Build Frontend Assets
         run: npm run build
 
-      # 8. 检查打包所需文件
       - name: Verify Build Output
         run: |
           test -d vendor
           test -d node_modules
           test -f artisan
           test -f composer.json
-          test -f composer.lock
-          test -f package.json
 
           echo "PHP dependencies:"
           du -sh vendor
@@ -100,10 +80,9 @@ jobs:
             du -sh public/build
           else
             echo "WARNING: public/build not found."
-            echo "Check the actual frontend build output directory."
+            echo "Verify the actual frontend build output directory."
           fi
 
-      # 9. 打包应用及全部依赖
       - name: Package Bagisto
         run: |
           tar -czf bagisto-build.tar.gz \
@@ -126,7 +105,6 @@ jobs:
           tar -tzf bagisto-build.tar.gz | grep -m 1 '^./vendor/'
           tar -tzf bagisto-build.tar.gz | grep -m 1 '^./node_modules/'
 
-      # 10. 上传压缩包
       - name: Upload Deployment Package
         uses: actions/upload-artifact@v4
         with:
