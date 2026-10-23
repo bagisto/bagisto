@@ -66,7 +66,7 @@ class UserController extends Controller
             $data['api_token'] = Str::random(80);
         }
 
-        Event::dispatch('user.admin.create.before');
+        Event::dispatch('user.admin.create.before', [$data]);
 
         $admin = $this->adminRepository->create($data);
 

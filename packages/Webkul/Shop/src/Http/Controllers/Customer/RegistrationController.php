@@ -66,7 +66,7 @@ class RegistrationController extends Controller
             'subscribed_to_news_letter' => (bool) (request()->input('is_subscribed') ?? $subscription?->is_subscribed),
         ]);
 
-        Event::dispatch('customer.registration.before');
+        Event::dispatch('customer.registration.before', [$data]);
 
         $customer = $this->customerRepository->create($data);
 
@@ -80,7 +80,7 @@ class RegistrationController extends Controller
             ! empty($data['is_subscribed'])
             && ! $subscription
         ) {
-            Event::dispatch('customer.subscription.before');
+            Event::dispatch('customer.subscription.before', $data['email']);
 
             $subscription = $this->subscriptionRepository->create([
                 'email' => $data['email'],

@@ -43,14 +43,14 @@ class CustomerGroupController extends Controller
             'name' => 'required',
         ]);
 
-        Event::dispatch('customer.customer_group.create.before');
-
         $data = array_merge(request()->only([
             'code',
             'name',
         ]), [
             'is_user_defined' => 1,
         ]);
+
+        Event::dispatch('customer.customer_group.create.before', [$data]);
 
         $customerGroup = $this->customerGroupRepository->create($data);
 

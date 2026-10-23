@@ -87,15 +87,17 @@ class Page
             'locale' => $locale,
         ]);
 
-        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
-
-        $urlRewrite = $this->urlRewriteRepository->create([
+        $data = [
             'entity_type' => 'cms_page',
             'request_path' => $translations['url_key'],
             'target_path' => $currentURLKey,
             'locale' => $locale,
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
-        ]);
+        ];
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before', [$data]);
+
+        $urlRewrite = $this->urlRewriteRepository->create($data);
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
     }
