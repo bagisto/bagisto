@@ -18,6 +18,10 @@ return [
     |
     | Examples: "images", "img/cache"
     |
+    | Set it to null or leave it empty to turn the route off: every image url
+    | then links the stored file itself, and the admin panel leaves out the
+    | Bagisto logo.
+    |
     */
 
     'route' => 'cache',
@@ -27,8 +31,9 @@ return [
     | Storage Paths
     |--------------------------------------------------------------------------
     |
-    | The following paths will be searched for the image filename submitted
-    | by the URI.
+    | The configured filesystem disk is read first, so a store on object storage
+    | is served the same way a local one is. These paths are searched after it,
+    | which covers a file published beside the application.
     |
     | Define as many directories as you like.
     |
@@ -51,7 +56,9 @@ return [
     | {route}/{template}/{filename}
     |
     | The values of this array will define which filter class will be
-    | applied, by its fully qualified name.
+    | applied, by its fully qualified name. An entry the image cache cannot
+    | apply is reported, and small, medium and large then fall back to the
+    | templates in Webkul\ImageCache\Templates.
     |
     */
 

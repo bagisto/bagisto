@@ -31,15 +31,17 @@
 <x-shop::layouts>
     <!-- Page Title -->
     <x-slot:title>
-        {{  $channel->home_seo['meta_title'] ?? '' }}
+        {{ $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
 
-    <!-- Loop over the storefront sections -->
+    <!-- Storefront Sections -->
     @foreach ($sections as $section)
-        @php ($data = $section->options) @endphp
+        @php
+            $data = $section->options;
 
-        {{-- The layout marks the types it draws on every page, so this page marks the rest. --}}
-        @php ($marks = ($preview ?? false) && ! $section->getTypeInstance()?->rendersInLayout())
+            $marks = ($preview ?? false)
+                && ! $section->getTypeInstance()?->rendersInLayout();
+        @endphp
 
         @if ($marks)
             <div
@@ -75,10 +77,10 @@
 
                 @break
             @case (\Webkul\Theme\Enums\SectionTypeEnum::CATEGORY_CAROUSEL->value)
-                <!-- Categories carousel -->
+                <!-- Categories Carousel -->
                 <x-shop::categories.carousel
                     :title="$data['title'] ?? ''"
-                    :src="route('shop.api.categories.index', $data['filters'] ?? [])"
+                    :src="route('shop.api.categories.index', array_merge((array) ($data['filters'] ?? []), $catalogQuery ?? []))"
                     :navigation-link="route('shop.home.index')"
                     aria-label="{{ trans('shop::app.home.index.categories-carousel') }}"
                 />
@@ -88,7 +90,7 @@
                 <!-- Product Carousel -->
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"
-                    :src="route('shop.api.products.index', $data['filters'] ?? [])"
+                    :src="route('shop.api.products.index', array_merge((array) ($data['filters'] ?? []), $catalogQuery ?? []))"
                     :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
                     aria-label="{{ trans('shop::app.home.index.product-carousel') }}"
                 />

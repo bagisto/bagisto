@@ -3,11 +3,20 @@
 namespace Webkul\ImageCache\Http\Controllers;
 
 use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\FilesystemOperationFailed;
+use League\Flysystem\FilesystemOperator;
+use League\Flysystem\PathTraversalDetected;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 use Webkul\Core\Helpers\InstalledPackages;
+use Webkul\ImageCache\Exceptions\UnprocessableImage;
+use Webkul\ImageCache\Exceptions\UnreadableImage;
 use Webkul\ImageCache\TemplateRegistry;
 use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\User\Repositories\AdminRepository;
@@ -20,11 +29,35 @@ class ImageCacheController extends Controller
     protected const BAGISTO_LOGO = 'https://updates.bagisto.com/bagisto.png';
 
     /**
+     * The cache key remembering that the Bagisto logo could not be fetched.
+     */
+    protected const LOGO_UNREACHABLE_KEY = 'imagecache.logo-unreachable';
+
+    /**
+     * How long a failed fetch of the Bagisto logo is remembered, so a store that cannot reach the update
+     * server does not try again on every admin page.
+     */
+    protected const LOGO_RETRY_MINUTES = 10;
+
+    /**
+     * Seconds a remote fetch may wait, so an unreachable host cannot hold a worker.
+     */
+    protected const FETCH_TIMEOUT = 3;
+
+    /**
      * The image types the cache serves, so a stored file whose bytes read as anything else is never sent from the store.
      */
     protected const SERVABLE_MIME_TYPES = [
         'image/avif', 'image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/vnd.microsoft.icon', 'image/webp',
         'image/x-icon', 'image/x-ms-bmp',
+    ];
+
+    /**
+     * The servable types the image driver can process through a template, so a request for any other type is
+     * never reported as a broken image.
+     */
+    protected const PROCESSABLE_MIME_TYPES = [
+        'image/avif', 'image/bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/webp',
     ];
 
     /**
@@ -59,13 +92,16 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Get the HTTP response for a template-processed image.
+     * Get the HTTP response for an image cut by a template, of the theme its url names or else the requesting
+     * channel's.
      */
     protected function getImage(string $template, string $filename): Response
     {
-        $templateConfig = $this->getTemplate($template);
+        [$name, $themeCode] = $this->templateRegistry->resolve($template);
 
-        if (! $templateConfig) {
+        $class = $this->templateRegistry->find($name, $themeCode);
+
+        if (! $class) {
             abort(404, 'Template not found.');
         }
 
@@ -76,42 +112,66 @@ class ImageCacheController extends Controller
         }
 
         try {
-            $image = image_manager()->fromBytes($contents);
+            $content = $this->applyTemplate($class, $contents);
+        } catch (Throwable $exception) {
+            $this->reportUnprocessable($name, $themeCode, $filename, $contents, $exception);
 
-            if (
-                is_object($templateConfig)
-                && method_exists($templateConfig, 'applyFilter')
-            ) {
-                $image = $templateConfig->applyFilter($image);
-            } elseif (
-                is_string($templateConfig)
-                && class_exists($templateConfig)
-            ) {
-                $filter = new $templateConfig;
-
-                if (method_exists($filter, 'applyFilter')) {
-                    $image = $filter->applyFilter($image);
-                }
-            }
-
-            $content = $image->toBytes();
-
-            return $this->buildResponse($content);
-        } catch (Exception) {
             abort(404, 'Unable to process image.');
         }
+
+        return $this->buildResponse($content);
     }
 
     /**
-     * Get the logo image from a remote URL.
+     * Run a stored image through the filter the container builds for a template class, returning the bytes of
+     * the image it produces.
+     */
+    protected function applyTemplate(string $class, string $contents): string
+    {
+        $filter = app($class);
+
+        return $filter->applyFilter(image_manager()->fromBytes($contents))->toBytes();
+    }
+
+    /**
+     * Report a stored image of a type the driver processes that still failed, leaving any other file, which
+     * anyone may request, and a filter's deliberate http response unreported.
+     */
+    protected function reportUnprocessable(string $template, ?string $themeCode, string $filename, string $contents, Throwable $exception): void
+    {
+        if (
+            $exception instanceof HttpExceptionInterface
+            || $exception instanceof HttpResponseException
+        ) {
+            return;
+        }
+
+        $mime = $this->detectMime($contents);
+
+        if (! in_array($mime, self::PROCESSABLE_MIME_TYPES)) {
+            return;
+        }
+
+        report(new UnprocessableImage($template, $filename, $themeCode, $mime, $exception));
+    }
+
+    /**
+     * Get the logo image from a remote URL, remembering a failed fetch for a while so it is not retried on
+     * every admin page.
      */
     protected function getLogo(): Response
     {
+        if (Cache::has(self::LOGO_UNREACHABLE_KEY)) {
+            abort(404, 'Unable to fetch logo.');
+        }
+
         try {
             $content = $this->fetchFromUrl($this->getLogoUrl());
 
             return $this->buildResponse($content);
         } catch (Exception) {
+            Cache::put(self::LOGO_UNREACHABLE_KEY, true, now()->addMinutes(self::LOGO_RETRY_MINUTES));
+
             abort(404, 'Unable to fetch logo.');
         }
     }
@@ -146,6 +206,7 @@ class ImageCacheController extends Controller
             'http' => [
                 'method' => 'GET',
                 'protocol_version' => 1.1,
+                'timeout' => self::FETCH_TIMEOUT,
                 'header' => "Accept-language: en\r\n".
                     "Domain: $domain\r\n".
                     $this->getAdminHeaders().
@@ -213,14 +274,12 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Read an image, wherever the application keeps its files.
-     *
-     * The configured disk is asked first; the configured paths then cover a file
-     * published beside the application rather than held on a disk.
+     * Read an image from the configured disk, then from the configured paths for a file published beside
+     * the application rather than held on a disk.
      */
     protected function getImageContents(string $filename): ?string
     {
-        $contents = Storage::get($this->sanitizeFilename($filename));
+        $contents = $this->readFromDisk($this->sanitizeFilename($filename));
 
         if (! is_null($contents)) {
             return $contents;
@@ -228,13 +287,49 @@ class ImageCacheController extends Controller
 
         $path = $this->getImagePath($filename);
 
-        if (! file_exists($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
-        $contents = file_get_contents($path);
+        $contents = @file_get_contents($path);
 
         return $contents === false ? null : $contents;
+    }
+
+    /**
+     * Read a file through the default disk's driver, whatever the disk's throw and report settings, answering
+     * null for a file it cannot read.
+     */
+    protected function readFromDisk(string $path): ?string
+    {
+        $driver = Storage::getDriver();
+
+        try {
+            return $driver->read($path);
+        } catch (PathTraversalDetected) {
+            return null;
+        } catch (FilesystemOperationFailed $exception) {
+            $this->reportUnreadable($driver, $path, $exception);
+
+            return null;
+        }
+    }
+
+    /**
+     * Report a failed read unless the disk says the file is simply not there, and report the disk itself when
+     * it cannot say.
+     */
+    protected function reportUnreadable(FilesystemOperator $driver, string $path, FilesystemOperationFailed $exception): void
+    {
+        try {
+            $failure = $driver->fileExists($path) ? $exception : null;
+        } catch (FilesystemOperationFailed $checkFailure) {
+            $failure = $checkFailure;
+        }
+
+        if ($failure) {
+            report(new UnreadableImage(config('filesystems.default'), $path, $failure));
+        }
     }
 
     /**
@@ -324,11 +419,11 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Get the template class registered under the name, for the theme of the requesting channel.
+     * The media type the bytes read as, whatever the file is named.
      */
-    protected function getTemplate(string $template): mixed
+    protected function detectMime(string $content): string
     {
-        return $this->templateRegistry->find($template, $this->templateRegistry->currentTheme());
+        return (string) finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $content);
     }
 
     /**
@@ -336,7 +431,7 @@ class ImageCacheController extends Controller
      */
     protected function buildResponse(string $content): Response
     {
-        $mime = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $content);
+        $mime = $this->detectMime($content);
 
         if (! in_array($mime, self::SERVABLE_MIME_TYPES)) {
             abort(404, 'Image not found.');
@@ -363,7 +458,8 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Apply the current channel's shop theme for the 404 page, which the route skips so a found image costs no channel query.
+     * Apply the current channel's shop theme for the 404 page, which the image route, registered outside the shop
+     * middleware group, never applies itself.
      */
     protected function applyChannelTheme(): void
     {

@@ -12,7 +12,10 @@
         </i>
 
         <!-- Logo -->
-        <a href="{{ route('admin.dashboard.index') }}" class="shrink-0">
+        <a
+            href="{{ route('admin.dashboard.index') }}"
+            class="shrink-0"
+        >
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="h-8 w-auto sm:h-10"
@@ -51,9 +54,7 @@
         <!-- Dark Mode Switcher -->
         <v-dark>
             <div class="flex">
-                <span
-                    class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
-                ></span>
+                <span class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"></span>
             </div>
         </v-dark>
 
@@ -103,12 +104,14 @@
             <!-- Admin Dropdown -->
             <x-slot:content class="p-0!">
                 <div class="flex items-center gap-1.5 border border-b-gray-300 px-4 py-2 dark:border-gray-800 sm:px-5 sm:py-2.5">
-                    <img
-                        src="{{ url('cache/logo/bagisto.png') }}"
-                        class="sm:h-6 sm:w-6"
-                        width="20"
-                        height="20"
-                    />
+                    @if ($bagistoLogoUrl = image_url('bagisto.png', 'logo'))
+                        <img
+                            src="{{ $bagistoLogoUrl }}"
+                            class="sm:h-6 sm:w-6"
+                            width="20"
+                            height="20"
+                        />
+                    @endif
 
                     <!-- Version -->
                     <p class="text-xs text-gray-400 sm:text-sm">
@@ -316,7 +319,10 @@
                                         :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}" class="h-full w-full object-cover">
+                                            <img
+                                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                                class="h-full w-full object-cover"
+                                            >
 
                                             <p class="absolute bottom-0.5 w-full text-center text-[4px] font-semibold text-gray-400 sm:bottom-1.5 sm:text-[6px]">
                                                 @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
@@ -324,7 +330,10 @@
                                         </template>
 
                                         <template v-else>
-                                            <img :src="product.images[0].url" class="h-full w-full object-cover">
+                                            <img
+                                                :src="product.images[0].url"
+                                                class="h-full w-full object-cover"
+                                            >
                                         </template>
                                     </div>
 
@@ -564,14 +573,10 @@
 
             methods: {
                 /**
-                 * Search the tab on screen, and move to one that has something when it does not.
+                 * Search the tab on screen, and move to one that has something when it does not. The length is tested
+                 * with a greater-than, since a less-than in this script reads as a tag to anything stripping them.
                  */
                 async search() {
-                    /**
-                     * Written as a greater-than test rather than a less-than one: a less-than
-                     * sign in a script inside a Blade view opens a tag to anything stripping them,
-                     * which swallows the page from here to the next angle bracket.
-                     */
                     const isLongEnough = this.searchTerm.length > 1;
 
                     if (! isLongEnough) {
@@ -609,7 +614,8 @@
                 },
 
                 /**
-                 * Move to the first tab that has something to show for the term.
+                 * Move to the first tab that has something to show for the term, or back to the first tab when none
+                 * has, rather than leaving the reader on whichever one the previous term opened.
                  */
                 async showFirstTabWithResults(searchId) {
                     for (const key of Object.keys(this.tabs)) {
@@ -632,10 +638,6 @@
                         }
                     }
 
-                    /**
-                     * Nothing anywhere, so back to the tab a search starts on rather than
-                     * leaving the reader on whichever one the term before happened to open.
-                     */
                     this.activeTab = Object.keys(this.tabs)[0];
                 },
 
@@ -668,6 +670,9 @@
                     Object.keys(this.tabs).forEach(key => this.searchedResults[key] = {data: []});
                 },
 
+                /**
+                 * Close the dropdown when a click lands outside the search.
+                 */
                 handleFocusOut(e) {
                     if (! this.$el.contains(e.target)) {
                         this.isDropdownOpen = false;
@@ -729,7 +734,7 @@
                                 @{{ orderTypeMessages[notification.order.status] }}
                             </p>
 
-                            <!-- Created Date In humand Readable Format -->
+                            <!-- Created Date -->
                             <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @{{ notification.order.datetime }}
                             </p>
@@ -762,110 +767,122 @@
         app.component('v-notifications', {
             template: '#v-notifications-template',
 
-                props: [
-                    'getReadAllUrl',
-                    'readAllTitle',
-                ],
+            props: [
+                'getReadAllUrl',
+                'readAllTitle',
+            ],
 
-                data() {
-                    return {
-                        notifications: [],
+            data() {
+                return {
+                    notifications: [],
 
-                        ordertype: {
-                            pending: {
-                                icon: 'icon-information',
-                                message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
-                            },
-
-                            processing: {
-                                icon: 'icon-processing',
-                                message: "@lang('admin::app.notifications.order-status-messages.processing')",
-                            },
-
-                            canceled: {
-                                icon: 'icon-close',
-                                message: "@lang('admin::app.notifications.order-status-messages.canceled')"
-                            },
-
-                            completed: {
-                                icon: 'icon-done',
-                                message: "@lang('admin::app.notifications.order-status-messages.completed')"
-                            },
-
-                            closed: {
-                                icon: 'icon-close',
-                                message: "@lang('admin::app.notifications.order-status-messages.closed')"
-                            },
-
-                            pending_payment: {
-                                icon: "icon-information",
-                                message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
-                            },
+                    ordertype: {
+                        pending: {
+                            icon: 'icon-information',
+                            message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
                         },
 
-                        totalUnRead: 0,
+                        processing: {
+                            icon: 'icon-processing',
+                            message: "@lang('admin::app.notifications.order-status-messages.processing')",
+                        },
 
-                        orderTypeMessages: {
-                            {{ \Webkul\Sales\Models\Order::STATUS_PENDING }}: "@lang('admin::app.notifications.order-status-messages.pending')",
-                            {{ \Webkul\Sales\Models\Order::STATUS_CANCELED }}: "@lang('admin::app.notifications.order-status-messages.canceled')",
-                            {{ \Webkul\Sales\Models\Order::STATUS_CLOSED }}: "@lang('admin::app.notifications.order-status-messages.closed')",
-                            {{ \Webkul\Sales\Models\Order::STATUS_COMPLETED }}: "@lang('admin::app.notifications.order-status-messages.completed')",
-                            {{ \Webkul\Sales\Models\Order::STATUS_PROCESSING }}: "@lang('admin::app.notifications.order-status-messages.processing')",
-                            {{ \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT }}: "@lang('admin::app.notifications.order-status-messages.pending-payment')",
-                        }
+                        canceled: {
+                            icon: 'icon-close',
+                            message: "@lang('admin::app.notifications.order-status-messages.canceled')"
+                        },
+
+                        completed: {
+                            icon: 'icon-done',
+                            message: "@lang('admin::app.notifications.order-status-messages.completed')"
+                        },
+
+                        closed: {
+                            icon: 'icon-close',
+                            message: "@lang('admin::app.notifications.order-status-messages.closed')"
+                        },
+
+                        pending_payment: {
+                            icon: "icon-information",
+                            message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
+                        },
+                    },
+
+                    totalUnRead: 0,
+
+                    orderTypeMessages: {
+                        {{ \Webkul\Sales\Models\Order::STATUS_PENDING }}: "@lang('admin::app.notifications.order-status-messages.pending')",
+                        {{ \Webkul\Sales\Models\Order::STATUS_CANCELED }}: "@lang('admin::app.notifications.order-status-messages.canceled')",
+                        {{ \Webkul\Sales\Models\Order::STATUS_CLOSED }}: "@lang('admin::app.notifications.order-status-messages.closed')",
+                        {{ \Webkul\Sales\Models\Order::STATUS_COMPLETED }}: "@lang('admin::app.notifications.order-status-messages.completed')",
+                        {{ \Webkul\Sales\Models\Order::STATUS_PROCESSING }}: "@lang('admin::app.notifications.order-status-messages.processing')",
+                        {{ \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT }}: "@lang('admin::app.notifications.order-status-messages.pending-payment')",
                     }
+                }
+            },
+
+            computed: {
+                /**
+                 * The icon classes for each order status a notification can show.
+                 */
+                notificationStatusIcon() {
+                    return {
+                        pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:text-amber-600!',
+                        closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!',
+                        completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:text-blue-600!',
+                        canceled: 'icon-close rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!',
+                        processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:text-green-600!',
+                    };
+                },
+            },
+
+            mounted() {
+                this.getNotification();
+
+                this.listenForNotifications();
+            },
+
+            methods: {
+                /**
+                 * Fetch the five latest unread notifications and the unread count.
+                 */
+                getNotification() {
+                    this.$axios.get('{{ route('admin.notification.get_notification') }}', {
+                            params: {
+                                limit: 5,
+                                read: 0
+                            }
+                        })
+                        .then((response) => {
+                            this.notifications = response.data.search_results.data;
+
+                            this.totalUnRead = response.data.total_unread;
+                        })
+                        .catch(error => console.log(error))
                 },
 
-                computed: {
-                    notificationStatusIcon() {
-                        return {
-                            pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:text-amber-600!',
-                            closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!',
-                            completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:text-blue-600!',
-                            canceled: 'icon-close rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!',
-                            processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:text-green-600!',
-                        };
-                    },
+                /**
+                 * Refetch the notifications whenever the broadcaster reports one created or updated.
+                 */
+                listenForNotifications() {
+                    if (! window.Echo) {
+                        return;
+                    }
+
+                    window.Echo.private('admin.notifications')
+                        .listen('.create-notification', () => this.getNotification())
+                        .listen('.update-notification', () => this.getNotification());
                 },
 
-                mounted() {
-                    this.getNotification();
+                /**
+                 * Mark every notification read and flash the result.
+                 */
+                readAll() {
+                    this.$axios.post('{{ route('admin.notification.read_all') }}')
+                        .then((response) => {
+                            this.notifications = response.data.search_results.data;
 
-                    this.listenForNotifications();
-                },
-
-                methods: {
-                    getNotification() {
-                        this.$axios.get('{{ route('admin.notification.get_notification') }}', {
-                                params: {
-                                    limit: 5,
-                                    read: 0
-                                }
-                            })
-                            .then((response) => {
-                                this.notifications = response.data.search_results.data;
-
-                                this.totalUnRead =   response.data.total_unread;
-                            })
-                            .catch(error => console.log(error))
-                    },
-
-                    listenForNotifications() {
-                        if (! window.Echo) {
-                            return;
-                        }
-
-                        window.Echo.private('admin.notifications')
-                            .listen('.create-notification', () => this.getNotification())
-                            .listen('.update-notification', () => this.getNotification());
-                    },
-
-                    readAll() {
-                        this.$axios.post('{{ route('admin.notification.read_all') }}')
-                            .then((response) => {
-                                this.notifications = response.data.search_results.data;
-
-                                this.totalUnRead = response.data.total_unread;
+                            this.totalUnRead = response.data.total_unread;
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.success_message });
                         })
@@ -903,6 +920,9 @@
             },
 
             methods: {
+                /**
+                 * Switch between light and dark mode, remembering the choice in a cookie.
+                 */
                 toggle() {
                     this.isDarkMode = parseInt(this.isDarkModeCookie()) ? 0 : 1;
 
@@ -925,6 +945,9 @@
                     }
                 },
 
+                /**
+                 * The value of the dark-mode cookie, or 0 when it is not set.
+                 */
                 isDarkModeCookie() {
                     const cookies = document.cookie.split(';');
 
@@ -941,4 +964,4 @@
             },
         });
     </script>
-@endpushOnce
+@endPushOnce

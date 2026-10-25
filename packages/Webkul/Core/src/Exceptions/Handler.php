@@ -40,7 +40,7 @@ class Handler extends BaseHandler
     protected function handleAuthenticationException(): void
     {
         $this->renderable(function (AuthenticationException $exception, Request $request) {
-            $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
+            $namespace = is_admin_request($request) ? 'admin' : 'shop';
 
             if ($request->wantsJson()) {
                 return response()->json(['error' => trans("{$namespace}::app.errors.401.description")], 401);
@@ -55,13 +55,13 @@ class Handler extends BaseHandler
     }
 
     /**
-     * Handle the http exceptions, keeping the status of a client error Bagisto has no page for
-     * instead of flattening it into a 500, as happened to an expired CSRF token's 419.
+     * Handle the http exceptions, keeping their headers, such as maintenance's Retry-After, and the status of a
+     * client error Bagisto has no page for instead of flattening it into a 500, as with an expired CSRF token's 419.
      */
     protected function handleHttpException(): void
     {
         $this->renderable(function (HttpException $exception, Request $request) {
-            $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
+            $namespace = is_admin_request($request) ? 'admin' : 'shop';
 
             $statusCode = $exception->getStatusCode();
 
@@ -83,7 +83,7 @@ class Handler extends BaseHandler
                 return response()->json([
                     'error' => trans("{$namespace}::app.errors.{$errorCode}.title"),
                     'description' => trans("{$namespace}::app.errors.{$errorCode}.description"),
-                ], $errorCode);
+                ], $errorCode, $exception->getHeaders());
             }
 
             $viewPath = "{$namespace}::errors.{$errorCode}";
@@ -92,7 +92,7 @@ class Handler extends BaseHandler
                 $viewPath = "{$namespace}::errors.index";
             }
 
-            return response()->view($viewPath, compact('errorCode'), $errorCode);
+            return response()->view($viewPath, compact('errorCode'), $errorCode, $exception->getHeaders());
         });
     }
 
@@ -112,7 +112,7 @@ class Handler extends BaseHandler
     protected function handleServerException(): void
     {
         $this->renderable(function (Throwable $throwable, Request $request) {
-            $namespace = $request->is(config('app.admin_url').'/*') ? 'admin' : 'shop';
+            $namespace = is_admin_request($request) ? 'admin' : 'shop';
 
             $errorCode = 500;
 

@@ -64,11 +64,13 @@
         rel="stylesheet"
     />
 
-    <link
-        rel="preload"
-        as="image"
-        href="{{ url('cache/logo/bagisto.png') }}"
-    >
+    @if ($bagistoLogoUrl = image_url('bagisto.png', 'logo'))
+        <link
+            rel="preload"
+            as="image"
+            href="{{ $bagistoLogoUrl }}"
+        >
+    @endif
 
     @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon'))
         <link
@@ -127,7 +129,6 @@
             </div>
 
             <div class="flex min-h-[calc(100vh-62px)] max-w-full flex-1 flex-col bg-white transition-all duration-300 dark:bg-gray-950 pt-3 px-2 sm:px-4 lg:pt-3 lg:px-4 lg:ltr:pl-71.5 lg:group-[.sidebar-collapsed]/container:ltr:pl-21.25 lg:rtl:pr-71.5 lg:group-[.sidebar-collapsed]/container:rtl:pr-21.25">
-                <!-- Added dynamic tabs for third level menus  -->
                 <div class="pb-4 lg:pb-6">
                     <!-- Page Content Blade Component -->
                     <div class="w-full overflow-x-hidden">
@@ -158,10 +159,7 @@
 
     <script>
         /**
-         * Load event, the purpose of using the event is to mount the application
-         * after all of our `Vue` components which is present in blade file have
-         * been registered in the app. No matter what `app.mount()` should be
-         * called in the last.
+         * Mount the app on load, once every component the views push has registered.
          */
         window.addEventListener("load", function(event) {
             app.mount("#app");
