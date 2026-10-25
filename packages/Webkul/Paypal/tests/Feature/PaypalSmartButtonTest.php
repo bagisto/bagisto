@@ -92,7 +92,7 @@ it('should not capture when PayPal approved less than the cart comes to', functi
     fakeSmartButton(paypalOrder($cart, 1.00), captures: false);
 
     captureSmartButtonOrder()
-        ->assertStatus(403)
+        ->assertForbidden()
         ->assertJsonPath('redirect_url', route('shop.checkout.cart.index'));
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
@@ -103,7 +103,7 @@ it('should not capture an order the shopper has not approved', function () {
 
     fakeSmartButton(paypalOrder($cart, status: 'CREATED'), captures: false);
 
-    captureSmartButtonOrder()->assertStatus(403);
+    captureSmartButtonOrder()->assertForbidden();
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
@@ -113,7 +113,7 @@ it('should not capture an order carrying more than one purchase unit', function 
 
     fakeSmartButton(paypalOrder($cart, units: 2), captures: false);
 
-    captureSmartButtonOrder()->assertStatus(403);
+    captureSmartButtonOrder()->assertForbidden();
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
@@ -127,7 +127,7 @@ it('should not capture when PayPal approved another currency', function () {
 
     fakeSmartButton($order, captures: false);
 
-    captureSmartButtonOrder()->assertStatus(403);
+    captureSmartButtonOrder()->assertForbidden();
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
@@ -160,7 +160,7 @@ it('should report our own failure message rather than an empty body', function (
     });
 
     captureSmartButtonOrder()
-        ->assertStatus(400)
+        ->assertBadRequest()
         ->assertJsonPath('message', 'Please specify a payment method');
 });
 
@@ -172,8 +172,21 @@ it('should pass a gateway failure through as the gateway reported it', function 
     });
 
     captureSmartButtonOrder()
-        ->assertStatus(400)
+        ->assertBadRequest()
         ->assertJsonPath('error', 'invalid_client');
+});
+
+it('should not leak a database or runtime error to the shopper', function () {
+    $this->createCartWithItems('paypal_smart_button');
+
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('getOrder')->andThrow(new ErrorException('Undefined array key "token" in /var/www/secret.php'));
+    });
+
+    captureSmartButtonOrder()
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('paypal::app.errors.something-went-wrong'))
+        ->assertDontSee('secret.php');
 });
 
 // ============================================================================

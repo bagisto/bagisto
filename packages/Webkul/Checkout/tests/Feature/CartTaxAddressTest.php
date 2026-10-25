@@ -135,7 +135,7 @@ it('should tax a stockable item against the shipping address', function () {
 
     cartBilledToIndiaShippedToUs('simple', taxCategoryCharging(['US' => 10, 'IN' => 20]));
 
-    expect(itemTaxAfterCollecting())->toBe(10.0);
+    expect(itemTaxAfterCollecting())->toBePrice(10.0);
 });
 
 it('should tax an item against the billing address when the store is set to bill', function () {
@@ -143,7 +143,7 @@ it('should tax an item against the billing address when the store is set to bill
 
     cartBilledToIndiaShippedToUs('simple', taxCategoryCharging(['US' => 10, 'IN' => 20]));
 
-    expect(itemTaxAfterCollecting())->toBe(20.0);
+    expect(itemTaxAfterCollecting())->toBePrice(20.0);
 });
 
 it('should tax a non-stockable item against the billing address even when the store ships', function () {
@@ -151,7 +151,7 @@ it('should tax a non-stockable item against the billing address even when the st
 
     cartBilledToIndiaShippedToUs('virtual', taxCategoryCharging(['US' => 10, 'IN' => 20]));
 
-    expect(itemTaxAfterCollecting())->toBe(20.0);
+    expect(itemTaxAfterCollecting())->toBePrice(20.0);
 });
 
 // ============================================================================
@@ -170,7 +170,7 @@ it('should collect totals when the configured shipping tax category never existe
 
     Cart::collectTotals();
 
-    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(0.0);
+    expect(Cart::getCart()->selected_shipping_rate->tax_amount)->toBePrice(0.0);
 });
 
 it('should take the tax off the shipping rate once the configured category has been deleted', function () {
@@ -185,7 +185,7 @@ it('should take the tax off the shipping rate once the configured category has b
 
     Cart::collectTotals();
 
-    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(5.0);
+    expect(Cart::getCart()->selected_shipping_rate->tax_amount)->toBePrice(5.0);
 
     $taxCategory->delete();
 
@@ -193,9 +193,9 @@ it('should take the tax off the shipping rate once the configured category has b
 
     $shippingRate = Cart::getCart()->selected_shipping_rate;
 
-    expect((float) $shippingRate->tax_amount)->toBe(0.0)
+    expect($shippingRate->tax_amount)->toBePrice(0.0)
         ->and($shippingRate->applied_tax_rate)->toBeNull()
-        ->and((float) $shippingRate->price_incl_tax)->toBe((float) $shippingRate->price);
+        ->and($shippingRate->price_incl_tax)->toBePrice((float) $shippingRate->price);
 });
 
 // ============================================================================
@@ -214,7 +214,7 @@ it('should tax shipping against the shipping address', function () {
 
     Cart::collectTotals();
 
-    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(5.0);
+    expect(Cart::getCart()->selected_shipping_rate->tax_amount)->toBePrice(5.0);
 });
 
 it('should tax shipping against the billing address when the store is set to bill', function () {
@@ -229,7 +229,7 @@ it('should tax shipping against the billing address when the store is set to bil
 
     Cart::collectTotals();
 
-    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(10.0);
+    expect(Cart::getCart()->selected_shipping_rate->tax_amount)->toBePrice(10.0);
 });
 
 // ============================================================================

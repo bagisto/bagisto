@@ -7,7 +7,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Checkout\Http\Middleware\RestoreSetAsideCart;
+use Webkul\Checkout\Http\Middleware\RestoreParkedCart;
 use Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\CacheResponse;
@@ -34,7 +34,7 @@ class ShopServiceProvider extends ServiceProvider
             Theme::class,
             Locale::class,
             Currency::class,
-            RestoreSetAsideCart::class,
+            RestoreParkedCart::class,
         ]);
 
         $router->aliasMiddleware('theme', Theme::class);

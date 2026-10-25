@@ -141,34 +141,34 @@ it('should refuse to merge a session cart that already belongs to a customer', f
 });
 
 // ============================================================================
-// Setting A Cart Aside For Buy Now
+// Parking A Cart For Buy Now
 // ============================================================================
 
-it('should give back the cart set aside once the buy now purchase leaves no cart behind', function () {
+it('should give back the cart parked once the buy now purchase leaves no cart behind', function () {
     $product = $this->createSimpleProduct();
 
     Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
 
     $basketId = Cart::getCart()->id;
 
-    Cart::setAsideCart();
+    Cart::parkCart();
 
-    expect(session(CartFacadeClass::SET_ASIDE_CART_KEY))->toBe($basketId)
+    expect(session(CartFacadeClass::PARKED_CART_KEY))->toBe($basketId)
         ->and(Cart::getCart())->toBeNull()
         ->and(session()->has('cart'))->toBeFalse();
 
     $this->assertDatabaseHas('cart', ['id' => $basketId, 'is_active' => 0]);
 
-    Cart::restoreSetAsideCart();
+    Cart::restoreParkedCart();
 
     expect(Cart::getCart()?->id)->toBe($basketId)
-        ->and(session()->has(CartFacadeClass::SET_ASIDE_CART_KEY))->toBeFalse()
+        ->and(session()->has(CartFacadeClass::PARKED_CART_KEY))->toBeFalse()
         ->and(session()->get('cart')->id)->toBe($basketId);
 
     $this->assertDatabaseHas('cart', ['id' => $basketId, 'is_active' => 1]);
 });
 
-it('should keep the cart set aside while a buy now cart is still live', function () {
+it('should keep the cart parked while a buy now cart is still live', function () {
     $basketProduct = $this->createSimpleProduct();
 
     $buyNowProduct = $this->createSimpleProduct();
@@ -177,21 +177,21 @@ it('should keep the cart set aside while a buy now cart is still live', function
 
     $basketId = Cart::getCart()->id;
 
-    Cart::setAsideCart();
+    Cart::parkCart();
 
     Cart::addProduct($buyNowProduct, ['product_id' => $buyNowProduct->id, 'quantity' => 1]);
 
     $buyNowId = Cart::getCart()->id;
 
-    Cart::restoreSetAsideCart();
+    Cart::restoreParkedCart();
 
     expect(Cart::getCart()?->id)->toBe($buyNowId)
-        ->and(session(CartFacadeClass::SET_ASIDE_CART_KEY))->toBe($basketId);
+        ->and(session(CartFacadeClass::PARKED_CART_KEY))->toBe($basketId);
 
     $this->assertDatabaseHas('cart', ['id' => $basketId, 'is_active' => 0]);
 });
 
-it('should keep the first cart set aside when a second buy now displaces the buy now cart', function () {
+it('should fold a second buy now into the basket already parked', function () {
     $basketProduct = $this->createSimpleProduct();
 
     $buyNowProduct = $this->createSimpleProduct();
@@ -200,22 +200,29 @@ it('should keep the first cart set aside when a second buy now displaces the buy
 
     $basketId = Cart::getCart()->id;
 
-    Cart::setAsideCart();
+    Cart::parkCart();
 
     Cart::addProduct($buyNowProduct, ['product_id' => $buyNowProduct->id, 'quantity' => 1]);
 
     $buyNowId = Cart::getCart()->id;
 
-    Cart::setAsideCart();
+    Cart::parkCart();
 
-    expect(session(CartFacadeClass::SET_ASIDE_CART_KEY))->toBe($basketId)
-        ->and(session(CartFacadeClass::SET_ASIDE_CART_KEY))->not->toBe($buyNowId);
+    expect(session(CartFacadeClass::PARKED_CART_KEY))->toBe($basketId)
+        ->and(session(CartFacadeClass::PARKED_CART_KEY))->not->toBe($buyNowId);
 
-    $this->assertDatabaseHas('cart', ['id' => $buyNowId, 'is_active' => 0]);
+    $this->assertDatabaseMissing('cart', ['id' => $buyNowId]);
 
-    Cart::restoreSetAsideCart();
+    Cart::restoreParkedCart();
 
     expect(Cart::getCart()?->id)->toBe($basketId);
+
+    foreach ([$basketProduct->id, $buyNowProduct->id] as $productId) {
+        $this->assertDatabaseHas('cart_items', [
+            'cart_id' => $basketId,
+            'product_id' => $productId,
+        ]);
+    }
 });
 
 it('should refuse to give back a cart that belongs to a customer to a guest session', function () {
@@ -227,30 +234,30 @@ it('should refuse to give back a cart that belongs to a customer to a guest sess
         'is_active' => 0,
     ]);
 
-    session()->put(CartFacadeClass::SET_ASIDE_CART_KEY, $cart->id);
+    session()->put(CartFacadeClass::PARKED_CART_KEY, $cart->id);
 
-    Cart::restoreSetAsideCart();
+    Cart::restoreParkedCart();
 
     expect(Cart::getCart())->toBeNull()
-        ->and(session()->has(CartFacadeClass::SET_ASIDE_CART_KEY))->toBeFalse();
+        ->and(session()->has(CartFacadeClass::PARKED_CART_KEY))->toBeFalse();
 
     $this->assertDatabaseHas('cart', ['id' => $cart->id, 'is_active' => 0]);
 });
 
-it('should hand a guest cart set aside before a login to the customer who signed in', function () {
+it('should hand a guest cart parked before a login to the customer who signed in', function () {
     $product = $this->createSimpleProduct();
 
     Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
 
     $basketId = Cart::getCart()->id;
 
-    Cart::setAsideCart();
+    Cart::parkCart();
 
     $customer = Customer::factory()->create();
 
     $this->actingAs($customer);
 
-    Cart::restoreSetAsideCart();
+    Cart::restoreParkedCart();
 
     expect(Cart::getCart()?->id)->toBe($basketId)
         ->and(session()->has('cart'))->toBeFalse();
@@ -263,21 +270,66 @@ it('should hand a guest cart set aside before a login to the customer who signed
     ]);
 });
 
-it('should drop the set aside cart id when the cart it names has gone', function () {
+it('should drop the parked cart id when the cart it names has gone', function () {
     $product = $this->createSimpleProduct();
 
     Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
 
     $basketId = Cart::getCart()->id;
 
-    Cart::setAsideCart();
+    Cart::parkCart();
 
     CartModel::query()->where('id', $basketId)->delete();
 
-    Cart::restoreSetAsideCart();
+    Cart::restoreParkedCart();
 
     expect(Cart::getCart())->toBeNull()
-        ->and(session()->has(CartFacadeClass::SET_ASIDE_CART_KEY))->toBeFalse();
+        ->and(session()->has(CartFacadeClass::PARKED_CART_KEY))->toBeFalse();
+});
+
+it('should hand the basket back and drop the empty cart when a buy now is discarded', function () {
+    $product = $this->createSimpleProduct();
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    $basketId = Cart::getCart()->id;
+
+    Cart::parkCart();
+
+    Cart::createCart([]);
+
+    $buyNowId = Cart::getCart()->id;
+
+    Cart::discardBuyNowCart();
+
+    expect(Cart::getCart()?->id)->toBe($basketId)
+        ->and(session()->has(CartFacadeClass::PARKED_CART_KEY))->toBeFalse();
+
+    $this->assertDatabaseMissing('cart', ['id' => $buyNowId]);
+
+    $this->assertDatabaseHas('cart', ['id' => $basketId, 'is_active' => 1]);
+});
+
+it('should recover a customer parked cart at login once the session pointer is gone', function () {
+    $customer = Customer::factory()->create();
+
+    $this->actingAs($customer);
+
+    $product = $this->createSimpleProduct();
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    $basketId = Cart::getCart()->id;
+
+    Cart::parkCart();
+
+    $this->assertDatabaseHas('cart', ['id' => $basketId, 'is_active' => 0, 'is_parked' => 1]);
+
+    session()->forget(CartFacadeClass::PARKED_CART_KEY);
+
+    Cart::mergeCart($customer);
+
+    expect((int) session(CartFacadeClass::PARKED_CART_KEY))->toBe($basketId);
 });
 
 // ============================================================================

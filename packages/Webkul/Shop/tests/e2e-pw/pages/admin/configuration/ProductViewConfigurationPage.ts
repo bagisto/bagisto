@@ -9,7 +9,7 @@ export class ProductViewConfigurationPage extends BasePage {
         super(page);
     }
 
-    async setBuyNowButton(enabled: boolean): Promise<void> {
+    async setBuyNowButton(enabled: boolean): Promise<boolean> {
         await this.visit("admin/configuration/catalog/products");
         await this.waitForVueMount();
 
@@ -19,7 +19,9 @@ export class ProductViewConfigurationPage extends BasePage {
 
         await checkbox.waitFor({ state: "attached" });
 
-        if ((await checkbox.isChecked()) !== enabled) {
+        const wasEnabled = await checkbox.isChecked();
+
+        if (wasEnabled !== enabled) {
             await this.page
                 .locator(
                     `label:has(> input[type="checkbox"][name="${BUY_NOW_FIELD}"])`,
@@ -36,5 +38,7 @@ export class ProductViewConfigurationPage extends BasePage {
         await expect(
             this.page.getByText("Configuration saved successfully"),
         ).toBeVisible();
+
+        return wasEnabled;
     }
 }

@@ -4,7 +4,7 @@ namespace Webkul\Checkout\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Checkout\Http\Middleware\RestoreSetAsideCart;
+use Webkul\Checkout\Http\Middleware\RestoreParkedCart;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,7 @@ class CheckoutServiceProvider extends ServiceProvider
      */
     public function boot(Router $router): void
     {
-        $router->aliasMiddleware('cart.restore', RestoreSetAsideCart::class);
+        $router->aliasMiddleware('cart.restore', RestoreParkedCart::class);
 
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 

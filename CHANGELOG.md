@@ -36,6 +36,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the checkout address step failing for a guest whose cart had gone, instead of sending them to sign in.
 
+- Fixed the PayPal Smart Button taking the money before checking the amount, which left a shopper charged against a cheaper cart with no order, and showing nothing when a payment failed. It now verifies the amount and currency against the cart before capturing, and shows the gateway's own reason when a call fails.
+
 - Refactored internals for clearer responsibilities.
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.

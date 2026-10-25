@@ -27,13 +27,11 @@ class CartController extends APIController
     ) {}
 
     /**
-     * Cart. A basket set aside for an unfinished buy now purchase is merged in here, where the
-     * shopper is looking at the cart; the buy now checkout has its own summary and never lands here.
+     * Cart. This endpoint is polled in the background by the header mini-cart, so it only reads;
+     * the parked basket is merged by the cart page itself, never on a background fetch.
      */
     public function index(): JsonResource
     {
-        Cart::mergeSetAsideCart();
-
         if (! Cart::getCart()) {
             return new JsonResource(['data' => null]);
         }
@@ -68,6 +66,8 @@ class CartController extends APIController
 
         $product = $this->productRepository->with('parent')->findOrFail(request()->input('product_id'));
 
+        $isBuyNow = request()->boolean('is_buy_now');
+
         try {
             if (! $product->status) {
                 throw new \Exception(trans('shop::app.checkout.cart.inactive-add'));
@@ -75,8 +75,8 @@ class CartController extends APIController
 
             $response = [];
 
-            if (request()->input('is_buy_now')) {
-                Cart::setAsideCart();
+            if ($isBuyNow) {
+                Cart::parkCart();
 
                 $response['redirect'] = route('shop.checkout.onepage.index');
             }
@@ -88,10 +88,18 @@ class CartController extends APIController
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
             ], $response));
         } catch (InsufficientProductInventoryException $exception) {
+            if ($isBuyNow) {
+                Cart::discardBuyNowCart();
+            }
+
             return response()->json([
                 'message' => $exception->getMessage(),
             ], Response::HTTP_BAD_REQUEST);
         } catch (\Exception $exception) {
+            if ($isBuyNow) {
+                Cart::discardBuyNowCart();
+            }
+
             return response()->json([
                 'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
                 'message' => $exception->getMessage(),
@@ -112,7 +120,9 @@ class CartController extends APIController
 
         Cart::collectTotals();
 
-        Cart::restoreSetAsideCart();
+        Cart::restoreParkedCart();
+
+        Cart::collectTotals();
 
         return new JsonResource([
             'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
@@ -127,7 +137,7 @@ class CartController extends APIController
     {
         $this->validate(request(), [
             'ids' => 'required|array',
-            'ids.*' => 'integer',
+            'ids.*' => 'integer|distinct',
         ]);
 
         foreach (request()->input('ids') as $id) {
@@ -136,7 +146,9 @@ class CartController extends APIController
 
         Cart::collectTotals();
 
-        Cart::restoreSetAsideCart();
+        Cart::restoreParkedCart();
+
+        Cart::collectTotals();
 
         return new JsonResource([
             'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
@@ -168,8 +180,12 @@ class CartController extends APIController
 
         Cart::collectTotals();
 
+        Cart::restoreParkedCart();
+
+        Cart::collectTotals();
+
         return new JsonResource([
-            'data' => new CartResource(Cart::getCart()) ?? null,
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
             'message' => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
         ]);
     }

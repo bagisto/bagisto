@@ -206,8 +206,8 @@ it('should send a guest to sign in from the address step when the cart holds a p
         'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
     ])
         ->assertOk()
-        ->assertJsonPath('redirect', true)
-        ->assertJsonPath('data', route('shop.customer.session.index'))
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.customer.session.index'))
         ->assertSessionHas('shop.url.intended', route('shop.checkout.onepage.index'));
 });
 
@@ -224,8 +224,8 @@ it('should send a guest to sign in from the address step when the cart row has g
         'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
     ])
         ->assertOk()
-        ->assertJsonPath('redirect', true)
-        ->assertJsonPath('data', route('shop.customer.session.index'));
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.customer.session.index'));
 });
 
 // ============================================================================

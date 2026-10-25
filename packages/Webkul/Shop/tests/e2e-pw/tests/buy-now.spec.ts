@@ -29,6 +29,7 @@ test.describe("buy now", () => {
     let checkoutHelper: CheckoutHelper;
     let basketProduct: string;
     let buyNowProduct: string;
+    let buyNowWasEnabled: boolean;
 
     test.beforeEach(async ({ adminPage, shopPage }) => {
         productListPage = new ProductListPage(adminPage);
@@ -36,7 +37,7 @@ test.describe("buy now", () => {
         cartPage = new CartPage(shopPage);
         checkoutHelper = new CheckoutHelper(shopPage);
 
-        await configurationPage.setBuyNowButton(true);
+        buyNowWasEnabled = await configurationPage.setBuyNowButton(true);
 
         const productCreatePage = new ProductCreatePage(adminPage);
 
@@ -50,12 +51,14 @@ test.describe("buy now", () => {
     });
 
     test.afterEach(async () => {
-        await configurationPage.setBuyNowButton(false);
-
-        await productListPage.deleteProductsIfPresent([
-            basketProduct,
-            buyNowProduct,
-        ]);
+        try {
+            await productListPage.deleteProductsIfPresent([
+                basketProduct,
+                buyNowProduct,
+            ]);
+        } finally {
+            await configurationPage.setBuyNowButton(buyNowWasEnabled);
+        }
     });
 
     test("should put the basket back beside the bought product once checkout is left", async () => {

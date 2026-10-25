@@ -32,6 +32,7 @@ test.describe("cart merge on login", () => {
     let credentials: CustomerCredentials;
     let firstProduct: string;
     let secondProduct: string;
+    let buyNowWasEnabled: boolean;
 
     test.beforeEach(async ({ adminPage, shopPage }) => {
         productListPage = new ProductListPage(adminPage);
@@ -39,7 +40,7 @@ test.describe("cart merge on login", () => {
         cartPage = new CartPage(shopPage);
         authPage = new AuthPage(shopPage);
 
-        await configurationPage.setBuyNowButton(true);
+        buyNowWasEnabled = await configurationPage.setBuyNowButton(true);
 
         const productCreatePage = new ProductCreatePage(adminPage);
 
@@ -55,12 +56,14 @@ test.describe("cart merge on login", () => {
     });
 
     test.afterEach(async () => {
-        await configurationPage.setBuyNowButton(false);
-
-        await productListPage.deleteProductsIfPresent([
-            firstProduct,
-            secondProduct,
-        ]);
+        try {
+            await productListPage.deleteProductsIfPresent([
+                firstProduct,
+                secondProduct,
+            ]);
+        } finally {
+            await configurationPage.setBuyNowButton(buyNowWasEnabled);
+        }
     });
 
     test("should hand the guest cart to a customer who signs in without one", async () => {

@@ -119,3 +119,23 @@ it('should reprice an item to its custom price when the totals are collected', f
 
     expect((float) Cart::getCart()->items->first()->price)->toBe(42.0);
 });
+
+// ============================================================================
+// Shipping Tax Left Behind When Its Rate Stops Applying
+// ============================================================================
+
+it('should take the stale tax off the shipping rate when no rate applies but the category stays', function () {
+    cartWithTaxedFlatRateShipping('excluding_tax');
+
+    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(1.0);
+
+    TaxMap::query()->delete();
+
+    Cart::collectTotals();
+
+    $rate = Cart::getCart()->selected_shipping_rate;
+
+    expect((float) $rate->tax_amount)->toBe(0.0)
+        ->and((float) $rate->price_incl_tax)->toBe((float) $rate->price)
+        ->and((float) Cart::getCart()->tax_total)->toBe(0.0);
+});

@@ -42,7 +42,7 @@ it('should measure the configured amount for each combination of the two flags',
 ) {
     cartUnderMinimumOrderFlags($includeTax, $includeDiscount);
 
-    expect(Cart::getOrderAmount())->toBe($expected);
+    expect(Cart::getOrderAmount())->toBePrice($expected);
 })->with([
     'neither flag: the subtotal alone' => [false, false, 100.0],
     'tax included: the subtotal plus tax' => [true, false, 110.0],

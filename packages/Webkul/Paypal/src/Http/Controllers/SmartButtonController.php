@@ -2,6 +2,7 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Webkul\Checkout\Facades\Cart;
@@ -442,17 +443,29 @@ class SmartButtonController extends Controller
     }
 
     /**
-     * The body of a failed PayPal call, whose message is the gateway's own JSON or, where the
-     * failure is one of ours, a sentence the shopper can act on.
+     * The body of a failed PayPal call: the gateway's own JSON, a generic message for a database
+     * or runtime error whose text is logged rather than shown, or one of our own sentences.
      */
     protected function errorResponse(\Exception $e): JsonResponse
     {
         $decoded = json_decode($e->getMessage(), true);
 
-        return response()->json(
-            is_array($decoded) ? $decoded : ['message' => $e->getMessage()],
-            400
-        );
+        if (is_array($decoded)) {
+            return response()->json($decoded, 400);
+        }
+
+        if (
+            $e instanceof QueryException
+            || $e instanceof \ErrorException
+        ) {
+            report($e);
+
+            return response()->json([
+                'message' => trans('paypal::app.errors.something-went-wrong'),
+            ], 400);
+        }
+
+        return response()->json(['message' => $e->getMessage()], 400);
     }
 
     /**

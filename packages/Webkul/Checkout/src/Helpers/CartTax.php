@@ -119,6 +119,10 @@ class CartTax
 
         $address = $this->shippingTaxAddress($cart);
 
+        $shippingRate->applied_tax_rate = null;
+
+        $shippingRate->tax_percent = $shippingRate->tax_amount = $shippingRate->base_tax_amount = 0;
+
         Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($shippingRate) {
             $shippingRate->applied_tax_rate = $rate->identifier;
 
@@ -141,15 +145,27 @@ class CartTax
     }
 
     /**
-     * The tax category an item is taxed under, from the item, then its product, then the store.
+     * The tax category an item is taxed under — the first of the item's, its product's and the
+     * store's that still resolves, so a deleted one falls through rather than untaxing the item.
      */
     protected function itemTaxCategoryId(Contracts\CartItem $item): ?int
     {
-        $taxCategoryId = $item->tax_category_id
-            ?: $item->product->tax_category_id
-            ?: core()->getConfigData('sales.taxes.categories.product');
+        $candidates = [
+            $item->tax_category_id,
+            $item->product->tax_category_id,
+            core()->getConfigData('sales.taxes.categories.product'),
+        ];
 
-        return $taxCategoryId ? (int) $taxCategoryId : null;
+        foreach ($candidates as $candidate) {
+            if (
+                $candidate
+                && $this->taxCategoryRepository->find($candidate)
+            ) {
+                return (int) $candidate;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -207,7 +223,7 @@ class CartTax
     {
         if (
             empty($item->applied_tax_rate)
-            && empty($item->tax_amount)
+            && empty((float) $item->tax_amount)
         ) {
             return;
         }
@@ -280,7 +296,7 @@ class CartTax
     {
         if (
             empty($shippingRate->applied_tax_rate)
-            && empty($shippingRate->tax_amount)
+            && empty((float) $shippingRate->tax_amount)
         ) {
             return;
         }

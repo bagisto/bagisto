@@ -45,9 +45,9 @@ class Cart
     const SHIPPING_ADDRESS_FIELDS = CartAddress::SHIPPING_FIELDS;
 
     /**
-     * The session key holding the id of the cart set aside for a buy now purchase.
+     * The session key holding the id of the cart parked for a buy now purchase.
      */
-    const SET_ASIDE_CART_KEY = 'set_aside_cart_id';
+    const PARKED_CART_KEY = 'parked_cart_id';
 
     /**
      * The cart instance, null until one exists.
@@ -206,6 +206,7 @@ class Cart
 
         $this->setCart($this->cartRepository->update([
             'is_active' => true,
+            'is_parked' => false,
         ], $cartId));
     }
 
@@ -224,12 +225,18 @@ class Cart
     }
 
     /**
-     * Set the current cart aside for a buy now purchase, so the basket can be handed back once
-     * that purchase is over. The first cart set aside wins, a nested buy now leaving it alone.
+     * Park the current cart for a buy now purchase, so the basket can be handed back once
+     * that purchase is over. A second buy now folds its cart into the basket already parked.
      */
-    public function setAsideCart(): void
+    public function parkCart(): void
     {
         if (! $this->cart) {
+            return;
+        }
+
+        if (session()->has(self::PARKED_CART_KEY)) {
+            $this->foldIntoParkedCart($this->cart);
+
             return;
         }
 
@@ -237,24 +244,22 @@ class Cart
 
         $this->deActivateCart();
 
-        if (session()->has(self::SET_ASIDE_CART_KEY)) {
-            return;
-        }
+        $this->cartRepository->update(['is_parked' => true], $cartId);
 
-        session()->put(self::SET_ASIDE_CART_KEY, $cartId);
+        session()->put(self::PARKED_CART_KEY, $cartId);
     }
 
     /**
-     * Hand back the cart set aside for a buy now purchase, doing nothing where one is already
+     * Hand back the cart parked for a buy now purchase, doing nothing where one is already
      * held so a basket is never restored over a cart in use.
      */
-    public function restoreSetAsideCart(): void
+    public function restoreParkedCart(): void
     {
         if ($this->cart) {
             return;
         }
 
-        if (! $cart = $this->pullSetAsideCart()) {
+        if (! $cart = $this->pullParkedCart()) {
             return;
         }
 
@@ -272,16 +277,32 @@ class Cart
     }
 
     /**
-     * Merge a basket set aside for a buy now purchase into the cart in play, for a shopper who
+     * Undo a buy now that failed before it could add its product, dropping the empty cart it
+     * started so the parked basket can be handed straight back.
+     */
+    public function discardBuyNowCart(): void
+    {
+        if (
+            $this->cart
+            && ! $this->cart->all_items->count()
+        ) {
+            $this->removeCart($this->cart);
+        }
+
+        $this->restoreParkedCart();
+    }
+
+    /**
+     * Merge a basket parked for a buy now purchase into the cart in play, for a shopper who
      * left that purchase unfinished and is looking at their cart again.
      */
-    public function mergeSetAsideCart(): void
+    public function mergeParkedCart(): void
     {
         if (! $this->cart) {
             return;
         }
 
-        if (! $cart = $this->pullSetAsideCart()) {
+        if (! $cart = $this->pullParkedCart()) {
             return;
         }
 
@@ -293,6 +314,8 @@ class Cart
      */
     public function mergeCart(CustomerContract $customer): void
     {
+        $this->recoverParkedCart($customer);
+
         if (! $guestCart = $this->sessionCart()) {
             return;
         }
@@ -996,12 +1019,35 @@ class Cart
     }
 
     /**
-     * The cart set aside for a buy now purchase, clearing the key on every outcome so a basket is
+     * Rehydrate the parked pointer from the customer's own row at login, so a basket parked for
+     * a buy now purchase survives the session that held the pointer being dropped on logout.
+     */
+    protected function recoverParkedCart(CustomerContract $customer): void
+    {
+        if (session()->has(self::PARKED_CART_KEY)) {
+            return;
+        }
+
+        $parkCart = $this->cartRepository->findOneWhere([
+            'customer_id' => $customer->id,
+            'is_active' => 0,
+            'is_parked' => 1,
+        ]);
+
+        if (! $parkCart) {
+            return;
+        }
+
+        session()->put(self::PARKED_CART_KEY, $parkCart->id);
+    }
+
+    /**
+     * The cart parked for a buy now purchase, clearing the key on every outcome so a basket is
      * offered back once and only to a session entitled to it.
      */
-    protected function pullSetAsideCart(): ?Contracts\Cart
+    protected function pullParkedCart(): ?Contracts\Cart
     {
-        if (! $cartId = session()->pull(self::SET_ASIDE_CART_KEY)) {
+        if (! $cartId = session()->pull(self::PARKED_CART_KEY)) {
             return null;
         }
 
@@ -1041,6 +1087,33 @@ class Cart
         session()->forget('cart');
 
         $this->setCart($cart);
+    }
+
+    /**
+     * Fold a buy now cart into the basket already parked, so a second buy now started before
+     * the first was finished joins its product to the basket rather than stranding its cart.
+     */
+    protected function foldIntoParkedCart(Contracts\Cart $buyNowCart): void
+    {
+        $parkCart = $this->cartRepository->find(session()->get(self::PARKED_CART_KEY));
+
+        if (! $parkCart) {
+            $cartId = $buyNowCart->id;
+
+            $this->deActivateCart();
+
+            $this->cartRepository->update(['is_parked' => true], $cartId);
+
+            session()->put(self::PARKED_CART_KEY, $cartId);
+
+            return;
+        }
+
+        $this->setCart($parkCart);
+
+        $this->mergeGuestCartItems($buyNowCart);
+
+        $this->forgetCart();
     }
 
     /**

@@ -168,7 +168,7 @@ class CartController extends Controller
 
         if (Cart::hasError()) {
             return new JsonResponse([
-                'message' => Cart::getErrors()['message'] ?? 'Something went wrong',
+                'message' => Cart::getErrors()['message'] ?? trans('admin::app.sales.orders.create.error'),
             ], Response::HTTP_BAD_REQUEST);
         }
 

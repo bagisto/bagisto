@@ -51,7 +51,7 @@ class OnepageController extends APIController
 
             return new JsonResource([
                 'redirect' => true,
-                'data' => route('shop.customer.session.index'),
+                'redirect_url' => route('shop.customer.session.index'),
             ]);
         }
 

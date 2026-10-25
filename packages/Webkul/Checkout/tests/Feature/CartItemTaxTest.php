@@ -68,9 +68,9 @@ it('should tax a product it has just written beside the one the cart already hel
         ->pluck('tax_amount', 'product_id')
         ->map(fn ($amount) => (float) $amount);
 
-    expect($taxAmounts[$first->id])->toBe(10.0)
-        ->and($taxAmounts[$second->id])->toBe(10.0)
-        ->and((float) $cart->tax_total)->toBe(20.0);
+    expect($taxAmounts[$first->id])->toBePrice(10.0)
+        ->and($taxAmounts[$second->id])->toBePrice(10.0)
+        ->and($cart->tax_total)->toBePrice(20.0);
 });
 
 // ============================================================================
@@ -92,8 +92,31 @@ it('should take the tax off an item once the category it was taxed under has bee
 
     $item = CartItem::query()->where('cart_id', Cart::getCart()->id)->firstOrFail();
 
-    expect((float) $item->tax_amount)->toBe(0.0)
+    expect($item->tax_amount)->toBePrice(0.0)
         ->and($item->applied_tax_rate)->toBeNull()
-        ->and((float) $item->total_incl_tax)->toBe((float) $item->total)
-        ->and((float) Cart::getCart()->tax_total)->toBe(0.0);
+        ->and($item->total_incl_tax)->toBePrice((float) $item->total)
+        ->and(Cart::getCart()->tax_total)->toBePrice(0.0);
+});
+
+it('should fall back to the store tax category when the item category it was taxed under is gone', function () {
+    $gone = taxCategoryChargingAtShippingOrigin(10);
+
+    $product = productTaxedUnder($gone);
+
+    $fallback = taxCategoryChargingAtShippingOrigin(5);
+
+    $this->setConfig('sales.taxes.categories.product', $fallback->id);
+
+    Cart::addProduct($product, ['product_id' => $product->id, 'quantity' => 1]);
+
+    expect(Cart::getCart()->tax_total)->toBePrice(10.0);
+
+    $gone->delete();
+
+    Cart::collectTotals();
+
+    $item = CartItem::query()->where('cart_id', Cart::getCart()->id)->firstOrFail();
+
+    expect($item->tax_amount)->toBePrice(5.0)
+        ->and(Cart::getCart()->tax_total)->toBePrice(5.0);
 });
