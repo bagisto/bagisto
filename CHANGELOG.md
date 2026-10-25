@@ -4,6 +4,36 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed overdue invoice reminders being sent to the store's own sender address instead of the customer who placed the order.
+
+- The production Docker images now run Laravel's scheduler from cron, so scheduled tasks such as the Omnibus price snapshots, campaign mail and nightly price indexing run in the container. Set `SCHEDULER_AUTOSTART=false` on all but one container sharing a database.
+
+- Fixed the production Docker images creating the application log as root at startup, which left the store unable to write to it or to report any error.
+
+- Fixed the nginx production image answering every resized image with a 404 status, though the image itself was served.
+
+- Image urls now follow the path set in `imagecache.route` instead of always `cache/`, and setting it to null or empty turns the image cache off rather than breaking the images it serves; product, category and section images then link their full-size stored files.
+
+- Fixed an entry in `config/imagecache.php` naming a missing class, or one without `applyFilter()`, silently serving full-size originals. It is now logged, and `small`, `medium` and `large`, broken or left out, fall back to the image cache's own 100, 300 and 600 pixel square crops.
+
+- Image cache templates are now built by the container, so a template may type-hint what its constructor needs; an object listed in `imagecache.templates` is no longer applied, so list its class name instead.
+
+- The image cache now logs, at most once an hour each, a remote storage disk it cannot read or reach, as with wrong credentials, and a stored image it fails to resize.
+
+- Fixed an admin panel that cannot reach updates.bagisto.com tying up a request for up to a minute on every page while fetching the Bagisto logo. The fetch now gives up after three seconds and is not retried for ten minutes.
+
+- The Appearance preview now cuts the images its sections show as the previewed theme does, including templates only that theme registers, rather than as the theme of the channel the admin domain resolves to.
+
+- The new `search-images:prune` command, which Laravel's scheduler runs daily at 00:05, deletes every image search upload from before today, along with the `product-search/` folder earlier releases kept them in.
+
+- Fixed storefront paths that merely begin with the admin URL, such as `/admin-tools`, staying open during maintenance.
+
+- Fixed storefront pages whose url held the admin URL and a slash anywhere but at the start of the path answering not found, and an `APP_ADMIN_URL` ending in a slash breaking the admin panel.
+
+- A path under the admin URL naming a storefront category, such as `/admin/shoes`, now answers not found instead of redirecting to `/shoes`.
+
+- While the store is down with `php artisan down --redirect` or `--render`, a request expecting JSON now gets the 503 instead of the redirect or page. With `APP_DEBUG` off, the 503 page and JSON now also carry the `Retry-After` and `Refresh` headers `--retry` and `--refresh` set.
+
 - Added the currencies of the East African Community — the Tanzanian, Kenyan, Ugandan and Somali shillings, the Rwandan, Burundian and Congolese francs, and the South Sudanese pound — to the installer.
 
 - Added Swahili (Kiswahili) as a supported locale, translated across the admin, the storefront and the installer.
