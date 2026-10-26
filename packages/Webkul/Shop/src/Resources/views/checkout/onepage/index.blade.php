@@ -262,5 +262,16 @@
                 },
             });
         </script>
+
+        <script type="module">
+            window.addEventListener('pageshow', (event) => {
+                if (
+                    event.persisted
+                    || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'
+                ) {
+                    window.location.reload();
+                }
+            });
+        </script>
     @endPushOnce
 </x-shop::layouts>
