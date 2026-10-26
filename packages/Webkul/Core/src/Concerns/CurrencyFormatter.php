@@ -4,6 +4,7 @@ namespace Webkul\Core\Concerns;
 
 use Webkul\Core\Contracts\Currency;
 use Webkul\Core\Enums\CurrencyPositionEnum;
+use Webkul\Core\Repositories\CurrencyRepository;
 
 trait CurrencyFormatter
 {
@@ -27,7 +28,7 @@ trait CurrencyFormatter
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
         if ($currency->symbol) {
-            if ($this->currencySymbol($currency) == $currency->symbol) {
+            if ($this->localeCurrencySymbol($currency->code) == $currency->symbol) {
                 return $formatter->formatCurrency($price, $currency->code);
             }
 
@@ -82,7 +83,7 @@ trait CurrencyFormatter
     }
 
     /**
-     * Return currency symbol from currency code.
+     * Return the currency's custom symbol, falling back to the locale symbol for its code.
      *
      * @param  string|Currency  $currency
      */
@@ -90,6 +91,22 @@ trait CurrencyFormatter
     {
         $code = $currency instanceof Currency ? $currency->code : $currency;
 
+        if (! $currency instanceof Currency) {
+            $currency = app(CurrencyRepository::class)->findOneByField('code', $code);
+        }
+
+        if ($currency?->symbol) {
+            return $currency->symbol;
+        }
+
+        return $this->localeCurrencySymbol($code);
+    }
+
+    /**
+     * Return the symbol the current locale uses for the currency code.
+     */
+    protected function localeCurrencySymbol(string $code): string
+    {
         $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
