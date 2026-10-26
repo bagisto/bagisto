@@ -27,8 +27,8 @@ class CartController extends APIController
     ) {}
 
     /**
-     * Cart. This endpoint is polled in the background by the header mini-cart, so it only reads;
-     * the parked basket is merged by the cart page itself, never on a background fetch.
+     * Cart. The shopper's basket, untouched by any buy now purchase, which runs on its own
+     * isolated cart.
      */
     public function index(): JsonResource
     {
@@ -73,33 +73,27 @@ class CartController extends APIController
                 throw new \Exception(trans('shop::app.checkout.cart.inactive-add'));
             }
 
-            $response = [];
-
             if ($isBuyNow) {
-                Cart::parkCart();
+                $cart = Cart::createBuyNowCart($product, request()->all());
 
-                $response['redirect'] = route('shop.checkout.onepage.index');
+                return new JsonResource([
+                    'data' => new CartResource($cart),
+                    'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
+                    'redirect' => route('shop.checkout.onepage.index', ['buy_now' => $cart->id]),
+                ]);
             }
 
             $cart = Cart::addProduct($product, request()->all());
 
-            return new JsonResource(array_merge([
+            return new JsonResource([
                 'data' => new CartResource($cart),
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
-            ], $response));
+            ]);
         } catch (InsufficientProductInventoryException $exception) {
-            if ($isBuyNow) {
-                Cart::discardBuyNowCart();
-            }
-
             return response()->json([
                 'message' => $exception->getMessage(),
             ], Response::HTTP_BAD_REQUEST);
         } catch (\Exception $exception) {
-            if ($isBuyNow) {
-                Cart::discardBuyNowCart();
-            }
-
             return response()->json([
                 'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
                 'message' => $exception->getMessage(),
@@ -117,10 +111,6 @@ class CartController extends APIController
         ]);
 
         Cart::removeItem(request()->input('cart_item_id'));
-
-        Cart::collectTotals();
-
-        Cart::restoreParkedCart();
 
         Cart::collectTotals();
 
@@ -143,10 +133,6 @@ class CartController extends APIController
         foreach (request()->input('ids') as $id) {
             Cart::removeItem($id);
         }
-
-        Cart::collectTotals();
-
-        Cart::restoreParkedCart();
 
         Cart::collectTotals();
 
@@ -177,10 +163,6 @@ class CartController extends APIController
 
             Cart::moveToWishlist($id, $qty);
         }
-
-        Cart::collectTotals();
-
-        Cart::restoreParkedCart();
 
         Cart::collectTotals();
 

@@ -164,6 +164,18 @@
                     }
                 },
 
+                created() {
+                    const buyNow = new URLSearchParams(window.location.search).get('buy_now');
+
+                    if (buyNow) {
+                        this.$axios.interceptors.request.use((config) => {
+                            config.params = { ...(config.params || {}), buy_now: buyNow };
+
+                            return config;
+                        });
+                    }
+                },
+
                 mounted() {
                     this.getCart();
                 },

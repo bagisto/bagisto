@@ -2,11 +2,22 @@
 
 namespace Webkul\Shop\Tests\Concerns;
 
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Testing\TestResponse;
+use Webkul\Checkout\Cart as CartFacadeInstance;
 use Webkul\Product\Models\Product;
 
 trait CartHelpers
 {
+    /**
+     * Forget the resolved cart so the next request resolves it afresh from the session, the way a
+     * brand new HTTP request does in production but the shared test container does not on its own.
+     */
+    public function forgetResolvedCart(): void
+    {
+        Facade::clearResolvedInstance(CartFacadeInstance::class);
+    }
+
     /**
      * Add a product to the cart via the real API endpoint.
      */

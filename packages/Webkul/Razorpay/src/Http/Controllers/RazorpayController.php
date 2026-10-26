@@ -66,7 +66,9 @@ class RazorpayController extends Controller
 
             $payment = $this->razorpayPayment->preparePaymentData($cart, $razorpayOrder);
 
-            return view('razorpay::drop-in-ui', compact('payment'));
+            $buyNow = $cart->is_buy_now ? $cart->id : null;
+
+            return view('razorpay::drop-in-ui', compact('payment', 'buyNow'));
         } catch (\Throwable $e) {
             report($e);
 

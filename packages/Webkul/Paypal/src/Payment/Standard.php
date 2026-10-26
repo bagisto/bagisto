@@ -54,12 +54,14 @@ class Standard extends Paypal
     {
         $cart = $this->getCart();
 
+        $buyNow = $cart->is_buy_now ? ['buy_now' => $cart->id] : [];
+
         $fields = [
             'business' => $this->getConfigData('business_account'),
             'invoice' => $cart->id,
             'currency_code' => $cart->cart_currency_code,
             'paymentaction' => 'sale',
-            'return' => route('paypal.standard.success'),
+            'return' => route('paypal.standard.success', $buyNow),
             'cancel_return' => route('paypal.standard.cancel'),
             'notify_url' => route('paypal.standard.ipn'),
             'charset' => 'utf-8',

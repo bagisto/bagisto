@@ -91,7 +91,7 @@ test.describe("cart merge on login", () => {
         await cartPage.expectCartQuantity(secondProduct, 1);
     });
 
-    test("should keep a basket merged out of a buy now across the login that follows", async () => {
+    test("should keep an unfinished buy now in the basket across the login that follows", async () => {
         await cartPage.addProductToCart(firstProduct);
         await cartPage.buyNowProduct(secondProduct);
 
@@ -108,7 +108,7 @@ test.describe("cart merge on login", () => {
         await cartPage.expectCartQuantity(secondProduct, 1);
     });
 
-    test("should hand over both carts when the guest signs in from the buy now checkout", async () => {
+    test("should carry an unfinished buy now into the basket when the guest signs in", async () => {
         await cartPage.addProductToCart(firstProduct);
         await cartPage.buyNowProduct(secondProduct);
 

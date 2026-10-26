@@ -61,7 +61,7 @@ test.describe("buy now", () => {
         }
     });
 
-    test("should put the basket back beside the bought product once checkout is left", async () => {
+    test("should keep the buy now item in the basket when its checkout is left", async () => {
         await cartPage.addProductToCart(basketProduct);
         await cartPage.buyNowProduct(buyNowProduct);
 
@@ -71,7 +71,7 @@ test.describe("buy now", () => {
         await cartPage.expectCartQuantity(buyNowProduct, 1);
     });
 
-    test("should hand the basket back once the bought product has been ordered", async () => {
+    test("should leave the basket untouched once the bought product has been ordered", async () => {
         await cartPage.addProductToCart(basketProduct);
         await cartPage.buyNowProduct(buyNowProduct);
 

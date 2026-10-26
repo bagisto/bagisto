@@ -236,6 +236,30 @@ it('should not place an order for a checkout whose payment has not gone through'
 });
 
 // ============================================================================
+// Buy Now Checkouts
+// ============================================================================
+
+it('should place the order for a paid buy now checkout on its isolated inactive cart', function () {
+    $cart = $this->createCartWithItems('stripe', ['is_active' => 0, 'is_buy_now' => 1]);
+
+    postStripeWebhookEvent('checkout.session.completed', paidStripeCheckoutSession($cart))
+        ->assertOk()
+        ->assertJsonPath('status', 'order_placed');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeTrue();
+});
+
+it('should still refuse a paid checkout on a cart deactivated for any reason other than buy now', function () {
+    $cart = $this->createCartWithItems('stripe', ['is_active' => 0]);
+
+    postStripeWebhookEvent('checkout.session.completed', paidStripeCheckoutSession($cart))
+        ->assertOk()
+        ->assertJsonPath('status', 'order_not_placed');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+// ============================================================================
 // Refunds
 // ============================================================================
 

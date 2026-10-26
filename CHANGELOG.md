@@ -20,7 +20,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a login handing the shopper a cart belonging to a different customer, items and all, when a stale cart session key named it.
 
-- Fixed Buy Now losing whatever was already in the cart. Leaving the purchase unfinished puts those items back in the cart beside it, and completing it hands the cart back.
+- Fixed Buy Now emptying the cart it was started from. A Buy Now now checks out on its own cart and mirrors the item into the main cart, so an unfinished or abandoned Buy Now stays in the cart and a completed one is taken back out.
 
 - Fixed the shipping estimate quoting a total it then threw away, leaving the cart with a chosen shipping method and no shipping in the grand total.
 

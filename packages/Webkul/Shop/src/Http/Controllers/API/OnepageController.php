@@ -167,10 +167,22 @@ class OnepageController extends APIController
 
         $cart = Cart::getCart();
 
+        if (
+            $cart->is_buy_now
+            && ($order = $this->orderRepository->findOneWhere(['cart_id' => $cart->id]))
+        ) {
+            session()->flash('order_id', $order->id);
+
+            return new JsonResource([
+                'redirect' => true,
+                'redirect_url' => route('shop.checkout.onepage.success'),
+            ]);
+        }
+
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return new JsonResource([
                 'redirect' => true,
-                'redirect_url' => $redirectUrl,
+                'redirect_url' => $this->withBuyNow($redirectUrl, $cart),
             ]);
         }
 
@@ -254,6 +266,19 @@ class OnepageController extends APIController
         if (! $this->isPaymentMethodAvailable($cart->payment->method)) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
+    }
+
+    /**
+     * Carry the buy now cart id onto a gateway redirect url, so the gateway's own redirect leg
+     * acts on that isolated cart rather than the shopper's basket.
+     */
+    protected function withBuyNow(string $url, $cart): string
+    {
+        if (! $cart->is_buy_now) {
+            return $url;
+        }
+
+        return $url.(str_contains($url, '?') ? '&' : '?').'buy_now='.$cart->id;
     }
 
     /**

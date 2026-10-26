@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cart', function (Blueprint $table) {
-            $table->boolean('is_parked')->nullable()->default(0)->after('is_active');
+            $table->boolean('is_buy_now')->nullable()->default(0)->after('is_active');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cart', function (Blueprint $table) {
-            $table->dropColumn('is_parked');
+            $table->dropColumn('is_buy_now');
         });
     }
 };

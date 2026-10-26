@@ -243,7 +243,10 @@ class PhonePeController extends Controller
 
             if (
                 ! $cart
-                || ! $cart->is_active
+                || (
+                    ! $cart->is_active
+                    && ! $cart->is_buy_now
+                )
             ) {
                 return response()->json(['status' => 'cart_inactive'], 200);
             }

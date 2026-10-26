@@ -205,7 +205,10 @@ class PayUController extends Controller
 
             if (
                 ! $cart
-                || ! $cart->is_active
+                || (
+                    ! $cart->is_active
+                    && ! $cart->is_buy_now
+                )
             ) {
                 return null;
             }
