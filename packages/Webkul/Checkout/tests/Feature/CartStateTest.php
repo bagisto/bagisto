@@ -292,6 +292,15 @@ it('should never point the session basket key at a buy now cart it is set to', f
         ->and(Cart::getCart()?->id)->toBe($buyNowCart->id);
 });
 
+it('should round trip a buy now token and refuse a tampered or missing one', function () {
+    $token = Cart::buyNowToken(42);
+
+    expect($token)->not->toBe('42')
+        ->and(Cart::parseBuyNowToken($token))->toBe(42)
+        ->and(Cart::parseBuyNowToken('not-a-real-token'))->toBeNull()
+        ->and(Cart::parseBuyNowToken(null))->toBeNull();
+});
+
 // ============================================================================
 // The Row Going Away Part Way Through Collecting Totals
 // ============================================================================

@@ -5,6 +5,7 @@ namespace Webkul\Shop\Tests\Concerns;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Testing\TestResponse;
 use Webkul\Checkout\Cart as CartFacadeInstance;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Product\Models\Product;
 
 trait CartHelpers
@@ -16,6 +17,22 @@ trait CartHelpers
     public function forgetResolvedCart(): void
     {
         Facade::clearResolvedInstance(CartFacadeInstance::class);
+    }
+
+    /**
+     * The opaque buy now token the storefront puts in a URL for a cart id.
+     */
+    public function buyNowToken(int $cartId): string
+    {
+        return Cart::buyNowToken($cartId);
+    }
+
+    /**
+     * The cart id a buy now token resolves back to.
+     */
+    public function parseBuyNowToken(?string $token): ?int
+    {
+        return Cart::parseBuyNowToken($token);
     }
 
     /**

@@ -300,6 +300,8 @@ class PhonePeController extends Controller
             }
 
             Cart::deActivateCart();
+
+            return response()->json(['status' => 'order_created', 'order_id' => $order->id], 200);
         } catch (\Exception $e) {
             report($e);
 

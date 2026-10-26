@@ -2,6 +2,7 @@
 
 namespace Webkul\Checkout;
 
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
@@ -272,6 +273,32 @@ class Cart
         $this->cart = $cart;
 
         return true;
+    }
+
+    /**
+     * The opaque token that stands in for a buy now cart's id in a URL, so the id is never carried
+     * as a plain sequential number and a tampered value will not decrypt.
+     */
+    public function buyNowToken(int $cartId): string
+    {
+        return Crypt::encryptString((string) $cartId);
+    }
+
+    /**
+     * The buy now cart id a token stands for, or null when it is absent or has been tampered with,
+     * so a forged token resolves nothing.
+     */
+    public function parseBuyNowToken(?string $token): ?int
+    {
+        if (! $token) {
+            return null;
+        }
+
+        try {
+            return (int) Crypt::decryptString($token);
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     /**

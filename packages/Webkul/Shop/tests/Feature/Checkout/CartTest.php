@@ -189,9 +189,13 @@ it('should start an isolated buy now cart and mirror the item into the basket', 
 
     $buyNowCartId = $response->json('data.id');
 
-    $response
-        ->assertJsonPath('redirect', route('shop.checkout.onepage.index', ['buy_now' => $buyNowCartId]))
-        ->assertJsonPath('data.items_count', 1);
+    $response->assertJsonPath('data.items_count', 1);
+
+    parse_str((string) parse_url($response->json('redirect'), PHP_URL_QUERY), $redirectQuery);
+
+    expect($response->json('redirect'))->toStartWith(route('shop.checkout.onepage.index'))
+        ->and($redirectQuery['buy_now'] ?? null)->not->toBe((string) $buyNowCartId)
+        ->and($this->parseBuyNowToken($redirectQuery['buy_now'] ?? null))->toBe($buyNowCartId);
 
     expect($buyNowCartId)->not->toBe($basketCartId);
 
@@ -275,22 +279,22 @@ it('should place a buy now order on its own cart and leave the basket', function
     $buyNowCartId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.id');
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
         'shipping' => $this->storefrontAddress(),
     ])->assertOk();
 
     postJson(route('shop.checkout.onepage.shipping_methods.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'shipping_method' => 'free_free',
     ])->assertOk();
 
     postJson(route('shop.checkout.onepage.payment_methods.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'payment' => ['method' => 'cashondelivery'],
     ])->assertOk();
 
-    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $buyNowCartId]));
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $this->buyNowToken($buyNowCartId)]));
 
     $this->assertDatabaseHas('order_items', ['product_id' => $second->id]);
 
@@ -312,24 +316,24 @@ it('should not place a second order when a completed buy now checkout is replaye
     $buyNowCartId = $this->addProductToCart($this->createSimpleProduct()->id, 1, ['is_buy_now' => 1])->json('data.id');
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
         'shipping' => $this->storefrontAddress(),
     ])->assertOk();
 
     postJson(route('shop.checkout.onepage.shipping_methods.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'shipping_method' => 'free_free',
     ])->assertOk();
 
     postJson(route('shop.checkout.onepage.payment_methods.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'payment' => ['method' => 'cashondelivery'],
     ])->assertOk();
 
-    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $buyNowCartId]));
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $this->buyNowToken($buyNowCartId)]));
 
-    postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $buyNowCartId])->assertOk();
+    postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $this->buyNowToken($buyNowCartId)])->assertOk();
 
     expect(Order::query()->where('cart_id', $buyNowCartId)->count())->toBe(1);
 });
@@ -343,7 +347,7 @@ it('should show the buy now cart on the checkout summary while the basket stays 
 
     $buyNowCartId = $this->addProductToCart($second->id, 1, ['is_buy_now' => 1])->json('data.id');
 
-    getJson(route('shop.checkout.onepage.summary', ['buy_now' => $buyNowCartId]))
+    getJson(route('shop.checkout.onepage.summary', ['buy_now' => $this->buyNowToken($buyNowCartId)]))
         ->assertOk()
         ->assertJsonPath('data.id', $buyNowCartId)
         ->assertJsonPath('data.items_count', 1);
@@ -414,22 +418,22 @@ it('should carry the basket and the buy now cart to a guest who signs in', funct
     ])->assertRedirect();
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
         'shipping' => $this->storefrontAddress(),
     ])->assertOk();
 
     postJson(route('shop.checkout.onepage.shipping_methods.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'shipping_method' => 'free_free',
     ])->assertOk();
 
     postJson(route('shop.checkout.onepage.payment_methods.store'), [
-        'buy_now' => $buyNowCartId,
+        'buy_now' => $this->buyNowToken($buyNowCartId),
         'payment' => ['method' => 'cashondelivery'],
     ])->assertOk();
 
-    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $buyNowCartId]));
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $this->buyNowToken($buyNowCartId)]));
 
     $this->assertDatabaseHas('order_items', ['product_id' => $second->id]);
 

@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartAddress;
@@ -79,7 +78,7 @@ class CartController extends APIController
                 return new JsonResource([
                     'data' => new CartResource($cart),
                     'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
-                    'redirect' => route('shop.checkout.onepage.index', ['buy_now' => $cart->id]),
+                    'redirect' => route('shop.checkout.onepage.index', ['buy_now' => Cart::buyNowToken($cart->id)]),
                 ]);
             }
 
@@ -328,11 +327,16 @@ class CartController extends APIController
 
         $productIds = $cart->items->pluck('product_id')->toArray();
 
-        $crossSellIds = DB::table('product_cross_sells')
-            ->whereIn('parent_id', $productIds)
-            ->whereNotIn('child_id', $productIds)
-            ->distinct()
-            ->pluck('child_id');
+        $crossSellIds = $this->productRepository
+            ->with('cross_sells')
+            ->findWhereIn('id', $productIds)
+            ->pluck('cross_sells')
+            ->flatten()
+            ->pluck('id')
+            ->unique()
+            ->diff($productIds)
+            ->values()
+            ->all();
 
         $products = $this->productRepository
             ->whereIn('products.id', $crossSellIds)

@@ -28,15 +28,17 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a product added beside one already in the cart in the same request going untaxed, which understated the tax and total on an admin reorder.
 
+- Fixed the minimum-order check subtracting tax that was never added, so a cart with the discount included but tax excluded was refused below the configured minimum when it should have passed.
+
 - Fixed a guest login with items in both carts ending up with no cart at all, and starting a second one on the next add.
 
 - Fixed a cart emptied of its last item lingering until the next request, which reported a minimum-order error instead of an empty cart.
 
-- Fixed removing selected cart items failing when the selection repeated an item, named none, or was not a list.
+- Hardened the remove-selected-items request to reject a missing, non-array, or duplicate selection with a validation error instead of silently accepting it.
 
 - Fixed the checkout address step failing for a guest whose cart had gone, instead of sending them to sign in.
 
-- Fixed the PayPal Smart Button taking the money before checking the amount, which left a shopper charged against a cheaper cart with no order, and showing nothing when a payment failed. It now verifies the amount and currency against the cart before capturing, and shows the gateway's own reason when a call fails.
+- Fixed the PayPal Smart Button capturing before verifying the amount, which could leave a shopper charged against a cheaper cart with no order; it now verifies amount and currency first and shows the gateway's own error.
 
 - Refactored internals for clearer responsibilities.
 

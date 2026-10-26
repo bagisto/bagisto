@@ -24,7 +24,7 @@
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-7.5"
-                    aria-label="@lang('shop::checkout.onepage.index.bagisto')"
+                    aria-label="@lang('shop::app.checkout.onepage.index.home')"
                 >
                     <img
                         src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"

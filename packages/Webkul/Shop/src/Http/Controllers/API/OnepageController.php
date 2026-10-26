@@ -144,7 +144,7 @@ class OnepageController extends APIController
     }
 
     /**
-     * Store order
+     * Store order.
      */
     public function storeOrder()
     {
@@ -240,7 +240,10 @@ class OnepageController extends APIController
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
-        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
+        if (
+            $cart->haveStockableItems()
+            && ! $cart->shipping_address
+        ) {
             throw new \Exception(trans('shop::app.checkout.onepage.address.check-shipping-address'));
         }
 
@@ -278,15 +281,12 @@ class OnepageController extends APIController
             return $url;
         }
 
-        return $url.(str_contains($url, '?') ? '&' : '?').'buy_now='.$cart->id;
+        return $url.(str_contains($url, '?') ? '&' : '?').'buy_now='.urlencode(Cart::buyNowToken($cart->id));
     }
 
     /**
-     * Checks whether the given payment method is available for the current cart.
-     *
-     * Availability is evaluated server-side against the cart contents (e.g. Cash
-     * On Delivery is not available for non-stockable/downloadable carts). This
-     * prevents crafted requests from bypassing the front-end method filtering.
+     * Whether the given payment method is available for the current cart, evaluated server-side
+     * against the cart contents so a crafted request cannot bypass the front-end filtering.
      */
     protected function isPaymentMethodAvailable(?string $method): bool
     {

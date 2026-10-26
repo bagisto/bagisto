@@ -66,7 +66,7 @@ class RazorpayController extends Controller
 
             $payment = $this->razorpayPayment->preparePaymentData($cart, $razorpayOrder);
 
-            $buyNow = $cart->is_buy_now ? $cart->id : null;
+            $buyNow = $cart->is_buy_now ? Cart::buyNowToken($cart->id) : null;
 
             return view('razorpay::drop-in-ui', compact('payment', 'buyNow'));
         } catch (\Throwable $e) {
@@ -199,17 +199,13 @@ class RazorpayController extends Controller
         try {
             $orderData = (new OrderResource($cart))->jsonSerialize();
 
-            $order = $this->orderRepository->create($orderData);
+            $orderData['payment']['additional'] = [
+                'status' => Invoice::STATUS_PAID,
+                'razorpay_order_id' => $request->input('razorpay_order_id'),
+                'razorpay_payment_id' => $request->input('razorpay_payment_id'),
+            ];
 
-            if ($order->payment) {
-                $order->payment->update([
-                    'additional' => [
-                        'status' => Invoice::STATUS_PAID,
-                        'razorpay_order_id' => $request->input('razorpay_order_id'),
-                        'razorpay_payment_id' => $request->input('razorpay_payment_id'),
-                    ],
-                ]);
-            }
+            $order = $this->orderRepository->create($orderData);
 
             $this->orderRepository->update(['status' => Order::STATUS_PROCESSING], $order->id);
 

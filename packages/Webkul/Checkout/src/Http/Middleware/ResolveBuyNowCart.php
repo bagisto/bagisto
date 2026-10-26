@@ -17,8 +17,10 @@ class ResolveBuyNowCart
      */
     public function handle($request, Closure $next)
     {
-        if ($cartId = $request->input('buy_now')) {
-            Cart::useBuyNowCart((int) $cartId);
+        if ($token = $request->input('buy_now')) {
+            if ($cartId = Cart::parseBuyNowToken($token)) {
+                Cart::useBuyNowCart($cartId);
+            }
         }
 
         return $next($request);
