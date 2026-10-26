@@ -41,13 +41,21 @@ export default {
 
                 const currency = JSON.parse(document.querySelector('meta[name="currency"]').content);
 
-                const symbol = currency.symbol !== '' ? currency.symbol : currency.code;
+                const symbol = currency.symbol ? currency.symbol : currency.code;
 
                 if (! currency.currency_position) {
-                    return new Intl.NumberFormat(locale, {
+                    const formatter = new Intl.NumberFormat(locale, {
                         style: "currency",
                         currency: currency.code,
-                    }).format(price);
+                    });
+
+                    if (! currency.symbol) {
+                        return formatter.format(price);
+                    }
+
+                    return formatter.formatToParts(price)
+                        .map(part => part.type === 'currency' ? currency.symbol : part.value)
+                        .join('');
                 }
 
                 const formatter = new Intl.NumberFormat(locale, {
@@ -76,7 +84,8 @@ export default {
                                 return part.value;
                         }
                     })
-                    .join('');
+                    .join('')
+                    .trim();
 
                 switch (currency.currency_position) {
                     case 'left':
