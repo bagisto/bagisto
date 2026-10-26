@@ -18,7 +18,7 @@ class SearchRepository extends ProductRepository
      */
     public function uploadSearchImage($data)
     {
-        $path = request()->file('image')->store('product-search');
+        $path = $data['image']->store('product-search');
 
         if (! $this->sanitizeSVG($path, $data['image']->getMimeType())) {
             throw ValidationException::withMessages([

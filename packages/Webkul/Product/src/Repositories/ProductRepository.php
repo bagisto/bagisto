@@ -359,7 +359,7 @@ class ProductRepository extends Repository
         $items = $indices['total'] ? $query->get() : [];
 
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
-            'path' => request()->url(),
+            'path' => Paginator::resolveCurrentPath(),
             'query' => $params,
         ]);
 

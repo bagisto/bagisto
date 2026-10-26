@@ -2,6 +2,7 @@
 
 namespace Webkul\Customer\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
@@ -55,18 +56,15 @@ class CustomerRepository extends Repository
     public function uploadImages($data, $customer, $type = 'image')
     {
         if (isset($data[$type])) {
-            $request = request();
-
-            foreach ($data[$type] as $imageId => $image) {
-                $file = $type.'.'.$imageId;
+            foreach ($data[$type] as $image) {
                 $dir = 'customer/'.$customer->id;
 
-                if ($request->hasFile($file)) {
+                if ($image instanceof UploadedFile) {
                     if ($customer->{$type}) {
                         Storage::delete($customer->{$type});
                     }
 
-                    $customer->{$type} = $request->file($file)->store($dir);
+                    $customer->{$type} = $image->store($dir);
                     $customer->save();
                 }
             }

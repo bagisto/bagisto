@@ -2,6 +2,7 @@
 
 namespace Webkul\RMA\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Helpers\StoredFile;
 use Webkul\RMA\Contracts\RMAImage;
@@ -32,13 +33,12 @@ class RMAImageRepository extends Repository
         $previousImageIds = $rma->images()->pluck('id');
 
         if (! empty($requestImages)) {
-            foreach ($requestImages as $imageId => $image) {
-                $file = 'images.'.$imageId;
+            foreach ($requestImages as $image) {
                 $dir = 'rmas/'.$rma->id.'/images';
 
-                if (request()->hasFile($file)) {
+                if ($image instanceof UploadedFile) {
                     $this->create([
-                        'path' => request()->file($file)->store($dir, 'private'),
+                        'path' => $image->store($dir, 'private'),
                         'rma_id' => $rma->id,
                     ]);
                 }

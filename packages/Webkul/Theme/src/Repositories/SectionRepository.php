@@ -54,6 +54,8 @@ class SectionRepository extends Repository
             );
         }
 
+        $uploads = $data;
+
         if ($withUploads) {
             unset($data[$locale]['options']);
         }
@@ -61,7 +63,7 @@ class SectionRepository extends Repository
         $section = parent::update($data, $id);
 
         if ($withUploads) {
-            $this->uploadImage(request()->all(), $section);
+            $this->uploadImage($uploads, $section);
         }
 
         $this->purgeUnreferencedMedia($section);

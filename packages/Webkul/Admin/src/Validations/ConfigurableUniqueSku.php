@@ -3,11 +3,17 @@
 namespace Webkul\Admin\Validations;
 
 use Closure;
+use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Webkul\Product\Repositories\ProductRepository;
 
-class ConfigurableUniqueSku implements ValidationRule
+class ConfigurableUniqueSku implements DataAwareRule, ValidationRule
 {
+    /**
+     * The data under validation.
+     */
+    protected array $data = [];
+
     /**
      * Constructor.
      *
@@ -16,6 +22,16 @@ class ConfigurableUniqueSku implements ValidationRule
     public function __construct(
         protected $currentIds = null,
     ) {}
+
+    /**
+     * Set the data under validation.
+     */
+    public function setData(array $data): static
+    {
+        $this->data = $data;
+
+        return $this;
+    }
 
     /**
      * Run the validation rule.
@@ -34,7 +50,7 @@ class ConfigurableUniqueSku implements ValidationRule
      */
     protected function isSkuExistsInProduct()
     {
-        $requestedSkus = collect(request()->input('variants'))->pluck('sku')->toArray();
+        $requestedSkus = collect($this->data['variants'] ?? null)->pluck('sku')->toArray();
 
         $productRepository = app(ProductRepository::class);
 
