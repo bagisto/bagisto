@@ -222,6 +222,12 @@
             .summary table td:nth-child(3) {
                 text-align: right;
             }
+
+            .footer {
+                clear: both;
+                margin-top: 40px;
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -635,6 +641,12 @@
                         </tbody>
                     </table>
                 </div>
+
+                @if (core()->getConfigData('sales.invoice_settings.pdf_print_outs.footer_text'))
+                    <div class="footer">
+                        {!! nl2br(e(core()->getConfigData('sales.invoice_settings.pdf_print_outs.footer_text'))) !!}
+                    </div>
+                @endif
             </div>
         </div>
     </body>

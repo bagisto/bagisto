@@ -20,6 +20,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added a `--force` option to `bagisto:install`, so an unattended install into a production environment proceeds instead of stopping at a confirmation nobody can answer.
 
+- #11558 [fixed] - Fixed the invoice PDF ignoring the footer text set under PDF Print Outs. It now prints centred below the totals, keeping its line breaks.
+
 - #11541 [fixed] - Fixed an expired or missing CSRF token coming back as a 500 rather than a 419 on a store with debug off, along with every other client error that has no page of its own, such as a throttled request's 429.
 
 - #11539 [fixed] - Fixed a cart rule set to apply to shipping losing its shipping discount whenever a shipping tax category was configured, so the shopper paid the full shipping price.
