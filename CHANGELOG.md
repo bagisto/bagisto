@@ -6,8 +6,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
-- The invoice PDF now prints the footer text set under Configuration → Sales → Invoice Settings → PDF Print Outs below the totals, keeping its line breaks.
-
 - Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
 
 - Fixed cancelling an order of a configurable product leaving its variant's stock reserved, so those units stayed unsellable long after the order was gone.
@@ -21,6 +19,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed the installer naming the Venezuelan bolívar by its retired VEF code and its pre-redenomination symbol, while installing it as VES.
 
 - Added a `--force` option to `bagisto:install`, so an unattended install into a production environment proceeds instead of stopping at a confirmation nobody can answer.
+
+- #11558 [fixed] - Fixed the invoice PDF ignoring the footer text set under PDF Print Outs. It now prints centred below the totals, keeping its line breaks.
 
 - #11541 [fixed] - Fixed an expired or missing CSRF token coming back as a 500 rather than a 419 on a store with debug off, along with every other client error that has no page of its own, such as a throttled request's 429.
 
