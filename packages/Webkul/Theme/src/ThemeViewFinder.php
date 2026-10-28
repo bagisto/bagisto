@@ -24,72 +24,6 @@ class ThemeViewFinder extends FileViewFinder
     public const SHOP_PACKAGE_VIEWS_NAMESPACE = 'shop';
 
     /**
-     * Find a namespaced view considering the active theme.
-     *
-     * @param  string  $name
-     * @return string
-     */
-    protected function findNamespacedView($name)
-    {
-        [$namespace, $view] = $this->parseNamespaceSegments($name);
-
-        $isAdmin = Str::contains(request()->url(), config('app.admin_url').'/');
-
-        $this->setActiveTheme($isAdmin);
-
-        $paths = $this->addThemeNamespacePaths($namespace);
-
-        try {
-            return $this->findInPaths($view, $paths);
-        } catch (\Exception $e) {
-            $view = $this->getThemedViewName($namespace, $view, $isAdmin);
-
-            return $this->findInPaths($view, $paths);
-        }
-    }
-
-    /**
-     * Sets the active theme depending on request context.
-     */
-    protected function setActiveTheme(bool $isAdmin)
-    {
-        if ($isAdmin) {
-            themes()->set(config('themes.admin-default'));
-        }
-    }
-
-    /**
-     * Get the theme-specific view name if not found on first try.
-     *
-     * @param  string  $namespace
-     * @param  string  $view
-     * @param  bool  $isAdmin
-     * @return string
-     */
-    protected function getThemedViewName($namespace, $view, $isAdmin)
-    {
-        $themeCode = themes()->current()?->code;
-
-        if (
-            ! $isAdmin
-            && $namespace !== self::SHOP_PACKAGE_VIEWS_NAMESPACE
-            && Str::contains($view, 'shop.')
-        ) {
-            return Str::replaceFirst('shop.', "shop.$themeCode.", $view);
-        }
-
-        if (
-            $isAdmin
-            && $namespace !== self::ADMIN_PACKAGE_VIEWS_NAMESPACE
-            && Str::contains($view, 'admin.')
-        ) {
-            return Str::replaceFirst('admin.', "admin.$themeCode.", $view);
-        }
-
-        return $view;
-    }
-
-    /**
      * Add possible paths for this namespace, including theme overlays.
      *
      * @param  string  $namespace
@@ -159,5 +93,71 @@ class ThemeViewFinder extends FileViewFinder
         $this->paths = $paths;
 
         $this->flush();
+    }
+
+    /**
+     * Find a namespaced view considering the active theme.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    protected function findNamespacedView($name)
+    {
+        [$namespace, $view] = $this->parseNamespaceSegments($name);
+
+        $isAdmin = is_admin_request();
+
+        $this->setActiveTheme($isAdmin);
+
+        $paths = $this->addThemeNamespacePaths($namespace);
+
+        try {
+            return $this->findInPaths($view, $paths);
+        } catch (\Exception $e) {
+            $view = $this->getThemedViewName($namespace, $view, $isAdmin);
+
+            return $this->findInPaths($view, $paths);
+        }
+    }
+
+    /**
+     * Sets the active theme depending on request context.
+     */
+    protected function setActiveTheme(bool $isAdmin)
+    {
+        if ($isAdmin) {
+            themes()->set(config('themes.admin-default'));
+        }
+    }
+
+    /**
+     * Get the theme-specific view name if not found on first try.
+     *
+     * @param  string  $namespace
+     * @param  string  $view
+     * @param  bool  $isAdmin
+     * @return string
+     */
+    protected function getThemedViewName($namespace, $view, $isAdmin)
+    {
+        $themeCode = themes()->current()?->code;
+
+        if (
+            ! $isAdmin
+            && $namespace !== self::SHOP_PACKAGE_VIEWS_NAMESPACE
+            && Str::contains($view, 'shop.')
+        ) {
+            return Str::replaceFirst('shop.', "shop.$themeCode.", $view);
+        }
+
+        if (
+            $isAdmin
+            && $namespace !== self::ADMIN_PACKAGE_VIEWS_NAMESPACE
+            && Str::contains($view, 'admin.')
+        ) {
+            return Str::replaceFirst('admin.', "admin.$themeCode.", $view);
+        }
+
+        return $view;
     }
 }

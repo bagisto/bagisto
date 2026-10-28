@@ -1,6 +1,6 @@
 # =============================================================================
 # Bagisto Production Image (Single-stage)
-# Single container: Nginx + PHP 8.4 FPM + the bundled database + Supervisor
+# Single container: Nginx + PHP 8.4 FPM + the bundled database + a queue worker + cron, under Supervisor
 #
 # Default mode  : the bundled database (ready to boot, Docker Hub style)
 # Override mode : set DB_HOST to an external address to use that instead
@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y \
         unzip \
     && add-apt-repository ppa:ondrej/php -y \
     && apt-get update && apt-get install -y \
+        cron \
         imagemagick \
         nginx \
         supervisor \
@@ -165,6 +166,23 @@ COPY nginx/config/nginx.conf /etc/nginx/conf.d/bagisto.conf
 COPY nginx/config/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
 RUN sed -i "s/__PHP_VERSION__/${PHP_VERSION}/g" /etc/supervisor/conf.d/bagisto.conf
 COPY shared/db/${DB_ENGINE}/supervisord.conf /etc/supervisor/conf.d/database.conf
+COPY shared/workers/supervisord.conf /etc/supervisor/conf.d/workers.conf
+
+
+# ---------------------------------------------------------------------------
+# Scheduler
+#
+# cron runs Laravel's scheduler every minute from /etc/cron.d/bagisto, which
+# it reads only while nobody but root can write to it. The jobs the packages
+# drop in are removed: none ran before the image had cron, and logrotate's,
+# on the PostgreSQL images, cannot make the web server reopen its logs.
+# pam_loginuid is made optional because a container cannot change a login uid
+# the host has set, and cron would then skip every job without a word.
+# ---------------------------------------------------------------------------
+COPY shared/workers/crontab /etc/cron.d/bagisto
+RUN chmod 0644 /etc/cron.d/bagisto \
+    && find /etc/cron.d /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly -type f ! -name bagisto ! -name .placeholder -delete \
+    && sed -i 's/^session\s\+required\s\+pam_loginuid\.so/session    optional     pam_loginuid.so/' /etc/pam.d/cron
 
 
 # ---------------------------------------------------------------------------
