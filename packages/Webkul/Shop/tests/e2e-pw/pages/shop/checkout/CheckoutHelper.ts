@@ -294,11 +294,17 @@ export class CheckoutHelper extends BasePage {
     }
 
     private async waitForPaymentMethodSaved() {
+        const buyNow = new URL(this.page.url()).searchParams.get("buy_now");
+
+        const summaryUrl = buyNow
+            ? `api/checkout/onepage/summary?buy_now=${encodeURIComponent(buyNow)}`
+            : "api/checkout/onepage/summary";
+
         await expect
             .poll(
                 async () => {
                     const response = await this.page.request
-                        .get("api/checkout/onepage/summary")
+                        .get(summaryUrl)
                         .catch(() => null);
 
                     if (!response || !response.ok()) {
