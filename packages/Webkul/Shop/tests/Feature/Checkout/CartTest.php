@@ -338,6 +338,41 @@ it('should not place a second order when a completed buy now checkout is replaye
     expect(Order::query()->where('cart_id', $buyNowCartId)->count())->toBe(1);
 });
 
+it('should send a completed buy now back to its order instead of reopening the checkout', function () {
+    $this->setConfig('sales.checkout.shopping_cart.cart_page', 1);
+
+    $this->loginAsCustomer();
+
+    $this->addProductToCart($this->createSimpleProduct()->id);
+
+    $buyNowCartId = $this->addProductToCart($this->createSimpleProduct()->id, 1, ['is_buy_now' => 1])->json('data.id');
+
+    $token = $this->buyNowToken($buyNowCartId);
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'buy_now' => $token,
+        'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
+        'shipping' => $this->storefrontAddress(),
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.shipping_methods.store'), [
+        'buy_now' => $token,
+        'shipping_method' => 'free_free',
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'buy_now' => $token,
+        'payment' => ['method' => 'cashondelivery'],
+    ])->assertOk();
+
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $token]));
+
+    $this->forgetResolvedCart();
+
+    $this->get(route('shop.checkout.onepage.index', ['buy_now' => $token]))
+        ->assertRedirect(route('shop.checkout.onepage.success'));
+});
+
 it('should show the buy now cart on the checkout summary while the basket stays its own', function () {
     $first = $this->createSimpleProduct();
 

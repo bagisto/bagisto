@@ -14,9 +14,9 @@ class OnepageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function index()
+    public function index(OrderRepository $orderRepository)
     {
         if (! core()->getConfigData('sales.checkout.shopping_cart.cart_page')) {
             abort(404);
@@ -51,6 +51,15 @@ class OnepageController extends Controller
         }
 
         $cart = Cart::getCart();
+
+        if (
+            $cart?->is_buy_now
+            && ($order = $orderRepository->findOneWhere(['cart_id' => $cart->id]))
+        ) {
+            session()->flash('order_id', $order->id);
+
+            return redirect()->route('shop.checkout.onepage.success');
+        }
 
         /**
          * If cart is has downloadable items and customer is not logged in
