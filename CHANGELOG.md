@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- The invoice PDF now prints the footer text set under Configuration → Sales → Invoice Settings → PDF Print Outs below the totals, keeping its line breaks.
+
 - Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
 
 - Fixed cancelling an order of a configurable product leaving its variant's stock reserved, so those units stayed unsellable long after the order was gone.
