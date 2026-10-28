@@ -2,6 +2,8 @@
 
 namespace Webkul\ImageCache;
 
+use Illuminate\Support\Facades\Storage;
+
 class ImageUrlBuilder
 {
     /**
@@ -15,18 +17,35 @@ class ImageUrlBuilder
     public function __construct(protected TemplateRegistry $templateRegistry) {}
 
     /**
-     * Get a stored image's url through every template it carries, keyed as `{name}_image_url`, served by
-     * the image cache, which reads through the configured disk whichever disk that is.
+     * The path the image cache route sits under, `imagecache.route` trimmed of slashes, or null when it names
+     * none, which leaves the image cache off.
      */
-    public function urls(string $path, ?string $key = null): array
+    public static function route(): ?string
     {
-        $urls = [];
+        $route = config('imagecache.route');
 
-        foreach ($this->templateNames($key) as $template) {
-            $urls[$template.'_image_url'] = url('cache/'.$template.'/'.$path);
+        if (! is_string($route)) {
+            return null;
         }
 
-        return $urls;
+        $route = trim($route, '/');
+
+        return $route === '' ? null : $route;
+    }
+
+    /**
+     * Get a stored image's url through one template, on the image cache route and naming any theme the request's
+     * images are pinned to, or null while the image cache route is off.
+     */
+    public function url(string $path, string $template): ?string
+    {
+        $route = static::route();
+
+        if (is_null($route)) {
+            return null;
+        }
+
+        return url($route.'/'.$this->templateRegistry->qualify($template).'/'.$path);
     }
 
     /**
@@ -44,5 +63,20 @@ class ImageUrlBuilder
             ...$listed,
             'original',
         ]));
+    }
+
+    /**
+     * Get a stored image's urls through every template it carries, keyed as `{name}_image_url`, served by
+     * the image cache from any disk, or linking the stored file itself while the image cache route is off.
+     */
+    public function urls(string $path, ?string $key = null): array
+    {
+        $urls = [];
+
+        foreach ($this->templateNames($key) as $template) {
+            $urls[$template.'_image_url'] = $this->url($path, $template) ?? Storage::url($path);
+        }
+
+        return $urls;
     }
 }

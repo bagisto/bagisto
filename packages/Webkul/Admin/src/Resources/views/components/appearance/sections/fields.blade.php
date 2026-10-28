@@ -234,6 +234,8 @@
                 return {
                     filterPairs: [],
 
+                    storedFilters: {},
+
                     rowKeySeed: 0,
                 };
             },
@@ -300,21 +302,23 @@
                 },
 
                 /**
-                 * The choices a value select shows, including whatever is already stored so
-                 * a value the list no longer offers still displays instead of reading blank.
+                 * The choices a value select shows, including the value the section was saved with so
+                 * one the list does not offer stays selectable after another value is picked.
                  */
                 valueOptionsFor(field, pair) {
                     const options = this.optionsFor(field, pair.key);
 
+                    const stored = this.storedFilters[pair.key] ?? '';
+
                     if (
                         ! options.length
-                        || pair.value === ''
-                        || options.some(option => option.value === pair.value)
+                        || stored === ''
+                        || options.some(option => option.value === stored)
                     ) {
                         return options;
                     }
 
-                    return [{ value: pair.value, label: pair.value }, ...options];
+                    return [{ value: stored, label: stored }, ...options];
                 },
 
                 /**
@@ -412,6 +416,8 @@
                         key,
                         value: stored[key] === null || stored[key] === undefined ? '' : String(stored[key]),
                     }));
+
+                    this.storedFilters = Object.fromEntries(this.filterPairs.map(pair => [pair.key, pair.value]));
 
                     this.filterPairs.forEach(pair => {
                         const options = this.optionsFor(field, pair.key);

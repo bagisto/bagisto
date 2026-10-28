@@ -19,7 +19,6 @@ class ProductCardResource extends JsonResource
      * Create a new resource instance.
      *
      * @param  mixed  $resource
-     * @return void
      */
     public function __construct($resource)
     {
@@ -29,13 +28,8 @@ class ProductCardResource extends JsonResource
     }
 
     /**
-     * Transform the resource into an array.
-     *
-     * This is a slim variant of {@see ProductResource} used for product
-     * listings and carousels. The heavy `description` field and the full
-     * `images` gallery are intentionally omitted - the product card never
-     * renders them - which keeps listing payloads small and avoids
-     * generating cached gallery image URLs for every product.
+     * Transform the resource into the slim array of {@see ProductResource} that listings and carousels render,
+     * leaving out the description and gallery a product card never shows, to keep listing payloads small.
      *
      * @param  Request  $request
      * @return array
@@ -54,7 +48,7 @@ class ProductCardResource extends JsonResource
             'is_featured' => (bool) $this->featured,
             'on_sale' => (bool) $productTypeInstance->haveDiscount(),
             'is_saleable' => (bool) $productTypeInstance->isSaleable(),
-            'is_wishlist' => (bool) auth()->guard()->user()?->wishlist_items
+            'is_wishlist' => (bool) auth()->guard('customer')->user()?->wishlist_items
                 ->where('channel_id', core()->getCurrentChannel()->id)
                 ->where('product_id', $this->id)->count(),
             'min_price' => core()->formatPrice($productTypeInstance->getMinimalPrice()),

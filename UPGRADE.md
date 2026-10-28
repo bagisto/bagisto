@@ -32,7 +32,7 @@
 - [Order Item Ownership Checks Moved Onto The Order](#order-item-ownership-checks-moved-onto-the-order)
 - [A Search Term Is Unique Within A Channel And Locale](#a-search-term-is-unique-within-a-channel-and-locale)
 - [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
-- [The Production Images Run A Queue Worker](#the-production-images-run-a-queue-worker)
+- [The Production Images Run A Queue Worker And The Scheduler](#the-production-images-run-a-queue-worker-and-the-scheduler)
 - [The PayPal Standard IPN Places The Order](#the-paypal-standard-ipn-places-the-order)
 - [Cart Signatures Narrowed And `$cart` Is Protected](#cart-signatures-narrowed-and-cart-is-protected)
 - [The Cart Answers Instead Of Erroring Without A Cart](#the-cart-answers-instead-of-erroring-without-a-cart)
@@ -44,6 +44,12 @@
 - [Removing Selected Cart Items Validates Its Input](#removing-selected-cart-items-validates-its-input)
 - [The Cart Update Event Carries The Written Item](#the-cart-update-event-carries-the-written-item)
 - [A Buy Now Purchase No Longer Loses The Basket](#a-buy-now-purchase-no-longer-loses-the-basket)
+- [Admin Requests Are Recognised By Their Leading Path Segment](#admin-requests-are-recognised-by-their-leading-path-segment)
+- [Maintenance Mode Answers A JSON Request With A 503](#maintenance-mode-answers-a-json-request-with-a-503)
+- [Core Image Templates Are Checked And Built By The Container](#core-image-templates-are-checked-and-built-by-the-container)
+- [The Image Cache Reports A Disk It Cannot Read](#the-image-cache-reports-a-disk-it-cannot-read)
+- [The Appearance Preview Names Its Theme In Image Urls](#the-appearance-preview-names-its-theme-in-image-urls)
+- [Image Search Uploads Are Filed By Day And Pruned](#image-search-uploads-are-filed-by-day-and-pruned)
 
 ---
 
@@ -53,7 +59,7 @@
 
 An SVG the sanitizer cannot parse used to be written to disk as an empty file while the upload reported success, leaving a blank image behind. `Webkul\Core\Traits\Sanitizer` now reports whether it could read the file: `sanitizeSVG()` returns `true` once the file is sanitized in place, and `false` after deleting a file it could not parse, keeping the parser's complaints in `$svgSanitizeIssues`.
 
-Every caller refuses the upload rather than keeping the file. Saving a configuration field, a locale logo, a product attribute image or file, an image search upload or a review attachment now fails with the validation message `core::app.errors.invalid-svg`, and the TinyMCE media endpoint answers with an error. Code that drove any of these and expected an empty file to be stored now receives a validation error instead.
+Every caller refuses the upload rather than keeping the file. Saving a configuration field, a locale logo, a product attribute image or file, or a review attachment now fails with the validation message `core::app.errors.invalid-svg`, and the TinyMCE media endpoint answers with an error. Code that drove any of these and expected an empty file to be stored now receives a validation error instead.
 
 What this changes for custom code:
 
@@ -198,15 +204,17 @@ What this changes for custom code:
 
 ---
 
-### The Production Images Run A Queue Worker
+### The Production Images Run A Queue Worker And The Scheduler
 
 **Impact Probability: Low**
 
-The images in `docker/production/` ran only the web server, PHP and the bundled database, so with `.env.example`'s `QUEUE_CONNECTION=sync` every queued job — order mail, the post-order price and inventory reindex, search terms, sitemap generation — ran inside the request that dispatched it.
+The images in `docker/production/` ran only the web server, PHP and the bundled database, so with `.env.example`'s `QUEUE_CONNECTION=sync` every queued job — order mail, the post-order price and inventory reindex, search terms, sitemap generation — ran inside the request that dispatched it. Nothing in the image ran Laravel's scheduler either, so unless a cron entry on the host ran it, no task Bagisto schedules ran: not the Omnibus price snapshots, the campaign mail, the overdue invoice reminders, the nightly catalog-rule and price indexing or, where it is switched on, the exchange-rate update.
 
 Supervisor now also runs `queue:work --queue=default,broadcastable`, and the entrypoint sets `QUEUE_CONNECTION` to `database` after the build-time install. Pass `QUEUE_CONNECTION=sync` to the container to go back to running that work inline; the worker then idles.
 
-This changes nothing for an installation that is not built from those images. `.env.example` still ships `sync`, which is what an installation with no worker needs: the work still happens, just inside the request.
+Supervisor also runs cron, which runs `php artisan schedule:run` every minute as `www-data` from `/etc/cron.d/bagisto`, each task at its time in `APP_TIMEZONE`, which `.env.example` sets to `Asia/Kolkata`. Remove whatever already runs `schedule:run` for the store, whether a cron entry on the host, a sidecar container or a Kubernetes CronJob, or keep it and set `SCHEDULER_AUTOSTART=false` on every container started from the image; otherwise every task runs twice. When several containers share one database, set it on all of them but one, for the same reason. The first runs act on what is already there: an invoice already marked overdue gets its reminder at the next 03:00, and an exchange-rate import switched on under Configuration starts updating the rates.
+
+This changes nothing for an installation that is not built from those images. `.env.example` still ships `sync`, which is what an installation with no worker needs: the work still happens, just inside the request. Such an installation runs the scheduler from its own cron, as before.
 
 ---
 
@@ -467,6 +475,114 @@ What this changes for custom code:
 - **A replayed buy now order is not placed twice.** `OnepageController::storeOrder()` now returns the order a buy-now cart already has rather than creating a second one, the way the gateways do. A buy-now cart stays reachable by its token even after it is deactivated, so a resubmitted Cash on Delivery buy now would otherwise order twice; an ordinary cart is unaffected, since it goes inactive and is no longer resolved at all.
 
 A Buy Now the shopper cancels or abandons leaves the bought product in the basket, so nothing is lost and there is nothing to restore. Its own inactive buy-now cart is left behind too, reachable only by its token and otherwise ignored.
+
+### Admin Requests Are Recognised By Their Leading Path Segment
+
+**Impact Probability: Low**
+
+Five places decided whether a request was for the admin panel, and they could disagree about the same URL. The theme loader and the view finder took any URL containing `{admin_url}/` for an admin request, wherever the segment appeared. The exception handler matched the path against `{admin_url}/*`, and maintenance mode let through any path that merely began with the admin URL's letters. Only the image cache's template registry read the leading path segment. The theme loader, the view finder, the exception handler and the template registry now call one helper, `is_admin_request(?Request $request = null)`, which is true for the admin URL and every path under it, and false for any request when `APP_ADMIN_URL` is empty, and maintenance mode lets exactly those paths through. The storefront's catch-all route calls the helper too, so a path under the admin URL that no admin route matches answers not found rather than with a storefront page.
+
+| Request, with `APP_ADMIN_URL=admin` | Before | Now |
+|---|---|---|
+| `/admin/catalog/products` | admin | admin |
+| `/cache/large/products/admin/shoe.png`, a storefront path with the segment further down | admin themes and views, storefront error page | storefront |
+| `/administration`, a storefront page, while the channel is under maintenance | let through | held back like any other storefront page |
+| `/admin/shoes`, where `shoes` is a storefront category and no admin route matches | 301 to `/shoes` | not found |
+
+An `APP_ADMIN_URL` written with slashes, such as `/backend/`, now works too. The theme loader and the view finder used to look for `/backend//` and the exception handler for `/backend//*`, so the panel loaded the storefront's theme: its login page rendered with it, and every page past the login answered with the storefront's not found page.
+
+What this changes for custom code:
+
+- **`TemplateRegistry::isAdminRequest()` is gone.** A subclass that called it calls the helper instead; one that overrode it to change which requests use only the core image templates overrides `currentTheme()`.
+- **A route that nests the admin segment further down its path is a storefront request**, such as `/api/admin/...`, where the theme loader and the view finder used to treat it as an admin one. Register a route that needs the admin theme under the admin URL itself.
+- **`Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance` no longer adds `{admin_url}*` to `$except`**, and no longer overrides the constructor. It returns `{admin_url}` and `{admin_url}/*` from `getExcludedPaths()`, which `php artisan down` also writes into the down file, so the page `down --render` serves before the application boots lets the admin panel through as well. A subclass that read the pattern from `$except` reads `getExcludedPaths()` instead, and one that overrides that method calls the parent, or the admin panel answers 503 during maintenance. With `APP_ADMIN_URL` empty, maintenance mode used to let every request through; it now holds back the storefront and the panel alike, so list the admin's address under the channel's allowed IPs.
+- **A product whose url key falls under the admin URL cannot be shown**, such as one imported as `admin/office-chair`: its storefront link answers not found, since every path there belongs to the admin panel. The importer accepts such a key, so look for one in `product_flat.url_key` and change it. Run `php artisan responsecache:clear` after upgrading too, or the page cache keeps serving what it stored for those paths until it expires.
+
+```php
+// Before
+if ($this->isAdminRequest()) {
+
+// After
+if (is_admin_request()) {
+```
+
+---
+
+### Maintenance Mode Answers A JSON Request With A 503
+
+**Impact Probability: Low**
+
+While the store was down with `php artisan down --redirect` or `--render`, a request that expects JSON, such as the storefront's own API calls or a mobile app's, was redirected or handed the HTML page as a browser is. It now gets the 503 itself, as Laravel's own middleware answers it. A browser's page request is answered as before.
+
+The error handler also keeps an HTTP exception's headers now, which it dropped while `APP_DEBUG` is off, so a 503 carries the `Retry-After` and `Refresh` that `--retry` and `--refresh` set, for a page and for JSON alike.
+
+---
+
+### Core Image Templates Are Checked And Built By The Container
+
+**Impact Probability: Low**
+
+A template in `config/imagecache.php` that the image cache could not apply — a class that no longer exists or has no `applyFilter()` method, a closure, a number — was skipped without a word, so `cache/{template}/{path}` served the full-size original, cached for the image lifetime like any resized copy. Those entries are now checked the way a theme's always were: each is reported, at most once an hour, and skipped. `small`, `medium` and `large` then fall back to the package's own classes in `Webkul\ImageCache\Templates`, which also stand in for any of the three the file leaves out, and any other name answers not found.
+
+| Entry in `config/imagecache.php` | Before | Now |
+|---|---|---|
+| `'small' => App\Gone::class`, a class that no longer exists | the full-size original, nothing logged | reported, and 100 × 100 from `Webkul\ImageCache\Templates\Small` |
+| `'small' => fn ($image) => $image->cover(120, 120)` | the full-size original, nothing logged | reported, and 100 × 100 from `Webkul\ImageCache\Templates\Small` |
+| `'thumb' => App\Gone::class` | the full-size original, nothing logged | reported, and not found |
+| no `medium` entry | not found | 300 × 300 from `Webkul\ImageCache\Templates\Medium` |
+
+Template classes, core and theme alike, are now built by the container rather than with `new`, so a filter's constructor may type-hint what it needs, and binding a template class to a subclass replaces it.
+
+What this changes for custom code:
+
+- **An object in `imagecache.templates` is no longer applied.** Register its class name instead. A configuration holding an object or a closure cannot be cached by `php artisan config:cache` in any case.
+- **The fallback is not the storefront's sizing.** The package's classes crop to 100 × 100, 300 × 300 and 600 × 600, while `Webkul\Shop\CacheFilters`, which the shipped `config/imagecache.php` names, size product, category, swatch and carousel images each their own way. Fix the entry the log names rather than leaving the fallback in place.
+- **A constructor the container cannot satisfy**, such as `__construct(int $width)`, is reported through `Webkul\ImageCache\Exceptions\UnprocessableImage` naming that parameter, and its images answer not found. Give the parameter a default, or bind it with `$this->app->when(YourTemplate::class)->needs('$width')->give(...)`.
+- **`TemplateRegistry::core()` returns the checked templates**, with the package's own filled in, rather than the raw `imagecache.templates` array, and the protected `isValid()` takes a nullable theme code, which is null for a core entry.
+- **`TemplateRegistry` is resolved once per request or job** and checks each template entry once, again only when its configuration changes, rather than for every image url a page builds, so an override of `isValid()` runs once per entry. Bind a subclass with `$this->app->scoped(TemplateRegistry::class, YourRegistry::class)` to keep that; one bound with `bind()` checks the templates again each time it is resolved.
+- **A template name in `config/imagecache.php` may hold only letters, digits, `-` and `_`**, as a theme's always had to, now that `@` separates a theme in the url, as in `small@fashion`. An entry such as `'large@2x'` or `'thumb.v2'`, which worked before, is now reported and answers not found, so rename it.
+
+---
+
+### The Image Cache Reports A Disk It Cannot Read
+
+**Impact Probability: Low**
+
+The image cache read the default disk through `Storage::get()`, which swallows a failed read unless the disk sets `throw`, so a remote disk with bad credentials or an unreachable endpoint answered every image not found and logged nothing. It now reads through the disk's driver, and when a read fails it asks the disk whether the file exists. A file that is simply missing stays a silent 404. A file the disk holds but cannot read, or a disk that cannot answer, is reported as `Webkul\ImageCache\Exceptions\UnreadableImage`, at most once an hour per disk and operation.
+
+What this changes for custom code:
+
+- **A disk configured with `'throw' => true` no longer turns a missing image into a 500**, since the read goes through the driver whatever the disk's `throw` and `report` settings.
+- **A disk with `'report' => true` no longer logs a missing image**, since a plain miss is no longer a failure.
+- **An S3 user without `s3:ListBucket`, or any S3-compatible store that answers 403 for a missing key, has each miss reported** as a disk that cannot answer, once an hour. Grant the permission to keep misses silent.
+
+---
+
+### The Appearance Preview Names Its Theme In Image Urls
+
+**Impact Probability: Low**
+
+The preview renders on the admin host, so its images were cut with the theme of the channel that host resolves to, and a template only the previewed theme defines answered not found. While previewing, every resized image url now names the previewed theme in its template segment, as in `cache/small@fashion/...`, which the image cache cuts as that theme does on any host; `original` and `download` urls stay bare. The preview's product and category carousels pass `preview_theme` to the storefront catalog API, which honours it only for an admin holding the `appearance.sections` permission and never caches the answer. Storefront urls are unchanged.
+
+What this changes for custom code:
+
+- **A theme that overrides `shop::home.index`**, or a section that calls the catalog API itself, should merge `$catalogQuery ?? []` into its API url as the shipped view does, or its carousels keep the host channel's images in the preview. Only the preview passes `$catalogQuery`, to `shop::home.index` and the views it includes, so a Blade component builds it from `app(TemplateRegistry::class)->pinnedTheme()`, as `[PreviewImageTheme::PARAMETER => $theme]` when that theme is not null.
+- **A theme or extension that builds an image url by hand**, as `url('cache/'.$template.'/'.$path)`, should call `image_url($path, $template)` instead, as the admin layouts and `ThemeStorage::resizedUrl()` now do. A hand-built url misses the theme the preview pins and breaks on a store that moves `imagecache.route` or turns it off. `image_url()` follows both, and returns null while the route is off, so add `?? Storage::url($path)` where the image must still show.
+- **`ImageCacheController::getTemplate()` is gone.** The controller resolves the url segment through `TemplateRegistry::resolve()`, which returns the template name and the theme to cut it for.
+- **`TemplateRegistry::currentTheme()` honours a theme pinned on the request** under `TemplateRegistry::PINNED_THEME`, and looks an installed theme up by its exact code rather than as a config path.
+
+---
+
+### Image Search Uploads Are Filed By Day And Pruned
+
+**Impact Probability: Low**
+
+The storefront image search kept every upload in `product-search/` on the default disk for good, so the folder grew with every search. An upload now goes to `search-images/{date}/`, one folder for each day, and the new `search-images:prune` command, scheduled daily at 00:05, deletes the folder of every day before today, along with the old `product-search/` folder. The search results page still shows the image for the rest of the day it was uploaded. When a folder cannot be deleted, as when cron runs as a different user from the web server that wrote it, the command fails, naming it in its output and in the log.
+
+What this changes for custom code:
+
+- **Run Laravel's scheduler**, `php artisan schedule:run` every minute from cron, or the uploads are never pruned; the images in `docker/production/` run it already. Run `php artisan search-images:prune` yourself to prune them by hand.
+- **Code that read uploads from `product-search/`** reads them from `Webkul\Product\Repositories\SearchRepository::SEARCH_IMAGES_DIRECTORY` and the day's subfolder instead.
 
 ## Upgrading To v2.5.0 From v2.4
 

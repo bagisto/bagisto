@@ -1,6 +1,9 @@
 <?php
 
+use Webkul\Customer\Models\Wishlist;
 use Webkul\Product\Models\Product;
+use Webkul\Shop\Http\Resources\ProductResource;
+use Webkul\User\Models\Admin;
 
 use function Pest\Laravel\getJson;
 
@@ -21,6 +24,23 @@ it('should omit the heavy description and gallery fields from the products listi
     expect(listedProductCard($this->createSimpleProduct()))
         ->not->toHaveKey('description')
         ->not->toHaveKey('images');
+});
+
+it('should read the wishlist from the customer guard, whichever guard the request uses by default', function () {
+    $product = $this->createSimpleProduct();
+
+    $customer = $this->loginAsCustomer();
+
+    Wishlist::factory()->create([
+        'channel_id' => core()->getCurrentChannel()->id,
+        'product_id' => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    $this->actingAs(Admin::factory()->create(), 'admin');
+
+    expect(listedProductCard($product)['is_wishlist'])->toBeTrue()
+        ->and((new ProductResource($product))->resolve()['is_wishlist'])->toBeTrue();
 });
 
 it('should keep the fields the product card needs in the listing', function () {
