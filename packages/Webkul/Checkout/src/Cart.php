@@ -325,7 +325,11 @@ class Cart
         $this->setCart($basket);
 
         foreach ($buyNowCart->items as $buyNowItem) {
-            if (! $basketItem = $this->cart->items->firstWhere('product_id', $buyNowItem->product_id)) {
+            $basketItem = $this->cart->items->first(
+                fn ($item) => $item->getTypeInstance()->compareOptions($item->additional, $buyNowItem->additional)
+            );
+
+            if (! $basketItem) {
                 continue;
             }
 

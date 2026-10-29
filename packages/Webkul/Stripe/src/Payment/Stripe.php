@@ -226,26 +226,40 @@ class Stripe extends Payment
     }
 
     /**
-     * Convert an amount to the base currency's smallest unit, as Stripe charges it; a zero-decimal currency is unchanged.
-     *
-     * @param  float  $amount
-     * @return int
+     * The amount expressed in the base currency's smallest unit, which may still carry a fraction of one.
      */
-    private function formatAmount($amount)
+    private function minorUnits(float $amount): float
     {
-        $decimal = core()->getBaseCurrency()->decimal ?? 2;
-
-        return (int) round($amount * (10 ** $decimal));
+        return $amount * (10 ** (core()->getBaseCurrency()->decimal ?? 2));
     }
 
     /**
-     * Convert an amount to the base currency's smallest unit as the decimal string Stripe prices a line at.
+     * Convert an amount to a whole unit of the base currency's smallest unit, as Stripe charges it; a
+     * zero-decimal currency is unchanged.
+     */
+    private function formatAmount(float $amount): int
+    {
+        return (int) round($this->minorUnits($amount));
+    }
+
+    /**
+     * Convert an amount to a whole unit of the base currency's smallest unit as the decimal string a line
+     * is priced at, since Stripe Checkout refuses a line priced at a fraction of the smallest unit.
      */
     private function formatDecimalAmount(float $amount): string
     {
-        $decimal = core()->getBaseCurrency()->decimal ?? 2;
+        return sprintf('%.4F', round($this->minorUnits($amount)));
+    }
 
-        return sprintf('%.4F', $amount * (10 ** $decimal));
+    /**
+     * Whether an amount already lands on a whole unit of the base currency's smallest unit, so its line
+     * keeps its quantity rather than collapsing to a row total that avoids losing a unit per piece.
+     */
+    private function isWholeMinorUnit(float $amount): bool
+    {
+        $minorUnits = $this->minorUnits($amount);
+
+        return abs($minorUnits - round($minorUnits)) < 0.00001;
     }
 
     /**
@@ -258,6 +272,8 @@ class Stripe extends Payment
         $lineItems = [];
 
         foreach ($cart->items as $item) {
+            $wholeUnitPrice = $this->isWholeMinorUnit($item->base_price);
+
             $lineItems[] = [
                 'price_data' => [
                     'currency' => strtolower(core()->getBaseCurrencyCode()),
@@ -266,10 +282,10 @@ class Stripe extends Payment
                         'name' => $item->product->name,
                     ],
 
-                    'unit_amount_decimal' => $this->formatDecimalAmount($item->base_price),
+                    'unit_amount_decimal' => $this->formatDecimalAmount($wholeUnitPrice ? $item->base_price : $item->base_total),
                 ],
 
-                'quantity' => $item->quantity,
+                'quantity' => $wholeUnitPrice ? $item->quantity : 1,
             ];
         }
 

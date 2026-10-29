@@ -310,6 +310,43 @@ it('should place a buy now order on its own cart and leave the basket', function
     $this->assertDatabaseHas('cart', ['id' => $basketCartId, 'is_active' => 1]);
 });
 
+it('should remove only the ordered variant from the basket when a configurable buy now is completed', function () {
+    $product = $this->createConfigurableProduct([1000, 1200]);
+
+    $basketVariant = $product->variants->first();
+
+    $buyNowVariant = $product->variants->get(1);
+
+    $basketCartId = $this->addProductToCart($product->id, 1, ['selected_configurable_option' => $basketVariant->id])->json('data.id');
+
+    $buyNowCartId = $this->addProductToCart($product->id, 1, [
+        'selected_configurable_option' => $buyNowVariant->id,
+        'is_buy_now' => 1,
+    ])->json('data.id');
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'buy_now' => $this->buyNowToken($buyNowCartId),
+        'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
+        'shipping' => $this->storefrontAddress(),
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.shipping_methods.store'), [
+        'buy_now' => $this->buyNowToken($buyNowCartId),
+        'shipping_method' => 'free_free',
+    ])->assertOk();
+
+    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'buy_now' => $this->buyNowToken($buyNowCartId),
+        'payment' => ['method' => 'cashondelivery'],
+    ])->assertOk();
+
+    $this->assertOrderPlaced(postJson(route('shop.checkout.onepage.orders.store'), ['buy_now' => $this->buyNowToken($buyNowCartId)]));
+
+    $this->assertDatabaseHas('cart_items', ['cart_id' => $basketCartId, 'product_id' => $basketVariant->id]);
+
+    $this->assertDatabaseMissing('cart_items', ['cart_id' => $basketCartId, 'product_id' => $buyNowVariant->id]);
+});
+
 it('should not place a second order when a completed buy now checkout is replayed', function () {
     $this->addProductToCart($this->createSimpleProduct()->id);
 

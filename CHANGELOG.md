@@ -74,6 +74,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
+- #11560 [fixed] - Fixed Stripe Checkout rejecting an order in a zero-decimal currency such as JPY, and in any cart whose tax or shipping amount carried a fraction of the currency's smallest unit; every line is now priced at a whole smallest unit.
+
 - #11547 [fixed] - A missing cached image showed the default theme's error page on a store running its own channel theme. The error page now uses the channel's theme.
 
 - #11546 [fixed] - A route parameter sharing its name with a Bagisto model, such as `{template}` or `{product}`, was silently looked up as that model and answered 404. Such a parameter is now a plain value unless the route type-hints a model.
