@@ -661,7 +661,7 @@
                                                 </span>
 
                                                 <p>
-                                                    {{ $item->tax_percent }}
+                                                    {{ number_format($item->tax_percent, 2) . '%' }}
                                                 </p>
                                             </div>
 
@@ -672,7 +672,7 @@
                                                 </span>
 
                                                 <p>
-                                                    {{ $item->tax_amount }}
+                                                    {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
                                                 </p>
                                             </div>
 
@@ -887,7 +887,7 @@
                                     </p>
 
                                     <p>
-                                        {{ core()->formatBasePrice($order->base_total_due) }}
+                                        {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
                                     </p>
                                 </div>
 
