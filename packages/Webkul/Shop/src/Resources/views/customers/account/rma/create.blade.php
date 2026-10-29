@@ -443,7 +443,7 @@
                                         @lang('shop::app.customers.account.rma.create.price'):
                                     </span>
 
-                                    <span>@{{ formatPrice(product.price) }}</span>
+                                    <span>@{{ product.formatted_price }}</span>
                                 </p>
 
                                 <p class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800">
@@ -1055,10 +1055,6 @@
                 },
 
                 methods: {
-                    formatPrice(price) {
-                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-                    },
-
                     selectOnlyOne(productId) {
                         const wasChecked = this.isChecked[productId] === true;
 
