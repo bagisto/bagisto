@@ -5,7 +5,6 @@ namespace Webkul\PhonePe\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\PhonePe\Payment\PhonePe;
@@ -36,10 +35,8 @@ class PhonePeController extends Controller
 
     /**
      * Redirect to PhonePe payment gateway.
-     *
-     * @return View
      */
-    public function redirect()
+    public function redirect(): RedirectResponse
     {
         if (! $this->phonePe->hasValidCredentials()) {
             session()->flash('error', trans('phonepe::app.response.provide-credentials'));
@@ -53,6 +50,10 @@ class PhonePeController extends Controller
             session()->flash('error', trans('phonepe::app.response.cart-not-found'));
 
             return redirect()->route('shop.checkout.cart.index');
+        }
+
+        if (Cart::requiresSignInToCheckout()) {
+            return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
         }
 
         $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());

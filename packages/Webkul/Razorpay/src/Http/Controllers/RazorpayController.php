@@ -38,7 +38,7 @@ class RazorpayController extends Controller
     ) {}
 
     /**
-     * Redirects to checkout.
+     * Show the Razorpay checkout for the cart, or send the shopper back when it cannot start.
      */
     public function redirect(): RedirectResponse|View
     {
@@ -50,6 +50,13 @@ class RazorpayController extends Controller
 
         try {
             $cart = Cart::getCart();
+
+            if (
+                $cart
+                && Cart::requiresSignInToCheckout()
+            ) {
+                return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
+            }
 
             $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
 

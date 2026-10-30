@@ -56,6 +56,10 @@ class PayGlocalController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        if (Cart::requiresSignInToCheckout()) {
+            return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
+        }
+
         $currency = $this->payGlocal->getCurrency($cart);
 
         if (! $this->payGlocal->isCurrencySupported($currency)) {

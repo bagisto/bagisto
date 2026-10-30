@@ -59,7 +59,10 @@ class SmartButtonController extends Controller
     {
         abort_if(! $this->smartButton->isAvailable(), 404);
 
-        if (Cart::hasError()) {
+        if (
+            Cart::hasError()
+            || Cart::requiresSignInToCheckout()
+        ) {
             return $this->redirectToCart();
         }
 

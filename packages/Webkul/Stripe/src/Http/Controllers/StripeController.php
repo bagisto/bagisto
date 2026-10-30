@@ -57,6 +57,10 @@ class StripeController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        if (Cart::requiresSignInToCheckout()) {
+            return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
+        }
+
         try {
             $checkoutSession = $this->stripe->createCheckoutSession($cart);
 

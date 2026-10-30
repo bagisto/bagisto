@@ -42,6 +42,22 @@ it('should redirect to the cart when the cart is not found', function () {
     $response->assertSessionHas('error');
 });
 
+it('should send a guest who has to sign in back to checkout instead of starting a Stripe session', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $cart = $this->createCartWithItems('stripe');
+
+    $client = $this->fakeStripeApi();
+
+    $token = Cart::buyNowToken($cart->id);
+
+    $response = $this->get(route('stripe.standard.redirect', ['buy_now' => $token]));
+
+    $response->assertRedirect(route('shop.checkout.onepage.index', ['buy_now' => $token]));
+
+    expect($client->requestsTo('POST', '/v1/checkout/sessions'))->toBeEmpty();
+});
+
 // ============================================================================
 // Payment Callbacks
 // ============================================================================

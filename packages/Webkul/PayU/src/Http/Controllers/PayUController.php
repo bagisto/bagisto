@@ -3,6 +3,7 @@
 namespace Webkul\PayU\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -38,10 +39,8 @@ class PayUController extends Controller
 
     /**
      * Redirect to PayU payment gateway.
-     *
-     * @return View
      */
-    public function redirect()
+    public function redirect(): RedirectResponse|View
     {
         if (! $this->payU->hasValidCredentials()) {
             session()->flash('error', trans('payu::app.response.provide-credentials'));
@@ -55,6 +54,10 @@ class PayUController extends Controller
             session()->flash('error', trans('payu::app.response.cart-not-found'));
 
             return redirect()->route('shop.checkout.cart.index');
+        }
+
+        if (Cart::requiresSignInToCheckout()) {
+            return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
         }
 
         $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());

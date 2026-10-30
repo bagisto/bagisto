@@ -133,6 +133,24 @@ it('should not capture when PayPal approved another currency', function () {
 });
 
 // ============================================================================
+// Nothing Is Captured For A Guest Who Has To Sign In
+// ============================================================================
+
+it('should not capture for a guest while guest checkout is off', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $cart = $this->createCartWithItems('paypal_smart_button');
+
+    fakeSmartButton(paypalOrder($cart), captures: false);
+
+    captureSmartButtonOrder()
+        ->assertForbidden()
+        ->assertJsonPath('redirect_url', route('shop.checkout.cart.index'));
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+// ============================================================================
 // A Matching Approval Still Places The Order
 // ============================================================================
 
