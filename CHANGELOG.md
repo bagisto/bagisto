@@ -68,6 +68,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the checkout address step failing for a guest whose cart had gone, instead of sending them to sign in.
 
+- Fixed a guest placing an order through the checkout API while guest checkout was off, or with a downloadable product in the cart, which only the checkout page refused; the order step and every payment gateway now turn such a guest away before any payment is taken.
+
 - Fixed the PayPal Smart Button capturing before verifying the amount, which could leave a shopper charged against a cheaper cart with no order; it now verifies amount and currency first and shows the gateway's own error.
 
 - Refactored internals for clearer responsibilities.

@@ -44,6 +44,7 @@
 - [Removing Selected Cart Items Validates Its Input](#removing-selected-cart-items-validates-its-input)
 - [The Cart Update Event Carries The Written Item](#the-cart-update-event-carries-the-written-item)
 - [A Buy Now Purchase No Longer Loses The Basket](#a-buy-now-purchase-no-longer-loses-the-basket)
+- [The Checkout API Enforces Guest Checkout](#the-checkout-api-enforces-guest-checkout)
 - [Admin Requests Are Recognised By Their Leading Path Segment](#admin-requests-are-recognised-by-their-leading-path-segment)
 - [Maintenance Mode Answers A JSON Request With A 503](#maintenance-mode-answers-a-json-request-with-a-503)
 - [Core Image Templates Are Checked And Built By The Container](#core-image-templates-are-checked-and-built-by-the-container)
@@ -475,6 +476,23 @@ What this changes for custom code:
 - **A replayed buy now order is not placed twice.** `OnepageController::storeOrder()` now returns the order a buy-now cart already has rather than creating a second one, the way the gateways do. A buy-now cart stays reachable by its token even after it is deactivated, so a resubmitted Cash on Delivery buy now would otherwise order twice; an ordinary cart is unaffected, since it goes inactive and is no longer resolved at all. The checkout page guards the same way — `OnepageController@index` sends a shopper whose buy-now cart already has an order to that order's success page rather than a fresh checkout, so pressing Back after a Buy Now does not reopen a working checkout for the purchased product.
 
 A Buy Now the shopper cancels or abandons leaves the bought product in the basket, so nothing is lost and there is nothing to restore. Its own inactive buy-now cart is left behind too, reachable only by its token and otherwise ignored.
+
+---
+
+### The Checkout API Enforces Guest Checkout
+
+**Impact Probability: Low**
+
+The **Allow Guest Checkout** setting, and the rule that a downloadable product needs an account, were enforced only by the checkout page, so a guest who called the checkout API directly could save an address and place an order with guest checkout turned off. `Webkul\Checkout\Cart::requiresSignInToCheckout()` is new and states the rule once — guest checkout off, no cart, a downloadable product, or a product whose **Guest Checkout** attribute is off — and the checkout page, the address and order steps of `Webkul\Shop\Http\Controllers\API\OnepageController`, the PayPal Smart Button and the redirect leg of every bundled gateway all use it.
+
+What this changes for custom code:
+
+- **A guest is refused at the order step, not only the address step.** `storeOrder()` sends a guest who has to sign in to the sign-in page, buy now token kept, before any payment redirect is issued or order created, so a cart that changed after its address was saved is still held to the rule.
+- **Every bundled gateway checks it before the shopper pays.** The redirect legs of Stripe, PayU, Razorpay, PayGlocal, PhonePe and PayPal Standard send a guest who has to sign in back to the checkout page, buy now token kept, which then sends them to sign in; the Smart Button refuses before it captures. Their return, callback and webhook legs are left alone: by then the money has moved, and refusing would charge the shopper for no order.
+- **A custom gateway should do the same.** Call `Cart::requiresSignInToCheckout()` on the leg that sends the shopper to pay, or before you capture, never after the payment has been taken.
+- A headless client that checked out as a guest while guest checkout was off is now answered with the sign-in redirect.
+
+---
 
 ### Admin Requests Are Recognised By Their Leading Path Segment
 
