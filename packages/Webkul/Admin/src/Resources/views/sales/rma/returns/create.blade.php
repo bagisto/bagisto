@@ -317,7 +317,7 @@
                                         @lang('admin::app.catalog.attributes.create.price'):
                                     </span>
 
-                                    <span>@{{ formatPrice(product.price) }}</span>
+                                    <span>@{{ product.formatted_price }}</span>
                                 </p>
 
                                 <p class="flex gap-1.5 text-sm">
@@ -928,10 +928,6 @@
                 },
 
                 methods: {
-                    formatPrice(price) {
-                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-                    },
-
                     selectOnlyOne(productId) {
                         const wasChecked = this.isChecked[productId] === true;
 
