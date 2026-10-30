@@ -265,8 +265,10 @@ class RMAController extends Controller
             ->findWhereIn('id', $orderItems->pluck('product_id')->filter()->unique()->all())
             ->keyBy('id');
 
-        return $orderItems->each(function ($orderItem) use ($products) {
+        return $orderItems->each(function ($orderItem) use ($products, $order) {
             $orderItem->base_image_url = product_image()->getProductBaseImage($products->get($orderItem->product_id))['small_image_url'] ?? null;
+
+            $orderItem->formatted_price = core()->formatPrice($orderItem->price, $order->order_currency_code);
         });
     }
 

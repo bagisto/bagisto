@@ -46,10 +46,10 @@
                         performAction
                     }">
                         <template v-if="! isLoading">
-                            <div class="row datagrid-head datagrid-head-cards grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1">
+                            <div class="row datagrid-head datagrid-head-cards grid grid-cols-[0.5fr_1fr_1fr_0.7fr_1fr_1fr_0.3fr] grid-rows-1">
                                 <div
                                     class="flex gap-2.5 items-center select-none"
-                                    v-for="(columnGroup, index) in [['increment_id'], ['customer_name'], ['status'], ['grand_total'], ['method_title'], ['created_at']]"
+                                    v-for="(columnGroup, index) in [['increment_id'], ['customer_name'], ['status'], ['base_grand_total'], ['method_title'], ['created_at']]"
                                 >
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span class="[&>*]:after:content-['_/_']">
@@ -87,7 +87,7 @@
                         <template v-else>
                             <x-admin::shimmer.datagrid.table.head
                                 :isMultiRow="true"
-                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                template="0.5fr 1fr 1fr 0.7fr 1fr 1fr 0.3fr"
                                 :groups="[1, 1, 1, 1, 1, 1, 1]"
                                 :massAction="false"
                             />
@@ -105,56 +105,56 @@
                     }">
                         <template v-if="! isLoading">
                             <div
-                                class="row datagrid-card grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row datagrid-card grid grid-cols-[0.5fr_1fr_1fr_0.7fr_1fr_1fr_0.3fr] grid-rows-1 items-center gap-2.5 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="record in available.records"
                             >
-                                <!-- Name, SKU, Attribute Family Columns -->
-                                <div class="flex gap-2.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-html="record.increment_id"
-                                    >
-                                    </p>
-                                </div>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    :data-label="available.columns.find(column => column.index === 'increment_id')?.label"
+                                    v-html="record.increment_id"
+                                >
+                                </p>
 
-                                <!-- Image, Price, Id, Stock Columns -->
-                                <div class="flex gap-1.5">
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ record.customer_name }}
-                                    </p>
-                                </div>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    :data-label="available.columns.find(column => column.index === 'customer_name')?.label"
+                                >
+                                    @{{ record.customer_name }}
+                                </p>
 
-                                <div class="flex gap-1.5 ">
-                                    <p v-html="record.status"></p>
-                                </div>
+                                <p
+                                    :data-label="available.columns.find(column => column.index === 'status')?.label"
+                                    v-html="record.status"
+                                >
+                                </p>
 
-                                <div class="flex gap-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-html="record.grand_total"
-                                    >
-                                    </p>
-                                </div>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    :data-label="available.columns.find(column => column.index === 'base_grand_total')?.label"
+                                    v-html="record.base_grand_total"
+                                >
+                                </p>
 
-                                <div class="flex gap-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-html="record.method_title"
-                                    >
-                                    </p>
-                                </div>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    :data-label="available.columns.find(column => column.index === 'method_title')?.label"
+                                    v-html="record.method_title"
+                                >
+                                </p>
 
-                                <div class="flex gap-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-html="record.created_at"
-                                    >
-                                    </p>
-                                </div>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    :data-label="available.columns.find(column => column.index === 'created_at')?.label"
+                                    v-html="record.created_at"
+                                >
+                                </p>
 
-                                <div class="flex gap-1.5 items-center">
+                                <div
+                                    class="flex items-center justify-end"
+                                    data-label="actions"
+                                >
                                     <a
-                                        class="icon-edit text-2xl cursor-pointer"
+                                        class="icon-edit cursor-pointer text-2xl"
                                         @click="productAvail(record)"
                                     >
                                     </a>
@@ -166,7 +166,7 @@
                         <template v-else>
                             <x-admin::shimmer.datagrid.table.body
                                 :isMultiRow="true"
-                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                template="0.5fr 1fr 1fr 0.7fr 1fr 1fr 0.3fr"
                                 :groups="[1, 1, 1, 1, 1, 1, 1]"
                                 :massAction="false"
                             />
@@ -227,7 +227,11 @@
             type="text/x-template"
             id="v-order-items-list-template"
         >
-            <div v-if="products.length > 0">
+            <div v-if="isLoading">
+                <x-admin::shimmer.sales.rma.order-items />
+            </div>
+
+            <div v-else-if="products.length > 0">
                 <x-admin::form.control-group.control
                     type="hidden"
                     name="order_id"
@@ -317,7 +321,7 @@
                                         @lang('admin::app.catalog.attributes.create.price'):
                                     </span>
 
-                                    <span>@{{ formatPrice(product.price) }}</span>
+                                    <span>@{{ product.formatted_price }}</span>
                                 </p>
 
                                 <p class="flex gap-1.5 text-sm">
@@ -928,10 +932,6 @@
                 },
 
                 methods: {
-                    formatPrice(price) {
-                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-                    },
-
                     selectOnlyOne(productId) {
                         const wasChecked = this.isChecked[productId] === true;
 
@@ -958,16 +958,22 @@
                     },
 
                     getOrderItems(orderId) {
-                        if (this.orderId) {
-                            this.$axios.get('{{ route("admin.sales.rma.requests.get_order_items", ":id") }}'.replace(':id', this.orderId))
-                                .then(response => {
-                                    this.isLoading = false;
+                        if (! this.orderId) {
+                            this.isLoading = false;
 
-                                    this.products = response.data;
-                                }).catch(error => {
-                                    console.log(error);
-                                });
+                            return;
                         }
+
+                        this.isLoading = true;
+
+                        this.$axios.get('{{ route("admin.sales.rma.requests.get_order_items", ":id") }}'.replace(':id', this.orderId))
+                            .then(response => {
+                                this.products = response.data;
+                            })
+                            .catch(error => {})
+                            .finally(() => {
+                                this.isLoading = false;
+                            });
                     },
 
                     calculateReturnWindow(createdAt, returnDays = null) {

@@ -653,39 +653,6 @@
                                                     @endif
                                                 </span>
                                             </div>
-
-                                            <!-- Tax Percent -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.tax-percent')
-                                                </span>
-
-                                                <p>
-                                                    {{ $item->tax_percent }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Tax Amount -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.tax-amount')
-                                                </span>
-
-                                                <p>
-                                                    {{ $item->tax_amount }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Grand Total -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.grand-total')
-                                                </span>
-
-                                                <p>
-                                                    {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -887,7 +854,7 @@
                                     </p>
 
                                     <p>
-                                        {{ core()->formatBasePrice($order->base_total_due) }}
+                                        {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
                                     </p>
                                 </div>
 
