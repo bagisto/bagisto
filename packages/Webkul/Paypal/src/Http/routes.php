@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Paypal\Http\Controllers\SmartButtonController;
 use Webkul\Paypal\Http\Controllers\StandardController;
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web', 'cart.buy_now']], function () {
     Route::prefix('paypal/standard')->group(function () {
         Route::get('/redirect', [StandardController::class, 'redirect'])->name('paypal.standard.redirect');
 

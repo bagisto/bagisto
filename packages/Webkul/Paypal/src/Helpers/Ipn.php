@@ -118,7 +118,8 @@ class Ipn
             $response = Http::asForm()
                 ->post($url, ['cmd' => self::VALIDATION_COMMAND] + $this->post);
 
-            return $response->successful() && $response->body() === self::VERIFIED_RESPONSE;
+            return $response->successful()
+                && $response->body() === self::VERIFIED_RESPONSE;
         } catch (\Exception $e) {
             report($e);
 
@@ -189,7 +190,10 @@ class Ipn
 
         if (
             ! $cart
-            || ! $cart->is_active
+            || (
+                ! $cart->is_active
+                && ! $cart->is_buy_now
+            )
         ) {
             return null;
         }

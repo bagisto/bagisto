@@ -93,6 +93,10 @@
                         razorpay_signature: response.razorpay_signature
                     });
                     
+                    @if (! empty($buyNow))
+                        params.append('buy_now', @json((string) $buyNow));
+                    @endif
+
                     window.location.href = "{{ route('razorpay.payment.success') }}?" + params.toString();
                 }
             });

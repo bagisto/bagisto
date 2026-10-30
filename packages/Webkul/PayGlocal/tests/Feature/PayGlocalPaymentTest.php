@@ -130,6 +130,8 @@ it('should redirect to the cart when the cart currency is not accepted', functio
 
     Cart::shouldReceive('getCart')->andReturn($cart);
 
+    Cart::shouldReceive('requiresSignInToCheckout')->andReturn(false);
+
     $this->payGlocalMock->shouldReceive('isCurrencySupported')->andReturn(false);
 
     $response = $this->get(route('payglocal.redirect'));
@@ -154,6 +156,8 @@ it('should send the customer to PayGlocal without recording anything of its own'
 
     Cart::shouldReceive('getCart')->andReturn($cart);
 
+    Cart::shouldReceive('requiresSignInToCheckout')->andReturn(false);
+
     $this->payGlocalMock->shouldReceive('initiatePayment')
         ->andReturn([
             'gid' => 'gl_o-test_gid',
@@ -170,6 +174,8 @@ it('should report a failure when PayGlocal will not start the payment', function
 
     Cart::shouldReceive('getCart')->andReturn($cart);
 
+    Cart::shouldReceive('requiresSignInToCheckout')->andReturn(false);
+
     $this->payGlocalMock->shouldReceive('initiatePayment')->andReturn(null);
 
     $response = $this->get(route('payglocal.redirect'));
@@ -177,6 +183,18 @@ it('should report a failure when PayGlocal will not start the payment', function
     $response->assertRedirect(route('shop.checkout.cart.index'));
 
     $response->assertSessionHas('error');
+});
+
+it('should send a guest who has to sign in back to checkout instead of starting a PayGlocal payment', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $this->createCartWithItems('payglocal');
+
+    $this->payGlocalMock->shouldNotReceive('initiatePayment');
+
+    $response = $this->get(route('payglocal.redirect'));
+
+    $response->assertRedirect(route('shop.checkout.onepage.index'));
 });
 
 // ============================================================================

@@ -7,6 +7,20 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\withSession;
 
 // ============================================================================
+// Standard Redirect
+// ============================================================================
+
+it('should send a guest who has to sign in back to checkout instead of starting a PayPal payment', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $this->createCartWithItems('paypal_standard');
+
+    get(route('paypal.standard.redirect'))
+        ->assertRedirect(route('shop.checkout.onepage.index'))
+        ->assertSessionMissing(StandardController::INTENT_KEY);
+});
+
+// ============================================================================
 // Standard Return
 // ============================================================================
 

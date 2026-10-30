@@ -12,6 +12,16 @@
 >
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
+### Medium Impact Changes
+
+- [The Cart Facade Delegates Its Tax And Address Work](#the-cart-facade-delegates-its-tax-and-address-work)
+- [Two New Cart Events, And Two That Now Fire More Often](#two-new-cart-events-and-two-that-now-fire-more-often)
+- [The Minimum Order Amount No Longer Subtracts Untaxed Tax](#the-minimum-order-amount-no-longer-subtracts-untaxed-tax)
+- [The PayPal Smart Button Verifies Before It Captures](#the-paypal-smart-button-verifies-before-it-captures)
+- [An Emptied Cart Is Removed In The Same Request](#an-emptied-cart-is-removed-in-the-same-request)
+- [Stale Tax Is Taken Off When Its Category Goes](#stale-tax-is-taken-off-when-its-category-goes)
+- [The Cart Session Key Has One Reader](#the-cart-session-key-has-one-reader)
+
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
@@ -24,6 +34,17 @@
 - [Index Jobs Retry A Lock Conflict](#index-jobs-retry-a-lock-conflict)
 - [The Production Images Run A Queue Worker And The Scheduler](#the-production-images-run-a-queue-worker-and-the-scheduler)
 - [The PayPal Standard IPN Places The Order](#the-paypal-standard-ipn-places-the-order)
+- [Cart Signatures Narrowed And `$cart` Is Protected](#cart-signatures-narrowed-and-cart-is-protected)
+- [The Cart Answers Instead Of Erroring Without A Cart](#the-cart-answers-instead-of-erroring-without-a-cart)
+- [A Guest Session Will Not Load A Customer's Cart](#a-guest-session-will-not-load-a-customers-cart)
+- [Cart Payments Are Written Through A Repository](#cart-payments-are-written-through-a-repository)
+- [Removing A Cart Only Lets Go Of That Cart](#removing-a-cart-only-lets-go-of-that-cart)
+- [The Shipping Estimate Keeps The Rates It Quoted](#the-shipping-estimate-keeps-the-rates-it-quoted)
+- [The Cart Survives Its Row Going Mid-Request](#the-cart-survives-its-row-going-mid-request)
+- [Removing Selected Cart Items Validates Its Input](#removing-selected-cart-items-validates-its-input)
+- [The Cart Update Event Carries The Written Item](#the-cart-update-event-carries-the-written-item)
+- [A Buy Now Purchase No Longer Loses The Basket](#a-buy-now-purchase-no-longer-loses-the-basket)
+- [The Checkout API Enforces Guest Checkout](#the-checkout-api-enforces-guest-checkout)
 - [Admin Requests Are Recognised By Their Leading Path Segment](#admin-requests-are-recognised-by-their-leading-path-segment)
 - [Maintenance Mode Answers A JSON Request With A 503](#maintenance-mode-answers-a-json-request-with-a-503)
 - [Core Image Templates Are Checked And Built By The Container](#core-image-templates-are-checked-and-built-by-the-container)
@@ -212,6 +233,264 @@ What this changes for custom code:
 - **`Ipn` takes `CartRepository`** as its second constructor argument, so resolve it through the container rather than building it by hand.
 - **`payment_status` is read as a `Webkul\Paypal\Enums\PaypalPaymentStatus`**, and the protocol strings the helper compares against are constants on `Ipn` — `VALIDATION_COMMAND`, `VERIFIED_RESPONSE`, `RECURRING_TRANSACTION_TYPE` and `DEFAULT_PAYMENT_TYPE`.
 - **`paypal/standard/ipn` runs in the `web` middleware group**, with request forgery prevention removed on the route, which is how every other gateway's webhook is registered. The route name is unchanged.
+
+---
+
+### The Cart Facade Delegates Its Tax And Address Work
+
+**Impact Probability: Medium**
+
+`Webkul\Checkout\Cart` had grown to carry a complete tax engine and the whole cart-address pipeline alongside its own job of holding a cart. Both have moved into collaborators — `Webkul\Checkout\Helpers\CartTax` and `Webkul\Checkout\Helpers\CartAddress` — and `Cart` now delegates to them. Every public method of the facade is unchanged and still does what it did, so storefront and admin code that goes through `Cart::` is unaffected.
+
+What this changes for custom code:
+
+- **The constructor's signature changed.** It now takes `CartRepository`, `CartItemRepository`, `CartPaymentRepository`, `CartAddress`, `CartTax` and `WishlistRepository`. `ProductRepository` is gone — it was never used — and `TaxCategoryRepository`, `CartAddressRepository` and `CustomerAddressRepository` moved to the collaborator that uses them. Code that builds the class by hand rather than resolving it from the container has to be updated; nothing in core does.
+- **`Cart::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN`, `..._BILLING_ADDRESS` and `..._SHIPPING_ADDRESS` still exist** and still hold the same strings. They now alias `CartTax::BASED_ON_SHIPPING_ORIGIN` and friends, so compare against either.
+- **`Cart::BILLING_ADDRESS_FIELDS` and `Cart::SHIPPING_ADDRESS_FIELDS`** are new constants holding the request fields each address is built from, aliasing `CartAddress::BILLING_FIELDS` and `CartAddress::SHIPPING_FIELDS`.
+- A subclass that overrode `calculateItemsTax()`, `calculateShippingTax()`, `updateOrCreateBillingAddress()`, `updateOrCreateShippingAddress()` or `customerAddressId()` still works — those remain on `Cart` as delegating methods — but the implementation it may have been copying now lives in the helper.
+
+---
+
+### Cart Signatures Narrowed And `$cart` Is Protected
+
+**Impact Probability: Low**
+
+Several `Cart` methods declared types they could not honour, and the cart property's docblock claimed a type it did not hold.
+
+What this changes for custom code:
+
+- **`addProduct()` returns `Contracts\Cart`** and **`updateItems()` returns `bool`.** Both previously declared `|\Exception` in the union; neither could ever return one, because both throw. Callers already wrap them in `try`/`catch`.
+- **`getErrors(): array`** now declares its return type. All four of its branches already returned an array, so no call can start throwing — but a subclass overriding it without a declared return type has to add one.
+- **`getOrderAmount(): float`** was `: int` over a `decimal(12,4)` column, which emitted a precision-loss deprecation on every minimum-order check. `int` to `float` is a widening, so a subclass declaring `: int` stays valid.
+- **`$cart` is `protected ?Contracts\Cart`**, previously `private` with a `@var Contracts\Cart` docblock that was wrong — the property is null until a cart exists. A subclass that redeclared `private $cart` will now fatal at class load with an incompatible-visibility error rather than quietly shadowing it.
+
+---
+
+### The Cart Answers Instead Of Erroring Without A Cart
+
+**Impact Probability: Low**
+
+A group of public methods dereferenced the cart without checking it was there, so calling any of them before a cart existed raised a PHP error rather than answering. Each now answers with whatever that method already used for "nothing", and no signature changed.
+
+What this changes for custom code:
+
+- `getItemByProduct()` returns `null`, `setCouponCode()` and `removeCouponCode()` return `$this`, `moveToWishlist()` returns `false`, `getOrderAmount()` returns `0.0`, and `setCustomerPersonnelDetails()` does nothing.
+- **The four address delegates answer too.** `customerAddressId()` returns `null` and `saveAddresses()` returns without doing anything; `updateOrCreateBillingAddress()` and `updateOrCreateShippingAddress()` throw the same `shop::app.checkout.cart.index.empty-product` exception `updateItems()` already threw, because their return types promise an address they cannot produce. They previously dereferenced the absent cart directly and raised the same null-property error as the methods above.
+- Code that relied on catching `Attempt to read property … on null` or `Call to a member function … on null` from these calls has to test the return value instead. The errors they raised were never a documented contract.
+
+---
+
+### Two New Cart Events, And Two That Now Fire More Often
+
+**Impact Probability: Medium**
+
+Every cart event is now dispatched from `Webkul\Checkout\Cart`; the new helpers dispatch nothing. Two cart mutations that announced nothing now do, and two existing pairs fire on more paths than before.
+
+What this changes for custom code:
+
+- **`checkout.cart.destroy.before` and `checkout.cart.destroy.after`** are new, carrying the cart id, and fire from `removeCart()`. The cart's own removal previously announced nothing, while `checkout.cart.delete.*` — which names item removal — made it look as though it did.
+- **`checkout.cart.validate.items.before` and `checkout.cart.validate.items.after`** are new, carrying the cart, and fire around `validateItems()`. The `before` event is the only hook that sees the cart before validation removes an invalid item or the cart itself.
+- **`checkout.cart.delete.before` and `checkout.cart.delete.after` now also fire when an item moves to the wishlist.** `cartItemRepository->delete()` is reached on that path too, and a listener reconciling cart state was being skipped. A listener that assumed these events meant "removed from the cart and not kept" will now fire for a move as well.
+- **`checkout.cart.calculate.shipping.tax.before` and `.after` now fire on every totals collection.** They previously fired only when the cart had a selected shipping rate, a configured shipping tax category and a category that resolved. They now mean "the shipping tax step ran" rather than "shipping tax was calculated", which is what the matching items-tax pair has always meant. A listener that assumed a shipping rate exists has to check.
+
+---
+
+### The Minimum Order Amount No Longer Subtracts Untaxed Tax
+
+**Impact Probability: Medium**
+
+`getOrderAmount()` subtracted the cart's tax from the measured amount whenever **Configuration → Sales → Order Settings → Minimum Order → Include Discount Amount** was on — including when **Include Tax To Amount** was off and no tax had been added in the first place. A cart with a 100.00 subtotal, 10.00 of tax and a 5.00 discount was measured at 85.00 instead of 95.00, so carts between those figures were refused.
+
+With both flags on the measured amount is unchanged, because the subtraction was cancelling the addition above it. Only the "include discount, exclude tax" combination changes.
+
+**Carts that were blocked below your configured minimum may now pass it.** Review the minimum if your store runs that combination.
+
+---
+
+### A Guest Session Will Not Load A Customer's Cart
+
+**Impact Probability: Low**
+
+`initCart()` loaded the cart named by the `cart` session key whenever that cart was active, without checking who owned it. It now also requires the cart to have no `customer_id`, so a stale key can no longer resurrect a cart that belongs to a signed-in customer for a visitor who is not signed in.
+
+`refreshCart()` also drops the session key when the row it points at has gone, rather than leaving the key behind pointing at a deleted cart.
+
+---
+
+### The PayPal Smart Button Verifies Before It Captures
+
+**Impact Probability: Medium**
+
+The Smart Button captured the PayPal order first and checked the amount afterwards, so an order approved against a cheaper cart took the money and was then refused — leaving a charged shopper with no order. The amount and currency are now verified against the cart **before** anything is captured, and the capture is checked again afterwards.
+
+What this changes for custom code:
+
+- **`createOrder` and `captureOrder` return 404 when the method is disabled.** Neither endpoint checked `isAvailable()`, so an order could be placed through a switched-off payment method.
+- **A failed call answers with a JSON body.** The controller used to run `json_decode()` over the exception message, which produced the gateway's own JSON for an SDK error and a literal `null` for one of Bagisto's own messages — so a shopper saw a 400 with nothing in it. A non-JSON message is now returned as `{"message": "…"}`, and the storefront shows it instead of a generic failure.
+- The approved order must have status `APPROVED` and exactly one purchase unit, in the cart's own currency.
+
+---
+
+### Cart Payments Are Written Through A Repository
+
+**Impact Probability: Low**
+
+`savePaymentMethod()` deleted the existing payment row and created the replacement in two unguarded statements, with `new CartPayment` bypassing the registered proxy.
+
+What this changes for custom code:
+
+- **`Webkul\Checkout\Repositories\CartPaymentRepository`** is new, and the write now goes through it — so a Concord model swap for `CartPayment` is honoured.
+- **`Webkul\Checkout\Models\CartPayment` declares `$fillable`** (`method`, `method_title`, `cart_id`). The model was previously fully guarded, so a repository `create()` would have thrown a `MassAssignmentException`.
+- **The delete and the insert run in one transaction**, and a request with no `payment.method` returns `false` instead of throwing after the delete had already committed.
+
+---
+
+### An Emptied Cart Is Removed In The Same Request
+
+**Impact Probability: Medium**
+
+`removeItem()` deleted the item row but left the cart holding its already-loaded `items` collection, so the `validateItems()` call inside the very next `collectTotals()` counted the item it had just removed. Removing the last item therefore left an active cart row with no items in it, and the cart was only cleaned up on the following request. The two item relations are now invalidated after the delete, so the emptied cart is removed at once.
+
+What this changes for custom code:
+
+- **`checkout.cart.destroy.before` and `checkout.cart.destroy.after` fire in the request that empties the cart**, not the next one. A listener that assumed it had one more request in which to read the cart no longer does.
+- **The two removal endpoints answer `data: null` for a cart that has gone.** `shop.api.checkout.cart.destroy` and `shop.api.checkout.cart.destroy_selected` returned a fully serialised resource for a cart with nothing in it; they now match what `index` already returned, and the storefront reads the empty state from it.
+- **`getErrors()` reports `CART_NOT_FOUND` rather than `MINIMUM_ORDER_AMOUNT`** after the last item goes, because there is no longer a zero-total cart left to measure against the minimum.
+
+---
+
+### Stale Tax Is Taken Off When Its Category Goes
+
+**Impact Probability: Medium**
+
+`CartTax` skipped an item whose tax category no longer resolved, leaving `applied_tax_rate`, `tax_percent` and both tax amounts at whatever the last successful pass had written. Because the totals are summed from the item rows after they are reloaded, that dead tax kept being added to `tax_total` and `grand_total` on every collection. Deleting a tax category therefore left carts quietly charging a tax that no longer existed, and the same held for the selected shipping rate.
+
+An item or shipping rate the configured categories no longer resolve is now explicitly untaxed: the rate is cleared, the amounts are zeroed, and the tax-inclusive fields are brought back in line with their net counterparts. An item that was never taxed is left alone rather than written on every pass.
+
+Two further cases are covered. An item's own tax category, its product's and the store's are each tried in turn, and the first that **still resolves** is used — so a deleted category pinned on the item or the product falls through to the next rather than untaxing an item another category would still tax. And the shipping rate's tax is reset before every recalculation, so a rate that stops applying — the address moved to a region the shipping category has no rate for, say — drops its tax the way an item already did, not only when the category itself is deleted.
+
+**Check the totals of any cart whose tax category you have deleted.** They will fall by the tax that was being carried.
+
+---
+
+### Removing A Cart Only Lets Go Of That Cart
+
+**Impact Probability: Low**
+
+`removeCart()` takes the cart to delete as an argument but then cleared the held cart and the `cart` session key unconditionally, whichever cart had been passed. Merging a guest cart on login ends by removing the *guest* cart, so a successful merge left the facade holding nothing while the merged cart was alive and active — and a later `addProduct()` in the same request would start a second active cart for the customer.
+
+Each reset is now conditional on naming the cart being removed: the held cart is dropped only when it is that cart, and the session key only when it points at it. Every caller in core passes either the held cart or one it had just loaded, so nothing else changes.
+
+This also stops `Cart::removeCart()` from an admin screen clearing `session('cart')` in the operator's own storefront session.
+
+---
+
+### The Shipping Estimate Keeps The Rates It Quoted
+
+**Impact Probability: Low**
+
+`estimateShippingMethods()` injects an unsaved address into the cart's `billing_address` and `shipping_address` relations so a destination can be quoted without storing it. Collecting the totals replaces the cart instance, which discarded those relations, so the `Shipping::collectRates()` call that built the response then deleted the existing rate rows and wrote none back. The cart was left with a shipping method and a shipping amount but no rates, and the next collection dropped shipping out of the grand total while still showing the method as chosen.
+
+The address is re-applied after the totals are collected, so the rates survive and the quoted total holds. A custom controller doing the same `setRelation()` trick needs the same re-application after any `Cart::collectTotals()`.
+
+---
+
+### The Cart Survives Its Row Going Mid-Request
+
+**Impact Probability: Low**
+
+A cart row can be deleted between one statement and the next — by a listener, by another request, or by the cart's own validation emptying it. Several methods assumed it could not be.
+
+What this changes for custom code:
+
+- **`collectTotals()` returns early** instead of raising `Attempt to assign property … on null` when the reload part way through finds the row gone. It still returns `$this`.
+- **`addProduct()` throws the translated empty-cart message** rather than a `TypeError` from its own return type. A `TypeError` is not an `Exception`, so `catch (\Exception $e)` around an add — as the cart merge and both reorder loops use — did not catch it.
+- **`activateCart()` does nothing for an id that resolves to no cart**, instead of throwing `ModelNotFoundException`. Note that `deActivateCart()` is terminal for a guest: it drops the only handle the session had on the cart.
+- **`removeItem()` asks the database whether the item is still there**, so removing the same id twice returns `false` the second time instead of raising a PHP error from inside the repository.
+- **`OnepageController::storeAddress()` sends the shopper to sign in** rather than erroring when the cart has gone before the address is posted.
+
+---
+
+### Removing Selected Cart Items Validates Its Input
+
+**Impact Probability: Low**
+
+`shop.api.checkout.cart.destroy_selected` looped over `ids` from the request without validating it, so a request with no `ids`, with `ids` that was not a list, or with the same id twice ran the loop anyway — the duplicate removing nothing on its second pass while the endpoint still answered `200`. It now validates `ids` as a required array of **distinct** integers and answers 422, so a repeated id is a validation error rather than a success over a no-op.
+
+The storefront only offers the control when at least one item is selected, and never names the same item twice, so no interface change follows. A custom client that relied on an empty, absent, or duplicate-bearing `ids` being accepted has to stop sending it.
+
+---
+
+### The Cart Session Key Has One Reader
+
+**Impact Probability: Medium**
+
+The `cart` session key had two readers that disagreed. `initCart()` accepted the cart it names only when the row resolved, was active, and had no `customer_id`. `mergeCart()` checked only that the row existed. Nothing ever removed a key whose guard had failed, so a stale key survived every request that met it.
+
+That gap let a login take a cart it should not have. With the key naming a cart that already belonged to another customer, `mergeCart()` fell through to `adoptGuestCart()` and stamped the logging-in customer onto it — **one customer's cart, with their items in it, became another's.** With the key naming a cart an order had already been raised from, the purchased lines were merged back into the new cart. The PayPal IPN is a live route to that state: it runs under the `web` middleware, so it gets its own throwaway session and its `Cart::deActivateCart()` clears *its* session while the buyer's browser keeps the key.
+
+Both readers now go through one guard, which accepts strictly less than `initCart()` did before and forgets the key on every other outcome, so a dead key heals on the request that meets it.
+
+What this changes for custom code:
+
+- **`Webkul\Checkout\Cart::sessionCart()` and `sessionCartId()`** are new `protected` methods. A subclass that overrode the session read by other means should move onto them.
+- **A key holding anything other than the object the cart writes is discarded** rather than dereferenced. Reading `->id` off, say, an integer previously threw an `ErrorException` from inside the constructor — before any of the class's own `session()->forget('cart')` lines could run — so the visitor got a 500 on every storefront page until the cookie was cleared. No core writer produces that shape; only third-party code did.
+- **`mergeCart()` returns without merging** when the key fails the guard, instead of adopting or merging the cart it names.
+
+This completes [A Guest Session Will Not Load A Customer's Cart](#a-guest-session-will-not-load-a-customers-cart), which fixed the load path only.
+
+---
+
+### The Cart Update Event Carries The Written Item
+
+**Impact Probability: Low**
+
+`updateItems()` dispatched `checkout.cart.update.before` and `checkout.cart.update.after` with the same object. The quantity had been assigned to it, but the repository `update()` that follows fills a *different* instance and its return value was discarded — so both events received one item carrying the new quantity beside the pre-update `total`, `base_total`, `total_incl_tax`, `base_total_incl_tax`, `total_weight`, `base_total_weight` and `additional`. A listener could not tell the two events apart. The row itself was always written correctly.
+
+`.after` now receives the instance the repository wrote. No core listener subscribes to either event, so core behaviour is unchanged; an extension that expected `.after` to hand back the same object it saw in `.before` will now get a different one, carrying the saved values.
+
+`.before` is unchanged and still carries the item with the new quantity assigned but not yet saved, which is what `isItemHaveQuantity()` validates against inventory.
+
+---
+
+### A Buy Now Purchase No Longer Loses The Basket
+
+**Impact Probability: Low**
+
+Buy Now deactivated whatever was in the cart and started a fresh one for the single product. Nothing ever reactivated the displaced cart: `initCart()`'s customer branch requires `is_active = 1`, and its guest branch needs the `cart` session key that `deActivateCart()` drops. **The shopper's basket became unreachable the moment they clicked Buy Now**, whether they completed that purchase, cancelled at the gateway, or simply walked away.
+
+Buy Now now checks out on its own isolated cart yet mirrors the bought product into the shopper's basket. The basket stays the single active cart; a Buy Now creates a separate cart holding only the bought product and checks out on that one, so two Buy Now purchases opened in two tabs are independent carts that do not collide, the way they behave on Amazon. The product is added to the basket as well, so a Buy Now left unfinished — abandoned, or the tab closed — is already sitting in the basket rather than lost, and a Buy Now that completes is taken back out of the basket. Nothing is parked, and nothing is folded back in through a middleware the way an earlier attempt did.
+
+What this changes for custom code:
+
+- **`Webkul\Checkout\Cart::createBuyNowCart(ProductContract $product, array $data)`** is new. It creates a cart marked `is_buy_now` and left inactive, adds the one product to it, mirrors that same product into the shopper's basket, remembers the buy-now cart against the session and returns it. The storefront's Buy Now add calls it in place of the ordinary add.
+- **`Webkul\Checkout\Cart::useBuyNowCart(int $cartId)`** is new. It points the facade at a buy-now cart the visitor owns for the current request only, without writing the `cart` session key, so the checkout and the gateway act on that cart while the session's basket pointer stays put. It returns `false` for a cart that is not a buy-now cart this visitor owns.
+- **`Webkul\Checkout\Http\Middleware\ResolveBuyNowCart`** is new. It reads a `buy_now` cart id from the request and calls `useBuyNowCart()` before the request reads the cart. It is registered in the **`shop` middleware group** and aliased as **`cart.buy_now`** by `CheckoutServiceProvider`. **Every payment gateway's route group now carries `cart.buy_now`**, so the forward leg to the gateway acts on the buy-now cart; a non-Shop entry point applies the alias to its own routes.
+- **The checkout carries the cart in a `buy_now` query parameter, as an encrypted token rather than the raw id.** `Cart::buyNowToken()` encrypts the id (via `Crypt`, keyed on `APP_KEY`) and `Cart::parseBuyNowToken()` reads it back, returning null for a missing or tampered value. `OnepageController::storeOrder()` appends the token to a gateway redirect URL for a buy-now cart (`withBuyNow()`), the checkout page carries it on every request, and the `cart.buy_now` middleware decodes it. So the sequential id is never exposed and the token cannot be forged; ownership is still checked on top of it.
+- **A migration adds a nullable `is_buy_now` boolean to `cart`**, defaulting to 0, and the `Cart` model casts it to boolean. `Cart::BUY_NOW_CARTS_KEY` (`buy_now_cart_ids`) is the session key holding the buy-now cart ids a guest session has started, so a guest's ownership is recognised before they sign in.
+- **A buy-now cart begun by a guest who then signs in is handed to that customer.** `mergeCart()` adopts the session's buy-now carts to the customer (`adoptBuyNowCarts()`) alongside the usual basket adoption, so a Buy Now started before signing in can still be checked out afterwards. A buy-now cart belongs to the guest session that created it or to the customer whose id it carries, and one visitor can never drive another's.
+- **`deActivateCart()` now drops the `cart` session key only when that key names the cart being deactivated.** Placing a buy-now order deactivates the buy-now cart, and this keeps that from dropping the shopper's basket pointer. The other callers run after an order exists and are unaffected.
+- **`setCart()` never points the `cart` session key at a buy-now cart.** A gateway that resolves a guest's buy-now cart by its own reference and places the order can no longer orphan the basket pointer through the session.
+- **A completed buy now is taken back out of the basket.** `Webkul\Checkout\Cart::removeBuyNowItemsFromBasket()` is new, and a listener on `checkout.order.save.after` (registered in the Checkout `EventServiceProvider`) calls it for every order: when the order's cart is a buy-now cart, the bought quantity is subtracted from the basket the Buy Now mirrored into, so a finished Buy Now leaves the basket as it was while an unfinished one stays in it. The basket is found by the customer's id for a signed-in shopper and by the session for a guest. The one case it cannot reach is a guest who pays through a redirect gateway and never returns, so only the webhook places the order: with no session, that guest's mirrored item lingers in the basket until they remove it.
+- **A gateway places a buy-now order even though its cart is inactive.** Stripe, PayPal, PayU, PayGlocal and PhonePe refused a cart that was not active before turning a paid checkout into an order; that check now also admits a buy-now cart (`! is_active && ! is_buy_now`), so an online payment for a Buy Now becomes an order while a genuinely abandoned cart is still refused. Duplicate orders are still held off by the existing per-cart lock and the order-already-placed lookup, not by that check. Razorpay has no such check and reaches its buy-now cart through the `cart.buy_now` middleware; it and PayPal Standard carry the `buy_now` token onto their return URL, their return leg having no other handle on the cart.
+- **A replayed buy now order is not placed twice.** `OnepageController::storeOrder()` now returns the order a buy-now cart already has rather than creating a second one, the way the gateways do. A buy-now cart stays reachable by its token even after it is deactivated, so a resubmitted Cash on Delivery buy now would otherwise order twice; an ordinary cart is unaffected, since it goes inactive and is no longer resolved at all. The checkout page guards the same way — `OnepageController@index` sends a shopper whose buy-now cart already has an order to that order's success page rather than a fresh checkout, so pressing Back after a Buy Now does not reopen a working checkout for the purchased product.
+
+A Buy Now the shopper cancels or abandons leaves the bought product in the basket, so nothing is lost and there is nothing to restore. Its own inactive buy-now cart is left behind too, reachable only by its token and otherwise ignored.
+
+---
+
+### The Checkout API Enforces Guest Checkout
+
+**Impact Probability: Low**
+
+The **Allow Guest Checkout** setting, and the rule that a downloadable product needs an account, were enforced only by the checkout page, so a guest who called the checkout API directly could save an address and place an order with guest checkout turned off. `Webkul\Checkout\Cart::requiresSignInToCheckout()` is new and states the rule once — guest checkout off, no cart, a downloadable product, or a product whose **Guest Checkout** attribute is off — and the checkout page, the address and order steps of `Webkul\Shop\Http\Controllers\API\OnepageController`, the PayPal Smart Button and the redirect leg of every bundled gateway all use it.
+
+What this changes for custom code:
+
+- **A guest is refused at the order step, not only the address step.** `storeOrder()` sends a guest who has to sign in to the sign-in page, buy now token kept, before any payment redirect is issued or order created, so a cart that changed after its address was saved is still held to the rule.
+- **Every bundled gateway checks it before the shopper pays.** The redirect legs of Stripe, PayU, Razorpay, PayGlocal, PhonePe and PayPal Standard send a guest who has to sign in back to the checkout page, buy now token kept, which then sends them to sign in; the Smart Button refuses before it captures. Their return, callback and webhook legs are left alone: by then the money has moved, and refusing would charge the shopper for no order.
+- **A custom gateway should do the same.** Call `Cart::requiresSignInToCheckout()` on the leg that sends the shopper to pay, or before you capture, never after the payment has been taken.
+- A headless client that checked out as a guest while guest checkout was off is now answered with the sign-in redirect.
 
 ---
 

@@ -48,11 +48,37 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
 
+- Fixed a login handing the shopper a cart belonging to a different customer, items and all, when a stale cart session key named it.
+
+- Fixed Buy Now emptying the cart it was started from. A Buy Now now checks out on its own cart and mirrors the item into the main cart, so an unfinished or abandoned Buy Now stays in the cart and a completed one is taken back out.
+
+- Fixed the shipping estimate quoting a total it then threw away, leaving the cart with a chosen shipping method and no shipping in the grand total.
+
+- Fixed a deleted tax category leaving its tax on carts, so items and shipping kept being charged a tax that no longer existed.
+
+- Fixed a product added beside one already in the cart in the same request going untaxed, which understated the tax and total on an admin reorder.
+
+- Fixed the minimum-order check subtracting tax that was never added, so a cart with the discount included but tax excluded was refused below the configured minimum when it should have passed.
+
+- Fixed a guest login with items in both carts ending up with no cart at all, and starting a second one on the next add.
+
+- Fixed a cart emptied of its last item lingering until the next request, which reported a minimum-order error instead of an empty cart.
+
+- Hardened the remove-selected-items request to reject a missing, non-array, or duplicate selection with a validation error instead of silently accepting it.
+
+- Fixed the checkout address step failing for a guest whose cart had gone, instead of sending them to sign in.
+
+- Fixed a guest placing an order through the checkout API while guest checkout was off, or with a downloadable product in the cart, which only the checkout page refused; the order step and every payment gateway now turn such a guest away before any payment is taken.
+
+- Fixed the PayPal Smart Button capturing before verifying the amount, which could leave a shopper charged against a cheaper cart with no order; it now verifies amount and currency first and shows the gateway's own error.
+
 - Refactored internals for clearer responsibilities.
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
 - #11562 [fixed] - The header menu kept the previous language after switching locale on any page but the home page. Each locale now has its own cached menu.
+
+- #11560 [fixed] - Fixed Stripe Checkout rejecting an order in a zero-decimal currency such as JPY, and in any cart whose tax or shipping amount carried a fraction of the currency's smallest unit; every line is now priced at a whole smallest unit.
 
 - #11547 [fixed] - A missing cached image showed the default theme's error page on a store running its own channel theme. The error page now uses the channel's theme.
 

@@ -199,6 +199,22 @@ export class CartPage extends BasePage {
         await expect(this.quantityDisplay(this.productForm)).toHaveText(String(quantity));
     }
 
+    async buyNowProduct(productName: string): Promise<void> {
+        await this.openProduct(productName);
+
+        await this.page.getByRole("button", { name: "Buy Now" }).click();
+
+        await expect(this.page).toHaveURL(/checkout\/onepage/);
+    }
+
+    async buyNowExpectingSignIn(productName: string): Promise<void> {
+        await this.openProduct(productName);
+
+        await this.page.getByRole("button", { name: "Buy Now" }).click();
+
+        await expect(this.page).toHaveURL(/customer\/login/);
+    }
+
     async updateCart(): Promise<void> {
         await this.updateCartButton.click();
 

@@ -3,6 +3,7 @@
 namespace Webkul\Paypal\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
@@ -31,12 +32,19 @@ class StandardController extends Controller
 
     /**
      * Redirects to the paypal.
-     *
-     * @return View
      */
-    public function redirect()
+    public function redirect(): RedirectResponse|View
     {
-        session()->put(self::INTENT_KEY, Cart::getCart()?->id);
+        $cart = Cart::getCart();
+
+        if (
+            $cart
+            && Cart::requiresSignInToCheckout()
+        ) {
+            return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
+        }
+
+        session()->put(self::INTENT_KEY, $cart?->id);
 
         return view('paypal::standard-redirect');
     }

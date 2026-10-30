@@ -21,6 +21,11 @@
             <directory suffix="Test.php">packages/Webkul/Category/tests/Unit</directory>
         </testsuite>
 
+        <!-- Checkout package testsuites. -->
+        <testsuite name="Checkout Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Checkout/tests/Feature</directory>
+        </testsuite>
+
         <!-- Core package testsuites. -->
         <testsuite name="Core Unit Test">
             <directory suffix="Test.php">packages/Webkul/Core/tests/Unit</directory>
@@ -55,11 +60,12 @@
             <directory suffix="Test.php">packages/Webkul/Installer/tests/Feature</directory>
         </testsuite>
 
-        <!-- Omnibus package testsuites. -->
+        <!-- Marketing package testsuites. -->
         <testsuite name="Marketing Unit Test">
             <directory suffix="Test.php">packages/Webkul/Marketing/tests/Unit</directory>
         </testsuite>
 
+        <!-- Omnibus package testsuites. -->
         <testsuite name="Omnibus Feature Test">
             <directory suffix="Test.php">packages/Webkul/Omnibus/tests/Feature</directory>
         </testsuite>
@@ -73,6 +79,11 @@
             <directory suffix="Test.php">packages/Webkul/PayGlocal/tests/Feature</directory>
         </testsuite>
 
+        <!-- Paypal package testsuites. -->
+        <testsuite name="Paypal Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Paypal/tests/Feature</directory>
+        </testsuite>
+
         <!-- PayU package testsuites. -->
         <testsuite name="PayU Unit Test">
             <directory suffix="Test.php">packages/Webkul/PayU/tests/Unit</directory>
@@ -82,8 +93,9 @@
             <directory suffix="Test.php">packages/Webkul/PayU/tests/Feature</directory>
         </testsuite>
 
-        <testsuite name="Paypal Feature Test">
-            <directory suffix="Test.php">packages/Webkul/Paypal/tests/Feature</directory>
+        <!-- PhonePe package testsuites. -->
+        <testsuite name="PhonePe Feature Test">
+            <directory suffix="Test.php">packages/Webkul/PhonePe/tests/Feature</directory>
         </testsuite>
 
         <!-- Product package testsuites. -->
