@@ -66,6 +66,12 @@ export class CheckoutHelper extends BasePage {
             .filter({ visible: true });
     }
 
+    private summaryItemName(productName: string) {
+        return this.page
+            .getByText(productName, { exact: true })
+            .filter({ visible: true });
+    }
+
     protected get productForm() {
         return this.page.locator('form:has(input[name="product_id"])');
     }
@@ -441,6 +447,14 @@ export class CheckoutHelper extends BasePage {
         await this.choosePayment(options.payment ?? "moneytransfer");
 
         return this.placeOrder();
+    }
+
+    async expectCheckoutSummaryShowsOnly(present: string, absent: string): Promise<void> {
+        await expect(this.page).toHaveURL(/checkout\/onepage/);
+
+        await expect(this.summaryItemName(present)).toHaveCount(1);
+
+        await expect(this.summaryItemName(absent)).toHaveCount(0);
     }
 
     async proceedWithNewAddress(

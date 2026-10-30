@@ -6,8 +6,13 @@ import { CheckoutHelper } from "../pages/shop/checkout/CheckoutHelper";
 import { CartPage } from "../pages/shop/CartPage";
 import type { BaseProduct } from "../pages/types/product.types";
 import { uniqueStamp } from "../utils/faker";
+import { AuthPage } from "../pages/shop/AuthPage";
+import { buildCustomerCredentials } from "../utils/customer";
+import { setConfigSwitch } from "../utils/admin";
 
 const PRICE = 149;
+const CHECKOUT_CONFIG_PATH = "admin/configuration/sales/checkout";
+const GUEST_CHECKOUT_FIELD = "sales[checkout][shopping_cart][allow_guest_checkout]";
 
 function buildSimpleProduct(): BaseProduct {
     return {
@@ -81,5 +86,39 @@ test.describe("buy now", () => {
 
         await cartPage.expectCartQuantity(basketProduct, 1);
         await cartPage.expectCartItemAbsent(buyNowProduct);
+    });
+
+    test("should return a signed in shopper to the buy now rather than the whole basket", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        const guestCheckoutWasEnabled = await setConfigSwitch(
+            adminPage,
+            CHECKOUT_CONFIG_PATH,
+            GUEST_CHECKOUT_FIELD,
+            false,
+        );
+
+        try {
+            const auth = new AuthPage(shopPage);
+            const credentials = buildCustomerCredentials();
+
+            await auth.register(credentials);
+
+            await cartPage.addProductToCart(basketProduct);
+            await cartPage.buyNowExpectingSignIn(buyNowProduct);
+
+            await auth.fillSignInForm(credentials.email, credentials.password);
+            await auth.submitSignInForm();
+
+            await checkoutHelper.expectCheckoutSummaryShowsOnly(buyNowProduct, basketProduct);
+        } finally {
+            await setConfigSwitch(
+                adminPage,
+                CHECKOUT_CONFIG_PATH,
+                GUEST_CHECKOUT_FIELD,
+                guestCheckoutWasEnabled,
+            );
+        }
     });
 });

@@ -473,6 +473,22 @@ it('should drop a coupon the merged cart no longer qualifies for', function () {
     $this->assertCartDiscount($response, 0);
 });
 
+it('should keep the buy now in the sign in redirect when guest checkout is off', function () {
+    $this->setConfig('sales.checkout.shopping_cart.cart_page', 1);
+
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', 0);
+
+    $this->addProductToCart($this->createSimpleProduct()->id);
+
+    $buyNowCartId = $this->addProductToCart($this->createSimpleProduct()->id, 1, ['is_buy_now' => 1])->json('data.id');
+
+    $token = $this->buyNowToken($buyNowCartId);
+
+    $this->get(route('shop.checkout.onepage.index', ['buy_now' => $token]))
+        ->assertRedirect(route('shop.customer.session.index'))
+        ->assertSessionHas('shop.url.intended', route('shop.checkout.onepage.index', ['buy_now' => $token]));
+});
+
 it('should carry the basket and the buy now cart to a guest who signs in', function () {
     $customer = Customer::factory()->create(['password' => Hash::make('secret-password')]);
 

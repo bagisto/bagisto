@@ -103,17 +103,12 @@ class OnepageController extends Controller
     }
 
     /**
-     * Send a guest to sign in, holding on to the checkout they were sent away from.
-     *
-     * A guest turned back from checkout has already chosen what to buy, so signing in or
-     * registering returns them to it rather than to the page the account settings would
-     * otherwise pick.
-     *
-     * @return RedirectResponse
+     * Send a guest to sign in, holding on to the checkout they were sent away from — the buy now token
+     * included, so signing in returns them to that buy now rather than to the whole basket.
      */
-    protected function redirectToSignIn()
+    protected function redirectToSignIn(): RedirectResponse
     {
-        session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
+        session()->put('shop.url.intended', route('shop.checkout.onepage.index', request()->only('buy_now')));
 
         return redirect()->route('shop.customer.session.index');
     }

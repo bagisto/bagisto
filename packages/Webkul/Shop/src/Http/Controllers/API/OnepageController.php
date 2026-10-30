@@ -47,7 +47,7 @@ class OnepageController extends APIController
             ! auth()->guard('customer')->check()
             && ! Cart::getCart()?->hasGuestCheckoutItems()
         ) {
-            session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
+            session()->put('shop.url.intended', route('shop.checkout.onepage.index', request()->only('buy_now')));
 
             return new JsonResource([
                 'redirect' => true,
