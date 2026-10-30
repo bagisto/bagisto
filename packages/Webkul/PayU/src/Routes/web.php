@@ -4,7 +4,7 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Support\Facades\Route;
 use Webkul\PayU\Http\Controllers\PayUController;
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web', 'cart.buy_now']], function () {
     Route::controller(PayUController::class)
         ->prefix('payu')
         ->group(function () {

@@ -81,6 +81,22 @@ it('should break the tax out of an including-tax shipping rate', function () {
 });
 
 // ============================================================================
+// The Chosen Shipping Rate Reaches The Cart's Totals
+// ============================================================================
+
+it('should carry the chosen shipping rate into the cart totals', function () {
+    cartWithTaxedFlatRateShipping('excluding_tax');
+
+    $cart = Cart::getCart();
+
+    expect((float) $cart->sub_total)->toBe(100.0)
+        ->and((float) $cart->shipping_amount)->toBe(10.0)
+        ->and((float) $cart->shipping_amount_incl_tax)->toBe(11.0)
+        ->and((float) $cart->tax_total)->toBe(1.0)
+        ->and((float) $cart->grand_total)->toBe(111.0);
+});
+
+// ============================================================================
 // A Custom Price Is What The Item Is Repriced To
 // ============================================================================
 
@@ -102,4 +118,24 @@ it('should reprice an item to its custom price when the totals are collected', f
     Cart::collectTotals();
 
     expect((float) Cart::getCart()->items->first()->price)->toBe(42.0);
+});
+
+// ============================================================================
+// Shipping Tax Left Behind When Its Rate Stops Applying
+// ============================================================================
+
+it('should take the stale tax off the shipping rate when no rate applies but the category stays', function () {
+    cartWithTaxedFlatRateShipping('excluding_tax');
+
+    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(1.0);
+
+    TaxMap::query()->delete();
+
+    Cart::collectTotals();
+
+    $rate = Cart::getCart()->selected_shipping_rate;
+
+    expect((float) $rate->tax_amount)->toBe(0.0)
+        ->and((float) $rate->price_incl_tax)->toBe((float) $rate->price)
+        ->and((float) Cart::getCart()->tax_total)->toBe(0.0);
 });
