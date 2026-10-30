@@ -93,6 +93,11 @@
             <directory suffix="Test.php">packages/Webkul/PayU/tests/Feature</directory>
         </testsuite>
 
+        <!-- PhonePe package testsuites. -->
+        <testsuite name="PhonePe Feature Test">
+            <directory suffix="Test.php">packages/Webkul/PhonePe/tests/Feature</directory>
+        </testsuite>
+
         <!-- Product package testsuites. -->
         <testsuite name="Product Unit Test">
             <directory suffix="Test.php">packages/Webkul/Product/tests/Unit</directory>

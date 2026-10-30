@@ -134,6 +134,7 @@
             "Webkul\\Paypal\\Tests\\": "packages/Webkul/Paypal/tests",
             "Webkul\\PayU\\Tests\\": "packages/Webkul/PayU/tests",
             "Webkul\\Payment\\Tests\\": "packages/Webkul/Payment/tests",
+            "Webkul\\PhonePe\\Tests\\": "packages/Webkul/PhonePe/tests",
             "Webkul\\Product\\Tests\\": "packages/Webkul/Product/tests",
             "Webkul\\Razorpay\\Tests\\": "packages/Webkul/Razorpay/tests",
             "Webkul\\Rule\\Tests\\": "packages/Webkul/Rule/tests",
