@@ -43,16 +43,8 @@ class OnepageController extends APIController
     {
         $params = $cartAddressRequest->all();
 
-        if (
-            ! auth()->guard('customer')->check()
-            && ! Cart::getCart()?->hasGuestCheckoutItems()
-        ) {
-            session()->put('shop.url.intended', route('shop.checkout.onepage.index', request()->only('buy_now')));
-
-            return new JsonResource([
-                'redirect' => true,
-                'redirect_url' => route('shop.customer.session.index'),
-            ]);
+        if (Cart::requiresSignInToCheckout()) {
+            return $this->redirectToSignIn();
         }
 
         if (Cart::hasError()) {
@@ -153,6 +145,10 @@ class OnepageController extends APIController
                 'redirect' => true,
                 'redirect_url' => route('shop.checkout.cart.index'),
             ]);
+        }
+
+        if (Cart::requiresSignInToCheckout()) {
+            return $this->redirectToSignIn();
         }
 
         Cart::collectTotals();
@@ -296,5 +292,19 @@ class OnepageController extends APIController
 
         return collect(Payment::getSupportedPaymentMethods()['payment_methods'] ?? [])
             ->contains('method', $method);
+    }
+
+    /**
+     * Send a guest to sign in, holding on to the checkout they were sent away from — the buy now token
+     * included — so signing in brings them back to the same cart.
+     */
+    protected function redirectToSignIn(): JsonResource
+    {
+        session()->put('shop.url.intended', route('shop.checkout.onepage.index', request()->only('buy_now')));
+
+        return new JsonResource([
+            'redirect' => true,
+            'redirect_url' => route('shop.customer.session.index'),
+        ]);
     }
 }
