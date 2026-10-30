@@ -44,6 +44,24 @@ it('should drop the chosen shipping rate when the quantity changes', function ()
     expect(Cart::getCart()->selected_shipping_rate)->toBeNull();
 });
 
+it('should drop the chosen shipping rate when an item is moved to the wishlist', function () {
+    $this->loginAsCustomer();
+
+    postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $this->createSimpleProduct()->id,
+        'quantity' => 1,
+    ])->assertOk();
+
+    $cart = cartShippedWithFlatRate($this->createSimpleProduct());
+
+    expect($cart->selected_shipping_rate)->not->toBeNull()
+        ->and($cart->items)->toHaveCount(2);
+
+    Cart::moveToWishlist($cart->items->first()->id);
+
+    expect(Cart::getCart()->selected_shipping_rate)->toBeNull();
+});
+
 it('should drop the chosen shipping rate when another product is added', function () {
     $product = $this->createSimpleProduct();
 

@@ -170,6 +170,22 @@ it('should create the Razorpay order and return the drop-in UI view', function (
     $response->assertViewHas('payment');
 });
 
+it('should send a guest who has to sign in back to checkout instead of creating a Razorpay order', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    $mockRazorpay = $this->mock(RazorpayPayment::class)->makePartial();
+
+    $mockRazorpay->shouldNotReceive('createOrder');
+
+    $this->app->instance(RazorpayPayment::class, $mockRazorpay);
+
+    $response = $this->get(route('razorpay.payment.redirect'));
+
+    $response->assertRedirect(route('shop.checkout.onepage.index'));
+});
+
 // ============================================================================
 // Payment Callback
 // ============================================================================

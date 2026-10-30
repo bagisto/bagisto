@@ -5,6 +5,7 @@ namespace Webkul\Product\Providers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Console\Commands\Indexer;
+use Webkul\Product\Console\Commands\PruneSearchImages;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 use Webkul\Product\Services\Search\Connections\ElasticConnection;
@@ -45,6 +46,8 @@ class ProductServiceProvider extends ServiceProvider
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('indexer:index --type=price')->dailyAt('00:01');
+
+            $schedule->command('search-images:prune')->dailyAt('00:05');
         });
 
         $this->app->register(EventServiceProvider::class);
@@ -53,7 +56,7 @@ class ProductServiceProvider extends ServiceProvider
     /**
      * Register configuration.
      */
-    public function registerConfig(): void
+    protected function registerConfig(): void
     {
         $this->mergeConfigFrom(dirname(__DIR__).'/Config/product_types.php', 'product_types');
     }
@@ -64,7 +67,7 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([Indexer::class]);
+            $this->commands([Indexer::class, PruneSearchImages::class]);
         }
     }
 

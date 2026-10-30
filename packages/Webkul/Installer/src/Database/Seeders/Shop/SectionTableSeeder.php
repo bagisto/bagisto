@@ -458,7 +458,7 @@ class SectionTableSeeder extends Seeder
                             'filters' => [
                                 'parent_id' => 1,
                                 'sort' => 'asc',
-                                'limit' => 10,
+                                'limit' => 12,
                             ],
                         ]),
                     ], [
@@ -472,7 +472,7 @@ class SectionTableSeeder extends Seeder
                             'filters' => [
                                 'category_id' => 2,
                                 'sort' => 'created_at-desc',
-                                'limit' => 10,
+                                'limit' => 12,
                             ],
                         ]),
                     ], [
@@ -486,7 +486,7 @@ class SectionTableSeeder extends Seeder
                             'filters' => [
                                 'category_id' => 4,
                                 'sort' => 'created_at-desc',
-                                'limit' => 10,
+                                'limit' => 12,
                             ],
                         ]),
                     ], [
@@ -500,7 +500,7 @@ class SectionTableSeeder extends Seeder
                             'filters' => [
                                 'category_id' => 3,
                                 'sort' => 'price-desc',
-                                'limit' => 10,
+                                'limit' => 12,
                             ],
                         ]),
                     ], [
@@ -514,7 +514,7 @@ class SectionTableSeeder extends Seeder
                             'filters' => [
                                 'category_id' => 26,
                                 'sort' => 'name-asc',
-                                'limit' => 10,
+                                'limit' => 12,
                             ],
                         ]),
                     ],

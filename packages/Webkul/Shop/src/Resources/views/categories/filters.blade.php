@@ -213,7 +213,7 @@
                                 :key="`${filter.id}_${option.id}`"
                                 v-for="(option, optionIndex) in options"
                             >
-                                <div class="flex select-none items-center gap-x-4 rounded-sm hover:bg-gray-100 max-sm:gap-x-1 max-sm:p-0! ltr:pl-2 rtl:pr-2">
+                                <div class="flex relative select-none items-center gap-x-4 rounded-sm hover:bg-gray-100 max-sm:gap-x-1 max-sm:p-0! ltr:pl-2 rtl:pr-2">
                                     <input
                                         type="checkbox"
                                         :id="`filter_${filter.id}_option_${option.id}`"

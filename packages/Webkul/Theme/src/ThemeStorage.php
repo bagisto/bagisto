@@ -18,10 +18,8 @@ class ThemeStorage
     public const MEDIA_REFERENCE = '__media__/';
 
     /**
-     * Resolve a stored path to the url it is served from.
-     *
-     * A local disk is addressed through the site, so an image and its resized
-     * copies come from the one origin the page was asked for.
+     * Resolve a stored path to the url it is served from, a local disk through the site, so an image and
+     * its resized copies come from the one origin the page was asked for.
      */
     public function url(?string $path): ?string
     {
@@ -43,7 +41,8 @@ class ThemeStorage
     }
 
     /**
-     * Resolve a stored image to the url for a resized copy.
+     * Resolve a stored image to the url for a resized copy, or to the original while the image cache route
+     * is off.
      */
     public function resizedUrl(?string $path, string $size): ?string
     {
@@ -57,7 +56,7 @@ class ThemeStorage
             return $path;
         }
 
-        return url('cache/'.$size.'/'.$path);
+        return image_url($path, $size) ?? $this->url($path);
     }
 
     /**
@@ -86,11 +85,8 @@ class ThemeStorage
     }
 
     /**
-     * Resolve a stored path to the url to write into authored markup.
-     *
-     * Markup keeps whatever url it is given, so a local disk is addressed from the
-     * site root rather than with a domain that can later change. The directory the
-     * application is served from stays in, or the browser resolves past it.
+     * Resolve a stored path to the url authored markup keeps, from the site root on a local disk so a change
+     * of domain cannot break it, keeping the directory the application is served from.
      */
     public function embedUrl(?string $path): ?string
     {
@@ -112,9 +108,8 @@ class ThemeStorage
     }
 
     /**
-     * The reference to write into authored markup for a stored path.
-     *
-     * Markup keeps a reference rather than a url, so it follows the site wherever it is served.
+     * The reference to write into authored markup for a stored path, kept rather than a url so it follows the
+     * site wherever it is served.
      */
     public function mediaReference(?string $path): ?string
     {
@@ -132,9 +127,8 @@ class ThemeStorage
     }
 
     /**
-     * Resolve every media reference in authored markup to the url it is served from.
-     *
-     * Both spellings markup carried before it kept references are resolved the same way.
+     * Resolve every media reference in authored markup to the url it is served from, and both spellings markup
+     * carried before it kept references the same way.
      */
     public function resolveMarkup(?string $markup): string
     {
@@ -154,9 +148,7 @@ class ThemeStorage
     }
 
     /**
-     * The url a stored path is resolved against.
-     *
-     * Read off a resolved path because a remote disk rejects an empty key.
+     * The url a stored path is resolved against, read off a resolved path as a remote disk rejects an empty key.
      */
     public function base(): string
     {
@@ -170,9 +162,8 @@ class ThemeStorage
     }
 
     /**
-     * Reduce a stored value to the path it names on the disk.
-     *
-     * The `storage/` prefix used before paths and urls were separated is tolerated.
+     * Reduce a stored value to the path it names on the disk, tolerating the `storage/` prefix used before paths
+     * and urls were separated.
      */
     public function normalize(?string $path): ?string
     {
@@ -196,9 +187,8 @@ class ThemeStorage
     }
 
     /**
-     * Where a stored path is served from, relative to the directory the application is served from.
-     *
-     * The disk's url carries that directory already, so it is taken off before `url()` puts it back.
+     * Where a stored path is served from, relative to the directory the application is served from, which the
+     * disk's url already carries and is taken off before `url()` puts it back.
      */
     protected function pathOnSite(string $path): string
     {

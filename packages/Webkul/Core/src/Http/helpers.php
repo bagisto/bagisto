@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Contracts\DatabaseGrammar;
 use Webkul\Core\Facades\Acl;
@@ -66,6 +67,23 @@ if (! function_exists('db_grammar')) {
     function db_grammar()
     {
         return DbGrammar::getFacadeRoot();
+    }
+}
+
+if (! function_exists('is_admin_request')) {
+    /**
+     * Whether a request is for the admin panel, read from the leading segment of its path, so a storefront
+     * url that merely contains the admin segment, such as a cached image's, is not taken for one.
+     */
+    function is_admin_request(?Request $request = null): bool
+    {
+        $adminUrl = trim((string) config('app.admin_url'), '/');
+
+        if ($adminUrl === '') {
+            return false;
+        }
+
+        return ($request ?? request())->is($adminUrl, $adminUrl.'/*');
     }
 }
 

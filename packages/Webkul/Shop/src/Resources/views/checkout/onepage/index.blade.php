@@ -24,7 +24,7 @@
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-7.5"
-                    aria-label="@lang('shop::checkout.onepage.index.bagisto')"
+                    aria-label="@lang('shop::app.checkout.onepage.index.home')"
                 >
                     <img
                         src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
@@ -164,6 +164,18 @@
                     }
                 },
 
+                created() {
+                    const buyNow = new URLSearchParams(window.location.search).get('buy_now');
+
+                    if (buyNow) {
+                        this.$axios.interceptors.request.use((config) => {
+                            config.params = { ...(config.params || {}), buy_now: buyNow };
+
+                            return config;
+                        });
+                    }
+                },
+
                 mounted() {
                     this.getCart();
                 },
@@ -248,6 +260,17 @@
                             });
                     }
                 },
+            });
+        </script>
+
+        <script type="module">
+            window.addEventListener('pageshow', (event) => {
+                if (
+                    event.persisted
+                    || performance.getEntriesByType('navigation')[0]?.type === 'back_forward'
+                ) {
+                    window.location.reload();
+                }
             });
         </script>
     @endPushOnce

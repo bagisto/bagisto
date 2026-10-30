@@ -565,7 +565,7 @@
                     <!-- Comment List -->
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                         <div class="grid gap-1.5 p-4">
-                            <p 
+                            <p
                                 class="break-all text-base leading-6 text-gray-800 dark:text-white"
                                 v-pre
                             >
@@ -605,10 +605,10 @@
                         </p>
                     </x-slot>
 
-                    <x-slot:content v-pre>
+                    <x-slot:content>
                         <div class="{{ $order->billing_address ? 'pb-4' : '' }}">
                             <div class="flex flex-col gap-1.5">
-                                <p 
+                                <p
                                     class="font-semibold text-gray-800 dark:text-white"
                                     v-pre
                                 >
@@ -626,7 +626,7 @@
 
                                 {!! view_render_event('bagisto.admin.sales.order.customer_email.after', ['order' => $order]) !!}
 
-                                <p 
+                                <p
                                     class="text-gray-600 dark:text-gray-300"
                                     v-pre
                                 >
@@ -744,7 +744,7 @@
                             </p>
 
                             <!-- Currency -->
-                            <p 
+                            <p
                                 class="pt-4 font-semibold text-gray-800 dark:text-white"
                                 v-pre
                             >
@@ -759,14 +759,14 @@
 
                             <!-- Additional details -->
                             @if (! empty($additionalDetails))
-                                <p 
+                                <p
                                     class="pt-4 font-semibold text-gray-800 dark:text-white"
                                     v-pre
                                 >
                                     {{ $additionalDetails['title'] }}
                                 </p>
 
-                                <p 
+                                <p
                                     class="text-gray-600 dark:text-gray-300"
                                     v-pre
                                 >
@@ -782,7 +782,7 @@
                             <span class="mt-4 block w-full border-b dark:border-gray-800"></span>
 
                             <div class="pt-4">
-                                <p 
+                                <p
                                     class="font-semibold text-gray-800 dark:text-white"
                                     v-pre
                                 >
@@ -920,7 +920,7 @@
                                         @lang('admin::app.sales.orders.view.name')
                                     </p>
 
-                                    <p 
+                                    <p
                                         class="text-gray-600 dark:text-gray-300"
                                         v-pre
                                     >
