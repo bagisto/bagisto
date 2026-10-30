@@ -653,39 +653,6 @@
                                                     @endif
                                                 </span>
                                             </div>
-
-                                            <!-- Tax Percent -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.tax-percent')
-                                                </span>
-
-                                                <p>
-                                                    {{ number_format($item->tax_percent, 2) . '%' }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Tax Amount -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.tax-amount')
-                                                </span>
-
-                                                <p>
-                                                    {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Grand Total -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.grand-total')
-                                                </span>
-
-                                                <p>
-                                                    {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
                                         </div>
                                     </div>
                                 @endforeach

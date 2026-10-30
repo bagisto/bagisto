@@ -7,7 +7,7 @@
 
         <!-- Total Order Revenue -->
         <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
-            @lang('admin::app.customers.customers.view.orders.total-revenue', ['revenue' => core()->formatPrice($customer->orders->whereNotIn('status', ['canceled', 'closed'])->sum('base_grand_total_invoiced'))])
+            @lang('admin::app.customers.customers.view.orders.total-revenue', ['revenue' => core()->formatBasePrice($customer->orders->whereNotIn('status', ['canceled', 'closed'])->sum('base_grand_total_invoiced'))])
         </p>
     </div>
 

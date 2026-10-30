@@ -66,7 +66,7 @@ class DownloadableController extends Controller
                 'id' => $link->id,
                 'title' => $link->title,
                 'price' => $link->price,
-                'formatted_price' => core()->formatPrice($link->price),
+                'formatted_price' => core()->formatBasePrice($link->price),
             ];
         }
 
