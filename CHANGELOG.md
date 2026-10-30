@@ -52,6 +52,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
 
+- #11562 [fixed] - The header menu kept the previous language after switching locale on any page but the home page. Each locale now has its own cached menu.
+
 - #11547 [fixed] - A missing cached image showed the default theme's error page on a store running its own channel theme. The error page now uses the channel's theme.
 
 - #11546 [fixed] - A route parameter sharing its name with a Bagisto model, such as `{template}` or `{product}`, was silently looked up as that model and answered 404. Such a parameter is now a plain value unless the route type-hints a model.

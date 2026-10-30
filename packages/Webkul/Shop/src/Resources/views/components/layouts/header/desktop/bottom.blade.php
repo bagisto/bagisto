@@ -549,6 +549,15 @@
                 }
             },
 
+            computed: {
+                /**
+                 * The key the category tree is kept under in the browser, one per channel and locale.
+                 */
+                categoriesStorageKey() {
+                    return "categories:{{ core()->getCurrentChannelCode() }}:{{ app()->getLocale() }}";
+                },
+            },
+
             mounted() {
                 this.initCategories();
 
@@ -560,9 +569,12 @@
             },
 
             methods: {
+                /**
+                 * Show the category tree kept in the browser for this channel and locale, or fetch it when there is none.
+                 */
                 initCategories() {
                     try {
-                        const stored = localStorage.getItem('categories');
+                        const stored = localStorage.getItem(this.categoriesStorageKey);
 
                         if (stored) {
                             this.categories = JSON.parse(stored);
@@ -572,18 +584,20 @@
 
                             return;
                         }
-
                     } catch (e) {}
 
                     this.getCategories();
                 },
 
+                /**
+                 * Fetch the category tree and keep it in the browser for this channel and locale.
+                 */
                 getCategories() {
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.isLoading = false;
                             this.categories = response.data.data;
-                            localStorage.setItem('categories', JSON.stringify(this.categories));
+                            localStorage.setItem(this.categoriesStorageKey, JSON.stringify(this.categories));
 
                             this.$nextTick(this.positionMegaMenus);
                         })
@@ -592,32 +606,51 @@
                         });
                 },
 
+                /**
+                 * Split a category's children into pairs, one pair to each column of its mega menu.
+                 */
                 pairCategoryChildren(category) {
-                    if (! category.children) return [];
+                    if (! category.children) {
+                        return [];
+                    }
 
                     return category.children.reduce((result, value, index, array) => {
                         if (index % 2 === 0) {
                             result.push(array.slice(index, index + 2));
                         }
+
                         return result;
                     }, []);
                 },
 
+                /**
+                 * Open or close the category drawer, starting from the top level when it opens.
+                 */
                 toggleCategoryDrawer() {
-                    this.isDrawerActive = !this.isDrawerActive;
+                    this.isDrawerActive = ! this.isDrawerActive;
+
                     if (this.isDrawerActive) {
                         this.currentViewLevel = 'main';
                     }
                 },
 
+                /**
+                 * Keep the drawer's state in step with the drawer component.
+                 */
                 onDrawerToggle(event) {
                     this.isDrawerActive = event.isActive;
                 },
 
+                /**
+                 * Mark the category drawer closed.
+                 */
                 onDrawerClose(event) {
                     this.isDrawerActive = false;
                 },
 
+                /**
+                 * Show the children of a second-level category that has some, instead of following its link.
+                 */
                 showThirdLevel(secondLevelCategory, parentCategory, event) {
                     if (secondLevelCategory.children && secondLevelCategory.children.length) {
                         this.currentSecondLevelCategory = secondLevelCategory;
@@ -631,10 +664,16 @@
                     }
                 },
 
+                /**
+                 * Go back to the top level of the category drawer.
+                 */
                 goBackToMainView() {
                     this.currentViewLevel = 'main';
                 },
 
+                /**
+                 * Keep each mega menu inside the viewport, moving it back by as much as it spills off either edge.
+                 */
                 positionMegaMenus() {
                     const MARGIN = 12;
                     const viewport = document.documentElement.clientWidth;
@@ -647,9 +686,6 @@
 
                         const rect = dropdown.getBoundingClientRect();
 
-                        /**
-                         * Positive when it spills off the right edge, negative off the left, 0 when it fits.
-                         */
                         const overflow = Math.max(0, rect.right - (viewport - MARGIN)) - Math.max(0, MARGIN - rect.left);
 
                         if (overflow) {
