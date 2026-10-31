@@ -44,9 +44,11 @@ class StatusController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        Event::dispatch('sales.rma.rma-status.create.before');
+        $data = request()->only('title', 'status', 'color');
 
-        $rmaStatus = $this->rmaStatusRepository->create(request()->only('title', 'status', 'color'));
+        Event::dispatch('sales.rma.rma-status.create.before', [$data]);
+
+        $rmaStatus = $this->rmaStatusRepository->create($data);
 
         Event::dispatch('sales.rma.rma-status.create.after', $rmaStatus);
 

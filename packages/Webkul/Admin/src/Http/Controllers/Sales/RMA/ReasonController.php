@@ -48,9 +48,11 @@ class ReasonController extends Controller
             'resolution_type' => 'required|array|min:1',
         ]);
 
-        Event::dispatch('sales.rma.reason.create.before');
+        $data = request()->only('title', 'status', 'position');
 
-        $rmaReason = $this->rmaReasonRepository->create(request()->only('title', 'status', 'position'));
+        Event::dispatch('sales.rma.reason.create.before', [$data]);
+
+        $rmaReason = $this->rmaReasonRepository->create($data);
 
         foreach (request()->resolution_type as $resolutionType) {
             $this->rmaReasonResolutionsRepository->create([

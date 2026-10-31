@@ -185,13 +185,15 @@ class WishlistController extends APIController
      */
     public function destroyAll(): JsonResource
     {
-        Event::dispatch('customer.wishlist.delete-all.before');
+        $customerId = auth()->guard('customer')->user()->id;
+
+        Event::dispatch('customer.wishlist.delete-all.before', $customerId);
 
         $success = $this->wishlistRepository->deleteWhere([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $customerId,
         ]);
 
-        Event::dispatch('customer.wishlist.delete-all.after');
+        Event::dispatch('customer.wishlist.delete-all.after', $customerId);
 
         if (! $success) {
             return new JsonResource([

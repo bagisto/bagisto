@@ -88,7 +88,7 @@ class ChannelController extends Controller
 
         $data = $this->setSEOContent($data);
 
-        Event::dispatch('core.channel.create.before');
+        Event::dispatch('core.channel.create.before', [$data]);
 
         $channel = $this->channelRepository->create($data);
 
