@@ -106,6 +106,19 @@ it('should refuse to refund an item that belongs to another order', function () 
     expect(Refund::whereIn('order_id', [$order->id, $other->id])->count())->toBe(0);
 });
 
+it('should refuse to refund an item of another order that is itself refundable', function () {
+    $order = markInvoiced(orderAwaitingInvoice());
+    $other = markInvoiced(orderAwaitingInvoice());
+
+    $foreignItem = $other->items->first();
+
+    post(route('admin.sales.refunds.store', $order->id), scopedRefundPayload([$foreignItem->id => 1]))
+        ->assertSessionHas('error');
+
+    expect(Refund::whereIn('order_id', [$order->id, $other->id])->count())->toBe(0)
+        ->and((float) $foreignItem->refresh()->qty_refunded)->toBe(0.0);
+});
+
 // ============================================================================
 // Refunded Shipping
 // ============================================================================

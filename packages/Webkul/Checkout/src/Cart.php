@@ -76,14 +76,7 @@ class Cart
                 'is_active' => 1,
             ]);
         } elseif (session()->has('cart')) {
-            $cart = $this->cartRepository->find(session()->get('cart')->id);
-
-            if (
-                $cart
-                && $cart->is_active
-            ) {
-                $this->cart = $cart;
-            }
+            $this->cart = $this->sessionCart();
         }
     }
 
@@ -214,7 +207,7 @@ class Cart
      */
     public function mergeCart(CustomerContract $customer): void
     {
-        if (! session()->has('cart')) {
+        if (! $guestCart = $this->sessionCart()) {
             return;
         }
 
@@ -222,8 +215,6 @@ class Cart
             'customer_id' => $customer->id,
             'is_active' => 1,
         ]);
-
-        $guestCart = $this->cartRepository->find(session()->get('cart')->id);
 
         if (! $cart) {
             $this->cartRepository->update([
@@ -812,6 +803,22 @@ class Cart
     }
 
     /**
+     * Whether the shopper has to sign in before this cart can be checked out: a guest does when guest
+     * checkout is off, the cart has gone, or it holds a downloadable or a product that needs an account.
+     */
+    public function requiresSignInToCheckout(): bool
+    {
+        if (auth()->guard('customer')->check()) {
+            return false;
+        }
+
+        return ! core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
+            || ! $this->cart
+            || $this->cart->hasDownloadableItems()
+            || ! $this->cart->hasGuestCheckoutItems();
+    }
+
+    /**
      * Check minimum Order Amount of cart.
      */
     public function getOrderAmount(): int
@@ -1266,5 +1273,30 @@ class Cart
         $shippingRate->save();
 
         Event::dispatch('checkout.cart.calculate.shipping.tax.after', $this->cart);
+    }
+
+    /**
+     * The guest cart the session key names, forgetting a key that no longer names a live one of
+     * their own so a dead key heals on the request that meets it.
+     */
+    protected function sessionCart(): ?Contracts\Cart
+    {
+        $sessionCart = session()->get('cart');
+
+        if (isset($sessionCart->id)) {
+            $cart = $this->cartRepository->find($sessionCart->id);
+
+            if (
+                $cart
+                && $cart->is_active
+                && ! $cart->customer_id
+            ) {
+                return $cart;
+            }
+        }
+
+        session()->forget('cart');
+
+        return null;
     }
 }

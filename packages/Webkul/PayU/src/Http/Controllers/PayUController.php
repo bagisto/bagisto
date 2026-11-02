@@ -57,6 +57,10 @@ class PayUController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        if (Cart::requiresSignInToCheckout()) {
+            return redirect()->route('shop.checkout.onepage.index');
+        }
+
         $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
 
         if (! $this->payU->isCurrencySupported($currency)) {

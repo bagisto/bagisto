@@ -61,6 +61,8 @@ it('redirects to cart when the cart currency is not accepted', function () {
 
     Cart::shouldReceive('getCart')->andReturn($cart);
 
+    Cart::shouldReceive('requiresSignInToCheckout')->andReturn(false);
+
     $this->payGlocalMock->shouldReceive('isCurrencySupported')->andReturn(false);
 
     // Act
@@ -91,6 +93,8 @@ it('sends the customer to payglocal without recording anything of its own', func
 
     Cart::shouldReceive('getCart')->andReturn($cart);
 
+    Cart::shouldReceive('requiresSignInToCheckout')->andReturn(false);
+
     $this->payGlocalMock->shouldReceive('initiatePayment')
         ->andReturn([
             'gid' => 'gl_o-test_gid',
@@ -109,6 +113,8 @@ it('reports a failure when payglocal will not start the payment', function () {
     $cart = $this->createCartWithItems('payglocal');
 
     Cart::shouldReceive('getCart')->andReturn($cart);
+
+    Cart::shouldReceive('requiresSignInToCheckout')->andReturn(false);
 
     $this->payGlocalMock->shouldReceive('initiatePayment')->andReturn(null);
 

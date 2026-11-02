@@ -51,6 +51,13 @@ class RazorpayController extends Controller
         try {
             $cart = Cart::getCart();
 
+            if (
+                $cart
+                && Cart::requiresSignInToCheckout()
+            ) {
+                return redirect()->route('shop.checkout.onepage.index');
+            }
+
             $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
 
             if (! $this->razorpayPayment->isCurrencySupported($currency)) {

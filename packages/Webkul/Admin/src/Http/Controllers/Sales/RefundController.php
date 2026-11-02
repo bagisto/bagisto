@@ -78,6 +78,12 @@ class RefundController extends Controller
             $data['refund']['shipping'] = 0;
         }
 
+        if (! $this->itemsBelongToOrder($order, array_keys((array) ($data['refund']['items'] ?? [])))) {
+            session()->flash('error', trans('admin::app.sales.refunds.create.invalid-qty'));
+
+            return redirect()->back();
+        }
+
         try {
             $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund'], $orderId);
 
@@ -144,5 +150,16 @@ class RefundController extends Controller
         $refund = $this->refundRepository->findOrFail($id);
 
         return view('admin::sales.refunds.view', compact('refund'));
+    }
+
+    /**
+     * Whether every item the request names is one the order carries.
+     */
+    protected function itemsBelongToOrder($order, array $itemIds): bool
+    {
+        return ! array_diff(
+            array_map('intval', $itemIds),
+            $order->items->pluck('id')->map('intval')->all()
+        );
     }
 }

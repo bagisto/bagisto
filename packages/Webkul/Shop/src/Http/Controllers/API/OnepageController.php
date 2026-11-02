@@ -43,16 +43,8 @@ class OnepageController extends APIController
     {
         $params = $cartAddressRequest->all();
 
-        if (
-            ! auth()->guard('customer')->check()
-            && ! Cart::getCart()->hasGuestCheckoutItems()
-        ) {
-            session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
-
-            return new JsonResource([
-                'redirect' => true,
-                'data' => route('shop.customer.session.index'),
-            ]);
+        if (Cart::requiresSignInToCheckout()) {
+            return $this->redirectToSignIn();
         }
 
         if (Cart::hasError()) {
@@ -155,6 +147,10 @@ class OnepageController extends APIController
                 'redirect' => true,
                 'redirect_url' => route('shop.checkout.cart.index'),
             ]);
+        }
+
+        if (Cart::requiresSignInToCheckout()) {
+            return $this->redirectToSignIn();
         }
 
         Cart::collectTotals();
@@ -273,5 +269,19 @@ class OnepageController extends APIController
 
         return collect(Payment::getSupportedPaymentMethods()['payment_methods'] ?? [])
             ->contains('method', $method);
+    }
+
+    /**
+     * Send a guest to sign in, holding on to the checkout they were sent away from so signing in
+     * brings them back to it.
+     */
+    protected function redirectToSignIn(): JsonResource
+    {
+        session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
+
+        return new JsonResource([
+            'redirect' => true,
+            'redirect_url' => route('shop.customer.session.index'),
+        ]);
     }
 }
