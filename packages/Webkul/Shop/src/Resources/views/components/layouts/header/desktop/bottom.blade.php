@@ -554,7 +554,7 @@
             methods: {
                 initCategories() {
                     try {
-                        const stored = localStorage.getItem('categories');
+                        const stored = localStorage.getItem('categories:{{ core()->getCurrentChannelCode() }}:{{ app()->getLocale() }}');
 
                         if (stored) {
                             this.categories = JSON.parse(stored);
@@ -575,7 +575,7 @@
                         .then(response => {
                             this.isLoading = false;
                             this.categories = response.data.data;
-                            localStorage.setItem('categories', JSON.stringify(this.categories));
+                            localStorage.setItem('categories:{{ core()->getCurrentChannelCode() }}:{{ app()->getLocale() }}', JSON.stringify(this.categories));
 
                             this.$nextTick(this.positionMegaMenus);
                         })

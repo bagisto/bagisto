@@ -512,7 +512,7 @@
             methods: {
                 initCategories() {
                     try {
-                        const stored = localStorage.getItem('categories');
+                        const stored = localStorage.getItem('categories:{{ core()->getCurrentChannelCode() }}:{{ app()->getLocale() }}');
 
                         if (stored) {
                             this.categories = JSON.parse(stored);
@@ -528,7 +528,7 @@
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.categories = response.data.data;
-                            localStorage.setItem('categories', JSON.stringify(this.categories));
+                            localStorage.setItem('categories:{{ core()->getCurrentChannelCode() }}:{{ app()->getLocale() }}', JSON.stringify(this.categories));
                         })
                         .catch(error => {
                             console.log(error);

@@ -4,6 +4,7 @@ namespace Webkul\Core\Concerns;
 
 use Webkul\Core\Contracts\Currency;
 use Webkul\Core\Enums\CurrencyPositionEnum;
+use Webkul\Core\Repositories\CurrencyRepository;
 
 trait CurrencyFormatter
 {
@@ -20,18 +21,14 @@ trait CurrencyFormatter
     }
 
     /**
-     * Use default formatter.
+     * Use the locale formatter, keeping its own symbol when the custom symbol is the same one.
      */
     public function useDefaultCurrencyFormatter(?float $price, Currency $currency): string
     {
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
         if ($currency->symbol) {
-            /**
-             * If, somehow, the currency symbol mentioned matches with the user-defined symbol,
-             * then we can simply use the 'formatCurrency' method.
-             */
-            if ($this->currencySymbol($currency) == $currency->symbol) {
+            if ($this->localeCurrencySymbol($currency->code) == $currency->symbol) {
                 return $formatter->formatCurrency($price, $currency->code);
             }
 
@@ -56,23 +53,21 @@ trait CurrencyFormatter
 
         $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formatter->format($price));
 
+        $separators = [];
+
         if (! empty($currency->group_separator)) {
-            $formattedCurrency = str_replace(
-                $formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL),
-                $currency->group_separator,
-                $formattedCurrency
-            );
+            $separators[$formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL)] = $currency->group_separator;
         }
 
         if (
             $currency->decimal > 0
             && ! empty($currency->decimal_separator)
         ) {
-            $formattedCurrency = str_replace(
-                $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
-                $currency->decimal_separator,
-                $formattedCurrency
-            );
+            $separators[$formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL)] = $currency->decimal_separator;
+        }
+
+        if (! empty($separators)) {
+            $formattedCurrency = strtr($formattedCurrency, $separators);
         }
 
         $symbol = ! empty($currency->symbol)
@@ -88,7 +83,7 @@ trait CurrencyFormatter
     }
 
     /**
-     * Return currency symbol from currency code.
+     * Return the currency's custom symbol, falling back to the locale symbol for its code.
      *
      * @param  string|Currency  $currency
      */
@@ -96,6 +91,22 @@ trait CurrencyFormatter
     {
         $code = $currency instanceof Currency ? $currency->code : $currency;
 
+        if (! $currency instanceof Currency) {
+            $currency = app(CurrencyRepository::class)->findOneByField('code', $code);
+        }
+
+        if ($currency?->symbol) {
+            return $currency->symbol;
+        }
+
+        return $this->localeCurrencySymbol($code);
+    }
+
+    /**
+     * Return the symbol the current locale uses for the currency code.
+     */
+    protected function localeCurrencySymbol(string $code): string
+    {
         $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);

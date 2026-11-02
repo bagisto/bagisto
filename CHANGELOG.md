@@ -6,6 +6,20 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- Fixed overdue invoice reminders being sent to the store's own sender address instead of the customer who placed the order.
+
+- Fixed the header menu keeping the previous language or channel after switching on any page but the home page.
+
+- Fixed Stripe Checkout rejecting an order in a zero-decimal currency such as JPY, or with a tax or shipping amount carrying a fraction of the smallest unit.
+
+- Fixed the minimum-order check subtracting tax that was never added, which refused carts above the minimum when the discount was included but tax was not.
+
+- Fixed a deleted tax category leaving its tax on carts, and a deleted shipping tax category failing every cart total.
+
+- Fixed a newly added base currency showing the wrong symbol in admin and in prices formatted in the browser, and a custom group and decimal separator being swapped.
+
+- Fixed admin cart, product and revenue prices using the channel's currency instead of the base currency, and the return request screens showing every price in US dollars.
+
 - Fixed the total due still counting cancelled items, or taking them off at the base price on an order in another currency, and the mobile order page giving each item the whole order's grand total.
 
 - Fixed the admin order, invoice, shipment and refund screens leaving the customer's name, company and VAT number blank. They now always print as plain text.

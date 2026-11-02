@@ -116,6 +116,7 @@ class Helper
                 'product_flat.sku',
                 'product_flat.type',
                 'order_items.price',
+                'order_items.base_price',
                 'order_items.order_id',
                 'order_items.id as order_item_id',
                 'order_items.qty_ordered',

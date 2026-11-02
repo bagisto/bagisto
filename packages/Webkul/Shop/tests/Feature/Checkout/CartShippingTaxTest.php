@@ -105,6 +105,55 @@ it('should break the tax out of an including-tax shipping rate', function () {
 });
 
 // ============================================================================
+// Tax Left Behind By A Category That Has Gone
+// ============================================================================
+
+it('should take the tax off the shipping rate once its tax category has been deleted', function () {
+    $rate = cartWithTaxedFlatRateShipping('excluding_tax');
+
+    expect((float) $rate->tax_amount)->toBe(1.0);
+
+    TaxCategory::query()->whereKey(core()->getConfigData('sales.taxes.categories.shipping'))->delete();
+
+    Cart::collectTotals();
+
+    $rate = Cart::getCart()->selected_shipping_rate;
+
+    expect((float) $rate->tax_amount)->toBe(0.0)
+        ->and((float) $rate->price_incl_tax)->toBe((float) $rate->price);
+});
+
+it('should take the tax off an item once the tax category it was taxed under has been deleted', function () {
+    $productTaxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $productTaxCategory->id,
+        'tax_rate_id' => TaxRate::factory()->create([
+            'country' => 'US',
+            'state' => '',
+            'zip_code' => '*',
+            'tax_rate' => 10,
+        ])->id,
+    ]);
+
+    setTaxConfig('sales.taxes.categories.product', $productTaxCategory->id);
+
+    cartWithTaxedFlatRateShipping('excluding_tax');
+
+    expect((float) Cart::getCart()->items->first()->tax_amount)->toBe(10.0);
+
+    $productTaxCategory->delete();
+
+    Cart::collectTotals();
+
+    $item = Cart::getCart()->items->first()->refresh();
+
+    expect((float) $item->tax_amount)->toBe(0.0)
+        ->and((float) $item->total_incl_tax)->toBe((float) $item->total)
+        ->and((float) Cart::getCart()->tax_total)->toBe((float) Cart::getCart()->selected_shipping_rate->tax_amount);
+});
+
+// ============================================================================
 // A Custom Price Is What The Item Is Repriced To
 // ============================================================================
 
