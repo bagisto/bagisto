@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Event;
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\CatalogRule\Models\CatalogRule;
@@ -1639,12 +1640,14 @@ it('should check customer group price for guest customer with fixed price type f
     ]))->getDownloadableProductFactory()->create();
 
     $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty' => rand(2, 5),
+        'qty' => 1,
         'value_type' => 'fixed',
         'value' => rand(20, 50),
         'product_id' => $product->id,
         'customer_group_id' => 1,
     ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -1750,12 +1753,14 @@ it('should check customer group price for guest customer with discount price typ
     ]))->getDownloadableProductFactory()->create();
 
     $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty' => rand(2, 5),
+        'qty' => 1,
         'value_type' => 'discount',
         'value' => rand(20, 50),
         'product_id' => $product->id,
         'customer_group_id' => 1,
     ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
 
     $totalAmount = $product->price * $customerGroupPrice->qty;
 
@@ -1862,12 +1867,14 @@ it('should check customer group price for general customer with fixed price type
     ]))->getDownloadableProductFactory()->create();
 
     $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty' => rand(2, 5),
+        'qty' => 1,
         'value_type' => 'fixed',
         'value' => rand(20, 50),
         'product_id' => $product->id,
         'customer_group_id' => 2,
     ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
 
     $customer = Customer::factory()->create();
 
@@ -1975,12 +1982,14 @@ it('should check customer group price for general customer with discount price t
     ]))->getDownloadableProductFactory()->create();
 
     $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty' => rand(2, 5),
+        'qty' => 1,
         'value_type' => 'discount',
         'value' => rand(20, 50),
         'product_id' => $product->id,
         'customer_group_id' => 2,
     ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
 
     $customer = Customer::factory()->create();
 
@@ -2091,12 +2100,14 @@ it('should check customer group price for wholesale customer with fixed price ty
     ]))->getDownloadableProductFactory()->create();
 
     $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty' => rand(2, 5),
+        'qty' => 1,
         'value_type' => 'fixed',
         'value' => rand(20, 50),
         'product_id' => $product->id,
         'customer_group_id' => 3,
     ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
@@ -2204,12 +2215,14 @@ it('should check customer group price for wholesale customer with discount price
     ]))->getDownloadableProductFactory()->create();
 
     $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
-        'qty' => rand(2, 5),
+        'qty' => 1,
         'value_type' => 'discount',
         'value' => rand(20, 50),
         'product_id' => $product->id,
         'customer_group_id' => 3,
     ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
