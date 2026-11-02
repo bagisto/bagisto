@@ -420,22 +420,8 @@
                                         <div class="flex w-full justify-between gap-x-5">
                                             @lang('shop::app.customers.account.orders.view.information.total-due')
 
-                                            @php
-                                                $totalDue = $order->total_due;
-                                            @endphp
-
-                                            @foreach ($order->items as $item)
-                                                @php
-                                                    $totalDue = $totalDue - ($item->base_price * $item->qty_canceled);
-                                                @endphp
-                                            @endforeach
-
                                             <p>
-                                                @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
-                                                    {{ core()->formatPrice($totalDue, $order->order_currency_code) }}
-                                                @else
-                                                    {{ core()->formatPrice(0.00, $order->order_currency_code) }}
-                                                @endif
+                                                {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
                                             </p>
                                         </div>
 
@@ -667,39 +653,6 @@
                                                     @endif
                                                 </span>
                                             </div>
-
-                                            <!-- Tax Percent -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.tax-percent')
-                                                </span>
-
-                                                <p>
-                                                    {{ $item->tax_percent }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Tax Amount -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.tax-amount')
-                                                </span>
-
-                                                <p>
-                                                    {{ $item->tax_amount }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Grand Total -->
-                                            <div class="flex justify-between">
-                                                <span class="text-zinc-500">
-                                                    @lang('shop::app.customers.account.orders.view.information.grand-total')
-                                                </span>
-
-                                                <p>
-                                                    {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -900,22 +853,8 @@
                                         @lang('shop::app.customers.account.orders.view.information.total-due')
                                     </p>
 
-                                    @php
-                                        $baseTotalDue = $order->base_total_due;
-                                    @endphp
-
-                                    @foreach ($order->items as $item)
-                                        @php
-                                            $baseTotalDue = $baseTotalDue - ($item->base_price * $item->qty_canceled);
-                                        @endphp
-                                    @endforeach
-
                                     <p>
-                                        @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
-                                            {{ core()->formatPrice($baseTotalDue, $order->order_currency_code) }}
-                                        @else
-                                            {{ core()->formatPrice(0.00, $order->order_currency_code) }}
-                                        @endif
+                                        {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
                                     </p>
                                 </div>
 

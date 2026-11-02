@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- Fixed the total due still counting cancelled items, or taking them off at the base price on an order in another currency, and the mobile order page giving each item the whole order's grand total.
+
 - Fixed the admin order, invoice, shipment and refund screens leaving the customer's name, company and VAT number blank. They now always print as plain text.
 
 - Fixed sending an invoice, refund or shipment email marking every invoice, refund or shipment in the store as emailed, rather than just the one sent.

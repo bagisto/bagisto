@@ -115,19 +115,25 @@ class Order extends Model implements OrderContract
     }
 
     /**
-     * Return base total due amount.
+     * The amount still to be invoiced, in the base currency.
      */
     public function getBaseTotalDueAttribute()
     {
-        return $this->base_grand_total - $this->base_grand_total_invoiced;
+        return $this->dueAfterCancellations(
+            $this->base_grand_total - $this->base_grand_total_invoiced,
+            'base_price'
+        );
     }
 
     /**
-     * Return total due amount.
+     * The amount still to be invoiced, in the currency the order was placed in.
      */
     public function getTotalDueAttribute()
     {
-        return $this->grand_total - $this->grand_total_invoiced;
+        return $this->dueAfterCancellations(
+            $this->grand_total - $this->grand_total_invoiced,
+            'price'
+        );
     }
 
     /**
@@ -420,6 +426,23 @@ class Order extends Model implements OrderContract
         }
 
         return $hasReorderable;
+    }
+
+    /**
+     * Take the cancelled quantities off a due total. Cancelling an item leaves the order's grand
+     * total alone, so what is owed has to discount what will now never be invoiced.
+     */
+    protected function dueAfterCancellations(float $due, string $priceColumn): float
+    {
+        if ($this->status === self::STATUS_CANCELED) {
+            return 0;
+        }
+
+        foreach ($this->items as $item) {
+            $due -= $item->{$priceColumn} * $item->qty_canceled;
+        }
+
+        return $due;
     }
 
     /**
