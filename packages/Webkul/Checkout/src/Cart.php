@@ -1016,7 +1016,7 @@ class Cart
                  * Update the item price if exchange rates changes with exclusive price is enabled.
                  */
                 if ($price != $item->price) {
-                    $item = $this->cartItemRepository->update([
+                    $item->update([
                         'price' => $price,
                         'price_incl_tax' => $price,
                         'base_price' => $basePrice,
@@ -1025,7 +1025,7 @@ class Cart
                         'total_incl_tax' => $total,
                         'base_total' => ($baseTotal = $basePrice * $item->quantity),
                         'base_total_incl_tax' => $baseTotal,
-                    ], $item->id);
+                    ]);
 
                     $this->cart->items->put($key, $item);
                 }
