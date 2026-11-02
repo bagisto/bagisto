@@ -7,6 +7,8 @@ use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerNote;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
+use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Models\ProductReview;
 use Webkul\Shop\Mail\Customer\NoteNotification;
 
 use function Pest\Laravel\get;
@@ -59,6 +61,35 @@ it('should return the view page of customer', function () {
         ->assertSeeText($customer->email)
         ->assertSeeText($customer->phone)
         ->assertSeeText(trans('admin::app.customers.customers.view.title'));
+});
+
+it('should point the action of a review on the customer reviews tab at the product it was written about', function () {
+    // Arrange.
+    $customer = (new CustomerFaker)->factory()->create();
+
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $review = ProductReview::factory()->create([
+        'customer_id' => $customer->id,
+        'name' => $customer->name,
+        'product_id' => $product->id,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $actions = getJson(route('admin.customers.customers.view', [
+        'id' => $customer->id,
+        'type' => 'reviews',
+        'filters' => ['product_review_id' => [$review->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->json('records.0.actions');
+
+    expect(array_column($actions, 'url'))->toBe([route('admin.catalog.products.edit', $product->id)]);
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in customer', function () {

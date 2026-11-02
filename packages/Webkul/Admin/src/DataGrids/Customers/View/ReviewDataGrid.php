@@ -2,18 +2,12 @@
 
 namespace Webkul\Admin\DataGrids\Customers\View;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
 class ReviewDataGrid extends DataGrid
 {
-    /**
-     * Prepare query builder.
-     *
-     * @var string
-     */
-    protected $primaryColumn = 'product_review_id';
-
     /**
      * Review status "approved".
      */
@@ -30,9 +24,16 @@ class ReviewDataGrid extends DataGrid
     const STATUS_DISAPPROVED = 'disapproved';
 
     /**
+     * The column a row is identified by: the review's id, not the product's.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'product_review_id';
+
+    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {
@@ -42,7 +43,6 @@ class ReviewDataGrid extends DataGrid
             })
             ->select(
                 'product_flat.name as product_name',
-                'product_flat.id',
                 'product_reviews.id as product_review_id',
                 'product_reviews.status',
                 'product_reviews.rating',
@@ -173,7 +173,7 @@ class ReviewDataGrid extends DataGrid
     }
 
     /**
-     * Prepare actions.
+     * Link each review to the product it was written about, as the reviews tab does.
      *
      * @return void
      */
@@ -185,7 +185,7 @@ class ReviewDataGrid extends DataGrid
                 'title' => trans('admin::app.customers.customers.view.datagrid.reviews.view'),
                 'method' => 'GET',
                 'url' => function ($row) {
-                    return route('admin.sales.orders.view', $row->id);
+                    return route('admin.catalog.products.edit', $row->product_id);
                 },
             ]);
         }

@@ -2,14 +2,22 @@
 
 namespace Webkul\Shop\Listeners;
 
+use Webkul\Sales\Repositories\RefundRepository;
 use Webkul\Shop\Mail\Order\RefundedNotification;
 
 class Refund extends Base
 {
     /**
-     * After order is created
+     * Create a new listener instance.
      *
-     * @param  \Webkul\Sale\Contracts\Refund  $refund
+     * @return void
+     */
+    public function __construct(protected RefundRepository $refundRepository) {}
+
+    /**
+     * Mail the customer the new refund, then mark that refund alone as emailed.
+     *
+     * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
     public function afterCreated($refund)
@@ -21,7 +29,7 @@ class Refund extends Base
 
             $this->prepareMail($refund, new RefundedNotification($refund));
 
-            $refund->query()->update(['email_sent' => 1]);
+            $this->refundRepository->update(['email_sent' => true], $refund->id);
         } catch (\Exception $e) {
             report($e);
         }

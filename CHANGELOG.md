@@ -6,6 +6,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- Fixed the admin order, invoice, shipment and refund screens leaving the customer's name, company and VAT number blank. They now always print as plain text.
+
+- Fixed sending an invoice, refund or shipment email marking every invoice, refund or shipment in the store as emailed, rather than just the one sent.
+
 - Fixed the search terms and search synonyms mass delete being hidden from every role but one with full access, and the RMA request view action being hidden from a role without create permission.
 
 - Fixed cancelling an order of a configurable product leaving its variant's stock reserved, so those units stayed unsellable long after the order was gone.

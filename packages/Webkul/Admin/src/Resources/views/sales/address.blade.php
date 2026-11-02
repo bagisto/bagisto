@@ -1,21 +1,24 @@
 <div class="flex flex-col">
-    <p 
+    <p
         class="font-semibold leading-6 text-gray-800 dark:text-white"
-        v-text="'{{ $address->company_name ?? '' }}'"
+        v-pre
     >
+        {{ $address->company_name }}
     </p>
 
-    <p 
+    <p
         class="font-semibold leading-6 text-gray-800 dark:text-white"
-        v-text="'{{ $address->name }}'"
+        v-pre
     >
+        {{ $address->name }}
     </p>
 
     @if ($address->vat_id)
-        <p 
+        <p
             class="font-semibold leading-6 text-gray-800 dark:text-white"
-            v-text="'{{ $address->vat_id }}'"
+            v-pre
         >
+            {{ $address->vat_id }}
         </p>
     @endif
 
