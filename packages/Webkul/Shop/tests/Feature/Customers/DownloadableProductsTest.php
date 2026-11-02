@@ -1,8 +1,10 @@
 <?php
 
 use Webkul\Customer\Models\Customer;
+use Webkul\Product\Type\Downloadable;
 use Webkul\Sales\Models\DownloadableLinkPurchased;
 use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\InvoiceItem;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
@@ -21,11 +23,20 @@ function entitledLink(int $downloadsBought, int $orderedQty = 1, int $invoicedQt
         'order_id' => $order->id,
         'type' => 'downloadable',
         'qty_ordered' => $orderedQty,
+        'qty_invoiced' => $invoicedQty,
+        'qty_refunded' => 0,
+        'qty_canceled' => 0,
     ]);
 
-    Invoice::factory()->create([
+    $invoice = Invoice::factory()->create([
         'order_id' => $order->id,
         'total_qty' => $invoicedQty,
+    ]);
+
+    InvoiceItem::factory()->create([
+        'invoice_id' => $invoice->id,
+        'order_item_id' => $orderItem->id,
+        'qty' => $invoicedQty,
     ]);
 
     return DownloadableLinkPurchased::create(array_merge([
@@ -123,4 +134,84 @@ it('should not spend more downloads than the invoiced quantity entitles', functi
     expect(spendDownload($link))->toBeTrue()
         ->and(spendDownload($link))->toBeFalse()
         ->and($link->refresh()->download_used)->toBe(1);
+});
+
+it('should scale the entitlement to its own item, not the whole order', function () {
+    $link = entitledLink(6, 3, 1);
+
+    $order = $link->order;
+
+    $order->update(['total_qty_ordered' => 10]);
+
+    $order->invoices()->first()->update(['total_qty' => 8]);
+
+    expect(spendDownload($link))->toBeTrue()
+        ->and(spendDownload($link))->toBeTrue()
+        ->and(spendDownload($link))->toBeFalse()
+        ->and($link->refresh()->download_used)->toBe(2);
+});
+
+// ============================================================================
+// Unlimited Downloads
+// ============================================================================
+
+it('should keep serving a link bought with no download limit', function () {
+    $link = entitledLink(0);
+
+    expect(spendDownload($link))->toBeTrue()
+        ->and(spendDownload($link))->toBeTrue()
+        ->and(spendDownload($link))->toBeTrue()
+        ->and($link->refresh()->download_used)->toBe(3)
+        ->and($link->status)->toBe('available');
+});
+
+// ============================================================================
+// Revoking On Refund Or Cancellation
+// ============================================================================
+
+it('should expire the link and give up its unspent downloads once the item is refunded', function () {
+    $link = entitledLink(3);
+
+    spendDownload($link);
+
+    $link->order_item->update(['qty_refunded' => 1]);
+
+    app(DownloadableLinkPurchasedRepository::class)->updateStatus($link->order_item->refresh(), 'expired');
+
+    expect($link->refresh()->status)->toBe('expired')
+        ->and($link->download_canceled)->toBe(2)
+        ->and(spendDownload($link))->toBeFalse();
+});
+
+it('should expire an unlimited link once the item is refunded without cancelling a negative amount', function () {
+    $link = entitledLink(0);
+
+    spendDownload($link);
+
+    $link->order_item->update(['qty_refunded' => 1]);
+
+    app(DownloadableLinkPurchasedRepository::class)->updateStatus($link->order_item->refresh(), 'expired');
+
+    expect($link->refresh()->status)->toBe('expired')
+        ->and($link->download_canceled)->toBe(0);
+});
+
+it('should keep the downloads the invoiced share paid for when only the rest of the item is cancelled', function () {
+    $link = entitledLink(4, 2, 1);
+
+    $link->order_item->update(['qty_canceled' => 1]);
+
+    app(DownloadableLinkPurchasedRepository::class)->updateStatus($link->order_item->refresh(), 'expired');
+
+    expect($link->refresh()->status)->toBe('available')
+        ->and($link->download_canceled)->toBe(2)
+        ->and(spendDownload($link))->toBeTrue();
+});
+
+// ============================================================================
+// One Of Each Link In The Cart
+// ============================================================================
+
+it('should always put a downloadable product in the cart once, whatever quantity is asked for', function () {
+    expect(app(Downloadable::class)->getQtyRequest(['quantity' => 3])['quantity'])->toBe(1);
 });

@@ -334,7 +334,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="downloads"
-                                            rules="required|numeric|min_value:1"
+                                            rules="required|numeric|min_value:0"
                                             v-model="selectedLink.downloads"
                                             :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.downloads')"
                                         />

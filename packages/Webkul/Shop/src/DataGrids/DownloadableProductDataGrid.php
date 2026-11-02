@@ -126,8 +126,7 @@ class DownloadableProductDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'remaining_downloads',
             'label' => trans('shop::app.customers.account.downloadable-products.remaining-downloads'),
-            'type' => 'datetime',
-            'filterable_type' => 'datetime_range',
+            'type' => 'integer',
             'sortable' => true,
             'closure' => function ($row) {
                 if (! $row->download_bought) {

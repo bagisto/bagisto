@@ -6,6 +6,14 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- Fixed a downloadable link set to unlimited downloads never downloading, and the admin form refusing 0 as the unlimited value.
+
+- Fixed a fully refunded downloadable link staying downloadable.
+
+- Fixed a downloadable link bought alongside other products being short of downloads until the whole order was invoiced.
+
+- Fixed a downloadable product's quantity being raised by adding it again or through the API, which multiplied its price and its downloads.
+
 - Fixed overdue invoice reminders being sent to the store's own sender address instead of the customer who placed the order.
 
 - Fixed the header menu keeping the previous language or channel after switching on any page but the home page.

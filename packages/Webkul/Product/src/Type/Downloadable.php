@@ -175,6 +175,20 @@ class Downloadable extends AbstractType
     }
 
     /**
+     * The quantity to put in the cart, which is always one. A link is bought once, so adding it
+     * again must neither raise the quantity nor add to what the cart already holds.
+     *
+     * @param  array  $data
+     * @return array
+     */
+    public function getQtyRequest($data)
+    {
+        $data['quantity'] = 1;
+
+        return $data;
+    }
+
+    /**
      * Compare options.
      *
      * @param  array  $options1
