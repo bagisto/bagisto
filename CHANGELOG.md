@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- Fixed admin order creation offering a quantity for products that take none, such as downloadable products.
+
 - Fixed a downloadable link set to unlimited downloads never downloading, and the admin form refusing 0 as the unlimited value.
 
 - Fixed a fully refunded downloadable link staying downloadable.
