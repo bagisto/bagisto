@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y \
         git \
         gnupg \
         gosu \
+        cron \
         imagemagick \
         nano \
         supervisor \
@@ -152,6 +153,22 @@ RUN chown -R www-data:www-data /usr/local/lsws/conf /usr/local/lsws/logs
 COPY litespeed/config/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
 RUN sed -i "s/__LSPHP_VERSION__/${LSPHP_VERSION}/g" /etc/supervisor/conf.d/bagisto.conf
 COPY shared/db/${DB_ENGINE}/supervisord.conf /etc/supervisor/conf.d/database.conf
+COPY shared/workers/supervisord.conf /etc/supervisor/conf.d/workers.conf
+
+
+# ---------------------------------------------------------------------------
+# Scheduler
+#
+# cron runs Laravel's scheduler every minute from /etc/cron.d/bagisto, which
+# it reads only while nobody but root can write to it. The jobs the packages
+# drop in are removed, since none ran before the image had cron.
+# pam_loginuid is made optional because a container cannot change a login uid
+# the host has set, and cron would then skip every job without a word.
+# ---------------------------------------------------------------------------
+COPY shared/workers/crontab /etc/cron.d/bagisto
+RUN chmod 0644 /etc/cron.d/bagisto \
+    && find /etc/cron.d /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly -type f ! -name bagisto ! -name .placeholder -delete \
+    && sed -i 's/^session\s\+required\s\+pam_loginuid\.so/session    optional     pam_loginuid.so/' /etc/pam.d/cron
 
 
 # ---------------------------------------------------------------------------

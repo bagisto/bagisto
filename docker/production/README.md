@@ -695,6 +695,7 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 | `APP_CURRENCY` | from `.env.example` | Default currency (e.g., `USD`, `INR`, `EUR`). |
 | `APP_TIMEZONE` | from `.env.example` | Timezone (e.g., `UTC`, `Asia/Kolkata`). |
 | `APP_ADMIN_URL` | `admin` | Admin panel URL path. |
+| `SCHEDULER_AUTOSTART` | `true` | `true` or `false`: whether Supervisor starts cron, which runs Laravel's scheduler every minute. Set `false` on every container but one when several share a database, or each runs every scheduled task. |
 
 ---
 

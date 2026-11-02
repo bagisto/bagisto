@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\File;
+use Mockery\MockInterface;
+use Webkul\ImageCache\Http\Controllers\ImageCacheController;
 
 use function Pest\Laravel\get;
 
@@ -32,3 +34,38 @@ it('should not serve a stored file whose contents are not an image, whatever its
     'vector image named as a picture' => ['drawing.png', '<svg xmlns="http://www.w3.org/2000/svg"></svg>'],
     'markup the sniffer reads as text' => ['notes.txt', '<body>hello</body>'],
 ]);
+
+// ============================================================================
+// Bagisto Logo
+// ============================================================================
+
+it('should not fetch the Bagisto logo again until ten minutes after a fetch fails', function () {
+    $fetches = 0;
+
+    $this->partialMock(ImageCacheController::class, function (MockInterface $mock) use (&$fetches) {
+        $mock->shouldAllowMockingProtectedMethods()
+            ->shouldReceive('fetchFromUrl')
+            ->andReturnUsing(function () use (&$fetches) {
+                $fetches++;
+
+                throw new Exception('The update server could not be reached.');
+            });
+    });
+
+    get('cache/logo/bagisto.png')
+        ->assertNotFound();
+
+    $this->travel(9)->minutes();
+
+    get('cache/logo/bagisto.png')
+        ->assertNotFound();
+
+    expect($fetches)->toBe(1);
+
+    $this->travel(1)->minutes();
+
+    get('cache/logo/bagisto.png')
+        ->assertNotFound();
+
+    expect($fetches)->toBe(2);
+});

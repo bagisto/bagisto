@@ -6,6 +6,7 @@ use Closure;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Webkul\Core\Helpers\InstalledPackages;
 use Webkul\ImageCache\TemplateRegistry;
 use Webkul\User\Repositories\AdminRepository;
@@ -16,6 +17,22 @@ class ImageCacheController extends Controller
      * The Bagisto logo URL.
      */
     protected const BAGISTO_LOGO = 'https://updates.bagisto.com/bagisto.png';
+
+    /**
+     * The cache key remembering that the Bagisto logo could not be fetched.
+     */
+    protected const LOGO_UNREACHABLE_KEY = 'imagecache.logo-unreachable';
+
+    /**
+     * How long a failed fetch of the Bagisto logo is remembered, so a store that cannot reach the update
+     * server does not try again on every admin page.
+     */
+    protected const LOGO_RETRY_MINUTES = 10;
+
+    /**
+     * Seconds a remote fetch may wait, so an unreachable host cannot hold a worker.
+     */
+    protected const FETCH_TIMEOUT = 3;
 
     /**
      * The image types the cache serves, so a stored file whose bytes read as anything else is never sent from the store.
@@ -101,11 +118,17 @@ class ImageCacheController extends Controller
      */
     protected function getLogo(): Response
     {
+        if (Cache::has(self::LOGO_UNREACHABLE_KEY)) {
+            abort(404, 'Unable to fetch logo.');
+        }
+
         try {
             $content = $this->fetchFromUrl($this->getLogoUrl());
 
             return $this->buildResponse($content);
         } catch (Exception) {
+            Cache::put(self::LOGO_UNREACHABLE_KEY, true, now()->addMinutes(self::LOGO_RETRY_MINUTES));
+
             abort(404, 'Unable to fetch logo.');
         }
     }
@@ -140,6 +163,7 @@ class ImageCacheController extends Controller
             'http' => [
                 'method' => 'GET',
                 'protocol_version' => 1.1,
+                'timeout' => self::FETCH_TIMEOUT,
                 'header' => "Accept-language: en\r\n".
                     "Domain: $domain\r\n".
                     $this->getAdminHeaders().
