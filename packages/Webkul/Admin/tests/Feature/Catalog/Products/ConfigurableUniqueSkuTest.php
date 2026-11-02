@@ -9,8 +9,6 @@ use Webkul\Product\Models\Product;
  */
 function validateVariantSkus(array $variants, array $currentIds = [])
 {
-    request()->merge(['variants' => $variants]);
-
     return Validator::make(
         ['variants' => $variants],
         ['variants.*.sku' => [new ConfigurableUniqueSku($currentIds)]]
