@@ -44,7 +44,7 @@ class ConfigurableUniqueSku implements DataAwareRule, ValidationRule
     }
 
     /**
-     * Is SKU is exists in product.
+     * Whether the posted variant skus are free: held by no product outside the current variants and not repeated.
      *
      * @return bool
      */
@@ -54,10 +54,6 @@ class ConfigurableUniqueSku implements DataAwareRule, ValidationRule
 
         $productRepository = app(ProductRepository::class);
 
-        /**
-         * First we will check sku in all the products except the
-         * current variant ids.
-         */
         if (
             $productRepository->whereIn('sku', $requestedSkus)
                 ->whereNotIn('id', $this->currentIds)
@@ -66,10 +62,6 @@ class ConfigurableUniqueSku implements DataAwareRule, ValidationRule
             return false;
         }
 
-        /**
-         * Once, we don't found any sku in all the products then
-         * we will check uniqueness in the current requested variant's skus.
-         */
         return ! (count($requestedSkus) !== count(array_unique($requestedSkus)));
     }
 }
