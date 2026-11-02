@@ -11,7 +11,7 @@ use Webkul\Sales\Models\OrderPayment;
 class OrderRMADataGrid extends DataGrid
 {
     /**
-     * Prepare query builder.
+     * Prepare query builder of orders with items still inside the return window they were placed with.
      */
     public function prepareQueryBuilder(): Builder
     {
@@ -27,8 +27,7 @@ class OrderRMADataGrid extends DataGrid
                 'orders.increment_id',
                 'orders.status',
                 'orders.created_at',
-                'orders.grand_total',
-                'orders.order_currency_code',
+                'orders.base_grand_total',
                 'orders.is_guest',
                 DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as customer_name'),
                 'order_payment.method_title',
@@ -46,12 +45,6 @@ class OrderRMADataGrid extends DataGrid
             Order::STATUS_PENDING_PAYMENT,
         ]);
 
-        /**
-         * Only include items where allow_rma was explicitly enabled at order
-         * placement (rma_return_period is not null) and the return window
-         * has not expired. Product type eligibility is also captured at order
-         * placement in rma_return_period.
-         */
         $g = db_grammar();
 
         $queryBuilder->whereNotNull('order_items.rma_return_period')
@@ -62,8 +55,7 @@ class OrderRMADataGrid extends DataGrid
             'orders.increment_id',
             'orders.status',
             'orders.created_at',
-            'orders.grand_total',
-            'orders.order_currency_code',
+            'orders.base_grand_total',
             'orders.is_guest',
             'orders.customer_first_name',
             'orders.customer_last_name',
@@ -73,7 +65,7 @@ class OrderRMADataGrid extends DataGrid
 
         $this->addFilter('id', 'orders.id');
         $this->addFilter('status', 'orders.status');
-        $this->addFilter('grand_total', 'orders.grand_total');
+        $this->addFilter('base_grand_total', 'orders.base_grand_total');
         $this->addFilter('method_title', 'order_payment.method_title');
         $this->addFilter('customer_name', DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name')));
         $this->addFilter('created_at', 'orders.created_at');
@@ -128,14 +120,14 @@ class OrderRMADataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'grand_total',
+            'index' => 'base_grand_total',
             'label' => trans('admin::app.sales.rma.all-rma.index.datagrid.total'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true,
             'closure' => function ($row) {
-                return '<span class="text-sm">'.e(core()->formatPrice($row->grand_total, $row->order_currency_code)).'</span>';
+                return '<span class="text-sm">'.e(core()->formatBasePrice($row->base_grand_total)).'</span>';
             },
         ]);
 
