@@ -514,7 +514,7 @@
             template: '#v-mobile-category-template',
 
             data() {
-                return  {
+                return {
                     categories: [],
                     currentViewLevel: 'main',
                     currentSecondLevelCategory: null,
@@ -522,42 +522,61 @@
                 }
             },
 
+            computed: {
+                /**
+                 * The height the menu fills: the window's, less the 61px header below 920px wide.
+                 */
+                getCurrentScreenHeight() {
+                    return window.innerHeight - (window.innerWidth < 920 ? 61 : 0) + 'px';
+                },
+
+                /**
+                 * The key the category tree is kept under in the browser, one per channel and locale.
+                 */
+                categoriesStorageKey() {
+                    return "categories:{{ core()->getCurrentChannelCode() }}:{{ app()->getLocale() }}";
+                },
+            },
+
             mounted() {
                 this.initCategories();
             },
 
-            computed: {
-                getCurrentScreenHeight() {
-                    return window.innerHeight - (window.innerWidth < 920 ? 61 : 0) + 'px';
-                },
-            },
-
             methods: {
+                /**
+                 * Show the category tree kept in the browser for this channel and locale, or fetch it when there is none.
+                 */
                 initCategories() {
                     try {
-                        const stored = localStorage.getItem('categories');
+                        const stored = localStorage.getItem(this.categoriesStorageKey);
 
                         if (stored) {
                             this.categories = JSON.parse(stored);
-                            this.isLoading = false;
+
                             return;
                         }
-
                     } catch (e) {}
 
                     this.getCategories();
                 },
+
+                /**
+                 * Fetch the category tree and keep it in the browser for this channel and locale.
+                 */
                 getCategories() {
                     this.$axios.get("{{ route('shop.api.categories.tree') }}")
                         .then(response => {
                             this.categories = response.data.data;
-                            localStorage.setItem('categories', JSON.stringify(this.categories));
+                            localStorage.setItem(this.categoriesStorageKey, JSON.stringify(this.categories));
                         })
                         .catch(error => {
                             console.log(error);
                         });
                 },
 
+                /**
+                 * Show the children of a second-level category that has some, instead of following its link.
+                 */
                 showThirdLevel(secondLevelCategory, parentCategory, event) {
                     if (secondLevelCategory.children && secondLevelCategory.children.length) {
                         this.currentSecondLevelCategory = secondLevelCategory;
@@ -571,6 +590,9 @@
                     }
                 },
 
+                /**
+                 * Go back to the top level of the category menu.
+                 */
                 goBackToMainView() {
                     this.currentViewLevel = 'main';
                 }
@@ -581,6 +603,9 @@
             template: '#v-mobile-drawer-template',
 
             methods: {
+                /**
+                 * Return the category menu to its top level when the drawer closes.
+                 */
                 onDrawerClose() {
                     this.$refs.mobileCategory.currentViewLevel = 'main';
                 }

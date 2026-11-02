@@ -20,13 +20,13 @@
     />
 @endPush
 
-@push('scripts')
-    @if(! empty($categories))
+@push ('scripts')
+    @if (! empty($categories))
         <script>
-            localStorage.setItem('categories', JSON.stringify(@json($categories)));
+            localStorage.setItem('categories:{{ $channel->code }}:{{ app()->getLocale() }}', JSON.stringify(@json($categories)));
         </script>
     @endif
-@endpush
+@endPush
 
 <x-shop::layouts>
     <!-- Page Title -->
