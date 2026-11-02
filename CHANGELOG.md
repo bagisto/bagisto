@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed a name, company or VAT number entered at checkout being able to run script in the admin order screen. Those fields now always print as plain text.
+
+- Fixed sending an invoice, refund or shipment email marking every invoice, refund or shipment in the store as emailed, rather than just the one sent.
+
 - Fixed overdue invoice reminders being sent to the store's own sender address instead of the customer who placed the order.
 
 - The production Docker images now run Laravel's scheduler from cron, so scheduled tasks such as the Omnibus price snapshots, campaign mail and nightly price indexing run in the container. Set `SCHEDULER_AUTOSTART=false` on all but one container sharing a database.

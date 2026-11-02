@@ -213,6 +213,30 @@ it('should store an invoice and send email notification', function () {
     Mail::assertQueued(InvoicedNotification::class, fn (InvoicedNotification $mail) => $mail->hasTo($order->customer_email));
 });
 
+it('should mark only the invoice it mails as emailed, leaving every other invoice as it was', function () {
+    Mail::fake();
+
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_invoice', 0);
+
+    $earlier = $this->invoiceOrder($this->createOrder());
+
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_invoice', 1);
+
+    $order = $this->createOrder();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $order->id), [
+        'invoice' => ['items' => [$order->items->first()->id => 1]],
+    ])
+        ->assertRedirect();
+
+    $invoice = Invoice::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect((bool) $invoice->email_sent)->toBeTrue()
+        ->and((bool) $earlier->fresh()->email_sent)->toBeFalse();
+});
+
 it('should fail validation when invoice items are missing on store', function () {
     $order = $this->createOrder();
 
