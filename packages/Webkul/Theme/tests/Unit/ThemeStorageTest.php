@@ -4,7 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use League\Flysystem\Local\LocalFilesystemAdapter;
+use Webkul\ImageCache\TemplateRegistry;
 use Webkul\Theme\ThemeStorage;
+
+/**
+ * The two ways `app.url` is written when the application sits in a subdirectory.
+ */
+dataset('app url in a subdirectory', [
+    'app url carries the directory' => 'http://127.0.0.1/folder-1/bagisto/public',
+    'app url carries only the host' => 'http://127.0.0.1',
+]);
 
 /**
  * Serve the application from a directory below the document root, as a dev box maps it.
@@ -26,14 +35,6 @@ function serveFromSubdirectory(string $appUrl): void
 
     URL::setRequest($request);
 }
-
-/**
- * The two ways `app.url` is written when the application sits in a subdirectory.
- */
-dataset('app url in a subdirectory', [
-    'app url carries the directory' => 'http://127.0.0.1/folder-1/bagisto/public',
-    'app url carries only the host' => 'http://127.0.0.1',
-]);
 
 // ============================================================================
 // Normalizing
@@ -271,3 +272,31 @@ it('should keep a reference pointing at the same file however the application is
     expect(bagisto_theme_storage()->mediaReference('themes/default/sections/1/a.webp'))
         ->toBe($reference);
 })->with('app url in a subdirectory');
+
+// ============================================================================
+// Image Cache Route
+// ============================================================================
+
+it('should resolve a resized copy on the image cache route the store configures', function () {
+    config(['imagecache.route' => 'img/cache']);
+
+    expect(bagisto_theme_storage()->resizedUrl('themes/default/sections/1/a.webp', 'large'))
+        ->toBe(url('img/cache/large/themes/default/sections/1/a.webp'));
+});
+
+it('should name the pinned theme in a resized url, so the image cache cuts it as that theme does', function () {
+    config(['themes.shop.pinned' => config('themes.shop.default')]);
+
+    request()->attributes->set(TemplateRegistry::PINNED_THEME, 'pinned');
+
+    expect(bagisto_theme_storage()->resizedUrl('themes/default/sections/1/a.webp', 'large'))
+        ->toBe(url('cache/large@pinned/themes/default/sections/1/a.webp'));
+});
+
+it('should offer the original at every size when the image cache route is off', function () {
+    config(['imagecache.route' => null]);
+
+    expect(bagisto_theme_storage()->imageUrls('themes/default/sections/1/a.webp')['srcset'])
+        ->toHaveKeys(ThemeStorage::SIZES)
+        ->each->toBe(bagisto_theme_storage()->url('themes/default/sections/1/a.webp'));
+});

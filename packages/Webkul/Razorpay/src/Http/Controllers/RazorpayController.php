@@ -38,7 +38,7 @@ class RazorpayController extends Controller
     ) {}
 
     /**
-     * Redirects to checkout.
+     * Show the Razorpay checkout for the cart, or send the shopper back when it cannot start.
      */
     public function redirect(): RedirectResponse|View
     {
@@ -50,6 +50,13 @@ class RazorpayController extends Controller
 
         try {
             $cart = Cart::getCart();
+
+            if (
+                $cart
+                && Cart::requiresSignInToCheckout()
+            ) {
+                return redirect()->route('shop.checkout.onepage.index', request()->only('buy_now'));
+            }
 
             $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
 
@@ -66,7 +73,9 @@ class RazorpayController extends Controller
 
             $payment = $this->razorpayPayment->preparePaymentData($cart, $razorpayOrder);
 
-            return view('razorpay::drop-in-ui', compact('payment'));
+            $buyNow = $cart->is_buy_now ? Cart::buyNowToken($cart->id) : null;
+
+            return view('razorpay::drop-in-ui', compact('payment', 'buyNow'));
         } catch (\Throwable $e) {
             report($e);
 
@@ -197,17 +206,13 @@ class RazorpayController extends Controller
         try {
             $orderData = (new OrderResource($cart))->jsonSerialize();
 
-            $order = $this->orderRepository->create($orderData);
+            $orderData['payment']['additional'] = [
+                'status' => Invoice::STATUS_PAID,
+                'razorpay_order_id' => $request->input('razorpay_order_id'),
+                'razorpay_payment_id' => $request->input('razorpay_payment_id'),
+            ];
 
-            if ($order->payment) {
-                $order->payment->update([
-                    'additional' => [
-                        'status' => Invoice::STATUS_PAID,
-                        'razorpay_order_id' => $request->input('razorpay_order_id'),
-                        'razorpay_payment_id' => $request->input('razorpay_payment_id'),
-                    ],
-                ]);
-            }
+            $order = $this->orderRepository->create($orderData);
 
             $this->orderRepository->update(['status' => Order::STATUS_PROCESSING], $order->id);
 

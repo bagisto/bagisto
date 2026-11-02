@@ -4,6 +4,7 @@ namespace Webkul\Shop\Helpers;
 
 use Closure;
 use Illuminate\Support\Facades\Cache;
+use Webkul\ImageCache\TemplateRegistry;
 
 class CatalogApiCache
 {
@@ -44,16 +45,17 @@ class CatalogApiCache
     }
 
     /**
-     * Whether a catalog response may be cached, which is only for guests since customers receive
-     * personalised data such as wishlist state and group prices.
+     * Whether a catalog response may be cached: only for a guest, since a customer's carries wishlist state and
+     * group prices, and only when its images are not pinned to a theme for the appearance preview.
      */
     public function shouldCache(): bool
     {
-        return ! auth()->guard('customer')->check();
+        return ! auth()->guard('customer')->check()
+            && is_null(app(TemplateRegistry::class)->pinnedTheme());
     }
 
     /**
-     * Resolve a catalog response, caching it for guests.
+     * Resolve a catalog response, caching it whenever shouldCache() allows.
      */
     public function remember(string $segment, array $params, Closure $callback): mixed
     {

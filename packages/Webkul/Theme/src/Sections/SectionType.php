@@ -86,7 +86,7 @@ abstract class SectionType
     }
 
     /**
-     * Whether the layout draws the section on every page.
+     * Whether the layout draws the section on every page, marking it for the preview itself.
      */
     public function rendersInLayout(): bool
     {

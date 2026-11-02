@@ -5691,7 +5691,7 @@ return [
                             'syncing' => 'Eşitleniyor...',
                             'pending' => ':count dosya henüz yapılandırılmış depolamada değil',
                             'up-to-date' => 'Her şey yapılandırılmış depolamada',
-                            'info' => 'Daha önce yüklenmiş dosyaları yapılandırılmış depolamaya kopyalar. Arka planda çalışır, hâlihazırda bulunanları atlar ve özgün dosyaları yerinde bırakır. Büyük bir mağaza için `php artisan bagisto:storage:sync` komutunu çalıştırın.',
+                            'info' => 'Daha önce yüklenmiş dosyaları yapılandırılmış depolamaya kopyalar. Arka planda çalışır, zaten orada olanları atlar ve orijinal dosyaları yerinde bırakır. Büyük bir mağaza için bunun yerine `php artisan bagisto:storage:sync` komutunu çalıştırın.',
                             'started' => 'Eşitleme başladı. Dosyalar arka planda kopyalanıyor.',
                             'local' => 'Yapılandırılmış depolama yerel disk olduğundan kopyalanacak bir şey yok.',
                         ],

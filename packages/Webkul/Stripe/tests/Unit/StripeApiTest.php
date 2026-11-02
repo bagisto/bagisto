@@ -208,6 +208,28 @@ it('should charge a price the cart holds to four decimals without losing a unit 
         ->toBe((int) round($cart->base_grand_total * $unit));
 });
 
+it('should price every line at a whole minor unit so Stripe accepts a fractional tax total', function () {
+    $cart = $this->createCartWithItems('stripe');
+
+    $cart->base_shipping_amount = 4.99;
+
+    $cart->base_tax_total = 30.5976;
+
+    $client = $this->fakeStripeApi([
+        'POST /v1/checkout/sessions' => [200, stripeSessionResponse('cs_test_whole_units')],
+    ]);
+
+    $this->stripe->createCheckoutSession($cart);
+
+    $params = $client->requestsTo('POST', '/v1/checkout/sessions')[0]['params'];
+
+    foreach ($params['line_items'] as $lineItem) {
+        $amount = (float) $lineItem['price_data']['unit_amount_decimal'];
+
+        expect($amount)->toBe(round($amount));
+    }
+});
+
 it('should start a checkout with no discount when the cart carries none', function () {
     $cart = $this->createCartWithItems('stripe');
 

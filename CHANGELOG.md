@@ -4,6 +4,36 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed overdue invoice reminders being sent to the store's own sender address instead of the customer who placed the order.
+
+- The production Docker images now run Laravel's scheduler from cron, so scheduled tasks such as the Omnibus price snapshots, campaign mail and nightly price indexing run in the container. Set `SCHEDULER_AUTOSTART=false` on all but one container sharing a database.
+
+- Fixed the production Docker images creating the application log as root at startup, which left the store unable to write to it or to report any error.
+
+- Fixed the nginx production image answering every resized image with a 404 status, though the image itself was served.
+
+- Image urls now follow the path set in `imagecache.route` instead of always `cache/`, and setting it to null or empty turns the image cache off rather than breaking the images it serves; product, category and section images then link their full-size stored files.
+
+- Fixed an entry in `config/imagecache.php` naming a missing class, or one without `applyFilter()`, silently serving full-size originals. It is now logged, and `small`, `medium` and `large`, broken or left out, fall back to the image cache's own 100, 300 and 600 pixel square crops.
+
+- Image cache templates are now built by the container, so a template may type-hint what its constructor needs; an object listed in `imagecache.templates` is no longer applied, so list its class name instead.
+
+- The image cache now logs, at most once an hour each, a remote storage disk it cannot read or reach, as with wrong credentials, and a stored image it fails to resize.
+
+- Fixed an admin panel that cannot reach updates.bagisto.com tying up a request for up to a minute on every page while fetching the Bagisto logo. The fetch now gives up after three seconds and is not retried for ten minutes.
+
+- The Appearance preview now cuts the images its sections show as the previewed theme does, including templates only that theme registers, rather than as the theme of the channel the admin domain resolves to.
+
+- The new `search-images:prune` command, which Laravel's scheduler runs daily at 00:05, deletes every image search upload from before today, along with the `product-search/` folder earlier releases kept them in.
+
+- Fixed storefront paths that merely begin with the admin URL, such as `/admin-tools`, staying open during maintenance.
+
+- Fixed storefront pages whose url held the admin URL and a slash anywhere but at the start of the path answering not found, and an `APP_ADMIN_URL` ending in a slash breaking the admin panel.
+
+- A path under the admin URL naming a storefront category, such as `/admin/shoes`, now answers not found instead of redirecting to `/shoes`.
+
+- While the store is down with `php artisan down --redirect` or `--render`, a request expecting JSON now gets the 503 instead of the redirect or page. With `APP_DEBUG` off, the 503 page and JSON now also carry the `Retry-After` and `Refresh` headers `--retry` and `--refresh` set.
+
 - Added the currencies of the East African Community — the Tanzanian, Kenyan, Ugandan and Somali shillings, the Rwandan, Burundian and Congolese francs, and the South Sudanese pound — to the installer.
 
 - Added Swahili (Kiswahili) as a supported locale, translated across the admin, the storefront and the installer.
@@ -18,9 +48,37 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
 
+- Fixed a login handing the shopper a cart belonging to a different customer, items and all, when a stale cart session key named it.
+
+- Fixed Buy Now emptying the cart it was started from. A Buy Now now checks out on its own cart and mirrors the item into the main cart, so an unfinished or abandoned Buy Now stays in the cart and a completed one is taken back out.
+
+- Fixed the shipping estimate quoting a total it then threw away, leaving the cart with a chosen shipping method and no shipping in the grand total.
+
+- Fixed a deleted tax category leaving its tax on carts, so items and shipping kept being charged a tax that no longer existed.
+
+- Fixed a product added beside one already in the cart in the same request going untaxed, which understated the tax and total on an admin reorder.
+
+- Fixed the minimum-order check subtracting tax that was never added, so a cart with the discount included but tax excluded was refused below the configured minimum when it should have passed.
+
+- Fixed a guest login with items in both carts ending up with no cart at all, and starting a second one on the next add.
+
+- Fixed a cart emptied of its last item lingering until the next request, which reported a minimum-order error instead of an empty cart.
+
+- Hardened the remove-selected-items request to reject a missing, non-array, or duplicate selection with a validation error instead of silently accepting it.
+
+- Fixed the checkout address step failing for a guest whose cart had gone, instead of sending them to sign in.
+
+- Fixed a guest placing an order through the checkout API while guest checkout was off, or with a downloadable product in the cart, which only the checkout page refused; the order step and every payment gateway now turn such a guest away before any payment is taken.
+
+- Fixed the PayPal Smart Button capturing before verifying the amount, which could leave a shopper charged against a cheaper cart with no order; it now verifies amount and currency first and shows the gateway's own error.
+
 - Refactored internals for clearer responsibilities.
 
 - Carried across every fix released on the 2.4 line, which the v2.4 changelog lists in full.
+
+- #11562 [fixed] - The header menu kept the previous language after switching locale on any page but the home page. Each locale now has its own cached menu.
+
+- #11560 [fixed] - Fixed Stripe Checkout rejecting an order in a zero-decimal currency such as JPY, and in any cart whose tax or shipping amount carried a fraction of the currency's smallest unit; every line is now priced at a whole smallest unit.
 
 - #11547 [fixed] - A missing cached image showed the default theme's error page on a store running its own channel theme. The error page now uses the channel's theme.
 

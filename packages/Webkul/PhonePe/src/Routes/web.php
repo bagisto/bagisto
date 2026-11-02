@@ -4,7 +4,7 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Support\Facades\Route;
 use Webkul\PhonePe\Http\Controllers\PhonePeController;
 
-Route::group(['middleware' => ['web'], 'prefix' => 'phonepe'], function () {
+Route::group(['middleware' => ['web', 'cart.buy_now'], 'prefix' => 'phonepe'], function () {
     Route::get('/redirect', [PhonePeController::class, 'redirect'])
         ->name('phonepe.redirect');
 

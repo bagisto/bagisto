@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Razorpay\Http\Controllers\RazorpayController;
 
 Route::controller(RazorpayController::class)
-    ->middleware('web')
+    ->middleware(['web', 'cart.buy_now'])
     ->prefix('razorpay/payment')
     ->group(function () {
         Route::get('redirect', 'redirect')->name('razorpay.payment.redirect');

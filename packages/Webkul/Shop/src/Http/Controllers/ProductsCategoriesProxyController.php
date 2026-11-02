@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -13,16 +14,12 @@ use Webkul\Theme\Repositories\SectionRepository;
 class ProductsCategoriesProxyController extends Controller
 {
     /**
-     * Using const variable for status
-     *
-     * @var int Status
+     * Using const variable for status.
      */
     const STATUS = 1;
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
@@ -32,18 +29,20 @@ class ProductsCategoriesProxyController extends Controller
     ) {}
 
     /**
-     * Show product or category view. If neither category nor product matches, abort with code 404.
+     * Show the category or product a storefront slug names, or the home page for a path that is no slug, redirecting a
+     * nested category path or a rewritten url, and answer not found otherwise, a path under the admin url included.
      *
-     * @return View|\Exception
+     * @return View|RedirectResponse
      */
     public function index(Request $request)
     {
+        if (is_admin_request($request)) {
+            abort(404);
+        }
+
         $slugOrURLKey = urldecode(trim($request->getPathInfo(), '/'));
 
-        /**
-         * Support url for chinese, japanese, arabic and english with numbers.
-         */
-        if (! preg_match('/^([\p{L}\p{N}\p{M}\x{0900}-\x{097F}\x{0590}-\x{05FF}\x{0600}-\x{06FF}\x{0400}-\x{04FF}_-]+\/?)+$/u', $slugOrURLKey)) {
+        if (! $this->isSlug($slugOrURLKey)) {
             $sections = $this->sectionRepository->getRenderable(
                 core()->getCurrentChannel()->id,
                 core()->getCurrentChannel()->theme
@@ -96,11 +95,6 @@ class ProductsCategoriesProxyController extends Controller
             return view('shop::products.view', compact('product'));
         }
 
-        /**
-         * If category is not found, try to find it by trimmed slug.
-         *
-         * Only needed when URL contains nested path segments.
-         */
         if (str_contains($slugOrURLKey, '/')) {
             $trimmedSlug = last(explode('/', $slugOrURLKey));
 
@@ -111,10 +105,6 @@ class ProductsCategoriesProxyController extends Controller
             }
         }
 
-        /**
-         * If neither category nor product matches,
-         * try to find it by url rewrite.
-         */
         $urlRewrite = $this->urlRewriteRepository->findOneWhere([
             'request_path' => $slugOrURLKey,
             'locale' => app()->getLocale(),
@@ -125,5 +115,14 @@ class ProductsCategoriesProxyController extends Controller
         }
 
         abort(404);
+    }
+
+    /**
+     * Whether a path is a slug of letters, digits and marks in any script, such as English, Chinese, Japanese or
+     * Arabic, joined by dashes and underscores, its segments separated by slashes.
+     */
+    protected function isSlug(string $path): bool
+    {
+        return (bool) preg_match('/^([\p{L}\p{N}\p{M}\x{0900}-\x{097F}\x{0590}-\x{05FF}\x{0600}-\x{06FF}\x{0400}-\x{04FF}_-]+\/?)+$/u', $path);
     }
 }

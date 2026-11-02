@@ -43,16 +43,8 @@ class OnepageController extends APIController
     {
         $params = $cartAddressRequest->all();
 
-        if (
-            ! auth()->guard('customer')->check()
-            && ! Cart::getCart()->hasGuestCheckoutItems()
-        ) {
-            session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
-
-            return new JsonResource([
-                'redirect' => true,
-                'data' => route('shop.customer.session.index'),
-            ]);
+        if (Cart::requiresSignInToCheckout()) {
+            return $this->redirectToSignIn();
         }
 
         if (Cart::hasError()) {
@@ -64,11 +56,9 @@ class OnepageController extends APIController
 
         Cart::saveAddresses($params);
 
-        $cart = Cart::getCart();
-
         Cart::collectTotals();
 
-        if ($cart->haveStockableItems()) {
+        if (Cart::getCart()?->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
                     'redirect' => true,
@@ -146,7 +136,7 @@ class OnepageController extends APIController
     }
 
     /**
-     * Store order
+     * Store order.
      */
     public function storeOrder()
     {
@@ -155,6 +145,10 @@ class OnepageController extends APIController
                 'redirect' => true,
                 'redirect_url' => route('shop.checkout.cart.index'),
             ]);
+        }
+
+        if (Cart::requiresSignInToCheckout()) {
+            return $this->redirectToSignIn();
         }
 
         Cart::collectTotals();
@@ -169,10 +163,22 @@ class OnepageController extends APIController
 
         $cart = Cart::getCart();
 
+        if (
+            $cart->is_buy_now
+            && ($order = $this->orderRepository->findOneWhere(['cart_id' => $cart->id]))
+        ) {
+            session()->flash('order_id', $order->id);
+
+            return new JsonResource([
+                'redirect' => true,
+                'redirect_url' => route('shop.checkout.onepage.success'),
+            ]);
+        }
+
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return new JsonResource([
                 'redirect' => true,
-                'redirect_url' => $redirectUrl,
+                'redirect_url' => $this->withBuyNow($redirectUrl, $cart),
             ]);
         }
 
@@ -230,7 +236,10 @@ class OnepageController extends APIController
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
-        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
+        if (
+            $cart->haveStockableItems()
+            && ! $cart->shipping_address
+        ) {
             throw new \Exception(trans('shop::app.checkout.onepage.address.check-shipping-address'));
         }
 
@@ -259,11 +268,21 @@ class OnepageController extends APIController
     }
 
     /**
-     * Checks whether the given payment method is available for the current cart.
-     *
-     * Availability is evaluated server-side against the cart contents (e.g. Cash
-     * On Delivery is not available for non-stockable/downloadable carts). This
-     * prevents crafted requests from bypassing the front-end method filtering.
+     * Carry the buy now cart id onto a gateway redirect url, so the gateway's own redirect leg
+     * acts on that isolated cart rather than the shopper's basket.
+     */
+    protected function withBuyNow(string $url, $cart): string
+    {
+        if (! $cart->is_buy_now) {
+            return $url;
+        }
+
+        return $url.(str_contains($url, '?') ? '&' : '?').'buy_now='.urlencode(Cart::buyNowToken($cart->id));
+    }
+
+    /**
+     * Whether the given payment method is available for the current cart, evaluated server-side
+     * against the cart contents so a crafted request cannot bypass the front-end filtering.
      */
     protected function isPaymentMethodAvailable(?string $method): bool
     {
@@ -273,5 +292,19 @@ class OnepageController extends APIController
 
         return collect(Payment::getSupportedPaymentMethods()['payment_methods'] ?? [])
             ->contains('method', $method);
+    }
+
+    /**
+     * Send a guest to sign in, holding on to the checkout they were sent away from — the buy now token
+     * included — so signing in brings them back to the same cart.
+     */
+    protected function redirectToSignIn(): JsonResource
+    {
+        session()->put('shop.url.intended', route('shop.checkout.onepage.index', request()->only('buy_now')));
+
+        return new JsonResource([
+            'redirect' => true,
+            'redirect_url' => route('shop.customer.session.index'),
+        ]);
     }
 }

@@ -345,7 +345,11 @@
             type="text/x-template"
             id="v-order-items-list-template"
         >
-            <div v-if="products.length > 0">
+            <div v-if="isLoading">
+                <x-shop::shimmer.customers.account.rma.order-items />
+            </div>
+
+            <div v-else-if="products.length > 0">
                 <x-shop::form.control-group.control
                     type="hidden"
                     name="order_id"
@@ -443,7 +447,7 @@
                                         @lang('shop::app.customers.account.rma.create.price'):
                                     </span>
 
-                                    <span>@{{ formatPrice(product.price) }}</span>
+                                    <span>@{{ product.formatted_price }}</span>
                                 </p>
 
                                 <p class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800">
@@ -934,35 +938,6 @@
                 </div>
             </div>
 
-            <div v-else-if="isLoading">
-                <!-- Loading Shimmer -->
-                <div>
-                    <div class="flex gap-5 mt-2">
-                        <x-shop::media.images.lazy class="h-23.75 max-h-23.75 w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
-
-                        <div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex gap-5 mt-2">
-                        <x-shop::media.images.lazy class="h-23.75 max-h-23.75 w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
-
-                        <div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                            <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div
                 v-else
                 class="text-center text-red-600 font-semibold mt-4"
@@ -1055,10 +1030,6 @@
                 },
 
                 methods: {
-                    formatPrice(price) {
-                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-                    },
-
                     selectOnlyOne(productId) {
                         const wasChecked = this.isChecked[productId] === true;
 
@@ -1093,17 +1064,22 @@
                     },
 
                     getOrderItems(orderId) {
-                        if (this.orderId) {
-                            this.$axios.get('{{ route("shop.customers.account.rma.get_order_items", ":id") }}'.replace(':id', this.orderId))
-                                .then(response => {
-                                    this.isLoading = false;
+                        if (! this.orderId) {
+                            this.isLoading = false;
 
-                                    this.products = response.data;
-
-                                }).catch(error => {
-                                    console.log(error);
-                                });
+                            return;
                         }
+
+                        this.isLoading = true;
+
+                        this.$axios.get('{{ route("shop.customers.account.rma.get_order_items", ":id") }}'.replace(':id', this.orderId))
+                            .then(response => {
+                                this.products = response.data;
+                            })
+                            .catch(error => {})
+                            .finally(() => {
+                                this.isLoading = false;
+                            });
                     },
 
                     sanitizeTextarea(event) {

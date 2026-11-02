@@ -149,3 +149,31 @@ it('should return the top customers stats', function () {
 
     expect($response->json('statistics.0.total'))->toBePrice(100);
 });
+
+// ============================================================================
+// Bagisto Logo
+// ============================================================================
+
+it('should preload and show the Bagisto logo through the image cache route the store configures', function () {
+    config(['imagecache.route' => 'img/cache']);
+
+    $this->loginAsAdmin();
+
+    $logoUrl = url('img/cache/logo/bagisto.png');
+
+    get(route('admin.dashboard.index'))
+        ->assertOk()
+        ->assertSee('href="'.$logoUrl.'"', false)
+        ->assertSee('src="'.$logoUrl.'"', false)
+        ->assertDontSee(url('cache/logo/bagisto.png'), false);
+});
+
+it('should leave the Bagisto logo out of the admin panel when the image cache route is off', function () {
+    config(['imagecache.route' => null]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.dashboard.index'))
+        ->assertOk()
+        ->assertDontSee('logo/bagisto.png', false);
+});

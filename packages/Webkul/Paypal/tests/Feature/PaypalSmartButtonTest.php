@@ -92,7 +92,7 @@ it('should not capture when PayPal approved less than the cart comes to', functi
     fakeSmartButton(paypalOrder($cart, 1.00), captures: false);
 
     captureSmartButtonOrder()
-        ->assertStatus(403)
+        ->assertForbidden()
         ->assertJsonPath('redirect_url', route('shop.checkout.cart.index'));
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
@@ -103,7 +103,7 @@ it('should not capture an order the shopper has not approved', function () {
 
     fakeSmartButton(paypalOrder($cart, status: 'CREATED'), captures: false);
 
-    captureSmartButtonOrder()->assertStatus(403);
+    captureSmartButtonOrder()->assertForbidden();
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
@@ -113,7 +113,7 @@ it('should not capture an order carrying more than one purchase unit', function 
 
     fakeSmartButton(paypalOrder($cart, units: 2), captures: false);
 
-    captureSmartButtonOrder()->assertStatus(403);
+    captureSmartButtonOrder()->assertForbidden();
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
@@ -127,7 +127,25 @@ it('should not capture when PayPal approved another currency', function () {
 
     fakeSmartButton($order, captures: false);
 
-    captureSmartButtonOrder()->assertStatus(403);
+    captureSmartButtonOrder()->assertForbidden();
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+});
+
+// ============================================================================
+// Nothing Is Captured For A Guest Who Has To Sign In
+// ============================================================================
+
+it('should not capture for a guest while guest checkout is off', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $cart = $this->createCartWithItems('paypal_smart_button');
+
+    fakeSmartButton(paypalOrder($cart), captures: false);
+
+    captureSmartButtonOrder()
+        ->assertForbidden()
+        ->assertJsonPath('redirect_url', route('shop.checkout.cart.index'));
 
     expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
@@ -146,6 +164,47 @@ it('should capture and place the order when the approved amount is the cart tota
         ->assertJsonPath('success', true);
 
     expect(Order::query()->where('cart_id', $cart->id)->count())->toBe(1);
+});
+
+// ============================================================================
+// A Failed Call Says Why
+// ============================================================================
+
+it('should report our own failure message rather than an empty body', function () {
+    $this->createCartWithItems('paypal_smart_button');
+
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('getOrder')->andThrow(new Exception('Please specify a payment method'));
+    });
+
+    captureSmartButtonOrder()
+        ->assertBadRequest()
+        ->assertJsonPath('message', 'Please specify a payment method');
+});
+
+it('should pass a gateway failure through as the gateway reported it', function () {
+    $this->createCartWithItems('paypal_smart_button');
+
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('getOrder')->andThrow(new Exception('{"error":"invalid_client"}'));
+    });
+
+    captureSmartButtonOrder()
+        ->assertBadRequest()
+        ->assertJsonPath('error', 'invalid_client');
+});
+
+it('should not leak a database or runtime error to the shopper', function () {
+    $this->createCartWithItems('paypal_smart_button');
+
+    test()->partialMock(SmartButton::class, function ($mock) {
+        $mock->shouldReceive('getOrder')->andThrow(new ErrorException('Undefined array key "token" in /var/www/secret.php'));
+    });
+
+    captureSmartButtonOrder()
+        ->assertBadRequest()
+        ->assertJsonPath('message', trans('paypal::app.errors.something-went-wrong'))
+        ->assertDontSee('secret.php');
 });
 
 // ============================================================================

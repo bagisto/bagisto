@@ -12,11 +12,11 @@ use Webkul\Sales\Repositories\OrderRepository;
 class OnepageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the checkout page, or send the shopper to sign in, to the cart or to an order already placed.
      *
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function index()
+    public function index(OrderRepository $orderRepository)
     {
         if (! core()->getConfigData('sales.checkout.shopping_cart.cart_page')) {
             abort(404);
@@ -24,9 +24,6 @@ class OnepageController extends Controller
 
         Event::dispatch('checkout.load.index');
 
-        /**
-         * If guest checkout is not allowed then redirect back to the cart page.
-         */
         if (
             ! auth()->guard('customer')->check()
             && ! core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
@@ -34,35 +31,28 @@ class OnepageController extends Controller
             return $this->redirectToSignIn();
         }
 
-        /**
-         * If user is suspended then redirect back to the cart page.
-         */
         if (auth()->guard('customer')->user()?->is_suspended) {
             session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
 
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        /**
-         * If cart has errors then redirect back to the cart page.
-         */
         if (Cart::hasError()) {
             return redirect()->route('shop.checkout.cart.index');
         }
 
         $cart = Cart::getCart();
 
-        /**
-         * If cart is has downloadable items and customer is not logged in
-         * then redirect back to the cart page.
-         */
         if (
-            ! auth()->guard('customer')->check()
-            && (
-                $cart->hasDownloadableItems()
-                || ! $cart->hasGuestCheckoutItems()
-            )
+            $cart?->is_buy_now
+            && ($order = $orderRepository->findOneWhere(['cart_id' => $cart->id]))
         ) {
+            session()->flash('order_id', $order->id);
+
+            return redirect()->route('shop.checkout.onepage.success');
+        }
+
+        if (Cart::requiresSignInToCheckout()) {
             return $this->redirectToSignIn();
         }
 
@@ -94,17 +84,12 @@ class OnepageController extends Controller
     }
 
     /**
-     * Send a guest to sign in, holding on to the checkout they were sent away from.
-     *
-     * A guest turned back from checkout has already chosen what to buy, so signing in or
-     * registering returns them to it rather than to the page the account settings would
-     * otherwise pick.
-     *
-     * @return RedirectResponse
+     * Send a guest to sign in, holding on to the checkout they were sent away from — the buy now token
+     * included, so signing in returns them to that buy now rather than to the whole basket.
      */
-    protected function redirectToSignIn()
+    protected function redirectToSignIn(): RedirectResponse
     {
-        session()->put('shop.url.intended', route('shop.checkout.onepage.index'));
+        session()->put('shop.url.intended', route('shop.checkout.onepage.index', request()->only('buy_now')));
 
         return redirect()->route('shop.customer.session.index');
     }

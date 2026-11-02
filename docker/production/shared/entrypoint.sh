@@ -46,6 +46,15 @@ else
 fi
 
 # ==========================================================================
+# Whether this container runs the scheduler
+# ==========================================================================
+# Supervisor starts cron, and with it Laravel's scheduler, unless this is false. Containers that
+# share a database each run every task, so all but one of them should set it to false.
+export SCHEDULER_AUTOSTART="${SCHEDULER_AUTOSTART:-true}"
+
+log "Scheduler: autostart=${SCHEDULER_AUTOSTART}"
+
+# ==========================================================================
 # Apply runtime overrides to .env
 # ==========================================================================
 cd "$APP_DIR"
@@ -77,6 +86,11 @@ log "Rebuilding the cached configuration..."
 
 php artisan optimize:clear --no-interaction 2>/dev/null || true
 php artisan optimize --no-interaction 2>/dev/null || true
+
+# Those ran as root, while PHP, the queue worker and the scheduler run as www-data. A file they
+# created, such as the log a cache clear opens before the bundled database is up, is handed over,
+# since a log owned by root refuses every later write and every exception report along with it.
+find storage/logs storage/framework bootstrap/cache -user root -exec chown www-data:www-data {} + 2>/dev/null || true
 
 # ==========================================================================
 # An external database has to be reachable before the web server starts

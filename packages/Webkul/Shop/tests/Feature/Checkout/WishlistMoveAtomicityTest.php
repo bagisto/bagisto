@@ -35,6 +35,27 @@ it('should leave the product in neither place twice when the cart item cannot be
         ->and(CartItem::query()->where('id', $cartItemId)->count())->toBe(1);
 });
 
+it('should add to the quantity of a wishlist row the product is already on', function () {
+    $product = $this->createSimpleProduct();
+
+    $customer = $this->loginAsCustomer();
+
+    $this->addProductToCart($product->id);
+
+    Cart::moveToWishlist($this->addProductToCart($product->id)->json('data.items.0.id'), 2);
+
+    $rows = Wishlist::query()->where('customer_id', $customer->id)->where('product_id', $product->id)->get();
+
+    expect($rows)->toHaveCount(1);
+
+    Cart::moveToWishlist($this->addProductToCart($product->id)->json('data.items.0.id'), 3);
+
+    $rows = Wishlist::query()->where('customer_id', $customer->id)->where('product_id', $product->id)->get();
+
+    expect($rows)->toHaveCount(1)
+        ->and((int) $rows->first()->additional['quantity'])->toBe(5);
+});
+
 it('should write the wishlist row and drop the cart item together', function () {
     $product = $this->createSimpleProduct();
 

@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartAddress;
@@ -27,14 +26,11 @@ class CartController extends APIController
     ) {}
 
     /**
-     * Cart.
+     * Cart. The shopper's basket, untouched by any buy now purchase, which runs on its own
+     * isolated cart.
      */
     public function index(): JsonResource
     {
-        /**
-         * Skip the totals recalculation when there is no cart - there is
-         * nothing to collect and the empty response is the same either way.
-         */
         if (! Cart::getCart()) {
             return new JsonResource(['data' => null]);
         }
@@ -69,25 +65,29 @@ class CartController extends APIController
 
         $product = $this->productRepository->with('parent')->findOrFail(request()->input('product_id'));
 
+        $isBuyNow = request()->boolean('is_buy_now');
+
         try {
             if (! $product->status) {
                 throw new \Exception(trans('shop::app.checkout.cart.inactive-add'));
             }
 
-            $response = [];
+            if ($isBuyNow) {
+                $cart = Cart::createBuyNowCart($product, request()->all());
 
-            if (request()->input('is_buy_now')) {
-                Cart::deActivateCart();
-
-                $response['redirect'] = route('shop.checkout.onepage.index');
+                return new JsonResource([
+                    'data' => new CartResource($cart),
+                    'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
+                    'redirect' => route('shop.checkout.onepage.index', ['buy_now' => Cart::buyNowToken($cart->id)]),
+                ]);
             }
 
             $cart = Cart::addProduct($product, request()->all());
 
-            return new JsonResource(array_merge([
+            return new JsonResource([
                 'data' => new CartResource($cart),
                 'message' => trans('shop::app.checkout.cart.item-add-to-cart'),
-            ], $response));
+            ]);
         } catch (InsufficientProductInventoryException $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
@@ -114,7 +114,7 @@ class CartController extends APIController
         Cart::collectTotals();
 
         return new JsonResource([
-            'data' => new CartResource(Cart::getCart()),
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
             'message' => trans('shop::app.checkout.cart.success-remove'),
         ]);
     }
@@ -124,6 +124,11 @@ class CartController extends APIController
      */
     public function destroySelected(): JsonResource
     {
+        $this->validate(request(), [
+            'ids' => 'required|array',
+            'ids.*' => 'integer|distinct',
+        ]);
+
         foreach (request()->input('ids') as $id) {
             Cart::removeItem($id);
         }
@@ -131,7 +136,7 @@ class CartController extends APIController
         Cart::collectTotals();
 
         return new JsonResource([
-            'data' => new CartResource(Cart::getCart()) ?? null,
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
             'message' => trans('shop::app.checkout.cart.index.remove-selected-success'),
         ]);
     }
@@ -161,7 +166,7 @@ class CartController extends APIController
         Cart::collectTotals();
 
         return new JsonResource([
-            'data' => new CartResource(Cart::getCart()) ?? null,
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null,
             'message' => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
         ]);
     }
@@ -225,7 +230,13 @@ class CartController extends APIController
 
         Cart::collectTotals();
 
-        $cartResource = (new CartResource(Cart::getCart()))->jsonSerialize();
+        $cart = Cart::getCart();
+
+        $cart->setRelation('billing_address', $address);
+
+        $cart->setRelation('shipping_address', $address);
+
+        $cartResource = (new CartResource($cart))->jsonSerialize();
 
         return new JsonResource([
             'data' => [
@@ -316,11 +327,16 @@ class CartController extends APIController
 
         $productIds = $cart->items->pluck('product_id')->toArray();
 
-        $crossSellIds = DB::table('product_cross_sells')
-            ->whereIn('parent_id', $productIds)
-            ->whereNotIn('child_id', $productIds)
-            ->distinct()
-            ->pluck('child_id');
+        $crossSellIds = $this->productRepository
+            ->with('cross_sells')
+            ->findWhereIn('id', $productIds)
+            ->pluck('cross_sells')
+            ->flatten()
+            ->pluck('id')
+            ->unique()
+            ->diff($productIds)
+            ->values()
+            ->all();
 
         $products = $this->productRepository
             ->whereIn('products.id', $crossSellIds)

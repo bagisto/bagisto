@@ -3,23 +3,28 @@
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
+use Webkul\Category\Models\Category;
+use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Core\Core as BaseCore;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Models\Customer;
 use Webkul\ImageCache\Exceptions\InvalidTemplate;
+use Webkul\ImageCache\Providers\ImageCacheServiceProvider;
 use Webkul\ImageCache\TemplateRegistry;
 use Webkul\ImageCache\Templates\Large;
 use Webkul\ImageCache\Templates\Medium;
 use Webkul\ImageCache\Templates\Small;
 use Webkul\Product\Helpers\SEO;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductImage;
 use Webkul\Product\Models\ProductReview;
 use Webkul\RMA\Enums\DefaultRMAResolution;
@@ -63,7 +68,7 @@ function channelRunningImageTemplates(string $code, ?array $templates, array $pr
 /**
  * The base image array the helper builds for a product on a channel.
  */
-function baseImageOn(Channel $channel, $product): array
+function baseImageOn(Channel $channel, Product $product): array
 {
     core()->setCurrentChannel($channel);
 
@@ -93,7 +98,7 @@ function sizeOfImage(TestResponse $response): array
 /**
  * The product's base image as the storefront products api lists it for a guest.
  */
-function listedBaseImage($product): array
+function listedBaseImage(Product $product): array
 {
     Core::clearResolvedInstance(BaseCore::class);
 
@@ -250,6 +255,53 @@ it('should never reuse one theme image for another theme that defines the same t
     expect($fromSquare->headers->get('Etag'))->not->toBe($fromPoster->headers->get('Etag'))
         ->and(sizeOfImage($fromSquare))->toBe([200, 200]);
 });
+
+// ============================================================================
+// Image Cache Route
+// ============================================================================
+
+it('should serve every template of a product image from the image cache route the store configures', function () {
+    config(['imagecache.route' => 'img/cache']);
+
+    app()->getProvider(ImageCacheServiceProvider::class)->boot();
+
+    $channel = channelRunningImageTemplates('poster', ['product_card' => ProductCard::class], ['product_card']);
+
+    $image = baseImageOn($channel, $this->product);
+
+    expect($image['small_image_url'])->toBe(url('img/cache/small/'.$this->path))
+        ->and($image['product_card_image_url'])->toBe(url('img/cache/product_card/'.$this->path))
+        ->and($image['original_image_url'])->toBe(url('img/cache/original/'.$this->path))
+        ->and(sizeOfImage(fetchImageOn($channel, $image['product_card_image_url'])->assertOk()))->toBe([240, 320]);
+});
+
+it('should link every template of a product image to its stored file when the image cache route is off', function (?string $route) {
+    config(['imagecache.route' => $route]);
+
+    $channel = channelRunningImageTemplates('poster', ['product_card' => ProductCard::class], ['product_card']);
+
+    expect(Arr::except(baseImageOn($channel, $this->product), 'alt'))
+        ->toHaveKeys(['small_image_url', 'medium_image_url', 'large_image_url', 'product_card_image_url', 'original_image_url'])
+        ->each->toBe(Storage::url($this->path));
+})->with([
+    'null' => [null],
+    'empty' => [''],
+    'only a slash' => ['/'],
+]);
+
+it('should register no image cache route for an empty route, leaving every path to the storefront', function (string $route) {
+    config(['imagecache.route' => $route]);
+
+    app()->getProvider(ImageCacheServiceProvider::class)->boot();
+
+    $category = Category::factory()->has(CategoryTranslation::factory(), 'translations')->create();
+
+    get('/outdated/'.$category->slug)
+        ->assertRedirect(url($category->slug));
+})->with([
+    'empty' => [''],
+    'only a slash' => ['/'],
+]);
 
 // ============================================================================
 // Placeholders

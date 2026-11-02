@@ -5688,12 +5688,12 @@ return [
 
                         'sync' => [
                             'title' => 'Bestaande bestanden synchroniseren',
-                            'syncing' => 'Synchroniseren...',
+                            'syncing' => 'Bezig met synchroniseren...',
                             'pending' => ':count bestand(en) staan nog niet op de ingestelde opslag',
                             'up-to-date' => 'Alles staat op de ingestelde opslag',
-                            'info' => 'Kopieert al geüploade bestanden naar de ingestelde opslag. Dit gebeurt op de achtergrond, bestanden die er al staan worden overgeslagen en de originelen blijven staan. Gebruik voor een grote winkel `php artisan bagisto:storage:sync`.',
-                            'started' => 'Synchronisatie gestart. De bestanden worden op de achtergrond gekopieerd.',
-                            'local' => 'De ingestelde opslag is de lokale schijf, dus er is niets te kopiëren.',
+                            'info' => 'Kopieert reeds geüploade bestanden naar de ingestelde opslag. Dit gebeurt op de achtergrond, bestanden die er al staan worden overgeslagen en de originelen blijven staan. Gebruik voor een grote winkel in plaats daarvan `php artisan bagisto:storage:sync`.',
+                            'started' => 'De synchronisatie is gestart. De bestanden worden op de achtergrond gekopieerd.',
+                            'local' => 'Er is lokale opslag ingesteld, dus er is niets te kopiëren.',
                         ],
                     ],
                 ],

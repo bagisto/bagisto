@@ -2,6 +2,8 @@
 
 namespace Webkul\Paypal\Payment;
 
+use Webkul\Checkout\Facades\Cart;
+
 class Standard extends Paypal
 {
     /**
@@ -54,12 +56,14 @@ class Standard extends Paypal
     {
         $cart = $this->getCart();
 
+        $buyNow = $cart->is_buy_now ? ['buy_now' => Cart::buyNowToken($cart->id)] : [];
+
         $fields = [
             'business' => $this->getConfigData('business_account'),
             'invoice' => $cart->id,
             'currency_code' => $cart->cart_currency_code,
             'paymentaction' => 'sale',
-            'return' => route('paypal.standard.success'),
+            'return' => route('paypal.standard.success', $buyNow),
             'cancel_return' => route('paypal.standard.cancel'),
             'notify_url' => route('paypal.standard.ipn'),
             'charset' => 'utf-8',
@@ -113,7 +117,7 @@ class Standard extends Paypal
         $cart = $this->getCart();
 
         $fields[sprintf('item_number_%d', $i)] = $cart->selected_shipping_rate->carrier_title;
-        $fields[sprintf('item_name_%d', $i)] = 'Shipping';
+        $fields[sprintf('item_name_%d', $i)] = $cart->selected_shipping_rate->method_title;
         $fields[sprintf('quantity_%d', $i)] = 1;
         $fields[sprintf('amount_%d', $i)] = $cart->selected_shipping_rate->price;
     }
