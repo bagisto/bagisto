@@ -49,7 +49,7 @@
                         <span
                             class="shimmer block h-10.5 w-80.75 rounded-lg px-11 py-3"
                             role="presentation"
-                            >
+                        >
                         </span>
                     </div>
 
