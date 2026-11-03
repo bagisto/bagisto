@@ -1,9 +1,10 @@
--- ============================================================================
--- MariaDB initial setup for the Bagisto internal database.
+-- ==========================================================================
+-- init.sql — Creates the database and user Bagisto uses on the bundled
+-- MariaDB server.
 --
 -- Executed once during the image build, against a freshly initialised data
 -- directory.
--- ============================================================================
+-- ==========================================================================
 
 CREATE DATABASE IF NOT EXISTS `bagisto`
     CHARACTER SET utf8mb4

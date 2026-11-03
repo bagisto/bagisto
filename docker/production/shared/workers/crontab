@@ -1,16 +1,19 @@
-# ==========================================================================
+# ===========================================================================
 # crontab — Laravel's scheduler, installed as /etc/cron.d/bagisto.
 #
-# cron runs `schedule:run` every minute as www-data, the user PHP runs as,
+# Cron runs `schedule:run` every minute as www-data, the user PHP runs as,
 # and the schedule decides which tasks are due; `php artisan schedule:list`
 # shows them. A task that exits with an error is logged to storage/logs by
-# its command and exit code, while the output here is discarded.
+# its command and exit code. The tasks each run reports are filed by day
+# under /var/log/bagisto/scheduler/, leaving out the minutes with nothing due.
 #
 # A job starts with almost none of the container's environment, so PATH is
-# set here: the litespeed image keeps its php in /usr/local/bin. Everything
+# set here: the litespeed image keeps its php in /usr/local/bin. JOB_LOG_DAYS
+# is written here by the entrypoint from the container's own. Everything
 # else comes from .env and the configuration the entrypoint caches, which is
 # what the web server and the queue worker read too.
-# ==========================================================================
+# ===========================================================================
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+JOB_LOG_DAYS=14
 
-* * * * * www-data cd /var/www/bagisto && php artisan schedule:run --no-interaction >> /dev/null 2>&1
+* * * * * www-data cd /var/www/bagisto && php artisan schedule:run --no-interaction 2>&1 | grep --line-buffered -v "No scheduled commands are ready to run" | /usr/local/bin/bagisto-job-log scheduler > /dev/null 2>&1

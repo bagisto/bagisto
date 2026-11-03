@@ -1,11 +1,12 @@
--- ============================================================================
--- PostgreSQL initial setup for the Bagisto internal database.
+-- ==========================================================================
+-- init.sql — Creates the role and database Bagisto uses on the bundled
+-- PostgreSQL server.
 --
 -- Executed once during the image build, against a freshly created cluster.
 -- PostgreSQL has no "CREATE ROLE IF NOT EXISTS", so the role is guarded by a
 -- DO block; the database is guarded by \gexec over a SELECT that yields no
 -- row when it already exists.
--- ============================================================================
+-- ==========================================================================
 
 DO
 $$

@@ -1,20 +1,22 @@
-# =============================================================================
-# Bagisto Production Image — OpenLiteSpeed (Single-stage)
-# Single container: OpenLiteSpeed + lsphp 8.4 (LSAPI) + the bundled database + a queue worker + cron, under Supervisor
+# ===========================================================================
+# Bagisto Production Image — OpenLiteSpeed (Single-Stage)
 #
-# Default mode  : the bundled database (ready to boot, Docker Hub style)
-# Override mode : set DB_HOST to an external address to use that instead
+# One container runs OpenLiteSpeed with lsphp 8.4 over LSAPI, the bundled database, a queue worker
+# and cron, under Supervisor.
+#
+# Default mode  : the bundled database, ready to boot, Docker Hub style.
+# Override mode : set DB_HOST to an external address to use that instead.
 #
 # Which database is bundled is chosen with --build-arg DB_ENGINE=mysql|mariadb|postgres.
 # Everything database-specific lives in shared/db/<engine>/, so this file is
 # the same for all of them.
 #
-# Bagisto is FULLY INSTALLED at build time — migrations, seeding, and all.
-# The image boots instantly with no first-run setup needed.
+# Bagisto is fully installed at build time, migrations and seeding included,
+# so the image boots straight into a working store with no first-run setup.
 #
 # Build context is `docker/production/`:
 #   docker build -f litespeed/Dockerfile -t bagisto:2.5.0-litespeed .
-# =============================================================================
+# ===========================================================================
 
 FROM ubuntu:24.04
 
@@ -27,7 +29,7 @@ ENV TZ=UTC
 
 
 # ---------------------------------------------------------------------------
-# System packages + PHP PPA
+# System Packages + PHP PPA
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         apt-transport-https \
@@ -46,8 +48,10 @@ RUN apt-get update && apt-get install -y \
 
 
 # ---------------------------------------------------------------------------
-# OpenLiteSpeed + lsphp (native LSAPI PHP)
-# repo.litespeed.sh adds the LiteSpeed apt repository.
+# OpenLiteSpeed + lsphp
+#
+# The lsphp packages are LiteSpeed's native LSAPI PHP, from the apt
+# repository that repo.litespeed.sh adds.
 # ---------------------------------------------------------------------------
 RUN wget -qO - https://repo.litespeed.sh | bash \
     && apt-get update && apt-get install -y \
@@ -64,12 +68,12 @@ RUN wget -qO - https://repo.litespeed.sh | bash \
 
 ENV PATH=/usr/local/lsws/lsphp${LSPHP_VERSION}/bin:$PATH
 
-# Expose lsphp's CLI as `php` so artisan / build-install.sh can run it.
+# Expose lsphp's CLI as `php`, so artisan and build-install.sh can run it.
 RUN ln -sf /usr/local/lsws/lsphp${LSPHP_VERSION}/bin/php /usr/local/bin/php
 
 
 # ---------------------------------------------------------------------------
-# The bundled database server
+# The Bundled Database Server
 #
 # Only the chosen engine's server is installed. Both PHP drivers are present
 # regardless, so an image can still be pointed at an external server of the
@@ -89,7 +93,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 
 # ---------------------------------------------------------------------------
-# Clone Bagisto + Composer install
+# Clone Bagisto + Composer Install
 # ---------------------------------------------------------------------------
 WORKDIR /var/www/bagisto
 
@@ -105,7 +109,7 @@ RUN git clone --depth 1 --branch ${BAGISTO_VERSION} \
 
 
 # ---------------------------------------------------------------------------
-# Prepare .env with the bundled-database defaults
+# Prepare .env with the Bundled-Database Defaults
 #
 # DB_CONNECTION and DB_PORT are engine-specific and are set further down,
 # next to the install that actually uses them.
@@ -120,7 +124,13 @@ RUN cp .env.example .env \
 
 
 # ---------------------------------------------------------------------------
-# Install Bagisto at BUILD TIME (starts the bundled database, migrates + seeds, bakes data in)
+# Install Bagisto at Build Time
+#
+# The build-install.sh script starts the bundled database, creates its
+# database and user, generates the application key, runs the Bagisto
+# installer, seeds the demo products and builds the search indexes, then shuts
+# the database down cleanly. The populated data directory is baked into this
+# layer.
 # ---------------------------------------------------------------------------
 COPY shared/build-install.sh /tmp/build-install.sh
 RUN mkdir -p /docker-entrypoint-initdb.d \
@@ -135,7 +145,9 @@ RUN mkdir -p /docker-entrypoint-initdb.d \
 
 
 # ---------------------------------------------------------------------------
-# PHP configuration (lsphp — LSAPI + CLI share the same binary)
+# PHP Configuration
+#
+# The lsphp binary serves both LSAPI and the CLI, so one file configures both.
 # ---------------------------------------------------------------------------
 COPY shared/php.ini /tmp/php.ini
 RUN cp /tmp/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/*/litespeed/php.ini \
@@ -143,7 +155,7 @@ RUN cp /tmp/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/*/litespeed/ph
 
 
 # ---------------------------------------------------------------------------
-# OpenLiteSpeed configuration
+# OpenLiteSpeed Configuration
 # ---------------------------------------------------------------------------
 COPY litespeed/config/httpd_config.conf /usr/local/lsws/conf/httpd_config.conf
 COPY litespeed/config/vhosts/bagisto.conf /usr/local/lsws/conf/vhosts/bagisto.conf
@@ -151,23 +163,26 @@ RUN chown -R www-data:www-data /usr/local/lsws/conf /usr/local/lsws/logs
 
 
 # ---------------------------------------------------------------------------
-# Supervisor configuration
+# Supervisor Configuration
 # ---------------------------------------------------------------------------
 COPY litespeed/config/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
 RUN sed -i "s/__LSPHP_VERSION__/${LSPHP_VERSION}/g" /etc/supervisor/conf.d/bagisto.conf
 COPY shared/db/${DB_ENGINE}/supervisord.conf /etc/supervisor/conf.d/database.conf
 COPY shared/workers/supervisord.conf /etc/supervisor/conf.d/workers.conf
+COPY shared/workers/job-log.sh /usr/local/bin/bagisto-job-log
+RUN chmod +x /usr/local/bin/bagisto-job-log
 
 
 # ---------------------------------------------------------------------------
 # Scheduler
 #
-# cron runs Laravel's scheduler every minute from /etc/cron.d/bagisto, which
+# Cron runs Laravel's scheduler every minute from /etc/cron.d/bagisto, which
 # it reads only while nobody but root can write to it. The jobs the packages
 # drop in are removed: none ran before the image had cron, and logrotate's,
 # on the PostgreSQL images, cannot make the web server reopen its logs.
-# pam_loginuid is made optional because a container cannot change a login uid
-# the host has set, and cron would then skip every job without a word.
+# The pam_loginuid module is made optional because a container cannot change
+# a login UID the host has set, and cron would then skip every job without a
+# word.
 # ---------------------------------------------------------------------------
 COPY shared/workers/crontab /etc/cron.d/bagisto
 RUN chmod 0644 /etc/cron.d/bagisto \
@@ -176,7 +191,7 @@ RUN chmod 0644 /etc/cron.d/bagisto \
 
 
 # ---------------------------------------------------------------------------
-# Runtime directories
+# Runtime Directories
 # ---------------------------------------------------------------------------
 RUN mkdir -p /var/log/supervisor /var/log/bagisto /tmp/lshttpd
 

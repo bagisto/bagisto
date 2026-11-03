@@ -57,6 +57,7 @@ The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because 
 | **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, the web server, a queue worker and the scheduler) |
 | **Queue** | A `queue:work` worker on the `default` and `broadcastable` queues, with `QUEUE_CONNECTION=database` and `--timeout=60` (below the connection's `retry_after`). Order mail, the post-order price and inventory reindex, search terms and sitemap generation run here instead of inside the request. |
 | **Scheduler** | cron, running `php artisan schedule:run` every minute as `www-data` from `/etc/cron.d/bagisto`. The Omnibus price snapshots, marketing campaign mail, overdue invoice reminders, the nightly catalog-rule and price indexing, the image search prune and, once it is switched on under Configuration, the exchange-rate update run here, each at its time in `APP_TIMEZONE`; `php artisan schedule:list` lists every task. |
+| **Job logs** | The queue worker and the scheduler file their output by day, one folder per Supervisor program: `/var/log/bagisto/queue/YYYY-MM-DD.log` and `/var/log/bagisto/scheduler/YYYY-MM-DD.log`, dated in `APP_TIMEZONE` and kept for `JOB_LOG_DAYS` days. The queue worker's output still reaches `docker logs` too. |
 | **Application** | Bagisto — fully installed at build time |
 
 ### Two database modes
@@ -103,6 +104,7 @@ bagisto/
     │   │       └── supervisord.conf  # Supervisor program for postgres
     │   └── workers/              # The background workers every image runs, whichever its web server
     │       ├── crontab           # The cron entry for Laravel's scheduler, installed as /etc/cron.d/bagisto
+    │       ├── job-log.sh        # Files a job's output by day under /var/log/bagisto/<job>/, installed as bagisto-job-log
     │       └── supervisord.conf  # Supervisor programs for the queue worker and the scheduler
     ├── nginx/
     │   ├── Dockerfile            # Nginx + PHP 8.4 FPM
@@ -582,6 +584,7 @@ None of the Dockerfiles declare a `VOLUME` directive. Persistence is entirely op
 docker run -d --name bagisto -p 80:80 \
   -v bagisto-mysql:/var/lib/mysql \
   -v bagisto-storage:/var/www/bagisto/storage \
+  -v bagisto-logs:/var/log/bagisto \
   webkul/bagisto:latest
 ```
 
@@ -590,6 +593,7 @@ docker run -d --name bagisto -p 80:80 \
 | `bagisto-mysql` | `/var/lib/mysql` | MySQL or MariaDB database files. Without this, all data is lost on `docker rm`. |
 | `bagisto-postgres` | `/var/lib/postgresql` | PostgreSQL database files, on a `-postgres` image, in place of `/var/lib/mysql`. |
 | `bagisto-storage` | `/var/www/bagisto/storage` | Uploaded files, product images, logs, sessions, cached views. |
+| `bagisto-logs` | `/var/log/bagisto` | The queue worker's and the scheduler's daily logs, so they outlive the container. |
 
 A new named volume is filled from the image on first use, so it starts with the database and storage baked in at build time.
 
@@ -687,6 +691,7 @@ docker exec -it -u www-data bagisto php /var/www/bagisto/artisan db:seed --force
 | `APP_ADMIN_URL` | `admin` | Admin panel URL path. Read from the container environment; the entrypoint does not write it into `.env`. |
 | `QUEUE_CONNECTION` | `database` | Connection the queue worker drains. The image runs a worker, so queued work is taken off the request; set `sync` to run it inline instead and the worker idles. |
 | `SCHEDULER_AUTOSTART` | `true` | `true` or `false`: whether Supervisor starts cron, which runs Laravel's scheduler every minute. Set `false` on every container but one when several share a database, and on all of them when a host cron entry or another container already runs `schedule:run`, or each runs every scheduled task. Any other value stops the container at boot. |
+| `JOB_LOG_DAYS` | `14` | How many days of the queue worker's and the scheduler's daily logs under `/var/log/bagisto/` to keep, today's included. `0` keeps every file. Anything but a whole number stops the container at boot. |
 
 ---
 
@@ -701,11 +706,12 @@ When the container starts, `entrypoint.sh` does this:
 | 1 | Reads `DB_HOST` to determine bundled vs. external database mode. |
 | 2 | Sets `DB_AUTOSTART=true` or `false` so Supervisor knows whether to start the bundled database. |
 | 3 | Sets `SCHEDULER_AUTOSTART` (`true` unless overridden) so Supervisor knows whether to start the scheduler. |
-| 4 | Writes any runtime overrides (`DB_*`, `APP_URL`, `APP_KEY`, `APP_LOCALE`, `APP_CURRENCY`, `APP_TIMEZONE`) into `/var/www/bagisto/.env`. |
-| 5 | Sets `QUEUE_CONNECTION` (`database` unless overridden), which the build deliberately left as `.env.example`'s `sync` so the install itself needed no worker. |
-| 6 | Runs `php artisan optimize:clear` + `optimize`, since the steps above have just invalidated the cached configuration, then hands any file those created under `storage/` or `bootstrap/cache/` to `www-data`, so the log stays writable. |
-| 7 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
-| 8 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal), the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed` — the queue worker and, unless `SCHEDULER_AUTOSTART` is `false`, the scheduler. |
+| 4 | Sets `JOB_LOG_DAYS` (`14` unless overridden) and writes it into `/etc/cron.d/bagisto`, then creates `/var/log/bagisto/queue/` and `/var/log/bagisto/scheduler/` owned by `www-data`, a mounted volume's included. |
+| 5 | Writes any runtime overrides (`DB_*`, `APP_URL`, `APP_KEY`, `APP_LOCALE`, `APP_CURRENCY`, `APP_TIMEZONE`) into `/var/www/bagisto/.env`. |
+| 6 | Sets `QUEUE_CONNECTION` (`database` unless overridden), which the build deliberately left as `.env.example`'s `sync` so the install itself needed no worker. |
+| 7 | Runs `php artisan optimize:clear` + `optimize`, since the steps above have just invalidated the cached configuration, then hands any file those created under `storage/` or `bootstrap/cache/` to `www-data`, so the log stays writable. |
+| 8 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
+| 9 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal), the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed` — the queue worker and, unless `SCHEDULER_AUTOSTART` is `false`, the scheduler. |
 
 ### Why the build-time install?
 
@@ -732,6 +738,13 @@ The populated data directory (`/var/lib/mysql`, or `/var/lib/postgresql` on a `-
 docker logs bagisto              # entrypoint + Supervisor output — see §18 Logging for what goes to files
 docker logs -f bagisto           # follow in real time
 docker logs --tail 100 bagisto   # last 100 lines
+```
+
+The queue worker and the scheduler keep a file per day, one folder each:
+
+```bash
+docker exec bagisto ls /var/log/bagisto/queue /var/log/bagisto/scheduler
+docker exec bagisto bash -c 'tail -f "$(ls /var/log/bagisto/queue/*.log | tail -1)"'   # follow today's
 ```
 
 ### Shell into the container
@@ -1094,9 +1107,10 @@ Supervisor pipes each program's console output — the bundled database, PHP-FPM
 
 - **PHP errors**: `/var/log/php-errors.log`, and on the nginx image the pool's `/var/log/php-fpm-error.log`.
 - **Web server access and error logs**: `/var/log/nginx/` (nginx) and `/var/log/apache2/` (apache). OpenLiteSpeed's server-level logs reach `docker logs`, but the Bagisto vhost logs to files under `/usr/local/lsws/logs/`.
-- **Laravel**: `storage/logs`, where the scheduler also logs a task that exits with an error, naming its command and exit code. The output of `schedule:run` and of each task is discarded, as in Laravel's documentation, and cron itself logs only to syslog, which the image does not run.
+- **Laravel**: `storage/logs`, where the scheduler also logs a task that exits with an error, naming its command and exit code. cron itself logs only to syslog, which the image does not run.
+- **Background jobs**: `/var/log/bagisto/<program>/YYYY-MM-DD.log`, one folder per Supervisor program and one file per day, dated in `APP_TIMEZONE`. `queue/` holds each job the worker ran or failed, and `scheduler/` the tasks `schedule:run` started, leaving out the minutes with nothing due. A job's exception, as opposed to the line saying it failed, is in `storage/logs`. Files older than `JOB_LOG_DAYS` days (14) are removed as each new day's file opens.
 
-For structured log shipping, mount `/var/www/bagisto/storage/logs` (and `/var/log` if you need the server logs) as a volume, or forward them to a log aggregator.
+For structured log shipping, mount `/var/www/bagisto/storage/logs` and `/var/log/bagisto` (and `/var/log` if you need the server logs) as volumes, or forward them to a log aggregator.
 
 ### Security checklist for real deployments
 

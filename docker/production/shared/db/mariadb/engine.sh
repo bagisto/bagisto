@@ -1,13 +1,13 @@
 #!/bin/bash
-# ==========================================================================
-# MariaDB engine driver.
+# ===========================================================================
+# engine.sh — The MariaDB engine driver.
 #
 # Sourced by build-install.sh at build time and by entrypoint.sh at runtime.
 # It exposes the same contract every engine does, so neither caller knows
 # which database it is talking to — see shared/db/mysql/engine.sh for the
 # contract. MariaDB speaks the MySQL protocol, so PHP uses the same pdo_mysql
 # driver and the same 3306 port; only the server binaries differ.
-# ==========================================================================
+# ===========================================================================
 
 DB_ENGINE_NAME="MariaDB"
 

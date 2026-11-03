@@ -1,6 +1,6 @@
 #!/bin/bash
-# ==========================================================================
-# MySQL engine driver.
+# ===========================================================================
+# engine.sh — The MySQL engine driver.
 #
 # Sourced by build-install.sh at build time and by entrypoint.sh at runtime.
 # Every engine exposes the same contract, so neither caller knows which
@@ -15,7 +15,7 @@
 #   db_build_provision     create the database and its user
 #   db_build_stop          shut down cleanly, leaving the data on disk
 #   db_runtime_ping        return 0 when a remote server is reachable
-# ==========================================================================
+# ===========================================================================
 
 DB_ENGINE_NAME="MySQL"
 

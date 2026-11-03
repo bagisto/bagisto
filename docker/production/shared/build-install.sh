@@ -1,5 +1,5 @@
 #!/bin/bash
-# ==========================================================================
+# ===========================================================================
 # build-install.sh — Fully installs Bagisto while the image is being built.
 #
 # Brings the bundled database up, runs migrations and seeding against it,
@@ -10,7 +10,7 @@
 # The database itself is handled by an engine driver — see shared/db/ — so
 # this script is the same whether the image bundles MySQL, MariaDB or
 # PostgreSQL.
-# ==========================================================================
+# ===========================================================================
 set -e
 
 DB_ENGINE="${DB_ENGINE:-mysql}"
