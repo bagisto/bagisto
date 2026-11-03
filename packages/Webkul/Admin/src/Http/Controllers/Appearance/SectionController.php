@@ -416,7 +416,8 @@ class SectionController extends Controller
     }
 
     /**
-     * The requested channel when it runs the theme, otherwise the first channel that does.
+     * The requested channel when it runs the theme, else the one the panel is opened on, else the
+     * first channel that does, so the editor lands on the current channel until the dropdown changes it.
      *
      * @return Channel|null
      */
@@ -424,7 +425,9 @@ class SectionController extends Controller
     {
         $channels = $this->themeCatalog->activeChannels($code);
 
-        return $channels->firstWhere('code', request('channel')) ?? $channels->first();
+        return $channels->firstWhere('code', request('channel'))
+            ?? $channels->firstWhere('code', core()->getCurrentChannelCode())
+            ?? $channels->first();
     }
 
     /**
