@@ -304,7 +304,7 @@
                                     <div v-show="ai.images.length">
                                         <div class="grid grid-cols-4 gap-5">
                                             <div
-                                                class="relative grid max-h-30 min-w-30 cursor-pointer justify-items-center overflow-hidden rounded-sm border-[3px] border-transparent transition-all hover:opacity-80"
+                                                class="relative grid max-h-30 min-w-30 cursor-pointer justify-items-center overflow-hidden rounded-sm border-3 border-transparent transition-all hover:opacity-80"
                                                 :class="{'border-blue-600!': image.selected}"
                                                 v-for="image in ai.images"
                                                 @click="image.selected = ! image.selected"
@@ -466,9 +466,9 @@
 
                 <x-slot:content>
                     <!-- Preview -->
-                    <div class="mb-4 flex justify-center rounded border border-gray-200 p-4 dark:border-gray-800">
+                    <div class="mb-4 flex justify-center rounded-sm border border-gray-200 p-4 dark:border-gray-800">
                         <img
-                            class="max-h-45 max-w-full rounded"
+                            class="max-h-45 max-w-full rounded-sm"
                             :src="image.url"
                         />
                     </div>

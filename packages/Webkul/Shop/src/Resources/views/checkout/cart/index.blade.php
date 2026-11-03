@@ -20,7 +20,7 @@
     <!-- Page Header -->
     <div class="flex flex-wrap">
         <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-15 py-4 max-lg:px-8 max-md:px-4">
-            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
+            <div class="flex items-center gap-x-14 max-1180:gap-x-9">
                 {!! view_render_event('bagisto.shop.checkout.cart.logo.before') !!}
 
                 <a

@@ -51,7 +51,7 @@
             id="app"
             class="container-fluide fixed w-full"
         >
-            <div class="flex [&amp;>*]:w-[50%] gap-12 justify-center items-center">
+            <div class="flex [&amp;>*]:w-1/2 gap-12 justify-center items-center">
                 <!-- Vue Component -->
                 <v-server-requirements></v-server-requirements>
             </div>
@@ -64,7 +64,7 @@
             >
                 <!-- Left Side Welcome to Installation -->
                 <div class="flex flex-col justify-center">
-                    <div class="m-auto grid h-[100vh] max-w-90.5 items-end">
+                    <div class="m-auto grid h-screen max-w-90.5 items-end">
                         <div class="grid gap-4">
                             <img
                                 src="{{ bagisto_asset('images/installer/bagisto-logo.svg', 'installer') }}"
@@ -228,7 +228,7 @@
                 <!-- Right Side Components -->
                 <!-- Start -->
                 <div
-                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'start'"
                 >
                     <x-installer::form
@@ -371,7 +371,7 @@
 
                 <!-- Environment Configuration Database -->
                 <div
-                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'envDatabase'"
                 >
                     <x-installer::form
@@ -564,7 +564,7 @@
 
                 <!-- Ready For Installation -->
                 <div
-                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'readyForInstallation'"
                 >
                     <x-installer::form
@@ -640,7 +640,7 @@
 
                 <!-- Installation Processing -->
                 <div
-                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'installProgress'"
                 >
                     <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -673,7 +673,7 @@
 
                 <!-- Environment Configuration .ENV -->
                 <div
-                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'envConfiguration'"
                 >
                     <x-installer::form

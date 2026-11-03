@@ -181,27 +181,27 @@
                 <table class="w-full table-fixed">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="w-[36%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-9/25 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.image') / @lang('shop::app.rma.table-heading.product-name')
                             </th>
 
-                            <th class="w-[16%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-4/25 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.sku')
                             </th>
 
-                            <th class="w-[11%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-11/100 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.price')
                             </th>
 
-                            <th class="w-[10%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-1/10 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.rma-qty')
                             </th>
 
-                            <th class="w-[13%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-13/100 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.resolution-type')
                             </th>
 
-                            <th class="w-[14%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-7/50 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.reason')
                             </th>
                         </tr>
@@ -471,7 +471,7 @@
                                 :class="message.is_admin == 1 ? 'justify-start' : 'justify-end'"
                             >
                                 <div
-                                    class="max-w-[70%] w-fit rounded-xl p-3.5 text-left shadow-xs"
+                                    class="max-w-7/10 w-fit rounded-xl p-3.5 text-left shadow-xs"
                                     :class="message.is_admin == 1 ? 'bg-gray-100' : 'bg-blue-50'"
                                 >
                                     <div class="flex items-center gap-2 mb-1">

@@ -12,7 +12,7 @@
         type="text/x-template"
         id="v-twitter-share-template"
     >
-        <li class="transition-all hover:opacity-[0.8]">
+        <li class="transition-all hover:opacity-80">
             <a 
                 :href="shareUrl" 
                 @click="openSharePopup"

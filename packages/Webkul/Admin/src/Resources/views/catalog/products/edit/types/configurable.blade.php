@@ -587,7 +587,7 @@
                                     <x-admin::form.control-group 
                                         class="mb-0 flex-1"
                                         ::class="{ 
-                                            'max-w-[115px]' : selectedType !== 'editName',
+                                            'max-w-28.75' : selectedType !== 'editName',
                                             'mb-0!': selectedType === 'editName'
                                         }"
                                     >
@@ -654,7 +654,7 @@
                                     <x-admin::form.control-group 
                                         class="mb-0 flex-1"
                                         ::class="{ 
-                                            'max-w-[115px]' : selectedType !== 'editSku',
+                                            'max-w-28.75' : selectedType !== 'editSku',
                                             'mb-0!': selectedType === 'editSku'
                                         }"
                                     >

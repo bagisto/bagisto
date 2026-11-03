@@ -57,7 +57,7 @@
     
                                 <label 
                                     :for="payment.method" 
-                                    class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5 peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded"
+                                    class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5 peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded-sm"
                                 >
                                 </label>
 

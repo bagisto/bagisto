@@ -13,7 +13,7 @@
         type="text/x-template"
         id="v-email-share-template"
     >
-        <li class="transition-all hover:opacity-[0.8]">
+        <li class="transition-all hover:opacity-80">
             <a 
                 href="{{ $emailURL }}" 
                 target="_blank"

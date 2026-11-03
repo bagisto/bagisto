@@ -10,7 +10,7 @@
         <div class="grid content-start gap-4">
             <p class="shimmer h-6 w-3/4"></p>
 
-            <p class="shimmer h-6 w-[55%]"></p>
+            <p class="shimmer h-6 w-11/20"></p>
 
             <p class="shimmer h-6 w-full"></p>
 

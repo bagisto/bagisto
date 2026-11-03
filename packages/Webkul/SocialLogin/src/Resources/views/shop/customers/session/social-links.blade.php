@@ -6,7 +6,7 @@
 
         <a
             href="{{ route('customer.social_login.index', $provider) }}"
-            class="transition-all hover:opacity-[0.8]"
+            class="transition-all hover:opacity-80"
             aria-label="{{ $provider }}"
         >
             @include('social_login::icons.'.$provider)

@@ -57,7 +57,7 @@
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                     <!-- Label -->
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                         <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.attributes.edit.label')
                         </p>
@@ -103,7 +103,7 @@
 
                     <!-- Options -->
                     <div
-                        class="box-shadow rounded bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
+                        class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
                         v-if="showSwatch"
                     >
                         <div class="mb-3 flex items-center justify-between">
@@ -264,7 +264,7 @@
                                                                 :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
                                                                 :alt="element.swatch_alt"
                                                                 :ref="'image_' + element.id"
-                                                                class="h-[50px] w-[50px]"
+                                                                class="h-12.5 w-12.5"
                                                             >
 
                                                             <input
@@ -278,7 +278,7 @@
                                                             <div class="mt-2 grid gap-1">
                                                                 <input
                                                                     type="text"
-                                                                    class="w-[160px] rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                    class="w-40 rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                                     :name="'options[' + element.id + '][swatch_alt]'"
                                                                     :placeholder="@js(trans('admin::app.components.media.images.seo.alt-text'))"
                                                                     v-model="element.swatch_alt"
@@ -286,7 +286,7 @@
 
                                                                 <input
                                                                     type="text"
-                                                                    class="w-[160px] rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                    class="w-40 rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                                     :name="'options[' + element.id + '][swatch_file_name]'"
                                                                     :placeholder="@js(trans('admin::app.components.media.images.seo.file-name'))"
                                                                     v-model="element.swatch_file_name"
@@ -297,7 +297,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="h-[25px] w-[25px] rounded-md border border-gray-200 dark:border-gray-800"
+                                                                class="h-6.25 w-6.25 rounded-md border border-gray-200 dark:border-gray-800"
                                                                 :style="{ background: element.swatch_value }"
                                                             >
                                                             </div>
@@ -362,7 +362,7 @@
                                 <div class="grid justify-items-center gap-3.5 px-2.5 py-10">
                                     <!-- Attribute Option Image -->
                                     <img
-                                        class="h-[120px] w-[120px] dark:mix-blend-exclusion dark:invert"
+                                        class="h-30 w-30 dark:mix-blend-exclusion dark:invert"
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                         alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                     >
@@ -392,7 +392,7 @@
                 </div>
 
                 <!-- Right Sub Component -->
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.general.before', ['attribute' => $attribute]) !!}
 
                     <!-- General -->
