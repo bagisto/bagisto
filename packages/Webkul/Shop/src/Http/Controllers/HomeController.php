@@ -51,8 +51,8 @@ class HomeController extends Controller
     }
 
     /**
-     * Render a channel's home page in the requested theme from unpublished section edits, with every image cut
-     * as that theme cuts it, for the appearance area.
+     * Render the previewed channel's home page in the requested theme from unpublished section edits, with every
+     * image cut as that theme cuts it, for the appearance area.
      *
      * @return View
      */
@@ -60,8 +60,7 @@ class HomeController extends Controller
     {
         abort_unless(bouncer()->hasPermission('appearance.sections'), 403);
 
-        $channel = core()->getAllChannels()->firstWhere('code', request('channel'))
-            ?? core()->getCurrentChannel();
+        $channel = core()->getCurrentChannel();
 
         $themeCode = $this->previewedTheme($channel->theme);
 
@@ -95,6 +94,7 @@ class HomeController extends Controller
             'catalogQuery' => [
                 PreviewImageTheme::PARAMETER => $themeCode,
                 PreviewChannel::PARAMETER => $channel->code,
+                PreviewChannel::LOCALE_PARAMETER => app()->getLocale(),
             ],
         ]);
     }

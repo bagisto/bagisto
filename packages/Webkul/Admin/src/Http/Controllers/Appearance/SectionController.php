@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Models\Channel;
+use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Theme\Contracts\Section;
 use Webkul\Theme\Repositories\SectionRepository;
 use Webkul\Theme\Sections\SectionType;
@@ -62,8 +63,8 @@ class SectionController extends Controller
                 ->all(),
             'previewUrl' => route('shop.appearance.preview', [
                 'theme' => $code,
-                'channel' => $channel->code,
-                'locale' => $locale->code,
+                PreviewChannel::PARAMETER => $channel->code,
+                PreviewChannel::LOCALE_PARAMETER => $locale->code,
             ]),
             'publishUrl' => route('admin.appearance.sections.publish', [
                 'code' => $code,
@@ -416,8 +417,7 @@ class SectionController extends Controller
     }
 
     /**
-     * The requested channel when it runs the theme, else the one the panel is opened on, else the
-     * first channel that does, so the editor lands on the current channel until the dropdown changes it.
+     * The requested channel when it runs the theme, else the one the panel is opened on, else the first that does.
      *
      * @return Channel|null
      */
