@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Exports;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Webkul\Core\Traits\Sanitizer;
 
@@ -20,10 +21,8 @@ class ReportingExport implements FromCollection
 
     /**
      * function to create a blade view for export.
-     *
-     * @return Collection
      */
-    public function collection()
+    public function collection(): Collection
     {
         $rows[] = Arr::pluck($this->records['columns'], 'label');
 

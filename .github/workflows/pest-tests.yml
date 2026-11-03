@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-24.04]
-        php: ['8.4']
+        php: ['8.4', '8.5']
         db-image:
           - 'mysql:8.0'
           - 'mysql:8.4'
