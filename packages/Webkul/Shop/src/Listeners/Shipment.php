@@ -2,14 +2,22 @@
 
 namespace Webkul\Shop\Listeners;
 
+use Webkul\Sales\Repositories\ShipmentRepository;
 use Webkul\Shop\Mail\Order\ShippedNotification;
 
 class Shipment extends Base
 {
     /**
-     * After order is created
+     * Create a new listener instance.
      *
-     * @param  \Webkul\Sale\Contracts\Shipment  $shipment
+     * @return void
+     */
+    public function __construct(protected ShipmentRepository $shipmentRepository) {}
+
+    /**
+     * Mail the customer the new shipment, then mark that shipment alone as emailed.
+     *
+     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
     public function afterCreated($shipment)
@@ -21,7 +29,7 @@ class Shipment extends Base
 
             $this->prepareMail($shipment, new ShippedNotification($shipment));
 
-            $shipment->query()->update(['email_sent' => 1]);
+            $this->shipmentRepository->update(['email_sent' => true], $shipment->id);
         } catch (\Exception $e) {
             report($e);
         }

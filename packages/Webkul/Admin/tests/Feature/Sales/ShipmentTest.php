@@ -219,6 +219,28 @@ it('should store a shipment and send email notifications', function () {
     Mail::assertQueued(ShippedNotification::class, fn (ShippedNotification $mail) => $mail->hasTo($order->customer_email));
 });
 
+it('should mark only the shipment it mails as emailed, leaving every other shipment as it was', function () {
+    Mail::fake();
+
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_shipment', 0);
+
+    $earlier = $this->shipOrder($this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 1]]));
+
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_shipment', 1);
+
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 2]]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 1))
+        ->assertRedirect();
+
+    $shipment = Shipment::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect((bool) $shipment->email_sent)->toBeTrue()
+        ->and((bool) $earlier->fresh()->email_sent)->toBeFalse();
+});
+
 it('should fail validation when shipment source is missing on store', function () {
     $order = $this->createOrder(items: [['product' => productInStock(10)]]);
 
