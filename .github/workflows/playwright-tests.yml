@@ -26,7 +26,7 @@ jobs:
       fail-fast: false
       matrix:
         operating-systems: [ubuntu-24.04]
-        php-versions: ["8.4"]
+        php-versions: ["8.5"]
         node-version: ["22.13.1"]
         locale: [en, ar]
         db: [mysql, mariadb, pgsql]
@@ -163,7 +163,7 @@ jobs:
       fail-fast: false
       matrix:
         operating-systems: [ubuntu-24.04]
-        php-versions: ["8.4"]
+        php-versions: ["8.5"]
         node-version: ["22.13.1"]
         project: [Admin, Shop]
         db: [mysql, mariadb, pgsql]

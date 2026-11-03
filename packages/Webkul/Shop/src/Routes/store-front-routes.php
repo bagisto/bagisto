@@ -75,6 +75,7 @@ Route::get('/', [HomeController::class, 'index'])
  * section markup resolves as it does on the home page rather than under the catch-all slug route.
  */
 Route::get('appearance-preview', [HomeController::class, 'preview'])
+    ->middleware('preview')
     ->name('shop.appearance.preview');
 
 Route::get('contact-us', [HomeController::class, 'contactUs'])

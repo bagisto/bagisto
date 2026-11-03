@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Webkul\Core\Models\Channel;
+use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Repositories\SectionRepository;
@@ -535,7 +536,7 @@ it('should preview a channel with its own sections, not another channel ones', f
     $this->loginAsAdmin();
 
     $marksIn = function ($channelCode) {
-        $html = get(route('shop.appearance.preview', ['channel' => $channelCode]))
+        $html = get(route('shop.appearance.preview', [PreviewChannel::PARAMETER => $channelCode]))
             ->assertOk()
             ->getContent();
 
