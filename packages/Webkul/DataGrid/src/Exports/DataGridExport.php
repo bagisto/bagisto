@@ -2,6 +2,9 @@
 
 namespace Webkul\DataGrid\Exports;
 
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -23,7 +26,7 @@ class DataGridExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMap
     /**
      * Query.
      */
-    public function query(): mixed
+    public function query(): Builder|EloquentBuilder|Relation
     {
         return $this->datagrid->getQueryBuilder();
     }
