@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Soon.
+
 ## **v2.4.14 (3rd of November 2026)** - *Release*
 
 - Security fixes.
