@@ -1,8 +1,16 @@
 <?php
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Event;
+use Webkul\Attribute\Models\Attribute;
 use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\Currency;
+use Webkul\Core\Models\Locale;
 use Webkul\ImageCache\Templates\Large;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductImage;
+use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Shop\Http\Middleware\PreviewImageTheme;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
@@ -12,6 +20,11 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
+
+dataset('visitors who cannot edit sections', [
+    'guest' => [null],
+    'admin without the appearance permission' => [['sales', 'sales.orders']],
+]);
 
 /**
  * Register a second storefront theme, built from the default one, that no channel runs yet.
@@ -24,9 +37,9 @@ function installGalleryTheme(string $code = 'gallery'): string
 }
 
 /**
- * A live section of a theme on a channel, carrying the given options.
+ * A live section of a theme on a channel, carrying the given options in the given locale, the current one by default.
  */
-function sectionOfTheme(string $themeCode, int $channelId, string $type, array $options): Section
+function sectionOfTheme(string $themeCode, int $channelId, string $type, array $options, ?string $locale = null): Section
 {
     $section = Section::factory()->create([
         'type' => $type,
@@ -35,7 +48,7 @@ function sectionOfTheme(string $themeCode, int $channelId, string $type, array $
         'theme_code' => $themeCode,
     ]);
 
-    $section->translateOrNew(app()->getLocale())->options = $options;
+    $section->translateOrNew($locale ?? app()->getLocale())->options = $options;
 
     $section->save();
 
@@ -79,6 +92,41 @@ function adminSignedInBesideTheStorefront(?array $permissions = null): void
     }
 
     auth()->shouldUse('customer');
+}
+
+/**
+ * A storefront product listed on the given channel alone.
+ */
+function productOnChannel(Channel $channel): Product
+{
+    $product = test()->createSimpleProduct();
+
+    $product->channels()->sync([$channel->id]);
+
+    $status = Attribute::query()->where('code', 'status')->firstOrFail();
+
+    ProductAttributeValue::create([
+        'product_id' => $product->id,
+        'attribute_id' => $status->id,
+        'channel' => $channel->code,
+        'boolean_value' => true,
+        'unique_id' => implode('|', [$channel->code, $product->id, $status->id]),
+    ]);
+
+    Event::dispatch('catalog.product.update.after', $product);
+
+    return $product;
+}
+
+/**
+ * The product cards the storefront catalog lists for a request naming the previewed channel.
+ */
+function previewedCatalog(Channel $channel): Collection
+{
+    return collect(getJson(route('shop.api.products.index', [
+        'sort' => 'created_at-desc',
+        PreviewChannel::PARAMETER => $channel->code,
+    ]))->assertOk()->json('data'));
 }
 
 // ============================================================================
@@ -162,6 +210,21 @@ it('should open the editor on a channel that runs the theme rather than the defa
         ->assertSee(route('admin.appearance.sections.store', ['code' => $code, 'channel' => $channel->code]), false);
 });
 
+it('should open the editor on the channel of the current host when no channel is requested', function () {
+    $code = core()->getDefaultChannel()->theme;
+
+    $channel = Channel::factory()->create([
+        'theme' => $code,
+        'hostname' => 'http://second-store.test',
+    ]);
+
+    $this->loginAsAdmin();
+
+    get('http://second-store.test'.route('admin.appearance.sections.index', ['code' => $code], false))
+        ->assertOk()
+        ->assertSee(route('admin.appearance.sections.store', ['code' => $code, 'channel' => $channel->code], false), false);
+});
+
 it('should refuse to create on a channel that runs a different theme', function () {
     $code = installGalleryTheme();
 
@@ -223,7 +286,7 @@ it('should preview the requested theme with that theme own sections', function (
 
     $this->loginAsAdmin();
 
-    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
+    get(route('shop.appearance.preview', ['theme' => $code, PreviewChannel::PARAMETER => $channel->code]))
         ->assertOk()
         ->assertSee('<p>Gallery hero</p>', false)
         ->assertDontSee('<p>Default hero</p>', false);
@@ -248,7 +311,7 @@ it('should hand the layout the previewed theme footer rather than the channel ow
 
     $this->loginAsAdmin();
 
-    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
+    get(route('shop.appearance.preview', ['theme' => $code, PreviewChannel::PARAMETER => $channel->code]))
         ->assertOk()
         ->assertSee('Gallery Footer Link')
         ->assertDontSee('Default Footer Link');
@@ -295,7 +358,7 @@ it('should name the previewed theme in every resized image url of the preview', 
 
     $this->loginAsAdmin();
 
-    $html = get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
+    $html = get(route('shop.appearance.preview', ['theme' => $code, PreviewChannel::PARAMETER => $channel->code]))
         ->assertOk()
         ->getContent();
 
@@ -305,7 +368,7 @@ it('should name the previewed theme in every resized image url of the preview', 
     }
 });
 
-it('should ask the catalog for the preview carousels with the previewed theme named', function () {
+it('should ask the catalog for the preview carousels with the previewed theme, channel and locale named', function () {
     $code = installGalleryTheme();
 
     $channel = core()->getDefaultChannel();
@@ -322,10 +385,44 @@ it('should ask the catalog for the preview carousels with the previewed theme na
 
     $this->loginAsAdmin();
 
-    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
+    get(route('shop.appearance.preview', ['theme' => $code, PreviewChannel::PARAMETER => $channel->code]))
         ->assertOk()
-        ->assertSee(route('shop.api.products.index', ['sort' => 'name-asc', PreviewImageTheme::PARAMETER => $code]))
-        ->assertSee(route('shop.api.categories.index', ['parent_id' => '1', PreviewImageTheme::PARAMETER => $code]));
+        ->assertSee(route('shop.api.products.index', [
+            'sort' => 'name-asc',
+            PreviewImageTheme::PARAMETER => $code,
+            PreviewChannel::PARAMETER => $channel->code,
+            PreviewChannel::LOCALE_PARAMETER => app()->getLocale(),
+        ]))
+        ->assertSee(route('shop.api.categories.index', [
+            'parent_id' => '1',
+            PreviewImageTheme::PARAMETER => $code,
+            PreviewChannel::PARAMETER => $channel->code,
+            PreviewChannel::LOCALE_PARAMETER => app()->getLocale(),
+        ]));
+});
+
+it('should preview a channel in a locale it offers that the host channel does not', function () {
+    $locale = Locale::factory()->create();
+
+    $channel = Channel::factory()->create([
+        'theme' => core()->getDefaultChannel()->theme,
+        'default_locale_id' => $locale->id,
+    ]);
+
+    $channel->locales()->sync([$locale->id]);
+
+    sectionOfTheme($channel->theme, $channel->id, SectionTypeEnum::STATIC_CONTENT->value, [
+        'html' => '<p>Written for that locale</p>',
+    ], $locale->code);
+
+    $this->loginAsAdmin();
+
+    get(route('shop.appearance.preview', [
+        PreviewChannel::PARAMETER => $channel->code,
+        PreviewChannel::LOCALE_PARAMETER => $locale->code,
+    ]))
+        ->assertOk()
+        ->assertSee('Written for that locale', false);
 });
 
 it('should render a carousel whose stored filters are a single value rather than a list', function () {
@@ -340,7 +437,7 @@ it('should render a carousel whose stored filters are a single value rather than
 
     $this->loginAsAdmin();
 
-    get(route('shop.appearance.preview', ['theme' => $code, 'channel' => $channel->code]))
+    get(route('shop.appearance.preview', ['theme' => $code, PreviewChannel::PARAMETER => $channel->code]))
         ->assertOk()
         ->assertSee(PreviewImageTheme::PARAMETER.'='.$code, false);
 });
@@ -386,10 +483,46 @@ it('should not let a visitor or an admin who cannot edit sections pin the catalo
 
     expect($image)->not->toHaveKey('card_image_url')
         ->and($image['small_image_url'])->toEndWith('/cache/small/'.$path);
-})->with([
-    'guest' => [null],
-    'admin without the appearance permission' => [['sales', 'sales.orders']],
-]);
+})->with('visitors who cannot edit sections');
+
+it('should list the products of the previewed channel for an admin who may edit sections', function () {
+    $channel = Channel::factory()->create();
+
+    $listed = productOnChannel($channel);
+
+    $elsewhere = $this->createSimpleProduct();
+
+    adminSignedInBesideTheStorefront();
+
+    expect(previewedCatalog($channel)->pluck('id'))->toContain($listed->id)
+        ->not->toContain($elsewhere->id);
+});
+
+it('should not let a visitor or an admin who cannot edit sections switch the catalog channel', function (?array $permissions) {
+    $channel = Channel::factory()->create();
+
+    $listed = $this->createSimpleProduct();
+
+    if (! is_null($permissions)) {
+        adminSignedInBesideTheStorefront($permissions);
+    }
+
+    expect(previewedCatalog($channel)->pluck('id'))->toContain($listed->id);
+})->with('visitors who cannot edit sections');
+
+it('should price the products of the previewed channel in a currency that channel offers', function () {
+    $currency = Currency::factory()->create(['symbol' => 'PRV']);
+
+    $channel = Channel::factory()->create(['base_currency_id' => $currency->id]);
+
+    $channel->currencies()->sync([$currency->id]);
+
+    $product = productOnChannel($channel);
+
+    adminSignedInBesideTheStorefront();
+
+    expect(previewedCatalog($channel)->firstWhere('id', $product->id)['min_price'])->toContain('PRV');
+});
 
 it('should hand the editor a preview of the theme being customized', function () {
     $channel = core()->getDefaultChannel();
