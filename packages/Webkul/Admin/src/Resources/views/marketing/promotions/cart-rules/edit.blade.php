@@ -745,7 +745,7 @@
                                     name="status"
                                     value="1"
                                     :label="trans('admin::app.marketing.promotions.cart-rules.edit.status')"
-                                    :checked="(boolean) $cartRule->status"
+                                    :checked="(bool) $cartRule->status"
                                 />
 
                                 <x-admin::form.control-group.error control-name="status" />

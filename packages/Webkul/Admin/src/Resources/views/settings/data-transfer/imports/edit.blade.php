@@ -258,7 +258,7 @@
                                 type="switch"
                                 name="process_in_queue"
                                 :value="1"
-                                :checked="(boolean) $import->process_in_queue"
+                                :checked="(bool) $import->process_in_queue"
                             />
 
                             <x-admin::form.control-group.error control-name="process_in_queue" />

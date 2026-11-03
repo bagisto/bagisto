@@ -668,7 +668,7 @@
                                     name="status"
                                     value="1"
                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.status')"
-                                    :checked="(boolean) old('status')"
+                                    :checked="(bool) old('status')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="status" />

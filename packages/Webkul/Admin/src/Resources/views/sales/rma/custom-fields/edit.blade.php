@@ -151,7 +151,7 @@
                                         name="status"
                                         value="1"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.status')"
-                                        :checked="(boolean) $selectedValue"
+                                        :checked="(bool) $selectedValue"
                                     />
 
                                     <x-admin::form.control-group.error control-name="status" />
@@ -411,7 +411,7 @@
                                         name="is_required"
                                         value="1"
                                         for="is_required"
-                                        :checked="(boolean) $isRequired"
+                                        :checked="(bool) $isRequired"
                                     />
 
                                     <label

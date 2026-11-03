@@ -244,7 +244,7 @@
                                 type="switch"
                                 name="status"
                                 :value="1"
-                                :checked="(boolean) $selectedOption"
+                                :checked="(bool) $selectedOption"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.status')"
                             />
 
