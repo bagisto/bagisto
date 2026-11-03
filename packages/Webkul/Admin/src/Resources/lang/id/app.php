@@ -5691,7 +5691,7 @@ return [
                             'syncing' => 'Menyinkronkan...',
                             'pending' => ':count berkas belum ada di penyimpanan yang dikonfigurasi',
                             'up-to-date' => 'Semuanya sudah ada di penyimpanan yang dikonfigurasi',
-                            'info' => 'Menyalin berkas yang sudah diunggah ke penyimpanan yang dikonfigurasi. Proses ini berjalan di latar belakang, melewati berkas yang sudah ada, dan membiarkan berkas asli tetap di tempatnya. Untuk toko besar, jalankan `php artisan bagisto:storage:sync`.',
+                            'info' => 'Menyalin berkas yang sudah diunggah ke penyimpanan yang dikonfigurasi. Proses ini berjalan di latar belakang, melewati berkas yang sudah ada, dan membiarkan berkas asli tetap di tempatnya. Untuk toko besar, jalankan `php artisan bagisto:storage:sync` alih-alih menggunakan tombol ini.',
                             'started' => 'Sinkronisasi dimulai. Berkas sedang disalin di latar belakang.',
                             'local' => 'Penyimpanan yang dikonfigurasi adalah disk lokal, jadi tidak ada yang perlu disalin.',
                         ],

@@ -376,10 +376,11 @@
 
                 <x-slot:content v-pre>
                     <div class="flex flex-col {{ $order->billing_address ? 'pb-4' : ''}}">
-                        <p 
+                        <p
                             class="font-semibold text-gray-800 dark:text-white"
-                            v-text="'{{ $invoice->order->customer_full_name }}'"
+                            v-pre
                         >
+                            {{ $invoice->order->customer_full_name }}
                         </p>
 
                         {!! view_render_event('bagisto.admin.sales.invoice.customer_name.after', ['order' => $order]) !!}

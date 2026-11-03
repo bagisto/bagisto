@@ -15,8 +15,6 @@ use Webkul\Shop\Http\Controllers\SubscriptionController;
 
 /**
  * EU Withdrawal — public guest flow (Directive (EU) 2023/2673, Art. 11a).
- *
- * Declared before the catch-all fallback so its URLs match first.
  */
 Route::prefix('withdraw')->middleware([NoCacheMiddleware::class])->group(function () {
     Route::controller(EUWithdrawalController::class)->group(function () {
@@ -57,8 +55,7 @@ Route::fallback(ProductsCategoriesProxyController::class.'@index')
     ->middleware('cache.response');
 
 /**
- * Search-engine / agent discovery. Declared before the catch-all fallback so
- * `sitemap.xml` and `robots.txt` are not swallowed by the slug route.
+ * Search-engine and agent discovery.
  */
 Route::get('sitemap.xml', [SitemapController::class, 'index'])
     ->name('shop.sitemap.index');
@@ -74,10 +71,8 @@ Route::get('/', [HomeController::class, 'index'])
     ->middleware('cache.response');
 
 /**
- * Appearance editor preview, never cached.
- *
- * The path must stay one segment deep: storefront markup emits relative asset urls such
- * as `cache/small/...`, which a nested path would resolve to the catch-all slug route.
+ * Appearance editor preview, never cached, kept one segment deep so a relative url in authored
+ * section markup resolves as it does on the home page rather than under the catch-all slug route.
  */
 Route::get('appearance-preview', [HomeController::class, 'preview'])
     ->name('shop.appearance.preview');
@@ -111,14 +106,14 @@ Route::controller(SubscriptionController::class)->group(function () {
 });
 
 /**
- * Compare products
+ * Compare products.
  */
 Route::get('compare', [CompareController::class, 'index'])
     ->name('shop.compare.index')
     ->middleware('cache.response');
 
 /**
- * Downloadable products
+ * Downloadable products.
  */
 Route::controller(ProductController::class)->group(function () {
     Route::get('downloadable/download-sample/{type}/{id}', 'downloadSample')->name('shop.downloadable.download_sample');
@@ -127,7 +122,7 @@ Route::controller(ProductController::class)->group(function () {
 });
 
 /**
- * Booking products
+ * Booking products.
  */
 Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
     ->name('shop.booking_product.slots.index');

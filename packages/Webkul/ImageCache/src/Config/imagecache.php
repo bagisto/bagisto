@@ -18,6 +18,10 @@ return [
     |
     | Examples: "images", "img/cache"
     |
+    | Set it to null or leave it empty to turn the route off: every image url
+    | then links the stored file itself, and the admin panel leaves out the
+    | Bagisto logo.
+    |
     */
 
     'route' => 'cache',
@@ -52,7 +56,9 @@ return [
     | {route}/{template}/{filename}
     |
     | The values of this array will define which filter class will be
-    | applied, by its fully qualified name.
+    | applied, by its fully qualified name. An entry the image cache cannot
+    | apply is reported, and small, medium and large then fall back to the
+    | templates in Webkul\ImageCache\Templates.
     |
     */
 

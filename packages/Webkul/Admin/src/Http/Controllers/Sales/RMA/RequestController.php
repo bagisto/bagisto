@@ -319,7 +319,10 @@ class RequestController extends Controller
      */
     public function getOrderItems(int $orderId): Collection
     {
-        return $this->rmaHelper->getOrderItems($orderId);
+        return $this->rmaHelper->getOrderItems($orderId)
+            ->each(function ($orderItem) {
+                $orderItem->formatted_price = core()->formatBasePrice($orderItem->base_price);
+            });
     }
 
     /**

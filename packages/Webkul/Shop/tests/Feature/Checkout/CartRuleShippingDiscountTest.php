@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Testing\TestResponse;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
@@ -54,7 +55,7 @@ function taxShippingToUs(float $rate): void
 // Shipping Discount
 // ============================================================================
 
-it('should keep the discount of a cart rule that applies to shipping', function (bool $taxedShipping) {
+it('should keep the discount of a cart rule that applies to shipping', function (bool $taxedShipping, float $expectedTax) {
     if ($taxedShipping) {
         taxShippingToUs(10);
     }
@@ -74,9 +75,11 @@ it('should keep the discount of a cart rule that applies to shipping', function 
         'discount_amount' => 5,
         'base_discount_amount' => 5,
     ]);
+
+    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe($expectedTax);
 })->with([
-    'untaxed shipping' => [false],
-    'taxed shipping' => [true],
+    'untaxed shipping' => [false, 0.0],
+    'taxed shipping' => [true, 0.5],
 ]);
 
 it('should leave no shipping discount once a cart rule makes shipping free', function (bool $taxedShipping) {
@@ -100,6 +103,8 @@ it('should leave no shipping discount once a cart rule makes shipping free', fun
         'discount_amount' => 0,
         'base_discount_amount' => 0,
     ]);
+
+    expect((float) Cart::getCart()->selected_shipping_rate->tax_amount)->toBe(0.0);
 })->with([
     'untaxed shipping' => [false],
     'taxed shipping' => [true],

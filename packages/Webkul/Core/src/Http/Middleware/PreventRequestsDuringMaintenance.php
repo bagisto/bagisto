@@ -3,7 +3,6 @@
 namespace Webkul\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as BasePreventRequestsDuringMaintenance;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -12,31 +11,22 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintenance
 {
     /**
-     * Exclude route names.
+     * Route names that stay reachable during maintenance.
      *
      * @var array
      */
     protected $excludedNames = [];
 
     /**
-     * Exclude Channel Ip's.
+     * The addresses the current channel lets through during maintenance.
      *
      * @var array
      */
     protected $excludedIPs = [];
 
     /**
-     * Constructor.
-     */
-    public function __construct(Application $app)
-    {
-        parent::__construct($app);
-
-        $this->except[] = config('app.admin_url').'*';
-    }
-
-    /**
-     * Handle an incoming request.
+     * Hold back a request while the application is down and the request's channel is under maintenance, letting the
+     * excluded paths, the channel's allowed addresses and a holder of the bypass secret through, as Laravel's does.
      *
      * @param  Request  $request
      * @return mixed
@@ -48,7 +38,7 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
         if ($this->app->maintenanceMode()->active()) {
             try {
                 $data = $this->app->maintenanceMode()->data();
-            } catch (\ErrorException $exception) {
+            } catch (\ErrorException|\TypeError $exception) {
                 if (! $this->app->maintenanceMode()->active()) {
                     return $next($request);
                 }
@@ -56,7 +46,10 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
                 throw $exception;
             }
 
-            if (isset($data['secret']) && $request->path() === $data['secret']) {
+            if (
+                is_string($data['secret'] ?? null)
+                && hash_equals($data['secret'], $request->path())
+            ) {
                 return $this->bypassResponse($data['secret']);
             }
 
@@ -81,7 +74,10 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
                 return $next($request);
             }
 
-            if (isset($data['redirect'])) {
+            if (
+                isset($data['redirect'])
+                && ! $request->expectsJson()
+            ) {
                 $path = $data['redirect'] === '/'
                     ? $data['redirect']
                     : trim($data['redirect'], '/');
@@ -91,7 +87,10 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
                 }
             }
 
-            if (isset($data['template'])) {
+            if (
+                isset($data['template'])
+                && ! $request->expectsJson()
+            ) {
                 return response(
                     $data['template'],
                     $data['status'] ?? 503,
@@ -111,7 +110,22 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
     }
 
     /**
-     * Set allowed IPs.
+     * The paths maintenance mode lets through, the admin url and every path under it among them, which `down`
+     * also writes into the down file for the maintenance page rendered before the application boots.
+     */
+    public function getExcludedPaths(): array
+    {
+        $adminUrl = trim((string) config('app.admin_url'), '/');
+
+        if ($adminUrl === '') {
+            return parent::getExcludedPaths();
+        }
+
+        return array_merge(parent::getExcludedPaths(), [$adminUrl, $adminUrl.'/*']);
+    }
+
+    /**
+     * Read the addresses the current channel lets through during maintenance.
      */
     protected function setAllowedIps(): void
     {

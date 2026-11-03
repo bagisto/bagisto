@@ -7,7 +7,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Webkul\PayGlocal\Http\Controllers\PayGlocalController;
 
 Route::controller(PayGlocalController::class)
-    ->middleware('web')
+    ->middleware(['web', 'cart.buy_now'])
     ->prefix('payglocal')
     ->group(function () {
         Route::get('redirect', 'redirect')->name('payglocal.redirect');

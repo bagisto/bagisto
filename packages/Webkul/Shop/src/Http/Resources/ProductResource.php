@@ -9,10 +9,16 @@ use Webkul\Product\Helpers\Review;
 class ProductResource extends JsonResource
 {
     /**
+     * Review helper instance.
+     *
+     * @var Review
+     */
+    protected $reviewHelper;
+
+    /**
      * Create a new resource instance.
      *
      * @param  mixed  $resource
-     * @return void
      */
     public function __construct($resource)
     {
@@ -24,7 +30,7 @@ class ProductResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  Request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
@@ -43,7 +49,7 @@ class ProductResource extends JsonResource
             'is_featured' => (bool) $this->featured,
             'on_sale' => (bool) $productTypeInstance->haveDiscount(),
             'is_saleable' => (bool) $productTypeInstance->isSaleable(),
-            'is_wishlist' => (bool) auth()->guard()->user()?->wishlist_items
+            'is_wishlist' => (bool) auth()->guard('customer')->user()?->wishlist_items
                 ->where('channel_id', core()->getCurrentChannel()->id)
                 ->where('product_id', $this->id)->count(),
             'min_price' => core()->formatPrice($productTypeInstance->getMinimalPrice()),

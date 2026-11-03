@@ -74,6 +74,16 @@ it('should refuse a cart in a currency PayU does not settle', function () {
     $response->assertSessionHas('error');
 });
 
+it('should send a guest who has to sign in back to checkout instead of building the PayU payment', function () {
+    $this->setConfig('sales.checkout.shopping_cart.allow_guest_checkout', '0');
+
+    $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
+
+    $response = $this->get(route('payu.redirect'));
+
+    $response->assertRedirect(route('shop.checkout.onepage.index'));
+});
+
 // ============================================================================
 // Payment Callbacks
 // ============================================================================

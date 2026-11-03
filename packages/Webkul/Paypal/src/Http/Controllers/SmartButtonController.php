@@ -2,6 +2,7 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Webkul\Checkout\Facades\Cart;
@@ -45,7 +46,7 @@ class SmartButtonController extends Controller
 
             return response()->json(['result' => $order]);
         } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
+            return $this->errorResponse($e);
         }
     }
 
@@ -58,7 +59,10 @@ class SmartButtonController extends Controller
     {
         abort_if(! $this->smartButton->isAvailable(), 404);
 
-        if (Cart::hasError()) {
+        if (
+            Cart::hasError()
+            || Cart::requiresSignInToCheckout()
+        ) {
             return $this->redirectToCart();
         }
 
@@ -73,7 +77,7 @@ class SmartButtonController extends Controller
 
             return $this->saveOrder();
         } catch (\Exception $e) {
-            return response()->json(json_decode($e->getMessage()), 400);
+            return $this->errorResponse($e);
         }
     }
 
@@ -439,6 +443,32 @@ class SmartButtonController extends Controller
         if (! $cart->payment) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
+    }
+
+    /**
+     * The body of a failed PayPal call: the gateway's own JSON, a generic message for a database
+     * or runtime error whose text is logged rather than shown, or one of our own sentences.
+     */
+    protected function errorResponse(\Exception $e): JsonResponse
+    {
+        $decoded = json_decode($e->getMessage(), true);
+
+        if (is_array($decoded)) {
+            return response()->json($decoded, 400);
+        }
+
+        if (
+            $e instanceof QueryException
+            || $e instanceof \ErrorException
+        ) {
+            report($e);
+
+            return response()->json([
+                'message' => trans('paypal::app.errors.something-went-wrong'),
+            ], 400);
+        }
+
+        return response()->json(['message' => $e->getMessage()], 400);
     }
 
     /**

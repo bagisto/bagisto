@@ -122,10 +122,11 @@
                 <x-slot:content v-pre>
                     <div class="flex flex-col pb-4">
                         <!-- Customer Full Name -->
-                        <p 
+                        <p
                             class="font-semibold text-gray-800 dark:text-white"
-                            v-text="'{{ $shipment->order->customer_full_name }}'"
+                            v-pre
                         >
+                            {{ $shipment->order->customer_full_name }}
                         </p>
 
                         <!-- Customer Email -->

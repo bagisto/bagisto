@@ -66,6 +66,12 @@ export class CheckoutHelper extends BasePage {
             .filter({ visible: true });
     }
 
+    private summaryItemName(productName: string) {
+        return this.page
+            .getByText(productName, { exact: true })
+            .filter({ visible: true });
+    }
+
     protected get productForm() {
         return this.page.locator('form:has(input[name="product_id"])');
     }
@@ -294,11 +300,17 @@ export class CheckoutHelper extends BasePage {
     }
 
     private async waitForPaymentMethodSaved() {
+        const buyNow = new URL(this.page.url()).searchParams.get("buy_now");
+
+        const summaryUrl = buyNow
+            ? `api/checkout/onepage/summary?buy_now=${encodeURIComponent(buyNow)}`
+            : "api/checkout/onepage/summary";
+
         await expect
             .poll(
                 async () => {
                     const response = await this.page.request
-                        .get("api/checkout/onepage/summary")
+                        .get(summaryUrl)
                         .catch(() => null);
 
                     if (!response || !response.ok()) {
@@ -417,6 +429,32 @@ export class CheckoutHelper extends BasePage {
         await this.proceedButton.click();
 
         return address;
+    }
+
+    async completeCheckoutHere(
+        options: {
+            shipping?: ShippingMethod | null;
+            payment?: PaymentMethod;
+        } = {},
+    ): Promise<string> {
+        await this.fillGuestAddress();
+        await this.proceedButton.click();
+
+        if (options.shipping !== null) {
+            await this.chooseShipping(options.shipping ?? "free");
+        }
+
+        await this.choosePayment(options.payment ?? "moneytransfer");
+
+        return this.placeOrder();
+    }
+
+    async expectCheckoutSummaryShowsOnly(present: string, absent: string): Promise<void> {
+        await expect(this.page).toHaveURL(/checkout\/onepage/);
+
+        await expect(this.summaryItemName(present)).toHaveCount(1);
+
+        await expect(this.summaryItemName(absent)).toHaveCount(0);
     }
 
     async proceedWithNewAddress(

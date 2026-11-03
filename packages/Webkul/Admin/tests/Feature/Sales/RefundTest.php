@@ -224,6 +224,33 @@ it('should store a refund and send email notification', function () {
     Mail::assertQueued(RefundedNotification::class, fn (RefundedNotification $mail) => $mail->hasTo($order->customer_email));
 });
 
+it('should mark only the refund it mails as emailed, leaving every other refund as it was', function () {
+    Mail::fake();
+
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_refund', 0);
+
+    $earlierOrder = invoicedOrder();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.store', $earlierOrder->id), refundPayload($earlierOrder->items->first()->id, 1))
+        ->assertRedirect();
+
+    $this->setConfig('emails.general.notifications.emails.general.notifications.new_refund', 1);
+
+    $order = invoicedOrder();
+
+    postJson(route('admin.sales.refunds.store', $order->id), refundPayload($order->items->first()->id, 1))
+        ->assertRedirect();
+
+    $earlier = Refund::query()->where('order_id', $earlierOrder->id)->firstOrFail();
+
+    $refund = Refund::query()->where('order_id', $order->id)->firstOrFail();
+
+    expect((bool) $refund->email_sent)->toBeTrue()
+        ->and((bool) $earlier->email_sent)->toBeFalse();
+});
+
 it('should fail validation when a refund item quantity is not numeric', function () {
     $order = invoicedOrder();
 

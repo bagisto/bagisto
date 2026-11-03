@@ -44,6 +44,7 @@ class Cart extends Model implements CartContract
         'additional' => 'json',
         'is_guest' => 'boolean',
         'is_active' => 'boolean',
+        'is_buy_now' => 'boolean',
     ];
 
     /**

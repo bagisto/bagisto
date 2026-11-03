@@ -254,7 +254,7 @@ class OrderController extends Controller
 
         if (! Cart::haveMinimumOrderAmount()) {
             throw new \Exception(trans('admin::app.sales.orders.create.minimum-order-error', [
-                'amount' => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0),
+                'amount' => core()->formatBasePrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0),
             ]));
         }
 

@@ -2,6 +2,7 @@
 
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
+use Webkul\ImageCache\TemplateRegistry;
 use Webkul\Shop\Helpers\CatalogApiCache;
 use Webkul\Shop\Listeners\CatalogCache;
 use Webkul\Shop\Providers\EventServiceProvider;
@@ -62,6 +63,16 @@ it('should not cache catalog responses for logged-in customers', function () {
     $resolved = $cache->remember('products', [], fn () => 'fresh-each-time');
 
     expect($resolved)->toBe('fresh-each-time');
+});
+
+it('should not cache a catalog response whose images are pinned to a theme', function () {
+    request()->attributes->set(TemplateRegistry::PINNED_THEME, core()->getDefaultChannel()->theme);
+
+    $cache = app(CatalogApiCache::class);
+
+    expect($cache->shouldCache())->toBeFalse()
+        ->and($cache->remember('products', ['limit' => 10], fn () => 'first'))->toBe('first')
+        ->and($cache->remember('products', ['limit' => 10], fn () => 'second'))->toBe('second');
 });
 
 // ============================================================================

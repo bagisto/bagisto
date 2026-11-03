@@ -4,19 +4,51 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed the nginx production image answering every resized image with a 404 status, though the image itself was served.
+
+- Image urls now follow the path set in `imagecache.route` instead of always `cache/`, and setting it to null or empty turns the image cache off rather than breaking the images it serves; product, category and section images then link their full-size stored files.
+
+- Fixed an entry in `config/imagecache.php` naming a missing class, or one without `applyFilter()`, silently serving full-size originals. It is now logged, and `small`, `medium` and `large`, broken or left out, fall back to the image cache's own 100, 300 and 600 pixel square crops.
+
+- Image cache templates are now built by the container, so a template may type-hint what its constructor needs; an object listed in `imagecache.templates` is no longer applied, so list its class name instead.
+
+- The image cache now logs, at most once an hour each, a remote storage disk it cannot read or reach, as with wrong credentials, and a stored image it fails to resize.
+
+- The Appearance preview now cuts the images its sections show as the previewed theme does, including templates only that theme registers, rather than as the theme of the channel the admin domain resolves to.
+
+- The new `search-images:prune` command, which Laravel's scheduler runs daily at 00:05, deletes every image search upload from before today, along with the `product-search/` folder earlier releases kept them in.
+
+- Fixed storefront paths that merely begin with the admin URL, such as `/admin-tools`, staying open during maintenance.
+
+- Fixed storefront pages whose url held the admin URL and a slash anywhere but at the start of the path answering not found, and an `APP_ADMIN_URL` ending in a slash breaking the admin panel.
+
+- A path under the admin URL naming a storefront category, such as `/admin/shoes`, now answers not found instead of redirecting to `/shoes`.
+
+- While the store is down with `php artisan down --redirect` or `--render`, a request expecting JSON now gets the 503 instead of the redirect or page. With `APP_DEBUG` off, the 503 page and JSON now also carry the `Retry-After` and `Refresh` headers `--retry` and `--refresh` set.
+
 - Added the currencies of the East African Community — the Tanzanian, Kenyan, Ugandan and Somali shillings, the Rwandan, Burundian and Congolese francs, and the South Sudanese pound — to the installer.
 
 - Added Swahili (Kiswahili) as a supported locale, translated across the admin, the storefront and the installer.
 
-- Refined downloadable products: a race-safe download count scoped to its own ordered item, restored unlimited allowances, withdrawal on refund, a single quantity everywhere, and a tidier links form.
+- Refined the admin form for a downloadable product's links.
 
 - Media already on the site can be copied onto Amazon S3 or Cloudflare R2, from a Sync button in Configuration → File Management or with `php artisan bagisto:storage:sync`. A file the target already holds is passed over, so an interrupted run is resumed by running it again.
 
 - Adding a product to the cart without a quantity no longer fails with an error and is taken as one.
 
-- Fixed an admin address edit moving the address to another customer, and clearing an unrelated customer's default address, when the request named a different one.
-
 - Fixed a Configuration → File Management page failing with an exception when a remote storage driver was chosen and one of its settings had never been saved.
+
+- Fixed Buy Now emptying the cart it was started from. A Buy Now now checks out on its own cart and mirrors the item into the main cart, so an unfinished or abandoned Buy Now stays in the cart and a completed one is taken back out.
+
+- Fixed the shipping estimate quoting a total it then threw away, leaving the cart with a chosen shipping method and no shipping in the grand total.
+
+- Fixed a product added beside one already in the cart in the same request going untaxed, which understated the tax and total on an admin reorder.
+
+- Fixed a guest login with items in both carts ending up with no cart at all, and starting a second one on the next add.
+
+- Fixed a cart emptied of its last item lingering until the next request, which reported a minimum-order error instead of an empty cart.
+
+- Hardened the remove-selected-items request to reject a missing, non-array, or duplicate selection with a validation error instead of silently accepting it.
 
 - Refactored internals for clearer responsibilities.
 

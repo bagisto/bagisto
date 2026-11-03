@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Customer\Models\CompareItem;
+use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 
 use function Pest\Laravel\deleteJson;
@@ -65,6 +68,28 @@ it('should reject an array search query instead of running it as a raw sql condi
     $response->assertRedirect();
 
     expect($response->baseResponse->getStatusCode())->not->toBe(500);
+});
+
+// ============================================================================
+// Image Search
+// ============================================================================
+
+it('should keep a search image in the folder of the day it was uploaded and answer with its url', function () {
+    Storage::fake();
+
+    $this->freezeTime();
+
+    $this->setConfig('magic_ai.general.settings.enabled', 0);
+
+    $response = postJson(route('shop.search.upload'), [
+        'image' => UploadedFile::fake()->image('shoe.png', 20, 10),
+    ])
+        ->assertOk();
+
+    $stored = Storage::allFiles(SearchRepository::SEARCH_IMAGES_DIRECTORY.'/'.now()->toDateString());
+
+    expect($stored)->toHaveCount(1)
+        ->and($response->json('image_url'))->toBe(Storage::url($stored[0]));
 });
 
 // ============================================================================

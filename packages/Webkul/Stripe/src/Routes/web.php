@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Stripe\Http\Controllers\StripeController;
 
 Route::controller(StripeController::class)
-    ->middleware('web')
+    ->middleware(['web', 'cart.buy_now'])
     ->prefix('stripe')
     ->group(function () {
         Route::get('redirect', 'redirect')->name('stripe.standard.redirect');
