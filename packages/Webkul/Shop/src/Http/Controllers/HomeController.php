@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\ImageCache\TemplateRegistry;
+use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Shop\Http\Middleware\PreviewImageTheme;
 use Webkul\Shop\Http\Requests\ContactRequest;
 use Webkul\Shop\Http\Resources\CategoryTreeResource;
@@ -91,7 +92,10 @@ class HomeController extends Controller
         return view('shop::home.index', compact('sections', 'categories') + [
             'preview' => true,
             'previewTheme' => app(ThemeCatalog::class)->find($themeCode)['name'] ?? $themeCode,
-            'catalogQuery' => [PreviewImageTheme::PARAMETER => $themeCode],
+            'catalogQuery' => [
+                PreviewImageTheme::PARAMETER => $themeCode,
+                PreviewChannel::PARAMETER => $channel->code,
+            ],
         ]);
     }
 

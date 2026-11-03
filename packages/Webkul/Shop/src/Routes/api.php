@@ -11,6 +11,7 @@ use Webkul\Shop\Http\Controllers\API\OnepageController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
+use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Shop\Http\Middleware\PreviewImageTheme;
 
 Route::group(['prefix' => 'api'], function () {
@@ -22,7 +23,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::controller(CategoryController::class)->prefix('categories')->group(function () {
         Route::get('', 'index')
-            ->middleware(PreviewImageTheme::class)
+            ->middleware([PreviewImageTheme::class, PreviewChannel::class])
             ->name('shop.api.categories.index');
 
         Route::get('tree', 'tree')->name('shop.api.categories.tree');
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')
-            ->middleware(PreviewImageTheme::class)
+            ->middleware([PreviewImageTheme::class, PreviewChannel::class])
             ->name('shop.api.products.index');
 
         Route::get('{id}/related', 'relatedProducts')->name('shop.api.products.related.index');
