@@ -447,7 +447,7 @@
                                     name="type"
                                     rules="required"
                                     :value="$selectedOption"
-                                    :disabled="(boolean) $selectedOption"
+                                    :disabled="(bool) $selectedOption"
                                     :label="trans('admin::app.catalog.attributes.edit.type')"
                                 >
                                     @foreach($attributeTypes as $attributeType)
@@ -580,7 +580,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_required"
-                                    :value="(boolean) $selectedOption"
+                                    :value="(bool) $selectedOption"
                                 />
 
                                 <x-admin::form.control-group.control
@@ -589,7 +589,7 @@
                                     id="is_required"
                                     for="is_required"
                                     value="1"
-                                    :checked="(boolean) (old('is_required') ?? $attribute->is_required)"
+                                    :checked="(bool) (old('is_required') ?? $attribute->is_required)"
                                 />
 
                                 <label
@@ -605,7 +605,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_unique"
-                                    :value="(boolean) (old('is_unique') ?? $attribute->is_unique)"
+                                    :value="(bool) (old('is_unique') ?? $attribute->is_unique)"
                                 />
 
                                 <x-admin::form.control-group.control
@@ -614,8 +614,8 @@
                                     name="is_unique"
                                     value="1"
                                     for="is_unique"
-                                    :checked="(boolean) $attribute->is_unique"
-                                    :disabled="(boolean) $attribute->is_unique"
+                                    :checked="(bool) $attribute->is_unique"
+                                    :disabled="(bool) $attribute->is_unique"
                                 />
 
                                 <label
@@ -652,8 +652,8 @@
                                     id="value_per_locale"
                                     name="value_per_locale"
                                     value="1"
-                                    :checked="(boolean) $valuePerLocale"
-                                    :disabled="(boolean) $valuePerLocale"
+                                    :checked="(bool) $valuePerLocale"
+                                    :disabled="(bool) $valuePerLocale"
                                 />
 
                                 <label
@@ -669,7 +669,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="value_per_locale"
-                                    :value="(boolean) $valuePerLocale"
+                                    :value="(bool) $valuePerLocale"
                                 />
                             </x-admin::form.control-group>
 
@@ -684,8 +684,8 @@
                                     id="value_per_channel"
                                     name="value_per_channel"
                                     value="1"
-                                    :checked="(boolean) $valuePerChannel"
-                                    :disabled="(boolean) $valuePerChannel"
+                                    :checked="(bool) $valuePerChannel"
+                                    :disabled="(bool) $valuePerChannel"
                                 />
 
                                 <label class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300">
@@ -699,7 +699,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="value_per_channel"
-                                    :value="(boolean) $valuePerChannel"
+                                    :value="(bool) $valuePerChannel"
                                 />
                             </x-admin::form.control-group>
 
@@ -718,7 +718,7 @@
                                     name="is_filterable"
                                     value="1"
                                     for="is_filterable"
-                                    :checked="(boolean) $isFilterable"
+                                    :checked="(bool) $isFilterable"
                                     ::disabled="! isFilterable"
                                 />
 
@@ -736,7 +736,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_filterable"
-                                    :value="(boolean) $isFilterable"
+                                    :value="(bool) $isFilterable"
                                 />
                             </x-admin::form.control-group>
 
@@ -755,7 +755,7 @@
                                     name="is_configurable"
                                     value="1"
                                     for="is_configurable"
-                                    :checked="(boolean) $isConfigurable"
+                                    :checked="(bool) $isConfigurable"
                                     ::disabled="! isConfigurable"
                                 />
 
@@ -773,7 +773,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_configurable"
-                                    :value="(boolean) $isConfigurable"
+                                    :value="(bool) $isConfigurable"
                                 />
                             </x-admin::form.control-group>
 
@@ -789,7 +789,7 @@
                                     name="is_visible_on_front"
                                     for="is_visible_on_front"
                                     value="1"
-                                    :checked="(boolean) $isVisibleOnFront"
+                                    :checked="(bool) $isVisibleOnFront"
                                 />
 
                                 <label
@@ -806,7 +806,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_visible_on_front"
-                                    :value="(boolean) $isVisibleOnFront"
+                                    :value="(bool) $isVisibleOnFront"
                                 />
                             </x-admin::form.control-group>
 
@@ -822,7 +822,7 @@
                                     name="is_comparable"
                                     value="1"
                                     for="is_comparable"
-                                    :checked="(boolean) $isComparable"
+                                    :checked="(bool) $isComparable"
                                 />
 
                                 <label
@@ -839,7 +839,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_comparable"
-                                    :value="(boolean) $isComparable"
+                                    :value="(bool) $isComparable"
                                 />
                             </x-admin::form.control-group>
                         </x-slot>
