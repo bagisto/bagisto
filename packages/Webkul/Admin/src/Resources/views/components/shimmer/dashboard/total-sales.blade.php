@@ -30,8 +30,8 @@
         </div>
 
         <div class="grid w-full gap-1.5">
-            <div class="flex aspect-[2] h-45 w-71.25 items-end border-b border-l pl-2.5 dark:border-gray-800">
-                <div class="flex aspect-[2] w-full items-end justify-between gap-2.5">
+            <div class="flex aspect-2/1 h-45 w-71.25 items-end border-b border-l pl-2.5 dark:border-gray-800">
+                <div class="flex aspect-2/1 w-full items-end justify-between gap-2.5">
                     @foreach (range(1, 14) as $i)
                         <div class="shimmer flex w-full" style="height: {{ rand(10, 100) }}%"></div>
                     @endforeach

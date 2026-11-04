@@ -165,7 +165,7 @@
                                             />
                                         </v-field>
 
-                                        <span class="text-lg max-sm:text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded px-2">
+                                        <span class="text-lg max-sm:text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded-sm px-2">
                                             @{{ option.label }}
                                         </span>
 

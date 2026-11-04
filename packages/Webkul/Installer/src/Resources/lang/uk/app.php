@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Книги та Канцтовари',
+                    'name' => 'Канцтовари',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

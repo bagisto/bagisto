@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'පොත් සහ ලිපි ද්‍රව්‍ය',
+                    'name' => 'ලිපි ද්‍රව්‍ය',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

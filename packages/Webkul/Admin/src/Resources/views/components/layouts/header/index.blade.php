@@ -43,7 +43,7 @@
                     placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 >
 
-                <kbd class="pointer-events-none absolute top-1/2 flex -translate-y-1/2 animate-pulse items-center gap-0.5 rounded border border-violet-300 bg-violet-50 px-2 py-1 font-sans text-[11px] font-semibold leading-none text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300 ltr:right-2 rtl:left-2 sm:ltr:right-3 sm:rtl:left-3">
+                <kbd class="pointer-events-none absolute top-1/2 flex -translate-y-1/2 animate-pulse items-center gap-0.5 rounded-sm border border-violet-300 bg-violet-50 px-2 py-1 font-sans text-[11px] font-semibold leading-none text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300 ltr:right-2 rtl:left-2 sm:ltr:right-3 sm:rtl:left-3">
                     @lang('admin::app.components.layouts.header.mega-search.shortcut')
                 </kbd>
             </div>
@@ -193,7 +193,7 @@
                         </a>
 
                         @if ($menuItem->haveChildren())
-                            <div class="{{ $menuItem->isActive() ? ' grid! bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-45 ltr:pl-8 rtl:pr-8 pb-2 rounded-b-lg z-[100] sm:ltr:pl-10 sm:rtl:pr-10">
+                            <div class="{{ $menuItem->isActive() ? ' grid! bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-45 ltr:pl-8 rtl:pr-8 pb-2 rounded-b-lg z-100 sm:ltr:pl-10 sm:rtl:pr-10">
                                 @foreach ($menuItem->getChildren() as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem->getUrl() }}"
@@ -277,7 +277,7 @@
 
             <kbd
                 v-show="! isDropdownOpen"
-                class="pointer-events-none absolute top-1/2 flex -translate-y-1/2 animate-pulse items-center gap-0.5 rounded border border-violet-300 bg-violet-50 px-2 py-1 font-sans text-[11px] font-semibold leading-none text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300 ltr:right-2 rtl:left-2 sm:ltr:right-3 sm:rtl:left-3"
+                class="pointer-events-none absolute top-1/2 flex -translate-y-1/2 animate-pulse items-center gap-0.5 rounded-sm border border-violet-300 bg-violet-50 px-2 py-1 font-sans text-[11px] font-semibold leading-none text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300 ltr:right-2 rtl:left-2 sm:ltr:right-3 sm:rtl:left-3"
             >
                 @lang('admin::app.components.layouts.header.mega-search.shortcut')
             </kbd>
@@ -316,7 +316,7 @@
                                     <!-- Image -->
                                     <div
                                         class="relative h-10 max-h-10 w-full max-w-10 overflow-hidden rounded-sm sm:h-15 sm:max-h-15 sm:max-w-15"
-                                        :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
+                                        :class="{'overflow-hidden rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
                                             <img

@@ -12,7 +12,7 @@
                 <div class="shimmer h-11.25 w-11.25"></div>
 
                 <p class="shimmer mt-1.5 h-5.25 w-full"></p>
-                <p class="shimmer mt-2.5 h-4.5 w-[70%]"></p>
+                <p class="shimmer mt-2.5 h-4.5 w-7/10"></p>
             </label>
         </div>
 
@@ -23,7 +23,7 @@
                 <div class="shimmer h-11.25 w-11.25"></div>
 
                 <p class="shimmer mt-1.5 h-5.25 w-full"></p>
-                <p class="shimmer mt-2.5 h-4.5 w-[70%]"></p>
+                <p class="shimmer mt-2.5 h-4.5 w-7/10"></p>
             </label>
         </div>
 
@@ -34,7 +34,7 @@
                 <div class="shimmer h-11.25 w-11.25"></div>
 
                 <p class="shimmer mt-1.5 h-5.25 w-full"></p>
-                <p class="shimmer mt-2.5 h-4.5 w-[70%]"></p>
+                <p class="shimmer mt-2.5 h-4.5 w-7/10"></p>
             </label>
         </div>
 
@@ -45,7 +45,7 @@
                 <div class="shimmer h-11.25 w-11.25"></div>
 
                 <p class="shimmer mt-1.5 h-5.25 w-full"></p>
-                <p class="shimmer mt-2.5 h-4.5 w-[70%]"></p>
+                <p class="shimmer mt-2.5 h-4.5 w-7/10"></p>
             </label>
         </div>
     </div>

@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Bücher & Schreibwaren',
+                    'name' => 'Schreibwaren',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

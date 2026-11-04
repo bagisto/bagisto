@@ -218,7 +218,7 @@
             >
                 <button
                     type="button"
-                    class="flex w-full cursor-pointer items-center justify-between gap-2 rounded text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden"
+                    class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-sm text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden"
                     @click="cart.show_taxes = ! cart.show_taxes"
                 >
                     <p class="text-base max-md:font-normal max-sm:text-sm">

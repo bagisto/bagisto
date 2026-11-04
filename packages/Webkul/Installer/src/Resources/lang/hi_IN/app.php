@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'पुस्तकें और स्टेशनरी',
+                    'name' => 'स्टेशनरी',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

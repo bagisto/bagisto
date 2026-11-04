@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'বই এবং স্টেশনারি',
+                    'name' => 'স্টেশনারি',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

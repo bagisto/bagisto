@@ -22,7 +22,7 @@
         :themes='@json($themes)'
         :channels='@json($channels->map(fn ($channel) => ['id' => $channel->id, 'name' => $channel->name])->values())'
     >
-        <x-admin::shimmer.image class="mt-8 h-[300px] w-full rounded" />
+        <x-admin::shimmer.image class="mt-8 h-75 w-full rounded-sm" />
     </v-appearance-themes>
 
     {!! view_render_event('bagisto.admin.appearance.themes.list.after') !!}
@@ -52,12 +52,12 @@
 
                     <div class="mt-4 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
                         <div
-                            class="box-shadow flex flex-col overflow-hidden rounded bg-white dark:bg-gray-900"
+                            class="box-shadow flex flex-col overflow-hidden rounded-sm bg-white dark:bg-gray-900"
                             v-for="theme in group.themes"
                             :key="theme.code"
                         >
                             <!-- Screenshot -->
-                            <div class="relative flex h-[190px] items-center justify-center bg-gray-100 dark:bg-gray-950">
+                            <div class="relative flex h-47.5 items-center justify-center bg-gray-100 dark:bg-gray-950">
                                 <img
                                     class="h-full w-full object-cover"
                                     :src="theme.screenshot"
@@ -236,7 +236,7 @@
 
                                     <!-- Impact Warning -->
                                     <div
-                                        class="mt-2 grid gap-1 rounded border border-orange-200 bg-orange-50 p-3 text-xs text-orange-800 dark:border-orange-900 dark:bg-orange-950 dark:text-orange-200"
+                                        class="mt-2 grid gap-1 rounded-sm border border-orange-200 bg-orange-50 p-3 text-xs text-orange-800 dark:border-orange-900 dark:bg-orange-950 dark:text-orange-200"
                                         v-if="impact.length"
                                     >
                                         <p

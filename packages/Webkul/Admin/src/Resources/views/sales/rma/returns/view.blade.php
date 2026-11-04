@@ -452,7 +452,7 @@
                                         >
                                             <div
                                                 :class="[
-                                                    'flex items-end gap-2 max-w-[80%]',
+                                                    'flex items-end gap-2 max-w-4/5',
                                                     message.is_admin == 1 ? 'flex-row-reverse' : 'flex-row'
                                                 ]"
                                             >

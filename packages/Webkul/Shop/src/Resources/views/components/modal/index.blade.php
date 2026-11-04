@@ -19,7 +19,7 @@
 
                 <button
                     type="button"
-                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded bg-transparent border-0"
+                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded-sm bg-transparent border-0"
                     aria-label="Close modal"
                     @click="toggle"
                 >
@@ -95,8 +95,8 @@
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
                         <div
-                            class="absolute left-1/2 top-1/2 z-999 w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-zinc-100 max-md:w-[90%]"
-                            :class="panelClass || 'max-w-[595px]'"
+                            class="absolute left-1/2 top-1/2 z-999 w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-zinc-100 max-md:w-9/10"
+                            :class="panelClass || 'max-w-148.75'"
                         >
                             <!-- Header Slot-->
                             <slot

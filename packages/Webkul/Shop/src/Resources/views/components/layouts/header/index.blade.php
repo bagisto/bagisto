@@ -12,7 +12,7 @@
         <div class="flex flex-wrap max-lg:hidden">
             <div class="flex min-h-19.5 w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-15 max-1180:px-8">
                 <!-- Left Navigation Section -->
-                <div class="flex items-center gap-x-10 max-[1180px]:gap-x-5">
+                <div class="flex items-center gap-x-10 max-1180:gap-x-5">
                     <!-- Logo Shimmer -->
                     <span
                         class="shimmer block h-7.25 w-32.75 rounded-sm"
@@ -47,7 +47,7 @@
                     <!-- Search Bar Shimmer -->
                     <div class="relative w-full max-w-111.25">
                         <span
-                            class="shimmer block h-10.5 w-62.5 rounded-lg px-11 py-3"
+                            class="shimmer block h-10.5 w-80.75 rounded-lg px-11 py-3 max-[1260px]:w-75 max-[1100px]:w-70"
                             role="presentation"
                         >
                         </span>

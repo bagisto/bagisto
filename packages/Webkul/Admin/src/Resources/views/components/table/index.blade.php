@@ -1,4 +1,4 @@
-<table {{ $attributes->merge(['class' => 'w-full min-w-[800px] text-left text-sm']) }}>
+<table {{ $attributes->merge(['class' => 'w-full min-w-200 text-left text-sm']) }}>
     {{ $slot }}
 </table>
 

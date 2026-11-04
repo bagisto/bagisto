@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Kitaplar ve Kırtasiye',
+                    'name' => 'Kırtasiye',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

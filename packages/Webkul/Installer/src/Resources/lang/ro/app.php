@@ -759,7 +759,7 @@ return [
                     'meta-description' => 'Meta descrierea categoriei Bărbați',
                     'meta-keywords' => 'Cuvinte cheie meta ale categoriei Bărbați',
                     'meta-title' => 'Titlu meta al categoriei Bărbați',
-                    'name' => 'Books & Stationery',
+                    'name' => 'Stationery',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

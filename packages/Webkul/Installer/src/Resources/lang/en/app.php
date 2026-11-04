@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Books & Stationery',
+                    'name' => 'Stationery',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],
