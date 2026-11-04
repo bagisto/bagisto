@@ -600,13 +600,25 @@
                             this.canReview = false;
                         })
                         .catch(error => {
-                            setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+                            const serverErrors = error.response?.status === 422
+                                ? error.response.data?.errors
+                                : null;
 
-                            this.$refs.reviewImages.uploadedFiles.forEach(element => {
-                                setTimeout(() => {
-                                    this.$refs.reviewImages.removeFile();
-                                }, 0);
-                            });
+                            if (! serverErrors) {
+                                setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+
+                                return;
+                            }
+
+                            const errors = {};
+
+                            for (const [key, messages] of Object.entries(serverErrors)) {
+                                const field = key.startsWith('attachments') ? 'attachments' : key;
+
+                                errors[field] = (errors[field] || []).concat(messages);
+                            }
+
+                            setErrors(errors);
                         });
                 },
             },
