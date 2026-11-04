@@ -235,12 +235,14 @@
                                 <div class="hidden">
                                     <x-admin::media.images
                                         name="logo_path"
+                                        accepted-types=".jpeg,.jpg,.png,.webp"
                                         ::uploaded-images='locale.image'
                                     />
                                 </div>
 
                                 <v-media-images
                                     name="logo_path"
+                                    accepted-types=".jpeg,.jpg,.png,.webp"
                                     :uploaded-images='locale.image'
                                 >
                                 </v-media-images>

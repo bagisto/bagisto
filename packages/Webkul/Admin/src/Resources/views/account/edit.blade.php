@@ -53,6 +53,7 @@
                             <x-admin::form.control-group>
                                 <x-admin::media.images
                                     name="image"
+                                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                     meta-name="image_meta"
                                     enable-seo="true"
                                     :uploaded-images="$user->image ? [[

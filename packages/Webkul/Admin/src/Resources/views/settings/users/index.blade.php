@@ -391,12 +391,14 @@
                                 <div class="hidden">
                                     <x-admin::media.images
                                         name="image"
+                                        accepted-types=".jpeg,.jpg,.png,.gif"
                                         ::uploaded-images='data.images'
                                     />
                                 </div>
 
                                 <v-media-images
                                     name="image"
+                                    accepted-types=".jpeg,.jpg,.png,.gif"
                                     :uploaded-images='data.images'
                                 >
                                 </v-media-images>

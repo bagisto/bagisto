@@ -17,6 +17,7 @@
     <!-- Image Blade Component -->
     <x-admin::media.images
         name="images[files]"
+        accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
         meta-name="images[meta]"
         allow-multiple="true"
         show-placeholders="true"

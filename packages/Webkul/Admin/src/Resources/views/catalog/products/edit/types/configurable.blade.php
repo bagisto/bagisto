@@ -367,6 +367,7 @@
                                         <div class="border-b pb-2.5 dark:border-gray-800">
                                             <v-media-images
                                                 name="images"
+                                                accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                                 class="mb-2.5"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="updateTypes[selectedType].images"
@@ -686,6 +687,7 @@
                                 <template v-if="selectedType == 'addImages'">
                                     <v-media-images
                                         name="images"
+                                        accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                         class="mt-2.5"
                                         v-bind:allow-multiple="true"
                                         :uploaded-images="variant.temp_images"
@@ -1056,6 +1058,7 @@
 
                                             <v-media-images
                                                 name="images"
+                                                accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="variant.images"
                                             >

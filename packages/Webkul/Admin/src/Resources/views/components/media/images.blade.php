@@ -18,6 +18,7 @@
     'height'           => '120px',
     'enableSeo'        => false,
     'metaName'         => '',
+    'acceptedTypes'    => 'image/*',
 ])
 
 @php
@@ -42,6 +43,7 @@
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
+    accepted-types="{{ $acceptedTypes }}"
     :uploaded-images="@js($uploadedImages)"
     width="{{ $width }}"
     height="{{ $height }}"
@@ -102,7 +104,7 @@
                                 type="file"
                                 class="hidden"
                                 :id="$.uid + '_imageInput'"
-                                accept="image/*"
+                                :accept="acceptedTypes"
                                 :multiple="allowMultiple"
                                 :ref="$.uid + '_imageInput'"
                                 @change="add"
@@ -128,6 +130,7 @@
                             :height="height"
                             :enable-seo="enableSeo"
                             :meta-name="metaName"
+                            :accepted-types="acceptedTypes"
                             @onRemove="remove($event)"
                         >
                         </v-media-image-item>
@@ -423,7 +426,7 @@
                         type="file"
                         :name="enableSeo ? name + '[' + image.id + ']' : name + '[]'"
                         class="hidden"
-                        accept="image/*"
+                        :accept="acceptedTypes"
                         :id="$.uid + '_imageInput_' + index"
                         :ref="$.uid + '_imageInput_' + index"
                         @change="edit"
@@ -549,8 +552,13 @@
 
             props: {
                 name: {
-                    type: String, 
+                    type: String,
                     default: 'images',
+                },
+
+                acceptedTypes: {
+                    type: String,
+                    default: 'image/*',
                 },
 
                 allowMultiple: {
@@ -662,7 +670,7 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    const validFiles = Array.from(imageInput.files).every(file => this.isAcceptedType(file));
 
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
@@ -675,6 +683,33 @@
 
                     imageInput.files.forEach((file, index) => {
                         this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
+                    });
+                },
+
+                isAcceptedType(file) {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    if (! types.length || types.includes('*') || types.includes('*/*')) {
+                        return true;
+                    }
+
+                    const mime = (file.type || '').toLowerCase();
+
+                    const extension = (file.name || '').split('.').pop().toLowerCase();
+
+                    return types.some(type => {
+                        if (type.endsWith('/*')) {
+                            return mime.startsWith(type.slice(0, -1));
+                        }
+
+                        if (type.includes('/')) {
+                            return mime === type;
+                        }
+
+                        return (type.startsWith('.') ? type.slice(1) : type) === extension;
                     });
                 },
 
@@ -763,7 +798,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'acceptedTypes'],
 
             mounted() {
                 if (this.image.file instanceof File) {
@@ -785,7 +820,7 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    const validFiles = Array.from(imageInput.files).every(file => this.isAcceptedType(file));
 
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
@@ -803,6 +838,33 @@
                     this.setFile(imageInput.files[0]);
 
                     this.readFile(imageInput.files[0]);
+                },
+
+                isAcceptedType(file) {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    if (! types.length || types.includes('*') || types.includes('*/*')) {
+                        return true;
+                    }
+
+                    const mime = (file.type || '').toLowerCase();
+
+                    const extension = (file.name || '').split('.').pop().toLowerCase();
+
+                    return types.some(type => {
+                        if (type.endsWith('/*')) {
+                            return mime.startsWith(type.slice(0, -1));
+                        }
+
+                        if (type.includes('/')) {
+                            return mime === type;
+                        }
+
+                        return (type.startsWith('.') ? type.slice(1) : type) === extension;
+                    });
                 },
 
                 remove() {
