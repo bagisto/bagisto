@@ -40,3 +40,18 @@ it('should not offer to copy existing files onto the disk they are already on', 
 it('should list the drivers worth syncing onto, as the configuration screen records them', function () {
     expect(SupportedFilesystemEnum::syncable())->toBe(['s3', 'r2']);
 });
+
+// ============================================================================
+// What A Driver Needs Before It Can Be Reached
+// ============================================================================
+
+it('should name the settings a remote driver must carry before it is selected', function (SupportedFilesystemEnum $driver, array $settings) {
+    expect($driver->requiredDiskSettings())->toBe($settings);
+})->with([
+    'amazon s3' => [SupportedFilesystemEnum::S3, ['key', 'secret', 'region', 'bucket']],
+    'cloudflare r2' => [SupportedFilesystemEnum::R2, ['key', 'secret', 'bucket', 'endpoint']],
+]);
+
+it('should ask nothing of the local disk, which is always reachable', function () {
+    expect(SupportedFilesystemEnum::LOCAL->requiredDiskSettings())->toBe([]);
+});

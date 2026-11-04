@@ -67,6 +67,10 @@ class StorageConfigurator
             default => null,
         };
 
+        if (! $this->isConfigured($driver)) {
+            return;
+        }
+
         config(['filesystems.default' => $driver->value]);
     }
 
@@ -127,6 +131,21 @@ class StorageConfigurator
             'filesystems.disks.r2.region' => 'auto',
             'filesystems.disks.r2.use_path_style_endpoint' => true,
         ]);
+    }
+
+    /**
+     * Whether the resolved disk carries every setting it needs to be reached, so
+     * an incomplete remote disk is left unselected instead of breaking the panel.
+     */
+    protected function isConfigured(SupportedFilesystemEnum $driver): bool
+    {
+        foreach ($driver->requiredDiskSettings() as $setting) {
+            if (empty(config('filesystems.disks.'.$driver->value.'.'.$setting))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

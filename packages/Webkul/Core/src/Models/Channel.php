@@ -131,7 +131,11 @@ class Channel extends TranslatableModel implements ChannelContract
             return;
         }
 
-        return Storage::url($this->logo);
+        try {
+            return Storage::url($this->logo);
+        } catch (\Throwable) {
+            return;
+        }
     }
 
     /**
@@ -161,7 +165,11 @@ class Channel extends TranslatableModel implements ChannelContract
             return;
         }
 
-        return Storage::url($this->favicon);
+        try {
+            return Storage::url($this->favicon);
+        } catch (\Throwable) {
+            return;
+        }
     }
 
     /**
