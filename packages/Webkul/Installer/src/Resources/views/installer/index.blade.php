@@ -51,7 +51,7 @@
             id="app"
             class="container-fluide fixed w-full"
         >
-            <div class="flex *:w-[50%] gap-12.5 justify-center items-center">
+            <div class="flex gap-12.5 justify-center items-center">
                 <!-- Vue Component -->
                 <v-server-requirements></v-server-requirements>
             </div>
