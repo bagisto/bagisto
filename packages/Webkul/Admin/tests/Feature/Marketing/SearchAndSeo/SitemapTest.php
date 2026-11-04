@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\ChannelTranslation;
 use Webkul\Sitemap\Jobs\ProcessSitemap;
 use Webkul\Sitemap\Models\Sitemap;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -20,6 +23,33 @@ it('should return the sitemap index page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.title'))
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create-btn'));
+});
+
+it('should list the sitemap channels by their names in the current locale', function () {
+    $channel = Channel::factory()->create();
+
+    $channel->translations()->update(['name' => $name = 'Zeta '.fake()->unique()->lexify('??????')]);
+
+    ChannelTranslation::factory()->create([
+        'channel_id' => $channel->id,
+        'locale' => 'fr',
+        'name' => 'Canal '.fake()->unique()->lexify('??????'),
+    ]);
+
+    $sitemap = Sitemap::factory()->create();
+
+    $sitemap->channels()->sync([core()->getDefaultChannel()->id, $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.marketing.search_seo.sitemaps.index', [
+        'filters' => ['id' => [$sitemap->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.channel', core()->getDefaultChannel()->name.', '.$name);
 });
 
 it('should deny guest access to the sitemap index page', function () {

@@ -2,9 +2,12 @@
 
 use Webkul\CMS\Models\Page;
 use Webkul\CMS\Models\PageTranslation;
+use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\ChannelTranslation;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -34,6 +37,33 @@ it('should return the CMS pages index page', function () {
     get(route('admin.cms.index'))
         ->assertOk()
         ->assertSeeText(trans('admin::app.cms.index.title'));
+});
+
+it('should list the CMS page channels by their names in the current locale', function () {
+    $channel = Channel::factory()->create();
+
+    $channel->translations()->update(['name' => $name = 'Zeta '.fake()->unique()->lexify('??????')]);
+
+    ChannelTranslation::factory()->create([
+        'channel_id' => $channel->id,
+        'locale' => 'fr',
+        'name' => 'Canal '.fake()->unique()->lexify('??????'),
+    ]);
+
+    $page = createCmsPage(['locale' => 'en']);
+
+    $page->channels()->sync([core()->getDefaultChannel()->id, $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.cms.index', [
+        'filters' => ['id' => [$page->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.channel', core()->getDefaultChannel()->name.', '.$name);
 });
 
 it('should deny guest access to the CMS pages index page', function () {
