@@ -103,9 +103,6 @@ class Configurable extends AbstractType
             return $product;
         }
 
-        /**
-         * Load fillable variant attributes.
-         */
         $this->fillableVariantAttributes = $this->attributeRepository->findWhereIn('code', $this->fillableVariantAttributeCodes);
 
         $superAttributes = [];
@@ -145,9 +142,6 @@ class Configurable extends AbstractType
             return $product;
         }
 
-        /**
-         * Load fillable variant attributes.
-         */
         $this->fillableVariantAttributes = $this->attributeRepository->findWhereIn('code', $this->fillableVariantAttributeCodes);
 
         $previousVariantIds = $product->variants->pluck('id');
@@ -290,6 +284,7 @@ class Configurable extends AbstractType
             ],
             'variants.*.price' => 'required',
             'variants.*.weight' => 'required',
+            'variants.*.images.files.*' => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
         ];
     }
 

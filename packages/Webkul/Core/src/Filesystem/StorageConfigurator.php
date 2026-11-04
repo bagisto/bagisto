@@ -36,12 +36,21 @@ class StorageConfigurator
     protected const R2_ENDPOINT = 'https://%s.r2.cloudflarestorage.com';
 
     /**
-     * Point the application at the disk the admin chose.
-     *
-     * Read straight from the table, because the disk is settled before the channel
-     * aware reader is available.
+     * Point the application at the disk the admin chose, never leaving it on a remote disk
+     * that is missing the settings it needs.
      */
     public function configure(): void
+    {
+        $this->applyChosenDisk();
+
+        $this->leaveIncompleteDisk();
+    }
+
+    /**
+     * Apply the disk the admin chose, read straight from the table because the disk is
+     * settled before the channel aware reader is available.
+     */
+    protected function applyChosenDisk(): void
     {
         $settings = $this->settings();
 
@@ -67,14 +76,16 @@ class StorageConfigurator
             default => null,
         };
 
+        if (! $this->isConfigured($driver)) {
+            return;
+        }
+
         config(['filesystems.default' => $driver->value]);
     }
 
     /**
-     * Apply the recorded credentials to the s3 disk.
-     *
-     * A setting left empty is passed over, so the environment stays in charge of
-     * anything the admin has not filled in.
+     * Apply the recorded credentials to the s3 disk, passing over any left empty so the
+     * environment stays in charge of them.
      */
     protected function configureS3(array $settings): void
     {
@@ -97,10 +108,8 @@ class StorageConfigurator
     }
 
     /**
-     * Apply the recorded credentials to the Cloudflare R2 disk.
-     *
-     * R2 builds its endpoint from the account and always uses the "auto" region, so
-     * neither is asked of the operator.
+     * Apply the recorded credentials to the Cloudflare R2 disk, which builds its endpoint
+     * from the account and always uses the "auto" region.
      */
     protected function configureR2(array $settings): void
     {
@@ -127,6 +136,39 @@ class StorageConfigurator
             'filesystems.disks.r2.region' => 'auto',
             'filesystems.disks.r2.use_path_style_endpoint' => true,
         ]);
+    }
+
+    /**
+     * Whether the resolved disk carries every setting it needs to be reached, so
+     * an incomplete remote disk is left unselected instead of breaking the panel.
+     */
+    protected function isConfigured(SupportedFilesystemEnum $driver): bool
+    {
+        foreach ($driver->requiredDiskSettings() as $setting) {
+            if (empty(config('filesystems.disks.'.$driver->value.'.'.$setting))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Fall back to the local disk when the disk in force is a remote one missing settings,
+     * whether the admin or the environment named it.
+     */
+    protected function leaveIncompleteDisk(): void
+    {
+        $driver = SupportedFilesystemEnum::tryFrom((string) config('filesystems.default'));
+
+        if (
+            is_null($driver)
+            || $this->isConfigured($driver)
+        ) {
+            return;
+        }
+
+        config(['filesystems.default' => SupportedFilesystemEnum::default()->value]);
     }
 
     /**

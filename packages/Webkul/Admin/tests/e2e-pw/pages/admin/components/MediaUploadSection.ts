@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 
 export class MediaUploadSection {
     constructor(
@@ -26,6 +27,12 @@ export class MediaUploadSection {
         await expect(this.tile.locator("img")).toBeVisible();
     }
 
+    async attemptUpload(file: MediaFile): Promise<void> {
+        await expect(this.fileInput).toBeAttached();
+
+        await this.fileInput.setInputFiles(file);
+    }
+
     async remove(): Promise<void> {
         await this.tile.scrollIntoViewIfNeeded();
         await this.tile.hover();
@@ -36,6 +43,12 @@ export class MediaUploadSection {
 
     async expectMediaStored(): Promise<void> {
         await expect(this.tile.locator("img")).toBeVisible();
+    }
+
+    async expectError(message: string): Promise<void> {
+        await expect(
+            this.page.locator("p.text-red-600").filter({ hasText: message }),
+        ).toBeVisible();
     }
 
     async expectMediaAbsent(): Promise<void> {

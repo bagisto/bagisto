@@ -60,7 +60,7 @@
 
             data() {
                 return {
-                    manageStock: "{{ (boolean) $product->manage_stock }}",
+                    manageStock: "{{ (bool) $product->manage_stock }}",
                 }
             },
 

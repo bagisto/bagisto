@@ -38,6 +38,15 @@
                 </div>
             </div>
 
+            @error('variants.variant_*.images.files.*')
+                <p
+                    class="mb-3 px-4 text-xs italic text-red-600"
+                    v-pre
+                >
+                    {{ $message }}
+                </p>
+            @enderror
+
             <template v-if="variants.length">
                 <!-- Mass Action Vue Component -->
                 <v-product-variations-mass-action
@@ -587,7 +596,7 @@
                                     <x-admin::form.control-group 
                                         class="mb-0 flex-1"
                                         ::class="{ 
-                                            'max-w-[115px]' : selectedType !== 'editName',
+                                            'max-w-28.75' : selectedType !== 'editName',
                                             'mb-0!': selectedType === 'editName'
                                         }"
                                     >
@@ -654,7 +663,7 @@
                                     <x-admin::form.control-group 
                                         class="mb-0 flex-1"
                                         ::class="{ 
-                                            'max-w-[115px]' : selectedType !== 'editSku',
+                                            'max-w-28.75' : selectedType !== 'editSku',
                                             'mb-0!': selectedType === 'editSku'
                                         }"
                                     >
@@ -835,7 +844,7 @@
                             class="label-active"
                             v-if="isDefault"
                         >
-                            Default
+                            @lang('admin::app.catalog.products.edit.types.configurable.default')
                         </span>
 
                         <p class="text-gray-600 dark:text-gray-300">
@@ -848,7 +857,7 @@
                         </p>
                     </div>
 
-                    <!-- Error message for price attribute -->
+                    <!-- Price Error -->
                     <v-error-message
                         :name="'variants[' + variant.id + '].price'"
                         v-slot="{ message }"
@@ -857,6 +866,14 @@
                             @{{ message }}
                         </p>
                     </v-error-message>
+
+                    <!-- Image Error -->
+                    <p
+                        class="mt-1 text-xs italic text-red-600"
+                        v-if="imageError"
+                        v-text="imageError"
+                    >
+                    </p>
                 </div>
             </div>
 
@@ -1115,6 +1132,9 @@
             },
 
             methods: {
+                /**
+                 * Add a variant for the chosen options, unless one already exists for them.
+                 */
                 addVariant(params, { resetForm }) {
                     let filteredVariants = this.variants.filter((variant) => {
                         let matchCount = 0;
@@ -1152,6 +1172,9 @@
                     this.$refs.variantCreateModal.close();
                 },
 
+                /**
+                 * Remove a variant once the admin has confirmed.
+                 */
                 removeVariant(variant) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
@@ -1235,6 +1258,9 @@
             },
 
             computed: {
+                /**
+                 * The variants the admin has selected.
+                 */
                 selectedVariants() {
                     return this.variants.filter((variant) => {
                         variant.temp_images = [];
@@ -1255,6 +1281,9 @@
             },
 
             methods: {
+                /**
+                 * The options of an attribute that at least one variant uses.
+                 */
                 usedAttributeOptions(attribute) {
                     const options = [];
 
@@ -1269,12 +1298,18 @@
                     return options;
                 },
 
+                /**
+                 * Select every variant, or clear the selection if any variant is selected.
+                 */
                 selectAll() {
                     let isSelected = this.selectedVariants.length <= 0;
 
                     this.variants.forEach(variant => variant.selected = isSelected);
                 },
 
+                /**
+                 * Toggle the selection of the variants holding an attribute option.
+                 */
                 selectVariantsByAttributeOption(attribute, option) {
                     let isAttributeOptionChecked = this.isAttributeOptionChecked(attribute, option);
 
@@ -1285,6 +1320,9 @@
                     });
                 },
 
+                /**
+                 * Whether every variant holding an attribute option is selected.
+                 */
                 isAttributeOptionChecked(attribute, option) {
                     let variants = this.variants.filter((variant) => variant[attribute.code] == option.id);
 
@@ -1303,6 +1341,9 @@
                     return isSelected;
                 },
 
+                /**
+                 * Start a mass action once the admin has confirmed, opening the drawer where it needs input.
+                 */
                 edit(type) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
@@ -1325,6 +1366,9 @@
                     });
                 },
 
+                /**
+                 * Apply the drawer's values to the working copy of the selected variants.
+                 */
                 update(params) {
                     switch (this.selectedType) {
                         case 'addImages':
@@ -1367,6 +1411,9 @@
                     }
                 },
 
+                /**
+                 * Apply the mass action to the selected variants and clear the selection.
+                 */
                 updateAll(params) {
                     this[this.selectedType](params);
 
@@ -1375,6 +1422,9 @@
                     this.selectedVariants.forEach((variant) => variant.selected = false);
                 },
 
+                /**
+                 * Copy the edited prices onto the selected variants.
+                 */
                 editPrices(params) {
                     this.selectedVariants.forEach((variant) => {
                         variant.price = this.findVariantByAttribute({
@@ -1384,6 +1434,9 @@
                     });
                 },
 
+                /**
+                 * Copy the edited inventories onto the selected variants.
+                 */
                 editInventories(params) {
                     this.selectedVariants.forEach((variant) => {
                         variant.inventories = this.findVariantByAttribute({
@@ -1393,6 +1446,9 @@
                     });
                 },
 
+                /**
+                 * Copy the edited weights onto the selected variants.
+                 */
                 editWeight(params) {
                     this.selectedVariants.forEach((variant) => {
                         variant.weight = this.findVariantByAttribute({
@@ -1402,6 +1458,9 @@
                     });
                 },
 
+                /**
+                 * Copy the edited names onto the selected variants.
+                 */
                 editName(params) {
                     this.selectedVariants.forEach((variant) => {
                         variant.name = this.findVariantByAttribute({
@@ -1411,6 +1470,9 @@
                     });
                 },
 
+                /**
+                 * Copy the edited SKUs onto the selected variants.
+                 */
                 editSku(params) {
                     this.selectedVariants.forEach((variant) => {
                         variant.sku = this.findVariantByAttribute({
@@ -1420,6 +1482,9 @@
                     });
                 },
 
+                /**
+                 * Copy the edited statuses onto the selected variants.
+                 */
                 editStatus(params) {
                     this.selectedVariants.forEach((variant) => {
                         variant.status = this.findVariantByAttribute({
@@ -1429,6 +1494,9 @@
                     });
                 },
                 
+                /**
+                 * Add the picked images to the selected variants.
+                 */
                 addImages(params) {
                     this.selectedVariants.forEach((variant) => {
                         let correspondingTempVariantTempImages = this.findVariantByAttribute({
@@ -1453,6 +1521,9 @@
                     this.updateTypes.addImages.images = [];
                 },
 
+                /**
+                 * Remove all images from the selected variants.
+                 */
                 removeImages() {
                     this.selectedVariants.forEach((variant) => {
                         variant.images = [];
@@ -1461,6 +1532,9 @@
                     });
                 },
 
+                /**
+                 * Remove the selected variants.
+                 */
                 removeVariants() {
                     this.selectedVariants.forEach((variant) => {
                         if (variant.selected) {
@@ -1471,10 +1545,16 @@
                     });
                 },
 
+                /**
+                 * The admin name of an attribute option.
+                 */
                 optionName(attribute, optionId) {
                     return attribute.options.find((option) => option.id == optionId)?.admin_name;
                 },
 
+                /**
+                 * Read a value from the working copy of a variant.
+                 */
                 findVariantByAttribute(attribute) {
                     return this.tempSelectedVariants.find(tempVariant => tempVariant.id === attribute.id)?.[attribute.name];
                 },
@@ -1511,16 +1591,25 @@
             },
 
             mounted() {
-                if (typeof this.variant.id === 'string' || this.variant.id instanceof String) {
+                if (
+                    typeof this.variant.id === 'string'
+                    || this.variant.id instanceof String
+                ) {
                     this.$refs.editVariantDrawer.open();
                 }
             },
 
             computed: {
+                /**
+                 * Whether this variant is the product's default variant.
+                 */
                 isDefault() {
                     return this.variant.id == this.$parent.defaultId;
                 },
 
+                /**
+                 * The quantity of this variant across all inventory sources.
+                 */
                 totalQty() {
                     let totalQty = 0;
 
@@ -1529,7 +1618,18 @@
                     }
 
                     return totalQty;
-                }
+                },
+
+                /**
+                 * The first error the form holds for one of this variant's image files.
+                 */
+                imageError() {
+                    const field = 'variants.' + this.variant.id + '.images.files.';
+
+                    const key = Object.keys(this.errors ?? {}).find(key => key.replace(/\[(.*?)\]/g, '.$1').startsWith(field));
+
+                    return this.errors?.[key];
+                },
             },
 
             watch: {
@@ -1542,18 +1642,27 @@
             },
 
             methods: {
+                /**
+                 * The admin name of an attribute option.
+                 */
                 optionName(attribute, optionId) {
                     return attribute.options.find((option) => {
                         return option.id == optionId;
                     })?.admin_name;
                 },
 
+                /**
+                 * Apply the drawer's values to this variant and close the drawer.
+                 */
                 update(params) {
                     Object.assign(this.variant, params);
 
                     this.$refs.editVariantDrawer.close();
                 },
 
+                /**
+                 * Put each new image on its input, so that it is submitted with the form.
+                 */
                 setFiles() {
                     this.variant.images.forEach((image, index) => {
                         if (image.file instanceof File) {
@@ -1570,6 +1679,9 @@
                     });
                 },
 
+                /**
+                 * Ask the panel to remove this variant.
+                 */
                 remove() {
                     this.$emit('onRemoved', this.variant);
                 },

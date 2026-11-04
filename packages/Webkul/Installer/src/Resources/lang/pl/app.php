@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Książki i Artykuły Piśmiennicze',
+                    'name' => 'Artykuły Piśmiennicze',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

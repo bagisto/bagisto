@@ -1,20 +1,22 @@
-# =============================================================================
-# Bagisto Production Image — Apache (Single-stage)
-# Single container: Apache 2 (mod_php) + PHP 8.4 + the bundled database + a queue worker + cron, under Supervisor
+# ===========================================================================
+# Bagisto Production Image — Apache (Single-Stage)
 #
-# Default mode  : the bundled database (ready to boot, Docker Hub style)
-# Override mode : set DB_HOST to an external address to use that instead
+# One container runs Apache 2 with PHP 8.4 as mod_php, the bundled database, a queue worker
+# and cron, under Supervisor.
+#
+# Default mode  : the bundled database, ready to boot, Docker Hub style.
+# Override mode : set DB_HOST to an external address to use that instead.
 #
 # Which database is bundled is chosen with --build-arg DB_ENGINE=mysql|mariadb|postgres.
 # Everything database-specific lives in shared/db/<engine>/, so this file is
 # the same for all of them.
 #
-# Bagisto is FULLY INSTALLED at build time — migrations, seeding, and all.
-# The image boots instantly with no first-run setup needed.
+# Bagisto is fully installed at build time, migrations and seeding included,
+# so the image boots straight into a working store with no first-run setup.
 #
 # Build context is `docker/production/`:
 #   docker build -f apache/Dockerfile -t bagisto:2.5.0-apache .
-# =============================================================================
+# ===========================================================================
 
 FROM ubuntu:24.04
 
@@ -27,7 +29,7 @@ ENV TZ=UTC
 
 
 # ---------------------------------------------------------------------------
-# System packages + PHP PPA + Apache
+# System Packages + PHP PPA + Apache
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         apt-transport-https \
@@ -48,7 +50,9 @@ RUN apt-get update && apt-get install -y \
 
 
 # ---------------------------------------------------------------------------
-# PHP 8.4 (CLI for artisan/build + Apache mod_php for serving) + extensions
+# PHP 8.4 + Extensions
+#
+# The CLI runs artisan and the build, and Apache's mod_php serves the store.
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         libapache2-mod-php${PHP_VERSION} \
@@ -73,7 +77,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # ---------------------------------------------------------------------------
-# The bundled database server
+# The Bundled Database Server
 #
 # Only the chosen engine's server is installed. Both PHP drivers are present
 # regardless, so an image can still be pointed at an external server of the
@@ -93,7 +97,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 
 # ---------------------------------------------------------------------------
-# Clone Bagisto + Composer install
+# Clone Bagisto + Composer Install
 # ---------------------------------------------------------------------------
 WORKDIR /var/www/bagisto
 
@@ -109,7 +113,7 @@ RUN git clone --depth 1 --branch ${BAGISTO_VERSION} \
 
 
 # ---------------------------------------------------------------------------
-# Prepare .env with the bundled-database defaults
+# Prepare .env with the Bundled-Database Defaults
 #
 # DB_CONNECTION and DB_PORT are engine-specific and are set further down,
 # next to the install that actually uses them.
@@ -124,7 +128,13 @@ RUN cp .env.example .env \
 
 
 # ---------------------------------------------------------------------------
-# Install Bagisto at BUILD TIME (starts the bundled database, migrates + seeds, bakes data in)
+# Install Bagisto at Build Time
+#
+# The build-install.sh script starts the bundled database, creates its
+# database and user, generates the application key, runs the Bagisto
+# installer, seeds the demo products and builds the search indexes, then shuts
+# the database down cleanly. The populated data directory is baked into this
+# layer.
 # ---------------------------------------------------------------------------
 COPY shared/build-install.sh /tmp/build-install.sh
 RUN mkdir -p /docker-entrypoint-initdb.d \
@@ -139,14 +149,16 @@ RUN mkdir -p /docker-entrypoint-initdb.d \
 
 
 # ---------------------------------------------------------------------------
-# PHP configuration (applied to both the Apache SAPI and the CLI)
+# PHP Configuration
+#
+# Applied to both the Apache SAPI and the CLI.
 # ---------------------------------------------------------------------------
 COPY shared/php.ini /etc/php/${PHP_VERSION}/apache2/conf.d/99-production.ini
 COPY shared/php.ini /etc/php/${PHP_VERSION}/cli/conf.d/99-production.ini
 
 
 # ---------------------------------------------------------------------------
-# Apache configuration
+# Apache Configuration
 # ---------------------------------------------------------------------------
 COPY apache/config/vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite headers expires \
@@ -156,22 +168,25 @@ RUN a2enmod rewrite headers expires \
 
 
 # ---------------------------------------------------------------------------
-# Supervisor configuration
+# Supervisor Configuration
 # ---------------------------------------------------------------------------
 COPY apache/config/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
 COPY shared/db/${DB_ENGINE}/supervisord.conf /etc/supervisor/conf.d/database.conf
 COPY shared/workers/supervisord.conf /etc/supervisor/conf.d/workers.conf
+COPY shared/workers/job-log.sh /usr/local/bin/bagisto-job-log
+RUN chmod +x /usr/local/bin/bagisto-job-log
 
 
 # ---------------------------------------------------------------------------
 # Scheduler
 #
-# cron runs Laravel's scheduler every minute from /etc/cron.d/bagisto, which
+# Cron runs Laravel's scheduler every minute from /etc/cron.d/bagisto, which
 # it reads only while nobody but root can write to it. The jobs the packages
 # drop in are removed: none ran before the image had cron, and logrotate's,
 # on the PostgreSQL images, cannot make the web server reopen its logs.
-# pam_loginuid is made optional because a container cannot change a login uid
-# the host has set, and cron would then skip every job without a word.
+# The pam_loginuid module is made optional because a container cannot change
+# a login UID the host has set, and cron would then skip every job without a
+# word.
 # ---------------------------------------------------------------------------
 COPY shared/workers/crontab /etc/cron.d/bagisto
 RUN chmod 0644 /etc/cron.d/bagisto \
@@ -180,7 +195,7 @@ RUN chmod 0644 /etc/cron.d/bagisto \
 
 
 # ---------------------------------------------------------------------------
-# Runtime directories
+# Runtime Directories
 # ---------------------------------------------------------------------------
 RUN mkdir -p /var/log/supervisor /var/log/bagisto
 

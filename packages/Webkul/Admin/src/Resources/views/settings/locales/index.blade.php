@@ -119,7 +119,7 @@
             </x-admin::datagrid>
 
             <x-admin::form
-                v-slot="{ meta, errors, handleSubmit }"
+                v-slot="{ meta, errors, handleSubmit, setFieldError }"
                 as="div"
                 ref="modalForm"
             >
@@ -211,16 +211,17 @@
 
                                     <option
                                         value="ltr"
-                                        selected title="Text direction left to right"
+                                        selected
+                                        title="Text direction left to right"
                                     >
-                                        LTR
+                                        @lang('admin::app.settings.locales.index.datagrid.ltr')
                                     </option>
 
                                     <option
                                         value="rtl"
                                         title="Text direction right to left"
                                     >
-                                        RTL
+                                        @lang('admin::app.settings.locales.index.datagrid.rtl')
                                     </option>
                                 </x-admin::form.control-group.control>
 
@@ -242,6 +243,8 @@
                                 <v-media-images
                                     name="logo_path"
                                     :uploaded-images='locale.image'
+                                    :errors="errors"
+                                    :set-field-error="setFieldError"
                                 >
                                 </v-media-images>
 
@@ -291,6 +294,9 @@
                 },
 
                 computed: {
+                    /**
+                     * The number of columns the datagrid's rows are laid out in.
+                     */
                     gridsCount() {
                         let count = this.$refs.datagrid.available.columns.length;
 
@@ -307,6 +313,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Create the locale, or update it when the form holds an id.
+                     */
                     updateOrCreate(params, { resetForm, setErrors  }) {
                         this.isLoading = true;
 
@@ -341,6 +350,9 @@
                         });
                     },
 
+                    /**
+                     * Fetch the locale and open the modal on it.
+                     */
                     editModal(url) {
                         this.$axios.get(url)
                             .then((response) => {
@@ -355,6 +367,9 @@
                             })
                     },
 
+                    /**
+                     * Empty the locale the modal is bound to.
+                     */
                     resetForm() {
                         this.locale = {
                             image: [],

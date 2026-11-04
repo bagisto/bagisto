@@ -656,7 +656,7 @@
                                 name="is_maintenance_on"
                                 :value="1"
                                 :label="trans('admin::app.settings.channels.edit.status')"
-                                :checked="(boolean) $channel->is_maintenance_on"
+                                :checked="(bool) $channel->is_maintenance_on"
                             />
 
                             <x-admin::form.control-group.error control-name="is_maintenance_on" />

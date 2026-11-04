@@ -177,7 +177,7 @@
             :name="$attribute->code"
             :value="1"
             :label="$attribute->admin_name"
-            :checked="(boolean) $selectedValue"
+            :checked="(bool) $selectedValue"
         />
 
         @break

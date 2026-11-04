@@ -1,3 +1,4 @@
+import { notAnImage } from "@shared/media-files";
 import { test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
@@ -58,5 +59,22 @@ test.describe("product reviews", () => {
 
         await reviewPage.expectValidationError("The Title field is required");
         await reviewPage.expectValidationError("The Comment field is required");
+    });
+
+    test("should say an attachment that is not an image failed to upload and keep the form open", async ({
+        shopPage,
+    }) => {
+        const reviewPage = new ReviewPage(shopPage);
+        const title = `${generateName()} ${uniqueStamp()}`;
+
+        await loginAsCustomer(shopPage);
+        await reviewPage.openProduct(productName);
+        await reviewPage.attemptReviewWithAttachment(
+            { title, comment: generateDescription(), rating: 5 },
+            notAnImage(),
+        );
+
+        await reviewPage.expectValidationError("The image failed to upload");
+        await reviewPage.expectReviewFormStillOpen(title);
     });
 });

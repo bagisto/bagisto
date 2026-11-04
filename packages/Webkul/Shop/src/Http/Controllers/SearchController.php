@@ -22,7 +22,7 @@ class SearchController extends Controller
     ) {}
 
     /**
-     * Index to handle the view loaded with the search results
+     * Index to handle the view loaded with the search results.
      *
      * @return View
      */
@@ -69,12 +69,13 @@ class SearchController extends Controller
     }
 
     /**
-     * Upload image and analyze it for product search keywords.
+     * Upload image and analyze it for product search keywords. An SVG is left to the browser's
+     * classifier, because the AI providers read raster images only and would receive it unsanitized.
      */
     public function upload(): JsonResponse
     {
         request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'required|image:allow_svg|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $imageUrl = $this->searchRepository->uploadSearchImage(request()->all());
@@ -82,7 +83,8 @@ class SearchController extends Controller
         $keywords = '';
 
         $useAi = core()->getConfigData('magic_ai.general.settings.enabled')
-            && core()->getConfigData('magic_ai.storefront_features.image_search.enabled');
+            && core()->getConfigData('magic_ai.storefront_features.image_search.enabled')
+            && request()->file('image')->guessExtension() !== 'svg';
 
         if ($useAi) {
             try {

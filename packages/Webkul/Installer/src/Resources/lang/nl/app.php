@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Boeken & Kantoorartikelen',
+                    'name' => 'Kantoorartikelen',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

@@ -1,3 +1,4 @@
+import { notAnImage, validImage } from "@shared/media-files";
 import { test } from "../../setup";
 import { LoginPage } from "../../pages/admin/auth/LoginPage";
 import {
@@ -125,5 +126,26 @@ test.describe("user management", () => {
         await loginPage.expectLoginRefused(
             "Your account is yet to be activated, please contact administrator.",
         );
+    });
+
+    test("should say why an avatar that is not an image was refused and not create the user", async () => {
+        const user = buildUser();
+        created.push(user.email);
+
+        await usersPage.attemptCreateUserWithAvatar(user, notAnImage());
+
+        await usersPage.avatarField().expectError(
+            "The Image field must be a file of type: jpeg, jpg, png, gif.",
+        );
+        await usersPage.expectUserAbsent(user.email);
+    });
+
+    test("should keep a valid avatar and show it in the edit form", async () => {
+        const user = buildUser();
+        created.push(user.email);
+
+        await usersPage.createUserWithAvatar(user, validImage());
+
+        await usersPage.expectAvatarInEditForm(user.email);
     });
 });

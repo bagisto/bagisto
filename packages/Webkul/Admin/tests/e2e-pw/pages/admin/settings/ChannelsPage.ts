@@ -1,4 +1,6 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
+import { MediaGalleryField } from "../components/MediaGalleryField";
 import { DatagridPage } from "../DatagridPage";
 import {
     generateDescription,
@@ -14,6 +16,8 @@ export interface ChannelData {
     description: string;
     hostname: string;
 }
+
+export type ChannelMedia = "Logo" | "Favicon";
 
 export function buildChannel(overrides: Partial<ChannelData> = {}): ChannelData {
     const name = `${generateName()} ${uniqueStamp()}`;
@@ -162,6 +166,43 @@ export class ChannelsPage extends DatagridPage {
         await this.seoDescriptionInput.fill(data.description);
     }
 
+    mediaField(field: ChannelMedia): MediaGalleryField {
+        return MediaGalleryField.underHeading(this.page, field);
+    }
+
+    async attemptCreateChannelWithMedia(
+        data: ChannelData,
+        field: ChannelMedia,
+        file: MediaFile,
+    ): Promise<void> {
+        await this.openCreateForm();
+        await this.fillCreateForm(data);
+        await this.mediaField(field).attach(file);
+        await this.saveButton.click();
+    }
+
+    async attemptSaveMedia(
+        name: string,
+        field: ChannelMedia,
+        file: MediaFile,
+    ): Promise<void> {
+        await this.openEditForm(name);
+        await this.mediaField(field).attach(file);
+        await this.saveButton.click();
+    }
+
+    async saveMedia(
+        name: string,
+        field: ChannelMedia,
+        file: MediaFile,
+    ): Promise<void> {
+        await this.attemptSaveMedia(name, field, file);
+
+        await expect(
+            this.flashMessage("Update Channel Successfully"),
+        ).toBeVisible();
+    }
+
     async createChannel(
         data: ChannelData = buildChannel(),
     ): Promise<ChannelData> {
@@ -265,6 +306,14 @@ export class ChannelsPage extends DatagridPage {
 
     async expectNameInEditForm(name: string): Promise<void> {
         await this.openEditForm(name);
+    }
+
+    async expectMediaInEditForm(
+        name: string,
+        field: ChannelMedia,
+    ): Promise<void> {
+        await this.openEditForm(name);
+        await this.mediaField(field).expectStored();
     }
 
     async expectValidationError(message: string): Promise<void> {

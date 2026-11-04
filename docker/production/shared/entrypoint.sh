@@ -1,5 +1,5 @@
 #!/bin/bash
-# ==========================================================================
+# ===========================================================================
 # entrypoint.sh — Prepares the container, then hands off to Supervisor.
 #
 # The image ships with a database already installed and populated. Leaving
@@ -9,7 +9,7 @@
 #
 # Which database is bundled is decided at build time — see shared/db/ — and
 # this script only talks to it through the engine driver's contract.
-# ==========================================================================
+# ===========================================================================
 set -e
 
 APP_DIR="/var/www/bagisto"
@@ -21,9 +21,11 @@ log() {
     echo "[bagisto-entrypoint] $(date '+%Y-%m-%d %H:%M:%S') $*"
 }
 
-# ==========================================================================
-# Connection settings, defaulting to the bundled database
-# ==========================================================================
+# ---------------------------------------------------------------------------
+# Connection Settings
+#
+# Each one defaults to the bundled database.
+# ---------------------------------------------------------------------------
 DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PORT="${DB_PORT:-$(db_default_port)}"
 DB_DATABASE="${DB_DATABASE:-bagisto}"
@@ -45,18 +47,42 @@ else
     export DB_AUTOSTART=false
 fi
 
-# ==========================================================================
-# Whether this container runs the scheduler
-# ==========================================================================
-# Supervisor starts cron, and with it Laravel's scheduler, unless this is false. Containers that
-# share a database each run every task, so all but one of them should set it to false.
+# ---------------------------------------------------------------------------
+# Scheduler
+#
+# Supervisor starts cron, and with it Laravel's scheduler, unless this is
+# false. Containers that share a database each run every task, so all but one
+# of them should set it to false.
+# ---------------------------------------------------------------------------
 export SCHEDULER_AUTOSTART="${SCHEDULER_AUTOSTART:-true}"
 
 log "Scheduler: autostart=${SCHEDULER_AUTOSTART}"
 
-# ==========================================================================
-# Apply runtime overrides to .env
-# ==========================================================================
+# ---------------------------------------------------------------------------
+# Job Logs
+#
+# The queue worker and the scheduler file their output by day under
+# /var/log/bagisto/<job>/ and keep JOB_LOG_DAYS days of it. Cron hands its
+# jobs none of this environment, so the value is written into the crontab.
+# Both write as www-data, so their folders are handed to it, a mounted
+# volume's included.
+# ---------------------------------------------------------------------------
+export JOB_LOG_DAYS="${JOB_LOG_DAYS:-14}"
+
+if ! [[ "$JOB_LOG_DAYS" =~ ^[0-9]+$ ]]; then
+    log "ERROR: JOB_LOG_DAYS must be a whole number of days, not '${JOB_LOG_DAYS}'."
+    exit 1
+fi
+
+sed -i "s/^JOB_LOG_DAYS=.*/JOB_LOG_DAYS=${JOB_LOG_DAYS}/" /etc/cron.d/bagisto
+
+install -d -o www-data -g www-data /var/log/bagisto/queue /var/log/bagisto/scheduler
+
+log "Job logs: /var/log/bagisto/{queue,scheduler}/YYYY-MM-DD.log, JOB_LOG_DAYS=${JOB_LOG_DAYS}"
+
+# ---------------------------------------------------------------------------
+# Apply Runtime Overrides to .env
+# ---------------------------------------------------------------------------
 cd "$APP_DIR"
 
 log "Applying environment overrides..."
@@ -72,29 +98,35 @@ sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=${DB_PASSWORD}/" .env
 [ -n "$APP_KEY" ]      && sed -i "s|^APP_KEY=.*|APP_KEY=${APP_KEY}|" .env
 [ -n "$APP_LOCALE" ]   && sed -i "s/^APP_LOCALE=.*/APP_LOCALE=${APP_LOCALE}/" .env
 [ -n "$APP_CURRENCY" ] && sed -i "s/^APP_CURRENCY=.*/APP_CURRENCY=${APP_CURRENCY}/" .env
-[ -n "$APP_TIMEZONE" ] && sed -i "s/^APP_TIMEZONE=.*/APP_TIMEZONE=${APP_TIMEZONE}/" .env
+[ -n "$APP_TIMEZONE" ] && sed -i "s|^APP_TIMEZONE=.*|APP_TIMEZONE=${APP_TIMEZONE}|" .env
 
-# The image runs a queue worker, so queued work belongs on a real connection rather than in the
-# request that dispatched it. The build installed with `.env.example`'s `sync`, which is right for
-# an installation without a worker; it is switched here, after the install, not before it.
+# The image runs a queue worker, so queued work belongs on a real connection
+# rather than in the request that dispatched it. The build installed with
+# `.env.example`'s `sync`, which is right for an installation without a
+# worker; it is switched here, after the install, not before it.
 sed -i "s/^QUEUE_CONNECTION=.*/QUEUE_CONNECTION=${QUEUE_CONNECTION:-database}/" .env
 
-# ==========================================================================
-# Rebuild the cached config, which the overrides above have just invalidated
-# ==========================================================================
+# ---------------------------------------------------------------------------
+# Rebuild the Cached Configuration
+#
+# The overrides above have just invalidated it.
+# ---------------------------------------------------------------------------
 log "Rebuilding the cached configuration..."
 
 php artisan optimize:clear --no-interaction 2>/dev/null || true
 php artisan optimize --no-interaction 2>/dev/null || true
 
-# Those ran as root, while PHP, the queue worker and the scheduler run as www-data. A file they
-# created, such as the log a cache clear opens before the bundled database is up, is handed over,
-# since a log owned by root refuses every later write and every exception report along with it.
+# Those ran as root, while PHP, the queue worker and the scheduler run as
+# www-data. A file they created, such as the log a cache clear opens before the
+# bundled database is up, is handed over, since a log owned by root refuses
+# every later write and every exception report along with it.
 find storage/logs storage/framework bootstrap/cache -user root -exec chown www-data:www-data {} + 2>/dev/null || true
 
-# ==========================================================================
-# An external database has to be reachable before the web server starts
-# ==========================================================================
+# ---------------------------------------------------------------------------
+# Wait for an External Database
+#
+# An external database has to be reachable before the web server starts.
+# ---------------------------------------------------------------------------
 if ! uses_bundled_database; then
     log "Waiting for ${DB_ENGINE_NAME} at ${DB_HOST}:${DB_PORT}..."
 

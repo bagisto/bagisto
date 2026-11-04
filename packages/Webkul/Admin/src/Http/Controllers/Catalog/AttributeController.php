@@ -102,7 +102,7 @@ class AttributeController extends Controller
             $rules['default_value'] = 'in:0,1';
         }
 
-        $this->validate(request(), $rules);
+        $this->validate(request(), $rules, [], ['options.*.swatch_value' => trans('admin::app.catalog.attributes.create.option.image')]);
 
         $requestData = request()->all();
 
@@ -174,7 +174,7 @@ class AttributeController extends Controller
             $rules['default_value'] = 'in:0,1';
         }
 
-        $this->validate(request(), $rules);
+        $this->validate(request(), $rules, [], ['options.*.swatch_value' => trans('admin::app.catalog.attributes.edit.option.image')]);
 
         $requestData = request()->all();
 

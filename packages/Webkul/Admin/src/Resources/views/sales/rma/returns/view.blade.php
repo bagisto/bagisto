@@ -4,7 +4,7 @@
 @endphp
 
 <x-admin::layouts>
-    <!-- Title of the page -->
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.rma.all-rma.view.title', ['id' => $rma->id])
     </x-slot>
@@ -142,7 +142,7 @@
                         </div>
                     </div>
 
-                    <!-- RMA items -->
+                    <!-- RMA Items -->
                     <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                         <div class="flex justify-between p-4 pb-0!">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
@@ -235,7 +235,7 @@
                             @endphp
 
                             @if ($canTakeOrderAction)
-                                <!-- Order Actions (order-linked) -->
+                                <!-- Order Actions -->
                                 <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-300 px-4 py-4 dark:border-gray-800">
                                     <div class="flex flex-col gap-0.5">
                                         <p class="text-sm font-semibold text-gray-800 dark:text-white">
@@ -298,7 +298,10 @@
                                                     </x-admin::form.control-group>
 
                                                     <div class="mt-4 flex justify-end">
-                                                        <button type="submit" class="primary-button">
+                                                        <button
+                                                            type="submit"
+                                                            class="primary-button"
+                                                        >
                                                             @lang('admin::app.sales.rma.all-rma.view.refund-item')
                                                         </button>
                                                     </div>
@@ -386,7 +389,11 @@
                                                 />
                                             </button>
 
-                                            <input type="hidden" name="removed_key" id="removed_key" />
+                                            <input
+                                                type="hidden"
+                                                name="removed_key"
+                                                id="removed_key"
+                                            />
 
                                             <div id="attachmentPreview"></div>
                                         </div>
@@ -397,9 +404,21 @@
                                                 v-if="isSent"
                                                 disabled
                                             >
-                                                <svg  aria-hidden="true" class="w-4 h-4 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                                <svg
+                                                    aria-hidden="true"
+                                                    class="w-4 h-4 text-gray-200 animate-spin fill-blue-600"
+                                                    viewBox="0 0 100 101"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                                        fill="currentColor"
+                                                    />
+                                                    <path
+                                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                                        fill="currentFill"
+                                                    />
                                                 </svg>
 
                                                 @lang('admin::app.sales.rma.all-rma.view.send-message-btn')
@@ -433,17 +452,23 @@
                                         >
                                             <div
                                                 :class="[
-                                                    'flex items-end gap-2 max-w-[80%]',
+                                                    'flex items-end gap-2 max-w-4/5',
                                                     message.is_admin == 1 ? 'flex-row-reverse' : 'flex-row'
                                                 ]"
                                             >
                                                 <!-- Avatar -->
                                                 <div class="shrink-0">
-                                                    <div v-if="message.is_admin == 1" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                                                    <div
+                                                        v-if="message.is_admin == 1"
+                                                        class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold"
+                                                    >
                                                         <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm0 2c-2.21 0-6 1.119-6 3.333V19h12v-2.667C18 14.119 14.21 13 12 13z'/></svg>
                                                     </div>
 
-                                                    <div v-else class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold">
+                                                    <div
+                                                        v-else
+                                                        class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold"
+                                                    >
                                                         <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z'/></svg>
                                                     </div>
                                                 </div>
@@ -481,7 +506,10 @@
                                                         style="margin-top:2px; word-break: break-word;"
                                                     >@{{ message.message }}</div>
 
-                                                    <div v-if="message.attachment" class="mt-2">
+                                                    <div
+                                                        v-if="message.attachment"
+                                                        class="mt-2"
+                                                    >
                                                         <hr class="mb-2"/>
 
                                                         <a
@@ -500,7 +528,11 @@
 
                                     <template v-else>
                                         <div class="flex flex-col items-center justify-center w-full h-full">
-                                            <div class="icon-sales" style="font-size:100px; color:#d7d7d7;"></div>
+                                            <div
+                                                class="icon-sales"
+                                                style="font-size:100px; color:#d7d7d7;"
+                                            >
+                                            </div>
                                             
                                             <p class="flex justify-center text-gray-300 mt-4">@lang('admin::app.sales.rma.all-rma.view.no-record')</p>
                                         </div>
@@ -561,7 +593,7 @@
                         </x-slot>
                     </x-admin::accordion>
 
-                    <!-- RMA change status-->
+                    <!-- RMA Status -->
                     @if ($rma->rma_status_id != DefaultRMAStatusEnum::RECEIVED_PACKAGE->value)
                         @if ($rma->rma_status_id != DefaultRMAStatusEnum::SOLVED->value)
                             @if ($rma->rma_status_id != DefaultRMAStatusEnum::DECLINED->value) 
@@ -705,7 +737,7 @@
 
                                 <div class="flex flex-col gap-y-1.5">
 
-                                    <!-- Order id -->
+                                    <!-- Order ID -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <a
                                             href="{{ route('admin.sales.orders.view', $rma->order_id) }}"
@@ -716,18 +748,18 @@
                                         </a>
                                     </p>
 
-                                    <!-- Order grand total -->
+                                    <!-- Order Grand Total -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         {{ core()->formatBasePrice($rma->order->base_grand_total) }}
                                     </p>
 
 
-                                    <!-- Order create date -->
+                                    <!-- Order Create Date -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         {{ \Carbon\Carbon::parse($rma->order->created_at)->format('F j, Y, h:i:s A') }}
                                     </p>
 
-                                     <!-- payment method -->
+                                     <!-- Payment Method -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         {{ $rma->order->payment->method_title }}
                                     </p>
@@ -889,6 +921,9 @@
                 },
 
                 computed: {
+                    /**
+                     * The file types a message attachment may have.
+                     */
                     allowedFileTypesArray() {
                        return this.allowedFileTypes
                             .split(",")
@@ -898,6 +933,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Update the status of this request once the admin has confirmed.
+                     */
                     updateRMStatus(params, { resetForm, setErrors  }) {
                         let messageToShow = "@lang('admin::app.components.modal.confirm.message')";
 
@@ -933,6 +971,9 @@
                         });
                     },
 
+                    /**
+                     * Cancel the item of this request once the admin has confirmed.
+                     */
                     cancelItem() {
                         this.$emitter.emit('open-confirm-modal', {
                             message: "@lang('admin::app.sales.rma.all-rma.view.confirm-item-canceled')",
@@ -957,6 +998,9 @@
                         });
                     },
 
+                    /**
+                     * Refund the item of this request.
+                     */
                     refundItem(params, { setErrors }) {
                         this.$axios.post(`{{ route('admin.sales.rma.requests.update_status', $rma->id) }}`, {
                             rma_status_id: {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }},
@@ -980,6 +1024,9 @@
                         });
                     },
 
+                    /**
+                     * Load the conversation of this request.
+                     */
                     getMessage() {
                         this.$axios.get(`{{ route('admin.sales.rma.requests.get_messages') }}`, {
                             params: {
@@ -993,6 +1040,9 @@
                         });
                     },
 
+                    /**
+                     * Send the message, telling the sender why when it is refused.
+                     */
                     chatSubmit(params, { resetForm, setErrors  }) {
                         this.isSent = true;
 
@@ -1018,10 +1068,16 @@
 
                                 this.isSent = false;
                             })
-                            .catch (error => {
+                            .catch((error) => {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response?.data?.message ?? error.message });
+
+                                this.isSent = false;
                             });
                     },
 
+                    /**
+                     * Escape the markup in a message.
+                     */
                     sanitizeInput(input) {
                         const tempDiv = document.createElement('div');
 
@@ -1030,6 +1086,9 @@
                         return tempDiv.innerHTML;
                     },
 
+                    /**
+                     * Open the attachment of a message in the modal.
+                     */
                     viewAttachmentModal(messagePath, attachmentName) {
                         this.messagePath = messagePath;
 
@@ -1040,6 +1099,9 @@
                         this.$refs.attachmentModal.toggle();
                     },
 
+                    /**
+                     * Download the attachment of a message.
+                     */
                     downloadAttachment(messagePath) {
                         const link = document.createElement('a');
 
@@ -1052,16 +1114,25 @@
                         document.body.removeChild(link);
                     },
 
+                    /**
+                     * Load the latest messages of the conversation.
+                     */
                     getNewMessage() {
                         this.limit += 5;
 
                         this.getMessage();
                     },
 
+                    /**
+                     * Clear the message form.
+                     */
                     resetForm() {
                         this.message = '';
                     },
 
+                    /**
+                     * Format the date of a message.
+                     */
                     dateFormat(v) {
                         let date = new Date(v);
 
@@ -1075,6 +1146,9 @@
                         return `${day}-${month}-${year} ${hours}:${minutes}`;
                     },
 
+                    /**
+                     * Show the picked attachment, provided its type is allowed.
+                     */
                     handleFileSelect($event) {
                         const attachmentPreview = document.getElementById('attachmentPreview');
 

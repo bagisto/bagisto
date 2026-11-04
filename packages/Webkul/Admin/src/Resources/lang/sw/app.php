@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Ongeza Tofauti',
+                        'default' => 'Kawaida',
                         'delete-btn' => 'Futa',
                         'edit-btn' => 'Hariri',
                         'empty-info' => 'Kuunda mchanganyiko mbalimbali wa bidhaa papo hapo.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Chagua hifadhi ambamo faili huhifadhiwa na kutolewa.',
                         'default-driver' => 'Kiendeshi Chaguo-msingi cha Hifadhi',
                         'default-driver-info' => 'Faili zitakazopakiwa kuanzia sasa zitahifadhiwa hapa. Faili zilizokwisha pakiwa hubaki kwenye hifadhi zilimohifadhiwa, kwa hiyo zihamishe kabla ya kubadilisha la sivyo hazitapatikana.',
+                        'incomplete' => ':driver imechaguliwa, lakini mipangilio yake haijakamilika, kwa hiyo faili zinazopakiwa bado hazihifadhiwi humo.',
 
                         'drivers' => [
                             'local' => 'Faili (Hifadhi ya Ndani)',
@@ -6119,8 +6121,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Ongeza Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Faili za video pekee (.mp4, .mov, .ogg ..) ndizo zinazoruhusiwa.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Faili za video pekee (.mp4, .mov, .webm) ndizo zinazoruhusiwa.',
                 'video' => 'Video',
 
                 'seo' => [

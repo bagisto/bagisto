@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Aggiungi Variante',
+                        'default' => 'Predefinito',
                         'delete-btn' => 'Elimina',
                         'edit-btn' => 'Modifica',
                         'empty-info' => 'Per creare varie combinazioni di prodotti al volo.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Scegli l\'archiviazione in cui i file vengono salvati e da cui vengono serviti.',
                         'default-driver' => 'Driver di archiviazione predefinito',
                         'default-driver-info' => 'I file caricati d\'ora in poi verranno salvati qui. I file già caricati restano sull\'archiviazione precedente: copiali prima di cambiare, altrimenti non verranno trovati.',
+                        'incomplete' => ':driver è selezionato, ma le sue impostazioni sono incomplete, quindi i file caricati non vengono ancora salvati lì.',
 
                         'drivers' => [
                             'local' => 'File (archiviazione locale)',
@@ -6119,8 +6121,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Aggiungi Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .webm).',
                 'video' => 'Video',
 
                 'seo' => [

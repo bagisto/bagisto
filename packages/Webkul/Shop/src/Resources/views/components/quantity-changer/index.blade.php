@@ -23,7 +23,7 @@
             <button
                 v-if="isAtMinValue"
                 type="button"
-                class="icon-bin cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded border-0 bg-transparent"
+                class="icon-bin cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded-sm border-0 bg-transparent"
                 aria-label="@lang('shop::app.components.quantity-changer.remove-item')"
                 @click="remove"
             ></button>
@@ -31,7 +31,7 @@
             <button
                 v-else
                 type="button"
-                class="icon-minus text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded border-0 bg-transparent"
+                class="icon-minus text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded-sm border-0 bg-transparent"
                 :class="atMinValue ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'"
                 :aria-disabled="atMinValue"
                 aria-label="@lang('shop::app.components.quantity-changer.decrease-quantity')"
@@ -44,7 +44,7 @@
 
             <button
                 type="button"
-                class="icon-plus cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded border-0 bg-transparent"
+                class="icon-plus cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded-sm border-0 bg-transparent"
                 aria-label="@lang('shop::app.components.quantity-changer.increase-quantity')"
                 @click="increase"
             ></button>

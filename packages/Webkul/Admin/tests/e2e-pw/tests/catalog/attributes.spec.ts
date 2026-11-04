@@ -1,3 +1,4 @@
+import { notAnImage, validImage } from "@shared/media-files";
 import { test } from "../../setup";
 import {
     AttributePage,
@@ -18,6 +19,8 @@ function buildAttribute(overrides: Partial<AttributeData> = {}): AttributeData {
         ...overrides,
     };
 }
+
+const SWATCH_REFUSED = "The Image Swatch field must be an image.";
 
 const attributeTypes: {
     title: string;
@@ -273,5 +276,37 @@ test.describe("attribute management", () => {
             untouched.adminName,
             "text",
         );
+    });
+
+    test("should say why a swatch image was refused on the create form and not create the attribute", async () => {
+        const attribute = buildAttribute({
+            type: "select",
+            swatchType: "image",
+            options: [{ label: "Denim", swatchImage: notAnImage() }],
+        });
+        created.push(attribute.code);
+
+        await attributePage.attemptCreateAttribute(attribute);
+
+        await attributePage.expectValidationError(SWATCH_REFUSED);
+        await attributePage.expectAttributeAbsent(attribute.code);
+    });
+
+    test("should say why a swatch image was refused on the edit form and not add the option", async () => {
+        const attribute = buildAttribute({
+            type: "select",
+            swatchType: "image",
+            options: [{ label: "Denim", swatchImage: validImage() }],
+        });
+        created.push(attribute.code);
+
+        await attributePage.createAttribute(attribute);
+        await attributePage.attemptAddOption(attribute.code, {
+            label: "Tweed",
+            swatchImage: notAnImage(),
+        });
+
+        await attributePage.expectValidationError(SWATCH_REFUSED);
+        await attributePage.expectOptionsInEditForm(attribute.code, ["Denim"]);
     });
 });

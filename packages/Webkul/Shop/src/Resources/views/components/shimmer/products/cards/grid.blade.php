@@ -8,7 +8,7 @@
 
         <div class="grid content-start gap-2.5 max-sm:gap-1">
             <p class="shimmer h-4 w-3/4"></p>
-            <p class="shimmer h-4 w-[55%]"></p>
+            <p class="shimmer h-4 w-11/20"></p>
         </div>
     </div>
 @endfor

@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'ספרים וציוד משרדי',
+                    'name' => 'ציוד משרדי',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

@@ -1,10 +1,11 @@
--- ============================================================================
--- MySQL initial setup for the Bagisto internal database.
+-- ==========================================================================
+-- init.sql — Creates the database and user Bagisto uses on the bundled MySQL
+-- server.
 --
 -- Executed once during the image build, against a freshly initialised data
 -- directory. The user is created with the server's default authentication
 -- plugin, which on MySQL 8.0 is caching_sha2_password.
--- ============================================================================
+-- ==========================================================================
 
 CREATE DATABASE IF NOT EXISTS `bagisto`
     CHARACTER SET utf8mb4

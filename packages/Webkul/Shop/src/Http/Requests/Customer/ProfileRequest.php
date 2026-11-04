@@ -43,4 +43,16 @@ class ProfileRequest extends FormRequest
             'subscribed_to_news_letter' => 'nullable',
         ];
     }
+
+    /**
+     * Get the custom attribute names for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'image.*' => trans('shop::app.components.layouts.account.profile-image'),
+        ];
+    }
 }

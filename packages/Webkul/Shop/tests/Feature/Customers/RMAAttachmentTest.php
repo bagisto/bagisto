@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Customer\Models\Customer;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
@@ -9,6 +10,7 @@ use Webkul\RMA\Models\RMAMessage;
 use Webkul\Sales\Models\Order;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\postJson;
 
 /**
  * A conversation message carrying an attachment on a return the given customer owns.
@@ -120,4 +122,20 @@ it('should not show a customer a photo on another return', function () {
     $this->loginAsCustomer(Customer::factory()->create());
 
     get(route('shop.customers.account.rma.image', $image->id))->assertNotFound();
+});
+
+// ============================================================================
+// Uploads
+// ============================================================================
+
+it('should name a return photo by its label when the file is not of an allowed type', function () {
+    $this->setConfig('sales.rma.setting.allowed_file_extension', 'image/jpeg,image/png');
+
+    $this->loginAsCustomer();
+
+    postJson(route('shop.customers.account.rma.store'), [
+        'images' => [UploadedFile::fake()->create('photo.txt', 1, 'text/plain')],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['images.0' => 'The Images field']);
 });

@@ -1,13 +1,13 @@
 #!/bin/bash
-# ==========================================================================
-# PostgreSQL engine driver.
+# ===========================================================================
+# engine.sh — The PostgreSQL engine driver.
 #
 # Implements the same contract as the MySQL driver beside it — see that file
 # for what each function is expected to do.
 #
 # The cluster version is discovered rather than pinned, so an Ubuntu base
 # image that moves from PostgreSQL 16 to 17 needs no change here.
-# ==========================================================================
+# ===========================================================================
 
 DB_ENGINE_NAME="PostgreSQL"
 

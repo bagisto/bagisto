@@ -40,7 +40,7 @@ class AccountController extends Controller
             'current_password' => 'required|min:6',
             'image.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'image_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
-        ]);
+        ], [], ['image.*' => trans('admin::app.components.media.images.image')]);
 
         $data = request()->only([
             'name',

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Webkul\Core\Models\Channel;
+use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Repositories\SectionRepository;
@@ -281,6 +282,32 @@ it('should copy a section including its translated options', function () {
         ->toBe($section->translate(app()->getLocale())->options);
 });
 
+it('should copy a section as a pending change rather than straight onto the storefront', function () {
+    $section = makeSection(['status' => 1]);
+
+    $this->loginAsAdmin();
+
+    $copyId = postJson(route('admin.appearance.sections.duplicate', $section->id))
+        ->assertOk()
+        ->assertJsonPath('section.has_draft', true)
+        ->json('section.id');
+
+    $copy = Section::query()->find($copyId);
+
+    expect((bool) $copy->status)->toBeFalse()
+        ->and($copy->draft_status)->toBeTrue()
+        ->and($copy->draft_sort_order)->toBeNull();
+
+    expect(app(SectionRepository::class)->getRenderable($copy->channel_id, $copy->theme_code)->pluck('id'))
+        ->not->toContain($copy->id);
+
+    publishDrafts($copy)->assertOk();
+
+    expect((bool) $copy->refresh()->status)->toBeTrue()
+        ->and(app(SectionRepository::class)->getRenderable($copy->channel_id, $copy->theme_code)->pluck('id'))
+        ->toContain($copy->id);
+});
+
 // ============================================================================
 // Reordering
 // ============================================================================
@@ -305,6 +332,58 @@ it('should renumber sections when the list is reordered', function () {
     expect($second->fresh()->sort_order)->toBe(1);
 
     expect($first->fresh()->sort_order)->toBe(2);
+});
+
+it('should keep a pinned footer at the end whatever order is sent', function () {
+    $channel = core()->getDefaultChannel();
+
+    $footer = Section::factory()->create([
+        'type' => SectionTypeEnum::FOOTER_LINKS->value,
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $other = Section::factory()->create([
+        'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$footer->id, $other->id],
+    ])->assertOk();
+
+    expect($footer->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
+});
+
+it('should keep a services section at the end too, as the layout draws it at a fixed place', function () {
+    $channel = core()->getDefaultChannel();
+
+    $services = Section::factory()->create([
+        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $other = Section::factory()->create([
+        'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$services->id, $other->id],
+    ])->assertOk();
+
+    expect($services->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
 });
 
 // ============================================================================
@@ -441,6 +520,39 @@ it('should refuse a media upload that carries no file at all', function () {
         ->assertJsonValidationErrorFor('file');
 });
 
+it('should file an upload under the theme the section belongs to', function () {
+    Storage::fake();
+
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
+    ])->assertOk();
+
+    expect($response->json('path'))
+        ->toStartWith('themes/'.$section->theme_code.'/sections/'.$section->id.'/');
+});
+
+it('should clear a section media directory when the section is deleted', function () {
+    Storage::fake();
+
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    $path = postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
+    ])->json('path');
+
+    Storage::assertExists($path);
+
+    deleteJson(route('admin.appearance.sections.delete', $section->id))->assertOk();
+
+    Storage::assertMissing($path);
+});
+
 // ============================================================================
 // Framing
 // ============================================================================
@@ -535,7 +647,7 @@ it('should preview a channel with its own sections, not another channel ones', f
     $this->loginAsAdmin();
 
     $marksIn = function ($channelCode) {
-        $html = get(route('shop.appearance.preview', ['channel' => $channelCode]))
+        $html = get(route('shop.appearance.preview', [PreviewChannel::PARAMETER => $channelCode]))
             ->assertOk()
             ->getContent();
 
@@ -580,99 +692,6 @@ it('should render every services section a channel holds, including any it had b
     foreach ($names as $name) {
         expect($html)->toContain($name.' Title');
     }
-});
-
-// ============================================================================
-// Reordering
-// ============================================================================
-
-it('should keep a pinned footer at the end whatever order is sent', function () {
-    $channel = core()->getDefaultChannel();
-
-    $footer = Section::factory()->create([
-        'type' => SectionTypeEnum::FOOTER_LINKS->value,
-        'status' => 1,
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme,
-    ]);
-
-    $other = Section::factory()->create([
-        'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
-        'status' => 1,
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme,
-    ]);
-
-    $this->loginAsAdmin();
-
-    postJson(route('admin.appearance.sections.reorder'), [
-        'sections' => [$footer->id, $other->id],
-    ])->assertOk();
-
-    expect($footer->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
-});
-
-it('should keep a services section at the end too, as the layout draws it at a fixed place', function () {
-    $channel = core()->getDefaultChannel();
-
-    $services = Section::factory()->create([
-        'type' => SectionTypeEnum::SERVICES_CONTENT->value,
-        'status' => 1,
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme,
-    ]);
-
-    $other = Section::factory()->create([
-        'type' => SectionTypeEnum::PRODUCT_CAROUSEL->value,
-        'status' => 1,
-        'channel_id' => $channel->id,
-        'theme_code' => $channel->theme,
-    ]);
-
-    $this->loginAsAdmin();
-
-    postJson(route('admin.appearance.sections.reorder'), [
-        'sections' => [$services->id, $other->id],
-    ])->assertOk();
-
-    expect($services->refresh()->draft_sort_order)->toBeGreaterThan($other->refresh()->draft_sort_order);
-});
-
-// ============================================================================
-// Uploads
-// ============================================================================
-
-it('should file an upload under the theme the section belongs to', function () {
-    Storage::fake();
-
-    $section = makeSection();
-
-    $this->loginAsAdmin();
-
-    $response = postJson(route('admin.appearance.sections.media', $section->id), [
-        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
-    ])->assertOk();
-
-    expect($response->json('path'))
-        ->toStartWith('themes/'.$section->theme_code.'/sections/'.$section->id.'/');
-});
-
-it('should clear a section media directory when the section is deleted', function () {
-    Storage::fake();
-
-    $section = makeSection();
-
-    $this->loginAsAdmin();
-
-    $path = postJson(route('admin.appearance.sections.media', $section->id), [
-        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
-    ])->json('path');
-
-    Storage::assertExists($path);
-
-    deleteJson(route('admin.appearance.sections.delete', $section->id))->assertOk();
-
-    Storage::assertMissing($path);
 });
 
 // ============================================================================
@@ -733,6 +752,40 @@ it('should announce a discard for each section it reverts, before and after', fu
     Event::assertDispatched('section.draft.discard.after');
 });
 
+it('should announce a media upload, before and after', function () {
+    $section = makeSection();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
+    ])->assertOk();
+
+    Event::assertDispatched('section.media.upload.before');
+
+    Event::assertDispatched('section.media.upload.after');
+});
+
+it('should announce a reorder, before and after', function () {
+    $first = makeSection();
+
+    $second = makeSection();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$second->id, $first->id],
+    ])->assertOk();
+
+    Event::assertDispatched('section.reorder.before');
+
+    Event::assertDispatched('section.reorder.after');
+});
+
 // ============================================================================
 // Publishing
 // ============================================================================
@@ -770,44 +823,6 @@ it('should announce nothing when there is no pending edit to publish', function 
     publishDrafts()->assertOk()->assertJsonPath('published', 0);
 
     Event::assertNotDispatched('section.update.after');
-});
-
-// ============================================================================
-// Events
-// ============================================================================
-
-it('should announce a media upload, before and after', function () {
-    $section = makeSection();
-
-    Event::fake();
-
-    $this->loginAsAdmin();
-
-    postJson(route('admin.appearance.sections.media', $section->id), [
-        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
-    ])->assertOk();
-
-    Event::assertDispatched('section.media.upload.before');
-
-    Event::assertDispatched('section.media.upload.after');
-});
-
-it('should announce a reorder, before and after', function () {
-    $first = makeSection();
-
-    $second = makeSection();
-
-    Event::fake();
-
-    $this->loginAsAdmin();
-
-    postJson(route('admin.appearance.sections.reorder'), [
-        'sections' => [$second->id, $first->id],
-    ])->assertOk();
-
-    Event::assertDispatched('section.reorder.before');
-
-    Event::assertDispatched('section.reorder.after');
 });
 
 // ============================================================================
@@ -981,7 +996,51 @@ it('should delete the upload a published draft replaced', function () {
     Storage::assertExists($new);
 });
 
-it('should keep an upload that only custom html points at', function () {
+it('should keep a fresh upload that a draft saved before it reached the server does not name', function () {
+    Storage::fake();
+
+    $section = makeSection(['type' => SectionTypeEnum::IMAGE_CAROUSEL->value]);
+
+    $this->loginAsAdmin();
+
+    $path = postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('just-uploaded.jpg', 40, 40),
+    ])->json('path');
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => ['images' => [['image' => '', 'link' => '', 'title' => 'slide']]],
+    ])->assertOk();
+
+    Storage::assertExists($path);
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => ['images' => [['image' => $path, 'link' => '', 'title' => 'slide']]],
+    ])->assertOk();
+
+    Storage::assertExists($path);
+});
+
+it('should delete an upload no draft named once it is no longer fresh', function () {
+    Storage::fake();
+
+    $section = makeSection(['type' => SectionTypeEnum::IMAGE_CAROUSEL->value]);
+
+    $this->loginAsAdmin();
+
+    $path = postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('abandoned.jpg', 40, 40),
+    ])->json('path');
+
+    $this->travel(SectionRepository::UNSAVED_UPLOAD_GRACE_MINUTES + 1)->minutes();
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => ['images' => [['image' => '', 'link' => '', 'title' => 'slide']]],
+    ])->assertOk();
+
+    Storage::assertMissing($path);
+});
+
+it('should keep an upload that only custom HTML points at', function () {
     Storage::fake();
 
     $section = makeSection();
@@ -1020,33 +1079,3 @@ it('should clear a section media directory however the section is deleted', func
 
     expect(Storage::exists($directory))->toBeFalse();
 })->with(['model', 'repository', 'collection']);
-
-// ============================================================================
-// Duplicating
-// ============================================================================
-
-it('should copy a section as a pending change rather than straight onto the storefront', function () {
-    $section = makeSection(['status' => 1]);
-
-    $this->loginAsAdmin();
-
-    $copyId = postJson(route('admin.appearance.sections.duplicate', $section->id))
-        ->assertOk()
-        ->assertJsonPath('section.has_draft', true)
-        ->json('section.id');
-
-    $copy = Section::query()->find($copyId);
-
-    expect((bool) $copy->status)->toBeFalse()
-        ->and($copy->draft_status)->toBeTrue()
-        ->and($copy->draft_sort_order)->toBeNull();
-
-    expect(app(SectionRepository::class)->getRenderable($copy->channel_id, $copy->theme_code)->pluck('id'))
-        ->not->toContain($copy->id);
-
-    publishDrafts($copy)->assertOk();
-
-    expect((bool) $copy->refresh()->status)->toBeTrue()
-        ->and(app(SectionRepository::class)->getRenderable($copy->channel_id, $copy->theme_code)->pluck('id'))
-        ->toContain($copy->id);
-});

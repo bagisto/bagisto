@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Afegir variant',
+                        'default' => 'Per Defecte',
                         'delete-btn' => 'Eliminar',
                         'edit-btn' => 'Editar',
                         'empty-info' => 'Per crear diverses combinacions de productes sobre la marxa.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Trieu l\'emmagatzematge on es desen els fitxers i des d\'on se serveixen.',
                         'default-driver' => 'Controlador d\'emmagatzematge per defecte',
                         'default-driver-info' => 'Els fitxers pujats a partir d\'ara es desaran aquí. Els fitxers ja pujats es queden a l\'emmagatzematge anterior: copieu-los abans de canviar o no es trobaran.',
+                        'incomplete' => 'S\'ha seleccionat :driver, però la seva configuració és incompleta, de manera que els fitxers pujats encara no s\'hi desen.',
 
                         'drivers' => [
                             'local' => 'Fitxer (emmagatzematge local)',
@@ -6119,8 +6121,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .ogg ..).',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .webm).',
                 'video' => 'Vídeo',
 
                 'seo' => [

@@ -151,7 +151,7 @@
                                     <div class="">
                                         <button
                                             type="button"
-                                            class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs text-left ltr:text-left rtl:text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded"
+                                            class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs text-left ltr:text-left rtl:text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded-sm"
                                             @click="item.option_show = ! item.option_show"
                                         >
                                             @lang('shop::app.checkout.cart.mini-cart.see-details')

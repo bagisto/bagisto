@@ -394,7 +394,7 @@
                                     name="status"
                                     value="1"
                                     :label="trans('admin::app.marketing.promotions.catalog-rules.edit.status')"
-                                    :checked="(boolean) $catalogRule->status"
+                                    :checked="(bool) $catalogRule->status"
                                 />
 
                                 <x-admin::form.control-group.error control-name="status" />

@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Libri e Cancelleria',
+                    'name' => 'Cancelleria',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

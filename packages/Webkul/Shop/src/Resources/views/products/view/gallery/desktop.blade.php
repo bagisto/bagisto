@@ -16,12 +16,12 @@
         <!-- Swiper Container -->
         <div
             ref="swiperContainer"
-            class="flex flex-col max-h-135 gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
+            class="flex flex-col max-h-135 gap-2.5 [&>*]:flex-0 overflow-auto scroll-smooth scrollbar-hide"
         >
             <template v-for="(media, index) in [...media.images, ...media.videos]">
                 <video
                     v-if="media.type == 'videos'"
-                    :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border-navyBlue' : 'border-white'}`"
+                    :class="`transparent max-h-25 min-w-25 cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border-navyBlue' : 'border-white'}`"
                     @click="change(media, index)"
                     alt="{{ $product->name }}"
                     tabindex="0"
@@ -34,7 +34,7 @@
 
                 <img
                     v-else
-                    :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
+                    :class="`transparent max-h-25 min-w-25 cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
                     :src="media.small_image_url"
                     :alt="media.alt"
                     width="100"

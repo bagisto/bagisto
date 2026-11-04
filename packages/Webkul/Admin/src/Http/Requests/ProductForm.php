@@ -55,7 +55,7 @@ class ProductForm extends FormRequest
         protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository
     ) {
-        $this->maxVideoFileSize = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048';
+        $this->maxVideoFileSize = product_video()->getMaxUploadSize();
     }
 
     /**
@@ -208,6 +208,7 @@ class ProductForm extends FormRequest
         return [
             'variants.*.sku.unique' => trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
             'videos.files.*' => trans('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
+            'videos.files.*.mimetypes' => trans('admin::app.components.media.videos.not-allowed-error'),
         ];
     }
 
@@ -225,6 +226,7 @@ class ProductForm extends FormRequest
             'videos.files.*' => trans('admin::app.components.media.videos.video'),
             'videos.meta.*.file_name' => trans('admin::app.components.media.images.seo.file-name'),
             'variants.*.sku' => trans('admin::app.catalog.products.index.datagrid.sku'),
+            'variants.*.images.files.*' => trans('admin::app.components.media.images.image'),
         ];
     }
 

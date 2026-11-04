@@ -34,7 +34,7 @@
                             <x-slot:toggle>
                                 <button 
                                     type="button"
-                                    class="cursor-pointer text-base text-blue-700 max-sm:text-sm focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded"
+                                    class="cursor-pointer text-base text-blue-700 max-sm:text-sm focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded-sm"
                                     v-if="! cart.coupon_code"
                                 >
                                     @lang('shop::app.checkout.coupon.apply')
@@ -108,7 +108,7 @@
 
                     <button
                         type="button"
-                        class="icon-cancel cursor-pointer text-xl text-gray-400 transition-colors hover:text-red-500 max-sm:text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded bg-transparent border-0"
+                        class="icon-cancel cursor-pointer text-xl text-gray-400 transition-colors hover:text-red-500 max-sm:text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded-sm bg-transparent border-0"
                         title="@lang('shop::app.checkout.coupon.remove')"
                         aria-label="@lang('shop::app.checkout.coupon.remove')"
                         @click="destroyCoupon"

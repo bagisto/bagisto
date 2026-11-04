@@ -46,4 +46,16 @@ class UserForm extends FormRequest
             'image.*' => 'mimes:jpeg,jpg,png,gif|max:10000',
         ];
     }
+
+    /**
+     * Get the custom attribute names for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'image.*' => trans('admin::app.components.media.images.image'),
+        ];
+    }
 }

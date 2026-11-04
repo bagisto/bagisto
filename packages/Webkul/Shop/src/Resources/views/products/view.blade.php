@@ -304,7 +304,7 @@
 
                                     @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
-                                            class="max-sm:min-h-7 max-sm:min-w-7 flex max-h-11.5 min-h-11.5 min-w-11.5 cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:text-base"
+                                            class="max-sm:min-h-7 max-sm:min-w-7 flex max-h-11.5 min-h-11.5 min-w-11.5 cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-80 max-sm:max-h-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"

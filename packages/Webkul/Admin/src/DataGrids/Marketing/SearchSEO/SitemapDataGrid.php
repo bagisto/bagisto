@@ -15,6 +15,8 @@ class SitemapDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        $currentLocale = app()->getLocale();
+
         $queryBuilder = DB::table('sitemaps')
             ->select(
                 'sitemaps.id',
@@ -22,7 +24,7 @@ class SitemapDataGrid extends DataGrid
                 'sitemaps.path'
             )
             ->addSelect(DB::raw(
-                db_grammar()->groupConcat(DB::getTablePrefix().'channels.code', ',', true).' as channel'
+                db_grammar()->groupConcat(DB::getTablePrefix().'channel_translations.name', ', ', false, DB::getTablePrefix().'channel_translations.name').' as channel'
             ))
             ->addSelect(DB::raw(
                 db_grammar()->groupConcat(
@@ -38,6 +40,10 @@ class SitemapDataGrid extends DataGrid
             ))
             ->leftJoin('sitemap_channels', 'sitemaps.id', '=', 'sitemap_channels.sitemap_id')
             ->leftJoin('channels', 'sitemap_channels.channel_id', '=', 'channels.id')
+            ->leftJoin('channel_translations', function ($join) use ($currentLocale) {
+                $join->on('channels.id', '=', 'channel_translations.channel_id')
+                    ->where('channel_translations.locale', '=', $currentLocale);
+            })
             ->groupBy('sitemaps.id', 'sitemaps.file_name', 'sitemaps.path');
 
         $this->addFilter('id', 'sitemaps.id');
@@ -71,7 +77,7 @@ class SitemapDataGrid extends DataGrid
                 ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
                 ->values()
                 ->toArray(),
-            'sortable' => true,
+            'sortable' => false,
         ]);
 
         $this->addColumn([

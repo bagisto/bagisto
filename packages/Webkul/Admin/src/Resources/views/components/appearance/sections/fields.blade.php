@@ -24,7 +24,7 @@
                         @end="bubble"
                     >
                         <template #item="{ element: row, index }">
-                            <div class="rounded border border-gray-200 p-3 dark:border-gray-800">
+                            <div class="rounded-sm border border-gray-200 p-3 dark:border-gray-800">
                                 <div class="mb-2 flex items-center gap-2">
                                     <span class="repeater-handle icon-drag cursor-grab text-lg text-gray-400"></span>
 
@@ -142,7 +142,7 @@
 
                     <div class="flex items-center gap-3">
                         <img
-                            class="h-16 w-24 rounded border border-gray-200 object-cover dark:border-gray-800"
+                            class="h-16 w-24 rounded-sm border border-gray-200 object-cover dark:border-gray-800"
                             :src="imageSrc(field)"
                             v-if="model[field.key]"
                         />

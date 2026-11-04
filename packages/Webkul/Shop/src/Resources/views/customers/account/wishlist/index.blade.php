@@ -136,7 +136,7 @@
                                         <button
                                             type="button"
                                             @click="remove"
-                                            class="icon-bin hidden text-2xl max-md:block cursor-pointer focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded bg-transparent border-0"
+                                            class="icon-bin hidden text-2xl max-md:block cursor-pointer focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded-sm bg-transparent border-0"
                                             aria-label="@lang('shop::app.customers.account.wishlist.remove')"
                                         ></button>
                                     </div>
@@ -150,7 +150,7 @@
                                             <div>
                                                 <button
                                                     type="button"
-                                                    class="flex cursor-pointer items-center gap-x-4 text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded text-left ltr:text-left rtl:text-right w-full bg-transparent border-0"
+                                                    class="flex cursor-pointer items-center gap-x-4 text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded-sm text-left ltr:text-left rtl:text-right w-full bg-transparent border-0"
                                                     @click="wishlist.option_show = ! wishlist.option_show"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.see-details')
@@ -206,7 +206,7 @@
                                         <!--Wishlist Item removed button-->
                                         <button
                                             type="button"
-                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded bg-transparent border-0"
+                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded-sm bg-transparent border-0"
                                             @click="remove"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')
@@ -252,7 +252,7 @@
 
                                 <button
                                     type="button"
-                                    class="flex cursor-pointer justify-end text-base text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded bg-transparent border-0 ltr:ml-auto rtl:mr-auto"
+                                    class="flex cursor-pointer justify-end text-base text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded-sm bg-transparent border-0 ltr:ml-auto rtl:mr-auto"
                                     @click="remove"
                                 >
                                     @lang('shop::app.customers.account.wishlist.remove')

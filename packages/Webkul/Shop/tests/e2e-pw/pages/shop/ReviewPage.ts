@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { BasePage } from "../BasePage";
 
 export interface ReviewData {
@@ -59,6 +60,10 @@ export class ReviewPage extends BasePage {
         return this.page.getByRole("button", { name: "Submit Review" });
     }
 
+    private get attachmentsInput() {
+        return this.reviewTabPanel.locator('input[type="file"][id$="_fileInput"]');
+    }
+
     private async dismissCookieConsent(): Promise<void> {
         if (await this.cookieConsentAccept.count()) {
             await this.cookieConsentAccept.click();
@@ -111,6 +116,24 @@ export class ReviewPage extends BasePage {
         ).toBeVisible();
     }
 
+    async attemptReviewWithAttachment(
+        review: ReviewData,
+        attachment: MediaFile,
+    ): Promise<void> {
+        await this.openReviewForm();
+        await this.ratingStar(review.rating).click();
+
+        await expect(this.ratingStar(review.rating)).toHaveAttribute(
+            "aria-pressed",
+            "true",
+        );
+
+        await this.attachmentsInput.setInputFiles(attachment);
+        await this.titleInput.fill(review.title);
+        await this.commentInput.fill(review.comment);
+        await this.submitButton.click();
+    }
+
     async submitEmptyReview(): Promise<void> {
         await this.openReviewForm();
         await this.submitButton.click();
@@ -120,6 +143,11 @@ export class ReviewPage extends BasePage {
         await expect(
             this.reviewTabPanel.getByText(message).first(),
         ).toBeVisible();
+    }
+
+    async expectReviewFormStillOpen(title: string): Promise<void> {
+        await expect(this.submitButton).toBeVisible();
+        await expect(this.titleInput).toHaveValue(title);
     }
 
     async expectReviewHidden(title: string): Promise<void> {

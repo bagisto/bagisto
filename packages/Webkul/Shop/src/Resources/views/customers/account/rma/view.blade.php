@@ -98,7 +98,10 @@
 
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($rma->images as $image)
-                                    <a href="{{ route('shop.customers.account.rma.image', $image['id']) }}" target="_blank">
+                                    <a
+                                        href="{{ route('shop.customers.account.rma.image', $image['id']) }}"
+                                        target="_blank"
+                                    >
                                         <img
                                             src="{{ route('shop.customers.account.rma.image', $image['id']) }}"
                                             class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded-sm border shadow-xs hover:shadow-md transition"
@@ -151,19 +154,28 @@
                                         rules="required"
                                     />
 
-                                    <label class="cursor-pointer text-sm font-medium text-gray-600" :for="$checkboxName">
+                                    <label
+                                        class="cursor-pointer text-sm font-medium text-gray-600"
+                                        :for="$checkboxName"
+                                    >
                                         {{ $canCloseRma
                                             ? trans('shop::app.rma.view-customer-rma.status-quotes')
                                             : trans('shop::app.rma.customer.create.reopen-request') }}
                                     </label>
                                 </x-shop::form.control-group>
 
-                                <button type="submit" class="primary-button">
+                                <button
+                                    type="submit"
+                                    class="primary-button"
+                                >
                                     @lang('shop::app.rma.view-customer-rma.save-btn')
                                 </button>
                             </div>
 
-                            <x-shop::form.control-group.error :control-name="$checkboxName" class="mt-1.5 flex" />
+                            <x-shop::form.control-group.error
+                                :control-name="$checkboxName"
+                                class="mt-1.5 flex"
+                            />
                         </x-shop::form>
                     </div>
                 @endif
@@ -181,27 +193,27 @@
                 <table class="w-full table-fixed">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="w-[36%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-9/25 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.image') / @lang('shop::app.rma.table-heading.product-name')
                             </th>
 
-                            <th class="w-[16%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-4/25 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.sku')
                             </th>
 
-                            <th class="w-[11%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-11/100 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.price')
                             </th>
 
-                            <th class="w-[10%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-1/10 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.rma-qty')
                             </th>
 
-                            <th class="w-[13%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-13/100 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.resolution-type')
                             </th>
 
-                            <th class="w-[14%] px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-7/50 px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.reason')
                             </th>
                         </tr>
@@ -377,7 +389,10 @@
     </div>
 
     @push('scripts')
-        <script type="text/x-template" id="rma-status-and-conversation-template">
+        <script
+            type="text/x-template"
+            id="rma-status-and-conversation-template"
+        >
             <!-- Conversations -->
             <div class="mt-8">
                 <p class="required text-xl max-sm:text-lg font-medium">
@@ -421,12 +436,19 @@
                                     >
                                     </x-shop::form.control-group.control>
 
-                                    <x-shop::form.control-group.error class="flex" control-name="message" />
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="message"
+                                    />
                                 </div>
                             </x-shop::form.control-group>
 
                             <div class="mb-4 max-md:mb-2">
-                                <button type="button" id="newFileInput" class="secondary-button text-sm max-sm:text-xs hover:bg-gray-200 relative">
+                                <button
+                                    type="button"
+                                    id="newFileInput"
+                                    class="secondary-button text-sm max-sm:text-xs hover:bg-gray-200 relative"
+                                >
                                     + @lang('shop::app.customers.account.rma.view.add-attachments')
 
                                     <input
@@ -438,16 +460,36 @@
                                     />
                                 </button>
 
-                                <input type="hidden" name="removed_key" id="removed_key" />
+                                <input
+                                    type="hidden"
+                                    name="removed_key"
+                                    id="removed_key"
+                                />
 
                                 <div id="attachmentPreview"></div>
                             </div>
 
                             <div class="flex justify-end">
-                                <button class="primary-button text-sm max-sm:text-xs max-sm:px-4 max-sm:py-2" :disabled="!isChatSend">
-                                    <svg v-if="!isChatSend" aria-hidden="true" class="w-5 h-5 max-sm:w-4 max-sm:h-4 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                <button
+                                    class="primary-button text-sm max-sm:text-xs max-sm:px-4 max-sm:py-2"
+                                    :disabled="!isChatSend"
+                                >
+                                    <svg
+                                        v-if="!isChatSend"
+                                        aria-hidden="true"
+                                        class="w-5 h-5 max-sm:w-4 max-sm:h-4 text-gray-200 animate-spin fill-blue-600"
+                                        viewBox="0 0 100 101"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                            fill="currentColor"
+                                        />
+                                        <path
+                                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                            fill="currentFill"
+                                        />
                                     </svg>
 
                                     @lang('shop::app.customers.account.rma.view.send-message-btn')
@@ -457,7 +499,7 @@
                     </x-shop::form>
                 </div>
 
-                <!-- View conversations -->
+                <!-- Conversations -->
                 <div
                     class="flex h-80 max-md:h-60 flex-col-reverse overflow-y-auto p-5 max-md:p-3 bg-gray-50"
                     @wheel="getNewMessage()"
@@ -471,7 +513,7 @@
                                 :class="message.is_admin == 1 ? 'justify-start' : 'justify-end'"
                             >
                                 <div
-                                    class="max-w-[70%] w-fit rounded-xl p-3.5 text-left shadow-xs"
+                                    class="max-w-7/10 w-fit rounded-xl p-3.5 text-left shadow-xs"
                                     :class="message.is_admin == 1 ? 'bg-gray-100' : 'bg-blue-50'"
                                 >
                                     <div class="flex items-center gap-2 mb-1">
@@ -490,8 +532,23 @@
 
                                     <div class="value text-sm max-sm:text-xs wrap-break-word">@{{ message.message }}</div>
 
-                                    <div v-if="message.attachment" class="mt-2 flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l7.071-7.071a4 4 0 00-5.657-5.657l-7.071 7.07a6 6 0 108.485 8.486L20.485 13"/></svg>
+                                    <div
+                                        v-if="message.attachment"
+                                        class="mt-2 flex items-center gap-2"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 text-gray-500"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l7.071-7.071a4 4 0 00-5.657-5.657l-7.071 7.07a6 6 0 108.485 8.486L20.485 13"
+                                            />
+                                        </svg>
                                         <a
                                             @click="viewAttachmentModal(message.attachment_url, message.attachment)"
                                             class="text-xs max-sm:text-xs hover:underline cursor-pointer text-blue-700"
@@ -505,7 +562,11 @@
 
                         <template v-else>
                             <div class="m-auto flex flex-col items-center">
-                                <div class="icon-listing" style="font-size:120px; color:#d7d7d7;"></div>
+                                <div
+                                    class="icon-listing"
+                                    style="font-size:120px; color:#d7d7d7;"
+                                >
+                                </div>
 
                                 <p class="mt-2 text-gray-300">
                                     @lang('shop::app.rma.conversation-texts.no-record')
@@ -547,7 +608,10 @@
 
                     <x-slot:footer>
                         <div class="flex items-center gap-x-2.5">
-                            <button @click="downloadAttachment(messagePath)" class="transparent-button text-sm max-sm:text-xs">
+                            <button
+                                class="transparent-button text-sm max-sm:text-xs"
+                                @click="downloadAttachment(messagePath)"
+                            >
                                 @lang('shop::app.customers.account.rma.view.download')
                             </button>
                         </div>
@@ -581,6 +645,9 @@
                 },
 
                 computed: {
+                    /**
+                     * The file types a message attachment may have.
+                     */
                     allowedFileTypesArray() {
                         return this.allowedFileTypes
                             .split(",")
@@ -590,6 +657,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Load the conversation of this request.
+                     */
                     getMessage() {
                         this.$axios.get(`{{ route('shop.customers.account.rma.get_messages') }}`, {
                             params: { id: this.rma.id, limit: this.limit }
@@ -599,6 +669,9 @@
                         }).catch(error => {});
                     },
 
+                    /**
+                     * Send the message, telling the sender why when it is refused.
+                     */
                     chatSubmit(params, { resetForm, setErrors }) {
                         let formData = new FormData(this.$refs.chatForm);
                         const messageInput = formData.get('message');
@@ -613,15 +686,26 @@
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
                                 this.getNewMessage();
                                 resetForm();
+                            })
+                            .catch((error) => {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response?.data?.message ?? error.message });
+
+                                this.isChatSend = true;
                             });
                     },
 
+                    /**
+                     * Escape the markup in a message.
+                     */
                     sanitizeInput(input) {
                         const tempDiv = document.createElement('div');
                         tempDiv.textContent = input;
                         return tempDiv.innerHTML;
                     },
 
+                    /**
+                     * Open the attachment of a message in the modal.
+                     */
                     viewAttachmentModal(messagePath, attachmentName) {
                         this.messagePath = messagePath;
                         this.attachmentName = attachmentName ?? '';
@@ -629,6 +713,9 @@
                         this.$refs.attachmentModal.toggle();
                     },
 
+                    /**
+                     * Download the attachment of a message.
+                     */
                     downloadAttachment(messagePath) {
                         const link = document.createElement('a');
                         link.href = messagePath;
@@ -638,16 +725,25 @@
                         document.body.removeChild(link);
                     },
 
+                    /**
+                     * Load the latest messages of the conversation.
+                     */
                     getNewMessage() {
                         this.limit += 5;
                         this.getMessage();
                         this.isChatSend = true;
                     },
 
+                    /**
+                     * Clear the message form.
+                     */
                     resetForm() {
                         this.message = '';
                     },
 
+                    /**
+                     * Validate the form of the given scope.
+                     */
                     validateForm(scope) {
                         if (!this.closeRmaChecked) {
                             this.error = true;
@@ -657,6 +753,9 @@
                         document.getElementById('check-form').submit();
                     },
 
+                    /**
+                     * Format the date of a message.
+                     */
                     dateFormat(v) {
                         let date = new Date(v);
                         const day = String(date.getDate()).padStart(2, '0');
@@ -668,6 +767,9 @@
                         return `${day}-${month}-${year} ${hours}:${minutes}`;
                     },
 
+                    /**
+                     * Show the picked attachment, provided its type is allowed.
+                     */
                     handleFileSelect($event) {
                         const attachmentPreview = document.getElementById('attachmentPreview');
                         attachmentPreview.innerHTML = '';

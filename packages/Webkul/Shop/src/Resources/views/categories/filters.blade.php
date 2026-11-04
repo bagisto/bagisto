@@ -224,7 +224,7 @@
                                     />
 
                                     <label
-                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded"
+                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded-sm"
                                         :for="`filter_${filter.id}_option_${option.id}`"
                                     >
                                     </label>
@@ -252,7 +252,7 @@
                                 v-else
                             >
                                 <div class="flex flex-col items-center justify-between">
-                                    <div class="shimmer h-5 w-[50%] self-end rounded-sm"></div>
+                                    <div class="shimmer h-5 w-1/2 self-end rounded-sm"></div>
                                 </div>
 
                                 <div class="z-10 grid gap-1 rounded-lg bg-white">
