@@ -25,7 +25,7 @@ class XLS extends AbstractSource
 
         $this->reader = $factory->getActiveSheet();
 
-        $this->totalColumns = Coordinate::columnIndexFromString($this->reader->getHighestColumn());
+        $this->totalColumns = Coordinate::columnIndexFromString($this->reader->getHighestDataColumn(1));
 
         $this->columnNames = $this->getNextRow();
     }
