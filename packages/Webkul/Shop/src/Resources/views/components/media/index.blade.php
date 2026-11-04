@@ -89,7 +89,14 @@
                 </label>
             </div>
 
-            <div 
+            <p
+                class="mt-1 text-xs italic text-red-500"
+                v-if="clientError"
+                v-text="clientError"
+            >
+            </p>
+
+            <div
                 class="flex items-center"
                 v-if="isMultiple"
             >
@@ -205,6 +212,8 @@
                     isDragOver: false,
 
                     appliedRules: '',
+
+                    clientError: '',
                 };
             },
 
@@ -223,6 +232,8 @@
 
             methods: {
                 onFileChange(event) {
+                    this.clientError = '';
+
                     let files = event.target.files;
                     let hasInvalid = false;
                     let hasOversize = false;
@@ -279,6 +290,8 @@
                 },
 
                 handleDroppedFiles(files) {
+                    this.clientError = '';
+
                     let hasInvalid = false;
                     let hasOversize = false;
 
@@ -381,17 +394,11 @@
                 },
 
                 notifyInvalidType() {
-                    this.$emitter.emit('add-flash', {
-                        type: 'warning',
-                        message: "@lang('shop::app.components.media.index.invalid-file-type')",
-                    });
+                    this.clientError = "@lang('shop::app.components.media.index.invalid-file-type')";
                 },
 
                 notifySizeLimit() {
-                    this.$emitter.emit('add-flash', {
-                        type: 'warning',
-                        message: "@lang('shop::app.components.media.index.size-limit-error')".replace(':size', this.formattedSizeLimit()),
-                    });
+                    this.clientError = "@lang('shop::app.components.media.index.size-limit-error')".replace(':size', this.formattedSizeLimit());
                 },
 
                 isImage(file) {
