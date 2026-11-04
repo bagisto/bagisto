@@ -18,10 +18,14 @@
         endpoint="{{ route('admin.configuration.file_management.sync') }}"
         depend-name="{{ $field->getDependFieldName() }}"
         depend-value="{{ $field->getDependFieldValue() }}"
-    ></v-storage-sync>
+    >
+    </v-storage-sync>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-storage-sync-template">
+        <script
+            type="text/x-template"
+            id="v-storage-sync-template"
+        >
             <div
                 class="mb-4 flex flex-col gap-2.5"
                 v-if="isVisible"
@@ -48,9 +52,9 @@
                         </button>
 
                         <span
-                            v-if="! isChecking && ! isUnreachable"
                             class="text-sm"
                             :class="pending ? 'text-orange-600 dark:text-orange-400' : 'text-emerald-600 dark:text-emerald-400'"
+                            v-if="! isChecking && ! isUnreachable"
                         >
                             @{{ pending ? pendingLabel.replace(':count', pending) : upToDateLabel }}
                         </span>

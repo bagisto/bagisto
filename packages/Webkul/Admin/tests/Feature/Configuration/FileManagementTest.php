@@ -47,7 +47,7 @@ it('should open every file management section while a remote disk is chosen', fu
         ->assertOk();
 })->with(['general', 'amazon_s3', 'cloudflare_r2']);
 
-it('should not ask a remote disk for the url of a setting that holds nothing', function () {
+it('should not ask a remote disk for the URL of a setting that holds nothing', function () {
     useRemoteDisk();
 
     expect(fn () => Storage::disk('s3')->url(null))->toThrow(TypeError::class);
@@ -88,6 +88,31 @@ it('should leave the sync button out while the files are served from the site it
         ->assertDontSee('v-storage-sync', false);
 });
 
+it('should save the chosen driver whichever one it is, now that the sync button depends on it', function (string $driver) {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.store', ['file_management', 'general']), [
+        'locale' => core()->getDefaultLocaleCodeFromDefaultChannel(),
+        'channel' => core()->getDefaultChannel()->code,
+        'file_management' => [
+            'general' => [
+                'settings' => [
+                    'default_driver' => $driver,
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'file_management.general.settings.default_driver',
+        'value' => $driver,
+    ]);
+})->with(['public', 's3', 'r2']);
+
+// ============================================================================
+// Saying The Chosen Driver Is Not In Use Yet
+// ============================================================================
+
 it('should say the chosen remote driver is not in use yet while its settings are incomplete', function (string $driver, string $title) {
     $this->loginAsAdmin();
 
@@ -113,29 +138,8 @@ it('should not say the chosen remote driver is incomplete once it is the one in 
     get(route('admin.configuration.index', ['slug' => 'file_management', 'slug2' => 'general']))
         ->assertOk()
         ->assertSee('v-storage-sync', false)
-        ->assertDontSee('its settings are incomplete');
+        ->assertDontSee(trans('admin::app.configuration.index.file-management.general.settings.incomplete', ['driver' => 'Amazon S3']));
 });
-
-it('should save the chosen driver whichever one it is, now that the sync button depends on it', function (string $driver) {
-    $this->loginAsAdmin();
-
-    postJson(route('admin.configuration.store', ['file_management', 'general']), [
-        'locale' => core()->getDefaultLocaleCodeFromDefaultChannel(),
-        'channel' => core()->getDefaultChannel()->code,
-        'file_management' => [
-            'general' => [
-                'settings' => [
-                    'default_driver' => $driver,
-                ],
-            ],
-        ],
-    ])->assertRedirect();
-
-    $this->assertDatabaseHas('core_config', [
-        'code' => 'file_management.general.settings.default_driver',
-        'value' => $driver,
-    ]);
-})->with(['public', 's3', 'r2']);
 
 // ============================================================================
 // Who May Reach The Sync
