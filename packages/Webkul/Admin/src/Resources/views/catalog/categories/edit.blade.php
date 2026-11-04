@@ -414,7 +414,7 @@
                                 name="status"
                                 value="1"
                                 :label="trans('admin::app.catalog.categories.edit.visible-in-menu')"
-                                :checked="(boolean) $selectedValue"
+                                :checked="(bool) $selectedValue"
                             />
                         </x-admin::form.control-group>
                     </x-slot>
