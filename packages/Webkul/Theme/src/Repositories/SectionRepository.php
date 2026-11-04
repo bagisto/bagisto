@@ -2,6 +2,7 @@
 
 namespace Webkul\Theme\Repositories;
 
+use DateTimeInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,12 @@ class SectionRepository extends Repository
      * visitor cannot ask a storefront page for unpublished drafts.
      */
     public const PREVIEWING = 'appearance_previewing';
+
+    /**
+     * How long a draft save leaves an upload it does not name, since the draft that names it
+     * can reach the server after an earlier one the editor queued before the upload finished.
+     */
+    public const UNSAVED_UPLOAD_GRACE_MINUTES = 5;
 
     /**
      * Specify model class name.
@@ -151,7 +158,7 @@ class SectionRepository extends Repository
 
         $section->save();
 
-        $this->purgeUnreferencedMedia($section);
+        $this->purgeUnreferencedMedia($section, now()->subMinutes(self::UNSAVED_UPLOAD_GRACE_MINUTES));
 
         return $section;
     }
@@ -541,12 +548,12 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Delete the uploads that neither the published nor the drafted options mention, in any
-     * locale, matching on the stored name so a path inside custom html still counts.
+     * Delete the uploads that neither the published nor the drafted options mention in any locale,
+     * matching on the stored name, and sparing any uploaded since the given moment.
      *
      * @param  Section  $section
      */
-    protected function purgeUnreferencedMedia($section): void
+    protected function purgeUnreferencedMedia($section, ?DateTimeInterface $keepUploadedSince = null): void
     {
         $directory = $this->mediaDirectory($section);
 
@@ -559,10 +566,24 @@ class SectionRepository extends Repository
             ->implode(' ');
 
         foreach (Storage::files($directory) as $file) {
-            if (! str_contains($referenced, basename($file))) {
-                Storage::delete($file);
+            if (
+                str_contains($referenced, basename($file))
+                || $this->uploadedSince($file, $keepUploadedSince)
+            ) {
+                continue;
             }
+
+            Storage::delete($file);
         }
+    }
+
+    /**
+     * Whether a stored file was written at or after the given moment, which no moment means never.
+     */
+    protected function uploadedSince(string $file, ?DateTimeInterface $moment): bool
+    {
+        return ! is_null($moment)
+            && Storage::lastModified($file) >= $moment->getTimestamp();
     }
 
     /**
