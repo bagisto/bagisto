@@ -50,14 +50,13 @@ function buildSynonym(): SearchSynonymData {
     };
 }
 
-function buildSitemap(channel = "Default", channelCode = "default"): SitemapData {
+function buildSitemap(channel = "Default"): SitemapData {
     const stamp = uniqueStamp();
 
     return {
         fileName: `sitemap-${stamp}.xml`,
         path: `/sitemap-${stamp}/`,
         channel,
-        channelCode,
     };
 }
 
@@ -133,7 +132,10 @@ test.describe("search-seo management", () => {
                 redirectType: "302",
             });
 
-            await rewritesPage.expectRewriteListed({ ...rewrite, redirectType: "302" });
+            await rewritesPage.expectRewriteListed({
+                ...rewrite,
+                redirectType: "302",
+            });
             await rewritesPage.expectStorefrontRedirect(
                 rewrite.requestPath,
                 rewrite.targetPath,
@@ -155,7 +157,11 @@ test.describe("search-seo management", () => {
             const first = buildRewrite();
             const second = buildRewrite();
             const untouched = buildRewrite();
-            created.push(first.requestPath, second.requestPath, untouched.requestPath);
+            created.push(
+                first.requestPath,
+                second.requestPath,
+                untouched.requestPath,
+            );
 
             await rewritesPage.createRewrite(first);
             await rewritesPage.createRewrite(second);
@@ -213,7 +219,10 @@ test.describe("search-seo management", () => {
             await searchTermsPage.createSearchTerm(searchTerm);
             await searchTermsPage.renameSearchTerm(searchTerm.term, newTerm);
 
-            await searchTermsPage.expectSearchTermListed({ ...searchTerm, term: newTerm });
+            await searchTermsPage.expectSearchTermListed({
+                ...searchTerm,
+                term: newTerm,
+            });
             await searchTermsPage.expectSearchTermAbsent(searchTerm.term);
         });
 
@@ -226,7 +235,10 @@ test.describe("search-seo management", () => {
             await searchTermsPage.createSearchTerm(first);
             await searchTermsPage.createSearchTerm(second);
             await searchTermsPage.createSearchTerm(untouched);
-            await searchTermsPage.massDeleteSearchTerms([first.term, second.term]);
+            await searchTermsPage.massDeleteSearchTerms([
+                first.term,
+                second.term,
+            ]);
 
             await searchTermsPage.expectSearchTermAbsent(first.term);
             await searchTermsPage.expectSearchTermAbsent(second.term);
@@ -259,8 +271,12 @@ test.describe("search-seo management", () => {
         test("should reject a search synonym without a name and terms", async () => {
             await synonymsPage.submitEmptyCreateForm();
 
-            await synonymsPage.expectValidationError("The Name field is required");
-            await synonymsPage.expectValidationError("The Terms field is required");
+            await synonymsPage.expectValidationError(
+                "The Name field is required",
+            );
+            await synonymsPage.expectValidationError(
+                "The Terms field is required",
+            );
         });
 
         test("should update the name and terms of a search synonym", async () => {
@@ -311,7 +327,9 @@ test.describe("search-seo management", () => {
 
             await sitemapsPage.attemptCreateSitemapWithoutChannel(sitemap);
 
-            await sitemapsPage.expectValidationError("The Channels field is required");
+            await sitemapsPage.expectValidationError(
+                "The Channels field is required",
+            );
             await sitemapsPage.expectNoSaveMessage();
             await sitemapsPage.expectSitemapAbsent(sitemap.fileName);
         });
@@ -352,7 +370,9 @@ test.describe("search-seo management", () => {
                 sitemap.channel,
             );
 
-            await sitemapsPage.expectValidationError("The Channels field is required");
+            await sitemapsPage.expectValidationError(
+                "The Channels field is required",
+            );
             await sitemapsPage.expectNoSaveMessage();
             await sitemapsPage.closeEditModal();
             await sitemapsPage.expectChannelPreselectedInEditForm(
@@ -367,7 +387,7 @@ test.describe("search-seo management", () => {
             const channelsPage = new ChannelsPage(adminPage);
             const channel = buildChannel();
             const defaultSitemap = buildSitemap();
-            const channelSitemap = buildSitemap(channel.name, channel.code);
+            const channelSitemap = buildSitemap(channel.name);
             created.push(defaultSitemap.fileName, channelSitemap.fileName);
 
             await channelsPage.createChannel(channel);
@@ -379,7 +399,9 @@ test.describe("search-seo management", () => {
                 await sitemapsPage.expectSitemapListed(defaultSitemap);
                 await sitemapsPage.expectSitemapListed(channelSitemap);
             } finally {
-                await sitemapsPage.deleteSitemapsIfPresent([channelSitemap.fileName]);
+                await sitemapsPage.deleteSitemapsIfPresent([
+                    channelSitemap.fileName,
+                ]);
                 await channelsPage.deleteChannelsIfPresent([channel.name]);
             }
         });

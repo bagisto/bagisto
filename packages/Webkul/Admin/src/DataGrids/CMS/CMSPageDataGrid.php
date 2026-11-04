@@ -24,13 +24,16 @@ class CMSPageDataGrid extends DataGrid
                 'cms_page_translations.url_key',
                 'cms_page_translations.locale'
             )
-            ->addSelect(DB::raw(db_grammar()->groupConcat('code', ',', true).' as channel'))
+            ->addSelect(DB::raw(db_grammar()->groupConcat(DB::getTablePrefix().'channel_translations.name', ', ', false, DB::getTablePrefix().'channel_translations.name').' as channel'))
             ->join('cms_page_translations', function ($join) use ($currentLocale) {
                 $join->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
                     ->where('cms_page_translations.locale', '=', $currentLocale);
             })
             ->leftJoin('cms_page_channels', 'cms_pages.id', '=', 'cms_page_channels.cms_page_id')
-            ->leftJoin('channels', 'cms_page_channels.channel_id', '=', 'channels.id')
+            ->leftJoin('channel_translations', function ($join) use ($currentLocale) {
+                $join->on('cms_page_channels.channel_id', '=', 'channel_translations.channel_id')
+                    ->where('channel_translations.locale', '=', $currentLocale);
+            })
             ->groupBy(
                 'cms_pages.id',
                 'cms_page_translations.locale',
@@ -70,8 +73,7 @@ class CMSPageDataGrid extends DataGrid
                 ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
                 ->values()
                 ->toArray(),
-            'sortable' => true,
-            'visibility' => false,
+            'sortable' => false,
         ]);
 
         $this->addColumn([
