@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'Errore: :attribute non può essere maggiore di :max kilobyte. Scegliere un file più piccolo, per favore.',
                     'info' => 'La dimensione massima del video dovrebbe essere di :size',
                     'title' => 'Video',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Chi può recensire un prodotto e come le recensioni sono mostrate nella pagina del prodotto.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Dimensione massima di caricamento file (in Kb)',
-                        'image-upload-size' => 'Dimensione massima di caricamento immagine (in Kb)',
-                        'title' => 'Attributo',
-                        'title-info' => 'La dimensione massima di immagine e file caricabili per un valore di attributo.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Scegli quali pulsanti di condivisione appaiono nella pagina del prodotto e il messaggio che riportano.',
                         'title' => 'Condivisione sui social network',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'L\'indirizzo da cui vengono serviti i file, l\'indirizzo pubblico del bucket oppure un dominio personalizzato. Un bucket R2 è privato finché non ne viene impostato uno, senza di esso i file non saranno raggiungibili.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Caricamento media',
+                    'info' => 'Scegli quali immagini e video possono essere caricati e quanto possono essere grandi.',
+                    'allowed-extensions' => 'Estensioni consentite',
+                    'allowed-extensions-info' => 'Tipi di file che possono essere caricati. Qualsiasi altro tipo viene rifiutato.',
+                    'max-size' => 'Dimensione massima del file (KB)',
+                    'max-size-info' => 'Il file più grande che può essere caricato, in kilobyte. Il limite del server resta valido se è inferiore.',
+
+                    'images' => [
+                        'title' => 'Immagini',
+                        'info' => 'Regole seguite da ogni caricamento di immagini.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Video',
+                        'info' => 'Regole seguite da ogni caricamento di video.',
+                    ],
+
+                    'files' => [
+                        'title' => 'File',
+                        'info' => 'Limite di dimensione dei file caricati che non sono immagini né video, come gli attributi file dei prodotti.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Sono consentiti solo file :types.',
+                'max-size' => 'Il file non può superare :size.',
+                'size-hint' => 'Max :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Aggiungi Immagine',
                 'ai-add-image-btn' => 'Intelligenza Artificiale',
                 'ai-btn-info' => 'Genera Immagine',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Immagine',
-                'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
                     'apply' => 'Applica',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Aggiungi Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
                 'video' => 'Video',
 
                 'seo' => [

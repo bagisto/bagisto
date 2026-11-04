@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\User\Repositories\RoleRepository;
 
 class UserForm extends FormRequest
@@ -23,7 +24,7 @@ class UserForm extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(MediaUpload $mediaUpload)
     {
         return [
             'name' => 'required',
@@ -43,7 +44,7 @@ class UserForm extends FormRequest
                 },
             ],
             'image' => 'array',
-            'image.*' => 'mimes:jpeg,jpg,png,gif|max:10000',
+            'image.*' => $mediaUpload->imageRules(),
         ];
     }
 }

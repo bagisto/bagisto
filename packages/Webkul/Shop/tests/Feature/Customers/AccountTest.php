@@ -101,13 +101,14 @@ it('should fail validation when required fields are missing on profile update', 
         'gender' => 'UNKNOWN',
         'date_of_birth' => now()->tomorrow()->toDateString(),
         'email' => 'WRONG_EMAIL',
-        'image' => 'INVALID',
+        'image' => ['INVALID'],
     ])
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('first_name')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('gender')
-        ->assertJsonValidationErrorFor('email');
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrors(['image.0' => 'The Profile Image field must be a file of type: bmp, jpeg, jpg, png, webp.']);
 });
 
 it('should update the profile when the same email exists on another channel', function () {

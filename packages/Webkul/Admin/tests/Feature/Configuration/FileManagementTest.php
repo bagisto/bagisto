@@ -170,3 +170,47 @@ it('should say the disk is unreachable rather than failing when it cannot be lis
         ->assertOk()
         ->assertJson(['unreachable' => true]);
 });
+
+// ============================================================================
+// Media Upload Settings
+// ============================================================================
+
+it('should open the media upload settings', function () {
+    $this->loginAsAdmin();
+
+    get(route('admin.configuration.index', ['slug' => 'file_management', 'slug2' => 'media']))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.configuration.index.file-management.media.images.title'))
+        ->assertSeeText(trans('admin::app.configuration.index.file-management.media.videos.title'));
+});
+
+it('should save the media upload settings', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.store', ['file_management', 'media']), [
+        'file_management' => [
+            'media' => [
+                'images' => ['max_size' => 512, 'allowed_extensions' => ['png', 'webp']],
+                'videos' => ['max_size' => 20480, 'allowed_extensions' => ['mp4']],
+            ],
+        ],
+    ])->assertRedirect();
+
+    expect(core()->getConfigData('file_management.media.images.allowed_extensions'))->toBe('png,webp')
+        ->and((int) core()->getConfigData('file_management.media.images.max_size'))->toBe(512)
+        ->and(core()->getConfigData('file_management.media.videos.allowed_extensions'))->toBe('mp4')
+        ->and((int) core()->getConfigData('file_management.media.videos.max_size'))->toBe(20480);
+});
+
+it('should refuse a media upload size that is not a positive whole number', function (mixed $size) {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.store', ['file_management', 'media']), [
+        'file_management' => [
+            'media' => [
+                'images' => ['max_size' => $size, 'allowed_extensions' => ['png']],
+                'videos' => ['max_size' => 1024, 'allowed_extensions' => ['mp4']],
+            ],
+        ],
+    ])->assertJsonValidationErrorFor('file_management.media.images.max_size');
+})->with([0, -5, 'big', 1.5]);

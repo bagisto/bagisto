@@ -398,6 +398,7 @@
                                 <v-media-images
                                     name="image"
                                     :uploaded-images='data.images'
+                                    :errors="errors"
                                 >
                                 </v-media-images>
 

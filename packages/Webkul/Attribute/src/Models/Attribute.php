@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\Attribute\Contracts\Attribute as AttributeContract;
 use Webkul\Attribute\Database\Factories\AttributeFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Core\Rules\Regex;
 
 class Attribute extends TranslatableModel implements AttributeContract
@@ -139,19 +140,13 @@ class Attribute extends TranslatableModel implements AttributeContract
         }
 
         if ($this->type == 'file') {
-            $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
-
-            if ($retVal) {
-                $validations[] = 'size:'.$retVal;
-            }
+            $validations[] = 'size: '.app(MediaUpload::class)->maxSize(MediaUpload::FILE);
         }
 
         if ($this->type == 'image') {
-            $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
+            $mediaUpload = app(MediaUpload::class);
 
-            if ($retVal) {
-                $validations[] = 'size:'.$retVal.', mimes: ["image/bmp", "image/jpeg", "image/jpg", "image/png", "image/webp"]';
-            }
+            $validations[] = 'size: '.$mediaUpload->maxSize(MediaUpload::IMAGE).', ext: '.json_encode($mediaUpload->extensions(MediaUpload::IMAGE));
         }
 
         if ($this->validation == 'regex') {

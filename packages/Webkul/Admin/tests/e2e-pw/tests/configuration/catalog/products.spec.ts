@@ -72,17 +72,6 @@ test.describe("product configuration", () => {
         await configPage.expectSettings(changed);
     });
 
-    test("should persist the attribute upload size limits after reload", async () => {
-        const changed = {
-            imageUploadSize: other(original.imageUploadSize, "2048", "4096"),
-            fileUploadSize: other(original.fileUploadSize, "2048", "4096"),
-        };
-
-        await configPage.applySettings(changed);
-
-        await configPage.expectSettings(changed);
-    });
-
     test("should persist the social share settings after reload", async () => {
         const changed = {
             socialShare: !original.socialShare,

@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'The :attribute may not be greater than :max kilobytes. Please choose a smaller file.',
                     'info' => 'Maximum video size should be like :size',
                     'title' => 'Videos',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Cine poate recenza un produs și cum sunt afișate recenziile în pagina produsului.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Allowed File Upload Size (in Kb)',
-                        'image-upload-size' => 'Allowed Image Upload Size (in Kb)',
-                        'title' => 'Attribute',
-                        'title-info' => 'Dimensiunea maximă a unei imagini sau a unui fișier încărcat pentru o valoare de atribut.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Alegeți ce butoane de partajare apar în pagina produsului și ce mesaj transmit.',
                         'title' => 'Social Share',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'Adresa de la care sunt servite fișierele, fie adresa publică a bucket-ului, fie un domeniu propriu. Un bucket R2 este privat până când este setată una, fără ea fișierele nu vor fi accesibile.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Încărcare media',
+                    'info' => 'Alegeți ce imagini și videoclipuri pot fi încărcate și cât de mari pot fi.',
+                    'allowed-extensions' => 'Extensii permise',
+                    'allowed-extensions-info' => 'Tipuri de fișiere care pot fi încărcate. Orice alt tip este refuzat.',
+                    'max-size' => 'Dimensiunea maximă a fișierului (KB)',
+                    'max-size-info' => 'Cel mai mare fișier care poate fi încărcat, în kilobytes. Limita serverului se aplică în continuare dacă este mai mică.',
+
+                    'images' => [
+                        'title' => 'Imagini',
+                        'info' => 'Reguli urmate de fiecare încărcare de imagine.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Videoclipuri',
+                        'info' => 'Reguli urmate de fiecare încărcare de videoclip.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Fișiere',
+                        'info' => 'Limita de dimensiune pentru fișierele încărcate care nu sunt imagini sau videoclipuri, cum ar fi atributele de tip fișier ale produselor.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Sunt permise doar fișiere :types.',
+                'max-size' => 'Fișierul nu poate depăși :size.',
+                'size-hint' => 'Max. :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Add Image',
                 'ai-add-image-btn' => 'Magic AI',
                 'ai-btn-info' => 'Generate Image',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imagine',
-                'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
                 'ai-generation' => [
                     'apply' => 'Apply',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
                 'video' => 'Videoclip',
 
                 'seo' => [

@@ -1,5 +1,13 @@
 {{-- Renders a section's options from its field schema, for every section type. --}}
+@php
+    use Webkul\Core\Helpers\MediaUpload;
+
+    $mediaUpload = app(MediaUpload::class);
+@endphp
+
 <x-admin::appearance.sections.code-editor />
+
+@include('admin::components.media.validation')
 
 @pushOnce('scripts')
     <script
@@ -153,7 +161,7 @@
                             <input
                                 type="file"
                                 class="hidden"
-                                accept="image/*"
+                                :accept="$mediaUpload.accept(imageRules.extensions)"
                                 @change="upload(field, $event)"
                             />
                         </label>
@@ -237,6 +245,12 @@
                     storedFilters: {},
 
                     rowKeySeed: 0,
+
+                    imageRules: {
+                        extensions: @js($mediaUpload->extensions(MediaUpload::IMAGE)),
+                        maxSize: {{ $mediaUpload->maxSize(MediaUpload::IMAGE) }},
+                        mimePrefix: 'image/',
+                    },
                 };
             },
 
@@ -511,9 +525,17 @@
                  * Upload a replacement image and record the path it was stored at.
                  */
                 upload(field, event) {
-                    const file = event.target.files?.[0];
+                    const [file] = this.$mediaUpload.takeFiles(event.target);
 
                     if (! file) {
+                        return;
+                    }
+
+                    const error = this.$mediaUpload.validate(file, this.imageRules);
+
+                    if (error) {
+                        this.$emitter.emit('add-flash', { type: 'warning', message: error });
+
                         return;
                     }
 

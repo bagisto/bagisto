@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Helpers\MediaFileName;
+use Webkul\Core\Helpers\MediaUpload;
 
 class AccountController extends Controller
 {
@@ -29,7 +30,7 @@ class AccountController extends Controller
      *
      * @return Response
      */
-    public function update()
+    public function update(MediaUpload $mediaUpload)
     {
         $user = auth()->guard('admin')->user();
 
@@ -38,7 +39,7 @@ class AccountController extends Controller
             'email' => 'email|unique:admins,email,'.$user->id,
             'password' => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
-            'image.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'image.*' => ['nullable', ...$mediaUpload->imageRules()],
             'image_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
         ]);
 

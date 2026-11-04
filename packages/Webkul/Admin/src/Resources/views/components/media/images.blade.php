@@ -1,5 +1,6 @@
 @php
     use Illuminate\Database\Eloquent\Model;
+    use Webkul\Core\Helpers\MediaUpload;
     use Webkul\MagicAI\AiProvider;
 
     $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.image_generation.providers') ?? ''));
@@ -7,6 +8,12 @@
     $models = AiProvider::modelsForProviders($enabledProviders, 'image');
     
     $defaultModel = $models[0]['value'] ?? '';
+
+    $mediaUpload = app(MediaUpload::class);
+
+    $defaultExtensions = implode(',', $mediaUpload->extensions(MediaUpload::IMAGE));
+
+    $defaultMaxSize = $mediaUpload->maxSize(MediaUpload::IMAGE);
 @endphp
 
 @props([
@@ -18,6 +25,9 @@
     'height'           => '120px',
     'enableSeo'        => false,
     'metaName'         => '',
+    'allowedTypes'     => null,
+    'extraTypes'       => '',
+    'maxSize'          => null,
 ])
 
 @php
@@ -42,13 +52,19 @@
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
+    allowed-types="{{ $allowedTypes ?: $defaultExtensions }}"
+    extra-types="{{ $extraTypes }}"
+    v-bind:max-size="{{ (int) ($maxSize ?: $defaultMaxSize) }}"
     :uploaded-images="@js($uploadedImages)"
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
+    {{ $attributes->except([':uploaded-images', ':errors']) }}
 >
     <x-admin::shimmer.image class="h-27.5 w-27.5 rounded-sm" />
 </v-media-images>
+
+@include('admin::components.media.validation')
 
 @pushOnce('scripts')
     <script
@@ -83,7 +99,7 @@
                     <!-- Upload Image Button -->
                     <label
                         class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                        :class="[(errors?.['images.files[0]'] ?? false) ? 'border border-red-500' : 'border-gray-300']"
+                        :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
@@ -93,8 +109,10 @@
                             <p class="grid text-center text-sm font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.components.media.images.add-image-btn')
                                 
-                                <span class="text-xs">
-                                    @lang('admin::app.components.media.images.allowed-types')
+                                <span
+                                    class="text-xs"
+                                    v-text="hint"
+                                >
                                 </span>
                             </p>
 
@@ -102,9 +120,8 @@
                                 type="file"
                                 class="hidden"
                                 :id="$.uid + '_imageInput'"
-                                accept="image/*"
+                                :accept="rules.accept"
                                 :multiple="allowMultiple"
-                                :ref="$.uid + '_imageInput'"
                                 @change="add"
                             />
                         </div>
@@ -128,7 +145,10 @@
                             :height="height"
                             :enable-seo="enableSeo"
                             :meta-name="metaName"
+                            :rules="rules"
                             @onRemove="remove($event)"
+                            @onChange="clearErrors"
+                            @onInvalid="clientError = $event"
                         >
                         </v-media-image-item>
                     </template>
@@ -376,7 +396,14 @@
                     </x-admin::form>
                 </Teleport>
             </div>
-        </div>  
+
+            <p
+                class="mt-1 text-xs italic text-red-600"
+                v-if="errorMessage"
+                v-text="errorMessage"
+            >
+            </p>
+        </div>
     </script>
 
     <script type="text/x-template" id="v-media-image-item-template">
@@ -421,12 +448,17 @@
 
                     <input
                         type="file"
-                        :name="enableSeo ? name + '[' + image.id + ']' : name + '[]'"
                         class="hidden"
-                        accept="image/*"
+                        :name="enableSeo ? name + '[' + image.id + ']' : name + '[]'"
+                        ref="fileInput"
+                    />
+
+                    <input
+                        type="file"
+                        class="hidden"
+                        :accept="rules.accept"
                         :id="$.uid + '_imageInput_' + index"
-                        :ref="$.uid + '_imageInput_' + index"
-                        @change="edit"
+                        @change="replace"
                     />
                 </div>
             </div>
@@ -588,9 +620,24 @@
                     default: '',
                 },
 
+                allowedTypes: {
+                    type: [String, Array],
+                    default: @js($defaultExtensions),
+                },
+
+                extraTypes: {
+                    type: [String, Array],
+                    default: '',
+                },
+
+                maxSize: {
+                    type: Number,
+                    default: {{ $defaultMaxSize }},
+                },
+
                 errors: {
                     type: Object,
-                    default: () => {}
+                    default: () => ({})
                 }
             },
 
@@ -624,60 +671,129 @@
 
                     isLoading: false,
 
-                    ai: {
-                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
+                    clientError: null,
 
-                        models: {!! json_encode($models) !!},
+                    isServerErrorDismissed: false,
 
-                        model: "{{ $defaultModel }}",
-
-                        prompt: null,
-
-                        n: 1,
-
-                        size: '1:1',
-
-                        quality: 'medium',
-
-                        images: [],
-                    },
+                    ai: this.aiDefaults(),
                 }
             },
 
             computed: {
+                /**
+                 * What a picked file is checked against: its extensions, size and type, and the picker filter.
+                 */
+                rules() {
+                    const extensions = [...new Set([
+                        ...this.$mediaUpload.parseExtensions(this.allowedTypes),
+                        ...this.$mediaUpload.parseExtensions(this.extraTypes),
+                    ])];
+
+                    return {
+                        extensions,
+                        maxSize: this.maxSize,
+                        mimePrefix: 'image/',
+                        accept: this.$mediaUpload.accept(extensions),
+                    };
+                },
+
+                /**
+                 * The allowed extensions and size, shown under the upload button.
+                 */
+                hint() {
+                    return this.$mediaUpload.hint(this.rules.extensions, this.rules.maxSize);
+                },
+
+                /**
+                 * The first error the server reported for this field.
+                 */
+                serverError() {
+                    return this.$mediaUpload.fieldError(this.errors, this.name);
+                },
+
+                /**
+                 * The message shown under the field, a rejected selection taking precedence over the server's.
+                 */
+                errorMessage() {
+                    if (this.clientError) {
+                        return this.clientError;
+                    }
+
+                    return this.isServerErrorDismissed ? null : this.serverError;
+                },
+
+                /**
+                 * The generated images picked to be added.
+                 */
                 selectedAIImages() {
                     return this.ai.images.filter(image => image.selected);
                 }
             },
 
+            watch: {
+                /**
+                 * A fresh server error describes the latest submission, so it is shown again.
+                 */
+                serverError() {
+                    this.isServerErrorDismissed = false;
+                },
+            },
+
             mounted() {
                 this.images = this.uploadedImages;
+
+                document.addEventListener('submit', this.onSubmit, true);
+            },
+
+            beforeUnmount() {
+                document.removeEventListener('submit', this.onSubmit, true);
             },
 
             methods: {
-                add() {
-                    let imageInput = this.$refs[this.$.uid + '_imageInput'];
+                /**
+                 * Add the picked files, or refuse all of them when one is not allowed.
+                 */
+                add(event) {
+                    const files = this.$mediaUpload.takeFiles(event.target);
 
-                    if (imageInput.files == undefined) {
+                    if (! files.length) {
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    const error = files.map(file => this.$mediaUpload.validate(file, this.rules)).find(Boolean);
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
-                        });
+                    if (error) {
+                        this.clientError = error;
 
                         return;
                     }
 
-                    imageInput.files.forEach((file, index) => {
+                    this.clearErrors();
+
+                    files.forEach(file => {
                         this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
                     });
                 },
 
+                /**
+                 * Drop the messages describing the previous selection once the images change.
+                 */
+                clearErrors() {
+                    this.clientError = null;
+
+                    this.isServerErrorDismissed = true;
+                },
+
+                /**
+                 * Let the server's answer to a new submission be shown again.
+                 */
+                onSubmit() {
+                    this.isServerErrorDismissed = false;
+                },
+
+                /**
+                 * Build an image entry for a picked file.
+                 */
                 newImage(file, fileName) {
                     return {
                         id: 'image_' + this.newImageIndex++,
@@ -688,22 +804,28 @@
                     };
                 },
 
+                /**
+                 * Remove an image from the list.
+                 */
                 remove(image) {
-                    let index = this.images.indexOf(image);
+                    const index = this.images.indexOf(image);
 
                     this.images.splice(index, 1);
+
+                    this.clearErrors();
                 },
 
+                /**
+                 * Ask the image generation service for images matching the prompt.
+                 */
                 generate(params, { setErrors }) {
                     this.isLoading = true;
-
-                    let self = this;
 
                     this.$axios.post("{{ route('admin.magic_ai.image') }}", params)
                         .then(response => {
                             this.isLoading = false;
 
-                            self.ai.images = response.data.images;
+                            this.ai.images = response.data.images;
                         })
                         .catch(error => {
                             this.isLoading = false;
@@ -716,35 +838,59 @@
                         });
                 },
 
+                /**
+                 * Add the selected generated images, refusing them all when one is not allowed.
+                 */
                 apply() {
-                    this.selectedAIImages.forEach((image, index) => {
-                        this.images.push(this.newImage(this.getBase64ToFile(image.url, 'temp.png'), ''));
-                    });
+                    const files = this.selectedAIImages.map(image => this.dataUrlToFile(image.url, 'ai-image'));
+
+                    const error = files.map(file => this.$mediaUpload.validate(file, this.rules)).find(Boolean);
 
                     this.$refs.magicAIImageModal.close();
-                },
 
-                getBase64ToFile(base64, filename) {
-                    var arr = base64.split(','),
-                        mime = arr[0].match(/:(.*?);/)[1],
-                        bstr = atob(arr[arr.length - 1]), 
-                        n = bstr.length, 
-                        u8arr = new Uint8Array(n);
+                    if (error) {
+                        this.clientError = error;
 
-                    while (n--) {
-                        u8arr[n] = bstr.charCodeAt(n);
+                        return;
                     }
 
-                    return new File([u8arr], filename, {type:mime});
+                    this.clearErrors();
+
+                    files.forEach(file => this.images.push(this.newImage(file, '')));
                 },
 
+                /**
+                 * Turn a data URL into a file named after its type.
+                 */
+                dataUrlToFile(dataUrl, baseName) {
+                    const [header, data] = dataUrl.split(',');
+
+                    const mime = header.match(/:(.*?);/)[1];
+
+                    const binary = atob(data);
+
+                    const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
+
+                    return new File([bytes], baseName + '.' + mime.split('/')[1].replace('jpeg', 'jpg'), { type: mime });
+                },
+
+                /**
+                 * Start the image generation modal over from its defaults.
+                 */
                 resetAIModal() {
-                    this.ai = {
-                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
+                    this.ai = this.aiDefaults();
+                },
 
-                        models: {!! json_encode($models) !!},
+                /**
+                 * The state of the image generation modal before anything is asked.
+                 */
+                aiDefaults() {
+                    return {
+                        enabled: @js((bool) (core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled'))),
 
-                        model: "{{ $defaultModel }}",
+                        models: @js($models),
+
+                        model: @js($defaultModel),
 
                         prompt: null,
 
@@ -756,14 +902,16 @@
 
                         images: [],
                     };
-                }
+                },
             }
         });
 
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'rules'],
+
+            emits: ['onRemove', 'onChange', 'onInvalid'],
 
             mounted() {
                 if (this.image.file instanceof File) {
@@ -774,57 +922,71 @@
             },
 
             methods: {
+                /**
+                 * Open the drawer holding the image's SEO details.
+                 */
                 openSeoDrawer() {
                     this.$refs.seoDrawer.open();
                 },
 
-                edit() {
-                    let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
+                /**
+                 * Replace the image with the picked file, which reaches the submitted input only once allowed.
+                 */
+                replace(event) {
+                    const [file] = this.$mediaUpload.takeFiles(event.target);
 
-                    if (imageInput.files == undefined) {
+                    if (! file) {
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    const error = this.$mediaUpload.validate(file, this.rules);
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
-                        });
+                    if (error) {
+                        this.$emit('onInvalid', error);
 
                         return;
                     }
 
                     if (! this.image.file_name) {
-                        this.image.file_name = imageInput.files[0].name.replace(/\.[^/.]+$/, '');
+                        this.image.file_name = file.name.replace(/\.[^/.]+$/, '');
                     }
 
-                    this.setFile(imageInput.files[0]);
+                    this.setFile(file);
 
-                    this.readFile(imageInput.files[0]);
+                    this.readFile(file);
+
+                    this.$emit('onChange', this.image);
                 },
 
+                /**
+                 * Ask the list to remove this image.
+                 */
                 remove() {
-                    this.$emit('onRemove', this.image)
+                    this.$emit('onRemove', this.image);
                 },
 
+                /**
+                 * Put the file into the input submitted with the form.
+                 */
                 setFile(file) {
                     this.image.is_new = 1;
+
+                    this.image.file = file;
 
                     const dataTransfer = new DataTransfer();
 
                     dataTransfer.items.add(file);
 
-                    this.$refs[this.$.uid + '_imageInput_' + this.index].files = dataTransfer.files;
+                    this.$refs.fileInput.files = dataTransfer.files;
                 },
 
+                /**
+                 * Read the file into a preview.
+                 */
                 readFile(file) {
-                    let reader = new FileReader();
+                    const reader = new FileReader();
 
-                    reader.onload = (e) => {
-                        this.image.url = e.target.result;
-                    }
+                    reader.onload = event => this.image.url = event.target.result;
 
                     reader.readAsDataURL(file);
                 },

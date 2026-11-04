@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => ':attribute haiwezi kuzidi kilobaiti :max. Tafadhali chagua faili ndogo zaidi.',
                     'info' => 'Ukubwa wa juu kabisa wa video unapaswa kuwa kama :size',
                     'title' => 'Video',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Tathmini au makadirio ya kitu, mara nyingi ikijumuisha maoni na maudhi.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Ukubwa wa Faili Unaoruhusiwa Kupakiwa (kwa Kb)',
-                        'image-upload-size' => 'Ukubwa wa Picha Unaoruhusiwa Kupakiwa (kwa Kb)',
-                        'title' => 'Sifa',
-                        'title-info' => 'Sifa au mali inayofafanua kitu, ikiathiri tabia yake, mwonekano wake au utendaji wake.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Sanidi mipangilio ya ushiriki wa kijamii kuwezesha kushiriki bidhaa kwenye Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn, na kwa barua pepe.',
                         'title' => 'Ushiriki wa Kijamii',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'Anwani ambayo faili hutolewa kutoka kwake, iwe anwani ya umma ya bucket au kikoa maalum. Bucket ya R2 ni ya faragha hadi moja iwekwe, kwa hiyo faili hazitafikika bila hiyo.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Upakiaji wa Media',
+                    'info' => 'Chagua picha na video zipi zinaweza kupakiwa na ukubwa wake wa juu.',
+                    'allowed-extensions' => 'Viendelezi Vinavyoruhusiwa',
+                    'allowed-extensions-info' => 'Aina za faili zinazoweza kupakiwa. Aina nyingine yoyote inakataliwa.',
+                    'max-size' => 'Ukubwa wa Juu wa Faili (KB)',
+                    'max-size-info' => 'Faili kubwa zaidi inayoweza kupakiwa, kwa kilobaiti. Kikomo cha seva bado kinatumika kikiwa chini zaidi.',
+
+                    'images' => [
+                        'title' => 'Picha',
+                        'info' => 'Sheria zinazofuatwa na kila upakiaji wa picha.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Video',
+                        'info' => 'Sheria zinazofuatwa na kila upakiaji wa video.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Faili',
+                        'info' => 'Kikomo cha ukubwa wa faili zilizopakiwa ambazo si picha wala video, kama sifa za faili za bidhaa.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Faili za :types pekee zinaruhusiwa.',
+                'max-size' => 'Faili haipaswi kuzidi :size.',
+                'size-hint' => 'Juu :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Ongeza Picha',
                 'ai-add-image-btn' => 'Magic AI',
                 'ai-btn-info' => 'Tengeneza Picha',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Picha',
-                'not-allowed-error' => 'Faili za picha pekee (.jpeg, .jpg, .png, ..) ndizo zinazoruhusiwa.',
 
                 'ai-generation' => [
                     'apply' => 'Tumia',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Ongeza Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Faili za video pekee (.mp4, .mov, .ogg ..) ndizo zinazoruhusiwa.',
                 'video' => 'Video',
 
                 'seo' => [

@@ -41,6 +41,10 @@ function accountUpdatePayload(Admin $admin, array $extra = []): array
     ], $extra);
 }
 
+// ============================================================================
+// Avatar Seo
+// ============================================================================
+
 it('should render the seo drawer on the account page', function () {
     $this->loginAsAdmin();
 
@@ -99,4 +103,50 @@ it('should delete the avatar file when the image is removed', function () {
     expect($admin->fresh()->image)->toBeNull();
 
     Storage::assertMissing($originalPath);
+});
+
+// ============================================================================
+// Avatar Validation
+// ============================================================================
+
+it('should accept an avatar of every type the media settings allow', function (string $file) {
+    Storage::fake();
+
+    $admin = makeAdminWithAvatar(withImage: false);
+
+    $this->loginAsAdmin($admin);
+
+    putJson(route('admin.account.update'), accountUpdatePayload($admin, [
+        'image' => ['image_0' => UploadedFile::fake()->image($file, 20, 20)],
+    ]))
+        ->assertRedirect()
+        ->assertSessionHasNoErrors();
+
+    expect($admin->fresh()->image)->not->toBeNull();
+})->with(['avatar.bmp', 'avatar.jpeg', 'avatar.jpg', 'avatar.png', 'avatar.webp']);
+
+it('should reject an avatar type the media settings do not allow', function () {
+    $admin = makeAdminWithAvatar(withImage: false);
+
+    $this->loginAsAdmin($admin);
+
+    putJson(route('admin.account.update'), accountUpdatePayload($admin, [
+        'image' => ['image_0' => UploadedFile::fake()->image('avatar.gif')],
+    ]))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('image.image_0');
+});
+
+it('should reject an avatar larger than the media settings allow', function () {
+    $this->setConfig('file_management.media.images.max_size', 100);
+
+    $admin = makeAdminWithAvatar(withImage: false);
+
+    $this->loginAsAdmin($admin);
+
+    putJson(route('admin.account.update'), accountUpdatePayload($admin, [
+        'image' => ['image_0' => UploadedFile::fake()->image('avatar.png')->size(101)],
+    ]))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('image.image_0');
 });

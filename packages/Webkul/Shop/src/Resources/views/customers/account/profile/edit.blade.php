@@ -43,15 +43,15 @@
             <x-shop::form.control-group class="mt-4">
                 <x-shop::form.control-group.control
                     type="image"
-                    class="max-md:[&>*]:[&>*]:rounded-full mb-0 rounded-xl p-0! text-gray-700 max-md:grid max-md:justify-center"
+                    class="max-md:*:*:rounded-full mb-0 rounded-xl p-0! text-gray-700 max-md:grid max-md:justify-center"
                     name="image[]"
                     :label="trans('Image')"
                     :is-multiple="false"
-                    accepted-types="image/*"
+                    accepted-types="{{ '.'.implode(',.', app(\Webkul\Core\Helpers\MediaUpload::class)->extensions(\Webkul\Core\Helpers\MediaUpload::IMAGE)) }}"
                     :src="$customer->image_url"
                 />
 
-                <x-shop::form.control-group.error control-name="image[]" />
+                <x-shop::form.control-group.error control-name="image[0]" />
             </x-shop::form.control-group>
 
             {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.image.after') !!}

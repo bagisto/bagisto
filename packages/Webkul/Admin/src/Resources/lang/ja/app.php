@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'エラー：:attribute は :max キロバイトを超えてはいけません。小さいファイルを選択してください。',
                     'info' => '最大ビデオサイズは :size となります',
                     'title' => 'ビデオ',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => '商品をレビューできる対象と、商品ページでのレビューの表示方法。',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => '許可されるファイルのアップロードサイズ（KB単位）',
-                        'image-upload-size' => '許可される画像のアップロードサイズ（KB単位）',
-                        'title' => '属性',
-                        'title-info' => '属性値にアップロードできる画像とファイルの最大サイズ。',
-                    ],
-
                     'social-share' => [
                         'title-info' => '商品ページに表示する共有ボタンと、そこに含めるメッセージを選択します。',
                         'title' => 'ソーシャルシェア',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'ファイルを配信するアドレスで、バケットの公開アドレスまたは独自ドメインです。R2 バケットは設定するまで非公開のため、指定しないとファイルにアクセスできません。',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'メディアのアップロード',
+                    'info' => 'アップロードできる画像と動画の種類と最大サイズを設定します。',
+                    'allowed-extensions' => '許可する拡張子',
+                    'allowed-extensions-info' => 'アップロードできるファイルの種類です。それ以外の種類は拒否されます。',
+                    'max-size' => '最大ファイルサイズ（KB）',
+                    'max-size-info' => 'アップロードできる最大ファイルサイズ（キロバイト）。サーバーの上限の方が小さい場合はそちらが適用されます。',
+
+                    'images' => [
+                        'title' => '画像',
+                        'info' => 'すべての画像アップロードに適用されるルールです。',
+                    ],
+
+                    'videos' => [
+                        'title' => '動画',
+                        'info' => 'すべての動画アップロードに適用されるルールです。',
+                    ],
+
+                    'files' => [
+                        'title' => 'ファイル',
+                        'info' => '商品のファイル属性など、画像や動画以外のアップロードファイルのサイズ上限です。',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => ':types ファイルのみ許可されています。',
+                'max-size' => 'ファイルは :size 以下である必要があります。',
+                'size-hint' => '最大 :size',
+            ],
+
             'images' => [
                 'add-image-btn' => '画像を追加',
                 'ai-add-image-btn' => 'マジックAI',
                 'ai-btn-info' => '画像生成',
-                'allowed-types' => 'png、jpeg、jpg',
                 'image' => '画像',
-                'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
                 'ai-generation' => [
                     'apply' => '適用',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'ビデオを追加',
-                'allowed-types' => 'mp4、webm、mkv',
-                'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
                 'video' => '動画',
 
                 'seo' => [

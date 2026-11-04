@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'El :attribute no ha de ser més gran que :max kilobytes. Si us plau, selecciona un fitxer més petit.',
                     'info' => 'El mida màxima del vídeo ha de ser d\'aproximadament :size',
                     'title' => 'Vídeos',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Qui pot valorar un producte i com es mostren les valoracions a la pàgina del producte.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Mida màxima de càrrega d\'arxius (en Kb)',
-                        'image-upload-size' => 'Mida màxima de càrrega d\'imatges (en Kb)',
-                        'title' => 'Atribut',
-                        'title-info' => 'La mida màxima d\'imatge i fitxer que es pot pujar per a un valor d\'atribut.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Trieu quins botons de compartir apareixen a la pàgina del producte i el missatge que porten.',
                         'title' => 'Compartir a les xarxes socials',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'L\'adreça des d\'on se serveixen els fitxers, ja sigui l\'adreça pública del bucket o un domini propi. Un bucket de R2 és privat fins que se\'n defineix una; sense ella els fitxers no seran accessibles.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Pujada de fitxers multimèdia',
+                    'info' => 'Trieu quines imatges i vídeos es poden pujar i quina mida poden tenir.',
+                    'allowed-extensions' => 'Extensions permeses',
+                    'allowed-extensions-info' => 'Tipus de fitxer que es poden pujar. Qualsevol altre tipus es rebutja.',
+                    'max-size' => 'Mida màxima del fitxer (KB)',
+                    'max-size-info' => 'El fitxer més gran que es pot pujar, en kilobytes. El límit del servidor continua aplicant-se si és inferior.',
+
+                    'images' => [
+                        'title' => 'Imatges',
+                        'info' => 'Regles que segueix cada pujada d\'imatge.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Vídeos',
+                        'info' => 'Regles que segueix cada pujada de vídeo.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Fitxers',
+                        'info' => 'Límit de mida dels fitxers pujats que no són imatges ni vídeos, com els atributs de fitxer del producte.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Només es permeten fitxers :types.',
+                'max-size' => 'El fitxer no pot superar :size.',
+                'size-hint' => 'Màx. :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Afegir Imatge',
                 'ai-add-image-btn' => 'Màgia IA',
                 'ai-btn-info' => 'Generar Imatge',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imatge',
-                'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
                     'apply' => 'Aplicar',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .ogg ..).',
                 'video' => 'Vídeo',
 
                 'seo' => [

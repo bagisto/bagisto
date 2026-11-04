@@ -3,6 +3,7 @@
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Core\Models\Locale;
 
 use function Pest\Laravel\deleteJson;
@@ -11,6 +12,17 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 beforeEach(fn () => Storage::fake());
+
+/**
+ * The message a locale logo of a type that is not allowed is refused with, listing the allowed extensions.
+ */
+function localeLogoExtensionsMessage(): string
+{
+    return trans('validation.extensions', [
+        'attribute' => trans('admin::app.settings.locales.index.create.locale-logo'),
+        'values' => implode(', ', [...app(MediaUpload::class)->extensions(MediaUpload::IMAGE), 'svg']),
+    ]);
+}
 
 /**
  * A locale code in the `xx_YY` form that no locale holds yet.
@@ -69,6 +81,31 @@ it('should store a newly created locale', function () {
     Storage::assertExists('locales/'.$data['code'].'.png');
 });
 
+it('should store an svg locale logo with its script stripped', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), $data = [
+        'code' => uniqueLocaleCode(),
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent(
+                'logo.svg',
+                '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><script>alert(1)</script><rect width="10" height="10"/></svg>'
+            ),
+        ],
+    ])
+        ->assertOk();
+
+    $path = 'locales/'.$data['code'].'.svg';
+
+    Storage::assertExists($path);
+
+    expect(Storage::get($path))
+        ->toContain('<rect')
+        ->not->toContain('<script');
+});
+
 it('should fail validation when the code belongs to another locale on store', function () {
     $locale = Locale::factory()->create();
 
@@ -93,7 +130,7 @@ it('should fail validation when required fields are missing on store', function 
         ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('direction')
-        ->assertJsonValidationErrorFor('logo_path.0');
+        ->assertJsonValidationErrors(['logo_path.0' => trans('validation.file', ['attribute' => trans('admin::app.settings.locales.index.create.locale-logo')])]);
 });
 
 it('should reject a tampered file upload on store', function () {
@@ -108,7 +145,7 @@ it('should reject a tampered file upload on store', function () {
         ],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('logo_path.0');
+        ->assertJsonValidationErrors(['logo_path.0' => localeLogoExtensionsMessage()]);
 });
 
 // ============================================================================
@@ -155,6 +192,83 @@ it('should update an existing locale', function () {
     Storage::assertExists('locales/'.$locale->code.'.png');
 });
 
+it('should keep the current svg logo when its replacement cannot be read', function () {
+    $locale = Locale::factory()->create();
+
+    $locale->forceFill(['logo_path' => 'locales/'.$locale->code.'.svg'])->save();
+
+    Storage::put($locale->logo_path, '<svg><rect/></svg>');
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id' => $locale->id,
+        'name' => $locale->name,
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg><rect></svg>'),
+        ],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['logo_path' => trans('core::app.errors.invalid-svg')]);
+
+    expect(Storage::get($locale->logo_path))->toBe('<svg><rect/></svg>')
+        ->and(Storage::files('locales'))->toBe([$locale->logo_path]);
+
+    $this->assertDatabaseHas('locales', [
+        'id' => $locale->id,
+        'logo_path' => $locale->logo_path,
+    ]);
+});
+
+it('should remove the previous logo file when it is replaced with another type', function () {
+    $locale = Locale::factory()->create();
+
+    $locale->forceFill(['logo_path' => 'locales/'.$locale->code.'.png'])->save();
+
+    Storage::put($locale->logo_path, 'png');
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id' => $locale->id,
+        'name' => $locale->name,
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg><rect/></svg>'),
+        ],
+    ])
+        ->assertOk();
+
+    Storage::assertMissing('locales/'.$locale->code.'.png');
+
+    Storage::assertExists('locales/'.$locale->code.'.svg');
+});
+
+it('should remove the logo file when the logo is cleared', function () {
+    $locale = Locale::factory()->create();
+
+    $locale->forceFill(['logo_path' => 'locales/'.$locale->code.'.png'])->save();
+
+    Storage::put($locale->logo_path, 'png');
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id' => $locale->id,
+        'name' => $locale->name,
+        'direction' => 'ltr',
+    ])
+        ->assertOk();
+
+    Storage::assertMissing('locales/'.$locale->code.'.png');
+
+    $this->assertDatabaseHas('locales', [
+        'id' => $locale->id,
+        'logo_path' => null,
+    ]);
+});
+
 it('should fail validation when required fields are missing on update', function () {
     $locale = Locale::factory()->create();
 
@@ -182,7 +296,7 @@ it('should reject a tampered file upload on update', function () {
         ],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('logo_path.0');
+        ->assertJsonValidationErrors(['logo_path.0' => localeLogoExtensionsMessage()]);
 });
 
 // ============================================================================

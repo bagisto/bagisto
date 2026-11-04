@@ -1,11 +1,24 @@
+@php
+    use Webkul\Core\Helpers\MediaUpload;
+
+    $mediaUpload = app(MediaUpload::class);
+
+    $defaultExtensions = implode(',', $mediaUpload->extensions(MediaUpload::VIDEO));
+
+    $defaultMaxSize = $mediaUpload->maxSize(MediaUpload::VIDEO);
+@endphp
+
 @props([
-    'name'           => 'images',
+    'name'           => 'videos',
     'allowMultiple'  => false,
     'uploadedVideos' => [],
     'width'          => '210px',
     'height'         => '120px',
     'enableSeo'      => false,
     'metaName'       => '',
+    'allowedTypes'   => null,
+    'extraTypes'     => '',
+    'maxSize'        => null,
 ])
 
 <v-media-videos
@@ -13,13 +26,18 @@
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
+    allowed-types="{{ $allowedTypes ?: $defaultExtensions }}"
+    extra-types="{{ $extraTypes }}"
+    v-bind:max-size="{{ (int) ($maxSize ?: $defaultMaxSize) }}"
     :uploaded-videos="@js($uploadedVideos)"
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
-    {{ $attributes->get('class') }}
+    {{ $attributes->except([':uploaded-videos', ':errors']) }}
 >
 </v-media-videos>
+
+@include('admin::components.media.validation')
 
 @pushOnce('scripts')
     <script
@@ -33,7 +51,7 @@
 
                 <label
                     class="grid h-30 max-h-30 w-full max-w-52.5 cursor-pointer items-center justify-items-center rounded-sm border border-dashed transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                    :class="[errors['videos.files[0]'] ? 'border border-red-500' : 'border-gray-300']"
+                    :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
                     :for="$.uid + '_videoInput'"
                     v-if="allowMultiple || videos.length == 0"
                 >
@@ -43,8 +61,10 @@
                         <p class="grid text-center text-sm font-semibold text-gray-600 dark:text-gray-300">
                             @lang('admin::app.components.media.videos.add-video-btn')
                             
-                            <span class="text-xs">
-                                @lang('admin::app.components.media.videos.allowed-types')
+                            <span
+                                class="text-xs"
+                                v-text="hint"
+                            >
                             </span>
                         </p>
 
@@ -52,9 +72,8 @@
                             type="file"
                             class="hidden"
                             :id="$.uid + '_videoInput'"
-                            accept="video/*"
+                            :accept="rules.accept"
                             :multiple="allowMultiple"
-                            :ref="$.uid + '_videoInput'"
                             @change="add"
                         />
                     </div>
@@ -77,12 +96,22 @@
                             :video="element"
                             :width="width"
                             :height="height"
+                            :rules="rules"
                             @onRemove="remove($event)"
+                            @onChange="clearErrors"
+                            @onInvalid="clientError = $event"
                         >
                         </v-media-video-item>
                     </template>
                 </draggable>
             </div>
+
+            <p
+                class="mt-1 text-xs italic text-red-600"
+                v-if="errorMessage"
+                v-text="errorMessage"
+            >
+            </p>
         </div>
     </script>
 
@@ -95,9 +124,10 @@
             <video
                 class="h-30 w-52.5 object-cover"
                 ref="videoPreview"
-                v-if="video.url.length > 0"
+                :src="video.url"
+                v-if="video.url"
+                @ended="isPlaying = false"
             >
-                <source :src="video.url" type="video/mp4">
             </video>
 
             <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
@@ -142,12 +172,17 @@
 
                     <input
                         type="file"
-                        :name="enableSeo ? name + '[' + video.id + ']' : name + '[]'"
                         class="hidden"
-                        accept="video/*"
+                        :name="enableSeo ? name + '[' + video.id + ']' : name + '[]'"
+                        ref="fileInput"
+                    />
+
+                    <input
+                        type="file"
+                        class="hidden"
+                        :accept="rules.accept"
                         :id="$.uid + '_videoInput_' + index"
-                        :ref="$.uid + '_videoInput_' + index"
-                        @change="edit"
+                        @change="replace"
                     />
                 </div>
             </div>
@@ -233,7 +268,7 @@
 
             props: {
                 name: {
-                    type: String, 
+                    type: String,
                     default: 'videos',
                 },
 
@@ -244,17 +279,17 @@
 
                 uploadedVideos: {
                     type: Array,
-                    default: () => []
+                    default: () => [],
                 },
 
                 width: {
                     type: String,
-                    default: '210px'
+                    default: '210px',
                 },
 
                 height: {
                     type: String,
-                    default: '120px'
+                    default: '120px',
                 },
 
                 enableSeo: {
@@ -267,129 +302,274 @@
                     default: '',
                 },
 
+                allowedTypes: {
+                    type: [String, Array],
+                    default: @js($defaultExtensions),
+                },
+
+                extraTypes: {
+                    type: [String, Array],
+                    default: '',
+                },
+
+                maxSize: {
+                    type: Number,
+                    default: {{ $defaultMaxSize }},
+                },
+
                 errors: {
                     type: Object,
-                    default: () => {}
-                }
+                    default: () => ({}),
+                },
             },
 
             data() {
                 return {
                     videos: [],
-                }
+
+                    newVideoIndex: 0,
+
+                    clientError: null,
+
+                    isServerErrorDismissed: false,
+                };
+            },
+
+            computed: {
+                /**
+                 * What a picked file is checked against: its extensions, size and type, and the picker filter.
+                 */
+                rules() {
+                    const extensions = [...new Set([
+                        ...this.$mediaUpload.parseExtensions(this.allowedTypes),
+                        ...this.$mediaUpload.parseExtensions(this.extraTypes),
+                    ])];
+
+                    return {
+                        extensions,
+                        maxSize: this.maxSize,
+                        mimePrefix: 'video/',
+                        accept: this.$mediaUpload.accept(extensions),
+                    };
+                },
+
+                /**
+                 * The allowed extensions and size, shown under the upload button.
+                 */
+                hint() {
+                    return this.$mediaUpload.hint(this.rules.extensions, this.rules.maxSize);
+                },
+
+                /**
+                 * The first error the server reported for this field.
+                 */
+                serverError() {
+                    return this.$mediaUpload.fieldError(this.errors, this.name);
+                },
+
+                /**
+                 * The message shown under the field, a rejected selection taking precedence over the server's.
+                 */
+                errorMessage() {
+                    if (this.clientError) {
+                        return this.clientError;
+                    }
+
+                    return this.isServerErrorDismissed ? null : this.serverError;
+                },
+            },
+
+            watch: {
+                /**
+                 * A fresh server error describes the latest submission, so it is shown again.
+                 */
+                serverError() {
+                    this.isServerErrorDismissed = false;
+                },
             },
 
             mounted() {
                 this.videos = this.uploadedVideos;
+
+                document.addEventListener('submit', this.onSubmit, true);
+            },
+
+            beforeUnmount() {
+                document.removeEventListener('submit', this.onSubmit, true);
             },
 
             methods: {
-                add() {
-                    let videoInput = this.$refs[this.$.uid + '_videoInput'];
+                /**
+                 * Add the picked files, or refuse all of them when one is not allowed.
+                 */
+                add(event) {
+                    const files = this.$mediaUpload.takeFiles(event.target);
 
-                    if (videoInput.files == undefined) {
+                    if (! files.length) {
                         return;
                     }
 
-                    const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
+                    const error = files.map(file => this.$mediaUpload.validate(file, this.rules)).find(Boolean);
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.videos.not-allowed-error')"
-                        });
+                    if (error) {
+                        this.clientError = error;
 
                         return;
                     }
 
-                    videoInput.files.forEach((file, index) => {
+                    this.clearErrors();
+
+                    files.forEach(file => {
                         this.videos.push({
-                            id: 'video_' + this.videos.length,
+                            id: 'video_' + this.newVideoIndex++,
                             url: '',
-                            file: file
+                            file_name: file.name.replace(/\.[^/.]+$/, ''),
+                            file,
                         });
                     });
                 },
 
+                /**
+                 * Remove a video from the list.
+                 */
                 remove(video) {
-                    let index = this.videos.indexOf(video);
+                    this.videos.splice(this.videos.indexOf(video), 1);
 
-                    this.videos.splice(index, 1);
+                    this.clearErrors();
                 },
-            }
+
+                /**
+                 * Drop the messages describing the previous selection once the videos change.
+                 */
+                clearErrors() {
+                    this.clientError = null;
+
+                    this.isServerErrorDismissed = true;
+                },
+
+                /**
+                 * Let the server's answer to a new submission be shown again.
+                 */
+                onSubmit() {
+                    this.isServerErrorDismissed = false;
+                },
+            },
         });
 
         app.component('v-media-video-item', {
             template: '#v-media-video-item-template',
 
-            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName'],
+            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName', 'rules'],
+
+            emits: ['onRemove', 'onChange', 'onInvalid'],
 
             data() {
                 return {
-                    isPlaying: false
-                }
+                    isPlaying: false,
+
+                    objectUrl: null,
+                };
             },
 
             mounted() {
                 if (this.video.file instanceof File) {
                     this.setFile(this.video.file);
 
-                    this.readFile(this.video.file);
+                    this.preview(this.video.file);
                 }
             },
 
+            beforeUnmount() {
+                this.revokePreview();
+            },
+
             methods: {
-                edit() {
-                    let videoInput = this.$refs[this.$.uid + '_videoInput_' + this.index];
+                /**
+                 * Replace the video with the picked file, which reaches the submitted input only once allowed.
+                 */
+                replace(event) {
+                    const [file] = this.$mediaUpload.takeFiles(event.target);
 
-                    if (videoInput.files == undefined) {
+                    if (! file) {
                         return;
                     }
 
-                    const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
+                    const error = this.$mediaUpload.validate(file, this.rules);
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.videos.not-allowed-error')"
-                        });
+                    if (error) {
+                        this.$emit('onInvalid', error);
 
                         return;
                     }
 
-                    this.setFile(videoInput.files[0]);
+                    if (! this.video.file_name) {
+                        this.video.file_name = file.name.replace(/\.[^/.]+$/, '');
+                    }
 
-                    this.readFile(videoInput.files[0]);
+                    this.isPlaying = false;
+
+                    this.setFile(file);
+
+                    this.preview(file);
+
+                    this.$emit('onChange', this.video);
                 },
 
+                /**
+                 * Ask the list to remove this video.
+                 */
                 remove() {
-                    this.$emit('onRemove', this.video)
+                    this.$emit('onRemove', this.video);
                 },
 
+                /**
+                 * Put the file into the input submitted with the form.
+                 */
                 setFile(file) {
                     this.video.is_new = 1;
+
+                    this.video.file = file;
 
                     const dataTransfer = new DataTransfer();
 
                     dataTransfer.items.add(file);
 
-                    this.$refs[this.$.uid + '_videoInput_' + this.index].files = dataTransfer.files;
+                    this.$refs.fileInput.files = dataTransfer.files;
                 },
 
-                readFile(file) {
-                    let reader = new FileReader();
+                /**
+                 * Preview the file through an object URL, which unlike a data URL is not held in memory as text.
+                 */
+                preview(file) {
+                    this.revokePreview();
 
-                    reader.onload = (e) => {
-                        this.video.url = e.target.result;
+                    this.objectUrl = URL.createObjectURL(file);
+
+                    this.video.url = this.objectUrl;
+                },
+
+                /**
+                 * Release the object URL of the previous preview.
+                 */
+                revokePreview() {
+                    if (this.objectUrl) {
+                        URL.revokeObjectURL(this.objectUrl);
+
+                        this.objectUrl = null;
+                    }
+                },
+
+                /**
+                 * Play the preview, or pause it when it is playing.
+                 */
+                playPause() {
+                    const videoPreview = this.$refs.videoPreview;
+
+                    if (! videoPreview) {
+                        return;
                     }
 
-                    reader.readAsDataURL(file);
-                },
-
-                playPause() {
-                    let videoPreview = this.$refs.videoPreview;
-
-                    if (videoPreview.paused == true) {
+                    if (videoPreview.paused) {
                         this.isPlaying = true;
 
                         videoPreview.play();
@@ -398,8 +578,8 @@
 
                         videoPreview.pause();
                     }
-                }
-            }
+                },
+            },
         });
     </script>
 @endPushOnce

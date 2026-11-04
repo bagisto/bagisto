@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Product\Models\Product;
@@ -300,6 +302,49 @@ it('should fail validation when boolean fields have invalid values on configurab
         ->assertJsonValidationErrorFor('new')
         ->assertJsonValidationErrorFor('featured');
 });
+
+it('should refuse a variant image of a type the media settings do not allow', function (string $file, bool $refused) {
+    $product = $this->storeAndUpdateConfigurableProduct();
+
+    $variants = $product->variants->mapWithKeys(fn ($variant) => [
+        $variant->id => [
+            'sku' => $variant->sku,
+            'name' => $variant->name ?? 'Variant',
+            'price' => 50,
+            'weight' => 2,
+            'status' => 1,
+            'inventories' => [1 => 50],
+        ],
+    ])->all();
+
+    Storage::fake();
+
+    $variantId = array_key_first($variants);
+
+    $variants[$variantId]['images'] = ['files' => [UploadedFile::fake()->image($file)]];
+
+    $response = putJson(route('admin.catalog.products.update', $product->id), [
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'name' => $product->name,
+        'short_description' => $product->short_description,
+        'description' => $product->description,
+        'channel' => core()->getDefaultChannelCode(),
+        'locale' => app()->getLocale(),
+        'status' => 1,
+        'visible_individually' => 1,
+        'guest_checkout' => 1,
+        'variants' => $variants,
+    ]);
+
+    $refused
+        ? $response->assertJsonValidationErrorFor('variants.'.$variantId.'.images.files.0')
+        : $response->assertRedirect(route('admin.catalog.products.index'));
+})->with([
+    'an allowed type' => ['photo.png', false],
+    'a type that is not allowed' => ['photo.gif', true],
+    'a script' => ['photo.php', true],
+]);
 
 // ============================================================================
 // Delete

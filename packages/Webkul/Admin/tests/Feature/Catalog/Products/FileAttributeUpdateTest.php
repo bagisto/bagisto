@@ -168,3 +168,25 @@ it('should reject a file attribute larger than the allowed upload size', functio
 
     expect(storedMediaPath('qa_file_attribute'))->toBe($this->storedPaths['qa_file_attribute']);
 });
+
+it('should limit an image attribute by the image media upload setting', function () {
+    $this->setConfig('file_management.media.images.max_size', 100);
+
+    put(route('admin.catalog.products.update', $this->product->id), array_merge($this->payload, [
+        'qa_image_attribute' => UploadedFile::fake()->image('fresh.png')->size(101),
+    ]))->assertSessionHasErrors('qa_image_attribute');
+
+    expect(storedMediaPath('qa_image_attribute'))->toBe($this->storedPaths['qa_image_attribute']);
+});
+
+it('should limit a file attribute by the file media upload setting', function () {
+    $this->setConfig('file_management.media.files.max_size', 100);
+
+    put(route('admin.catalog.products.update', $this->product->id), array_merge($this->payload, [
+        'qa_file_attribute' => UploadedFile::fake()->create('fresh.pdf', 101, 'application/pdf'),
+    ]))->assertSessionHasErrors('qa_file_attribute');
+
+    put(route('admin.catalog.products.update', $this->product->id), array_merge($this->payload, [
+        'qa_file_attribute' => UploadedFile::fake()->create('fresh.pdf', 99, 'application/pdf'),
+    ]))->assertSessionHasNoErrors();
+});

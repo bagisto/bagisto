@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'The :attribute may not be greater than :max kilobytes. Please choose a smaller file.',
                     'info' => 'Maximum video size should be like :size',
                     'title' => 'Videos',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Who may review a product, and how reviews are shown on the product page.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Allowed File Upload Size (in Kb)',
-                        'image-upload-size' => 'Allowed Image Upload Size (in Kb)',
-                        'title' => 'Attribute',
-                        'title-info' => 'The largest image and file that may be uploaded for an attribute value.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Choose which share buttons appear on the product page, and the message they carry.',
                         'title' => 'Social Share',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'The address files are served from, either the bucket public address or a custom domain. An R2 bucket is private until one is set, so files will not be reachable without it.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Media Uploads',
+                    'info' => 'Choose which images and videos may be uploaded and how large they may be.',
+                    'allowed-extensions' => 'Allowed Extensions',
+                    'allowed-extensions-info' => 'File types that may be uploaded. A file of any other type is refused.',
+                    'max-size' => 'Maximum File Size (KB)',
+                    'max-size-info' => 'Largest file that may be uploaded, in kilobytes. The server\'s own upload limit still applies when it is lower.',
+
+                    'images' => [
+                        'title' => 'Images',
+                        'info' => 'Rules every image upload follows.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Videos',
+                        'info' => 'Rules every video upload follows.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Files',
+                        'info' => 'Size limit for uploaded files that are neither images nor videos, such as product file attributes.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Only :types files are allowed.',
+                'max-size' => 'The file may not be larger than :size.',
+                'size-hint' => 'Max :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Add Image',
                 'ai-add-image-btn' => 'Magic AI',
                 'ai-btn-info' => 'Generate Image',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Image',
-                'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
                 'ai-generation' => [
                     'apply' => 'Apply',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
                 'video' => 'Video',
 
                 'seo' => [

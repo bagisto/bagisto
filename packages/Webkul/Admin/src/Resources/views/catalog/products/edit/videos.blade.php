@@ -1,3 +1,9 @@
+@php
+    use Webkul\Core\Helpers\MediaUpload;
+
+    $mediaUpload = app(MediaUpload::class);
+@endphp
+
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.videos.before', ['product' => $product]) !!}
 
 <div class="box-shadow relative rounded-sm bg-white p-4 dark:bg-gray-900">
@@ -9,7 +15,7 @@
             </p>
 
             <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
-                @lang('admin::app.catalog.products.edit.videos.info', ['size' => core()->getMaxUploadSize()])
+                @lang('admin::app.catalog.products.edit.videos.info', ['size' => $mediaUpload->formatSize($mediaUpload->maxSize(MediaUpload::VIDEO))])
             </p>
         </div>
     </div>
@@ -22,8 +28,6 @@
         :enable-seo="true"
         :uploaded-videos="$product->videos"
     />
-
-    <x-admin::form.control-group.error control-name='videos.files[0]' />
 </div>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.videos.after', ['product' => $product]) !!}

@@ -260,6 +260,7 @@
                                 <x-admin::media.images
                                     name="favicon"
                                     meta-name="favicon_meta"
+                                    extra-types="ico"
                                     enable-seo="true"
                                     width="110px"
                                     height="110px"

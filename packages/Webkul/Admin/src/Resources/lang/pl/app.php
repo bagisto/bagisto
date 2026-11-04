@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'Błąd: :attribute nie może być większy niż :max megabajtów. Proszę wybrać mniejszy plik.',
                     'info' => 'Maksymalny rozmiar filmu powinien wynosić około :size',
                     'title' => 'Filmy',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Kto może wystawić opinię o produkcie i jak opinie są pokazywane na stronie produktu.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Maksymalny rozmiar pliku (KB)',
-                        'image-upload-size' => 'Maksymalny rozmiar zdjęcia (KB)',
-                        'title' => 'Limity dla atrybutów (Pliki i Obrazy)',
-                        'title-info' => 'Maksymalny rozmiar obrazu i pliku, który można przesłać dla wartości atrybutu.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Wybierz, które przyciski udostępniania pojawiają się na stronie produktu i jaką wiadomość niosą.',
                         'title' => 'Udostępnianie w social mediach',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'Adres, spod którego udostępniane są pliki: publiczny adres zasobnika albo własna domena. Zasobnik R2 jest prywatny, dopóki adres nie zostanie ustawiony, bez niego pliki będą niedostępne.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Przesyłanie multimediów',
+                    'info' => 'Wybierz, jakie obrazy i filmy można przesyłać oraz jak duże mogą być.',
+                    'allowed-extensions' => 'Dozwolone rozszerzenia',
+                    'allowed-extensions-info' => 'Typy plików, które można przesyłać. Każdy inny typ jest odrzucany.',
+                    'max-size' => 'Maksymalny rozmiar pliku (KB)',
+                    'max-size-info' => 'Największy plik, który można przesłać, w kilobajtach. Limit serwera nadal obowiązuje, jeśli jest niższy.',
+
+                    'images' => [
+                        'title' => 'Obrazy',
+                        'info' => 'Zasady obowiązujące przy każdym przesyłaniu obrazu.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Filmy',
+                        'info' => 'Zasady obowiązujące przy każdym przesyłaniu filmu.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Pliki',
+                        'info' => 'Limit rozmiaru przesyłanych plików, które nie są obrazami ani filmami, np. atrybutów plikowych produktu.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Dozwolone są tylko pliki :types.',
+                'max-size' => 'Plik nie może być większy niż :size.',
+                'size-hint' => 'Maks. :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Dodaj obraz',
                 'ai-add-image-btn' => 'Magia AI',
                 'ai-btn-info' => 'Generuj obraz',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Obraz',
-                'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
                     'apply' => 'Zastosuj',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Dodaj film',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
                 'video' => 'Wideo',
 
                 'seo' => [

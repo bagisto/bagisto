@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => ':attribute :max kilobayttan büyük olamaz. Lütfen daha küçük bir dosya seçin.',
                     'info' => 'Maksimum video boyutu :size gibi olmalıdır',
                     'title' => 'Videolar',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Bir ürünü kimlerin değerlendirebileceği ve değerlendirmelerin ürün sayfasında nasıl gösterileceği.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'İzin Verilen Dosya Yükleme Boyutu (Kb cinsinden)',
-                        'image-upload-size' => 'İzin Verilen Resim Yükleme Boyutu (Kb cinsinden)',
-                        'title' => 'Öznitelik',
-                        'title-info' => 'Bir öznitelik değeri için yüklenebilecek en büyük görsel ve dosya boyutu.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Ürün sayfasında hangi paylaşım düğmelerinin görüneceğini ve taşıyacakları mesajı seçin.',
                         'title' => 'Sosyal Paylaşım',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'Dosyaların sunulduğu adres; klasörün genel adresi ya da kendi alan adınız olabilir. Bir R2 klasörü bir adres belirlenene kadar özeldir, adres olmadan dosyalara erişilemez.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Medya Yüklemeleri',
+                    'info' => 'Hangi görsel ve videoların yüklenebileceğini ve ne kadar büyük olabileceğini seçin.',
+                    'allowed-extensions' => 'İzin Verilen Uzantılar',
+                    'allowed-extensions-info' => 'Yüklenebilecek dosya türleri. Diğer türler reddedilir.',
+                    'max-size' => 'Maksimum Dosya Boyutu (KB)',
+                    'max-size-info' => 'Yüklenebilecek en büyük dosya, kilobayt cinsinden. Sunucunun kendi sınırı daha düşükse o geçerlidir.',
+
+                    'images' => [
+                        'title' => 'Görseller',
+                        'info' => 'Her görsel yüklemesinin uyduğu kurallar.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Videolar',
+                        'info' => 'Her video yüklemesinin uyduğu kurallar.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Dosyalar',
+                        'info' => 'Ürün dosya nitelikleri gibi görsel veya video olmayan yüklenen dosyaların boyut sınırı.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Yalnızca :types dosyalarına izin verilir.',
+                'max-size' => 'Dosya :size boyutundan büyük olamaz.',
+                'size-hint' => 'Maks. :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Resim Ekle',
                 'ai-add-image-btn' => 'Sihirli AI',
                 'ai-btn-info' => 'Resim Oluştur',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Görsel',
-                'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
                 'ai-generation' => [
                     'apply' => 'Uygula',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Video Ekle',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
                 'video' => 'Video',
 
                 'seo' => [

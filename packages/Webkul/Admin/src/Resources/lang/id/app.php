@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => ':attribute tidak boleh lebih besar dari :max kilobyte. Silakan pilih file yang lebih kecil.',
                     'info' => 'Ukuran maksimum video harus :size',
                     'title' => 'Video',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Siapa yang boleh mengulas produk, dan bagaimana ulasan ditampilkan di halaman produk.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Ukuran Unggahan File yang Diizinkan (dalam Kb)',
-                        'image-upload-size' => 'Ukuran Unggahan Gambar yang Diizinkan (dalam Kb)',
-                        'title' => 'Atribut',
-                        'title-info' => 'Ukuran gambar dan berkas terbesar yang boleh diunggah untuk sebuah nilai atribut.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Pilih tombol berbagi mana yang muncul di halaman produk, dan pesan yang dibawanya.',
                         'title' => 'Berbagi Sosial',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'Alamat tempat berkas disajikan, bisa alamat publik bucket atau domain sendiri. Bucket R2 bersifat privat sampai alamat ini diisi, tanpa itu berkas tidak dapat diakses.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Unggahan Media',
+                    'info' => 'Pilih gambar dan video apa saja yang boleh diunggah dan seberapa besar ukurannya.',
+                    'allowed-extensions' => 'Ekstensi yang Diizinkan',
+                    'allowed-extensions-info' => 'Jenis file yang boleh diunggah. File jenis lain akan ditolak.',
+                    'max-size' => 'Ukuran File Maksimum (KB)',
+                    'max-size-info' => 'File terbesar yang boleh diunggah, dalam kilobyte. Batas unggah server tetap berlaku jika lebih kecil.',
+
+                    'images' => [
+                        'title' => 'Gambar',
+                        'info' => 'Aturan yang diikuti setiap unggahan gambar.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Video',
+                        'info' => 'Aturan yang diikuti setiap unggahan video.',
+                    ],
+
+                    'files' => [
+                        'title' => 'File',
+                        'info' => 'Batas ukuran file unggahan yang bukan gambar atau video, seperti atribut file produk.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Hanya file :types yang diperbolehkan.',
+                'max-size' => 'File tidak boleh lebih besar dari :size.',
+                'size-hint' => 'Maks :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Tambah Gambar',
                 'ai-add-image-btn' => 'AI Magic',
                 'ai-btn-info' => 'Hasilkan Gambar',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Gambar',
-                'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
                 'ai-generation' => [
                     'apply' => 'Terapkan',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Hanya file video (.mp4, .mov, .ogg, dll) yang diperbolehkan.',
                 'video' => 'Video',
 
                 'seo' => [

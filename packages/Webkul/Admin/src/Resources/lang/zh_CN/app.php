@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => ':attribute 不能大于:max KB。请选择较小的文件。',
                     'info' => '最大视频尺寸应为 :size',
                     'title' => '视频',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => '谁可以评价商品，以及评价在商品页面的显示方式。',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => '允许文件上传大小（以KB为单位）',
-                        'image-upload-size' => '允许图片上传大小（以KB为单位）',
-                        'title' => '属性',
-                        'title-info' => '属性值可上传的图片和文件的最大大小。',
-                    ],
-
                     'social-share' => [
                         'title-info' => '选择商品页面显示哪些分享按钮，以及它们附带的消息。',
                         'title' => '社交分享',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => '对外提供文件的地址，可以是存储桶的公开地址或自定义域名。R2 存储桶在设置之前是私有的，未设置时文件将无法访问。',
                     ],
                 ],
+
+                'media' => [
+                    'title' => '媒体上传',
+                    'info' => '选择允许上传的图片和视频类型及其最大大小。',
+                    'allowed-extensions' => '允许的扩展名',
+                    'allowed-extensions-info' => '允许上传的文件类型，其他类型的文件将被拒绝。',
+                    'max-size' => '最大文件大小（KB）',
+                    'max-size-info' => '允许上传的最大文件，单位为千字节。若服务器自身的上传限制更低，则以服务器为准。',
+
+                    'images' => [
+                        'title' => '图片',
+                        'info' => '每次图片上传都遵循的规则。',
+                    ],
+
+                    'videos' => [
+                        'title' => '视频',
+                        'info' => '每次视频上传都遵循的规则。',
+                    ],
+
+                    'files' => [
+                        'title' => '文件',
+                        'info' => '非图片或视频的上传文件（例如商品文件属性）的大小限制。',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => '仅允许 :types 文件。',
+                'max-size' => '文件大小不能超过 :size。',
+                'size-hint' => '最大 :size',
+            ],
+
             'images' => [
                 'add-image-btn' => '添加图片',
                 'ai-add-image-btn' => '魔法 AI',
                 'ai-btn-info' => '生成图像',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => '图片',
-                'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
                 'ai-generation' => [
                     'apply' => '应用',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => '添加视频',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
                 'video' => '视频',
 
                 'seo' => [

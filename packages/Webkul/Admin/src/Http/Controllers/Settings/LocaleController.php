@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\LocalesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\LocaleRequest;
 use Webkul\Core\Repositories\LocaleRepository;
-use Webkul\Core\Rules\Code;
 
 class LocaleController extends Controller
 {
@@ -36,19 +36,11 @@ class LocaleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(): JsonResponse
+    public function store(LocaleRequest $request): JsonResponse
     {
-        $this->validate(request(), [
-            'code' => ['required', 'unique:locales,code', new Code],
-            'name' => 'required',
-            'direction' => 'required|in:ltr,rtl',
-            'logo_path' => 'array',
-            'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
-        ]);
-
         Event::dispatch('core.locale.create.before');
 
-        $locale = $this->localeRepository->create(request()->only([
+        $locale = $this->localeRepository->create($request->only([
             'code',
             'name',
             'direction',
@@ -77,22 +69,15 @@ class LocaleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(): JsonResponse
+    public function update(LocaleRequest $request): JsonResponse
     {
-        $this->validate(request(), [
-            'name' => 'required',
-            'direction' => 'required|in:ltr,rtl',
-            'logo_path' => 'array',
-            'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
-        ]);
+        Event::dispatch('core.locale.update.before', $request->id);
 
-        Event::dispatch('core.locale.update.before', request()->id);
-
-        $locale = $this->localeRepository->update(request()->only([
+        $locale = $this->localeRepository->update($request->only([
             'name',
             'direction',
             'logo_path',
-        ]), request()->id);
+        ]), $request->id);
 
         Event::dispatch('core.locale.update.after', $locale);
 

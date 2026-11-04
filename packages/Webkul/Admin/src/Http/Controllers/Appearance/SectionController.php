@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Core\Models\Channel;
 use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Theme\Contracts\Section;
@@ -246,10 +247,14 @@ class SectionController extends Controller
      * Store one uploaded file for a section, returning the path to record and the reference
      * to write into markup.
      */
-    public function uploadMedia(int $id): JsonResponse
+    public function uploadMedia(int $id, MediaUpload $mediaUpload): JsonResponse
     {
+        $type = str_starts_with((string) request()->file('file')?->getMimeType(), 'video/')
+            ? MediaUpload::VIDEO
+            : MediaUpload::IMAGE;
+
         $this->validate(request(), [
-            'file' => 'required|mimes:bmp,jpeg,jpg,png,webp,mp4,webm,ogg|max:51200',
+            'file' => ['required', ...$mediaUpload->rules($type)],
         ]);
 
         $this->sectionOrFail($id);

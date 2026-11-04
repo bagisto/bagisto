@@ -87,7 +87,8 @@ class LocaleRepository extends Repository
     }
 
     /**
-     * Upload image.
+     * Upload image under a temporary name first, so a refused upload never replaces the
+     * stored logo, and remove the previous file once it is replaced or cleared.
      *
      * @param  array  $localeImages
      * @param  \Webkul\Core\Models\Locale  $locale
@@ -95,34 +96,42 @@ class LocaleRepository extends Repository
      */
     public function uploadImage($localeImages, $locale)
     {
-        if (! isset($localeImages['logo_path'])) {
-            if (! empty($localeImages['logo_path'])) {
-                Storage::delete((string) $locale->logo_path);
-            }
+        $previousPath = $locale->logo_path;
 
+        if (! isset($localeImages['logo_path'])) {
             $locale->logo_path = null;
 
             $locale->save();
+
+            if ($previousPath) {
+                Storage::delete($previousPath);
+            }
 
             return;
         }
 
         foreach ($localeImages['logo_path'] as $image) {
             if ($image instanceof UploadedFile) {
-                $mimeType = $image->getMimeType();
+                $temporaryPath = $image->store('locales');
 
-                $locale->logo_path = $image->storeAs(
-                    'locales',
-                    $locale->code.'.'.$image->getClientOriginalExtension()
-                );
-
-                if (! $this->sanitizeSVG($locale->logo_path, $mimeType)) {
+                if (! $this->sanitizeSVG($temporaryPath, $image->getMimeType())) {
                     throw ValidationException::withMessages([
                         'logo_path' => trans('core::app.errors.invalid-svg'),
                     ]);
                 }
 
+                $locale->logo_path = 'locales/'.$locale->code.'.'.$image->getClientOriginalExtension();
+
+                Storage::move($temporaryPath, $locale->logo_path);
+
                 $locale->save();
+
+                if (
+                    $previousPath
+                    && $previousPath !== $locale->logo_path
+                ) {
+                    Storage::delete($previousPath);
+                }
             }
         }
     }

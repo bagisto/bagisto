@@ -130,7 +130,10 @@
 
                     {!! view_render_event('bagisto.admin.settings.locales.create_form_controls.before') !!}
 
-                    <x-admin::modal ref="localeUpdateOrCreateModal">
+                    <x-admin::modal
+                        ref="localeUpdateOrCreateModal"
+                        @toggle="onModalToggle"
+                    >
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
@@ -241,11 +244,11 @@
 
                                 <v-media-images
                                     name="logo_path"
+                                    extra-types="svg"
                                     :uploaded-images='locale.image'
+                                    :errors="errors"
                                 >
                                 </v-media-images>
-
-                                <x-admin::form.control-group.error control-name="logo_path" />
                             </x-admin::form.control-group>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300">
@@ -306,8 +309,21 @@
                     },
                 },
 
+                watch: {
+                    /**
+                     * The logo errors describe the file that was sent, so they go once the logo changes.
+                     */
+                    'locale.image': {
+                        deep: true,
+
+                        handler() {
+                            this.clearLogoErrors();
+                        },
+                    },
+                },
+
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors  }) {
+                    updateOrCreate(params, { setErrors }) {
                         this.isLoading = true;
 
                         let formData = new FormData(this.$refs.createLocaleForm);
@@ -330,7 +346,7 @@
 
                             this.$refs.datagrid.get();
 
-                            resetForm();
+                            this.resetForm();
                         })
                         .catch(error => {
                             this.isLoading = false;
@@ -344,6 +360,8 @@
                     editModal(url) {
                         this.$axios.get(url)
                             .then((response) => {
+                                this.resetForm();
+
                                 this.locale = {
                                     ...response.data.data,
                                         image: response.data.data.logo_path
@@ -355,10 +373,30 @@
                             })
                     },
 
+                    onModalToggle({ isActive }) {
+                        if (! isActive) {
+                            this.resetForm();
+                        }
+                    },
+
+                    clearLogoErrors() {
+                        const form = this.$refs.modalForm;
+
+                        Object.keys(form.getErrors())
+                            .filter(field => field.startsWith('logo_path'))
+                            .forEach(field => form.setFieldError(field, undefined));
+                    },
+
                     resetForm() {
                         this.locale = {
                             image: [],
                         };
+
+                        const form = this.$refs.modalForm;
+
+                        Object.keys(form.getErrors()).forEach(field => form.setFieldError(field, undefined));
+
+                        form.resetForm();
                     }
                 },
             });

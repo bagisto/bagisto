@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'Fout: :attribute mag niet groter zijn dan :max kilobytes. Kies alstublieft een kleiner bestand.',
                     'info' => 'De maximale grootte van de video moet zijn zoals :size',
                     'title' => 'Video\'s',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Wie een product mag beoordelen en hoe beoordelingen op de productpagina worden getoond.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Toegestane bestandsgrootte voor upload (in Kb)',
-                        'image-upload-size' => 'Toegestane afbeeldingsgrootte voor upload (in Kb)',
-                        'title' => 'Attribuut',
-                        'title-info' => 'De maximale grootte van een afbeelding of bestand dat voor een attribuutwaarde kan worden geüpload.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Kies welke deelknoppen op de productpagina verschijnen en welk bericht ze meesturen.',
                         'title' => 'Sociale media delen',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'Het adres van waaruit de bestanden worden geleverd, ofwel het openbare adres van de bucket ofwel een eigen domein. Een R2-bucket is privé totdat er een is ingesteld, zonder dit adres zijn de bestanden niet bereikbaar.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Media-uploads',
+                    'info' => 'Kies welke afbeeldingen en video\'s geüpload mogen worden en hoe groot ze mogen zijn.',
+                    'allowed-extensions' => 'Toegestane extensies',
+                    'allowed-extensions-info' => 'Bestandstypen die geüpload mogen worden. Elk ander type wordt geweigerd.',
+                    'max-size' => 'Maximale bestandsgrootte (KB)',
+                    'max-size-info' => 'Grootste bestand dat geüpload mag worden, in kilobytes. De uploadlimiet van de server blijft gelden als die lager is.',
+
+                    'images' => [
+                        'title' => 'Afbeeldingen',
+                        'info' => 'Regels die elke afbeeldingsupload volgt.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Video\'s',
+                        'info' => 'Regels die elke video-upload volgt.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Bestanden',
+                        'info' => 'Groottelimiet voor geüploade bestanden die geen afbeeldingen of video\'s zijn, zoals bestandsattributen van producten.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Alleen :types-bestanden zijn toegestaan.',
+                'max-size' => 'Het bestand mag niet groter zijn dan :size.',
+                'size-hint' => 'Max. :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Afbeelding Toevoegen',
                 'ai-add-image-btn' => 'Magische AI',
                 'ai-btn-info' => 'Afbeelding genereren',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Afbeelding',
-                'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
                 'ai-generation' => [
                     'apply' => 'Toepassen',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Video Toevoegen',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
                 'video' => 'Video',
 
                 'seo' => [

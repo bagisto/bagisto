@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\ChannelDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Helpers\MediaFileName;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Rules\Code;
 
@@ -50,7 +51,7 @@ class ChannelController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(MediaUpload $mediaUpload)
     {
         $data = $this->validate(request(), [
             /* general */
@@ -69,10 +70,10 @@ class ChannelController extends Controller
 
             /* design */
             'theme' => 'nullable',
-            'logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'logo.*' => ['nullable', ...$mediaUpload->imageRules()],
             'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
             'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
-            'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
+            'favicon.*' => ['nullable', ...$mediaUpload->imageRules(['ico'])],
             'favicon_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
 
             /* seo */
@@ -122,7 +123,7 @@ class ChannelController extends Controller
      *
      * @return Response
      */
-    public function update(int $id)
+    public function update(int $id, MediaUpload $mediaUpload)
     {
         $locale = core()->getRequestedLocaleCode();
 
@@ -143,10 +144,10 @@ class ChannelController extends Controller
 
             /* design */
             'theme' => 'nullable',
-            'logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'logo.*' => ['nullable', ...$mediaUpload->imageRules()],
             'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
             'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
-            'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
+            'favicon.*' => ['nullable', ...$mediaUpload->imageRules(['ico'])],
             'favicon_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
 
             /* seo */

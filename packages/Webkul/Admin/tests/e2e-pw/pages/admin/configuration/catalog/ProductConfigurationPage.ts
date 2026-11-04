@@ -14,8 +14,6 @@ export interface ProductSettings {
     guestReview: boolean;
     customerReview: boolean;
     reviewSummary: string;
-    imageUploadSize: string;
-    fileUploadSize: string;
     socialShare: boolean;
     shareMessage: string;
 }
@@ -33,8 +31,6 @@ const FIELDS = {
     guestReview: "catalog[products][review][guest_review]",
     customerReview: "catalog[products][review][customer_review]",
     reviewSummary: "catalog[products][review][summary]",
-    imageUploadSize: "catalog[products][attribute][image_attribute_upload_size]",
-    fileUploadSize: "catalog[products][attribute][file_attribute_upload_size]",
     socialShare: "catalog[products][social_share][enabled]",
     shareMessage: "catalog[products][social_share][share_message]",
 } as const;
@@ -68,8 +64,6 @@ export class ProductConfigurationPage extends ConfigurationFormPage {
             guestReview: await this.readBoolean(FIELDS.guestReview),
             customerReview: await this.readBoolean(FIELDS.customerReview),
             reviewSummary: await this.readSelect(FIELDS.reviewSummary),
-            imageUploadSize: await this.readText(FIELDS.imageUploadSize),
-            fileUploadSize: await this.readText(FIELDS.fileUploadSize),
             socialShare: await this.readBoolean(FIELDS.socialShare),
             shareMessage: await this.readText(FIELDS.shareMessage),
         };
@@ -96,8 +90,6 @@ export class ProductConfigurationPage extends ConfigurationFormPage {
             "upSells",
             "crossSells",
             "productsPerPage",
-            "imageUploadSize",
-            "fileUploadSize",
             "shareMessage",
         ] as const) {
             if (settings[key] !== undefined) {
@@ -138,8 +130,6 @@ export class ProductConfigurationPage extends ConfigurationFormPage {
             "upSells",
             "crossSells",
             "productsPerPage",
-            "imageUploadSize",
-            "fileUploadSize",
             "shareMessage",
         ] as const) {
             if (settings[key] !== undefined) {

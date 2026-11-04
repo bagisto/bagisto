@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Webkul\Admin\Validations\ConfigurableUniqueSku;
 use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Customer\Contracts\Wishlist;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -291,6 +292,7 @@ class Configurable extends AbstractType
             ],
             'variants.*.price' => 'required',
             'variants.*.weight' => 'required',
+            'variants.*.images.files.*' => ['nullable', ...app(MediaUpload::class)->imageRules()],
         ];
     }
 

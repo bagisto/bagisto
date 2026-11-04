@@ -17,6 +17,7 @@ use Webkul\Attribute\Enums\SwatchTypeEnum;
 use Webkul\Attribute\Enums\ValidationEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Helpers\MediaFileName;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Core\Rules\Code;
 use Webkul\Core\Rules\Regex;
 use Webkul\Product\Repositories\ProductRepository;
@@ -296,8 +297,10 @@ class AttributeController extends Controller
      */
     protected function swatchValueRules(): NestedRules
     {
+        $imageRules = app(MediaUpload::class)->imageRules();
+
         return Rule::forEach(fn ($value) => $value instanceof UploadedFile
-            ? ['image', 'mimes:bmp,jpeg,jpg,png,webp']
+            ? $imageRules
             : ['nullable']
         );
     }

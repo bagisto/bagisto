@@ -197,6 +197,10 @@
             $mediaDownloadUrl = $storedMedia
                 ? route('admin.catalog.products.file.download', [$product->id, $attribute->id])
                 : '';
+
+            $mediaExtensions = $attribute->type == 'image'
+                ? implode(', ', app(\Webkul\Core\Helpers\MediaUpload::class)->extensions(\Webkul\Core\Helpers\MediaUpload::IMAGE))
+                : '';
         @endphp
 
         <x-admin::media.upload
@@ -206,7 +210,7 @@
             src="{{ $mediaSource }}"
             download-url="{{ $mediaDownloadUrl }}"
             ::rules="{{ $mediaRules }}"
-            extensions="{{ $attribute->type == 'image' ? 'bmp, jpeg, jpg, png, webp' : '' }}"
+            extensions="{{ $mediaExtensions }}"
             label="{{ $attribute->admin_name }}"
             removable="{{ $attribute->is_required ? '0' : '1' }}"
         />

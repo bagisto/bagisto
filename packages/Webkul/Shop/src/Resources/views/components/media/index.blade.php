@@ -295,6 +295,9 @@
                     }
                 },
 
+                /**
+                 * Whether the file matches one of the accepted types, given as extensions or mime types.
+                 */
                 isAcceptedType(file) {
                     const types = (this.acceptedTypes || '')
                         .split(',')
@@ -305,11 +308,15 @@
                         return true;
                     }
 
-                    return types.some(type =>
-                        type.endsWith('/*')
+                    return types.some(type => {
+                        if (type.startsWith('.')) {
+                            return file.name.toLowerCase().endsWith(type.toLowerCase());
+                        }
+
+                        return type.endsWith('/*')
                             ? file.type.startsWith(type.slice(0, -1))
-                            : file.type === type
-                    );
+                            : file.type === type;
+                    });
                 },
 
                 notifyInvalidType() {

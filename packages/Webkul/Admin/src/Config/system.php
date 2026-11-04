@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\Core\Enums\SupportedFilesystemEnum;
+use Webkul\Core\Helpers\MediaUpload;
 use Webkul\Core\Mail\Transport\DynamicMailTransport;
 use Webkul\MagicAI\AiProvider;
 use Webkul\Product\Enums\ElasticAuthEnum;
@@ -2642,24 +2643,6 @@ return [
             ],
         ],
     ], [
-        'key' => 'catalog.products.attribute',
-        'name' => 'admin::app.configuration.index.catalog.products.attribute.title',
-        'info' => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort' => 7,
-        'fields' => [
-            [
-                'name' => 'image_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
-                'type' => 'text',
-                'validation' => 'numeric',
-            ], [
-                'name' => 'file_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
-                'type' => 'text',
-                'validation' => 'numeric',
-            ],
-        ],
-    ], [
         'key' => 'catalog.products.omnibus',
         'name' => 'admin::app.configuration.index.catalog.products.omnibus.title',
         'info' => 'admin::app.configuration.index.catalog.products.omnibus.title-info',
@@ -3626,6 +3609,83 @@ return [
                 'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.url-info',
                 'type' => 'text',
                 'validation' => 'nullable|url',
+                'channel_based' => false,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'file_management.media',
+        'name' => 'admin::app.configuration.index.file-management.media.title',
+        'info' => 'admin::app.configuration.index.file-management.media.info',
+        'icon' => 'settings/file-management.svg',
+        'sort' => 4,
+    ], [
+        'key' => 'file_management.media.images',
+        'name' => 'admin::app.configuration.index.file-management.media.images.title',
+        'info' => 'admin::app.configuration.index.file-management.media.images.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'max_size',
+                'title' => 'admin::app.configuration.index.file-management.media.max-size',
+                'info' => 'admin::app.configuration.index.file-management.media.max-size-info',
+                'type' => 'number',
+                'default' => MediaUpload::DEFAULT_MAX_SIZES[MediaUpload::IMAGE],
+                'validation' => 'required|integer|min:1',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'allowed_extensions',
+                'title' => 'admin::app.configuration.index.file-management.media.allowed-extensions',
+                'info' => 'admin::app.configuration.index.file-management.media.allowed-extensions-info',
+                'type' => 'multiselect',
+                'default' => implode(',', MediaUpload::DEFAULT_EXTENSIONS[MediaUpload::IMAGE]),
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => false,
+                'options' => MediaUpload::extensionOptions(MediaUpload::IMAGE),
+            ],
+        ],
+    ], [
+        'key' => 'file_management.media.videos',
+        'name' => 'admin::app.configuration.index.file-management.media.videos.title',
+        'info' => 'admin::app.configuration.index.file-management.media.videos.info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'max_size',
+                'title' => 'admin::app.configuration.index.file-management.media.max-size',
+                'info' => 'admin::app.configuration.index.file-management.media.max-size-info',
+                'type' => 'number',
+                'default' => MediaUpload::DEFAULT_MAX_SIZES[MediaUpload::VIDEO],
+                'validation' => 'required|integer|min:1',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'allowed_extensions',
+                'title' => 'admin::app.configuration.index.file-management.media.allowed-extensions',
+                'info' => 'admin::app.configuration.index.file-management.media.allowed-extensions-info',
+                'type' => 'multiselect',
+                'default' => implode(',', MediaUpload::DEFAULT_EXTENSIONS[MediaUpload::VIDEO]),
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => false,
+                'options' => MediaUpload::extensionOptions(MediaUpload::VIDEO),
+            ],
+        ],
+    ], [
+        'key' => 'file_management.media.files',
+        'name' => 'admin::app.configuration.index.file-management.media.files.title',
+        'info' => 'admin::app.configuration.index.file-management.media.files.info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'max_size',
+                'title' => 'admin::app.configuration.index.file-management.media.max-size',
+                'info' => 'admin::app.configuration.index.file-management.media.max-size-info',
+                'type' => 'number',
+                'default' => MediaUpload::DEFAULT_MAX_SIZES[MediaUpload::FILE],
+                'validation' => 'required|integer|min:1',
                 'channel_based' => false,
                 'locale_based' => false,
             ],

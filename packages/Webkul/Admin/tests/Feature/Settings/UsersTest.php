@@ -125,6 +125,59 @@ it('should reject a tampered avatar on store', function () {
         ->assertJsonValidationErrorFor('image.0');
 });
 
+it('should accept an avatar of every type the media settings allow on store', function (string $file) {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'name' => fake()->name(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
+        'password_confirmation' => $password,
+        'image' => [
+            UploadedFile::fake()->image($file),
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonMissingValidationErrors('image.0');
+})->with(['avatar.bmp', 'avatar.jpeg', 'avatar.jpg', 'avatar.png', 'avatar.webp']);
+
+it('should reject an avatar type the media settings do not allow on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'name' => fake()->name(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
+        'password_confirmation' => $password,
+        'image' => [
+            UploadedFile::fake()->image('avatar.gif'),
+        ],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('image.0');
+});
+
+it('should reject an avatar larger than the media settings allow on store', function () {
+    $this->setConfig('file_management.media.images.max_size', 100);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'name' => fake()->name(),
+        'role_id' => 1,
+        'email' => fake()->email(),
+        'password' => $password = fake()->password(),
+        'password_confirmation' => $password,
+        'image' => [
+            UploadedFile::fake()->image('avatar.png')->size(101),
+        ],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('image.0');
+});
+
 // ============================================================================
 // Edit
 // ============================================================================

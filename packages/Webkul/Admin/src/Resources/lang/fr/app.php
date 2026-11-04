@@ -1243,7 +1243,6 @@ return [
                 ],
 
                 'videos' => [
-                    'error' => 'Erreur : La taille de :attribute ne doit pas dépasser :max kilo-octets. Veuillez choisir un fichier plus petit.',
                     'info' => 'La taille maximale de la vidéo doit être d\'environ :size',
                     'title' => 'Vidéos',
                 ],
@@ -5246,13 +5245,6 @@ return [
                         'title-info' => 'Qui peut évaluer un produit, et comment les avis apparaissent sur la page produit.',
                     ],
 
-                    'attribute' => [
-                        'file-upload-size' => 'Taille de téléchargement de fichier autorisée (en Ko)',
-                        'image-upload-size' => 'Taille de téléchargement d\'image autorisée (en Ko)',
-                        'title' => 'Attribut',
-                        'title-info' => 'La taille maximale d\'une image ou d\'un fichier téléversé pour une valeur d\'attribut.',
-                    ],
-
                     'social-share' => [
                         'title-info' => 'Choisissez les boutons de partage affichés sur la page produit et le message qu\'ils portent.',
                         'title' => 'Partage social',
@@ -5741,6 +5733,30 @@ return [
                         'url-info' => 'L\'adresse depuis laquelle les fichiers sont servis, soit l\'adresse publique du bucket, soit un domaine personnalisé. Un bucket R2 reste privé tant qu\'aucune adresse n\'est définie, sans elle les fichiers seront inaccessibles.',
                     ],
                 ],
+
+                'media' => [
+                    'title' => 'Téléversement de médias',
+                    'info' => 'Choisissez quelles images et vidéos peuvent être téléversées et leur taille maximale.',
+                    'allowed-extensions' => 'Extensions autorisées',
+                    'allowed-extensions-info' => 'Types de fichiers pouvant être téléversés. Tout autre type est refusé.',
+                    'max-size' => 'Taille maximale du fichier (Ko)',
+                    'max-size-info' => 'Le plus gros fichier pouvant être téléversé, en kilo-octets. La limite du serveur s\'applique toujours si elle est inférieure.',
+
+                    'images' => [
+                        'title' => 'Images',
+                        'info' => 'Règles suivies par chaque téléversement d\'image.',
+                    ],
+
+                    'videos' => [
+                        'title' => 'Vidéos',
+                        'info' => 'Règles suivies par chaque téléversement de vidéo.',
+                    ],
+
+                    'files' => [
+                        'title' => 'Fichiers',
+                        'info' => 'Taille maximale des fichiers téléversés qui ne sont ni des images ni des vidéos, comme les attributs fichier des produits.',
+                    ],
+                ],
             ],
 
             'cache-management' => [
@@ -6056,13 +6072,17 @@ return [
         ],
 
         'media' => [
+            'validation' => [
+                'invalid-type' => 'Seuls les fichiers :types sont autorisés.',
+                'max-size' => 'Le fichier ne doit pas dépasser :size.',
+                'size-hint' => 'Max. :size',
+            ],
+
             'images' => [
                 'add-image-btn' => 'Ajouter une image',
                 'ai-add-image-btn' => 'IA Magique',
                 'ai-btn-info' => 'Générer une Image',
-                'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Image',
-                'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
 
                 'ai-generation' => [
                     'apply' => 'Appliquer',
@@ -6119,8 +6139,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Ajouter une vidéo',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .ogg ..) sont autorisés.',
                 'video' => 'Vidéo',
 
                 'seo' => [
