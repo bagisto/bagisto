@@ -5,7 +5,6 @@ export interface SitemapData {
     fileName: string;
     path: string;
     channel: string;
-    channelCode: string;
 }
 
 export class SitemapsPage extends DatagridPage {
@@ -140,14 +139,17 @@ export class SitemapsPage extends DatagridPage {
     }
 
     async deleteSitemapsIfPresent(fileNames: string[]): Promise<void> {
-        await this.deleteRowsIfPresent(fileNames, "Sitemap Deleted successfully");
+        await this.deleteRowsIfPresent(
+            fileNames,
+            "Sitemap Deleted successfully",
+        );
     }
 
     async expectSitemapListed(data: SitemapData): Promise<void> {
         await this.expectSearchedRowCount(data.fileName, 1);
 
         await expect(this.row(data.fileName)).toContainText(data.path);
-        await expect(this.row(data.fileName)).toContainText(data.channelCode);
+        await expect(this.row(data.fileName)).toContainText(data.channel);
     }
 
     async expectSitemapAbsent(fileName: string): Promise<void> {
@@ -194,7 +196,11 @@ export class SitemapsPage extends DatagridPage {
     }
 
     async expectNoSaveMessage(): Promise<void> {
-        await expect(this.flashMessage("Sitemap created successfully")).toHaveCount(0);
-        await expect(this.flashMessage("Sitemap Updated successfully")).toHaveCount(0);
+        await expect(
+            this.flashMessage("Sitemap created successfully"),
+        ).toHaveCount(0);
+        await expect(
+            this.flashMessage("Sitemap Updated successfully"),
+        ).toHaveCount(0);
     }
 }

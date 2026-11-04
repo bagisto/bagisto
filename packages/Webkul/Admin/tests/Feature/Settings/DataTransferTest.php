@@ -6,6 +6,7 @@ use Webkul\DataTransfer\Models\Import;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -357,4 +358,26 @@ it('should return the import page with stats', function () {
     get(route('admin.settings.data_transfer.imports.import', $import->id))
         ->assertOk()
         ->assertSeeText($import->type);
+});
+
+// ============================================================================
+// Validate
+// ============================================================================
+
+it('should validate an xls import whose sheet reports columns past the header', function () {
+    $import = createImport([
+        'type' => 'customers',
+        'file_path' => 'imports/customers.xls',
+    ]);
+
+    Storage::disk('private')->put(
+        $import->file_path,
+        file_get_contents(base_path('packages/Webkul/Admin/tests/e2e-pw/data/data-transfer/customers.xls')),
+    );
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.settings.data_transfer.imports.validate', $import->id))
+        ->assertOk()
+        ->assertJsonPath('is_valid', true);
 });
