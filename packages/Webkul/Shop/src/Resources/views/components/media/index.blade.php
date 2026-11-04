@@ -298,18 +298,28 @@
                 isAcceptedType(file) {
                     const types = (this.acceptedTypes || '')
                         .split(',')
-                        .map(type => type.trim())
+                        .map(type => type.trim().toLowerCase())
                         .filter(Boolean);
 
                     if (! types.length || types.includes('*') || types.includes('*/*')) {
                         return true;
                     }
 
-                    return types.some(type =>
-                        type.endsWith('/*')
-                            ? file.type.startsWith(type.slice(0, -1))
-                            : file.type === type
-                    );
+                    const mime = (file.type || '').toLowerCase();
+
+                    const extension = (file.name || '').split('.').pop().toLowerCase();
+
+                    return types.some(type => {
+                        if (type.endsWith('/*')) {
+                            return mime.startsWith(type.slice(0, -1));
+                        }
+
+                        if (type.includes('/')) {
+                            return mime === type;
+                        }
+
+                        return (type.startsWith('.') ? type.slice(1) : type) === extension;
+                    });
                 },
 
                 notifyInvalidType() {

@@ -47,7 +47,7 @@
                     name="image[]"
                     :label="trans('Image')"
                     :is-multiple="false"
-                    accepted-types="image/*"
+                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                     :src="$customer->image_url"
                 />
 
