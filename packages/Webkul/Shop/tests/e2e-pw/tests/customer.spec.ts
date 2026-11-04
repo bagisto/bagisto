@@ -1,3 +1,4 @@
+import { notAnImage, plainTextFile, validImage } from "@shared/media-files";
 import path from "path";
 import { fileURLToPath } from "url";
 import { expect, test } from "../setup";
@@ -28,6 +29,9 @@ const imagePath = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     "../data/images/images.jpeg",
 );
+
+const PROFILE_IMAGE_REFUSED =
+    "The Profile Image field must be a file of type: bmp, jpeg, jpg, png, webp.";
 
 function buildAddress(): AddressData {
     return {
@@ -127,6 +131,37 @@ test.describe("customer account", () => {
             });
 
             await customerPage.expectProfileImageShown();
+        });
+
+        test("should say why a profile image was refused and keep none", async () => {
+            await customerPage.attemptProfileImage(notAnImage(), {
+                phone: generatePhoneNumber(),
+                gender: "Male",
+            });
+
+            await customerPage.expectProfileImageError(PROFILE_IMAGE_REFUSED);
+            await customerPage.expectNoProfileImagePicked();
+        });
+
+        test("should forget a refused profile image's error when another file is picked", async () => {
+            await customerPage.attemptProfileImage(notAnImage(), {
+                phone: generatePhoneNumber(),
+                gender: "Male",
+            });
+
+            await customerPage.expectProfileImageError(PROFILE_IMAGE_REFUSED);
+
+            await customerPage.pickProfileImage(validImage());
+
+            await customerPage.expectNoProfileImageError(PROFILE_IMAGE_REFUSED);
+        });
+
+        test("should not add a file the browser already knows is not an image", async () => {
+            await customerPage.openEditProfile();
+            await customerPage.pickProfileImage(plainTextFile());
+
+            await customerPage.expectNotice("The selected file type is not allowed.");
+            await customerPage.expectNoProfileImagePicked();
         });
 
         test("should sign in with the new password after changing it", async ({

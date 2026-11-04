@@ -96,6 +96,20 @@ export class CustomerReviewsPage extends DatagridPage {
         await expect(this.statusCell(title, status)).toHaveCount(1);
     }
 
+    async expectReviewAttachments(
+        title: string,
+        attachments: { images: number; videos: number },
+    ): Promise<void> {
+        await this.openGrid();
+        await this.searchFor(title);
+        await this.editIconFor(title).click();
+
+        await expect(this.editModal.locator('img[alt="Image"]')).toHaveCount(
+            attachments.images,
+        );
+        await expect(this.editModal.locator("video")).toHaveCount(attachments.videos);
+    }
+
     async expectReviewAbsent(title: string): Promise<void> {
         await this.expectSearchedRowCount(title, 0);
     }

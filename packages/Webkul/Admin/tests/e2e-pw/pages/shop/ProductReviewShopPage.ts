@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { BasePage } from "../BasePage";
 
 export interface ReviewData {
@@ -59,6 +60,10 @@ export class ProductReviewShopPage extends BasePage {
         return this.page.getByRole("button", { name: "Submit Review" });
     }
 
+    private get attachmentsInput() {
+        return this.reviewTabPanel.locator('input[type="file"][id$="_fileInput"]');
+    }
+
     private async dismissCookieConsent(): Promise<void> {
         if (await this.cookieConsentAccept.count()) {
             await this.cookieConsentAccept.click();
@@ -86,7 +91,11 @@ export class ProductReviewShopPage extends BasePage {
         await expect(this.reviewTabPanel).toBeVisible();
     }
 
-    async submitReview(productName: string, review: ReviewData): Promise<void> {
+    async submitReview(
+        productName: string,
+        review: ReviewData,
+        attachments: MediaFile[] = [],
+    ): Promise<void> {
         await this.openProduct(productName);
         await this.openReviewsTab();
         await this.writeReviewButton.click();
@@ -96,6 +105,10 @@ export class ProductReviewShopPage extends BasePage {
             "aria-pressed",
             "true",
         );
+
+        if (attachments.length) {
+            await this.attachmentsInput.setInputFiles(attachments);
+        }
 
         await this.titleInput.fill(review.title);
         await this.commentInput.fill(review.comment);

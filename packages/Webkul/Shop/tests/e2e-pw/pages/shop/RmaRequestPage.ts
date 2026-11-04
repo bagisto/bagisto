@@ -1,4 +1,5 @@
 import { expect, Page, Response } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { BasePage } from "../BasePage";
 
 export class RmaRequestPage extends BasePage {
@@ -22,6 +23,10 @@ export class RmaRequestPage extends BasePage {
 
     private get messageInput() {
         return this.page.locator('textarea[name="message"]');
+    }
+
+    private get messageAttachmentInput() {
+        return this.page.locator('input#file[name="file"]');
     }
 
     private get sendMessageButton() {
@@ -68,13 +73,21 @@ export class RmaRequestPage extends BasePage {
         return response;
     }
 
-    async sendMessage(orderId: string, message: string): Promise<void> {
+    async sendMessage(
+        orderId: string,
+        message: string,
+        attachment?: MediaFile,
+    ): Promise<void> {
         await this.openDetail(orderId);
         await this.waitForVueMount();
 
         await expect(this.conversationsHeading).toBeVisible();
 
         await this.messageInput.fill(message);
+
+        if (attachment) {
+            await this.messageAttachmentInput.setInputFiles(attachment);
+        }
 
         await Promise.all([
             this.page.waitForResponse(
@@ -144,6 +157,19 @@ export class RmaRequestPage extends BasePage {
                 )
                 .toBeGreaterThan(0);
         }
+    }
+
+    async expectMessageRefused(message: string): Promise<void> {
+        await expect(this.page.getByText(message).first()).toBeVisible();
+    }
+
+    async expectMessageCanBeSentAgain(): Promise<void> {
+        await expect(this.sendMessageButton).toBeEnabled();
+        await expect(this.messageInput).toBeEnabled();
+    }
+
+    async expectAttachmentInConversation(attachmentName: string): Promise<void> {
+        await expect(this.page.getByText(attachmentName)).toBeVisible();
     }
 
     async expectMessageInConversation(message: string): Promise<void> {

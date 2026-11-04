@@ -1,3 +1,4 @@
+import { notAnImage } from "@shared/media-files";
 import { test } from "../../setup";
 import { AttributePage, type AttributeData } from "../../pages/admin/catalog/attribute/AttributePage";
 import {
@@ -108,5 +109,17 @@ test.describe("product media attributes", () => {
         await productEditPage.openProduct(product.name);
 
         await productEditPage.mediaAttribute(attribute.code).expectMediaStored();
+    });
+
+    test("should say why a file on a product media attribute was refused and keep none", async () => {
+        await productEditPage.openProduct(product.name);
+
+        await productEditPage.mediaAttribute(attribute.code).attemptUpload(notAnImage());
+        await productEditPage.saveProduct();
+
+        await productEditPage.mediaAttribute(attribute.code).expectError(
+            `The ${attribute.adminName} field must be a file of type: bmp, jpeg, jpg, png, webp.`,
+        );
+        await productEditPage.mediaAttribute(attribute.code).expectMediaAbsent();
     });
 });

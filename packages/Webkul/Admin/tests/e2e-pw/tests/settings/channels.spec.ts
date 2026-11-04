@@ -1,3 +1,4 @@
+import { notAnImage, validImage } from "@shared/media-files";
 import { test } from "../../setup";
 import {
     buildChannel,
@@ -84,4 +85,60 @@ test.describe("channel management", () => {
         await channelsPage.expectErrorMessage("Last Channel deleted failed.");
         await channelsPage.expectDefaultChannelListed();
     });
+
+    const channelMedia = [
+        {
+            field: "Logo",
+            refused:
+                "The Logo field must be a file of type: bmp, jpeg, jpg, png, webp.",
+        },
+        {
+            field: "Favicon",
+            refused:
+                "The Favicon field must be a file of type: bmp, jpeg, jpg, png, webp, ico.",
+        },
+    ] as const;
+
+    for (const { field, refused } of channelMedia) {
+        const title = field.toLowerCase();
+
+        test(`should say why a ${title} was refused on the create form and not create the channel`, async () => {
+            const channel = buildChannel();
+            created.push(channel.name);
+
+            await channelsPage.attemptCreateChannelWithMedia(
+                channel,
+                field,
+                notAnImage(),
+            );
+
+            await channelsPage.mediaField(field).expectError(refused);
+            await channelsPage.mediaField(field).expectUploadTileFlagged();
+            await channelsPage.expectStillOnCreateForm();
+            await channelsPage.expectChannelAbsent(channel.name);
+        });
+
+        test(`should say why a ${title} was refused on the edit form and keep none`, async () => {
+            const channel = await channelsPage.createChannel();
+            created.push(channel.name);
+
+            await channelsPage.attemptSaveMedia(
+                channel.name,
+                field,
+                notAnImage(),
+            );
+
+            await channelsPage.mediaField(field).expectError(refused);
+            await channelsPage.mediaField(field).expectEmpty();
+        });
+
+        test(`should keep a valid ${title} after reload`, async () => {
+            const channel = await channelsPage.createChannel();
+            created.push(channel.name);
+
+            await channelsPage.saveMedia(channel.name, field, validImage());
+
+            await channelsPage.expectMediaInEditForm(channel.name, field);
+        });
+    }
 });

@@ -1,3 +1,4 @@
+import { notAnImage, validImage } from "@shared/media-files";
 import { test } from "../../setup";
 import {
     CategoryPage,
@@ -146,4 +147,50 @@ test.describe("category management", () => {
         await categoryPage.expectCategoryAbsent(second.name);
         await categoryPage.expectCategoryListed(untouched.name, "Active");
     });
+
+    for (const field of ["Logo", "Banner"] as const) {
+        const title = field.toLowerCase();
+        const refused = `The ${field} field must be a file of type: bmp, jpeg, jpg, png, webp.`;
+
+        test(`should say why a ${title} was refused on the create form and not create the category`, async () => {
+            const category = buildCategory();
+            created.push(category.name);
+
+            await categoryPage.attemptCreateCategoryWithMedia(
+                category,
+                field,
+                notAnImage(),
+            );
+
+            await categoryPage.mediaField(field).expectError(refused);
+            await categoryPage.mediaField(field).expectUploadTileFlagged();
+            await categoryPage.expectStillOnCreateForm();
+            await categoryPage.expectCategoryAbsent(category.name);
+        });
+
+        test(`should say why a ${title} was refused on the edit form and keep none`, async () => {
+            const category = buildCategory();
+            created.push(category.name);
+
+            await categoryPage.createCategory(category);
+            await categoryPage.attemptSaveMedia(
+                category.name,
+                field,
+                notAnImage(),
+            );
+
+            await categoryPage.mediaField(field).expectError(refused);
+            await categoryPage.mediaField(field).expectEmpty();
+        });
+
+        test(`should keep a valid ${title} after reload`, async () => {
+            const category = buildCategory();
+            created.push(category.name);
+
+            await categoryPage.createCategory(category);
+            await categoryPage.saveMedia(category.name, field, validImage());
+
+            await categoryPage.expectMediaInEditForm(category.name, field);
+        });
+    }
 });

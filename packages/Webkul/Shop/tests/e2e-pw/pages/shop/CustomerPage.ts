@@ -1,4 +1,5 @@
 import { expect, Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { BasePage } from "../BasePage";
 
 export interface ProfileChanges {
@@ -132,6 +133,17 @@ export class CustomerPage extends BasePage {
         await expect(this.page.getByText("Profile updated successfully").first()).toBeVisible();
     }
 
+    async attemptProfileImage(image: MediaFile, extras: ProfileChanges): Promise<void> {
+        await this.openEditProfile();
+        await this.imageInput.setInputFiles(image);
+        await this.fillRequiredExtras(extras);
+        await this.saveButton.click();
+    }
+
+    async pickProfileImage(image: MediaFile): Promise<void> {
+        await this.imageInput.setInputFiles(image);
+    }
+
     async changePassword(
         currentPassword: string,
         newPassword: string,
@@ -204,6 +216,22 @@ export class CustomerPage extends BasePage {
         if (changes.dateOfBirth !== undefined) {
             await expect(this.dateOfBirthInput).toHaveValue(changes.dateOfBirth);
         }
+    }
+
+    async expectProfileImageError(message: string): Promise<void> {
+        await expect(this.page.getByText(message)).toBeVisible();
+    }
+
+    async expectNoProfileImageError(message: string): Promise<void> {
+        await expect(this.page.getByText(message)).toHaveCount(0);
+    }
+
+    async expectNotice(message: string): Promise<void> {
+        await expect(this.page.getByText(message).first()).toBeVisible();
+    }
+
+    async expectNoProfileImagePicked(): Promise<void> {
+        await expect(this.uploadedImage).toHaveCount(0);
     }
 
     async expectProfileImageShown(): Promise<void> {
