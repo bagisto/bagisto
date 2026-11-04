@@ -6064,6 +6064,7 @@ return [
                 'image' => 'תמונה',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
+                'size-limit-error' => 'שגיאת הגבלת גודל',
                 'ai-generation' => [
                     'apply' => 'החל',
                     'generate' => 'יצירה',

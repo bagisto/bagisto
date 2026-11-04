@@ -6064,6 +6064,7 @@ return [
                 'image' => 'Изображение',
                 'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
 
+                'size-limit-error' => 'Ошибка ограничения размера',
                 'ai-generation' => [
                     'apply' => 'Применить',
                     'generate' => 'Создать',

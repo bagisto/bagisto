@@ -565,6 +565,7 @@ return [
                 'add-attachments' => 'Dodaj załączniki',
                 'add-image' => 'Dodaj Obraz/Wideo',
                 'invalid-file-type' => 'Wybrany typ pliku jest niedozwolony.',
+                'size-limit-error' => 'Błąd Limitu Rozmiaru',
             ],
         ],
 

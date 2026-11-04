@@ -6064,6 +6064,7 @@ return [
                 'image' => '画像',
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
+                'size-limit-error' => 'サイズ制限エラー',
                 'ai-generation' => [
                     'apply' => '適用',
                     'generate' => '生成',

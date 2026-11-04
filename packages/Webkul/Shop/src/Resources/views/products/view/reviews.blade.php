@@ -38,6 +38,8 @@
                                     name="attachments"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
+                                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp,.gif,.mp4,.webm,.mov"
+                                    max-size="10240"
                                     ref="reviewImages"
                                 />
 

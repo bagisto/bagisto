@@ -565,6 +565,7 @@ return [
                 'add-attachments' => 'সংযুক্তি যোগ করুন',
                 'add-image' => 'ছবি / ভিডিও যোগ করুন',
                 'invalid-file-type' => 'নির্বাচিত ফাইলের ধরন অনুমোদিত নয়।',
+                'size-limit-error' => 'সাইজ সীমা পার',
             ],
         ],
 

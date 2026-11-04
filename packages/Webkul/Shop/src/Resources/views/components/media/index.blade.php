@@ -164,8 +164,13 @@
                 },
 
                 acceptedTypes: {
-                    type: String, 
+                    type: String,
                     default: 'image/*, video/*,'
+                },
+
+                maxSize: {
+                    type: [Number, String],
+                    default: 0,
                 },
 
                 label: {
@@ -216,12 +221,19 @@
                 onFileChange(event) {
                     let files = event.target.files;
                     let hasInvalid = false;
+                    let hasOversize = false;
 
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
 
                         if (! this.isAcceptedType(file)) {
                             hasInvalid = true;
+
+                            continue;
+                        }
+
+                        if (this.exceedsMaxSize(file)) {
+                            hasOversize = true;
 
                             continue;
                         }
@@ -251,19 +263,32 @@
 
                     if (hasInvalid) {
                         this.notifyInvalidType();
+                    }
 
+                    if (hasOversize) {
+                        this.notifySizeLimit();
+                    }
+
+                    if (hasInvalid || hasOversize) {
                         event.target.value = '';
                     }
                 },
 
                 handleDroppedFiles(files) {
                     let hasInvalid = false;
+                    let hasOversize = false;
 
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
 
                         if (! this.isAcceptedType(file)) {
                             hasInvalid = true;
+
+                            continue;
+                        }
+
+                        if (this.exceedsMaxSize(file)) {
+                            hasOversize = true;
 
                             continue;
                         }
@@ -293,6 +318,16 @@
                     if (hasInvalid) {
                         this.notifyInvalidType();
                     }
+
+                    if (hasOversize) {
+                        this.notifySizeLimit();
+                    }
+                },
+
+                exceedsMaxSize(file) {
+                    const maxKilobytes = Number(this.maxSize);
+
+                    return maxKilobytes > 0 && file.size > maxKilobytes * 1024;
                 },
 
                 isAcceptedType(file) {
@@ -326,6 +361,13 @@
                     this.$emitter.emit('add-flash', {
                         type: 'warning',
                         message: "@lang('shop::app.components.media.index.invalid-file-type')",
+                    });
+                },
+
+                notifySizeLimit() {
+                    this.$emitter.emit('add-flash', {
+                        type: 'warning',
+                        message: "@lang('shop::app.components.media.index.size-limit-error')",
                     });
                 },
 

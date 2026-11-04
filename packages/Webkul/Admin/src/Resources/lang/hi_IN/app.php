@@ -6064,6 +6064,7 @@ return [
                 'image' => 'छवि',
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
 
+                'size-limit-error' => 'साइज़ सीमा त्रुटि',
                 'ai-generation' => [
                     'apply' => 'लागू करें',
                     'generate' => 'उत्पन्न करें',

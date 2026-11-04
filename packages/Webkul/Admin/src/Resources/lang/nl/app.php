@@ -6064,6 +6064,7 @@ return [
                 'image' => 'Afbeelding',
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
+                'size-limit-error' => 'Grootte Limiet Fout',
                 'ai-generation' => [
                     'apply' => 'Toepassen',
                     'generate' => 'Genereren',

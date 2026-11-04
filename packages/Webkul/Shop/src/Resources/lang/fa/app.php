@@ -565,6 +565,7 @@ return [
                 'add-attachments' => 'افزودن پیوست',
                 'add-image' => 'افزودن تصویر/ویدئو',
                 'invalid-file-type' => 'نوع فایل انتخاب‌شده مجاز نیست.',
+                'size-limit-error' => 'خطای محدودیت اندازه',
             ],
         ],
 

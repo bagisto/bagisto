@@ -565,6 +565,7 @@ return [
                 'add-attachments' => 'Ongeza viambatisho',
                 'add-image' => 'Ongeza Picha/Video',
                 'invalid-file-type' => 'Aina ya faili iliyochaguliwa hairuhusiwi.',
+                'size-limit-error' => 'Hitilafu ya Kikomo cha Ukubwa',
             ],
         ],
 

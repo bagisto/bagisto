@@ -6064,6 +6064,7 @@ return [
                 'image' => 'Gambar',
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
+                'size-limit-error' => 'Kesalahan Batas Ukuran',
                 'ai-generation' => [
                     'apply' => 'Terapkan',
                     'generate' => 'Hasilkan',

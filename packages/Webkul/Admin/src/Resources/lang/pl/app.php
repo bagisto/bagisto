@@ -6064,6 +6064,7 @@ return [
                 'image' => 'Obraz',
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
+                'size-limit-error' => 'Błąd Limitu Rozmiaru',
                 'ai-generation' => [
                     'apply' => 'Zastosuj',
                     'generate' => 'Generuj',

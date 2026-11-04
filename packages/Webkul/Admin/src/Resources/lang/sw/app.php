@@ -6064,6 +6064,7 @@ return [
                 'image' => 'Picha',
                 'not-allowed-error' => 'Faili za picha pekee (.jpeg, .jpg, .png, ..) ndizo zinazoruhusiwa.',
 
+                'size-limit-error' => 'Hitilafu ya Kikomo cha Ukubwa',
                 'ai-generation' => [
                     'apply' => 'Tumia',
                     'generate' => 'Tengeneza',

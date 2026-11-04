@@ -565,6 +565,7 @@ return [
                 'add-attachments' => '添付ファイルを追加',
                 'add-image' => '画像/ビデオを追加',
                 'invalid-file-type' => '選択されたファイル形式は許可されていません。',
+                'size-limit-error' => 'サイズ制限エラー',
             ],
         ],
 

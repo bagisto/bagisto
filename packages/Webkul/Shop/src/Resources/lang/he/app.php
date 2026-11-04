@@ -565,6 +565,7 @@ return [
                 'add-attachments' => 'הוסף קבצים מצורפים',
                 'add-image' => 'הוסף תמונה/וידאו',
                 'invalid-file-type' => 'סוג הקובץ שנבחר אינו מותר.',
+                'size-limit-error' => 'שגיאת הגבלת גודל',
             ],
         ],
 

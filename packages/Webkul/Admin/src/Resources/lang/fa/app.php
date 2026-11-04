@@ -6064,6 +6064,7 @@ return [
                 'image' => 'تصویر',
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
+                'size-limit-error' => 'خطای محدودیت اندازه',
                 'ai-generation' => [
                     'apply' => 'اعمال',
                     'generate' => 'تولید',

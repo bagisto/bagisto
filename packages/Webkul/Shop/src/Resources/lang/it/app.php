@@ -565,6 +565,7 @@ return [
                 'add-attachments' => 'Aggiungi allegati',
                 'add-image' => 'Aggiungi Immagine/Video',
                 'invalid-file-type' => 'Il tipo di file selezionato non è consentito.',
+                'size-limit-error' => 'Errore di limite di dimensione',
             ],
         ],
 

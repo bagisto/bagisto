@@ -19,6 +19,7 @@
     'enableSeo'        => false,
     'metaName'         => '',
     'acceptedTypes'    => 'image/*',
+    'maxSize'          => 0,
 ])
 
 @php
@@ -44,6 +45,7 @@
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
     accepted-types="{{ $acceptedTypes }}"
+    v-bind:max-size="{{ (int) $maxSize }}"
     :uploaded-images="@js($uploadedImages)"
     width="{{ $width }}"
     height="{{ $height }}"
@@ -131,6 +133,7 @@
                             :enable-seo="enableSeo"
                             :meta-name="metaName"
                             :accepted-types="acceptedTypes"
+                            :max-size="maxSize"
                             @onRemove="remove($event)"
                         >
                         </v-media-image-item>
@@ -561,6 +564,11 @@
                     default: 'image/*',
                 },
 
+                maxSize: {
+                    type: [Number, String],
+                    default: 0,
+                },
+
                 allowMultiple: {
                     type: Boolean,
                     default: false,
@@ -681,6 +689,17 @@
                         return;
                     }
 
+                    const withinSize = Array.from(imageInput.files).every(file => ! this.exceedsMaxSize(file));
+
+                    if (! withinSize) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'warning',
+                            message: "@lang('admin::app.components.media.images.size-limit-error')"
+                        });
+
+                        return;
+                    }
+
                     imageInput.files.forEach((file, index) => {
                         this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
                     });
@@ -711,6 +730,12 @@
 
                         return (type.startsWith('.') ? type.slice(1) : type) === extension;
                     });
+                },
+
+                exceedsMaxSize(file) {
+                    const maxKilobytes = Number(this.maxSize);
+
+                    return maxKilobytes > 0 && file.size > maxKilobytes * 1024;
                 },
 
                 newImage(file, fileName) {
@@ -798,7 +823,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'acceptedTypes'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'acceptedTypes', 'maxSize'],
 
             mounted() {
                 if (this.image.file instanceof File) {
@@ -826,6 +851,17 @@
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
                             message: "@lang('admin::app.components.media.images.not-allowed-error')"
+                        });
+
+                        return;
+                    }
+
+                    const withinSize = Array.from(imageInput.files).every(file => ! this.exceedsMaxSize(file));
+
+                    if (! withinSize) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'warning',
+                            message: "@lang('admin::app.components.media.images.size-limit-error')"
                         });
 
                         return;
@@ -865,6 +901,12 @@
 
                         return (type.startsWith('.') ? type.slice(1) : type) === extension;
                     });
+                },
+
+                exceedsMaxSize(file) {
+                    const maxKilobytes = Number(this.maxSize);
+
+                    return maxKilobytes > 0 && file.size > maxKilobytes * 1024;
                 },
 
                 remove() {
