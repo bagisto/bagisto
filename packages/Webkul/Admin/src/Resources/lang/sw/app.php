@@ -5680,6 +5680,7 @@ return [
                         'info' => 'Chagua hifadhi ambamo faili huhifadhiwa na kutolewa.',
                         'default-driver' => 'Kiendeshi Chaguo-msingi cha Hifadhi',
                         'default-driver-info' => 'Faili zitakazopakiwa kuanzia sasa zitahifadhiwa hapa. Faili zilizokwisha pakiwa hubaki kwenye hifadhi zilimohifadhiwa, kwa hiyo zihamishe kabla ya kubadilisha la sivyo hazitapatikana.',
+                        'incomplete' => ':driver imechaguliwa, lakini mipangilio yake haijakamilika, kwa hiyo faili zinazopakiwa bado hazihifadhiwi humo.',
 
                         'drivers' => [
                             'local' => 'Faili (Hifadhi ya Ndani)',

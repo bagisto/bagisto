@@ -5680,6 +5680,7 @@ return [
                         'info' => 'Wybierz magazyn, w którym pliki są zapisywane i z którego są udostępniane.',
                         'default-driver' => 'Domyślny sterownik magazynu',
                         'default-driver-info' => 'Pliki przesłane od teraz będą zapisywane tutaj. Pliki przesłane wcześniej pozostają w poprzednim magazynie, więc skopiuj je przed zmianą, w przeciwnym razie nie zostaną odnalezione.',
+                        'incomplete' => 'Wybrano :driver, ale jego ustawienia są niekompletne, więc przesłane pliki nie są jeszcze w nim zapisywane.',
 
                         'drivers' => [
                             'local' => 'Plik (magazyn lokalny)',

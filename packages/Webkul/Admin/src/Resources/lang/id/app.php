@@ -5680,6 +5680,7 @@ return [
                         'info' => 'Pilih penyimpanan tempat berkas disimpan dan disajikan.',
                         'default-driver' => 'Driver Penyimpanan Bawaan',
                         'default-driver-info' => 'Berkas yang diunggah mulai sekarang akan disimpan di sini. Berkas yang sudah diunggah tetap berada di penyimpanan sebelumnya, jadi salin dulu sebelum berpindah atau berkas tidak akan ditemukan.',
+                        'incomplete' => ':driver dipilih, tetapi pengaturannya belum lengkap, jadi berkas yang diunggah belum disimpan di sana.',
 
                         'drivers' => [
                             'local' => 'Berkas (Penyimpanan Lokal)',

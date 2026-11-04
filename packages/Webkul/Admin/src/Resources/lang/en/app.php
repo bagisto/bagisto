@@ -5680,6 +5680,7 @@ return [
                         'info' => 'Pick the storage files are saved to and served from.',
                         'default-driver' => 'Default Storage Driver',
                         'default-driver-info' => 'Files uploaded from now on are saved here. Files already uploaded stay on the storage they were saved to, so copy them across before switching or they will not be found.',
+                        'incomplete' => ':driver is selected, but its settings are incomplete, so uploaded files are not being saved to it yet.',
 
                         'drivers' => [
                             'local' => 'File (Local Storage)',

@@ -5680,6 +5680,7 @@ return [
                         'info' => 'Kies de opslag waarin bestanden worden bewaard en van waaruit ze worden geleverd.',
                         'default-driver' => 'Standaard opslagstuurprogramma',
                         'default-driver-info' => 'Bestanden die vanaf nu worden geüpload, worden hier opgeslagen. Reeds geüploade bestanden blijven op de vorige opslag staan: kopieer ze vóór het wisselen, anders worden ze niet gevonden.',
+                        'incomplete' => ':driver is geselecteerd, maar de instellingen zijn onvolledig, dus geüploade bestanden worden er nog niet in opgeslagen.',
 
                         'drivers' => [
                             'local' => 'Bestand (lokale opslag)',

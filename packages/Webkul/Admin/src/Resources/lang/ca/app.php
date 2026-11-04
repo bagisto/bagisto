@@ -5680,6 +5680,7 @@ return [
                         'info' => 'Trieu l\'emmagatzematge on es desen els fitxers i des d\'on se serveixen.',
                         'default-driver' => 'Controlador d\'emmagatzematge per defecte',
                         'default-driver-info' => 'Els fitxers pujats a partir d\'ara es desaran aquí. Els fitxers ja pujats es queden a l\'emmagatzematge anterior: copieu-los abans de canviar o no es trobaran.',
+                        'incomplete' => 'S\'ha seleccionat :driver, però la seva configuració és incompleta, de manera que els fitxers pujats encara no s\'hi desen.',
 
                         'drivers' => [
                             'local' => 'Fitxer (emmagatzematge local)',
