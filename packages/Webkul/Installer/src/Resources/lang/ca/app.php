@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Llibres i Papereria',
+                    'name' => 'Papereria',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

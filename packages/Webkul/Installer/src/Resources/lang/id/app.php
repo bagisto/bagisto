@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'Buku & Alat Tulis',
+                    'name' => 'Alat Tulis',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

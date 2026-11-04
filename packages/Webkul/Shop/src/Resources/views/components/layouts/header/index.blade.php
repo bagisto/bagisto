@@ -47,7 +47,7 @@
                     <!-- Search Bar Shimmer -->
                     <div class="relative w-full max-w-111.25">
                         <span
-                            class="shimmer block h-10.5 w-80.75 rounded-lg px-11 py-3"
+                            class="shimmer block h-10.5 w-80.75 rounded-lg px-11 py-3 max-[1260px]:w-75 max-[1100px]:w-70"
                             role="presentation"
                         >
                         </span>
