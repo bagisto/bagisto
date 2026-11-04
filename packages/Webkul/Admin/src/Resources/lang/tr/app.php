@@ -5679,6 +5679,7 @@ return [
                         'info' => 'Dosyaların kaydedileceği ve sunulacağı depolamayı seçin.',
                         'default-driver' => 'Varsayılan Depolama Sürücüsü',
                         'default-driver-info' => 'Bundan sonra yüklenen dosyalar buraya kaydedilir. Daha önce yüklenen dosyalar eski depolamada kalır; geçiş yapmadan önce kopyalayın, aksi halde bulunamazlar.',
+                        'incomplete' => ':driver seçili, ancak ayarları eksik olduğu için yüklenen dosyalar henüz oraya kaydedilmiyor.',
 
                         'drivers' => [
                             'local' => 'Dosya (Yerel Depolama)',

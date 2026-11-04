@@ -60,10 +60,6 @@ class Locale extends Model implements LocaleContract
             return;
         }
 
-        try {
-            return Storage::url($this->logo_path);
-        } catch (\Throwable) {
-            return;
-        }
+        return Storage::url($this->logo_path);
     }
 }

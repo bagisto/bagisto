@@ -5679,6 +5679,7 @@ return [
                         'info' => 'Elija el almacenamiento en el que se guardan los archivos y desde el que se sirven.',
                         'default-driver' => 'Controlador de almacenamiento predeterminado',
                         'default-driver-info' => 'Los archivos subidos a partir de ahora se guardarán aquí. Los archivos ya subidos permanecen en el almacenamiento anterior: cópielos antes de cambiar o no se encontrarán.',
+                        'incomplete' => 'Se ha seleccionado :driver, pero su configuración está incompleta, por lo que los archivos subidos todavía no se guardan en él.',
 
                         'drivers' => [
                             'local' => 'Archivo (almacenamiento local)',

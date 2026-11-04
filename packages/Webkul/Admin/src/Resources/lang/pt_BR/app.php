@@ -5679,6 +5679,7 @@ return [
                         'info' => 'Escolha o armazenamento em que os arquivos são salvos e a partir do qual são servidos.',
                         'default-driver' => 'Driver de armazenamento padrão',
                         'default-driver-info' => 'Os arquivos enviados a partir de agora serão salvos aqui. Os arquivos já enviados permanecem no armazenamento anterior: copie-os antes de trocar, caso contrário não serão encontrados.',
+                        'incomplete' => ':driver está selecionado, mas suas configurações estão incompletas, por isso os arquivos enviados ainda não são salvos nele.',
 
                         'drivers' => [
                             'local' => 'Arquivo (armazenamento local)',

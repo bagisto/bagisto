@@ -5679,6 +5679,7 @@ return [
                         'info' => 'Choisissez le stockage dans lequel les fichiers sont enregistrés et depuis lequel ils sont servis.',
                         'default-driver' => 'Pilote de stockage par défaut',
                         'default-driver-info' => 'Les fichiers téléversés à partir de maintenant seront enregistrés ici. Les fichiers déjà téléversés restent sur le stockage précédent : copiez-les avant de changer, sinon ils seront introuvables.',
+                        'incomplete' => ':driver est sélectionné, mais ses paramètres sont incomplets : les fichiers téléversés n\'y sont donc pas encore enregistrés.',
 
                         'drivers' => [
                             'local' => 'Fichier (stockage local)',

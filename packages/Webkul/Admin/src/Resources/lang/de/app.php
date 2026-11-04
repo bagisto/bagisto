@@ -5679,6 +5679,7 @@ return [
                         'info' => 'Wählen Sie den Speicher, in dem Dateien abgelegt und von dem sie ausgeliefert werden.',
                         'default-driver' => 'Standard-Speichertreiber',
                         'default-driver-info' => 'Ab sofort hochgeladene Dateien werden hier gespeichert. Bereits hochgeladene Dateien verbleiben auf dem bisherigen Speicher. Kopieren Sie diese vor dem Wechsel, sonst werden sie nicht gefunden.',
+                        'incomplete' => ':driver ist ausgewählt, aber die Einstellungen sind unvollständig, daher werden hochgeladene Dateien noch nicht dort gespeichert.',
 
                         'drivers' => [
                             'local' => 'Datei (Lokaler Speicher)',

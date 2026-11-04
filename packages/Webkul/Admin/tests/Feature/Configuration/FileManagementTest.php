@@ -88,6 +88,34 @@ it('should leave the sync button out while the files are served from the site it
         ->assertDontSee('v-storage-sync', false);
 });
 
+it('should say the chosen remote driver is not in use yet while its settings are incomplete', function (string $driver, string $title) {
+    $this->loginAsAdmin();
+
+    $this->setConfig('file_management.general.settings.default_driver', $driver);
+
+    config(['filesystems.default' => 'public']);
+
+    get(route('admin.configuration.index', ['slug' => 'file_management', 'slug2' => 'general']))
+        ->assertOk()
+        ->assertSee(trans('admin::app.configuration.index.file-management.general.settings.incomplete', ['driver' => $title]));
+})->with([
+    'Amazon S3' => ['s3', 'Amazon S3'],
+    'Cloudflare R2' => ['r2', 'Cloudflare R2'],
+]);
+
+it('should not say the chosen remote driver is incomplete once it is the one in use', function () {
+    $this->loginAsAdmin();
+
+    $this->setConfig('file_management.general.settings.default_driver', 's3');
+
+    config(['filesystems.default' => 's3']);
+
+    get(route('admin.configuration.index', ['slug' => 'file_management', 'slug2' => 'general']))
+        ->assertOk()
+        ->assertSee('v-storage-sync', false)
+        ->assertDontSee('its settings are incomplete');
+});
+
 it('should save the chosen driver whichever one it is, now that the sync button depends on it', function (string $driver) {
     $this->loginAsAdmin();
 

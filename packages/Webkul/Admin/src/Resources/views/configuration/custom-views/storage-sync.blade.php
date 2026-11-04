@@ -1,8 +1,18 @@
 @php
     $driver = \Webkul\Core\Enums\SupportedFilesystemEnum::currentDriver();
+
+    $chosen = \Webkul\Core\Enums\SupportedFilesystemEnum::fromConfig(
+        core()->getConfigData(\Webkul\Core\Enums\SupportedFilesystemEnum::CONFIG_KEY)
+    );
+
+    $isIncomplete = $chosen !== $driver
+        && $chosen->supportsSync();
 @endphp
 
-@if ($driver->supportsSync())
+@if (
+    $driver->supportsSync()
+    || $isIncomplete
+)
     <v-storage-sync
         status-endpoint="{{ route('admin.configuration.file_management.sync_status') }}"
         endpoint="{{ route('admin.configuration.file_management.sync') }}"
@@ -16,34 +26,40 @@
                 class="mb-4 flex flex-col gap-2.5"
                 v-if="isVisible"
             >
-                <div class="flex flex-wrap items-center gap-2.5">
-                    <button
-                        type="button"
-                        class="secondary-button"
-                        :disabled="isSyncing || isUnreachable"
-                        @click="sync"
-                    >
-                        <span v-if="! isSyncing">
-                            @lang('admin::app.configuration.index.file-management.general.settings.sync.title')
+                @if ($isIncomplete)
+                    <p class="text-sm text-orange-600 dark:text-orange-400">
+                        @lang('admin::app.configuration.index.file-management.general.settings.incomplete', ['driver' => trans($chosen->title())])
+                    </p>
+                @else
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            :disabled="isSyncing || isUnreachable"
+                            @click="sync"
+                        >
+                            <span v-if="! isSyncing">
+                                @lang('admin::app.configuration.index.file-management.general.settings.sync.title')
+                            </span>
+
+                            <span v-else>
+                                @lang('admin::app.configuration.index.file-management.general.settings.sync.syncing')
+                            </span>
+                        </button>
+
+                        <span
+                            v-if="! isChecking && ! isUnreachable"
+                            class="text-sm"
+                            :class="pending ? 'text-orange-600 dark:text-orange-400' : 'text-emerald-600 dark:text-emerald-400'"
+                        >
+                            @{{ pending ? pendingLabel.replace(':count', pending) : upToDateLabel }}
                         </span>
+                    </div>
 
-                        <span v-else>
-                            @lang('admin::app.configuration.index.file-management.general.settings.sync.syncing')
-                        </span>
-                    </button>
-
-                    <span
-                        v-if="! isChecking && ! isUnreachable"
-                        class="text-sm"
-                        :class="pending ? 'text-orange-600 dark:text-orange-400' : 'text-emerald-600 dark:text-emerald-400'"
-                    >
-                        @{{ pending ? pendingLabel.replace(':count', pending) : upToDateLabel }}
-                    </span>
-                </div>
-
-                <p class="text-xs text-gray-600 dark:text-gray-300">
-                    @lang('admin::app.configuration.index.file-management.general.settings.sync.info')
-                </p>
+                    <p class="text-xs text-gray-600 dark:text-gray-300">
+                        @lang('admin::app.configuration.index.file-management.general.settings.sync.info')
+                    </p>
+                @endif
             </div>
         </script>
 
@@ -63,6 +79,8 @@
 
                         isVisible: true,
 
+                        isIncomplete: @json($isIncomplete),
+
                         pending: 0,
 
                         pendingLabel: @json(trans('admin::app.configuration.index.file-management.general.settings.sync.pending')),
@@ -74,7 +92,9 @@
                 mounted() {
                     this.watchDriver();
 
-                    this.check();
+                    if (! this.isIncomplete) {
+                        this.check();
+                    }
                 },
 
                 methods: {

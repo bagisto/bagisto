@@ -25,6 +25,7 @@
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
+- [An Incomplete Remote Disk Is Not Selected](#an-incomplete-remote-disk-is-not-selected)
 - [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
 - [The Invoice Payment Transaction Is Created By The Controller](#the-invoice-payment-transaction-is-created-by-the-controller)
@@ -68,6 +69,19 @@ What this changes for custom code:
 - **Review attachments are recorded as a batch.** `ProductReviewAttachmentRepository::upload()` stores every file first and records them only once all of them are readable, so one unreadable file leaves neither rows nor files behind.
 - **`ProductReviewRepository` takes `ProductReviewAttachmentRepository` in its constructor**, so resolve it through the container rather than building it by hand. Its new `createWithAttachments()` writes the review and its attachments in one transaction, and `Webkul\Shop\Http\Controllers\API\ReviewController` calls that instead of creating the review and uploading the attachments itself — the controller no longer injects `ProductReviewAttachmentRepository`.
 - **Configuration saves, locale saves and product updates run in a transaction**, so a refused file rolls the rest of the save back.
+
+---
+
+### An Incomplete Remote Disk Is Not Selected
+
+**Impact Probability: Low**
+
+Choosing Amazon S3 or Cloudflare R2 as the storage driver switched the store onto it straight away, even without the settings it needs, so any page that built a file URL either failed or linked to a file that did not exist. The chosen disk is now selected only once it is complete: a region and bucket for S3, a bucket and endpoint for R2, and an access key and secret for both. Until then the store keeps saving to and serving from the local disk, and the file management screen says the chosen disk is not in use yet. A remote disk that `FILESYSTEM_DISK` names in `.env` is held to the same settings.
+
+What this changes for custom code:
+
+- **A store that reached S3 through an instance role with the key and secret left blank** now stays on the local disk. Enter the access key and secret in the configuration panel.
+- **`SupportedFilesystemEnum::requiredDiskSettings()`** names the settings each driver must carry before it is selected.
 
 ---
 

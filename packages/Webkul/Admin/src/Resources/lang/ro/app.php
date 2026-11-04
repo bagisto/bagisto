@@ -5679,6 +5679,7 @@ return [
                         'info' => 'Alegeți stocarea în care fișierele sunt salvate și din care sunt servite.',
                         'default-driver' => 'Driver de stocare implicit',
                         'default-driver-info' => 'Fișierele încărcate de acum înainte vor fi salvate aici. Fișierele deja încărcate rămân pe stocarea anterioară, așa că le copiați înainte de comutare, altfel nu vor fi găsite.',
+                        'incomplete' => ':driver este selectat, dar setările sale sunt incomplete, așa că fișierele încărcate nu sunt încă salvate acolo.',
 
                         'drivers' => [
                             'local' => 'Fișier (stocare locală)',
