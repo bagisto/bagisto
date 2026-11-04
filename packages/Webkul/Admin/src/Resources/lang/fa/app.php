@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'افزودن نسخه',
+                        'default' => 'پیش‌فرض',
                         'delete-btn' => 'حذف',
                         'edit-btn' => 'ویرایش',
                         'empty-info' => 'برای ایجاد ترکیب‌های مختلف محصول به طور پویا.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'افزودن ویدیو',
-                'allowed-types' => 'mp4، webm، mkv',
-                'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
+                'allowed-types' => 'mp4، webm، mov',
+                'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .webm) مجاز هستند.',
                 'video' => 'ویدیو',
 
                 'seo' => [

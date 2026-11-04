@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Afegir variant',
+                        'default' => 'Per Defecte',
                         'delete-btn' => 'Eliminar',
                         'edit-btn' => 'Editar',
                         'empty-info' => 'Per crear diverses combinacions de productes sobre la marxa.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .ogg ..).',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .webm).',
                 'video' => 'Vídeo',
 
                 'seo' => [

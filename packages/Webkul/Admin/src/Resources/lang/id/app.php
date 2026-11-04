@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Tambah Varian',
+                        'default' => 'Default',
                         'delete-btn' => 'Hapus',
                         'edit-btn' => 'Edit',
                         'empty-info' => 'Untuk membuat berbagai kombinasi produk dengan cepat.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Hanya file video (.mp4, .mov, .ogg, dll) yang diperbolehkan.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Hanya file video (.mp4, .mov, .webm) yang diperbolehkan.',
                 'video' => 'Video',
 
                 'seo' => [

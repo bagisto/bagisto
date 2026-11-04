@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'वेरिएंट जोड़ें',
+                        'default' => 'डिफ़ॉल्ट',
                         'delete-btn' => 'हटाएं',
                         'edit-btn' => 'संपादित करें',
                         'empty-info' => 'विभिन्न उत्पाद की विभिन्न संयोजना बनाने के लिए।',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'वीडियो जोड़ें',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .webm) अनुमत हैं।',
                 'video' => 'वीडियो',
 
                 'seo' => [

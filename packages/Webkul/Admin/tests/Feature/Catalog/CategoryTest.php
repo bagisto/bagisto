@@ -282,6 +282,20 @@ it('should fail validation when logo_path is not an array of images', function (
         ->assertJsonValidationErrorFor('logo_path');
 });
 
+it('should name the logo and banner by their labels when they are not images', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.categories.store'), [
+        'logo_path' => ['image_0' => UploadedFile::fake()->image('logo.php')],
+        'banner_path' => ['image_0' => UploadedFile::fake()->image('banner.php')],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors([
+            'logo_path.image_0' => 'The Logo field',
+            'banner_path.image_0' => 'The Banner field',
+        ]);
+});
+
 it('should fail validation when image files have invalid extensions', function () {
     $this->loginAsAdmin();
 

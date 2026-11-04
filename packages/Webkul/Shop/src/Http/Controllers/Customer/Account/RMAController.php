@@ -140,7 +140,7 @@ class RMAController extends Controller
             'images' => 'nullable|array|min:1',
             'images.*' => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
             'agreement' => 'accepted',
-        ]);
+        ], [], ['images.*' => trans('shop::app.customers.account.rma.create.images')]);
 
         $data = request()->only([
             'order_id',

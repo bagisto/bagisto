@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'විකුණන්නාගේ වෙනස් කරන්න',
+                        'default' => 'පෙරනිමි',
                         'delete-btn' => 'මකන්න',
                         'edit-btn' => 'සංස්කරණය කරන්න',
                         'empty-info' => 'වෙනස් කිරීමට විවෘත සාකච්ඡාව.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'වීඩියෝ එකතු කරන්න',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .webm) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
                 'video' => 'වීඩියෝව',
 
                 'seo' => [

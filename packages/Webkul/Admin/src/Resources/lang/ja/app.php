@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'バリエーションを追加',
+                        'default' => 'デフォルト',
                         'delete-btn' => '削除',
                         'edit-btn' => '編集',
                         'empty-info' => '製品のさまざまな組み合わせをすぐに作成するには。',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'ビデオを追加',
-                'allowed-types' => 'mp4、webm、mkv',
-                'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+                'allowed-types' => 'mp4、webm、mov',
+                'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.webm）。',
                 'video' => '動画',
 
                 'seo' => [

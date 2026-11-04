@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Добавить вариант',
+                        'default' => 'По умолчанию',
                         'delete-btn' => 'Удалить',
                         'edit-btn' => 'Редактировать',
                         'empty-info' => 'Создание различных комбинаций продуктов.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Добавить видео',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .webm)',
                 'video' => 'Видео',
 
                 'seo' => [

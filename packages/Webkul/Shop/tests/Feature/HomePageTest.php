@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Customer\Models\CompareItem;
+use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\SearchRepository;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 
@@ -58,7 +59,7 @@ it('should return search results for a product', function () {
         ->assertSeeText(trans('shop::app.search.title', ['query' => $product->name]));
 });
 
-it('should reject an array search query instead of running it as a raw sql condition', function () {
+it('should reject an array search query instead of running it as a raw SQL condition', function () {
     config(['responsecache.enabled' => true]);
 
     $response = get('/search?'.http_build_query([
@@ -74,7 +75,7 @@ it('should reject an array search query instead of running it as a raw sql condi
 // Image Search
 // ============================================================================
 
-it('should keep a search image in the folder of the day it was uploaded and answer with its url', function () {
+it('should keep a search image in the folder of the day it was uploaded and answer with its URL', function () {
     Storage::fake();
 
     $this->freezeTime();
@@ -90,6 +91,71 @@ it('should keep a search image in the folder of the day it was uploaded and answ
 
     expect($stored)->toHaveCount(1)
         ->and($response->json('image_url'))->toBe(Storage::url($stored[0]));
+});
+
+it('should store an SVG image search upload with its scripts stripped', function () {
+    Storage::fake();
+
+    $this->setConfig('magic_ai.general.settings.enabled', 0);
+
+    postJson(route('shop.search.upload'), [
+        'image' => UploadedFile::fake()->createWithContent('shoe.svg', '<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"><script>alert(2)</script><rect/></svg>'),
+    ])->assertOk();
+
+    $stored = Storage::allFiles(SearchRepository::SEARCH_IMAGES_DIRECTORY);
+
+    expect($stored)->toHaveCount(1)
+        ->and(Storage::get($stored[0]))
+        ->toContain('<rect')
+        ->not->toContain('script')
+        ->not->toContain('onload');
+});
+
+it('should refuse an SVG image search upload that cannot be read and store nothing', function () {
+    Storage::fake();
+
+    postJson(route('shop.search.upload'), [
+        'image' => UploadedFile::fake()->createWithContent('shoe.svg', '<svg><rect></svg>'),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['image' => trans('core::app.errors.invalid-svg')]);
+
+    expect(Storage::allFiles(SearchRepository::SEARCH_IMAGES_DIRECTORY))->toBeEmpty();
+});
+
+it('should leave an SVG image search upload to the browser classifier when the AI is on', function () {
+    Storage::fake();
+
+    $this->setConfig([
+        'magic_ai.general.settings.enabled' => 1,
+        'magic_ai.storefront_features.image_search.enabled' => 1,
+    ]);
+
+    MagicAI::shouldReceive('analyzeImage')->never();
+
+    postJson(route('shop.search.upload'), [
+        'image' => UploadedFile::fake()->createWithContent('shoe.svg', '<svg xmlns="http://www.w3.org/2000/svg"><rect/></svg>'),
+    ])
+        ->assertOk()
+        ->assertJsonPath('engine', 'tensorflow');
+});
+
+it('should send a raster image search upload to the AI when it is on', function () {
+    Storage::fake();
+
+    $this->setConfig([
+        'magic_ai.general.settings.enabled' => 1,
+        'magic_ai.storefront_features.image_search.enabled' => 1,
+    ]);
+
+    MagicAI::shouldReceive('analyzeImage')->once()->andReturn('red shoe');
+
+    postJson(route('shop.search.upload'), [
+        'image' => UploadedFile::fake()->image('shoe.png', 20, 10),
+    ])
+        ->assertOk()
+        ->assertJsonPath('engine', 'ai')
+        ->assertJsonPath('keywords', 'red shoe');
 });
 
 // ============================================================================

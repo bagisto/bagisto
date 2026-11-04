@@ -112,6 +112,9 @@
                     },
 
                     methods: {
+                        /**
+                         * Show or hide the password.
+                         */
                         toggle() {
                             this.isVisible = ! this.isVisible;
                         },
@@ -166,7 +169,10 @@
             >
             </textarea>
 
-            @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
+            @if (
+                $attributes->get('tinymce', false)
+                || $attributes->get(':tinymce', false)
+            )
                 <x-shop::tinymce
                     :selector="'textarea#' . $attributes->get('id')"
                     :prompt="stripcslashes($attributes->get('prompt', ''))"
@@ -320,6 +326,8 @@
     @case('image')
         <x-shop::media
             ::class="[errors && errors['{{ $name }}'] ? 'border border-red-500!' : '']"
+            ::errors="errors"
+            ::set-field-error="setFieldError"
             {{ $attributes }}
             name="{{ $name }}"
         />

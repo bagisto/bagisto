@@ -124,6 +124,15 @@
                             </div>
                         </div>
 
+                        @error('options.*.swatch_value')
+                            <p
+                                class="mb-3 text-xs italic text-red-600"
+                                v-pre
+                            >
+                                {{ $message }}
+                            </p>
+                        @enderror
+
                         <!-- For Attribute Options If Data Exist -->
                         <div class="mt-4 overflow-x-auto">
                             <div
@@ -890,6 +899,9 @@
                 },
 
                 computed: {
+                    /**
+                     * Whether attributes of the chosen type can be filterable.
+                     */
                     isFilterable() {
                         return this.attributeType == 'checkbox'
                             || this.attributeType == 'select'
@@ -898,16 +910,25 @@
                             || this.attributeType == 'price';
                     },
 
+                    /**
+                     * Whether attributes of the chosen type can be configurable.
+                     */
                     isConfigurable() {
                         return this.attributeType == 'select';
                     },
 
+                    /**
+                     * Whether attributes of the chosen type can have a default value.
+                     */
                     canHaveDefaultValue() {
                         return this.attributeType == 'boolean';
                     },
                 },
 
                 methods: {
+                    /**
+                     * Offer the swatch again and clear a validation only text attributes have.
+                     */
                     onTypeChange() {
                         this.swatchAttribute = true;
 
@@ -916,6 +937,9 @@
                         }
                     },
 
+                    /**
+                     * Add the option to the list, or update it when it is being edited.
+                     */
                     storeOptions(params, { resetForm }) {
                         const sortedLocales = Object.values(this.locales).sort((a, b) => a.name.localeCompare(b.name));
 
@@ -959,6 +983,9 @@
                         resetForm();
                     },
 
+                    /**
+                     * Open the option modal with the values of the chosen option.
+                     */
                     editModal(values) {
                         values.params.id = values.id;
 
@@ -973,6 +1000,9 @@
                         this.$refs.addOptionsRow.toggle();
                     },
 
+                    /**
+                     * Remove an option once the admin has confirmed.
+                     */
                     removeOption(id) {
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
@@ -983,18 +1013,23 @@
                         });
                     },
 
+                    /**
+                     * Reset the null option checkbox when the modal closes.
+                     */
                     listenModal(event) {
                         if (! event.isActive) {
                             this.isNullOptionChecked = false;
                         }
                     },
 
+                    /**
+                     * Put the swatch on the preview and input of its row, once the row has rendered.
+                     */
                     setFile(event) {
                         let dataTransfer = new DataTransfer();
 
                         dataTransfer.items.add(event.swatch_value);
 
-                        // use set timeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
                             this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
 
