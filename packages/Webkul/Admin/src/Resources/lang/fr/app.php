@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Ajouter une variante',
+                        'default' => 'Par défaut',
                         'delete-btn' => 'Supprimer',
                         'edit-btn' => 'Modifier',
                         'empty-info' => 'Pour créer diverses combinaisons de produits en un clin d\'œil.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Ajouter une vidéo',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .ogg ..) sont autorisés.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .webm) sont autorisés.',
                 'video' => 'Vidéo',
 
                 'seo' => [

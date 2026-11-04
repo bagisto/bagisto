@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Çeşit Ekle',
+                        'default' => 'Varsayılan',
                         'delete-btn' => 'Sil',
                         'edit-btn' => 'Düzenle',
                         'empty-info' => 'Hızlı bir şekilde ürünün farklı kombinasyonlarını oluşturmak için.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Video Ekle',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .webm) izin verilir.',
                 'video' => 'Video',
 
                 'seo' => [

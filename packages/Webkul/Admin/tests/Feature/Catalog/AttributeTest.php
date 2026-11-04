@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
@@ -128,7 +129,7 @@ it('should return the attribute create page', function () {
 });
 
 // ============================================================================
-// Store — All attribute types
+// Store — All Attribute Types
 // ============================================================================
 
 it('should store a [type] attribute', function (string $type) {
@@ -150,7 +151,7 @@ it('should store a [type] attribute', function (string $type) {
 })->with('attribute_types');
 
 // ============================================================================
-// Store — Option-based types with options
+// Store — Option-Based Types With Options
 // ============================================================================
 
 it('should store a [type] attribute with options', function (string $type) {
@@ -197,7 +198,7 @@ it('should ignore options for non-option [type] attributes', function (string $t
 })->with('non_option_types');
 
 // ============================================================================
-// Store — Boolean default value
+// Store — Boolean Default Value
 // ============================================================================
 
 it('should store a boolean attribute with valid default value', function () {
@@ -226,7 +227,7 @@ it('should fail validation for invalid boolean default value on store', function
 });
 
 // ============================================================================
-// Store — Business logic: filterable, configurable, locale
+// Store — Business Logic: Filterable, Configurable, Locale
 // ============================================================================
 
 it('should force is_filterable to 0 for non-filterable [type] attributes', function (string $type) {
@@ -308,7 +309,7 @@ it('should unset value_per_locale for [type] attributes', function (string $type
 })->with('locale_unset_types');
 
 // ============================================================================
-// Store — Swatch types
+// Store — Swatch Types
 // ============================================================================
 
 it('should store a select attribute with [swatch_type] swatch type', function (string $swatchType) {
@@ -331,7 +332,7 @@ it('should store a select attribute with [swatch_type] swatch type', function (s
 })->with('swatch_types');
 
 // ============================================================================
-// Store — Validation types
+// Store — Validation Types
 // ============================================================================
 
 it('should store a text attribute with [validation] validation', function (string $validation) {
@@ -360,7 +361,7 @@ it('should store a text attribute with [validation] validation', function (strin
 })->with('validation_types');
 
 // ============================================================================
-// Store — Validation errors
+// Store — Validation Errors
 // ============================================================================
 
 it('should fail validation when required fields are missing on store', function () {
@@ -429,6 +430,21 @@ it('should fail validation when code already exists on store', function () {
     ])
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('code');
+});
+
+it('should show an image swatch that is not an image on the page it returns to on store', function () {
+    $this->loginAsAdmin();
+
+    $this->from(route('admin.catalog.attributes.create'))
+        ->followingRedirects()
+        ->post(route('admin.catalog.attributes.store'), [
+            'code' => 'bad_swatch',
+            'admin_name' => 'Bad Swatch',
+            'type' => 'select',
+            'options' => ['option_0' => ['swatch_value' => UploadedFile::fake()->image('swatch.php')]],
+        ])
+        ->assertOk()
+        ->assertSee('The Image Swatch field');
 });
 
 // ============================================================================
@@ -596,6 +612,26 @@ it('should dispatch update events for a [type] attribute', function (string $typ
     Event::assertDispatched('catalog.attribute.update.before');
     Event::assertDispatched('catalog.attribute.update.after');
 })->with('attribute_types');
+
+it('should show an image swatch that is not an image on the page it returns to on update', function () {
+    $attribute = Attribute::factory()->create([
+        'type' => 'select',
+        'swatch_type' => 'image',
+    ]);
+
+    $this->loginAsAdmin();
+
+    $this->from(route('admin.catalog.attributes.edit', $attribute->id))
+        ->followingRedirects()
+        ->put(route('admin.catalog.attributes.update', $attribute->id), [
+            'code' => $attribute->code,
+            'admin_name' => $attribute->admin_name,
+            'type' => 'select',
+            'options' => ['option_0' => ['swatch_value' => UploadedFile::fake()->image('swatch.php')]],
+        ])
+        ->assertOk()
+        ->assertSee('The Image Swatch field');
+});
 
 // ============================================================================
 // Destroy

@@ -64,7 +64,7 @@
                 id="uploaded-image-url"
                 class="hidden"
                 :src="uploadedImageUrl"
-                alt="uploaded image url"
+                alt=""
                 width="20"
                 height="20"
             />
@@ -84,10 +84,16 @@
             },
 
             methods: {
+                /**
+                 * Upload the picked image and start the search for what it shows.
+                 */
                 analyzeImage() {
                     let imageInput = this.$refs.imageSearchInput;
 
-                    if (! imageInput.files || ! imageInput.files[0]) {
+                    if (
+                        ! imageInput.files
+                        || ! imageInput.files[0]
+                    ) {
                         return;
                     }
 
@@ -125,19 +131,30 @@
 
                             localStorage.searchedImageUrl = data.image_url;
 
-                            if (data.engine === 'ai' && data.keywords) {
+                            if (
+                                data.engine === 'ai'
+                                && data.keywords
+                            ) {
                                 this.handleAiResult(data.keywords);
                             } else {
                                 this.handleTensorflowResult();
                             }
                         })
-                        .catch(() => {
-                            this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
+                        .catch(error => {
+                            imageInput.value = '';
+
+                            this.$emitter.emit('add-flash', {
+                                type: 'error',
+                                message: error.response?.data?.errors?.image?.[0] ?? "@lang('shop::app.search.images.index.something-went-wrong')",
+                            });
 
                             this.isSearching = false;
                         });
                 },
 
+                /**
+                 * Search for the first of the keywords the AI found in the image.
+                 */
                 handleAiResult(keywords) {
                     let terms = keywords
                         .split(',')
@@ -157,6 +174,9 @@
                     window.location.href = `{{ route('shop.search.index') }}?query=${encodeURIComponent(terms[0])}&image-search=1`;
                 },
 
+                /**
+                 * Load the image classifier and classify the uploaded image in the browser.
+                 */
                 handleTensorflowResult() {
                     this.$shop.loadDynamicScript(
                         'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js', () => {
@@ -169,6 +189,9 @@
                     );
                 },
 
+                /**
+                 * Search for what the classifier recognises in the uploaded image.
+                 */
                 async classifyWithTensorflow() {
                     try {
                         let analysedResult = [];

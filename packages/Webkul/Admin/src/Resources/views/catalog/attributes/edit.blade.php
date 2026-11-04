@@ -120,6 +120,15 @@
                             </div>
                         </div>
 
+                        @error('options.*.swatch_value')
+                            <p
+                                class="mb-3 text-xs italic text-red-600"
+                                v-pre
+                            >
+                                {{ $message }}
+                            </p>
+                        @enderror
+
                         <!-- Swatch Changer And Empty Field Section -->
                         <div
                             class="flex items-center gap-4 max-sm:flex-wrap"
@@ -1021,6 +1030,9 @@
                 },
 
                 computed: {
+                    /**
+                     * Whether attributes of the chosen type can be filterable.
+                     */
                     isFilterable() {
                         return this.attributeType == 'checkbox'
                             || this.attributeType == 'select'
@@ -1029,10 +1041,16 @@
                             || this.attributeType == 'price';
                     },
 
+                    /**
+                     * Whether attributes of the chosen type can be configurable.
+                     */
                     isConfigurable() {
                         return this.attributeType == 'select';
                     },
 
+                    /**
+                     * Whether attributes of the chosen type can have a default value.
+                     */
                     canHaveDefaultValue() {
                         return this.attributeType == 'boolean';
                     },
@@ -1043,6 +1061,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Add the option to the list, or update it when it is being edited.
+                     */
                     storeOptions(params, { resetForm, setValues }) {
                         const lastId = this.optionsData.map(item => item.id).pop() ?? 0;
 
@@ -1086,6 +1107,9 @@
                         resetForm();
                     },
 
+                    /**
+                     * Open the option modal with the values of the chosen option.
+                     */
                     editOptions(value) {
                         this.optionIsNew = false;
 
@@ -1109,6 +1133,9 @@
                         this.$refs.addOptionsRow.toggle();
                     },
 
+                    /**
+                     * Remove an option once the admin has confirmed.
+                     */
                     removeOption(id) {
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
@@ -1127,12 +1154,18 @@
                         });
                     },
 
+                    /**
+                     * Reset the null option checkbox when the modal closes.
+                     */
                     listenModel(event) {
                         if (! event.isActive) {
                             this.isNullOptionChecked = false;
                         }
                     },
 
+                    /**
+                     * Load the options of this attribute.
+                     */
                     getAttributesOption() {
                         this.$axios.get(`{{ route('admin.catalog.attributes.options', $attribute->id) }}`)
                             .then(response => {
@@ -1170,12 +1203,14 @@
                             });
                     },
 
+                    /**
+                     * Put the swatch on the preview and input of its row, once the row has rendered.
+                     */
                     setFile(file, id) {
                         let dataTransfer = new DataTransfer();
 
                         dataTransfer.items.add(file);
 
-                        // Use Set timeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
                             this.$refs['image_' + id].src =  URL.createObjectURL(file);
 

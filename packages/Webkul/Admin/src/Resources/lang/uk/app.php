@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Додати варіант',
+                        'default' => 'За замовчуванням',
                         'delete-btn' => 'Видалити',
                         'edit-btn' => 'Редагувати',
                         'empty-info' => 'Створити різні комбінації товару на ходу.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Додати відео',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .webm).',
                 'video' => 'Відео',
 
                 'seo' => [

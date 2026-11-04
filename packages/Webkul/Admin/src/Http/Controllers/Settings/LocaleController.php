@@ -43,8 +43,8 @@ class LocaleController extends Controller
             'name' => 'required',
             'direction' => 'required|in:ltr,rtl',
             'logo_path' => 'array',
-            'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
-        ]);
+            'logo_path.*' => 'image:allow_svg|extensions:jpeg,jpg,png,svg,webp',
+        ], [], ['logo_path.*' => trans('admin::app.settings.locales.index.create.locale-logo')]);
 
         Event::dispatch('core.locale.create.before');
 
@@ -83,8 +83,8 @@ class LocaleController extends Controller
             'name' => 'required',
             'direction' => 'required|in:ltr,rtl',
             'logo_path' => 'array',
-            'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
-        ]);
+            'logo_path.*' => 'image:allow_svg|extensions:jpeg,jpg,png,svg,webp',
+        ], [], ['logo_path.*' => trans('admin::app.settings.locales.index.create.locale-logo')]);
 
         Event::dispatch('core.locale.update.before', request()->id);
 

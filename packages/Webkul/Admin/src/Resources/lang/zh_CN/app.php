@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => '添加变体',
+                        'default' => '默认',
                         'delete-btn' => '删除',
                         'edit-btn' => '编辑',
                         'empty-info' => '随时创建产品的各种组合。',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => '添加视频',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.webm）。',
                 'video' => '视频',
 
                 'seo' => [

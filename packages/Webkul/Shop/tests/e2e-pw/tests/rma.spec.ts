@@ -1,3 +1,4 @@
+import { notAnImage, validImage } from "@shared/media-files";
 import { test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
@@ -148,6 +149,63 @@ test.describe("return requests", () => {
         await createPage.expectRequestCreatedOnDetailPage();
 
         await requestPage.expectPhotosServedOnDetailPage(2);
+    });
+
+    test("should keep the one photo a customer attaches", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const createPage = new RmaCreatePage(shopPage);
+        const requestPage = new RmaRequestPage(shopPage);
+
+        await createPage.requestReturnWithPhotos(orderId, [validImage()]);
+
+        await createPage.expectRequestCreatedOnDetailPage();
+
+        await requestPage.expectPhotosServedOnDetailPage(1);
+    });
+
+    test("should say why a photo was refused and create no request", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const createPage = new RmaCreatePage(shopPage);
+
+        await createPage.requestReturnWithPhotos(orderId, [notAnImage()]);
+
+        await createPage.expectPhotosRefused("The Images field must be a file of type");
+        await createPage.expectNoRequestForOrder(orderId);
+    });
+
+    test("should say why a message attachment was refused and send a valid one", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        await createProduct(adminPage, true);
+
+        const orderId = await placeInvoicedOrder(adminPage, shopPage);
+        const createPage = new RmaCreatePage(shopPage);
+        const requestPage = new RmaRequestPage(shopPage);
+        const message = `Message ${uniqueStamp()}`;
+        const attachment = validImage(`attachment-${uniqueStamp()}.png`);
+
+        await createPage.requestReturn(orderId);
+
+        await requestPage.sendMessage(orderId, message, notAnImage());
+
+        await requestPage.expectMessageRefused("The file field must be a file of type");
+        await requestPage.expectMessageCanBeSentAgain();
+
+        await requestPage.sendMessage(orderId, message, attachment);
+
+        await requestPage.expectMessageInConversation(message);
+        await requestPage.expectAttachmentInConversation(attachment.name);
     });
 
     test("should let a customer cancel a return request", async ({

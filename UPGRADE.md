@@ -51,6 +51,7 @@
 - [The Image Cache Reports A Disk It Cannot Read](#the-image-cache-reports-a-disk-it-cannot-read)
 - [The Appearance Preview Names Its Theme In Image Urls](#the-appearance-preview-names-its-theme-in-image-urls)
 - [Image Search Uploads Are Filed By Day And Pruned](#image-search-uploads-are-filed-by-day-and-pruned)
+- [The Maximum Upload Size Helper Returns Kilobytes](#the-maximum-upload-size-helper-returns-kilobytes)
 
 ---
 
@@ -601,6 +602,20 @@ What this changes for custom code:
 
 - **Run Laravel's scheduler**, `php artisan schedule:run` every minute from cron, or the uploads are never pruned; the images in `docker/production/` run it already. Run `php artisan search-images:prune` yourself to prune them by hand.
 - **Code that read uploads from `product-search/`** reads them from `Webkul\Product\Repositories\SearchRepository::SEARCH_IMAGES_DIRECTORY` and the day's subfolder instead.
+
+---
+
+### The Maximum Upload Size Helper Returns Kilobytes
+
+**Impact Probability: Low**
+
+`core()->getMaxUploadSize()` returned PHP's `upload_max_filesize` as `php.ini` spells it, such as `2M`, and ignored `post_max_size`, so it could name a size PHP would refuse. It now returns the largest upload PHP accepts as an integer number of kilobytes, whichever of the two settings is lower.
+
+What this changes for custom code:
+
+- **Code that displays the value** adds its own unit, because `2M` is now `2048`.
+- **Code that parsed the shorthand** uses the number directly.
+- **The product videos panel** no longer reads this helper for its hint. It shows `product_video()->getMaxUploadSize()`, the limit the upload is actually held to.
 
 ## Upgrading To v2.5.0 From v2.4
 

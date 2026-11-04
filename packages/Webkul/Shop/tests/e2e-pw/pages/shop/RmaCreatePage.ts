@@ -1,4 +1,5 @@
 import { expect, Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { BasePage } from "../BasePage";
 
 export class RmaCreatePage extends BasePage {
@@ -11,11 +12,14 @@ export class RmaCreatePage extends BasePage {
     }
 
     private orderRow(orderId: string) {
-        return this.page.locator("div.row").filter({
-            has: this.page.locator("p", {
-                hasText: new RegExp(`^\\s*#?${orderId}\\s*$`),
-            }),
-        });
+        return this.page
+            .locator("div.row")
+            .filter({
+                has: this.page.locator("p", {
+                    hasText: new RegExp(`^\\s*#?${orderId}\\s*$`),
+                }),
+            })
+            .filter({ visible: true });
     }
 
     private get itemCheckbox() {
@@ -96,13 +100,20 @@ export class RmaCreatePage extends BasePage {
         ).toBeVisible();
     }
 
-    async requestReturnWithPhotos(orderId: string, photoPaths: string[]): Promise<void> {
+    async requestReturnWithPhotos(
+        orderId: string,
+        photoPaths: string[] | MediaFile[],
+    ): Promise<void> {
         await this.fillRequest(orderId, "1");
         await this.packageConditionSelect.selectOption({ value: "open" });
         await this.informationInput.fill("The item arrived damaged.");
         await this.photoInput.setInputFiles(photoPaths);
         await this.agreementLabel.check();
         await this.submitButton.click();
+    }
+
+    async expectPhotosRefused(message: string): Promise<void> {
+        await expect(this.page.getByText(message)).toBeVisible();
     }
 
     async expectRequestCreatedOnDetailPage(): Promise<void> {

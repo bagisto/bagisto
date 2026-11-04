@@ -1,3 +1,4 @@
+import { notAnImage } from "@shared/media-files";
 import { test } from "../../../setup";
 import { CategoryPage, type CategoryData } from "../../../pages/admin/catalog/categories/CategoryPage";
 import {
@@ -42,6 +43,23 @@ test.describe("design configuration", () => {
 
             await designConfig.deleteMedia(field);
 
+            await designConfig.expectMediaAbsent(field);
+        });
+    }
+
+    for (const { field, label } of [
+        { field: "logo_image", label: "Logo Image" },
+        { field: "favicon", label: "Favicon" },
+    ] as const) {
+        test(`should say why a ${label.toLowerCase()} was refused and keep none`, async () => {
+            test.skip(
+                await designConfig.hasMedia(field),
+                `A ${field} is already configured and is not what this test is about`,
+            );
+
+            await designConfig.attemptUploadMedia(field, notAnImage());
+
+            await designConfig.expectMediaRefused(`The ${label} field must be a file of type`);
             await designConfig.expectMediaAbsent(field);
         });
     }

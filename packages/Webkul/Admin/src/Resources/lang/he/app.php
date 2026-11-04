@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'הוסף נציג',
+                        'default' => 'ברירת מחדל',
                         'delete-btn' => 'מחק',
                         'edit-btn' => 'ערוך',
                         'empty-info' => 'כדי ליצור שילובים שונים של מוצר בצעדה.',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'הוסף וידאו',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .webm)',
                 'video' => 'וידאו',
 
                 'seo' => [

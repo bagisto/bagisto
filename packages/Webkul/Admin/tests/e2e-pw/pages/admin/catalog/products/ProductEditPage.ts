@@ -1,9 +1,18 @@
 import path from "path";
 import { expect, Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { BasePage } from "../../../BasePage";
 import type { AdminPage } from "../../../../setup";
 import { ProductListPage } from "./ProductListPage";
+import { MediaGalleryField } from "../../components/MediaGalleryField";
 import { MediaUploadSection } from "../../components/MediaUploadSection";
+
+export interface NewVariantData {
+    options: Record<string, string>;
+    name: string;
+    weight: string;
+    image?: MediaFile;
+}
 
 export interface ProductEditData {
     productNumber?: string;
@@ -169,12 +178,103 @@ export class ProductEditPage extends BasePage {
         return this.downloadablePanel.locator("p.text-red-600").first();
     }
 
+    private get videoLimitHint() {
+        return this.page.getByText(/Maximum video size should be like \d+ KB/);
+    }
+
+    private get addVariantButton() {
+        return this.page
+            .locator(".secondary-button")
+            .filter({ hasText: "Add Variant" });
+    }
+
+    private get confirmVariantButton() {
+        return this.page.getByRole("button", { name: "Add", exact: true });
+    }
+
+    private get variantDrawerPrice() {
+        return this.page.locator('input[name="price"]').filter({ visible: true });
+    }
+
+    private get variantDrawerForm() {
+        return this.variantDrawerPrice.locator("xpath=ancestor::form[1]");
+    }
+
+    private get variantDrawerSaveButton() {
+        return this.variantDrawerForm.getByRole("button", {
+            name: "Save",
+            exact: true,
+        });
+    }
+
     private linkRow(title: string) {
         return this.page.getByText(title);
     }
 
+    private variantRow(sku: string) {
+        return this.page
+            .getByText(`SKU - ${sku}`, { exact: true })
+            .locator('xpath=ancestor::div[.//p[normalize-space()="Edit"]][1]');
+    }
+
+    private variantOptionSelect(code: string) {
+        return this.page
+            .locator(`select[name="${code}"]`)
+            .filter({ visible: true });
+    }
+
+    private async saveVariantDrawer(): Promise<void> {
+        await this.variantDrawerSaveButton.click();
+
+        await expect(this.variantDrawerPrice).toHaveCount(0);
+    }
+
     mediaAttribute(code: string): MediaUploadSection {
         return new MediaUploadSection(this.page, code);
+    }
+
+    imagesField(): MediaGalleryField {
+        return MediaGalleryField.underHeading(this.page, "Images");
+    }
+
+    videosField(): MediaGalleryField {
+        return MediaGalleryField.underHeading(this.page, "Videos", "video");
+    }
+
+    async readVideoLimit(): Promise<number> {
+        const hint = await this.videoLimitHint.innerText();
+
+        return Number(hint.match(/(\d+) KB/)?.[1]);
+    }
+
+    async attachVariantImage(sku: string, image: MediaFile): Promise<void> {
+        await this.variantRow(sku).getByText("Edit", { exact: true }).click();
+
+        await expect(this.variantDrawerPrice).toBeVisible();
+
+        await new MediaGalleryField(this.variantDrawerForm).attach(image);
+        await this.saveVariantDrawer();
+    }
+
+    async addVariant(variant: NewVariantData): Promise<void> {
+        await this.addVariantButton.click();
+
+        for (const [code, optionId] of Object.entries(variant.options)) {
+            await this.variantOptionSelect(code).selectOption(optionId);
+        }
+
+        await this.confirmVariantButton.click();
+
+        await expect(this.variantDrawerPrice).toBeVisible();
+
+        await this.variantDrawerForm.locator('input[name="name"]').fill(variant.name);
+        await this.variantDrawerForm.locator('input[name="weight"]').fill(variant.weight);
+
+        if (variant.image) {
+            await new MediaGalleryField(this.variantDrawerForm).attach(variant.image);
+        }
+
+        await this.saveVariantDrawer();
     }
 
     async waitForForm() {
@@ -390,6 +490,34 @@ export class ProductEditPage extends BasePage {
 
     async expectDownloadableLinkListed(title: string): Promise<void> {
         await expect(this.linkRow(title)).toBeVisible();
+    }
+
+    async expectVariantListed(sku: string): Promise<void> {
+        await expect(this.variantRow(sku)).toBeVisible();
+    }
+
+    async expectVariantImageError(sku: string, message: string): Promise<void> {
+        await expect(this.variantRow(sku).getByText(message)).toBeVisible();
+    }
+
+    async expectVariantsPanelError(message: string): Promise<void> {
+        await expect(this.page.getByText(message)).toBeVisible();
+    }
+
+    async expectVariantWithoutImage(sku: string): Promise<void> {
+        await expect(
+            this.variantRow(sku).locator('img[src*="/storage/"]'),
+        ).toHaveCount(0);
+    }
+
+    async expectVariantImageStored(sku: string): Promise<void> {
+        const image = this.variantRow(sku).locator("img");
+
+        await expect(image).toHaveAttribute("src", /storage\/product/);
+
+        await expect
+            .poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth))
+            .toBeGreaterThan(0);
     }
 
     async expectStillOnEditForm(): Promise<void> {

@@ -113,7 +113,7 @@ export default {
                 return true;
             }
 
-            const trimmedValue = value.trim();
+            const trimmedValue = String(value).trim();
 
             if (Number(decimals) === 0) {
                 return /^-?\d*$/.test(trimmedValue);

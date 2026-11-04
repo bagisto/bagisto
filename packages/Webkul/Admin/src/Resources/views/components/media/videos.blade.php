@@ -17,6 +17,7 @@
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
+    :set-field-error="setFieldError"
     {{ $attributes->get('class') }}
 >
 </v-media-videos>
@@ -30,10 +31,9 @@
         <div class="grid">
             <div class="flex gap-1">
                 <!-- Upload Video Button -->
-
                 <label
                     class="grid h-30 max-h-30 w-full max-w-52.5 cursor-pointer items-center justify-items-center rounded-sm border border-dashed transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                    :class="[errors['videos.files[0]'] ? 'border border-red-500' : 'border-gray-300']"
+                    :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
                     :for="$.uid + '_videoInput'"
                     v-if="allowMultiple || videos.length == 0"
                 >
@@ -78,11 +78,19 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
+                            @onChange="clearErrors"
                         >
                         </v-media-video-item>
                     </template>
                 </draggable>
             </div>
+
+            <p
+                class="mt-1 text-xs italic text-red-600"
+                v-if="errorMessage"
+                v-text="errorMessage"
+            >
+            </p>
         </div>
     </script>
 
@@ -97,7 +105,10 @@
                 ref="videoPreview"
                 v-if="video.url.length > 0"
             >
-                <source :src="video.url" type="video/mp4">
+                <source
+                    :src="video.url"
+                    type="video/mp4"
+                >
             </video>
 
             <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
@@ -269,21 +280,54 @@
 
                 errors: {
                     type: Object,
-                    default: () => {}
-                }
+                    default: () => ({})
+                },
+
+                setFieldError: {
+                    type: Function,
+                },
             },
 
             data() {
                 return {
                     videos: [],
+
+                    newVideoIndex: 0,
                 }
+            },
+
+            computed: {
+                /**
+                 * The keys of the form's errors that belong to one of this field's files.
+                 */
+                errorKeys() {
+                    const toPath = key => key.replace(/\[\]$/, '').replace(/\[(.*?)\]/g, '.$1');
+
+                    const field = toPath(this.name) + '.';
+
+                    return Object.keys(this.errors).filter(key => toPath(key).startsWith(field));
+                },
+
+                /**
+                 * The first error the form holds for one of this field's files.
+                 */
+                errorMessage() {
+                    return this.errors[this.errorKeys[0]];
+                },
             },
 
             mounted() {
                 this.videos = this.uploadedVideos;
             },
 
+            beforeUnmount() {
+                this.clearErrors();
+            },
+
             methods: {
+                /**
+                 * Add the picked files to the field, provided they are all videos.
+                 */
                 add() {
                     let videoInput = this.$refs[this.$.uid + '_videoInput'];
 
@@ -304,17 +348,31 @@
 
                     videoInput.files.forEach((file, index) => {
                         this.videos.push({
-                            id: 'video_' + this.videos.length,
+                            id: 'video_' + this.newVideoIndex++,
                             url: '',
                             file: file
                         });
                     });
+
+                    this.clearErrors();
                 },
 
+                /**
+                 * Remove a video from the field.
+                 */
                 remove(video) {
                     let index = this.videos.indexOf(video);
 
                     this.videos.splice(index, 1);
+
+                    this.clearErrors();
+                },
+
+                /**
+                 * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
+                 */
+                clearErrors() {
+                    this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
                 },
             }
         });
@@ -339,6 +397,9 @@
             },
 
             methods: {
+                /**
+                 * Replace this video with the picked file, provided it is a video.
+                 */
                 edit() {
                     let videoInput = this.$refs[this.$.uid + '_videoInput_' + this.index];
 
@@ -360,12 +421,20 @@
                     this.setFile(videoInput.files[0]);
 
                     this.readFile(videoInput.files[0]);
+
+                    this.$emit('onChange');
                 },
 
+                /**
+                 * Ask the field to remove this video.
+                 */
                 remove() {
                     this.$emit('onRemove', this.video)
                 },
 
+                /**
+                 * Put the file on this video's input, so that it is submitted with the form.
+                 */
                 setFile(file) {
                     this.video.is_new = 1;
 
@@ -376,6 +445,9 @@
                     this.$refs[this.$.uid + '_videoInput_' + this.index].files = dataTransfer.files;
                 },
 
+                /**
+                 * Read the file for this video's preview.
+                 */
                 readFile(file) {
                     let reader = new FileReader();
 
@@ -386,6 +458,9 @@
                     reader.readAsDataURL(file);
                 },
 
+                /**
+                 * Play or pause the preview of this video.
+                 */
                 playPause() {
                     let videoPreview = this.$refs.videoPreview;
 

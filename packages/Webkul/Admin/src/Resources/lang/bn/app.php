@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'ভ্যারিয়েন্ট যোগ করুন',
+                        'default' => 'ডিফল্ট',
                         'delete-btn' => 'মুছে ফেলুন',
                         'edit-btn' => 'সম্পাদনা',
                         'empty-info' => 'যোগ করার জন্য পণ্যের বিবিধ সম্মিলিত সম্ভাবনা তৈরি করতে যান।',
@@ -6119,8 +6120,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .webm) অনুমোদিত।',
                 'video' => 'ভিডিও',
 
                 'seo' => [

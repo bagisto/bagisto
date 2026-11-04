@@ -122,7 +122,7 @@ it('should reject a tampered avatar on store', function () {
         ],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('image.0');
+        ->assertJsonValidationErrors(['image.0' => 'The Image field']);
 });
 
 // ============================================================================
@@ -213,7 +213,7 @@ it('should reject a tampered avatar on update', function () {
         'password_confirmation' => $password,
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('image.0');
+        ->assertJsonValidationErrors(['image.0' => 'The Image field']);
 });
 
 it('should update a user without a new image', function () {

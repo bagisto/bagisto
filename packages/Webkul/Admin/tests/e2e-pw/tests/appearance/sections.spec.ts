@@ -1,6 +1,10 @@
+import { notAnImage, validImage, validVideo } from "@shared/media-files";
 import { test } from "../../setup";
 import { SectionsPage } from "../../pages/admin/appearance/SectionsPage";
 import { generateName, uniqueStamp } from "../../utils/faker";
+
+const UPLOAD_REFUSED =
+    "The file field must be a file of type: bmp, jpeg, jpg, png, webp, mp4, webm, ogg.";
 
 function sectionName(): string {
     return `${generateName()} ${uniqueStamp()}`;
@@ -158,5 +162,60 @@ test.describe("section management", () => {
 
         await sectionsPage.open();
         await sectionsPage.expectSectionListed(untouched, "Static Content");
+    });
+
+    test("should keep an image uploaded to a slide after the section is reopened", async () => {
+        const name = sectionName();
+        created.push(name);
+
+        await sectionsPage.createSection("Image Carousel", name);
+        await sectionsPage.addSlide();
+        await sectionsPage.uploadSlideImage(validImage());
+        await sectionsPage.closeSection();
+
+        await sectionsPage.openSection(name);
+
+        await sectionsPage.expectSlideImageShown();
+    });
+
+    test("should say why a slide image was refused and keep none", async () => {
+        const name = sectionName();
+        created.push(name);
+
+        await sectionsPage.createSection("Image Carousel", name);
+        await sectionsPage.addSlide();
+        await sectionsPage.attemptSlideImage(notAnImage());
+
+        await sectionsPage.expectUploadRefused(UPLOAD_REFUSED);
+        await sectionsPage.expectNoSlideImage();
+    });
+
+    for (const { kind, file, markup } of [
+        { kind: "image", file: validImage, markup: "<img src=" },
+        { kind: "video", file: validVideo, markup: "<video src=" },
+    ]) {
+        test(`should write an uploaded ${kind} into the html of a static content section`, async () => {
+            const name = sectionName();
+            created.push(name);
+
+            await sectionsPage.createSection("Static Content", name);
+            await sectionsPage.insertHtmlMedia(file());
+            await sectionsPage.closeSection();
+
+            await sectionsPage.openSection(name);
+
+            await sectionsPage.expectHtmlContains(markup);
+        });
+    }
+
+    test("should say why a file for the html was refused and leave the html alone", async () => {
+        const name = sectionName();
+        created.push(name);
+
+        await sectionsPage.createSection("Static Content", name);
+        await sectionsPage.attemptHtmlMedia(notAnImage());
+
+        await sectionsPage.expectUploadRefused(UPLOAD_REFUSED);
+        await sectionsPage.expectHtmlEmpty();
     });
 });

@@ -17,9 +17,9 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <!--Customers logout-->
+    <!-- Page Content -->
     <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
-        <!-- Heading of the page -->
+        <!-- Page Heading -->
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <!-- Back Button -->
@@ -294,7 +294,7 @@
                 </div>
 
                 <x-shop::form
-                    v-slot="{ meta, errors, handleSubmit }"
+                    v-slot="{ meta, errors, handleSubmit, setFieldError }"
                     as="div"
                 >
                     <form
@@ -314,8 +314,17 @@
 
                             <!-- Modal Content -->
                             <x-slot:content class="bg-gray-50 p-5 max-sm:p-3">
-                                <div class="journal-scroll flex flex-col gap-3 overflow-auto ltr:pr-1.5 rtl:pl-1.5" style="min-height: 420px; max-height: 60vh;">
-                                    <v-order-items-list :key="refreshComponent" :order-id="isSelect"></v-order-items-list>
+                                <div
+                                    class="journal-scroll flex flex-col gap-3 overflow-auto ltr:pr-1.5 rtl:pl-1.5"
+                                    style="min-height: 420px; max-height: 60vh;"
+                                >
+                                    <v-order-items-list
+                                        :key="refreshComponent"
+                                        :order-id="isSelect"
+                                        :errors="errors"
+                                        :set-field-error="setFieldError"
+                                    >
+                                    </v-order-items-list>
                                 </div>
                             </x-slot>
 
@@ -326,9 +335,22 @@
                                         :disabled="!rmaFormButton || !rmaFormSubmit"
                                         class="primary-button"
                                     >
-                                        <svg v-if="!rmaFormSubmit" aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                        <svg
+                                            v-if="!rmaFormSubmit"
+                                            aria-hidden="true"
+                                            class="w-5 h-5 text-gray-200 animate-spin fill-blue-600"
+                                            viewBox="0 0 100 101"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                                fill="currentColor"
+                                            />
+                                            <path
+                                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                                fill="currentFill"
+                                            />
                                         </svg>
 
                                         @lang('shop::app.rma.customer.submit-req')
@@ -487,9 +509,15 @@
                             </div>
 
                             <div class="flex gap-3">
-                                <!-- Resolution Type for rules product -->
-                                <p class="w-full" v-if="product.rma_return_period">
-                                    <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                <!-- Resolution Type -->
+                                <p
+                                    class="w-full"
+                                    v-if="product.rma_return_period"
+                                >
+                                    <div
+                                        class="mt-4"
+                                        v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'"
+                                    >
                                         <x-shop::form.control-group>
                                             <x-shop::form.control-group.label class="required text-sm flex">
                                                 @lang('shop::app.customers.account.rma.create.resolution-type')
@@ -522,14 +550,23 @@
                                                 </option>
                                             </x-shop::form.control-group.control>
 
-                                            <x-shop::form.control-group.error name="resolution_type" class="flex" />
+                                            <x-shop::form.control-group.error
+                                                name="resolution_type"
+                                                class="flex"
+                                            />
                                         </x-shop::form.control-group>
                                     </div>
                                 </p>
 
                                 <!-- Resolution Type -->
-                                <p class="w-full" v-else>
-                                    <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                <p
+                                    class="w-full"
+                                    v-else
+                                >
+                                    <div
+                                        class="mt-4"
+                                        v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'"
+                                    >
                                         <x-shop::form.control-group>
                                             <x-shop::form.control-group.label class="required text-sm flex">
                                                 @lang('shop::app.customers.account.rma.create.resolution-type')
@@ -562,7 +599,10 @@
                                                 </option>
                                             </x-shop::form.control-group.control>
 
-                                            <x-shop::form.control-group.error name="resolution_type" class="flex" />
+                                            <x-shop::form.control-group.error
+                                                name="resolution_type"
+                                                class="flex"
+                                            />
                                         </x-shop::form.control-group>
                                     </div>
                                 </p>
@@ -596,7 +636,10 @@
                                             </option>
                                         </x-shop::form.control-group.control>
 
-                                        <x-shop::form.control-group.error name="rma_reason_id" class="flex" />
+                                        <x-shop::form.control-group.error
+                                            name="rma_reason_id"
+                                            class="flex"
+                                        />
                                     </x-shop::form.control-group>
                                 </p>
                             </div>
@@ -627,7 +670,10 @@
                                                     v-model="rma_qty[getProductId(product)]"
                                                 />
 
-                                                <x-shop::form.control-group.error name="rma_qty" class="flex" />
+                                                <x-shop::form.control-group.error
+                                                    name="rma_qty"
+                                                    class="flex"
+                                                />
                                             </x-shop::form.control-group>
                                         </p>
 
@@ -657,7 +703,10 @@
                                                     </option>
                                                 </x-shop::form.control-group.control>
 
-                                                <x-shop::form.control-group.error name="package_condition" class="flex" />
+                                                <x-shop::form.control-group.error
+                                                    name="package_condition"
+                                                    class="flex"
+                                                />
                                             </x-shop::form.control-group>
                                         </p>
                                     </div>
@@ -679,7 +728,10 @@
                                             v-model="rma_qty[getProductId(product)]"
                                         />
 
-                                        <x-shop::form.control-group.error name="rma_qty" class="flex" />
+                                        <x-shop::form.control-group.error
+                                            name="rma_qty"
+                                            class="flex"
+                                        />
                                     </x-shop::form.control-group>
                                 </template>
                             </template>
@@ -771,7 +823,7 @@
                                         :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                     >
-                                        <!-- Here! All Needed types are defined -->
+                                        <!-- Options -->
                                         @foreach($attribute->options ?? [] as $option)
                                             <option
                                                 value="{{ $option->value }}"
@@ -798,7 +850,7 @@
                                         :value="old($attribute->id)"
                                         label="{{ $attribute->label }}"
                                     >
-                                        <!-- Here! All Needed types are defined -->
+                                        <!-- Options -->
                                         @foreach($attribute->options ?? [] as $option)
                                             <option
                                                 value="{{ $option->value }}"
@@ -895,7 +947,7 @@
                         </x-shop::form.control-group>
                     @endforeach
 
-                    <!-- Additional information -->
+                    <!-- Additional Information -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="text-sm flex">
                             @lang('shop::app.rma.customer.create.information')
@@ -913,7 +965,10 @@
                             maxlength="250"
                         />
 
-                        <x-shop::form.control-group.error control-name="information" class="flex" />
+                        <x-shop::form.control-group.error
+                            control-name="information"
+                            class="flex"
+                        />
                     </x-shop::form.control-group>
 
                     <!-- Images -->
@@ -931,7 +986,10 @@
                             accepted-types="{{ core()->getConfigData('sales.rma.setting.allowed_file_extension') }}"
                         />
 
-                        <x-shop::form.control-group.error control-name="images[]" class="flex" />
+                        <x-shop::form.control-group.error
+                            control-name="images[]"
+                            class="flex"
+                        />
                     </x-shop::form.control-group>
 
                     @include('shop::customers.account.rma.terms')
@@ -968,6 +1026,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Open the request form for the chosen order.
+                     */
                     productAvail(record) {
                         this.isSelect = record.id;
 
@@ -976,6 +1037,9 @@
                         this.$refs.rmaModel.toggle();
                     },
 
+                    /**
+                     * Submit the request, showing the server's errors on the form when it is refused.
+                     */
                     async rmaSubmit(params, { resetForm, setErrors }) {
                         let formData = new FormData(this.$refs.rmaSubmit);
 
@@ -999,7 +1063,7 @@
             app.component('v-order-items-list', {
                 template: '#v-order-items-list-template',
 
-                props: ['orderId'],
+                props: ['orderId', 'errors', 'setFieldError'],
 
                 data() {
                     return {
@@ -1030,13 +1094,13 @@
                 },
 
                 methods: {
+                    /**
+                     * Keep a single item of the order selected, clearing the others and
+                     * un-checking the box when it was already checked.
+                     */
                     selectOnlyOne(productId) {
                         const wasChecked = this.isChecked[productId] === true;
 
-                        /**
-                         * Only one product can be selected at a time, so reset every
-                         * selection first.
-                         */
                         for (const key in this.isChecked) {
                             if (Object.prototype.hasOwnProperty.call(this.isChecked, key)) {
                                 this.isChecked[key] = false;
@@ -1047,22 +1111,24 @@
                             }
                         }
 
-                        /**
-                         * Toggle behaviour - re-select the product only if it was not
-                         * already checked, so un-checking the box hides its fields.
-                         */
                         if (! wasChecked) {
                             this.isChecked[productId] = true;
                             this.resolutionType[productId] = null;
                         }
                     },
 
+                    /**
+                     * The key an item of the order is tracked by.
+                     */
                     getProductId(product) {
                         return product.type === 'configurable'
                             ? product.additional.selected_configurable_option
                             : product.product_id;
                     },
 
+                    /**
+                     * Load the items of the order that a request can be made for.
+                     */
                     getOrderItems(orderId) {
                         if (! this.orderId) {
                             this.isLoading = false;
@@ -1082,10 +1148,16 @@
                             });
                     },
 
+                    /**
+                     * Sanitize what is typed into the additional information.
+                     */
                     sanitizeTextarea(event) {
                         this.information = this.sanitizeInput(event.target.value);
                     },
 
+                    /**
+                     * Strip the angle brackets from a typed value and escape what remains.
+                     */
                     sanitizeInput(value) {
                         if (!value) return '';
 
@@ -1096,6 +1168,9 @@
                             .replace(/'/g, '&#39;');
                     },
 
+                    /**
+                     * Work out how long an item can still be returned.
+                     */
                     calculateReturnWindow(createdAt, returnDays = null) {
                         const days = returnDays ?? this.returnWindowDays;
                         const createdDate = new Date(createdAt);
@@ -1117,6 +1192,9 @@
                         }).format(returnDate);
                     },
 
+                    /**
+                     * Load the reasons offered for the chosen resolution of an item.
+                     */
                     getResolutionReason(product_id) {
                         let resolutionType = this.resolutionType[product_id];
 
@@ -1143,6 +1221,9 @@
                         }
                     },
 
+                    /**
+                     * Shorten a long title for display.
+                     */
                     formatTitle(title) {
                         if (title.length > 100) {
                             return title.slice(0, 100) + '...';

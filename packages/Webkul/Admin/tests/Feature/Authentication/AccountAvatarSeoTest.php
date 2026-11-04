@@ -41,7 +41,23 @@ function accountUpdatePayload(Admin $admin, array $extra = []): array
     ], $extra);
 }
 
-it('should render the seo drawer on the account page', function () {
+// ============================================================================
+// Avatar
+// ============================================================================
+
+it('should name the avatar by its label when it is not an image', function () {
+    $admin = makeAdminWithAvatar(false);
+
+    $this->loginAsAdmin($admin);
+
+    putJson(route('admin.account.update'), accountUpdatePayload($admin, [
+        'image' => ['image_0' => UploadedFile::fake()->image('avatar.php')],
+    ]))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['image.image_0' => 'The Image field']);
+});
+
+it('should render the SEO drawer on the account page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.account.edit'))

@@ -1,9 +1,22 @@
+import {
+    brokenSvg,
+    htmlNamedAsSvg,
+    notAnImage,
+    plainTextFile,
+    validImage,
+    validSvg,
+} from "@shared/media-files";
 import { test } from "../../setup";
 import {
     LocalesPage,
     type LocaleData,
 } from "../../pages/admin/settings/LocalesPage";
 import { uniqueStamp } from "../../utils/faker";
+
+const LOGO_REFUSED = "The Locale Logo field must be an image.";
+
+const SVG_UNREADABLE =
+    "The SVG file could not be read, so it was not uploaded. Please upload a valid SVG file.";
 
 function buildLocale(overrides: Partial<LocaleData> = {}): LocaleData {
     const stamp = Number(uniqueStamp()).toString(36);
@@ -90,5 +103,85 @@ test.describe("locale management", () => {
 
         await localesPage.expectLocaleAbsent(locale.name);
         await localesPage.expectLocaleListed(untouched);
+    });
+
+    for (const { title, logo, message } of [
+        { title: "that is not an image", logo: notAnImage, message: LOGO_REFUSED },
+        { title: "that is markup named as an svg", logo: htmlNamedAsSvg, message: LOGO_REFUSED },
+        { title: "that is an svg nobody can read", logo: brokenSvg, message: SVG_UNREADABLE },
+    ]) {
+        test(`should say why a logo ${title} was refused and not create the locale`, async () => {
+            const locale = buildLocale();
+            created.push(locale.name);
+
+            await localesPage.attemptCreateLocaleWithLogo(locale, logo());
+
+            await localesPage.logoField().expectError(message);
+            await localesPage.expectLocaleAbsent(locale.name);
+        });
+    }
+
+    test("should forget a refused logo's error once it is removed and accept a valid one", async () => {
+        const locale = buildLocale();
+        created.push(locale.name);
+
+        await localesPage.attemptCreateLocaleWithLogo(locale, notAnImage());
+
+        await localesPage.logoField().expectError(LOGO_REFUSED);
+
+        await localesPage.logoField().removeAt(0);
+
+        await localesPage.logoField().expectNoError(LOGO_REFUSED);
+
+        await localesPage.logoField().attach(validImage());
+        await localesPage.saveNewLocale();
+
+        await localesPage.expectLogoInEditForm(locale.name);
+    });
+
+    test("should not carry a refused logo's error into the next time the form is opened", async () => {
+        const locale = buildLocale();
+        created.push(locale.name);
+
+        await localesPage.attemptCreateLocaleWithLogo(locale, notAnImage());
+
+        await localesPage.logoField().expectError(LOGO_REFUSED);
+
+        await localesPage.closeAndReopenCreateForm();
+
+        await localesPage.logoField().expectNoError(LOGO_REFUSED);
+        await localesPage.logoField().expectEmpty();
+    });
+
+    test("should not add a file the browser already knows is not an image", async () => {
+        await localesPage.startCreatingLocale(buildLocale());
+
+        await localesPage.logoField().attemptAttach(plainTextFile());
+
+        await localesPage.logoField().expectNotice(
+            "Only images files (.jpeg, .jpg, .png, ..) are allowed.",
+        );
+        await localesPage.logoField().expectEmpty();
+    });
+
+    test("should keep an svg logo and show it in the edit form", async () => {
+        const locale = buildLocale();
+        created.push(locale.name);
+
+        await localesPage.createLocaleWithLogo(locale, validSvg());
+
+        await localesPage.expectLogoInEditForm(locale.name);
+    });
+
+    test("should keep the current logo when its svg replacement cannot be read", async () => {
+        const locale = buildLocale();
+        created.push(locale.name);
+
+        await localesPage.createLocaleWithLogo(locale, validSvg());
+        await localesPage.attemptReplaceLogo(locale.name, brokenSvg());
+
+        await localesPage.logoField().expectError(SVG_UNREADABLE);
+
+        await localesPage.expectLogoInEditForm(locale.name);
     });
 });
