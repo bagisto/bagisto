@@ -565,7 +565,7 @@ return [
                 'add-attachments' => 'Adaugă atașamente',
                 'add-image' => 'Adaugă imagine/video',
                 'invalid-file-type' => 'Tipul de fișier selectat nu este permis.',
-                'size-limit-error' => 'Eroare limită dimensiune',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
             ],
         ],
 

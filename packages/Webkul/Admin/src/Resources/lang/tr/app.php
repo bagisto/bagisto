@@ -6064,7 +6064,7 @@ return [
                 'image' => 'Görsel',
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
-                'size-limit-error' => 'Dosya boyutu çok büyük.',
+                'size-limit-error' => 'Dosya, :size olan en yüksek yükleme boyutunu aşıyor.',
                 'ai-generation' => [
                     'apply' => 'Uygula',
                     'generate' => 'Oluştur',

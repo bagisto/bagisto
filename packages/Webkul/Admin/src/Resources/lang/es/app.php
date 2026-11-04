@@ -6064,7 +6064,7 @@ return [
                 'image' => 'Imagen',
                 'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
 
-                'size-limit-error' => 'Error de límite de tamaño',
+                'size-limit-error' => 'El archivo supera el tamaño máximo de subida de :size.',
                 'ai-generation' => [
                     'apply' => 'Aplicar',
                     'generate' => 'Generar',

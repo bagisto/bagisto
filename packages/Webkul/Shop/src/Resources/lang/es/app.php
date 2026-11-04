@@ -565,7 +565,7 @@ return [
                 'add-attachments' => 'Agregar adjuntos',
                 'add-image' => 'Agregar Imagen/Video',
                 'invalid-file-type' => 'El tipo de archivo seleccionado no está permitido.',
-                'size-limit-error' => 'Error de límite de tamaño',
+                'size-limit-error' => 'El archivo supera el tamaño máximo de subida de :size.',
             ],
         ],
 

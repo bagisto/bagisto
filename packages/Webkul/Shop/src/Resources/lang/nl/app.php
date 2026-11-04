@@ -565,7 +565,7 @@ return [
                 'add-attachments' => 'Bijlagen toevoegen',
                 'add-image' => 'Afbeelding/Video toevoegen',
                 'invalid-file-type' => 'Het geselecteerde bestandstype is niet toegestaan.',
-                'size-limit-error' => 'Grootte Limiet Fout',
+                'size-limit-error' => 'Het bestand overschrijdt de maximale uploadgrootte van :size.',
             ],
         ],
 

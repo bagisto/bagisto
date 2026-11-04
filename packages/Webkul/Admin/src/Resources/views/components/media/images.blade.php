@@ -7,6 +7,8 @@
     $models = AiProvider::modelsForProviders($enabledProviders, 'image');
     
     $defaultModel = $models[0]['value'] ?? '';
+
+    $uploadMaxKilobytes = (int) floor(\Illuminate\Http\UploadedFile::getMaxFilesize() / 1024);
 @endphp
 
 @props([
@@ -694,7 +696,7 @@
                     if (! withinSize) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.components.media.images.size-limit-error')"
+                            message: "@lang('admin::app.components.media.images.size-limit-error')".replace(':size', this.formattedSizeLimit())
                         });
 
                         return;
@@ -733,9 +735,28 @@
                 },
 
                 exceedsMaxSize(file) {
-                    const maxKilobytes = Number(this.maxSize);
+                    const limit = this.sizeLimitKilobytes();
 
-                    return maxKilobytes > 0 && file.size > maxKilobytes * 1024;
+                    return limit > 0 && file.size > limit * 1024;
+                },
+
+                sizeLimitKilobytes() {
+                    const serverLimit = {{ $uploadMaxKilobytes }};
+                    const fieldLimit = Number(this.maxSize) || 0;
+
+                    if (serverLimit > 0 && fieldLimit > 0) {
+                        return Math.min(serverLimit, fieldLimit);
+                    }
+
+                    return fieldLimit > 0 ? fieldLimit : serverLimit;
+                },
+
+                formattedSizeLimit() {
+                    const kilobytes = this.sizeLimitKilobytes();
+
+                    return kilobytes >= 1024
+                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
+                        : kilobytes + ' KB';
                 },
 
                 newImage(file, fileName) {
@@ -861,7 +882,7 @@
                     if (! withinSize) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.components.media.images.size-limit-error')"
+                            message: "@lang('admin::app.components.media.images.size-limit-error')".replace(':size', this.formattedSizeLimit())
                         });
 
                         return;
@@ -904,9 +925,28 @@
                 },
 
                 exceedsMaxSize(file) {
-                    const maxKilobytes = Number(this.maxSize);
+                    const limit = this.sizeLimitKilobytes();
 
-                    return maxKilobytes > 0 && file.size > maxKilobytes * 1024;
+                    return limit > 0 && file.size > limit * 1024;
+                },
+
+                sizeLimitKilobytes() {
+                    const serverLimit = {{ $uploadMaxKilobytes }};
+                    const fieldLimit = Number(this.maxSize) || 0;
+
+                    if (serverLimit > 0 && fieldLimit > 0) {
+                        return Math.min(serverLimit, fieldLimit);
+                    }
+
+                    return fieldLimit > 0 ? fieldLimit : serverLimit;
+                },
+
+                formattedSizeLimit() {
+                    const kilobytes = this.sizeLimitKilobytes();
+
+                    return kilobytes >= 1024
+                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
+                        : kilobytes + ' KB';
                 },
 
                 remove() {

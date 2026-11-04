@@ -565,7 +565,7 @@ return [
                 'add-attachments' => 'Adicionar Anexos',
                 'add-image' => 'Adicionar Imagem/Vídeo',
                 'invalid-file-type' => 'O tipo de arquivo selecionado não é permitido.',
-                'size-limit-error' => 'Erro de Limite de Tamanho',
+                'size-limit-error' => 'O arquivo excede o tamanho máximo de envio de :size.',
             ],
         ],
 

@@ -6064,7 +6064,7 @@ return [
                 'image' => 'ছবি',
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
 
-                'size-limit-error' => 'সাইজ সীমা পার',
+                'size-limit-error' => 'ফাইলটি সর্বোচ্চ আপলোড আকার :size অতিক্রম করেছে।',
                 'ai-generation' => [
                     'apply' => 'প্রয়োগ করুন',
                     'generate' => 'তৈরি করুন',

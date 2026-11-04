@@ -565,7 +565,7 @@ return [
                 'add-attachments' => 'إضافة المرفقات',
                 'add-image' => 'إضافة صورة / فيديو',
                 'invalid-file-type' => 'نوع الملف المحدد غير مسموح به.',
-                'size-limit-error' => 'خطأ في حد الحجم',
+                'size-limit-error' => 'يتجاوز الملف الحد الأقصى لحجم الرفع :size.',
             ],
         ],
 

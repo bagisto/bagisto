@@ -6064,7 +6064,7 @@ return [
                 'image' => 'Imagine',
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
-                'size-limit-error' => 'Eroare limită dimensiune',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
                 'ai-generation' => [
                     'apply' => 'Apply',
                     'generate' => 'Generate',
