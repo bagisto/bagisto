@@ -13,6 +13,7 @@ use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Regex;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Contracts\Product;
+use Webkul\Product\Helpers\Indexers\Flat;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -80,8 +81,8 @@ class ProductForm extends FormRequest
         $currentRmaRuleId = $this->product->rma_rule_id;
 
         $this->rules = array_merge($this->product->getTypeInstance()->getTypeValidationRules(), [
-            'sku' => ['required', Rule::unique('products', 'sku')->ignore($this->id), new Slug],
-            'url_key' => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
+            'sku' => ['required', 'max:255', Rule::unique('products', 'sku')->ignore($this->id), new Slug],
+            'url_key' => ['required', 'max:255', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*' => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*' => ['nullable', 'integer'],
             'images.meta.*.alt_text' => ['nullable', 'string', 'max:255'],
@@ -140,6 +141,10 @@ class ProductForm extends FormRequest
                 $validations[] = $isRequired ? 'required' : 'nullable';
             } else {
                 $validations = $this->rules[$attribute->code];
+            }
+
+            if (in_array($attribute->code, Flat::LENGTH_LIMITED_ATTRIBUTES)) {
+                $validations[] = 'max:255';
             }
 
             if (

@@ -57,8 +57,8 @@ class CampaignController extends Controller
     public function store()
     {
         $validatedData = $this->validate(request(), [
-            'name' => 'required',
-            'subject' => 'required',
+            'name' => 'required|max:255',
+            'subject' => 'required|max:255',
             'marketing_template_id' => 'required',
             'marketing_event_id' => 'required',
             'channel_id' => 'required',
@@ -99,8 +99,8 @@ class CampaignController extends Controller
     public function update(int $id)
     {
         $validatedData = $this->validate(request(), [
-            'name' => 'required',
-            'subject' => 'required',
+            'name' => 'required|max:255',
+            'subject' => 'required|max:255',
             'marketing_template_id' => 'required',
             'marketing_event_id' => 'required',
             'channel_id' => 'required',

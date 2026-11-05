@@ -44,7 +44,7 @@ class CurrencyController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'min:3', 'max:3', 'unique:currencies,code', new Code],
-            'name' => 'required',
+            'name' => 'required|max:255',
             ...$this->getFormatRules(),
         ]);
 
@@ -85,7 +85,7 @@ class CurrencyController extends Controller
         $id = request('id');
 
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             ...$this->getFormatRules(),
         ]);
 

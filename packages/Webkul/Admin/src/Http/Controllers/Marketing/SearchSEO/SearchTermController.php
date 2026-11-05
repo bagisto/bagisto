@@ -40,7 +40,7 @@ class SearchTermController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'term' => 'required',
+            'term' => 'required|max:255',
             'redirect_url' => 'url:http,https',
             'channel_id' => 'required|exists:channels,id',
             'locale' => 'required|exists:locales,code',
@@ -70,7 +70,7 @@ class SearchTermController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'term' => 'required',
+            'term' => 'required|max:255',
             'redirect_url' => 'url:http,https',
             'channel_id' => 'required|exists:channels,id',
             'locale' => 'required|exists:locales,code',

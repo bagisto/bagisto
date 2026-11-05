@@ -24,7 +24,7 @@ class CatalogRuleRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'channels' => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
             'starts_from' => 'nullable|date',

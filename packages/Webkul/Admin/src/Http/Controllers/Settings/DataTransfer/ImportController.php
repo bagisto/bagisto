@@ -94,7 +94,7 @@ class ImportController extends Controller
             'action' => 'required|in:append,delete',
             'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
             'allowed_errors' => 'required|integer|min:0',
-            'field_separator' => 'required',
+            'field_separator' => 'required|max:255',
             'file' => 'required|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ], $this->imageRules(request()->input('type'))));
 
@@ -175,7 +175,7 @@ class ImportController extends Controller
             'action' => 'required|in:append,delete',
             'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
             'allowed_errors' => 'required|integer|min:0',
-            'field_separator' => 'required',
+            'field_separator' => 'required|max:255',
             'file' => 'nullable|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ], $this->imageRules(request()->input('type'), $id)));
 

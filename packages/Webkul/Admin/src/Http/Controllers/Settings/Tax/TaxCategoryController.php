@@ -46,8 +46,8 @@ class TaxCategoryController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'code' => 'required|string|unique:tax_categories,code',
-            'name' => 'required|string',
+            'code' => 'required|max:255|string|unique:tax_categories,code',
+            'name' => 'required|max:255|string',
             'description' => 'required|string',
             'taxrates' => 'array|required',
         ]);
@@ -90,8 +90,8 @@ class TaxCategoryController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'code' => 'required|string|unique:tax_categories,code,'.$id,
-            'name' => 'required|string',
+            'code' => 'required|max:255|string|unique:tax_categories,code,'.$id,
+            'name' => 'required|max:255|string',
             'description' => 'required|string',
             'taxrates' => 'array|required',
         ]);

@@ -273,6 +273,30 @@ it('should fail validation when the billing address is incomplete', function () 
         ->assertJsonValidationErrorFor('billing.country');
 });
 
+it('should refuse billing address fields longer than the address columns hold', function () {
+    ['customer' => $customer, 'cart' => $cart] = createAdminCart();
+
+    $product = $this->createSimpleProduct();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'product_id' => $product->id,
+        'quantity' => 1,
+    ]);
+
+    postJson(route('admin.sales.cart.addresses.store', $cart->id), [
+        'billing' => array_merge(adminCartAddress($customer), [
+            'first_name' => str_repeat('a', 256),
+            'address' => [str_repeat('b', 200), str_repeat('c', 60)],
+        ]),
+    ])
+        ->assertUnprocessable()
+        ->assertOnlyJsonValidationErrors(['billing.first_name', 'billing.address']);
+
+    $this->assertDatabaseMissing('addresses', ['cart_id' => $cart->id]);
+});
+
 it('should copy the billing address to the shipping address and offer the shipping methods', function () {
     ['customer' => $customer, 'cart' => $cart] = createAdminCart();
 
