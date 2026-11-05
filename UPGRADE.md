@@ -1,9 +1,11 @@
 # UPGRADE Guide
 
 - [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
-- [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
+- [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
+  - [Before You Start](#before-you-start-1)
+  - [The Upgrade Itself](#the-upgrade-itself-1)
 
 ## Upgrading To v2.5.1 From v2.5.0
 
@@ -14,6 +16,7 @@
 
 ### Medium Impact Changes
 
+- [Laravel Excel 4 And PhpSpreadsheet 5](#laravel-excel-4-and-phpspreadsheet-5)
 - [The Cart Facade Delegates Its Tax And Address Work](#the-cart-facade-delegates-its-tax-and-address-work)
 - [Two New Cart Events, And Two That Now Fire More Often](#two-new-cart-events-and-two-that-now-fire-more-often)
 - [The Minimum Order Amount No Longer Subtracts Untaxed Tax](#the-minimum-order-amount-no-longer-subtracts-untaxed-tax)
@@ -24,6 +27,13 @@
 
 ### Low Impact Changes
 
+- [Concord No Longer Binds Route Parameters Named After Models](#concord-no-longer-binds-route-parameters-named-after-models)
+- [Text Inputs Are Checked Against Their Column Length](#text-inputs-are-checked-against-their-column-length)
+- [Product Import Matches SKUs Regardless Of Case](#product-import-matches-skus-regardless-of-case)
+- [Overlays Follow One Stacking Scale](#overlays-follow-one-stacking-scale)
+- [Upload Pickers Check A File Before Sending It](#upload-pickers-check-a-file-before-sending-it)
+- [The MySQL SSL Option Uses PHP 8.5's Constant](#the-mysql-ssl-option-uses-php-85s-constant)
+- [Datagrid Actions Check The Permission They Belong To](#datagrid-actions-check-the-permission-they-belong-to)
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
 - [An Incomplete Remote Disk Is Not Selected](#an-incomplete-remote-disk-is-not-selected)
 - [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
@@ -53,6 +63,202 @@
 - [The Appearance Preview Names Its Theme In Image Urls](#the-appearance-preview-names-its-theme-in-image-urls)
 - [Image Search Uploads Are Filed By Day And Pruned](#image-search-uploads-are-filed-by-day-and-pruned)
 - [The Maximum Upload Size Helper Returns Kilobytes](#the-maximum-upload-size-helper-returns-kilobytes)
+
+### Before You Start
+
+v2.5.1 is a patch release on the 2.5 line, so it asks nothing new of the platform: PHP 8.4 as before, and it now runs on PHP 8.5 as well.
+
+1. **Back up the database.** One of the release's two migrations makes a search term unique within its channel and locale, and it folds the rows a term had already accumulated into one before adding the index — summing their uses and keeping the earliest row. That cannot be undone from the index alone. The other adds a nullable `is_buy_now` column to `cart`.
+
+2. **Check the packages you have added.** This release moves `maatwebsite/excel` to `^4.0` and `enshrined/svg-sanitize` to `^1.0`, so a package that still requires an older major of either stops `composer install` until its constraint is widened. [Laravel Excel 4 And PhpSpreadsheet 5](#laravel-excel-4-and-phpspreadsheet-5) covers what an export of your own has to change.
+
+3. **Maintenance mode is optional.** Neither migration rewrites anything a request reads, so a short window while the files are replaced is enough. The sequence below still brackets the work with `php artisan down` and `php artisan up`, which is the safer default.
+
+> [!WARNING]
+> Do not run `php artisan bagisto:install` on an existing store. It is the fresh-install command and calls `db:wipe` followed by `migrate:fresh` — it will destroy your data. An upgrade only ever runs `php artisan migrate`.
+
+### The Upgrade Itself
+
+Start by bringing your application files up to the new release, reconciling anything you changed. The root files that carry changes are `composer.json`, `composer.lock`, `bootstrap/app.php`, `phpunit.xml`, `config/concord.php`, `config/database.php`, `config/imagecache.php` and the new `lang/sw/`, and `routes/console.php` is deleted. [Concord No Longer Binds Route Parameters Named After Models](#concord-no-longer-binds-route-parameters-named-after-models) and [The MySQL SSL Option Uses PHP 8.5's Constant](#the-mysql-ssl-option-uses-php-85s-constant) cover the two configuration changes a store keeping its own copy has to carry across.
+
+Then run:
+
+```bash
+# Take the store down
+php artisan down
+
+# Install the dependency tree
+composer install
+
+# Run the migrations
+php artisan migrate --force
+
+# Rebuild the Admin, Shop and Installer bundles, each from its own package directory
+(cd packages/Webkul/Admin && npm install && npm run build)
+(cd packages/Webkul/Shop && npm install && npm run build)
+(cd packages/Webkul/Installer && npm install && npm run build)
+
+# Clear every cached config, route, view and compiled service, and the page cache
+php artisan optimize:clear
+php artisan responsecache:clear
+
+# Bring the store back up
+php artisan up
+```
+
+The bundles have to be rebuilt because this release changes the frontend of all three: Swahili validation messages, the upload pickers and the stacking order of overlays. The dependency set itself is unchanged, so `npm install` over the existing `node_modules` is enough — no clean reinstall.
+
+Run Laravel's scheduler every minute from cron, `php artisan schedule:run`, or the image search uploads are never pruned, and if `QUEUE_CONNECTION` is anything but `sync`, keep a `php artisan queue:work` running for the order mail and reindexing it takes off the request. The images in `docker/production/` run both.
+
+Then verify:
+
+```bash
+php artisan bagisto:version
+php artisan migrate:status
+```
+
+`bagisto:version` should report 2.5.1, and every migration should read `Ran`. Finally load the storefront home page, a category, a product page and the admin dashboard.
+
+---
+
+### Laravel Excel 4 And PhpSpreadsheet 5
+
+**Impact Probability: Medium**
+
+`maatwebsite/excel` is now `^4.0`, up from `^3.1.46`, and it brings `phpoffice/phpspreadsheet` from 1.30 to 5. Laravel Excel 4 declares native types on every concern, so an export or import class written for 3.1 that leaves a return type off is a fatal error the moment PHP loads it, rather than when something exports. Bagisto's own exports declare their types now — `DataGridExport::query()` and `ReportingExport::collection()` gained theirs — and the data grid exports, the reporting exports and the importer behave as before.
+
+What this changes for custom code:
+
+- **A class implementing a Laravel Excel concern has to declare the interface's types**, such as `collection(): Enumerable` (a `Collection` satisfies it), `query(): Builder|EloquentBuilder|Relation`, `array(): array`, `headings(): array`, `map(mixed $row): array` and `title(): string`.
+- **A package that requires `maatwebsite/excel` `^3.1` in its own `composer.json`** cannot be installed beside this release. Widen its constraint to `^4.0`.
+- **Code that touches PhpSpreadsheet objects directly** — an `AfterSheet` listener styling `$event->sheet->getDelegate()`, a custom value binder, `NumberFormat` or `Coordinate` calls — has to be checked against PhpSpreadsheet's 2.0 to 5.0 breaking changes. `vendor/maatwebsite/excel/UPGRADE-4.x.md` lists the rest, including the narrowed return types of `Exportable::store()` and `queue()`.
+
+---
+
+### Concord No Longer Binds Route Parameters Named After Models
+
+**Impact Probability: Low**
+
+Concord registers `Route::model()` for the short name of every model it knows unless `concord.register_route_models` is `false`, so a web route parameter that happened to share a name, such as `{template}` or `{product}`, was looked up as that model and answered not found when no row matched (#11546). Bagisto's own routes use none of these names, so the shipped `config/concord.php` turns the bindings off:
+
+```php
+'register_route_models' => false,
+```
+
+What this changes for custom code:
+
+- **Add the key to your own `config/concord.php`.** Concord's default is `true`, so a store that keeps its existing file keeps the bindings.
+- **A route that relied on the binding**, receiving a model for a parameter named after it without type-hinting it, now receives the raw value. Type-hint the model class so Laravel's implicit binding resolves it, or register the binding yourself, as in `Route::model('product', ProductProxy::modelClass())`.
+
+---
+
+### Text Inputs Are Checked Against Their Column Length
+
+**Impact Probability: Low**
+
+Most admin and storefront forms accepted a text value of any length, while the columns behind them hold 255 characters. A longer value was cut short without a word on MySQL outside strict mode, and failed the save with a database error on PostgreSQL and strict MySQL. The requests now carry the column's limit, so a value that cannot fit is refused with a validation error on its field and nothing is written.
+
+The limits cover the codes, names, titles, url keys, emails, phone numbers and similar fields of the catalog, customer, sales, marketing, CMS, settings and RMA forms, the admin account, the storefront's registration, profile and address forms, and the customer, tax rate and product importers, which report an over-long cell as a row error. Street lines are stored in one column, so the new `Webkul\Core\Rules\AddressLines` rule refuses an address whose lines, joined with `PHP_EOL` as they are stored, run past 255 characters; the admin and storefront address forms and both checkout address requests use it.
+
+What this changes for custom code:
+
+- **An integration that posts to these routes** receives a 422 naming the field, where MySQL used to store a shortened value and PostgreSQL answered with a 500.
+- **A form request subclass that replaces `rules()`** without merging the parent's keeps the old, unbounded rules.
+- **`AddressLines` is available to a custom address form.**
+
+---
+
+### Product Import Matches SKUs Regardless Of Case
+
+**Impact Probability: Low**
+
+The catalogue treats `ABC-1` and `abc-1` as one SKU, but the product importer compared them as written. On PostgreSQL a row whose SKU differed from an existing product's only in case created a second product beside it, and on MySQL the update rewrote the stored SKU to the file's spelling. The importer now matches SKUs regardless of case, against the catalogue and between the rows of a file: such a row updates the product it matches and keeps that product's stored SKU.
+
+Three more kinds of row are now handled rather than imported as given or failing the import:
+
+- **A url key that is not a slug**, such as one holding a space, a slash or a dot, fails `Webkul\Core\Rules\Slug` with a row error. It used to be imported, leaving a product the storefront could not route to.
+- **A row naming an attribute family that does not exist** is reported as such. `Importer::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND` held `attribute_family_code_not_found`, the value of `ERROR_INVALID_ATTRIBUTE_FAMILY_CODE`, so one message replaced the other and an unknown family crashed validation; it now holds `super_attribute_code_not_found`.
+- **A step that fails partway is rolled back.** `Webkul\DataTransfer\Helpers\Import::start()`, `link()` and `index()` commit only once the step completes. They used to commit in a `finally` block, so a step that failed with a PHP error kept whatever it had written before failing.
+
+What this changes for custom code:
+
+- **`SKUStorage` keys its entries by the lower-cased SKU**, through the now public `key()`, and `get()` returns the stored spelling under `sku`. A subclass that read `$items` by the raw SKU has to go through `key()`.
+- **Two rows whose SKUs differ only in case describe one product**, as two rows with the same SKU always did.
+
+---
+
+### Overlays Follow One Stacking Scale
+
+**Impact Probability: Low**
+
+The `z-index` of each overlay in the admin panel and the storefront had grown one value at a time — the admin header at `10001`, its flash messages at `10003`, the AI image dialog at `10007` — so a new overlay could only be placed by guessing a number above the rest. Both now share one scale:
+
+| Layer | Admin | Storefront |
+|---|---|---|
+| Header | `10001` → `50` | `10`, unchanged |
+| Dropdowns and menus | `10` → `20` | `20`, unchanged |
+| Drawer backdrop and panel | `10001` and `10002` → `60` and `70` | `20` and `1000` → `60` and `70` |
+| Modal, command palette and image zoomer | `10001` to `10002` → `80` | `10` → `80` |
+| Confirmation dialog | `10002` → `90` | `20` → `90` |
+| Cookie banner | — | `999` → `50` |
+| Flash messages | `10003` → `110` | `1001` → `110` |
+| Skip-to-content link | — | `999` → `120` |
+
+What this changes for custom code:
+
+- **An overlay of your own that used a number to clear the old admin header**, such as `z-[10001]`, now sits above dialogs and flash messages as well. Place it on the scale: a drawer at `60` and `70`, a modal at `80`, a confirmation at `90`.
+- **Drawers and modals render where they are declared**, not moved to `<body>`, so one inside an ancestor that sets its own `z-index` is held to that ancestor's layer. The storefront's mobile filter bar sits at `5` and raises itself to `60` while one of its drawers is open, through `has-[.z-70:not([style*='display:_none'])]:z-60`; keep that variant in a theme that copies the bar.
+- **A theme that overrides one of these components** keeps its own values, and may now stack against the shipped ones differently.
+
+---
+
+### Upload Pickers Check A File Before Sending It
+
+**Impact Probability: Low**
+
+The admin image and video pickers, the admin upload tile and the storefront file picker sent whatever was chosen and left the refusal to the server, which the storefront then showed as a toast. Each now checks the type and size it accepts before the form is sent, and shows that refusal, or the server's, under the field. Every image picker declares the types its field accepts, so an SVG is refused up front wherever the server refuses one, and accepted for locale logos and review attachments, which the server sanitizes.
+
+What this changes for custom code:
+
+- **Review attachments accept a fixed list of types.** The storefront review API took any `image/*` or `video/*`; it now takes BMP, JPEG, PNG, WebP, GIF, SVG, MP4, WebM and QuickTime, so a HEIC or AVIF photo or an Ogg video is refused with a validation error.
+- **The admin image and video pickers take `accepted-types` and `max-size`, and the storefront picker `max-size`.** Each is optional and defaults to what the component accepted before — `image/*` for admin images, the product video formats for videos and no size limit — so an existing call keeps working.
+- **`admin::app.components.media.videos.allowed-types` is gone.** The videos panel builds its hint from the accepted extensions, so a view that printed the key now shows it raw.
+- **`Webkul\Product\ProductVideo` declares its types.** `getVideos(?Product $product): array` replaces the untyped `getVideos($product)`, so a subclass bound in its place has to match. `ProductVideo::FORMATS` maps each accepted extension to its MIME type, read through `getAllowedExtensions()` and `getAllowedMimeTypes()`, which return collections.
+
+---
+
+### The MySQL SSL Option Uses PHP 8.5's Constant
+
+**Impact Probability: Low**
+
+PHP 8.5 deprecates `PDO::MYSQL_ATTR_SSL_CA` in favour of `Pdo\Mysql::ATTR_SSL_CA`, so the shipped `config/database.php` uses the new constant where it exists and falls back to the old one on PHP 8.4:
+
+```php
+// Before
+PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+
+// After, with `use Pdo\Mysql;` at the top of the file
+(defined('Pdo\Mysql::ATTR_SSL_CA') ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
+```
+
+A store that keeps its own `config/database.php` should make the same change to its `mysql` and `mariadb` connections, or PHP 8.5 reports a deprecation each time the configuration is loaded.
+
+---
+
+### Datagrid Actions Check The Permission They Belong To
+
+**Impact Probability: Low**
+
+Four datagrid actions asked for the wrong permission:
+
+| Action | Asked for | Now asks for |
+|---|---|---|
+| Mass delete on the search terms listing | `marketing.search_terms.delete`, which does not exist | `marketing.search_seo.search_terms.delete` |
+| Mass delete on the search synonyms listing | `marketing.search_synonyms.delete`, which does not exist | `marketing.search_seo.search_synonyms.delete` |
+| View on the RMA requests listing | `sales.rma.requests.create` | `sales.rma.requests` |
+| View on the transactions listing | `sales.shipments.view` | `sales.transactions.view` |
+
+A role granted only some permissions may see one of these actions appear or disappear after the upgrade. Review custom roles under Settings → Roles if a user reports a missing button.
 
 ---
 
@@ -529,7 +735,7 @@ What this changes for custom code:
 - **`TemplateRegistry::isAdminRequest()` is gone.** A subclass that called it calls the helper instead; one that overrode it to change which requests use only the core image templates overrides `currentTheme()`.
 - **A route that nests the admin segment further down its path is a storefront request**, such as `/api/admin/...`, where the theme loader and the view finder used to treat it as an admin one. Register a route that needs the admin theme under the admin URL itself.
 - **`Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance` no longer adds `{admin_url}*` to `$except`**, and no longer overrides the constructor. It returns `{admin_url}` and `{admin_url}/*` from `getExcludedPaths()`, which `php artisan down` also writes into the down file, so the page `down --render` serves before the application boots lets the admin panel through as well. A subclass that read the pattern from `$except` reads `getExcludedPaths()` instead, and one that overrides that method calls the parent, or the admin panel answers 503 during maintenance. With `APP_ADMIN_URL` empty, maintenance mode used to let every request through; it now holds back the storefront and the panel alike, so list the admin's address under the channel's allowed IPs.
-- **A product whose url key falls under the admin URL cannot be shown**, such as one imported as `admin/office-chair`: its storefront link answers not found, since every path there belongs to the admin panel. The importer accepts such a key, so look for one in `product_flat.url_key` and change it. Run `php artisan responsecache:clear` after upgrading too, or the page cache keeps serving what it stored for those paths until it expires.
+- **A product whose url key falls under the admin URL cannot be shown**, such as one imported as `admin/office-chair`: its storefront link answers not found, since every path there belongs to the admin panel. The importer now refuses such a key, since a slash is not part of a slug, but one imported earlier is still there, so look for one in `product_flat.url_key` and change it. Run `php artisan responsecache:clear` after upgrading too, or the page cache keeps serving what it stored for those paths until it expires.
 
 ```php
 // Before
@@ -1876,7 +2082,7 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
 
 4. **Rewrite `app.css`** — replace `@tailwind` directives with `@import "tailwindcss" source("...");`, pointing at the directory your class names are written under, and translate any `theme.extend.*` values from your old JS config into `@theme` blocks. If you overrode Bagisto's colors, breakpoints, or fonts, register them in `@theme` with `--color-*`, `--breakpoint-*`, `--font-*` variables.
 
-5. **Rebuild frontend assets** as shown in [The Upgrade Itself](#the-upgrade-itself).
+5. **Rebuild frontend assets** as shown in [The Upgrade Itself](#the-upgrade-itself-1).
 
 6. **Visually verify** the storefront, admin panel, and installer flow. Common regression spots after a v4 upgrade:
 

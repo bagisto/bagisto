@@ -78,10 +78,11 @@ Admin and Shop need a running server and a seeded database; Installer runs again
 ### Frontend
 
 ```bash
-cd packages/Webkul/Admin && npm install && npm run build    # Admin production build
-cd packages/Webkul/Shop && npm install && npm run build     # Shop production build
-cd packages/Webkul/Admin && npm run dev                     # Admin dev server with HMR
-cd packages/Webkul/Shop && npm run dev                      # Shop dev server with HMR
+cd packages/Webkul/Admin && npm install && npm run build      # Admin production build
+cd packages/Webkul/Shop && npm install && npm run build       # Shop production build
+cd packages/Webkul/Installer && npm install && npm run build  # Installer production build
+cd packages/Webkul/Admin && npm run dev                       # Admin dev server with HMR
+cd packages/Webkul/Shop && npm run dev                        # Shop dev server with HMR
 ```
 
 ### Translations
@@ -142,7 +143,7 @@ Every query, migration and raw fragment has to work on **MySQL 8.0, MariaDB 10.1
 
 ## CI
 
-Every push and pull request runs `pint --test`, `vendor/bin/pest --parallel` on PHP 8.4 against nine database versions (MySQL 8.0/8.4/9.7, MariaDB 10.11/11.8/12.3, PostgreSQL 10/14/18), and the translation-key check. Playwright runs on a pull request labelled **Need Playwright Testing**, and the Docker images build on a `v*` tag. Details in `.github/workflows/`.
+Every push and pull request runs `pint --test`, `vendor/bin/pest --parallel` on PHP 8.4 and 8.5 against nine database versions (MySQL 8.0/8.4/9.7, MariaDB 10.11/11.8/12.3, PostgreSQL 10/14/18), and the translation-key check. Playwright runs on a pull request labelled **Need Playwright Testing**, and the Docker images build on a `v*` tag. Details in `.github/workflows/`.
 
 ## Production Docker Images
 

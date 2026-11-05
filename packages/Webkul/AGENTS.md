@@ -28,7 +28,7 @@ packages/Webkul/
 ├── CatalogRule/            # Catalog price rules
 ├── Tax/                    # Tax calculation
 ├── DataGrid/               # Admin data table component
-├── DataTransfer/           # Import/export
+├── DataTransfer/           # Imports: products, customers, tax rates (exports come from the DataGrid)
 ├── CMS/                    # CMS pages
 ├── Marketing/              # SEO, URL rewrites, search terms, campaigns
 ├── Theme/                  # Theme management
@@ -70,7 +70,7 @@ packages/Webkul/<Package>/src/
 │   └── Seeders/
 ├── DataGrids/                  # DataGrid classes (extend Webkul\DataGrid\DataGrid)
 ├── Http/
-│   ├── Controllers/            # Separate Admin/ and Shop/ controller directories
+│   ├── Controllers/            # Admin groups them by area (Catalog/, Sales/…), Shop keeps its JSON endpoints in API/
 │   ├── Middleware/
 │   └── Requests/               # Form Request validation classes
 ├── Jobs/
@@ -95,7 +95,7 @@ packages/Webkul/<Package>/src/
 - **Routes**: `Routes/web.php` per package, with `Routes/api.php` for API routes. Admin and Shop are large enough to split theirs by area — `Admin/src/Routes/web/catalog-routes.php`, `Shop/src/Routes/store-front-routes.php` — each `require`d from that package's `web.php`
 - **Models**: Singular (`Product`, `Category`)
 - **Repositories**: `<Model>Repository` (e.g., `ProductRepository`)
-- **Controllers**: `<Model>Controller` in `Http/Controllers/Admin/` or `Shop/`
+- **Controllers**: `<Model>Controller` under `Http/Controllers/`, grouped by area in Admin (`Admin/src/Http/Controllers/Catalog/ProductController.php`); a domain package such as `Sales` has none, its screens living in Admin and Shop
 
 ## Extension Points
 
@@ -108,7 +108,7 @@ packages/Webkul/<Package>/src/
 Admin, Shop, and Installer each have independent Vite builds. Run `npm install` and `npm run dev`/`npm run build` from within the respective package directory, never from the project root:
 - **Admin**: `packages/Webkul/Admin/` builds to `public/themes/admin/default/build/`
 - **Shop**: `packages/Webkul/Shop/` builds to `public/themes/shop/default/build/`
-- **Installer**: `packages/Webkul/Installer/`
+- **Installer**: `packages/Webkul/Installer/` builds to `public/themes/installer/default/build/`
 
 Vue 3 components are used within Blade templates via `@pushOnce('scripts')` / Blade component slots.
 
