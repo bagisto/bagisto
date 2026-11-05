@@ -562,7 +562,7 @@ class Importer extends AbstractImporter
     {
         $rules = [
             'sku' => ['required', 'max:255', new Slug],
-            'url_key' => ['required', 'max:255'],
+            'url_key' => ['required', 'max:255', new Slug],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to' => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price' => ['nullable', new Decimal, 'lt:price'],
