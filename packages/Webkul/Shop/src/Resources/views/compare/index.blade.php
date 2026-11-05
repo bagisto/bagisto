@@ -94,7 +94,7 @@
                                     >
                                         <button
                                             type="button"
-                                            class="icon-cancel absolute top-5 z-10 flex h-7.5 w-7.5 cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-md:top-10 max-md:h-6 max-md:w-6 max-md:rounded-full max-md:text-sm ltr:right-10 max-md:ltr:right-4 rtl:left-10 max-md:rtl:left-4 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden"
+                                            class="icon-cancel absolute top-5 z-1 flex h-7.5 w-7.5 cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-md:top-10 max-md:h-6 max-md:w-6 max-md:rounded-full max-md:text-sm ltr:right-10 max-md:ltr:right-4 rtl:left-10 max-md:rtl:left-4 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden"
                                             aria-label="@lang('shop::app.compare.remove')"
                                             @click="remove(product.id)"
                                         ></button>
