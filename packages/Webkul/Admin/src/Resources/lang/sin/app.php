@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'රූපය එකතු කරන්න',
                 'delete' => 'මකන්න',
                 'download' => 'බාගත කරන්න',
+                'not-allowed-error' => ':types ගොනු පමණක් අවසර ඇත.',
                 'replace' => 'ප්‍රතිස්ථාපනය කරන්න',
+                'size-limit-error' => 'ගොනුව උපරිම උඩුගත කිරීමේ ප්‍රමාණය :size ඉක්මවයි.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'වීඩියෝ එකතු කරන්න',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (:types) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+                'size-limit-error' => 'ගොනුව උපරිම උඩුගත කිරීමේ ප්‍රමාණය :size ඉක්මවයි.',
                 'video' => 'වීඩියෝව',
 
                 'seo' => [

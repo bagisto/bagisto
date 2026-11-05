@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Afbeelding Toevoegen',
                 'delete' => 'Verwijderen',
                 'download' => 'Downloaden',
+                'not-allowed-error' => 'Alleen :types-bestanden zijn toegestaan.',
                 'replace' => 'Vervangen',
+                'size-limit-error' => 'Het bestand overschrijdt de maximale uploadgrootte van :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Video Toevoegen',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Alleen videobestanden (:types) zijn toegestaan.',
+                'size-limit-error' => 'Het bestand overschrijdt de maximale uploadgrootte van :size.',
                 'video' => 'Video',
 
                 'seo' => [

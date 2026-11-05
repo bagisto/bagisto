@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'छवि जोड़ें',
                 'delete' => 'हटाएं',
                 'download' => 'डाउनलोड करें',
+                'not-allowed-error' => 'केवल :types फ़ाइलें अनुमत हैं।',
                 'replace' => 'बदलें',
+                'size-limit-error' => 'फ़ाइल अधिकतम अपलोड आकार :size से अधिक है।',
             ],
 
             'videos' => [
                 'add-video-btn' => 'वीडियो जोड़ें',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'केवल वीडियो फ़ाइलें (:types) अनुमत हैं।',
+                'size-limit-error' => 'फ़ाइल अधिकतम अपलोड आकार :size से अधिक है।',
                 'video' => 'वीडियो',
 
                 'seo' => [

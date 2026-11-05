@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'הוסף תמונה',
                 'delete' => 'מחק',
                 'download' => 'הורדה',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי :types.',
                 'replace' => 'החלפה',
+                'size-limit-error' => 'הקובץ חורג מגודל ההעלאה המרבי של :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'הוסף וידאו',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (:types)',
+                'size-limit-error' => 'הקובץ חורג מגודל ההעלאה המרבי של :size.',
                 'video' => 'וידאו',
 
                 'seo' => [

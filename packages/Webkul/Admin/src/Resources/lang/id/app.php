@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Tambah Gambar',
                 'delete' => 'Hapus',
                 'download' => 'Unduh',
+                'not-allowed-error' => 'Hanya file :types yang diperbolehkan.',
                 'replace' => 'Ganti',
+                'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Hanya file video (:types) yang diperbolehkan.',
+                'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
                 'video' => 'Video',
 
                 'seo' => [

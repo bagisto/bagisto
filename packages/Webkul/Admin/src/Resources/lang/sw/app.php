@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Ongeza Picha',
                 'delete' => 'Futa',
                 'download' => 'Pakua',
+                'not-allowed-error' => 'Faili za :types pekee ndizo zinazoruhusiwa.',
                 'replace' => 'Badilisha',
+                'size-limit-error' => 'Faili limezidi ukubwa wa juu wa kupakia wa :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Ongeza Video',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Faili za video pekee (:types) ndizo zinazoruhusiwa.',
+                'size-limit-error' => 'Faili limezidi ukubwa wa juu wa kupakia wa :size.',
                 'video' => 'Video',
 
                 'seo' => [

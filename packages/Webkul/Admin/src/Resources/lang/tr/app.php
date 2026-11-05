@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Resim Ekle',
                 'delete' => 'Sil',
                 'download' => 'İndir',
+                'not-allowed-error' => 'Yalnızca :types dosyalarına izin verilir.',
                 'replace' => 'Değiştir',
+                'size-limit-error' => 'Dosya, :size olan en yüksek yükleme boyutunu aşıyor.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Video Ekle',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Yalnızca video dosyaları (:types) izin verilir.',
+                'size-limit-error' => 'Dosya, :size olan en yüksek yükleme boyutunu aşıyor.',
                 'video' => 'Video',
 
                 'seo' => [

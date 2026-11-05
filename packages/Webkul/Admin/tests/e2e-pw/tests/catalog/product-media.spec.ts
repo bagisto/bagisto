@@ -115,15 +115,19 @@ test.describe("product images and videos", () => {
     test("should refuse a product video over the limit the panel states, naming that limit", async () => {
         const limit = await productEditPage.readVideoLimit();
 
+        const formatted =
+            limit >= 1024
+                ? `${Math.round((limit / 1024) * 10) / 10} MB`
+                : `${limit} KB`;
+
         await productEditPage
             .videosField()
-            .attach(validVideo("too-large.mp4", limit + 1024));
-        await productEditPage.saveProduct();
+            .attemptAttach(validVideo("too-large.mp4", limit + 1024));
 
         await productEditPage
             .videosField()
             .expectError(
-                `The Video may not be greater than ${limit} kilobytes. Please choose a smaller file.`,
+                `The file exceeds the maximum upload size of ${formatted}.`,
             );
         await productEditPage.videosField().expectEmpty();
     });

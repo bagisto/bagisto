@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Afegir Imatge',
                 'delete' => 'Esborrar',
                 'download' => 'Descarregar',
+                'not-allowed-error' => 'Només es permeten fitxers :types.',
                 'replace' => 'Substituir',
+                'size-limit-error' => 'El fitxer supera la mida màxima de pujada de :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Només es permeten arxius de vídeo (:types).',
+                'size-limit-error' => 'El fitxer supera la mida màxima de pujada de :size.',
                 'video' => 'Vídeo',
 
                 'seo' => [

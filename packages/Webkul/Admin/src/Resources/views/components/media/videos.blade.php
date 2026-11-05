@@ -7,6 +7,7 @@
     'enableSeo'      => false,
     'metaName'       => '',
     'acceptedTypes'  => '.mp4,.mov,.webm',
+    'maxSize'        => 0,
 ])
 
 <v-media-videos
@@ -15,6 +16,7 @@
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
     accepted-types="{{ $acceptedTypes }}"
+    v-bind:max-size="{{ (int) $maxSize }}"
     :uploaded-videos="@js($uploadedVideos)"
     width="{{ $width }}"
     height="{{ $height }}"
@@ -79,7 +81,7 @@
                             :video="element"
                             :width="width"
                             :height="height"
-                            :not-allowed-error="notAllowedError"
+                            :refusal-for="refusalFor"
                             @onRemove="remove($event)"
                             @onChange="clearErrors"
                             @onRefusal="setClientError"
@@ -288,6 +290,11 @@
                     default: '.mp4,.mov,.webm',
                 },
 
+                maxSize: {
+                    type: [Number, String],
+                    default: 0,
+                },
+
                 errors: {
                     type: Object,
                     default: () => ({})
@@ -387,7 +394,7 @@
 
             methods: {
                 /**
-                 * Add the picked files to the field, provided they are all videos.
+                 * Add the picked files to the field, provided each is of a type and size it accepts.
                  */
                 add() {
                     let videoInput = this.$refs[this.$.uid + '_videoInput'];
@@ -398,10 +405,10 @@
 
                     this.clearErrors();
 
-                    const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
+                    const refusal = this.refusalFor(videoInput.files);
 
-                    if (! validFiles) {
-                        this.clientError = this.notAllowedError;
+                    if (refusal) {
+                        this.clientError = refusal;
 
                         return;
                     }
@@ -413,6 +420,51 @@
                             file: file
                         });
                     });
+                },
+
+                /**
+                 * Why the files cannot be added to the field, or an empty string when they can.
+                 */
+                refusalFor(files) {
+                    if (! Array.from(files).every(file => file.type.includes('video/'))) {
+                        return this.notAllowedError;
+                    }
+
+                    if (Array.from(files).some(file => this.exceedsMaxSize(file))) {
+                        return "@lang('admin::app.components.media.videos.size-limit-error')".replace(':size', this.formattedSizeLimit());
+                    }
+
+                    return '';
+                },
+
+                /**
+                 * Whether the file is larger than the field, or PHP, accepts.
+                 */
+                exceedsMaxSize(file) {
+                    const limit = this.sizeLimitKilobytes();
+
+                    return limit > 0
+                        && file.size > limit * 1024;
+                },
+
+                /**
+                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
+                 */
+                sizeLimitKilobytes() {
+                    const limits = [{{ core()->getMaxUploadSize() }}, Number(this.maxSize) || 0].filter(limit => limit > 0);
+
+                    return limits.length ? Math.min(...limits) : 0;
+                },
+
+                /**
+                 * The size limit written for the admin, in megabytes from one megabyte up.
+                 */
+                formattedSizeLimit() {
+                    const kilobytes = this.sizeLimitKilobytes();
+
+                    return kilobytes >= 1024
+                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
+                        : kilobytes + ' KB';
                 },
 
                 /**
@@ -471,7 +523,7 @@
         app.component('v-media-video-item', {
             template: '#v-media-video-item-template',
 
-            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName', 'notAllowedError'],
+            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName', 'refusalFor'],
 
             data() {
                 return {
@@ -498,10 +550,10 @@
                         return;
                     }
 
-                    const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
+                    const refusal = this.refusalFor(videoInput.files);
 
-                    if (! validFiles) {
-                        this.$emit('onRefusal', this.notAllowedError);
+                    if (refusal) {
+                        this.$emit('onRefusal', refusal);
 
                         return;
                     }

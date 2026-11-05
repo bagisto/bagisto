@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'إضافة صورة',
                 'delete' => 'حذف',
                 'download' => 'تحميل',
+                'not-allowed-error' => 'يُسمح فقط بملفات :types.',
                 'replace' => 'استبدال',
+                'size-limit-error' => 'يتجاوز الملف الحد الأقصى لحجم الرفع :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'إضافة فيديو',
                 'allowed-types' => 'mp4، webm، mov',
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (:types).',
+                'size-limit-error' => 'يتجاوز الملف الحد الأقصى لحجم الرفع :size.',
                 'video' => 'فيديو',
 
                 'seo' => [

@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Add Image',
                 'delete' => 'Delete',
                 'download' => 'Download',
+                'not-allowed-error' => 'Only :types files are allowed.',
                 'replace' => 'Replace',
+                'size-limit-error' => 'The file exceeds the maximum upload size of :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Only video files (:types) are allowed.',
+                'size-limit-error' => 'The file exceeds the maximum upload size of :size.',
                 'video' => 'Video',
 
                 'seo' => [

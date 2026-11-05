@@ -21,6 +21,7 @@
         :allow-multiple="true"
         :enable-seo="true"
         :uploaded-videos="$product->videos"
+        :max-size="product_video()->getMaxUploadSize()"
     />
 </div>
 

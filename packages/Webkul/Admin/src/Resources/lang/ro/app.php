@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'Add Image',
                 'delete' => 'Delete',
                 'download' => 'Download',
+                'not-allowed-error' => 'Sunt permise doar fișiere :types.',
                 'replace' => 'Replace',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Only video files (:types) are allowed.',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
                 'video' => 'Videoclip',
 
                 'seo' => [

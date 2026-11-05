@@ -6117,13 +6117,16 @@ return [
                 'add-image' => 'চিত্র যোগ করুন',
                 'delete' => 'মুছে ফেলুন',
                 'download' => 'ডাউনলোড',
+                'not-allowed-error' => 'কেবল :types ফাইল অনুমোদিত।',
                 'replace' => 'প্রতিস্থাপন করুন',
+                'size-limit-error' => 'ফাইলটি সর্বোচ্চ আপলোড আকার :size অতিক্রম করেছে।',
             ],
 
             'videos' => [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
                 'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'কেবল ভিডিও ফাইল (:types) অনুমোদিত।',
+                'size-limit-error' => 'ফাইলটি সর্বোচ্চ আপলোড আকার :size অতিক্রম করেছে।',
                 'video' => 'ভিডিও',
 
                 'seo' => [
