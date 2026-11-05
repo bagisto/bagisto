@@ -29,7 +29,7 @@
             leave-from-class="ltr:translate-x-0 rtl:-translate-x-0"
             leave-active-class="transform transition duration-200 ease-in-out"
             leave-to-class="ltr:translate-x-full rtl:-translate-x-full"
-            class='fixed top-5 z-1001 grid justify-items-end gap-2.5 max-sm:hidden ltr:right-5 rtl:left-5'
+            class='fixed top-5 z-110 grid justify-items-end gap-2.5 max-sm:hidden ltr:right-5 rtl:left-5'
         >
             <x-shop::flash-group.item />
         </transition-group>
@@ -43,7 +43,7 @@
             leave-from-class="ltr:translate-y-0 rtl:-translate-y-0"
             leave-active-class="transform transition duration-200 ease-in-out"
             leave-to-class="ltr:translate-y-full rtl:-translate-y-full"
-            class='fixed bottom-10 left-1/2 z-1001 grid -translate-x-1/2 -translate-y-1/2 transform justify-items-center gap-2.5 sm:hidden'
+            class='fixed bottom-10 left-1/2 z-110 grid -translate-x-1/2 -translate-y-1/2 transform justify-items-center gap-2.5 sm:hidden'
         >
             <x-shop::flash-group.item />
         </transition-group>

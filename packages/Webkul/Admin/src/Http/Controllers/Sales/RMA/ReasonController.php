@@ -42,7 +42,7 @@ class ReasonController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title' => 'required',
+            'title' => 'required|max:255',
             'status' => 'required|boolean',
             'position' => 'required',
             'resolution_type' => 'required|array|min:1',
@@ -84,7 +84,7 @@ class ReasonController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'title' => 'required',
+            'title' => 'required|max:255',
             'status' => 'required|boolean',
             'position' => 'required',
             'resolution_type' => 'required|array|min:1',

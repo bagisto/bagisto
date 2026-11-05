@@ -15,6 +15,11 @@ use Webkul\Product\Repositories\ProductRepository;
 class Flat extends AbstractIndexer
 {
     /**
+     * The attributes copied into a product_flat column of 255 characters, so a longer value cannot be saved.
+     */
+    public const LENGTH_LIMITED_ATTRIBUTES = ['name', 'product_number', 'sku', 'url_key'];
+
+    /**
      * Batch size.
      *
      * @var int

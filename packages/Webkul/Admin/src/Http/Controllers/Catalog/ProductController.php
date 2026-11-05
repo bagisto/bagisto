@@ -92,7 +92,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type' => 'required',
             'attribute_family_id' => 'required',
-            'sku' => ['required', 'unique:products,sku', new Slug],
+            'sku' => ['required', 'max:255', 'unique:products,sku', new Slug],
             'super_attributes' => 'array|min:1',
             'super_attributes.*' => 'array|min:1',
         ]);

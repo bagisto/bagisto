@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Validator;
 use Webkul\Core\Rules\Address;
+use Webkul\Core\Rules\AddressLines;
 use Webkul\Core\Rules\Code;
 use Webkul\Core\Rules\CommaSeparatedInteger;
 use Webkul\Core\Rules\Decimal;
@@ -159,6 +160,25 @@ it('should reject a street address that is too long or holds unsupported charact
     'sixty-one characters' => str_repeat('a', 61),
     'an at sign' => 'Baker Street @ Marylebone',
     'angle brackets' => '<script>alert(1)</script>',
+]);
+
+// ============================================================================
+// Address Lines
+// ============================================================================
+
+it('should accept street lines that fit the address column once joined', function (array $value) {
+    expect(passesRule(new AddressLines, $value))->toBeTrue();
+})->with([
+    'one short line' => [['221B Baker Street']],
+    'two lines filling the column' => [[str_repeat('a', 200), str_repeat('b', 54)]],
+    'multibyte characters counted as characters' => [[str_repeat('न', 255)]],
+]);
+
+it('should reject street lines that run past the address column once joined', function (array $value) {
+    expect(passesRule(new AddressLines, $value))->toBeFalse();
+})->with([
+    'one over-long line' => [[str_repeat('a', 256)]],
+    'two lines that each fit alone' => [[str_repeat('a', 200), str_repeat('b', 55)]],
 ]);
 
 // ============================================================================

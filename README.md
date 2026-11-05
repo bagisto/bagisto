@@ -18,6 +18,13 @@
 </p>
 
 <p align="center">
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/pest-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/pest-tests.yml?label=pest" alt="Pest Tests"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/playwright-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/playwright-tests.yml?label=playwright" alt="Playwright Tests"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/pint-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/pint-tests.yml?label=code%20style" alt="Code Style Check"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/translation-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/translation-tests.yml?label=translations" alt="Translation Check"></a>
+</p>
+
+<p align="center">
     <a href="https://x.com/bagistoshop"><img src="https://img.shields.io/badge/Follow-%40bagistoshop-000000?style=social&logo=x" alt="Follow Bagisto on X"></a>
     <a href="https://www.youtube.com/@Bagisto"><img src="https://img.shields.io/badge/YouTube-Subscribe-FF0000?style=social&logo=youtube" alt="Subscribe to Bagisto on YouTube"></a>
 </p>

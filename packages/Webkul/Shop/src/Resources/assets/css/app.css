@@ -276,7 +276,7 @@
     .label-info,
     .label-completed,
     .label-active {
-        @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
+        @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-full;
     }
 
     .label-pending {
@@ -305,7 +305,7 @@
     }
 
     .primary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-90;
     }
 
     .secondary-button {
@@ -379,10 +379,10 @@
     }
 
     .skip-to-main-content-link {
-        @apply absolute ltr:left-[-9999px] rtl:right-[-9999px] z-[999] p-[1em] bg-black text-white opacity-0;
+        @apply absolute ltr:left-[-9999px] rtl:right-[-9999px] z-120 p-[1em] bg-black text-white opacity-0;
     }
 
     .skip-to-main-content-link:focus {
-        @apply ltr:left-1/2 rtl:right-1/2 ltr:translate-x-1/2 rtl:translate-x-[-50%] opacity-100;
+        @apply ltr:left-1/2 rtl:right-1/2 ltr:translate-x-1/2 rtl:-translate-x-1/2 opacity-100;
     }
 }

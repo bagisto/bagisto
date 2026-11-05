@@ -89,8 +89,8 @@ class AttributeController extends Controller
     public function store()
     {
         $rules = [
-            'code' => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
-            'admin_name' => 'required',
+            'code' => ['required', 'max:255', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
+            'admin_name' => 'required|max:255',
             'type' => 'required',
             'options.*.swatch_value' => $this->swatchValueRules(),
             'options.*.swatch_alt' => ['nullable', 'string', 'max:255'],
@@ -161,8 +161,8 @@ class AttributeController extends Controller
     public function update(int $id)
     {
         $rules = [
-            'code' => ['required', 'unique:attributes,code,'.$id, new Code],
-            'admin_name' => 'required',
+            'code' => ['required', 'max:255', 'unique:attributes,code,'.$id, new Code],
+            'admin_name' => 'required|max:255',
             'type' => 'required',
             'options.*.swatch_value' => $this->swatchValueRules(),
             'options.*.swatch_alt' => ['nullable', 'string', 'max:255'],

@@ -196,6 +196,33 @@ it('should fail validation when required fields are missing on update', function
         ->assertJsonValidationErrorFor('base_currency_id');
 });
 
+it('should refuse a channel name longer than its column holds on update', function () {
+    $channel = Channel::factory()->create();
+    $locale = app()->getLocale();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.channels.update', $channel->id), [
+        'code' => $channel->code,
+
+        $locale => [
+            'name' => str_repeat('a', 256),
+            'seo_title' => fake()->sentence(),
+            'seo_description' => fake()->sentence(),
+            'seo_keywords' => fake()->words(3, true),
+        ],
+
+        'root_category_id' => 1,
+        'default_locale_id' => 1,
+        'base_currency_id' => 1,
+        'inventory_sources' => [1],
+        'locales' => [1],
+        'currencies' => [1],
+    ])
+        ->assertUnprocessable()
+        ->assertOnlyJsonValidationErrors(["{$locale}.name"]);
+});
+
 it('should save SEO for a non-default locale via the locale switcher', function () {
     $channel = Channel::factory()->create();
 

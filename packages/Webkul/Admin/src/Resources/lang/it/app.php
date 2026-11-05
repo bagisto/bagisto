@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => 'Genera Immagine',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Immagine',
-                'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
+                'not-allowed-error' => 'Sono consentiti solo file immagine (:types).',
+                'size-limit-error' => 'Il file supera la dimensione massima di caricamento di :size.',
 
                 'ai-generation' => [
                     'apply' => 'Applica',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => 'Aggiungi Immagine',
                 'delete' => 'Elimina',
                 'download' => 'Scarica',
+                'not-allowed-error' => 'Sono consentiti solo file :types.',
                 'replace' => 'Sostituisci',
+                'size-limit-error' => 'Il file supera la dimensione massima di caricamento di :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Aggiungi Video',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .webm).',
+                'not-allowed-error' => 'Sono consentiti solo file video (:types).',
+                'size-limit-error' => 'Il file supera la dimensione massima di caricamento di :size.',
                 'video' => 'Video',
 
                 'seo' => [

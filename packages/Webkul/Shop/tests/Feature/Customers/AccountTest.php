@@ -303,6 +303,18 @@ it('should fail validation when required fields are missing on address store', f
         ->assertJsonValidationErrorFor('country');
 });
 
+it('should refuse street lines that together run past the address column on address store', function () {
+    $customer = $this->loginAsCustomer();
+
+    postJson(route('shop.customers.account.addresses.store'), $this->storefrontAddress([
+        'address' => [str_repeat('a', 200), str_repeat('b', 60)],
+    ]))
+        ->assertUnprocessable()
+        ->assertOnlyJsonValidationErrors(['address']);
+
+    $this->assertDatabaseMissing('addresses', ['customer_id' => $customer->id]);
+});
+
 it('should return the address edit page', function () {
     $customer = Customer::factory()->create();
 

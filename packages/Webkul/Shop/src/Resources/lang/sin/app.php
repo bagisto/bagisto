@@ -564,7 +564,8 @@ return [
             'index' => [
                 'add-attachments' => 'ඇඩෙක්මෙන්ට් එකක් එක්කරන්න',
                 'add-image' => 'රූපයක්/වීඩියෝ එකතු කරන්න',
-                'invalid-file-type' => 'තෝරාගත් ගොනු වර්ගය අවසර නැත.',
+                'invalid-file-type' => ':types ගොනු පමණක් අවසර ඇත.',
+                'size-limit-error' => 'ගොනුව උපරිම උඩුගත කිරීමේ ප්‍රමාණය :size ඉක්මවයි.',
             ],
         ],
 

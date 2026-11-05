@@ -65,7 +65,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 z-10001 bg-gray-500/50 transition-opacity"
+                    class="fixed inset-0 z-80 bg-gray-500/50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -81,12 +81,12 @@
                 leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-10002 transform overflow-y-auto transition"
+                    class="fixed inset-0 z-80 transform overflow-y-auto transition"
                     v-if="isOpen"
                 >
                     <div class="flex min-h-screen items-end justify-center p-4 sm:items-center sm:p-0">
                         <div
-                            class="box-shadow relative z-999 w-screen rounded-lg bg-white dark:bg-gray-900 max-lg:mb-4 max-lg:mt-4 max-md:w-9/10"
+                            class="box-shadow relative z-10 w-screen rounded-lg bg-white dark:bg-gray-900 max-lg:mb-4 max-lg:mt-4 max-md:w-9/10"
                             :class="panelClass || 'max-w-142'"
                         >
                             <!-- Header Slot -->

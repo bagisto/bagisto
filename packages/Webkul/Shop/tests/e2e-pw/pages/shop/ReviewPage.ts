@@ -61,7 +61,9 @@ export class ReviewPage extends BasePage {
     }
 
     private get attachmentsInput() {
-        return this.reviewTabPanel.locator('input[type="file"][id$="_fileInput"]');
+        return this.reviewTabPanel.locator(
+            'input[type="file"][id$="_fileInput"]',
+        );
     }
 
     private async dismissCookieConsent(): Promise<void> {
@@ -134,6 +136,11 @@ export class ReviewPage extends BasePage {
         await this.submitButton.click();
     }
 
+    async pickAttachment(attachment: MediaFile): Promise<void> {
+        await this.openReviewForm();
+        await this.attachmentsInput.setInputFiles(attachment);
+    }
+
     async submitEmptyReview(): Promise<void> {
         await this.openReviewForm();
         await this.submitButton.click();
@@ -145,6 +152,12 @@ export class ReviewPage extends BasePage {
         ).toBeVisible();
     }
 
+    async expectAttachmentNotPicked(attachment: MediaFile): Promise<void> {
+        await expect(
+            this.reviewTabPanel.getByAltText(attachment.name),
+        ).toHaveCount(0);
+    }
+
     async expectReviewFormStillOpen(title: string): Promise<void> {
         await expect(this.submitButton).toBeVisible();
         await expect(this.titleInput).toHaveValue(title);
@@ -153,7 +166,9 @@ export class ReviewPage extends BasePage {
     async expectReviewHidden(title: string): Promise<void> {
         await this.openReviewsTab();
 
-        await expect(this.reviewTabPanel.getByText(title, { exact: true })).toHaveCount(0);
+        await expect(
+            this.reviewTabPanel.getByText(title, { exact: true }),
+        ).toHaveCount(0);
     }
 
     async expectWriteReviewUnavailable(): Promise<void> {

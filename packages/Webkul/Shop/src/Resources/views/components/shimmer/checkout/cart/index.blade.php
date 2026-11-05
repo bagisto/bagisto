@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="flex items-center gap-2.5">
-                            <div class="shimmer h-9 w-27 rounded-[54px] max-sm:h-7.5 max-sm:w-20"></div>
+                            <div class="shimmer h-9 w-27 rounded-full max-sm:h-7.5 max-sm:w-20"></div>
 
                             <div class="shimmer hidden h-6 w-12 max-sm:block"></div>
                         </div>

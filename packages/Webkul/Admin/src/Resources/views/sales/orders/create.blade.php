@@ -8,7 +8,7 @@
     <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="grid gap-1.5">
             <p
-                class="text-xl font-bold leading-6 text-gray-800 dark:text-white"
+                class="text-xl font-bold leading-6 text-gray-800 wrap-anywhere dark:text-white"
                 v-pre
             >
                 @lang('admin::app.sales.orders.create.title', ['name' => e($cart->customer->name)])
@@ -35,7 +35,7 @@
             type="text/x-template"
             id="v-create-order-template"
         >
-            <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
+            <div class="mt-3.5 flex gap-2.5 wrap-anywhere max-xl:flex-wrap">
                 <!-- Left Component -->
                 {!! view_render_event('bagisto.admin.sales.order.create.left_component.before') !!}
 

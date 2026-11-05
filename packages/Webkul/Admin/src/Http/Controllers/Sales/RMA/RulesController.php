@@ -40,9 +40,9 @@ class RulesController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'status' => 'required|boolean',
-            'description' => 'required',
+            'description' => 'required|max:255',
         ]);
 
         Event::dispatch('sales.rma.rules.create.before');
@@ -77,9 +77,9 @@ class RulesController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'status' => 'required|boolean',
-            'description' => 'required',
+            'description' => 'required|max:255',
         ]);
 
         Event::dispatch('sales.rma.rules.update.before', $id);

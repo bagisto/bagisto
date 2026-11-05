@@ -17,6 +17,7 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 dataset('product_types', [
     'simple' => ['simple'],
@@ -310,6 +311,32 @@ it('should return 404 for a non-existent product edit page', function () {
 
     get(route('admin.catalog.products.edit', Product::query()->max('id') + 1))
         ->assertNotFound();
+});
+
+// ============================================================================
+// Update — Validation
+// ============================================================================
+
+it('should refuse a name or product number longer than the product listing holds rather than fail to save', function () {
+    $product = $this->createSimpleProduct();
+
+    $name = $product->name;
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'name' => str_repeat('a', 256),
+        'product_number' => str_repeat('1', 256),
+        'channel' => core()->getDefaultChannelCode(),
+        'locale' => app()->getLocale(),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('product_number');
+
+    expect($product->refresh()->name)->toBe($name);
 });
 
 // ============================================================================

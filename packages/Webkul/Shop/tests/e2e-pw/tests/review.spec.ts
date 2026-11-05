@@ -1,4 +1,4 @@
-import { notAnImage } from "@shared/media-files";
+import { largeImage, notAnImage } from "@shared/media-files";
 import { test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
@@ -61,7 +61,7 @@ test.describe("product reviews", () => {
         await reviewPage.expectValidationError("The Comment field is required");
     });
 
-    test("should say an attachment that is not an image failed to upload and keep the form open", async ({
+    test("should say why an attachment was refused and keep the form open", async ({
         shopPage,
     }) => {
         const reviewPage = new ReviewPage(shopPage);
@@ -74,7 +74,25 @@ test.describe("product reviews", () => {
             notAnImage(),
         );
 
-        await reviewPage.expectValidationError("The image failed to upload");
+        await reviewPage.expectValidationError(
+            "The Attachments field must be a file of type",
+        );
         await reviewPage.expectReviewFormStillOpen(title);
+    });
+
+    test("should refuse an attachment larger than the review takes before sending it", async ({
+        shopPage,
+    }) => {
+        const reviewPage = new ReviewPage(shopPage);
+        const attachment = largeImage(10241);
+
+        await loginAsCustomer(shopPage);
+        await reviewPage.openProduct(productName);
+        await reviewPage.pickAttachment(attachment);
+
+        await reviewPage.expectValidationError(
+            "The file exceeds the maximum upload size of",
+        );
+        await reviewPage.expectAttachmentNotPicked(attachment);
     });
 });

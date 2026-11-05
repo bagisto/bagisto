@@ -103,7 +103,7 @@ it('should say a picked file of the wrong type is not a video', function () {
         'videos' => ['files' => ['video_0' => UploadedFile::fake()->create('clip.mp4', 1, 'text/plain')]],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrors(['videos.files.video_0' => trans('admin::app.components.media.videos.not-allowed-error')]);
+        ->assertJsonValidationErrors(['videos.files.video_0' => trans('admin::app.components.media.videos.not-allowed-error', ['types' => product_video()->getAllowedExtensions()->implode(', ')])]);
 });
 
 it('should say a video over the configured limit is too large, naming the limit', function () {

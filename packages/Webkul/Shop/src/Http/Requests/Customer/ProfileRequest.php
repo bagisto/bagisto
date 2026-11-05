@@ -29,17 +29,17 @@ class ProfileRequest extends FormRequest
         $id = $customer->id;
 
         return [
-            'first_name' => ['required'],
-            'last_name' => ['required'],
+            'first_name' => ['required', 'max:255'],
+            'last_name' => ['required', 'max:255'],
             'gender' => 'required|in:Other,Male,Female',
             'date_of_birth' => 'date|before:today',
-            'email' => 'email|unique:customers,email,'.$id.',id,channel_id,'.$customer->channel_id,
+            'email' => 'max:255|email|unique:customers,email,'.$id.',id,channel_id,'.$customer->channel_id,
             'new_password' => 'confirmed|min:6|required_with:current_password',
             'new_password_confirmation' => 'required_with:new_password',
             'current_password' => 'required_with:new_password',
             'image' => 'array',
             'image.*' => 'mimes:bmp,jpeg,jpg,png,webp',
-            'phone' => ['required', new PhoneNumber, 'unique:customers,phone,'.$id],
+            'phone' => ['required', 'max:255', new PhoneNumber, 'unique:customers,phone,'.$id],
             'subscribed_to_news_letter' => 'nullable',
         ];
     }

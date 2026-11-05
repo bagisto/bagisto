@@ -396,12 +396,16 @@
                                 <div class="hidden">
                                     <x-admin::media.images
                                         name="image"
+                                        accepted-types=".jpeg,.jpg,.png,.gif"
+                                        max-size="10000"
                                         ::uploaded-images='data.images'
                                     />
                                 </div>
 
                                 <v-media-images
                                     name="image"
+                                    accepted-types=".jpeg,.jpg,.png,.gif"
+                                    max-size="10000"
                                     :uploaded-images='data.images'
                                     :errors="errors"
                                     :set-field-error="setFieldError"

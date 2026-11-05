@@ -128,7 +128,7 @@ class CartRuleController extends Controller
                 $primaryCoupon = $cartRule->cart_rule_coupon()->where('is_primary', 1)->first();
 
                 $this->validate(request(), [
-                    'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,'.($primaryCoupon?->id ?? 'NULL'),
+                    'coupon_code' => 'required_if:use_auto_generation,==,0|max:255|unique:cart_rule_coupons,code,'.($primaryCoupon?->id ?? 'NULL'),
                 ]);
             }
 

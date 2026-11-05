@@ -5,6 +5,7 @@ use Webkul\Customer\Models\CustomerAddress;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
+use function Pest\Laravel\postJson;
 use function Pest\Laravel\put;
 
 beforeEach(function () {
@@ -184,4 +185,28 @@ it('should answer not found when recording an address for a customer that does n
         'postcode' => '201301',
         'phone' => '1234567890',
     ])->assertNotFound();
+});
+
+// ============================================================================
+// Validation
+// ============================================================================
+
+it('should refuse street lines that together run past the address column', function () {
+    $customer = Customer::factory()->create();
+
+    postJson(route('admin.customers.customers.addresses.store', $customer->id), [
+        'first_name' => 'Demo',
+        'last_name' => 'Customer',
+        'email' => $customer->email,
+        'address' => [str_repeat('a', 200), str_repeat('b', 60)],
+        'country' => 'IN',
+        'state' => 'UP',
+        'city' => 'Noida',
+        'postcode' => '201301',
+        'phone' => '1234567890',
+    ])
+        ->assertUnprocessable()
+        ->assertOnlyJsonValidationErrors(['address']);
+
+    expect(CustomerAddress::where('customer_id', $customer->id)->count())->toBe(0);
 });

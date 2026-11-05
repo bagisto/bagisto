@@ -1,4 +1,5 @@
 import type { Page } from "@playwright/test";
+import { AuthPage } from "../pages/shop/AuthPage";
 import { expect } from "../setup";
 import {
     generateName,
@@ -59,10 +60,7 @@ export async function login(
     page: Page,
     credentials: CustomerCredentials,
 ): Promise<void> {
-    await page.goto("customer/login");
-    await page.getByPlaceholder("email@example.com").fill(credentials.email);
-    await page.getByPlaceholder("Password").fill(credentials.password);
-    await page.getByRole("button", { name: "Sign In" }).click();
+    await new AuthPage(page).login(credentials);
 
     await page.goto("customer/account/profile");
     await expect(page).toHaveURL(/customer\/account\/profile/);

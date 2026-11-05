@@ -26,6 +26,22 @@ export function validImage(name: string = "valid-image.png"): MediaFile {
     };
 }
 
+export function largeImage(
+    kilobytes: number,
+    name: string = "large-image.png",
+): MediaFile {
+    const image = Buffer.from(ONE_PIXEL_PNG, "base64");
+
+    return {
+        name,
+        mimeType: "image/png",
+        buffer: Buffer.concat([
+            image,
+            Buffer.alloc(kilobytes * 1024 - image.length),
+        ]),
+    };
+}
+
 export function notAnImage(): MediaFile {
     return textFile(
         "not-an-image.png",

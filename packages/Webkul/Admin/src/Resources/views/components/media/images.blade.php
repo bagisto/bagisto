@@ -18,6 +18,8 @@
     'height'           => '120px',
     'enableSeo'        => false,
     'metaName'         => '',
+    'acceptedTypes'    => 'image/*',
+    'maxSize'          => 0,
 ])
 
 @php
@@ -42,6 +44,8 @@
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
+    accepted-types="{{ $acceptedTypes }}"
+    v-bind:max-size="{{ (int) $maxSize }}"
     :uploaded-images="@js($uploadedImages)"
     width="{{ $width }}"
     height="{{ $height }}"
@@ -84,7 +88,7 @@
                     <!-- Upload Image Button -->
                     <label
                         class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                        :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
+                        :class="[fieldError ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
@@ -103,7 +107,7 @@
                                 type="file"
                                 class="hidden"
                                 :id="$.uid + '_imageInput'"
-                                accept="image/*"
+                                :accept="acceptedTypes"
                                 :multiple="allowMultiple"
                                 :ref="$.uid + '_imageInput'"
                                 @change="add"
@@ -129,8 +133,11 @@
                             :height="height"
                             :enable-seo="enableSeo"
                             :meta-name="metaName"
+                            :accepted-types="acceptedTypes"
+                            :refusal-for="refusalFor"
                             @onRemove="remove($event)"
                             @onChange="clearErrors"
+                            @onRefusal="setClientError"
                         >
                         </v-media-image-item>
                     </template>
@@ -161,7 +168,7 @@
                             <!-- AI Content Generation Modal -->
                             <x-admin::modal
                                 ref="magicAIImageModal"
-                                class="*:z-10007"
+                                class="*:z-90"
                             >
                                 <!-- Modal Header -->
                                 <x-slot:header>
@@ -381,8 +388,9 @@
 
             <p
                 class="mt-1 text-xs italic text-red-600"
-                v-if="errorMessage"
-                v-text="errorMessage"
+                data-field-error
+                v-if="fieldError"
+                v-text="fieldError"
             >
             </p>
         </div>
@@ -435,7 +443,7 @@
                         type="file"
                         :name="enableSeo ? name + '[' + image.id + ']' : name + '[]'"
                         class="hidden"
-                        accept="image/*"
+                        :accept="acceptedTypes"
                         :id="$.uid + '_imageInput_' + index"
                         :ref="$.uid + '_imageInput_' + index"
                         @change="edit"
@@ -561,8 +569,18 @@
 
             props: {
                 name: {
-                    type: String, 
+                    type: String,
                     default: 'images',
+                },
+
+                acceptedTypes: {
+                    type: String,
+                    default: 'image/*',
+                },
+
+                maxSize: {
+                    type: [Number, String],
+                    default: 0,
                 },
 
                 allowMultiple: {
@@ -615,6 +633,8 @@
                     images: [],
 
                     newImageIndex: 0,
+
+                    clientError: '',
 
                     placeholders: [
                         {
@@ -685,10 +705,64 @@
                 errorMessage() {
                     return this.errors[this.errorKeys[0]];
                 },
+
+                /**
+                 * The error shown under the field, the server's for one of its files before the one found on picking.
+                 */
+                fieldError() {
+                    return this.errorMessage ?? this.clientError;
+                },
+
+                /**
+                 * The extensions the field accepts, written for display from its accepted types.
+                 */
+                acceptedExtensions() {
+                    const subtypeExtensions = {
+                        'svg+xml': 'svg',
+                        'quicktime': 'mov',
+                        'x-icon': 'ico',
+                        'vnd.microsoft.icon': 'ico',
+                    };
+
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    const extensions = types
+                        .filter(type => ! type.endsWith('*'))
+                        .map(type => {
+                            if (! type.includes('/')) {
+                                return type.replace(/^\.?/, '.');
+                            }
+
+                            const subtype = type.split('/').pop();
+
+                            return '.' + (subtypeExtensions[subtype] ?? subtype);
+                        });
+
+                    const labels = extensions.length
+                        ? extensions
+                        : types.map(type => type.split('/').shift()).filter(type => type !== '*');
+
+                    return [...new Set(labels)].join(', ');
+                },
+            },
+
+            watch: {
+                fieldError(message) {
+                    if (message) {
+                        this.focusError();
+                    }
+                },
             },
 
             mounted() {
                 this.images = this.uploadedImages;
+
+                if (this.fieldError) {
+                    this.focusError();
+                }
             },
 
             beforeUnmount() {
@@ -697,7 +771,7 @@
 
             methods: {
                 /**
-                 * Add the picked files to the field, provided they are all images.
+                 * Add the picked files to the field, provided each is of a type and size it accepts.
                  */
                 add() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput'];
@@ -706,13 +780,12 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    this.clearErrors();
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
-                        });
+                    const refusal = this.refusalFor(imageInput.files);
+
+                    if (refusal) {
+                        this.clientError = refusal;
 
                         return;
                     }
@@ -720,8 +793,85 @@
                     imageInput.files.forEach((file, index) => {
                         this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
                     });
+                },
 
-                    this.clearErrors();
+                /**
+                 * Why the files cannot be added to the field, or an empty string when they can.
+                 */
+                refusalFor(files) {
+                    if (! Array.from(files).every(file => this.isAcceptedType(file))) {
+                        return "@lang('admin::app.components.media.images.not-allowed-error')".replace(':types', this.acceptedExtensions);
+                    }
+
+                    if (Array.from(files).some(file => this.exceedsMaxSize(file))) {
+                        return "@lang('admin::app.components.media.images.size-limit-error')".replace(':size', this.formattedSizeLimit());
+                    }
+
+                    return '';
+                },
+
+                /**
+                 * Whether the field accepts the file, by its extension or its MIME type.
+                 */
+                isAcceptedType(file) {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    if (
+                        ! types.length
+                        || types.includes('*')
+                        || types.includes('*/*')
+                    ) {
+                        return true;
+                    }
+
+                    const mime = (file.type || '').toLowerCase();
+
+                    const extension = (file.name || '').split('.').pop().toLowerCase();
+
+                    return types.some(type => {
+                        if (type.endsWith('/*')) {
+                            return mime.startsWith(type.slice(0, -1));
+                        }
+
+                        if (type.includes('/')) {
+                            return mime === type;
+                        }
+
+                        return (type.startsWith('.') ? type.slice(1) : type) === extension;
+                    });
+                },
+
+                /**
+                 * Whether the file is larger than the field, or PHP, accepts.
+                 */
+                exceedsMaxSize(file) {
+                    const limit = this.sizeLimitKilobytes();
+
+                    return limit > 0
+                        && file.size > limit * 1024;
+                },
+
+                /**
+                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
+                 */
+                sizeLimitKilobytes() {
+                    const limits = [{{ core()->getMaxUploadSize() }}, Number(this.maxSize) || 0].filter(limit => limit > 0);
+
+                    return limits.length ? Math.min(...limits) : 0;
+                },
+
+                /**
+                 * The size limit written for the admin, in megabytes from one megabyte up.
+                 */
+                formattedSizeLimit() {
+                    const kilobytes = this.sizeLimitKilobytes();
+
+                    return kilobytes >= 1024
+                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
+                        : kilobytes + ' KB';
                 },
 
                 /**
@@ -752,7 +902,40 @@
                  * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
                  */
                 clearErrors() {
+                    this.clientError = '';
+
                     this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
+                },
+
+                /**
+                 * Show, under the field, why a file picked to replace an existing image was refused.
+                 */
+                setClientError(message) {
+                    this.clearErrors();
+
+                    this.clientError = message;
+                },
+
+                /**
+                 * Bring this field's error into view, but only when no field before it holds one.
+                 */
+                focusError() {
+                    this.$nextTick(() => {
+                        const errorElement = this.$el?.querySelector?.('[data-field-error]');
+
+                        if (! errorElement) {
+                            return;
+                        }
+
+                        if (document.querySelector('[data-field-error]') !== errorElement) {
+                            return;
+                        }
+
+                        errorElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    });
                 },
 
                 /**
@@ -836,7 +1019,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'acceptedTypes', 'refusalFor'],
 
             mounted() {
                 if (this.image.file instanceof File) {
@@ -855,7 +1038,7 @@
                 },
 
                 /**
-                 * Replace this image with the picked file, provided it is an image.
+                 * Replace this image with the picked file, provided it is of a type and size the field accepts.
                  */
                 edit() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
@@ -864,13 +1047,10 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    const refusal = this.refusalFor(imageInput.files);
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
-                        });
+                    if (refusal) {
+                        this.$emit('onRefusal', refusal);
 
                         return;
                     }

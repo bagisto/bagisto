@@ -58,7 +58,7 @@
                         <!-- Product Details -->
                         <div class="flex w-full flex-col gap-1.5">
                             <p
-                                class="text-gray-600 dark:text-gray-300"
+                                class="text-gray-600 wrap-anywhere dark:text-gray-300"
                                 v-text="item.name"
                             >
                             </p>

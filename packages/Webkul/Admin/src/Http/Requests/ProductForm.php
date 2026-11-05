@@ -7,12 +7,14 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
+use Webkul\Attribute\Contracts\Attribute;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Regex;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Contracts\Product;
+use Webkul\Product\Helpers\Indexers\Flat;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -48,8 +50,6 @@ class ProductForm extends FormRequest
 
     /**
      * Create a new form request instance.
-     *
-     * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
@@ -60,33 +60,29 @@ class ProductForm extends FormRequest
 
     /**
      * Determine if the product is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $this->product = $this->productRepository->find($this->id);
 
         $currentRmaRuleId = $this->product->rma_rule_id;
 
         $this->rules = array_merge($this->product->getTypeInstance()->getTypeValidationRules(), [
-            'sku' => ['required', Rule::unique('products', 'sku')->ignore($this->id), new Slug],
-            'url_key' => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
+            'sku' => ['required', 'max:255', Rule::unique('products', 'sku')->ignore($this->id), new Slug],
+            'url_key' => ['required', 'max:255', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*' => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*' => ['nullable', 'integer'],
             'images.meta.*.alt_text' => ['nullable', 'string', 'max:255'],
             'images.meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
-            'videos.files.*' => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:'.$this->maxVideoFileSize],
+            'videos.files.*' => ['nullable', 'mimetypes:application/octet-stream,'.product_video()->getAllowedMimeTypes()->implode(','), 'max:'.$this->maxVideoFileSize],
             'videos.positions.*' => ['nullable', 'integer'],
             'videos.meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'special_price_from' => ['nullable', 'date'],
@@ -140,6 +136,10 @@ class ProductForm extends FormRequest
                 $validations[] = $isRequired ? 'required' : 'nullable';
             } else {
                 $validations = $this->rules[$attribute->code];
+            }
+
+            if (in_array($attribute->code, Flat::LENGTH_LIMITED_ATTRIBUTES)) {
+                $validations[] = 'max:255';
             }
 
             if (
@@ -199,25 +199,21 @@ class ProductForm extends FormRequest
     }
 
     /**
-     * Custom message for validation.
-     *
-     * @return array
+     * Get the custom messages for the validation rules.
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'variants.*.sku.unique' => trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
             'videos.files.*' => trans('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
-            'videos.files.*.mimetypes' => trans('admin::app.components.media.videos.not-allowed-error'),
+            'videos.files.*.mimetypes' => trans('admin::app.components.media.videos.not-allowed-error', ['types' => product_video()->getAllowedExtensions()->implode(', ')]),
         ];
     }
 
     /**
-     * Attributes.
-     *
-     * @return array
+     * Get the display names of the validated attributes.
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'images.files.*' => trans('admin::app.components.media.images.image'),
@@ -233,7 +229,7 @@ class ProductForm extends FormRequest
     /**
      * Whether a media attribute keeps the file it already holds, the edit form sending none.
      */
-    protected function keepsStoredMedia($attribute): bool
+    protected function keepsStoredMedia(Attribute $attribute): bool
     {
         return in_array($attribute->type, [AttributeTypeEnum::IMAGE->value, AttributeTypeEnum::FILE->value], true)
             && ! $this->hasFile($attribute->code)
@@ -243,10 +239,8 @@ class ProductForm extends FormRequest
     /**
      * Keep locale-scoped values in a locale the channel being edited has, which is where the product
      * is read from.
-     *
-     * @return void
      */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $channel = core()->getAllChannels()->firstWhere('code', $this->input('channel') ?: core()->getDefaultChannelCode());
 
@@ -264,10 +258,8 @@ class ProductForm extends FormRequest
 
     /**
      * Handle a passed validation attempt.
-     *
-     * @return void
      */
-    protected function passedValidation()
+    protected function passedValidation(): void
     {
         $tinyMCEFields = $this->productEditableAttributes
             ->filter(fn ($attribute) => $attribute->type === AttributeTypeEnum::TEXTAREA->value && $attribute->enable_wysiwyg)

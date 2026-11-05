@@ -29,19 +29,19 @@ class InventorySourceRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', Rule::unique('inventory_sources', 'code')->ignore($this->id), new Code],
-            'name' => ['required'],
+            'code' => ['required', 'max:255', Rule::unique('inventory_sources', 'code')->ignore($this->id), new Code],
+            'name' => ['required', 'max:255'],
             'latitude' => ['numeric', 'between:-90,90'],
             'longitude' => ['numeric', 'between:-180,180'],
             'priority' => ['numeric'],
-            'contact_name' => ['required'],
-            'contact_email' => ['required', 'email'],
-            'contact_number' => ['required', new PhoneNumber],
-            'street' => ['required', new Address],
+            'contact_name' => ['required', 'max:255'],
+            'contact_email' => ['required', 'max:255', 'email'],
+            'contact_number' => ['required', 'max:255', new PhoneNumber],
+            'street' => ['required', 'max:255', new Address],
             'country' => ['required'],
-            'state' => ['required'],
-            'city' => ['required'],
-            'postcode' => ['required', new PostCode],
+            'state' => ['required', 'max:255'],
+            'city' => ['required', 'max:255'],
+            'postcode' => ['required', 'max:255', new PostCode],
         ];
     }
 }

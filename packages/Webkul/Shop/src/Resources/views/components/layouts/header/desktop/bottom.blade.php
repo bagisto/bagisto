@@ -205,7 +205,10 @@
                 @auth('customer')
                     <x-slot:content class="p-0!">
                         <div class="grid gap-2.5 p-5 pb-0">
-                            <p class="text-xl font-dmserif" v-pre>
+                            <p
+                                class="truncate text-xl font-dmserif [contain:inline-size]"
+                                v-pre
+                            >
                                 @lang('shop::app.components.layouts.header.desktop.bottom.welcome')’
                                 {{ auth()->guard('customer')->user()->first_name }}
                             </p>
@@ -308,8 +311,9 @@
             >
                 <span>
                     <a
+                        class="block max-w-60 truncate px-5 uppercase"
                         :href="category.url"
-                        class="inline-block px-5 uppercase"
+                        :title="category.name"
                     >
                         @{{ category.name }}
                     </a>
@@ -326,8 +330,11 @@
                             v-for="pairCategoryChildren in pairCategoryChildren(category)"
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">
-                                <p class="font-medium text-navyBlue">
-                                    <a :href="secondLevelCategory.url">
+                                <p class="line-clamp-2 max-w-60 font-medium text-navyBlue wrap-anywhere">
+                                    <a
+                                        :href="secondLevelCategory.url"
+                                        :title="secondLevelCategory.name"
+                                    >
                                         @{{ secondLevelCategory.name }}
                                     </a>
                                 </p>
@@ -337,10 +344,13 @@
                                     v-if="secondLevelCategory.children && secondLevelCategory.children.length"
                                 >
                                     <li
-                                        class="text-sm font-medium text-zinc-500"
+                                        class="line-clamp-2 max-w-60 text-sm font-medium text-zinc-500 wrap-anywhere"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
-                                        <a :href="thirdLevelCategory.url">
+                                        <a
+                                            :href="thirdLevelCategory.url"
+                                            :title="thirdLevelCategory.name"
+                                        >
                                             @{{ thirdLevelCategory.name }}
                                         </a>
                                     </li>
@@ -375,8 +385,9 @@
                 >
                     <span>
                         <a
+                            class="block max-w-60 truncate px-5 uppercase"
                             :href="category.url"
-                            class="inline-block px-5 uppercase"
+                            :title="category.name"
                         >
                             @{{ category.name }}
                         </a>
@@ -393,8 +404,11 @@
                             v-for="pairCategoryChildren in pairCategoryChildren(category)"
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">
-                                <p class="font-medium text-navyBlue">
-                                    <a :href="secondLevelCategory.url">
+                                <p class="line-clamp-2 max-w-60 font-medium text-navyBlue wrap-anywhere">
+                                    <a
+                                        :href="secondLevelCategory.url"
+                                        :title="secondLevelCategory.name"
+                                    >
                                         @{{ secondLevelCategory.name }}
                                     </a>
                                 </p>
@@ -404,10 +418,13 @@
                                     v-if="secondLevelCategory.children && secondLevelCategory.children.length"
                                 >
                                     <li
-                                        class="text-sm font-medium text-zinc-500"
+                                        class="line-clamp-2 max-w-60 text-sm font-medium text-zinc-500 wrap-anywhere"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
-                                        <a :href="thirdLevelCategory.url">
+                                        <a
+                                            :href="thirdLevelCategory.url"
+                                            :title="thirdLevelCategory.name"
+                                        >
                                             @{{ thirdLevelCategory.name }}
                                         </a>
                                     </li>
@@ -457,8 +474,9 @@
                                     >
                                         <div class="flex items-center justify-between px-6 py-2 transition-colors duration-200 cursor-pointer hover:bg-gray-100">
                                             <a
+                                                class="line-clamp-2 min-w-0 text-base font-medium text-black wrap-anywhere"
                                                 :href="category.url"
-                                                class="text-base font-medium text-black"
+                                                :title="category.name"
                                             >
                                                 @{{ category.name }}
                                             </a>
@@ -475,8 +493,9 @@
                                                     @click="showThirdLevel(secondLevelCategory, category, $event)"
                                                 >
                                                     <a
+                                                        class="line-clamp-2 min-w-0 text-sm font-normal wrap-anywhere"
                                                         :href="secondLevelCategory.url"
-                                                        class="text-sm font-normal"
+                                                        :title="secondLevelCategory.name"
                                                     >
                                                         @{{ secondLevelCategory.name }}
                                                     </a>
@@ -519,8 +538,9 @@
                                         class="mb-2"
                                     >
                                         <a
+                                            class="line-clamp-2 px-6 py-2 text-sm transition-colors duration-200 wrap-anywhere hover:bg-gray-100"
                                             :href="thirdLevelCategory.url"
-                                            class="block px-6 py-2 text-sm transition-colors duration-200 hover:bg-gray-100"
+                                            :title="thirdLevelCategory.name"
                                         >
                                             @{{ thirdLevelCategory.name }}
                                         </a>

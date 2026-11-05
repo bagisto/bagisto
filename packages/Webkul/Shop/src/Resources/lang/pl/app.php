@@ -564,7 +564,8 @@ return [
             'index' => [
                 'add-attachments' => 'Dodaj załączniki',
                 'add-image' => 'Dodaj Obraz/Wideo',
-                'invalid-file-type' => 'Wybrany typ pliku jest niedozwolony.',
+                'invalid-file-type' => 'Dozwolone są tylko pliki :types.',
+                'size-limit-error' => 'Plik przekracza maksymalny rozmiar przesyłania :size.',
             ],
         ],
 

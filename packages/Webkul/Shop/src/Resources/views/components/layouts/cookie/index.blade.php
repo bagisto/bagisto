@@ -13,7 +13,7 @@
 
             @if (core()->getConfigData('general.gdpr.cookie.enabled'))
                 <div
-                    class="js-cookie-consent fixed z-999 mx-4 box-border hidden min-h-5 overflow-hidden rounded-sm bg-black/90 p-7"
+                    class="js-cookie-consent fixed z-50 mx-4 box-border hidden min-h-5 overflow-hidden rounded-sm bg-black/90 p-7"
                     :class="getPositionClasses(position)"
                 >
                     <div class="cookieTitle">

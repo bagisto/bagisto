@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => 'Создать изображение',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Изображение',
-                'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
+                'not-allowed-error' => 'Разрешены только файлы изображений (:types.',
+                'size-limit-error' => 'Файл превышает максимальный размер загрузки :size.',
 
                 'ai-generation' => [
                     'apply' => 'Применить',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => 'Добавить изображение',
                 'delete' => 'Удалить',
                 'download' => 'Скачать',
+                'not-allowed-error' => 'Разрешены только файлы :types.',
                 'replace' => 'Заменить',
+                'size-limit-error' => 'Файл превышает максимальный размер загрузки :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Добавить видео',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .webm)',
+                'not-allowed-error' => 'Разрешены только файлы видео (:types.',
+                'size-limit-error' => 'Файл превышает максимальный размер загрузки :size.',
                 'video' => 'Видео',
 
                 'seo' => [

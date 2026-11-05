@@ -24,7 +24,7 @@ class CartRuleRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'channels' => 'required|array|min:1',
             'customer_groups' => 'required|array|min:1',
             'coupon_type' => 'required',
@@ -37,7 +37,7 @@ class CartRuleRequest extends FormRequest
 
         if (! request('id')) {
             $rules = array_merge($rules, [
-                'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code',
+                'coupon_code' => 'required_if:use_auto_generation,==,0|max:255|unique:cart_rule_coupons,code',
             ]);
         }
 

@@ -105,7 +105,7 @@ class Importer extends AbstractImporter
     /**
      * Error code for super attribute code not found
      */
-    const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'attribute_family_code_not_found';
+    const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'super_attribute_code_not_found';
 
     /**
      * Error code for an image named as a file while the import expects links
@@ -561,8 +561,8 @@ class Importer extends AbstractImporter
     public function getValidationRules(array $rowData): array
     {
         $rules = [
-            'sku' => ['required', new Slug],
-            'url_key' => ['required'],
+            'sku' => ['required', 'max:255', new Slug],
+            'url_key' => ['required', 'max:255', new Slug],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to' => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price' => ['nullable', new Decimal, 'lt:price'],
@@ -581,6 +581,10 @@ class Importer extends AbstractImporter
                 $validations[] = $attribute->is_required ? 'required' : 'nullable';
             } else {
                 $validations = $rules[$attribute->code];
+            }
+
+            if (in_array($attribute->code, FlatIndexer::LENGTH_LIMITED_ATTRIBUTES)) {
+                $validations[] = 'max:255';
             }
 
             if (
@@ -1195,13 +1199,15 @@ class Importer extends AbstractImporter
             ->first()->id;
 
         if ($this->isSKUExist($rowData['sku'])) {
-            $products['update'][$rowData['sku']] = [
+            $sku = $this->skuStorage->get($rowData['sku'])['sku'];
+
+            $products['update'][$sku] = [
                 'type' => $rowData['type'],
-                'sku' => $rowData['sku'],
+                'sku' => $sku,
                 'attribute_family_id' => $attributeFamilyId,
             ];
         } else {
-            $products['insert'][$rowData['sku']] = [
+            $products['insert'][$this->skuStorage->key($rowData['sku'])] = [
                 'type' => $rowData['type'],
                 'sku' => $rowData['sku'],
                 'attribute_family_id' => $attributeFamilyId,
@@ -1235,7 +1241,7 @@ class Importer extends AbstractImporter
              */
             $newProducts = $this->productRepository->findWhereIn(
                 'sku',
-                array_keys($products['insert']),
+                array_column($products['insert'], 'sku'),
                 [
                     'id',
                     'type',

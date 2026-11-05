@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="flex flex-wrap gap-5 max-md:mt-2.5 max-md:flex-nowrap">
-                                <div class="shimmer h-10 w-27.5 rounded-[54px] max-md:h-8.5 max-md:w-20"></div>
+                                <div class="shimmer h-10 w-27.5 rounded-full max-md:h-8.5 max-md:w-20"></div>
 
                                 <div class="shimmer h-10 w-39.5 rounded-2xl max-md:h-8.5 max-md:w-28"></div>
                             </div>

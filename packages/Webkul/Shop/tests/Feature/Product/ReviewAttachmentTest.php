@@ -2,12 +2,15 @@
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Testing\TestResponse;
 use Illuminate\Validation\ValidationException;
 use Webkul\Customer\Models\Customer;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Product\Models\ProductReviewAttachment;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+
+use function Pest\Laravel\postJson;
 
 /**
  * A review for attachments to belong to.
@@ -33,6 +36,32 @@ function svgAttachment(string $name, string $markup): UploadedFile
     file_put_contents($path, $markup);
 
     return new UploadedFile($path, $name, 'image/svg+xml', null, true);
+}
+
+/**
+ * Post a guest review of the product carrying the given attachments.
+ */
+function postReviewWithAttachments(int $productId, array $attachments): TestResponse
+{
+    test()->setConfig(['catalog.products.review.guest_review' => 1]);
+
+    return postJson(route('shop.api.products.reviews.store', $productId), [
+        'title' => 'Looks good',
+        'name' => 'Guest',
+        'comment' => 'Arrived quickly.',
+        'rating' => 5,
+        'attachments' => $attachments,
+    ]);
+}
+
+/**
+ * The single attachment recorded against a review of the product.
+ */
+function soleAttachmentOf(int $productId): ProductReviewAttachment
+{
+    return ProductReviewAttachment::query()
+        ->whereIn('review_id', ProductReview::where('product_id', $productId)->pluck('id'))
+        ->sole();
 }
 
 beforeEach(fn () => Storage::fake());
@@ -88,4 +117,55 @@ it('should leave no review behind when an attachment cannot be sanitized', funct
 
     expect($create)->toThrow(ValidationException::class)
         ->and(ProductReview::where('product_id', $product->id)->count())->toBe(0);
+});
+
+// ============================================================================
+// Taking Attachments With A Review
+// ============================================================================
+
+it('should take an SVG attachment with a review and store it without its script', function () {
+    $product = $this->createSimpleProduct();
+
+    postReviewWithAttachments($product->id, [
+        svgAttachment('logo.svg', '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script><rect/></svg>'),
+    ])->assertOk();
+
+    $attachment = soleAttachmentOf($product->id);
+
+    expect($attachment->mime_type)->toBe('svg+xml')
+        ->and(Storage::get($attachment->path))->not->toContain('<script');
+});
+
+it('should take a video attachment with a review', function () {
+    $product = $this->createSimpleProduct();
+
+    postReviewWithAttachments($product->id, [
+        UploadedFile::fake()->create('clip.mp4', 100, 'video/mp4'),
+    ])->assertOk();
+
+    expect(soleAttachmentOf($product->id)->type)->toBe('video');
+});
+
+it('should refuse an image type a review does not take and name the field attachments', function () {
+    $product = $this->createSimpleProduct();
+
+    postReviewWithAttachments($product->id, [
+        UploadedFile::fake()->create('scan.tiff', 10, 'image/tiff'),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['attachments.0' => 'The Attachments field must be a file of type']);
+
+    expect(ProductReview::where('product_id', $product->id)->exists())->toBeFalse();
+});
+
+it('should refuse an HTML page named as an SVG attachment', function () {
+    $product = $this->createSimpleProduct();
+
+    postReviewWithAttachments($product->id, [
+        svgAttachment('logo.svg', '<!doctype html><html><body><script>alert(1)</script></body></html>'),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors('attachments.0');
+
+    expect(ProductReview::where('product_id', $product->id)->exists())->toBeFalse();
 });
