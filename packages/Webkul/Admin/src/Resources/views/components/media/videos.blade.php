@@ -371,21 +371,21 @@
 
             watch: {
                 /**
-                 * Bring this field's error into view once it is the first on the page.
+                 * Bring this field's error into view when one surfaces while the page is open.
                  */
-                fieldError: {
-                    immediate: true,
-
-                    handler(message) {
-                        if (message) {
-                            this.focusError();
-                        }
-                    },
+                fieldError(message) {
+                    if (message) {
+                        this.focusError();
+                    }
                 },
             },
 
             mounted() {
                 this.videos = this.uploadedVideos;
+
+                if (this.fieldError) {
+                    this.focusError();
+                }
             },
 
             beforeUnmount() {

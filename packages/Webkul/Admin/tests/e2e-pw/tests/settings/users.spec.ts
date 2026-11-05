@@ -160,7 +160,7 @@ test.describe("user management", () => {
         await usersPage
             .avatarField()
             .expectNotice(
-                "Only images files (.jpeg, .jpg, .png, ..) are allowed.",
+                "Only image files (.jpeg, .jpg, .png, .gif) are allowed.",
             );
         await usersPage.avatarField().expectEmpty();
     });
