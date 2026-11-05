@@ -3,10 +3,6 @@
     'height' => '200px'
 ])
 
-@php
-    $uploadMaxKilobytes = (int) floor(\Illuminate\Http\UploadedFile::getMaxFilesize() / 1024);
-@endphp
-
 <v-media
     {{ $attributes }}
     width="{{ $width }}"
@@ -89,13 +85,6 @@
                 </label>
             </div>
 
-            <p
-                class="mt-1 text-xs italic text-red-500"
-                v-if="clientError"
-                v-text="clientError"
-            >
-            </p>
-
             <div
                 class="flex items-center"
                 v-if="isMultiple"
@@ -155,8 +144,8 @@
 
             <p
                 class="text-red-500 text-xs italic"
-                v-if="errorMessage"
-                v-text="errorMessage"
+                v-if="fieldError"
+                v-text="fieldError"
             >
             </p>
         </div>
@@ -253,6 +242,13 @@
                 },
 
                 /**
+                 * The error shown under the field, the server's for one of its files before the one found on picking.
+                 */
+                fieldError() {
+                    return this.errorMessage ?? this.clientError;
+                },
+
+                /**
                  * Whether a file is picked, in which case the empty field must go, because
                  * a value posted under the same key hides the file from validation.
                  */
@@ -278,11 +274,9 @@
 
             methods: {
                 /**
-                 * Add the picked files to the field, leaving out any of a type it does not accept.
+                 * Add the picked files to the field, leaving out any of a type or size it does not accept.
                  */
                 onFileChange(event) {
-                    this.clientError = '';
-
                     let files = event.target.files;
                     let hasInvalid = false;
                     let hasOversize = false;
@@ -335,17 +329,18 @@
                         this.notifySizeLimit();
                     }
 
-                    if (hasInvalid || hasOversize) {
+                    if (
+                        hasInvalid
+                        || hasOversize
+                    ) {
                         event.target.value = '';
                     }
                 },
 
                 /**
-                 * Add the dropped files to the field, leaving out any of a type it does not accept.
+                 * Add the dropped files to the field, leaving out any of a type or size it does not accept.
                  */
                 handleDroppedFiles(files) {
-                    this.clientError = '';
-
                     let hasInvalid = false;
                     let hasOversize = false;
 
@@ -397,23 +392,28 @@
                     }
                 },
 
+                /**
+                 * Whether the file is larger than the field, or PHP, accepts.
+                 */
                 exceedsMaxSize(file) {
                     const limit = this.sizeLimitKilobytes();
 
-                    return limit > 0 && file.size > limit * 1024;
+                    return limit > 0
+                        && file.size > limit * 1024;
                 },
 
+                /**
+                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
+                 */
                 sizeLimitKilobytes() {
-                    const serverLimit = {{ $uploadMaxKilobytes }};
-                    const fieldLimit = Number(this.maxSize) || 0;
+                    const limits = [{{ core()->getMaxUploadSize() }}, Number(this.maxSize) || 0].filter(limit => limit > 0);
 
-                    if (serverLimit > 0 && fieldLimit > 0) {
-                        return Math.min(serverLimit, fieldLimit);
-                    }
-
-                    return fieldLimit > 0 ? fieldLimit : serverLimit;
+                    return limits.length ? Math.min(...limits) : 0;
                 },
 
+                /**
+                 * The size limit written for the shopper, in megabytes from one megabyte up.
+                 */
                 formattedSizeLimit() {
                     const kilobytes = this.sizeLimitKilobytes();
 
@@ -463,6 +463,9 @@
                     this.clientError = "@lang('shop::app.components.media.index.invalid-file-type')";
                 },
 
+                /**
+                 * Tell the shopper a file was left out for its size.
+                 */
                 notifySizeLimit() {
                     this.clientError = "@lang('shop::app.components.media.index.size-limit-error')".replace(':size', this.formattedSizeLimit());
                 },
@@ -530,6 +533,8 @@
                  * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
                  */
                 clearErrors() {
+                    this.clientError = '';
+
                     this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
                 },
             },

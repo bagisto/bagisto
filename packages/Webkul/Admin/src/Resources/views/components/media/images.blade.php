@@ -7,8 +7,6 @@
     $models = AiProvider::modelsForProviders($enabledProviders, 'image');
     
     $defaultModel = $models[0]['value'] ?? '';
-
-    $uploadMaxKilobytes = (int) floor(\Illuminate\Http\UploadedFile::getMaxFilesize() / 1024);
 @endphp
 
 @props([
@@ -136,7 +134,7 @@
                             :enable-seo="enableSeo"
                             :meta-name="metaName"
                             :accepted-types="acceptedTypes"
-                            :max-size="maxSize"
+                            :refusal-for="refusalFor"
                             @onRemove="remove($event)"
                             @onChange="clearErrors"
                         >
@@ -724,23 +722,12 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => this.isAcceptedType(file));
+                    const refusal = this.refusalFor(imageInput.files);
 
-                    if (! validFiles) {
+                    if (refusal) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
-                        });
-
-                        return;
-                    }
-
-                    const withinSize = Array.from(imageInput.files).every(file => ! this.exceedsMaxSize(file));
-
-                    if (! withinSize) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.images.size-limit-error')".replace(':size', this.formattedSizeLimit())
+                            message: refusal
                         });
 
                         return;
@@ -754,6 +741,21 @@
                 },
 
                 /**
+                 * Why the files cannot be added to the field, or an empty string when they can.
+                 */
+                refusalFor(files) {
+                    if (! Array.from(files).every(file => this.isAcceptedType(file))) {
+                        return "@lang('admin::app.components.media.images.not-allowed-error')";
+                    }
+
+                    if (Array.from(files).some(file => this.exceedsMaxSize(file))) {
+                        return "@lang('admin::app.components.media.images.size-limit-error')".replace(':size', this.formattedSizeLimit());
+                    }
+
+                    return '';
+                },
+
+                /**
                  * Whether the field accepts the file, by its extension or its MIME type.
                  */
                 isAcceptedType(file) {
@@ -762,7 +764,11 @@
                         .map(type => type.trim().toLowerCase())
                         .filter(Boolean);
 
-                    if (! types.length || types.includes('*') || types.includes('*/*')) {
+                    if (
+                        ! types.length
+                        || types.includes('*')
+                        || types.includes('*/*')
+                    ) {
                         return true;
                     }
 
@@ -789,21 +795,17 @@
                 exceedsMaxSize(file) {
                     const limit = this.sizeLimitKilobytes();
 
-                    return limit > 0 && file.size > limit * 1024;
+                    return limit > 0
+                        && file.size > limit * 1024;
                 },
 
                 /**
                  * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
                  */
                 sizeLimitKilobytes() {
-                    const serverLimit = {{ $uploadMaxKilobytes }};
-                    const fieldLimit = Number(this.maxSize) || 0;
+                    const limits = [{{ core()->getMaxUploadSize() }}, Number(this.maxSize) || 0].filter(limit => limit > 0);
 
-                    if (serverLimit > 0 && fieldLimit > 0) {
-                        return Math.min(serverLimit, fieldLimit);
-                    }
-
-                    return fieldLimit > 0 ? fieldLimit : serverLimit;
+                    return limits.length ? Math.min(...limits) : 0;
                 },
 
                 /**
@@ -929,7 +931,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'acceptedTypes', 'maxSize'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName', 'acceptedTypes', 'refusalFor'],
 
             mounted() {
                 if (this.image.file instanceof File) {
@@ -957,23 +959,12 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => this.isAcceptedType(file));
+                    const refusal = this.refusalFor(imageInput.files);
 
-                    if (! validFiles) {
+                    if (refusal) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
-                        });
-
-                        return;
-                    }
-
-                    const withinSize = Array.from(imageInput.files).every(file => ! this.exceedsMaxSize(file));
-
-                    if (! withinSize) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.images.size-limit-error')".replace(':size', this.formattedSizeLimit())
+                            message: refusal
                         });
 
                         return;
@@ -988,70 +979,6 @@
                     this.readFile(imageInput.files[0]);
 
                     this.$emit('onChange');
-                },
-
-                /**
-                 * Whether the field accepts the file, by its extension or its MIME type.
-                 */
-                isAcceptedType(file) {
-                    const types = (this.acceptedTypes || '')
-                        .split(',')
-                        .map(type => type.trim().toLowerCase())
-                        .filter(Boolean);
-
-                    if (! types.length || types.includes('*') || types.includes('*/*')) {
-                        return true;
-                    }
-
-                    const mime = (file.type || '').toLowerCase();
-
-                    const extension = (file.name || '').split('.').pop().toLowerCase();
-
-                    return types.some(type => {
-                        if (type.endsWith('/*')) {
-                            return mime.startsWith(type.slice(0, -1));
-                        }
-
-                        if (type.includes('/')) {
-                            return mime === type;
-                        }
-
-                        return (type.startsWith('.') ? type.slice(1) : type) === extension;
-                    });
-                },
-
-                /**
-                 * Whether the file is larger than the field, or PHP, accepts.
-                 */
-                exceedsMaxSize(file) {
-                    const limit = this.sizeLimitKilobytes();
-
-                    return limit > 0 && file.size > limit * 1024;
-                },
-
-                /**
-                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
-                 */
-                sizeLimitKilobytes() {
-                    const serverLimit = {{ $uploadMaxKilobytes }};
-                    const fieldLimit = Number(this.maxSize) || 0;
-
-                    if (serverLimit > 0 && fieldLimit > 0) {
-                        return Math.min(serverLimit, fieldLimit);
-                    }
-
-                    return fieldLimit > 0 ? fieldLimit : serverLimit;
-                },
-
-                /**
-                 * The size limit written for the admin, in megabytes from one megabyte up.
-                 */
-                formattedSizeLimit() {
-                    const kilobytes = this.sizeLimitKilobytes();
-
-                    return kilobytes >= 1024
-                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
-                        : kilobytes + ' KB';
                 },
 
                 /**
