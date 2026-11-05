@@ -52,7 +52,8 @@
                             class=""
                         >
                             <p
-                                class="text-center text-lg text-black max-md:text-base max-md:font-normal max-sm:text-sm"
+                                class="line-clamp-2 text-center text-lg text-black wrap-anywhere max-md:text-base max-md:font-normal max-sm:text-sm"
+                                :title="category.name"
                                 v-text="category.name"
                             >
                             </p>

@@ -100,7 +100,7 @@
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
                                     <a
-                                        class="max-w-4/5 max-md:w-full"
+                                        class="max-w-4/5 wrap-anywhere max-md:w-full"
                                         :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)"
                                     >
                                         <p class="text-base font-medium max-md:font-normal max-sm:text-sm">

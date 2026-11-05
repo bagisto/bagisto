@@ -48,7 +48,10 @@
                 @foreach ($addresses as $address)
                     <div class="p-5 border rounded-xl border-zinc-200 max-md:flex-wrap">
                         <div class="flex justify-between">
-                            <p class="text-base font-medium" v-pre>
+                            <p
+                                class="text-base font-medium wrap-anywhere"
+                                v-pre
+                            >
                                 {{ $address->first_name }} {{ $address->last_name }}
 
                                 @if ($address->company_name)
@@ -135,7 +138,10 @@
                             </div>
                         </div>
 
-                        <p class="mt-6 text-zinc-500 max-md:mt-5 max-md:text-sm" v-pre>
+                        <p
+                            class="mt-6 text-zinc-500 wrap-anywhere max-md:mt-5 max-md:text-sm"
+                            v-pre
+                        >
                             {{ $address->address }},
 
                             {{ $address->city }}, 

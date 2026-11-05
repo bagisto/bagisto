@@ -218,7 +218,7 @@
                                             {!! view_render_event('bagisto.shop.checkout.cart.item_name.before') !!}
 
                                             <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
-                                                <p class="text-base font-medium max-sm:text-sm">
+                                                <p class="text-base font-medium wrap-anywhere max-sm:text-sm">
                                                     @{{ item.name }}
                                                 </p>
                                             </a>

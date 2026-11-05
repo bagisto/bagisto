@@ -44,7 +44,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.header.after') !!}
 
     <!-- Page Content -->
-    <div class="container px-15 max-lg:px-8 max-sm:px-4">
+    <div class="container px-15 wrap-anywhere max-lg:px-8 max-sm:px-4">
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
 

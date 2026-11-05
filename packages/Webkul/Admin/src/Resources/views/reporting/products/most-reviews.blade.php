@@ -41,7 +41,7 @@
                                 class="grid"
                                 v-for="product in report.statistics"
                             >
-                                <p class="dark:text-white">
+                                <p class="wrap-anywhere dark:text-white">
                                     @{{ product.product_name }}
                                 </p>
 

@@ -20,6 +20,7 @@
             display: flex;
             align-items: center;
             padding: 2px 0;
+            overflow-wrap: anywhere;
         }
 
         .v-tree-toggle {

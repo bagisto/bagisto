@@ -150,7 +150,7 @@
                     </div>
                 </div>
 
-                <div class="table-responsive box-shadow grid w-full overflow-hidden rounded-sm bg-white dark:bg-gray-900">
+                <div class="table-responsive box-shadow grid w-full overflow-hidden rounded-sm bg-white wrap-anywhere dark:bg-gray-900">
                     <template v-if="isLoading">
                         <x-admin::shimmer.datagrid.table.head
                             :columns="3"

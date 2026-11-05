@@ -122,7 +122,7 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
-                <p class="wrap-break-word text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:whitespace-break-spaces max-md:leading-6 max-sm:max-w-48 max-sm:text-sm max-sm:leading-4">
+                <p class="wrap-anywhere text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:whitespace-break-spaces max-md:leading-6 max-sm:max-w-48 max-sm:text-sm max-sm:leading-4">
                     @{{ product.name }}
                 </p>
 
@@ -267,7 +267,7 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
-                <p class="text-base">
+                <p class="text-base wrap-anywhere">
                     @{{ product.name }}
                 </p>
 

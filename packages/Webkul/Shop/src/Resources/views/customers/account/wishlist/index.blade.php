@@ -129,7 +129,7 @@
 
                                 <div class="grid gap-y-2.5 max-md:w-full max-md:gap-y-0">
                                     <div class="flex justify-between">
-                                        <p class="text-base font-medium max-md:text-sm">
+                                        <p class="text-base font-medium wrap-anywhere max-md:text-sm">
                                             @{{ wishlist.product.name }}
                                         </p>
 
