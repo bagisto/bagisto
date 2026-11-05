@@ -74,7 +74,7 @@ class ReviewController extends APIController
             'name' => [auth()->guard('customer')->check() ? 'nullable' : 'required', 'string', 'max:255'],
             'rating' => 'required|numeric|min:1|max:5',
             'attachments' => 'array|max:5',
-            'attachments.*' => 'file|mimetypes:image/bmp,image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime|max:10240',
+            'attachments.*' => 'file|mimetypes:image/bmp,image/jpeg,image/png,image/webp,image/gif,image/svg+xml,video/mp4,video/webm,video/quicktime|max:10240',
         ], [], [
             'attachments.*' => trans('shop::app.products.view.reviews.attachments'),
         ]);
