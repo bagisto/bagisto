@@ -89,7 +89,7 @@ class SectionController extends Controller
         $this->themeOrFail($code);
 
         $validated = $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'type' => ['required', Rule::in($this->sectionSchema->types($code)->keys()->all())],
         ]);
 
@@ -127,7 +127,7 @@ class SectionController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'sort_order' => 'required|numeric',
             'type' => ['required', Rule::in($this->sectionSchema->types(request('theme_code'))->keys()->all())],
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),

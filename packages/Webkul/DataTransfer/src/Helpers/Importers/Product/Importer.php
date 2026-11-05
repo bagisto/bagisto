@@ -561,8 +561,8 @@ class Importer extends AbstractImporter
     public function getValidationRules(array $rowData): array
     {
         $rules = [
-            'sku' => ['required', new Slug],
-            'url_key' => ['required'],
+            'sku' => ['required', 'max:255', new Slug],
+            'url_key' => ['required', 'max:255'],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to' => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price' => ['nullable', new Decimal, 'lt:price'],
@@ -581,6 +581,10 @@ class Importer extends AbstractImporter
                 $validations[] = $attribute->is_required ? 'required' : 'nullable';
             } else {
                 $validations = $rules[$attribute->code];
+            }
+
+            if (in_array($attribute->code, FlatIndexer::LENGTH_LIMITED_ATTRIBUTES)) {
+                $validations[] = 'max:255';
             }
 
             if (

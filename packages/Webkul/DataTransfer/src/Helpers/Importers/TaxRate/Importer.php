@@ -176,11 +176,11 @@ class Importer extends AbstractImporter
          * Validate product attributes
          */
         $validator = Validator::make($rowData, [
-            'identifier' => 'required|string',
+            'identifier' => 'required|string|max:255',
             'is_zip_range' => 'sometimes|boolean',
-            'zip_code' => 'nullable|required_if:is_zip_range,0',
-            'zip_from' => 'nullable|required_if:is_zip_range,1',
-            'zip_to' => 'nullable|required_if:is_zip_range,1',
+            'zip_code' => 'nullable|required_if:is_zip_range,0|max:255',
+            'zip_from' => 'nullable|required_if:is_zip_range,1|max:255',
+            'zip_to' => 'nullable|required_if:is_zip_range,1|max:255',
             'country' => 'required|string',
             'tax_rate' => 'required|numeric|min:0.0001',
         ]);

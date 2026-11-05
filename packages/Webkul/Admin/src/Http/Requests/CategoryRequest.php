@@ -43,14 +43,14 @@ class CategoryRequest extends FormRequest
         ];
 
         if ($id = $this->id) {
-            $rules[$locale.'.slug'] = ['required', new Slug, new ProductCategoryUniqueSlug('category_translations', $id)];
+            $rules[$locale.'.slug'] = ['required', 'max:255', new Slug, new ProductCategoryUniqueSlug('category_translations', $id)];
             $rules[$locale.'.name'] = ['required'];
             $rules[$locale.'.description'] = 'required_if:display_mode,==,description_only,products_and_description';
 
             return $rules;
         }
 
-        $rules['slug'] = ['required', new ProductCategoryUniqueSlug('category_translations')];
+        $rules['slug'] = ['required', 'max:255', new ProductCategoryUniqueSlug('category_translations')];
         $rules['name'] = 'required';
         $rules['description'] = 'required_if:display_mode,==,description_only,products_and_description';
 

@@ -39,8 +39,8 @@ class CustomerGroupController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code', new Code],
-            'name' => 'required',
+            'code' => ['required', 'max:255', 'unique:customer_groups,code', new Code],
+            'name' => 'required|max:255',
         ]);
 
         Event::dispatch('customer.customer_group.create.before');
@@ -69,8 +69,8 @@ class CustomerGroupController extends Controller
         $id = request()->input('id');
 
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code,'.$id, new Code],
-            'name' => 'required',
+            'code' => ['required', 'max:255', 'unique:customer_groups,code,'.$id, new Code],
+            'name' => 'required|max:255',
         ]);
 
         Event::dispatch('customer.customer_group.update.before', $id);

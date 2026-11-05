@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => '生成图像',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => '图片',
-                'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
+                'not-allowed-error' => '仅允许图像文件（:types）。',
+                'size-limit-error' => '文件超过最大上传大小 :size。',
 
                 'ai-generation' => [
                     'apply' => '应用',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => '添加图片',
                 'delete' => '删除',
                 'download' => '下载',
+                'not-allowed-error' => '仅允许 :types 文件。',
                 'replace' => '替换',
+                'size-limit-error' => '文件超过最大上传大小 :size。',
             ],
 
             'videos' => [
                 'add-video-btn' => '添加视频',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.webm）。',
+                'not-allowed-error' => '仅允许视频文件（:types）。',
+                'size-limit-error' => '文件超过最大上传大小 :size。',
                 'video' => '视频',
 
                 'seo' => [

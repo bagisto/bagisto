@@ -86,6 +86,28 @@ it('should still demand a shipping address when the cart holds a stockable item'
     $this->assertDatabaseMissing('addresses', ['cart_id' => $cartId]);
 })->with('shoppers');
 
+it('should refuse address fields longer than the address columns hold', function (bool $signedIn) {
+    $product = $this->createSimpleProduct();
+
+    if ($signedIn) {
+        $this->loginAsCustomer();
+    }
+
+    $cartId = $this->addProductToCart($product->id)->json('data.id');
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => $this->storefrontAddress([
+            'first_name' => str_repeat('a', 256),
+            'address' => [str_repeat('b', 200), str_repeat('c', 60)],
+            'use_for_shipping' => true,
+        ]),
+    ])
+        ->assertUnprocessable()
+        ->assertOnlyJsonValidationErrors(['billing.first_name', 'billing.address']);
+
+    $this->assertDatabaseMissing('addresses', ['cart_id' => $cartId]);
+})->with('shoppers');
+
 // ============================================================================
 // Store Address
 // ============================================================================

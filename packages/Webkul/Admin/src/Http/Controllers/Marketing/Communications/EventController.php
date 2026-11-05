@@ -40,7 +40,7 @@ class EventController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
             'date' => 'date|required',
         ]);
@@ -86,7 +86,7 @@ class EventController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
             'date' => 'date|required',
         ]);

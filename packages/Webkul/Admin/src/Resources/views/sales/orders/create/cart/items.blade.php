@@ -102,7 +102,7 @@
 
                             <div class="flex flex-col gap-1.5">
                                 <!-- Item Name -->
-                                <p class="whitespace-nowrap text-base font-semibold text-gray-800 dark:text-white">
+                                <p class="text-base font-semibold text-gray-800 wrap-anywhere dark:text-white">
                                     @{{ item.name }}
                                 </p>
 

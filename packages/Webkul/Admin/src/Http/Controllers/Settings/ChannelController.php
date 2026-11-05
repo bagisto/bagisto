@@ -53,12 +53,12 @@ class ChannelController extends Controller
     public function store()
     {
         $data = $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code', new Code],
-            'name' => 'required',
+            'code' => ['required', 'max:255', 'unique:channels,code', new Code],
+            'name' => 'required|max:255',
             'description' => 'nullable',
             'inventory_sources' => 'required|array|min:1',
             'root_category_id' => 'required',
-            'hostname' => 'unique:channels,hostname',
+            'hostname' => 'unique:channels,hostname|max:255',
 
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required|in_array:locales.*',
@@ -125,12 +125,12 @@ class ChannelController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $data = $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code,'.$id, new Code],
-            $locale.'.name' => 'required',
+            'code' => ['required', 'max:255', 'unique:channels,code,'.$id, new Code],
+            $locale.'.name' => 'required|max:255',
             $locale.'.description' => 'nullable',
             'inventory_sources' => 'required|array|min:1',
             'root_category_id' => 'required',
-            'hostname' => 'unique:channels,hostname,'.$id,
+            'hostname' => 'max:255|unique:channels,hostname,'.$id,
 
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required|in_array:locales.*',

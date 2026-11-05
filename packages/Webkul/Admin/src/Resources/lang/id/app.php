@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => 'Hasilkan Gambar',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Gambar',
-                'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
+                'not-allowed-error' => 'Hanya file gambar (:types) yang diperbolehkan.',
+                'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
 
                 'ai-generation' => [
                     'apply' => 'Terapkan',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => 'Tambah Gambar',
                 'delete' => 'Hapus',
                 'download' => 'Unduh',
+                'not-allowed-error' => 'Hanya file :types yang diperbolehkan.',
                 'replace' => 'Ganti',
+                'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Hanya file video (.mp4, .mov, .webm) yang diperbolehkan.',
+                'not-allowed-error' => 'Hanya file video (:types) yang diperbolehkan.',
+                'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
                 'video' => 'Video',
 
                 'seo' => [

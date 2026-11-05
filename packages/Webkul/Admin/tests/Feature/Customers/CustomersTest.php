@@ -168,6 +168,28 @@ it('should fail validation when email already exists on store', function () {
         ->assertJsonValidationErrorFor('email');
 });
 
+it('should refuse an email, name or phone longer than the customer record holds rather than cutting it short', function () {
+    $email = str_repeat('x', 244).'@example.com';
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.store'), [
+        'first_name' => str_repeat('a', 256),
+        'last_name' => fake()->lastName(),
+        'gender' => 'male',
+        'email' => $email,
+        'phone' => '9'.str_repeat('8', 255),
+        'channel_id' => core()->getDefaultChannel()->id,
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('phone');
+
+    expect(strlen($email))->toBe(256)
+        ->and(Customer::query()->where('email', 'like', str_repeat('x', 244).'%')->exists())->toBeFalse();
+});
+
 // ============================================================================
 // Update
 // ============================================================================
@@ -205,6 +227,25 @@ it('should fail validation when required fields are missing on update', function
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('gender')
         ->assertJsonValidationErrorFor('email');
+});
+
+it('should refuse an email longer than the customer record holds and keep the one it has', function () {
+    $customer = Customer::factory()->create();
+
+    $email = $customer->email;
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.customers.update', $customer->id), [
+        'first_name' => $customer->first_name,
+        'last_name' => $customer->last_name,
+        'gender' => $customer->gender,
+        'email' => str_repeat('x', 244).'@example.com',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('email');
+
+    expect($customer->refresh()->email)->toBe($email);
 });
 
 // ============================================================================

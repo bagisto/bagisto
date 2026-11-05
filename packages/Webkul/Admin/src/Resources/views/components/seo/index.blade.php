@@ -7,7 +7,7 @@
         type="text/x-template"
         id="v-seo-helper-template"
     >
-        <div class="mb-8 flex flex-col gap-1">
+        <div class="mb-8 flex flex-col gap-1 wrap-anywhere">
             <p 
                 class="text-[#161B9D] dark:text-white"
                 v-text="metaTitle"

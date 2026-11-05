@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => 'Bild generieren',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Bild',
-                'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
+                'not-allowed-error' => 'Nur Bilddateien (:types) sind erlaubt.',
+                'size-limit-error' => 'Die Datei überschreitet die maximale Uploadgröße von :size.',
 
                 'ai-generation' => [
                     'apply' => 'Anwenden',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => 'Bild hinzufügen',
                 'delete' => 'Löschen',
                 'download' => 'Herunterladen',
+                'not-allowed-error' => 'Nur :types-Dateien sind erlaubt.',
                 'replace' => 'Ersetzen',
+                'size-limit-error' => 'Die Datei überschreitet die maximale Uploadgröße von :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Video hinzufügen',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .webm) sind erlaubt.',
+                'not-allowed-error' => 'Nur Videodateien (:types) sind erlaubt.',
+                'size-limit-error' => 'Die Datei überschreitet die maximale Uploadgröße von :size.',
                 'video' => 'Video',
 
                 'seo' => [

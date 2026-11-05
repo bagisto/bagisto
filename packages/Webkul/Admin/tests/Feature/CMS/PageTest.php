@@ -201,6 +201,25 @@ it('should fail validation when required fields are missing on update', function
         ->assertJsonValidationErrorFor('channels');
 });
 
+it('should refuse a page title or url key longer than their columns hold on update', function () {
+    $page = createCmsPage();
+    $locale = app()->getLocale();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.cms.update', $page->id), [
+        $locale => [
+            'page_title' => str_repeat('a', 256),
+            'url_key' => str_repeat('b', 256),
+            'html_content' => '<p>Content</p>',
+        ],
+        'channels' => [1],
+        'locale' => $locale,
+    ])
+        ->assertUnprocessable()
+        ->assertOnlyJsonValidationErrors(["{$locale}.page_title", "{$locale}.url_key"]);
+});
+
 // ============================================================================
 // Delete
 // ============================================================================

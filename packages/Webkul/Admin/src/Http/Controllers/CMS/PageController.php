@@ -53,8 +53,8 @@ class PageController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'url_key' => ['required', 'unique:cms_page_translations,url_key', new Slug],
-            'page_title' => 'required',
+            'url_key' => ['required', 'max:255', 'unique:cms_page_translations,url_key', new Slug],
+            'page_title' => 'required|max:255',
             'html_content' => 'required',
             'channels' => 'required|array|min:1',
         ]);
@@ -104,12 +104,12 @@ class PageController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale.'.url_key' => ['required', new Slug, function ($attribute, $value, $fail) use ($id) {
+            $locale.'.url_key' => ['required', 'max:255', new Slug, function ($attribute, $value, $fail) use ($id) {
                 if (! $this->pageRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
                 }
             }],
-            $locale.'.page_title' => 'required',
+            $locale.'.page_title' => 'required|max:255',
             $locale.'.html_content' => 'required',
             'channels' => 'required|array|min:1',
         ]);

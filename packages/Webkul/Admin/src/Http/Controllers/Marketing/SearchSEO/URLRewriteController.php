@@ -41,8 +41,8 @@ class URLRewriteController extends Controller
     {
         $this->validate(request(), [
             'entity_type' => 'required|in:category,product,cms_page',
-            'request_path' => 'required',
-            'target_path' => 'required',
+            'request_path' => 'required|max:255',
+            'target_path' => 'required|max:255',
             'redirect_type' => 'required|in:301,302',
             'locale' => 'required|exists:locales,code',
         ]);
@@ -73,8 +73,8 @@ class URLRewriteController extends Controller
 
         $this->validate(request(), [
             'entity_type' => 'required|in:category,product,cms_page',
-            'request_path' => 'required',
-            'target_path' => 'required',
+            'request_path' => 'required|max:255',
+            'target_path' => 'required|max:255',
             'redirect_type' => 'required|in:301,302',
             'locale' => 'required|exists:locales,code',
         ]);

@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => 'تولید تصویر',
                 'allowed-types' => 'png، jpeg، jpg',
                 'image' => 'تصویر',
-                'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
+                'not-allowed-error' => 'فقط فایل‌های تصویری (:types) مجاز هستند.',
+                'size-limit-error' => 'حجم فایل از حداکثر اندازه مجاز بارگذاری :size بیشتر است.',
 
                 'ai-generation' => [
                     'apply' => 'اعمال',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => 'افزودن تصویر',
                 'delete' => 'حذف',
                 'download' => 'دانلود',
+                'not-allowed-error' => 'فقط فایل‌های :types مجاز هستند.',
                 'replace' => 'جایگزینی',
+                'size-limit-error' => 'حجم فایل از حداکثر اندازه مجاز بارگذاری :size بیشتر است.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'افزودن ویدیو',
-                'allowed-types' => 'mp4، webm، mov',
-                'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .webm) مجاز هستند.',
+                'not-allowed-error' => 'فقط فایل‌های ویدیویی (:types) مجاز هستند.',
+                'size-limit-error' => 'حجم فایل از حداکثر اندازه مجاز بارگذاری :size بیشتر است.',
                 'video' => 'ویدیو',
 
                 'seo' => [

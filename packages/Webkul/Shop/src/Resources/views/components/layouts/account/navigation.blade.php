@@ -14,14 +14,14 @@
         </div>
 
         <div 
-            class="flex flex-col justify-between"
+            class="flex min-w-0 flex-col justify-between"
             v-pre
         >
-            <p class="text-2xl break-all font-medium max-md:text-xl">
+            <p class="line-clamp-2 text-2xl break-all font-medium max-md:text-xl">
                 {{ trans('shop::app.components.layouts.account.greeting', ['name' => $customer->first_name]) }}
             </p>
 
-            <p class="no-underline text-zinc-500">
+            <p class="line-clamp-2 break-all no-underline text-zinc-500">
                 {{ $customer->email }}
             </p>
         </div>

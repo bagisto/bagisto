@@ -8,7 +8,7 @@
         <v-field
             v-slot="{ field: mediaField, errors, handleChange, handleBlur }"
             :name="name"
-            :rules="rules"
+            :rules="fieldRules"
             :label="label"
         >
             <div class="flex">
@@ -65,7 +65,7 @@
                 <label
                     v-else
                     class="flex h-30 w-30 cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden rounded-sm border border-dashed px-2 transition-all hover:border-gray-400 dark:hover:border-gray-400"
-                    :class="errors.length ? 'border-red-600' : 'border-gray-300 dark:border-gray-800'"
+                    :class="(errors.length || fieldError) ? 'border-red-600' : 'border-gray-300 dark:border-gray-800'"
                     :for="name"
                 >
                     <span
@@ -107,7 +107,7 @@
                     :id="name"
                     :name="mediaField.name"
                     :accept="mediaAccept"
-                    @change="handleChange($event); stageMedia($event)"
+                    @change="onPick($event, handleChange)"
                     @blur="handleBlur"
                 />
 
@@ -118,6 +118,15 @@
                     value="1"
                 />
             </div>
+
+            <p
+                class="mt-1 text-xs italic text-red-600"
+                ref="fieldError"
+                data-field-error
+                v-if="fieldError"
+                v-text="fieldError"
+            >
+            </p>
         </v-field>
     </script>
 
@@ -146,6 +155,8 @@
 
                         isDeleted: false,
                     },
+
+                    clientError: '',
                 };
             },
 
@@ -190,10 +201,42 @@
                 },
 
                 /**
+                 * The rules handed to the validator, without the type and size ones this control checks itself.
+                 */
+                fieldRules() {
+                    if (typeof this.rules !== 'string') {
+                        return this.rules;
+                    }
+
+                    return this.rules
+                        .split('|')
+                        .filter((rule) => ! ['mimes', 'mimetypes', 'image', 'size', 'dimensions'].includes(rule.split(':')[0]))
+                        .join('|');
+                },
+
+                /**
+                 * The extensions the control accepts, written for display from its accepted types.
+                 */
+                acceptedExtensions() {
+                    if (this.mediaTypes.length) {
+                        return this.mediaTypes.map((type) => `.${type}`).join(', ');
+                    }
+
+                    return this.type == 'image' ? 'image' : '';
+                },
+
+                /**
                  * The accepted extensions, shown as the hint under the upload button.
                  */
                 mediaHint() {
                     return this.mediaTypes.join(', ');
+                },
+
+                /**
+                 * The error shown under the control when a picked file is of a type or size it refuses.
+                 */
+                fieldError() {
+                    return this.clientError;
                 },
 
                 /**
@@ -247,7 +290,147 @@
                 },
             },
 
+            watch: {
+                fieldError: {
+                    immediate: true,
+
+                    handler(message) {
+                        if (message) {
+                            this.focusError();
+                        }
+                    },
+                },
+            },
+
             methods: {
+                /**
+                 * Stage the picked file when the control accepts it, showing why it does not otherwise.
+                 */
+                onPick(event, handleChange) {
+                    this.clientError = '';
+
+                    const file = event.target.files[0];
+
+                    if (! file) {
+                        handleChange(event);
+
+                        return;
+                    }
+
+                    const refusal = this.refusalFor(file);
+
+                    if (refusal) {
+                        event.target.value = '';
+
+                        this.clientError = refusal;
+
+                        return;
+                    }
+
+                    handleChange(event);
+
+                    this.stageMedia(event);
+                },
+
+                /**
+                 * Why the file cannot be added to the control, or an empty string when it can.
+                 */
+                refusalFor(file) {
+                    if (! this.isAcceptedType(file)) {
+                        return "@lang('admin::app.components.media.upload.not-allowed-error')".replace(':types', this.acceptedExtensions);
+                    }
+
+                    if (this.exceedsMaxSize(file)) {
+                        return "@lang('admin::app.components.media.upload.size-limit-error')".replace(':size', this.formattedSizeLimit());
+                    }
+
+                    return '';
+                },
+
+                /**
+                 * Whether the control accepts the file, by its extension or its MIME type.
+                 */
+                isAcceptedType(file) {
+                    const types = (this.mediaAccept || '')
+                        .split(',')
+                        .map((type) => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    if (
+                        ! types.length
+                        || types.includes('*')
+                        || types.includes('*/*')
+                    ) {
+                        return true;
+                    }
+
+                    const mime = (file.type || '').toLowerCase();
+
+                    const extension = (file.name || '').split('.').pop().toLowerCase();
+
+                    return types.some((type) => {
+                        if (type.endsWith('/*')) {
+                            return mime.startsWith(type.slice(0, -1));
+                        }
+
+                        if (type.includes('/')) {
+                            return mime === type;
+                        }
+
+                        return (type.startsWith('.') ? type.slice(1) : type) === extension;
+                    });
+                },
+
+                /**
+                 * Whether the file is larger than PHP accepts.
+                 */
+                exceedsMaxSize(file) {
+                    const limit = this.sizeLimitKilobytes();
+
+                    return limit > 0
+                        && file.size > limit * 1024;
+                },
+
+                /**
+                 * The largest file the control takes in kilobytes, as PHP is configured.
+                 */
+                sizeLimitKilobytes() {
+                    return {{ core()->getMaxUploadSize() }};
+                },
+
+                /**
+                 * The size limit written for the admin, in megabytes from one megabyte up.
+                 */
+                formattedSizeLimit() {
+                    const kilobytes = this.sizeLimitKilobytes();
+
+                    return kilobytes >= 1024
+                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
+                        : kilobytes + ' KB';
+                },
+
+                /**
+                 * Bring this control's error into view, but only when no field before it holds one.
+                 */
+                focusError() {
+                    this.$nextTick(() => {
+                        const errorElement = this.$refs.fieldError;
+
+                        if (! errorElement) {
+                            return;
+                        }
+
+                        if (document.querySelector('[data-field-error]') !== errorElement) {
+                            return;
+                        }
+
+                        errorElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    });
+                },
+
                 /**
                  * Stage the picked file for preview, over whatever the control already held.
                  */
@@ -280,6 +463,8 @@
                  * input is dispatched so the validator lets go of the file it was holding too.
                  */
                 removeMedia() {
+                    this.clientError = '';
+
                     this.$refs.mediaInput.value = '';
 
                     this.$refs.mediaInput.dispatchEvent(new Event('change'));

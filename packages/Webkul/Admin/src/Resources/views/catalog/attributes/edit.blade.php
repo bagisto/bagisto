@@ -895,12 +895,14 @@
                                     <div class="hidden">
                                         <x-admin::media.images
                                             name="swatch_value[]"
+                                            accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                             ::uploaded-images='swatchValue.image'
                                         />
                                     </div>
 
                                     <v-media-images
                                         name="swatch_value"
+                                        accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                         :uploaded-images='swatchValue.image'
                                     >
                                     </v-media-images>

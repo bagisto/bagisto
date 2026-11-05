@@ -772,12 +772,14 @@
                                     <x-admin::form.control-group.control
                                         type="image"
                                         name="swatch_value"
+                                        accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                         :placeholder="trans('admin::app.catalog.attributes.create.image')"
                                     />
 
                                     <div class="hidden">
                                         <x-admin::media.images
                                             name="swatch_value"
+                                            accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                             ::uploaded-images='swatchValue.image'
                                         />
                                     </div>

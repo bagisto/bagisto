@@ -564,7 +564,8 @@ return [
             'index' => [
                 'add-attachments' => 'Aggiungi allegati',
                 'add-image' => 'Aggiungi Immagine/Video',
-                'invalid-file-type' => 'Il tipo di file selezionato non è consentito.',
+                'invalid-file-type' => 'Sono consentiti solo file :types.',
+                'size-limit-error' => 'Il file supera la dimensione massima di caricamento di :size.',
             ],
         ],
 

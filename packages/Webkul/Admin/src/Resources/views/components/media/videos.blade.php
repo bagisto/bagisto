@@ -6,6 +6,8 @@
     'height'         => '120px',
     'enableSeo'      => false,
     'metaName'       => '',
+    'acceptedTypes'  => product_video()->getAllowedExtensions()->implode(','),
+    'maxSize'        => 0,
 ])
 
 <v-media-videos
@@ -13,6 +15,8 @@
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
+    accepted-types="{{ $acceptedTypes }}"
+    v-bind:max-size="{{ (int) $maxSize }}"
     :uploaded-videos="@js($uploadedVideos)"
     width="{{ $width }}"
     height="{{ $height }}"
@@ -33,7 +37,7 @@
                 <!-- Upload Video Button -->
                 <label
                     class="grid h-30 max-h-30 w-full max-w-52.5 cursor-pointer items-center justify-items-center rounded-sm border border-dashed transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                    :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
+                    :class="[fieldError ? 'border border-red-500' : 'border-gray-300']"
                     :for="$.uid + '_videoInput'"
                     v-if="allowMultiple || videos.length == 0"
                 >
@@ -43,8 +47,10 @@
                         <p class="grid text-center text-sm font-semibold text-gray-600 dark:text-gray-300">
                             @lang('admin::app.components.media.videos.add-video-btn')
                             
-                            <span class="text-xs">
-                                @lang('admin::app.components.media.videos.allowed-types')
+                            <span
+                                class="text-xs"
+                                v-text="acceptedExtensions"
+                            >
                             </span>
                         </p>
 
@@ -52,7 +58,7 @@
                             type="file"
                             class="hidden"
                             :id="$.uid + '_videoInput'"
-                            accept="video/*"
+                            :accept="acceptedTypes"
                             :multiple="allowMultiple"
                             :ref="$.uid + '_videoInput'"
                             @change="add"
@@ -77,8 +83,10 @@
                             :video="element"
                             :width="width"
                             :height="height"
+                            :refusal-for="refusalFor"
                             @onRemove="remove($event)"
                             @onChange="clearErrors"
+                            @onRefusal="setClientError"
                         >
                         </v-media-video-item>
                     </template>
@@ -87,8 +95,9 @@
 
             <p
                 class="mt-1 text-xs italic text-red-600"
-                v-if="errorMessage"
-                v-text="errorMessage"
+                data-field-error
+                v-if="fieldError"
+                v-text="fieldError"
             >
             </p>
         </div>
@@ -278,6 +287,16 @@
                     default: '',
                 },
 
+                acceptedTypes: {
+                    type: String,
+                    required: true,
+                },
+
+                maxSize: {
+                    type: [Number, String],
+                    default: 0,
+                },
+
                 errors: {
                     type: Object,
                     default: () => ({})
@@ -293,6 +312,8 @@
                     videos: [],
 
                     newVideoIndex: 0,
+
+                    clientError: '',
                 }
             },
 
@@ -314,10 +335,71 @@
                 errorMessage() {
                     return this.errors[this.errorKeys[0]];
                 },
+
+                /**
+                 * The error shown under the field, the server's for one of its files before the one found on picking.
+                 */
+                fieldError() {
+                    return this.errorMessage ?? this.clientError;
+                },
+
+                /**
+                 * The extensions the field accepts, written for display from its accepted types.
+                 */
+                acceptedExtensions() {
+                    const subtypeExtensions = {
+                        'svg+xml': 'svg',
+                        'quicktime': 'mov',
+                        'x-icon': 'ico',
+                        'vnd.microsoft.icon': 'ico',
+                    };
+
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    const extensions = types
+                        .filter(type => ! type.endsWith('*'))
+                        .map(type => {
+                            if (! type.includes('/')) {
+                                return type.replace(/^\.?/, '.');
+                            }
+
+                            const subtype = type.split('/').pop();
+
+                            return '.' + (subtypeExtensions[subtype] ?? subtype);
+                        });
+
+                    const labels = extensions.length
+                        ? extensions
+                        : types.map(type => type.split('/').shift()).filter(type => type !== '*');
+
+                    return [...new Set(labels)].join(', ');
+                },
+
+                /**
+                 * The message shown when a picked file is not one of the accepted types.
+                 */
+                notAllowedError() {
+                    return "@lang('admin::app.components.media.videos.not-allowed-error')".replace(':types', this.acceptedExtensions);
+                },
+            },
+
+            watch: {
+                fieldError(message) {
+                    if (message) {
+                        this.focusError();
+                    }
+                },
             },
 
             mounted() {
                 this.videos = this.uploadedVideos;
+
+                if (this.fieldError) {
+                    this.focusError();
+                }
             },
 
             beforeUnmount() {
@@ -326,7 +408,7 @@
 
             methods: {
                 /**
-                 * Add the picked files to the field, provided they are all videos.
+                 * Add the picked files to the field, provided each is of a type and size it accepts.
                  */
                 add() {
                     let videoInput = this.$refs[this.$.uid + '_videoInput'];
@@ -335,13 +417,12 @@
                         return;
                     }
 
-                    const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
+                    this.clearErrors();
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.videos.not-allowed-error')"
-                        });
+                    const refusal = this.refusalFor(videoInput.files);
+
+                    if (refusal) {
+                        this.clientError = refusal;
 
                         return;
                     }
@@ -353,8 +434,51 @@
                             file: file
                         });
                     });
+                },
 
-                    this.clearErrors();
+                /**
+                 * Why the files cannot be added to the field, or an empty string when they can.
+                 */
+                refusalFor(files) {
+                    if (! Array.from(files).every(file => file.type.includes('video/'))) {
+                        return this.notAllowedError;
+                    }
+
+                    if (Array.from(files).some(file => this.exceedsMaxSize(file))) {
+                        return "@lang('admin::app.components.media.videos.size-limit-error')".replace(':size', this.formattedSizeLimit());
+                    }
+
+                    return '';
+                },
+
+                /**
+                 * Whether the file is larger than the field, or PHP, accepts.
+                 */
+                exceedsMaxSize(file) {
+                    const limit = this.sizeLimitKilobytes();
+
+                    return limit > 0
+                        && file.size > limit * 1024;
+                },
+
+                /**
+                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
+                 */
+                sizeLimitKilobytes() {
+                    const limits = [{{ core()->getMaxUploadSize() }}, Number(this.maxSize) || 0].filter(limit => limit > 0);
+
+                    return limits.length ? Math.min(...limits) : 0;
+                },
+
+                /**
+                 * The size limit written for the admin, in megabytes from one megabyte up.
+                 */
+                formattedSizeLimit() {
+                    const kilobytes = this.sizeLimitKilobytes();
+
+                    return kilobytes >= 1024
+                        ? (Math.round((kilobytes / 1024) * 10) / 10) + ' MB'
+                        : kilobytes + ' KB';
                 },
 
                 /**
@@ -372,7 +496,40 @@
                  * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
                  */
                 clearErrors() {
+                    this.clientError = '';
+
                     this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
+                },
+
+                /**
+                 * Show, under the field, why a file picked to replace an existing video was refused.
+                 */
+                setClientError(message) {
+                    this.clearErrors();
+
+                    this.clientError = message;
+                },
+
+                /**
+                 * Bring this field's error into view, but only when no field before it holds one.
+                 */
+                focusError() {
+                    this.$nextTick(() => {
+                        const errorElement = this.$el?.querySelector?.('[data-field-error]');
+
+                        if (! errorElement) {
+                            return;
+                        }
+
+                        if (document.querySelector('[data-field-error]') !== errorElement) {
+                            return;
+                        }
+
+                        errorElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    });
                 },
             }
         });
@@ -380,7 +537,7 @@
         app.component('v-media-video-item', {
             template: '#v-media-video-item-template',
 
-            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName'],
+            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName', 'refusalFor'],
 
             data() {
                 return {
@@ -407,13 +564,10 @@
                         return;
                     }
 
-                    const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
+                    const refusal = this.refusalFor(videoInput.files);
 
-                    if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.videos.not-allowed-error')"
-                        });
+                    if (refusal) {
+                        this.$emit('onRefusal', refusal);
 
                         return;
                     }

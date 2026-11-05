@@ -31,7 +31,7 @@ export class SearchPage extends BasePage {
 
     private get productCards() {
         return this.page.locator("div.group").filter({
-            has: this.page.locator("p.wrap-break-word"),
+            has: this.page.locator("p.wrap-anywhere"),
         });
     }
 
@@ -98,7 +98,7 @@ export class SearchPage extends BasePage {
     }
 
     async readProductNames(): Promise<string[]> {
-        return (await this.productCards.locator("p.wrap-break-word").allInnerTexts()).map(
+        return (await this.productCards.locator("p.wrap-anywhere").allInnerTexts()).map(
             (text) => text.trim(),
         );
     }

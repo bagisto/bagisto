@@ -74,10 +74,10 @@ class AttributeFamilyController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code', new Code],
-            'name' => 'required',
-            'attribute_groups.*.code' => 'required',
-            'attribute_groups.*.name' => 'required',
+            'code' => ['required', 'max:255', 'unique:attribute_families,code', new Code],
+            'name' => 'required|max:255',
+            'attribute_groups.*.code' => 'required|max:255',
+            'attribute_groups.*.name' => 'required|max:255',
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
@@ -118,10 +118,10 @@ class AttributeFamilyController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code,'.$id, new Code],
-            'name' => 'required',
-            'attribute_groups.*.code' => 'required',
-            'attribute_groups.*.name' => 'required',
+            'code' => ['required', 'max:255', 'unique:attribute_families,code,'.$id, new Code],
+            'name' => 'required|max:255',
+            'attribute_groups.*.code' => 'required|max:255',
+            'attribute_groups.*.name' => 'required|max:255',
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 

@@ -94,7 +94,7 @@
                                 class="grid"
                                 v-for="category in report.statistics.top_categories"
                             >
-                                <p class="dark:text-white">
+                                <p class="wrap-anywhere dark:text-white">
                                     @{{ category.name }}
                                 </p>
 

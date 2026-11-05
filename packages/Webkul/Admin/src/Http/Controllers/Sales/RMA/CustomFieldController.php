@@ -50,8 +50,8 @@ class CustomFieldController extends Controller
     public function store(): RedirectResponse
     {
         $this->validate(request(), [
-            'label' => 'required',
-            'code' => 'required|unique:rma_custom_fields,code',
+            'label' => 'required|max:255',
+            'code' => 'required|max:255|unique:rma_custom_fields,code',
             'position' => 'required',
             'type' => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
             'options' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
@@ -103,8 +103,8 @@ class CustomFieldController extends Controller
     public function update(int $id): RedirectResponse
     {
         $this->validate(request(), [
-            'label' => 'required',
-            'code' => ['required', 'unique:rma_custom_fields,code,'.$id],
+            'label' => 'required|max:255',
+            'code' => ['required', 'max:255', 'unique:rma_custom_fields,code,'.$id],
             'position' => 'required',
             'type' => 'required|in:text,textarea,select,multiselect,checkbox,radio,date',
             'options' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',

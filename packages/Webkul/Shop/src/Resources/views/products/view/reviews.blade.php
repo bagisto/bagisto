@@ -36,9 +36,11 @@
                                     type="image"
                                     class="mb-0! p-0! max-md:gap-1.5"
                                     name="attachments"
+                                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp,.gif,.svg,.mp4,.webm,.mov"
+                                    max-size="10240"
+                                    ref="reviewImages"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
-                                    ref="reviewImages"
                                 />
 
                                 <x-shop::form.control-group.error
@@ -560,6 +562,9 @@
             },
 
             methods: {
+                /**
+                 * Load the next page of reviews, if there is one.
+                 */
                 get() {
                     if (! this.links?.next) {
                         return;
@@ -578,6 +583,9 @@
                         .catch(error => {});
                 },
 
+                /**
+                 * Submit the review with its attachments, showing the server's errors against the fields they belong to.
+                 */
                 store(params, { resetForm, setErrors }) {
                     let selectedFiles = this.$refs.reviewImages.uploadedFiles
                         .filter(obj => obj.file instanceof File)
@@ -598,13 +606,25 @@
                             this.canReview = false;
                         })
                         .catch(error => {
-                            setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+                            const serverErrors = error.response?.status === 422
+                                ? error.response.data?.errors
+                                : null;
 
-                            this.$refs.reviewImages.uploadedFiles.forEach(element => {
-                                setTimeout(() => {
-                                    this.$refs.reviewImages.removeFile();
-                                }, 0);
-                            });
+                            if (! serverErrors) {
+                                setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+
+                                return;
+                            }
+
+                            const errors = {};
+
+                            for (const [key, messages] of Object.entries(serverErrors)) {
+                                const field = key.startsWith('attachments') ? 'attachments' : key;
+
+                                errors[field] = (errors[field] || []).concat(messages);
+                            }
+
+                            setErrors(errors);
                         });
                 },
             },
@@ -626,6 +646,9 @@
             },
 
             computed: {
+                /**
+                 * The review's images and videos, as their URL and type.
+                 */
                 attachments() {
                     let data = [...this.review.images].map((file) => {
                         return {
@@ -639,6 +662,9 @@
             },
 
             methods: {
+                /**
+                 * Replace the review's comment with its translation.
+                 */
                 translate() {
                     this.isLoading = true;
 

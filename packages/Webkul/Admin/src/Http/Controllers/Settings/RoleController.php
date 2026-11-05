@@ -56,9 +56,9 @@ class RoleController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'permission_type' => 'required|in:all,custom',
-            'description' => 'required',
+            'description' => 'required|max:255',
             'permissions' => 'array',
             'permissions.*' => 'string',
         ]);
@@ -115,9 +115,9 @@ class RoleController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'permission_type' => 'required|in:all,custom',
-            'description' => 'required',
+            'description' => 'required|max:255',
             'permissions' => 'array',
             'permissions.*' => 'string',
         ]);

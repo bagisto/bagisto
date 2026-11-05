@@ -160,7 +160,10 @@
                                                 {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                             </td>
 
-                                            <td data-value="@lang('shop::app.customers.account.orders.view.information.product-name')">
+                                            <td
+                                                class="wrap-anywhere"
+                                                data-value="@lang('shop::app.customers.account.orders.view.information.product-name')"
+                                            >
                                                 {{ $item->name }}
 
                                                 @if (isset($item->additional['attributes']))
@@ -536,7 +539,7 @@
                             <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                 @foreach ($order->items as $item)
                                     <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
-                                        <p class="pb-2 text-sm font-medium">
+                                        <p class="pb-2 text-sm font-medium wrap-anywhere">
                                             {{ $item->name }}
 
                                             @if (isset($item->additional['attributes']))
@@ -906,7 +909,7 @@
                                         <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                             @foreach ($invoice->items as $item)
                                                 <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
-                                                    <p class="pb-2 text-sm font-medium">
+                                                    <p class="pb-2 text-sm font-medium wrap-anywhere">
                                                         {{ $item->name }}
                                                     </p>
 
@@ -1195,7 +1198,10 @@
                                                             {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                         </td>
 
-                                                        <td data-value="@lang('shop::app.customers.account.orders.view.invoices.product-name')">
+                                                        <td
+                                                            class="wrap-anywhere"
+                                                            data-value="@lang('shop::app.customers.account.orders.view.invoices.product-name')"
+                                                        >
                                                             {{ $item->name }}
 
                                                             @if (isset($item->additional['attributes']))
@@ -1446,7 +1452,10 @@
                                                             {{ $item->sku }}
                                                         </td>
 
-                                                        <td data-value="@lang('shop::app.customers.account.orders.view.shipments.product-name')">
+                                                        <td
+                                                            class="wrap-anywhere"
+                                                            data-value="@lang('shop::app.customers.account.orders.view.shipments.product-name')"
+                                                        >
                                                             {{ $item->name }}
 
                                                             @if (isset($item->additional['attributes']))
@@ -1498,7 +1507,7 @@
                                         <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                             @foreach ($shipment->items as $item)
                                                 <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
-                                                    <p class="pb-2 text-sm font-medium">
+                                                    <p class="pb-2 text-sm font-medium wrap-anywhere">
                                                         {{ $item->name }}
                                                     </p>
 
@@ -1584,7 +1593,10 @@
                                                         {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                     </td>
 
-                                                    <td data-value="@lang('shop::app.customers.account.orders.view.refunds.product-name')">
+                                                    <td
+                                                        class="wrap-anywhere"
+                                                        data-value="@lang('shop::app.customers.account.orders.view.refunds.product-name')"
+                                                    >
                                                         {{ $item->name }}
 
                                                         @if (isset($item->additional['attributes']))
@@ -1677,7 +1689,7 @@
                                     <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                         @foreach ($invoice->items as $item)
                                             <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
-                                                <p class="pb-2 text-sm font-medium">
+                                                <p class="pb-2 text-sm font-medium wrap-anywhere">
                                                     {{ $item->name }}
                                                 </p>
 

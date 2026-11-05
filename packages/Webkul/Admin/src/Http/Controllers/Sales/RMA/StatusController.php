@@ -40,7 +40,7 @@ class StatusController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'title' => 'required|unique:rma_statuses,title',
+            'title' => 'required|max:255|unique:rma_statuses,title',
             'status' => 'required|boolean',
         ]);
 
@@ -71,7 +71,7 @@ class StatusController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'title' => 'required|unique:rma_statuses,title,'.$id,
+            'title' => 'required|max:255|unique:rma_statuses,title,'.$id,
             'status' => 'required|boolean',
         ]);
 

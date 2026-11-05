@@ -564,7 +564,8 @@ return [
             'index' => [
                 'add-attachments' => '添加附件',
                 'add-image' => '添加图片/视频',
-                'invalid-file-type' => '不允许所选的文件类型。',
+                'invalid-file-type' => '仅允许 :types 文件。',
+                'size-limit-error' => '文件超过最大上传大小 :size。',
             ],
         ],
 

@@ -52,7 +52,7 @@
                     @lang('shop::app.customers.account.profile.index.first-name')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500" v-pre>
+                <p class="text-sm font-medium text-zinc-500 wrap-anywhere" v-pre>
                     {{ $customer->first_name }}
                 </p>
             </div>
@@ -66,7 +66,7 @@
                     @lang('shop::app.customers.account.profile.index.last-name')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500" v-pre>
+                <p class="text-sm font-medium text-zinc-500 wrap-anywhere" v-pre>
                     {{ $customer->last_name }}
                 </p>
             </div>
@@ -81,7 +81,7 @@
                 </p>
 
                 <p
-                    class="text-sm font-medium text-zinc-500"
+                    class="text-sm font-medium text-zinc-500 wrap-anywhere"
                     v-pre
                 >
                     {{ $customer->gender ?? '-'}}
@@ -98,7 +98,7 @@
                 </p>
 
                 <p
-                    class="text-sm font-medium text-zinc-500"
+                    class="text-sm font-medium text-zinc-500 wrap-anywhere"
                     v-pre
                 >
                     {{ $customer->date_of_birth?->format('Y-m-d') ?? '-' }}

@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'email' => ['required', 'email'],
+            'email' => ['required', 'max:255', 'email'],
         ]);
 
         $email = request()->input('email');
