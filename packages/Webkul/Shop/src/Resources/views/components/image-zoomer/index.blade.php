@@ -18,27 +18,27 @@
         >
             <div
                 ref="parentContainer" 
-                class="fixed inset-0 z-10 flex transform flex-col gap-4 overflow-y-auto transition"
+                class="fixed inset-0 z-80 flex transform flex-col gap-4 overflow-y-auto transition"
                 v-show="isOpen"
             >
                 <!-- Close -->
                 <button
                     type="button"
                     ref="closeButton"
-                    class="icon-cancel absolute top-3 z-1000 cursor-pointer border-0 bg-transparent text-3xl ltr:right-3 rtl:left-3 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                    class="icon-cancel absolute top-3 z-10 cursor-pointer border-0 bg-transparent text-3xl ltr:right-3 rtl:left-3 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
                     aria-label="@lang('shop::app.components.image-zoomer.close')"
                     @click="toggle"
                 ></button>
 
                 <span
-                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
+                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
                     @click="navigate(currentIndex -= 1)"
                 >
                 </span>
 
                 <span
-                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
+                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
                     @click="navigate(currentIndex += 1)"
                 >

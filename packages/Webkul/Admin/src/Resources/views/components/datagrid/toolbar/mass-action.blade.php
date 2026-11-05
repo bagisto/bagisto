@@ -57,7 +57,7 @@
                                     <i class="icon-arrow-left rtl:icon-arrow-right -mt-px text-xl"></i>
                                 </a>
 
-                                <ul class="absolute top-0 z-10 hidden w-max min-w-37.5 rounded-sm border bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block dark:border-gray-800 dark:bg-gray-900 ltr:left-full rtl:right-full">
+                                <ul class="absolute top-0 z-20 hidden w-max min-w-37.5 rounded-sm border bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block dark:border-gray-800 dark:bg-gray-900 ltr:left-full rtl:right-full">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"

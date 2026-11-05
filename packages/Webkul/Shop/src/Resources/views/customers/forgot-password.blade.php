@@ -22,7 +22,7 @@
         <div class="flex items-center gap-x-14 max-1180:gap-x-9">
             <a
                 href="{{ route('shop.home.index') }}"
-                class="m-[0_auto_20px_auto]"
+                class="mx-auto mb-5"
                 aria-label="@lang('shop::app.customers.forgot-password.bagisto')"
             >
                 <img

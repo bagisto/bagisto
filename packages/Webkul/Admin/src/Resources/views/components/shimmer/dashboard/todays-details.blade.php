@@ -46,7 +46,7 @@
 
                         <div class="shimmer h-4.25 w-32.5"></div>
 
-                        <div class="shimmer h-4.75 w-15 rounded-[35px]"></div>
+                        <div class="shimmer h-4.75 w-15 rounded-full"></div>
                     </div>
                 </div>
 
