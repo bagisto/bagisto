@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Bild',
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
-
                 'size-limit-error' => 'Die Datei überschreitet die maximale Uploadgröße von :size.',
+
                 'ai-generation' => [
                     'apply' => 'Anwenden',
                     'generate' => 'Generieren',

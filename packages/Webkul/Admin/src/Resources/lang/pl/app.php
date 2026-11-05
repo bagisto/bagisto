@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Obraz',
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
-
                 'size-limit-error' => 'Plik przekracza maksymalny rozmiar przesyłania :size.',
+
                 'ai-generation' => [
                     'apply' => 'Zastosuj',
                     'generate' => 'Generuj',

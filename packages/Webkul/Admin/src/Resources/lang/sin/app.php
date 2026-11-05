@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'රූපය',
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
-
                 'size-limit-error' => 'ගොනුව උපරිම උඩුගත කිරීමේ ප්‍රමාණය :size ඉක්මවයි.',
+
                 'ai-generation' => [
                     'apply' => 'අයැදීම',
                     'generate' => 'උදාහරින්න',

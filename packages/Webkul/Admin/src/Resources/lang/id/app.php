@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Gambar',
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
-
                 'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
+
                 'ai-generation' => [
                     'apply' => 'Terapkan',
                     'generate' => 'Hasilkan',

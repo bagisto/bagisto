@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'छवि',
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
-
                 'size-limit-error' => 'फ़ाइल अधिकतम अपलोड आकार :size से अधिक है।',
+
                 'ai-generation' => [
                     'apply' => 'लागू करें',
                     'generate' => 'उत्पन्न करें',

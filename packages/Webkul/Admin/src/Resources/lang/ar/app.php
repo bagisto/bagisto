@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png، jpeg، jpg',
                 'image' => 'صورة',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
-
                 'size-limit-error' => 'يتجاوز الملف الحد الأقصى لحجم الرفع :size.',
+
                 'ai-generation' => [
                     'apply' => 'تطبيق',
                     'generate' => 'إنشاء',

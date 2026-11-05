@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png، jpeg، jpg',
                 'image' => 'تصویر',
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
-
                 'size-limit-error' => 'حجم فایل از حداکثر اندازه مجاز بارگذاری :size بیشتر است.',
+
                 'ai-generation' => [
                     'apply' => 'اعمال',
                     'generate' => 'تولید',

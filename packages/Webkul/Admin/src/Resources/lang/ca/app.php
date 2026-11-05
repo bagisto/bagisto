@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imatge',
                 'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
-
                 'size-limit-error' => 'El fitxer supera la mida màxima de pujada de :size.',
+
                 'ai-generation' => [
                     'apply' => 'Aplicar',
                     'generate' => 'Generar',

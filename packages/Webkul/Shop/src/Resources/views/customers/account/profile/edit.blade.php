@@ -45,9 +45,9 @@
                     type="image"
                     class="max-md:[&>*]:[&>*]:rounded-full mb-0 rounded-xl p-0! text-gray-700 max-md:grid max-md:justify-center"
                     name="image[]"
+                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                     :label="trans('Image')"
                     :is-multiple="false"
-                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                     :src="$customer->image_url"
                 />
 

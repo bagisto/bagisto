@@ -36,11 +36,11 @@
                                     type="image"
                                     class="mb-0! p-0! max-md:gap-1.5"
                                     name="attachments"
-                                    :label="trans('shop::app.products.view.reviews.attachments')"
-                                    :is-multiple="true"
                                     accepted-types=".bmp,.jpeg,.jpg,.png,.webp,.gif,.svg,.mp4,.webm,.mov"
                                     max-size="10240"
                                     ref="reviewImages"
+                                    :label="trans('shop::app.products.view.reviews.attachments')"
+                                    :is-multiple="true"
                                 />
 
                                 <x-shop::form.control-group.error
@@ -562,6 +562,9 @@
             },
 
             methods: {
+                /**
+                 * Load the next page of reviews, if there is one.
+                 */
                 get() {
                     if (! this.links?.next) {
                         return;
@@ -580,6 +583,9 @@
                         .catch(error => {});
                 },
 
+                /**
+                 * Submit the review with its attachments, showing the server's errors against the fields they belong to.
+                 */
                 store(params, { resetForm, setErrors }) {
                     let selectedFiles = this.$refs.reviewImages.uploadedFiles
                         .filter(obj => obj.file instanceof File)
@@ -640,6 +646,9 @@
             },
 
             computed: {
+                /**
+                 * The review's images and videos, as their URL and type.
+                 */
                 attachments() {
                     let data = [...this.review.images].map((file) => {
                         return {
@@ -653,6 +662,9 @@
             },
 
             methods: {
+                /**
+                 * Replace the review's comment with its translation.
+                 */
                 translate() {
                     this.isLoading = true;
 

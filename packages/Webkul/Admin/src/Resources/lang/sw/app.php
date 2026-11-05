@@ -6065,8 +6065,8 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Picha',
                 'not-allowed-error' => 'Faili za picha pekee (.jpeg, .jpg, .png, ..) ndizo zinazoruhusiwa.',
-
                 'size-limit-error' => 'Faili limezidi ukubwa wa juu wa kupakia wa :size.',
+
                 'ai-generation' => [
                     'apply' => 'Tumia',
                     'generate' => 'Tengeneza',
