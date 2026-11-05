@@ -1,4 +1,4 @@
-<div class="fixed top-14 z-40 h-full w-67.5 bg-white pt-4 shadow-[0px_8px_10px_0px_rgba(0,0,0,0.2)] transition-all duration-300 group-[.sidebar-collapsed]/container:w-17.5 dark:bg-gray-900 max-lg:hidden">
+<div class="fixed top-14 z-10 h-full w-67.5 bg-white pt-4 shadow-[0px_8px_10px_0px_rgba(0,0,0,0.2)] transition-all duration-300 group-[.sidebar-collapsed]/container:w-17.5 dark:bg-gray-900 max-lg:hidden">
     <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid w-full gap-2">
             <!-- Navigation Menu -->
