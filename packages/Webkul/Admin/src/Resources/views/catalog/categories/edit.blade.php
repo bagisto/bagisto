@@ -297,8 +297,6 @@
                             </v-field>
 
                             <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[slug]" />
-
-                            <x-admin::form.control-group.error control-name="{{$currentLocale->code}}.slug" />
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
