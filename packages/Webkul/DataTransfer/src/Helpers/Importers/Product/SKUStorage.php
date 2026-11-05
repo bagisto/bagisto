@@ -3,6 +3,7 @@
 namespace Webkul\DataTransfer\Helpers\Importers\Product;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Webkul\Product\Repositories\ProductRepository;
 
 class SKUStorage
@@ -52,7 +53,11 @@ class SKUStorage
         if (empty($skus)) {
             $products = $this->productRepository->all($this->selectColumns);
         } else {
-            $products = $this->productRepository->findWhereIn('sku', $skus, $this->selectColumns);
+            $products = $this->productRepository->findWhereIn(
+                DB::raw('LOWER('.DB::getTablePrefix().'products.sku)'),
+                array_map(fn ($sku) => $this->key((string) $sku), $skus),
+                $this->selectColumns
+            );
         }
 
         foreach ($products as $product) {
@@ -69,7 +74,7 @@ class SKUStorage
      */
     public function set(string $sku, array $data): self
     {
-        $this->items[$sku] = implode(self::DELIMITER, [
+        $this->items[$this->key($sku)] = implode(self::DELIMITER, [
             $data['id'],
             $data['type'],
             $data['attribute_family_id'],
@@ -83,7 +88,7 @@ class SKUStorage
      */
     public function has(string $sku): bool
     {
-        return isset($this->items[$sku]);
+        return isset($this->items[$this->key($sku)]);
     }
 
     /**
@@ -95,7 +100,7 @@ class SKUStorage
             return null;
         }
 
-        $data = explode(self::DELIMITER, $this->items[$sku]);
+        $data = explode(self::DELIMITER, $this->items[$this->key($sku)]);
 
         return [
             'id' => $data[0],
@@ -122,5 +127,13 @@ class SKUStorage
     public function isEmpty(): int
     {
         return empty($this->items);
+    }
+
+    /**
+     * Normalise a SKU so that lookups match regardless of case, as the catalogue treats it.
+     */
+    protected function key(string $sku): string
+    {
+        return mb_strtolower($sku);
     }
 }
