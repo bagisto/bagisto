@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'Создать изображение',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Изображение',
-                'not-allowed-error' => 'Разрешены только файлы изображений (:types)',
+                'not-allowed-error' => 'Разрешены только файлы изображений (:types.',
                 'size-limit-error' => 'Файл превышает максимальный размер загрузки :size.',
 
                 'ai-generation' => [
@@ -6124,8 +6124,7 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Добавить видео',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Разрешены только файлы видео (:types)',
+                'not-allowed-error' => 'Разрешены только файлы видео (:types.',
                 'size-limit-error' => 'Файл превышает максимальный размер загрузки :size.',
                 'video' => 'Видео',
 

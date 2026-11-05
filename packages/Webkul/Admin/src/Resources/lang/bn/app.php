@@ -6124,7 +6124,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
-                'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'কেবল ভিডিও ফাইল (:types) অনুমোদিত।',
                 'size-limit-error' => 'ফাইলটি সর্বোচ্চ আপলোড আকার :size অতিক্রম করেছে।',
                 'video' => 'ভিডিও',

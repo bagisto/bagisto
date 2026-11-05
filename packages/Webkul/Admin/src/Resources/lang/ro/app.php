@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'Generate Image',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imagine',
-                'not-allowed-error' => 'Only image files (:types) are allowed.',
+                'not-allowed-error' => 'Sunt permise doar fișiere imagine (:types).',
                 'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
 
                 'ai-generation' => [
@@ -6124,8 +6124,7 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Only video files (:types) are allowed.',
+                'not-allowed-error' => 'Sunt permise doar fișiere video (:types).',
                 'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
                 'video' => 'Videoclip',
 

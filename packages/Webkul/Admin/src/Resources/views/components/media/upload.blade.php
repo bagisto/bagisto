@@ -291,9 +291,6 @@
             },
 
             watch: {
-                /**
-                 * Bring this control's error into view once it is the first on the page.
-                 */
                 fieldError: {
                     immediate: true,
 

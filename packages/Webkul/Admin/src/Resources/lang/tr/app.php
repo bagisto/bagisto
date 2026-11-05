@@ -6124,7 +6124,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Video Ekle',
-                'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Yalnızca video dosyaları (:types) izin verilir.',
                 'size-limit-error' => 'Dosya, :size olan en yüksek yükleme boyutunu aşıyor.',
                 'video' => 'Video',

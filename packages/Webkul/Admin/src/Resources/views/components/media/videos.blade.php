@@ -6,7 +6,7 @@
     'height'         => '120px',
     'enableSeo'      => false,
     'metaName'       => '',
-    'acceptedTypes'  => '.mp4,.mov,.webm',
+    'acceptedTypes'  => product_video()->getAllowedExtensions()->implode(','),
     'maxSize'        => 0,
 ])
 
@@ -47,8 +47,10 @@
                         <p class="grid text-center text-sm font-semibold text-gray-600 dark:text-gray-300">
                             @lang('admin::app.components.media.videos.add-video-btn')
                             
-                            <span class="text-xs">
-                                @lang('admin::app.components.media.videos.allowed-types')
+                            <span
+                                class="text-xs"
+                                v-text="acceptedExtensions"
+                            >
                             </span>
                         </p>
 
@@ -287,7 +289,7 @@
 
                 acceptedTypes: {
                     type: String,
-                    default: '.mp4,.mov,.webm',
+                    required: true,
                 },
 
                 maxSize: {
@@ -345,6 +347,13 @@
                  * The extensions the field accepts, written for display from its accepted types.
                  */
                 acceptedExtensions() {
+                    const subtypeExtensions = {
+                        'svg+xml': 'svg',
+                        'quicktime': 'mov',
+                        'x-icon': 'ico',
+                        'vnd.microsoft.icon': 'ico',
+                    };
+
                     const types = (this.acceptedTypes || '')
                         .split(',')
                         .map(type => type.trim().toLowerCase())
@@ -352,7 +361,15 @@
 
                     const extensions = types
                         .filter(type => ! type.endsWith('*'))
-                        .map(type => type.includes('/') ? '.' + type.split('/').pop() : type.replace(/^\.?/, '.'));
+                        .map(type => {
+                            if (! type.includes('/')) {
+                                return type.replace(/^\.?/, '.');
+                            }
+
+                            const subtype = type.split('/').pop();
+
+                            return '.' + (subtypeExtensions[subtype] ?? subtype);
+                        });
 
                     const labels = extensions.length
                         ? extensions
@@ -370,9 +387,6 @@
             },
 
             watch: {
-                /**
-                 * Bring this field's error into view when one surfaces while the page is open.
-                 */
                 fieldError(message) {
                     if (message) {
                         this.focusError();

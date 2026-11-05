@@ -2,11 +2,39 @@
 
 namespace Webkul\Product;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Contracts\Product;
 
 class ProductVideo
 {
+    /**
+     * The video formats a product takes, each extension keyed to the MIME type it is uploaded as.
+     */
+    public const FORMATS = [
+        'mp4' => 'video/mp4',
+        'mov' => 'video/quicktime',
+        'webm' => 'video/webm',
+    ];
+
+    /**
+     * Get the extensions a product video may have, each with its leading dot.
+     */
+    public function getAllowedExtensions(): Collection
+    {
+        return collect(self::FORMATS)
+            ->keys()
+            ->map(fn (string $extension) => '.'.$extension);
+    }
+
+    /**
+     * Get the MIME types a product video may be uploaded as.
+     */
+    public function getAllowedMimeTypes(): Collection
+    {
+        return collect(self::FORMATS)->values();
+    }
+
     /**
      * Get the largest video that can be uploaded for a product, in kilobytes, which is the
      * configured limit capped by what PHP itself accepts.
@@ -19,12 +47,11 @@ class ProductVideo
     }
 
     /**
-     * Retrieve collection of videos.
+     * Get the product's videos whose files are still in storage, each with its type and URL.
      *
-     * @param  Product  $product
-     * @return array
+     * @return array<int, array{type: string, video_url: string}>
      */
-    public function getVideos($product)
+    public function getVideos(?Product $product): array
     {
         if (! $product) {
             return [];

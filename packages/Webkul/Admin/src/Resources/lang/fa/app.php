@@ -6124,7 +6124,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'افزودن ویدیو',
-                'allowed-types' => 'mp4، webm، mov',
                 'not-allowed-error' => 'فقط فایل‌های ویدیویی (:types) مجاز هستند.',
                 'size-limit-error' => 'حجم فایل از حداکثر اندازه مجاز بارگذاری :size بیشتر است.',
                 'video' => 'ویدیو',

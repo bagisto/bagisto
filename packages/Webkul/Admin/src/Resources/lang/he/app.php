@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'יצירת תמונה',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'תמונה',
-                'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (:types)',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (:types.',
                 'size-limit-error' => 'הקובץ חורג מגודל ההעלאה המרבי של :size.',
 
                 'ai-generation' => [
@@ -6124,8 +6124,7 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'הוסף וידאו',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (:types)',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (:types.',
                 'size-limit-error' => 'הקובץ חורג מגודל ההעלאה המרבי של :size.',
                 'video' => 'וידאו',
 

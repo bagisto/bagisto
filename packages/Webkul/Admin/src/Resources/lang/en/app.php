@@ -6124,7 +6124,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
-                'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Only video files (:types) are allowed.',
                 'size-limit-error' => 'The file exceeds the maximum upload size of :size.',
                 'video' => 'Video',

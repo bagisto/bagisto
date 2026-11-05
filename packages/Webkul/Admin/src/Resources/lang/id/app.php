@@ -6124,7 +6124,6 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
-                'allowed-types' => 'mp4, webm, mov',
                 'not-allowed-error' => 'Hanya file video (:types) yang diperbolehkan.',
                 'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
                 'video' => 'Video',
