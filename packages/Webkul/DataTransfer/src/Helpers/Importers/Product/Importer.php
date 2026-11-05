@@ -105,7 +105,7 @@ class Importer extends AbstractImporter
     /**
      * Error code for super attribute code not found
      */
-    const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'attribute_family_code_not_found';
+    const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'super_attribute_code_not_found';
 
     /**
      * Error code for an image named as a file while the import expects links
