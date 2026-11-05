@@ -9,7 +9,7 @@
     >
         <div
             v-if="isOpen"
-            class="fixed inset-0 z-10002 flex items-start justify-center bg-gray-900/40 p-4 pt-[10vh] backdrop-blur-[2px] dark:bg-gray-950/60"
+            class="fixed inset-0 z-80 flex items-start justify-center bg-gray-900/40 p-4 pt-[10vh] backdrop-blur-[2px] dark:bg-gray-950/60"
             @click.self="close"
         >
             <div class="flex max-h-[70vh] w-full max-w-2xl flex-col overflow-hidden rounded-xl border bg-white shadow-2xl dark:border-gray-800 dark:bg-gray-900">

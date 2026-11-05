@@ -161,7 +161,7 @@
                             <!-- AI Content Generation Modal -->
                             <x-admin::modal
                                 ref="magicAIImageModal"
-                                class="*:z-10007"
+                                class="*:z-90"
                             >
                                 <!-- Modal Header -->
                                 <x-slot:header>

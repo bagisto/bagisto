@@ -64,7 +64,7 @@
                 leave-to-class="scale-95 transform opacity-0"
             >
                 <div
-                    class="absolute z-10 mt-1 max-w-[calc(100vw-2rem)] overflow-auto rounded-sm bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.20),0px_6px_30px_0px_rgba(0,0,0,0.12),0px_16px_24px_0px_rgba(0,0,0,0.14)] dark:bg-gray-900 ltr:right-0 rtl:left-0"
+                    class="absolute z-20 mt-1 max-w-[calc(100vw-2rem)] overflow-auto rounded-sm bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.20),0px_6px_30px_0px_rgba(0,0,0,0.12),0px_16px_24px_0px_rgba(0,0,0,0.14)] dark:bg-gray-900 ltr:right-0 rtl:left-0"
                     role="dialog"
                     :aria-label="`${startLabel} – ${endLabel}`"
                     v-show="isOpen"

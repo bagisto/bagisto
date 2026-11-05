@@ -30,14 +30,14 @@
 
                         @if (core()->getConfigData('sales.checkout.mini_cart.summary') == 'display_item_quantity')
                             <span
-                                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:ltr:left-4 max-md:rtl:right-4"
+                                class="absolute -top-4 rounded-full bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:ltr:left-4 max-md:rtl:right-4"
                                 v-if="cart?.items_qty"
                             >
                                 @{{ cart.items_qty }}
                             </span>
                         @else
                             <span
-                                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
+                                class="absolute -top-4 rounded-full bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
                                 v-if="cart?.items_count"
                             >
                                 @{{ cart.items_count }}
@@ -204,7 +204,7 @@
                                     <x-shop::quantity-changer
                                         v-if="item.can_change_qty"
                                         ::key="'qty-' + item.id + '-' + refreshKey"
-                                        class="max-h-9 max-w-37.5 gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
+                                        class="max-h-9 max-w-37.5 gap-x-2.5 rounded-full px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
                                         name="quantity"
                                         ::value="item?.quantity"
                                         :removable="true"
@@ -367,7 +367,7 @@
                         ></span>
 
                         <span
-                            class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
+                            class="absolute -top-4 rounded-full bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
                             v-if="cart?.items_qty"
                         >
                             @{{ cart.items_qty }}

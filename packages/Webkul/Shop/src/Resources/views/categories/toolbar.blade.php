@@ -18,7 +18,7 @@
 
                 <!-- Product Sorting Filters -->
                 <x-shop::dropdown
-                    class="z-1"
+                    class="z-10"
                     position="bottom-left"
                 >
                     <x-slot:toggle>

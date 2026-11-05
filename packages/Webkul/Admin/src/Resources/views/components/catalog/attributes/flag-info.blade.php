@@ -25,13 +25,12 @@
     </span>
 
     <!--
-        Tooltip sits ABOVE the icon (`bottom-full` + margin) and is anchored
-        to the icon's RIGHT edge (`ltr:right-0` / `rtl:left-0`) so it extends
-        toward the centre of the form rather than off the right side of the
-        configuration panel. `z-50` keeps it above the accordion chrome.
+        Opens above the icon and aligns to its end edge, so it grows toward the
+        middle of the form instead of spilling past the panel in either text
+        direction. `z-30` is the tooltip layer: above dropdowns, below the header.
     -->
     <div
-        class="pointer-events-none absolute bottom-full z-50 mb-2 hidden w-64 rounded-lg bg-gray-900 p-2.5 text-xs leading-snug text-white shadow-lg peer-hover:block ltr:right-0 rtl:left-0 dark:bg-gray-700"
+        class="pointer-events-none absolute bottom-full z-30 mb-2 hidden w-64 rounded-lg bg-gray-900 p-2.5 text-xs leading-snug text-white shadow-lg peer-hover:block ltr:right-0 rtl:left-0 dark:bg-gray-700"
         role="tooltip"
     >
         {{ $text }}

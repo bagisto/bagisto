@@ -779,7 +779,7 @@
                     Object.assign(pane.style, {
                         position: 'fixed',
                         margin: '0',
-                        zIndex: '10002',
+                        zIndex: '70',
                         borderRadius: '0',
                         transition: 'none',
                         top: `${box.top}px`,
