@@ -1199,13 +1199,15 @@ class Importer extends AbstractImporter
             ->first()->id;
 
         if ($this->isSKUExist($rowData['sku'])) {
-            $products['update'][$rowData['sku']] = [
+            $sku = $this->skuStorage->get($rowData['sku'])['sku'];
+
+            $products['update'][$sku] = [
                 'type' => $rowData['type'],
-                'sku' => $rowData['sku'],
+                'sku' => $sku,
                 'attribute_family_id' => $attributeFamilyId,
             ];
         } else {
-            $products['insert'][$rowData['sku']] = [
+            $products['insert'][$this->skuStorage->key($rowData['sku'])] = [
                 'type' => $rowData['type'],
                 'sku' => $rowData['sku'],
                 'attribute_family_id' => $attributeFamilyId,
@@ -1239,7 +1241,7 @@ class Importer extends AbstractImporter
              */
             $newProducts = $this->productRepository->findWhereIn(
                 'sku',
-                array_keys($products['insert']),
+                array_column($products['insert'], 'sku'),
                 [
                     'id',
                     'type',

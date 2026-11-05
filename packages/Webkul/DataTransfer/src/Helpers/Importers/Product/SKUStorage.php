@@ -78,6 +78,7 @@ class SKUStorage
             $data['id'],
             $data['type'],
             $data['attribute_family_id'],
+            $sku,
         ]);
 
         return $this;
@@ -106,6 +107,7 @@ class SKUStorage
             'id' => $data[0],
             'type' => $data[1],
             'attribute_family_id' => $data[2],
+            'sku' => $data[3] ?? $sku,
         ];
     }
 
@@ -132,7 +134,7 @@ class SKUStorage
     /**
      * Normalise a SKU so that lookups match regardless of case, as the catalogue treats it.
      */
-    protected function key(string $sku): string
+    public function key(string $sku): string
     {
         return mb_strtolower($sku);
     }
