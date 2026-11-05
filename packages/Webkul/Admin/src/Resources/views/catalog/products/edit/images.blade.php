@@ -25,8 +25,6 @@
         :uploaded-images="$product->images"
     />
 
-    <x-admin::form.control-group.error control-name='images.files[0]' />
-
     @foreach ($errors->get('images.meta.*') as $metaMessages)
         @foreach ($metaMessages as $metaMessage)
             <p class="mt-1 text-xs italic text-red-600">{{ $metaMessage }}</p>

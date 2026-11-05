@@ -52,6 +52,7 @@
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
+    :set-field-error="setFieldError"
 >
     <x-admin::shimmer.image class="h-27.5 w-27.5 rounded-sm" />
 </v-media-images>
@@ -89,7 +90,7 @@
                     <!-- Upload Image Button -->
                     <label
                         class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                        :class="[(errors?.['images.files[0]'] ?? false) ? 'border border-red-500' : 'border-gray-300']"
+                        :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
@@ -137,6 +138,7 @@
                             :accepted-types="acceptedTypes"
                             :max-size="maxSize"
                             @onRemove="remove($event)"
+                            @onChange="clearErrors"
                         >
                         </v-media-image-item>
                     </template>
@@ -312,7 +314,7 @@
                                     <div v-show="ai.images.length">
                                         <div class="grid grid-cols-4 gap-5">
                                             <div
-                                                class="relative grid max-h-30 min-w-30 cursor-pointer justify-items-center overflow-hidden rounded-sm border-[3px] border-transparent transition-all hover:opacity-80"
+                                                class="relative grid max-h-30 min-w-30 cursor-pointer justify-items-center overflow-hidden rounded-sm border-3 border-transparent transition-all hover:opacity-80"
                                                 :class="{'border-blue-600!': image.selected}"
                                                 v-for="image in ai.images"
                                                 @click="image.selected = ! image.selected"
@@ -384,10 +386,20 @@
                     </x-admin::form>
                 </Teleport>
             </div>
-        </div>  
+
+            <p
+                class="mt-1 text-xs italic text-red-600"
+                v-if="errorMessage"
+                v-text="errorMessage"
+            >
+            </p>
+        </div>
     </script>
 
-    <script type="text/x-template" id="v-media-image-item-template">
+    <script
+        type="text/x-template"
+        id="v-media-image-item-template"
+    >
         <div class="group relative grid max-h-30 min-w-30 justify-items-center overflow-hidden rounded-sm transition-all hover:border-gray-400">
             <!-- Image Preview -->
             <img
@@ -474,9 +486,9 @@
 
                 <x-slot:content>
                     <!-- Preview -->
-                    <div class="mb-4 flex justify-center rounded border border-gray-200 p-4 dark:border-gray-800">
+                    <div class="mb-4 flex justify-center rounded-sm border border-gray-200 p-4 dark:border-gray-800">
                         <img
-                            class="max-h-45 max-w-full rounded"
+                            class="max-h-45 max-w-full rounded-sm"
                             :src="image.url"
                         />
                     </div>
@@ -608,8 +620,12 @@
 
                 errors: {
                     type: Object,
-                    default: () => {}
-                }
+                    default: () => ({})
+                },
+
+                setFieldError: {
+                    type: Function,
+                },
             },
 
             data() {
@@ -663,16 +679,44 @@
             },
 
             computed: {
+                /**
+                 * The generated images the admin has selected.
+                 */
                 selectedAIImages() {
                     return this.ai.images.filter(image => image.selected);
-                }
+                },
+
+                /**
+                 * The keys of the form's errors that belong to one of this field's files.
+                 */
+                errorKeys() {
+                    const toPath = key => key.replace(/\[\]$/, '').replace(/\[(.*?)\]/g, '.$1');
+
+                    const field = toPath(this.name) + '.';
+
+                    return Object.keys(this.errors).filter(key => toPath(key).startsWith(field));
+                },
+
+                /**
+                 * The first error the form holds for one of this field's files.
+                 */
+                errorMessage() {
+                    return this.errors[this.errorKeys[0]];
+                },
             },
 
             mounted() {
                 this.images = this.uploadedImages;
             },
 
+            beforeUnmount() {
+                this.clearErrors();
+            },
+
             methods: {
+                /**
+                 * Add the picked files to the field, provided each is of a type and size it accepts.
+                 */
                 add() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput'];
 
@@ -705,8 +749,13 @@
                     imageInput.files.forEach((file, index) => {
                         this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
                     });
+
+                    this.clearErrors();
                 },
 
+                /**
+                 * Whether the field accepts the file, by its extension or its MIME type.
+                 */
                 isAcceptedType(file) {
                     const types = (this.acceptedTypes || '')
                         .split(',')
@@ -734,12 +783,18 @@
                     });
                 },
 
+                /**
+                 * Whether the file is larger than the field, or PHP, accepts.
+                 */
                 exceedsMaxSize(file) {
                     const limit = this.sizeLimitKilobytes();
 
                     return limit > 0 && file.size > limit * 1024;
                 },
 
+                /**
+                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
+                 */
                 sizeLimitKilobytes() {
                     const serverLimit = {{ $uploadMaxKilobytes }};
                     const fieldLimit = Number(this.maxSize) || 0;
@@ -751,6 +806,9 @@
                     return fieldLimit > 0 ? fieldLimit : serverLimit;
                 },
 
+                /**
+                 * The size limit written for the admin, in megabytes from one megabyte up.
+                 */
                 formattedSizeLimit() {
                     const kilobytes = this.sizeLimitKilobytes();
 
@@ -759,6 +817,9 @@
                         : kilobytes + ' KB';
                 },
 
+                /**
+                 * Build the entry of a newly added image.
+                 */
                 newImage(file, fileName) {
                     return {
                         id: 'image_' + this.newImageIndex++,
@@ -769,12 +830,27 @@
                     };
                 },
 
+                /**
+                 * Remove an image from the field.
+                 */
                 remove(image) {
                     let index = this.images.indexOf(image);
 
                     this.images.splice(index, 1);
+
+                    this.clearErrors();
                 },
 
+                /**
+                 * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
+                 */
+                clearErrors() {
+                    this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
+                },
+
+                /**
+                 * Generate images from the prompt of the AI modal.
+                 */
                 generate(params, { setErrors }) {
                     this.isLoading = true;
 
@@ -797,6 +873,9 @@
                         });
                 },
 
+                /**
+                 * Add the selected generated images to the field.
+                 */
                 apply() {
                     this.selectedAIImages.forEach((image, index) => {
                         this.images.push(this.newImage(this.getBase64ToFile(image.url, 'temp.png'), ''));
@@ -805,6 +884,9 @@
                     this.$refs.magicAIImageModal.close();
                 },
 
+                /**
+                 * Convert a base64 image into a file.
+                 */
                 getBase64ToFile(base64, filename) {
                     var arr = base64.split(','),
                         mime = arr[0].match(/:(.*?);/)[1],
@@ -819,6 +901,9 @@
                     return new File([u8arr], filename, {type:mime});
                 },
 
+                /**
+                 * Reset the AI modal to its defaults.
+                 */
                 resetAIModal() {
                     this.ai = {
                         enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
@@ -855,10 +940,16 @@
             },
 
             methods: {
+                /**
+                 * Open the SEO drawer of this image.
+                 */
                 openSeoDrawer() {
                     this.$refs.seoDrawer.open();
                 },
 
+                /**
+                 * Replace this image with the picked file, provided it is of a type and size the field accepts.
+                 */
                 edit() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
 
@@ -895,8 +986,13 @@
                     this.setFile(imageInput.files[0]);
 
                     this.readFile(imageInput.files[0]);
+
+                    this.$emit('onChange');
                 },
 
+                /**
+                 * Whether the field accepts the file, by its extension or its MIME type.
+                 */
                 isAcceptedType(file) {
                     const types = (this.acceptedTypes || '')
                         .split(',')
@@ -924,12 +1020,18 @@
                     });
                 },
 
+                /**
+                 * Whether the file is larger than the field, or PHP, accepts.
+                 */
                 exceedsMaxSize(file) {
                     const limit = this.sizeLimitKilobytes();
 
                     return limit > 0 && file.size > limit * 1024;
                 },
 
+                /**
+                 * The largest file the field takes in kilobytes, the lower of its own limit and PHP's.
+                 */
                 sizeLimitKilobytes() {
                     const serverLimit = {{ $uploadMaxKilobytes }};
                     const fieldLimit = Number(this.maxSize) || 0;
@@ -941,6 +1043,9 @@
                     return fieldLimit > 0 ? fieldLimit : serverLimit;
                 },
 
+                /**
+                 * The size limit written for the admin, in megabytes from one megabyte up.
+                 */
                 formattedSizeLimit() {
                     const kilobytes = this.sizeLimitKilobytes();
 
@@ -949,10 +1054,16 @@
                         : kilobytes + ' KB';
                 },
 
+                /**
+                 * Ask the field to remove this image.
+                 */
                 remove() {
                     this.$emit('onRemove', this.image)
                 },
 
+                /**
+                 * Put the file on this image's input, so that it is submitted with the form.
+                 */
                 setFile(file) {
                     this.image.is_new = 1;
 
@@ -963,6 +1074,9 @@
                     this.$refs[this.$.uid + '_imageInput_' + this.index].files = dataTransfer.files;
                 },
 
+                /**
+                 * Read the file for this image's preview.
+                 */
                 readFile(file) {
                     let reader = new FileReader();
 

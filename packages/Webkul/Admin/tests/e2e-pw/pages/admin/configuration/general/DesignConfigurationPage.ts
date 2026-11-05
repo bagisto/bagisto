@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { ConfigurationFormPage } from "../ConfigurationFormPage";
 
 export type CategoryView = "default" | "sidebar";
@@ -74,6 +75,15 @@ export class DesignConfigurationPage extends ConfigurationFormPage {
         await this.save();
     }
 
+    async attemptUploadMedia(field: LogoField, file: MediaFile): Promise<void> {
+        await this.open();
+
+        await expect(this.mediaInput(field)).toBeAttached();
+
+        await this.mediaInput(field).setInputFiles(file);
+        await this.saveButton.click();
+    }
+
     async deleteMedia(field: LogoField): Promise<void> {
         await this.open();
 
@@ -120,6 +130,12 @@ export class DesignConfigurationPage extends ConfigurationFormPage {
             "src",
             /storage\//,
         );
+    }
+
+    async expectMediaRefused(message: string): Promise<void> {
+        await expect(
+            this.page.locator("p.text-red-600").filter({ hasText: message }),
+        ).toBeVisible();
     }
 
     async expectMediaAbsent(field: LogoField): Promise<void> {

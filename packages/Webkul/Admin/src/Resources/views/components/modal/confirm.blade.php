@@ -37,7 +37,7 @@
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-5 sm:items-center sm:p-0">
-                        <div class="box-shadow absolute left-1/2 top-1/2 z-999 w-full max-w-100 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%]">
+                        <div class="box-shadow absolute left-1/2 top-1/2 z-999 w-full max-w-100 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-9/10">
                             <div class="flex items-center justify-between gap-2.5 border-b px-4 py-3 text-lg font-bold text-gray-800 dark:border-gray-800 dark:text-white">
                                 @{{ title }}
                             </div>

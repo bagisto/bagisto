@@ -143,6 +143,8 @@ export class AuthPage extends BasePage {
         await this.attemptLogin(credentials.email, credentials.password);
 
         await this.expectLoginAccepted();
+
+        await this.waitForBackgroundRequestsToSettle();
     }
 
     async logout(): Promise<void> {

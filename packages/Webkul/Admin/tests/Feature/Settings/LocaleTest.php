@@ -69,6 +69,68 @@ it('should store a newly created locale', function () {
     Storage::assertExists('locales/'.$data['code'].'.png');
 });
 
+it('should store a locale with an SVG logo', function () {
+    $this->loginAsAdmin();
+
+    $code = uniqueLocaleCode();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code' => $code,
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10"/></svg>'),
+        ],
+    ])->assertOk();
+
+    $this->assertDatabaseHas('locales', [
+        'code' => $code,
+        'logo_path' => 'locales/'.$code.'.svg',
+    ]);
+
+    Storage::assertExists('locales/'.$code.'.svg');
+});
+
+it('should strip a script out of an SVG logo', function () {
+    $this->loginAsAdmin();
+
+    $code = uniqueLocaleCode();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code' => $code,
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script><rect/></svg>'),
+        ],
+    ])->assertOk();
+
+    expect(Storage::get('locales/'.$code.'.svg'))
+        ->toContain('<rect')
+        ->not->toContain('script');
+});
+
+it('should refuse an SVG logo that cannot be read and store nothing', function () {
+    $this->loginAsAdmin();
+
+    $code = uniqueLocaleCode();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code' => $code,
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg><rect></svg>'),
+        ],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['logo_path' => trans('core::app.errors.invalid-svg')]);
+
+    $this->assertDatabaseMissing('locales', ['code' => $code]);
+
+    expect(Storage::allFiles('locales'))->toBeEmpty();
+});
+
 it('should fail validation when the code belongs to another locale on store', function () {
     $locale = Locale::factory()->create();
 
@@ -93,7 +155,7 @@ it('should fail validation when required fields are missing on store', function 
         ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('direction')
-        ->assertJsonValidationErrorFor('logo_path.0');
+        ->assertJsonValidationErrors(['logo_path.0' => 'The Locale Logo field']);
 });
 
 it('should reject a tampered file upload on store', function () {
@@ -108,7 +170,7 @@ it('should reject a tampered file upload on store', function () {
         ],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('logo_path.0');
+        ->assertJsonValidationErrors(['logo_path.0' => 'The Locale Logo field']);
 });
 
 // ============================================================================
@@ -155,6 +217,57 @@ it('should update an existing locale', function () {
     Storage::assertExists('locales/'.$locale->code.'.png');
 });
 
+it('should replace the SVG logo of a locale that already holds one', function () {
+    $locale = Locale::factory()->create();
+
+    $locale->forceFill(['logo_path' => 'locales/'.$locale->code.'.svg'])->save();
+
+    Storage::put($locale->logo_path, '<svg xmlns="http://www.w3.org/2000/svg"><circle/></svg>');
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id' => $locale->id,
+        'code' => $locale->code,
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10"/></svg>'),
+        ],
+    ])->assertOk();
+
+    expect(Storage::get($locale->logo_path))
+        ->toContain('<rect')
+        ->not->toContain('<circle')
+        ->and(Storage::allFiles('locales'))->toBe([$locale->logo_path]);
+});
+
+it('should keep the current logo when its SVG replacement cannot be read', function () {
+    $locale = Locale::factory()->create();
+
+    $locale->forceFill(['logo_path' => 'locales/'.$locale->code.'.svg'])->save();
+
+    Storage::put($locale->logo_path, $current = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10"/></svg>');
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id' => $locale->id,
+        'code' => $locale->code,
+        'name' => fake()->name(),
+        'direction' => 'ltr',
+        'logo_path' => [
+            UploadedFile::fake()->createWithContent('logo.svg', '<svg><rect></svg>'),
+        ],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['logo_path' => trans('core::app.errors.invalid-svg')]);
+
+    expect(Storage::get($locale->logo_path))->toBe($current)
+        ->and(Storage::allFiles('locales'))->toBe([$locale->logo_path])
+        ->and($locale->fresh()->logo_path)->toBe('locales/'.$locale->code.'.svg');
+});
+
 it('should fail validation when required fields are missing on update', function () {
     $locale = Locale::factory()->create();
 
@@ -182,7 +295,7 @@ it('should reject a tampered file upload on update', function () {
         ],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('logo_path.0');
+        ->assertJsonValidationErrors(['logo_path.0' => 'The Locale Logo field']);
 });
 
 // ============================================================================
@@ -224,7 +337,7 @@ it('should announce a locale creation exactly once from the controller', functio
         && $payload->code === $data['code']);
 });
 
-it('should announce a locale update exactly once, carrying the id then the model', function () {
+it('should announce a locale update exactly once, carrying the ID then the model', function () {
     $locale = Locale::factory()->create();
 
     Event::fake();

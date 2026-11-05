@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Dodaj wariant',
+                        'default' => 'Domyślny',
                         'delete-btn' => 'Usuń',
                         'edit-btn' => 'Edytuj',
                         'empty-info' => 'Aby tworzyć różne kombinacje produktów, wystarczy to zrobić.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Wybierz magazyn, w którym pliki są zapisywane i z którego są udostępniane.',
                         'default-driver' => 'Domyślny sterownik magazynu',
                         'default-driver-info' => 'Pliki przesłane od teraz będą zapisywane tutaj. Pliki przesłane wcześniej pozostają w poprzednim magazynie, więc skopiuj je przed zmianą, w przeciwnym razie nie zostaną odnalezione.',
+                        'incomplete' => 'Wybrano :driver, ale jego ustawienia są niekompletne, więc przesłane pliki nie są jeszcze w nim zapisywane.',
 
                         'drivers' => [
                             'local' => 'Plik (magazyn lokalny)',
@@ -6120,8 +6122,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Dodaj film',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .webm).',
                 'video' => 'Wideo',
 
                 'seo' => [

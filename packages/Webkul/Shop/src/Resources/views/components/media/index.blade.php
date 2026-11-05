@@ -72,7 +72,7 @@
                     <input
                         type="hidden"
                         :name="name"
-                        v-if="! uploadedFiles.isPicked"
+                        v-if="! hasPickedFiles"
                     />
 
                     <v-field
@@ -152,6 +152,13 @@
                     </li>
                 </ul>
             </div>
+
+            <p
+                class="text-red-500 text-xs italic"
+                v-if="errorMessage"
+                v-text="errorMessage"
+            >
+            </p>
         </div>
     </script>
 
@@ -203,6 +210,15 @@
                     type: String,
                     default: '200px',
                 },
+
+                errors: {
+                    type: Object,
+                    default: () => ({}),
+                },
+
+                setFieldError: {
+                    type: Function,
+                },
             },
 
             data() {
@@ -215,6 +231,36 @@
 
                     clientError: '',
                 };
+            },
+
+            computed: {
+                /**
+                 * The keys of the form's errors that belong to one of this field's files.
+                 */
+                errorKeys() {
+                    const toPath = key => key.replace(/\[\]$/, '').replace(/\[(.*?)\]/g, '.$1');
+
+                    const field = toPath(this.name) + '.';
+
+                    return Object.keys(this.errors).filter(key => toPath(key).startsWith(field));
+                },
+
+                /**
+                 * The first error the form holds for one of this field's files.
+                 */
+                errorMessage() {
+                    return this.errors[this.errorKeys[0]];
+                },
+
+                /**
+                 * Whether a file is picked, in which case the empty field must go, because
+                 * a value posted under the same key hides the file from validation.
+                 */
+                hasPickedFiles() {
+                    return this.isMultiple
+                        ? this.uploadedFiles.length > 0
+                        : this.uploadedFiles.isPicked;
+                },
             },
 
             created() {
@@ -231,12 +277,17 @@
             },
 
             methods: {
+                /**
+                 * Add the picked files to the field, leaving out any of a type it does not accept.
+                 */
                 onFileChange(event) {
                     this.clientError = '';
 
                     let files = event.target.files;
                     let hasInvalid = false;
                     let hasOversize = false;
+
+                    this.clearErrors();
 
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
@@ -289,11 +340,16 @@
                     }
                 },
 
+                /**
+                 * Add the dropped files to the field, leaving out any of a type it does not accept.
+                 */
                 handleDroppedFiles(files) {
                     this.clientError = '';
 
                     let hasInvalid = false;
                     let hasOversize = false;
+
+                    this.clearErrors();
 
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
@@ -366,13 +422,20 @@
                         : kilobytes + ' KB';
                 },
 
+                /**
+                 * Whether the field accepts a file of this type.
+                 */
                 isAcceptedType(file) {
                     const types = (this.acceptedTypes || '')
                         .split(',')
                         .map(type => type.trim().toLowerCase())
                         .filter(Boolean);
 
-                    if (! types.length || types.includes('*') || types.includes('*/*')) {
+                    if (
+                        ! types.length
+                        || types.includes('*')
+                        || types.includes('*/*')
+                    ) {
                         return true;
                     }
 
@@ -393,6 +456,9 @@
                     });
                 },
 
+                /**
+                 * Tell the shopper a file was left out for its type.
+                 */
                 notifyInvalidType() {
                     this.clientError = "@lang('shop::app.components.media.index.invalid-file-type')";
                 },
@@ -401,6 +467,9 @@
                     this.clientError = "@lang('shop::app.components.media.index.size-limit-error')".replace(':size', this.formattedSizeLimit());
                 },
 
+                /**
+                 * Whether the file is an image, going by its name.
+                 */
                 isImage(file) {
                     if (! file.name) {
                         return;
@@ -409,18 +478,27 @@
                     return file.name.match(/\.(jpg|jpeg|png|gif)$/i);
                 },
 
+                /**
+                 * Mark the field as having files dragged over it.
+                 */
                 onDragOver(event) {
                     event.preventDefault();
 
                     this.isDragOver = true;
                 },
 
+                /**
+                 * Clear the mark once the files are dragged away.
+                 */
                 onDragLeave(event) {
                     event.preventDefault();
 
                     this.isDragOver = false;
                 },
                 
+                /**
+                 * Take in the files dropped on the field.
+                 */
                 onDrop(event) {
                     event.preventDefault();
 
@@ -431,7 +509,12 @@
                     this.handleDroppedFiles(files);
                 },
 
+                /**
+                 * Remove a file from the field.
+                 */
                 remove(index) {
+                    this.clearErrors();
+
                     if (! this.isMultiple) {
                         this.uploadedFiles = [];
 
@@ -441,6 +524,13 @@
                     }
 
                     this.uploadedFiles.splice(index, 1);
+                },
+
+                /**
+                 * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
+                 */
+                clearErrors() {
+                    this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
                 },
             },
         });

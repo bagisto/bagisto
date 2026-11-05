@@ -46,7 +46,7 @@
         type="text/x-template"
         id="v-section-editor-template"
     >
-        <div class="flex h-[calc(100vh-140px)] min-h-[480px] flex-col">
+        <div class="flex h-[calc(100vh-140px)] min-h-120 flex-col">
             <!-- Page Header -->
             <div class="flex shrink-0 items-center justify-between gap-4 max-sm:flex-wrap">
                 <div class="grid gap-1.5">
@@ -121,7 +121,7 @@
             <div class="mt-4 flex min-h-0 min-w-0 flex-1">
                 <div class="flex min-h-0 min-w-0 flex-1 gap-4 max-lg:flex-col">
                     <!-- Section List -->
-                    <div class="box-shadow flex w-[340px] shrink-0 flex-col overflow-hidden rounded bg-white dark:bg-gray-900 max-lg:w-full">
+                    <div class="box-shadow flex w-85 shrink-0 flex-col overflow-hidden rounded-sm bg-white dark:bg-gray-900 max-lg:w-full">
                         <div class="flex shrink-0 items-center gap-2 border-b p-4 dark:border-gray-800">
                             <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.components.layouts.sidebar.sections')
@@ -269,7 +269,7 @@
 
                     <!-- Preview -->
                     <div
-                        class="box-shadow flex min-w-0 flex-1 flex-col overflow-hidden rounded bg-white dark:bg-gray-900"
+                        class="box-shadow flex min-w-0 flex-1 flex-col overflow-hidden rounded-sm bg-white dark:bg-gray-900"
                         ref="previewPane"
                     >
                         <div class="flex shrink-0 items-center justify-between gap-2 border-b p-4 dark:border-gray-800">
@@ -281,7 +281,7 @@
                             <div class="flex items-center gap-1">
                                 <button
                                     type="button"
-                                    class="rounded px-2.5 py-1 text-xs font-medium transition-all"
+                                    class="rounded-sm px-2.5 py-1 text-xs font-medium transition-all"
                                     :class="device === option.key
                                         ? 'bg-blue-50 text-blue-700 dark:bg-gray-950 dark:text-blue-400'
                                         : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-950'"
@@ -293,7 +293,7 @@
 
                                 <button
                                     type="button"
-                                    class="icon-repeat flex h-6 w-6 items-center justify-center rounded text-base text-gray-500 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    class="icon-repeat flex h-6 w-6 items-center justify-center rounded-sm text-base text-gray-500 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                                     :title="@js(trans('admin::app.appearance.sections.edit.preview'))"
                                     @click="reloadPreview"
                                 ></button>
@@ -305,7 +305,7 @@
                             ref="previewStage"
                         >
                             <div
-                                class="absolute overflow-hidden rounded bg-white transition-all duration-300 ease-in-out"
+                                class="absolute overflow-hidden rounded-sm bg-white transition-all duration-300 ease-in-out"
                                 :style="frameBoxStyle"
                             >
                                 <iframe
@@ -391,7 +391,7 @@
                                 >
                                     <button
                                         type="button"
-                                        class="flex flex-col items-center justify-center gap-1.5 rounded border p-3 text-center transition-all"
+                                        class="flex flex-col items-center justify-center gap-1.5 rounded-sm border p-3 text-center transition-all"
                                         :class="newType === option.code
                                             ? 'border-blue-600 bg-blue-50 text-blue-700 dark:border-blue-600 dark:bg-gray-950 dark:text-blue-400'
                                             : 'border-gray-200 text-gray-600 hover:border-gray-400 dark:border-gray-800 dark:text-gray-300'"

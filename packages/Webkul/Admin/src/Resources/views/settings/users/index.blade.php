@@ -144,7 +144,7 @@
                                         <img
                                             class="h-9 w-9"
                                             :src="record.user_img"
-                                            alt="record.user_name"
+                                            :alt="record.user_name"
                                         />
                                     </div>
 
@@ -209,7 +209,7 @@
 
             <!-- Modal Form -->
             <x-admin::form
-                v-slot="{ meta, errors, handleSubmit }"
+                v-slot="{ meta, errors, handleSubmit, setFieldError }"
                 as="div"
                 ref="modalForm"
             >
@@ -343,7 +343,12 @@
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >
-                                            <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+                                            <option
+                                                value=""
+                                                disabled
+                                            >
+                                                @lang('admin::app.settings.taxes.categories.index.create.select')
+                                            </option>
 
                                             <option
                                                 v-for="role in roles"
@@ -402,6 +407,8 @@
                                     accepted-types=".jpeg,.jpg,.png,.gif"
                                     max-size="10000"
                                     :uploaded-images='data.images'
+                                    :errors="errors"
+                                    :set-field-error="setFieldError"
                                 >
                                 </v-media-images>
 
@@ -449,6 +456,9 @@
                 },
 
                 methods: {
+                    /**
+                     * Create the user, or update them when the form holds an id.
+                     */
                     updateOrCreate(params, { setErrors }) {
                         this.isLoading = true;
 
@@ -483,6 +493,9 @@
                             });
                     },
 
+                    /**
+                     * Fetch the user and open the modal on them.
+                     */
                     editModal(url) {
                         this.isUpdating = true;
 
@@ -509,6 +522,9 @@
                             }));
                     },
 
+                    /**
+                     * Empty the user the modal is bound to.
+                     */
                     resetForm() {
                         this.isUpdating = false;
 

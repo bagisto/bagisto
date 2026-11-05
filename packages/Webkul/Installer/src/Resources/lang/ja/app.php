@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => '本と文房具',
+                    'name' => '文房具',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

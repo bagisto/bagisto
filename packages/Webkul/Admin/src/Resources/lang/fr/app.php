@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Ajouter une variante',
+                        'default' => 'Par défaut',
                         'delete-btn' => 'Supprimer',
                         'edit-btn' => 'Modifier',
                         'empty-info' => 'Pour créer diverses combinaisons de produits en un clin d\'œil.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Choisissez le stockage dans lequel les fichiers sont enregistrés et depuis lequel ils sont servis.',
                         'default-driver' => 'Pilote de stockage par défaut',
                         'default-driver-info' => 'Les fichiers téléversés à partir de maintenant seront enregistrés ici. Les fichiers déjà téléversés restent sur le stockage précédent : copiez-les avant de changer, sinon ils seront introuvables.',
+                        'incomplete' => ':driver est sélectionné, mais ses paramètres sont incomplets : les fichiers téléversés n\'y sont donc pas encore enregistrés.',
 
                         'drivers' => [
                             'local' => 'Fichier (stockage local)',
@@ -6120,8 +6122,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Ajouter une vidéo',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .ogg ..) sont autorisés.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .webm) sont autorisés.',
                 'video' => 'Vidéo',
 
                 'seo' => [

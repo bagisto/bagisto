@@ -56,4 +56,17 @@ class CategoryRequest extends FormRequest
 
         return $rules;
     }
+
+    /**
+     * Get the custom attribute names for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'logo_path.*' => trans('admin::app.catalog.categories.create.logo'),
+            'banner_path.*' => trans('admin::app.catalog.categories.create.banner'),
+        ];
+    }
 }

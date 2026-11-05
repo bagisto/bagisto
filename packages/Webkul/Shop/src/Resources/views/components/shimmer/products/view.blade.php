@@ -12,11 +12,11 @@
 
             <div class="shimmer mt-4 h-9.5 w-37.5 rounded-lg"></div>
 
-            <p class="shimmer mt-5 h-9 w-[35%]"></p>
+            <p class="shimmer mt-5 h-9 w-7/20"></p>
 
             <div class="mt-6 grid gap-2.5 max-sm:my-5 max-sm:flex max-sm:justify-between">
                 <p class="shimmer h-6.75 w-full max-sm:h-5.25 max-sm:w-25"></p>
-                <p class="shimmer h-6.75 w-[90%] max-sm:hidden"></p>
+                <p class="shimmer h-6.75 w-9/10 max-sm:hidden"></p>
                 <p class="shimmer h-6.75 w-4/5 max-sm:h-5.25 max-sm:w-15"></p>
             </div>
 

@@ -1,4 +1,6 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
+import { MediaGalleryField } from "../components/MediaGalleryField";
 import { DatagridPage } from "../DatagridPage";
 
 export interface LocaleData {
@@ -36,6 +38,14 @@ export class LocalesPage extends DatagridPage {
         return this.page.getByRole("button", { name: "Save Locale" });
     }
 
+    private get form() {
+        return this.codeInput.locator("xpath=ancestor::form[1]");
+    }
+
+    private get closeFormIcon() {
+        return this.form.locator("span.icon-close");
+    }
+
     private async openCreateModal(): Promise<void> {
         await this.openGrid();
         await this.createButton.click();
@@ -55,6 +65,60 @@ export class LocalesPage extends DatagridPage {
         await this.codeInput.fill(data.code);
         await this.nameInput.fill(data.name);
         await this.directionSelect.selectOption(data.direction);
+    }
+
+    logoField(): MediaGalleryField {
+        return new MediaGalleryField(this.form);
+    }
+
+    async startCreatingLocale(data: LocaleData): Promise<void> {
+        await this.openCreateModal();
+        await this.fillForm(data);
+    }
+
+    async attemptCreateLocaleWithLogo(
+        data: LocaleData,
+        logo: MediaFile,
+    ): Promise<void> {
+        await this.startCreatingLocale(data);
+        await this.logoField().attach(logo);
+        await this.saveButton.click();
+    }
+
+    async createLocaleWithLogo(
+        data: LocaleData,
+        logo: MediaFile,
+    ): Promise<void> {
+        await this.attemptCreateLocaleWithLogo(data, logo);
+
+        await expect(
+            this.flashMessage("Locale created successfully."),
+        ).toBeVisible();
+    }
+
+    async saveNewLocale(): Promise<void> {
+        await this.saveButton.click();
+
+        await expect(
+            this.flashMessage("Locale created successfully."),
+        ).toBeVisible();
+    }
+
+    async attemptReplaceLogo(name: string, logo: MediaFile): Promise<void> {
+        await this.openEditModal(name);
+        await this.logoField().removeAt(0);
+        await this.logoField().attach(logo);
+        await this.saveButton.click();
+    }
+
+    async closeAndReopenCreateForm(): Promise<void> {
+        await this.closeFormIcon.click();
+
+        await expect(this.codeInput).toBeHidden();
+
+        await this.createButton.click();
+
+        await expect(this.codeInput).toBeVisible();
     }
 
     async createLocale(data: LocaleData): Promise<void> {
@@ -129,6 +193,11 @@ export class LocalesPage extends DatagridPage {
         await this.openEditModal(name);
 
         await expect(this.directionSelect).toHaveValue(direction);
+    }
+
+    async expectLogoInEditForm(name: string): Promise<void> {
+        await this.openEditModal(name);
+        await this.logoField().expectStored();
     }
 
     async expectValidationError(message: string): Promise<void> {

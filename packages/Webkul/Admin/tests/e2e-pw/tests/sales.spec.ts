@@ -1,3 +1,4 @@
+import { notAnImage, validImage } from "@shared/media-files";
 import { expect, test } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
@@ -235,6 +236,75 @@ test.describe("rma management", () => {
             }
         });
     }
+
+    test("should say why a new return request's image was refused and accept a valid one", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        const productName = await createSimpleProduct(
+            new ProductCreatePage(adminPage),
+            true,
+        );
+        const shop = new RmaShopPage(shopPage);
+        const rmaPage = new RmaManagePage(adminPage);
+        const orderViewPage = new OrderViewPage(adminPage);
+
+        try {
+            await shop.registerAndAddAddress();
+            const orderId = await shop.placeOrder(productName);
+
+            await orderViewPage.open(orderId);
+            await orderViewPage.createInvoice();
+
+            await rmaPage.startNewRequestForOrder(orderId, reasonTitle);
+            await rmaPage.attemptNewRequestWithImages([notAnImage()]);
+
+            await rmaPage.expectRefusal("The Images field must be a file of type");
+
+            await rmaPage.createNewRequestWithImages([validImage()]);
+
+            await rmaPage.expectRequestListed(orderId, "Pending Review");
+        } finally {
+            await new ProductListPage(adminPage).deleteProductsIfPresent([productName]);
+        }
+    });
+
+    test("should say why a message attachment was refused and send a valid one", async ({
+        adminPage,
+        shopPage,
+    }) => {
+        const productName = await createSimpleProduct(
+            new ProductCreatePage(adminPage),
+            true,
+        );
+        const shop = new RmaShopPage(shopPage);
+        const rmaPage = new RmaManagePage(adminPage);
+        const orderViewPage = new OrderViewPage(adminPage);
+        const message = `Message ${uniqueStamp()}`;
+        const attachment = validImage(`attachment-${uniqueStamp()}.png`);
+
+        try {
+            await shop.registerAndAddAddress();
+            const orderId = await shop.placeOrder(productName);
+
+            await orderViewPage.open(orderId);
+            await orderViewPage.createInvoice();
+
+            await shop.requestReturn(orderId, reasonTitle);
+
+            await rmaPage.openRequestForOrder(orderId);
+            await rmaPage.sendMessageWithAttachment(message, notAnImage());
+
+            await rmaPage.expectRefusal("The file field must be a file of type");
+            await rmaPage.expectMessageCanBeSentAgain();
+
+            await rmaPage.sendMessageWithAttachment(message, attachment);
+
+            await rmaPage.expectMessageWithAttachment(message, attachment.name);
+        } finally {
+            await new ProductListPage(adminPage).deleteProductsIfPresent([productName]);
+        }
+    });
 
     test("should list a newly created rma reason", async () => {
         await reasonsPage.expectReasonListed(reasonTitle);

@@ -9,6 +9,8 @@ export interface CmsPageData {
 }
 
 export class CmsPage extends DatagridPage {
+    private readonly defaultChannelName = "Default";
+
     constructor(page: Page) {
         super(page);
     }
@@ -141,6 +143,7 @@ export class CmsPage extends DatagridPage {
         await this.expectSearchedRowCount(title, 1);
 
         await expect(this.row(title)).toContainText(urlKey);
+        await expect(this.row(title)).toContainText(this.defaultChannelName);
     }
 
     async expectPageAbsent(title: string): Promise<void> {

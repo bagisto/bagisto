@@ -47,7 +47,7 @@ it('should open every file management section while a remote disk is chosen', fu
         ->assertOk();
 })->with(['general', 'amazon_s3', 'cloudflare_r2']);
 
-it('should not ask a remote disk for the url of a setting that holds nothing', function () {
+it('should not ask a remote disk for the URL of a setting that holds nothing', function () {
     useRemoteDisk();
 
     expect(fn () => Storage::disk('s3')->url(null))->toThrow(TypeError::class);
@@ -108,6 +108,38 @@ it('should save the chosen driver whichever one it is, now that the sync button 
         'value' => $driver,
     ]);
 })->with(['public', 's3', 'r2']);
+
+// ============================================================================
+// Saying The Chosen Driver Is Not In Use Yet
+// ============================================================================
+
+it('should say the chosen remote driver is not in use yet while its settings are incomplete', function (string $driver, string $title) {
+    $this->loginAsAdmin();
+
+    $this->setConfig('file_management.general.settings.default_driver', $driver);
+
+    config(['filesystems.default' => 'public']);
+
+    get(route('admin.configuration.index', ['slug' => 'file_management', 'slug2' => 'general']))
+        ->assertOk()
+        ->assertSee(trans('admin::app.configuration.index.file-management.general.settings.incomplete', ['driver' => $title]));
+})->with([
+    'Amazon S3' => ['s3', 'Amazon S3'],
+    'Cloudflare R2' => ['r2', 'Cloudflare R2'],
+]);
+
+it('should not say the chosen remote driver is incomplete once it is the one in use', function () {
+    $this->loginAsAdmin();
+
+    $this->setConfig('file_management.general.settings.default_driver', 's3');
+
+    config(['filesystems.default' => 's3']);
+
+    get(route('admin.configuration.index', ['slug' => 'file_management', 'slug2' => 'general']))
+        ->assertOk()
+        ->assertSee('v-storage-sync', false)
+        ->assertDontSee(trans('admin::app.configuration.index.file-management.general.settings.incomplete', ['driver' => 'Amazon S3']));
+});
 
 // ============================================================================
 // Who May Reach The Sync

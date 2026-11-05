@@ -9,17 +9,24 @@
 </p>
 
 <p align="center">
-    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/d/total.svg" alt="Total Downloads"></a>
-    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/v/stable.svg" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/license.svg" alt="License"></a>
-    <a href="#backers"><img src="https://opencollective.com/bagisto/backers/badge.svg" alt="Backers on Open Collective"></a>
-    <a href="#sponsors"><img src="https://opencollective.com/bagisto/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
+    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://img.shields.io/packagist/dt/bagisto/bagisto" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://img.shields.io/packagist/v/bagisto/bagisto?label=stable" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://img.shields.io/packagist/l/bagisto/bagisto" alt="License"></a>
+    <a href="#backers"><img src="https://img.shields.io/opencollective/backers/bagisto" alt="Backers on Open Collective"></a>
+    <a href="#sponsors"><img src="https://img.shields.io/opencollective/sponsors/bagisto" alt="Sponsors on Open Collective"></a>
     <a href="https://www.codetriage.com/bagisto/bagisto"><img src="https://www.codetriage.com/bagisto/bagisto/badges/users.svg" alt="Open Source Helpers"></a>
 </p>
 
 <p align="center">
-    <a href="https://twitter.com/intent/follow?screen_name=bagistoshop"><img src="https://img.shields.io/twitter/follow/bagistoshop?style=social"></a>
-    <a href="https://www.youtube.com/channel/UCbrfqnhyiDv-bb9QuZtonYQ"><img src="https://img.shields.io/youtube/channel/subscribers/UCbrfqnhyiDv-bb9QuZtonYQ?style=social"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/pest-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/pest-tests.yml?label=pest" alt="Pest Tests"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/playwright-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/playwright-tests.yml?label=playwright" alt="Playwright Tests"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/pint-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/pint-tests.yml?label=code%20style" alt="Code Style Check"></a>
+    <a href="https://github.com/bagisto/bagisto/actions/workflows/translation-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/bagisto/bagisto/translation-tests.yml?label=translations" alt="Translation Check"></a>
+</p>
+
+<p align="center">
+    <a href="https://x.com/bagistoshop"><img src="https://img.shields.io/badge/Follow-%40bagistoshop-000000?style=social&logo=x" alt="Follow Bagisto on X"></a>
+    <a href="https://www.youtube.com/@Bagisto"><img src="https://img.shields.io/badge/YouTube-Subscribe-FF0000?style=social&logo=youtube" alt="Subscribe to Bagisto on YouTube"></a>
 </p>
 
 <p align="center">

@@ -1,4 +1,6 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
+import { MediaGalleryField } from "../../components/MediaGalleryField";
 import { DatagridPage } from "../../DatagridPage";
 
 export interface CategoryData {
@@ -8,6 +10,8 @@ export interface CategoryData {
     filterableAttribute?: string;
     parent?: string;
 }
+
+export type CategoryMedia = "Logo" | "Banner";
 
 export class CategoryPage extends DatagridPage {
     constructor(page: Page) {
@@ -100,6 +104,43 @@ export class CategoryPage extends DatagridPage {
         ).click();
 
         await expect(this.slugInput).toHaveValue(data.slug);
+    }
+
+    mediaField(field: CategoryMedia): MediaGalleryField {
+        return MediaGalleryField.underHeading(this.page, field);
+    }
+
+    async attemptCreateCategoryWithMedia(
+        data: CategoryData,
+        field: CategoryMedia,
+        file: MediaFile,
+    ): Promise<void> {
+        await this.openCreateForm();
+        await this.fillCreateForm(data);
+        await this.mediaField(field).attach(file);
+        await this.saveButton.click();
+    }
+
+    async attemptSaveMedia(
+        name: string,
+        field: CategoryMedia,
+        file: MediaFile,
+    ): Promise<void> {
+        await this.openEditForm(name);
+        await this.mediaField(field).attach(file);
+        await this.saveButton.click();
+    }
+
+    async saveMedia(
+        name: string,
+        field: CategoryMedia,
+        file: MediaFile,
+    ): Promise<void> {
+        await this.attemptSaveMedia(name, field, file);
+
+        await expect(
+            this.flashMessage("Category updated successfully."),
+        ).toBeVisible();
     }
 
     async createCategory(data: CategoryData): Promise<void> {
@@ -231,6 +272,14 @@ export class CategoryPage extends DatagridPage {
         await this.openEditForm(name);
 
         await expect(this.localeNameInput).toHaveValue(name);
+    }
+
+    async expectMediaInEditForm(
+        name: string,
+        field: CategoryMedia,
+    ): Promise<void> {
+        await this.openEditForm(name);
+        await this.mediaField(field).expectStored();
     }
 
     async expectValidationError(message: string): Promise<void> {

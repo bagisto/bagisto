@@ -53,7 +53,7 @@ function productUpdatePayload(Product $product, array $images): array
 // Edit Page
 // ============================================================================
 
-it('should render the seo drawer on the product edit page', function () {
+it('should render the SEO drawer on the product edit page', function () {
     Storage::fake();
 
     [$product] = makeProductWithStoredImage();
@@ -68,7 +68,7 @@ it('should render the seo drawer on the product edit page', function () {
         ->assertSee(trans('admin::app.components.media.images.seo.file-name'));
 });
 
-it('should not render the seo drawer where it is not enabled', function () {
+it('should not render the SEO drawer where it is not enabled', function () {
     $this->loginAsAdmin();
 
     get(route('admin.settings.channels.create'))
@@ -166,6 +166,18 @@ it('should keep the alt text of each locale apart', function () {
 // ============================================================================
 // Uploads
 // ============================================================================
+
+it('should name a newly picked file by its label when it is not an image', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'images' => ['files' => ['image_0' => UploadedFile::fake()->image('image.php')]],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['images.files.image_0' => 'The Image field']);
+});
 
 it('should name a newly uploaded image after the requested file name', function () {
     Storage::fake();

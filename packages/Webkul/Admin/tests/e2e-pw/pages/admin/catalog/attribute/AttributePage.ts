@@ -1,10 +1,11 @@
 import { expect, type Locator, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
 import { DatagridPage } from "../../DatagridPage";
 
 export interface AttributeOptionData {
     label: string;
     color?: string;
-    swatchImage?: string;
+    swatchImage?: string | MediaFile;
 }
 
 export interface SwatchSeoData {
@@ -64,8 +65,9 @@ export class AttributePage extends DatagridPage {
 
     private get addRowButton() {
         return this.page
-            .locator(".secondary-button")
-            .filter({ hasText: /^\s*Add Row\s*$/ });
+            .locator("p")
+            .filter({ hasText: /^\s*Options\s*$/ })
+            .locator('xpath=following-sibling::div[contains(@class, "secondary-button")]');
     }
 
     private get optionModal() {
@@ -77,7 +79,9 @@ export class AttributePage extends DatagridPage {
     }
 
     private get optionLocaleNameInput() {
-        return this.optionModal.locator('input[name="en"]');
+        return this.optionModal.locator(
+            'input[name="en"], input[name="locales.en"]',
+        );
     }
 
     private get optionColorInput() {
@@ -155,8 +159,8 @@ export class AttributePage extends DatagridPage {
         await expect(this.optionRow(option.label)).toBeVisible();
     }
 
-    private async stageSwatchImage(filePath: string): Promise<void> {
-        await this.optionSwatchImageUploader.setInputFiles(filePath);
+    private async stageSwatchImage(file: string | MediaFile): Promise<void> {
+        await this.optionSwatchImageUploader.setInputFiles(file);
 
         await expect
             .poll(() =>
@@ -223,6 +227,15 @@ export class AttributePage extends DatagridPage {
     async attemptCreateAttribute(data: AttributeData): Promise<void> {
         await this.openCreateForm();
         await this.fillCreateForm(data);
+        await this.saveButton.click();
+    }
+
+    async attemptAddOption(
+        code: string,
+        option: AttributeOptionData,
+    ): Promise<void> {
+        await this.openEditForm(code);
+        await this.addOption(option);
         await this.saveButton.click();
     }
 

@@ -1,3 +1,4 @@
+import { validImage, validVideo } from "@shared/media-files";
 import { test } from "../../setup";
 import { ProductCreatePage } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../../pages/admin/catalog/products/ProductListPage";
@@ -103,5 +104,27 @@ test.describe("review management", () => {
         await reviewsPage.massDeleteReviews([review.title]);
 
         await reviewsPage.expectReviewAbsent(review.title);
+    });
+
+    test("should show the image and video a customer attaches to a review", async () => {
+        const withAttachments: ReviewData = {
+            title: `${generateName()} ${uniqueStamp()}`,
+            comment: generateDescription(),
+            rating: 4,
+        };
+
+        try {
+            await reviewShop.submitReview(productName, withAttachments, [
+                validImage(),
+                validVideo(),
+            ]);
+
+            await reviewsPage.expectReviewAttachments(withAttachments.title, {
+                images: 1,
+                videos: 1,
+            });
+        } finally {
+            await reviewsPage.deleteReviewsIfPresent([withAttachments.title]);
+        }
     });
 });

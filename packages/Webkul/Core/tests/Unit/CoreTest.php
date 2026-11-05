@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Webkul\Core\Core;
 use Webkul\Core\Enums\CurrencyPositionEnum;
@@ -273,4 +274,12 @@ it('should fall back to the base currency of the channel when the current curren
     core()->setCurrentCurrency('NOPE');
 
     expect(core()->getCurrentCurrency()->is($currency))->toBeTrue();
+});
+
+// ============================================================================
+// Upload Limit
+// ============================================================================
+
+it('should report the largest upload PHP accepts in kilobytes', function () {
+    expect(core()->getMaxUploadSize())->toBe((int) floor(UploadedFile::getMaxFilesize() / 1024));
 });

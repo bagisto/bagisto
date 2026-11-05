@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Add Variant',
+                        'default' => 'Default',
                         'delete-btn' => 'Delete',
                         'edit-btn' => 'Edit',
                         'empty-info' => 'To create various combination of product on a go.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Alegeți stocarea în care fișierele sunt salvate și din care sunt servite.',
                         'default-driver' => 'Driver de stocare implicit',
                         'default-driver-info' => 'Fișierele încărcate de acum înainte vor fi salvate aici. Fișierele deja încărcate rămân pe stocarea anterioară, așa că le copiați înainte de comutare, altfel nu vor fi găsite.',
+                        'incomplete' => ':driver este selectat, dar setările sale sunt incomplete, așa că fișierele încărcate nu sunt încă salvate acolo.',
 
                         'drivers' => [
                             'local' => 'Fișier (stocare locală)',
@@ -6120,8 +6122,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Only videos files (.mp4, .mov, .webm) are allowed.',
                 'video' => 'Videoclip',
 
                 'seo' => [

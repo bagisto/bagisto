@@ -42,17 +42,17 @@
         
         <div class="flex justify-between text-right">
             <p class="shimmer h-6 w-1/5"></p>
-            <p class="shimmer h-6 w-[15%]"></p>
+            <p class="shimmer h-6 w-3/20"></p>
         </div>
 
         <div class="flex justify-between text-right">
             <p class="shimmer h-6 w-1/4"></p>
-            <p class="shimmer h-6 w-[35%]"></p>
+            <p class="shimmer h-6 w-7/20"></p>
         </div>
 
         <div class="flex justify-between text-right">
-            <p class="shimmer h-6 w-[35%]"></p>
-            <p class="shimmer h-9.5 w-[30%]"></p>
+            <p class="shimmer h-6 w-7/20"></p>
+            <p class="shimmer h-9.5 w-3/10"></p>
         </div>
     </div>
 

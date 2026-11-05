@@ -759,7 +759,7 @@ return [
                     'meta-description' => '',
                     'meta-keywords' => '',
                     'meta-title' => '',
-                    'name' => 'کتاب و لوازم التحریر',
+                    'name' => 'لوازم التحریر',
                     'slug' => 'books-stationery',
                     'url-path' => '',
                 ],

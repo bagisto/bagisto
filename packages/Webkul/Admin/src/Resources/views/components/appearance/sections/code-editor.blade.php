@@ -24,7 +24,7 @@
 
                     <!-- Media is inserted at the cursor, so it lands where the author is typing. -->
                     <label
-                        class="flex cursor-pointer items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-blue-600 transition-all hover:bg-blue-50 dark:hover:bg-gray-900"
+                        class="flex cursor-pointer items-center gap-1 rounded-sm px-2 py-1 text-xs font-semibold text-blue-600 transition-all hover:bg-blue-50 dark:hover:bg-gray-900"
                         v-if="allowsMedia"
                     >
                         <span class="icon-image text-base"></span>

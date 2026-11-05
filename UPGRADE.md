@@ -25,6 +25,7 @@
 ### Low Impact Changes
 
 - [Unreadable SVG Uploads Are Refused](#unreadable-svg-uploads-are-refused)
+- [An Incomplete Remote Disk Is Not Selected](#an-incomplete-remote-disk-is-not-selected)
 - [An SVG That Uses A Custom DTD Entity Is Refused](#an-svg-that-uses-a-custom-dtd-entity-is-refused)
 - [ProductReviewRepository Reads Reviews By Customer](#productreviewrepository-reads-reviews-by-customer)
 - [The Invoice Payment Transaction Is Created By The Controller](#the-invoice-payment-transaction-is-created-by-the-controller)
@@ -51,6 +52,7 @@
 - [The Image Cache Reports A Disk It Cannot Read](#the-image-cache-reports-a-disk-it-cannot-read)
 - [The Appearance Preview Names Its Theme In Image Urls](#the-appearance-preview-names-its-theme-in-image-urls)
 - [Image Search Uploads Are Filed By Day And Pruned](#image-search-uploads-are-filed-by-day-and-pruned)
+- [The Maximum Upload Size Helper Returns Kilobytes](#the-maximum-upload-size-helper-returns-kilobytes)
 
 ---
 
@@ -68,6 +70,19 @@ What this changes for custom code:
 - **Review attachments are recorded as a batch.** `ProductReviewAttachmentRepository::upload()` stores every file first and records them only once all of them are readable, so one unreadable file leaves neither rows nor files behind.
 - **`ProductReviewRepository` takes `ProductReviewAttachmentRepository` in its constructor**, so resolve it through the container rather than building it by hand. Its new `createWithAttachments()` writes the review and its attachments in one transaction, and `Webkul\Shop\Http\Controllers\API\ReviewController` calls that instead of creating the review and uploading the attachments itself — the controller no longer injects `ProductReviewAttachmentRepository`.
 - **Configuration saves, locale saves and product updates run in a transaction**, so a refused file rolls the rest of the save back.
+
+---
+
+### An Incomplete Remote Disk Is Not Selected
+
+**Impact Probability: Low**
+
+Choosing Amazon S3 or Cloudflare R2 as the storage driver switched the store onto it straight away, even without the settings it needs, so any page that built a file URL either failed or linked to a file that did not exist. The chosen disk is now selected only once it is complete: a region and bucket for S3, a bucket and endpoint for R2, and an access key and secret for both. Until then the store keeps saving to and serving from the local disk, and the file management screen says the chosen disk is not in use yet. A remote disk that `FILESYSTEM_DISK` names in `.env` is held to the same settings.
+
+What this changes for custom code:
+
+- **A store that reached S3 through an instance role with the key and secret left blank** now stays on the local disk. Enter the access key and secret in the configuration panel.
+- **`SupportedFilesystemEnum::requiredDiskSettings()`** names the settings each driver must carry before it is selected.
 
 ---
 
@@ -601,6 +616,20 @@ What this changes for custom code:
 
 - **Run Laravel's scheduler**, `php artisan schedule:run` every minute from cron, or the uploads are never pruned; the images in `docker/production/` run it already. Run `php artisan search-images:prune` yourself to prune them by hand.
 - **Code that read uploads from `product-search/`** reads them from `Webkul\Product\Repositories\SearchRepository::SEARCH_IMAGES_DIRECTORY` and the day's subfolder instead.
+
+---
+
+### The Maximum Upload Size Helper Returns Kilobytes
+
+**Impact Probability: Low**
+
+`core()->getMaxUploadSize()` returned PHP's `upload_max_filesize` as `php.ini` spells it, such as `2M`, and ignored `post_max_size`, so it could name a size PHP would refuse. It now returns the largest upload PHP accepts as an integer number of kilobytes, whichever of the two settings is lower.
+
+What this changes for custom code:
+
+- **Code that displays the value** adds its own unit, because `2M` is now `2048`.
+- **Code that parsed the shorthand** uses the number directly.
+- **The product videos panel** no longer reads this helper for its hint. It shows `product_video()->getMaxUploadSize()`, the limit the upload is actually held to.
 
 ## Upgrading To v2.5.0 From v2.4
 

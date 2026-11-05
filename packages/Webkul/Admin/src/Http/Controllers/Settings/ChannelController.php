@@ -53,7 +53,6 @@ class ChannelController extends Controller
     public function store()
     {
         $data = $this->validate(request(), [
-            /* general */
             'code' => ['required', 'unique:channels,code', new Code],
             'name' => 'required',
             'description' => 'nullable',
@@ -61,13 +60,11 @@ class ChannelController extends Controller
             'root_category_id' => 'required',
             'hostname' => 'unique:channels,hostname',
 
-            /* currencies and locales */
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required|in_array:locales.*',
             'currencies' => 'required|array|min:1',
             'base_currency_id' => 'required|in_array:currencies.*',
 
-            /* design */
             'theme' => 'nullable',
             'logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
@@ -75,15 +72,16 @@ class ChannelController extends Controller
             'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
             'favicon_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
 
-            /* seo */
             'seo_title' => 'required|string',
             'seo_description' => 'required|string',
             'seo_keywords' => 'required|string',
 
-            /* maintenance mode */
             'is_maintenance_on' => 'boolean',
             'maintenance_mode_text' => 'nullable',
             'allowed_ips' => 'nullable',
+        ], [], [
+            'logo.*' => trans('admin::app.settings.channels.create.logo'),
+            'favicon.*' => trans('admin::app.settings.channels.create.favicon'),
         ]);
 
         $data = $this->setSEOContent($data);
@@ -127,7 +125,6 @@ class ChannelController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $data = $this->validate(request(), [
-            /* general */
             'code' => ['required', 'unique:channels,code,'.$id, new Code],
             $locale.'.name' => 'required',
             $locale.'.description' => 'nullable',
@@ -135,13 +132,11 @@ class ChannelController extends Controller
             'root_category_id' => 'required',
             'hostname' => 'unique:channels,hostname,'.$id,
 
-            /* currencies and locales */
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required|in_array:locales.*',
             'currencies' => 'required|array|min:1',
             'base_currency_id' => 'required|in_array:currencies.*',
 
-            /* design */
             'theme' => 'nullable',
             'logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
@@ -149,15 +144,16 @@ class ChannelController extends Controller
             'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
             'favicon_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
 
-            /* seo */
             $locale.'.seo_title' => 'required|string',
             $locale.'.seo_description' => 'required|string',
             $locale.'.seo_keywords' => 'required|string',
 
-            /* maintenance mode */
             'is_maintenance_on' => 'boolean',
             $locale.'.maintenance_mode_text' => 'nullable',
             'allowed_ips' => 'nullable',
+        ], [], [
+            'logo.*' => trans('admin::app.settings.channels.edit.logo'),
+            'favicon.*' => trans('admin::app.settings.channels.edit.favicon'),
         ]);
 
         $data['is_maintenance_on'] = request()->input('is_maintenance_on') == '1';

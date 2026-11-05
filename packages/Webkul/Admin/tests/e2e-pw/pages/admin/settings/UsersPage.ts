@@ -1,4 +1,6 @@
 import { expect, type Page } from "@playwright/test";
+import type { MediaFile } from "@shared/media-files";
+import { MediaGalleryField } from "../components/MediaGalleryField";
 import { DatagridPage } from "../DatagridPage";
 
 export interface AdminUserData {
@@ -54,6 +56,10 @@ export class UsersPage extends DatagridPage {
         return this.page.getByRole("button", { name: "Save User" });
     }
 
+    private get form() {
+        return this.nameInput.locator("xpath=ancestor::form[1]");
+    }
+
     private roleOption(name: string) {
         return this.roleSelect.getByRole("option", { name, exact: true });
     }
@@ -80,6 +86,31 @@ export class UsersPage extends DatagridPage {
         await this.passwordConfirmationInput.fill(data.password);
         await this.roleSelect.selectOption({ label: data.role });
         await this.setSwitch(this.statusToggle, this.statusInput, data.active);
+    }
+
+    avatarField(): MediaGalleryField {
+        return new MediaGalleryField(this.form);
+    }
+
+    async attemptCreateUserWithAvatar(
+        data: AdminUserData,
+        avatar: MediaFile,
+    ): Promise<void> {
+        await this.openCreateModal();
+        await this.fillCreateForm(data);
+        await this.avatarField().attach(avatar);
+        await this.saveButton.click();
+    }
+
+    async createUserWithAvatar(
+        data: AdminUserData,
+        avatar: MediaFile,
+    ): Promise<void> {
+        await this.attemptCreateUserWithAvatar(data, avatar);
+
+        await expect(
+            this.flashMessage("User created successfully."),
+        ).toBeVisible();
     }
 
     async createUser(data: AdminUserData): Promise<void> {
@@ -144,6 +175,11 @@ export class UsersPage extends DatagridPage {
         await this.openEditModal(email);
 
         await expect(this.nameInput).toHaveValue(name);
+    }
+
+    async expectAvatarInEditForm(email: string): Promise<void> {
+        await this.openEditModal(email);
+        await this.avatarField().expectStored();
     }
 
     async expectValidationError(message: string): Promise<void> {

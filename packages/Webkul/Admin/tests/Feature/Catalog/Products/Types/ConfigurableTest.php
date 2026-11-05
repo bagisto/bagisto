@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Models\ProductImage;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -17,6 +20,41 @@ use function Pest\Laravel\putJson;
 function configurableAttribute(string $code): Attribute
 {
     return Attribute::query()->where('code', $code)->firstOrFail();
+}
+
+/**
+ * The payload that updates a configurable product, sending the given files as its first variant's images.
+ */
+function configurablePayloadWithVariantImages(Product $product, array $files): array
+{
+    $variants = [];
+
+    foreach ($product->variants as $variant) {
+        $variants[$variant->id] = [
+            'sku' => $variant->sku,
+            'name' => $variant->name ?? 'Variant',
+            'price' => 50,
+            'weight' => 2,
+            'status' => 1,
+            'inventories' => [1 => 50],
+        ];
+    }
+
+    $variants[$product->variants->first()->id]['images'] = ['files' => $files];
+
+    return [
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'name' => $product->name,
+        'short_description' => $product->short_description,
+        'description' => $product->description,
+        'channel' => core()->getDefaultChannelCode(),
+        'locale' => app()->getLocale(),
+        'status' => 1,
+        'visible_individually' => 1,
+        'guest_checkout' => 1,
+        'variants' => $variants,
+    ];
 }
 
 // ============================================================================
@@ -261,6 +299,65 @@ it('should update variant values and reflect changes in product_flat', function 
     expect($flat->name)->toBe('Updated Variant Name')
         ->and((float) $flat->price)->toBe(79.99)
         ->and((float) $flat->weight)->toBe(3.0);
+});
+
+// ============================================================================
+// Variant Images
+// ============================================================================
+
+it('should reject a file on a variant that is not an image and store nothing', function () {
+    $product = $this->storeAndUpdateConfigurableProduct();
+
+    Storage::fake();
+
+    $variant = $product->variants->first();
+
+    putJson(route('admin.catalog.products.update', $product->id), configurablePayloadWithVariantImages($product, [
+        UploadedFile::fake()->create('document.pdf', 10, 'application/pdf'),
+    ]))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(["variants.{$variant->id}.images.files.0" => 'The Image field']);
+
+    expect(Storage::allFiles())->toBeEmpty();
+});
+
+it('should store a valid image on a variant', function () {
+    $product = $this->storeAndUpdateConfigurableProduct();
+
+    Storage::fake();
+
+    $variant = $product->variants->first();
+
+    putJson(route('admin.catalog.products.update', $product->id), configurablePayloadWithVariantImages($product, [
+        UploadedFile::fake()->image('photo.png'),
+    ]))->assertRedirect(route('admin.catalog.products.index'));
+
+    Storage::assertExists($variant->images()->sole()->path);
+});
+
+it('should keep a stored image of a variant when the form sends only its ID', function () {
+    $product = $this->storeAndUpdateConfigurableProduct();
+
+    Storage::fake();
+
+    $variant = $product->variants->first();
+
+    $image = ProductImage::query()->create([
+        'product_id' => $variant->id,
+        'type' => 'images',
+        'path' => 'products/'.$variant->id.'/hf83ndkq.webp',
+        'position' => 1,
+    ]);
+
+    Storage::put($image->path, 'image-contents');
+
+    putJson(route('admin.catalog.products.update', $product->id), configurablePayloadWithVariantImages($product, [
+        $image->id => '',
+    ]))->assertRedirect(route('admin.catalog.products.index'));
+
+    Storage::assertExists($image->path);
+
+    expect($variant->images()->sole()->id)->toBe($image->id);
 });
 
 // ============================================================================

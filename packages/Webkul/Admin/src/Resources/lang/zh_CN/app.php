@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => '添加变体',
+                        'default' => '默认',
                         'delete-btn' => '删除',
                         'edit-btn' => '编辑',
                         'empty-info' => '随时创建产品的各种组合。',
@@ -5679,6 +5680,7 @@ return [
                         'info' => '选择文件保存和对外提供的存储。',
                         'default-driver' => '默认存储驱动',
                         'default-driver-info' => '从现在起上传的文件将保存到这里。此前上传的文件仍留在原来的存储中，请在切换前先复制过去，否则将无法找到。',
+                        'incomplete' => '已选择 :driver，但其设置不完整，因此上传的文件尚未保存到其中。',
 
                         'drivers' => [
                             'local' => '文件（本地存储）',
@@ -6120,8 +6122,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => '添加视频',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.webm）。',
                 'video' => '视频',
 
                 'seo' => [

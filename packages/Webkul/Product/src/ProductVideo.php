@@ -8,7 +8,18 @@ use Webkul\Product\Contracts\Product;
 class ProductVideo
 {
     /**
-     * Retrieve collection of videos
+     * Get the largest video that can be uploaded for a product, in kilobytes, which is the
+     * configured limit capped by what PHP itself accepts.
+     */
+    public function getMaxUploadSize(): int
+    {
+        $configured = (int) (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: 10240);
+
+        return min($configured, core()->getMaxUploadSize());
+    }
+
+    /**
+     * Retrieve collection of videos.
      *
      * @param  Product  $product
      * @return array

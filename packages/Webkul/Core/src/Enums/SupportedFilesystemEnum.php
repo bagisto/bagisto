@@ -103,6 +103,19 @@ enum SupportedFilesystemEnum: string
     }
 
     /**
+     * The resolved disk settings that must be present before the driver can be
+     * reached, so a half configured remote disk is never made the default.
+     */
+    public function requiredDiskSettings(): array
+    {
+        return match ($this) {
+            self::LOCAL => [],
+            self::S3 => ['key', 'secret', 'region', 'bucket'],
+            self::R2 => ['key', 'secret', 'bucket', 'endpoint'],
+        };
+    }
+
+    /**
      * Whether files already stored can be copied onto this driver, which only a
      * remote disk the application can reach allows.
      */

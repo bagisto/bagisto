@@ -87,7 +87,8 @@ class LocaleRepository extends Repository
     }
 
     /**
-     * Upload image.
+     * Upload image, moving it onto the locale's fixed path only once it is sanitized, so that a
+     * refused file cannot remove the logo the locale already holds.
      *
      * @param  array  $localeImages
      * @param  \Webkul\Core\Models\Locale  $locale
@@ -111,16 +112,17 @@ class LocaleRepository extends Repository
             if ($image instanceof UploadedFile) {
                 $mimeType = $image->getMimeType();
 
-                $locale->logo_path = $image->storeAs(
-                    'locales',
-                    $locale->code.'.'.$image->getClientOriginalExtension()
-                );
+                $path = $image->store('locales');
 
-                if (! $this->sanitizeSVG($locale->logo_path, $mimeType)) {
+                if (! $this->sanitizeSVG($path, $mimeType)) {
                     throw ValidationException::withMessages([
                         'logo_path' => trans('core::app.errors.invalid-svg'),
                     ]);
                 }
+
+                $locale->logo_path = 'locales/'.$locale->code.'.'.$image->getClientOriginalExtension();
+
+                Storage::move($path, $locale->logo_path);
 
                 $locale->save();
             }

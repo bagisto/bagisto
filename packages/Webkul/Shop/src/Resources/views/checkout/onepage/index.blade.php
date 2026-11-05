@@ -20,7 +20,7 @@
     <!-- Page Header -->
     <div class="flex-wrap">
         <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-15 py-4 max-lg:px-8 max-sm:px-4">
-            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
+            <div class="flex items-center gap-x-14 max-1180:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-7.5"

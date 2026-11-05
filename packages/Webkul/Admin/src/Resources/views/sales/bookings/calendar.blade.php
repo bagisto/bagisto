@@ -36,7 +36,7 @@
                     <!-- Content -->
                     <template #event="{ event, view }">
                         <div
-                            class="slot group relative h-full cursor-pointer overflow-hidden rounded-md border-l-[3px] text-left text-xs shadow-xs backdrop-blur-xs transition-all duration-200 hover:-translate-y-px hover:shadow-md"
+                            class="slot group relative h-full cursor-pointer overflow-hidden rounded-md border-l-3 text-left text-xs shadow-xs backdrop-blur-xs transition-all duration-200 hover:-translate-y-px hover:shadow-md"
                             :class="[
                                 event.status === 'pending' ? 'border-amber-500 bg-amber-50/90 hover:bg-amber-100 dark:border-amber-400 dark:bg-amber-500/15 dark:hover:bg-amber-500/25' :
                                 event.status === 'completed' ? 'border-emerald-500 bg-emerald-50/90 hover:bg-emerald-100 dark:border-emerald-400 dark:bg-emerald-500/15 dark:hover:bg-emerald-500/25' :

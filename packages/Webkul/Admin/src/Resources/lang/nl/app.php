@@ -1366,6 +1366,7 @@ return [
 
                     'configurable' => [
                         'add-btn' => 'Variant Toevoegen',
+                        'default' => 'Standaard',
                         'delete-btn' => 'Verwijderen',
                         'edit-btn' => 'Bewerken',
                         'empty-info' => 'Om verschillende combinaties van producten snel te maken.',
@@ -5679,6 +5680,7 @@ return [
                         'info' => 'Kies de opslag waarin bestanden worden bewaard en van waaruit ze worden geleverd.',
                         'default-driver' => 'Standaard opslagstuurprogramma',
                         'default-driver-info' => 'Bestanden die vanaf nu worden geüpload, worden hier opgeslagen. Reeds geüploade bestanden blijven op de vorige opslag staan: kopieer ze vóór het wisselen, anders worden ze niet gevonden.',
+                        'incomplete' => ':driver is geselecteerd, maar de instellingen zijn onvolledig, dus geüploade bestanden worden er nog niet in opgeslagen.',
 
                         'drivers' => [
                             'local' => 'Bestand (lokale opslag)',
@@ -6120,8 +6122,8 @@ return [
 
             'videos' => [
                 'add-video-btn' => 'Video Toevoegen',
-                'allowed-types' => 'mp4, webm, mkv',
-                'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
+                'allowed-types' => 'mp4, webm, mov',
+                'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .webm) zijn toegestaan.',
                 'video' => 'Video',
 
                 'seo' => [
