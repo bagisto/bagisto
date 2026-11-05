@@ -761,7 +761,7 @@
                 this.images = this.uploadedImages;
 
                 if (this.fieldError) {
-                    this.focusError();
+                    this.focusError('instant');
                 }
             },
 
@@ -917,9 +917,10 @@
                 },
 
                 /**
-                 * Bring this field's error into view, but only when no field before it holds one.
+                 * Bring this field's error into view when no field before it holds one. On load it jumps rather
+                 * than glides, so scroll anchoring keeps it there while the editors above it finish growing.
                  */
-                focusError() {
+                focusError(behavior = 'smooth') {
                     this.$nextTick(() => {
                         const errorElement = this.$el?.querySelector?.('[data-field-error]');
 
@@ -932,7 +933,7 @@
                         }
 
                         errorElement.scrollIntoView({
-                            behavior: 'smooth',
+                            behavior,
                             block: 'center',
                         });
                     });
