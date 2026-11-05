@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => '画像生成',
                 'allowed-types' => 'png、jpeg、jpg',
                 'image' => '画像',
-                'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
+                'not-allowed-error' => '画像ファイル（:types）のみ許可されています。',
                 'size-limit-error' => 'ファイルが最大アップロードサイズ :size を超えています。',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'ビデオを追加',
                 'allowed-types' => 'mp4、webm、mov',
-                'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.webm）。',
+                'not-allowed-error' => 'ビデオファイルのみ許可されています（:types）。',
                 'video' => '動画',
 
                 'seo' => [

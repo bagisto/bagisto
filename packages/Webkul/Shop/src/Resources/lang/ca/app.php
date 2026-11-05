@@ -564,7 +564,7 @@ return [
             'index' => [
                 'add-attachments' => 'Afegir adjunts',
                 'add-image' => 'Afegir Imatge/Vídeo',
-                'invalid-file-type' => 'El tipus de fitxer seleccionat no està permès.',
+                'invalid-file-type' => 'Només es permeten fitxers :types.',
                 'size-limit-error' => 'El fitxer supera la mida màxima de pujada de :size.',
             ],
         ],

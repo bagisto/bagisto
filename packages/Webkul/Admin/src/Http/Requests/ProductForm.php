@@ -208,7 +208,7 @@ class ProductForm extends FormRequest
         return [
             'variants.*.sku.unique' => trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
             'videos.files.*' => trans('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
-            'videos.files.*.mimetypes' => trans('admin::app.components.media.videos.not-allowed-error'),
+            'videos.files.*.mimetypes' => trans('admin::app.components.media.videos.not-allowed-error', ['types' => '.mp4, .mov, .webm']),
         ];
     }
 

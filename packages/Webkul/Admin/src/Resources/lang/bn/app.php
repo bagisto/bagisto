@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'ছবি তৈরি করুন',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'ছবি',
-                'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
+                'not-allowed-error' => 'কেবল চিত্র ফাইল (:types) অনুমোদিত।',
                 'size-limit-error' => 'ফাইলটি সর্বোচ্চ আপলোড আকার :size অতিক্রম করেছে।',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
                 'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .webm) অনুমোদিত।',
+                'not-allowed-error' => 'কেবল ভিডিও ফাইল (:types) অনুমোদিত।',
                 'video' => 'ভিডিও',
 
                 'seo' => [

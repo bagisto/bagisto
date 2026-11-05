@@ -564,7 +564,7 @@ return [
             'index' => [
                 'add-attachments' => 'अटैचमेंट जोड़ें',
                 'add-image' => 'चित्र/वीडियो जोड़ें',
-                'invalid-file-type' => 'चयनित फ़ाइल प्रकार की अनुमति नहीं है।',
+                'invalid-file-type' => 'केवल :types फ़ाइलें अनुमत हैं।',
                 'size-limit-error' => 'फ़ाइल अधिकतम अपलोड आकार :size से अधिक है।',
             ],
         ],

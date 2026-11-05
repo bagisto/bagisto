@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'إنشاء صورة',
                 'allowed-types' => 'png، jpeg، jpg',
                 'image' => 'صورة',
-                'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
+                'not-allowed-error' => 'تُسمح فقط بملفات الصور (:types).',
                 'size-limit-error' => 'يتجاوز الملف الحد الأقصى لحجم الرفع :size.',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'إضافة فيديو',
                 'allowed-types' => 'mp4، webm، mov',
-                'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .webm).',
+                'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (:types).',
                 'video' => 'فيديو',
 
                 'seo' => [

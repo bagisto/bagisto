@@ -88,7 +88,7 @@
                     <!-- Upload Image Button -->
                     <label
                         class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                        :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
+                        :class="[fieldError ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
@@ -137,6 +137,7 @@
                             :refusal-for="refusalFor"
                             @onRemove="remove($event)"
                             @onChange="clearErrors"
+                            @onRefusal="setClientError"
                         >
                         </v-media-image-item>
                     </template>
@@ -387,8 +388,9 @@
 
             <p
                 class="mt-1 text-xs italic text-red-600"
-                v-if="errorMessage"
-                v-text="errorMessage"
+                data-field-error
+                v-if="fieldError"
+                v-text="fieldError"
             >
             </p>
         </div>
@@ -632,6 +634,8 @@
 
                     newImageIndex: 0,
 
+                    clientError: '',
+
                     placeholders: [
                         {
                             label: "@lang('admin::app.components.media.images.placeholders.front')",
@@ -701,6 +705,48 @@
                 errorMessage() {
                     return this.errors[this.errorKeys[0]];
                 },
+
+                /**
+                 * The error shown under the field, the server's for one of its files before the one found on picking.
+                 */
+                fieldError() {
+                    return this.errorMessage ?? this.clientError;
+                },
+
+                /**
+                 * The extensions the field accepts, written for display from its accepted types.
+                 */
+                acceptedExtensions() {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    const extensions = types
+                        .filter(type => ! type.endsWith('*'))
+                        .map(type => type.includes('/') ? '.' + type.split('/').pop() : type.replace(/^\.?/, '.'));
+
+                    const labels = extensions.length
+                        ? extensions
+                        : types.map(type => type.split('/').shift()).filter(type => type !== '*');
+
+                    return [...new Set(labels)].join(', ');
+                },
+            },
+
+            watch: {
+                /**
+                 * Bring this field's error into view once it is the first on the page.
+                 */
+                fieldError: {
+                    immediate: true,
+
+                    handler(message) {
+                        if (message) {
+                            this.focusError();
+                        }
+                    },
+                },
             },
 
             mounted() {
@@ -722,13 +768,12 @@
                         return;
                     }
 
+                    this.clearErrors();
+
                     const refusal = this.refusalFor(imageInput.files);
 
                     if (refusal) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: refusal
-                        });
+                        this.clientError = refusal;
 
                         return;
                     }
@@ -736,8 +781,6 @@
                     imageInput.files.forEach((file, index) => {
                         this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
                     });
-
-                    this.clearErrors();
                 },
 
                 /**
@@ -745,7 +788,7 @@
                  */
                 refusalFor(files) {
                     if (! Array.from(files).every(file => this.isAcceptedType(file))) {
-                        return "@lang('admin::app.components.media.images.not-allowed-error')";
+                        return "@lang('admin::app.components.media.images.not-allowed-error')".replace(':types', this.acceptedExtensions);
                     }
 
                     if (Array.from(files).some(file => this.exceedsMaxSize(file))) {
@@ -847,7 +890,40 @@
                  * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
                  */
                 clearErrors() {
+                    this.clientError = '';
+
                     this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
+                },
+
+                /**
+                 * Show, under the field, why a file picked to replace an existing image was refused.
+                 */
+                setClientError(message) {
+                    this.clearErrors();
+
+                    this.clientError = message;
+                },
+
+                /**
+                 * Bring this field's error into view, but only when no field before it holds one.
+                 */
+                focusError() {
+                    this.$nextTick(() => {
+                        const errorElement = this.$el?.querySelector?.('[data-field-error]');
+
+                        if (! errorElement) {
+                            return;
+                        }
+
+                        if (document.querySelector('[data-field-error]') !== errorElement) {
+                            return;
+                        }
+
+                        errorElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    });
                 },
 
                 /**
@@ -962,10 +1038,7 @@
                     const refusal = this.refusalFor(imageInput.files);
 
                     if (refusal) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: refusal
-                        });
+                        this.$emit('onRefusal', refusal);
 
                         return;
                     }

@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'Tengeneza Picha',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Picha',
-                'not-allowed-error' => 'Faili za picha pekee (.jpeg, .jpg, .png, ..) ndizo zinazoruhusiwa.',
+                'not-allowed-error' => 'Faili za picha pekee (:types) ndizo zinazoruhusiwa.',
                 'size-limit-error' => 'Faili limezidi ukubwa wa juu wa kupakia wa :size.',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'Ongeza Video',
                 'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Faili za video pekee (.mp4, .mov, .webm) ndizo zinazoruhusiwa.',
+                'not-allowed-error' => 'Faili za video pekee (:types) ndizo zinazoruhusiwa.',
                 'video' => 'Video',
 
                 'seo' => [

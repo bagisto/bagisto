@@ -12,7 +12,7 @@ import { ProductListPage } from "../../pages/admin/catalog/products/ProductListP
 import type { BaseProduct } from "../../pages/admin/types/product.types";
 import { generateDescription, uniqueStamp } from "../../utils/faker";
 
-const VIDEO_TYPE_MESSAGE = "Only videos files (.mp4, .mov, .webm) are allowed.";
+const VIDEO_TYPE_MESSAGE = "Only video files (.mp4, .mov, .webm) are allowed.";
 
 test.describe("product images and videos", () => {
     test.setTimeout(180000);
@@ -29,7 +29,7 @@ test.describe("product images and videos", () => {
             valid: validImage,
             refusedMessage:
                 "The Image field must be a file of type: bmp, jpeg, jpg, png, webp.",
-            notice: "Only images files (.jpeg, .jpg, .png, ..) are allowed.",
+            notice: "Only image files (.bmp, .jpeg, .jpg, .png, .webp) are allowed.",
         },
         {
             kind: "video",
@@ -77,6 +77,7 @@ test.describe("product images and videos", () => {
             await productEditPage.saveProduct();
 
             await field().expectError(refusedMessage);
+            await field().expectErrorInView();
             await field().expectUploadTileFlagged();
             await field().expectEmpty();
             await productEditPage.expectStillOnEditForm();

@@ -564,7 +564,7 @@ return [
             'index' => [
                 'add-attachments' => 'افزودن پیوست',
                 'add-image' => 'افزودن تصویر/ویدئو',
-                'invalid-file-type' => 'نوع فایل انتخاب‌شده مجاز نیست.',
+                'invalid-file-type' => 'فقط فایل‌های :types مجاز هستند.',
                 'size-limit-error' => 'حجم فایل از حداکثر اندازه مجاز بارگذاری :size بیشتر است.',
             ],
         ],

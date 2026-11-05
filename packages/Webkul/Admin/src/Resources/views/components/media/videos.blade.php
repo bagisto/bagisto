@@ -6,6 +6,7 @@
     'height'         => '120px',
     'enableSeo'      => false,
     'metaName'       => '',
+    'acceptedTypes'  => '.mp4,.mov,.webm',
 ])
 
 <v-media-videos
@@ -13,6 +14,7 @@
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
+    accepted-types="{{ $acceptedTypes }}"
     :uploaded-videos="@js($uploadedVideos)"
     width="{{ $width }}"
     height="{{ $height }}"
@@ -33,7 +35,7 @@
                 <!-- Upload Video Button -->
                 <label
                     class="grid h-30 max-h-30 w-full max-w-52.5 cursor-pointer items-center justify-items-center rounded-sm border border-dashed transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
-                    :class="[errorMessage ? 'border border-red-500' : 'border-gray-300']"
+                    :class="[fieldError ? 'border border-red-500' : 'border-gray-300']"
                     :for="$.uid + '_videoInput'"
                     v-if="allowMultiple || videos.length == 0"
                 >
@@ -52,7 +54,7 @@
                             type="file"
                             class="hidden"
                             :id="$.uid + '_videoInput'"
-                            accept="video/*"
+                            :accept="acceptedTypes"
                             :multiple="allowMultiple"
                             :ref="$.uid + '_videoInput'"
                             @change="add"
@@ -77,8 +79,10 @@
                             :video="element"
                             :width="width"
                             :height="height"
+                            :not-allowed-error="notAllowedError"
                             @onRemove="remove($event)"
                             @onChange="clearErrors"
+                            @onRefusal="setClientError"
                         >
                         </v-media-video-item>
                     </template>
@@ -87,8 +91,9 @@
 
             <p
                 class="mt-1 text-xs italic text-red-600"
-                v-if="errorMessage"
-                v-text="errorMessage"
+                data-field-error
+                v-if="fieldError"
+                v-text="fieldError"
             >
             </p>
         </div>
@@ -278,6 +283,11 @@
                     default: '',
                 },
 
+                acceptedTypes: {
+                    type: String,
+                    default: '.mp4,.mov,.webm',
+                },
+
                 errors: {
                     type: Object,
                     default: () => ({})
@@ -293,6 +303,8 @@
                     videos: [],
 
                     newVideoIndex: 0,
+
+                    clientError: '',
                 }
             },
 
@@ -313,6 +325,55 @@
                  */
                 errorMessage() {
                     return this.errors[this.errorKeys[0]];
+                },
+
+                /**
+                 * The error shown under the field, the server's for one of its files before the one found on picking.
+                 */
+                fieldError() {
+                    return this.errorMessage ?? this.clientError;
+                },
+
+                /**
+                 * The extensions the field accepts, written for display from its accepted types.
+                 */
+                acceptedExtensions() {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    const extensions = types
+                        .filter(type => ! type.endsWith('*'))
+                        .map(type => type.includes('/') ? '.' + type.split('/').pop() : type.replace(/^\.?/, '.'));
+
+                    const labels = extensions.length
+                        ? extensions
+                        : types.map(type => type.split('/').shift()).filter(type => type !== '*');
+
+                    return [...new Set(labels)].join(', ');
+                },
+
+                /**
+                 * The message shown when a picked file is not one of the accepted types.
+                 */
+                notAllowedError() {
+                    return "@lang('admin::app.components.media.videos.not-allowed-error')".replace(':types', this.acceptedExtensions);
+                },
+            },
+
+            watch: {
+                /**
+                 * Bring this field's error into view once it is the first on the page.
+                 */
+                fieldError: {
+                    immediate: true,
+
+                    handler(message) {
+                        if (message) {
+                            this.focusError();
+                        }
+                    },
                 },
             },
 
@@ -335,13 +396,12 @@
                         return;
                     }
 
+                    this.clearErrors();
+
                     const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
 
                     if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.videos.not-allowed-error')"
-                        });
+                        this.clientError = this.notAllowedError;
 
                         return;
                     }
@@ -353,8 +413,6 @@
                             file: file
                         });
                     });
-
-                    this.clearErrors();
                 },
 
                 /**
@@ -372,7 +430,40 @@
                  * Forget the errors of this field's files, which the form otherwise keeps until the page reloads.
                  */
                 clearErrors() {
+                    this.clientError = '';
+
                     this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
+                },
+
+                /**
+                 * Show, under the field, why a file picked to replace an existing video was refused.
+                 */
+                setClientError(message) {
+                    this.clearErrors();
+
+                    this.clientError = message;
+                },
+
+                /**
+                 * Bring this field's error into view, but only when no field before it holds one.
+                 */
+                focusError() {
+                    this.$nextTick(() => {
+                        const errorElement = this.$el?.querySelector?.('[data-field-error]');
+
+                        if (! errorElement) {
+                            return;
+                        }
+
+                        if (document.querySelector('[data-field-error]') !== errorElement) {
+                            return;
+                        }
+
+                        errorElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    });
                 },
             }
         });
@@ -380,7 +471,7 @@
         app.component('v-media-video-item', {
             template: '#v-media-video-item-template',
 
-            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName'],
+            props: ['index', 'video', 'name', 'width', 'height', 'enableSeo', 'metaName', 'notAllowedError'],
 
             data() {
                 return {
@@ -410,10 +501,7 @@
                     const validFiles = Array.from(videoInput.files).every(file => file.type.includes('video/'));
 
                     if (! validFiles) {
-                        this.$emitter.emit('add-flash', {
-                            type: 'warning',
-                            message: "@lang('admin::app.components.media.videos.not-allowed-error')"
-                        });
+                        this.$emit('onRefusal', this.notAllowedError);
 
                         return;
                     }

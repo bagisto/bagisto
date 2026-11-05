@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'Gerar Imagem',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imagem',
-                'not-allowed-error' => 'Apenas arquivos de imagem (.jpeg, .jpg, .png, ..) são permitidos.',
+                'not-allowed-error' => 'Apenas arquivos de imagem (:types) são permitidos.',
                 'size-limit-error' => 'O arquivo excede o tamanho máximo de envio de :size.',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'Adicionar Vídeo',
                 'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Apenas arquivos de vídeo (.mp4, .mov, .webm) são permitidos.',
+                'not-allowed-error' => 'Apenas arquivos de vídeo (:types) são permitidos.',
                 'video' => 'Vídeo',
 
                 'seo' => [

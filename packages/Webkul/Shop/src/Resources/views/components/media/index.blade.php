@@ -144,6 +144,7 @@
 
             <p
                 class="text-red-500 text-xs italic"
+                data-field-error
                 v-if="fieldError"
                 v-text="fieldError"
             >
@@ -256,6 +257,41 @@
                     return this.isMultiple
                         ? this.uploadedFiles.length > 0
                         : this.uploadedFiles.isPicked;
+                },
+
+                /**
+                 * The extensions the field accepts, written for display from its accepted types.
+                 */
+                acceptedExtensions() {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim().toLowerCase())
+                        .filter(Boolean);
+
+                    const extensions = types
+                        .filter(type => ! type.endsWith('*'))
+                        .map(type => type.includes('/') ? '.' + type.split('/').pop() : type.replace(/^\.?/, '.'));
+
+                    const labels = extensions.length
+                        ? extensions
+                        : types.map(type => type.split('/').shift()).filter(type => type !== '*');
+
+                    return [...new Set(labels)].join(', ');
+                },
+            },
+
+            watch: {
+                /**
+                 * Bring this field's error into view once it is the first on the page.
+                 */
+                fieldError: {
+                    immediate: true,
+
+                    handler(message) {
+                        if (message) {
+                            this.focusError();
+                        }
+                    },
                 },
             },
 
@@ -460,7 +496,7 @@
                  * Tell the shopper a file was left out for its type.
                  */
                 notifyInvalidType() {
-                    this.clientError = "@lang('shop::app.components.media.index.invalid-file-type')";
+                    this.clientError = "@lang('shop::app.components.media.index.invalid-file-type')".replace(':types', this.acceptedExtensions);
                 },
 
                 /**
@@ -536,6 +572,28 @@
                     this.clientError = '';
 
                     this.errorKeys.forEach(key => this.setFieldError?.(key, undefined));
+                },
+
+                /**
+                 * Bring this field's error into view, but only when no field before it holds one.
+                 */
+                focusError() {
+                    this.$nextTick(() => {
+                        const errorElement = this.$el?.querySelector?.('[data-field-error]');
+
+                        if (! errorElement) {
+                            return;
+                        }
+
+                        if (document.querySelector('[data-field-error]') !== errorElement) {
+                            return;
+                        }
+
+                        errorElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                        });
+                    });
                 },
             },
         });

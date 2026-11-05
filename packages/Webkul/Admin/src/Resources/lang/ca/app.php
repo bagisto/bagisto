@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'Generar Imatge',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imatge',
-                'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
+                'not-allowed-error' => 'Només es permeten arxius d\'imatge (:types)',
                 'size-limit-error' => 'El fitxer supera la mida màxima de pujada de :size.',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
                 'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .webm).',
+                'not-allowed-error' => 'Només es permeten arxius de vídeo (:types).',
                 'video' => 'Vídeo',
 
                 'seo' => [

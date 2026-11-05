@@ -564,7 +564,7 @@ return [
             'index' => [
                 'add-attachments' => 'הוסף קבצים מצורפים',
                 'add-image' => 'הוסף תמונה/וידאו',
-                'invalid-file-type' => 'סוג הקובץ שנבחר אינו מותר.',
+                'invalid-file-type' => 'ניתן להעלות רק קבצי :types.',
                 'size-limit-error' => 'הקובץ חורג מגודל ההעלאה המרבי של :size.',
             ],
         ],

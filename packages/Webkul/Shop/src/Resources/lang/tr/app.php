@@ -564,7 +564,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dosya Ekle',
                 'add-image' => 'Resim/Video Ekle',
-                'invalid-file-type' => 'Seçilen dosya türüne izin verilmiyor.',
+                'invalid-file-type' => 'Yalnızca :types dosyalarına izin verilir.',
                 'size-limit-error' => 'Dosya, :size olan en yüksek yükleme boyutunu aşıyor.',
             ],
         ],

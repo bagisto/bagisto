@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => '生成图像',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => '图片',
-                'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
+                'not-allowed-error' => '仅允许图像文件（:types）。',
                 'size-limit-error' => '文件超过最大上传大小 :size。',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => '添加视频',
                 'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.webm）。',
+                'not-allowed-error' => '仅允许视频文件（:types）。',
                 'video' => '视频',
 
                 'seo' => [

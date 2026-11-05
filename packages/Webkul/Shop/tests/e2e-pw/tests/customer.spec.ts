@@ -70,7 +70,12 @@ test.describe("customer account", () => {
                     "Account created successfully.",
                 );
             } finally {
-                await setConfigSwitch(adminPage, CUSTOMER_SETTINGS_PATH, VERIFICATION_FIELD, original);
+                await setConfigSwitch(
+                    adminPage,
+                    CUSTOMER_SETTINGS_PATH,
+                    VERIFICATION_FIELD,
+                    original,
+                );
             }
         });
 
@@ -91,7 +96,12 @@ test.describe("customer account", () => {
                     "Account created successfully, an e-mail has been sent for verification.",
                 );
             } finally {
-                await setConfigSwitch(adminPage, CUSTOMER_SETTINGS_PATH, VERIFICATION_FIELD, original);
+                await setConfigSwitch(
+                    adminPage,
+                    CUSTOMER_SETTINGS_PATH,
+                    VERIFICATION_FIELD,
+                    original,
+                );
             }
         });
     });
@@ -160,7 +170,9 @@ test.describe("customer account", () => {
             await customerPage.openEditProfile();
             await customerPage.pickProfileImage(plainTextFile());
 
-            await customerPage.expectNotice("The selected file type is not allowed.");
+            await customerPage.expectNotice(
+                "Only .bmp, .jpeg, .jpg, .png, .webp files are allowed.",
+            );
             await customerPage.expectNoProfileImagePicked();
         });
 
@@ -170,25 +182,39 @@ test.describe("customer account", () => {
             const newPassword = "testUser@1234";
             const authPage = new AuthPage(shopPage);
 
-            await customerPage.changePassword(credentials.password, newPassword, {
-                phone: generatePhoneNumber(),
-                gender: "Male",
-            });
+            await customerPage.changePassword(
+                credentials.password,
+                newPassword,
+                {
+                    phone: generatePhoneNumber(),
+                    gender: "Male",
+                },
+            );
             await authPage.logout();
-            await authPage.attemptLogin(credentials.email, credentials.password);
+            await authPage.attemptLogin(
+                credentials.email,
+                credentials.password,
+            );
 
             await authPage.expectLoginRefused();
 
             await login(shopPage, { ...credentials, password: newPassword });
 
-            await authPage.expectSignedIn(`${credentials.firstName} ${credentials.lastName}`);
+            await authPage.expectSignedIn(
+                `${credentials.firstName} ${credentials.lastName}`,
+            );
         });
 
-        test("should delete the profile and refuse a later sign in", async ({ shopPage }) => {
+        test("should delete the profile and refuse a later sign in", async ({
+            shopPage,
+        }) => {
             const authPage = new AuthPage(shopPage);
 
             await customerPage.deleteProfile(credentials.password);
-            await authPage.attemptLogin(credentials.email, credentials.password);
+            await authPage.attemptLogin(
+                credentials.email,
+                credentials.password,
+            );
 
             await authPage.expectLoginRefused();
         });
@@ -214,8 +240,12 @@ test.describe("customer account", () => {
         test("should reject an address without its required fields", async () => {
             await addressPage.submitEmptyAddress();
 
-            await addressPage.expectValidationError("The First Name field is required");
-            await addressPage.expectValidationError("The Street Address field is required");
+            await addressPage.expectValidationError(
+                "The First Name field is required",
+            );
+            await addressPage.expectValidationError(
+                "The Street Address field is required",
+            );
         });
 
         test("should edit an address and show the new details", async () => {
@@ -300,7 +330,9 @@ test.describe("customer account", () => {
             await productListPage.deleteProductsIfPresent([productName]);
         });
 
-        async function placeOrder(shopPage: import("@playwright/test").Page): Promise<string> {
+        async function placeOrder(
+            shopPage: import("@playwright/test").Page,
+        ): Promise<string> {
             await loginAsCustomer(shopPage);
             await new AddressPage(shopPage).addAddress(buildAddress());
 
@@ -309,7 +341,9 @@ test.describe("customer account", () => {
             });
         }
 
-        test("should reorder a placed order into the cart", async ({ shopPage }) => {
+        test("should reorder a placed order into the cart", async ({
+            shopPage,
+        }) => {
             const orderId = await placeOrder(shopPage);
             const orderPage = new OrderPage(shopPage);
 
@@ -337,7 +371,9 @@ test.describe("customer account", () => {
 
             await new AdminOrderPage(adminPage).createInvoice(orderId);
 
-            const fileName = await new OrderPage(shopPage).printInvoice(orderId);
+            const fileName = await new OrderPage(shopPage).printInvoice(
+                orderId,
+            );
 
             expect(fileName).toMatch(/\.pdf$/);
         });

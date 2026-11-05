@@ -6064,7 +6064,7 @@ return [
                 'ai-btn-info' => 'Afbeelding genereren',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Afbeelding',
-                'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+                'not-allowed-error' => 'Alleen afbeeldingsbestanden (:types) zijn toegestaan.',
                 'size-limit-error' => 'Het bestand overschrijdt de maximale uploadgrootte van :size.',
 
                 'ai-generation' => [
@@ -6123,7 +6123,7 @@ return [
             'videos' => [
                 'add-video-btn' => 'Video Toevoegen',
                 'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .webm) zijn toegestaan.',
+                'not-allowed-error' => 'Alleen videobestanden (:types) zijn toegestaan.',
                 'video' => 'Video',
 
                 'seo' => [

@@ -10,6 +10,7 @@
 >
     <p
         {{ $attributes->merge(['class' => 'mt-1 text-xs italic text-red-600']) }}
+        data-field-error
         v-text="message"
     >
     </p>
