@@ -92,6 +92,11 @@ export class UsersPage extends DatagridPage {
         return new MediaGalleryField(this.form);
     }
 
+    async pickAvatarForNewUser(avatar: MediaFile): Promise<void> {
+        await this.openCreateModal();
+        await this.avatarField().attemptAttach(avatar);
+    }
+
     async attemptCreateUserWithAvatar(
         data: AdminUserData,
         avatar: MediaFile,

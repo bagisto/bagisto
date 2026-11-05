@@ -78,7 +78,10 @@ test.describe("locale management", () => {
 
     test("should update a locale and keep the new direction after reload", async () => {
         const locale = buildLocale();
-        const changes = { name: `Locale ${uniqueStamp()} renamed`, direction: "rtl" as const };
+        const changes = {
+            name: `Locale ${uniqueStamp()} renamed`,
+            direction: "rtl" as const,
+        };
         created.push(locale.name, changes.name);
 
         await localesPage.createLocale(locale);
@@ -106,9 +109,21 @@ test.describe("locale management", () => {
     });
 
     for (const { title, logo, message } of [
-        { title: "that is not an image", logo: notAnImage, message: LOGO_REFUSED },
-        { title: "that is markup named as an svg", logo: htmlNamedAsSvg, message: LOGO_REFUSED },
-        { title: "that is an svg nobody can read", logo: brokenSvg, message: SVG_UNREADABLE },
+        {
+            title: "that is not an image",
+            logo: notAnImage,
+            message: LOGO_REFUSED,
+        },
+        {
+            title: "that is markup named as an svg",
+            logo: htmlNamedAsSvg,
+            message: LOGO_REFUSED,
+        },
+        {
+            title: "that is an svg nobody can read",
+            logo: brokenSvg,
+            message: SVG_UNREADABLE,
+        },
     ]) {
         test(`should say why a logo ${title} was refused and not create the locale`, async () => {
             const locale = buildLocale();
@@ -158,9 +173,11 @@ test.describe("locale management", () => {
 
         await localesPage.logoField().attemptAttach(plainTextFile());
 
-        await localesPage.logoField().expectNotice(
-            "Only images files (.jpeg, .jpg, .png, ..) are allowed.",
-        );
+        await localesPage
+            .logoField()
+            .expectNotice(
+                "Only image files (.jpeg, .jpg, .png, .svg, .webp) are allowed.",
+            );
         await localesPage.logoField().expectEmpty();
     });
 

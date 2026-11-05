@@ -237,6 +237,7 @@
 
                                 <x-admin::media.images
                                     name="logo"
+                                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                     meta-name="logo_meta"
                                     enable-seo="true"
                                     width="110px"
@@ -259,6 +260,7 @@
 
                                 <x-admin::media.images
                                     name="favicon"
+                                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp,.ico"
                                     meta-name="favicon_meta"
                                     enable-seo="true"
                                     width="110px"

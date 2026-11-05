@@ -1,4 +1,9 @@
-import { notAnImage, validImage } from "@shared/media-files";
+import {
+    largeImage,
+    notAnImage,
+    validImage,
+    validSvg,
+} from "@shared/media-files";
 import { test } from "../../setup";
 import { LoginPage } from "../../pages/admin/auth/LoginPage";
 import {
@@ -102,9 +107,7 @@ test.describe("user management", () => {
         await usersPage.expectUserListed(env.adminEmail, "");
     });
 
-    test("should let a newly created active user sign in", async ({
-        page,
-    }) => {
+    test("should let a newly created active user sign in", async ({ page }) => {
         const user = buildUser();
         created.push(user.email);
 
@@ -134,9 +137,11 @@ test.describe("user management", () => {
 
         await usersPage.attemptCreateUserWithAvatar(user, notAnImage());
 
-        await usersPage.avatarField().expectError(
-            "The Image field must be a file of type: jpeg, jpg, png, gif.",
-        );
+        await usersPage
+            .avatarField()
+            .expectError(
+                "The Image field must be a file of type: jpeg, jpg, png, gif.",
+            );
         await usersPage.expectUserAbsent(user.email);
     });
 
@@ -147,5 +152,25 @@ test.describe("user management", () => {
         await usersPage.createUserWithAvatar(user, validImage());
 
         await usersPage.expectAvatarInEditForm(user.email);
+    });
+
+    test("should refuse an avatar of a type the user form does not take before sending it", async () => {
+        await usersPage.pickAvatarForNewUser(validSvg());
+
+        await usersPage
+            .avatarField()
+            .expectNotice(
+                "Only image files (.jpeg, .jpg, .png, .gif) are allowed.",
+            );
+        await usersPage.avatarField().expectEmpty();
+    });
+
+    test("should refuse an avatar larger than the user form takes before sending it", async () => {
+        await usersPage.pickAvatarForNewUser(largeImage(10001));
+
+        await usersPage
+            .avatarField()
+            .expectNotice("The file exceeds the maximum upload size of");
+        await usersPage.avatarField().expectEmpty();
     });
 });

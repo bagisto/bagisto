@@ -92,7 +92,13 @@ export class MediaGalleryField {
     }
 
     async expectNotice(text: string): Promise<void> {
-        await expect(this.root.page().getByText(text)).toBeVisible();
+        await expect(
+            this.root.locator("[data-field-error]").filter({ hasText: text }),
+        ).toBeVisible();
+    }
+
+    async expectErrorInView(): Promise<void> {
+        await expect(this.root.locator("[data-field-error]")).toBeInViewport();
     }
 
     async expectEmpty(): Promise<void> {

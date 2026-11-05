@@ -53,6 +53,7 @@
                             <x-admin::form.control-group>
                                 <x-admin::media.images
                                     name="image"
+                                    accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                     meta-name="image_meta"
                                     enable-seo="true"
                                     :uploaded-images="$user->image ? [[
@@ -370,8 +371,14 @@
                 },
 
                 methods: {
+                    /**
+                     * Reset the setup modal on closing, putting the toggle back when two-factor was not enabled.
+                     */
                     setupModalClose() {
-                        if (this.currentToggleElement && !this.originalToggleState) {
+                        if (
+                            this.currentToggleElement
+                            && ! this.originalToggleState
+                        ) {
                             this.currentToggleElement.checked = this.originalToggleState;
                         }
 
@@ -386,6 +393,9 @@
                         this.$emit('update:modelValue', false);
                     },
 
+                    /**
+                     * Enable two-factor authentication with the submitted code and show the backup codes.
+                     */
                     enableTwoFactor(params, { setErrors }) {
                         if (this.isEnabling) {
                             return;
@@ -418,6 +428,9 @@
                             });
                     },
 
+                    /**
+                     * Download the backup codes as a text file.
+                     */
                     downloadBackupCodes() {
                         let blob = new Blob([this.backupCodes.join("\n")], { type: 'text/plain' });
 
@@ -438,6 +451,9 @@
                         URL.revokeObjectURL(url);
                     },
 
+                    /**
+                     * Open the setup when the toggle is switched on, or disable two-factor when it is switched off.
+                     */
                     handleToggleChange(event) {
                         this.currentToggleElement = event.target;
                         
@@ -448,6 +464,9 @@
                         }
                     },
 
+                    /**
+                     * Disable two-factor authentication, putting the toggle back if the request fails.
+                     */
                     disableTwoFactor() {
                         this.$axios.post(`{{ route('admin.two_factor.disable') }}`)
                             .then(response => {
@@ -470,6 +489,9 @@
                             });
                     },
 
+                    /**
+                     * Open the setup modal and load the QR code to scan.
+                     */
                     openSetupModal() {
                         this.$refs.twoFactorSetupModal.open();
 
@@ -494,6 +516,9 @@
                             });
                     },
 
+                    /**
+                     * Mark two-factor as enabled and close the setup modal.
+                     */
                     onTwoFactorEnabled() {
                         this.originalToggleState = true;
 

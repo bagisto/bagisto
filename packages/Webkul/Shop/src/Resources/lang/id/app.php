@@ -564,7 +564,8 @@ return [
             'index' => [
                 'add-attachments' => 'Tambahkan Lampiran',
                 'add-image' => 'Tambahkan Gambar/Video',
-                'invalid-file-type' => 'Tipe file yang dipilih tidak diizinkan.',
+                'invalid-file-type' => 'Hanya file :types yang diperbolehkan.',
+                'size-limit-error' => 'File melebihi ukuran unggah maksimum :size.',
             ],
         ],
 

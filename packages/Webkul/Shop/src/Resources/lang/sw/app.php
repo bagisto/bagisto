@@ -564,7 +564,8 @@ return [
             'index' => [
                 'add-attachments' => 'Ongeza viambatisho',
                 'add-image' => 'Ongeza Picha/Video',
-                'invalid-file-type' => 'Aina ya faili iliyochaguliwa hairuhusiwi.',
+                'invalid-file-type' => 'Faili za :types pekee ndizo zinazoruhusiwa.',
+                'size-limit-error' => 'Faili limezidi ukubwa wa juu wa kupakia wa :size.',
             ],
         ],
 

@@ -151,6 +151,7 @@
 
                             <x-admin::media.images
                                 name="logo_path"
+                                accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                 meta-name="logo_meta"
                                 enable-seo="true"
                             />
@@ -168,6 +169,7 @@
 
                             <x-admin::media.images
                                 name="banner_path"
+                                accepted-types=".bmp,.jpeg,.jpg,.png,.webp"
                                 meta-name="banner_meta"
                                 enable-seo="true"
                                 width="220px"

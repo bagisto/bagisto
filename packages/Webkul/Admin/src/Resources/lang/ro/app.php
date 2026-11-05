@@ -6064,7 +6064,8 @@ return [
                 'ai-btn-info' => 'Generate Image',
                 'allowed-types' => 'png, jpeg, jpg',
                 'image' => 'Imagine',
-                'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
+                'not-allowed-error' => 'Sunt permise doar fișiere imagine (:types).',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
 
                 'ai-generation' => [
                     'apply' => 'Apply',
@@ -6116,13 +6117,15 @@ return [
                 'add-image' => 'Add Image',
                 'delete' => 'Delete',
                 'download' => 'Download',
+                'not-allowed-error' => 'Sunt permise doar fișiere :types.',
                 'replace' => 'Replace',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
             ],
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
-                'allowed-types' => 'mp4, webm, mov',
-                'not-allowed-error' => 'Only videos files (.mp4, .mov, .webm) are allowed.',
+                'not-allowed-error' => 'Sunt permise doar fișiere video (:types).',
+                'size-limit-error' => 'Fișierul depășește dimensiunea maximă de încărcare de :size.',
                 'video' => 'Videoclip',
 
                 'seo' => [
