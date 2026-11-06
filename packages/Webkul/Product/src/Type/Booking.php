@@ -84,14 +84,17 @@ class Booking extends AbstractType
      * Update the product type specific data.
      *
      * @param  int  $id
-     * @param  string  $attribute
+     * @param  array  $attributes
      * @return Product
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attributes = [])
     {
-        $product = parent::update($data, $id, $attribute);
+        $product = parent::update($data, $id, $attributes);
 
-        if (request()->route()->getName() != 'admin.catalog.products.mass_update') {
+        if (
+            $attributes !== ['status']
+            && isset($data['booking'])
+        ) {
             if (
                 isset($data['booking']['type'])
                 && $data['booking']['type'] != 'event'
@@ -573,8 +576,8 @@ class Booking extends AbstractType
             ],
 
             'booking.duration' => [
-                function ($attribute, $value, $fail) {
-                    $booking = request('booking') ?? [];
+                function ($attribute, $value, $fail, $validator) {
+                    $booking = $validator->getData()['booking'] ?? [];
 
                     if (! in_array($booking['type'] ?? null, ['default', 'appointment', 'table'], true)) {
                         return;
@@ -585,8 +588,8 @@ class Booking extends AbstractType
             ],
 
             'booking.renting_type' => [
-                function ($attribute, $value, $fail) {
-                    $booking = request('booking') ?? [];
+                function ($attribute, $value, $fail, $validator) {
+                    $booking = $validator->getData()['booking'] ?? [];
 
                     if (($booking['type'] ?? null) !== 'rental') {
                         return;

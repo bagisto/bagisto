@@ -3,6 +3,7 @@
 namespace Webkul\Category\Repositories;
 
 use Illuminate\Container\Container;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -335,15 +336,13 @@ class CategoryRepository extends Repository
             return;
         }
 
-        foreach ($data[$type] as $imageId => $image) {
-            $file = $type.'.'.$imageId;
-
-            if (request()->hasFile($file)) {
+        foreach ($data[$type] as $image) {
+            if ($image instanceof UploadedFile) {
                 if ($category->{$type}) {
                     Storage::delete($category->{$type});
                 }
 
-                $encoded = image_manager()->fromUpload(request()->file($file))->toWebp()->toBytes();
+                $encoded = image_manager()->fromUpload($image)->toWebp()->toBytes();
 
                 $category->{$type} = $this->mediaFileName->resolve(
                     'categories/'.$category->id,

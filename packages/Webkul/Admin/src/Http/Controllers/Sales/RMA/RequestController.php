@@ -283,7 +283,7 @@ class RequestController extends Controller
             ! empty($data['images'])
             && ! empty(implode(',', $data['images']))
         ) {
-            $this->rmaImageRepository->manageImages($data['images'], $rma);
+            $this->rmaImageRepository->manageImages(request()->file('images', []), $rma);
         }
 
         $customAttributes = request('customAttributes', []);

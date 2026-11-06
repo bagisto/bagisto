@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Contracts\ProductDownloadableLink;
@@ -27,12 +28,12 @@ class ProductDownloadableLinkRepository extends Repository
     public function upload($data, $productId)
     {
         foreach ($data as $type => $file) {
-            if (! request()->hasFile($type)) {
+            if (! $file instanceof UploadedFile) {
                 continue;
             }
 
             return [
-                $type => request()->file($type)->store('products/'.$productId.'/downloadable-links', 'private'),
+                $type => $file->store('products/'.$productId.'/downloadable-links', 'private'),
                 $type.'_name' => $file->getClientOriginalName(),
             ];
         }
