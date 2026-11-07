@@ -54,7 +54,7 @@ class GDPRController extends Controller
             'email' => $customer->email,
         ]);
 
-        Event::dispatch('customer.account.gdpr-request.create.before');
+        Event::dispatch('customer.account.gdpr-request.create.before', [$params]);
 
         $gdprRequest = $this->gdprDataRequestRepository->create($params);
 
@@ -169,7 +169,7 @@ class GDPRController extends Controller
             return redirect()->route('shop.customers.account.gdpr.index');
         }
 
-        Event::dispatch('customer.account.gdpr-request.update.before');
+        Event::dispatch('customer.account.gdpr-request.update.before', $id);
 
         $gdprRequest = $this->gdprDataRequestRepository->update([
             'status' => 'revoked',

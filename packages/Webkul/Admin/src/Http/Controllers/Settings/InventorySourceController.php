@@ -51,9 +51,7 @@ class InventorySourceController extends Controller
      */
     public function store(InventorySourceRequest $inventorySourceRequest)
     {
-        Event::dispatch('inventory.inventory_source.create.before');
-
-        $inventorySource = $this->inventorySourceRepository->create($inventorySourceRequest->only([
+        $data = $inventorySourceRequest->only([
             'code',
             'name',
             'description',
@@ -70,7 +68,11 @@ class InventorySourceController extends Controller
             'street',
             'postcode',
             'status',
-        ]));
+        ]);
+
+        Event::dispatch('inventory.inventory_source.create.before', [$data]);
+
+        $inventorySource = $this->inventorySourceRepository->create($data);
 
         Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 

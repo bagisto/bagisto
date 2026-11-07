@@ -90,8 +90,6 @@ class CustomerController extends Controller
 
         $password = Str::password(16);
 
-        Event::dispatch('customer.registration.before');
-
         $data = array_merge([
             'password' => bcrypt($password),
             'is_verified' => 1,
@@ -106,7 +104,9 @@ class CustomerController extends Controller
             'channel_id',
         ]));
 
-        Event::dispatch('customer.create.before');
+        Event::dispatch('customer.registration.before', [$data]);
+
+        Event::dispatch('customer.create.before', [$data]);
 
         $customer = $this->customerRepository->create($data);
 

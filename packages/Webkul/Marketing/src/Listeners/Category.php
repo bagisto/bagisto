@@ -96,15 +96,17 @@ class Category
             Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
         }
 
-        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
-
-        $urlRewrite = $this->urlRewriteRepository->create([
+        $data = [
             'entity_type' => 'category',
             'request_path' => $translations['slug'],
             'target_path' => $currentURLKey,
             'locale' => $locale,
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
-        ]);
+        ];
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before', [$data]);
+
+        $urlRewrite = $this->urlRewriteRepository->create($data);
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
     }

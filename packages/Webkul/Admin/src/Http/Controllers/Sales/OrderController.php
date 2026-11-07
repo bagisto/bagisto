@@ -205,7 +205,7 @@ class OrderController extends Controller
 
         $validatedData['order_id'] = $id;
 
-        Event::dispatch('sales.order.comment.create.before');
+        Event::dispatch('sales.order.comment.create.before', [$validatedData]);
 
         $comment = $this->orderCommentRepository->create($validatedData);
 

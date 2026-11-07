@@ -30,7 +30,7 @@ class SubscriptionController extends Controller
 
         $email = request()->input('email');
 
-        Event::dispatch('customer.subscription.before');
+        Event::dispatch('customer.subscription.before', $email);
 
         if ($this->isAlreadySubscribed($email)) {
             session()->flash('error', trans('shop::app.subscription.already'));

@@ -71,12 +71,14 @@ class CompareController extends APIController
             ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        Event::dispatch('customer.compare.create.before');
-
-        $compareProduct = $this->compareItemRepository->create([
+        $data = [
             'customer_id' => auth()->guard('customer')->id(),
             'product_id' => request()->input('product_id'),
-        ]);
+        ];
+
+        Event::dispatch('customer.compare.create.before', [$data]);
+
+        $compareProduct = $this->compareItemRepository->create($data);
 
         Event::dispatch('customer.compare.create.after', $compareProduct);
 
@@ -141,13 +143,15 @@ class CompareController extends APIController
             abort(401, trans('shop::app.errors.401.title'));
         }
 
-        Event::dispatch('customer.compare.delete-all.before');
+        $customerId = auth()->guard('customer')->id();
+
+        Event::dispatch('customer.compare.delete-all.before', $customerId);
 
         $success = $this->compareItemRepository->deleteWhere([
-            'customer_id' => auth()->guard('customer')->id(),
+            'customer_id' => $customerId,
         ]);
 
-        Event::dispatch('customer.compare.delete-all.after');
+        Event::dispatch('customer.compare.delete-all.after', $customerId);
 
         if (! $success) {
             return new JsonResource([
