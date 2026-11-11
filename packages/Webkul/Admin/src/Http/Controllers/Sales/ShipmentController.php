@@ -3,9 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\OrderShipmentDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Product\Contracts\Product;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
@@ -74,7 +76,7 @@ class ShipmentController extends Controller
         }
 
         $this->validate(request(), [
-            'shipment.source' => 'required',
+            'shipment.source' => ['required', Rule::in($order->channel?->inventory_sources->pluck('id')->all() ?? [])],
             'shipment.items.*.*' => 'required|numeric|min:0',
         ]);
 
@@ -135,28 +137,15 @@ class ShipmentController extends Controller
 
                         $finalQty = ($child->qty_ordered / $orderItem->qty_ordered) * $qty;
 
-                        $availableQty = $child->product->inventories()
-                            ->where('inventory_source_id', $inventorySourceId)
-                            ->sum('qty');
-
                         if (
                             $child->qty_to_ship < $finalQty
-                            || $availableQty < $finalQty
+                            || ! $this->hasStockToShip($child->product, $inventorySourceId, $finalQty)
                         ) {
                             return false;
                         }
                     }
-                } else {
-                    $availableQty = $orderItem->product->inventories()
-                        ->where('inventory_source_id', $inventorySourceId)
-                        ->sum('qty');
-
-                    if (
-                        $orderItem->qty_to_ship < $qty
-                        || $availableQty < $qty
-                    ) {
-                        return false;
-                    }
+                } elseif (! $this->hasStockToShip($orderItem->product, $inventorySourceId, $qty)) {
+                    return false;
                 }
 
                 $valid = true;
@@ -178,5 +167,17 @@ class ShipmentController extends Controller
         $shipment = $this->shipmentRepository->findOrFail($id);
 
         return view('admin::sales.shipments.view', compact('shipment'));
+    }
+
+    /**
+     * Return true if the source holds the quantity, or the product does not manage its stock.
+     */
+    protected function hasStockToShip(Product $product, int $inventorySourceId, float $qty): bool
+    {
+        if (! $product->manage_stock) {
+            return true;
+        }
+
+        return $product->inventory_source_qty($inventorySourceId) >= $qty;
     }
 }

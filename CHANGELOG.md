@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Reworked admin notifications into a feed any package can add to, filtered by type and read per admin, covering orders, customers, reviews, returns, GDPR requests and imports.
 
+- #11575 [fixed] - An order for a product that does not manage its stock could not be shipped, so it never completed. It now ships whatever the inventory source holds.
+
 ## **v2.5.1 (6th of November 2026)** - *Release*
 
 - Fixed the nginx production image answering every resized image with a 404 status, though the image itself was served.
