@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Listar todas as notificações',
-        'marked-success' => 'Todas as notificações foram marcadas como lidas',
-        'no-record' => 'Nenhum Registro Encontrado',
+        'all' => 'Todos',
+        'description' => 'Acompanhe pedidos, clientes e tudo o que precisa da sua atenção.',
+        'empty-description' => 'Novas notificações aparecerão aqui assim que chegarem.',
+        'empty-title' => 'Tudo em dia',
+        'mark-all-read' => 'Marcar tudo como lido',
+        'mark-read' => 'Marcar como lida',
+        'mark-unread' => 'Marcar como não lida',
+        'marked-all-read' => 'Todas as notificações foram marcadas como lidas.',
         'of' => 'de',
         'per-page' => 'Por página',
-        'read-all' => 'Marcar como Lido',
         'title' => 'Notificações',
-        'view-all' => 'Ver Todas',
+        'today' => 'Hoje',
+        'unread' => 'Não lidas',
+        'view-all' => 'Ver todas as notificações',
+        'yesterday' => 'Ontem',
 
-        'order-status-messages' => [
-            'all' => 'Todos',
-            'canceled' => 'Pedido Cancelado',
-            'closed' => 'Pedido Fechado',
-            'completed' => 'Pedido Concluído',
-            'pending' => 'Pedido Pendente',
-            'pending-payment' => 'Pagamento Pendente',
-            'processing' => 'Pedido em Processamento',
+        'groups' => [
+            'customers' => 'Clientes',
+            'gdpr' => 'Solicitações de Dados GDPR',
+            'imports' => 'Importações',
+            'orders' => 'Pedidos',
+            'returns' => 'Solicitações de RMA',
+            'reviews' => 'Avaliações',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Novo cliente cadastrado',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Nova solicitação de exclusão de dados',
+                'message' => 'De :customer',
+                'update-title' => 'Nova solicitação de atualização de dados',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed linhas processadas',
+                'message-skipped' => ':processed linhas processadas, :skipped ignoradas',
+                'title' => 'Importação de :type concluída',
+            ],
+
+            'order' => [
+                'message' => ':total de :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Pedido #:order cancelado',
+            ],
+
+            'order-placed' => [
+                'title' => 'Novo pedido #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount reembolsado',
+                'title' => 'Reembolso emitido para o pedido #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Pedido #:order de :customer',
+                'title' => 'Nova solicitação de devolução #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer avaliou :product com :rating de 5',
+                'title' => 'Nova avaliação aguardando aprovação',
+            ],
         ],
     ],
 

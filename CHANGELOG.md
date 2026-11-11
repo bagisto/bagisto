@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Reworked admin notifications into a feed any package can add to, filtered by type and read per admin, covering orders, customers, reviews, returns, GDPR requests and imports.
+
 ## **v2.5.1 (6th of November 2026)** - *Release*
 
 - Fixed the nginx production image answering every resized image with a 404 status, though the image itself was served.

@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Все уведомления в списке',
-        'marked-success' => 'Все уведомления отмечены как прочитанные',
-        'no-record' => 'Нет записей',
+        'all' => 'Все',
+        'description' => 'Следите за заказами, клиентами и всем, что требует вашего внимания.',
+        'empty-description' => 'Новые уведомления появятся здесь, как только поступят.',
+        'empty-title' => 'Новых уведомлений нет',
+        'mark-all-read' => 'Отметить все как прочитанные',
+        'mark-read' => 'Отметить как прочитанное',
+        'mark-unread' => 'Отметить как непрочитанное',
+        'marked-all-read' => 'Все уведомления отмечены как прочитанные.',
         'of' => 'из',
         'per-page' => 'На странице',
-        'read-all' => 'Пометить все как прочитанные',
         'title' => 'Уведомления',
-        'view-all' => 'Просмотреть все',
+        'today' => 'Сегодня',
+        'unread' => 'Непрочитанные',
+        'view-all' => 'Все уведомления',
+        'yesterday' => 'Вчера',
 
-        'order-status-messages' => [
-            'all' => 'Все',
-            'canceled' => 'Заказ отменен',
-            'closed' => 'Заказ закрыт',
-            'completed' => 'Заказ завершен',
-            'pending' => 'Заказ в ожидании',
-            'pending-payment' => 'Ожидается оплата',
-            'processing' => 'Заказ в обработке',
+        'groups' => [
+            'customers' => 'Клиенты',
+            'gdpr' => 'Запросы данных GDPR',
+            'imports' => 'Импорты',
+            'orders' => 'Заказы',
+            'returns' => 'Запросы RMA',
+            'reviews' => 'Отзывы',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Зарегистрирован новый клиент',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Новый запрос на удаление данных',
+                'message' => 'От :customer',
+                'update-title' => 'Новый запрос на обновление данных',
+            ],
+
+            'import-completed' => [
+                'message' => 'Обработано строк: :processed',
+                'message-skipped' => 'Обработано строк: :processed, пропущено: :skipped',
+                'title' => 'Импорт :type завершён',
+            ],
+
+            'order' => [
+                'message' => ':total от :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Заказ #:order отменён',
+            ],
+
+            'order-placed' => [
+                'title' => 'Новый заказ #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => 'Возвращено :amount',
+                'title' => 'Оформлен возврат по заказу #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Заказ #:order от :customer',
+                'title' => 'Новый запрос на возврат #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer оценил(а) :product на :rating из 5',
+                'title' => 'Новый отзыв ожидает одобрения',
+            ],
         ],
     ],
 

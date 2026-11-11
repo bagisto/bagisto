@@ -3,15 +3,23 @@
 namespace Webkul\Notification\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Webkul\Notification\Contracts\Notification as NotificationContract;
-use Webkul\Sales\Models\OrderProxy;
 
 class Notification extends Model implements NotificationContract
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'type',
-        'read',
-        'order_id',
+        'audience',
+        'data',
+        'notifiable_type',
+        'notifiable_id',
     ];
 
     /**
@@ -20,14 +28,22 @@ class Notification extends Model implements NotificationContract
      * @var array
      */
     protected $casts = [
-        'read' => 'boolean',
+        'data' => 'array',
     ];
 
     /**
-     * Get Order Details.
+     * The user the notification is addressed to, or none when it is for its whole audience.
      */
-    public function order()
+    public function notifiable(): MorphTo
     {
-        return $this->belongsTo(OrderProxy::modelClass());
+        return $this->morphTo();
+    }
+
+    /**
+     * Who has read the notification.
+     */
+    public function reads(): HasMany
+    {
+        return $this->hasMany(NotificationReadProxy::modelClass());
     }
 }

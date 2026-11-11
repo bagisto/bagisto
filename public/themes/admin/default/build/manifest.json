@@ -268,7 +268,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-Reqr1h2x.css",
+    "file": "assets/app-B7iipWfg.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -517,7 +517,7 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-CG1OQxbP.js",
+    "file": "assets/app-OcYlhD50.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
@@ -581,7 +581,7 @@
     "isEntry": true
   },
   "src/Resources/assets/js/echo.js": {
-    "file": "assets/echo-CTK1Dwf6.js",
+    "file": "assets/echo-DWY2wxk7.js",
     "name": "echo",
     "src": "src/Resources/assets/js/echo.js",
     "isEntry": true,

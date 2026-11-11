@@ -3,8 +3,8 @@
 use Illuminate\Broadcasting\BroadcastException;
 use Illuminate\Contracts\Broadcasting\Broadcaster;
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
-use Webkul\Notification\Listeners\Order as OrderListener;
 use Webkul\Notification\Models\Notification;
 
 beforeEach(function () {
@@ -23,6 +23,7 @@ beforeEach(function () {
     config([
         'broadcasting.default' => 'failing',
         'broadcasting.connections.failing' => ['driver' => 'failing'],
+        'queue.default' => 'sync',
     ]);
 });
 
@@ -33,21 +34,13 @@ beforeEach(function () {
 it('should still record the notification when the broadcaster is unreachable', function () {
     $order = $this->createOrder();
 
-    app(OrderListener::class)->createOrder($order);
+    Event::dispatch('checkout.order.save.after', $order);
 
-    expect(Notification::where('order_id', $order->id)->exists())->toBeTrue();
+    expect(Notification::query()->where('type', 'order.placed')->get()->contains(fn ($notification) => $notification->data['order_id'] === $order->id))->toBeTrue();
 });
 
-it('should not let an unreachable broadcaster fail order creation', function () {
-    $order = $this->createOrder();
-
-    app(OrderListener::class)->createOrder($order);
-})->throwsNoExceptions();
-
-it('should not let an unreachable broadcaster fail an order status update', function () {
-    $order = $this->createOrder();
-
-    app(OrderListener::class)->updateOrder($order);
+it('should not let an unreachable broadcaster fail what raised the notification', function () {
+    notifier()->notify('order.placed', $this->createOrder());
 })->throwsNoExceptions();
 
 it('should log the reason a notification was not broadcast', function () {
@@ -55,5 +48,5 @@ it('should log the reason a notification was not broadcast', function () {
         ->once()
         ->withArgs(fn ($message) => str_contains($message, 'The broadcaster is unreachable.'));
 
-    app(OrderListener::class)->updateOrder($this->createOrder());
+    notifier()->notify('order.placed', $this->createOrder());
 });

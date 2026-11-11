@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'සිසුන් සියලු දැක්කාක් ලැයිස්තුවෙන් සලකා',
-        'marked-success' => 'සියලු දැනුම්දීම් කියවූ ලෙස සලකුණු කර ඇත',
-        'no-record' => 'නිළියන්ට වාර්තා නොමැත',
+        'all' => 'සියල්ල',
+        'description' => 'ඇණවුම්, පාරිභෝගිකයන් සහ ඔබේ අවධානය අවශ්‍ය සියල්ල ගැන දැනුවත්ව සිටින්න.',
+        'empty-description' => 'නව දැනුම්දීම් ලැබුණු විගස මෙහි පෙන්වනු ඇත.',
+        'empty-title' => 'ඔබ සියල්ල බලා ඇත',
+        'mark-all-read' => 'සියල්ල කියවූ ලෙස සලකුණු කරන්න',
+        'mark-read' => 'කියවූ ලෙස සලකුණු කරන්න',
+        'mark-unread' => 'නොකියවූ ලෙස සලකුණු කරන්න',
+        'marked-all-read' => 'සියලු දැනුම්දීම් කියවූ ලෙස සලකුණු කරන ලදී.',
         'of' => 'සිට',
         'per-page' => 'පිටුවට',
-        'read-all' => 'සියලු කියවන්න',
         'title' => 'සෞඛ්‍යාත්මක දැක්කාකරු',
-        'view-all' => 'සියල්ල බලන්න',
+        'today' => 'අද',
+        'unread' => 'නොකියවූ',
+        'view-all' => 'සියලු දැනුම්දීම් බලන්න',
+        'yesterday' => 'ඊයේ',
 
-        'order-status-messages' => [
-            'all' => 'සියල්ල',
-            'canceled' => 'ඇනවුම අවලංගු කරන ලදි',
-            'closed' => 'ඇනවුම වසා ඇත',
-            'completed' => 'ඇනවුම කරන ලදි',
-            'pending' => 'ඇනවුම සහිතයි',
-            'pending-payment' => 'වාරික ගෙවීමට නැත',
-            'processing' => 'ඇනවුම සකසා ඇත',
+        'groups' => [
+            'customers' => 'පාරිභෝගිකයෝ',
+            'gdpr' => 'GDPR දත්ත ඉල්ලීම්',
+            'imports' => 'ආනයනයන්',
+            'orders' => 'ඇණවුම්',
+            'returns' => 'RMA ඉල්ලීම්',
+            'reviews' => 'අදාල වියැකි',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'නව පාරිභෝගිකයෙකු ලියාපදිංචි විය',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'දත්ත මකා දැමීමේ නව ඉල්ලීමක්',
+                'message' => ':customer වෙතින්',
+                'update-title' => 'දත්ත යාවත්කාලීන කිරීමේ නව ඉල්ලීමක්',
+            ],
+
+            'import-completed' => [
+                'message' => 'පේළි :processed ක් සකසන ලදී',
+                'message-skipped' => 'පේළි :processed ක් සකසන ලදී, :skipped ක් මඟ හරින ලදී',
+                'title' => ':type ආයාතය සම්පූර්ණයි',
+            ],
+
+            'order' => [
+                'message' => ':customer වෙතින් :total',
+            ],
+
+            'order-canceled' => [
+                'title' => 'ඇණවුම #:order අවලංගු කරන ලදී',
+            ],
+
+            'order-placed' => [
+                'title' => 'නව ඇණවුම #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount ආපසු ගෙවන ලදී',
+                'title' => 'ඇණවුම #:order සඳහා ආපසු ගෙවීමක් නිකුත් කරන ලදී',
+            ],
+
+            'return-requested' => [
+                'message' => ':customer ගේ ඇණවුම #:order',
+                'title' => 'නව ආපසු යැවීමේ ඉල්ලීම #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer විසින් :product ට 5 න් :rating ක් ලබා දී ඇත',
+                'title' => 'අනුමැතිය බලාපොරොත්තුවෙන් නව සමාලෝචනයක්',
+            ],
         ],
     ],
 

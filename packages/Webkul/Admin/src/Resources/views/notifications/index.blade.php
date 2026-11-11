@@ -3,27 +3,22 @@
         @lang('admin::app.notifications.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.marketing.notifications.create.before') !!}
+    {!! view_render_event('bagisto.admin.notifications.index.before') !!}
 
-    <!-- Vue Component -->
-    <v-notification-list>
+    <v-notification-feed>
         <!-- Shimmer Effect -->
         <x-admin::shimmer.notifications />
-    </v-notification-list>
+    </v-notification-feed>
 
-    {!! view_render_event('bagisto.admin.marketing.notifications.create.after') !!}
+    {!! view_render_event('bagisto.admin.notifications.index.after') !!}
 
     @pushOnce('scripts')
         <script
             type="text/x-template"
-            id="v-notification-list-template"
+            id="v-notification-feed-template"
         >
-            <template v-if="isLoading">
-                <!-- Shimmer Effect -->
-                <x-admin::shimmer.notifications />
-            </template>
-
-            <template v-else>
+            <div>
+                <!-- Page Header -->
                 <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
                     <div class="grid gap-1.5">
                         <p class="pt-1.5 text-xl font-bold leading-6 text-gray-800 dark:text-white">
@@ -31,215 +26,356 @@
                         </p>
 
                         <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.notifications.description-text')
+                            @lang('admin::app.notifications.description')
                         </p>
                     </div>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        :disabled="! unread"
+                        @click="readAll"
+                    >
+                        @lang('admin::app.notifications.mark-all-read')
+                    </button>
                 </div>
 
-                <div class="box-shadow flex h-[calc(100vh-179px)] max-w-max flex-col justify-between rounded-md bg-white dark:bg-gray-900">
-                    <div>
-                        <div class="journal-scroll flex overflow-auto border-b dark:border-gray-800">
-                            <div
-                                class="flex cursor-pointer items-center gap-1 border-b-2 px-4 py-4 hover:bg-gray-100 dark:hover:bg-gray-950"
-                                :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
-                                v-for="data in orderType"
-                                @click="status=data.status; getNotification()"
+                <div class="flex items-start gap-4 max-lg:flex-col">
+                    <!-- Filters -->
+                    <div class="box-shadow w-64 shrink-0 rounded-md bg-white p-2 dark:bg-gray-900 max-lg:flex max-lg:w-full max-lg:gap-1 max-lg:overflow-x-auto">
+                        <button
+                            type="button"
+                            class="flex w-full cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all max-lg:w-auto"
+                            :class="filterClasses(filter.key)"
+                            :aria-pressed="filter.key === activeFilter"
+                            v-for="filter in baseFilters"
+                            :key="filter.key"
+                            @click="applyFilter(filter.key)"
+                        >
+                            <span
+                                class="text-xl"
+                                aria-hidden="true"
+                                :class="filter.icon"
                             >
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    @{{ data.message }}
+                            </span>
+
+                            <span v-text="filter.name"></span>
+
+                            <span
+                                class="rounded-full bg-blue-600 px-1.5 py-px text-xs font-semibold text-white ltr:ml-auto rtl:mr-auto"
+                                v-if="filter.unread"
+                                v-text="filter.unread"
+                            >
+                            </span>
+                        </button>
+
+                        <div
+                            class="my-1.5 border-t dark:border-gray-800 max-lg:hidden"
+                            v-if="groups.length"
+                        >
+                        </div>
+
+                        <button
+                            type="button"
+                            class="flex w-full cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all max-lg:w-auto"
+                            :class="filterClasses(group.key)"
+                            :aria-pressed="group.key === activeFilter"
+                            v-for="group in groups"
+                            :key="group.key"
+                            @click="applyFilter(group.key)"
+                        >
+                            <span
+                                class="text-xl"
+                                aria-hidden="true"
+                                :class="group.icon"
+                            >
+                            </span>
+
+                            <span v-text="group.name"></span>
+
+                            <span
+                                class="rounded-full bg-blue-600 px-1.5 py-px text-xs font-semibold text-white ltr:ml-auto rtl:mr-auto"
+                                v-if="group.unread"
+                                v-text="group.unread"
+                            >
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Feed -->
+                    <div class="box-shadow flex min-w-0 flex-1 flex-col rounded-md bg-white dark:bg-gray-900 max-lg:w-full">
+                        <template v-if="isLoading">
+                            <x-admin::shimmer.notifications.list />
+                        </template>
+
+                        <div
+                            role="feed"
+                            v-else-if="notifications.length"
+                        >
+                            <div
+                                class="border-b last:border-b-0 dark:border-gray-800"
+                                v-for="day in days"
+                                :key="day.key"
+                            >
+                                <p
+                                    class="px-4 pb-1 pt-4 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400"
+                                    v-text="day.label"
+                                >
                                 </p>
 
-                                <span class="rounded-full bg-gray-400 px-1.5 py-px text-xs font-semibold text-white">
-                                    @{{ data.status_count ?? '0' }}
-                                </span>
+                                <x-admin::notifications.item
+                                    v-for="notification in day.items"
+                                    ::key="notification.id"
+                                    ::notification="notification"
+                                    @toggle-read="toggleRead"
+                                />
                             </div>
                         </div>
 
+                        <!-- Empty State -->
                         <div
-                            class="journal-scroll grid max-h-[calc(100vh-330px)] overflow-auto"
-                            v-if="notifications.length"
-                        >
-                            <a
-                                :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                                class="flex h-14 items-start gap-1.5 p-4 hover:bg-gray-50 dark:hover:bg-gray-950"
-                                v-for="notification in notifications"
-                            >
-                                <span
-                                    v-if="notification.order.status in orderType"
-                                    class="h-fit rounded-full text-2xl"
-                                    :class="orderType[notification.order.status].icon"
-                                >
-                                </span>
-
-                                <div class="grid">
-                                    <p
-                                        class="text-gray-800 dark:text-white"
-                                        :class="notification.read ? 'font-normal' : 'font-semibold'"
-                                    >
-                                        #@{{ notification.order.id }}
-                                        @{{ orderType[notification.order.status].message }}
-                                    </p>
-
-                                    <p class="text-xs text-gray-600 dark:text-gray-300">
-                                        @{{ notification.order.datetime }}
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- For Empty Data -->
-                        <div
-                            class="max-h-[calc(100vh-330px)] px-6 py-3 text-gray-600 dark:text-gray-300"
+                            class="grid justify-items-center gap-3 px-6 py-16 text-center"
                             v-else
                         >
-                            @lang('admin::app.notifications.no-record')
+                            <span
+                                class="icon-notification flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-4xl text-gray-400 dark:bg-gray-800 dark:text-gray-500!"
+                                aria-hidden="true"
+                            >
+                            </span>
+
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @lang('admin::app.notifications.empty-title')
+                            </p>
+
+                            <p class="text-sm text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.notifications.empty-description')
+                            </p>
                         </div>
-                    </div>
 
-                    <!-- Pagination -->
-                    <div class="flex items-center gap-x-2 border-t p-4 dark:border-gray-800">
-                        <div class="inline-flex w-full max-w-max appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-2 py-1.5 text-center leading-6 text-gray-600 marker:shadow-sm focus:outline-hidden focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 max-sm:hidden ltr:ml-2 rtl:mr-2">
-                            @{{ pagination.per_page }}
-                        </div>
+                        <!-- Pagination -->
+                        <div
+                            class="flex items-center justify-between gap-2 border-t px-4 py-3 dark:border-gray-800"
+                            v-if="meta.total > meta.per_page"
+                        >
+                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                                <select
+                                    class="custom-select rounded-md border bg-white px-2.5 py-1.5 text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pr-8 rtl:pl-8"
+                                    v-model.number="perPage"
+                                    @change="fetch(1)"
+                                >
+                                    <option
+                                        v-for="option in perPageOptions"
+                                        :key="option"
+                                        :value="option"
+                                        v-text="option"
+                                    >
+                                    </option>
+                                </select>
 
-                        <span class="whitespace-nowrap text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.notifications.per-page')
-                        </span>
+                                @lang('admin::app.notifications.per-page')
+                            </div>
 
-                        <p class="whitespace-nowrap text-gray-600 dark:text-gray-300">
-                            @{{ pagination.current_page }}
-                        </p>
+                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                                <span>
+                                    @{{ meta.current_page }} @lang('admin::app.notifications.of') @{{ meta.last_page }}
+                                </span>
 
-                        <span class="whitespace-nowrap text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.notifications.of')
-                        </span>
-
-                        <p class="whitespace-nowrap text-gray-600 dark:text-gray-300">
-                            @{{ pagination.last_page }}
-                        </p>
-
-                        <!-- Prev & Next Page Button -->
-                        <div class="flex items-center gap-1">
-                            <a @click="getResults(pagination.prev_page_url)">
-                                <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:border hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
+                                <button
+                                    type="button"
+                                    class="inline-flex cursor-pointer items-center rounded-md border bg-white p-1.5 transition-all hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
+                                    :disabled="meta.current_page <= 1"
+                                    @click="fetch(meta.current_page - 1)"
+                                >
                                     <span class="icon-sort-left rtl:icon-sort-right text-2xl"></span>
-                                </div>
-                            </a>
+                                </button>
 
-                            <a @click="getResults(pagination.next_page_url)">
-                                <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:border hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
+                                <button
+                                    type="button"
+                                    class="inline-flex cursor-pointer items-center rounded-md border bg-white p-1.5 transition-all hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
+                                    :disabled="meta.current_page >= meta.last_page"
+                                    @click="fetch(meta.current_page + 1)"
+                                >
                                     <span class="icon-sort-right rtl:icon-sort-left text-2xl"></span>
-                                </div>
-                            </a>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </template>
+            </div>
         </script>
 
         <script type="module">
-            app.component('v-notification-list',{
-                template: '#v-notification-list-template',
+            app.component('v-notification-feed', {
+                template: '#v-notification-feed-template',
 
                 data() {
                     return {
                         notifications: [],
 
-                        pagination: {},
+                        groups: [],
 
-                        status: 'all',
+                        unread: 0,
 
-                        orderType: {
-                            all : {
-                                icon: 'icon',
-                                message: '@lang('admin::app.notifications.order-status-messages.all')',
-                                status: 'all'
-                            },
+                        meta: {},
 
-                            pending : {
-                                icon: 'icon-information bg-amber-100 text-amber-600 dark:text-amber-600!',
-                                message: '@lang('admin::app.notifications.order-status-messages.pending')',
-                                status: 'pending'
-                            },
+                        activeFilter: 'all',
 
-                            processing : {
-                                icon: 'icon-sort-right bg-green-100 text-green-600 dark:text-green-600!',
-                                message: '@lang('admin::app.notifications.order-status-messages.processing')',
-                                status: 'processing'
-                            },
+                        perPage: 10,
 
-                            canceled : {
-                                icon: 'icon-close bg-red-100 text-red-600 dark:text-red-600!',
-                                message: '@lang('admin::app.notifications.order-status-messages.canceled')',
-                                status: 'canceled'
-                            },
-
-                            completed : {
-                                icon: 'icon-done bg-blue-100 text-blue-600 dark:text-blue-600!',
-                                message: '@lang('admin::app.notifications.order-status-messages.completed')',
-                                status: 'completed'
-                            },
-
-                            closed : {
-                                icon: 'icon-repeat bg-red-100 text-red-600 dark:text-red-600!',
-                                message: '@lang('admin::app.notifications.order-status-messages.closed')',
-                                status: 'closed'
-                            },
-                        },
+                        perPageOptions: [10, 20, 50],
 
                         isLoading: true,
-                    }
+                    };
+                },
+
+                computed: {
+                    /**
+                     * The filters every admin has, ahead of the groups their role may see.
+                     */
+                    baseFilters() {
+                        return [
+                            {
+                                key: 'all',
+                                name: @json(trans('admin::app.notifications.all')),
+                                icon: 'icon-notification',
+                                unread: 0,
+                            },
+                            {
+                                key: 'unread',
+                                name: @json(trans('admin::app.notifications.unread')),
+                                icon: 'icon-dot',
+                                unread: this.unread,
+                            },
+                        ];
+                    },
+
+                    /**
+                     * The notifications of the page, gathered under the day they were raised.
+                     */
+                    days() {
+                        return this.notifications.reduce((days, notification) => {
+                            const last = days[days.length - 1];
+
+                            if (last?.key === notification.day) {
+                                last.items.push(notification);
+                            } else {
+                                days.push({
+                                    key: notification.day,
+                                    label: notification.day_label,
+                                    items: [notification],
+                                });
+                            }
+
+                            return days;
+                        }, []);
+                    },
                 },
 
                 mounted() {
-                    this.getNotification();
+                    this.fetch();
+
+                    this.$emitter.on('notifications-changed', this.refresh);
+
+                    window.Echo?.private('admin.notifications')
+                        .listen('.notification-created', () => this.refresh());
+                },
+
+                beforeUnmount() {
+                    this.$emitter.off('notifications-changed', this.refresh);
                 },
 
                 methods: {
-                    getNotification() {
-                        const params = {};
+                    /**
+                     * Fetch a page of the feed under the active filter, with the unread count of every group.
+                     */
+                    fetch(page = 1) {
+                        const params = {
+                            page,
+                            per_page: this.perPage,
+                        };
 
-                        if (this.status != 'all') {
-                            params.status = this.status;
+                        if (this.activeFilter === 'unread') {
+                            params.unread = 1;
+                        } else if (this.activeFilter !== 'all') {
+                            params.group = this.activeFilter;
                         }
 
-                        this.$axios.get("{{ route('admin.notification.get_notification') }}", {
-                            params: params
-                        })
-                        .then((response) => {
-                            this.notifications = response.data.search_results.data;
+                        return this.$axios.get("{{ route('admin.notification.list') }}", { params })
+                            .then((response) => {
+                                this.notifications = response.data.data;
 
-                            let total = 0;
+                                this.meta = response.data.meta;
 
-                            response.data.status_count.forEach((item) => {
-                                this.orderType[item.status].status_count = item.status_count;
+                                this.groups = response.data.groups;
 
-                                total += item.status_count;
+                                this.unread = response.data.unread;
+
+                                this.isLoading = false;
+                            })
+                            .catch(() => {
+                                this.isLoading = false;
                             });
-
-                            this.orderType['all'].status_count = total;
-
-                            this.pagination = response.data.search_results;
-
-                            this.isLoading = false;
-                        })
-                        .catch(error => console.log(error));
                     },
 
-                    getResults(url) {
-                        if (url) {
-                            this.$axios.get(url)
-                                .then(response => {
-                                    this.notifications = response.data.search_results.data;
+                    /**
+                     * Fetch the page on show again, after a notification arrives or another view changed one.
+                     */
+                    refresh() {
+                        this.fetch(this.meta.current_page ?? 1);
+                    },
 
-                                    this.pagination = response.data.search_results;
-                                })
-                                .catch(error => console.log(error));
-                        }
-                    }
-                }
-            })
+                    /**
+                     * Show the feed under a filter, from its first page.
+                     */
+                    applyFilter(filter) {
+                        this.activeFilter = filter;
+
+                        this.isLoading = true;
+
+                        this.fetch();
+                    },
+
+                    /**
+                     * The classes of a filter, highlighting the active one.
+                     */
+                    filterClasses(filter) {
+                        return this.activeFilter === filter
+                            ? 'bg-blue-50 font-semibold text-blue-600 dark:bg-gray-950 dark:text-blue-400'
+                            : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950';
+                    },
+
+                    /**
+                     * Mark a notification read or unread, and tell the bell its count has changed.
+                     */
+                    toggleRead(notification) {
+                        const request = notification.read
+                            ? this.$axios.delete("{{ route('admin.notification.mark_unread', ':id') }}".replace(':id', notification.id))
+                            : this.$axios.post("{{ route('admin.notification.mark_read', ':id') }}".replace(':id', notification.id));
+
+                        request.then(() => {
+                            this.refresh();
+
+                            this.$emitter.emit('notifications-changed');
+                        });
+                    },
+
+                    /**
+                     * Mark everything under the active group read, or everything when no group is chosen.
+                     */
+                    readAll() {
+                        const group = ['all', 'unread'].includes(this.activeFilter) ? null : this.activeFilter;
+
+                        this.$axios.post("{{ route('admin.notification.read_all') }}", { group })
+                            .then((response) => {
+                                this.refresh();
+
+                                this.$emitter.emit('notifications-changed');
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            });
+                    },
+                },
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>

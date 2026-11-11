@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Lister toutes les notifications',
-        'marked-success' => 'Toutes les notifications ont été marquées comme lues',
-        'no-record' => 'Aucun enregistrement trouvé',
+        'all' => 'Tout',
+        'description' => 'Suivez les commandes, les clients et tout ce qui demande votre attention.',
+        'empty-description' => 'Les nouvelles notifications apparaîtront ici dès leur arrivée.',
+        'empty-title' => 'Vous êtes à jour',
+        'mark-all-read' => 'Tout marquer comme lu',
+        'mark-read' => 'Marquer comme lue',
+        'mark-unread' => 'Marquer comme non lue',
+        'marked-all-read' => 'Toutes les notifications ont été marquées comme lues.',
         'of' => 'de',
         'per-page' => 'Par page',
-        'read-all' => 'Marquer comme lu',
         'title' => 'Notifications',
-        'view-all' => 'Voir tout',
+        'today' => 'Aujourd\'hui',
+        'unread' => 'Non lues',
+        'view-all' => 'Voir toutes les notifications',
+        'yesterday' => 'Hier',
 
-        'order-status-messages' => [
-            'all' => 'Tout',
-            'canceled' => 'Commande annulée',
-            'closed' => 'Commande fermée',
-            'completed' => 'Commande terminée',
-            'pending' => 'Commande en attente',
-            'pending-payment' => 'Paiement en attente',
-            'processing' => 'Commande en cours de traitement',
+        'groups' => [
+            'customers' => 'Clients',
+            'gdpr' => 'Demandes de données GDPR',
+            'imports' => 'Importations',
+            'orders' => 'Commandes',
+            'returns' => 'Demandes RMA',
+            'reviews' => 'Avis',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Nouveau client inscrit',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Nouvelle demande de suppression des données',
+                'message' => 'De :customer',
+                'update-title' => 'Nouvelle demande de mise à jour des données',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed lignes traitées',
+                'message-skipped' => ':processed lignes traitées, :skipped ignorées',
+                'title' => 'Importation de :type terminée',
+            ],
+
+            'order' => [
+                'message' => ':total de :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Commande #:order annulée',
+            ],
+
+            'order-placed' => [
+                'title' => 'Nouvelle commande #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount remboursé',
+                'title' => 'Remboursement émis pour la commande #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Commande #:order de :customer',
+                'title' => 'Nouvelle demande de retour #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer a noté :product :rating sur 5',
+                'title' => 'Nouvel avis en attente d\'approbation',
+            ],
         ],
     ],
 
