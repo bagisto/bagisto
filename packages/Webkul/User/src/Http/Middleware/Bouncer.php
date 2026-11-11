@@ -8,11 +8,8 @@ use Illuminate\Support\Facades\Route;
 class Bouncer
 {
     /**
-     * Routes every signed-in admin may reach whatever their role grants. They either
-     * act on the admin's own record, or back shared UI - notifications, the datagrid
-     * chrome, the editor's uploader - that no single permission owns. Anything not
-     * listed here and not mapped in `acl.php` is refused, so a route added without an
-     * ACL entry fails closed instead of being silently open to every role.
+     * Routes every admin may reach whatever their role grants: their own record, and shared UI no permission owns.
+     * A route neither listed nor mapped in `acl.php` is refused, so one added without an ACL entry fails closed.
      */
     const UNRESTRICTED_ROUTES = [
         'admin.account.edit',
@@ -47,21 +44,7 @@ class Bouncer
      */
     public function handle($request, \Closure $next, $guard = 'admin')
     {
-        /**
-         * Only the routes required to set up or complete two-factor
-         * authentication may bypass the verification check below (otherwise
-         * the redirect to the verification/setup screen would loop). Every
-         * other two-factor action - in particular disabling 2FA - must stay
-         * behind the verification check, so that a session which has logged in
-         * with the password but has not passed two-factor verification cannot
-         * use it to switch two-factor authentication off and bypass it.
-         */
-        if (
-            $request->routeIs('admin.two_factor.setup')
-            || $request->routeIs('admin.two_factor.verify.form')
-            || $request->routeIs('admin.two_factor.verify.store')
-            || $request->routeIs('admin.session.destroy')
-        ) {
+        if ($this->isTwoFactorRoute($request)) {
             return $next($request);
         }
 
@@ -69,20 +52,12 @@ class Bouncer
             return redirect()->route('admin.session.create');
         }
 
-        /**
-         * If user status is changed by admin. Then session should be
-         * logged out.
-         */
         if (! (bool) auth()->guard($guard)->user()->status) {
             auth()->guard($guard)->logout();
 
             return redirect()->route('admin.session.create');
         }
 
-        /**
-         * If somehow the user deleted all permissions, then it should be
-         * auto logged out and need to contact the administrator again.
-         */
         if ($this->isPermissionsEmpty()) {
             auth()->guard('admin')->logout();
 
@@ -91,10 +66,6 @@ class Bouncer
             return redirect()->route('admin.session.create');
         }
 
-        /**
-         * If two-factor authentication is enabled for the user,
-         * check if they have completed the verification process.
-         */
         if ($this->isTwoFactorRequired($guard)) {
             return $this->handleTwoFactorRedirect($guard);
         }
@@ -158,18 +129,8 @@ class Bouncer
     {
         $admin = auth()->guard($guard)->user();
 
-        return $admin->two_factor_enabled && ! $this->hasPassedTwoFactor();
-    }
-
-    /**
-     * Determine if two-factor authentication has been passed for this session.
-     */
-    protected function hasPassedTwoFactor(): bool
-    {
-        $passedFor = session('two_factor_passed_for');
-
-        return $passedFor
-            && (int) $passedFor === (int) auth()->guard('admin')->id();
+        return $admin->two_factor_enabled
+            && ! $this->hasPassedTwoFactor();
     }
 
     /**
@@ -184,5 +145,28 @@ class Bouncer
         }
 
         return redirect()->route('admin.two_factor.setup');
+    }
+
+    /**
+     * Whether the route sets up or completes two-factor sign in, or signs out, which skip the check so it cannot loop.
+     * Disabling two-factor is not one, so a session yet to pass it cannot switch it off to get round it.
+     */
+    protected function isTwoFactorRoute(Request $request): bool
+    {
+        return $request->routeIs('admin.two_factor.setup')
+            || $request->routeIs('admin.two_factor.verify.form')
+            || $request->routeIs('admin.two_factor.verify.store')
+            || $request->routeIs('admin.session.destroy');
+    }
+
+    /**
+     * Determine if two-factor authentication has been passed for this session.
+     */
+    protected function hasPassedTwoFactor(): bool
+    {
+        $passedFor = session('two_factor_passed_for');
+
+        return $passedFor
+            && (int) $passedFor === (int) auth()->guard('admin')->id();
     }
 }
