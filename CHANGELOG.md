@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- #11574 [fixed] - Content written in the editor lost its formatting on the storefront, with lists showing no bullets or numbers and headings, tables and rules flattened. Product, category, CMS and GDPR pages now show it as the editor did, floated images, column widths and new-tab links included.
+
 ## **v2.5.1 (6th of November 2026)** - *Release*
 
 - Fixed the nginx production image answering every resized image with a 404 status, though the image itself was served.

@@ -61,7 +61,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer select-none max-sm:text-sm"
+                                    class="rich-text cursor-pointer select-none max-sm:text-sm"
                                     for="strictly_necessary"
                                 >
                                     {!! core()->getConfigData('general.gdpr.cookie_consent.strictly_necessary') !!}
@@ -92,7 +92,7 @@
                                     />
         
                                     <label
-                                        class="cursor-pointer select-none max-sm:text-sm"
+                                        class="rich-text cursor-pointer select-none max-sm:text-sm"
                                         for="{{ $key }}"
                                     >
                                         {!! core()->getConfigData('general.gdpr.cookie_consent.' . $key) !!}
