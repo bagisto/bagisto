@@ -191,6 +191,10 @@ export class ProductCreatePage extends BasePage {
         await productEditPage.fillWeight(product.weight ?? "");
         await productEditPage.fillInventory(product.inventory ?? "");
 
+        if (product.manageStock !== undefined) {
+            await productEditPage.setManageStock(product.manageStock);
+        }
+
         if (product.allowRma) {
             await productEditPage.setAllowRma(true);
         }

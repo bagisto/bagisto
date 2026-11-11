@@ -1,7 +1,8 @@
 import { notAnImage, validImage } from "@shared/media-files";
-import { expect, test } from "../setup";
+import { expect, test, type AdminPage } from "../setup";
 import { ProductCreatePage } from "../pages/admin/catalog/products/ProductCreatePage";
 import { ProductListPage } from "../pages/admin/catalog/products/ProductListPage";
+import type { BaseProduct } from "../pages/admin/types/product.types";
 import {
     CustomersPage,
     type CustomerData,
@@ -43,7 +44,7 @@ function buildCustomer(): CustomerData {
 
 async function createSimpleProduct(
     productCreatePage: ProductCreatePage,
-    allowRma = false,
+    overrides: Partial<BaseProduct> = {},
 ): Promise<string> {
     const name = `Simple ${uniqueStamp()}`;
 
@@ -55,10 +56,29 @@ async function createSimpleProduct(
         price: "199",
         weight: "1",
         inventory: "100",
-        allowRma,
+        ...overrides,
     });
 
     return name;
+}
+
+async function placeOrderForNewCustomer(adminPage: AdminPage, productName: string): Promise<string> {
+    const customer = buildCustomer();
+    const customersPage = new CustomersPage(adminPage);
+
+    await customersPage.createCustomer(customer);
+    await customersPage.openCustomer(customer.email);
+    await new CustomerDetailsPage(adminPage).addAddress({
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        email: customer.email,
+        street: "Sector 62",
+        city: "Noida",
+        postcode: "201301",
+        phone: customer.phone,
+    });
+
+    return new OrderCreatePage(adminPage).placeOrderForCustomer(customer.email, productName);
 }
 
 test.describe("order management", () => {
@@ -75,27 +95,8 @@ test.describe("order management", () => {
         orderCreatePage = new OrderCreatePage(adminPage);
         invoicesPage = new InvoicesPage(adminPage);
 
-        const customer = buildCustomer();
-        const customersPage = new CustomersPage(adminPage);
-
         productName = await createSimpleProduct(new ProductCreatePage(adminPage));
-
-        await customersPage.createCustomer(customer);
-        await customersPage.openCustomer(customer.email);
-        await new CustomerDetailsPage(adminPage).addAddress({
-            firstName: customer.firstName,
-            lastName: customer.lastName,
-            email: customer.email,
-            street: "Sector 62",
-            city: "Noida",
-            postcode: "201301",
-            phone: customer.phone,
-        });
-
-        orderId = await orderCreatePage.placeOrderForCustomer(
-            customer.email,
-            productName,
-        );
+        orderId = await placeOrderForNewCustomer(adminPage, productName);
     });
 
     test.afterEach(async ({ adminPage }) => {
@@ -181,6 +182,36 @@ test.describe("order management", () => {
     });
 });
 
+test.describe("shipping a product that does not manage its stock", () => {
+    test.setTimeout(240000);
+
+    let productName: string;
+
+    test.beforeEach(async ({ adminPage }) => {
+        productName = await createSimpleProduct(new ProductCreatePage(adminPage), {
+            inventory: "0",
+            manageStock: false,
+        });
+    });
+
+    test.afterEach(async ({ adminPage }) => {
+        await new ProductListPage(adminPage).deleteProductsIfPresent([productName]);
+    });
+
+    test("should ship and complete the order though no inventory source holds the product", async ({
+        adminPage,
+    }) => {
+        const orderViewPage = new OrderViewPage(adminPage);
+        const orderId = await placeOrderForNewCustomer(adminPage, productName);
+
+        await orderViewPage.open(orderId);
+        await orderViewPage.createInvoice();
+        await orderViewPage.createShipment(generateName(), `${uniqueStamp()}`);
+
+        await orderViewPage.expectStatus("Completed");
+    });
+});
+
 test.describe("rma management", () => {
     test.setTimeout(300000);
 
@@ -205,7 +236,7 @@ test.describe("rma management", () => {
         test(`should let the admin ${title}`, async ({ adminPage, shopPage }) => {
             const productName = await createSimpleProduct(
                 new ProductCreatePage(adminPage),
-                true,
+                { allowRma: true },
             );
             const shop = new RmaShopPage(shopPage);
             const rmaPage = new RmaManagePage(adminPage);
@@ -243,7 +274,7 @@ test.describe("rma management", () => {
     }) => {
         const productName = await createSimpleProduct(
             new ProductCreatePage(adminPage),
-            true,
+            { allowRma: true },
         );
         const shop = new RmaShopPage(shopPage);
         const rmaPage = new RmaManagePage(adminPage);
@@ -275,7 +306,7 @@ test.describe("rma management", () => {
     }) => {
         const productName = await createSimpleProduct(
             new ProductCreatePage(adminPage),
-            true,
+            { allowRma: true },
         );
         const shop = new RmaShopPage(shopPage);
         const rmaPage = new RmaManagePage(adminPage);
@@ -354,7 +385,7 @@ test.describe("rma management", () => {
         };
         const productName = await createSimpleProduct(
             new ProductCreatePage(adminPage),
-            true,
+            { allowRma: true },
         );
         const shop = new RmaShopPage(shopPage);
         const rmaPage = new RmaManagePage(adminPage);
