@@ -2,9 +2,9 @@
     use Webkul\MagicAI\AiProvider;
 
     $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.text_generation.providers') ?? ''));
-    
+
     $models = AiProvider::modelsForProviders($enabledProviders, 'text');
-    
+
     $defaultModel = $models[0]['value'] ?? '';
 @endphp
 
@@ -144,7 +144,7 @@
     <script type="module">
         app.component('v-tinymce', {
             template: '#v-tinymce-template',
-                
+
             props: ['selector', 'field', 'prompt'],
 
             data() {
@@ -172,25 +172,29 @@
             mounted() {
                 this.init();
 
-                this.$emitter.on('change-theme', (theme) => {
-                    tinymce.get(0).destroy();
+                this.$emitter.on('change-theme', this.changeTheme);
+            },
 
-                    this.currentSkin = theme === 'dark' ? 'oxide-dark' : 'oxide';
-                    this.currentContentCSS = theme === 'dark' ? 'dark' : 'default';
+            beforeUnmount() {
+                this.$emitter.off('change-theme', this.changeTheme);
 
-                    this.init();
-                });
+                this.removeEditor();
             },
 
             methods: {
+                /**
+                 * Start the editor on the selector, in the skin of the current theme.
+                 */
                 init() {
                     let self = this;
+
+                    this.removeEditor();
 
                     let tinyMCEHelper = {
                         initTinyMCE: function(extraConfiguration) {
                             let self2 = this;
 
-                            let config = {  
+                            let config = {
                                 relative_urls: false,
                                 menubar: false,
                                 remove_script_host: false,
@@ -269,7 +273,7 @@
                                 if (xhr.status < 200 || xhr.status >= 300) {
                                     try {
                                         json = JSON.parse(xhr.responseText);
-                                        
+
                                         if (json.error) {
                                             reject(json.error);
                                         } else {
@@ -340,6 +344,9 @@
                     });
                 },
 
+                /**
+                 * Ask Magic AI for content from the prompt, keeping it to be applied.
+                 */
                 generate(params, { resetForm, resetField, setErrors }) {
                     this.isLoading = true;
 
@@ -363,16 +370,43 @@
                         });
                 },
 
+                /**
+                 * Put the generated content into the editor and the field, then close the modal.
+                 */
                 apply() {
                     if (! this.ai.content) {
                         return;
                     }
 
-                    tinymce.get(this.selector.replace('textarea#', '')).setContent(this.ai.content.replace(/\r?\n/g, '<br />'))
+                    tinymce.get(this.editorId()).setContent(this.ai.content.replace(/\r?\n/g, '<br />'));
 
                     this.field.onInput(this.ai.content.replace(/\r?\n/g, '<br />'));
 
                     this.$refs.magicAIModal.close();
+                },
+
+                /**
+                 * Restart the editor in the skin and content style of the chosen theme.
+                 */
+                changeTheme(theme) {
+                    this.currentSkin = theme === 'dark' ? 'oxide-dark' : 'oxide';
+                    this.currentContentCSS = theme === 'dark' ? 'dark' : 'default';
+
+                    this.init();
+                },
+
+                /**
+                 * The id of the textarea the editor is attached to.
+                 */
+                editorId() {
+                    return this.selector.replace('textarea#', '');
+                },
+
+                /**
+                 * Remove this field's editor, so a field shown again starts a fresh one.
+                 */
+                removeEditor() {
+                    tinymce.get(this.editorId())?.remove();
                 },
             },
         })
