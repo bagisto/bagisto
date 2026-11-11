@@ -38,7 +38,7 @@ return [
 
     'gdpr' => [
         'name' => 'admin::app.notifications.groups.gdpr',
-        'icon' => 'icon-information',
+        'icon' => 'icon-view-close',
         'sort' => 5,
     ],
 

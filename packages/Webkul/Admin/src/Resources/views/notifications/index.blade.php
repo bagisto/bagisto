@@ -53,7 +53,7 @@
                             @click="applyFilter(filter.key)"
                         >
                             <span
-                                class="text-xl"
+                                class="flex h-6 w-6 shrink-0 items-center justify-center text-xl"
                                 aria-hidden="true"
                                 :class="filter.icon"
                             >
@@ -85,7 +85,7 @@
                             @click="applyFilter(group.key)"
                         >
                             <span
-                                class="text-xl"
+                                class="flex h-6 w-6 shrink-0 items-center justify-center text-xl"
                                 aria-hidden="true"
                                 :class="group.icon"
                             >

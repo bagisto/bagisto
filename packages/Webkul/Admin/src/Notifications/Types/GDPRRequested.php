@@ -9,7 +9,7 @@ class GDPRRequested extends AbstractType
     /**
      * The icon class shown beside the notification.
      */
-    protected string $icon = 'icon-information';
+    protected string $icon = 'icon-view-close';
 
     /**
      * The colour of the icon.
