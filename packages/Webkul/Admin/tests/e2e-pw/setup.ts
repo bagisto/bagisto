@@ -49,9 +49,46 @@ async function fillTinymce(
         { id: editorId, value: content },
     );
 
-    await expect(page.frameLocator(iframeSelector).locator("body")).toHaveText(
-        content,
-    );
+    await expectEditorHolds(page, iframeSelector, editorId, content);
+}
+
+async function expectEditorHolds(
+    page: Page,
+    iframeSelector: string,
+    editorId: string,
+    content: string,
+): Promise<void> {
+    if (!/<[a-z][^>]*>/i.test(content)) {
+        await expect(
+            page.frameLocator(iframeSelector).locator("body"),
+        ).toHaveText(content);
+
+        return;
+    }
+
+    const expectedText = await page.evaluate((html) => {
+        const holder = document.createElement("div");
+
+        holder.innerHTML = html;
+
+        return holder.textContent ?? "";
+    }, content);
+
+    await expect
+        .poll(async () =>
+            withoutWhitespace(
+                await page.evaluate(
+                    (id) =>
+                        (window as any).tinymce.get(id).getBody().textContent,
+                    editorId,
+                ),
+            ),
+        )
+        .toBe(withoutWhitespace(expectedText));
+}
+
+function withoutWhitespace(text: string): string {
+    return text.replace(/\s+/g, "");
 }
 
 export function withTinymce(page: Page): AdminPage {
