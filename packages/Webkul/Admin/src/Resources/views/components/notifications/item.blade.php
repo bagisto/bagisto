@@ -86,7 +86,7 @@
 
             computed: {
                 /**
-                 * The background and icon colour of the notification's tone.
+                 * The background and icon colour for the tone of the notification.
                  */
                 toneClasses() {
                     return {
