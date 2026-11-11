@@ -9,11 +9,6 @@
 
 ## Upgrading To v2.5.1 From v2.5.0
 
-> [!IMPORTANT]
-> **Upcoming release.** v2.5.1 is not out yet — this section covers changes already merged into the `2.5` branch and is still being added to.
->
-> We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
-
 ### Medium Impact Changes
 
 - [Laravel Excel 4 And PhpSpreadsheet 5](#laravel-excel-4-and-phpspreadsheet-5)
@@ -63,6 +58,9 @@
 - [The Appearance Preview Names Its Theme In Image Urls](#the-appearance-preview-names-its-theme-in-image-urls)
 - [Image Search Uploads Are Filed By Day And Pruned](#image-search-uploads-are-filed-by-day-and-pruned)
 - [The Maximum Upload Size Helper Returns Kilobytes](#the-maximum-upload-size-helper-returns-kilobytes)
+
+> [!NOTE]
+> We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
 ### Before You Start
 
