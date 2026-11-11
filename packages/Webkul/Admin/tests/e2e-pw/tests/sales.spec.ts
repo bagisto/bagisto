@@ -206,7 +206,9 @@ test.describe("shipping a product that does not manage its stock", () => {
 
         await orderViewPage.open(orderId);
         await orderViewPage.createInvoice();
-        await orderViewPage.createShipment(generateName(), `${uniqueStamp()}`);
+        await orderViewPage.openShipmentDrawer();
+        await orderViewPage.expectStockNotManagedNotice();
+        await orderViewPage.submitShipment(generateName(), `${uniqueStamp()}`);
 
         await orderViewPage.expectStatus("Completed");
     });
