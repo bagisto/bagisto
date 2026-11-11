@@ -130,9 +130,15 @@
                                         $item->qty_to_ship > 0
                                         && $item->product
                                     )
-										@php
-											$canShipQty = app('\Webkul\RMA\Helpers\Helper')->getRemainingQtyAfterRMA($item->id);
-										@endphp
+                                        @php
+                                            $canShipQty = app('\Webkul\RMA\Helpers\Helper')->getRemainingQtyAfterRMA($item->id);
+
+                                            $product = $item->getTypeInstance()->getOrderedItem($item)->product;
+
+                                            $isStockUnmanaged = $product
+                                                && $product->getTypeInstance()->isInventoryManageable()
+                                                && ! $product->manage_stock;
+                                        @endphp
 
                                         <div class="flex justify-between gap-2.5 py-4">
                                             <div class="flex gap-2.5">
@@ -217,6 +223,23 @@
                                             </div>
                                         </div>
 
+                                        <!-- Stock Not Managed -->
+                                        @if ($isStockUnmanaged)
+                                            <div class="mb-2.5 flex items-start gap-2.5 rounded-md border border-blue-200 bg-blue-50 p-3 dark:border-gray-800 dark:bg-blue-950">
+                                                <i class="icon-information shrink-0 rounded-full bg-blue-200 text-2xl text-blue-600 dark:text-blue-600!"></i>
+
+                                                <div class="grid gap-0.5">
+                                                    <p class="text-sm font-semibold text-blue-700 dark:text-blue-300">
+                                                        @lang('admin::app.sales.shipments.create.stock-not-managed')
+                                                    </p>
+
+                                                    <p class="text-xs text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.shipments.create.stock-not-managed-info')
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <!-- Information -->
                                         @foreach ($order->channel->inventory_sources as $inventorySource)
                                             <div class="grid grid-cols-2 gap-2.5 border-b border-slate-300 py-2.5 dark:border-gray-800">
@@ -234,14 +257,18 @@
                                                         @lang('admin::app.sales.shipments.create.qty-available') :
 
                                                         @php
-                                                            $product = $item->getTypeInstance()->getOrderedItem($item)->product;
-
                                                             $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
 
-                                                            $canShipFromSource = $sourceQty || ($product && ! $product->manage_stock);
+                                                            $canShipFromSource = $sourceQty || $isStockUnmanaged;
                                                         @endphp
 
-                                                        {{ $sourceQty }}
+                                                        @if ($isStockUnmanaged)
+                                                            <span class="font-medium text-blue-600 dark:text-blue-400">
+                                                                @lang('admin::app.sales.shipments.create.not-tracked')
+                                                            </span>
+                                                        @else
+                                                            {{ $sourceQty }}
+                                                        @endif
                                                     </p>
                                                 </div>
 
@@ -273,9 +300,9 @@
                                                     </x-admin::form.control-group>
                                                 </div>
 
-												@if ($canShipQty['message'])
-													<p class="mt-1 text-xs italic text-green-600">{{ $canShipQty['message'] }}</p>
-												@endif
+                                                @if ($canShipQty['message'])
+                                                    <p class="mt-1 text-xs italic text-green-600">{{ $canShipQty['message'] }}</p>
+                                                @endif
                                             </div>
                                         @endforeach
                                     @endif

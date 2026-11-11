@@ -93,6 +93,34 @@ it('should deny guest access to the shipments index page', function () {
 });
 
 // ============================================================================
+// Create
+// ============================================================================
+
+it('should tell the admin when an item to ship does not manage its stock', function () {
+    $order = $this->createOrder(items: [['product' => productWithUnmanagedStock(), 'qty_ordered' => 1]]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.sales.orders.view', $order->id))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.shipments.create.stock-not-managed'))
+        ->assertSeeText(trans('admin::app.sales.shipments.create.stock-not-managed-info'))
+        ->assertSeeText(trans('admin::app.sales.shipments.create.not-tracked'));
+});
+
+it('should not mark an item to ship that manages its stock', function () {
+    $order = $this->createOrder(items: [['product' => productInStock(10), 'qty_ordered' => 1]]);
+
+    $this->loginAsAdmin();
+
+    get(route('admin.sales.orders.view', $order->id))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.shipments.create.qty-available'))
+        ->assertDontSeeText(trans('admin::app.sales.shipments.create.stock-not-managed'))
+        ->assertDontSeeText(trans('admin::app.sales.shipments.create.not-tracked'));
+});
+
+// ============================================================================
 // Store
 // ============================================================================
 
