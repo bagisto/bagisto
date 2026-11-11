@@ -237,6 +237,8 @@
                                                             $product = $item->getTypeInstance()->getOrderedItem($item)->product;
 
                                                             $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
+
+                                                            $canShipFromSource = $sourceQty || ($product && ! $product->manage_stock);
                                                         @endphp
 
                                                         {{ $sourceQty }}
@@ -263,7 +265,7 @@
                                                             :value="$canShipQty['qty']"
                                                             :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
                                                             data-original-quantity="{{ $canShipQty['qty'] }}"
-                                                            ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
+                                                            ::disabled="'{{ ! $canShipFromSource }}' || source != '{{ $inventorySource->id }}'"
                                                             :ref="$inputName"
                                                         />
 

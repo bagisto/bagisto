@@ -25,6 +25,40 @@ function productInStock(int $qty): Product
 }
 
 /**
+ * Create a simple product that does not manage its stock, with nothing in the default inventory source.
+ */
+function productWithUnmanagedStock(): Product
+{
+    $product = test()->createSimpleProduct([
+        'manage_stock' => ['boolean_value' => false, 'channel' => core()->getDefaultChannelCode()],
+    ]);
+
+    $product->inventories()->update(['qty' => 0]);
+
+    return $product->fresh();
+}
+
+/**
+ * Create an order for a configurable product whose ordered variant is the given product.
+ */
+function configurableOrder(Product $variant, int $qty): Order
+{
+    $parent = test()->createConfigurableProduct();
+
+    $variant->update(['parent_id' => $parent->id]);
+
+    $order = test()->createOrder(items: [['product' => $parent, 'qty_ordered' => $qty]]);
+
+    test()->createOrderItem($order, [
+        'product' => $variant,
+        'parent_id' => $order->items->first()->id,
+        'qty_ordered' => $qty,
+    ]);
+
+    return $order->refresh()->load('items');
+}
+
+/**
  * The shipment payload shipping the given quantity of an order item from the default source.
  */
 function shipmentPayload(int $orderItemId, int $qty, ?int $sourceId = null): array
@@ -172,6 +206,75 @@ it('should refuse to ship more than the inventory source holds', function () {
     post(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 2))
         ->assertRedirect()
         ->assertSessionHas('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
+
+    $this->assertDatabaseMissing('shipments', ['order_id' => $order->id]);
+});
+
+it('should ship and complete an order for a product that does not manage its stock, though the source holds none', function () {
+    $product = productWithUnmanagedStock();
+
+    $order = $this->createOrder(items: [['product' => $product, 'qty_ordered' => 2]]);
+
+    $this->invoiceOrder($order);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 2))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
+        ->assertSessionHas('success', trans('admin::app.sales.shipments.create.success'));
+
+    $this->assertDatabaseHas('order_items', [
+        'id' => $order->items->first()->id,
+        'qty_shipped' => 2,
+    ]);
+
+    $this->assertDatabaseHas('product_inventories', [
+        'product_id' => $product->id,
+        'inventory_source_id' => $this->defaultInventorySourceId(),
+        'qty' => 0,
+    ]);
+
+    $this->assertDatabaseHas('orders', [
+        'id' => $order->id,
+        'status' => Order::STATUS_COMPLETED,
+    ]);
+});
+
+it('should ship a configurable variant that does not manage its stock, though the source holds none', function () {
+    $order = configurableOrder(productWithUnmanagedStock(), 2);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 2))
+        ->assertRedirect(route('admin.sales.orders.view', $order->id))
+        ->assertSessionHas('success', trans('admin::app.sales.shipments.create.success'));
+
+    $this->assertDatabaseHas('order_items', [
+        'parent_id' => $order->items->first()->id,
+        'qty_shipped' => 2,
+    ]);
+});
+
+it('should refuse to ship a configurable variant beyond what the inventory source holds', function () {
+    $order = configurableOrder(productInStock(1), 2);
+
+    $this->loginAsAdmin();
+
+    post(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 2))
+        ->assertRedirect()
+        ->assertSessionHas('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
+
+    $this->assertDatabaseMissing('shipments', ['order_id' => $order->id]);
+});
+
+it('should refuse to ship from a source the order channel does not ship from', function () {
+    $order = $this->createOrder(items: [['product' => productWithUnmanagedStock(), 'qty_ordered' => 1]]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.shipments.store', $order->id), shipmentPayload($order->items->first()->id, 1, PHP_INT_MAX))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('shipment.source');
 
     $this->assertDatabaseMissing('shipments', ['order_id' => $order->id]);
 });
