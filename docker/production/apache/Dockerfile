@@ -161,7 +161,7 @@ COPY shared/php.ini /etc/php/${PHP_VERSION}/cli/conf.d/99-production.ini
 # Apache Configuration
 # ---------------------------------------------------------------------------
 COPY apache/config/vhost.conf /etc/apache2/sites-available/000-default.conf
-RUN a2enmod rewrite headers expires \
+RUN a2enmod rewrite headers expires proxy proxy_http proxy_wstunnel \
     && a2dissite 000-default >/dev/null 2>&1 || true \
     && a2ensite 000-default \
     && rm -f /var/www/html/index.html
