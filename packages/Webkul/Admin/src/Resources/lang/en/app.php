@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'List all the Notifications',
-        'marked-success' => 'All notifications have been marked as read',
-        'no-record' => 'No Record Found',
+        'all' => 'All',
+        'description' => 'Stay on top of orders, customers and everything else that needs your attention.',
+        'empty-description' => 'New notifications will show up here as they come in.',
+        'empty-title' => 'You are all caught up',
+        'mark-all-read' => 'Mark all as read',
+        'mark-read' => 'Mark as read',
+        'mark-unread' => 'Mark as unread',
+        'marked-all-read' => 'All notifications have been marked as read.',
         'of' => 'of',
         'per-page' => 'Per Page',
-        'read-all' => 'Mark as Read',
         'title' => 'Notifications',
-        'view-all' => 'View All',
+        'today' => 'Today',
+        'unread' => 'Unread',
+        'view-all' => 'View all notifications',
+        'yesterday' => 'Yesterday',
 
-        'order-status-messages' => [
-            'all' => 'All',
-            'canceled' => 'Order Canceled',
-            'closed' => 'Order Closed',
-            'completed' => 'Order Completed',
-            'pending' => 'Order Pending',
-            'pending-payment' => 'Pending Payment',
-            'processing' => 'Order Processing',
+        'groups' => [
+            'customers' => 'Customers',
+            'gdpr' => 'GDPR Data Requests',
+            'imports' => 'Imports',
+            'orders' => 'Orders',
+            'returns' => 'RMA Requests',
+            'reviews' => 'Reviews',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'New customer registered',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'New data deletion request',
+                'message' => 'From :customer',
+                'update-title' => 'New data update request',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed rows processed',
+                'message-skipped' => ':processed rows processed, :skipped skipped',
+                'title' => ':type import completed',
+            ],
+
+            'order' => [
+                'message' => ':total from :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Order #:order canceled',
+            ],
+
+            'order-placed' => [
+                'title' => 'New order #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount refunded',
+                'title' => 'Refund issued for order #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Order #:order from :customer',
+                'title' => 'New return request #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer rated :product :rating out of 5',
+                'title' => 'New review awaiting approval',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Ordered (:qty_ordered)',
                 'item-refunded' => 'Refunded (:qty_refunded)',
                 'item-shipped' => 'Shipped (:qty_shipped)',
+                'not-tracked' => 'Not Tracked',
                 'order-error' => 'Shipment is not valid',
                 'per-unit' => 'Per Unit',
                 'qty-available' => 'Qty. Available',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Qty. Invalid',
                 'sku' => 'SKU - :sku',
                 'source' => 'Source',
+                'stock-not-managed' => 'Stock Not Managed',
+                'stock-not-managed-info' => 'This product does not manage its stock, so it can ship from any source without changing stock levels.',
                 'success' => 'Shipment created successfully',
                 'title' => 'Create new Shipment',
                 'tracking-number' => 'Tracking Number',

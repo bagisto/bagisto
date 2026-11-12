@@ -15,7 +15,7 @@
     </x-slot>
 
     <!-- Page Content -->
-    <div class="container mt-8 px-15 max-lg:px-8">
+    <div class="rich-text container mt-8 px-15 max-lg:px-8">
         {!! $page->html_content !!}
     </div>
 </x-shop::layouts>

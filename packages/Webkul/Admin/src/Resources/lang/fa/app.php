@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'لیست کل اعلان‌ها',
-        'marked-success' => 'تمام اعلان‌ها به عنوان خوانده شده علامت‌گذاری شدند',
-        'no-record' => 'هیچ رکوردی یافت نشد',
+        'all' => 'همه',
+        'description' => 'سفارش‌ها، مشتریان و هر چیزی را که به توجه شما نیاز دارد دنبال کنید.',
+        'empty-description' => 'اعلان‌های جدید به محض رسیدن در اینجا نمایش داده می‌شوند.',
+        'empty-title' => 'همه اعلان‌ها را دیده‌اید',
+        'mark-all-read' => 'علامت‌گذاری همه به‌عنوان خوانده‌شده',
+        'mark-read' => 'علامت‌گذاری به‌عنوان خوانده‌شده',
+        'mark-unread' => 'علامت‌گذاری به‌عنوان خوانده‌نشده',
+        'marked-all-read' => 'همه اعلان‌ها به‌عنوان خوانده‌شده علامت‌گذاری شدند.',
         'of' => 'از',
         'per-page' => 'در هر صفحه',
-        'read-all' => 'علامت خوانده شده',
         'title' => 'اعلان‌ها',
-        'view-all' => 'مشاهده همه',
+        'today' => 'امروز',
+        'unread' => 'خوانده‌نشده',
+        'view-all' => 'مشاهده همه اعلان‌ها',
+        'yesterday' => 'دیروز',
 
-        'order-status-messages' => [
-            'all' => 'همه',
-            'canceled' => 'سفارش کنسل شده',
-            'closed' => 'سفارش بسته شده',
-            'completed' => 'سفارش تکمیل شده',
-            'pending' => 'سفارش در انتظار',
-            'pending-payment' => 'در انتظار پرداخت',
-            'processing' => 'سفارش در حال پردازش',
+        'groups' => [
+            'customers' => 'مشتریان',
+            'gdpr' => 'درخواست‌های داده GDPR',
+            'imports' => 'ورودی‌ها',
+            'orders' => 'سفارش‌ها',
+            'returns' => 'درخواست‌های RMA',
+            'reviews' => 'نقد و بررسی‌ها',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'مشتری جدید ثبت‌نام کرد',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'درخواست جدید حذف داده‌ها',
+                'message' => 'از :customer',
+                'update-title' => 'درخواست جدید به‌روزرسانی داده‌ها',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed ردیف پردازش شد',
+                'message-skipped' => ':processed ردیف پردازش شد، :skipped ردیف رد شد',
+                'title' => 'درون‌ریزی :type تکمیل شد',
+            ],
+
+            'order' => [
+                'message' => ':total از :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'سفارش #:order لغو شد',
+            ],
+
+            'order-placed' => [
+                'title' => 'سفارش جدید #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount بازپرداخت شد',
+                'title' => 'بازپرداخت برای سفارش #:order صادر شد',
+            ],
+
+            'return-requested' => [
+                'message' => 'سفارش #:order از :customer',
+                'title' => 'درخواست مرجوعی جدید #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer به :product امتیاز :rating از 5 داد',
+                'title' => 'نظر جدید در انتظار تأیید',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'سفارش داده شده (:qty_ordered)',
                 'item-refunded' => 'بازپرداخت شده (:qty_refunded)',
                 'item-shipped' => 'ارسال شده (:qty_shipped)',
+                'not-tracked' => 'ردیابی نمی‌شود',
                 'order-error' => 'ارسال معتبر نمی‌باشد',
                 'per-unit' => 'در هر واحد',
                 'qty-available' => 'تعداد موجود',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'تعداد نامعتبر',
                 'sku' => 'کد SKU - :sku',
                 'source' => 'منبع',
+                'stock-not-managed' => 'موجودی مدیریت نمی‌شود',
+                'stock-not-managed-info' => 'موجودی این محصول مدیریت نمی‌شود، بنابراین می‌توان آن را از هر منبعی ارسال کرد بدون اینکه سطح موجودی تغییر کند.',
                 'success' => 'ارسال با موفقیت ایجاد شد',
                 'title' => 'ایجاد ارسال جدید',
                 'tracking-number' => 'شماره پیگیری',

@@ -29,14 +29,18 @@ export class SearchPage extends BasePage {
         return this.page.getByRole("heading", { level: 2, name: /These are results for/ });
     }
 
+    private get pageContent() {
+        return this.page.locator("#main");
+    }
+
     private get productCards() {
-        return this.page.locator("div.group").filter({
+        return this.pageContent.locator("div.group").filter({
             has: this.page.locator("p.wrap-anywhere"),
         });
     }
 
     private productCard(productName: string) {
-        return this.page
+        return this.pageContent
             .locator("div.group")
             .filter({ has: this.page.locator(`p:text-is("${productName}")`) });
     }

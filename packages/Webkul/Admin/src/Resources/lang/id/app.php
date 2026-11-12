@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Daftar semua Notifikasi',
-        'marked-success' => 'Semua notifikasi telah ditandai sebagai dibaca',
-        'no-record' => 'Tidak Ada Data Ditemukan',
+        'all' => 'Semua',
+        'description' => 'Pantau pesanan, pelanggan, dan semua hal yang memerlukan perhatian Anda.',
+        'empty-description' => 'Notifikasi baru akan muncul di sini begitu masuk.',
+        'empty-title' => 'Semua sudah Anda lihat',
+        'mark-all-read' => 'Tandai semua sudah dibaca',
+        'mark-read' => 'Tandai sudah dibaca',
+        'mark-unread' => 'Tandai belum dibaca',
+        'marked-all-read' => 'Semua notifikasi telah ditandai sudah dibaca.',
         'of' => 'dari',
         'per-page' => 'Per Halaman',
-        'read-all' => 'Tandai sebagai Dibaca',
         'title' => 'Notifikasi',
-        'view-all' => 'Lihat Semua',
+        'today' => 'Hari Ini',
+        'unread' => 'Belum dibaca',
+        'view-all' => 'Lihat semua notifikasi',
+        'yesterday' => 'Kemarin',
 
-        'order-status-messages' => [
-            'all' => 'Semua',
-            'canceled' => 'Pesanan Dibatalkan',
-            'closed' => 'Pesanan Ditutup',
-            'completed' => 'Pesanan Selesai',
-            'pending' => 'Pesanan Tertunda',
-            'pending-payment' => 'Menunggu Pembayaran',
-            'processing' => 'Pesanan Sedang Diproses',
+        'groups' => [
+            'customers' => 'Pelanggan',
+            'gdpr' => 'Permintaan Data GDPR',
+            'imports' => 'Impor',
+            'orders' => 'Pesanan',
+            'returns' => 'Permintaan RMA',
+            'reviews' => 'Ulasan',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Pelanggan baru terdaftar',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Permintaan penghapusan data baru',
+                'message' => 'Dari :customer',
+                'update-title' => 'Permintaan pembaruan data baru',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed baris diproses',
+                'message-skipped' => ':processed baris diproses, :skipped dilewati',
+                'title' => 'Impor :type selesai',
+            ],
+
+            'order' => [
+                'message' => ':total dari :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Pesanan #:order dibatalkan',
+            ],
+
+            'order-placed' => [
+                'title' => 'Pesanan baru #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount dikembalikan',
+                'title' => 'Pengembalian dana diterbitkan untuk pesanan #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Pesanan #:order dari :customer',
+                'title' => 'Permintaan retur baru #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer memberi :product nilai :rating dari 5',
+                'title' => 'Ulasan baru menunggu persetujuan',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Dipesan (:qty_ordered)',
                 'item-refunded' => 'Dikembalikan (:qty_refunded)',
                 'item-shipped' => 'Dikirim (:qty_shipped)',
+                'not-tracked' => 'Tidak Dilacak',
                 'order-error' => 'Pengiriman tidak valid',
                 'per-unit' => 'Per Unit',
                 'qty-available' => 'Jumlah Tersedia',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Jumlah tidak valid',
                 'sku' => 'SKU - :sku',
                 'source' => 'Sumber',
+                'stock-not-managed' => 'Stok Tidak Dikelola',
+                'stock-not-managed-info' => 'Stok produk ini tidak dikelola, sehingga dapat dikirim dari sumber mana pun tanpa mengubah tingkat stok.',
                 'success' => 'Pengiriman berhasil dibuat',
                 'title' => 'Buat Pengiriman Baru',
                 'tracking-number' => 'Nomor Pelacakan',

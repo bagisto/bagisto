@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'সমস্ত বিজ্ঞপ্তি তালিকা',
-        'marked-success' => 'সমস্ত বিজ্ঞপ্তি পড়া হয়েছে হিসাবে চিহ্নিত করা হয়েছে',
-        'no-record' => 'কোনও রেকর্ড পাওয়া যায়নি',
+        'all' => 'সব',
+        'description' => 'অর্ডার, গ্রাহক এবং আপনার মনোযোগ প্রয়োজন এমন সবকিছুর খবর রাখুন।',
+        'empty-description' => 'নতুন বিজ্ঞপ্তি এলে এখানে দেখা যাবে।',
+        'empty-title' => 'আপনার সব বিজ্ঞপ্তি দেখা হয়ে গেছে',
+        'mark-all-read' => 'সব পঠিত হিসেবে চিহ্নিত করুন',
+        'mark-read' => 'পঠিত হিসেবে চিহ্নিত করুন',
+        'mark-unread' => 'অপঠিত হিসেবে চিহ্নিত করুন',
+        'marked-all-read' => 'সব বিজ্ঞপ্তি পঠিত হিসেবে চিহ্নিত করা হয়েছে।',
         'of' => 'এর',
         'per-page' => 'প্রতি পৃষ্ঠা',
-        'read-all' => 'পড়ুন হিসেবে চিহ্নিত করুন',
         'title' => 'বিজ্ঞপ্তিসমূহ',
-        'view-all' => 'সব দেখুন',
+        'today' => 'আজ',
+        'unread' => 'অপঠিত',
+        'view-all' => 'সব বিজ্ঞপ্তি দেখুন',
+        'yesterday' => 'গতকাল',
 
-        'order-status-messages' => [
-            'all' => 'সব',
-            'canceled' => 'অর্ডার বাতিল হয়েছে',
-            'closed' => 'অর্ডার বন্ধ হয়েছে',
-            'completed' => 'অর্ডার সম্পন্ন হয়েছে',
-            'pending' => 'অর্ডার মুলতুবি',
-            'pending-payment' => 'মুলতুবি পেমেন্ট',
-            'processing' => 'অর্ডার প্রসেসিং হচ্ছে',
+        'groups' => [
+            'customers' => 'গ্রাহকগণ',
+            'gdpr' => 'GDPR ডেটা অনুরোধ',
+            'imports' => 'ইম্পোর্ট',
+            'orders' => 'অর্ডারস',
+            'returns' => 'RMA অনুরোধ',
+            'reviews' => 'মতামত',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'নতুন গ্রাহক নিবন্ধিত হয়েছেন',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'নতুন ডেটা মুছে ফেলার অনুরোধ',
+                'message' => ':customer এর কাছ থেকে',
+                'update-title' => 'নতুন ডেটা হালনাগাদের অনুরোধ',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed টি সারি প্রক্রিয়া করা হয়েছে',
+                'message-skipped' => ':processed টি সারি প্রক্রিয়া করা হয়েছে, :skipped টি বাদ দেওয়া হয়েছে',
+                'title' => ':type ইমপোর্ট সম্পন্ন হয়েছে',
+            ],
+
+            'order' => [
+                'message' => ':customer এর কাছ থেকে :total',
+            ],
+
+            'order-canceled' => [
+                'title' => 'অর্ডার #:order বাতিল হয়েছে',
+            ],
+
+            'order-placed' => [
+                'title' => 'নতুন অর্ডার #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount ফেরত দেওয়া হয়েছে',
+                'title' => 'অর্ডার #:order এর জন্য ফেরত দেওয়া হয়েছে',
+            ],
+
+            'return-requested' => [
+                'message' => ':customer এর অর্ডার #:order',
+                'title' => 'নতুন রিটার্ন অনুরোধ #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer :product কে 5 এর মধ্যে :rating দিয়েছেন',
+                'title' => 'অনুমোদনের অপেক্ষায় নতুন রিভিউ',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'অর্ডার দেওয়া (:qty_ordered)',
                 'item-refunded' => 'ফেরত দেওয়া (:qty_refunded)',
                 'item-shipped' => 'প্রেরিত (:qty_shipped)',
+                'not-tracked' => 'ট্র্যাক করা হয় না',
                 'order-error' => 'প্রেরণ বৈধ নয়',
                 'per-unit' => 'প্রতি ইউনিট',
                 'qty-available' => 'প্রাপ্ত পরিমাণ',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'পরিমাণ অবৈধ',
                 'sku' => 'SKU - :sku',
                 'source' => 'উৎস',
+                'stock-not-managed' => 'স্টক পরিচালিত হয় না',
+                'stock-not-managed-info' => 'এই পণ্যের স্টক পরিচালিত হয় না, তাই এটি যেকোনো উৎস থেকে শিপ করা যায় এবং স্টকের পরিমাণ অপরিবর্তিত থাকে।',
                 'success' => 'প্রেরণ সফলভাবে তৈরি হয়েছে',
                 'title' => 'নতুন প্রেরণ তৈরি করুন',
                 'tracking-number' => 'ট্র্যাকিং নাম্বার',

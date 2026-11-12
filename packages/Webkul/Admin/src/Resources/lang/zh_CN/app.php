@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => '列出所有通知',
-        'marked-success' => '所有通知已标记为已读',
-        'no-record' => '未找到记录',
+        'all' => '全部',
+        'description' => '随时掌握订单、客户以及所有需要您关注的事项。',
+        'empty-description' => '新的通知到达后会显示在这里。',
+        'empty-title' => '您已查看所有通知',
+        'mark-all-read' => '全部标为已读',
+        'mark-read' => '标为已读',
+        'mark-unread' => '标为未读',
+        'marked-all-read' => '所有通知已标为已读。',
         'of' => '的',
         'per-page' => '每页',
-        'read-all' => '标记为已读',
         'title' => '通知',
-        'view-all' => '查看全部',
+        'today' => '今天',
+        'unread' => '未读',
+        'view-all' => '查看所有通知',
+        'yesterday' => '昨天',
 
-        'order-status-messages' => [
-            'all' => '全部',
-            'canceled' => '订单已取消',
-            'closed' => '订单已关闭',
-            'completed' => '订单已完成',
-            'pending' => '订单待处理',
-            'pending-payment' => '待付款订单',
-            'processing' => '订单处理中',
+        'groups' => [
+            'customers' => '客户',
+            'gdpr' => 'GDPR 数据请求',
+            'imports' => '匯入',
+            'orders' => '订单',
+            'returns' => 'RMA 请求',
+            'reviews' => '评论',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => '新客户已注册',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => '新的数据删除请求',
+                'message' => '来自 :customer',
+                'update-title' => '新的数据更新请求',
+            ],
+
+            'import-completed' => [
+                'message' => '已处理 :processed 行',
+                'message-skipped' => '已处理 :processed 行，跳过 :skipped 行',
+                'title' => ':type 导入已完成',
+            ],
+
+            'order' => [
+                'message' => '来自 :customer，金额 :total',
+            ],
+
+            'order-canceled' => [
+                'title' => '订单 #:order 已取消',
+            ],
+
+            'order-placed' => [
+                'title' => '新订单 #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => '已退款 :amount',
+                'title' => '已为订单 #:order 退款',
+            ],
+
+            'return-requested' => [
+                'message' => '来自 :customer 的订单 #:order',
+                'title' => '新的退货请求 #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer 给 :product 评了 :rating 分（满分 5 分）',
+                'title' => '新评价待审核',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => '已下单 (:qty_ordered)',
                 'item-refunded' => '已退款 (:qty_refunded)',
                 'item-shipped' => '已发货 (:qty_shipped)',
+                'not-tracked' => '不跟踪',
                 'order-error' => '发货无效',
                 'per-unit' => '每单位',
                 'qty-available' => '可用数量',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => '数量无效',
                 'sku' => 'SKU - :sku',
                 'source' => '来源',
+                'stock-not-managed' => '未管理库存',
+                'stock-not-managed-info' => '此商品未管理库存，因此可以从任意来源发货，库存数量不会改变。',
                 'success' => '发货创建成功',
                 'title' => '创建新的发货',
                 'tracking-number' => '跟踪编号',

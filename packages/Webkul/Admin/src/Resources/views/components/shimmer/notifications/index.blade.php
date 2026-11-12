@@ -1,56 +1,30 @@
 <div>
-    <!-- Heading Section -->
+    <!-- Page Header -->
     <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="grid gap-1.5">
-            <div class="shimmer h-6 w-36 pt-1.5"></div>
+            <div class="shimmer h-6 w-36"></div>
 
-            <div class="shimmer h-4 w-40"></div>
+            <div class="shimmer h-4 w-80 max-w-full"></div>
         </div>
+
+        <div class="shimmer h-10 w-36 rounded-md"></div>
     </div>
 
-    <!-- Main Content Panel -->
-    <div class="box-shadow flex h-[calc(100vh-179px)] max-w-max flex-col justify-between rounded-md">
-        <div>
-            <!-- Multiple Tabs -->
-            <div class="flex border-b dark:border-gray-800">
-                <div class="flex w-20.75 gap-1 border-b-2 px-4 py-4 dark:border-gray-800">
-                    <div class="shimmer h-4.5 w-28"></div>
+    <div class="flex items-start gap-4 max-lg:flex-col">
+        <!-- Filters -->
+        <div class="box-shadow grid w-64 shrink-0 gap-1 rounded-md bg-white p-2 dark:bg-gray-900 max-lg:w-full">
+            @for ($i = 0; $i < 6; $i++)
+                <div class="flex items-center gap-2.5 px-3 py-2">
+                    <div class="shimmer h-5 w-5 rounded-full"></div>
+
+                    <div class="shimmer h-4 w-24"></div>
                 </div>
-    
-                @for ($i = 1; $i < 6; $i++)
-                    <div class="flex w-38 gap-1 border-b-2 px-4 py-4 dark:border-gray-800">
-                        <div class="shimmer h-4.5 w-28"></div>
-                    </div>    
-                @endfor
-            </div>
-
-            <!-- Notifications List -->
-            <div class="journal-scroll grid max-h-[calc(100vh-330px)] overflow-auto">
-                @for ($i = 1; $i < 10; $i++)
-                    <div class="flex h-14 items-start gap-1.5 p-4">
-                        <div class="shimmer h-6 w-6 rounded-full"></div>
-
-                        <div class="grid gap-1">
-                            <div class="shimmer h-4 w-32"></div>
-
-                            <div class="shimmer h-3.5 w-20"></div>
-                        </div>
-                    </div>
-                @endfor
-            </div>
+            @endfor
         </div>
 
-        <!-- Pagination Section -->
-        <div class="flex items-center gap-x-2 border-t p-4 dark:border-gray-800">
-            <div class="shimmer h-9 w-9 rounded-sm ltr:ml-2 rtl:mr-2"></div>
-
-            <div class="shimmer h-6 w-16"></div>
-
-            <div class="shimmer h-6 w-14"></div>
-
-            <div class="shimmer h-9 w-9 rounded-sm"></div>
-
-            <div class="shimmer h-9 w-9 rounded-sm"></div>
+        <!-- Feed -->
+        <div class="box-shadow min-w-0 flex-1 rounded-md bg-white dark:bg-gray-900 max-lg:w-full">
+            <x-admin::shimmer.notifications.list />
         </div>
     </div>
 </div>

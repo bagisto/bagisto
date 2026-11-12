@@ -7,6 +7,7 @@ use Webkul\Admin\Listeners\Admin;
 use Webkul\Admin\Listeners\Customer;
 use Webkul\Admin\Listeners\GDPR;
 use Webkul\Admin\Listeners\Invoice;
+use Webkul\Admin\Listeners\Notification;
 use Webkul\Admin\Listeners\Order;
 use Webkul\Admin\Listeners\Refund;
 use Webkul\Admin\Listeners\Shipment;
@@ -57,6 +58,10 @@ class EventServiceProvider extends ServiceProvider
 
         'sales.refund.save.after' => [
             [Refund::class, 'afterCreated'],
+        ],
+
+        'notification.create.after' => [
+            [Notification::class, 'afterCreated'],
         ],
     ];
 }

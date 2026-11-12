@@ -80,6 +80,14 @@ export class ProductEditPage extends BasePage {
         return this.page.locator('input[name="inventories\\[1\\]"]');
     }
 
+    private get manageStockInput() {
+        return this.page.locator('input[type="checkbox"][name="manage_stock"]');
+    }
+
+    private get manageStockToggle() {
+        return this.page.locator('label[for="manage_stock"]');
+    }
+
     private get allowRmaInput() {
         return this.page.locator('input[type="checkbox"][name="allow_rma"]');
     }
@@ -342,6 +350,15 @@ export class ProductEditPage extends BasePage {
     async fillInventory(quantity: number | string) {
         await this.inventoryInput.click();
         await this.inventoryInput.fill(String(quantity));
+    }
+
+    async setManageStock(enabled: boolean) {
+        if ((await this.manageStockInput.isChecked()) !== enabled) {
+            await this.manageStockToggle.click();
+        }
+
+        await expect(this.manageStockInput).toBeChecked({ checked: enabled });
+        await expect(this.inventoryInput).toBeVisible({ visible: enabled });
     }
 
     async setAllowRma(enabled: boolean) {

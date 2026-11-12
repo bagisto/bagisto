@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Llistar totes les notificacions',
-        'marked-success' => 'Totes les notificacions s’han marcat com a llegides',
-        'no-record' => 'No s’han trobat registres',
+        'all' => 'Tots',
+        'description' => 'Estigueu al dia de les comandes, els clients i tot allò que requereix la vostra atenció.',
+        'empty-description' => 'Les notificacions noves apareixeran aquí quan arribin.',
+        'empty-title' => 'Ho teniu tot al dia',
+        'mark-all-read' => 'Marca-ho tot com a llegit',
+        'mark-read' => 'Marca com a llegida',
+        'mark-unread' => 'Marca com a no llegida',
+        'marked-all-read' => 'Totes les notificacions s\'han marcat com a llegides.',
         'of' => 'de',
         'per-page' => 'Per pàgina',
-        'read-all' => 'Marcar com a llegit',
         'title' => 'Notificacions',
-        'view-all' => 'Veure totes',
+        'today' => 'Avui',
+        'unread' => 'No llegides',
+        'view-all' => 'Mostra totes les notificacions',
+        'yesterday' => 'Ahir',
 
-        'order-status-messages' => [
-            'all' => 'Tots',
-            'canceled' => 'Comanda cancel·lada',
-            'closed' => 'Comanda tancada',
-            'completed' => 'Comanda completada',
-            'pending' => 'Comanda pendent',
-            'pending-payment' => 'Pagament pendent',
-            'processing' => 'Comanda en procés',
+        'groups' => [
+            'customers' => 'Clients',
+            'gdpr' => 'Sol·licituds de dades GDPR',
+            'imports' => 'Importacions',
+            'orders' => 'Ordres',
+            'returns' => 'Sol·licituds RMA',
+            'reviews' => 'Ressenyes',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Nou client registrat',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Nova sol·licitud d\'eliminació de dades',
+                'message' => 'De :customer',
+                'update-title' => 'Nova sol·licitud d\'actualització de dades',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed files processades',
+                'message-skipped' => ':processed files processades, :skipped omeses',
+                'title' => 'Importació de :type completada',
+            ],
+
+            'order' => [
+                'message' => ':total de :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Comanda #:order cancel·lada',
+            ],
+
+            'order-placed' => [
+                'title' => 'Nova comanda #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount reemborsat',
+                'title' => 'Reemborsament emès per a la comanda #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Comanda #:order de :customer',
+                'title' => 'Nova sol·licitud de devolució #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer ha valorat :product amb :rating de 5',
+                'title' => 'Nova ressenya pendent d\'aprovació',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Comanda (:qty_ordered)',
                 'item-refunded' => 'Reemborsat (:qty_refunded)',
                 'item-shipped' => 'Enviat (:qty_shipped)',
+                'not-tracked' => 'Sense seguiment',
                 'order-error' => 'L\'enviament no és vàlid',
                 'per-unit' => 'Per Unitat',
                 'qty-available' => 'Quantitat Disponible',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Quantitat no vàlida',
                 'sku' => 'SKU - :sku',
                 'source' => 'Font',
+                'stock-not-managed' => 'Stock no gestionat',
+                'stock-not-managed-info' => 'El stock d\'aquest producte no es gestiona, de manera que es pot enviar des de qualsevol font sense canviar els nivells de stock.',
                 'success' => 'Enviament creat amb éxit',
                 'title' => 'Crear nou Enviament',
                 'tracking-number' => 'Número de Seguiment',

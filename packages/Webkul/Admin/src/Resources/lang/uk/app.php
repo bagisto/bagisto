@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Список всіх повідомлень',
-        'marked-success' => 'Усі повідомлення позначено як прочитані',
-        'no-record' => 'Записів не знайдено',
+        'all' => 'Все',
+        'description' => 'Стежте за замовленнями, клієнтами та всім, що потребує вашої уваги.',
+        'empty-description' => 'Нові сповіщення з’являться тут, щойно надійдуть.',
+        'empty-title' => 'Нових сповіщень немає',
+        'mark-all-read' => 'Позначити всі як прочитані',
+        'mark-read' => 'Позначити як прочитане',
+        'mark-unread' => 'Позначити як непрочитане',
+        'marked-all-read' => 'Усі сповіщення позначено як прочитані.',
         'of' => 'з',
         'per-page' => 'на сторінці',
-        'read-all' => 'Позначити як прочитане',
         'title' => 'Повідомлення',
-        'view-all' => 'Переглянути всі',
+        'today' => 'Сьогодні',
+        'unread' => 'Непрочитані',
+        'view-all' => 'Усі сповіщення',
+        'yesterday' => 'Вчора',
 
-        'order-status-messages' => [
-            'all' => 'Все',
-            'canceled' => 'Замовлення скасовано',
-            'closed' => 'Замовлення закрито',
-            'completed' => 'Замовлення завершено',
-            'pending' => 'Замовлення очікує на оплату',
-            'pending-payment' => 'Очікується оплата',
-            'processing' => 'Замовлення обробляється',
+        'groups' => [
+            'customers' => 'Клієнти',
+            'gdpr' => 'Запити на дані GDPR',
+            'imports' => 'Імпорти',
+            'orders' => 'Замовлення',
+            'returns' => 'Запити RMA',
+            'reviews' => 'Відгуки',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Зареєстровано нового клієнта',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Новий запит на видалення даних',
+                'message' => 'Від :customer',
+                'update-title' => 'Новий запит на оновлення даних',
+            ],
+
+            'import-completed' => [
+                'message' => 'Оброблено рядків: :processed',
+                'message-skipped' => 'Оброблено рядків: :processed, пропущено: :skipped',
+                'title' => 'Імпорт :type завершено',
+            ],
+
+            'order' => [
+                'message' => ':total від :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Замовлення #:order скасовано',
+            ],
+
+            'order-placed' => [
+                'title' => 'Нове замовлення #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => 'Повернено :amount',
+                'title' => 'Оформлено повернення коштів за замовленням #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Замовлення #:order від :customer',
+                'title' => 'Новий запит на повернення #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer оцінив(ла) :product на :rating з 5',
+                'title' => 'Новий відгук очікує схвалення',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Замовлено (:qty_ordered)',
                 'item-refunded' => 'Повернуто (:qty_refunded)',
                 'item-shipped' => 'Відправлено (:qty_shipped)',
+                'not-tracked' => 'Не відстежується',
                 'order-error' => 'Відвантаження не є дійсним',
                 'per-unit' => 'За одиницю',
                 'qty-available' => 'Доступна кількість',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Кількість недійсна',
                 'sku' => 'SKU - :sku',
                 'source' => 'Джерело',
+                'stock-not-managed' => 'Запаси не керуються',
+                'stock-not-managed-info' => 'Запаси цього товару не керуються, тому його можна відправити з будь-якого джерела без зміни залишків.',
                 'success' => 'Відвантаження створено успішно',
                 'title' => 'Створити нове відвантаження',
                 'tracking-number' => 'Номер відстеження',

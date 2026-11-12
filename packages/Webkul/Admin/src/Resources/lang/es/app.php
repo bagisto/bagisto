@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Lista de todas las notificaciones',
-        'marked-success' => 'Todas las notificaciones han sido marcadas como leídas',
-        'no-record' => 'No se encontraron registros',
+        'all' => 'Todas',
+        'description' => 'Mantente al día de los pedidos, los clientes y todo lo que necesita tu atención.',
+        'empty-description' => 'Las nuevas notificaciones aparecerán aquí en cuanto lleguen.',
+        'empty-title' => 'Estás al día',
+        'mark-all-read' => 'Marcar todo como leído',
+        'mark-read' => 'Marcar como leída',
+        'mark-unread' => 'Marcar como no leída',
+        'marked-all-read' => 'Todas las notificaciones se han marcado como leídas.',
         'of' => 'de',
         'per-page' => 'Por página',
-        'read-all' => 'Marcar como leídas',
         'title' => 'Notificaciones',
-        'view-all' => 'Ver todas',
+        'today' => 'Hoy',
+        'unread' => 'No leídas',
+        'view-all' => 'Ver todas las notificaciones',
+        'yesterday' => 'Ayer',
 
-        'order-status-messages' => [
-            'all' => 'Todas',
-            'canceled' => 'Pedido cancelado',
-            'closed' => 'Pedido cerrado',
-            'completed' => 'Pedido completado',
-            'pending' => 'Pedido pendiente',
-            'pending-payment' => 'Pago pendiente',
-            'processing' => 'Pedido en proceso',
+        'groups' => [
+            'customers' => 'Clientes',
+            'gdpr' => 'Solicitudes de datos GDPR',
+            'imports' => 'Importaciones',
+            'orders' => 'Pedidos',
+            'returns' => 'Solicitudes de RMA',
+            'reviews' => 'Reseñas',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Nuevo cliente registrado',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Nueva solicitud de eliminación de datos',
+                'message' => 'De :customer',
+                'update-title' => 'Nueva solicitud de actualización de datos',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed filas procesadas',
+                'message-skipped' => ':processed filas procesadas, :skipped omitidas',
+                'title' => 'Importación de :type completada',
+            ],
+
+            'order' => [
+                'message' => ':total de :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Pedido #:order cancelado',
+            ],
+
+            'order-placed' => [
+                'title' => 'Nuevo pedido #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount reembolsado',
+                'title' => 'Reembolso emitido para el pedido #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Pedido #:order de :customer',
+                'title' => 'Nueva solicitud de devolución #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer valoró :product con :rating de 5',
+                'title' => 'Nueva reseña pendiente de aprobación',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Pedido (:qty_ordered)',
                 'item-refunded' => 'Reembolsado (:qty_refunded)',
                 'item-shipped' => 'Enviado (:qty_shipped)',
+                'not-tracked' => 'Sin seguimiento',
                 'order-error' => 'El envío no es válido',
                 'per-unit' => 'Por Unidad',
                 'qty-available' => 'Cantidad Disponible',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Cantidad no válida',
                 'sku' => 'SKU - :sku',
                 'source' => 'Fuente',
+                'stock-not-managed' => 'Stock no gestionado',
+                'stock-not-managed-info' => 'El stock de este producto no se gestiona, por lo que puede enviarse desde cualquier fuente sin cambiar los niveles de stock.',
                 'success' => 'Envío creado con éxito',
                 'title' => 'Crear nuevo Envío',
                 'tracking-number' => 'Número de Seguimiento',

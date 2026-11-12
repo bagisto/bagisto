@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Elenca tutte le notifiche',
-        'marked-success' => 'Tutte le notifiche sono state segnate come lette',
-        'no-record' => 'Nessun Record Trovato',
+        'all' => 'Tutti',
+        'description' => 'Tieni sotto controllo ordini, clienti e tutto ciò che richiede la tua attenzione.',
+        'empty-description' => 'Le nuove notifiche appariranno qui non appena arrivano.',
+        'empty-title' => 'Sei aggiornato',
+        'mark-all-read' => 'Segna tutto come letto',
+        'mark-read' => 'Segna come letta',
+        'mark-unread' => 'Segna come non letta',
+        'marked-all-read' => 'Tutte le notifiche sono state segnate come lette.',
         'of' => 'di',
         'per-page' => 'Per pagina',
-        'read-all' => 'Segna come Letto',
         'title' => 'Notifiche',
-        'view-all' => 'Visualizza Tutte',
+        'today' => 'Oggi',
+        'unread' => 'Non lette',
+        'view-all' => 'Visualizza tutte le notifiche',
+        'yesterday' => 'Ieri',
 
-        'order-status-messages' => [
-            'all' => 'Tutti',
-            'canceled' => 'Ordine Annullato',
-            'closed' => 'Ordine Chiuso',
-            'completed' => 'Ordine Completato',
-            'pending' => 'Ordine in Sospeso',
-            'pending-payment' => 'Pagamento in Sospeso',
-            'processing' => 'Ordine in Elaborazione',
+        'groups' => [
+            'customers' => 'Clienti',
+            'gdpr' => 'Richieste di Dati GDPR',
+            'imports' => 'Importazioni',
+            'orders' => 'Ordini',
+            'returns' => 'Richieste RMA',
+            'reviews' => 'Recensioni',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Nuovo cliente registrato',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Nuova richiesta di cancellazione dei dati',
+                'message' => 'Da :customer',
+                'update-title' => 'Nuova richiesta di aggiornamento dei dati',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed righe elaborate',
+                'message-skipped' => ':processed righe elaborate, :skipped saltate',
+                'title' => 'Importazione di :type completata',
+            ],
+
+            'order' => [
+                'message' => ':total da :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Ordine #:order annullato',
+            ],
+
+            'order-placed' => [
+                'title' => 'Nuovo ordine #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount rimborsato',
+                'title' => 'Rimborso emesso per l\'ordine #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Ordine #:order di :customer',
+                'title' => 'Nuova richiesta di reso #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer ha valutato :product :rating su 5',
+                'title' => 'Nuova recensione in attesa di approvazione',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Ordinato (:qty_ordered)',
                 'item-refunded' => 'Rimborsato (:qty_refunded)',
                 'item-shipped' => 'Spedito (:qty_shipped)',
+                'not-tracked' => 'Non monitorata',
                 'order-error' => 'La spedizione non è valida',
                 'per-unit' => 'Per Unità',
                 'qty-available' => 'Quantità Disponibile',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Quantità Non Valida',
                 'sku' => 'SKU - :sku',
                 'source' => 'Origine',
+                'stock-not-managed' => 'Scorte non gestite',
+                'stock-not-managed-info' => 'Le scorte di questo prodotto non sono gestite, quindi può essere spedito da qualsiasi origine senza modificare i livelli delle scorte.',
                 'success' => 'Spedizione creata con successo',
                 'title' => 'Crea nuova Spedizione',
                 'tracking-number' => 'Numero di Tracciamento',

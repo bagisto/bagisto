@@ -73,6 +73,10 @@ export class OrderViewPage extends DatagridPage {
         return this.page.getByRole("button", { name: "Create Shipment" });
     }
 
+    private get stockNotManagedNotice() {
+        return this.page.getByText("Stock Not Managed", { exact: true });
+    }
+
     private get refundAction() {
         return this.actionTrigger("Refund");
     }
@@ -128,7 +132,17 @@ export class OrderViewPage extends DatagridPage {
     }
 
     async createShipment(carrier: string, trackingNumber: string): Promise<void> {
+        await this.openShipmentDrawer();
+        await this.submitShipment(carrier, trackingNumber);
+    }
+
+    async openShipmentDrawer(): Promise<void> {
         await this.shipAction.click();
+
+        await expect(this.createShipmentButton).toBeVisible();
+    }
+
+    async submitShipment(carrier: string, trackingNumber: string): Promise<void> {
         await this.carrierTitleInput.fill(carrier);
         await this.trackingNumberInput.fill(trackingNumber);
         await this.shipmentSourceSelect.selectOption({ label: "Default" });
@@ -166,6 +180,10 @@ export class OrderViewPage extends DatagridPage {
 
     async expectStatus(status: OrderStatus): Promise<void> {
         await expect(this.statusBadge).toHaveText(status);
+    }
+
+    async expectStockNotManagedNotice(): Promise<void> {
+        await expect(this.stockNotManagedNotice).toBeVisible();
     }
 
     async expectItemListed(productName: string): Promise<void> {

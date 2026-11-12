@@ -10,21 +10,18 @@ use Webkul\Core\Rules\Slug;
 class CategoryRequest extends FormRequest
 {
     /**
-     * Determine if the Configuration is authorized to make this request.
-     *
-     * @return bool
+     * Determine if the user is authorized to make this request.
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
+     * Get the validation rules that apply to the request. The name is a text column, so only the
+     * slug, a 255 character column, is held to a length.
      */
-    public function rules()
+    public function rules(): array
     {
         $locale = core()->getRequestedLocaleCode();
 
@@ -50,7 +47,7 @@ class CategoryRequest extends FormRequest
             return $rules;
         }
 
-        $rules['slug'] = ['required', 'max:255', new ProductCategoryUniqueSlug('category_translations')];
+        $rules['slug'] = ['required', 'max:255', new Slug, new ProductCategoryUniqueSlug('category_translations')];
         $rules['name'] = 'required';
         $rules['description'] = 'required_if:display_mode,==,description_only,products_and_description';
 
@@ -58,15 +55,22 @@ class CategoryRequest extends FormRequest
     }
 
     /**
-     * Get the custom attribute names for validator errors.
-     *
-     * @return array
+     * Get the custom attribute names for validator errors, so a translated field is named by its
+     * label rather than its locale-prefixed key.
      */
-    public function attributes()
+    public function attributes(): array
     {
+        $locale = core()->getRequestedLocaleCode();
+
         return [
             'logo_path.*' => trans('admin::app.catalog.categories.create.logo'),
             'banner_path.*' => trans('admin::app.catalog.categories.create.banner'),
+            'name' => trans('admin::app.catalog.categories.create.name'),
+            'slug' => trans('admin::app.catalog.categories.create.slug'),
+            'description' => trans('admin::app.catalog.categories.create.description'),
+            $locale.'.name' => trans('admin::app.catalog.categories.edit.name'),
+            $locale.'.slug' => trans('admin::app.catalog.categories.edit.slug'),
+            $locale.'.description' => trans('admin::app.catalog.categories.edit.description'),
         ];
     }
 }

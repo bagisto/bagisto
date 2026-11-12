@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Alle Benachrichtigungen auflisten',
-        'marked-success' => 'Alle Benachrichtigungen wurden als gelesen markiert',
-        'no-record' => 'Kein Datensatz gefunden',
+        'all' => 'Alle',
+        'description' => 'Behalten Sie Bestellungen, Kunden und alles andere im Blick, was Ihre Aufmerksamkeit braucht.',
+        'empty-description' => 'Neue Benachrichtigungen erscheinen hier, sobald sie eintreffen.',
+        'empty-title' => 'Sie sind auf dem neuesten Stand',
+        'mark-all-read' => 'Alle als gelesen markieren',
+        'mark-read' => 'Als gelesen markieren',
+        'mark-unread' => 'Als ungelesen markieren',
+        'marked-all-read' => 'Alle Benachrichtigungen wurden als gelesen markiert.',
         'of' => 'von',
         'per-page' => 'Pro Seite',
-        'read-all' => 'Als gelesen markieren',
         'title' => 'Benachrichtigungen',
-        'view-all' => 'Alle anzeigen',
+        'today' => 'Heute',
+        'unread' => 'Ungelesen',
+        'view-all' => 'Alle Benachrichtigungen anzeigen',
+        'yesterday' => 'Gestern',
 
-        'order-status-messages' => [
-            'all' => 'Alle',
-            'canceled' => 'Bestellung storniert',
-            'closed' => 'Bestellung geschlossen',
-            'completed' => 'Bestellung abgeschlossen',
-            'pending' => 'Bestellung ausstehend',
-            'pending-payment' => 'Zahlung ausstehend',
-            'processing' => 'Bestellung in Bearbeitung',
+        'groups' => [
+            'customers' => 'Kunden',
+            'gdpr' => 'GDPR-Datenanfragen',
+            'imports' => 'Importe',
+            'orders' => 'Bestellungen',
+            'returns' => 'RMA-Anfragen',
+            'reviews' => 'Bewertungen',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Neuer Kunde registriert',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Neue Anfrage zur Datenlöschung',
+                'message' => 'Von :customer',
+                'update-title' => 'Neue Anfrage zur Datenaktualisierung',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed Zeilen verarbeitet',
+                'message-skipped' => ':processed Zeilen verarbeitet, :skipped übersprungen',
+                'title' => 'Import von :type abgeschlossen',
+            ],
+
+            'order' => [
+                'message' => ':total von :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Bestellung #:order storniert',
+            ],
+
+            'order-placed' => [
+                'title' => 'Neue Bestellung #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount erstattet',
+                'title' => 'Erstattung für Bestellung #:order ausgestellt',
+            ],
+
+            'return-requested' => [
+                'message' => 'Bestellung #:order von :customer',
+                'title' => 'Neue Rücksendeanfrage #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer hat :product mit :rating von 5 bewertet',
+                'title' => 'Neue Bewertung wartet auf Freigabe',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Bestellt (:qty_ordered)',
                 'item-refunded' => 'Erstattet (:qty_refunded)',
                 'item-shipped' => 'Versendet (:qty_shipped)',
+                'not-tracked' => 'Nicht erfasst',
                 'order-error' => 'Lieferung ist ungültig',
                 'per-unit' => 'Pro Einheit',
                 'qty-available' => 'Verfügbare Menge',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Menge ungültig',
                 'sku' => 'Artikelnummer (SKU) - :sku',
                 'source' => 'Quelle',
+                'stock-not-managed' => 'Bestand nicht verwaltet',
+                'stock-not-managed-info' => 'Der Bestand dieses Produkts wird nicht verwaltet, daher kann es aus jeder Quelle versendet werden, ohne dass sich die Lagerbestände ändern.',
                 'success' => 'Lieferung erfolgreich erstellt',
                 'title' => 'Neue Lieferung erstellen',
                 'tracking-number' => 'Sendungsnummer',

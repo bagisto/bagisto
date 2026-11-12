@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Tüm Bildirimleri Listele',
-        'marked-success' => 'Tüm bildirimler okundu olarak işaretlendi',
-        'no-record' => 'Kayıt Bulunamadı',
+        'all' => 'Tümü',
+        'description' => 'Siparişleri, müşterileri ve ilgilenmeniz gereken her şeyi takip edin.',
+        'empty-description' => 'Yeni bildirimler geldiğinde burada görünecek.',
+        'empty-title' => 'Her şeyi gördünüz',
+        'mark-all-read' => 'Tümünü okundu olarak işaretle',
+        'mark-read' => 'Okundu olarak işaretle',
+        'mark-unread' => 'Okunmadı olarak işaretle',
+        'marked-all-read' => 'Tüm bildirimler okundu olarak işaretlendi.',
         'of' => 'of',
         'per-page' => 'Sayfa Başına',
-        'read-all' => 'Tümünü Okundu Olarak İşaretle',
         'title' => 'Bildirimler',
-        'view-all' => 'Tümünü Görüntüle',
+        'today' => 'Bugün',
+        'unread' => 'Okunmamış',
+        'view-all' => 'Tüm bildirimleri görüntüle',
+        'yesterday' => 'Dün',
 
-        'order-status-messages' => [
-            'all' => 'Tümü',
-            'canceled' => 'Sipariş İptal Edildi',
-            'closed' => 'Sipariş Kapatıldı',
-            'completed' => 'Sipariş Tamamlandı',
-            'pending' => 'Sipariş Bekliyor',
-            'pending-payment' => 'Bekleyen Ödeme',
-            'processing' => 'Sipariş İşleniyor',
+        'groups' => [
+            'customers' => 'Müşteriler',
+            'gdpr' => 'GDPR Veri Talepleri',
+            'imports' => 'Importlar',
+            'orders' => 'Siparişler',
+            'returns' => 'RMA Talepleri',
+            'reviews' => 'Değerlendirmeler',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Yeni müşteri kaydoldu',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Yeni veri silme talebi',
+                'message' => ':customer tarafından',
+                'update-title' => 'Yeni veri güncelleme talebi',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed satır işlendi',
+                'message-skipped' => ':processed satır işlendi, :skipped satır atlandı',
+                'title' => ':type içe aktarımı tamamlandı',
+            ],
+
+            'order' => [
+                'message' => ':customer tarafından :total',
+            ],
+
+            'order-canceled' => [
+                'title' => '#:order numaralı sipariş iptal edildi',
+            ],
+
+            'order-placed' => [
+                'title' => 'Yeni sipariş #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount iade edildi',
+                'title' => '#:order numaralı sipariş için iade yapıldı',
+            ],
+
+            'return-requested' => [
+                'message' => ':customer tarafından #:order numaralı sipariş',
+                'title' => 'Yeni iade talebi #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer, :product ürününe 5 üzerinden :rating verdi',
+                'title' => 'Onay bekleyen yeni değerlendirme',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'Sipariş Edilen (:qty_ordered)',
                 'item-refunded' => 'İade Edildi (:qty_refunded)',
                 'item-shipped' => 'Gönderildi (:qty_shipped)',
+                'not-tracked' => 'İzlenmiyor',
                 'order-error' => 'Gönderi geçerli değil',
                 'per-unit' => 'Birim Başına',
                 'qty-available' => 'Mevcut Miktar',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'Miktar Geçersiz',
                 'sku' => 'Ürün Kodu - :sku',
                 'source' => 'Kaynak',
+                'stock-not-managed' => 'Stok yönetilmiyor',
+                'stock-not-managed-info' => 'Bu ürünün stoğu yönetilmediği için herhangi bir kaynaktan gönderilebilir ve stok seviyeleri değişmez.',
                 'success' => 'Gönderi başarıyla oluşturuldu',
                 'title' => 'Yeni Gönderi Oluştur',
                 'tracking-number' => 'Takip Numarası',

@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'לרשום את כל ההתראות',
-        'marked-success' => 'כל ההתראות סומנו כנקראו',
-        'no-record' => 'לא נמצאו רשומות',
+        'all' => 'הכל',
+        'description' => 'עקבו אחר הזמנות, לקוחות וכל מה שדורש את תשומת לבכם.',
+        'empty-description' => 'התראות חדשות יופיעו כאן ברגע שיגיעו.',
+        'empty-title' => 'אין התראות חדשות',
+        'mark-all-read' => 'סמן הכול כנקרא',
+        'mark-read' => 'סמן כנקרא',
+        'mark-unread' => 'סמן כלא נקרא',
+        'marked-all-read' => 'כל ההתראות סומנו כנקראו.',
         'of' => 'מתוך',
         'per-page' => 'לעמוד',
-        'read-all' => 'סמן כנקרא',
         'title' => 'התראות',
-        'view-all' => 'הצג הכל',
+        'today' => 'היום',
+        'unread' => 'לא נקראו',
+        'view-all' => 'הצג את כל ההתראות',
+        'yesterday' => 'אתמול',
 
-        'order-status-messages' => [
-            'all' => 'הכל',
-            'canceled' => 'הזמנה בוטלה',
-            'closed' => 'הזמנה נסגרה',
-            'completed' => 'הזמנה הושלמה',
-            'pending' => 'הזמנה ממתינה',
-            'pending-payment' => 'הזמנה ממתינה לתשלום',
-            'processing' => 'הזמנה בעיבוד',
+        'groups' => [
+            'customers' => 'לקוחות',
+            'gdpr' => 'בקשות נתוני GDPR',
+            'imports' => 'ייבואים',
+            'orders' => 'הזמנות',
+            'returns' => 'בקשות RMA',
+            'reviews' => 'ביקורות',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'לקוח חדש נרשם',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'בקשה חדשה למחיקת נתונים',
+                'message' => 'מאת :customer',
+                'update-title' => 'בקשה חדשה לעדכון נתונים',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed שורות עובדו',
+                'message-skipped' => ':processed שורות עובדו, :skipped דולגו',
+                'title' => 'ייבוא :type הושלם',
+            ],
+
+            'order' => [
+                'message' => ':total מאת :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'הזמנה #:order בוטלה',
+            ],
+
+            'order-placed' => [
+                'title' => 'הזמנה חדשה #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => 'הוחזרו :amount',
+                'title' => 'הונפק החזר עבור הזמנה #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'הזמנה #:order מאת :customer',
+                'title' => 'בקשת החזרה חדשה #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer דירג/ה את :product ב-:rating מתוך 5',
+                'title' => 'ביקורת חדשה ממתינה לאישור',
+            ],
         ],
     ],
 
@@ -565,6 +617,7 @@ return [
                 'item-ordered' => 'הוזמן (:qty_ordered)',
                 'item-refunded' => 'הוחזר (:qty_refunded)',
                 'item-shipped' => 'נשלח (:qty_shipped)',
+                'not-tracked' => 'לא במעקב',
                 'order-error' => 'המשלוח אינו תקין',
                 'per-unit' => 'ליחידה',
                 'qty-available' => 'כמות זמינה',
@@ -572,6 +625,8 @@ return [
                 'quantity-invalid' => 'כמות לא תקינה',
                 'sku' => 'מ.ק. - :sku',
                 'source' => 'מקור',
+                'stock-not-managed' => 'המלאי אינו מנוהל',
+                'stock-not-managed-info' => 'המלאי של מוצר זה אינו מנוהל, ולכן ניתן לשלוח אותו מכל מקור מבלי לשנות את רמות המלאי.',
                 'success' => 'המשלוח נוצר בהצלחה',
                 'title' => 'צור משלוח חדש',
                 'tracking-number' => 'מספר מעקב',
