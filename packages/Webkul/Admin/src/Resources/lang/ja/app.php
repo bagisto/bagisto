@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'すべての通知をリストアップ',
-        'marked-success' => 'すべての通知が既読としてマークされました',
-        'no-record' => '記録が見つかりません',
+        'all' => 'すべて',
+        'description' => '注文、顧客など、対応が必要なことを見逃さずに確認できます。',
+        'empty-description' => '新しい通知が届くとここに表示されます。',
+        'empty-title' => 'すべて確認済みです',
+        'mark-all-read' => 'すべて既読にする',
+        'mark-read' => '既読にする',
+        'mark-unread' => '未読にする',
+        'marked-all-read' => 'すべての通知を既読にしました。',
         'of' => 'の',
         'per-page' => 'ページごと',
-        'read-all' => 'すべてを既読にする',
         'title' => 'お知らせ',
-        'view-all' => 'すべて表示',
+        'today' => '今日',
+        'unread' => '未読',
+        'view-all' => 'すべての通知を表示',
+        'yesterday' => '昨日',
 
-        'order-status-messages' => [
-            'all' => 'すべて',
-            'canceled' => '注文キャンセル',
-            'closed' => '注文終了',
-            'completed' => '注文完了',
-            'pending' => '注文保留中',
-            'pending-payment' => '支払い保留中',
-            'processing' => '注文処理中',
+        'groups' => [
+            'customers' => '顧客',
+            'gdpr' => 'GDPRデータリクエスト',
+            'imports' => '輸入品',
+            'orders' => '注文',
+            'returns' => 'RMAリクエスト',
+            'reviews' => 'レビュー',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => '新しい顧客が登録しました',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => '新しいデータ削除リクエスト',
+                'message' => ':customer から',
+                'update-title' => '新しいデータ更新リクエスト',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed 行を処理しました',
+                'message-skipped' => ':processed 行を処理し、:skipped 行をスキップしました',
+                'title' => ':type のインポートが完了しました',
+            ],
+
+            'order' => [
+                'message' => ':customer 様より :total',
+            ],
+
+            'order-canceled' => [
+                'title' => '注文 #:order がキャンセルされました',
+            ],
+
+            'order-placed' => [
+                'title' => '新しい注文 #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount を返金しました',
+                'title' => '注文 #:order の返金を発行しました',
+            ],
+
+            'return-requested' => [
+                'message' => ':customer 様の注文 #:order',
+                'title' => '新しい返品リクエスト #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer 様が :product を 5 段階中 :rating と評価しました',
+                'title' => '承認待ちの新しいレビュー',
+            ],
         ],
     ],
 

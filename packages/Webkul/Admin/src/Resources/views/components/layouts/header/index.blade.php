@@ -71,18 +71,16 @@
             </span>
         </a>
 
-       <!-- Notification Component -->
-        @if (bouncer()->hasPermission('sales.orders'))
-            <v-notifications {{ $attributes }}>
-                <span class="relative flex">
-                    <span
-                        class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
-                        title="@lang('admin::app.components.layouts.header.notifications')"
-                    >
-                    </span>
+        <!-- Notification Component -->
+        <v-notifications>
+            <span class="relative flex">
+                <span
+                    class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
+                    title="@lang('admin::app.components.layouts.header.notifications')"
+                >
                 </span>
-            </v-notifications>
-        @endif
+            </span>
+        </v-notifications>
 
         <!-- Admin Profile -->
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
@@ -691,74 +689,83 @@
             <x-slot:toggle>
                 <span class="relative flex">
                     <span
-                        class="icon-notification text-red cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                        class="icon-notification cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
 
                     <span
-                        class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5"
-                        v-if="totalUnRead"
+                        class="absolute -top-1.5 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-semibold text-white ltr:left-5 rtl:right-5"
+                        v-if="unread"
+                        v-text="unread > 99 ? '99+' : unread"
                     >
-                        @{{ totalUnRead }}
                     </span>
                 </span>
             </x-slot>
 
             <!-- Notification Content -->
-            <x-slot:content class="min-w-62.5 max-w-62.5 p-0!">
+            <x-slot:content class="w-96 max-w-[calc(100vw-2rem)] p-0!">
                 <!-- Header -->
-                <div class="border-b p-3 text-base font-semibold text-gray-600 dark:border-gray-800 dark:text-gray-300">
-                    @lang('admin::app.notifications.title', ['read' => 0])
+                <div class="flex items-center justify-between gap-2 border-b px-4 py-3 dark:border-gray-800">
+                    <p class="flex items-center gap-2 text-base font-semibold text-gray-800 dark:text-white">
+                        @lang('admin::app.notifications.title')
+
+                        <span
+                            class="rounded-full bg-blue-50 px-2 py-px text-xs font-semibold text-blue-600 dark:bg-gray-950 dark:text-blue-400"
+                            v-if="unread"
+                            v-text="unread"
+                        >
+                        </span>
+                    </p>
+
+                    <button
+                        type="button"
+                        class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
+                        v-if="unread"
+                        @click="readAll"
+                    >
+                        @lang('admin::app.notifications.mark-all-read')
+                    </button>
                 </div>
 
                 <!-- Content -->
-                <div class="grid">
-                    <a
-                        class="flex items-start gap-1.5 border-b p-3 last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                <div
+                    class="journal-scroll max-h-[min(28rem,70vh)] overflow-y-auto"
+                    role="feed"
+                    v-if="notifications.length"
+                >
+                    <x-admin::notifications.item
+                        class="border-b last:border-b-0 dark:border-gray-800"
                         v-for="notification in notifications"
-                        :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
+                        ::key="notification.id"
+                        ::notification="notification"
+                        @toggle-read="toggleRead"
+                    />
+                </div>
+
+                <!-- Empty State -->
+                <div
+                    class="grid justify-items-center gap-2 px-6 py-10 text-center"
+                    v-else
+                >
+                    <span
+                        class="icon-notification flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-3xl text-gray-400 dark:bg-gray-800 dark:text-gray-500!"
+                        aria-hidden="true"
                     >
-                        <!-- Notification Icon -->
-                        <span
-                            v-if="notification.order.status in notificationStatusIcon"
-                            class="h-fit"
-                            :class="notificationStatusIcon[notification.order.status]"
-                        >
-                        </span>
+                    </span>
 
-                        <div class="grid">
-                            <!-- Order Id & Status -->
-                            <p class="text-gray-800 dark:text-white">
-                                #@{{ notification.order.id }}
-                                @{{ orderTypeMessages[notification.order.status] }}
-                            </p>
-
-                            <!-- Created Date -->
-                            <p class="text-xs text-gray-600 dark:text-gray-300">
-                                @{{ notification.order.datetime }}
-                            </p>
-                        </div>
-                    </a>
+                    <p class="text-sm font-semibold text-gray-800 dark:text-white">
+                        @lang('admin::app.notifications.empty-title')
+                    </p>
                 </div>
 
                 <!-- Footer -->
-                <div class="flex h-11.75 justify-between gap-1.5 border-t px-6 py-4 dark:border-gray-800">
-                    <a
-                        href="{{ route('admin.notification.index') }}"
-                        class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
-                    >
-                        @lang('admin::app.notifications.view-all')
-                    </a>
-
-                    <a
-                        class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
-                        v-if="notifications?.length"
-                        @click="readAll()"
-                    >
-                        @lang('admin::app.notifications.read-all')
-                    </a>
-                </div>
+                <a
+                    href="{{ route('admin.notification.index') }}"
+                    class="block border-t px-4 py-3 text-center text-sm font-semibold text-blue-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                >
+                    @lang('admin::app.notifications.view-all')
+                </a>
             </x-slot>
         </x-admin::dropdown>
     </script>
@@ -767,126 +774,73 @@
         app.component('v-notifications', {
             template: '#v-notifications-template',
 
-            props: [
-                'getReadAllUrl',
-                'readAllTitle',
-            ],
-
             data() {
                 return {
                     notifications: [],
 
-                    ordertype: {
-                        pending: {
-                            icon: 'icon-information',
-                            message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
-                        },
-
-                        processing: {
-                            icon: 'icon-processing',
-                            message: "@lang('admin::app.notifications.order-status-messages.processing')",
-                        },
-
-                        canceled: {
-                            icon: 'icon-close',
-                            message: "@lang('admin::app.notifications.order-status-messages.canceled')"
-                        },
-
-                        completed: {
-                            icon: 'icon-done',
-                            message: "@lang('admin::app.notifications.order-status-messages.completed')"
-                        },
-
-                        closed: {
-                            icon: 'icon-close',
-                            message: "@lang('admin::app.notifications.order-status-messages.closed')"
-                        },
-
-                        pending_payment: {
-                            icon: "icon-information",
-                            message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
-                        },
-                    },
-
-                    totalUnRead: 0,
-
-                    orderTypeMessages: {
-                        {{ \Webkul\Sales\Models\Order::STATUS_PENDING }}: "@lang('admin::app.notifications.order-status-messages.pending')",
-                        {{ \Webkul\Sales\Models\Order::STATUS_CANCELED }}: "@lang('admin::app.notifications.order-status-messages.canceled')",
-                        {{ \Webkul\Sales\Models\Order::STATUS_CLOSED }}: "@lang('admin::app.notifications.order-status-messages.closed')",
-                        {{ \Webkul\Sales\Models\Order::STATUS_COMPLETED }}: "@lang('admin::app.notifications.order-status-messages.completed')",
-                        {{ \Webkul\Sales\Models\Order::STATUS_PROCESSING }}: "@lang('admin::app.notifications.order-status-messages.processing')",
-                        {{ \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT }}: "@lang('admin::app.notifications.order-status-messages.pending-payment')",
-                    }
-                }
-            },
-
-            computed: {
-                /**
-                 * The icon classes for each order status a notification can show.
-                 */
-                notificationStatusIcon() {
-                    return {
-                        pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:text-amber-600!',
-                        closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!',
-                        completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:text-blue-600!',
-                        canceled: 'icon-close rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!',
-                        processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:text-green-600!',
-                    };
-                },
+                    unread: 0,
+                };
             },
 
             mounted() {
-                this.getNotification();
+                this.fetch();
 
-                this.listenForNotifications();
+                this.$emitter.on('notifications-changed', this.fetch);
+
+                window.Echo?.private('admin.notifications')
+                    .listen('.notification-created', () => this.fetch());
+            },
+
+            beforeUnmount() {
+                this.$emitter.off('notifications-changed', this.fetch);
             },
 
             methods: {
                 /**
-                 * Fetch the five latest unread notifications and the unread count.
+                 * Fetch the latest notifications and the unread count.
                  */
-                getNotification() {
-                    this.$axios.get('{{ route('admin.notification.get_notification') }}', {
+                fetch() {
+                    this.$axios.get("{{ route('admin.notification.list') }}", {
                             params: {
-                                limit: 5,
-                                read: 0
-                            }
+                                per_page: 6,
+                            },
                         })
                         .then((response) => {
-                            this.notifications = response.data.search_results.data;
+                            this.notifications = response.data.data;
 
-                            this.totalUnRead = response.data.total_unread;
+                            this.unread = response.data.unread;
                         })
-                        .catch(error => console.log(error))
+                        .catch(() => {});
                 },
 
                 /**
-                 * Refetch the notifications whenever the broadcaster reports one created or updated.
+                 * Mark a notification read or unread, and tell the feed it has changed.
                  */
-                listenForNotifications() {
-                    if (! window.Echo) {
-                        return;
-                    }
+                toggleRead(notification) {
+                    const request = notification.read
+                        ? this.$axios.delete("{{ route('admin.notification.mark_unread', ':id') }}".replace(':id', notification.id))
+                        : this.$axios.post("{{ route('admin.notification.mark_read', ':id') }}".replace(':id', notification.id));
 
-                    window.Echo.private('admin.notifications')
-                        .listen('.create-notification', () => this.getNotification())
-                        .listen('.update-notification', () => this.getNotification());
+                    request.then(() => {
+                        this.fetch();
+
+                        this.$emitter.emit('notifications-changed');
+                    });
                 },
 
                 /**
-                 * Mark every notification read and flash the result.
+                 * Mark every notification read, flash the result and tell the feed it has changed.
                  */
                 readAll() {
-                    this.$axios.post('{{ route('admin.notification.read_all') }}')
+                    this.$axios.post("{{ route('admin.notification.read_all') }}")
                         .then((response) => {
-                            this.notifications = response.data.search_results.data;
+                            this.fetch();
 
-                            this.totalUnRead = response.data.total_unread;
+                            this.$emitter.emit('notifications-changed');
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.success_message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
-                        .catch((error) => {});
+                        .catch(() => {});
                 },
             },
         });

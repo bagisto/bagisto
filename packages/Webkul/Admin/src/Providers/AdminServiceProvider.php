@@ -76,6 +76,16 @@ class AdminServiceProvider extends ServiceProvider
             dirname(__DIR__).'/Config/command-palette.php',
             'command_palette'
         );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__).'/Config/notification-groups.php',
+            'notification_groups'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__).'/Config/notification-types.php',
+            'notification_types'
+        );
     }
 
     /**

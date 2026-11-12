@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Alle meldingen weergeven',
-        'marked-success' => 'Alle meldingen zijn gemarkeerd als gelezen',
-        'no-record' => 'Geen Records Gevonden',
+        'all' => 'Alles',
+        'description' => 'Houd bestellingen, klanten en alles wat uw aandacht nodig heeft in de gaten.',
+        'empty-description' => 'Nieuwe meldingen verschijnen hier zodra ze binnenkomen.',
+        'empty-title' => 'U bent helemaal bij',
+        'mark-all-read' => 'Alles als gelezen markeren',
+        'mark-read' => 'Als gelezen markeren',
+        'mark-unread' => 'Als ongelezen markeren',
+        'marked-all-read' => 'Alle meldingen zijn als gelezen gemarkeerd.',
         'of' => 'van',
         'per-page' => 'Per pagina',
-        'read-all' => 'Markeer als Gelezen',
         'title' => 'Meldingen',
-        'view-all' => 'Alles Bekijken',
+        'today' => 'Vandaag',
+        'unread' => 'Ongelezen',
+        'view-all' => 'Alle meldingen bekijken',
+        'yesterday' => 'Gisteren',
 
-        'order-status-messages' => [
-            'all' => 'Alles',
-            'canceled' => 'Bestelling Geannuleerd',
-            'closed' => 'Bestelling Gesloten',
-            'completed' => 'Bestelling Voltooid',
-            'pending' => 'Bestelling In Afwachting',
-            'pending-payment' => 'In Afwachting van Betaling',
-            'processing' => 'Bestelling In Verwerking',
+        'groups' => [
+            'customers' => 'Klanten',
+            'gdpr' => 'GDPR Data Verzoeken',
+            'imports' => 'Imports',
+            'orders' => 'Bestellingen',
+            'returns' => 'RMA-verzoeken',
+            'reviews' => 'Beoordelingen',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Nieuwe klant geregistreerd',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Nieuw verzoek om gegevens te verwijderen',
+                'message' => 'Van :customer',
+                'update-title' => 'Nieuw verzoek om gegevens bij te werken',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed rijen verwerkt',
+                'message-skipped' => ':processed rijen verwerkt, :skipped overgeslagen',
+                'title' => 'Import van :type voltooid',
+            ],
+
+            'order' => [
+                'message' => ':total van :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Bestelling #:order geannuleerd',
+            ],
+
+            'order-placed' => [
+                'title' => 'Nieuwe bestelling #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount terugbetaald',
+                'title' => 'Terugbetaling uitgevoerd voor bestelling #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Bestelling #:order van :customer',
+                'title' => 'Nieuw retourverzoek #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer gaf :product :rating van de 5',
+                'title' => 'Nieuwe review wacht op goedkeuring',
+            ],
         ],
     ],
 

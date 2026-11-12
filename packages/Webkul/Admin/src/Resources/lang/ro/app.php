@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'List all the Notifications',
-        'marked-success' => 'All notifications have been marked as read',
-        'no-record' => 'No Record Found',
+        'all' => 'All',
+        'description' => 'Urmăriți comenzile, clienții și tot ce are nevoie de atenția dvs.',
+        'empty-description' => 'Notificările noi vor apărea aici imediat ce sosesc.',
+        'empty-title' => 'Sunteți la zi',
+        'mark-all-read' => 'Marchează toate ca citite',
+        'mark-read' => 'Marchează ca citită',
+        'mark-unread' => 'Marchează ca necitită',
+        'marked-all-read' => 'Toate notificările au fost marcate ca citite.',
         'of' => 'of',
         'per-page' => 'Per Page',
-        'read-all' => 'Mark as Read',
         'title' => 'Notifications',
-        'view-all' => 'View All',
+        'today' => 'Today',
+        'unread' => 'Necitite',
+        'view-all' => 'Vezi toate notificările',
+        'yesterday' => 'Yesterday',
 
-        'order-status-messages' => [
-            'all' => 'All',
-            'canceled' => 'Order Canceled',
-            'closed' => 'Order Closed',
-            'completed' => 'Order Completed',
-            'pending' => 'Order Pending',
-            'pending-payment' => 'Pending Payment',
-            'processing' => 'Order Processing',
+        'groups' => [
+            'customers' => 'Customers',
+            'gdpr' => 'GDPR Data Requests',
+            'imports' => 'Imports',
+            'orders' => 'Orders',
+            'returns' => 'RMA Requests',
+            'reviews' => 'Reviews',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Client nou înregistrat',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Cerere nouă de ștergere a datelor',
+                'message' => 'De la :customer',
+                'update-title' => 'Cerere nouă de actualizare a datelor',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed rânduri procesate',
+                'message-skipped' => ':processed rânduri procesate, :skipped omise',
+                'title' => 'Importul de :type s-a încheiat',
+            ],
+
+            'order' => [
+                'message' => ':total de la :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Comanda #:order a fost anulată',
+            ],
+
+            'order-placed' => [
+                'title' => 'Comandă nouă #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount rambursat',
+                'title' => 'Rambursare emisă pentru comanda #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Comanda #:order de la :customer',
+                'title' => 'Cerere nouă de retur #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer a evaluat :product cu :rating din 5',
+                'title' => 'Recenzie nouă în așteptarea aprobării',
+            ],
         ],
     ],
 

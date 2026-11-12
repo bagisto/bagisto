@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
-        'marked-success' => 'सभी सूचनाओं को पढ़ा गया के रूप में चिह्नित किया गया है',
-        'no-record' => 'कोई रिकॉर्ड नहीं मिला',
+        'all' => 'सभी',
+        'description' => 'ऑर्डर, ग्राहकों और ध्यान देने योग्य हर चीज़ पर नज़र रखें।',
+        'empty-description' => 'नई सूचनाएँ आते ही यहाँ दिखाई देंगी।',
+        'empty-title' => 'आपने सब कुछ देख लिया है',
+        'mark-all-read' => 'सभी को पढ़ा हुआ चिह्नित करें',
+        'mark-read' => 'पढ़ा हुआ चिह्नित करें',
+        'mark-unread' => 'अपठित चिह्नित करें',
+        'marked-all-read' => 'सभी सूचनाएँ पढ़ी हुई चिह्नित कर दी गई हैं।',
         'of' => 'का',
         'per-page' => 'प्रति पृष्ठ',
-        'read-all' => 'पढ़ा गया मार्क करें',
         'title' => 'सूचनाएँ',
-        'view-all' => 'सभी देखें',
+        'today' => 'आज',
+        'unread' => 'अपठित',
+        'view-all' => 'सभी सूचनाएँ देखें',
+        'yesterday' => 'कल',
 
-        'order-status-messages' => [
-            'all' => 'सभी',
-            'canceled' => 'ऑर्डर रद्द हो गया',
-            'closed' => 'ऑर्डर बंद हो गया',
-            'completed' => 'ऑर्डर पूरा हुआ',
-            'pending' => 'ऑर्डर लंबित है',
-            'pending-payment' => 'लंबित भुगतान',
-            'processing' => 'ऑर्डर प्रसंस्कृत हो रहा है',
+        'groups' => [
+            'customers' => 'ग्राहक',
+            'gdpr' => 'GDPR डेटा अनुरोध',
+            'imports' => 'आयात',
+            'orders' => 'आदेश',
+            'returns' => 'RMA अनुरोध',
+            'reviews' => 'समीक्षा',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'नए ग्राहक ने पंजीकरण किया',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'डेटा हटाने का नया अनुरोध',
+                'message' => ':customer से',
+                'update-title' => 'डेटा अपडेट करने का नया अनुरोध',
+            ],
+
+            'import-completed' => [
+                'message' => ':processed पंक्तियाँ संसाधित हुईं',
+                'message-skipped' => ':processed पंक्तियाँ संसाधित हुईं, :skipped छोड़ी गईं',
+                'title' => ':type इंपोर्ट पूरा हुआ',
+            ],
+
+            'order' => [
+                'message' => ':customer से :total',
+            ],
+
+            'order-canceled' => [
+                'title' => 'ऑर्डर #:order रद्द किया गया',
+            ],
+
+            'order-placed' => [
+                'title' => 'नया ऑर्डर #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount रिफ़ंड किया गया',
+                'title' => 'ऑर्डर #:order के लिए रिफ़ंड जारी किया गया',
+            ],
+
+            'return-requested' => [
+                'message' => ':customer का ऑर्डर #:order',
+                'title' => 'नया रिटर्न अनुरोध #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer ने :product को 5 में से :rating दिए',
+                'title' => 'स्वीकृति की प्रतीक्षा में नई समीक्षा',
+            ],
         ],
     ],
 

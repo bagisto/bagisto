@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'قائمة جميع الإشعارات',
-        'marked-success' => 'تم وضع علامة على جميع الإشعارات كمقروءة',
-        'no-record' => 'لم يتم العثور على سجلات',
+        'all' => 'الكل',
+        'description' => 'تابع الطلبات والعملاء وكل ما يحتاج إلى انتباهك.',
+        'empty-description' => 'ستظهر الإشعارات الجديدة هنا فور وصولها.',
+        'empty-title' => 'لا توجد إشعارات جديدة',
+        'mark-all-read' => 'تعيين الكل كمقروء',
+        'mark-read' => 'تعيين كمقروء',
+        'mark-unread' => 'تعيين كغير مقروء',
+        'marked-all-read' => 'تم تعيين جميع الإشعارات كمقروءة.',
         'of' => 'من',
         'per-page' => 'في الصفحة',
-        'read-all' => 'وضع علامة كمقروء',
         'title' => 'الإشعارات',
-        'view-all' => 'عرض الكل',
+        'today' => 'اليوم',
+        'unread' => 'غير مقروء',
+        'view-all' => 'عرض كل الإشعارات',
+        'yesterday' => 'الأمس',
 
-        'order-status-messages' => [
-            'all' => 'الكل',
-            'canceled' => 'تم إلغاء الطلب',
-            'closed' => 'تم إغلاق الطلب',
-            'completed' => 'تم الانتهاء من الطلب',
-            'pending' => 'الطلب معلق',
-            'pending-payment' => 'انتظار الدفع',
-            'processing' => 'جاري معالجة الطلب',
+        'groups' => [
+            'customers' => 'العملاء',
+            'gdpr' => 'طلبات بيانات GDPR',
+            'imports' => 'الاستيرادات',
+            'orders' => 'الطلبات',
+            'returns' => 'طلبات RMA',
+            'reviews' => 'التقييمات',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'تسجيل عميل جديد',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'طلب جديد لحذف البيانات',
+                'message' => 'من :customer',
+                'update-title' => 'طلب جديد لتحديث البيانات',
+            ],
+
+            'import-completed' => [
+                'message' => 'تمت معالجة :processed صف',
+                'message-skipped' => 'تمت معالجة :processed صف، وتم تخطي :skipped',
+                'title' => 'اكتمل استيراد :type',
+            ],
+
+            'order' => [
+                'message' => ':total من :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'تم إلغاء الطلب #:order',
+            ],
+
+            'order-placed' => [
+                'title' => 'طلب جديد #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => 'تم استرداد :amount',
+                'title' => 'تم إصدار استرداد للطلب #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'الطلب #:order من :customer',
+                'title' => 'طلب إرجاع جديد #:id',
+            ],
+
+            'review-created' => [
+                'message' => 'قيّم :customer المنتج :product بـ :rating من 5',
+                'title' => 'تقييم جديد بانتظار الموافقة',
+            ],
         ],
     ],
 

@@ -46,23 +46,75 @@ return [
     ],
 
     'notifications' => [
-        'description-text' => 'Orodhesha Taarifa Zote',
-        'marked-success' => 'Taarifa zote zimeashiriwa kama zimesomwa',
-        'no-record' => 'Hakuna Rekodi Iliyopatikana',
+        'all' => 'Zote',
+        'description' => 'Fuatilia maagizo, wateja na kila kitu kinachohitaji umakini wako.',
+        'empty-description' => 'Arifa mpya zitaonekana hapa mara zinapofika.',
+        'empty-title' => 'Umeona kila kitu',
+        'mark-all-read' => 'Weka zote kuwa zimesomwa',
+        'mark-read' => 'Weka kuwa imesomwa',
+        'mark-unread' => 'Weka kuwa haijasomwa',
+        'marked-all-read' => 'Arifa zote zimewekwa kuwa zimesomwa.',
         'of' => 'kati ya',
         'per-page' => 'Kila Ukurasa',
-        'read-all' => 'Ashiria Kama Imesomwa',
         'title' => 'Taarifa',
-        'view-all' => 'Angalia Zote',
+        'today' => 'Leo',
+        'unread' => 'Hazijasomwa',
+        'view-all' => 'Tazama arifa zote',
+        'yesterday' => 'Jana',
 
-        'order-status-messages' => [
-            'all' => 'Zote',
-            'canceled' => 'Oda Imeghairiwa',
-            'closed' => 'Oda Imefungwa',
-            'completed' => 'Oda Imekamilika',
-            'pending' => 'Oda Inasubiri',
-            'pending-payment' => 'Inasubiri Malipo',
-            'processing' => 'Oda Inachakatwa',
+        'groups' => [
+            'customers' => 'Wateja',
+            'gdpr' => 'Maombi ya Data ya GDPR',
+            'imports' => 'Uingizaji',
+            'orders' => 'Oda',
+            'returns' => 'Maombi ya RMA',
+            'reviews' => 'Maoni',
+        ],
+
+        'types' => [
+            'customer-registered' => [
+                'message' => ':name · :email',
+                'title' => 'Mteja mpya amejisajili',
+            ],
+
+            'gdpr-requested' => [
+                'delete-title' => 'Ombi jipya la kufuta data',
+                'message' => 'Kutoka kwa :customer',
+                'update-title' => 'Ombi jipya la kusasisha data',
+            ],
+
+            'import-completed' => [
+                'message' => 'Safu :processed zimechakatwa',
+                'message-skipped' => 'Safu :processed zimechakatwa, :skipped zimerukwa',
+                'title' => 'Uingizaji wa :type umekamilika',
+            ],
+
+            'order' => [
+                'message' => ':total kutoka kwa :customer',
+            ],
+
+            'order-canceled' => [
+                'title' => 'Agizo #:order limeghairiwa',
+            ],
+
+            'order-placed' => [
+                'title' => 'Agizo jipya #:order',
+            ],
+
+            'order-refunded' => [
+                'message' => ':amount imerejeshwa',
+                'title' => 'Marejesho yametolewa kwa agizo #:order',
+            ],
+
+            'return-requested' => [
+                'message' => 'Agizo #:order kutoka kwa :customer',
+                'title' => 'Ombi jipya la kurejesha #:id',
+            ],
+
+            'review-created' => [
+                'message' => ':customer amekadiria :product :rating kati ya 5',
+                'title' => 'Maoni mapya yanasubiri idhini',
+            ],
         ],
     ],
 

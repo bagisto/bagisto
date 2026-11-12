@@ -1,5 +1,6 @@
 # UPGRADE Guide
 
+- [Upgrading To v2.5.2 From v2.5.1](#upgrading-to-v252-from-v251)
 - [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
@@ -7,12 +8,66 @@
   - [Before You Start](#before-you-start-1)
   - [The Upgrade Itself](#the-upgrade-itself-1)
 
-## Upgrading To v2.5.1 From v2.5.0
+## Upgrading To v2.5.2 From v2.5.1
 
 > [!IMPORTANT]
-> **Upcoming release.** v2.5.1 is not out yet — this section covers changes already merged into the `2.5` branch and is still being added to.
->
+> **Upcoming release.** v2.5.2 is not out yet — this section covers changes already merged into the `2.5` branch and is still being added to.
+
+### Medium Impact Changes
+
+- [Admin Notifications Are Typed And Read Per Admin](#admin-notifications-are-typed-and-read-per-admin)
+
+> [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
+
+---
+
+### Admin Notifications Are Typed And Read Per Admin
+
+**Impact Probability: Medium**
+
+Admin notifications were order-only: the `notifications` table held an `order_id` and one `read` flag the whole store shared, and the bell and the Notifications screen showed each order's current status. A notification now has a type, the data that type keeps and the audience it is for, each reader has their own read state, and every admin sees the types their role allows. Orders placed, canceled and refunded, new customers, reviews awaiting approval, return requests, GDPR requests and finished imports are raised out of the box.
+
+The Notification package is now panel-neutral, so another panel, such as a seller's, can raise and list notifications of its own on it. A notification goes to its type's whole audience, or to the users the type addresses it to, and anyone can read it: `notification_reads` records each read against a `reader_type` and `reader_id`. Everything particular to the admin panel lives in the Admin package — its types, the permission check, reading as the signed in admin, and the broadcast.
+
+The migration adds `audience`, `data` and a nullable `notifiable` recipient to `notifications`, rewrites each existing notification as an admin `order.placed` one carrying the order's number, customer and total, keeps one already read as read for every admin, and drops the `order_id` and `read` columns.
+
+What this changes for custom code:
+
+- **`Webkul\Notification\Events\CreateOrderNotification`, `UpdateOrderNotification` and the `Webkul\Notification\Listeners\Order` listener are gone.** The Admin package broadcasts `Webkul\Admin\Events\NotificationCreated` as `notification-created` on the `admin.notifications` channel with an empty payload, so an Echo listener on `.create-notification` or `.update-notification` listens for `.notification-created` and fetches the feed. The Notification package itself fires `notification.create.before` and `notification.create.after`.
+- **The routes changed.** `admin.notification.get_notification` (`get-notifications`) is now `admin.notification.list` (`notifications/list`), and `admin.notification.viewed_notification` (`viewed-notifications/{orderId}`) is now `admin.notification.open` (`notifications/{id}/open`), which takes the notification's id rather than the order's. `admin.notification.read_all` moved to `notifications/read-all`, and `admin.notification.mark_read` and `admin.notification.mark_unread` are new. The list answers with `data`, `meta`, `groups` and `unread` in place of `search_results`, `status_count` and `total_unread`, so a script reading the old response has to read the new keys.
+- **`NotificationRepository::getParamsData()` and `getAll()` are gone**, replaced by `paginateFor()`, `unreadCountsFor()`, `findFor()`, `markRead()`, `markUnread()` and `markAllRead()`, each taking the reader model it acts for and, where it lists, the audience. Read marks are written through the new `NotificationReadRepository`, which `NotificationRepository` now takes in its constructor, so a class extending it passes it on.
+- **The `admin::app.notifications.order-status-messages.*` keys are removed**, with `description-text`, `marked-success`, `no-record` and `read-all`. A Blade override of the bell or the Notifications screen has to be rebuilt against the new views.
+- **The screen's render events are renamed** from `bagisto.admin.marketing.notifications.create.before` and `.after` to `bagisto.admin.notifications.index.before` and `.after`, so a listener injecting markup there listens under the new names.
+- **The bell shows for every admin**, no longer only those holding `sales.orders`. What it lists is narrowed by each type's permission.
+
+A package raises notifications of its own by registering a type, and the group it is listed under, from its service provider:
+
+```php
+$this->mergeConfigFrom(__DIR__.'/../Config/notification-groups.php', 'notification_groups');
+
+$this->mergeConfigFrom(__DIR__.'/../Config/notification-types.php', 'notification_types');
+```
+
+```php
+return [
+    'marketing.campaign-sent' => [
+        'audience' => 'admin',
+        'group' => 'marketing',
+        'class' => \Acme\Marketing\Notifications\CampaignSent::class,
+        'permission' => 'marketing.campaigns',
+        'events' => ['marketing.campaign.sent.after'],
+    ],
+];
+```
+
+The class extends `Webkul\Notification\Types\AbstractType`: `data()` builds what is kept from the subject, `shouldNotify()` lets it pass on some of the events it listens to, `title()`, `message()`, `url()`, `icon()` and `tone()` render it in the language of the user reading it, and `recipients()` addresses it to particular users rather than the whole audience. Without `events`, raise it by name with `notifier()->notify('marketing.campaign-sent', $campaign)`. The Notification package's `Config/notification-groups.php` and `Config/notification-types.php` document every key, and the Admin package registers the built-in types the same way.
+
+A type raised from `events` is notified after the transaction the event fired in commits, and a failure is reported rather than thrown, so a notification cannot roll back the order or refund that raised it. `notifier()->notify()` called directly notifies at once and throws to its caller.
+
+---
+
+## Upgrading To v2.5.1 From v2.5.0
 
 ### Medium Impact Changes
 
@@ -63,6 +118,9 @@
 - [The Appearance Preview Names Its Theme In Image Urls](#the-appearance-preview-names-its-theme-in-image-urls)
 - [Image Search Uploads Are Filed By Day And Pruned](#image-search-uploads-are-filed-by-day-and-pruned)
 - [The Maximum Upload Size Helper Returns Kilobytes](#the-maximum-upload-size-helper-returns-kilobytes)
+
+> [!NOTE]
+> We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
 ### Before You Start
 

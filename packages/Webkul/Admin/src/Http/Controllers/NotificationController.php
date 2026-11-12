@@ -2,111 +2,173 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Webkul\Admin\Http\Requests\NotificationFeedRequest;
+use Webkul\Admin\Http\Resources\NotificationResource;
+use Webkul\Admin\Notifications\AdminNotifications;
+use Webkul\Notification\Contracts\Notification;
 use Webkul\Notification\Repositories\NotificationRepository;
+use Webkul\Notification\TypeRegistry;
 
 class NotificationController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
-    public function __construct(protected NotificationRepository $notificationRepository) {}
+    public function __construct(
+        protected NotificationRepository $notificationRepository,
+        protected TypeRegistry $typeRegistry,
+        protected AdminNotifications $adminNotifications
+    ) {}
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return View
+     * Display the notification feed.
      */
-    public function index()
+    public function index(): View
     {
-        abort_unless($this->readsOrderNotifications(), 401);
-
         return view('admin::notifications.index');
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return array
+     * The admin's notifications, narrowed to a group or to those unread, with the unread count of every group.
      */
-    public function getNotifications()
+    public function list(NotificationFeedRequest $request): JsonResponse
     {
-        if (! $this->readsOrderNotifications()) {
-            return [
-                'search_results' => [],
-                'status_count' => '',
-                'total_unread' => 0,
-            ];
-        }
+        $notifications = $this->notificationRepository->paginateFor(
+            $this->admin(),
+            AdminNotifications::AUDIENCE,
+            $request->types(),
+            $request->boolean('unread'),
+            $request->integer('per_page', 10)
+        );
 
-        $params = request()->except('page');
+        $unreadCounts = $this->unreadCounts();
 
-        $searchResults = count($params)
-            ? $this->notificationRepository->getParamsData($params)
-            : $this->notificationRepository->getAll();
-
-        $results = isset($searchResults['notifications']) ? $searchResults['notifications'] : $searchResults;
-
-        $statusCount = isset($searchResults['status_counts']) ? $searchResults['status_counts'] : '';
-
-        return [
-            'search_results' => $results,
-            'status_count' => $statusCount,
-            'total_unread' => $this->notificationRepository->where('read', 0)->count(),
-        ];
-    }
-
-    /**
-     * Update the notification is reade or not.
-     *
-     * @param  int  $orderId
-     * @return View
-     */
-    public function viewedNotifications($orderId)
-    {
-        abort_unless($this->readsOrderNotifications(), 401);
-
-        if ($notification = $this->notificationRepository->where('order_id', $orderId)->first()) {
-            $notification->read = 1;
-
-            $notification->save();
-
-            return redirect()->route('admin.sales.orders.view', $orderId);
-        }
-
-        abort(404);
-    }
-
-    /**
-     * Update the notification is reade or not.
-     *
-     * @return array
-     */
-    public function readAllNotifications()
-    {
-        abort_unless($this->readsOrderNotifications(), 401);
-
-        $this->notificationRepository->where('read', 0)->update(['read' => 1]);
-
-        $searchResults = $this->notificationRepository->getParamsData([
-            'limit' => 5,
-            'read' => 0,
+        return new JsonResponse([
+            'data' => NotificationResource::collection($notifications->items())->resolve(),
+            'meta' => [
+                'current_page' => $notifications->currentPage(),
+                'last_page' => $notifications->lastPage(),
+                'per_page' => $notifications->perPage(),
+                'total' => $notifications->total(),
+            ],
+            'groups' => $this->groups($unreadCounts),
+            'unread' => array_sum($unreadCounts),
         ]);
-
-        return [
-            'search_results' => $searchResults,
-            'total_unread' => $this->notificationRepository->where('read', 0)->count(),
-            'success_message' => trans('admin::app.notifications.marked-success'),
-        ];
     }
 
     /**
-     * Whether the signed in admin may read the orders every notification is raised about.
+     * Mark the notification read and take the admin to what it is about.
      */
-    protected function readsOrderNotifications(): bool
+    public function open(int $id): RedirectResponse
     {
-        return bouncer()->hasPermission('sales.orders');
+        $notification = $this->visibleNotification($id);
+
+        $this->notificationRepository->markRead($notification->id, $this->admin());
+
+        $url = $this->typeRegistry->instance($notification->type)->url($notification->data ?? []);
+
+        return redirect()->to($url ?? route('admin.notification.index'));
+    }
+
+    /**
+     * Mark the notification read for the admin.
+     */
+    public function markRead(int $id): JsonResponse
+    {
+        $this->notificationRepository->markRead($this->visibleNotification($id)->id, $this->admin());
+
+        return $this->unreadResponse();
+    }
+
+    /**
+     * Mark the notification unread for the admin.
+     */
+    public function markUnread(int $id): JsonResponse
+    {
+        $this->notificationRepository->markUnread($this->visibleNotification($id)->id, $this->admin());
+
+        return $this->unreadResponse();
+    }
+
+    /**
+     * Mark every notification the admin may see read, or only those of one group.
+     */
+    public function readAll(NotificationFeedRequest $request): JsonResponse
+    {
+        $this->notificationRepository->markAllRead($this->admin(), AdminNotifications::AUDIENCE, $request->types());
+
+        return $this->unreadResponse(trans('admin::app.notifications.marked-all-read'));
+    }
+
+    /**
+     * The signed in admin, who reads the feed.
+     */
+    protected function admin(): Model
+    {
+        return auth()->guard('admin')->user();
+    }
+
+    /**
+     * A notification the admin may see, or a not found response.
+     */
+    protected function visibleNotification(int $id): Notification
+    {
+        $notification = $this->notificationRepository->findFor(
+            $id,
+            $this->admin(),
+            AdminNotifications::AUDIENCE,
+            $this->adminNotifications->types()
+        );
+
+        abort_unless($notification, 404);
+
+        return $notification;
+    }
+
+    /**
+     * How many notifications of each type the admin may see are unread.
+     *
+     * @return array<string, int>
+     */
+    protected function unreadCounts(): array
+    {
+        return $this->notificationRepository->unreadCountsFor(
+            $this->admin(),
+            AdminNotifications::AUDIENCE,
+            $this->adminNotifications->types()
+        );
+    }
+
+    /**
+     * The groups the admin may see, with how many notifications in each are unread.
+     *
+     * @param  array<string, int>  $unreadCounts
+     */
+    protected function groups(array $unreadCounts): array
+    {
+        return collect($this->adminNotifications->groups())
+            ->map(fn (array $group, string $key) => [
+                'key' => $key,
+                'name' => trans($group['name']),
+                'icon' => $group['icon'] ?? 'icon-notification',
+                'unread' => array_sum(array_intersect_key($unreadCounts, array_flip($this->adminNotifications->typesIn($key)))),
+            ])
+            ->values()
+            ->all();
+    }
+
+    /**
+     * The admin's unread count, with a message when there is one to show.
+     */
+    protected function unreadResponse(?string $message = null): JsonResponse
+    {
+        return new JsonResponse(array_filter([
+            'unread' => array_sum($this->unreadCounts()),
+            'message' => $message,
+        ], fn ($value) => ! is_null($value)));
     }
 }
