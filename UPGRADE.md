@@ -34,7 +34,7 @@ The migration adds `audience`, `data` and a nullable `notifiable` recipient to `
 
 What this changes for custom code:
 
-- **`Webkul\Notification\Events\CreateOrderNotification`, `UpdateOrderNotification` and the `Webkul\Notification\Listeners\Order` listener are gone.** The Admin package broadcasts `Webkul\Admin\Events\NotificationCreated` as `notification-created` on the `admin.notifications` channel, carrying only the notification's id and type, so an Echo listener on `.create-notification` or `.update-notification` listens for `.notification-created` and fetches the feed. The Notification package itself fires `notification.create.before` and `notification.create.after`.
+- **`Webkul\Notification\Events\CreateOrderNotification`, `UpdateOrderNotification` and the `Webkul\Notification\Listeners\Order` listener are gone.** The Admin package broadcasts `Webkul\Admin\Events\NotificationCreated` as `notification-created` on the `admin.notifications` channel with an empty payload, so an Echo listener on `.create-notification` or `.update-notification` listens for `.notification-created` and fetches the feed. The Notification package itself fires `notification.create.before` and `notification.create.after`.
 - **The routes changed.** `admin.notification.get_notification` (`get-notifications`) is now `admin.notification.list` (`notifications/list`), and `admin.notification.viewed_notification` (`viewed-notifications/{orderId}`) is now `admin.notification.open` (`notifications/{id}/open`), which takes the notification's id rather than the order's. `admin.notification.read_all` moved to `notifications/read-all`, and `admin.notification.mark_read` and `admin.notification.mark_unread` are new. The list answers with `data`, `meta`, `groups` and `unread` in place of `search_results`, `status_count` and `total_unread`, so a script reading the old response has to read the new keys.
 - **`NotificationRepository::getParamsData()` and `getAll()` are gone**, replaced by `paginateFor()`, `unreadCountsFor()`, `findFor()`, `markRead()`, `markUnread()` and `markAllRead()`, each taking the reader model it acts for and, where it lists, the audience. Read marks are written through the new `NotificationReadRepository`, which `NotificationRepository` now takes in its constructor, so a class extending it passes it on.
 - **The `admin::app.notifications.order-status-messages.*` keys are removed**, with `description-text`, `marked-success`, `no-record` and `read-all`. A Blade override of the bell or the Notifications screen has to be rebuilt against the new views.
@@ -62,6 +62,8 @@ return [
 ```
 
 The class extends `Webkul\Notification\Types\AbstractType`: `data()` builds what is kept from the subject, `shouldNotify()` lets it pass on some of the events it listens to, `title()`, `message()`, `url()`, `icon()` and `tone()` render it in the language of the user reading it, and `recipients()` addresses it to particular users rather than the whole audience. Without `events`, raise it by name with `notifier()->notify('marketing.campaign-sent', $campaign)`. The Notification package's `Config/notification-groups.php` and `Config/notification-types.php` document every key, and the Admin package registers the built-in types the same way.
+
+A type raised from `events` is notified after the transaction the event fired in commits, and a failure is reported rather than thrown, so a notification cannot roll back the order or refund that raised it. `notifier()->notify()` called directly notifies at once and throws to its caller.
 
 ---
 

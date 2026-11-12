@@ -16,9 +16,7 @@ return [
     | Notification Types
     |--------------------------------------------------------------------------
     |
-    | The notifications the admin panel raises out of the box. The keys each
-    | entry accepts are documented in the Notification package's
-    | `Config/notification-types.php`.
+    | The notification types the admin panel ships with.
     |
     */
 

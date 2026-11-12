@@ -28,14 +28,11 @@ class NotificationCreated implements ShouldBroadcast
     }
 
     /**
-     * Broadcast only the id and type, so each admin's panel refetches what its own role may see.
+     * Broadcast nothing about the notification, so an admin learns of it only from a feed filtered by their role.
      */
     public function broadcastWith(): array
     {
-        return [
-            'id' => $this->id,
-            'type' => $this->type,
-        ];
+        return [];
     }
 
     /**

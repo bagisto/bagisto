@@ -6,9 +6,7 @@ return [
     | Notification Groups
     |--------------------------------------------------------------------------
     |
-    | The groups the admin panel lists its notification types under. The keys
-    | each entry accepts are documented in the Notification package's
-    | `Config/notification-groups.php`.
+    | The notification groups the admin panel ships with.
     |
     */
 

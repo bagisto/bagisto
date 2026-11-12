@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Exceptions;
 use Webkul\Admin\Events\NotificationCreated;
 use Webkul\Admin\Notifications\AdminNotifications;
 use Webkul\Customer\Models\Customer;
@@ -79,6 +81,25 @@ function addressedTestType(): AbstractType
     };
 }
 
+/**
+ * A test type whose data cannot be built, so raising it always fails.
+ */
+function failingTestType(): AbstractType
+{
+    return new class extends AbstractType
+    {
+        public function data(mixed $subject): array
+        {
+            throw new RuntimeException('The report data is unavailable.');
+        }
+
+        public function title(array $data): string
+        {
+            return 'Report ready';
+        }
+    };
+}
+
 // ============================================================================
 // Raising A Notification
 // ============================================================================
@@ -139,14 +160,14 @@ it('should leave a notification raised by the storefront unread for a signed in 
     expect(notificationReadBy($notification, $admin))->toBeFalse();
 });
 
-it('should broadcast a new notification on the admin channel', function () {
+it('should broadcast a new notification on the admin channel without its id or type', function () {
     Event::fake([NotificationCreated::class]);
 
     $notification = notifier()->notify('order.placed', $this->createOrder())->first();
 
     Event::assertDispatched(NotificationCreated::class, fn (NotificationCreated $event) => $event->id === $notification->id
-        && $event->type === 'order.placed'
-        && $event->broadcastAs() === 'notification-created');
+        && $event->broadcastAs() === 'notification-created'
+        && $event->broadcastWith() === []);
 });
 
 // ============================================================================
@@ -235,6 +256,54 @@ it('should warn when an import skipped rows, and read as done when it skipped no
             'processed' => 10,
             'skipped' => 3,
         ]));
+});
+
+// ============================================================================
+// An Event Fired Inside A Transaction
+// ============================================================================
+
+it('should raise a notification once the transaction its event fired in commits, and none when it rolls back', function () {
+    $committed = $this->createOrder();
+
+    $rolledBack = $this->createOrder();
+
+    DB::transaction(function () use ($committed) {
+        Event::dispatch('checkout.order.save.after', $committed);
+
+        expect(notificationsAboutOrder('order.placed', $committed))->toBe(0);
+    });
+
+    DB::beginTransaction();
+
+    Event::dispatch('checkout.order.save.after', $rolledBack);
+
+    DB::rollBack();
+
+    expect(notificationsAboutOrder('order.placed', $committed))->toBe(1)
+        ->and(notificationsAboutOrder('order.placed', $rolledBack))->toBe(0);
+});
+
+it('should report a notification that fails rather than undo the change that raised it', function () {
+    Exceptions::fake();
+
+    registerTestNotificationType('reports.failed', failingTestType(), [
+        'audience' => AdminNotifications::AUDIENCE,
+        'events' => ['test.report.failed'],
+    ]);
+
+    app(Notifier::class)->listen();
+
+    $customer = DB::transaction(function () {
+        $customer = Customer::factory()->create();
+
+        Event::dispatch('test.report.failed', [['name' => 'Sales']]);
+
+        return $customer;
+    });
+
+    expect(Customer::query()->whereKey($customer->id)->exists())->toBeTrue();
+
+    Exceptions::assertReported(fn (RuntimeException $e) => $e->getMessage() === 'The report data is unavailable.');
 });
 
 // ============================================================================
