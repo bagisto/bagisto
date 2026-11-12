@@ -216,7 +216,7 @@
                         :label="trans('shop::app.customers.account.addresses.edit.country')"
                         @change="addressData.state = ''"
                     >
-                        @foreach (core()->countries() as $country)
+                        @foreach (core()->allowedCountries() as $country)
                             <option 
                                 {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
                                 value="{{ $country->code }}"
@@ -353,7 +353,7 @@
                             state: "{{ old('state') ?? $address->state }}",
                         },
 
-                        countryStates: @json(core()->groupedStatesByCountries()),
+                        countryStates: @json(core()->allowedGroupedStatesByCountries()),
                     };
                 },
     

@@ -5393,6 +5393,13 @@ return [
                         'title' => '情報',
                         'title-info' => '住所フォームに表示する住所行の数。',
                     ],
+
+                    'countries' => [
+                        'allowed' => '許可する国',
+                        'allowed-info' => '空のままにすると、すべての国が表示されます。',
+                        'title' => '国',
+                        'title-info' => 'ストアフロントでお客様が選択できる国。',
+                    ],
                 ],
 
                 'captcha' => [

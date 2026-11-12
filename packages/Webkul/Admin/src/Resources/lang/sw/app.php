@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Taarifa',
                         'title-info' => '"Mistari katika anwani ya mtaa" inahusu sehemu tofauti za anwani, mara nyingi zikitenganishwa na koma, zenye kutoa taarifa za mahali kama namba ya nyumba, mtaa, mji na mengine.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Nchi Zinazoruhusiwa',
+                        'allowed-info' => 'Acha wazi ili kutoa nchi zote.',
+                        'title' => 'Nchi',
+                        'title-info' => 'Nchi ambazo wateja wanaweza kuchagua dukani.',
+                    ],
                 ],
 
                 'captcha' => [

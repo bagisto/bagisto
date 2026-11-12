@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Information',
                         'title-info' => 'Câte rânduri de adresă afișează formularul.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Țări permise',
+                        'allowed-info' => 'Lăsați gol pentru a oferi toate țările.',
+                        'title' => 'Țări',
+                        'title-info' => 'Ce țări pot alege clienții în magazin.',
+                    ],
                 ],
 
                 'captcha' => [

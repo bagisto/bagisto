@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Informationen',
                         'title-info' => 'Wie viele Straßenzeilen das Adressformular anzeigt.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Erlaubte Länder',
+                        'allowed-info' => 'Leer lassen, um alle Länder anzubieten.',
+                        'title' => 'Länder',
+                        'title-info' => 'Welche Länder Kunden im Shop auswählen können.',
+                    ],
                 ],
 
                 'captcha' => [

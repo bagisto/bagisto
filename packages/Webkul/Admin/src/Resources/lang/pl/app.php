@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Informacje',
                         'title-info' => 'Ile wierszy adresu pokazuje formularz adresu.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Dozwolone kraje',
+                        'allowed-info' => 'Pozostaw puste, aby udostępnić wszystkie kraje.',
+                        'title' => 'Kraje',
+                        'title-info' => 'Które kraje klienci mogą wybrać w sklepie.',
+                    ],
                 ],
 
                 'captcha' => [

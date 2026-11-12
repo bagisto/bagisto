@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- #11500 [added] - Customer > Address > Countries now limits the countries the storefront offers, per channel. The address forms, the country and state lists the storefront loads, and the address and shipping estimate validation all follow it, and leaving it empty keeps every country.
+
 - Reworked admin notifications into a feed any package can add to, filtered by type and read per admin, covering orders, customers, reviews, returns, GDPR requests and imports.
 
 - #11575 [fixed] - An order for a product that does not manage its stock could not be shipped, so it never completed. It now ships whatever the inventory source holds.

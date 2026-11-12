@@ -3056,6 +3056,21 @@ return [
             ],
         ],
     ], [
+        'key' => 'customer.address.countries',
+        'name' => 'admin::app.configuration.index.customer.address.countries.title',
+        'info' => 'admin::app.configuration.index.customer.address.countries.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'allowed',
+                'title' => 'admin::app.configuration.index.customer.address.countries.allowed',
+                'info' => 'admin::app.configuration.index.customer.address.countries.allowed-info',
+                'type' => 'multiselect',
+                'options' => 'Webkul\Core\Repositories\CountryRepository@getConfigOptions',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'customer.captcha',
         'name' => 'admin::app.configuration.index.customer.captcha.title',
         'info' => 'admin::app.configuration.index.customer.captcha.info',

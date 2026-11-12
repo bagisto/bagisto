@@ -195,6 +195,12 @@
 
             <!-- Multiselect Input -->
             <template v-if="field.type == 'multiselect' && field.is_visible">
+                <input
+                    type="hidden"
+                    :name="`${name}[]`"
+                    value=""
+                />
+
                 <v-field
                     v-slot="data"
                     :id="name"

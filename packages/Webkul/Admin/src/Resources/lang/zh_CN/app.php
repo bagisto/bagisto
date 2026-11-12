@@ -5393,6 +5393,13 @@ return [
                         'title' => '信息',
                         'title-info' => '地址表单显示的街道地址行数。',
                     ],
+
+                    'countries' => [
+                        'allowed' => '允许的国家',
+                        'allowed-info' => '留空则提供所有国家。',
+                        'title' => '国家',
+                        'title-info' => '顾客在店铺前台可以选择的国家。',
+                    ],
                 ],
 
                 'captcha' => [

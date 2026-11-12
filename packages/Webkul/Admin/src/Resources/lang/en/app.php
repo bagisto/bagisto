@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Information',
                         'title-info' => 'How many street address lines the address form shows.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Allowed Countries',
+                        'allowed-info' => 'Leave empty to offer every country.',
+                        'title' => 'Countries',
+                        'title-info' => 'Which countries customers can choose on the storefront.',
+                    ],
                 ],
 
                 'captcha' => [
