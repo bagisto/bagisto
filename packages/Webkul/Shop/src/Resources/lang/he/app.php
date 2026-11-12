@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'הבקשה נוצרה בהצלחה',
                 'revoked-successfully' => 'הבקשה בוטלה בהצלחה',
-                'success-verify' => 'הצלחה! אימייל האימות נשלח.',
-                'success-verify-email-unsent' => 'הצלחה! אימייל האימות לא נשלח.',
-                'unable-to-sent' => 'לא ניתן לשלוח אימייל.',
 
                 'index' => [
                     'create-btn' => 'צור בקשה',

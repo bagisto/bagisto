@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Ombi limetengenezwa kwa mafanikio',
                 'revoked-successfully' => 'Ombi limebatilishwa kwa mafanikio',
-                'success-verify' => 'Mafanikio! Barua pepe ya uthibitisho imetumwa.',
-                'success-verify-email-unsent' => 'Mafanikio! Barua pepe ya uthibitisho haijatumwa.',
-                'unable-to-sent' => 'Imeshindikana kutuma barua pepe.',
 
                 'index' => [
                     'create-btn' => 'Tengeneza Ombi',

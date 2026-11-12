@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'درخواست با موفقیت ایجاد شد',
                 'revoked-successfully' => 'درخواست با موفقیت لغو شد',
-                'success-verify' => 'موفقیت! ایمیل تأیید ارسال شد.',
-                'success-verify-email-unsent' => 'موفقیت! ایمیل تأیید ارسال نشده است.',
-                'unable-to-sent' => 'امکان ارسال ایمیل وجود ندارد.',
 
                 'index' => [
                     'create-btn' => 'ایجاد درخواست',

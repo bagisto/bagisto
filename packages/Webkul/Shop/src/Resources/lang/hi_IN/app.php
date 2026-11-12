@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'अनुरोध सफलतापूर्वक बनाया गया',
                 'revoked-successfully' => 'अनुरोध सफलतापूर्वक रद्द किया गया',
-                'success-verify' => 'Successo! L\'email di verifica è stata inviata.',
-                'success-verify-email-unsent' => 'Successo! L\'email di verifica non è stata inviata.',
-                'unable-to-sent' => 'Impossibile inviare l\'email.',
 
                 'index' => [
                     'create-btn' => 'Crea richiesta',

@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => '请求创建成功',
                 'revoked-successfully' => '请求撤销成功',
-                'success-verify' => '成功！验证邮件已发送。',
-                'success-verify-email-unsent' => '成功！验证邮件未发送。',
-                'unable-to-sent' => '无法发送邮件。',
 
                 'index' => [
                     'create-btn' => '创建请求',
