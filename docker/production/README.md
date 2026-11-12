@@ -54,10 +54,11 @@ The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because 
 | **Web Server** | One of **Nginx** (default), **Apache 2**, or **OpenLiteSpeed** — listening on port 80 (see the variant table above) |
 | **PHP** | 8.4. The nginx and apache images install bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pgsql, pdo, soap, sockets, xml, zip and imagick; the litespeed image installs lsphp with common, curl, imagick, intl, mysql, pgsql and opcache. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
 | **Database** | MySQL 8.0, MariaDB 10.11 or PostgreSQL 16, bundled and pre-installed with Bagisto migrations + seed data already applied |
-| **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, the web server, a queue worker and the scheduler) |
+| **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, the web server, a queue worker, Reverb and the scheduler) |
+| **Real-time notifications** | Laravel Reverb on `127.0.0.1:8080`, proxied by the web server on the store's own address, as in a production deployment: websocket upgrades on `/app/` and the events Laravel publishes to `/apps/<id>/`. A new order, customer or other notification reaches the admin bell without a refresh, over `ws://` or `wss://` as `APP_URL` says, with no extra port to publish. |
 | **Queue** | A `queue:work` worker on the `default` and `broadcastable` queues, with `QUEUE_CONNECTION=database` and `--timeout=60` (below the connection's `retry_after`). Order mail, the post-order price and inventory reindex, search terms and sitemap generation run here instead of inside the request. |
 | **Scheduler** | cron, running `php artisan schedule:run` every minute as `www-data` from `/etc/cron.d/bagisto`. The Omnibus price snapshots, marketing campaign mail, overdue invoice reminders, the nightly catalog-rule and price indexing, the image search prune and, once it is switched on under Configuration, the exchange-rate update run here, each at its time in `APP_TIMEZONE`; `php artisan schedule:list` lists every task. |
-| **Job logs** | The queue worker and the scheduler file their output by day, one folder per Supervisor program: `/var/log/bagisto/queue/YYYY-MM-DD.log` and `/var/log/bagisto/scheduler/YYYY-MM-DD.log`, dated in `APP_TIMEZONE` and kept for `JOB_LOG_DAYS` days. The queue worker's output still reaches `docker logs` too. |
+| **Job logs** | The queue worker, Reverb and the scheduler file their output by day, one folder per Supervisor program: `/var/log/bagisto/queue/YYYY-MM-DD.log`, `/var/log/bagisto/reverb/YYYY-MM-DD.log` and `/var/log/bagisto/scheduler/YYYY-MM-DD.log`, dated in `APP_TIMEZONE` and kept for `JOB_LOG_DAYS` days. The queue worker's and Reverb's output still reaches `docker logs` too. |
 | **Application** | Bagisto — fully installed at build time |
 
 ### Two database modes
@@ -105,7 +106,7 @@ bagisto/
     │   └── workers/              # The background workers every image runs, whichever its web server
     │       ├── crontab           # The cron entry for Laravel's scheduler, installed as /etc/cron.d/bagisto
     │       ├── job-log.sh        # Files a job's output by day under /var/log/bagisto/<job>/, installed as bagisto-job-log
-    │       └── supervisord.conf  # Supervisor programs for the queue worker and the scheduler
+    │       └── supervisord.conf  # Supervisor programs for the queue worker, Reverb and the scheduler
     ├── nginx/
     │   ├── Dockerfile            # Nginx + PHP 8.4 FPM
     │   └── config/
@@ -164,7 +165,7 @@ Open `http://localhost` — your store is live.
 ### Run on a different host port
 
 ```bash
-docker run -d --name bagisto -p 8080:80 webkul/bagisto:latest
+docker run -d --name bagisto -p 8080:80 -e APP_URL=http://localhost:8080 webkul/bagisto:latest
 ```
 
 Then visit `http://localhost:8080`.
@@ -515,7 +516,7 @@ docker run -d --name bagisto -p 80:80 webkul/bagisto:latest
 ### Different host port
 
 ```bash
-docker run -d --name bagisto -p 8080:80 webkul/bagisto:latest
+docker run -d --name bagisto -p 8080:80 -e APP_URL=http://localhost:8080 webkul/bagisto:latest
 ```
 
 ### In the foreground (stream logs directly)
@@ -593,7 +594,7 @@ docker run -d --name bagisto -p 80:80 \
 | `bagisto-mysql` | `/var/lib/mysql` | MySQL or MariaDB database files. Without this, all data is lost on `docker rm`. |
 | `bagisto-postgres` | `/var/lib/postgresql` | PostgreSQL database files, on a `-postgres` image, in place of `/var/lib/mysql`. |
 | `bagisto-storage` | `/var/www/bagisto/storage` | Uploaded files, product images, logs, sessions, cached views. |
-| `bagisto-logs` | `/var/log/bagisto` | The queue worker's and the scheduler's daily logs, so they outlive the container. |
+| `bagisto-logs` | `/var/log/bagisto` | The queue worker's, Reverb's and the scheduler's daily logs, so they outlive the container. |
 
 A new named volume is filled from the image on first use, so it starts with the database and storage baked in at build time.
 
@@ -683,7 +684,7 @@ docker exec -it -u www-data bagisto php /var/www/bagisto/artisan db:seed --force
 | `DB_DATABASE` | `bagisto` | Database name. |
 | `DB_USERNAME` | `bagisto` | Database user. |
 | `DB_PASSWORD` | `bagisto` | Database password. |
-| `APP_URL` | `http://localhost` | Public-facing URL of the store. |
+| `APP_URL` | `http://localhost` | Public-facing URL of the store, exactly as the browser opens it, port included. Real-time notifications connect to it, so with `-p 8080:80` set `http://localhost:8080`. |
 | `APP_KEY` | baked at build | Laravel encryption key. Generated during build; override for fixed keys. |
 | `APP_LOCALE` | from `.env.example` | Application locale (e.g., `en`, `fr`, `de`). |
 | `APP_CURRENCY` | from `.env.example` | Default currency (e.g., `USD`, `INR`, `EUR`). |
@@ -691,7 +692,10 @@ docker exec -it -u www-data bagisto php /var/www/bagisto/artisan db:seed --force
 | `APP_ADMIN_URL` | `admin` | Admin panel URL path. Read from the container environment; the entrypoint does not write it into `.env`. |
 | `QUEUE_CONNECTION` | `database` | Connection the queue worker drains. The image runs a worker, so queued work is taken off the request; set `sync` to run it inline instead and the worker idles. |
 | `SCHEDULER_AUTOSTART` | `true` | `true` or `false`: whether Supervisor starts cron, which runs Laravel's scheduler every minute. Set `false` on every container but one when several share a database, and on all of them when a host cron entry or another container already runs `schedule:run`, or each runs every scheduled task. Any other value stops the container at boot. |
-| `JOB_LOG_DAYS` | `14` | How many days of the queue worker's and the scheduler's daily logs under `/var/log/bagisto/` to keep, today's included. `0` keeps every file. Anything but a whole number stops the container at boot. |
+| `BROADCAST_CONNECTION` | `reverb` | `reverb` pushes admin notifications live through the bundled Reverb server. `null` turns real-time notifications off and leaves Reverb stopped. |
+| `REVERB_HOST`, `REVERB_PORT`, `REVERB_SCHEME` | follow `APP_URL` | Where the browser and PHP reach Reverb. Set them only to serve the websocket from a host of its own, such as `ws.example.com`, proxied to the container. |
+| `REVERB_APP_ID`, `REVERB_APP_KEY`, `REVERB_APP_SECRET` | generated on first boot | Reverb credentials, kept in `.env`. |
+| `JOB_LOG_DAYS` | `14` | How many days of the queue worker's, Reverb's and the scheduler's daily logs under `/var/log/bagisto/` to keep, today's included. `0` keeps every file. Anything but a whole number stops the container at boot. |
 
 ---
 
@@ -706,12 +710,13 @@ When the container starts, `entrypoint.sh` does this:
 | 1 | Reads `DB_HOST` to determine bundled vs. external database mode. |
 | 2 | Sets `DB_AUTOSTART=true` or `false` so Supervisor knows whether to start the bundled database. |
 | 3 | Sets `SCHEDULER_AUTOSTART` (`true` unless overridden) so Supervisor knows whether to start the scheduler. |
-| 4 | Sets `JOB_LOG_DAYS` (`14` unless overridden) and writes it into `/etc/cron.d/bagisto`, then creates `/var/log/bagisto/queue/` and `/var/log/bagisto/scheduler/` owned by `www-data`, a mounted volume's included. |
+| 4 | Sets `JOB_LOG_DAYS` (`14` unless overridden) and writes it into `/etc/cron.d/bagisto`, then creates `/var/log/bagisto/queue/`, `/var/log/bagisto/reverb/` and `/var/log/bagisto/scheduler/` owned by `www-data`, a mounted volume's included. |
 | 5 | Writes any runtime overrides (`DB_*`, `APP_URL`, `APP_KEY`, `APP_LOCALE`, `APP_CURRENCY`, `APP_TIMEZONE`) into `/var/www/bagisto/.env`. |
 | 6 | Sets `QUEUE_CONNECTION` (`database` unless overridden), which the build deliberately left as `.env.example`'s `sync` so the install itself needed no worker. |
-| 7 | Runs `php artisan optimize:clear` + `optimize`, since the steps above have just invalidated the cached configuration, then hands any file those created under `storage/` or `bootstrap/cache/` to `www-data`, so the log stays writable. |
-| 8 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
-| 9 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal), the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed` — the queue worker and, unless `SCHEDULER_AUTOSTART` is `false`, the scheduler. |
+| 7 | Sets `BROADCAST_CONNECTION` (`reverb` unless overridden). For Reverb it generates the app id, key and secret on first boot and points `REVERB_HOST`, `REVERB_PORT` and `REVERB_SCHEME` at `APP_URL`. A plain `http` address on a port other than 80 is answered on that port inside the container too, so PHP reaches it to publish. |
+| 8 | Runs `php artisan optimize:clear` + `optimize`, since the steps above have just invalidated the cached configuration, then hands any file those created under `storage/` or `bootstrap/cache/` to `www-data`, so the log stays writable. |
+| 9 | (External database mode only) Waits up to 60 seconds for the external server to accept connections. |
+| 10 | Hands off to Supervisor, which starts the bundled database (`mysql`, `mariadb` or `postgresql`, if internal), the web server — `php-fpm` + `nginx`, `apache2`, or `lsphp` + `openlitespeed` — the queue worker, Reverb unless `BROADCAST_CONNECTION` is not `reverb`, and, unless `SCHEDULER_AUTOSTART` is `false`, the scheduler. |
 
 ### Why the build-time install?
 
@@ -740,10 +745,10 @@ docker logs -f bagisto           # follow in real time
 docker logs --tail 100 bagisto   # last 100 lines
 ```
 
-The queue worker and the scheduler keep a file per day, one folder each:
+The queue worker, Reverb and the scheduler keep a file per day, one folder each:
 
 ```bash
-docker exec bagisto ls /var/log/bagisto/queue /var/log/bagisto/scheduler
+docker exec bagisto ls /var/log/bagisto/queue /var/log/bagisto/reverb /var/log/bagisto/scheduler
 docker exec bagisto bash -c 'tail -f "$(ls /var/log/bagisto/queue/*.log | tail -1)"'   # follow today's
 ```
 
@@ -880,7 +885,7 @@ docker exec -u www-data bagisto php /var/www/bagisto/artisan migrate --force
 **Fix** — map to a different host port:
 
 ```bash
-docker run -d --name bagisto -p 8080:80 webkul/bagisto:latest
+docker run -d --name bagisto -p 8080:80 -e APP_URL=http://localhost:8080 webkul/bagisto:latest
 ```
 
 Or find what's holding port 80:
@@ -888,6 +893,16 @@ Or find what's holding port 80:
 ```bash
 sudo lsof -i :80
 ```
+
+### Notifications only appear after a page refresh
+
+**Symptom**: the admin notification bell updates only when the page is reloaded.
+
+**Fix** — check, in order:
+
+1. `APP_URL` is the address in the browser's location bar, scheme and port included, such as `http://localhost:8080` for `-p 8080:80`. Real-time notifications connect to it.
+2. Behind a reverse proxy, the proxy passes websocket upgrades on `/app/` through to the container, with the `Upgrade` and `Connection` headers, and the container can reach `APP_URL` itself, since it publishes each notification there.
+3. Reverb is running: `docker exec bagisto supervisorctl status reverb` shows `RUNNING`, and `docker logs bagisto` shows why it stopped if not.
 
 ### Bundled database not running
 
@@ -1045,7 +1060,7 @@ For production at scale, set `DB_HOST` to an external managed database (AWS RDS,
 
 ### Why Supervisor?
 
-Docker containers are designed for a single process, but this image runs several — the bundled database and the web server processes (for example MySQL, PHP-FPM and Nginx), plus the queue worker and the scheduler. Supervisor is the standard solution: it starts services in the right order, restarts crashed processes, exposes `supervisorctl` for inspection, and pipes each program's console output to stdout/stderr so `docker logs` shows it.
+Docker containers are designed for a single process, but this image runs several — the bundled database and the web server processes (for example MySQL, PHP-FPM and Nginx), plus the queue worker, Reverb and the scheduler. Supervisor is the standard solution: it starts services in the right order, restarts crashed processes, exposes `supervisorctl` for inspection, and pipes each program's console output to stdout/stderr so `docker logs` shows it.
 
 ### Why is Bagisto installed at build time instead of runtime?
 
@@ -1094,21 +1109,26 @@ No. Bagisto works without it (falling back to database search). If you need Elas
 - Admin panel URL path
 - Queue connection
 - Whether the container runs the scheduler
+- Real-time notifications: the broadcast connection and the Reverb host, port, scheme and credentials
+
+### Real-time notifications across several containers
+
+Each container runs its own Reverb, and an admin only hears the notifications broadcast by the container their websocket landed on. Behind a load balancer, run one Reverb for all of them and point every container's `REVERB_*` settings at it, or set `BROADCAST_CONNECTION=null`.
 
 ### NOT configurable at runtime (set at build time)
 
 - Bagisto version (via `--build-arg BAGISTO_VERSION`)
 - PHP version (via `--build-arg PHP_VERSION`, or `LSPHP_VERSION` on litespeed)
-- Web server / PHP / Supervisor config files (baked into the image). On the nginx image, override them by mounting replacements over `/etc/nginx/conf.d/bagisto.conf`, `/etc/php/8.4/fpm/conf.d/99-production.ini`, `/etc/supervisor/conf.d/bagisto.conf`, for the bundled database's program `/etc/supervisor/conf.d/database.conf`, and for the queue worker and the scheduler `/etc/supervisor/conf.d/workers.conf`. The apache and litespeed images keep theirs under their own server's config directories. The scheduler's entry is `/etc/cron.d/bagisto`; a replacement must be owned by root with mode 0644, or cron skips it without a word.
+- Web server / PHP / Supervisor config files (baked into the image). On the nginx image, override them by mounting replacements over `/etc/nginx/conf.d/bagisto.conf`, `/etc/php/8.4/fpm/conf.d/99-production.ini`, `/etc/supervisor/conf.d/bagisto.conf`, for the bundled database's program `/etc/supervisor/conf.d/database.conf`, and for the queue worker, Reverb and the scheduler `/etc/supervisor/conf.d/workers.conf`. The apache and litespeed images keep theirs under their own server's config directories. The scheduler's entry is `/etc/cron.d/bagisto`; a replacement must be owned by root with mode 0644, or cron skips it without a word.
 
 ### Logging
 
-Supervisor pipes each program's console output — the bundled database, PHP-FPM or lsphp, the web server and the queue worker — to stdout/stderr, so `docker logs bagisto` shows it together with the entrypoint's messages. Several logs go to files instead:
+Supervisor pipes each program's console output — the bundled database, PHP-FPM or lsphp, the web server, the queue worker and Reverb — to stdout/stderr, so `docker logs bagisto` shows it together with the entrypoint's messages. Several logs go to files instead:
 
 - **PHP errors**: `/var/log/php-errors.log`, and on the nginx image the pool's `/var/log/php-fpm-error.log`.
 - **Web server access and error logs**: `/var/log/nginx/` (nginx) and `/var/log/apache2/` (apache). OpenLiteSpeed's server-level logs reach `docker logs`, but the Bagisto vhost logs to files under `/usr/local/lsws/logs/`.
 - **Laravel**: `storage/logs`, where the scheduler also logs a task that exits with an error, naming its command and exit code. cron itself logs only to syslog, which the image does not run.
-- **Background jobs**: `/var/log/bagisto/<program>/YYYY-MM-DD.log`, one folder per Supervisor program and one file per day, dated in `APP_TIMEZONE`. `queue/` holds each job the worker ran or failed, and `scheduler/` the tasks `schedule:run` started, leaving out the minutes with nothing due. A job's exception, as opposed to the line saying it failed, is in `storage/logs`. Files older than `JOB_LOG_DAYS` days (14) are removed as each new day's file opens.
+- **Background jobs**: `/var/log/bagisto/<program>/YYYY-MM-DD.log`, one folder per Supervisor program and one file per day, dated in `APP_TIMEZONE`. `queue/` holds each job the worker ran or failed, `reverb/` what the websocket server reports, and `scheduler/` the tasks `schedule:run` started, leaving out the minutes with nothing due. A job's exception, as opposed to the line saying it failed, is in `storage/logs`. Files older than `JOB_LOG_DAYS` days (14) are removed as each new day's file opens.
 
 For structured log shipping, mount `/var/www/bagisto/storage/logs` and `/var/log/bagisto` (and `/var/log` if you need the server logs) as volumes, or forward them to a log aggregator.
 
