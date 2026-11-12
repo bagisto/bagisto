@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Запрос успешно создан',
                 'revoked-successfully' => 'Запрос успешно отозван',
-                'success-verify' => 'Успех! Письмо для подтверждения отправлено.',
-                'success-verify-email-unsent' => 'Успех! Письмо для подтверждения не отправлено.',
-                'unable-to-sent' => 'Невозможно отправить письмо.',
 
                 'index' => [
                     'create-btn' => 'Создать запрос',

@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'تم إنشاء الطلب بنجاح',
                 'revoked-successfully' => 'تم إلغاء الطلب بنجاح',
-                'success-verify' => 'نجاح! تم إرسال بريد التحقق الإلكتروني.',
-                'success-verify-email-unsent' => 'نجاح! لم يتم إرسال بريد التحقق الإلكتروني.',
-                'unable-to-sent' => 'تعذر إرسال البريد الإلكتروني.',
 
                 'index' => [
                     'create-btn' => 'إنشاء طلب',

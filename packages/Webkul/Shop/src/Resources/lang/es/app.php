@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Solicitud creada con éxito',
                 'revoked-successfully' => 'Solicitud revocada con éxito',
-                'success-verify' => '¡Éxito! El correo de verificación ha sido enviado.',
-                'success-verify-email-unsent' => '¡Éxito! El correo de verificación no ha sido enviado.',
-                'unable-to-sent' => 'No se pudo enviar el correo electrónico.',
 
                 'index' => [
                     'create-btn' => 'Crear solicitud',

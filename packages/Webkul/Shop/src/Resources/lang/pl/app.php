@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Żądanie zostało pomyślnie utworzone',
                 'revoked-successfully' => 'Żądanie zostało pomyślnie cofnięte',
-                'success-verify' => 'Sukces! E-mail weryfikacyjny został wysłany.',
-                'success-verify-email-unsent' => 'Sukces! E-mail weryfikacyjny nie został wysłany.',
-                'unable-to-sent' => 'Nie można wysłać e-maila.',
 
                 'index' => [
                     'create-btn' => 'Utwórz żądanie',

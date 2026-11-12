@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Cerere creată cu succes',
                 'revoked-successfully' => 'Cerere revocată cu succes',
-                'success-verify' => 'Succes! E-mailul de verificare a fost trimis.',
-                'success-verify-email-unsent' => 'Succes! E-mailul de verificare nu a fost trimis.',
-                'unable-to-sent' => 'Nu s-a putut trimite e-mailul.',
 
                 'index' => [
                     'create-btn' => 'Creează cerere',
