@@ -10,28 +10,22 @@ use Webkul\Shop\Mail\Customer\GDPR\StatusUpdateNotification;
 class GDPR extends Base
 {
     /**
-     * Send mail on creating GDPR request
+     * Send the customer a receipt for their new GDPR request, reporting a mail failure rather than telling them.
      *
      * @param  GDPRDataRequest  $gdprRequest
      * @return void
      */
     public function afterGdprRequestCreated($gdprRequest)
     {
-        if ($gdprRequest) {
-            try {
-                Mail::queue(new NewRequestNotification($gdprRequest));
-
-                session()->flash('success', trans('shop::app.customers.account.gdpr.success-verify'));
-            } catch (\Exception) {
-                session()->flash('warning', trans('shop::app.customers.account.gdpr.success-verify-email-unsent'));
-            }
-        } else {
-            session()->flash('error', trans('shop::app.customers.account.gdpr.unable-to-sent'));
+        try {
+            Mail::queue(new NewRequestNotification($gdprRequest));
+        } catch (\Exception $e) {
+            report($e);
         }
     }
 
     /**
-     * Send mail on creating GDPR request
+     * Tell the customer the status of their GDPR request has changed.
      *
      * @param  GDPRDataRequest  $gdprRequest
      * @return void

@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'リクエストが正常に作成されました。',
                 'revoked-successfully' => 'リクエストが正常に取り消されました。',
-                'success-verify' => '成功！確認メールが送信されました。',
-                'success-verify-email-unsent' => '成功！確認メールは送信されませんでした。',
-                'unable-to-sent' => 'メールを送信できません。',
 
                 'index' => [
                     'create-btn' => 'リクエストを作成',

@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Anfrage erfolgreich erstellt',
                 'revoked-successfully' => 'Anfrage erfolgreich widerrufen',
-                'success-verify' => 'Erfolg! Bestätigungs-E-Mail wurde gesendet.',
-                'success-verify-email-unsent' => 'Erfolg! Bestätigungs-E-Mail wurde nicht gesendet.',
-                'unable-to-sent' => 'E-Mail konnte nicht gesendet werden.',
 
                 'index' => [
                     'create-btn' => 'Anfrage erstellen',

@@ -398,9 +398,6 @@ return [
             'gdpr' => [
                 'create-success' => 'Запит успішно створено',
                 'revoked-successfully' => 'Запит успішно скасовано',
-                'success-verify' => 'Успішно! Лист для підтвердження відправлено.',
-                'success-verify-email-unsent' => 'Успішно! Лист для підтвердження не відправлено.',
-                'unable-to-sent' => 'Не вдалося надіслати листа.',
 
                 'index' => [
                     'create-btn' => 'Створити запит',
