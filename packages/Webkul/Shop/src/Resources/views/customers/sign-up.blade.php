@@ -292,7 +292,7 @@
         </x-slot>
 
         <x-slot:content class="p-5!">
-            <div class="max-h-125 overflow-auto">
+            <div class="rich-text max-h-125 overflow-auto">
                 {!! core()->getConfigData('general.gdpr.agreement.agreement_content') !!}
             </div>
         </x-slot>

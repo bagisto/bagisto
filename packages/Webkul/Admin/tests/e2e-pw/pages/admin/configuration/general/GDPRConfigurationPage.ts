@@ -9,6 +9,8 @@ export interface GdprSettings {
     cookiePosition: string;
     cookieBlockIdentifier: string;
     cookieDescription: string;
+    agreementContent: string;
+    strictlyNecessaryContent: string;
 }
 
 const BOOLEANS = {
@@ -25,6 +27,12 @@ const TEXTS = {
 const COOKIE_POSITION = "general[gdpr][cookie][position]";
 
 const COOKIE_DESCRIPTION = "general[gdpr][cookie][description]";
+
+const EDITORS = {
+    agreementContent: "general[gdpr][agreement][agreement_content]",
+    strictlyNecessaryContent:
+        "general[gdpr][cookie_consent][strictly_necessary]",
+} as const;
 
 export class GDPRConfigurationPage extends ConfigurationFormPage {
     constructor(page: Page) {
@@ -44,8 +52,14 @@ export class GDPRConfigurationPage extends ConfigurationFormPage {
             agreementLabel: await this.readText(TEXTS.agreementLabel),
             cookieEnabled: await this.readBoolean(BOOLEANS.cookieEnabled),
             cookiePosition: await this.readSelect(COOKIE_POSITION),
-            cookieBlockIdentifier: await this.readText(TEXTS.cookieBlockIdentifier),
+            cookieBlockIdentifier: await this.readText(
+                TEXTS.cookieBlockIdentifier,
+            ),
             cookieDescription: await this.readTextArea(COOKIE_DESCRIPTION),
+            agreementContent: await this.readTextArea(EDITORS.agreementContent),
+            strictlyNecessaryContent: await this.readTextArea(
+                EDITORS.strictlyNecessaryContent,
+            ),
         };
     }
 
@@ -66,7 +80,18 @@ export class GDPRConfigurationPage extends ConfigurationFormPage {
         }
 
         if (settings.cookieDescription !== undefined) {
-            await this.setTextArea(COOKIE_DESCRIPTION, settings.cookieDescription);
+            await this.setTextArea(
+                COOKIE_DESCRIPTION,
+                settings.cookieDescription,
+            );
+        }
+
+        for (const key of Object.keys(EDITORS) as (keyof typeof EDITORS)[]) {
+            const value = settings[key];
+
+            if (value !== undefined) {
+                await this.setEditor(EDITORS[key], value);
+            }
         }
 
         await this.setBooleans(BOOLEANS, settings, false);
@@ -97,7 +122,10 @@ export class GDPRConfigurationPage extends ConfigurationFormPage {
         }
 
         if (settings.cookieDescription !== undefined) {
-            await this.expectTextArea(COOKIE_DESCRIPTION, settings.cookieDescription);
+            await this.expectTextArea(
+                COOKIE_DESCRIPTION,
+                settings.cookieDescription,
+            );
         }
     }
 }

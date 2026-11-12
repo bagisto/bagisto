@@ -312,6 +312,68 @@
         @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
 
+    /**
+     * Content written in the editor — a description, a CMS page, an agreement. The base reset flattens
+     * headings, spacing, lists and links, so they revert to the browser's own styles, as in the editor.
+     */
+    .rich-text :where(h1, h2, h3, h4, h5, h6, p, a, pre, code, blockquote, hr, ul, ol, li, dl, dt, dd, table, caption, thead, tbody, tfoot, tr, th, td) {
+        all: revert;
+    }
+
+    .rich-text > :first-child {
+        margin-top: 0;
+    }
+
+    .rich-text > :last-child {
+        margin-bottom: 0;
+    }
+
+    /**
+     * The editor's own rules for what the browser leaves bare, so a table, a rule, a quote and code
+     * look as they did while they were written.
+     */
+    .rich-text table:not([cellpadding]) :is(th, td) {
+        padding: 0.4rem;
+    }
+
+    .rich-text table[border]:not([border="0"]):not([style*="border-width"]) :is(th, td) {
+        border-width: 1px;
+    }
+
+    .rich-text table[border]:not([border="0"]):not([style*="border-style"]) :is(th, td) {
+        border-style: solid;
+    }
+
+    .rich-text table[border]:not([border="0"]):not([style*="border-color"]) :is(th, td) {
+        border-color: #ccc;
+    }
+
+    .rich-text hr {
+        border-color: #ccc;
+        border-style: solid;
+        border-width: 1px 0 0;
+    }
+
+    .rich-text blockquote {
+        border-inline-start: 2px solid #ccc;
+        margin-inline-start: 1.5rem;
+        padding-inline-start: 1rem;
+    }
+
+    .rich-text code {
+        border-radius: 3px;
+        background-color: #e8e8e8;
+        padding: 0.1rem 0.2rem;
+    }
+
+    .rich-text :is(pre, code) {
+        font-size: 0.8125em;
+    }
+
+    .rich-text pre code {
+        font-size: inherit;
+    }
+
     .shimmer {
         animation-duration: 2.2s;
         animation-fill-mode: forwards;
