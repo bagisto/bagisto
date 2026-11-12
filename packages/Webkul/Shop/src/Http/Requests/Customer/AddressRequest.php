@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\AddressLines;
+use Webkul\Core\Rules\AllowedCountry;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
 use Webkul\Core\Rules\StateBelongsToCountry;
@@ -33,7 +34,7 @@ class AddressRequest extends FormRequest
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
             'address' => ['required', 'array', 'min:1', new AddressLines],
-            'country' => core()->isCountryRequired() ? ['required'] : ['nullable'],
+            'country' => core()->isCountryRequired() ? ['required', new AllowedCountry] : ['nullable', new AllowedCountry],
             'state' => [
                 core()->isStateRequired() ? 'required' : 'nullable',
                 'max:255',

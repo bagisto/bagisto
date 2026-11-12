@@ -206,7 +206,7 @@
                                 @lang('shop::app.customers.account.addresses.create.select-country')
                             </option>
             
-                            @foreach (core()->countries() as $country)
+                            @foreach (core()->allowedCountries() as $country)
                                 <option value="{{ $country->code }}">{{ $country->name }}</option>
                             @endforeach
                         </x-shop::form.control-group.control>
@@ -363,7 +363,7 @@
 
                         state: "{{ old('state') }}",
 
-                        countryStates: @json(core()->groupedStatesByCountries()),
+                        countryStates: @json(core()->allowedGroupedStatesByCountries()),
                     }
                 },
     

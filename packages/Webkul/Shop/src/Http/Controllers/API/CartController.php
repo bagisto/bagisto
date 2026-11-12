@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartAddress;
+use Webkul\Core\Rules\AllowedCountry;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
@@ -203,7 +204,7 @@ class CartController extends APIController
     public function estimateShippingMethods(): JsonResource
     {
         $this->validate(request(), [
-            'country' => 'required',
+            'country' => ['required', new AllowedCountry],
             'state' => 'required',
             'postcode' => 'required',
             'shipping_method' => 'sometimes|required',

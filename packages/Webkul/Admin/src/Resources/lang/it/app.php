@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Informazioni',
                         'title-info' => 'Quante righe di indirizzo mostra il modulo.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Paesi consentiti',
+                        'allowed-info' => 'Lascia vuoto per offrire tutti i paesi.',
+                        'title' => 'Paesi',
+                        'title-info' => 'Quali paesi i clienti possono scegliere nel negozio.',
+                    ],
                 ],
 
                 'captcha' => [

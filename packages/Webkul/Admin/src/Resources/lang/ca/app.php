@@ -5393,6 +5393,13 @@ return [
                         'title' => 'Informació',
                         'title-info' => 'Quantes línies d\'adreça mostra el formulari.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Països permesos',
+                        'allowed-info' => 'Deixeu-ho buit per oferir tots els països.',
+                        'title' => 'Països',
+                        'title-info' => 'Quins països poden triar els clients a la botiga.',
+                    ],
                 ],
 
                 'captcha' => [

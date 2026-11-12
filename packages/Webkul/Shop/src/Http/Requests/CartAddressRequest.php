@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Core\Rules\AddressLines;
+use Webkul\Core\Rules\AllowedCountry;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
 use Webkul\Core\Rules\StateBelongsToCountry;
@@ -58,7 +59,7 @@ class CartAddressRequest extends FormRequest
             "{$addressType}.email" => ['required', 'max:255'],
             "{$addressType}.address" => ['required', 'array', 'min:1', new AddressLines],
             "{$addressType}.city" => ['required', 'max:255'],
-            "{$addressType}.country" => core()->isCountryRequired() ? ['required'] : ['nullable'],
+            "{$addressType}.country" => core()->isCountryRequired() ? ['required', new AllowedCountry] : ['nullable', new AllowedCountry],
             "{$addressType}.state" => [
                 core()->isStateRequired() ? 'required' : 'nullable',
                 'max:255',

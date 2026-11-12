@@ -14,7 +14,7 @@ class CoreController extends APIController
     public function getCountries()
     {
         return response()->json([
-            'data' => core()->countries()->map(fn ($country) => [
+            'data' => core()->allowedCountries()->map(fn ($country) => [
                 'id' => $country->id,
                 'code' => $country->code,
                 'name' => $country->name,
@@ -30,7 +30,7 @@ class CoreController extends APIController
     public function getStates()
     {
         return response()->json([
-            'data' => core()->groupedStatesByCountries(),
+            'data' => core()->allowedGroupedStatesByCountries(),
         ]);
     }
 }

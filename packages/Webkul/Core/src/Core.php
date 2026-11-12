@@ -707,6 +707,45 @@ class Core
     }
 
     /**
+     * Retrieve the country codes the storefront is limited to, empty when every country is offered.
+     */
+    public function allowedCountryCodes(): array
+    {
+        return array_values(array_filter(
+            array_map('trim', explode(',', (string) $this->getConfigData('customer.address.countries.allowed'))),
+            fn (string $code) => $code !== ''
+        ));
+    }
+
+    /**
+     * Retrieve the countries a customer can pick on the storefront.
+     */
+    public function allowedCountries(): Collection
+    {
+        $countries = $this->countries();
+
+        $allowed = $this->allowedCountryCodes();
+
+        return $allowed
+            ? $countries->whereIn('code', $allowed)->values()
+            : $countries;
+    }
+
+    /**
+     * Retrieve the states grouped by the countries a customer can pick on the storefront.
+     */
+    public function allowedGroupedStatesByCountries(): array
+    {
+        $allowed = $this->allowedCountryCodes();
+
+        $states = $this->groupedStatesByCountries();
+
+        return $allowed
+            ? array_intersect_key($states, array_flip($allowed))
+            : $states;
+    }
+
+    /**
      * Returns country name by code.
      *
      * @param  string  $code
