@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Contracts\ProductDownloadableSample;
@@ -25,13 +26,15 @@ class ProductDownloadableSampleRepository extends Repository
      */
     public function upload($data, $productId)
     {
-        if (! request()->hasFile('file')) {
+        $file = $data['file'] ?? null;
+
+        if (! $file instanceof UploadedFile) {
             return [];
         }
 
         return [
-            'file' => $path = request()->file('file')->store('products/'.$productId.'/downloadable-samples', 'private'),
-            'file_name' => request()->file('file')->getClientOriginalName(),
+            'file' => $path = $file->store('products/'.$productId.'/downloadable-samples', 'private'),
+            'file_name' => $file->getClientOriginalName(),
         ];
     }
 
