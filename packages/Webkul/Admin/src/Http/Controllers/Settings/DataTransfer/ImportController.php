@@ -98,8 +98,6 @@ class ImportController extends Controller
             'file' => 'required|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ], $this->imageRules(request()->input('type'))));
 
-        Event::dispatch('data_transfer.imports.create.before');
-
         $data = request()->only([
             'type',
             'action',
@@ -113,6 +111,8 @@ class ImportController extends Controller
         $data['process_in_queue'] = request()->boolean('process_in_queue');
 
         $data = array_merge($data, $this->imageSourceData(request()->input('type')));
+
+        Event::dispatch('data_transfer.imports.create.before', [$data]);
 
         /**
          * The record is created first so every file it owns can live under a
@@ -179,7 +179,7 @@ class ImportController extends Controller
             'file' => 'nullable|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
         ], $this->imageRules(request()->input('type'), $id)));
 
-        Event::dispatch('data_transfer.imports.update.before');
+        Event::dispatch('data_transfer.imports.update.before', $id);
 
         $data = array_merge(
             request()->only([

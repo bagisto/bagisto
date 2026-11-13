@@ -44,12 +44,14 @@ class SearchSynonymController extends Controller
             'terms' => 'required',
         ]);
 
-        Event::dispatch('marketing.search_seo.search_synonyms.create.before');
-
-        $searchSynonym = $this->searchSynonymRepository->create(request()->only([
+        $data = request()->only([
             'name',
             'terms',
-        ]));
+        ]);
+
+        Event::dispatch('marketing.search_seo.search_synonyms.create.before', [$data]);
+
+        $searchSynonym = $this->searchSynonymRepository->create($data);
 
         Event::dispatch('marketing.search_seo.search_synonyms.create.after', $searchSynonym);
 

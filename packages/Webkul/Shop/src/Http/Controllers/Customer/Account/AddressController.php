@@ -47,8 +47,6 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        Event::dispatch('customer.addresses.create.before');
-
         $data = array_merge(request()->only([
             'company_name',
             'first_name',
@@ -66,6 +64,8 @@ class AddressController extends Controller
             'customer_id' => $customer->id,
             'address' => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
+
+        Event::dispatch('customer.addresses.create.before', [$data]);
 
         if (! empty($data['default_address'])) {
             $this->customerAddressRepository->where('customer_id', $data['customer_id'])

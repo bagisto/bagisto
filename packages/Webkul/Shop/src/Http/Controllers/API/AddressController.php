@@ -34,8 +34,6 @@ class AddressController extends APIController
     {
         $customer = auth()->guard('customer')->user();
 
-        Event::dispatch('customer.addresses.create.before');
-
         $data = array_merge($request->only([
             'company_name',
             'first_name',
@@ -53,6 +51,8 @@ class AddressController extends APIController
             'customer_id' => $customer->id,
             'address' => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
+
+        Event::dispatch('customer.addresses.create.before', [$data]);
 
         if (! empty($data['default_address'])) {
             $this->customerAddressRepository->where('customer_id', $data['customer_id'])
@@ -83,7 +83,7 @@ class AddressController extends APIController
             abort(403);
         }
 
-        Event::dispatch('customer.addresses.update.before');
+        Event::dispatch('customer.addresses.update.before', $addressToUpdate->id);
 
         $customerAddress = $this->customerAddressRepository->update(array_merge($request->only([
             'company_name',

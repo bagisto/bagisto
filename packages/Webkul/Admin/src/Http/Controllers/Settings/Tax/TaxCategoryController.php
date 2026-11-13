@@ -52,14 +52,14 @@ class TaxCategoryController extends Controller
             'taxrates' => 'array|required',
         ]);
 
-        Event::dispatch('tax.category.create.before');
-
         $data = request()->only([
             'code',
             'name',
             'description',
             'taxrates',
         ]);
+
+        Event::dispatch('tax.category.create.before', [$data]);
 
         $taxCategory = $this->taxCategoryRepository->create($data);
 
