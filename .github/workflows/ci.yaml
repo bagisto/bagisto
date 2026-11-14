@@ -95,6 +95,7 @@ jobs:
           php-version: '8.4'
           extensions: calendar, gd, intl, zip, bcmath
           tools: composer:v2
+          coverage: none
 
       - name: Composer install
         run: composer install --no-interaction --prefer-dist
@@ -125,6 +126,7 @@ jobs:
           extensions: calendar, gd, intl, zip, bcmath, pdo_mysql, curl, fileinfo, mbstring, openssl, tokenizer
           ini-values: error_reporting=E_ALL
           tools: composer:v2
+          coverage: nones
       - name: Composer install
         run: composer install --no-interaction --prefer-dist
       - name: Chuan bi .env cho test
