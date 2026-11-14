@@ -31,7 +31,7 @@ jobs:
       - uses: docker/setup-buildx-action@v3
 
       - name: Build
-        uses: docker/build-push-actions@v6
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ${{matrix.file}}
@@ -56,16 +56,16 @@ jobs:
           echo "2) extension bat buoc"
           mods="$(docker run --rm --entrypoint php $IMG -m)"
           for e in calendar intl pdo_mysql gd zip bcmath; do
-            echo "$mods" | grep -qix "$e" || {echo "Thieu etension: $e"; exit 1;}
+            echo "$mods" | grep -qix "$e" || { echo "Thieu etension: $e"; exit 1; }
           done
 
 
           echo "3) vendor da co"
-          docker run -rm --entrypoint test $IMG -f vendor/autoload.php
+          docker run --rm --entrypoint test $IMG -f vendor/autoload.php
 
 
           echo "4) cong cuj build khong nam trong image cuoi"
-          docker run -rm --entrypoint sh $IMG -c '! command -v composer && ! command -v unzip'
+          docker run --rm --entrypoint sh $IMG -c '! command -v composer && ! command -v unzip'
 
 
       - name: Smoke test (web)
