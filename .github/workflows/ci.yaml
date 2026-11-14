@@ -72,6 +72,21 @@ jobs:
         if: matrix.name == 'web'
         run: |
           docker run --rm --entrypoint ls bagisto-web:ci /var/www/html/public
+  scan-soucre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trivy scan code
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          format: table
+          exit-code: "0"
+
 
 
 
