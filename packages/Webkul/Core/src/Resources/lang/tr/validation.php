@@ -2,6 +2,7 @@
 
 return [
     'address' => ':attribute yalnızca alfa, sayısal, boşluk, virgül ve tire karakterlerini kabul edebilir.',
+    'allowed-country' => 'Bu mağaza seçilen ülkedeki adresleri kabul etmiyor.',
     'alpha-numeric-space' => ':attribute yalnızca alfa, sayısal ve boşlukları kabul edebilir.',
     'code' => ':attribute değeri geçerli olmalı.',
     'comma-separated-integer' => ':attribute alanı sayısal olmalı ve virgül içerebilir.',

@@ -358,6 +358,9 @@
                 },
     
                 methods: {
+                    /**
+                     * Whether the selected country has states.
+                     */
                     haveStates() {
                         return !!this.countryStates[this.addressData.country]?.length;
                     },

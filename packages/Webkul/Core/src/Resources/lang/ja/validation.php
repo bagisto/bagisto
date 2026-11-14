@@ -2,6 +2,7 @@
 
 return [
     'address' => ':attribute はアルファベット、数字、スペース、カンマ、ハイフンのみを受け付けます。',
+    'allowed-country' => 'このストアは選択された国の住所を受け付けていません。',
     'alpha-numeric-space' => ':attribute はアルファベット、数字、スペースのみを受け付けます。',
     'code' => ':attribute は有効である必要があります。',
     'comma-separated-integer' => ':attribute フィールドは数値であり、カンマを含んでいてもよいです。',

@@ -1,27 +1,22 @@
 <?php
 
 use Webkul\Core\Models\Channel;
-use Webkul\Core\Models\Locale;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 /**
- * Save the allowed countries for a channel the way the configuration form submits them.
+ * Save the allowed countries of a channel as the form posts them, empty placeholder first.
  */
-function saveAllowedCountries(array $countries): void
+function saveAllowedCountries(Channel $channel, array $countries): void
 {
-    $channel = Channel::factory()->create();
-
-    $locale = Locale::factory()->create();
-
     postJson(route('admin.configuration.store', ['customer', 'address']), [
-        'locale' => $locale->code,
+        'locale' => app()->getLocale(),
         'channel' => $channel->code,
         'customer' => [
             'address' => [
                 'countries' => [
-                    'allowed' => $countries,
+                    'allowed' => ['', ...$countries],
                 ],
             ],
         ],
@@ -48,26 +43,62 @@ it('should display the allowed countries field on the address configuration page
 // Saving
 // ============================================================================
 
-it('should save the selected countries as a comma separated list', function () {
+it('should save the selected countries as a comma separated list without the empty placeholder', function () {
     $this->loginAsAdmin();
 
-    saveAllowedCountries(['IN', 'US']);
+    $channel = Channel::factory()->create();
+
+    saveAllowedCountries($channel, ['IN', 'US']);
 
     $this->assertDatabaseHas('core_config', [
         'code' => 'customer.address.countries.allowed',
+        'channel_code' => $channel->code,
         'value' => 'IN,US',
     ]);
 });
 
-it('should lift the limit when every country is deselected', function () {
+it('should lift the limit of a channel when every country is deselected', function () {
     $this->loginAsAdmin();
 
-    saveAllowedCountries(['IN']);
+    $channel = Channel::factory()->create();
 
-    saveAllowedCountries(['']);
+    saveAllowedCountries($channel, ['IN']);
+
+    saveAllowedCountries($channel, []);
 
     $this->assertDatabaseHas('core_config', [
         'code' => 'customer.address.countries.allowed',
+        'channel_code' => $channel->code,
         'value' => '',
+    ]);
+
+    $this->assertDatabaseMissing('core_config', [
+        'code' => 'customer.address.countries.allowed',
+        'channel_code' => $channel->code,
+        'value' => 'IN',
+    ]);
+});
+
+it('should keep the limit of one channel apart from another', function () {
+    $this->loginAsAdmin();
+
+    $limited = Channel::factory()->create();
+
+    $other = Channel::factory()->create();
+
+    saveAllowedCountries($limited, ['IN']);
+
+    saveAllowedCountries($other, ['US']);
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'customer.address.countries.allowed',
+        'channel_code' => $limited->code,
+        'value' => 'IN',
+    ]);
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'customer.address.countries.allowed',
+        'channel_code' => $other->code,
+        'value' => 'US',
     ]);
 });

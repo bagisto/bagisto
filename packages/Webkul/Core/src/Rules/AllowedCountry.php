@@ -25,7 +25,7 @@ class AllowedCountry implements ValidationRule
             ! is_string($value)
             || ! in_array(mb_strtoupper(trim($value)), array_map('mb_strtoupper', $allowed), true)
         ) {
-            $fail('validation.in')->translate();
+            $fail('core::validation.allowed-country')->translate();
         }
     }
 }

@@ -60,7 +60,7 @@ class CoreConfigRepository extends Repository
                         gettype($value) == 'array'
                         && ! isset($value['delete'])
                     ) {
-                        $value = implode(',', $value);
+                        $value = implode(',', array_filter($value, fn ($item) => filled($item)));
                     }
 
                     if (! empty($field['channel_based'])) {

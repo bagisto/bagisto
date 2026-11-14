@@ -2,6 +2,7 @@
 
 return [
     'address' => ':attribute poate conține doar litere, cifre, spații, virgule și cratime.',
+    'allowed-country' => 'Acest magazin nu acceptă adrese din țara selectată.',
     'alpha-numeric-space' => ':attribute poate conține doar litere, cifre și spații.',
     'code' => ':attribute trebuie să fie valid.',
     'comma-separated-integer' => 'Câmpul :attribute trebuie să fie numeric și poate conține virgulă.',

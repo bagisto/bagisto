@@ -2,6 +2,7 @@
 
 return [
     'address' => 'Het veld :attribute mag alleen alfa, numerieke, spaties, komma\'s en streepjes bevatten.',
+    'allowed-country' => 'Deze winkel accepteert geen adressen in het geselecteerde land.',
     'alpha-numeric-space' => 'Het veld :attribute mag alleen alfa, numeriek en spaties bevatten.',
     'code' => 'Het veld :attribute moet geldig zijn.',
     'comma-separated-integer' => 'Het veld :attribute moet numeriek zijn en mag een komma bevatten.',

@@ -2,6 +2,7 @@
 
 return [
     'address' => ':attribute inakubali herufi, namba, nafasi, koma na mistari tu.',
+    'allowed-country' => 'Duka hili halikubali anwani katika nchi iliyochaguliwa.',
     'alpha-numeric-space' => ':attribute inakubali herufi, namba na nafasi tu.',
     'code' => ':attribute lazima iwe sahihi.',
     'comma-separated-integer' => 'Sehemu ya :attribute lazima iwe namba na inaweza kuwa na koma.',

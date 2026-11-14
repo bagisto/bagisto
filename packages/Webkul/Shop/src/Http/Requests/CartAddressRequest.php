@@ -59,7 +59,7 @@ class CartAddressRequest extends FormRequest
             "{$addressType}.email" => ['required', 'max:255'],
             "{$addressType}.address" => ['required', 'array', 'min:1', new AddressLines],
             "{$addressType}.city" => ['required', 'max:255'],
-            "{$addressType}.country" => core()->isCountryRequired() ? ['required', new AllowedCountry] : ['nullable', new AllowedCountry],
+            "{$addressType}.country" => [core()->isCountryRequired() ? 'required' : 'nullable', new AllowedCountry],
             "{$addressType}.state" => [
                 core()->isStateRequired() ? 'required' : 'nullable',
                 'max:255',

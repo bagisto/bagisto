@@ -14,27 +14,23 @@ class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'company_name' => ['nullable', 'max:255'],
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
             'address' => ['required', 'array', 'min:1', new AddressLines],
-            'country' => core()->isCountryRequired() ? ['required', new AllowedCountry] : ['nullable', new AllowedCountry],
+            'country' => [core()->isCountryRequired() ? 'required' : 'nullable', new AllowedCountry],
             'state' => [
                 core()->isStateRequired() ? 'required' : 'nullable',
                 'max:255',

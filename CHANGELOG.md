@@ -4,13 +4,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- #11500 [added] - Customer > Address > Countries now limits the countries the storefront offers, per channel. The address forms, the country and state lists the storefront loads, and the address and shipping estimate validation all follow it, and leaving it empty keeps every country.
-
 - Reworked admin notifications into a feed any package can add to, filtered by type and read per admin, covering orders, customers, reviews, returns, GDPR requests and imports.
 
 - #11575 [fixed] - An order for a product that does not manage its stock could not be shipped, so it never completed. It now ships whatever the inventory source holds.
 
 - #11574 [fixed] - Content written in the editor lost its formatting on the storefront, with lists showing no bullets or numbers and headings, tables and rules flattened. Product, category, CMS and GDPR pages now show it as the editor did, floated images, column widths and new-tab links included.
+
+- #11500 [added] - Customer > Address > Countries now limits the countries the storefront offers, per channel. The address forms, the country and state lists the storefront loads, and the address and shipping estimate validation all follow it, and leaving it empty keeps every country.
 
 ## **v2.5.1 (6th of November 2026)** - *Release*
 

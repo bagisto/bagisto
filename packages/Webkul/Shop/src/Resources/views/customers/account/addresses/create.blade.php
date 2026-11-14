@@ -368,12 +368,10 @@
                 },
     
                 methods: {
+                    /**
+                     * Whether the selected country has states.
+                     */
                     haveStates() {
-                        /*
-                        * The double negation operator is used to convert the value to a boolean.
-                        * It ensures that the final result is a boolean value,
-                        * true if the array has a length greater than 0, and otherwise false.
-                        */
                         return !!this.countryStates[this.country]?.length;
                     },
                 }

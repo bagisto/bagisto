@@ -2,6 +2,7 @@
 
 return [
     'address' => 'El :attribute sólo puede aceptar caracteres alfabéticos, numéricos, espacios, coma y guiones.',
+    'allowed-country' => 'Esta tienda no acepta direcciones en el país seleccionado.',
     'alpha-numeric-space' => 'El :attribute sólo puede aceptar caracteres alfabéticos, numéricos y espacios.',
     'code' => 'O :attribute debe ser válido.',
     'comma-separated-integer' => 'El campo :attribute debe ser numérico y puede contener coma.',

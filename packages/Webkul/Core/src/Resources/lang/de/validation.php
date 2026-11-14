@@ -2,6 +2,7 @@
 
 return [
     'address' => 'Das :Attribut kann nur Buchstaben, Zahlen, Leerzeichen, Kommas und Bindestriche akzeptieren.',
+    'allowed-country' => 'Dieser Shop akzeptiert keine Adressen im ausgewählten Land.',
     'alpha-numeric-space' => 'Das :Attribut kann nur Buchstaben, Zahlen und Leerzeichen akzeptieren.',
     'code' => 'Der :attribute-Wert muss gültig sein.',
     'comma-separated-integer' => 'Das :attribute-Feld muss numerisch sein und darf Komma enthalten.',
