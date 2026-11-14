@@ -1,0 +1,84 @@
+name: ci
+
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build-${matrix.name}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: app
+            file: Dockerfile
+          - name: web
+            file: Dockerfile.nginx
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build
+        uses: docker/build-push-actions@v6
+        with:
+          context: .
+          file: ${{matrix.file}}
+          load: true
+          tags: bagisto-${{matrix.name}}:ci
+          buiuld-args: |
+            VCS_REF = ${{github.sha}}
+            BUILD_DATE = ${{github.event.head_commit.timestamp}}
+          cache-from: type=gha,mode=max,scope=${{matrix.name}}
+          cache-to: type=gha,moed=max,scope=${{matrix.name}}
+
+      - name : Image Size
+        run: docker images "bagisto-${{matrix.name}}"
+
+      - name: Smoke test (app)
+        if: matrix.name == 'app'
+        run: |
+          IMG=bagisto-app:ci
+          echo "1) khong chay bang root"
+          test "$(docker run --rm --entrypoint id $IMG -u)" != "0"
+
+          echo "2) extension bat buoc"
+          mods="$(docker run --rm --entrypoint php $IMG -m)"
+          for e in calendar intl pdo_mysql gd zip bcmath; do
+            echo "$mods" | grep -qix "$e" || {echo "Thieu etension: $e"; exit 1;}
+          done
+
+
+          echo "3) vendor da co"
+          docker run -rm --entrypoint test $IMG -f vendor/autoload.php
+
+
+          echo "4) cong cuj build khong nam trong image cuoi"
+          docker run -rm --entrypoint sh $IMG -c '! command -v composer && ! command -v unzip'
+
+
+      - name: Smoke test (web)
+        if: matrix.name == 'web'
+        run: |
+          docker run --rm --entrypoint ls bagisto-web:ci /var/www/html/public
+
+
+
+
+
+          
+
+
+        
+

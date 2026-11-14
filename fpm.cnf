@@ -1,0 +1,5 @@
+[www]
+listen = 9000
+catch_workers_output = yes
+decorate_workers_output = no
+clear_env = no

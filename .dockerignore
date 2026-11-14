@@ -1,0 +1,54 @@
+# Keep this list in sync with what the Dockerfiles COPY. Excluding composer.json,
+# composer.lock or public/ would break the build.
+
+# VCS, editors and agent tooling
+.git
+.github
+.gitignore
+.idea
+.vscode
+.agents
+.claude
+.cursor
+.opencode
+.agents/
+.phpunit.result.cache
+.php_cs.cache
+
+# Local configuration and secrets — never baked into an image. The template is
+# kept because the web installer copies it, and the entrypoint needs its keys.
+.env
+.env.*
+!.env.example
+
+# Dependencies are installed in the image; local copies are not sent
+vendor
+node_modules
+**/node_modules
+
+# Tests and documentation are not runtime dependencies
+tests
+**/tests
+phpunit.xml
+README.md
+UPGRADE.md
+AGENTS.md
+
+# The old single-container build is not used by these Dockerfiles
+docker
+docker-compose.yml
+Dockerfile
+Dockerfile.nginx
+
+# Runtime state — volumes and the containers own these at run time
+storage/logs/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/debugbar/*
+*.log
+database/*.sqlite
+
+# OS noise
+.DS_Store
+Thumbs.db

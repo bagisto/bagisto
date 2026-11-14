@@ -1,0 +1,77 @@
+# syntax=docker/dockerfile:1.7
+
+# ===========================================================================
+# Bagisto web image — nginx + the public/ tree.
+#
+# The PHP-FPM upstream is rendered from a template at container start, so a
+# Kubernetes deployment can point it at 127.0.0.1:9000 without rebuilding.
+# Uploaded files are read from the storage volume shared with the app.
+# ===========================================================================
+
+ARG NGINX_VERSION=1.31.8
+
+FROM nginx:${NGINX_VERSION}-alpine AS final
+
+ARG VCS_REF=unknown
+ARG BUILD_DATE=unknown
+
+LABEL org.opencontainers.image.title="bagisto-web" \
+      org.opencontainers.image.description="Bagisto monolith web server (nginx)" \
+      org.opencontainers.image.source="https://github.com/bagisto/bagisto" \
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.licenses="MIT"
+
+ENV PHP_FPM_HOST=app:9000
+
+RUN rm -f /etc/nginx/conf.d/default.conf \
+    && mkdir -p /var/www/html/storage/app/public
+
+COPY public /var/www/html/public
+
+# The official nginx entrypoint renders /etc/nginx/templates/*.template with
+# envsubst before nginx starts. ${PHP_FPM_HOST} is the only substituted value.
+COPY <<"EOF" /etc/nginx/templates/default.conf.template
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/html/public;
+    index index.php;
+
+    client_max_body_size 110M;
+
+    # Uploaded media lives on the volume shared with the app container.
+    location ^~ /storage/ {
+        alias /var/www/html/storage/app/public/;
+        access_log off;
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /var/www/html/public$fastcgi_script_name;
+        fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_read_timeout 300s;
+
+        fastcgi_pass ${PHP_FPM_HOST};
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+EOF
+
+EXPOSE 80
+
+# The nginx master stays root so it can bind :80; its workers run as nginx.
+# To drop root entirely, listen on :8080, add `USER nginx`, and map 8080:8080.

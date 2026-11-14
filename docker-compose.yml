@@ -1,209 +1,155 @@
+name: bagisto
+
 services:
-    laravel.test:
+    app:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.4
+            context: .
             dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.4/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+                VCS_REF: ${VCS_REF:-local}
+                BUILD_DATE: ${BUILD_DATE:-unknown}
+        image: bagisto-app:local
+        init: true
+        env_file:
+            - .env
         volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
+            - bagisto-storage:/var/www/html/storage/app/public
         depends_on:
-            - redis
-            - elasticsearch
-            - kibana
-            - mailpit
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "php", "-r", "exit(@fsockopen('127.0.0.1', 9000) ? 0 : 1);"]
+            interval: 10s
+            timeout: 5s
+            retries: 6
+            start_period: 20s
+        restart: unless-stopped
+
+    worker:
+        image: bagisto-app:local
+        init: true
+        command: ["php", "artisan", "queue:work", "--tries=3", "--timeout=60", "--sleep=3", "--max-time=3600"]
+        env_file:
+            - .env
+        volumes:
+            - bagisto-storage:/var/www/html/storage/app/public
+        depends_on:
+            app:
+                condition: service_healthy
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "php", "artisan", "queue:monitor", "redis:default", "--max=1000"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 20s
+        stop_grace_period: 60s
+        restart: unless-stopped
+
+    scheduler:
+        image: bagisto-app:local
+        init: true
+        command: ["php", "artisan", "schedule:work"]
+        env_file:
+            - .env
+        volumes:
+            - bagisto-storage:/var/www/html/storage/app/public
+        depends_on:
+            app:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "php", "artisan", "schedule:list"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 20s
+        restart: unless-stopped
+
     nginx:
-        profiles: ['nginx']
-        image: 'nginx:alpine'
+        build:
+            context: .
+            dockerfile: Dockerfile.nginx
+            args:
+                VCS_REF: ${VCS_REF:-local}
+                BUILD_DATE: ${BUILD_DATE:-unknown}
+        image: bagisto-web:local
+        environment:
+            PHP_FPM_HOST: ${PHP_FPM_HOST:-app:9000}
         ports:
-            - '${FORWARD_WEB_PORT:-8080}:80'
+            - "8080:80"
         volumes:
-            - '.:/var/www/html:ro'
-            - './docker/local/nginx:/etc/nginx/conf.d:ro'
-        networks:
-            - sail
+            - bagisto-storage:/var/www/html/storage/app/public:ro
         depends_on:
-            - laravel.test
-    apache:
-        profiles: ['apache']
-        image: 'httpd:2.4-alpine'
-        ports:
-            - '${FORWARD_WEB_PORT:-8080}:80'
-        volumes:
-            - '.:/var/www/html:ro'
-            - './docker/local/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro'
-        networks:
-            - sail
-        depends_on:
-            - laravel.test
-    litespeed:
-        profiles: ['litespeed']
-        image: 'litespeedtech/openlitespeed:1.9.2-lsphp84'
-        ports:
-            - '${FORWARD_WEB_PORT:-8080}:80'
-        volumes:
-            - '.:/var/www/html:ro'
-            - './docker/local/litespeed/httpd_config.conf:/usr/local/lsws/conf/httpd_config.conf:ro'
-            - './docker/local/litespeed/vhosts/bagisto.conf:/usr/local/lsws/conf/vhosts/bagisto.conf:ro'
-        networks:
-            - sail
-        depends_on:
-            - laravel.test
+            app:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/install || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 6
+            start_period: 20s
+        restart: unless-stopped
+
     mysql:
-        profiles: ['mysql']
-        image: 'mysql:8.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+        # TODO: pin by digest.
+        image: mysql:8.0.46-bookworm
         environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-            MYSQL_EXTRA_OPTIONS: '${MYSQL_EXTRA_OPTIONS:-}'
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+            MYSQL_DATABASE: ${DB_DATABASE:-bagisto}
+            MYSQL_USER: ${DB_USERNAME:-bagisto}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-bagisto}
         volumes:
-            - 'sail-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
-        networks:
-            - sail
+            - bagisto-mysql:/var/lib/mysql
         healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
+            test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+            interval: 10s
             timeout: 5s
-    mariadb:
-        profiles: ['mariadb']
-        image: 'mariadb:10.11'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        volumes:
-            - 'sail-mariadb:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mariadb/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - healthcheck.sh
-                - '--connect'
-                - '--innodb_initialized'
-            retries: 3
-            timeout: 5s
-    pgsql:
-        profiles: ['pgsql']
-        image: 'postgres:16'
-        ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
-        environment:
-            PGPASSWORD: '${DB_PASSWORD}'
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD}'
-        volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - pg_isready
-                - '-q'
-                - '-d'
-                - '${DB_DATABASE}'
-                - '-U'
-                - '${DB_USERNAME}'
-            retries: 3
-            timeout: 5s
+            retries: 10
+            start_period: 30s
+        restart: unless-stopped
+
     redis:
-        image: 'redis:alpine'
-        ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        # TODO: pin by digest.
+        image: redis:8.8.4-alpine
         volumes:
-            - 'sail-redis:/data'
-        networks:
-            - sail
+            - bagisto-redis:/data
         healthcheck:
-            test:
-                - CMD
-                - redis-cli
-                - ping
-            retries: 3
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
             timeout: 5s
+            retries: 6
+        restart: unless-stopped
+
     elasticsearch:
+        # TODO: pin by digest.
         image: docker.elastic.co/elasticsearch/elasticsearch:8.19.21
-        ports:
-            - '9200:9200'
-            - '9300:9300'
+        profiles: ["search"]
         environment:
-            - xpack.security.enabled=false
             - discovery.type=single-node
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-            nofile:
-                soft: 65536
-                hard: 65536
+            - xpack.security.enabled=false
+            - ES_JAVA_OPTS=-Xms256m -Xmx256m
         volumes:
-            - 'sail-elasticsearch:/usr/share/elasticsearch/data'
-        networks:
-            - sail
-    kibana:
-        image: docker.elastic.co/kibana/kibana:8.19.21
+            - bagisto-elasticsearch:/usr/share/elasticsearch/data
         ports:
-            - 5601:5601
-        environment:
-            ELASTICSEARCH_HOSTS: 'http://elasticsearch:9200'
-        networks:
-            - sail
-        depends_on:
-            - elasticsearch
+            - "9200:9200"
+        restart: unless-stopped
+
     mailpit:
-        image: 'axllent/mailpit:latest'
+        # TODO: pin by digest.
+        image: axllent/mailpit:v1.33.1
+        profiles: ["mail"]
         ports:
-            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
-            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
-        networks:
-            - sail
-networks:
-    sail:
-        driver: bridge
+            - "1025:1025"
+            - "8025:8025"
+        restart: unless-stopped
+
 volumes:
-    sail-mysql:
-        driver: local
-    sail-mariadb:
-        driver: local
-    sail-pgsql:
-        driver: local
-    sail-redis:
-        driver: local
-    sail-elasticsearch:
-        driver: local
+    bagisto-storage:
+    bagisto-mysql:
+    bagisto-redis:
+    bagisto-elasticsearch:
