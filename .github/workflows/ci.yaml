@@ -169,7 +169,7 @@ jobs:
       matrix: 
         name: [app, web]
     steps:
-      - uses: actions/checkoutv4
+      - uses: actions/checkout@v4
         with:
           name: immage-${{matrix.name}}
           path: /tmp
