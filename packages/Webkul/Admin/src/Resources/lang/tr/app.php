@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Ayarlar başarıyla kaydedildi',
             'search' => 'Ara',
             'select-country' => 'Ülke Seçin',
+            'select-options' => 'Seçenekleri Seçin',
             'select-state' => 'Bölge Seçin',
             'title' => 'Ayarlar',
 

@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'הגדרות נשמרו בהצלחה',
             'search' => 'חיפוש',
             'select-country' => 'בחר מדינה',
+            'select-options' => 'בחר אפשרויות',
             'select-state' => 'בחר מדינה',
             'title' => 'הגדרות',
 

@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Configuració desada correctament',
             'search' => 'Cerca',
             'select-country' => 'Selecciona el país',
+            'select-options' => 'Selecciona opcions',
             'select-state' => 'Selecciona l\'estat',
             'title' => 'Configuració',
 

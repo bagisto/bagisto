@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Configuratie succesvol opgeslagen',
             'search' => 'Zoeken',
             'select-country' => 'Selecteer land',
+            'select-options' => 'Selecteer opties',
             'select-state' => 'Selecteer provincie',
             'title' => 'Configuratie',
 

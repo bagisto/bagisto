@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'تم حفظ الإعدادات بنجاح',
             'search' => 'يبحث',
             'select-country' => 'اختر البلد',
+            'select-options' => 'اختر الخيارات',
             'select-state' => 'اختر الولاية',
             'title' => 'الإعدادات',
 

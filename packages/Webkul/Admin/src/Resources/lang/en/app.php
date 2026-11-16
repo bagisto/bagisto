@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Configuration saved successfully',
             'search' => 'Search',
             'select-country' => 'Select Country',
+            'select-options' => 'Select Options',
             'select-state' => 'Select State',
             'title' => 'Configuration',
 

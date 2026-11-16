@@ -32,13 +32,21 @@
                 v-slot="{ errors }"
             >
                 <div
-                    class="flex min-h-10.5 w-full cursor-pointer flex-wrap items-center gap-1.5 rounded-md border bg-white px-2 py-1.5 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                    class="flex min-h-10.5 w-full cursor-pointer flex-wrap items-center gap-1.5 rounded-md border bg-white px-2 py-1.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 focus:outline-hidden dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                    role="combobox"
+                    aria-haspopup="listbox"
+                    tabindex="0"
+                    ref="trigger"
                     :class="[
                         errors.length ? 'border border-red-600! hover:border-red-600!' : '',
                         isOpen ? 'border-gray-400 dark:border-gray-400' : '',
                     ]"
                     :name="name"
+                    :aria-expanded="isOpen"
+                    :aria-controls="listId"
                     @click="toggleDropdown"
+                    @keydown.enter.prevent="toggleDropdown"
+                    @keydown.esc="closeDropdown"
                 >
                     <span
                         class="inline-flex max-w-full items-center gap-1 rounded-sm bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300"
@@ -68,32 +76,48 @@
                 </div>
 
                 <div
-                    class="absolute left-0 z-20 mt-1 w-full overflow-hidden rounded-md border bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
+                    class="absolute z-20 w-full overflow-hidden rounded-md border bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900 ltr:left-0 rtl:right-0"
+                    ref="panel"
+                    :class="openAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
                     v-show="isOpen"
                 >
-                    <div class="border-b p-2 dark:border-gray-800">
+                    <div
+                        class="border-b p-2 dark:border-gray-800"
+                        v-if="searchable"
+                    >
                         <div class="relative">
                             <input
                                 type="text"
-                                ref="searchInput"
                                 class="block w-full rounded-md border bg-white py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 ltr:pl-3 ltr:pr-9 rtl:pl-9 rtl:pr-3"
+                                ref="searchInput"
                                 :placeholder="searchPlaceholder"
                                 v-model="search"
                                 @keydown.delete="removeLastOnBackspace"
+                                @keydown.esc="closeDropdown"
                             />
 
                             <span class="icon-search pointer-events-none absolute top-1.5 flex items-center text-2xl text-gray-400 ltr:right-2 rtl:left-2"></span>
                         </div>
                     </div>
 
-                    <div class="max-h-60 overflow-y-auto py-1">
+                    <div
+                        class="max-h-60 overflow-y-auto py-1"
+                        role="listbox"
+                        aria-multiselectable="true"
+                        ref="list"
+                        :id="listId"
+                        :style="{ maxHeight: listMaxHeight }"
+                    >
                         <div
                             class="flex cursor-pointer items-center justify-between gap-2 px-3 py-2 text-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+                            role="option"
                             :class="isSelected(option.id)
                                 ? 'font-semibold text-blue-600 dark:text-blue-500'
                                 : 'text-gray-600 dark:text-gray-300'"
                             v-for="option in filteredOptions"
                             :key="option.id"
+                            :aria-selected="isSelected(option.id)"
+                            :data-value="option.id"
                             @click="toggle(option.id)"
                         >
                             <span class="truncate">@{{ option.label }}</span>
@@ -156,6 +180,11 @@
                     default: '',
                 },
 
+                searchable: {
+                    type: Boolean,
+                    default: true,
+                },
+
                 label: {
                     type: String,
                     default: '',
@@ -169,6 +198,10 @@
                     search: '',
 
                     isOpen: false,
+
+                    openAbove: false,
+
+                    listMaxHeight: null,
 
                     searchPlaceholder: "@lang('admin::app.components.datagrid.toolbar.search.title')",
                 };
@@ -193,12 +226,25 @@
             },
 
             computed: {
+                /**
+                 * The id of the option list, which the field points to as the list it controls.
+                 */
+                listId() {
+                    return `${this.name}-options`;
+                },
+
+                /**
+                 * The chosen options, in the order they were chosen.
+                 */
                 selectedOptions() {
                     return this.selectedIds
                         .map((id) => this.options.find((option) => String(option.id) === id))
                         .filter((option) => option);
                 },
 
+                /**
+                 * The options whose label holds the search term.
+                 */
                 filteredOptions() {
                     let term = this.search.trim().toLowerCase();
 
@@ -219,10 +265,16 @@
             },
 
             methods: {
+                /**
+                 * Whether the option with the given id is chosen.
+                 */
                 isSelected(id) {
                     return this.selectedIds.includes(String(id));
                 },
 
+                /**
+                 * Choose the option with the given id, or let it go when it is already chosen.
+                 */
                 toggle(id) {
                     if (this.isSelected(id)) {
                         this.deselect(id);
@@ -230,35 +282,117 @@
                         this.selectedIds = [...this.selectedIds, String(id)];
                     }
 
-                    this.$nextTick(() => this.$refs.searchInput?.focus());
+                    this.$nextTick(() => this.$refs.searchInput?.focus({ preventScroll: true }));
                 },
 
+                /**
+                 * Let the option with the given id go.
+                 */
                 deselect(id) {
                     this.selectedIds = this.selectedIds.filter((selectedId) => selectedId !== String(id));
                 },
 
+                /**
+                 * Let the last chosen option go on a backspace in an empty search.
+                 */
                 removeLastOnBackspace() {
                     if (this.search === '' && this.selectedIds.length) {
                         this.selectedIds = this.selectedIds.slice(0, -1);
                     }
                 },
 
-                openDropdown() {
-                    this.isOpen = true;
-
-                    this.$nextTick(() => this.$refs.searchInput?.focus());
+                /**
+                 * Open the options when closed, and close them when open.
+                 */
+                toggleDropdown() {
+                    this.isOpen ? this.closeDropdown() : this.openDropdown();
                 },
 
+                /**
+                 * Open the options, above the field when there is not enough room below it.
+                 */
+                openDropdown() {
+                    this.listMaxHeight = null;
+
+                    this.isOpen = true;
+
+                    this.$nextTick(() => {
+                        this.placeDropdown();
+
+                        this.$refs.searchInput?.focus({ preventScroll: true });
+                    });
+                },
+
+                /**
+                 * Close the options and forget the search term.
+                 */
                 closeDropdown() {
                     this.isOpen = false;
 
                     this.search = '';
                 },
 
-                toggleDropdown() {
-                    this.isOpen ? this.closeDropdown() : this.openDropdown();
+                /**
+                 * Open the options on the side of the field with room for them, or with more room when
+                 * neither side has enough, shortening the list to fit.
+                 */
+                placeDropdown() {
+                    let trigger = this.$refs.trigger.getBoundingClientRect();
+
+                    let bounds = this.visibleBounds();
+
+                    let below = bounds.bottom - trigger.bottom - 8;
+
+                    let above = trigger.top - bounds.top - 8;
+
+                    let height = this.$refs.panel.offsetHeight;
+
+                    this.openAbove = below < height
+                        && above > below;
+
+                    let room = this.openAbove ? above : below;
+
+                    if (height > room) {
+                        this.listMaxHeight = Math.max(room - (height - this.$refs.list.offsetHeight), 96) + 'px';
+                    }
                 },
 
+                /**
+                 * The band of the window the options can show in: inside every ancestor that clips
+                 * vertically, and below the sticky admin header.
+                 */
+                visibleBounds() {
+                    let bounds = { top: 0, bottom: window.innerHeight };
+
+                    let header = document.querySelector('header');
+
+                    if (
+                        header
+                        && ['sticky', 'fixed'].includes(getComputedStyle(header).position)
+                    ) {
+                        bounds.top = header.getBoundingClientRect().bottom;
+                    }
+
+                    for (let element = this.$el.parentElement; element; element = element.parentElement) {
+                        let style = getComputedStyle(element);
+
+                        if (style.overflowY === 'visible') {
+                            continue;
+                        }
+
+                        let rect = element.getBoundingClientRect();
+
+                        bounds.top = Math.max(bounds.top, rect.top);
+
+                        bounds.bottom = Math.min(bounds.bottom, rect.bottom);
+                    }
+
+                    return bounds;
+                },
+
+                /**
+                 * Close the options on a click anywhere outside the field.
+                 */
                 handleOutsideClick(event) {
                     if (! this.$el.contains(event.target)) {
                         this.closeDropdown();

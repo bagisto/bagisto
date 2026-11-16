@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Konfiguracja zapisana pomyślnie',
             'search' => 'Szukaj',
             'select-country' => 'Wybierz kraj',
+            'select-options' => 'Wybierz opcje',
             'select-state' => 'Wybierz stan',
             'title' => 'Konfiguracja',
 

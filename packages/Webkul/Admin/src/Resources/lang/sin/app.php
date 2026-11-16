@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'වින්‍යාසය සුරකින්නේ සාර්ථකව සුරකින්නියි',
             'search' => 'සොයන්න',
             'select-country' => 'රට තෝරන්න',
+            'select-options' => 'විකල්ප තෝරන්න',
             'select-state' => 'පළාත තෝරන්න',
             'title' => 'වින්‍යාසය',
 

@@ -4691,6 +4691,7 @@ return [
             'save-message' => '配置保存成功',
             'search' => '搜索',
             'select-country' => '选择国家',
+            'select-options' => '选择选项',
             'select-state' => '选择省份',
             'title' => '配置',
 

@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'कॉन्फ़िगरेशन सफलतापूर्वक सहेजी गई',
             'search' => 'खोजें',
             'select-country' => 'देश चुनें',
+            'select-options' => 'विकल्प चुनें',
             'select-state' => 'राज्य चुनें',
             'title' => 'कॉन्फ़िगरेशन',
 

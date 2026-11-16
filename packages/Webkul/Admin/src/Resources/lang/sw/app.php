@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Usanidi umehifadhiwa kwa mafanikio',
             'search' => 'Tafuta',
             'select-country' => 'Chagua Nchi',
+            'select-options' => 'Chagua Chaguo',
             'select-state' => 'Chagua Jimbo',
             'title' => 'Usanidi',
 

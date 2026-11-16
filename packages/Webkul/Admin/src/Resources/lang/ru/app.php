@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Настройки успешно сохранены',
             'search' => 'Поиск',
             'select-country' => 'Выберите страну',
+            'select-options' => 'Выберите варианты',
             'select-state' => 'Выберите регион',
             'title' => 'Настройки',
 

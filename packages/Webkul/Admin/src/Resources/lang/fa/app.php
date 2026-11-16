@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'تنظیمات با موفقیت ذخیره شد',
             'search' => 'جستجو',
             'select-country' => 'انتخاب کشور',
+            'select-options' => 'گزینه‌ها را انتخاب کنید',
             'select-state' => 'انتخاب استان',
             'title' => 'تنظیمات',
 

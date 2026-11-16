@@ -4691,6 +4691,7 @@ return [
             'save-message' => 'Konfigurasi berhasil disimpan',
             'search' => 'Cari',
             'select-country' => 'Pilih Negara',
+            'select-options' => 'Pilih Opsi',
             'select-state' => 'Pilih Provinsi',
             'title' => 'Konfigurasi',
 

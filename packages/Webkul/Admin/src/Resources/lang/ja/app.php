@@ -4691,6 +4691,7 @@ return [
             'save-message' => '設定が正常に保存されました',
             'search' => '検索',
             'select-country' => '国を選択',
+            'select-options' => 'オプションを選択',
             'select-state' => '都道府県を選択',
             'title' => '設定',
 
