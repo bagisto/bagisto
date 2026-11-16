@@ -28,7 +28,10 @@ class ProductDownloadableLinkRepository extends Repository
     public function upload($data, $productId)
     {
         foreach ($data as $type => $file) {
-            if (! $file instanceof UploadedFile) {
+            if (
+                ! $file instanceof UploadedFile
+                || $file->getPathname() === ''
+            ) {
                 continue;
             }
 
