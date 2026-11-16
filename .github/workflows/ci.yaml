@@ -1,13 +1,13 @@
 name: ci
 
-
 on:
   push:
   pull_request:
   workflow_dispatch:
 
+# Push liên tiếp lên cùng nhánh thì huỷ lần chạy cũ
 concurrency:
-  group: ci-${{github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build:
-    name: build-${matrix.name}
+    name: build-${{ matrix.name }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -30,53 +30,97 @@ jobs:
 
       - uses: docker/setup-buildx-action@v3
 
+      # Build đúng một lần, nạp vào Docker local của runner để smoke test.
+      # Chưa push đi đâu (phần publish làm ở lớp sau).
       - name: Build
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{matrix.file}}
+          file: ${{ matrix.file }}
           load: true
-          tags: bagisto-${{matrix.name}}:ci
-          buiuld-args: |
-            VCS_REF = ${{github.sha}}
-            BUILD_DATE = ${{github.event.head_commit.timestamp}}
-          cache-from: type=gha,mode=max,scope=${{matrix.name}}
-          cache-to: type=gha,moed=max,scope=${{matrix.name}}
+          tags: bagisto-${{ matrix.name }}:ci
+          build-args: |
+            VCS_REF=${{ github.sha }}
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
+          labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
 
-      - name : Image Size
-        run: docker images "bagisto-${{matrix.name}}"
+      - name: Kích thước image
+        run: docker images "bagisto-${{ matrix.name }}"
 
+      # Lần đầu CHỈ BÁO CÁO (exit-code 0) để lấy số liệu gốc, chưa chặn pipeline.
+      # Sau khi xem kết quả mới đặt ngưỡng (đổi exit-code thành 1).
+      - name: Trivy báo cáo image (CRITICAL và HIGH, không chặn)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: bagisto-${{ matrix.name }}:ci
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          vuln-type: os,library
+          format: table
+          exit-code: '0'
+
+      # CỔNG CHẶN (đang để lỏng): chỉ CRITICAL và đã có bản vá thì mới làm pipeline đỏ.
+      # Muốn bỏ qua một CVE có lý do: thêm vào file .trivyignore ở gốc repo (kèm ghi chú).
+      # Siết dần sau này: thêm HIGH vào severity.
+      - name: Trivy cổng chặn image
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: bagisto-${{ matrix.name }}:ci
+          severity: CRITICAL
+          ignore-unfixed: true
+          vuln-type: os,library
+          format: table
+          exit-code: '1'
+
+      # --entrypoint để chỉ chạy đúng lệnh kiểm tra, không chạy script khởi động của image
       - name: Smoke test (app)
         if: matrix.name == 'app'
         run: |
           IMG=bagisto-app:ci
-          echo "1) khong chay bang root"
+          echo "1) không chạy bằng root"
           test "$(docker run --rm --entrypoint id $IMG -u)" != "0"
 
-          echo "2) extension bat buoc"
+          echo "2) extension bắt buộc"
           mods="$(docker run --rm --entrypoint php $IMG -m)"
           for e in calendar intl pdo_mysql gd zip bcmath; do
-            echo "$mods" | grep -qix "$e" || { echo "Thieu etension: $e"; exit 1; }
+            echo "$mods" | grep -qix "$e" || { echo "THIẾU extension: $e"; exit 1; }
           done
 
-
-          echo "3) vendor da co"
+          echo "3) vendor đã có"
           docker run --rm --entrypoint test $IMG -f vendor/autoload.php
 
-
-          echo "4) cong cuj build khong nam trong image cuoi"
+          echo "4) công cụ build không nằm trong image cuối"
           docker run --rm --entrypoint sh $IMG -c '! command -v composer && ! command -v unzip'
-
 
       - name: Smoke test (web)
         if: matrix.name == 'web'
         run: |
+          # nginx cần container app mới khởi động được, nên ở đây chỉ kiểm tra nội dung image
           docker run --rm --entrypoint ls bagisto-web:ci /var/www/html/public
-  scan-soucre:
+
+      # Chỉ trên nhánh mặc định: lưu CHÍNH image vừa build/quét/test để job publish đẩy lên,
+      # không build lại.
+      - name: Lưu image
+        if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+        run: docker save "bagisto-${{ matrix.name }}:ci" | gzip -1 > "/tmp/${{ matrix.name }}.tar.gz"
+
+      - name: Upload image artifact
+        if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-${{ matrix.name }}
+          path: /tmp/${{ matrix.name }}.tar.gz
+          retention-days: 1
+
+  scan-source:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Trivy scan code
+
+      # composer.lock (thư viện PHP), secret lọt vào repo, cấu hình sai trong Dockerfile/compose
+      - name: Trivy quét mã nguồn
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
@@ -85,23 +129,27 @@ jobs:
           severity: CRITICAL,HIGH
           ignore-unfixed: true
           format: table
-          exit-code: "0"
+          exit-code: '0'
+
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           extensions: calendar, gd, intl, zip, bcmath
+          coverage: none        # tắt Xdebug cho nhanh
           tools: composer:v2
-          coverage: none
 
       - name: Composer install
         run: composer install --no-interaction --prefer-dist
 
-      - name: Pint
+      # Chỉ kiểm tra, không sửa file
+      - name: Pint (kiểu code)
         run: vendor/bin/pint --test
+
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -120,16 +168,20 @@ jobs:
           --health-retries=5
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
-          php-verion: '8.4'
+          php-version: '8.4'
           extensions: calendar, gd, intl, zip, bcmath, pdo_mysql, curl, fileinfo, mbstring, openssl, tokenizer
           ini-values: error_reporting=E_ALL
+          coverage: none        # tắt Xdebug cho nhanh (bật pcov riêng khi làm Sonar)
           tools: composer:v2
-          coverage: nones
+
       - name: Composer install
         run: composer install --no-interaction --prefer-dist
-      - name: Chuan bi .env cho test
+
+      # phpunit.xml không khai báo DB, nên DB lấy từ .env
+      - name: Chuẩn bị .env cho test
         run: |
           cp .env.example .env
           sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
@@ -139,69 +191,106 @@ jobs:
           sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
           sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
 
+      # Bagisto 2.4: các cờ --skip-* đã bị gỡ, dùng --no-interaction (đọc .env có sẵn).
+      # Lệnh này XOÁ SẠCH database rồi cài mới: chỉ chạy trên DB tạm của CI.
       - name: Bagisto installer
         run: php artisan bagisto:install --no-interaction
 
-      - name: Pest
-        run: vendor/bin/pest --parallel --colors=always
-  sonar:
-    if: github.event_name == 'pull_request' || github.ref_name == github.event.repository.default_branch
+      # Chẩn đoán: runner có bao nhiêu CPU/RAM (Pest song song chia theo số CPU)
+      - name: Thông tin runner
+        run: nproc && free -h
 
+      # --profile: in ra các test chậm nhất. Nếu cờ này không chạy cùng --parallel
+      # thì bỏ --parallel ở lần chẩn đoán này.
+      # Nếu chạy quá nặng hoặc lỗi, thu hẹp bằng: --testsuite="Unit Test"
+      - name: Pest
+        run: vendor/bin/pest --testsuite="Unit Test" --parallel --colors=always --profile
+
+  sonar:
+    # SonarQube Cloud gói Free chỉ phân tích nhánh chính và Pull Request
+    if: github.event_name == 'pull_request' || github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # lay du lich su sonar qube?
+          fetch-depth: 0   # lấy đủ lịch sử để Sonar xác định code mới
 
+      # Lớp đầu: chỉ quét code, chưa chặn pipeline (không đặt sonar.qualitygate.wait).
+      # Phiên bản action: nếu @v8 không tìm thấy, lấy tag đầy đủ ở trang Tags của repo
+      # SonarSource/sonarqube-scan-action.
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   publish:
-    needs: [build, lint, test, sonar]
+    # Chỉ khi push lên nhánh mặc định và mọi kiểm tra đã xanh
+    needs: [build, scan-source, lint, test]
     if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+      id-token: write   # cosign ký keyless bằng danh tính của workflow
     strategy:
       fail-fast: false
-      matrix: 
+      matrix:
         name: [app, web]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          name: immage-${{matrix.name}}
+          name: image-${{ matrix.name }}
           path: /tmp
-      - name: Nap image da build
-        run : gunzip -c "/tmp/${{matrix.name}}.tar.gz" | docker load
+
+      - name: Nạp image đã build
+        run: gunzip -c "/tmp/${{ matrix.name }}.tar.gz" | docker load
+
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-        
-      - name: Gan tag theo commit va push
-        run : |
+
+      # GHCR bắt buộc tên viết thường; chủ sở hữu của bạn có chữ hoa nên phải hạ xuống.
+      - name: Gắn tag theo commit và push
+        run: |
           OWNER="${GITHUB_REPOSITORY_OWNER,,}"
-          REPO="ghcr.io/${OWNER}/bagisto-${{matrix.name}}"
+          REPO="ghcr.io/${OWNER}/bagisto-${{ matrix.name }}"
           TAG="sha-${GITHUB_SHA::7}"
-          docker tag "bagisto-${{matrix.name}}:ci" "${REPO}:${TAG}"
+          docker tag "bagisto-${{ matrix.name }}:ci" "${REPO}:${TAG}"
           docker push "${REPO}:${TAG}"
-          echo "da push image ${REPO}:${TAG}"
-          docker inspect --format='{{index .RepoDigests 0}}' "${REPO}:${TAG}""
+          # Ký và gắn SBOM theo DIGEST (định danh bất biến), không theo tag
+          DIGEST_REF="$(docker inspect --format='{{index .RepoDigests 0}}' "${REPO}:${TAG}")"
+          echo "Đã đẩy ${DIGEST_REF}"
+          echo "DIGEST_REF=${DIGEST_REF}" >> "$GITHUB_ENV"
 
-        
-      
+      # SBOM = danh sách mọi thành phần trong image (định dạng CycloneDX)
+      - name: Tạo SBOM
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: bagisto-${{ matrix.name }}:ci
+          format: cyclonedx
+          output: sbom-${{ matrix.name }}.cdx.json
 
+      - uses: sigstore/cosign-installer@v3
 
+      # Keyless: không có khoá riêng để giữ. Cosign đổi token OIDC của workflow lấy
+      # chứng chỉ ngắn hạn từ Sigstore rồi ký digest của image.
+      - name: Ký image
+        run: cosign sign --yes "${DIGEST_REF}"
 
+      - name: Gắn SBOM vào image (attestation đã ký)
+        run: cosign attest --yes --type cyclonedx --predicate "sbom-${{ matrix.name }}.cdx.json" "${DIGEST_REF}"
 
+      # Tự kiểm chứng ngay: chữ ký phải đến từ chính workflow này
+      - name: Kiểm tra chữ ký
+        run: |
+          cosign verify "${DIGEST_REF}" \
+            --certificate-identity "https://github.com/${{ github.repository }}/.github/workflows/ci.yml@${{ github.ref }}" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com
 
-
-
-          
-
-
-        
-
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ matrix.name }}
+          path: sbom-${{ matrix.name }}.cdx.json
+          retention-days: 30
