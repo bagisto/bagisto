@@ -35,6 +35,14 @@ abstract class AbstractType
     }
 
     /**
+     * Whether to mark the notification read for the user whose own action raised it, who already knows of it.
+     */
+    public function shouldMarkReadForCauser(): bool
+    {
+        return true;
+    }
+
+    /**
      * The users the notification is addressed to, or null to address everyone in its audience.
      *
      * @return iterable<Model>|null

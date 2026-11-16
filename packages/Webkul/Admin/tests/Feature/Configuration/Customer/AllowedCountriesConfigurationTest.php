@@ -6,7 +6,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 /**
- * Save the allowed countries of a channel as the form posts them, empty placeholder first.
+ * Save the allowed countries of a channel as the form posts them, an empty value once none is chosen.
  */
 function saveAllowedCountries(Channel $channel, array $countries): void
 {
@@ -16,7 +16,7 @@ function saveAllowedCountries(Channel $channel, array $countries): void
         'customer' => [
             'address' => [
                 'countries' => [
-                    'allowed' => ['', ...$countries],
+                    'allowed' => $countries ?: '',
                 ],
             ],
         ],
@@ -43,7 +43,7 @@ it('should display the allowed countries field on the address configuration page
 // Saving
 // ============================================================================
 
-it('should save the selected countries as a comma separated list without the empty placeholder', function () {
+it('should save the selected countries as a comma separated list', function () {
     $this->loginAsAdmin();
 
     $channel = Channel::factory()->create();

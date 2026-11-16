@@ -220,3 +220,52 @@ it('should not save a dependent field while its depend condition is off', functi
         'code' => 'general.gdpr.agreement.agreement_label',
     ]);
 });
+
+// ============================================================================
+// Multiselect Fields
+// ============================================================================
+
+it('should save the chosen options of a multiselect joined by commas', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.configuration.index', ['magic_ai', 'admin_features']), [
+        'magic_ai' => [
+            'admin_features' => [
+                'text_generation' => [
+                    'enabled' => '1',
+                    'providers' => ['anthropic', 'openai'],
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'magic_ai.admin_features.text_generation.providers',
+        'value' => 'anthropic,openai',
+    ]);
+});
+
+it('should clear a multiselect posted with nothing chosen', function () {
+    $this->loginAsAdmin();
+
+    CoreConfig::query()->create([
+        'code' => 'magic_ai.admin_features.text_generation.providers',
+        'value' => 'anthropic,openai',
+    ]);
+
+    postJson(route('admin.configuration.index', ['magic_ai', 'admin_features']), [
+        'magic_ai' => [
+            'admin_features' => [
+                'text_generation' => [
+                    'enabled' => '1',
+                    'providers' => '',
+                ],
+            ],
+        ],
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('core_config', [
+        'code' => 'magic_ai.admin_features.text_generation.providers',
+        'value' => '',
+    ]);
+});

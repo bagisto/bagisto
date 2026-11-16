@@ -8,16 +8,21 @@ use Webkul\Admin\Events\NotificationCreated;
 use Webkul\Admin\Notifications\AdminNotifications;
 use Webkul\Notification\Contracts\Notification as NotificationContract;
 use Webkul\Notification\Repositories\NotificationRepository;
+use Webkul\Notification\TypeRegistry;
 
 class Notification
 {
     /**
      * Create a new listener instance.
      */
-    public function __construct(protected NotificationRepository $notificationRepository) {}
+    public function __construct(
+        protected NotificationRepository $notificationRepository,
+        protected TypeRegistry $typeRegistry
+    ) {}
 
     /**
-     * Mark a new admin notification read for the admin whose own action raised it, and broadcast it to the panel.
+     * Mark a new admin notification read for the admin whose own action raised it, where its type allows,
+     * and broadcast it to the panel.
      */
     public function afterCreated(NotificationContract $notification): void
     {
@@ -25,7 +30,10 @@ class Notification
             return;
         }
 
-        if ($admin = $this->causingAdmin()) {
+        if (
+            $this->typeRegistry->instance($notification->type)->shouldMarkReadForCauser()
+            && $admin = $this->causingAdmin()
+        ) {
             $this->notificationRepository->markRead($notification->id, $admin);
         }
 

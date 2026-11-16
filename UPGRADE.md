@@ -107,7 +107,7 @@ What this changes for custom code:
 
 **Impact Probability: Low**
 
-A multiselect field in Admin → Configuration posted nothing once every option was deselected, so the save kept the value it had. The field now posts an empty entry of its own, and the save drops empty entries before joining the selection, so deselecting everything stores an empty value.
+A multiselect field in Admin → Configuration posted nothing once every option was deselected, so the save kept the value it had. The field now posts an empty value of its own, which the chosen options replace, so deselecting everything stores an empty value.
 
 What this changes for custom code:
 

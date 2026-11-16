@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Middleware\InspectSystemHealth;
 use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 
 /**
@@ -8,7 +9,7 @@ use Webkul\Core\Http\Middleware\NoCacheMiddleware;
  */
 require 'web/auth-routes.php';
 
-Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin', NoCacheMiddleware::class, InspectSystemHealth::class], 'prefix' => config('app.admin_url')], function () {
     /**
      * Sales routes.
      */

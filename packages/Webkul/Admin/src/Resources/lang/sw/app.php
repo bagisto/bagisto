@@ -69,12 +69,38 @@ return [
             'orders' => 'Oda',
             'returns' => 'Maombi ya RMA',
             'reviews' => 'Maoni',
+            'system' => 'Mfumo',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL ni :url, lakini duka linahudumiwa kutoka :host. Viungo kwenye barua pepe vitakuwa si sahihi.',
+                'title' => 'APP_URL hailingani na anwani ya duka',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Seva ya utangazaji haikujibu, kwa hivyo arifa hazitasasishwa moja kwa moja.',
+                'title' => 'Arifa za wakati halisi hazipatikani',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Mteja mpya amejisajili',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Kurasa za hitilafu zinaonyesha maelezo ya ndani kwa wageni. Weka APP_DEBUG=false.',
+                'title' => 'Hali ya utatuzi imewashwa kwenye mazingira ya uzalishaji',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Viwango havijasasishwa kulingana na ratiba. Angalia huduma ya viwango vya ubadilishaji na ufunguo wake wa API.',
+                'title' => 'Viwango vya ubadilishaji vimepitwa na wakati',
+            ],
+
+            'failed-jobs' => [
+                'message' => 'Kazi :count zilizoshindwa zinasubiri. Zikague kwa php artisan queue:failed.',
+                'title' => 'Kazi za foleni zinashindwa',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => 'Safu :processed zimechakatwa',
                 'message-skipped' => 'Safu :processed zimechakatwa, :skipped zimerukwa',
                 'title' => 'Uingizaji wa :type umekamilika',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Baadhi ya bidhaa hazina faharasa ya bei. Endesha php artisan indexer:index.',
+                'title' => 'Faharasa ya bidhaa haijakamilika',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'Duka haliwezi kutuma barua pepe hadi SMTP au Brevo isanidiwe.',
+                'title' => 'Barua pepe haijasanidiwa',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Marejesho yametolewa kwa agizo #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Kazi kwenye foleni ya :connection zinasubiri. Ianzishe kwa php artisan queue:work.',
+                'title' => 'Mfanyakazi wa foleni haendeshwi',
+            ],
+
             'return-requested' => [
                 'message' => 'Agizo #:order kutoka kwa :customer',
                 'title' => 'Ombi jipya la kurejesha #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer amekadiria :product :rating kati ya 5',
                 'title' => 'Maoni mapya yanasubiri idhini',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Kazi zilizopangwa haziendeshwi. Ongeza ingizo la cron la schedule:run kwenye seva yako.',
+                'title' => 'Kipanga ratiba hakiendeshwi',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Injini ya utafutaji haikujibu. Angalia mipangilio yake ya muunganisho.',
+                'title' => 'Injini ya utafutaji haipatikani',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Faili zinazopakiwa hazifiki kwenye hifadhi iliyochaguliwa. Angalia vitambulisho vyake.',
+                'title' => 'Hifadhi ya mbali haipatikani',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Imetatuliwa: :title',
             ],
         ],
     ],
@@ -4544,6 +4604,78 @@ return [
                         'yes' => 'Ndio',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Kile ambacho duka linahitaji ili kufanya kazi, na kinachohitaji umakini wako.',
+                    'open-settings' => 'Fungua mipangilio',
+                    'summary-attention' => 'Ukaguzi :count kati ya :total unahitaji umakini.',
+                    'summary-healthy' => 'Kila kitu ambacho duka linahitaji kinafanya kazi.',
+                    'title' => 'Afya ya Mfumo',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL lazima ilingane na anwani ambayo duka linahudumiwa.',
+                            'title' => 'Anwani ya duka',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Hutuma arifa mpya kwenye paneli ya msimamizi bila kupakia upya.',
+                            'title' => 'Arifa za wakati halisi',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Lazima izimwe kwenye uzalishaji ili kurasa za hitilafu zisifichue chochote.',
+                            'title' => 'Hali ya utatuzi',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Huweka viwango vya sarafu vikiwa vya sasa kwenye duka lenye sarafu kadhaa.',
+                            'title' => 'Viwango vya ubadilishaji',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Kazi za usuli zilizosimama kwa hitilafu na zinasubiri kujaribiwa tena.',
+                            'title' => 'Kazi zilizoshindwa',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Hutuma barua pepe za oda, akaunti na msimamizi.',
+                            'title' => 'Barua pepe',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Huhifadhi bei ambazo duka huonyesha bidhaa nazo.',
+                            'title' => 'Faharasa ya bidhaa',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Huchakata barua pepe, uingizaji na uwekaji faharasa kwenye usuli.',
+                            'title' => 'Mfanyakazi wa foleni',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Huhifadhi picha za bidhaa na faili nyingine zilizopakiwa.',
+                            'title' => 'Hifadhi ya faili',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Huendesha kazi za muda kama kanuni za bei, viwango vya ubadilishaji na vikumbusho vya ankara.',
+                            'title' => 'Kipanga ratiba',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Hujibu utafutaji wa duka na orodha za kategoria.',
+                            'title' => 'Injini ya utafutaji',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Inahitaji umakini',
+                        'healthy' => 'Inafanya kazi',
+                        'idle' => 'Haitumiki',
+                        'unconfirmed' => 'Bado haijathibitishwa',
+                    ],
+                ],
             ],
 
             'add-file' => 'Ongeza Faili',
@@ -4559,6 +4691,7 @@ return [
             'save-message' => 'Usanidi umehifadhiwa kwa mafanikio',
             'search' => 'Tafuta',
             'select-country' => 'Chagua Nchi',
+            'select-options' => 'Chagua Chaguo',
             'select-state' => 'Chagua Jimbo',
             'title' => 'Usanidi',
 
@@ -5896,6 +6029,7 @@ return [
                 'logout' => 'Toka',
                 'my-account' => 'Akaunti Yangu',
                 'notifications' => 'Taarifa',
+                'system-health' => 'Afya ya Mfumo',
                 'visit-shop' => 'Tembelea Duka',
 
                 'mega-search' => [
