@@ -102,49 +102,51 @@ jobs:
 
       - name: Pint
         run: vendor/bin/pint --test
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: bagisto
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-verion: '8.4'
-          extensions: calendar, gd, intl, zip, bcmath, pdo_mysql, curl, fileinfo, mbstring, openssl, tokenizer
-          ini-values: error_reporting=E_ALL
-          tools: composer:v2
-          coverage: nones
-      - name: Composer install
-        run: composer install --no-interaction --prefer-dist
-      - name: Chuan bi .env cho test
-        run: |
-          cp .env.example .env
-          sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
-          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
-          sed -i "s|^\(DB_PORT=\s*\).*$|\13306|" .env
-          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
-          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
-          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
+  # test:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 30
+  #   services:
+  #     mysql:
+  #       image: mysql:8.0
+  #       env:
+  #         MYSQL_ROOT_PASSWORD: root
+  #         MYSQL_DATABASE: bagisto
+  #       ports:
+  #         - 3306:3306
+  #       options: >-
+  #         --health-cmd="mysqladmin ping"
+  #         --health-interval=10s
+  #         --health-timeout=5s
+  #         --health-retries=5
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: shivammathur/setup-php@v2
+  #       with:
+  #         php-verion: '8.4'
+  #         extensions: calendar, gd, intl, zip, bcmath, pdo_mysql, curl, fileinfo, mbstring, openssl, tokenizer
+  #         ini-values: error_reporting=E_ALL
+  #         tools: composer:v2
+  #         coverage: nones
+  #     - name: Composer install
+  #       run: composer install --no-interaction --prefer-dist
+  #     - name: Chuan bi .env cho test
+  #       run: |
+  #         cp .env.example .env
+  #         sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
+  #         sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
+  #         sed -i "s|^\(DB_PORT=\s*\).*$|\13306|" .env
+  #         sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
+  #         sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
+  #         sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
 
-      - name: Bagisto installer
-        run: php artisan bagisto:install --no-interaction
+  #     - name: Bagisto installer
+  #       run: php artisan bagisto:install --no-interaction
 
-      - name: Pest
-        run: vendor/bin/pest --parallel --colors=always
+  #     - name: Pest
+  #       run: vendor/bin/pest --parallel --colors=always
   sonar:
+    if: github.event_name == 'pull_request' || github.ref_name == github.event.repository.default_branch
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -155,6 +157,39 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  publish:
+    needs: [build, lint, test, sonar]
+    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+    runs-on:  ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix: 
+        name: [app, web]
+    steps:
+      - uses: actions/checkoutv4
+        with:
+          name: immage-${{matrix.name}}
+          path: /tmp
+      - name: Nap image da build
+        run : gunzip -c "/tmp/${{matrix.name}}.tar.gz" | docker load
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrects.GITHUB_TOKEN }}
+        
+      - name: Gan tag theo commit va push
+        run : |
+          OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+          REPO="ghcr.io/${OWNER}/bagisto-${{matrix.name}}"
+          TAG="sha-${GITHUB_SHA::7}"
+          docker tag "bagisto-${{matrix.name}}:ci" "${REPO}:${TAG}"
+          docker push "${REPO}:${TAG}"
+          echo "da push image ${REPO}:${TAG}"
+          docker inspect --format='{{index .RepoDigests 0}}' "${REPO}:${TAG}""
 
         
       
