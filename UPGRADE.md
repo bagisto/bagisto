@@ -17,6 +17,12 @@
 
 - [Admin Notifications Are Typed And Read Per Admin](#admin-notifications-are-typed-and-read-per-admin)
 
+### Low Impact Changes
+
+- [The Storefront Can Be Limited To Some Countries](#the-storefront-can-be-limited-to-some-countries)
+- [Address Settings Moved To The Customer Package](#address-settings-moved-to-the-customer-package)
+- [A Multiselect Setting Is Cleared When Everything Is Deselected](#a-multiselect-setting-is-cleared-when-everything-is-deselected)
+
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
@@ -64,6 +70,49 @@ return [
 The class extends `Webkul\Notification\Types\AbstractType`: `data()` builds what is kept from the subject, `shouldNotify()` lets it pass on some of the events it listens to, `title()`, `message()`, `url()`, `icon()` and `tone()` render it in the language of the user reading it, and `recipients()` addresses it to particular users rather than the whole audience. Without `events`, raise it by name with `notifier()->notify('marketing.campaign-sent', $campaign)`. The Notification package's `Config/notification-groups.php` and `Config/notification-types.php` document every key, and the Admin package registers the built-in types the same way.
 
 A type raised from `events` is notified after the transaction the event fired in commits, and a failure is reported rather than thrown, so a notification cannot roll back the order or refund that raised it. `notifier()->notify()` called directly notifies at once and throws to its caller.
+
+---
+
+### The Storefront Can Be Limited To Some Countries
+
+**Impact Probability: Low**
+
+Configuration → Customer → Address has a new Countries group whose Allowed Countries setting, saved per channel, limits the countries the storefront offers. Left empty, as it is after the upgrade, every country is offered and nothing changes.
+
+Once a limit is set, the account address forms, the checkout address form and the cart's shipping estimate list only the allowed countries, and the server refuses an address or an estimate for any other country with a validation error. An address a customer saved in a country that is later removed is refused at checkout until it is moved to an allowed one. The admin's Create Order form still lists every country.
+
+What this changes for custom code:
+
+- **Two storefront endpoints are new.** `shop.api.customers.addresses.allowed_countries` (`api/customer/addresses/allowed-countries`) and `shop.api.customers.addresses.allowed_states` (`api/customer/addresses/allowed-states`) answer in the shape of `shop.api.core.countries` and `shop.api.core.states`, narrowed to the limit. The two existing endpoints are unchanged and still list every country.
+- **A theme overriding the checkout address form or the cart's shipping estimate** still calls the unlimited endpoints, so it lists countries the server will refuse. Point it at the two new routes.
+- **A theme overriding the account address create or edit view** lists `core()->countries()` and `core()->groupedStatesByCountries()`. Use `\Webkul\Customer\Facades\AddressSettings::allowedCountries()` and `allowedGroupedStates()` in their place.
+- **A custom form request validating a storefront address** adds `new \Webkul\Customer\Rules\AllowedCountry` to its country rule to enforce the limit.
+
+---
+
+### Address Settings Moved To The Customer Package
+
+**Impact Probability: Low**
+
+`core()->isCountryRequired()`, `core()->isStateRequired()` and `core()->isPostCodeRequired()` read settings that belong to the customer's address, so they now live on `Webkul\Customer\AddressSettings`, reached through the `Webkul\Customer\Facades\AddressSettings` facade, beside the new allowed-country readers.
+
+What this changes for custom code:
+
+- **The three `core()` methods still work** and answer the same, but are deprecated and delegate to the new class. Call `AddressSettings::isCountryRequired()`, `AddressSettings::isStateRequired()` and `AddressSettings::isPostCodeRequired()` instead.
+- **A class overriding one of the three on a bound `Core` subclass** is no longer consulted by core's own views and form requests, which read the facade. Bind a subclass of `Webkul\Customer\AddressSettings` instead.
+
+---
+
+### A Multiselect Setting Is Cleared When Everything Is Deselected
+
+**Impact Probability: Low**
+
+A multiselect field in Admin → Configuration posted nothing once every option was deselected, so the save kept the value it had. The field now posts an empty value of its own, which the chosen options replace, so deselecting everything stores an empty value.
+
+What this changes for custom code:
+
+- **A multiselect setting of your own can now be saved empty.** Mark it `'validation' => 'required'` if it must keep at least one option, as the return settings do.
+- **Code reading such a setting** should treat an empty string as no selection.
 
 ---
 

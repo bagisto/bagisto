@@ -5538,6 +5538,13 @@ return [
                         'title' => 'Informasi',
                         'title-info' => 'Berapa banyak baris alamat yang ditampilkan formulir alamat.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Negara yang Diizinkan',
+                        'allowed-info' => 'Biarkan kosong untuk menawarkan semua negara.',
+                        'title' => 'Negara',
+                        'title-info' => 'Negara yang dapat dipilih pelanggan di etalase toko.',
+                    ],
                 ],
 
                 'captcha' => [

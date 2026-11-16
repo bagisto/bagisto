@@ -5538,6 +5538,13 @@ return [
                         'title' => 'Informação',
                         'title-info' => 'Quantas linhas de endereço o formulário exibe.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Países permitidos',
+                        'allowed-info' => 'Deixe vazio para oferecer todos os países.',
+                        'title' => 'Países',
+                        'title-info' => 'Quais países os clientes podem escolher na loja.',
+                    ],
                 ],
 
                 'captcha' => [

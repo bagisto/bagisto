@@ -5538,6 +5538,13 @@ return [
                         'title' => 'Bilgi',
                         'title-info' => 'Adres formunun kaç adres satırı göstereceği.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'İzin Verilen Ülkeler',
+                        'allowed-info' => 'Tüm ülkeleri sunmak için boş bırakın.',
+                        'title' => 'Ülkeler',
+                        'title-info' => 'Müşterilerin mağazada seçebileceği ülkeler.',
+                    ],
                 ],
 
                 'captcha' => [

@@ -203,20 +203,20 @@
 
                 <!-- Country Name -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }}">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}">
                         @lang('shop::app.customers.account.addresses.edit.country')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
                         type="select"
                         name="country"
-                        rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                        rules="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}"
                         v-model="addressData.country"
                         :aria-label="trans('shop::app.customers.account.addresses.edit.country')"
                         :label="trans('shop::app.customers.account.addresses.edit.country')"
                         @change="addressData.state = ''"
                     >
-                        @foreach (core()->countries() as $country)
+                        @foreach (\Webkul\Customer\Facades\AddressSettings::allowedCountries() as $country)
                             <option 
                                 {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
                                 value="{{ $country->code }}"
@@ -233,7 +233,7 @@
 
                 <!-- State Name -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }}">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}">
                         @lang('shop::app.customers.account.addresses.edit.state')
                     </x-shop::form.control-group.label>
                     <template v-if="haveStates()">
@@ -241,7 +241,7 @@
                             type="select"
                             name="state"
                             id="state"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                             v-model="addressData.state"
                             :label="trans('shop::app.customers.account.addresses.edit.state')"
                             :placeholder="trans('shop::app.customers.account.addresses.edit.state')"
@@ -259,7 +259,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="state"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                             :value="old('state') ?? $address->state"
                             v-model="addressData.state"
                             :label="trans('shop::app.customers.account.addresses.edit.state')"
@@ -292,14 +292,14 @@
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.city.after', ['address' => $address]) !!}
 
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }}">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}">
                         @lang('shop::app.customers.account.addresses.edit.post-code')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
                         type="text"
                         name="postcode"
-                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
+                        rules="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}|postcode"
                         :value="old('postcode') ?? $address->postcode"
                         :label="trans('shop::app.customers.account.addresses.edit.post-code')"
                         :placeholder="trans('shop::app.customers.account.addresses.edit.post-code')"
@@ -353,11 +353,14 @@
                             state: "{{ old('state') ?? $address->state }}",
                         },
 
-                        countryStates: @json(core()->groupedStatesByCountries()),
+                        countryStates: @json(\Webkul\Customer\Facades\AddressSettings::allowedGroupedStates()),
                     };
                 },
     
                 methods: {
+                    /**
+                     * Whether the selected country has states.
+                     */
                     haveStates() {
                         return !!this.countryStates[this.addressData.country]?.length;
                     },
