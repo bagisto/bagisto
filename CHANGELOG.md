@@ -4,6 +4,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- The admin customer address forms and Create Order now follow the street lines and allowed countries of the customer's channel, not the default channel's.
+
+- Fixed the extra street address lines looking detached and unlabelled, and being emptied when an address was edited at checkout or in admin Create Order.
+
 - Reworked admin notifications into a feed any package can add to, filtered by type and read per admin, covering orders, customers, reviews, returns, GDPR requests and imports.
 
 - Moved `core()->isCountryRequired()`, `isStateRequired()` and `isPostCodeRequired()` to `Webkul\Customer\Facades\AddressSettings`. The `core()` methods still work and are deprecated.

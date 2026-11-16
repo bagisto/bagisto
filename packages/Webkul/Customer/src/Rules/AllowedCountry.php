@@ -9,11 +9,16 @@ use Webkul\Customer\AddressSettings;
 class AllowedCountry implements ValidationRule
 {
     /**
-     * Run the validation rule, passing every country while the storefront is not limited to some.
+     * Create a rule for the countries of the given channel, the requested one by default.
+     */
+    public function __construct(protected ?string $channelCode = null) {}
+
+    /**
+     * Run the validation rule, passing every country while the channel is not limited to some.
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $allowed = app(AddressSettings::class)->allowedCountryCodes();
+        $allowed = app(AddressSettings::class)->allowedCountryCodes($this->channelCode);
 
         if (
             ! $allowed

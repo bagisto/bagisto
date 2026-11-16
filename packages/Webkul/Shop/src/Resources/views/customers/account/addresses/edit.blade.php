@@ -158,6 +158,12 @@
 
                 @php
                     $addresses = explode(PHP_EOL, $address->address);
+
+                    $streetLines = \Webkul\Customer\Facades\AddressSettings::streetLines();
+
+                    $firstLineTitle = $streetLines > 1
+                        ? trans('shop::app.customers.account.addresses.edit.street-address-line', ['line' => 1])
+                        : trans('shop::app.customers.account.addresses.edit.street-address');
                 @endphp
 
                 <!-- Street Address -->
@@ -171,25 +177,23 @@
                         name="address[]"
                         :value="collect(old('address'))->first() ?? $addresses[0]"
                         rules="required|address"
-                        :label="trans('shop::app.customers.account.addresses.edit.street-address')"
-                        :placeholder="trans('shop::app.customers.account.addresses.edit.street-address')"
+                        :label="$firstLineTitle"
+                        :placeholder="$firstLineTitle"
                     />
 
-                    <x-shop::form.control-group.error control-name="address[]" />
-                </x-shop::form.control-group>
+                    <x-shop::form.control-group.error
+                        class="mb-2"
+                        control-name="address[]"
+                    />
 
-                @if (
-                    core()->getConfigData('customer.address.information.street_lines')
-                    && core()->getConfigData('customer.address.information.street_lines') > 1
-                )
-                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
+                    @for ($i = 1; $i < $streetLines; $i++)
                         <x-shop::form.control-group.control
                             type="text"
                             name="address[{{ $i }}]"
                             :value="old('address.'.$i, $addresses[$i] ?? '')"
                             rules="address"
-                            :label="trans('shop::app.customers.account.addresses.edit.street-address')"
-                            :placeholder="trans('shop::app.customers.account.addresses.edit.street-address')"
+                            :label="trans('shop::app.customers.account.addresses.edit.street-address-line', ['line' => $i + 1])"
+                            :placeholder="trans('shop::app.customers.account.addresses.edit.street-address-line', ['line' => $i + 1])"
                         />
 
                         <x-shop::form.control-group.error
@@ -197,7 +201,7 @@
                             name="address[{{ $i }}]"
                         />
                     @endfor
-                @endif
+                </x-shop::form.control-group>
 
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.street-addres.after', ['address' => $address]) !!}
 

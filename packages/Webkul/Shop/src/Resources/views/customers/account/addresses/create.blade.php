@@ -144,6 +144,14 @@
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.vat_id.after') !!}
 
+                    @php
+                        $streetLines = \Webkul\Customer\Facades\AddressSettings::streetLines();
+
+                        $firstLineTitle = $streetLines > 1
+                            ? trans('shop::app.customers.account.addresses.create.street-address-line', ['line' => 1])
+                            : trans('shop::app.customers.account.addresses.create.street-address');
+                    @endphp
+
                     <!-- Street Address -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
@@ -155,27 +163,23 @@
                             name="address[]"
                             rules="required|address"
                             :value="collect(old('address'))->first()"
-                            :label="trans('shop::app.customers.account.addresses.create.street-address')"
-                            :placeholder="trans('shop::app.customers.account.addresses.create.street-address')"
+                            :label="$firstLineTitle"
+                            :placeholder="$firstLineTitle"
                         />
 
-                        <x-shop::form.control-group.error control-name="address[]" />
-                    </x-shop::form.control-group>
+                        <x-shop::form.control-group.error
+                            class="mb-2"
+                            control-name="address[]"
+                        />
 
-                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.street_address.after') !!}
-
-                    @if (
-                        core()->getConfigData('customer.address.information.street_lines')
-                        && core()->getConfigData('customer.address.information.street_lines') > 1
-                    )
-                        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
+                        @for ($i = 1; $i < $streetLines; $i++)
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="address[{{ $i }}]"
                                 :value="old('address.'.$i)"
                                 rules="address"
-                                :label="trans('shop::app.customers.account.addresses.create.street-address')"
-                                :placeholder="trans('shop::app.customers.account.addresses.create.street-address')"
+                                :label="trans('shop::app.customers.account.addresses.create.street-address-line', ['line' => $i + 1])"
+                                :placeholder="trans('shop::app.customers.account.addresses.create.street-address-line', ['line' => $i + 1])"
                             />
 
                             <x-shop::form.control-group.error
@@ -183,7 +187,7 @@
                                 name="address[{{ $i }}]"
                             />
                         @endfor
-                    @endif
+                    </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.street_address.after') !!}
 

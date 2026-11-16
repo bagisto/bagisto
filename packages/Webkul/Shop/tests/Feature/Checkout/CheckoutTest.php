@@ -566,6 +566,20 @@ it('should keep a guest on the checkout page when guest checkout is allowed', fu
         ->assertOk();
 });
 
+it('should fill every street line of an address edited at checkout', function () {
+    allowGuestCheckout(true);
+
+    $this->setConfig('customer.address.information.street_lines', 3);
+
+    $this->addProductToCart($this->createSimpleProduct()->id);
+
+    get(route('shop.checkout.onepage.index'))
+        ->assertOk()
+        ->assertSee('placeholder="'.trans('shop::app.checkout.onepage.address.street-address-line', ['line' => 3]).'"', false)
+        ->assertSee(':value="address.address[1]"', false)
+        ->assertSee(':value="address.address[2]"', false);
+});
+
 it('should send a guest to sign in when guest checkout is off and bring them back to checkout after signing in', function () {
     allowGuestCheckout(false);
 

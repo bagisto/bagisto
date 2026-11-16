@@ -327,6 +327,35 @@ it('should return the address edit page', function () {
         ->assertSeeText(trans('shop::app.customers.account.addresses.edit.title'));
 });
 
+it('should number the street lines on the address forms when the store takes several', function () {
+    $this->setConfig('customer.address.information.street_lines', 3);
+
+    $customer = Customer::factory()->create();
+
+    $address = addressOf($customer, ['address' => "12 Baker Street\nFlat 4B\nNear Central Park"]);
+
+    $this->loginAsCustomer($customer);
+
+    get(route('shop.customers.account.addresses.create'))
+        ->assertOk()
+        ->assertSee('placeholder="'.trans('shop::app.customers.account.addresses.create.street-address-line', ['line' => 1]).'"', false)
+        ->assertSee('placeholder="'.trans('shop::app.customers.account.addresses.create.street-address-line', ['line' => 3]).'"', false);
+
+    get(route('shop.customers.account.addresses.edit', $address->id))
+        ->assertOk()
+        ->assertSee('placeholder="'.trans('shop::app.customers.account.addresses.edit.street-address-line', ['line' => 3]).'"', false)
+        ->assertSee('value="Near Central Park"', false);
+});
+
+it('should keep a single street line unnumbered on the address form', function () {
+    $this->loginAsCustomer();
+
+    get(route('shop.customers.account.addresses.create'))
+        ->assertOk()
+        ->assertSee('placeholder="'.trans('shop::app.customers.account.addresses.create.street-address').'"', false)
+        ->assertDontSee(trans('shop::app.customers.account.addresses.create.street-address-line', ['line' => 1]));
+});
+
 it('should not show the address edit page of another customer', function () {
     $address = addressOf(Customer::factory()->create());
 
