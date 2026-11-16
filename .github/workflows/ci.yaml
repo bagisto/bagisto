@@ -1,6 +1,7 @@
+---
 name: ci
 
-on:
+"on":
   push:
   pull_request:
   workflow_dispatch:
@@ -224,10 +225,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   publish:
-    # Chỉ publish khi push lên default branch và mọi kiểm tra đã thành công
     needs: [build, scan-source, lint, test, sonar]
     if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
-
     runs-on: ubuntu-latest
 
     permissions:
@@ -241,20 +240,20 @@ jobs:
         name: [app, web]
 
     steps:
-      # 1. Tải Docker image artifact từ job build
+      # 1. Download Docker image artifact từ job build
       - name: Download image artifact
         uses: actions/download-artifact@v4
         with:
           name: image-${{ matrix.name }}
           path: /tmp
 
-      # 2. Nạp image vào Docker daemon
+      # 2. Load Docker image vào Docker daemon
       - name: Load Docker image
         run: |
           gunzip -c "/tmp/${{ matrix.name }}.tar.gz" | docker load
 
-      # 3. Đăng nhập GHCR
-      - name: Login GHCR
+      # 3. Login vào GitHub Container Registry
+      - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -264,20 +263,32 @@ jobs:
       # 4. Push image lên GHCR và lấy digest
       - name: Push image to GHCR
         id: push
+        shell: bash
         run: |
           OWNER="${GITHUB_REPOSITORY_OWNER,,}"
           REPO="ghcr.io/${OWNER}/bagisto-${{ matrix.name }}"
           TAG="sha-${GITHUB_SHA::7}"
 
+          # Tag image local bằng GHCR reference
           docker tag "bagisto-${{ matrix.name }}:ci" "${REPO}:${TAG}"
+
+          # Push image
           docker push "${REPO}:${TAG}"
 
-          DIGEST_REF="$(docker inspect --format='{{index .RepoDigests 0}}' "${REPO}:${TAG}")"
+          # Lấy digest từ image trên GHCR
+          DIGEST_REF="$(docker inspect \
+            --format='{{range .RepoDigests}}{{println .}}{{end}}' \
+            "${REPO}:${TAG}" | grep -F "${REPO}@" | head -n 1)"
+
+          if [[ -z "${DIGEST_REF}" ]]; then
+            echo "::error::Cannot retrieve GHCR image digest"
+            exit 1
+          fi
 
           echo "Image pushed: ${DIGEST_REF}"
           echo "digest_ref=${DIGEST_REF}" >> "$GITHUB_OUTPUT"
 
-      # 5. Tạo SBOM từ image
+      # 5. Generate SBOM bằng Trivy
       - name: Generate SBOM
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -290,14 +301,26 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
-      # 7. Ký image theo digest bằng keyless signing
+      # 7. Kiểm tra image reference
+      - name: Verify image reference
+        env:
+          DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
+        run: |
+          echo "DIGEST_REF=${DIGEST_REF}"
+
+          if [[ "${DIGEST_REF}" != ghcr.io/* ]]; then
+            echo "::error::Image reference is not a GHCR reference"
+            exit 1
+          fi
+
+      # 8. Sign image bằng Cosign keyless
       - name: Sign image
         env:
           DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
         run: |
           cosign sign --yes "${DIGEST_REF}"
 
-      # 8. Gắn SBOM vào image dưới dạng attestation đã ký
+      # 9. Attest SBOM vào image
       - name: Attest SBOM
         env:
           DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
@@ -308,16 +331,16 @@ jobs:
             --predicate "sbom-${{ matrix.name }}.cdx.json" \
             "${DIGEST_REF}"
 
-      # 9. Xác minh chữ ký image
+      # 10. Verify chữ ký image
       - name: Verify image signature
         env:
           DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
         run: |
           cosign verify "${DIGEST_REF}" \
-            --certificate-identity "https://github.com/${{ github.repository }}/.github/workflows/ci.yaml@${{ github.ref }}" \
+            --certificate-identity "https://github.com/${{ github.workflow_ref }}" \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
 
-      # 10. Upload SBOM làm artifact
+      # 11. Upload SBOM làm GitHub Actions artifact
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
