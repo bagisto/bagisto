@@ -3739,5 +3739,30 @@ return [
                 'path' => 'admin::configuration.custom-views.about',
             ],
         ],
+    ], [
+        'key' => 'about.system_health',
+        'name' => 'admin::app.configuration.index.about.system-health.title',
+        'info' => 'admin::app.configuration.index.about.system-health.info',
+        'icon' => 'settings/system-health.svg',
+        'sort' => 2,
+        'layout' => [
+            'title_section' => false,
+            'save_button' => false,
+            'channel_switcher' => false,
+            'locale_switcher' => false,
+        ],
+    ], [
+        'key' => 'about.system_health.checks',
+        'name' => 'admin::app.configuration.index.about.system-health.title',
+        'info' => 'admin::app.configuration.index.about.system-health.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'checks',
+                'title' => 'admin::app.configuration.index.about.system-health.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.system-health',
+            ],
+        ],
     ],
 ];

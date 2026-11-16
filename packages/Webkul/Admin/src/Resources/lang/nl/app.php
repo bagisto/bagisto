@@ -69,12 +69,38 @@ return [
             'orders' => 'Bestellingen',
             'returns' => 'RMA-verzoeken',
             'reviews' => 'Beoordelingen',
+            'system' => 'Systeem',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL is :url, maar de winkel wordt geserveerd vanaf :host. Links in e-mails zullen onjuist zijn.',
+                'title' => 'APP_URL komt niet overeen met het winkeladres',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'De broadcastserver reageerde niet, dus meldingen worden niet live bijgewerkt.',
+                'title' => 'Realtime meldingen zijn niet bereikbaar',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Nieuwe klant geregistreerd',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Foutpagina\'s tonen interne details aan bezoekers. Stel APP_DEBUG=false in.',
+                'title' => 'Debugmodus staat aan in productie',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'De koersen zijn niet volgens schema bijgewerkt. Controleer de wisselkoersdienst en de API-sleutel.',
+                'title' => 'Wisselkoersen zijn verouderd',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count mislukte jobs wachten. Bekijk ze met php artisan queue:failed.',
+                'title' => 'Jobs in de wachtrij mislukken',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed rijen verwerkt',
                 'message-skipped' => ':processed rijen verwerkt, :skipped overgeslagen',
                 'title' => 'Import van :type voltooid',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Sommige producten hebben geen prijsindex. Voer php artisan indexer:index uit.',
+                'title' => 'Productindex is onvolledig',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'De winkel kan geen e-mail verzenden totdat SMTP of Brevo is ingesteld.',
+                'title' => 'E-mail is niet geconfigureerd',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Terugbetaling uitgevoerd voor bestelling #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Jobs in de wachtrij :connection wachten. Start hem met php artisan queue:work.',
+                'title' => 'Queue worker draait niet',
+            ],
+
             'return-requested' => [
                 'message' => 'Bestelling #:order van :customer',
                 'title' => 'Nieuw retourverzoek #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer gaf :product :rating van de 5',
                 'title' => 'Nieuwe review wacht op goedkeuring',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Geplande taken worden niet uitgevoerd. Voeg de cron-regel voor schedule:run toe aan uw server.',
+                'title' => 'Scheduler draait niet',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'De zoekmachine reageerde niet. Controleer de verbindingsinstellingen.',
+                'title' => 'Zoekmachine is niet bereikbaar',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Uploads bereiken de gekozen opslag niet. Controleer de inloggegevens.',
+                'title' => 'Externe opslag is niet beschikbaar',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Opgelost: :title',
             ],
         ],
     ],
@@ -4544,6 +4604,78 @@ return [
                         'yes' => 'Ja',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Wat de winkel nodig heeft om te draaien en wat uw aandacht vraagt.',
+                    'open-settings' => 'Instellingen openen',
+                    'summary-attention' => ':count van :total controles vragen aandacht.',
+                    'summary-healthy' => 'Alles wat de winkel nodig heeft werkt.',
+                    'title' => 'Systeemstatus',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL moet overeenkomen met het adres waarop de winkel wordt geserveerd.',
+                            'title' => 'Winkeladres',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Stuurt nieuwe meldingen naar het beheerpaneel zonder te herladen.',
+                            'title' => 'Realtime meldingen',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Moet uit staan in productie, zodat foutpagina\'s niets prijsgeven.',
+                            'title' => 'Debugmodus',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Houdt de koersen actueel in een winkel met meerdere valuta\'s.',
+                            'title' => 'Wisselkoersen',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Achtergrondjobs die met een fout zijn gestopt en op een nieuwe poging wachten.',
+                            'title' => 'Mislukte jobs',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Verstuurt bestel-, account- en beheer-e-mails.',
+                            'title' => 'E-mail',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Bevat de prijzen waarmee de winkel producten toont.',
+                            'title' => 'Productindex',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Verwerkt e-mails, imports en indexering op de achtergrond.',
+                            'title' => 'Queue worker',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Slaat productafbeeldingen en andere uploads op.',
+                            'title' => 'Bestandsopslag',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Voert geplande taken uit, zoals prijsregels, wisselkoersen en factuurherinneringen.',
+                            'title' => 'Scheduler',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Beantwoordt zoekopdrachten in de winkel en categorielijsten.',
+                            'title' => 'Zoekmachine',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Vraagt aandacht',
+                        'healthy' => 'Werkt',
+                        'idle' => 'Niet in gebruik',
+                        'unconfirmed' => 'Nog niet bevestigd',
+                    ],
+                ],
             ],
 
             'add-file' => 'Bestand Toevoegen',
@@ -4559,6 +4691,7 @@ return [
             'save-message' => 'Configuratie succesvol opgeslagen',
             'search' => 'Zoeken',
             'select-country' => 'Selecteer land',
+            'select-options' => 'Selecteer opties',
             'select-state' => 'Selecteer provincie',
             'title' => 'Configuratie',
 
@@ -5889,6 +6022,7 @@ return [
                 'logout' => 'Uitloggen',
                 'my-account' => 'Mijn Account',
                 'notifications' => 'Meldingen',
+                'system-health' => 'Systeemstatus',
                 'visit-shop' => 'Bezoek Winkel',
 
                 'mega-search' => [

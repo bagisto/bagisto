@@ -41,16 +41,29 @@
     </v-configurable>
 </div>
 
+@once
+    <!-- Loads the advanced select controls the fields render with, without rendering one. -->
+    <x-admin::form.control-group.advance.select
+        name="configuration-select"
+        v-if="false"
+    />
+
+    <x-admin::form.control-group.advance.multiselect
+        name="configuration-multiselect"
+        v-if="false"
+    />
+@endonce
+
 @pushOnce('scripts')
     <script
         type="text/x-template"
         id="v-configurable-template"
     >
         <x-admin::form.control-group class="last:mb-0!">
-            <!-- Title of the input field -->
-            <div    
-                v-if="field.is_visible"
+            <!-- Field Title -->
+            <div
                 class="flex justify-between"
+                v-if="field.is_visible"
             >
                 <x-admin::form.control-group.label ::for="name">
                     @{{ label }} <span :class="isRequire"></span>
@@ -61,7 +74,7 @@
                         v-text="JSON.parse(currentChannel).name"
                     >
                     </span>
-        
+
                     <span
                         v-if="field['locale_based']"
                         class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
@@ -70,8 +83,8 @@
                     </span>
                 </x-admin::form.control-group.label>
             </div>
-        
-            <!-- Text input -->
+
+            <!-- Text Input -->
             <template v-if="field.type == 'text' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="text"
@@ -83,8 +96,8 @@
                     ::placeholder="placeholder"
                 />
             </template>
-        
-            <!-- Password input -->
+
+            <!-- Password Input -->
             <template v-if="field.type == 'password' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="password"
@@ -96,8 +109,8 @@
                     ::placeholder="placeholder"
                 />
             </template>
-        
-            <!-- Number input -->
+
+            <!-- Number Input -->
             <template v-if="field.type == 'number' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="number"
@@ -129,7 +142,7 @@
                     />
                 </v-field>
             </template>
-        
+
             <!-- Textarea Input -->
             <template v-if="field.type == 'textarea' && field.is_visible">
                 <x-admin::form.control-group.control
@@ -144,7 +157,7 @@
                 />
             </template>
 
-            <!-- Textarea with tinymce -->
+            <!-- Rich Text Editor -->
             <template v-if="field.type == 'editor' && field.is_visible">
                 <v-field
                     v-slot="{ field, errors }"
@@ -165,70 +178,51 @@
                     />
                 </v-field>
             </template>
-        
-            <!-- Select input -->
+
+            <!-- Select Input -->
             <template v-if="field.type == 'select' && field.is_visible">
-                <v-field
-                    v-slot="data"
+                <v-select
                     :id="name"
                     :name="name"
+                    :options="choices"
+                    :value="chosenValue"
                     :rules="validations"
-                    :value="value"
                     :label="label"
+                    :placeholder="placeholder"
+                    :searchable="searchable"
                 >
-                    <select
-                        :id="name"
-                        :name="name"
-                        v-bind="data.field"
-                        :class="[data.errors.length ? 'border border-red-500' : '']"
-                        class="custom-select w-full rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                    >
-                        <option
-                            v-for="option in field.options"
-                            :value="option.value"
-                            v-text="option.title"
-                        >
-                        </option>
-                    </select>
-                </v-field>
+                </v-select>
             </template>
 
             <!-- Multiselect Input -->
             <template v-if="field.type == 'multiselect' && field.is_visible">
-                <v-field
-                    v-slot="data"
-                    :id="name"
+                <!-- Posted when nothing is chosen, so clearing every option saves an empty value. -->
+                <input
+                    type="hidden"
+                    :name="name"
+                    value=""
+                />
+
+                <v-multiselect
                     :name="`${name}[]`"
-                    :rules="validations"
+                    :options="choices"
                     :value="savedSelections"
+                    :rules="validations"
                     :label="label"
+                    :placeholder="placeholder || selectOptionsPlaceholder"
+                    :searchable="searchable"
                 >
-                    <select
-                        :name="`${name}[]`"
-                        v-bind="data.field"
-                        v-model="data.value"
-                        :class="['custom-select', 'w-full', 'rounded-md', 'border', 'bg-white', 'px-3', 'py-2.5', 'text-sm', 'font-normal', 'text-gray-600', 'transition-all', 'hover:border-gray-400', 'dark:border-gray-800', 'dark:bg-gray-900', 'dark:text-gray-300', 'dark:hover:border-gray-400', data.errors.length && 'border-red-500']"
-                        multiple
-                    >
-                        <option
-                            v-for="option in field.options"
-                            :key="option.value"
-                            :value="option.value"
-                        >
-                            @{{ option.title }}
-                        </option>
-                    </select>
-                </v-field>
+                </v-multiselect>
             </template>
-           
-            <!-- Boolean/Switch input -->
+
+            <!-- Boolean Switch -->
             <template v-if="field.type == 'boolean' && field.is_visible">
                 <input
                     type="hidden"
                     :name="name"
                     :value="0"
                 />
-        
+
                 <label class="relative inline-flex cursor-pointer items-center">
                     <input  
                         type="checkbox"
@@ -242,7 +236,7 @@
                     <div class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-hidden peer-focus:ring-blue-300 ltr:after:left-0.5 ltr:peer-checked:after:translate-x-full rtl:after:right-0.5 rtl:peer-checked:after:-translate-x-full dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-blue-600"></div>
                 </label>
             </template>
-        
+
             <!-- Image And File Input -->
             <template v-if="isMediaField && field.is_visible">
                 <x-admin::media.upload
@@ -256,92 +250,69 @@
                 />
             </template>
 
+            <!-- Country Select -->
             <template v-if="field.type == 'country' && field.is_visible">
                 <v-country :selected-country="value">
                     <template v-slot:default="{ changeCountry }">
-                        <x-admin::form.control-group class="flex">
-                            <x-admin::form.control-group.control
-                                type="select"
-                                ::id="name"
-                                ::name="name"
-                                ::rules="validations"
-                                ::value="value"
-                                ::label="label"
-                                @change="changeCountry($event.target.value)"
-                            >
-                                <option value="">
-                                    @lang('admin::app.configuration.index.select-country')
-                                </option>
-        
-                                @foreach (core()->countries() as $country)
-                                    <option value="{{ $country->code }}">
-                                        {{ $country->name }}
-                                    </option>
-                                @endforeach
-                            </x-admin::form.control-group.control>
-                        </x-admin::form.control-group>
+                        <v-select
+                            placeholder="@lang('admin::app.configuration.index.select-country')"
+                            clearable
+                            :id="name"
+                            :name="name"
+                            :options="countries"
+                            :value="value"
+                            :rules="validations"
+                            :label="label"
+                            @update:model-value="changeCountry"
+                        >
+                        </v-select>
                     </template>
                 </v-country>
             </template>
-        
-            <!-- State select Vue component -->
+
+            <!-- State Select -->
             <template v-if="field.type == 'state' && field.is_visible">
                 <v-state>
                     <template v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }">
                         <div v-if="isStateComponenetLoaded">
                             <template v-if="haveStates()">
-                                <x-admin::form.control-group class="flex">
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        ::id="name"
-                                        ::name="name"
-                                        ::rules="validations"
-                                        ::value="value"
-                                        ::label="label"
-                                    >
-                                        <option value="">
-                                            @lang('admin::app.configuration.index.select-state')
-                                        </option>
-                                        
-                                        <option value="*">
-                                            *
-                                        </option>
-                                        
-                                        <option
-                                            v-for='(state, index) in countryStates[country]'
-                                            :value="state.code"
-                                        >
-                                            @{{ state.default_name }}
-                                        </option>
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
+                                <v-select
+                                    placeholder="@lang('admin::app.configuration.index.select-state')"
+                                    clearable
+                                    :id="name"
+                                    :name="name"
+                                    :options="stateChoices(countryStates[country])"
+                                    :value="value"
+                                    :rules="validations"
+                                    :label="label"
+                                >
+                                </v-select>
                             </template>
-        
+
                             <template v-else>
-                                <x-admin::form.control-group class="flex">
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        ::id="name"
-                                        ::name="name"
-                                        ::rules="validations"
-                                        ::value="value"
-                                        ::label="label"
-                                    />
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    ::id="name"
+                                    ::name="name"
+                                    ::rules="validations"
+                                    ::value="value"
+                                    ::label="label"
+                                />
                             </template>
                         </div>
                     </template>
                 </v-state>
             </template>
-        
+
+            <!-- Field Info -->
             <p
-                v-if="field.info && field.is_visible"
                 class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300"
+                v-if="field.info && field.is_visible"
                 v-text="info"
             >
             </p>
-     
-            <!-- validation message -->
+
+            <!-- Validation Message -->
             <v-error-message
                 :name="name"
                 v-slot="{ message }"
@@ -380,6 +351,8 @@
     </script>
 
     <script type="module">
+        const configurationCountries = @json(core()->countries()->map(fn ($country) => ['id' => $country->code, 'label' => $country->name])->values());
+
         app.component('v-configurable', {
             template: '#v-configurable-template',
 
@@ -403,15 +376,50 @@
             data() {
                 return {
                     field: JSON.parse(this.fieldData),
+
+                    selectOptionsPlaceholder: @json(trans('admin::app.configuration.index.select-options')),
                 };
             },
 
             computed: {
                 /**
+                 * The field's options in the shape the advanced select controls take.
+                 */
+                choices() {
+                    return (this.field.options ?? []).map((option) => ({
+                        id: String(option.value),
+                        label: option.title,
+                    }));
+                },
+
+                /**
+                 * The stored option of a select, or its first option when the stored value is none of them.
+                 */
+                chosenValue() {
+                    return this.choices.some((choice) => choice.id === String(this.value ?? ''))
+                        ? String(this.value)
+                        : (this.choices[0]?.id ?? '');
+                },
+
+                /**
                  * The stored comma separated value of a multiselect, as the array it binds to.
                  */
                 savedSelections() {
                     return this.value ? this.value.split(',') : [];
+                },
+
+                /**
+                 * Whether the field has options enough to need a search box.
+                 */
+                searchable() {
+                    return this.choices.length > 6;
+                },
+
+                /**
+                 * Every country, for the country field.
+                 */
+                countries() {
+                    return configurationCountries;
                 },
 
                 /**
@@ -462,6 +470,18 @@
 
                 dependElement.dispatchEvent(new Event('change'));
             },
+
+            methods: {
+                /**
+                 * A country's states for the state field, led by the wildcard that matches all of them.
+                 */
+                stateChoices(states) {
+                    return [
+                        { id: '*', label: '*' },
+                        ...(states ?? []).map((state) => ({ id: state.code, label: state.default_name })),
+                    ];
+                },
+            },
         });
 
         app.component('v-country', {
@@ -480,6 +500,9 @@
             },
 
             methods: {
+                /**
+                 * Tell the state field which country was chosen.
+                 */
                 changeCountry(selectedCountryCode) {
                     this.$emitter.emit('country-changed', selectedCountryCode);
                 },
@@ -508,12 +531,10 @@
             },
 
             methods: {
+                /**
+                 * Whether the chosen country has states to choose from.
+                 */
                 haveStates() {
-                    /*
-                    * The double negation operator is used to convert the value to a boolean.
-                    * It ensures that the final result is a boolean value,
-                    * true if the array has a length greater than 0, and otherwise false.
-                    */
                     return !!this.countryStates[this.country]?.length;
                 },
             },

@@ -69,12 +69,38 @@ return [
             'orders' => 'Orders',
             'returns' => 'RMA Requests',
             'reviews' => 'Reviews',
+            'system' => 'Sistem',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL este :url, dar magazinul este servit de la :host. Linkurile din e-mailuri vor fi greșite.',
+                'title' => 'APP_URL nu corespunde adresei magazinului',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Serverul de broadcasting nu a răspuns, deci notificările nu se vor actualiza în direct.',
+                'title' => 'Notificările în timp real nu sunt accesibile',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Client nou înregistrat',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Paginile de eroare arată vizitatorilor detalii interne. Setați APP_DEBUG=false.',
+                'title' => 'Modul de depanare este activ în producție',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Cursurile nu s-au actualizat conform programului. Verificați serviciul de curs valutar și cheia API.',
+                'title' => 'Cursurile de schimb nu sunt actualizate',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count joburi eșuate sunt în așteptare. Verificați-le cu php artisan queue:failed.',
+                'title' => 'Joburile din coadă eșuează',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed rânduri procesate',
                 'message-skipped' => ':processed rânduri procesate, :skipped omise',
                 'title' => 'Importul de :type s-a încheiat',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Unele produse nu au index de prețuri. Rulați php artisan indexer:index.',
+                'title' => 'Indexul de produse este incomplet',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'Magazinul nu poate trimite e-mailuri până când nu este configurat SMTP sau Brevo.',
+                'title' => 'E-mailul nu este configurat',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Rambursare emisă pentru comanda #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Joburile din coada :connection sunt în așteptare. Porniți-l cu php artisan queue:work.',
+                'title' => 'Workerul cozii nu rulează',
+            ],
+
             'return-requested' => [
                 'message' => 'Comanda #:order de la :customer',
                 'title' => 'Cerere nouă de retur #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer a evaluat :product cu :rating din 5',
                 'title' => 'Recenzie nouă în așteptarea aprobării',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Sarcinile programate nu rulează. Adăugați intrarea cron pentru schedule:run pe serverul dvs.',
+                'title' => 'Planificatorul nu rulează',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Motorul de căutare nu a răspuns. Verificați setările de conexiune.',
+                'title' => 'Motorul de căutare nu este accesibil',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Încărcările nu ajung la stocarea selectată. Verificați datele de autentificare.',
+                'title' => 'Stocarea la distanță nu este disponibilă',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Rezolvat: :title',
             ],
         ],
     ],
@@ -4544,6 +4604,78 @@ return [
                         'yes' => 'Da',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Ce are nevoie magazinul pentru a funcționa și ce necesită atenția dvs.',
+                    'open-settings' => 'Deschide setările',
+                    'summary-attention' => ':count din :total verificări necesită atenție.',
+                    'summary-healthy' => 'Tot ce are nevoie magazinul funcționează.',
+                    'title' => 'Starea sistemului',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL trebuie să corespundă adresei de la care este servit magazinul.',
+                            'title' => 'Adresa magazinului',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Trimite notificările noi către panoul de administrare fără reîncărcare.',
+                            'title' => 'Notificări în timp real',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Trebuie să fie oprit în producție, pentru ca paginile de eroare să nu dezvăluie nimic.',
+                            'title' => 'Mod de depanare',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Menține cursurile actualizate într-un magazin cu mai multe monede.',
+                            'title' => 'Cursuri de schimb',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Joburi de fundal oprite cu o eroare, care așteaptă o reîncercare.',
+                            'title' => 'Joburi eșuate',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Trimite e-mailurile de comenzi, conturi și administrare.',
+                            'title' => 'E-mail',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Păstrează prețurile cu care magazinul listează produsele.',
+                            'title' => 'Index de produse',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Procesează e-mailuri, importuri și indexare în fundal.',
+                            'title' => 'Workerul cozii',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Stochează imaginile produselor și alte încărcări.',
+                            'title' => 'Stocare fișiere',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Rulează sarcini programate precum reguli de preț, cursuri de schimb și mementouri de facturi.',
+                            'title' => 'Planificator',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Răspunde la căutarea din magazin și la listele de categorii.',
+                            'title' => 'Motor de căutare',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Necesită atenție',
+                        'healthy' => 'Funcționează',
+                        'idle' => 'Nu este utilizat',
+                        'unconfirmed' => 'Încă neconfirmat',
+                    ],
+                ],
             ],
 
             'add-file' => 'Add File',
@@ -4559,6 +4691,7 @@ return [
             'save-message' => 'Configuration saved successfully',
             'search' => 'Search',
             'select-country' => 'Select Country',
+            'select-options' => 'Selectează Opțiuni',
             'select-state' => 'Select State',
             'title' => 'Configuration',
 
@@ -5889,6 +6022,7 @@ return [
                 'logout' => 'Logout',
                 'my-account' => 'My Account',
                 'notifications' => 'Notifications',
+                'system-health' => 'Starea sistemului',
                 'visit-shop' => 'Visit Shop',
 
                 'mega-search' => [

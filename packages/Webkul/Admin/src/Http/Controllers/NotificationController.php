@@ -61,17 +61,19 @@ class NotificationController extends Controller
     }
 
     /**
-     * Mark the notification read and take the admin to what it is about.
+     * Mark the notification read and take the admin to what it is about. One that leads nowhere cannot be opened.
      */
     public function open(int $id): RedirectResponse
     {
         $notification = $this->visibleNotification($id);
 
-        $this->notificationRepository->markRead($notification->id, $this->admin());
-
         $url = $this->typeRegistry->instance($notification->type)->url($notification->data ?? []);
 
-        return redirect()->to($url ?? route('admin.notification.index'));
+        abort_if(is_null($url), 404);
+
+        $this->notificationRepository->markRead($notification->id, $this->admin());
+
+        return redirect()->to($url);
     }
 
     /**

@@ -69,12 +69,38 @@ return [
             'orders' => 'Orders',
             'returns' => 'RMA Requests',
             'reviews' => 'Reviews',
+            'system' => 'System',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL is :url, but the store is served from :host. Links in emails will be wrong.',
+                'title' => 'APP_URL does not match the store address',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'The broadcasting server did not answer, so notifications will not update live.',
+                'title' => 'Real-time notifications are not reachable',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'New customer registered',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Error pages show internal details to visitors. Set APP_DEBUG=false.',
+                'title' => 'Debug mode is on in production',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Rates have not updated on schedule. Check the exchange rate service and its API key.',
+                'title' => 'Exchange rates are out of date',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count failed jobs are waiting. Review them with php artisan queue:failed.',
+                'title' => 'Queued jobs are failing',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed rows processed',
                 'message-skipped' => ':processed rows processed, :skipped skipped',
                 'title' => ':type import completed',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Some products have no price index. Run php artisan indexer:index.',
+                'title' => 'Product index is incomplete',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'The store cannot send email until SMTP or Brevo is set up.',
+                'title' => 'Email is not configured',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Refund issued for order #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Jobs on the :connection queue are waiting. Start it with php artisan queue:work.',
+                'title' => 'Queue worker is not running',
+            ],
+
             'return-requested' => [
                 'message' => 'Order #:order from :customer',
                 'title' => 'New return request #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer rated :product :rating out of 5',
                 'title' => 'New review awaiting approval',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Scheduled tasks are not running. Add the schedule:run cron entry to your server.',
+                'title' => 'Scheduler is not running',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'The search engine did not answer. Check its connection settings.',
+                'title' => 'Search engine is not reachable',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Uploads cannot reach the selected storage. Check its credentials.',
+                'title' => 'Remote storage is not available',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Resolved: :title',
             ],
         ],
     ],
@@ -4544,6 +4604,78 @@ return [
                         'yes' => 'Yes',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'What the store needs to run, and what needs your attention.',
+                    'open-settings' => 'Open settings',
+                    'summary-attention' => ':count of :total checks need attention.',
+                    'summary-healthy' => 'Everything the store needs is working.',
+                    'title' => 'System Health',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL must match the address the store is served on.',
+                            'title' => 'Store address',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Pushes new notifications to the admin panel without a reload.',
+                            'title' => 'Real-time notifications',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Must be off in production so error pages reveal nothing.',
+                            'title' => 'Debug mode',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Keeps currency rates current on a store with several currencies.',
+                            'title' => 'Exchange rates',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Background jobs that stopped with an error and wait for a retry.',
+                            'title' => 'Failed jobs',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Sends order, account and admin emails.',
+                            'title' => 'Email',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Holds the prices the storefront lists products by.',
+                            'title' => 'Product index',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Processes emails, imports and indexing in the background.',
+                            'title' => 'Queue worker',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Stores product images and other uploads.',
+                            'title' => 'File storage',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Runs timed tasks such as price rules, exchange rates and invoice reminders.',
+                            'title' => 'Scheduler',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Answers storefront search and category listings.',
+                            'title' => 'Search engine',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Needs attention',
+                        'healthy' => 'Working',
+                        'idle' => 'Not in use',
+                        'unconfirmed' => 'Not confirmed yet',
+                    ],
+                ],
             ],
 
             'add-file' => 'Add File',
@@ -4559,6 +4691,7 @@ return [
             'save-message' => 'Configuration saved successfully',
             'search' => 'Search',
             'select-country' => 'Select Country',
+            'select-options' => 'Select Options',
             'select-state' => 'Select State',
             'title' => 'Configuration',
 
@@ -5889,6 +6022,7 @@ return [
                 'logout' => 'Logout',
                 'my-account' => 'My Account',
                 'notifications' => 'Notifications',
+                'system-health' => 'System Health',
                 'visit-shop' => 'Visit Shop',
 
                 'mega-search' => [

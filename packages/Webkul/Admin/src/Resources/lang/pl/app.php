@@ -69,12 +69,38 @@ return [
             'orders' => 'Zamówienia',
             'returns' => 'Żądania RMA',
             'reviews' => 'Recenzje',
+            'system' => 'System',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL to :url, ale sklep jest serwowany z :host. Linki w wiadomościach e-mail będą nieprawidłowe.',
+                'title' => 'APP_URL nie zgadza się z adresem sklepu',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Serwer rozgłaszania nie odpowiedział, więc powiadomienia nie będą aktualizowane na żywo.',
+                'title' => 'Powiadomienia w czasie rzeczywistym są niedostępne',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Zarejestrowano nowego klienta',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Strony błędów pokazują odwiedzającym wewnętrzne szczegóły. Ustaw APP_DEBUG=false.',
+                'title' => 'Tryb debugowania jest włączony na produkcji',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Kursy nie zostały zaktualizowane zgodnie z harmonogramem. Sprawdź usługę kursów walut i jej klucz API.',
+                'title' => 'Kursy walut są nieaktualne',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count nieudanych zadań oczekuje. Przejrzyj je poleceniem php artisan queue:failed.',
+                'title' => 'Zadania w kolejce kończą się niepowodzeniem',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => 'Przetworzone wiersze: :processed',
                 'message-skipped' => 'Przetworzone wiersze: :processed, pominięte: :skipped',
                 'title' => 'Import :type zakończony',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Niektóre produkty nie mają indeksu cen. Uruchom php artisan indexer:index.',
+                'title' => 'Indeks produktów jest niekompletny',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'Sklep nie może wysyłać wiadomości e-mail, dopóki nie zostanie skonfigurowany SMTP lub Brevo.',
+                'title' => 'Poczta e-mail nie jest skonfigurowana',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Wystawiono zwrot dla zamówienia #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Zadania w kolejce :connection oczekują. Uruchom go poleceniem php artisan queue:work.',
+                'title' => 'Worker kolejki nie działa',
+            ],
+
             'return-requested' => [
                 'message' => 'Zamówienie #:order od :customer',
                 'title' => 'Nowa prośba o zwrot #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer ocenił(a) :product na :rating z 5',
                 'title' => 'Nowa opinia czeka na zatwierdzenie',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Zaplanowane zadania nie są uruchamiane. Dodaj wpis cron dla schedule:run na swoim serwerze.',
+                'title' => 'Harmonogram nie działa',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Wyszukiwarka nie odpowiedziała. Sprawdź ustawienia połączenia.',
+                'title' => 'Wyszukiwarka jest nieosiągalna',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Przesyłane pliki nie docierają do wybranego magazynu. Sprawdź dane uwierzytelniające.',
+                'title' => 'Zdalny magazyn plików jest niedostępny',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Rozwiązano: :title',
             ],
         ],
     ],
@@ -4544,6 +4604,78 @@ return [
                         'yes' => 'Tak',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Czego sklep potrzebuje do działania i co wymaga Twojej uwagi.',
+                    'open-settings' => 'Otwórz ustawienia',
+                    'summary-attention' => ':count z :total kontroli wymaga uwagi.',
+                    'summary-healthy' => 'Wszystko, czego sklep potrzebuje, działa.',
+                    'title' => 'Stan systemu',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL musi odpowiadać adresowi, pod którym serwowany jest sklep.',
+                            'title' => 'Adres sklepu',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Wysyła nowe powiadomienia do panelu administracyjnego bez przeładowania.',
+                            'title' => 'Powiadomienia w czasie rzeczywistym',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Musi być wyłączony na produkcji, aby strony błędów niczego nie ujawniały.',
+                            'title' => 'Tryb debugowania',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Utrzymuje aktualne kursy w sklepie z wieloma walutami.',
+                            'title' => 'Kursy walut',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Zadania w tle, które zatrzymały się z błędem i czekają na ponowną próbę.',
+                            'title' => 'Nieudane zadania',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Wysyła wiadomości dotyczące zamówień, kont i administracji.',
+                            'title' => 'E-mail',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Przechowuje ceny, według których sklep wyświetla produkty.',
+                            'title' => 'Indeks produktów',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Przetwarza wiadomości e-mail, importy i indeksowanie w tle.',
+                            'title' => 'Worker kolejki',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Przechowuje zdjęcia produktów i inne przesłane pliki.',
+                            'title' => 'Magazyn plików',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Uruchamia zaplanowane zadania, takie jak reguły cenowe, kursy walut i przypomnienia o fakturach.',
+                            'title' => 'Harmonogram',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Obsługuje wyszukiwanie w sklepie i listy kategorii.',
+                            'title' => 'Wyszukiwarka',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Wymaga uwagi',
+                        'healthy' => 'Działa',
+                        'idle' => 'Nieużywane',
+                        'unconfirmed' => 'Jeszcze niepotwierdzone',
+                    ],
+                ],
             ],
 
             'add-file' => 'Dodaj plik',
@@ -4559,6 +4691,7 @@ return [
             'save-message' => 'Konfiguracja zapisana pomyślnie',
             'search' => 'Szukaj',
             'select-country' => 'Wybierz kraj',
+            'select-options' => 'Wybierz opcje',
             'select-state' => 'Wybierz stan',
             'title' => 'Konfiguracja',
 
@@ -5889,6 +6022,7 @@ return [
                 'logout' => 'Wyloguj',
                 'my-account' => 'Moje Konto',
                 'notifications' => 'Powiadomienia',
+                'system-health' => 'Stan systemu',
                 'visit-shop' => 'Odwiedź Sklep',
 
                 'mega-search' => [

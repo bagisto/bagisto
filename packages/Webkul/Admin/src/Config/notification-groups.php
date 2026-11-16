@@ -45,4 +45,10 @@ return [
         'icon' => 'icon-folder',
         'sort' => 6,
     ],
+
+    'system' => [
+        'name' => 'admin::app.notifications.groups.system',
+        'icon' => 'icon-configuration',
+        'sort' => 7,
+    ],
 ];

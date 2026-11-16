@@ -5,6 +5,7 @@ namespace Webkul\Admin\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Webkul\Admin\Listeners\Admin;
 use Webkul\Admin\Listeners\Customer;
+use Webkul\Admin\Listeners\ExchangeRate;
 use Webkul\Admin\Listeners\GDPR;
 use Webkul\Admin\Listeners\Invoice;
 use Webkul\Admin\Listeners\Notification;
@@ -58,6 +59,10 @@ class EventServiceProvider extends ServiceProvider
 
         'notification.create.after' => [
             [Notification::class, 'afterCreated'],
+        ],
+
+        'core.exchange_rate.update_rates.after' => [
+            [ExchangeRate::class, 'afterRatesUpdated'],
         ],
     ];
 }

@@ -69,12 +69,38 @@ return [
             'orders' => 'Pedidos',
             'returns' => 'Solicitudes de RMA',
             'reviews' => 'Reseñas',
+            'system' => 'Sistema',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL es :url, pero la tienda se sirve desde :host. Los enlaces de los correos serán incorrectos.',
+                'title' => 'APP_URL no coincide con la dirección de la tienda',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'El servidor de difusión no respondió, por lo que las notificaciones no se actualizarán en vivo.',
+                'title' => 'Las notificaciones en tiempo real no están disponibles',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Nuevo cliente registrado',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Las páginas de error muestran detalles internos a los visitantes. Establezca APP_DEBUG=false.',
+                'title' => 'El modo de depuración está activo en producción',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Los tipos no se han actualizado según lo programado. Revise el servicio de tipos de cambio y su clave API.',
+                'title' => 'Los tipos de cambio están desactualizados',
+            ],
+
+            'failed-jobs' => [
+                'message' => 'Hay :count trabajos fallidos en espera. Revíselos con php artisan queue:failed.',
+                'title' => 'Los trabajos en cola están fallando',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed filas procesadas',
                 'message-skipped' => ':processed filas procesadas, :skipped omitidas',
                 'title' => 'Importación de :type completada',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Algunos productos no tienen índice de precios. Ejecute php artisan indexer:index.',
+                'title' => 'El índice de productos está incompleto',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'La tienda no puede enviar correos hasta que se configure SMTP o Brevo.',
+                'title' => 'El correo electrónico no está configurado',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Reembolso emitido para el pedido #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Los trabajos de la cola :connection están en espera. Inícielo con php artisan queue:work.',
+                'title' => 'El worker de la cola no se está ejecutando',
+            ],
+
             'return-requested' => [
                 'message' => 'Pedido #:order de :customer',
                 'title' => 'Nueva solicitud de devolución #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer valoró :product con :rating de 5',
                 'title' => 'Nueva reseña pendiente de aprobación',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Las tareas programadas no se ejecutan. Añada la entrada cron de schedule:run a su servidor.',
+                'title' => 'El programador no se está ejecutando',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'El motor de búsqueda no respondió. Revise la configuración de conexión.',
+                'title' => 'El motor de búsqueda no está accesible',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Las subidas no pueden llegar al almacenamiento seleccionado. Revise sus credenciales.',
+                'title' => 'El almacenamiento remoto no está disponible',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Resuelto: :title',
             ],
         ],
     ],
@@ -4544,6 +4604,78 @@ return [
                         'yes' => 'Sí',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Lo que la tienda necesita para funcionar y lo que requiere su atención.',
+                    'open-settings' => 'Abrir configuración',
+                    'summary-attention' => ':count de :total comprobaciones requieren atención.',
+                    'summary-healthy' => 'Todo lo que la tienda necesita funciona.',
+                    'title' => 'Estado del sistema',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL debe coincidir con la dirección desde la que se sirve la tienda.',
+                            'title' => 'Dirección de la tienda',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Envía las notificaciones nuevas al panel de administración sin recargar.',
+                            'title' => 'Notificaciones en tiempo real',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Debe estar desactivado en producción para que las páginas de error no revelen nada.',
+                            'title' => 'Modo de depuración',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Mantiene actualizados los tipos en una tienda con varias monedas.',
+                            'title' => 'Tipos de cambio',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Trabajos en segundo plano que se detuvieron con un error y esperan un reintento.',
+                            'title' => 'Trabajos fallidos',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Envía los correos de pedidos, cuentas y administración.',
+                            'title' => 'Correo electrónico',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Contiene los precios con los que la tienda lista los productos.',
+                            'title' => 'Índice de productos',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Procesa correos, importaciones e indexación en segundo plano.',
+                            'title' => 'Worker de la cola',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Guarda las imágenes de producto y otras subidas.',
+                            'title' => 'Almacenamiento de archivos',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Ejecuta tareas programadas como reglas de precios, tipos de cambio y recordatorios de facturas.',
+                            'title' => 'Programador',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Responde a la búsqueda de la tienda y a los listados de categorías.',
+                            'title' => 'Motor de búsqueda',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Requiere atención',
+                        'healthy' => 'Funciona',
+                        'idle' => 'No se usa',
+                        'unconfirmed' => 'Aún sin confirmar',
+                    ],
+                ],
             ],
 
             'add-file' => 'Agregar Archivo',
@@ -4559,6 +4691,7 @@ return [
             'save-message' => 'Configuración guardada correctamente',
             'search' => 'Buscar',
             'select-country' => 'Selecciona País',
+            'select-options' => 'Selecciona Opciones',
             'select-state' => 'Selecciona Provincia',
             'title' => 'Configuración',
 
@@ -5889,6 +6022,7 @@ return [
                 'logout' => 'Cerrar Sesión',
                 'my-account' => 'Mi Cuenta',
                 'notifications' => 'Notificaciones',
+                'system-health' => 'Estado del sistema',
                 'visit-shop' => 'Visitar Tienda',
 
                 'mega-search' => [

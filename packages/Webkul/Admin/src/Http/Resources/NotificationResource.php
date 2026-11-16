@@ -23,7 +23,7 @@ class NotificationResource extends JsonResource
             'message' => $type->message($data),
             'icon' => $type->icon($data),
             'tone' => $type->tone($data),
-            'url' => route('admin.notification.open', $this->id),
+            'url' => $type->url($data) ? route('admin.notification.open', $this->id) : null,
             'read' => (bool) $this->read,
             'created_at' => $this->created_at->toIso8601String(),
             'time_ago' => $this->created_at->diffForHumans(),

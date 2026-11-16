@@ -9,8 +9,9 @@
             class="group relative flex items-start gap-3 px-4 py-3 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
             :class="{ 'bg-blue-50/40 dark:bg-gray-950/40': ! notification.read }"
         >
-            <a
+            <component
                 class="flex min-w-0 flex-1 items-start gap-3"
+                :is="notification.url ? 'a' : 'div'"
                 :href="notification.url"
             >
                 <!-- Icon -->
@@ -44,7 +45,7 @@
                     >
                     </span>
                 </span>
-            </a>
+            </component>
 
             <!-- Read Toggle -->
             <button
