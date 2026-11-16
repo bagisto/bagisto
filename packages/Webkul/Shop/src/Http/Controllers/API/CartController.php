@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartAddress;
-use Webkul\Core\Rules\AllowedCountry;
+use Webkul\Customer\Rules\AllowedCountry;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
@@ -18,8 +18,6 @@ class CartController extends APIController
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
@@ -313,10 +311,8 @@ class CartController extends APIController
 
     /**
      * Cross-sell product listings.
-     *
-     * @return JsonResource::collection
      */
-    public function crossSellProducts()
+    public function crossSellProducts(): JsonResource
     {
         $cart = Cart::getCart();
 

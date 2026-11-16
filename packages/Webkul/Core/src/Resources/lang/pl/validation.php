@@ -2,7 +2,6 @@
 
 return [
     'address' => 'Pole :attribute może zawierać tylko litery, cyfry, spacje, przecinki i myślniki.',
-    'allowed-country' => 'Ten sklep nie przyjmuje adresów w wybranym kraju.',
     'alpha-numeric-space' => 'Pole :attribute może zawierać tylko litery, cyfry i spacje.',
     'code' => 'Pole :attribute musi być ważne.',
     'comma-separated-integer' => 'Pole :attribute musi być numeryczne i może zawierać przecinki.',

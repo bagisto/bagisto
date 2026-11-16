@@ -161,7 +161,7 @@
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <!-- Country -->
                 <x-shop::form.control-group class="mb-4!" ::for="controlName + '_country'">
-                    <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} mt-0!">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }} mt-0!">
                         @lang('shop::app.checkout.onepage.address.country')
                     </x-shop::form.control-group.label>
 
@@ -170,7 +170,7 @@
                         ::name="controlName + '.country'"
                         ::value="address.country"
                         v-model="selectedCountry"
-                        rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                        rules="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.country')"
                         :placeholder="trans('shop::app.checkout.onepage.address.country')"
                         ::id="controlName + '_country'"
@@ -195,7 +195,7 @@
 
                 <!-- State -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} mt-0!" ::for="controlName + '_state'">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }} mt-0!" ::for="controlName + '_state'">
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
@@ -204,7 +204,7 @@
                             <x-shop::form.control-group.control
                                 type="select"
                                 ::name="controlName + '.state'"
-                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                                 ::value="address.state"
                                 v-model="selectedState"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
@@ -230,7 +230,7 @@
                                 ::name="controlName + '.state'"
                                 ::value="address.state"
                                 v-model="selectedState"
-                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
                                 ::id="controlName + '_state'"
@@ -268,7 +268,7 @@
 
                 <!-- Postcode -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} mt-0!" ::for="controlName + '_postcode'">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }} mt-0!" ::for="controlName + '_postcode'">
                         @lang('shop::app.checkout.onepage.address.postcode')
                     </x-shop::form.control-group.label>
 
@@ -276,7 +276,7 @@
                         type="text"
                         ::name="controlName + '.postcode'"
                         ::value="address.postcode"
-                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
+                        rules="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}|postcode"
                         :label="trans('shop::app.checkout.onepage.address.postcode')"
                         :placeholder="trans('shop::app.checkout.onepage.address.postcode')"
                         ::id="controlName + '_postcode'"
@@ -366,7 +366,7 @@
 
             methods: {
                 getCountries() {
-                    this.$axios.get("{{ route('shop.api.core.countries') }}")
+                    this.$axios.get("{{ route('shop.api.customers.addresses.allowed_countries') }}")
                         .then(response => {
                             this.countries = response.data.data;
                         })
@@ -374,7 +374,7 @@
                 },
 
                 getStates() {
-                    this.$axios.get("{{ route('shop.api.core.states') }}")
+                    this.$axios.get("{{ route('shop.api.customers.addresses.allowed_states') }}")
                         .then(response => {
                             this.states = response.data.data;
                         })

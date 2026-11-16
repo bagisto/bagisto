@@ -7,14 +7,12 @@ use Illuminate\Http\JsonResponse;
 class CoreController extends APIController
 {
     /**
-     * Get countries.
-     *
-     * @return JsonResponse
+     * Get every country.
      */
-    public function getCountries()
+    public function getCountries(): JsonResponse
     {
         return response()->json([
-            'data' => core()->allowedCountries()->map(fn ($country) => [
+            'data' => core()->countries()->map(fn ($country) => [
                 'id' => $country->id,
                 'code' => $country->code,
                 'name' => $country->name,
@@ -23,14 +21,12 @@ class CoreController extends APIController
     }
 
     /**
-     * Get states.
-     *
-     * @return JsonResponse
+     * Get the states of every country.
      */
-    public function getStates()
+    public function getStates(): JsonResponse
     {
         return response()->json([
-            'data' => core()->allowedGroupedStatesByCountries(),
+            'data' => core()->groupedStatesByCountries(),
         ]);
     }
 }

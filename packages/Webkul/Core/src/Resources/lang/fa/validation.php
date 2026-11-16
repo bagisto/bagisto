@@ -2,7 +2,6 @@
 
 return [
     'address' => 'attribute : فقط می تواند آلفا، عدد، فاصله، کاما و خط تیره را بپذیرد.',
-    'allowed-country' => 'این فروشگاه نشانی‌های کشور انتخاب‌شده را نمی‌پذیرد.',
     'alpha-numeric-space' => 'attribute : فقط می تواند آلفا، عدد و فاصله را بپذیرد.',
     'code' => 'attribute : باید معتبر باشد.',
     'comma-separated-integer' => 'فیلد :attribute باید عددی باشد و ممکن است حاوی کاما باشد.',

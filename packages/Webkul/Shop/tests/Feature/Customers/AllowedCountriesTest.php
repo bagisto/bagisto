@@ -3,9 +3,11 @@
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\CountryRepository;
-use Webkul\Core\Rules\AllowedCountry;
+use Webkul\Customer\AddressSettings;
 use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Customer\Rules\AllowedCountry;
 
+use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -15,7 +17,7 @@ use function Pest\Laravel\putJson;
 // ============================================================================
 
 it('should offer every country while the storefront is not limited to some', function () {
-    $codes = collect(getJson(route('shop.api.core.countries'))->assertOk()->json('data'))->pluck('code');
+    $codes = collect(getJson(route('shop.api.customers.addresses.allowed_countries'))->assertOk()->json('data'))->pluck('code');
 
     expect($codes)->toContain('IN', 'US', 'GB');
 });
@@ -23,7 +25,7 @@ it('should offer every country while the storefront is not limited to some', fun
 it('should offer only the allowed countries', function () {
     $this->setConfig('customer.address.countries.allowed', 'IN,US');
 
-    $codes = collect(getJson(route('shop.api.core.countries'))->assertOk()->json('data'))->pluck('code');
+    $codes = collect(getJson(route('shop.api.customers.addresses.allowed_countries'))->assertOk()->json('data'))->pluck('code');
 
     expect($codes->all())->toEqualCanonicalizing(['IN', 'US']);
 });
@@ -31,9 +33,20 @@ it('should offer only the allowed countries', function () {
 it('should offer the states of the allowed countries only', function () {
     $this->setConfig('customer.address.countries.allowed', 'IN');
 
-    $states = getJson(route('shop.api.core.states'))->assertOk()->json('data');
+    $states = getJson(route('shop.api.customers.addresses.allowed_states'))->assertOk()->json('data');
 
     expect(array_keys($states))->toBe(['IN']);
+});
+
+it('should keep listing every country and its states on the core endpoints while the storefront is limited', function () {
+    $this->setConfig('customer.address.countries.allowed', 'IN');
+
+    $codes = collect(getJson(route('shop.api.core.countries'))->assertOk()->json('data'))->pluck('code');
+
+    $states = getJson(route('shop.api.core.states'))->assertOk()->json('data');
+
+    expect($codes)->toContain('IN', 'US', 'GB')
+        ->and($states)->toHaveKeys(['IN', 'US']);
 });
 
 it('should not limit the storefront to the countries allowed on another channel', function () {
@@ -45,13 +58,13 @@ it('should not limit the storefront to the countries allowed on another channel'
         'channel_code' => Channel::factory()->create()->code,
     ]);
 
-    expect(core()->allowedCountryCodes())->toBe([]);
+    expect(app(AddressSettings::class)->allowedCountryCodes())->toBe([]);
 });
 
 it('should ignore the blanks and spaces of a stored list', function () {
     $this->setConfig('customer.address.countries.allowed', ',IN, US');
 
-    expect(core()->allowedCountryCodes())->toBe(['IN', 'US']);
+    expect(app(AddressSettings::class)->allowedCountryCodes())->toBe(['IN', 'US']);
 });
 
 it('should list the countries as options of the configuration field', function () {
@@ -64,6 +77,28 @@ it('should list the countries as options of the configuration field', function (
 // Customer Address
 // ============================================================================
 
+it('should offer only the allowed countries on the address forms', function () {
+    $customer = $this->loginAsCustomer();
+
+    $address = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+        'country' => 'IN',
+        'state' => 'UP',
+    ]);
+
+    $this->setConfig('customer.address.countries.allowed', 'IN');
+
+    get(route('shop.customers.account.addresses.create'))
+        ->assertOk()
+        ->assertSee('value="IN"', false)
+        ->assertDontSee('value="US"', false);
+
+    get(route('shop.customers.account.addresses.edit', $address->id))
+        ->assertOk()
+        ->assertSee('value="IN"', false)
+        ->assertDontSee('value="US"', false);
+});
+
 it('should fail the validation when the country is not allowed when storing the customer address', function () {
     $this->setConfig('customer.address.countries.allowed', 'IN');
 
@@ -74,7 +109,7 @@ it('should fail the validation when the country is not allowed when storing the 
         'state' => 'CA',
     ]))
         ->assertUnprocessable()
-        ->assertJsonValidationErrors(['country' => trans('core::validation.allowed-country')]);
+        ->assertJsonValidationErrors(['country' => trans('customer::app.validations.allowed-country.not-allowed')]);
 });
 
 it('should refuse to keep a saved address in a country that is no longer allowed', function () {
@@ -93,7 +128,7 @@ it('should refuse to keep a saved address in a country that is no longer allowed
         'state' => 'CA',
     ]))
         ->assertUnprocessable()
-        ->assertJsonValidationErrors(['country' => trans('core::validation.allowed-country')]);
+        ->assertJsonValidationErrors(['country' => trans('customer::app.validations.allowed-country.not-allowed')]);
 });
 
 it('should move a saved address to an allowed country', function () {
@@ -171,7 +206,7 @@ it('should refuse a checkout address in a country that is not allowed', function
         'billing' => array_merge($this->storefrontAddress(), ['use_for_shipping' => true]),
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrors(['billing.country' => trans('core::validation.allowed-country')]);
+        ->assertJsonValidationErrors(['billing.country' => trans('customer::app.validations.allowed-country.not-allowed')]);
 });
 
 it('should accept a checkout address in an allowed country', function () {
@@ -196,5 +231,21 @@ it('should refuse a shipping estimate for a country that is not allowed', functi
         'postcode' => '90001',
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrors(['country' => trans('core::validation.allowed-country')]);
+        ->assertJsonValidationErrors(['country' => trans('customer::app.validations.allowed-country.not-allowed')]);
+});
+
+// ============================================================================
+// Deprecated Core Helpers
+// ============================================================================
+
+it('should keep answering the address requirements through the deprecated core helpers', function () {
+    $this->setConfig([
+        'customer.address.requirements.country' => 1,
+        'customer.address.requirements.state' => 0,
+        'customer.address.requirements.postcode' => 1,
+    ]);
+
+    expect(core()->isCountryRequired())->toBeTrue()
+        ->and(core()->isStateRequired())->toBeFalse()
+        ->and(core()->isPostCodeRequired())->toBeTrue();
 });

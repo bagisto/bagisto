@@ -16,6 +16,7 @@ use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\LocaleRepository;
+use Webkul\Customer\AddressSettings;
 use Webkul\Customer\Contracts\CustomerGroup;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
@@ -707,45 +708,6 @@ class Core
     }
 
     /**
-     * Retrieve the country codes the storefront is limited to, empty when every country is offered.
-     */
-    public function allowedCountryCodes(): array
-    {
-        return array_values(array_filter(
-            array_map('trim', explode(',', (string) $this->getConfigData('customer.address.countries.allowed'))),
-            fn (string $code) => $code !== ''
-        ));
-    }
-
-    /**
-     * Retrieve the countries a customer can pick on the storefront.
-     */
-    public function allowedCountries(): Collection
-    {
-        $countries = $this->countries();
-
-        $allowed = $this->allowedCountryCodes();
-
-        return $allowed
-            ? $countries->whereIn('code', $allowed)->values()
-            : $countries;
-    }
-
-    /**
-     * Retrieve the states grouped by the countries a customer can pick on the storefront.
-     */
-    public function allowedGroupedStatesByCountries(): array
-    {
-        $allowed = $this->allowedCountryCodes();
-
-        $states = $this->groupedStatesByCountries();
-
-        return $allowed
-            ? array_intersect_key($states, array_flip($allowed))
-            : $states;
-    }
-
-    /**
      * Returns country name by code.
      *
      * @param  string  $code
@@ -806,31 +768,31 @@ class Core
     /**
      * Is country required.
      *
-     * @return bool
+     * @deprecated Use Webkul\Customer\Facades\AddressSettings::isCountryRequired() instead.
      */
-    public function isCountryRequired()
+    public function isCountryRequired(): bool
     {
-        return (bool) $this->getConfigData('customer.address.requirements.country');
+        return app(AddressSettings::class)->isCountryRequired();
     }
 
     /**
      * Is state required.
      *
-     * @return bool
+     * @deprecated Use Webkul\Customer\Facades\AddressSettings::isStateRequired() instead.
      */
-    public function isStateRequired()
+    public function isStateRequired(): bool
     {
-        return (bool) $this->getConfigData('customer.address.requirements.state');
+        return app(AddressSettings::class)->isStateRequired();
     }
 
     /**
      * Is postcode required.
      *
-     * @return bool
+     * @deprecated Use Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() instead.
      */
-    public function isPostCodeRequired()
+    public function isPostCodeRequired(): bool
     {
-        return (bool) $this->getConfigData('customer.address.requirements.postcode');
+        return app(AddressSettings::class)->isPostCodeRequired();
     }
 
     /**

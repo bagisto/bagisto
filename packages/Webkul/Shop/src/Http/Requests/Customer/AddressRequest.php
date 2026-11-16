@@ -4,10 +4,11 @@ namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\AddressLines;
-use Webkul\Core\Rules\AllowedCountry;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
 use Webkul\Core\Rules\StateBelongsToCountry;
+use Webkul\Customer\Facades\AddressSettings;
+use Webkul\Customer\Rules\AllowedCountry;
 use Webkul\Customer\Rules\VatIdRule;
 
 class AddressRequest extends FormRequest
@@ -30,14 +31,14 @@ class AddressRequest extends FormRequest
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
             'address' => ['required', 'array', 'min:1', new AddressLines],
-            'country' => [core()->isCountryRequired() ? 'required' : 'nullable', new AllowedCountry],
+            'country' => [AddressSettings::isCountryRequired() ? 'required' : 'nullable', new AllowedCountry],
             'state' => [
-                core()->isStateRequired() ? 'required' : 'nullable',
+                AddressSettings::isStateRequired() ? 'required' : 'nullable',
                 'max:255',
                 new StateBelongsToCountry($this->input('country')),
             ],
             'city' => ['required', 'max:255', 'string'],
-            'postcode' => core()->isPostCodeRequired() ? ['required', 'max:255', new PostCode] : ['max:255', new PostCode],
+            'postcode' => AddressSettings::isPostCodeRequired() ? ['required', 'max:255', new PostCode] : ['max:255', new PostCode],
             'phone' => ['required', 'max:255', new PhoneNumber],
             'vat_id' => ['max:255', (new VatIdRule)->setCountry($this->input('country'))],
             'email' => ['required', 'max:255'],
@@ -45,11 +46,9 @@ class AddressRequest extends FormRequest
     }
 
     /**
-     * Attributes.
-     *
-     * @return array
+     * Get the names the validation messages use for the fields.
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'address.*' => 'address',

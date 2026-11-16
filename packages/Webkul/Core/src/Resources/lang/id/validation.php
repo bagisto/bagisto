@@ -2,7 +2,6 @@
 
 return [
     'address' => ':attribute hanya boleh berisi huruf, angka, spasi, koma, dan tanda hubung.',
-    'allowed-country' => 'Toko ini tidak menerima alamat di negara yang dipilih.',
     'alpha-numeric-space' => ':attribute hanya boleh berisi huruf, angka, dan spasi.',
     'code' => ':attribute harus berupa kode yang valid.',
     'comma-separated-integer' => 'Kolom :attribute harus berupa angka dan boleh dipisahkan dengan koma.',

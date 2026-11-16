@@ -2,7 +2,6 @@
 
 return [
     'address' => 'The :attribute can only accept alpha, numeric, spaces, comma and dashes.',
-    'allowed-country' => 'Questo negozio non accetta indirizzi nel paese selezionato.',
     'alpha-numeric-space' => 'The :attribute can only accept alpha, numeric and spaces.',
     'code' => ':attribute deve essere valido.',
     'comma-separated-integer' => 'The :attribute field must be numeric and may contain comma.',
