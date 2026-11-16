@@ -74,6 +74,46 @@ class SystemHealth
     }
 
     /**
+     * How many checks of a report stand in each state.
+     *
+     * @param  list<array{state: string}>  $report
+     * @return array{failing: int, unconfirmed: int, healthy: int, idle: int}
+     */
+    public function tally(array $report): array
+    {
+        return array_merge(
+            ['failing' => 0, 'unconfirmed' => 0, 'healthy' => 0, 'idle' => 0],
+            collect($report)->countBy('state')->all()
+        );
+    }
+
+    /**
+     * The percentage of the checks in use that are working; full when the store uses none.
+     *
+     * @param  array{failing: int, unconfirmed: int, healthy: int, idle: int}  $tally
+     */
+    public function score(array $tally): int
+    {
+        $inUse = $tally['failing'] + $tally['unconfirmed'] + $tally['healthy'];
+
+        return $inUse ? (int) floor($tally['healthy'] / $inUse * 100) : 100;
+    }
+
+    /**
+     * The worst state any check stands in, ignoring those not in use.
+     *
+     * @param  array{failing: int, unconfirmed: int, healthy: int, idle: int}  $tally
+     */
+    public function overall(array $tally): string
+    {
+        return match (true) {
+            $tally['failing'] > 0 => 'failing',
+            $tally['unconfirmed'] > 0 => 'unconfirmed',
+            default => 'healthy',
+        };
+    }
+
+    /**
      * Run every check once, hand each standing to the callback, and remember how many need attention.
      * A check that throws is reported and skipped, so one cannot hide the others.
      *
@@ -97,10 +137,9 @@ class SystemHealth
             }
         }
 
-        Cache::forever(
-            self::PROBLEMS_KEY,
-            collect($report)->whereIn('state', ['failing', 'unconfirmed'])->count()
-        );
+        $tally = $this->tally($report);
+
+        Cache::forever(self::PROBLEMS_KEY, $tally['failing'] + $tally['unconfirmed']);
 
         return $report;
     }

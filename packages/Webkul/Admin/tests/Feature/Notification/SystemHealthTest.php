@@ -577,6 +577,23 @@ it('should count the checks needing attention for the account menu, and show non
     get(route('admin.dashboard.index'))->assertOk()->assertSee($counter, false);
 });
 
+it('should score the share of checks in use that work, and name the worst state among them', function () {
+    $systemHealth = app(SystemHealth::class);
+
+    $tally = $systemHealth->tally([
+        ['state' => 'healthy'],
+        ['state' => 'healthy'],
+        ['state' => 'unconfirmed'],
+        ['state' => 'idle'],
+    ]);
+
+    expect($tally)->toBe(['failing' => 0, 'unconfirmed' => 1, 'healthy' => 2, 'idle' => 1])
+        ->and($systemHealth->score($tally))->toBe(66)
+        ->and($systemHealth->overall($tally))->toBe('unconfirmed')
+        ->and($systemHealth->score($systemHealth->tally([['state' => 'idle']])))->toBe(100)
+        ->and($systemHealth->overall($systemHealth->tally([['state' => 'idle']])))->toBe('healthy');
+});
+
 it('should show the health page with every check and its state', function () {
     $this->loginAsAdmin();
 
