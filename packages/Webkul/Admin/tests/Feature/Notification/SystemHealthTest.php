@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Queue\Events\JobPopping;
 use Illuminate\Queue\Events\Looping;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -23,6 +24,11 @@ use Webkul\Product\Services\Search\SearchEngineAvailability;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\travel;
+
+dataset('worker polls', [
+    'a queue:work loop' => [fn () => new Looping('database', 'default')],
+    'a queue:listen fetch from an empty queue' => [fn () => new JobPopping('database', 'default')],
+]);
 
 /**
  * The notifications raised for a system problem, oldest first.
@@ -125,17 +131,17 @@ it('should resolve the problem once the worker beats again, and report it anew w
         ->and($problems->last()->data['resolved_at'])->toBeNull();
 });
 
-it('should beat when a worker loops', function () {
+it('should beat whenever a worker polls the queue', function (object $event) {
     app(Heartbeat::class)->silence(QueueWorkerCheck::HEARTBEAT);
 
     travel(2)->minutes();
 
     expect(app(Heartbeat::class)->silence(QueueWorkerCheck::HEARTBEAT))->toBe(120);
 
-    app('events')->dispatch(new Looping('database', 'default'));
+    app('events')->dispatch($event);
 
     expect(app(Heartbeat::class)->silence(QueueWorkerCheck::HEARTBEAT))->toBe(0);
-});
+})->with('worker polls');
 
 // ============================================================================
 // Failed Jobs
