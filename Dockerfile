@@ -9,9 +9,14 @@ ARG PHP_VERSION=8.4
 #   gd                        <- trình cài đặt Bagisto + composer.lock
 #   zip, bcmath               <- composer.lock
 FROM php:${PHP_VERSION}-fpm-bookworm AS base
-# TODO: ghim digest cho cả 3 image (php, mlocati, composer), để Renovate cập nhật
+
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions calendar intl pdo_mysql gd zip bcmath
+
+RUN install-php-extensions calendar intl pdo_mysql gd zip bcmath \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /var/www/html
 
 
