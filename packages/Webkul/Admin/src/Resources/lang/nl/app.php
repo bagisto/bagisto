@@ -5526,6 +5526,13 @@ return [
                         'title' => 'Informatie',
                         'title-info' => 'Hoeveel adresregels het adresformulier toont.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Toegestane landen',
+                        'allowed-info' => 'Laat leeg om alle landen aan te bieden.',
+                        'title' => 'Landen',
+                        'title-info' => 'Welke landen klanten in de winkel kunnen kiezen.',
+                    ],
                 ],
 
                 'captcha' => [
