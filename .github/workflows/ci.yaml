@@ -224,72 +224,102 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   publish:
-    # Chỉ khi push lên nhánh mặc định và mọi kiểm tra đã xanh
-    needs: [build, scan-source, lint, test]
+    # Chỉ publish khi push lên default branch và mọi kiểm tra đã thành công
+    needs: [build, scan-source, lint, test, sonar]
     if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
-      id-token: write   # cosign ký keyless bằng danh tính của workflow
+      id-token: write
+
     strategy:
       fail-fast: false
       matrix:
         name: [app, web]
+
     steps:
-      - uses: actions/download-artifact@v4
+      # 1. Tải Docker image artifact từ job build
+      - name: Download image artifact
+        uses: actions/download-artifact@v4
         with:
           name: image-${{ matrix.name }}
           path: /tmp
 
-      - name: Nạp image đã build
-        run: gunzip -c "/tmp/${{ matrix.name }}.tar.gz" | docker load
+      # 2. Nạp image vào Docker daemon
+      - name: Load Docker image
+        run: |
+          gunzip -c "/tmp/${{ matrix.name }}.tar.gz" | docker load
 
-      - uses: docker/login-action@v3
+      # 3. Đăng nhập GHCR
+      - name: Login GHCR
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # GHCR bắt buộc tên viết thường; chủ sở hữu của bạn có chữ hoa nên phải hạ xuống.
-      - name: Gắn tag theo commit và push
+      # 4. Push image lên GHCR và lấy digest
+      - name: Push image to GHCR
+        id: push
         run: |
           OWNER="${GITHUB_REPOSITORY_OWNER,,}"
           REPO="ghcr.io/${OWNER}/bagisto-${{ matrix.name }}"
           TAG="sha-${GITHUB_SHA::7}"
+
           docker tag "bagisto-${{ matrix.name }}:ci" "${REPO}:${TAG}"
           docker push "${REPO}:${TAG}"
-          # Ký và gắn SBOM theo DIGEST (định danh bất biến), không theo tag
-          DIGEST_REF="$(docker inspect --format='{{index .RepoDigests 0}}' "${REPO}:${TAG}")"
-          echo "Đã đẩy ${DIGEST_REF}"
-          echo "DIGEST_REF=${DIGEST_REF}" >> "$GITHUB_ENV"
 
-      # SBOM = danh sách mọi thành phần trong image (định dạng CycloneDX)
-      - name: Tạo SBOM
+          DIGEST_REF="$(docker inspect --format='{{index .RepoDigests 0}}' "${REPO}:${TAG}")"
+
+          echo "Image pushed: ${DIGEST_REF}"
+          echo "digest_ref=${DIGEST_REF}" >> "$GITHUB_OUTPUT"
+
+      # 5. Tạo SBOM từ image
+      - name: Generate SBOM
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: bagisto-${{ matrix.name }}:ci
           format: cyclonedx
           output: sbom-${{ matrix.name }}.cdx.json
+          exit-code: "0"
 
-      - uses: sigstore/cosign-installer@v3
+      # 6. Cài đặt Cosign
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
 
-      # Keyless: không có khoá riêng để giữ. Cosign đổi token OIDC của workflow lấy
-      # chứng chỉ ngắn hạn từ Sigstore rồi ký digest của image.
-      - name: Ký image
-        run: cosign sign --yes "${DIGEST_REF}"
+      # 7. Ký image theo digest bằng keyless signing
+      - name: Sign image
+        env:
+          DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
+        run: |
+          cosign sign --yes "${DIGEST_REF}"
 
-      - name: Gắn SBOM vào image (attestation đã ký)
-        run: cosign attest --yes --type cyclonedx --predicate "sbom-${{ matrix.name }}.cdx.json" "${DIGEST_REF}"
+      # 8. Gắn SBOM vào image dưới dạng attestation đã ký
+      - name: Attest SBOM
+        env:
+          DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
+        run: |
+          cosign attest \
+            --yes \
+            --type cyclonedx \
+            --predicate "sbom-${{ matrix.name }}.cdx.json" \
+            "${DIGEST_REF}"
 
-      # Tự kiểm chứng ngay: chữ ký phải đến từ chính workflow này
-      - name: Kiểm tra chữ ký
+      # 9. Xác minh chữ ký image
+      - name: Verify image signature
+        env:
+          DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
         run: |
           cosign verify "${DIGEST_REF}" \
-            --certificate-identity "https://github.com/${{ github.repository }}/.github/workflows/ci.yml@${{ github.ref }}" \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com
+            --certificate-identity "https://github.com/${{ github.repository }}/.github/workflows/ci.yaml@${{ github.ref }}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
 
-      - uses: actions/upload-artifact@v4
+      # 10. Upload SBOM làm artifact
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
         with:
           name: sbom-${{ matrix.name }}
           path: sbom-${{ matrix.name }}.cdx.json
