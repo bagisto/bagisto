@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Afegir a la cistella',
                             'available-qty' => ':qty disponible',
-                            'empty-info' => 'No hi ha productes disponibles per al terme de cerca.',
+                            'empty-info' => 'No hi ha productes disponibles al canal :channel per al terme de cerca.',
                             'empty-title' => 'No s\'han trobat productes',
                             'product-image' => 'Imatge del producte',
                             'qty' => 'Quantitat',
+                            'search-info' => 'Cerqueu els productes disponibles al canal :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Cercar productes',
                         ],

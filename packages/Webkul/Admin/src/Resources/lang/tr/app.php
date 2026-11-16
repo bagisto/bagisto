@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Sepete Ekle',
                             'available-qty' => ':qty Mevcut',
-                            'empty-info' => 'Arama terimi için ürün bulunamadı.',
+                            'empty-info' => ':channel kanalında arama terimi için ürün bulunamadı.',
                             'empty-title' => 'Ürün bulunamadı',
                             'product-image' => 'Ürün Görseli',
                             'qty' => 'Adet',
+                            'search-info' => ':channel kanalındaki ürünleri arayın.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Ürünleri Ara',
                         ],

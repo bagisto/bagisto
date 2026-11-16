@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'أضف إلى السلة',
                             'available-qty' => ':qty متاح',
-                            'empty-info' => 'لا توجد منتجات متاحة لمصطلح البحث.',
+                            'empty-info' => 'لا توجد منتجات متاحة في قناة :channel لمصطلح البحث.',
                             'empty-title' => 'لم يتم العثور على منتجات',
                             'product-image' => 'صورة المنتج',
                             'qty' => 'الكمية',
+                            'search-info' => 'ابحث عن المنتجات المتاحة في قناة :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'البحث عن المنتجات',
                         ],

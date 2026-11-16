@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Toevoegen aan winkelwagen',
                             'available-qty' => ':qty beschikbaar',
-                            'empty-info' => 'Geen producten beschikbaar voor zoekterm.',
+                            'empty-info' => 'Geen producten beschikbaar op kanaal :channel voor zoekterm.',
                             'empty-title' => 'Geen producten gevonden',
                             'product-image' => 'Productafbeelding',
                             'qty' => 'Aantal',
+                            'search-info' => 'Zoek naar producten die beschikbaar zijn op kanaal :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Producten zoeken',
                         ],

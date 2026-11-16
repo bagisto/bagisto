@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'කරත්තයක් එක් කරන්න',
                             'available-qty' => ':qty ලබාදුන්',
-                            'empty-info' => 'ප්‍රමාණයක් සඳහා නොපවතීයි.',
+                            'empty-info' => ':channel නාලිකාවේ සෙවුම් පදය සඳහා නිෂ්පාදන නොමැත.',
                             'empty-title' => 'නිෂ්පාදන හමු නොවීය',
                             'product-image' => 'නිෂ්පාදන රූපය',
                             'qty' => 'ප්ලාස්',
+                            'search-info' => ':channel නාලිකාවේ ඇති නිෂ්පාදන සොයන්න.',
                             'sku' => 'SKU - :sku',
                             'title' => 'නිෂ්පාදන සෙවුම්',
                         ],

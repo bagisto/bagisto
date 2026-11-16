@@ -153,8 +153,8 @@
                                         <button
                                             type="button"
                                             class="icon-edit inline-block cursor-pointer rounded-md py-0.5 align-text-bottom text-sm font-normal text-gray-400 transition-all hover:bg-gray-100 hover:text-gray-700 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-                                            title="{{ trans($translation.'.edit-group-btn') }}"
-                                            aria-label="{{ trans($translation.'.edit-group-btn') }}"
+                                            title="@lang($translation.'.edit-group-btn')"
+                                            aria-label="@lang($translation.'.edit-group-btn')"
                                             @click.stop="startRenaming(element)"
                                         ></button>
                                     </span>

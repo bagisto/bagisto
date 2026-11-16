@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Ongeza Kwenye Kikapu',
                             'available-qty' => ':qty Zinazopatikana',
-                            'empty-info' => 'Hakuna bidhaa zinazopatikana kwa neno hilo la utaftaji.',
+                            'empty-info' => 'Hakuna bidhaa zinazopatikana kwenye chaneli ya :channel kwa neno hilo la utaftaji.',
                             'empty-title' => 'Hakuna bidhaa zilizopatikana',
                             'product-image' => 'Picha ya Bidhaa',
                             'qty' => 'Kiasi',
+                            'search-info' => 'Tafuta bidhaa zinazopatikana kwenye chaneli ya :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Tafuta Bidhaa',
                         ],

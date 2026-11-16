@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'הוסף לעגלה',
                             'available-qty' => ':qty זמין',
-                            'empty-info' => 'אין מוצרים זמינים עבור מונח החיפוש.',
+                            'empty-info' => 'אין מוצרים זמינים בערוץ :channel עבור מונח החיפוש.',
                             'empty-title' => 'לא נמצאו מוצרים',
                             'product-image' => 'תמונת מוצר',
                             'qty' => 'כמות',
+                            'search-info' => 'חפשו מוצרים הזמינים בערוץ :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'חיפוש מוצרים',
                         ],

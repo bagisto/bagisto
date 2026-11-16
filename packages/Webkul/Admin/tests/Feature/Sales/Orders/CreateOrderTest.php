@@ -92,6 +92,20 @@ it('should search customers via email or name', function () {
         ->assertJsonPath('data.0.email', $customer->email);
 });
 
+it('should name the channel of each customer the search finds', function () {
+    $channel = Channel::factory()->create();
+
+    $customer = Customer::factory()->create(['channel_id' => $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.customers.customers.search', ['query' => $customer->email]))
+        ->assertOk()
+        ->assertJsonPath('data.0.id', $customer->id)
+        ->assertJsonPath('data.0.channel_name', $channel->name)
+        ->assertJsonMissingPath('data.0.channel');
+});
+
 // ============================================================================
 // Cart Creation
 // ============================================================================
@@ -176,6 +190,21 @@ it('should follow the address settings of the customer channel on the order crea
     ])
         ->assertUnprocessable()
         ->assertJsonValidationErrors(['billing.country' => trans('customer::app.validations.allowed-country.not-allowed')]);
+});
+
+it('should name the customer channel before a product search and when nothing matches it', function () {
+    $channel = Channel::factory()->create();
+
+    ['customer' => $customer, 'cart' => $cart] = createAdminCart();
+
+    $customer->update(['channel_id' => $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.sales.orders.create', $cart->id))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.search-info', ['channel' => $channel->name]))
+        ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.empty-info', ['channel' => $channel->name]));
 });
 
 it('should send the admin to the orders listing when the cart does not exist', function () {

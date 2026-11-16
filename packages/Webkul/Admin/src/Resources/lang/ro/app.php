@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Add To Cart',
                             'available-qty' => ':qty Available',
-                            'empty-info' => 'No products available for search term.',
+                            'empty-info' => 'Nu există produse disponibile pe canalul :channel pentru termenul căutat.',
                             'empty-title' => 'No products found',
                             'product-image' => 'Product Image',
                             'qty' => 'Qty',
+                            'search-info' => 'Căutați produsele disponibile pe canalul :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Search Products',
                         ],

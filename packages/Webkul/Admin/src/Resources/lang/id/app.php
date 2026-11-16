@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Tambah ke Keranjang',
                             'available-qty' => ':qty Tersedia',
-                            'empty-info' => 'Tidak ada produk yang sesuai dengan pencarian.',
+                            'empty-info' => 'Tidak ada produk pada saluran :channel yang sesuai dengan pencarian.',
                             'empty-title' => 'Produk Tidak Ditemukan',
                             'product-image' => 'Gambar Produk',
                             'qty' => 'Jumlah',
+                            'search-info' => 'Cari produk yang tersedia pada saluran :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Cari Produk',
                         ],

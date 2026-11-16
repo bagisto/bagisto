@@ -15,6 +15,10 @@
 {!! view_render_event('bagisto.admin.sales.order.create.cart.items.after') !!}
 
 @pushOnce('scripts')
+    @php
+        $customerChannelName = $cart->customer?->channel?->name ?? core()->getDefaultChannel()->name;
+    @endphp
+
     <script
         type="text/x-template"
         id="v-cart-items-template"
@@ -353,27 +357,40 @@
                         </div>
                     </div>
 
-                    <!-- For Empty Variations -->
+                    <!-- No Products Found -->
                     <div
                         class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
-                        v-else
+                        v-else-if="searchTerm.length > 1 && ! isSearching"
                     >
-                        <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                             class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                         />
 
-                        <!-- Add Variants Information -->
                         <div class="flex flex-col items-center gap-1.5">
                             <p class="text-base font-semibold text-gray-400">
                                 @lang('admin::app.sales.orders.create.cart.items.search.empty-title')
                             </p>
 
-                            <p class="text-gray-400">
-                                @lang('admin::app.sales.orders.create.cart.items.search.empty-info')
+                            <p class="text-center text-gray-400">
+                                @lang('admin::app.sales.orders.create.cart.items.search.empty-info', ['channel' => e($customerChannelName)])
                             </p>
                         </div>
+                    </div>
+
+                    <!-- Search Prompt -->
+                    <div
+                        class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
+                        v-else
+                    >
+                        <img
+                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                            class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
+                        />
+
+                        <p class="text-center text-gray-400">
+                            @lang('admin::app.sales.orders.create.cart.items.search.search-info', ['channel' => e($customerChannelName)])
+                        </p>
                     </div>
                 </x-slot>
             </x-admin::drawer>

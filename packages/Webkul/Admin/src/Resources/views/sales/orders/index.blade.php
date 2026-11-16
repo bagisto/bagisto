@@ -219,17 +219,27 @@
                             v-if="searchedCustomers.length"
                         >
                             <div
-                                class="grid cursor-pointer place-content-start gap-1.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
+                                class="flex cursor-pointer items-start justify-between gap-2.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 v-for="customer in searchedCustomers"
                                 @click="createCart(customer)"
                             >
-                                <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                                    @{{ customer.first_name + ' ' + customer.last_name }}
-                                </p>
+                                <div class="grid min-w-0 gap-1.5">
+                                    <p class="text-base font-semibold text-gray-600 wrap-anywhere dark:text-gray-300">
+                                        @{{ customer.first_name + ' ' + customer.last_name }}
+                                    </p>
 
-                                <p class="text-gray-500">
-                                    @{{ customer.email }}
-                                </p>
+                                    <p class="text-gray-500 wrap-anywhere">
+                                        @{{ customer.email }}
+                                    </p>
+                                </div>
+
+                                <!-- Channel -->
+                                <span
+                                    class="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                                    v-if="customer.channel_name"
+                                >
+                                    @{{ customer.channel_name }}
+                                </span>
                             </div>
                         </div>
 

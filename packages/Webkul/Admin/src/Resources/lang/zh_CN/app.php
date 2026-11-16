@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => '添加到购物车',
                             'available-qty' => ':qty 可用',
-                            'empty-info' => '没有可用于搜索词的产品。',
+                            'empty-info' => ':channel 渠道中没有可用于搜索词的产品。',
                             'empty-title' => '未找到产品',
                             'product-image' => '产品图片',
                             'qty' => '数量',
+                            'search-info' => '搜索 :channel 渠道中可用的产品。',
                             'sku' => 'SKU - :sku',
                             'title' => '搜索产品',
                         ],

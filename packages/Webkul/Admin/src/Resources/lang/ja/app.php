@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'カートに追加',
                             'available-qty' => ':qty 個利用可能',
-                            'empty-info' => '検索用語に該当する商品はありません。',
+                            'empty-info' => ':channel チャネルには検索用語に該当する商品はありません。',
                             'empty-title' => '商品が見つかりません',
                             'product-image' => '商品画像',
                             'qty' => '数量',
+                            'search-info' => ':channel チャネルで利用できる商品を検索してください。',
                             'sku' => 'SKU - :sku',
                             'title' => '商品を検索',
                         ],

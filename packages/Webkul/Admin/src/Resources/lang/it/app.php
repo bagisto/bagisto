@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Aggiungi al Carrello',
                             'available-qty' => ':qty Disponibili',
-                            'empty-info' => 'Nessun prodotto disponibile per il termine di ricerca.',
+                            'empty-info' => 'Nessun prodotto disponibile sul canale :channel per il termine di ricerca.',
                             'empty-title' => 'Nessun prodotto trovato',
                             'product-image' => 'Immagine del Prodotto',
                             'qty' => 'Quantità',
+                            'search-info' => 'Cerca i prodotti disponibili sul canale :channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Cerca Prodotti',
                         ],

@@ -450,10 +450,11 @@ return [
                         'search' => [
                             'add-to-cart' => 'Add To Cart',
                             'available-qty' => ':qty Available',
-                            'empty-info' => 'No products available for search term.',
+                            'empty-info' => 'No products available in the :channel channel for this search term.',
                             'empty-title' => 'No products found',
                             'product-image' => 'Product Image',
                             'qty' => 'Qty',
+                            'search-info' => 'Search for products available in the :channel channel.',
                             'sku' => 'SKU - :sku',
                             'title' => 'Search Products',
                         ],
