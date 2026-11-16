@@ -1,63 +1,55 @@
-<div class="">
+<div>
     <!-- Panel Header -->
-    <div class="mb-2.5 flex flex-wrap justify-between gap-2.5 p-4">
-        <!-- Panel Header -->
-        <div class="flex flex-col gap-2">
-            <div class="shimmer h-4.25 w-13.5"></div>
+    <div class="flex flex-wrap items-center justify-between gap-2.5 border-b p-4 dark:border-gray-800">
+        <div class="flex flex-col gap-1">
+            <div class="shimmer h-5 w-16"></div>
 
-            <div class="shimmer h-4.25 w-44.25"></div>
+            <div class="shimmer h-4 w-44"></div>
         </div>
 
-        <!-- Panel Content -->
-        <div class="flex items-center gap-x-1">
-            <!-- Delete Group Button -->
-            <div class="shimmer h-10 w-32.5 rounded-md"></div>
+        <!-- Group Actions -->
+        <div class="flex flex-wrap items-center gap-1">
+            <div class="shimmer h-10 w-28 rounded-md"></div>
 
-            <!-- Add Group Button -->
-            <div class="shimmer h-10 w-27.25 rounded-md"></div>
+            <div class="shimmer h-10 w-24 rounded-md"></div>
+
+            <div class="shimmer h-10 w-28 rounded-md"></div>
         </div>
     </div>
 
     <!-- Panel Content -->
-    <div class="flex [&amp;>*]:flex-1 gap-5 justify-between px-4">
-        @for ($i = 0; $i < 2; $i++)
-            <!-- Attributes Groups Container -->
-            <div>
-                <!-- Attributes Groups Header -->
-                <div class="mb-4 flex flex-col">
-                    <div class="shimmer mb-1 h-6 w-20.5"></div>
+    <div class="grid grid-cols-3 gap-4 p-4 max-lg:grid-cols-1">
+        @for ($column = 0; $column < 3; $column++)
+            <div class="flex h-[calc(100vh-270px)] min-h-96 flex-col rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-950 max-lg:h-[60vh]">
+                <!-- Column Header -->
+                <div class="flex items-start justify-between gap-2.5 border-b border-gray-200 px-3 py-2.5 dark:border-gray-800">
+                    <div class="flex flex-col gap-1">
+                        <div class="shimmer h-4 w-24"></div>
 
-                    <div class="shimmer h-4.25 w-36.75"></div>
+                        <div class="shimmer h-3.5 w-36"></div>
+                    </div>
+
+                    <div class="shimmer h-5 w-7 rounded-full"></div>
                 </div>
 
-                <!-- Draggable Attribute Groups -->
-                <div class="h-[calc(100vh-285px)] overflow-auto border-gray-200 pb-4 ltr:border-r rtl:border-l">
-                    @for ($j = 0; $j < 3; $j++)
-                        <div>
-                            <!-- Group Container -->
-                            <div class="flex items-center">
-                                <!-- Toggle -->
-                                <div class="shimmer mr-1 h-4 w-4"></div>
+                <!-- Groups -->
+                <div class="flex flex-col gap-2.5 overflow-hidden p-2.5">
+                    @for ($group = 0; $group < 2; $group++)
+                        <div class="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+                            <div class="flex items-center gap-1.5 px-2 py-2">
+                                <div class="shimmer h-4.5 w-4.5"></div>
 
-                                <!-- Group Name -->
-                                <div class="group_node flex max-w-max gap-1.5 py-1.5 ltr:pr-1.5 rtl:pl-1.5">
-                                    <div class="shimmer h-5.25 w-5"></div>
-
-                                    <div class="shimmer h-5.25 w-5"></div>
-                                    
-                                    <div class="shimmer h-5.25 w-26.25"></div>
-                                </div>
+                                <div class="shimmer h-4 w-24"></div>
                             </div>
 
-                            <!-- Group Attributes -->
-                            <div class="ltr:ml-11 rtl:mr-11">
-                                @for ($k = 0; $k < 5; $k++)
-                                    <div class="flex max-w-max gap-1.5 py-1.5 ltr:pr-1.5 rtl:pl-1.5">
-                                        <div class="shimmer h-5.25 w-5"></div>
+                            <div class="flex flex-col gap-0.5 border-t border-gray-100 p-1.5 dark:border-gray-800">
+                                @for ($attribute = 0; $attribute < 3; $attribute++)
+                                    <div class="flex items-center gap-2 px-2 py-1.5">
+                                        <div class="shimmer h-4 w-4"></div>
 
-                                        <div class="shimmer h-5.25 w-5"></div>
-                                        
-                                        <div class="shimmer h-5.25 w-26.25"></div>
+                                        <div class="shimmer h-4 w-4"></div>
+
+                                        <div class="shimmer h-4 w-28"></div>
                                     </div>
                                 @endfor
                             </div>
@@ -66,28 +58,5 @@
                 </div>
             </div>
         @endfor
-
-        <!-- Unassigned Attributes Container -->
-        <div class="">
-            <!-- Unassigned Attributes Header -->
-            <div class="mb-4 flex flex-col">
-                <div class="shimmer mb-1 h-6 w-20.5"></div>
-
-                <div class="shimmer h-4.25 w-36.75"></div>
-            </div>
-
-            <!-- Draggable Unassigned Attributes -->
-            <div class="h-[calc(100vh-285px)] overflow-auto pb-4">
-                @for ($i = 0; $i < 10; $i++)
-                    <div class="flex max-w-max gap-1.5 py-1.5 ltr:pr-1.5 rtl:pl-1.5">
-                        <div class="shimmer h-5.25 w-5"></div>
-
-                        <div class="shimmer h-5.25 w-5"></div>
-                        
-                        <div class="shimmer h-5.25 w-26.25"></div>
-                    </div>
-                @endfor
-            </div>
-        </div>
     </div>
 </div>
