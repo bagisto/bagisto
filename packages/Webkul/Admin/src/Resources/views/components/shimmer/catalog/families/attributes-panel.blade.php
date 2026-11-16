@@ -42,6 +42,8 @@
                                 <div class="shimmer h-4.5 w-4.5"></div>
 
                                 <div class="shimmer h-4 w-24"></div>
+
+                                <div class="shimmer h-4.5 w-4.5"></div>
                             </div>
 
                             <div class="flex flex-col gap-0.5 border-t border-gray-100 p-1.5 dark:border-gray-800">
