@@ -77,7 +77,8 @@ class AttributeFamilyController extends Controller
             'code' => ['required', 'max:255', 'unique:attribute_families,code', new Code],
             'name' => 'required|max:255',
             'attribute_groups.*.code' => 'required|max:255',
-            'attribute_groups.*.name' => 'required|max:255',
+            'attribute_groups.*.admin_name' => 'required|max:255',
+            'attribute_groups.*.*.name' => 'nullable|string|max:65535',
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
@@ -121,7 +122,8 @@ class AttributeFamilyController extends Controller
             'code' => ['required', 'max:255', 'unique:attribute_families,code,'.$id, new Code],
             'name' => 'required|max:255',
             'attribute_groups.*.code' => 'required|max:255',
-            'attribute_groups.*.name' => 'required|max:255',
+            'attribute_groups.*.admin_name' => 'required|max:255',
+            'attribute_groups.*.*.name' => 'nullable|string|max:65535',
             'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 

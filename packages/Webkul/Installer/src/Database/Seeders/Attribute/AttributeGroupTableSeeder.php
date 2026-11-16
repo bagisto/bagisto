@@ -28,7 +28,7 @@ class AttributeGroupTableSeeder extends Seeder
             [
                 'id' => 1,
                 'code' => 'general',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.general', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.general', [], $defaultLocale),
                 'column' => 1,
                 'is_user_defined' => 0,
                 'position' => 1,
@@ -36,7 +36,7 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 2,
                 'code' => 'description',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.description', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.description', [], $defaultLocale),
                 'column' => 1,
                 'is_user_defined' => 0,
                 'position' => 2,
@@ -44,7 +44,7 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 3,
                 'code' => 'meta_description',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.meta-description', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.meta-description', [], $defaultLocale),
                 'column' => 1,
                 'is_user_defined' => 0,
                 'position' => 3,
@@ -52,7 +52,7 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 4,
                 'code' => 'price',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.price', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.price', [], $defaultLocale),
                 'column' => 2,
                 'is_user_defined' => 0,
                 'position' => 1,
@@ -60,7 +60,7 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 5,
                 'code' => 'shipping',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.shipping', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.shipping', [], $defaultLocale),
                 'column' => 2,
                 'is_user_defined' => 0,
                 'position' => 2,
@@ -68,7 +68,7 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 6,
                 'code' => 'settings',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.settings', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.settings', [], $defaultLocale),
                 'column' => 2,
                 'is_user_defined' => 0,
                 'position' => 3,
@@ -76,7 +76,7 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 7,
                 'code' => 'inventories',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.inventories', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.inventories', [], $defaultLocale),
                 'column' => 2,
                 'is_user_defined' => 0,
                 'position' => 4,
@@ -84,13 +84,53 @@ class AttributeGroupTableSeeder extends Seeder
             ], [
                 'id' => 8,
                 'code' => 'rma',
-                'name' => trans('installer::app.seeders.attribute.attribute-groups.rma', [], $defaultLocale),
+                'admin_name' => trans('installer::app.seeders.attribute.attribute-groups.rma', [], $defaultLocale),
                 'column' => 2,
                 'is_user_defined' => 0,
                 'position' => 5,
                 'attribute_family_id' => 1,
             ],
         ]);
+
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
+
+        foreach ($locales as $locale) {
+            DB::table('attribute_group_translations')->insert([
+                [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.general', [], $locale),
+                    'attribute_group_id' => 1,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.description', [], $locale),
+                    'attribute_group_id' => 2,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.meta-description', [], $locale),
+                    'attribute_group_id' => 3,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.price', [], $locale),
+                    'attribute_group_id' => 4,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.shipping', [], $locale),
+                    'attribute_group_id' => 5,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.settings', [], $locale),
+                    'attribute_group_id' => 6,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.inventories', [], $locale),
+                    'attribute_group_id' => 7,
+                ], [
+                    'locale' => $locale,
+                    'name' => trans('installer::app.seeders.attribute.attribute-groups.rma', [], $locale),
+                    'attribute_group_id' => 8,
+                ],
+            ]);
+        }
 
         DB::table('attribute_group_mappings')->insert([
             /**

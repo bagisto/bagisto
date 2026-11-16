@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
+use Webkul\Core\Models\Locale;
 use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\deleteJson;
@@ -28,7 +29,7 @@ function buildGroupsPayloadFromFamily(AttributeFamily $family): array
 
         $payload[(string) $group->id] = [
             'code' => $group->code,
-            'name' => $group->name,
+            'admin_name' => $group->admin_name,
             'position' => (string) $group->position,
             'column' => (string) $group->column,
             'is_user_defined' => $group->is_user_defined,
@@ -153,7 +154,7 @@ it('should store a family with all default groups plus an extra custom group', f
 
     $payload['attribute_groups']['group_1_0'] = [
         'code' => 'custom_info',
-        'name' => 'Custom Info',
+        'admin_name' => 'Custom Info',
         'position' => '99',
         'column' => '2',
         'is_user_defined' => 1,
@@ -194,7 +195,7 @@ it('should fail validation when code starts with a number', function () {
         'code' => '123invalid',
         'name' => 'Invalid Code',
         'attribute_groups' => [
-            '1' => ['code' => 'general', 'name' => 'General', 'column' => '1', 'position' => '1'],
+            '1' => ['code' => 'general', 'admin_name' => 'General', 'column' => '1', 'position' => '1'],
         ],
     ])
         ->assertUnprocessable()
@@ -210,7 +211,7 @@ it('should fail validation when code already exists on store', function () {
         'code' => $existing->code,
         'name' => 'Duplicate',
         'attribute_groups' => [
-            '1' => ['code' => 'general', 'name' => 'General', 'column' => '1', 'position' => '1'],
+            '1' => ['code' => 'general', 'admin_name' => 'General', 'column' => '1', 'position' => '1'],
         ],
     ])
         ->assertUnprocessable()
@@ -224,7 +225,7 @@ it('should fail validation when attribute group column is invalid', function () 
         'code' => fake()->unique()->lexify('family_??????????'),
         'name' => 'Invalid Column',
         'attribute_groups' => [
-            '1' => ['code' => 'general', 'name' => 'General', 'column' => '5', 'position' => '1'],
+            '1' => ['code' => 'general', 'admin_name' => 'General', 'column' => '5', 'position' => '1'],
         ],
     ])
         ->assertUnprocessable()
@@ -242,7 +243,7 @@ it('should fail validation when attribute group name is missing', function () {
         ],
     ])
         ->assertUnprocessable()
-        ->assertJsonValidationErrorFor('attribute_groups.1.name');
+        ->assertJsonValidationErrorFor('attribute_groups.1.admin_name');
 });
 
 it('should dispatch events when storing a family', function () {
@@ -326,7 +327,7 @@ it('should add a new group to an existing family during update', function () {
 
     $payload['group_1_new'] = [
         'code' => 'custom_section',
-        'name' => 'Custom Section',
+        'admin_name' => 'Custom Section',
         'column' => '2',
         'position' => '99',
         'is_user_defined' => 1,
@@ -354,11 +355,11 @@ it('should remove a user-defined group when omitted from update payload', functi
     $payload = buildDefaultFamilyPayload($code, 'Removable Groups');
 
     $payload['attribute_groups']['group_1_0'] = [
-        'code' => 'keep_me', 'name' => 'Keep Me', 'column' => '1', 'position' => '90',
+        'code' => 'keep_me', 'admin_name' => 'Keep Me', 'column' => '1', 'position' => '90',
         'is_user_defined' => 1,
     ];
     $payload['attribute_groups']['group_2_0'] = [
-        'code' => 'remove_me', 'name' => 'Remove Me', 'column' => '2', 'position' => '91',
+        'code' => 'remove_me', 'admin_name' => 'Remove Me', 'column' => '2', 'position' => '91',
         'is_user_defined' => 1,
     ];
 
@@ -446,7 +447,7 @@ it('should fail validation when code conflicts with another family on update', f
         'name' => 'Conflict',
         'attribute_groups' => [
             'group_1' => [
-                'code' => 'general', 'name' => 'General', 'column' => '1', 'position' => '1',
+                'code' => 'general', 'admin_name' => 'General', 'column' => '1', 'position' => '1',
                 'is_user_defined' => 1,
             ],
         ],
@@ -472,6 +473,146 @@ it('should dispatch events when updating a family', function () {
 
     Event::assertDispatched('catalog.attribute_family.update.before');
     Event::assertDispatched('catalog.attribute_family.update.after');
+});
+
+// ============================================================================
+// Group Names By Locale
+// ============================================================================
+
+it('should store a group with its name in each locale', function () {
+    $this->loginAsAdmin();
+
+    $locale = Locale::factory()->create();
+
+    $code = fake()->unique()->lexify('family_??????????');
+
+    $payload = buildDefaultFamilyPayload($code, 'Localized Family');
+
+    $payload['attribute_groups']['group_1_0'] = [
+        'code' => 'custom_info',
+        'admin_name' => 'Custom Info',
+        'position' => '99',
+        'column' => '1',
+        'en' => ['name' => 'Custom Information'],
+        $locale->code => ['name' => 'Informations personnalisées'],
+    ];
+
+    postJson(route('admin.catalog.families.store'), $payload)
+        ->assertRedirectToRoute('admin.catalog.families.index');
+
+    $group = AttributeFamily::query()->where('code', $code)->first()
+        ->attribute_groups->firstWhere('code', 'custom_info');
+
+    expect($group->admin_name)->toBe('Custom Info')
+        ->and($group->translate('en')->name)->toBe('Custom Information')
+        ->and($group->translate($locale->code)->name)->toBe('Informations personnalisées');
+});
+
+it('should change one locale of a group name on update and keep the others', function () {
+    $this->loginAsAdmin();
+
+    $locale = Locale::factory()->create();
+
+    $family = AttributeFamily::factory()->create();
+
+    $group = $family->attribute_groups()->create([
+        'code' => 'custom_info',
+        'admin_name' => 'Custom Info',
+        'column' => 1,
+        'position' => 1,
+        'en' => ['name' => 'Custom Information'],
+        $locale->code => ['name' => 'Informations'],
+    ]);
+
+    putJson(route('admin.catalog.families.update', $family->id), [
+        'code' => $family->code,
+        'name' => $family->name,
+        'attribute_groups' => [
+            (string) $group->id => [
+                'code' => 'custom_info',
+                'admin_name' => 'Custom Info',
+                'position' => '1',
+                'column' => '1',
+                'en' => ['name' => 'Custom Information'],
+                $locale->code => ['name' => 'Informations personnalisées'],
+            ],
+        ],
+    ])->assertRedirectToRoute('admin.catalog.families.index');
+
+    $group->refresh();
+
+    expect($group->translate('en')->name)->toBe('Custom Information')
+        ->and($group->translate($locale->code)->name)->toBe('Informations personnalisées');
+});
+
+it('should name a group in the current locale, falling back to the default locale', function () {
+    $translated = Locale::factory()->create();
+
+    $untranslated = Locale::factory()->create();
+
+    $group = AttributeFamily::factory()->create()->attribute_groups()->create([
+        'code' => 'custom_info',
+        'admin_name' => 'Custom Info',
+        'column' => 1,
+        'position' => 1,
+        'en' => ['name' => 'Custom Information'],
+        $translated->code => ['name' => 'Informations'],
+    ]);
+
+    app()->setLocale($translated->code);
+
+    expect($group->fresh()->name)->toBe('Informations');
+
+    app()->setLocale($untranslated->code);
+
+    expect($group->fresh()->name)->toBe('Custom Information');
+});
+
+it('should refuse a group name in a locale that is longer than the column holds', function () {
+    $this->loginAsAdmin();
+
+    $payload = buildDefaultFamilyPayload(fake()->unique()->lexify('family_??????????'), 'Long Name');
+
+    $groupId = array_key_first($payload['attribute_groups']);
+
+    $payload['attribute_groups'][$groupId]['en'] = ['name' => str_repeat('a', 65536)];
+
+    postJson(route('admin.catalog.families.store'), $payload)
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor("attribute_groups.{$groupId}.en.name");
+});
+
+it('should hand the edit screen each group with its names by locale', function () {
+    $this->loginAsAdmin();
+
+    $family = AttributeFamily::factory()->create();
+
+    $family->attribute_groups()->create([
+        'code' => 'custom_info',
+        'admin_name' => 'Custom Info',
+        'column' => 1,
+        'position' => 1,
+        'en' => ['name' => 'Custom Information'],
+    ]);
+
+    get(route('admin.catalog.families.edit', $family->id))
+        ->assertOk()
+        ->assertSee('"admin_name":"Custom Info"', false)
+        ->assertSee('"names":{"en":"Custom Information"}', false);
+});
+
+it('should head a product section with the group name of the current locale', function () {
+    $this->loginAsAdmin();
+
+    $product = $this->createSimpleProduct();
+
+    $group = $product->attribute_family->attribute_groups->firstWhere('code', 'general');
+
+    $group->update(['en' => ['name' => 'Localized General Heading']]);
+
+    get(route('admin.catalog.products.edit', $product->id))
+        ->assertOk()
+        ->assertSeeText('Localized General Heading');
 });
 
 // ============================================================================

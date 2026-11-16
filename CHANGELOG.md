@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Moved `core()->isCountryRequired()`, `isStateRequired()` and `isPostCodeRequired()` to `Webkul\Customer\Facades\AddressSettings`. The `core()` methods still work and are deprecated.
 
+- #11580 [feature] - Attribute groups can now be named in each locale from the attribute family screen, with existing names carried over. The `attribute_groups.name` column is now `admin_name`.
+
 - #11500 [feature] - Customer > Address > Countries now limits the countries the storefront offers, per channel. The address forms, the country and state lists the storefront loads, and the address and shipping estimate validation all follow it, and leaving it empty keeps every country.
 
 - #11343 [feature] - Admin notifications now report system problems, such as a stopped queue worker or scheduler and unconfigured mail, and say when each is resolved. A System Health page under Configure → About lists every check.
