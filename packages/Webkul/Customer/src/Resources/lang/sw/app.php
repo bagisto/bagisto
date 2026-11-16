@@ -2,6 +2,10 @@
 
 return [
     'validations' => [
+        'allowed-country' => [
+            'not-allowed' => 'Duka hili halikubali anwani katika nchi iliyochaguliwa.',
+        ],
+
         'captcha' => [
             'captcha' => 'Kumetokea hitilafu! Tafadhali jaribu tena.',
             'required' => 'Tafadhali chagua CAPTCHA',

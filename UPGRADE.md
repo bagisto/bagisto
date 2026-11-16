@@ -16,6 +16,7 @@
 - [The View Render Event Manager Moved To Core](#the-view-render-event-manager-moved-to-core)
 - [Core No Longer Resolves Guest Groups Or Tax Categories](#core-no-longer-resolves-guest-groups-or-tax-categories)
 - [Cart Item Type Hints Use The Contract](#cart-item-type-hints-use-the-contract)
+- [The Address Requirement Helpers Left Core](#the-address-requirement-helpers-left-core)
 
 ### Low Impact Changes
 
@@ -27,6 +28,7 @@
 - [Password Reset And Overdue Reminder Mail Is Sent By A Listener](#password-reset-and-overdue-reminder-mail-is-sent-by-a-listener)
 - [The Price Indexer No Longer Takes A Catalog Rule Repository](#the-price-indexer-no-longer-takes-a-catalog-rule-repository)
 - [The Theme Section Factory Moved To Theme](#the-theme-section-factory-moved-to-theme)
+- [The Section Type Constants Are Removed](#the-section-type-constants-are-removed)
 
 ### Before You Start
 
@@ -148,6 +150,22 @@ Every one of them now takes `Webkul\Checkout\Contracts\CartItem`:
 `Simple` and `Virtual` already used the contract and are unchanged.
 
 **A product type or booking helper that overrides one of these has to widen its own hint too.** PHP requires an override's parameter type to be the same or wider, so a subclass left on `Models\CartItem` is a fatal error once the parent takes the contract — the one thing in this release that fails at load rather than at runtime. Passing a cart item is otherwise unchanged, since the shipped model implements the contract.
+
+---
+
+### The Address Requirement Helpers Left Core
+
+**Impact Probability: Medium**
+
+The 2.5 line moved the three address requirement helpers to the Customer package, which owns the settings they read, and kept the `core()` methods as deprecated wrappers. Those wrappers are gone, since they made Core depend on Customer:
+
+| Before | After |
+|---|---|
+| `core()->isCountryRequired()` | `\Webkul\Customer\Facades\AddressSettings::isCountryRequired()` |
+| `core()->isStateRequired()` | `\Webkul\Customer\Facades\AddressSettings::isStateRequired()` |
+| `core()->isPostCodeRequired()` | `\Webkul\Customer\Facades\AddressSettings::isPostCodeRequired()` |
+
+**A theme that overrides an address view is the usual caller.** The checkout address form, the cart's shipping estimate, the account address create and edit views and the admin's Create Order address form all read these, and an override still calling `core()` fails with an undefined method error the first time it renders. The settings themselves, and what each answers, are unchanged.
 
 ---
 
@@ -290,3 +308,18 @@ use Webkul\Theme\Database\Factories\SectionFactory;
 ```
 
 `Section::factory()` resolves it through `newFactory()`, so only code naming the class directly is affected. It was the only factory in `Webkul\Admin`, so that package no longer has a `Database/Factories` directory.
+
+---
+
+### The Section Type Constants Are Removed
+
+**Impact Probability: Low**
+
+The section type constants on `Webkul\Theme\Models\Section` were deprecated on the 2.5 line, when theme sections became types a theme registers, and are now removed:
+
+| Before | After |
+|---|---|
+| `Section::IMAGE_CAROUSEL`, `PRODUCT_CAROUSEL`, `CATEGORY_CAROUSEL`, `FOOTER_LINKS`, `STATIC_CONTENT`, `SERVICES_CONTENT` | The matching `Webkul\Theme\Enums\SectionTypeEnum` case, with `->value` where the type code is wanted |
+| `Section::TYPES` | `app(\Webkul\Theme\SectionSchema::class)->types()` for the types a theme offers, or `SectionTypeEnum::getValues()` for the core codes |
+
+Stored sections are unaffected, since the codes the constants held are the enum's values.

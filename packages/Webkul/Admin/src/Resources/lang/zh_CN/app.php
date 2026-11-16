@@ -69,12 +69,38 @@ return [
             'orders' => '订单',
             'returns' => 'RMA 请求',
             'reviews' => '评论',
+            'system' => '系统',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL 为 :url，但商店实际通过 :host 提供服务。邮件中的链接将不正确。',
+                'title' => 'APP_URL 与商店地址不一致',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => '广播服务器没有响应，因此通知不会实时更新。',
+                'title' => '实时通知无法连接',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => '新客户已注册',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => '错误页面会向访客显示内部信息。请设置 APP_DEBUG=false。',
+                'title' => '生产环境已开启调试模式',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => '汇率未按计划更新。请检查汇率服务及其 API 密钥。',
+                'title' => '汇率已过期',
+            ],
+
+            'failed-jobs' => [
+                'message' => '有 :count 个失败的任务等待处理。请使用 php artisan queue:failed 查看。',
+                'title' => '队列任务正在失败',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => '已处理 :processed 行',
                 'message-skipped' => '已处理 :processed 行，跳过 :skipped 行',
                 'title' => ':type 导入已完成',
+            ],
+
+            'index-incomplete' => [
+                'message' => '部分商品没有价格索引。请运行 php artisan indexer:index。',
+                'title' => '商品索引不完整',
+            ],
+
+            'mail-not-configured' => [
+                'message' => '在配置 SMTP 或 Brevo 之前，商店无法发送邮件。',
+                'title' => '邮件尚未配置',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => '已为订单 #:order 退款',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => ':connection 队列中的任务正在等待。请使用 php artisan queue:work 启动。',
+                'title' => '队列工作进程未运行',
+            ],
+
             'return-requested' => [
                 'message' => '来自 :customer 的订单 #:order',
                 'title' => '新的退货请求 #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer 给 :product 评了 :rating 分（满分 5 分）',
                 'title' => '新评价待审核',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => '计划任务未运行。请在服务器上添加 schedule:run 的 cron 条目。',
+                'title' => '调度器未运行',
+            ],
+
+            'search-unreachable' => [
+                'message' => '搜索引擎没有响应。请检查其连接设置。',
+                'title' => '搜索引擎无法连接',
+            ],
+
+            'storage-unreachable' => [
+                'message' => '上传文件无法到达所选存储。请检查其凭据。',
+                'title' => '远程存储不可用',
+            ],
+
+            'system' => [
+                'resolved-title' => '已解决：:title',
             ],
         ],
     ],
@@ -2114,12 +2174,17 @@ return [
                 'code' => '代码',
                 'column' => '列',
                 'delete-group-btn' => '删除分组',
+                'drop-attributes-here' => '将属性拖到此处',
+                'edit-group-btn' => '编辑分组',
                 'edit-group-info' => '双击编辑分组',
+                'edit-group-title' => '编辑分组',
                 'enter-code' => '输入代码',
                 'enter-name' => '输入名称',
                 'general' => '常规',
                 'group-code-already-exists' => '属性组代码已经存在。',
                 'group-contains-system-attributes' => '此分组包含系统属性。请先将系统属性移至其他分组，然后重试。',
+                'group-labels' => '各语言的名称',
+                'group-labels-info' => '留空则使用上方的名称。',
                 'group-name-already-exists' => '已存在属性分组名称。',
                 'groups' => '分组',
                 'groups-info' => '管理属性家族分组',
@@ -2128,6 +2193,7 @@ return [
                 'removal-not-possible' => '您无法从属性家族中移除系统属性。',
                 'right-column' => '右侧列',
                 'save-btn' => '保存属性家族',
+                'save-group-btn' => '保存分组',
                 'select-group' => '请选择属性分组。',
                 'title' => '创建属性家族',
                 'unassigned-attributes' => '未分配的属性',
@@ -2141,12 +2207,17 @@ return [
                 'code' => '代码',
                 'column' => '列',
                 'delete-group-btn' => '删除分组',
+                'drop-attributes-here' => '将属性拖到此处',
+                'edit-group-btn' => '编辑分组',
                 'edit-group-info' => '双击编辑分组',
+                'edit-group-title' => '编辑分组',
                 'enter-code' => '输入代码',
                 'enter-name' => '输入名称',
                 'general' => '一般的',
                 'group-code-already-exists' => '属性组代码已经存在。',
                 'group-contains-system-attributes' => '此分组包含系统属性。请先将系统属性移至其他分组，然后重试。',
+                'group-labels' => '各语言的名称',
+                'group-labels-info' => '留空则使用上方的名称。',
                 'group-name-already-exists' => '已存在属性分组名称。',
                 'groups' => '分组',
                 'groups-info' => '管理属性家族分组',
@@ -2155,6 +2226,7 @@ return [
                 'removal-not-possible' => '您无法从属性家族中移除系统属性。',
                 'right-column' => '右侧列',
                 'save-btn' => '保存属性家族',
+                'save-group-btn' => '保存分组',
                 'select-group' => '请选择属性分组。',
                 'title' => '编辑属性家族',
                 'unassigned-attributes' => '未分配的属性',
@@ -4544,6 +4616,78 @@ return [
                         'yes' => '是',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => '商店运行所需的各项服务，以及需要您关注的问题。',
+                    'open-settings' => '打开设置',
+                    'summary-attention' => ':total 项检查中有 :count 项需要关注。',
+                    'summary-healthy' => '商店所需的一切均正常运行。',
+                    'title' => '系统健康',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL 必须与商店实际提供服务的地址一致。',
+                            'title' => '商店地址',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => '无需刷新即可将新通知推送到管理面板。',
+                            'title' => '实时通知',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => '生产环境中必须关闭，以免错误页面泄露信息。',
+                            'title' => '调试模式',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => '在多货币商店中保持汇率最新。',
+                            'title' => '汇率',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => '因错误而停止并等待重试的后台任务。',
+                            'title' => '失败的任务',
+                        ],
+
+                        'mail' => [
+                            'info' => '发送订单、账户和管理员邮件。',
+                            'title' => '邮件',
+                        ],
+
+                        'product-index' => [
+                            'info' => '保存店面展示商品时使用的价格。',
+                            'title' => '商品索引',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => '在后台处理邮件、导入和索引。',
+                            'title' => '队列工作进程',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => '存储商品图片和其他上传文件。',
+                            'title' => '文件存储',
+                        ],
+
+                        'scheduler' => [
+                            'info' => '运行价格规则、汇率和发票提醒等定时任务。',
+                            'title' => '调度器',
+                        ],
+
+                        'search-engine' => [
+                            'info' => '为店面搜索和分类列表提供结果。',
+                            'title' => '搜索引擎',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => '需要关注',
+                        'healthy' => '正常运行',
+                        'idle' => '未使用',
+                        'unconfirmed' => '尚未确认',
+                    ],
+                ],
             ],
 
             'add-file' => '添加文件',
@@ -4559,6 +4703,7 @@ return [
             'save-message' => '配置保存成功',
             'search' => '搜索',
             'select-country' => '选择国家',
+            'select-options' => '选择选项',
             'select-state' => '选择省份',
             'title' => '配置',
 
@@ -5393,6 +5538,13 @@ return [
                         'title' => '信息',
                         'title-info' => '地址表单显示的街道地址行数。',
                     ],
+
+                    'countries' => [
+                        'allowed' => '允许的国家',
+                        'allowed-info' => '留空则提供所有国家。',
+                        'title' => '国家',
+                        'title-info' => '顾客在店铺前台可以选择的国家。',
+                    ],
                 ],
 
                 'captcha' => [
@@ -5889,6 +6041,7 @@ return [
                 'logout' => '退出',
                 'my-account' => '我的账户',
                 'notifications' => '通知',
+                'system-health' => '系统健康',
                 'visit-shop' => '访问商店',
 
                 'mega-search' => [

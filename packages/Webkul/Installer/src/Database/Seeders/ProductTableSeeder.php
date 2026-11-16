@@ -636,20 +636,27 @@ class ProductTableSeeder extends Seeder
             return;
         }
 
-        $rows = collect($data['attribute_groups'])
+        $groups = collect($data['attribute_groups'])
             ->filter(fn ($item) => ! DB::table('attribute_groups')->where('id', $item['id'])->exists())
-            ->map(function ($item) {
-                $row = Arr::except($item, ['translations']);
-                $row['name'] = data_get($item, "translations.{$this->defaultLocale}.name", $row['name'] ?? '');
+            ->values();
 
-                return $row;
-            })
-            ->values()
-            ->all();
-
-        if (filled($rows)) {
-            DB::table('attribute_groups')->insert($rows);
+        if ($groups->isEmpty()) {
+            return;
         }
+
+        DB::table('attribute_groups')->insert($groups->map(function ($item) {
+            $row = Arr::except($item, ['translations', 'name']);
+
+            $row['admin_name'] = data_get($item, "translations.{$this->defaultLocale}.name", $item['name'] ?? '');
+
+            return $row;
+        })->all());
+
+        DB::table('attribute_group_translations')->insert($groups->flatMap(fn ($item) => array_map(fn ($locale) => [
+            'attribute_group_id' => $item['id'],
+            'locale' => $locale,
+            'name' => data_get($item, "translations.{$locale}.name", data_get($item, 'translations.en.name', $item['name'] ?? '')),
+        ], $this->locales))->all());
     }
 
     /**

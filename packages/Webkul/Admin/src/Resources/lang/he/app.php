@@ -69,12 +69,38 @@ return [
             'orders' => 'הזמנות',
             'returns' => 'בקשות RMA',
             'reviews' => 'ביקורות',
+            'system' => 'מערכת',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'הערך של APP_URL הוא :url, אך החנות מוגשת מ-:host. הקישורים בהודעות הדוא"ל יהיו שגויים.',
+                'title' => 'APP_URL אינו תואם לכתובת החנות',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'שרת השידור לא הגיב, ולכן ההתראות לא יתעדכנו בזמן אמת.',
+                'title' => 'התראות בזמן אמת אינן זמינות',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'לקוח חדש נרשם',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'דפי השגיאה מציגים פרטים פנימיים למבקרים. הגדירו APP_DEBUG=false.',
+                'title' => 'מצב דיבוג פעיל בסביבת הייצור',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'השערים לא עודכנו לפי לוח הזמנים. בדקו את שירות שערי החליפין ואת מפתח ה-API שלו.',
+                'title' => 'שערי החליפין אינם מעודכנים',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count משימות שנכשלו ממתינות. בדקו אותן באמצעות php artisan queue:failed.',
+                'title' => 'משימות בתור נכשלות',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed שורות עובדו',
                 'message-skipped' => ':processed שורות עובדו, :skipped דולגו',
                 'title' => 'ייבוא :type הושלם',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'לחלק מהמוצרים אין אינדקס מחירים. הריצו php artisan indexer:index.',
+                'title' => 'אינדקס המוצרים אינו שלם',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'החנות אינה יכולה לשלוח דוא"ל עד שיוגדר SMTP או Brevo.',
+                'title' => 'הדוא"ל אינו מוגדר',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'הונפק החזר עבור הזמנה #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'משימות בתור :connection ממתינות. הפעילו אותו באמצעות php artisan queue:work.',
+                'title' => 'עובד התור אינו פועל',
+            ],
+
             'return-requested' => [
                 'message' => 'הזמנה #:order מאת :customer',
                 'title' => 'בקשת החזרה חדשה #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer דירג/ה את :product ב-:rating מתוך 5',
                 'title' => 'ביקורת חדשה ממתינה לאישור',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'משימות מתוזמנות אינן רצות. הוסיפו את רשומת ה-cron של schedule:run לשרת שלכם.',
+                'title' => 'המתזמן אינו פועל',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'מנוע החיפוש לא הגיב. בדקו את הגדרות החיבור שלו.',
+                'title' => 'מנוע החיפוש אינו זמין',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'העלאות אינן מגיעות לאחסון שנבחר. בדקו את פרטי הגישה שלו.',
+                'title' => 'האחסון המרוחק אינו זמין',
+            ],
+
+            'system' => [
+                'resolved-title' => 'נפתר: :title',
             ],
         ],
     ],
@@ -2114,12 +2174,17 @@ return [
                 'code' => 'קוד',
                 'column' => 'עמודה',
                 'delete-group-btn' => 'מחק קבוצה',
+                'drop-attributes-here' => 'גרור תכונות לכאן',
+                'edit-group-btn' => 'עריכת קבוצה',
                 'edit-group-info' => 'לחיצה כפולה לעריכת קבוצה',
+                'edit-group-title' => 'עריכת קבוצה',
                 'enter-code' => 'הזן קוד',
                 'enter-name' => 'הזן שם',
                 'general' => 'כללי',
                 'group-code-already-exists' => 'קוד קבוצת המאפיינים כבר קיים.',
                 'group-contains-system-attributes' => 'קבוצה זו מכילה מאפיינים מערכתיים. תחילה העבר את המאפיינים המערכתיים לקבוצה אחרת ונסה שוב.',
+                'group-labels' => 'שם בכל שפה',
+                'group-labels-info' => 'השאירו שפה ריקה כדי להשתמש בשם שלמעלה.',
                 'group-name-already-exists' => 'שם קבוצת מאפיינים כבר קיים.',
                 'groups' => 'קבוצות',
                 'groups-info' => 'ניהול קבוצות משפחת המאפיינים',
@@ -2128,6 +2193,7 @@ return [
                 'removal-not-possible' => 'אי אפשר להסיר מאפיינים מערכתיים ממשפחת המאפיינים.',
                 'right-column' => 'עמוד ימני',
                 'save-btn' => 'שמור משפחת מאפיינים',
+                'save-group-btn' => 'שמירת קבוצה',
                 'select-group' => 'אנא בחר קבוצת מאפיינים.',
                 'title' => 'צור משפחת מאפיינים',
                 'unassigned-attributes' => 'מאפיינים לא משויכים',
@@ -2141,12 +2207,17 @@ return [
                 'code' => 'קוד',
                 'column' => 'עמודה',
                 'delete-group-btn' => 'מחק קבוצה',
+                'drop-attributes-here' => 'גרור תכונות לכאן',
+                'edit-group-btn' => 'עריכת קבוצה',
                 'edit-group-info' => 'לחיצה כפולה לעריכת קבוצה',
+                'edit-group-title' => 'עריכת קבוצה',
                 'enter-code' => 'הזן קוד',
                 'enter-name' => 'הזן שם',
                 'general' => 'כללי',
                 'group-code-already-exists' => 'קוד קבוצת המאפיינים כבר קיים.',
                 'group-contains-system-attributes' => 'קבוצה זו מכילה מאפיינים מערכתיים. תחילה העבר את המאפיינים המערכתיים לקבוצה אחרת ונסה שוב.',
+                'group-labels' => 'שם בכל שפה',
+                'group-labels-info' => 'השאירו שפה ריקה כדי להשתמש בשם שלמעלה.',
                 'group-name-already-exists' => 'שם קבוצת מאפיינים כבר קיים.',
                 'groups' => 'קבוצות',
                 'groups-info' => 'ניהול קבוצות משפחת המאפיינים',
@@ -2155,6 +2226,7 @@ return [
                 'removal-not-possible' => 'אי אפשר להסיר מאפיינים מערכתיים ממשפחת המאפיינים.',
                 'right-column' => 'עמוד ימני',
                 'save-btn' => 'שמור משפחת מאפיינים',
+                'save-group-btn' => 'שמירת קבוצה',
                 'select-group' => 'אנא בחר קבוצת מאפיינים.',
                 'title' => 'ערוך משפחת מאפיינים',
                 'unassigned-attributes' => 'מאפיינים לא משויכים',
@@ -4544,6 +4616,78 @@ return [
                         'yes' => 'כן',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'מה החנות צריכה כדי לפעול, ומה דורש את תשומת לבכם.',
+                    'open-settings' => 'פתיחת ההגדרות',
+                    'summary-attention' => ':count מתוך :total בדיקות דורשות תשומת לב.',
+                    'summary-healthy' => 'כל מה שהחנות צריכה פועל.',
+                    'title' => 'בריאות המערכת',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL חייב להתאים לכתובת שממנה החנות מוגשת.',
+                            'title' => 'כתובת החנות',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'שולח התראות חדשות ללוח הניהול ללא רענון.',
+                            'title' => 'התראות בזמן אמת',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'חייב להיות כבוי בסביבת הייצור כדי שדפי השגיאה לא יחשפו דבר.',
+                            'title' => 'מצב דיבוג',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'שומר על שערי המטבע מעודכנים בחנות עם כמה מטבעות.',
+                            'title' => 'שערי חליפין',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'משימות רקע שנעצרו בשגיאה וממתינות לניסיון חוזר.',
+                            'title' => 'משימות שנכשלו',
+                        ],
+
+                        'mail' => [
+                            'info' => 'שולח הודעות דוא"ל של הזמנות, חשבונות וניהול.',
+                            'title' => 'דוא"ל',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'מחזיק את המחירים שלפיהם החנות מציגה מוצרים.',
+                            'title' => 'אינדקס מוצרים',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'מעבד דוא"ל, ייבוא ואינדוקס ברקע.',
+                            'title' => 'עובד התור',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'מאחסן תמונות מוצרים והעלאות אחרות.',
+                            'title' => 'אחסון קבצים',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'מריץ משימות מתוזמנות כגון כללי מחיר, שערי חליפין ותזכורות חשבוניות.',
+                            'title' => 'מתזמן',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'עונה לחיפוש בחנות ולרשימות הקטגוריות.',
+                            'title' => 'מנוע חיפוש',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'דורש תשומת לב',
+                        'healthy' => 'פועל',
+                        'idle' => 'לא בשימוש',
+                        'unconfirmed' => 'טרם אושר',
+                    ],
+                ],
             ],
 
             'add-file' => 'הוסף קובץ',
@@ -4559,6 +4703,7 @@ return [
             'save-message' => 'הגדרות נשמרו בהצלחה',
             'search' => 'חיפוש',
             'select-country' => 'בחר מדינה',
+            'select-options' => 'בחר אפשרויות',
             'select-state' => 'בחר מדינה',
             'title' => 'הגדרות',
 
@@ -5393,6 +5538,13 @@ return [
                         'title' => 'מידע',
                         'title-info' => 'כמה שורות כתובת מציג טופס הכתובת.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'מדינות מותרות',
+                        'allowed-info' => 'השאירו ריק כדי להציע את כל המדינות.',
+                        'title' => 'מדינות',
+                        'title-info' => 'אילו מדינות הלקוחות יכולים לבחור בחנות.',
+                    ],
                 ],
 
                 'captcha' => [
@@ -5889,6 +6041,7 @@ return [
                 'logout' => 'התנתק',
                 'my-account' => 'החשבון שלי',
                 'notifications' => 'התראות',
+                'system-health' => 'בריאות המערכת',
                 'visit-shop' => 'בקר בחנות',
 
                 'mega-search' => [

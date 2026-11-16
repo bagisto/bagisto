@@ -108,6 +108,12 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('login', 'login')->name('shop.api.customers.session.create');
     });
 
+    Route::controller(AddressController::class)->prefix('customer/addresses')->group(function () {
+        Route::get('allowed-countries', 'allowedCountries')->name('shop.api.customers.addresses.allowed_countries');
+
+        Route::get('allowed-states', 'allowedStates')->name('shop.api.customers.addresses.allowed_states');
+    });
+
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
         Route::controller(AddressController::class)->prefix('addresses')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.addresses.index');

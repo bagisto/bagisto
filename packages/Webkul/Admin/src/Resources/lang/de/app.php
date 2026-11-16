@@ -69,12 +69,38 @@ return [
             'orders' => 'Bestellungen',
             'returns' => 'RMA-Anfragen',
             'reviews' => 'Bewertungen',
+            'system' => 'System',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL ist :url, der Shop wird jedoch über :host ausgeliefert. Links in E-Mails werden falsch sein.',
+                'title' => 'APP_URL stimmt nicht mit der Shop-Adresse überein',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Der Broadcasting-Server hat nicht geantwortet, daher werden Benachrichtigungen nicht live aktualisiert.',
+                'title' => 'Echtzeit-Benachrichtigungen sind nicht erreichbar',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Neuer Kunde registriert',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Fehlerseiten zeigen Besuchern interne Details. Setzen Sie APP_DEBUG=false.',
+                'title' => 'Debug-Modus ist in der Produktion aktiv',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Die Kurse wurden nicht planmäßig aktualisiert. Prüfen Sie den Wechselkursdienst und dessen API-Schlüssel.',
+                'title' => 'Wechselkurse sind veraltet',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count fehlgeschlagene Jobs warten. Prüfen Sie sie mit php artisan queue:failed.',
+                'title' => 'Jobs in der Queue schlagen fehl',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed Zeilen verarbeitet',
                 'message-skipped' => ':processed Zeilen verarbeitet, :skipped übersprungen',
                 'title' => 'Import von :type abgeschlossen',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Einige Produkte haben keinen Preisindex. Führen Sie php artisan indexer:index aus.',
+                'title' => 'Produktindex ist unvollständig',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'Der Shop kann keine E-Mails senden, bis SMTP oder Brevo eingerichtet ist.',
+                'title' => 'E-Mail ist nicht konfiguriert',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Erstattung für Bestellung #:order ausgestellt',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Jobs in der Queue :connection warten. Starten Sie ihn mit php artisan queue:work.',
+                'title' => 'Queue-Worker läuft nicht',
+            ],
+
             'return-requested' => [
                 'message' => 'Bestellung #:order von :customer',
                 'title' => 'Neue Rücksendeanfrage #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer hat :product mit :rating von 5 bewertet',
                 'title' => 'Neue Bewertung wartet auf Freigabe',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Geplante Aufgaben werden nicht ausgeführt. Fügen Sie den Cron-Eintrag für schedule:run auf Ihrem Server hinzu.',
+                'title' => 'Scheduler läuft nicht',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Die Suchmaschine hat nicht geantwortet. Prüfen Sie die Verbindungseinstellungen.',
+                'title' => 'Suchmaschine ist nicht erreichbar',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Uploads erreichen den gewählten Speicher nicht. Prüfen Sie die Zugangsdaten.',
+                'title' => 'Externer Speicher ist nicht verfügbar',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Behoben: :title',
             ],
         ],
     ],
@@ -2114,12 +2174,17 @@ return [
                 'code' => 'Code',
                 'column' => 'Spalte',
                 'delete-group-btn' => 'Gruppe löschen',
+                'drop-attributes-here' => 'Attribute hierher ziehen',
+                'edit-group-btn' => 'Gruppe bearbeiten',
                 'edit-group-info' => 'Doppelklicken Sie, um die Gruppe zu bearbeiten',
+                'edit-group-title' => 'Gruppe bearbeiten',
                 'enter-code' => 'Code eingeben',
                 'enter-name' => 'Name eingeben',
                 'general' => 'Allgemein',
                 'group-code-already-exists' => 'Ein Attributgruppencode existiert bereits.',
                 'group-contains-system-attributes' => 'Diese Gruppe enthält Systemattribute. Verschieben Sie zuerst Systemattribute in eine andere Gruppe und versuchen Sie es erneut.',
+                'group-labels' => 'Name in jeder Sprache',
+                'group-labels-info' => 'Lassen Sie eine Sprache leer, um den obigen Namen zu verwenden.',
                 'group-name-already-exists' => 'Ein Attributgruppenname existiert bereits.',
                 'groups' => 'Gruppen',
                 'groups-info' => 'Verwalten Sie Attributfamilien-Gruppen',
@@ -2128,6 +2193,7 @@ return [
                 'removal-not-possible' => 'Sie können Systemattribute nicht aus der Attributfamilie entfernen.',
                 'right-column' => 'Rechte Seitenleiste',
                 'save-btn' => 'Attributfamilie speichern',
+                'save-group-btn' => 'Gruppe speichern',
                 'select-group' => 'Bitte wählen Sie eine Attributgruppe aus.',
                 'title' => 'Attributfamilie erstellen',
                 'unassigned-attributes' => 'Nicht zugewiesene Attribute',
@@ -2141,12 +2207,17 @@ return [
                 'code' => 'Code',
                 'column' => 'Spalte',
                 'delete-group-btn' => 'Gruppe löschen',
+                'drop-attributes-here' => 'Attribute hierher ziehen',
+                'edit-group-btn' => 'Gruppe bearbeiten',
                 'edit-group-info' => 'Doppelklicken Sie, um die Gruppe zu bearbeiten',
+                'edit-group-title' => 'Gruppe bearbeiten',
                 'enter-code' => 'Code eingeben',
                 'enter-name' => 'Name eingeben',
                 'general' => 'Allgemein',
                 'group-code-already-exists' => 'Ein Attributgruppencode existiert bereits.',
                 'group-contains-system-attributes' => 'Diese Gruppe enthält Systemattribute. Verschieben Sie zuerst Systemattribute in eine andere Gruppe und versuchen Sie es erneut.',
+                'group-labels' => 'Name in jeder Sprache',
+                'group-labels-info' => 'Lassen Sie eine Sprache leer, um den obigen Namen zu verwenden.',
                 'group-name-already-exists' => 'Ein Attributgruppenname existiert bereits.',
                 'groups' => 'Gruppen',
                 'groups-info' => 'Verwalten Sie Attributfamilien-Gruppen',
@@ -2155,6 +2226,7 @@ return [
                 'removal-not-possible' => 'Sie können Systemattribute nicht aus der Attributfamilie entfernen.',
                 'right-column' => 'Rechte Seitenleiste',
                 'save-btn' => 'Attributfamilie speichern',
+                'save-group-btn' => 'Gruppe speichern',
                 'select-group' => 'Bitte wählen Sie eine Attributgruppe aus.',
                 'title' => 'Attributfamilie bearbeiten',
                 'unassigned-attributes' => 'Nicht zugewiesene Attribute',
@@ -4544,6 +4616,78 @@ return [
                         'yes' => 'Ja',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Was der Shop zum Betrieb braucht und was Ihre Aufmerksamkeit erfordert.',
+                    'open-settings' => 'Einstellungen öffnen',
+                    'summary-attention' => ':count von :total Prüfungen erfordern Aufmerksamkeit.',
+                    'summary-healthy' => 'Alles, was der Shop braucht, funktioniert.',
+                    'title' => 'Systemzustand',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL muss mit der Adresse übereinstimmen, unter der der Shop ausgeliefert wird.',
+                            'title' => 'Shop-Adresse',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Sendet neue Benachrichtigungen ohne Neuladen an das Admin-Panel.',
+                            'title' => 'Echtzeit-Benachrichtigungen',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Muss in der Produktion aus sein, damit Fehlerseiten nichts preisgeben.',
+                            'title' => 'Debug-Modus',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Hält die Kurse in einem Shop mit mehreren Währungen aktuell.',
+                            'title' => 'Wechselkurse',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Hintergrundjobs, die mit einem Fehler abgebrochen sind und auf einen neuen Versuch warten.',
+                            'title' => 'Fehlgeschlagene Jobs',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Versendet Bestell-, Konto- und Admin-E-Mails.',
+                            'title' => 'E-Mail',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Enthält die Preise, mit denen der Shop Produkte auflistet.',
+                            'title' => 'Produktindex',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Verarbeitet E-Mails, Importe und Indexierung im Hintergrund.',
+                            'title' => 'Queue-Worker',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Speichert Produktbilder und andere Uploads.',
+                            'title' => 'Dateispeicher',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Führt zeitgesteuerte Aufgaben wie Preisregeln, Wechselkurse und Rechnungserinnerungen aus.',
+                            'title' => 'Scheduler',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Beantwortet die Shop-Suche und Kategorielisten.',
+                            'title' => 'Suchmaschine',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Erfordert Aufmerksamkeit',
+                        'healthy' => 'Funktioniert',
+                        'idle' => 'Nicht in Verwendung',
+                        'unconfirmed' => 'Noch nicht bestätigt',
+                    ],
+                ],
             ],
 
             'add-file' => 'Datei hinzufügen',
@@ -4559,6 +4703,7 @@ return [
             'save-message' => 'Konfiguration erfolgreich gespeichert',
             'search' => 'Suche',
             'select-country' => 'Land auswählen',
+            'select-options' => 'Optionen auswählen',
             'select-state' => 'Bundesland auswählen',
             'title' => 'Konfiguration',
 
@@ -5393,6 +5538,13 @@ return [
                         'title' => 'Informationen',
                         'title-info' => 'Wie viele Straßenzeilen das Adressformular anzeigt.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Erlaubte Länder',
+                        'allowed-info' => 'Leer lassen, um alle Länder anzubieten.',
+                        'title' => 'Länder',
+                        'title-info' => 'Welche Länder Kunden im Shop auswählen können.',
+                    ],
                 ],
 
                 'captcha' => [
@@ -5889,6 +6041,7 @@ return [
                 'logout' => 'Abmelden',
                 'my-account' => 'Mein Konto',
                 'notifications' => 'Benachrichtigungen',
+                'system-health' => 'Systemzustand',
                 'visit-shop' => 'Zum Shop',
 
                 'mega-search' => [

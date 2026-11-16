@@ -238,12 +238,6 @@ it('should implement every core section type with a class of the same code', fun
     expect(app($case->getClassName())->getCode())->toBe($case->value);
 })->with(SectionTypeEnum::cases());
 
-it('should keep the deprecated model constants in step with the enum', function () {
-    expect(Section::TYPES)->toBe(SectionTypeEnum::getValues())
-        ->and(Section::FOOTER_LINKS)->toBe(SectionTypeEnum::FOOTER_LINKS->value)
-        ->and(Section::STATIC_CONTENT)->toBe(SectionTypeEnum::STATIC_CONTENT->value);
-});
-
 it('should mark only the footer and the service promises as drawn by the layout', function () {
     $layout = app(SectionSchema::class)
         ->types()

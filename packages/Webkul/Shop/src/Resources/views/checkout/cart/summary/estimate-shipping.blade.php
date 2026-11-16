@@ -33,7 +33,7 @@
                 
                 <!-- Country -->
                 <x-shop::form.control-group class="mb-2.5!">
-                    <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }}">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}">
                         @lang('shop::app.checkout.cart.summary.estimate-shipping.country')
                     </x-shop::form.control-group.label>
 
@@ -41,7 +41,7 @@
                         type="select"
                         name="country"
                         v-model="selectedCountry"
-                        rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                        rules="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.cart.summary.estimate-shipping.country')"
                         :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.country')"
                         @change="selectedState = ''"
@@ -65,7 +65,7 @@
 
                 <!-- State -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }}">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}">
                         @lang('shop::app.checkout.cart.summary.estimate-shipping.state')
                     </x-shop::form.control-group.label>
 
@@ -75,7 +75,7 @@
                                 type="select"
                                 name="state"
                                 v-model="selectedState"
-                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
                                 :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
                             >
@@ -97,7 +97,7 @@
                                 type="text"
                                 name="state"
                                 v-model="selectedState"
-                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
                                 :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.state')"
                             />
@@ -109,14 +109,14 @@
 
                 <!-- Postcode -->
                 <x-shop::form.control-group class="mb-0!">
-                    <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }}">
+                    <x-shop::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}">
                         @lang('shop::app.checkout.cart.summary.estimate-shipping.postcode')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
                         type="text"
                         name="postcode"
-                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
+                        rules="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}|postcode"
                         :label="trans('shop::app.checkout.cart.summary.estimate-shipping.postcode')"
                         :placeholder="trans('shop::app.checkout.cart.summary.estimate-shipping.postcode')"
                     />
@@ -204,7 +204,7 @@
 
             methods: {
                 getCountries() {
-                    this.$axios.get("{{ route('shop.api.core.countries') }}")
+                    this.$axios.get("{{ route('shop.api.customers.addresses.allowed_countries') }}")
                         .then(response => {
                             this.countries = response.data.data;
                         })
@@ -212,7 +212,7 @@
                 },
 
                 getStates() {
-                    this.$axios.get("{{ route('shop.api.core.states') }}")
+                    this.$axios.get("{{ route('shop.api.customers.addresses.allowed_states') }}")
                         .then(response => {
                             this.states = response.data.data;
                         })

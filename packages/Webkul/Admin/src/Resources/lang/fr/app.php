@@ -69,12 +69,38 @@ return [
             'orders' => 'Commandes',
             'returns' => 'Demandes RMA',
             'reviews' => 'Avis',
+            'system' => 'Système',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL vaut :url, mais la boutique est servie depuis :host. Les liens dans les e-mails seront incorrects.',
+                'title' => 'APP_URL ne correspond pas à l\'adresse de la boutique',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Le serveur de diffusion n\'a pas répondu, les notifications ne se mettront donc pas à jour en direct.',
+                'title' => 'Les notifications en temps réel sont injoignables',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Nouveau client inscrit',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Les pages d\'erreur montrent des détails internes aux visiteurs. Définissez APP_DEBUG=false.',
+                'title' => 'Le mode débogage est activé en production',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Les taux n\'ont pas été mis à jour comme prévu. Vérifiez le service de taux de change et sa clé API.',
+                'title' => 'Les taux de change ne sont plus à jour',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count tâches échouées sont en attente. Consultez-les avec php artisan queue:failed.',
+                'title' => 'Des tâches en file d\'attente échouent',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed lignes traitées',
                 'message-skipped' => ':processed lignes traitées, :skipped ignorées',
                 'title' => 'Importation de :type terminée',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Certains produits n\'ont pas d\'index de prix. Exécutez php artisan indexer:index.',
+                'title' => 'L\'index des produits est incomplet',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'La boutique ne peut pas envoyer d\'e-mails tant que SMTP ou Brevo n\'est pas configuré.',
+                'title' => 'L\'e-mail n\'est pas configuré',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Remboursement émis pour la commande #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'Les tâches de la file :connection sont en attente. Démarrez-le avec php artisan queue:work.',
+                'title' => 'Le worker de file d\'attente ne fonctionne pas',
+            ],
+
             'return-requested' => [
                 'message' => 'Commande #:order de :customer',
                 'title' => 'Nouvelle demande de retour #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer a noté :product :rating sur 5',
                 'title' => 'Nouvel avis en attente d\'approbation',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Les tâches planifiées ne s\'exécutent pas. Ajoutez l\'entrée cron schedule:run à votre serveur.',
+                'title' => 'Le planificateur ne fonctionne pas',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Le moteur de recherche n\'a pas répondu. Vérifiez ses paramètres de connexion.',
+                'title' => 'Le moteur de recherche est injoignable',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Les envois n\'atteignent pas le stockage sélectionné. Vérifiez ses identifiants.',
+                'title' => 'Le stockage distant n\'est pas disponible',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Résolu : :title',
             ],
         ],
     ],
@@ -2114,12 +2174,17 @@ return [
                 'code' => 'Code',
                 'column' => 'Colonne',
                 'delete-group-btn' => 'Supprimer le groupe',
+                'drop-attributes-here' => 'Glissez les attributs ici',
+                'edit-group-btn' => 'Modifier le groupe',
                 'edit-group-info' => 'Double-cliquez pour modifier le groupe',
+                'edit-group-title' => 'Modifier le groupe',
                 'enter-code' => 'Saisir le code',
                 'enter-name' => 'Saisir le nom',
                 'general' => 'Général',
                 'group-code-already-exists' => 'Un code de groupe d\'attributs existe déjà.',
                 'group-contains-system-attributes' => 'Ce groupe contient des attributs système. Déplacez d\'abord les attributs système vers un autre groupe et réessayez.',
+                'group-labels' => 'Nom dans chaque langue',
+                'group-labels-info' => 'Laissez une langue vide pour utiliser le nom ci-dessus.',
                 'group-name-already-exists' => 'Un nom de groupe d\'attributs existe déjà.',
                 'groups' => 'Groupes',
                 'groups-info' => 'Gérer les groupes de famille d\'attributs',
@@ -2128,6 +2193,7 @@ return [
                 'removal-not-possible' => 'Vous ne pouvez pas supprimer les attributs système de la famille d\'attributs.',
                 'right-column' => 'Colonne de droite',
                 'save-btn' => 'Enregistrer la famille d\'attributs',
+                'save-group-btn' => 'Enregistrer le groupe',
                 'select-group' => 'Veuillez sélectionner un groupe d\'attributs.',
                 'title' => 'Créer une famille d\'attributs',
                 'unassigned-attributes' => 'Attributs non assignés',
@@ -2141,12 +2207,17 @@ return [
                 'code' => 'Code',
                 'column' => 'Colonne',
                 'delete-group-btn' => 'Supprimer le groupe',
+                'drop-attributes-here' => 'Glissez les attributs ici',
+                'edit-group-btn' => 'Modifier le groupe',
                 'edit-group-info' => 'Double-cliquez pour modifier le groupe',
+                'edit-group-title' => 'Modifier le groupe',
                 'enter-code' => 'Saisir le code',
                 'enter-name' => 'Saisir le nom',
                 'general' => 'Général',
                 'group-code-already-exists' => 'Un code de groupe d\'attributs existe déjà.',
                 'group-contains-system-attributes' => 'Ce groupe contient des attributs système. Déplacez d\'abord les attributs système vers un autre groupe et réessayez.',
+                'group-labels' => 'Nom dans chaque langue',
+                'group-labels-info' => 'Laissez une langue vide pour utiliser le nom ci-dessus.',
                 'group-name-already-exists' => 'Un nom de groupe d\'attributs existe déjà.',
                 'groups' => 'Groupes',
                 'groups-info' => 'Gérer les groupes de famille d\'attributs',
@@ -2155,6 +2226,7 @@ return [
                 'removal-not-possible' => 'Vous ne pouvez pas supprimer les attributs système de la famille d\'attributs.',
                 'right-column' => 'Colonne de droite',
                 'save-btn' => 'Enregistrer la famille d\'attributs',
+                'save-group-btn' => 'Enregistrer le groupe',
                 'select-group' => 'Veuillez sélectionner un groupe d\'attributs.',
                 'title' => 'Modifier la famille d\'attributs',
                 'unassigned-attributes' => 'Attributs non assignés',
@@ -4544,6 +4616,78 @@ return [
                         'yes' => 'Oui',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Ce dont la boutique a besoin pour fonctionner et ce qui demande votre attention.',
+                    'open-settings' => 'Ouvrir les paramètres',
+                    'summary-attention' => ':count vérifications sur :total demandent votre attention.',
+                    'summary-healthy' => 'Tout ce dont la boutique a besoin fonctionne.',
+                    'title' => 'État du système',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL doit correspondre à l\'adresse depuis laquelle la boutique est servie.',
+                            'title' => 'Adresse de la boutique',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Envoie les nouvelles notifications au panneau d\'administration sans rechargement.',
+                            'title' => 'Notifications en temps réel',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Doit être désactivé en production pour que les pages d\'erreur ne révèlent rien.',
+                            'title' => 'Mode débogage',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Maintient les taux à jour dans une boutique à plusieurs devises.',
+                            'title' => 'Taux de change',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Tâches d\'arrière-plan arrêtées sur une erreur et en attente d\'une nouvelle tentative.',
+                            'title' => 'Tâches échouées',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Envoie les e-mails de commande, de compte et d\'administration.',
+                            'title' => 'E-mail',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Contient les prix avec lesquels la boutique liste les produits.',
+                            'title' => 'Index des produits',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Traite les e-mails, les imports et l\'indexation en arrière-plan.',
+                            'title' => 'Worker de file d\'attente',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Stocke les images des produits et les autres envois.',
+                            'title' => 'Stockage des fichiers',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Exécute les tâches planifiées comme les règles de prix, les taux de change et les rappels de factures.',
+                            'title' => 'Planificateur',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Répond à la recherche de la boutique et aux listes de catégories.',
+                            'title' => 'Moteur de recherche',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Demande votre attention',
+                        'healthy' => 'Fonctionne',
+                        'idle' => 'Non utilisé',
+                        'unconfirmed' => 'Pas encore confirmé',
+                    ],
+                ],
             ],
 
             'add-file' => 'Ajouter un fichier',
@@ -4559,6 +4703,7 @@ return [
             'save-message' => 'Configuration enregistrée avec succès',
             'search' => 'Rechercher',
             'select-country' => 'Sélectionner un pays',
+            'select-options' => 'Sélectionner des options',
             'select-state' => 'Sélectionner un état',
             'title' => 'Configuration',
 
@@ -5393,6 +5538,13 @@ return [
                         'title' => 'Informations',
                         'title-info' => 'Le nombre de lignes d\'adresse affichées dans le formulaire.',
                     ],
+
+                    'countries' => [
+                        'allowed' => 'Pays autorisés',
+                        'allowed-info' => 'Laissez vide pour proposer tous les pays.',
+                        'title' => 'Pays',
+                        'title-info' => 'Les pays que les clients peuvent choisir sur la boutique.',
+                    ],
                 ],
 
                 'captcha' => [
@@ -5889,6 +6041,7 @@ return [
                 'logout' => 'Déconnexion',
                 'my-account' => 'Mon Compte',
                 'notifications' => 'Notifications',
+                'system-health' => 'État du système',
                 'visit-shop' => 'Visiter la Boutique',
 
                 'mega-search' => [

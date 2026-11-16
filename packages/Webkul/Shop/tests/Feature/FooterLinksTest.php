@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Storage;
 use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Models\Section;
 
 use function Pest\Laravel\get;
@@ -13,12 +14,12 @@ function makeFooterLinks(array $links): Section
 {
     $channel = core()->getCurrentChannel();
 
-    Section::query()->where('type', Section::FOOTER_LINKS)->delete();
+    Section::query()->where('type', SectionTypeEnum::FOOTER_LINKS->value)->delete();
 
     $section = Section::factory()->create([
         'channel_id' => $channel->id,
         'theme_code' => $channel->theme ?: 'default',
-        'type' => Section::FOOTER_LINKS,
+        'type' => SectionTypeEnum::FOOTER_LINKS->value,
         'status' => 1,
     ]);
 

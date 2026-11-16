@@ -150,7 +150,7 @@
 
             <!-- Country -->
             <x-admin::form.control-group class="mb-4!">
-                <x-admin::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} mt-0!">
+                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }} mt-0!">
                     @lang('admin::app.sales.orders.create.cart.address.country')
                 </x-admin::form.control-group.label>
 
@@ -159,7 +159,7 @@
                     ::name="controlName + '.country'"
                     ::value="address.country"
                     v-model="selectedCountry"
-                    rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                    rules="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}"
                     :label="trans('admin::app.sales.orders.create.cart.address.country')"
                     :placeholder="trans('admin::app.sales.orders.create.cart.address.country')"
                     @change="selectedState = ''"
@@ -183,7 +183,7 @@
 
             <!-- State -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} mt-0!">
+                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }} mt-0!">
                     @lang('admin::app.sales.orders.create.cart.address.state')
                 </x-admin::form.control-group.label>
 
@@ -194,7 +194,7 @@
                             ::name="controlName + '.state'"
                             ::value="address.state"
                             v-model="selectedState"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                             :label="trans('admin::app.sales.orders.create.cart.address.state')"
                             :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
                         >
@@ -217,7 +217,7 @@
                             ::name="controlName + '.state'"
                             ::value="address.state"
                             v-model="selectedState"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
                             :label="trans('admin::app.sales.orders.create.cart.address.state')"
                             :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
                         />
@@ -251,7 +251,7 @@
 
             <!-- Postcode -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} mt-0!">
+                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }} mt-0!">
                     @lang('admin::app.sales.orders.create.cart.address.postcode')
                 </x-admin::form.control-group.label>
 
@@ -259,7 +259,7 @@
                     type="text"
                     ::name="controlName + '.postcode'"
                     ::value="address.postcode"
-                    rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
+                    rules="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}|postcode"
                     :label="trans('admin::app.sales.orders.create.cart.address.postcode')"
                     :placeholder="trans('admin::app.sales.orders.create.cart.address.postcode')"
                 />

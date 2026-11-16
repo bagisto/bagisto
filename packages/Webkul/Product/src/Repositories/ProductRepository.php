@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use DateTimeInterface;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -46,6 +47,17 @@ class ProductRepository extends Repository
     public function model(): string
     {
         return Product::class;
+    }
+
+    /**
+     * Whether any product created before the given time has no price index.
+     */
+    public function hasUnindexedPrices(DateTimeInterface $createdBefore): bool
+    {
+        return $this->model->newQuery()
+            ->where('created_at', '<', $createdBefore)
+            ->whereDoesntHave('price_indices')
+            ->exists();
     }
 
     /**

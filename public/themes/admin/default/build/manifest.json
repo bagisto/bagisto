@@ -268,7 +268,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-B7iipWfg.css",
+    "file": "assets/app-w74OFWbt.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -487,6 +487,10 @@
   "src/Resources/assets/images/settings/store.svg": {
     "file": "assets/store-DyMTCGK9.svg",
     "src": "src/Resources/assets/images/settings/store.svg"
+  },
+  "src/Resources/assets/images/settings/system-health.svg": {
+    "file": "assets/system-health-BsSxRA7o.svg",
+    "src": "src/Resources/assets/images/settings/system-health.svg"
   },
   "src/Resources/assets/images/settings/tax.svg": {
     "file": "assets/tax-BQgwf9VP.svg",

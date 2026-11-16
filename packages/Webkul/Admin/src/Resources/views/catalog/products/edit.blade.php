@@ -186,7 +186,7 @@
                                     class="mb-4 text-base font-semibold text-gray-800 dark:text-white"
                                     v-pre
                                 >
-                                    {{ $group->name }}
+                                    {{ $group->name ?: $group->admin_name }}
                                 </p>
 
                                 @if ($group->code == 'meta_description')

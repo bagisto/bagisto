@@ -746,36 +746,6 @@ class Core
     }
 
     /**
-     * Is country required.
-     *
-     * @return bool
-     */
-    public function isCountryRequired()
-    {
-        return (bool) $this->getConfigData('customer.address.requirements.country');
-    }
-
-    /**
-     * Is state required.
-     *
-     * @return bool
-     */
-    public function isStateRequired()
-    {
-        return (bool) $this->getConfigData('customer.address.requirements.state');
-    }
-
-    /**
-     * Is postcode required.
-     *
-     * @return bool
-     */
-    public function isPostCodeRequired()
-    {
-        return (bool) $this->getConfigData('customer.address.requirements.postcode');
-    }
-
-    /**
      * Convert empty strings to null.
      *
      * @param  array  $array

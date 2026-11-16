@@ -69,12 +69,38 @@ return [
             'orders' => '注文',
             'returns' => 'RMAリクエスト',
             'reviews' => 'レビュー',
+            'system' => 'システム',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL は :url ですが、ストアは :host から配信されています。メール内のリンクが正しくなくなります。',
+                'title' => 'APP_URL がストアのアドレスと一致しません',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'ブロードキャストサーバーが応答しないため、通知はリアルタイムで更新されません。',
+                'title' => 'リアルタイム通知に接続できません',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => '新しい顧客が登録しました',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'エラーページで内部情報が訪問者に表示されます。APP_DEBUG=false を設定してください。',
+                'title' => '本番環境でデバッグモードが有効です',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'レートがスケジュールどおりに更新されていません。為替レートサービスと API キーを確認してください。',
+                'title' => '為替レートが古くなっています',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count 件の失敗したジョブが待機中です。php artisan queue:failed で確認してください。',
+                'title' => 'キューのジョブが失敗しています',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed 行を処理しました',
                 'message-skipped' => ':processed 行を処理し、:skipped 行をスキップしました',
                 'title' => ':type のインポートが完了しました',
+            ],
+
+            'index-incomplete' => [
+                'message' => '価格インデックスのない商品があります。php artisan indexer:index を実行してください。',
+                'title' => '商品インデックスが不完全です',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'SMTP または Brevo を設定するまで、ストアはメールを送信できません。',
+                'title' => 'メールが設定されていません',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => '注文 #:order の返金を発行しました',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => ':connection キューのジョブが待機中です。php artisan queue:work で起動してください。',
+                'title' => 'キューワーカーが動作していません',
+            ],
+
             'return-requested' => [
                 'message' => ':customer 様の注文 #:order',
                 'title' => '新しい返品リクエスト #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer 様が :product を 5 段階中 :rating と評価しました',
                 'title' => '承認待ちの新しいレビュー',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'スケジュールされたタスクが実行されていません。サーバーに schedule:run の cron エントリを追加してください。',
+                'title' => 'スケジューラーが動作していません',
+            ],
+
+            'search-unreachable' => [
+                'message' => '検索エンジンが応答しませんでした。接続設定を確認してください。',
+                'title' => '検索エンジンに接続できません',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'アップロードが選択したストレージに届きません。認証情報を確認してください。',
+                'title' => 'リモートストレージを利用できません',
+            ],
+
+            'system' => [
+                'resolved-title' => '解決済み: :title',
             ],
         ],
     ],
@@ -2114,12 +2174,17 @@ return [
                 'code' => 'コード',
                 'column' => 'カラム',
                 'delete-group-btn' => 'グループを削除',
+                'drop-attributes-here' => 'ここに属性をドラッグ',
+                'edit-group-btn' => 'グループを編集',
                 'edit-group-info' => 'ダブルクリックしてグループを編集',
+                'edit-group-title' => 'グループを編集',
                 'enter-code' => 'コードを入力',
                 'enter-name' => '名前を入力',
                 'general' => '一般',
                 'group-code-already-exists' => '属性グループコードはすでに存在しています。',
                 'group-contains-system-attributes' => 'このグループにはシステム属性が含まれています。まずシステム属性を別のグループに移動してから再試行してください。',
+                'group-labels' => '各ロケールの名前',
+                'group-labels-info' => '上の名前を使用する場合はロケールを空欄にしてください。',
                 'group-name-already-exists' => '属性グループ名はすでに存在します。',
                 'groups' => 'グループ',
                 'groups-info' => '属性ファミリーグループを管理',
@@ -2128,6 +2193,7 @@ return [
                 'removal-not-possible' => '属性ファミリーからシステム属性を削除することはできません。',
                 'right-column' => '右側カラム',
                 'save-btn' => '属性ファミリーを保存',
+                'save-group-btn' => 'グループを保存',
                 'select-group' => '属性グループを選択してください。',
                 'title' => '属性ファミリーを作成',
                 'unassigned-attributes' => '未割り当ての属性',
@@ -2141,12 +2207,17 @@ return [
                 'code' => 'コード',
                 'column' => 'カラム',
                 'delete-group-btn' => 'グループを削除',
+                'drop-attributes-here' => 'ここに属性をドラッグ',
+                'edit-group-btn' => 'グループを編集',
                 'edit-group-info' => 'ダブルクリックしてグループを編集',
+                'edit-group-title' => 'グループを編集',
                 'enter-code' => 'コードを入力',
                 'enter-name' => '名前を入力',
                 'general' => '一般',
                 'group-code-already-exists' => '属性グループコードはすでに存在しています。',
                 'group-contains-system-attributes' => 'このグループにはシステム属性が含まれています。まずシステム属性を別のグループに移動してから再試行してください。',
+                'group-labels' => '各ロケールの名前',
+                'group-labels-info' => '上の名前を使用する場合はロケールを空欄にしてください。',
                 'group-name-already-exists' => '属性グループ名はすでに存在します。',
                 'groups' => 'グループ',
                 'groups-info' => '属性ファミリーグループを管理',
@@ -2155,6 +2226,7 @@ return [
                 'removal-not-possible' => '属性ファミリーからシステム属性を削除することはできません。',
                 'right-column' => '右側カラム',
                 'save-btn' => '属性ファミリーを保存',
+                'save-group-btn' => 'グループを保存',
                 'select-group' => '属性グループを選択してください。',
                 'title' => '属性ファミリーを編集',
                 'unassigned-attributes' => '未割り当ての属性',
@@ -4544,6 +4616,78 @@ return [
                         'yes' => 'はい',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'ストアの運用に必要なものと、対応が必要なもの。',
+                    'open-settings' => '設定を開く',
+                    'summary-attention' => ':total 件中 :count 件のチェックに対応が必要です。',
+                    'summary-healthy' => 'ストアに必要なものはすべて動作しています。',
+                    'title' => 'システムヘルス',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL はストアが配信されているアドレスと一致している必要があります。',
+                            'title' => 'ストアのアドレス',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => '再読み込みなしで新しい通知を管理パネルに送ります。',
+                            'title' => 'リアルタイム通知',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'エラーページで情報が漏れないよう、本番環境ではオフにする必要があります。',
+                            'title' => 'デバッグモード',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => '複数通貨のストアで通貨レートを最新に保ちます。',
+                            'title' => '為替レート',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'エラーで停止し、再試行を待っているバックグラウンドジョブです。',
+                            'title' => '失敗したジョブ',
+                        ],
+
+                        'mail' => [
+                            'info' => '注文、アカウント、管理者向けのメールを送信します。',
+                            'title' => 'メール',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'ストアフロントが商品を表示する際の価格を保持します。',
+                            'title' => '商品インデックス',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'メール、インポート、インデックス作成をバックグラウンドで処理します。',
+                            'title' => 'キューワーカー',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => '商品画像やその他のアップロードを保存します。',
+                            'title' => 'ファイルストレージ',
+                        ],
+
+                        'scheduler' => [
+                            'info' => '価格ルール、為替レート、請求書リマインダーなどの定期タスクを実行します。',
+                            'title' => 'スケジューラー',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'ストアフロントの検索とカテゴリ一覧に応答します。',
+                            'title' => '検索エンジン',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => '対応が必要',
+                        'healthy' => '動作中',
+                        'idle' => '未使用',
+                        'unconfirmed' => '未確認',
+                    ],
+                ],
             ],
 
             'add-file' => 'ファイルを追加',
@@ -4559,6 +4703,7 @@ return [
             'save-message' => '設定が正常に保存されました',
             'search' => '検索',
             'select-country' => '国を選択',
+            'select-options' => 'オプションを選択',
             'select-state' => '都道府県を選択',
             'title' => '設定',
 
@@ -5393,6 +5538,13 @@ return [
                         'title' => '情報',
                         'title-info' => '住所フォームに表示する住所行の数。',
                     ],
+
+                    'countries' => [
+                        'allowed' => '許可する国',
+                        'allowed-info' => '空のままにすると、すべての国が表示されます。',
+                        'title' => '国',
+                        'title-info' => 'ストアフロントでお客様が選択できる国。',
+                    ],
                 ],
 
                 'captcha' => [
@@ -5889,6 +6041,7 @@ return [
                 'logout' => 'ログアウト',
                 'my-account' => 'マイアカウント',
                 'notifications' => '通知',
+                'system-health' => 'システムヘルス',
                 'visit-shop' => 'ショップを訪問',
 
                 'mega-search' => [

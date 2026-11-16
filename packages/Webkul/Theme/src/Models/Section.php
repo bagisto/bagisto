@@ -7,69 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Theme\Contracts\Section as SectionContract;
 use Webkul\Theme\Database\Factories\SectionFactory;
-use Webkul\Theme\Enums\SectionTypeEnum;
 use Webkul\Theme\Sections\SectionType;
 use Webkul\Theme\SectionSchema;
 
 class Section extends TranslatableModel implements SectionContract
 {
     use HasFactory;
-
-    /**
-     * Image carousel type.
-     *
-     * @deprecated Use SectionTypeEnum::IMAGE_CAROUSEL instead.
-     */
-    public const IMAGE_CAROUSEL = SectionTypeEnum::IMAGE_CAROUSEL->value;
-
-    /**
-     * Product carousel type.
-     *
-     * @deprecated Use SectionTypeEnum::PRODUCT_CAROUSEL instead.
-     */
-    public const PRODUCT_CAROUSEL = SectionTypeEnum::PRODUCT_CAROUSEL->value;
-
-    /**
-     * Category carousel type.
-     *
-     * @deprecated Use SectionTypeEnum::CATEGORY_CAROUSEL instead.
-     */
-    public const CATEGORY_CAROUSEL = SectionTypeEnum::CATEGORY_CAROUSEL->value;
-
-    /**
-     * Footer links type.
-     *
-     * @deprecated Use SectionTypeEnum::FOOTER_LINKS instead.
-     */
-    public const FOOTER_LINKS = SectionTypeEnum::FOOTER_LINKS->value;
-
-    /**
-     * Static content type.
-     *
-     * @deprecated Use SectionTypeEnum::STATIC_CONTENT instead.
-     */
-    public const STATIC_CONTENT = SectionTypeEnum::STATIC_CONTENT->value;
-
-    /**
-     * Services content type.
-     *
-     * @deprecated Use SectionTypeEnum::SERVICES_CONTENT instead.
-     */
-    public const SERVICES_CONTENT = SectionTypeEnum::SERVICES_CONTENT->value;
-
-    /**
-     * Every core section type.
-     *
-     * @deprecated Use SectionSchema::types() for the types a theme offers.
-     */
-    public const TYPES = [
-        self::IMAGE_CAROUSEL,
-        self::PRODUCT_CAROUSEL,
-        self::CATEGORY_CAROUSEL,
-        self::FOOTER_LINKS,
-        self::STATIC_CONTENT,
-        self::SERVICES_CONTENT,
-    ];
 
     /**
      * The attributes that are translatable.

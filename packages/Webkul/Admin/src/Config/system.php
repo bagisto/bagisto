@@ -3056,6 +3056,21 @@ return [
             ],
         ],
     ], [
+        'key' => 'customer.address.countries',
+        'name' => 'admin::app.configuration.index.customer.address.countries.title',
+        'info' => 'admin::app.configuration.index.customer.address.countries.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'allowed',
+                'title' => 'admin::app.configuration.index.customer.address.countries.allowed',
+                'info' => 'admin::app.configuration.index.customer.address.countries.allowed-info',
+                'type' => 'multiselect',
+                'options' => 'Webkul\Core\Repositories\CountryRepository@getConfigOptions',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'customer.captcha',
         'name' => 'admin::app.configuration.index.customer.captcha.title',
         'info' => 'admin::app.configuration.index.customer.captcha.info',
@@ -3737,6 +3752,31 @@ return [
                 'title' => 'admin::app.configuration.index.about.general.title',
                 'type' => 'blade',
                 'path' => 'admin::configuration.custom-views.about',
+            ],
+        ],
+    ], [
+        'key' => 'about.system_health',
+        'name' => 'admin::app.configuration.index.about.system-health.title',
+        'info' => 'admin::app.configuration.index.about.system-health.info',
+        'icon' => 'settings/system-health.svg',
+        'sort' => 2,
+        'layout' => [
+            'title_section' => false,
+            'save_button' => false,
+            'channel_switcher' => false,
+            'locale_switcher' => false,
+        ],
+    ], [
+        'key' => 'about.system_health.checks',
+        'name' => 'admin::app.configuration.index.about.system-health.title',
+        'info' => 'admin::app.configuration.index.about.system-health.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'checks',
+                'title' => 'admin::app.configuration.index.about.system-health.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.system-health',
             ],
         ],
     ],
