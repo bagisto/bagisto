@@ -134,6 +134,14 @@
                                 >
                                     <i class="icon-drag shrink-0 cursor-grab text-lg text-gray-400 dark:text-gray-500"></i>
 
+                                    <i
+                                        class="shrink-0 text-lg"
+                                        :class="[
+                                            element.is_user_defined ? 'icon-folder' : 'icon-folder-block',
+                                            isSelected(element) ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400',
+                                        ]"
+                                    ></i>
+
                                     <span
                                         class="min-w-0 flex-1 text-sm font-semibold wrap-break-word"
                                         :class="isSelected(element) ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-white'"

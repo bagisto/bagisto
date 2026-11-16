@@ -39,6 +39,8 @@
                             <div class="flex items-center gap-1.5 px-2 py-2">
                                 <div class="shimmer h-4.5 w-4.5"></div>
 
+                                <div class="shimmer h-4.5 w-4.5"></div>
+
                                 <div class="shimmer h-4 w-24"></div>
                             </div>
 
