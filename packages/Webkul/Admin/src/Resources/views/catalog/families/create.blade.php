@@ -203,7 +203,7 @@
                                         <!-- Group Name -->
                                         <div
                                             class="group_node group flex max-w-max cursor-pointer gap-1.5 rounded-sm py-1.5 text-gray-600 transition-all group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-white ltr:pr-1.5 rtl:pl-1.5"
-                                            :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
+                                            :class="{'bg-blue-600 text-white dark:text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click.stop="groupSelected(element)"
                                         >
                                             <i class="icon-drag cursor-grab text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
@@ -229,8 +229,8 @@
 
                                             <input
                                                 type="text"
+                                                class="group_node rounded-sm border border-white bg-white px-1.5 text-sm text-gray-800! outline-hidden dark:border-gray-900 dark:bg-gray-900 dark:text-white!"
                                                 :name="'attribute_groups[' + element.id + '][admin_name]'"
-                                                class="group_node text-sm text-gray-600! dark:text-gray-300!"
                                                 v-model="element.admin_name"
                                                 v-show="editableGroup.id == element.id"
                                             />
@@ -571,7 +571,7 @@
                     },
 
                     /**
-                     * Select a group, and make it renameable in place on a second click.
+                     * Select a group, and make it renameable in place on a second click, ready to type into.
                      */
                     groupSelected(group) {
                         if (this.selectedGroup.id) {
@@ -585,6 +585,10 @@
                         }
 
                         this.selectedGroup = group;
+
+                        if (this.editableGroup.id == group.id) {
+                            this.$nextTick(() => this.$el.querySelector(`input[name="attribute_groups[${group.id}][admin_name]"]`)?.focus());
+                        }
                     },
 
                     /**
