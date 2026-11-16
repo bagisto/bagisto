@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11580 [feature] - Attribute groups can now be named in each locale from the attribute family screen, with existing names carried over. The `attribute_groups.name` column is now `admin_name`.
 
+- #11343 [feature] - Admin notifications now report system problems, such as a stopped queue worker or scheduler and unconfigured mail, and say when each is resolved. A System Health page under Configure → About lists every check.
+
 - #11575 [fixed] - An order for a product that does not manage its stock could not be shipped, so it never completed. It now ships whatever the inventory source holds.
 
 - #11574 [fixed] - Content written in the editor lost its formatting on the storefront, with lists showing no bullets or numbers and headings, tables and rules flattened. Product, category, CMS and GDPR pages now show it as the editor did, floated images, column widths and new-tab links included.

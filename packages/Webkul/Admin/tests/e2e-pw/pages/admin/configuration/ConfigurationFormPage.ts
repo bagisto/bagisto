@@ -31,7 +31,17 @@ export abstract class ConfigurationFormPage extends BasePage {
     }
 
     protected selectInput(name: string): Locator {
-        return this.page.locator(`select[name="${name}"]`);
+        return this.page.locator(`input[type="hidden"][name="${name}"]`);
+    }
+
+    protected selectTrigger(name: string): Locator {
+        return this.page.locator(`[role="combobox"][name="${name}"]`);
+    }
+
+    protected selectChoice(name: string, value: string): Locator {
+        return this.page.locator(
+            `[role="listbox"][id="${name}-options"] [role="option"][data-value="${value}"]`,
+        );
     }
 
     private editorFrameSelector(name: string): string {
@@ -160,7 +170,8 @@ export abstract class ConfigurationFormPage extends BasePage {
 
         await this.setIfRendered(this.selectInput(name), value, async () => {
             if ((await this.selectInput(name).inputValue()) !== value) {
-                await this.selectInput(name).selectOption(value);
+                await this.selectTrigger(name).click();
+                await this.selectChoice(name, value).click();
             }
 
             await expect(this.selectInput(name)).toHaveValue(value);

@@ -69,12 +69,38 @@ return [
             'orders' => 'Siparişler',
             'returns' => 'RMA Talepleri',
             'reviews' => 'Değerlendirmeler',
+            'system' => 'Sistem',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL değeri :url, ancak mağaza :host üzerinden sunuluyor. E-postalardaki bağlantılar hatalı olacak.',
+                'title' => 'APP_URL mağaza adresiyle eşleşmiyor',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Yayın sunucusu yanıt vermedi, bu nedenle bildirimler canlı güncellenmeyecek.',
+                'title' => 'Gerçek zamanlı bildirimlere ulaşılamıyor',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Yeni müşteri kaydoldu',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Hata sayfaları ziyaretçilere dahili ayrıntıları gösteriyor. APP_DEBUG=false olarak ayarlayın.',
+                'title' => 'Üretim ortamında hata ayıklama modu açık',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'Kurlar zamanında güncellenmedi. Döviz kuru hizmetini ve API anahtarını kontrol edin.',
+                'title' => 'Döviz kurları güncel değil',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count başarısız iş bekliyor. php artisan queue:failed ile inceleyin.',
+                'title' => 'Kuyruktaki işler başarısız oluyor',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed satır işlendi',
                 'message-skipped' => ':processed satır işlendi, :skipped satır atlandı',
                 'title' => ':type içe aktarımı tamamlandı',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Bazı ürünlerin fiyat dizini yok. php artisan indexer:index komutunu çalıştırın.',
+                'title' => 'Ürün dizini eksik',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'SMTP veya Brevo ayarlanana kadar mağaza e-posta gönderemez.',
+                'title' => 'E-posta yapılandırılmamış',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => '#:order numaralı sipariş için iade yapıldı',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => ':connection kuyruğundaki işler bekliyor. php artisan queue:work ile başlatın.',
+                'title' => 'Kuyruk işçisi çalışmıyor',
+            ],
+
             'return-requested' => [
                 'message' => ':customer tarafından #:order numaralı sipariş',
                 'title' => 'Yeni iade talebi #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer, :product ürününe 5 üzerinden :rating verdi',
                 'title' => 'Onay bekleyen yeni değerlendirme',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Zamanlanmış görevler çalışmıyor. Sunucunuza schedule:run cron kaydını ekleyin.',
+                'title' => 'Zamanlayıcı çalışmıyor',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Arama motoru yanıt vermedi. Bağlantı ayarlarını kontrol edin.',
+                'title' => 'Arama motoruna ulaşılamıyor',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'Yüklemeler seçilen depolamaya ulaşamıyor. Kimlik bilgilerini kontrol edin.',
+                'title' => 'Uzak depolama kullanılamıyor',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Çözüldü: :title',
             ],
         ],
     ],
@@ -4556,6 +4616,78 @@ return [
                         'yes' => 'Evet',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Mağazanın çalışması için gerekenler ve ilginizi gerektirenler.',
+                    'open-settings' => 'Ayarları aç',
+                    'summary-attention' => ':total denetimden :count tanesi ilgi gerektiriyor.',
+                    'summary-healthy' => 'Mağazanın ihtiyaç duyduğu her şey çalışıyor.',
+                    'title' => 'Sistem Sağlığı',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL, mağazanın sunulduğu adresle eşleşmelidir.',
+                            'title' => 'Mağaza adresi',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Yeni bildirimleri sayfa yenilenmeden yönetim paneline gönderir.',
+                            'title' => 'Gerçek zamanlı bildirimler',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Hata sayfalarının hiçbir şey açığa çıkarmaması için üretimde kapalı olmalıdır.',
+                            'title' => 'Hata ayıklama modu',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Birden çok para birimli mağazada kurları güncel tutar.',
+                            'title' => 'Döviz kurları',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Hatayla duran ve yeniden denenmeyi bekleyen arka plan işleri.',
+                            'title' => 'Başarısız işler',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Sipariş, hesap ve yönetici e-postalarını gönderir.',
+                            'title' => 'E-posta',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Mağazanın ürünleri listelerken kullandığı fiyatları tutar.',
+                            'title' => 'Ürün dizini',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'E-postaları, içe aktarmaları ve dizinlemeyi arka planda işler.',
+                            'title' => 'Kuyruk işçisi',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Ürün görsellerini ve diğer yüklemeleri saklar.',
+                            'title' => 'Dosya depolama',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Fiyat kuralları, döviz kurları ve fatura hatırlatmaları gibi zamanlanmış görevleri çalıştırır.',
+                            'title' => 'Zamanlayıcı',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Mağaza aramasını ve kategori listelerini yanıtlar.',
+                            'title' => 'Arama motoru',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'İlgi gerektiriyor',
+                        'healthy' => 'Çalışıyor',
+                        'idle' => 'Kullanılmıyor',
+                        'unconfirmed' => 'Henüz doğrulanmadı',
+                    ],
+                ],
             ],
 
             'add-file' => 'Dosya Ekle',
@@ -4571,6 +4703,7 @@ return [
             'save-message' => 'Ayarlar başarıyla kaydedildi',
             'search' => 'Ara',
             'select-country' => 'Ülke Seçin',
+            'select-options' => 'Seçenekleri Seçin',
             'select-state' => 'Bölge Seçin',
             'title' => 'Ayarlar',
 
@@ -5901,6 +6034,7 @@ return [
                 'logout' => 'Çıkış',
                 'my-account' => 'Hesabım',
                 'notifications' => 'Bildirimler',
+                'system-health' => 'Sistem Sağlığı',
                 'visit-shop' => 'Mağazayı Ziyaret Et',
 
                 'mega-search' => [

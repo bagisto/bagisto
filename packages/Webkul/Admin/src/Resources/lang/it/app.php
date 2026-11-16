@@ -69,12 +69,38 @@ return [
             'orders' => 'Ordini',
             'returns' => 'Richieste RMA',
             'reviews' => 'Recensioni',
+            'system' => 'Sistema',
         ],
 
         'types' => [
+            'app-url-mismatch' => [
+                'message' => 'APP_URL è :url, ma il negozio è servito da :host. I link nelle email saranno errati.',
+                'title' => 'APP_URL non corrisponde all\'indirizzo del negozio',
+            ],
+
+            'broadcast-unreachable' => [
+                'message' => 'Il server di broadcasting non ha risposto, quindi le notifiche non si aggiorneranno in tempo reale.',
+                'title' => 'Le notifiche in tempo reale non sono raggiungibili',
+            ],
+
             'customer-registered' => [
                 'message' => ':name · :email',
                 'title' => 'Nuovo cliente registrato',
+            ],
+
+            'debug-mode-enabled' => [
+                'message' => 'Le pagine di errore mostrano dettagli interni ai visitatori. Imposta APP_DEBUG=false.',
+                'title' => 'La modalità debug è attiva in produzione',
+            ],
+
+            'exchange-rates-stale' => [
+                'message' => 'I tassi non sono stati aggiornati come pianificato. Controlla il servizio dei tassi di cambio e la sua chiave API.',
+                'title' => 'I tassi di cambio non sono aggiornati',
+            ],
+
+            'failed-jobs' => [
+                'message' => ':count job falliti sono in attesa. Controllali con php artisan queue:failed.',
+                'title' => 'I job in coda stanno fallendo',
             ],
 
             'gdpr-requested' => [
@@ -87,6 +113,16 @@ return [
                 'message' => ':processed righe elaborate',
                 'message-skipped' => ':processed righe elaborate, :skipped saltate',
                 'title' => 'Importazione di :type completata',
+            ],
+
+            'index-incomplete' => [
+                'message' => 'Alcuni prodotti non hanno un indice dei prezzi. Esegui php artisan indexer:index.',
+                'title' => 'L\'indice dei prodotti è incompleto',
+            ],
+
+            'mail-not-configured' => [
+                'message' => 'Il negozio non può inviare email finché SMTP o Brevo non è configurato.',
+                'title' => 'L\'email non è configurata',
             ],
 
             'order' => [
@@ -106,6 +142,11 @@ return [
                 'title' => 'Rimborso emesso per l\'ordine #:order',
             ],
 
+            'queue-worker-stopped' => [
+                'message' => 'I job nella coda :connection sono in attesa. Avvialo con php artisan queue:work.',
+                'title' => 'Il worker della coda non è in esecuzione',
+            ],
+
             'return-requested' => [
                 'message' => 'Ordine #:order di :customer',
                 'title' => 'Nuova richiesta di reso #:id',
@@ -114,6 +155,25 @@ return [
             'review-created' => [
                 'message' => ':customer ha valutato :product :rating su 5',
                 'title' => 'Nuova recensione in attesa di approvazione',
+            ],
+
+            'scheduler-stopped' => [
+                'message' => 'Le attività pianificate non vengono eseguite. Aggiungi la voce cron schedule:run al tuo server.',
+                'title' => 'Lo scheduler non è in esecuzione',
+            ],
+
+            'search-unreachable' => [
+                'message' => 'Il motore di ricerca non ha risposto. Controlla le impostazioni di connessione.',
+                'title' => 'Il motore di ricerca non è raggiungibile',
+            ],
+
+            'storage-unreachable' => [
+                'message' => 'I caricamenti non raggiungono l\'archiviazione selezionata. Controlla le credenziali.',
+                'title' => 'L\'archiviazione remota non è disponibile',
+            ],
+
+            'system' => [
+                'resolved-title' => 'Risolto: :title',
             ],
         ],
     ],
@@ -4556,6 +4616,78 @@ return [
                         'yes' => 'Sì',
                     ],
                 ],
+
+                'system-health' => [
+                    'info' => 'Ciò di cui il negozio ha bisogno per funzionare e ciò che richiede la tua attenzione.',
+                    'open-settings' => 'Apri impostazioni',
+                    'summary-attention' => ':count controlli su :total richiedono attenzione.',
+                    'summary-healthy' => 'Tutto ciò di cui il negozio ha bisogno funziona.',
+                    'title' => 'Stato del sistema',
+
+                    'checks' => [
+                        'application-url' => [
+                            'info' => 'APP_URL deve corrispondere all\'indirizzo da cui il negozio è servito.',
+                            'title' => 'Indirizzo del negozio',
+                        ],
+
+                        'broadcasting' => [
+                            'info' => 'Invia le nuove notifiche al pannello di amministrazione senza ricaricare.',
+                            'title' => 'Notifiche in tempo reale',
+                        ],
+
+                        'debug-mode' => [
+                            'info' => 'Deve essere disattivata in produzione affinché le pagine di errore non rivelino nulla.',
+                            'title' => 'Modalità debug',
+                        ],
+
+                        'exchange-rates' => [
+                            'info' => 'Mantiene aggiornati i tassi in un negozio con più valute.',
+                            'title' => 'Tassi di cambio',
+                        ],
+
+                        'failed-jobs' => [
+                            'info' => 'Job in background interrotti da un errore e in attesa di un nuovo tentativo.',
+                            'title' => 'Job falliti',
+                        ],
+
+                        'mail' => [
+                            'info' => 'Invia le email di ordini, account e amministrazione.',
+                            'title' => 'Email',
+                        ],
+
+                        'product-index' => [
+                            'info' => 'Contiene i prezzi con cui il negozio elenca i prodotti.',
+                            'title' => 'Indice dei prodotti',
+                        ],
+
+                        'queue-worker' => [
+                            'info' => 'Elabora email, importazioni e indicizzazione in background.',
+                            'title' => 'Worker della coda',
+                        ],
+
+                        'remote-storage' => [
+                            'info' => 'Conserva le immagini dei prodotti e gli altri caricamenti.',
+                            'title' => 'Archiviazione file',
+                        ],
+
+                        'scheduler' => [
+                            'info' => 'Esegue attività pianificate come regole di prezzo, tassi di cambio e promemoria delle fatture.',
+                            'title' => 'Scheduler',
+                        ],
+
+                        'search-engine' => [
+                            'info' => 'Risponde alla ricerca del negozio e agli elenchi di categorie.',
+                            'title' => 'Motore di ricerca',
+                        ],
+                    ],
+
+                    'states' => [
+                        'failing' => 'Richiede attenzione',
+                        'healthy' => 'Funziona',
+                        'idle' => 'Non in uso',
+                        'unconfirmed' => 'Non ancora confermato',
+                    ],
+                ],
             ],
 
             'add-file' => 'Aggiungi File',
@@ -4571,6 +4703,7 @@ return [
             'save-message' => 'Configurazione salvata con successo',
             'search' => 'Cerca',
             'select-country' => 'Seleziona Paese',
+            'select-options' => 'Seleziona Opzioni',
             'select-state' => 'Seleziona Stato',
             'title' => 'Configurazione',
 
@@ -5901,6 +6034,7 @@ return [
                 'logout' => 'Logout',
                 'my-account' => 'Il mio account',
                 'notifications' => 'Notifiche',
+                'system-health' => 'Stato del sistema',
                 'visit-shop' => 'Visita il Negozio',
 
                 'mega-search' => [

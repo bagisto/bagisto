@@ -125,6 +125,23 @@
                         @lang('admin::app.components.layouts.header.my-account')
                     </a>
 
+                    <!-- System Health -->
+                    @if (bouncer()->hasPermission('configuration'))
+                        <a
+                            class="flex cursor-pointer items-center justify-between gap-3 px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950 sm:px-5 sm:text-base"
+                            href="{{ route('admin.configuration.index', ['slug' => 'about', 'slug2' => 'system_health']) }}"
+                        >
+                            @lang('admin::app.components.layouts.header.system-health')
+
+                            <!-- Problems Counter -->
+                            @if ($problems = app(\Webkul\Admin\SystemHealth\SystemHealth::class)->problems())
+                                <span class="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-600 px-1.5 text-xs font-semibold text-white">
+                                    {{ $problems }}
+                                </span>
+                            @endif
+                        </a>
+                    @endif
+
                     <!-- Admin Logout -->
                     <x-admin::form
                         method="DELETE"

@@ -119,7 +119,11 @@ class ExchangeRateController extends Controller
     public function updateRates(): RedirectResponse
     {
         try {
+            Event::dispatch('core.exchange_rate.update_rates.before');
+
             ExchangeRate::resolve()->updateRates();
+
+            Event::dispatch('core.exchange_rate.update_rates.after');
 
             session()->flash('success', trans('admin::app.settings.exchange-rates.index.update-success'));
         } catch (\Throwable $e) {

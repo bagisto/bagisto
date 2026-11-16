@@ -71,6 +71,18 @@ class NotificationRepository extends Repository
     }
 
     /**
+     * The newest notification of a type raised for an audience, if any.
+     */
+    public function latestOf(string $type, string $audience): ?Notification
+    {
+        return $this->model->newQuery()
+            ->where('audience', $audience)
+            ->where('type', $type)
+            ->latest('id')
+            ->first();
+    }
+
+    /**
      * Mark a notification read for the reader.
      */
     public function markRead(int $notificationId, Model $reader): void
