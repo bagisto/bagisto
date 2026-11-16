@@ -1,155 +1,99 @@
-name: bagisto
-
+# Môi trường DEV local: app (php-fpm) + nginx + mysql + redis (+ elasticsearch tùy chọn) + mailpit
+# Chạy:            docker compose up -d --build
+# Kèm search:      docker compose --profile search up -d
+# Lần đầu:         docker compose exec app composer install
+#                  docker compose exec app php artisan bagisto:install
 services:
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-            args:
-                VCS_REF: ${VCS_REF:-local}
-                BUILD_DATE: ${BUILD_DATE:-unknown}
-        image: bagisto-app:local
-        init: true
-        env_file:
-            - .env
-        volumes:
-            - bagisto-storage:/var/www/html/storage/app/public
-        depends_on:
-            mysql:
-                condition: service_healthy
-            redis:
-                condition: service_healthy
-        healthcheck:
-            test: ["CMD", "php", "-r", "exit(@fsockopen('127.0.0.1', 9000) ? 0 : 1);"]
-            interval: 10s
-            timeout: 5s
-            retries: 6
-            start_period: 20s
-        restart: unless-stopped
+  app:
+    build:
+      context: .
+      target: dev
+    volumes:
+      - '.:/var/www/html'
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      REDIS_HOST: redis
+      SESSION_DRIVER: redis
+      CACHE_STORE: redis    
+      QUEUE_CONNECTION: redis
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [bagisto]
 
-    worker:
-        image: bagisto-app:local
-        init: true
-        command: ["php", "artisan", "queue:work", "--tries=3", "--timeout=60", "--sleep=3", "--max-time=3600"]
-        env_file:
-            - .env
-        volumes:
-            - bagisto-storage:/var/www/html/storage/app/public
-        depends_on:
-            app:
-                condition: service_healthy
-            mysql:
-                condition: service_healthy
-            redis:
-                condition: service_healthy
-        healthcheck:
-            test: ["CMD", "php", "artisan", "queue:monitor", "redis:default", "--max=1000"]
-            interval: 30s
-            timeout: 10s
-            retries: 3
-            start_period: 20s
-        stop_grace_period: 60s
-        restart: unless-stopped
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '${FORWARD_WEB_PORT:-8080}:80'
+    volumes:
+      - '.:/var/www/html:ro'
+      - './docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro'
+    depends_on: [app]
+    networks: [bagisto]
 
-    scheduler:
-        image: bagisto-app:local
-        init: true
-        command: ["php", "artisan", "schedule:work"]
-        env_file:
-            - .env
-        volumes:
-            - bagisto-storage:/var/www/html/storage/app/public
-        depends_on:
-            app:
-                condition: service_healthy
-        healthcheck:
-            test: ["CMD", "php", "artisan", "schedule:list"]
-            interval: 30s
-            timeout: 10s
-            retries: 3
-            start_period: 20s
-        restart: unless-stopped
+  mysql:
+    image: mysql:8.0
+    ports:
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'   # không được đặt là root
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-p${DB_PASSWORD}']
+      interval: 5s
+      retries: 10
+      timeout: 5s
+    networks: [bagisto]
 
-    nginx:
-        build:
-            context: .
-            dockerfile: Dockerfile.nginx
-            args:
-                VCS_REF: ${VCS_REF:-local}
-                BUILD_DATE: ${BUILD_DATE:-unknown}
-        image: bagisto-web:local
-        environment:
-            PHP_FPM_HOST: ${PHP_FPM_HOST:-app:9000}
-        ports:
-            - "8080:80"
-        volumes:
-            - bagisto-storage:/var/www/html/storage/app/public:ro
-        depends_on:
-            app:
-                condition: service_healthy
-        healthcheck:
-            test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/install || exit 1"]
-            interval: 10s
-            timeout: 5s
-            retries: 6
-            start_period: 20s
-        restart: unless-stopped
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    networks: [bagisto]
 
-    mysql:
-        # TODO: pin by digest.
-        image: mysql:8.0.46-bookworm
-        environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-            MYSQL_DATABASE: ${DB_DATABASE:-bagisto}
-            MYSQL_USER: ${DB_USERNAME:-bagisto}
-            MYSQL_PASSWORD: ${DB_PASSWORD:-bagisto}
-        volumes:
-            - bagisto-mysql:/var/lib/mysql
-        healthcheck:
-            test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
-            interval: 10s
-            timeout: 5s
-            retries: 10
-            start_period: 30s
-        restart: unless-stopped
+  elasticsearch:
+    profiles: ['search']
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.21
+    ports:
+      - '9200:9200'
+    environment:
+      - xpack.security.enabled=false   # chỉ dev
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock: { soft: -1, hard: -1 }
+      nofile: { soft: 65536, hard: 65536 }
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    networks: [bagisto]
 
-    redis:
-        # TODO: pin by digest.
-        image: redis:8.8.4-alpine
-        volumes:
-            - bagisto-redis:/data
-        healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            interval: 10s
-            timeout: 5s
-            retries: 6
-        restart: unless-stopped
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+    networks: [bagisto]
 
-    elasticsearch:
-        # TODO: pin by digest.
-        image: docker.elastic.co/elasticsearch/elasticsearch:8.19.21
-        profiles: ["search"]
-        environment:
-            - discovery.type=single-node
-            - xpack.security.enabled=false
-            - ES_JAVA_OPTS=-Xms256m -Xmx256m
-        volumes:
-            - bagisto-elasticsearch:/usr/share/elasticsearch/data
-        ports:
-            - "9200:9200"
-        restart: unless-stopped
-
-    mailpit:
-        # TODO: pin by digest.
-        image: axllent/mailpit:v1.33.1
-        profiles: ["mail"]
-        ports:
-            - "1025:1025"
-            - "8025:8025"
-        restart: unless-stopped
+networks:
+  bagisto:
+    driver: bridge
 
 volumes:
-    bagisto-storage:
-    bagisto-mysql:
-    bagisto-redis:
-    bagisto-elasticsearch:
+  mysql-data:
+  redis-data:
+  es-data:
