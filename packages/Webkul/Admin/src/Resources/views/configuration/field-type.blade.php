@@ -196,6 +196,13 @@
 
             <!-- Multiselect Input -->
             <template v-if="field.type == 'multiselect' && field.is_visible">
+                <!-- Posted when nothing is chosen, so clearing every option saves an empty value. -->
+                <input
+                    type="hidden"
+                    :name="name"
+                    value=""
+                />
+
                 <v-multiselect
                     :name="`${name}[]`"
                     :options="choices"
