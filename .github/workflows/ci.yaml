@@ -286,7 +286,11 @@ jobs:
           fi
 
           echo "Image pushed: ${DIGEST_REF}"
-          echo "digest_ref=${DIGEST_REF}" >> "$GITHUB_OUTPUT"
+          {
+            echo "image=${REPO}"
+            echo "tag=${TAG}"
+            echo "digest_ref=${DIGEST_REF}"
+          } >> "$GITHUB_OUTPUT"
 
       # 5. Generate SBOM bằng Trivy
       - name: Generate SBOM
@@ -340,10 +344,290 @@ jobs:
             --certificate-identity "https://github.com/${{ github.workflow_ref }}" \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
 
-      # 11. Upload SBOM làm GitHub Actions artifact
+      # 11. Ghi lại image reference đã push để job update-gitops dùng, không build lại
+      - name: Record published image metadata
+        env:
+          COMPONENT: ${{ matrix.name }}
+          IMAGE: ${{ steps.push.outputs.image }}
+          IMAGE_TAG: ${{ steps.push.outputs.tag }}
+          DIGEST_REF: ${{ steps.push.outputs.digest_ref }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/image-ref
+          jq -n \
+            --arg component "${COMPONENT}" \
+            --arg image "${IMAGE}" \
+            --arg tag "${IMAGE_TAG}" \
+            --arg digest_ref "${DIGEST_REF}" \
+            '{component: $component, image: $image, tag: $tag, digest_ref: $digest_ref}' \
+            > "/tmp/image-ref/${COMPONENT}.json"
+          cat "/tmp/image-ref/${COMPONENT}.json"
+
+      - name: Upload published image metadata
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: image-ref-${{ matrix.name }}
+          path: /tmp/image-ref/${{ matrix.name }}.json
+          retention-days: 1
+
+      # 12. Upload SBOM làm GitHub Actions artifact
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
           name: sbom-${{ matrix.name }}
           path: sbom-${{ matrix.name }}.cdx.json
           retention-days: 30
+
+  update-gitops:
+    name: update-gitops
+    needs: [publish]
+    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      GITOPS_REPOSITORY: ${{ vars.GITOPS_REPOSITORY }}
+      GITOPS_BRANCH: ${{ vars.GITOPS_BRANCH || 'master' }}
+      GITOPS_OVERLAY_DIR: ${{ vars.GITOPS_OVERLAY_DIR || 'overlays/dev' }}
+      KUSTOMIZE_VERSION: v5.7.1
+      KUSTOMIZE_SHA256: ea375e7372f9aa029129d4b2d16c66b7750b7f1213c4f66f910d981c895818d8
+
+    steps:
+      - name: Download published image metadata
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: image-ref-*
+          path: image-metadata
+          merge-multiple: true
+
+      - name: Validate configuration and image metadata
+        id: images
+        env:
+          GITOPS_TOKEN: ${{ secrets.GITOPS_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${GITOPS_REPOSITORY:-}" ]]; then
+            echo "::error::Repository variable GITOPS_REPOSITORY is not set."
+            exit 1
+          fi
+
+          if [[ ! "${GITOPS_REPOSITORY}" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "::error::GITOPS_REPOSITORY must be in owner/repository form."
+            exit 1
+          fi
+
+          if [[ ! "${GITOPS_BRANCH}" =~ ^[A-Za-z0-9._/-]+$ ]] || [[ "${GITOPS_BRANCH}" == -* ]]; then
+            echo "::error::GITOPS_BRANCH contains unsupported characters."
+            exit 1
+          fi
+
+          if [[ ! "${GITOPS_OVERLAY_DIR}" =~ ^[A-Za-z0-9._/-]+$ ]] || [[ "${GITOPS_OVERLAY_DIR}" == *".."* ]] || [[ "${GITOPS_OVERLAY_DIR}" == /* ]]; then
+            echo "::error::GITOPS_OVERLAY_DIR must be a relative path inside the GitOps repository."
+            exit 1
+          fi
+
+          if [[ -z "${GITOPS_TOKEN:-}" ]]; then
+            echo "::error::Secret GITOPS_TOKEN is not set."
+            exit 1
+          fi
+
+          for component in app web; do
+            metadata="image-metadata/${component}.json"
+            if [[ ! -s "${metadata}" ]]; then
+              echo "::error::Missing published image metadata for component: ${component}"
+              exit 1
+            fi
+            jq -e . "${metadata}" >/dev/null
+          done
+
+          app_tag="$(jq -er '.tag' image-metadata/app.json)"
+          web_tag="$(jq -er '.tag' image-metadata/web.json)"
+
+          if [[ ! "${app_tag}" =~ ^sha-[0-9a-f]{7}$ ]]; then
+            echo "::error::app image tag is not an immutable sha-<7-hex> tag: ${app_tag}"
+            exit 1
+          fi
+
+          if [[ "${app_tag}" != "${web_tag}" ]]; then
+            echo "::error::app and web images were published with different tags."
+            exit 1
+          fi
+
+          while IFS= read -r metadata; do
+            image="$(jq -er '.image' "${metadata}")"
+            digest_ref="$(jq -er '.digest_ref' "${metadata}")"
+            if [[ ! "${image}" =~ ^ghcr\.io/[a-z0-9._/-]+$ ]]; then
+              echo "::error::Unexpected image repository in ${metadata}: ${image}"
+              exit 1
+            fi
+            if [[ "${digest_ref}" != "${image}@sha256:"* ]]; then
+              echo "::error::Digest reference in ${metadata} does not match its image."
+              exit 1
+            fi
+          done < <(find image-metadata -maxdepth 1 -name '*.json' -print | sort)
+
+          echo "tag=${app_tag}" >> "$GITHUB_OUTPUT"
+
+      - name: Install Kustomize ${{ env.KUSTOMIZE_VERSION }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          base="https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/${KUSTOMIZE_VERSION}"
+          curl -fsSLo kustomize.tar.gz "${base}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
+          echo "${KUSTOMIZE_SHA256}  kustomize.tar.gz" | sha256sum -c -
+          tar -xzf kustomize.tar.gz kustomize
+          sudo install -m 0755 kustomize /usr/local/bin/kustomize
+          kustomize version
+
+      - name: Checkout GitOps repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          repository: ${{ env.GITOPS_REPOSITORY }}
+          ref: ${{ env.GITOPS_BRANCH }}
+          token: ${{ secrets.GITOPS_TOKEN }}
+          path: gitops
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Check whether the image tags already match
+        id: current
+        working-directory: gitops
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! -f "${GITOPS_OVERLAY_DIR}/kustomization.yaml" ]]; then
+            echo "::error::Kustomization not found at ${GITOPS_OVERLAY_DIR}/kustomization.yaml"
+            exit 1
+          fi
+
+          kustomize build "${GITOPS_OVERLAY_DIR}" > "${RUNNER_TEMP}/current.yaml"
+
+          up_to_date=true
+          while IFS= read -r metadata; do
+            image="$(jq -er '.image' "${metadata}")"
+            image_tag="$(jq -er '.tag' "${metadata}")"
+            if ! grep -Fq "image: ${image}:${image_tag}" "${RUNNER_TEMP}/current.yaml"; then
+              up_to_date=false
+            fi
+          done < <(find "$GITHUB_WORKSPACE/image-metadata" -maxdepth 1 -name '*.json' -print | sort)
+
+          echo "up_to_date=${up_to_date}" >> "$GITHUB_OUTPUT"
+          if [[ "${up_to_date}" == "true" ]]; then
+            echo "GitOps already references ${GITOPS_REPOSITORY}@${GITOPS_BRANCH} at tag ${{ steps.images.outputs.tag }}."
+          fi
+
+      - name: Update Kustomize image tags
+        if: steps.current.outputs.up_to_date != 'true'
+        working-directory: gitops
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${GITOPS_OVERLAY_DIR}"
+
+          image_args=()
+          while IFS= read -r metadata; do
+            image="$(jq -er '.image' "${metadata}")"
+            image_tag="$(jq -er '.tag' "${metadata}")"
+            image_args+=("${image}:${image_tag}")
+          done < <(find "$GITHUB_WORKSPACE/image-metadata" -maxdepth 1 -name '*.json' -print | sort)
+
+          kustomize edit set image "${image_args[@]}"
+
+      - name: Validate modified Kustomize overlay
+        if: steps.current.outputs.up_to_date != 'true'
+        working-directory: gitops
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          kustomize build "${GITOPS_OVERLAY_DIR}" > "${RUNNER_TEMP}/rendered.yaml"
+          test -s "${RUNNER_TEMP}/rendered.yaml"
+
+          while IFS= read -r metadata; do
+            image="$(jq -er '.image' "${metadata}")"
+            image_tag="$(jq -er '.tag' "${metadata}")"
+            if ! grep -Fq "image: ${image}:${image_tag}" "${RUNNER_TEMP}/rendered.yaml"; then
+              echo "::error::Rendered overlay does not contain ${image}:${image_tag}"
+              exit 1
+            fi
+          done < <(find "$GITHUB_WORKSPACE/image-metadata" -maxdepth 1 -name '*.json' -print | sort)
+
+          mapfile -t changed_files < <(git diff --name-only)
+          if [[ "${#changed_files[@]}" -ne 1 ]] || [[ "${changed_files[0]}" != "${GITOPS_OVERLAY_DIR}/kustomization.yaml" ]]; then
+            echo "::error::Unexpected files changed by kustomize edit:"
+            printf '%s\n' "${changed_files[@]}"
+            exit 1
+          fi
+
+          if git status --porcelain --untracked-files=no | grep -vq "^ M ${GITOPS_OVERLAY_DIR}/kustomization.yaml$"; then
+            echo "::error::Unrelated tracked changes detected in the GitOps repository."
+            git status --short
+            exit 1
+          fi
+
+      - name: Commit GitOps update
+        id: commit
+        if: steps.current.outputs.up_to_date != 'true'
+        working-directory: gitops
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No image tag change to commit."
+            exit 0
+          fi
+
+          git config user.name "bagisto-ci[bot]"
+          git config user.email "bagisto-ci[bot]@users.noreply.github.com"
+          git add -- "${GITOPS_OVERLAY_DIR}/kustomization.yaml"
+          git commit -m "chore(gitops): update bagisto image to ${{ steps.images.outputs.tag }}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch, rebase, and push GitOps update
+        if: steps.current.outputs.up_to_date != 'true' && steps.commit.outputs.changed == 'true'
+        working-directory: gitops
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          validate_rendered() {
+            kustomize build "${GITOPS_OVERLAY_DIR}" > "${RUNNER_TEMP}/rendered-push.yaml"
+            test -s "${RUNNER_TEMP}/rendered-push.yaml"
+            while IFS= read -r metadata; do
+              image="$(jq -er '.image' "${metadata}")"
+              image_tag="$(jq -er '.tag' "${metadata}")"
+              if ! grep -Fq "image: ${image}:${image_tag}" "${RUNNER_TEMP}/rendered-push.yaml"; then
+                echo "::error::Rendered overlay lost ${image}:${image_tag} before push."
+                return 1
+              fi
+            done < <(find "$GITHUB_WORKSPACE/image-metadata" -maxdepth 1 -name '*.json' -print | sort)
+          }
+
+          for attempt in 1 2 3; do
+            git fetch --quiet origin "${GITOPS_BRANCH}"
+
+            if ! git rebase "origin/${GITOPS_BRANCH}"; then
+              git rebase --abort || true
+              echo "::error::Concurrent GitOps changes conflict with this update; nothing was pushed."
+              exit 1
+            fi
+
+            validate_rendered
+
+            if git push origin "HEAD:${GITOPS_BRANCH}"; then
+              echo "Pushed ${GITOPS_REPOSITORY}@${GITOPS_BRANCH} tag ${{ steps.images.outputs.tag }}."
+              exit 0
+            fi
+
+            echo "Push rejected on attempt ${attempt}; re-reading remote state."
+            sleep "$((attempt * 5))"
+          done
+
+          echo "::error::Could not push the GitOps update after 3 attempts; remote was not overwritten."
+          exit 1
