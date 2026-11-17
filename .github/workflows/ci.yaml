@@ -629,5 +629,5 @@ jobs:
             sleep "$((attempt * 5))"
           done
 
-          echo "::error::Could not push the GitOps update after 3 attempts; remote was not overwritten."
+          echo "::error::Could not push the GitOps update after 3 attempts; remote was not overwritten. "
           exit 1
