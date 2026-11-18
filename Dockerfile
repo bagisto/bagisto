@@ -68,7 +68,11 @@ decorate_workers_output = no
 clear_env = no
 EOF
 COPY --from=vendor --chown=www-data:www-data /app /var/www/html
-RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
+RUN cp .env.example .env \
+    && sed -i 's/^APP_ENV=.*/APP_ENV=production/' .env \
+    && sed -i 's/^APP_DEBUG=.*/APP_DEBUG=false/' .env \
+    && chown www-data:www-data .env \
+    && mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 USER www-data
 EXPOSE 9000
