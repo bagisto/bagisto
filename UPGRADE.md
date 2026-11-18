@@ -1,5 +1,8 @@
 # UPGRADE Guide
 
+> [!NOTE]
+> We aim to keep modules working across every release, but 100% compatibility with every module cannot be guaranteed. If something breaks after an upgrade, check the section below for each version between the one you ran and the one you upgraded to.
+
 - [Upgrading To v2.5.2 From v2.5.1](#upgrading-to-v252-from-v251)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
@@ -12,7 +15,7 @@
 
 ## Upgrading To v2.5.2 From v2.5.1
 
-v2.5.2 keeps code written against v2.5.1 working: classes that extend core keep loading, and the routes, columns and translations they use are still there. A module written against v2.5.1 or later runs on every release from v2.5.1 onwards; one written against v2.5.0 first follows the v2.5.1 notes below. Everything named below as deprecated still works in the 2.5 line and is removed in the next major release; the few changes custom code has to follow are listed with each section. Back up the database before migrating, as two migrations rewrite existing rows.
+v2.5.2 keeps the classes, routes, columns and translations that code written against v2.5.1 relies on, so that code should keep working. Everything named below as deprecated still works in the 2.5 line and is removed in the next major release; the few changes custom code has to follow are listed with each section.
 
 ### Low Impact Changes
 
@@ -36,7 +39,7 @@ v2.5.2 is a patch release on the 2.5 line, so it asks nothing new of the platfor
 
 2. **Take the store down while it migrates.** The notification migration rewrites the rows the admin bell reads, so the sequence below brackets the work with `php artisan down` and `php artisan up`.
 
-3. **Check what you override.** Code written for v2.5.1 keeps loading, and each section below says what changes for custom code. Code still written for v2.5.0 follows [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250) first.
+3. **Check what you override.** Code written for v2.5.1 should keep loading, and each section below says what changes for custom code. Code still written for v2.5.0 follows [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250) first.
 
 > [!WARNING]
 > Do not run `php artisan bagisto:install` on an existing store. It is the fresh-install command and calls `db:wipe` followed by `migrate:fresh` — it will destroy your data. An upgrade only ever runs `php artisan migrate`.
@@ -133,7 +136,7 @@ return [
 ];
 ```
 
-The class extends `Webkul\Notification\Types\AbstractType`: `data()` builds what is kept from the subject, `shouldNotify()` lets it pass on some of the events it listens to, `title()`, `message()`, `url()`, `icon()` and `tone()` render it in the language of the user reading it, and `recipients()` addresses it to particular users rather than the whole audience. Without `events`, raise it by name with `notifier()->notify('marketing.campaign-sent', $campaign)`. The Notification package's `Config/notification-groups.php` and `Config/notification-types.php` document every key, and the Admin package registers the built-in types the same way.
+The class extends `Webkul\Notification\Types\AbstractType`: `data()` builds what is kept from the subject, `shouldNotify()` lets it pass on some of the events it listens to, `shouldMarkReadForCauser()` decides whether the admin whose own action raised it sees it already read, `title()`, `message()`, `url()`, `icon()` and `tone()` render it in the language of the user reading it, and `recipients()` addresses it to particular users rather than the whole audience. Without `events`, raise it by name with `notifier()->notify('marketing.campaign-sent', $campaign)`. The Notification package's `Config/notification-groups.php` and `Config/notification-types.php` document every key, and the Admin package registers the built-in types the same way.
 
 A type raised from `events` is notified after the transaction the event fired in commits, and a failure is reported rather than thrown, so a notification cannot roll back the order or refund that raised it. `notifier()->notify()` called directly notifies at once and throws to its caller.
 
