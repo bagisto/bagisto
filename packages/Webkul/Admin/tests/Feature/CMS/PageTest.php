@@ -133,6 +133,43 @@ it('should fail validation when url_key already exists on store', function () {
         ->assertJsonValidationErrorFor('url_key');
 });
 
+it('should store a CMS page with a url_key another channel already uses', function () {
+    createCmsPage(['url_key' => 'about-us']);
+
+    $channel = Channel::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.cms.store'), [
+        'page_title' => fake()->sentence(),
+        'url_key' => 'about-us',
+        'html_content' => '<p>Content</p>',
+        'channels' => [$channel->id],
+    ])
+        ->assertRedirect(route('admin.cms.index'));
+
+    $page = Page::whereHas('channels', fn ($query) => $query->where('id', $channel->id))->first();
+
+    expect($page->translations()->where('url_key', 'about-us')->exists())->toBeTrue();
+});
+
+it('should fail validation when url_key exists on one of the requested channels on store', function () {
+    createCmsPage(['url_key' => 'about-us']);
+
+    $channel = Channel::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.cms.store'), [
+        'page_title' => fake()->sentence(),
+        'url_key' => 'about-us',
+        'html_content' => '<p>Content</p>',
+        'channels' => [$channel->id, 1],
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('url_key');
+});
+
 // ============================================================================
 // Edit
 // ============================================================================
@@ -183,6 +220,43 @@ it('should update an existing CMS page', function () {
         'url_key' => $originalSlug,
         'locale' => $locale,
     ]);
+});
+
+it('should check the url_key against the pages of the requested channels on update', function () {
+    $locale = app()->getLocale();
+
+    createCmsPage(['url_key' => 'about-us', 'locale' => $locale]);
+
+    $channel = Channel::factory()->create();
+
+    $page = createCmsPage(['url_key' => 'about-us', 'locale' => $locale]);
+
+    $page->channels()->sync([$channel->id]);
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.cms.update', ['id' => $page->id, 'locale' => $locale]), [
+        $locale => [
+            'page_title' => fake()->sentence(),
+            'url_key' => 'about-us',
+            'html_content' => '<p>Content</p>',
+        ],
+        'channels' => [$channel->id],
+        'locale' => $locale,
+    ])
+        ->assertRedirect(route('admin.cms.index'));
+
+    putJson(route('admin.cms.update', ['id' => $page->id, 'locale' => $locale]), [
+        $locale => [
+            'page_title' => fake()->sentence(),
+            'url_key' => 'about-us',
+            'html_content' => '<p>Content</p>',
+        ],
+        'channels' => [$channel->id, 1],
+        'locale' => $locale,
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor("{$locale}.url_key");
 });
 
 it('should fail validation when required fields are missing on update', function () {
