@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'All',
         'description' => 'Stay on top of orders, customers and everything else that needs your attention.',
+        'description-text' => 'List all the Notifications',
         'empty-description' => 'New notifications will show up here as they come in.',
         'empty-title' => 'You are all caught up',
         'mark-all-read' => 'Mark all as read',
         'mark-read' => 'Mark as read',
         'mark-unread' => 'Mark as unread',
         'marked-all-read' => 'All notifications have been marked as read.',
+        'marked-success' => 'All notifications have been marked as read',
+        'no-record' => 'No Record Found',
         'of' => 'of',
         'per-page' => 'Per Page',
+        'read-all' => 'Mark as Read',
         'title' => 'Notifications',
         'today' => 'Today',
         'unread' => 'Unread',
@@ -70,6 +74,16 @@ return [
             'returns' => 'RMA Requests',
             'reviews' => 'Reviews',
             'system' => 'System',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'All',
+            'canceled' => 'Order Canceled',
+            'closed' => 'Order Closed',
+            'completed' => 'Order Completed',
+            'pending' => 'Order Pending',
+            'pending-payment' => 'Pending Payment',
+            'processing' => 'Order Processing',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Add To Cart',
                             'available-qty' => ':qty Available',
-                            'empty-info' => 'No products available in the :channel channel for this search term.',
+                            'empty-channel-info' => 'No products available in the :channel channel for this search term.',
+                            'empty-info' => 'No products available for search term.',
                             'empty-title' => 'No products found',
                             'product-image' => 'Product Image',
                             'qty' => 'Qty',

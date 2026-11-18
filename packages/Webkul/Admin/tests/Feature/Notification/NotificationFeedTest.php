@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Admin\Http\Controllers\NotificationController;
 use Webkul\Admin\Notifications\AdminNotifications;
 use Webkul\Customer\Models\Customer;
 use Webkul\Notification\Models\Notification;
@@ -324,4 +325,93 @@ it('should show the notification bell to every admin', function () {
     get(route('admin.dashboard.index'))
         ->assertOk()
         ->assertSee('<v-notifications', false);
+});
+
+// ============================================================================
+// Compatibility With v2.5.1
+// ============================================================================
+
+it('should keep the order on a placed order notification', function () {
+    $notification = notifyOfPlacedOrder();
+
+    expect($notification->order_id)->toBe($notification->data['order_id'])
+        ->and($notification->order->id)->toBe($notification->order_id);
+});
+
+it('should leave the order column empty on a notification about anything else', function () {
+    expect(notifyOfRegisteredCustomer()->order_id)->toBeNull();
+});
+
+it('should list placed orders through the route the bell called before notifications were typed', function () {
+    $this->loginAsAdmin();
+
+    $notification = notifyOfPlacedOrder();
+
+    $other = notifyOfRegisteredCustomer();
+
+    $response = getJson(route('admin.notification.get_notification', ['limit' => 50, 'read' => 0]))->assertOk();
+
+    $listed = collect($response->json('search_results.data'));
+
+    expect($listed->firstWhere('id', $notification->id)['order']['id'])->toBe($notification->order_id)
+        ->and($listed->firstWhere('id', $other->id))->toBeNull()
+        ->and($response->json('total_unread'))->toBeGreaterThanOrEqual(1)
+        ->and($response->json('status_count'))->not->toBeEmpty();
+});
+
+it('should open an order through the route the bell linked to before notifications were typed', function () {
+    $admin = $this->loginAsAdmin();
+
+    $notification = notifyOfPlacedOrder();
+
+    get(route('admin.notification.viewed_notification', $notification->order_id))
+        ->assertRedirect(route('admin.sales.orders.view', $notification->order_id));
+
+    expect(adminHasRead($notification, $admin))->toBeTrue();
+});
+
+it('should mark placed orders read through the path the bell posted to before notifications were typed', function () {
+    $admin = $this->loginAsAdmin();
+
+    $notification = notifyOfPlacedOrder();
+
+    postJson(route('admin.notification.read_all_notifications'))
+        ->assertOk()
+        ->assertJsonPath('success_message', trans('admin::app.notifications.marked-success'));
+
+    expect(adminHasRead($notification, $admin))->toBeTrue();
+});
+
+it('should hide placed orders on the earlier routes from an admin who cannot read orders', function () {
+    $this->loginAsAdminWithPermissions(['dashboard']);
+
+    getJson(route('admin.notification.get_notification'))
+        ->assertOk()
+        ->assertJsonPath('search_results', [])
+        ->assertJsonPath('total_unread', 0);
+});
+
+it('should build the repository and the controller the way a subclass written for v2.5.1 does', function () {
+    $repository = new NotificationRepository(app());
+
+    $controller = new class($repository) extends NotificationController
+    {
+        /**
+         * Create the controller passing only the repository.
+         */
+        public function __construct(NotificationRepository $notificationRepository)
+        {
+            parent::__construct($notificationRepository);
+        }
+    };
+
+    $this->loginAsAdmin();
+
+    expect($repository->getAll()['notifications']->perPage())->toBe(10)
+        ->and($controller->getNotifications())->toHaveKeys(['search_results', 'status_count', 'total_unread']);
+});
+
+it('should keep the translations the screen used before notifications were typed', function () {
+    expect(trans('admin::app.notifications.order-status-messages.pending'))->toBe('Order Pending')
+        ->and(trans('admin::app.notifications.read-all'))->toBe('Mark as Read');
 });

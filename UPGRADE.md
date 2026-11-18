@@ -1,49 +1,115 @@
 # UPGRADE Guide
 
 - [Upgrading To v2.5.2 From v2.5.1](#upgrading-to-v252-from-v251)
-- [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
   - [Before You Start](#before-you-start)
   - [The Upgrade Itself](#the-upgrade-itself)
-- [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
+- [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250)
   - [Before You Start](#before-you-start-1)
   - [The Upgrade Itself](#the-upgrade-itself-1)
+- [Upgrading To v2.5.0 From v2.4](#upgrading-to-v250-from-v24)
+  - [Before You Start](#before-you-start-2)
+  - [The Upgrade Itself](#the-upgrade-itself-2)
 
 ## Upgrading To v2.5.2 From v2.5.1
 
-> [!IMPORTANT]
-> **Upcoming release.** v2.5.2 is not out yet — this section covers changes already merged into the `2.5` branch and is still being added to.
-
-### Medium Impact Changes
-
-- [Admin Notifications Are Typed And Read Per Admin](#admin-notifications-are-typed-and-read-per-admin)
+v2.5.2 keeps code written against v2.5.1 working: classes that extend core keep loading, and the routes, columns and translations they use are still there. A module written against v2.5.1 or later runs on every release from v2.5.1 onwards; one written against v2.5.0 first follows the v2.5.1 notes below. Everything named below as deprecated still works in the 2.5 line and is removed in the next major release; the few changes custom code has to follow are listed with each section. Back up the database before migrating, as two migrations rewrite existing rows.
 
 ### Low Impact Changes
 
+- [Admin Notifications Are Typed And Read Per Admin](#admin-notifications-are-typed-and-read-per-admin)
+- [Attribute Groups Are Named In Each Locale](#attribute-groups-are-named-in-each-locale)
+- [Editor Formatting Needs The Updated Purify Config](#editor-formatting-needs-the-updated-purify-config)
 - [The Storefront Can Be Limited To Some Countries](#the-storefront-can-be-limited-to-some-countries)
 - [Address Settings Moved To The Customer Package](#address-settings-moved-to-the-customer-package)
 - [A Multiselect Setting Is Cleared When Everything Is Deselected](#a-multiselect-setting-is-cleared-when-everything-is-deselected)
+- [A Shipment's Source Must Serve The Order's Channel](#a-shipments-source-must-serve-the-orders-channel)
+- [The Exchange Rate Command Reports A Failure](#the-exchange-rate-command-reports-a-failure)
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
+
+### Before You Start
+
+v2.5.2 is a patch release on the 2.5 line, so it asks nothing new of the platform: PHP 8.4 or 8.5 as before. `composer.json` and every `package.json` are unchanged, and `composer.lock` takes only minor and patch updates, Laravel 13.40 among them.
+
+1. **Back up the database.** Both of the release's migrations rewrite existing rows. One turns every admin notification into a typed `order.placed` one, records who had read it in the new `notification_reads` table and makes `notifications.order_id` nullable. The other adds `attribute_groups.admin_name`, copies each group's name into it and names the group in every locale in the new `attribute_group_translations` table.
+
+2. **Take the store down while it migrates.** The notification migration rewrites the rows the admin bell reads, so the sequence below brackets the work with `php artisan down` and `php artisan up`.
+
+3. **Check what you override.** Code written for v2.5.1 keeps loading, and each section below says what changes for custom code. Code still written for v2.5.0 follows [Upgrading To v2.5.1 From v2.5.0](#upgrading-to-v251-from-v250) first.
+
+> [!WARNING]
+> Do not run `php artisan bagisto:install` on an existing store. It is the fresh-install command and calls `db:wipe` followed by `migrate:fresh` — it will destroy your data. An upgrade only ever runs `php artisan migrate`.
+
+### The Upgrade Itself
+
+Start by bringing your application files up to the new release, reconciling anything you changed. The root files that carry changes are `composer.lock`, `config/purify.php` and the production images under `docker/production/`. [Editor Formatting Needs The Updated Purify Config](#editor-formatting-needs-the-updated-purify-config) covers what a store keeping its own `config/purify.php` merges in.
+
+Then run:
+
+```bash
+# Take the store down
+php artisan down
+
+# Install the dependency tree
+composer install
+
+# Run the migrations
+php artisan migrate --force
+
+# Rebuild the Admin and Shop bundles, each from its own package directory
+(cd packages/Webkul/Admin && npm install && npm run build)
+(cd packages/Webkul/Shop && npm install && npm run build)
+
+# Clear every cached config, route, view and compiled service, and the page cache
+php artisan optimize:clear
+php artisan responsecache:clear
+
+# Bring the store back up
+php artisan up
+```
+
+The Admin and Shop bundles have to be rebuilt because both carry new styles: the notification feed, the System Health page and the attribute family panel in the admin, and editor content on the storefront. The Installer's bundle is unchanged. The dependency set is too, so `npm install` over the existing `node_modules` is enough.
+
+While an admin is signed in, the panel now checks the store's health at most every five minutes and raises a notification while a check fails. The checks cover:
+
+- a stopped queue worker or scheduler, and failed jobs;
+- unconfigured mail, and debug mode left on;
+- an `APP_URL` whose host is neither the one the admin is using nor any channel's;
+- a search engine, remote disk or broadcaster that cannot be reached;
+- stale exchange rates, and products missing from the price index.
+
+Configure → About → System Health lists every check. Keep Laravel's scheduler running every minute from cron, `php artisan schedule:run`, and, when `QUEUE_CONNECTION` is anything but `sync`, a `php artisan queue:work`, or the bell reports them stopped. The images in `docker/production/` run both, and now also run Reverb behind the web server, so the bell updates live without a port of its own; `docker/production/README.md` lists the settings.
+
+Then verify:
+
+```bash
+php artisan bagisto:version
+php artisan migrate:status
+```
+
+`bagisto:version` should report 2.5.2, and every migration should read `Ran`. Finally load the storefront home page, a product page, the admin dashboard with its notification bell, and an attribute family.
 
 ---
 
 ### Admin Notifications Are Typed And Read Per Admin
 
-**Impact Probability: Medium**
+**Impact Probability: Low**
 
 Admin notifications were order-only: the `notifications` table held an `order_id` and one `read` flag the whole store shared, and the bell and the Notifications screen showed each order's current status. A notification now has a type, the data that type keeps and the audience it is for, each reader has their own read state, and every admin sees the types their role allows. Orders placed, canceled and refunded, new customers, reviews awaiting approval, return requests, GDPR requests and finished imports are raised out of the box.
 
 The Notification package is now panel-neutral, so another panel, such as a seller's, can raise and list notifications of its own on it. A notification goes to its type's whole audience, or to the users the type addresses it to, and anyone can read it: `notification_reads` records each read against a `reader_type` and `reader_id`. Everything particular to the admin panel lives in the Admin package — its types, the permission check, reading as the signed in admin, and the broadcast.
 
-The migration adds `audience`, `data` and a nullable `notifiable` recipient to `notifications`, rewrites each existing notification as an admin `order.placed` one carrying the order's number, customer and total, keeps one already read as read for every admin, and drops the `order_id` and `read` columns.
+The migration adds `audience`, `data` and a nullable `notifiable` recipient to `notifications`, rewrites each existing notification as an admin `order.placed` one carrying the order's number, customer and total, keeps one already read as read for every admin, and makes `order_id` nullable. The `order_id` and `read` columns stay, so a query on them still runs: a placed order notification still carries its order, but `read` keeps the value it had at the upgrade and is no longer written. Read state lives in `notification_reads`, per reader.
 
 What this changes for custom code:
 
+- **An existing notification's `type` changes from `order` to `order.placed`.** A query filtering on `type = 'order'` matches nothing after the upgrade; filter on `order_id` being set instead.
 - **`Webkul\Notification\Events\CreateOrderNotification`, `UpdateOrderNotification` and the `Webkul\Notification\Listeners\Order` listener are gone.** The Admin package broadcasts `Webkul\Admin\Events\NotificationCreated` as `notification-created` on the `admin.notifications` channel with an empty payload, so an Echo listener on `.create-notification` or `.update-notification` listens for `.notification-created` and fetches the feed. The Notification package itself fires `notification.create.before` and `notification.create.after`.
-- **The routes changed.** `admin.notification.get_notification` (`get-notifications`) is now `admin.notification.list` (`notifications/list`), and `admin.notification.viewed_notification` (`viewed-notifications/{orderId}`) is now `admin.notification.open` (`notifications/{id}/open`), which takes the notification's id rather than the order's. `admin.notification.read_all` moved to `notifications/read-all`, and `admin.notification.mark_read` and `admin.notification.mark_unread` are new. The list answers with `data`, `meta`, `groups` and `unread` in place of `search_results`, `status_count` and `total_unread`, so a script reading the old response has to read the new keys.
-- **`NotificationRepository::getParamsData()` and `getAll()` are gone**, replaced by `paginateFor()`, `unreadCountsFor()`, `findFor()`, `markRead()`, `markUnread()` and `markAllRead()`, each taking the reader model it acts for and, where it lists, the audience. Read marks are written through the new `NotificationReadRepository`, which `NotificationRepository` now takes in its constructor, so a class extending it passes it on.
-- **The `admin::app.notifications.order-status-messages.*` keys are removed**, with `description-text`, `marked-success`, `no-record` and `read-all`. A Blade override of the bell or the Notifications screen has to be rebuilt against the new views.
+- **The earlier routes are deprecated and still answer in their earlier shape**, listing placed orders only: `admin.notification.get_notification` (`get-notifications`), `admin.notification.viewed_notification` (`viewed-notifications/{orderId}`) and the `read-all-notifications` path, now named `admin.notification.read_all_notifications`. Their replacements are `admin.notification.list`, `admin.notification.open`, which takes the notification's id, `admin.notification.mark_read` and `admin.notification.mark_unread`. `admin.notification.read_all` now points at `notifications/read-all` and answers with `unread` and `message` in place of `search_results`, `total_unread` and `success_message`, so a bell override posting to it reads the new keys.
+- **`NotificationRepository::getParamsData()` and `getAll()` are deprecated** and list placed orders as before, their `read` filter now meaning read by any admin. Their replacements are `paginateFor()`, `unreadCountsFor()`, `findFor()`, `markRead()`, `markUnread()` and `markAllRead()`, each taking the reader model it acts for and, where it lists, the audience. The repository's constructor is unchanged.
+- **`Notification::order()` is deprecated.** Read the order's id from the notification's `data`.
+- **The `admin::app.notifications.order-status-messages.*` keys, `description-text`, `marked-success`, `no-record` and `read-all` are deprecated** and still translated. A Blade override of the bell or the Notifications screen keeps working, showing placed orders only until it is rebuilt against the new views.
 - **The screen's render events are renamed** from `bagisto.admin.marketing.notifications.create.before` and `.after` to `bagisto.admin.notifications.index.before` and `.after`, so a listener injecting markup there listens under the new names.
 - **The bell shows for every admin**, no longer only those holding `sales.orders`. What it lists is narrowed by each type's permission.
 
@@ -73,20 +139,45 @@ A type raised from `events` is notified after the transaction the event fired in
 
 ---
 
+### Attribute Groups Are Named In Each Locale
+
+**Impact Probability: Low**
+
+An attribute group had one `name`. It now has an `admin_name`, shown in the admin, and a `name` in each locale, kept in the new `attribute_group_translations` table and shown on the product form in the admin's language. The migration adds `attribute_groups.admin_name`, copies each group's name into it and into every locale.
+
+What this changes for custom code:
+
+- **`attribute_groups.name` stays and always holds the admin name**, so a query or a join on it keeps working. It is deprecated: read `admin_name`.
+- **A group created or updated with a `name` and no `admin_name`**, through the model, `AttributeFamilyRepository` or the admin family form, takes the name as its admin name and as its name in the current locale. A row inserted with only a `name` reads back with that as its `admin_name`.
+- **`$group->name` is the name in the current locale**, falling back to the admin name where the group has no name in that locale.
+- **An override of the family create or edit view** keeps saving groups by `attribute_groups[...][name]`. To name a group per locale, post `attribute_groups[...][admin_name]` and `attribute_groups[...][<locale>][name]`, as the `admin::catalog.families.attributes-panel` component does.
+
+---
+
+### Editor Formatting Needs The Updated Purify Config
+
+**Impact Probability: Low**
+
+`config/purify.php` now allows a link's `target` and `rel`, a floated image and a table column's width, so content formatted in the admin editor shows the same on the storefront. A store that keeps its own copy of the file merges those entries in; without them nothing breaks, and that formatting is still stripped.
+
+---
+
 ### The Storefront Can Be Limited To Some Countries
 
 **Impact Probability: Low**
 
 Configuration → Customer → Address has a new Countries group whose Allowed Countries setting, saved per channel, limits the countries the storefront offers. Left empty, as it is after the upgrade, every country is offered and nothing changes.
 
-Once a limit is set, the account address forms, the checkout address form and the cart's shipping estimate list only the allowed countries, and the server refuses an address or an estimate for any other country with a validation error. An address a customer saved in a country that is later removed is refused at checkout until it is moved to an allowed one. The admin's Create Order form still lists every country.
+Once a limit is set, the account address forms, the checkout address form and the cart's shipping estimate list only the allowed countries, and the server refuses an address or an estimate for any other country with a validation error. An address a customer saved in a country that is later removed is refused at checkout until it is moved to an allowed one.
+
+In the admin, a customer's address forms and Create Order follow the customer's channel rather than the default one: its allowed countries and its number of street lines, and in Create Order its required fields too.
 
 What this changes for custom code:
 
 - **Two storefront endpoints are new.** `shop.api.customers.addresses.allowed_countries` (`api/customer/addresses/allowed-countries`) and `shop.api.customers.addresses.allowed_states` (`api/customer/addresses/allowed-states`) answer in the shape of `shop.api.core.countries` and `shop.api.core.states`, narrowed to the limit. The two existing endpoints are unchanged and still list every country.
 - **A theme overriding the checkout address form or the cart's shipping estimate** still calls the unlimited endpoints, so it lists countries the server will refuse. Point it at the two new routes.
 - **A theme overriding the account address create or edit view** lists `core()->countries()` and `core()->groupedStatesByCountries()`. Use `\Webkul\Customer\Facades\AddressSettings::allowedCountries()` and `allowedGroupedStates()` in their place.
-- **A custom form request validating a storefront address** adds `new \Webkul\Customer\Rules\AllowedCountry` to its country rule to enforce the limit.
+- **A custom form request validating a storefront address** adds `new \Webkul\Customer\Rules\AllowedCountry` to its country rule to enforce the limit. An admin one passes the customer's channel code, `new AllowedCountry($channelCode)`, as `AddressRequest` and `CartAddressRequest` do; every `AddressSettings` reader takes the same optional channel code.
 
 ---
 
@@ -98,7 +189,7 @@ What this changes for custom code:
 
 What this changes for custom code:
 
-- **The three `core()` methods still work** and answer the same, but are deprecated and delegate to the new class. Call `AddressSettings::isCountryRequired()`, `AddressSettings::isStateRequired()` and `AddressSettings::isPostCodeRequired()` instead.
+- **The three `core()` methods still work** and answer the same, but are deprecated. Call `AddressSettings::isCountryRequired()`, `AddressSettings::isStateRequired()` and `AddressSettings::isPostCodeRequired()` instead.
 - **A class overriding one of the three on a bound `Core` subclass** is no longer consulted by core's own views and form requests, which read the facade. Bind a subclass of `Webkul\Customer\AddressSettings` instead.
 
 ---
@@ -113,6 +204,27 @@ What this changes for custom code:
 
 - **A multiselect setting of your own can now be saved empty.** Mark it `'validation' => 'required'` if it must keep at least one option, as the return settings do.
 - **Code reading such a setting** should treat an empty string as no selection.
+
+---
+
+### A Shipment's Source Must Serve The Order's Channel
+
+**Impact Probability: Low**
+
+The admin's shipment form posts the inventory source to ship from, which is now checked against the sources of the order's channel, refusing any other with a validation error. A product that does not manage its stock now ships from any of those sources, whatever quantity the source holds, so its order can complete (#11575).
+
+What this changes for custom code:
+
+- **A script or module creating shipments through the admin route** posts a `shipment.source` that belongs to the order's channel.
+- **An override of `ShipmentController::isInventoryValidate()`** skips the stock check for a product whose `manage_stock` is off, as core's now does.
+
+---
+
+### The Exchange Rate Command Reports A Failure
+
+**Impact Probability: Low**
+
+`php artisan exchange-rate:update` exits with status 1 when the rate provider fails, where it exited 0 after printing the error, so a cron job or deployment step watching the exit code now sees the failure. The command and the admin's Update Rates button both fire `core.exchange_rate.update_rates.before` and `core.exchange_rate.update_rates.after` around the update, which the System Health page uses to tell when rates were last refreshed.
 
 ---
 
@@ -2189,7 +2301,7 @@ If you maintain a custom Bagisto theme, extension, or admin package with its own
 
 4. **Rewrite `app.css`** — replace `@tailwind` directives with `@import "tailwindcss" source("...");`, pointing at the directory your class names are written under, and translate any `theme.extend.*` values from your old JS config into `@theme` blocks. If you overrode Bagisto's colors, breakpoints, or fonts, register them in `@theme` with `--color-*`, `--breakpoint-*`, `--font-*` variables.
 
-5. **Rebuild frontend assets** as shown in [The Upgrade Itself](#the-upgrade-itself-1).
+5. **Rebuild frontend assets** as shown in [The Upgrade Itself](#the-upgrade-itself-2).
 
 6. **Visually verify** the storefront, admin panel, and installer flow. Common regression spots after a v4 upgrade:
 

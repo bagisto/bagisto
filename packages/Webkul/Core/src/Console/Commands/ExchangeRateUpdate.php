@@ -24,8 +24,10 @@ class ExchangeRateUpdate extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
-    public function handle(): int
+    public function handle()
     {
         try {
             Event::dispatch('core.exchange_rate.update_rates.before');

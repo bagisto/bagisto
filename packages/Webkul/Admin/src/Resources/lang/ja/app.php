@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'すべて',
         'description' => '注文、顧客など、対応が必要なことを見逃さずに確認できます。',
+        'description-text' => 'すべての通知をリストアップ',
         'empty-description' => '新しい通知が届くとここに表示されます。',
         'empty-title' => 'すべて確認済みです',
         'mark-all-read' => 'すべて既読にする',
         'mark-read' => '既読にする',
         'mark-unread' => '未読にする',
         'marked-all-read' => 'すべての通知を既読にしました。',
+        'marked-success' => 'すべての通知が既読としてマークされました',
+        'no-record' => '記録が見つかりません',
         'of' => 'の',
         'per-page' => 'ページごと',
+        'read-all' => 'すべてを既読にする',
         'title' => 'お知らせ',
         'today' => '今日',
         'unread' => '未読',
@@ -70,6 +74,16 @@ return [
             'returns' => 'RMAリクエスト',
             'reviews' => 'レビュー',
             'system' => 'システム',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'すべて',
+            'canceled' => '注文キャンセル',
+            'closed' => '注文終了',
+            'completed' => '注文完了',
+            'pending' => '注文保留中',
+            'pending-payment' => '支払い保留中',
+            'processing' => '注文処理中',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'カートに追加',
                             'available-qty' => ':qty 個利用可能',
-                            'empty-info' => ':channel チャネルには検索用語に該当する商品はありません。',
+                            'empty-channel-info' => ':channel チャネルには検索用語に該当する商品はありません。',
+                            'empty-info' => '検索用語に該当する商品はありません。',
                             'empty-title' => '商品が見つかりません',
                             'product-image' => '商品画像',
                             'qty' => '数量',

@@ -1,11 +1,14 @@
 <?php
 
+use Webkul\Core\Core;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Customer\AddressSettings;
 use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Rules\AllowedCountry;
+use Webkul\Shop\Http\Controllers\API\AddressController;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
@@ -248,4 +251,23 @@ it('should keep answering the address requirements through the deprecated core h
     expect(core()->isCountryRequired())->toBeTrue()
         ->and(core()->isStateRequired())->toBeFalse()
         ->and(core()->isPostCodeRequired())->toBeTrue();
+});
+
+// ============================================================================
+// Compatibility With v2.5.1
+// ============================================================================
+
+it('should build the address controller for a subclass that passes only the repository', function () {
+    $controller = new class(app(CustomerAddressRepository::class)) extends AddressController
+    {
+        /**
+         * Create the controller the way a subclass written for v2.5.1 does.
+         */
+        public function __construct(CustomerAddressRepository $customerAddressRepository)
+        {
+            parent::__construct($customerAddressRepository);
+        }
+    };
+
+    expect($controller->allowedCountries()->resolve())->not->toBeEmpty();
 });

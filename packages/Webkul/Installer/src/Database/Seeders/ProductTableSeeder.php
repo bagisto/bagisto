@@ -649,6 +649,8 @@ class ProductTableSeeder extends Seeder
 
             $row['admin_name'] = data_get($item, "translations.{$this->defaultLocale}.name", $item['name'] ?? '');
 
+            $row['name'] = $row['admin_name'];
+
             return $row;
         })->all());
 

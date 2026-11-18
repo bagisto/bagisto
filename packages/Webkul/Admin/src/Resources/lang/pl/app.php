@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Wszystko',
         'description' => 'Śledź zamówienia, klientów i wszystko, co wymaga Twojej uwagi.',
+        'description-text' => 'Wszystkie powiadomienia',
         'empty-description' => 'Nowe powiadomienia pojawią się tutaj, gdy tylko nadejdą.',
         'empty-title' => 'Wszystko przeczytane',
         'mark-all-read' => 'Oznacz wszystkie jako przeczytane',
         'mark-read' => 'Oznacz jako przeczytane',
         'mark-unread' => 'Oznacz jako nieprzeczytane',
         'marked-all-read' => 'Wszystkie powiadomienia zostały oznaczone jako przeczytane.',
+        'marked-success' => 'Wszystkie powiadomienia zostały oznaczone jako przeczytane',
+        'no-record' => 'Brak dostępnych powiadomień',
         'of' => 'z',
         'per-page' => 'na stronę',
+        'read-all' => 'Oznacz jako przeczytane',
         'title' => 'Powiadomienia',
         'today' => 'Dziś',
         'unread' => 'Nieprzeczytane',
@@ -70,6 +74,16 @@ return [
             'returns' => 'Żądania RMA',
             'reviews' => 'Recenzje',
             'system' => 'System',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Wszystko',
+            'canceled' => 'Zamówienie anulowane',
+            'closed' => 'Zamówienie zamknięte',
+            'completed' => 'Zamówienie zakończone',
+            'pending' => 'Zamówienie w trakcie',
+            'pending-payment' => 'Oczekuje na płatność',
+            'processing' => 'Zamówienie w trakcie realizacji',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Dodaj do koszyka',
                             'available-qty' => ':qty dostępne',
-                            'empty-info' => 'Brak produktów dostępnych w kanale :channel dla podanego terminu wyszukiwania.',
+                            'empty-channel-info' => 'Brak produktów dostępnych w kanale :channel dla podanego terminu wyszukiwania.',
+                            'empty-info' => 'Brak produktów dostępnych dla podanego terminu wyszukiwania.',
                             'empty-title' => 'Nie znaleziono produktów',
                             'product-image' => 'Obraz produktu',
                             'qty' => 'Ilość',

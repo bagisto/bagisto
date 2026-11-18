@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Semua',
         'description' => 'Pantau pesanan, pelanggan, dan semua hal yang memerlukan perhatian Anda.',
+        'description-text' => 'Daftar semua Notifikasi',
         'empty-description' => 'Notifikasi baru akan muncul di sini begitu masuk.',
         'empty-title' => 'Semua sudah Anda lihat',
         'mark-all-read' => 'Tandai semua sudah dibaca',
         'mark-read' => 'Tandai sudah dibaca',
         'mark-unread' => 'Tandai belum dibaca',
         'marked-all-read' => 'Semua notifikasi telah ditandai sudah dibaca.',
+        'marked-success' => 'Semua notifikasi telah ditandai sebagai dibaca',
+        'no-record' => 'Tidak Ada Data Ditemukan',
         'of' => 'dari',
         'per-page' => 'Per Halaman',
+        'read-all' => 'Tandai sebagai Dibaca',
         'title' => 'Notifikasi',
         'today' => 'Hari Ini',
         'unread' => 'Belum dibaca',
@@ -70,6 +74,16 @@ return [
             'returns' => 'Permintaan RMA',
             'reviews' => 'Ulasan',
             'system' => 'Sistem',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Semua',
+            'canceled' => 'Pesanan Dibatalkan',
+            'closed' => 'Pesanan Ditutup',
+            'completed' => 'Pesanan Selesai',
+            'pending' => 'Pesanan Tertunda',
+            'pending-payment' => 'Menunggu Pembayaran',
+            'processing' => 'Pesanan Sedang Diproses',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Tambah ke Keranjang',
                             'available-qty' => ':qty Tersedia',
-                            'empty-info' => 'Tidak ada produk pada saluran :channel yang sesuai dengan pencarian.',
+                            'empty-channel-info' => 'Tidak ada produk pada saluran :channel yang sesuai dengan pencarian.',
+                            'empty-info' => 'Tidak ada produk yang sesuai dengan pencarian.',
                             'empty-title' => 'Produk Tidak Ditemukan',
                             'product-image' => 'Gambar Produk',
                             'qty' => 'Jumlah',

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
@@ -698,4 +699,62 @@ it('should still open the create family screen when the default family is missin
     get(route('admin.catalog.families.create'))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.families.create.title'));
+});
+
+// ============================================================================
+// Compatibility With v2.5.1
+// ============================================================================
+
+it('should store a group posted with a name and no admin name, as the form posted it before groups were translated', function () {
+    $this->loginAsAdmin();
+
+    $code = fake()->unique()->lexify('family_??????????');
+
+    postJson(route('admin.catalog.families.store'), [
+        'code' => $code,
+        'name' => 'Legacy Family',
+        'attribute_groups' => [
+            'group_0' => ['code' => 'legacy_info', 'name' => 'Legacy Info', 'column' => '1', 'position' => '1'],
+        ],
+    ])->assertRedirectToRoute('admin.catalog.families.index');
+
+    $group = AttributeFamily::query()->where('code', $code)->first()
+        ->attribute_groups->firstWhere('code', 'legacy_info');
+
+    expect($group->admin_name)->toBe('Legacy Info')
+        ->and($group->name)->toBe('Legacy Info');
+
+    $this->assertDatabaseHas('attribute_groups', [
+        'id' => $group->id,
+        'name' => 'Legacy Info',
+        'admin_name' => 'Legacy Info',
+    ]);
+});
+
+it('should keep the name column holding the admin name when a group is renamed', function () {
+    $family = AttributeFamily::factory()->create();
+
+    $group = $family->attribute_groups()->create(['code' => 'renamed', 'admin_name' => 'Before', 'column' => 1, 'position' => 1]);
+
+    $group->update(['admin_name' => 'After']);
+
+    $this->assertDatabaseHas('attribute_groups', ['id' => $group->id, 'name' => 'After', 'admin_name' => 'After']);
+});
+
+it('should read a group written with only a name, and name it in a locale it has no translation in', function () {
+    $family = AttributeFamily::factory()->create();
+
+    $id = DB::table('attribute_groups')->insertGetId([
+        'code' => 'raw_group',
+        'name' => 'Raw Group',
+        'column' => 1,
+        'position' => 1,
+        'attribute_family_id' => $family->id,
+    ]);
+
+    $group = $family->attribute_groups()->find($id);
+
+    expect($group->admin_name)->toBe('Raw Group')
+        ->and($group->name)->toBe('Raw Group')
+        ->and($group->toArray()['name'])->toBe('Raw Group');
 });

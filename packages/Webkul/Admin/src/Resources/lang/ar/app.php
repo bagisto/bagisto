@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'الكل',
         'description' => 'تابع الطلبات والعملاء وكل ما يحتاج إلى انتباهك.',
+        'description-text' => 'قائمة جميع الإشعارات',
         'empty-description' => 'ستظهر الإشعارات الجديدة هنا فور وصولها.',
         'empty-title' => 'لا توجد إشعارات جديدة',
         'mark-all-read' => 'تعيين الكل كمقروء',
         'mark-read' => 'تعيين كمقروء',
         'mark-unread' => 'تعيين كغير مقروء',
         'marked-all-read' => 'تم تعيين جميع الإشعارات كمقروءة.',
+        'marked-success' => 'تم وضع علامة على جميع الإشعارات كمقروءة',
+        'no-record' => 'لم يتم العثور على سجلات',
         'of' => 'من',
         'per-page' => 'في الصفحة',
+        'read-all' => 'وضع علامة كمقروء',
         'title' => 'الإشعارات',
         'today' => 'اليوم',
         'unread' => 'غير مقروء',
@@ -70,6 +74,16 @@ return [
             'returns' => 'طلبات RMA',
             'reviews' => 'التقييمات',
             'system' => 'النظام',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'الكل',
+            'canceled' => 'تم إلغاء الطلب',
+            'closed' => 'تم إغلاق الطلب',
+            'completed' => 'تم الانتهاء من الطلب',
+            'pending' => 'الطلب معلق',
+            'pending-payment' => 'انتظار الدفع',
+            'processing' => 'جاري معالجة الطلب',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'أضف إلى السلة',
                             'available-qty' => ':qty متاح',
-                            'empty-info' => 'لا توجد منتجات متاحة في قناة :channel لمصطلح البحث.',
+                            'empty-channel-info' => 'لا توجد منتجات متاحة في قناة :channel لمصطلح البحث.',
+                            'empty-info' => 'لا توجد منتجات متاحة لمصطلح البحث.',
                             'empty-title' => 'لم يتم العثور على منتجات',
                             'product-image' => 'صورة المنتج',
                             'qty' => 'الكمية',

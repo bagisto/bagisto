@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Tots',
         'description' => 'Estigueu al dia de les comandes, els clients i tot allò que requereix la vostra atenció.',
+        'description-text' => 'Llistar totes les notificacions',
         'empty-description' => 'Les notificacions noves apareixeran aquí quan arribin.',
         'empty-title' => 'Ho teniu tot al dia',
         'mark-all-read' => 'Marca-ho tot com a llegit',
         'mark-read' => 'Marca com a llegida',
         'mark-unread' => 'Marca com a no llegida',
         'marked-all-read' => 'Totes les notificacions s\'han marcat com a llegides.',
+        'marked-success' => 'Totes les notificacions s’han marcat com a llegides',
+        'no-record' => 'No s’han trobat registres',
         'of' => 'de',
         'per-page' => 'Per pàgina',
+        'read-all' => 'Marcar com a llegit',
         'title' => 'Notificacions',
         'today' => 'Avui',
         'unread' => 'No llegides',
@@ -70,6 +74,16 @@ return [
             'returns' => 'Sol·licituds RMA',
             'reviews' => 'Ressenyes',
             'system' => 'Sistema',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Tots',
+            'canceled' => 'Comanda cancel·lada',
+            'closed' => 'Comanda tancada',
+            'completed' => 'Comanda completada',
+            'pending' => 'Comanda pendent',
+            'pending-payment' => 'Pagament pendent',
+            'processing' => 'Comanda en procés',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Afegir a la cistella',
                             'available-qty' => ':qty disponible',
-                            'empty-info' => 'No hi ha productes disponibles al canal :channel per al terme de cerca.',
+                            'empty-channel-info' => 'No hi ha productes disponibles al canal :channel per al terme de cerca.',
+                            'empty-info' => 'No hi ha productes disponibles per al terme de cerca.',
                             'empty-title' => 'No s\'han trobat productes',
                             'product-image' => 'Imatge del producte',
                             'qty' => 'Quantitat',

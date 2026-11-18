@@ -400,6 +400,9 @@ return [
             'gdpr' => [
                 'create-success' => 'Verzoek succesvol aangemaakt',
                 'revoked-successfully' => 'Verzoek succesvol ingetrokken',
+                'success-verify' => 'Succes! Verificatie-e-mail is verzonden.',
+                'success-verify-email-unsent' => 'Succes! Verificatie-e-mail is niet verzonden.',
+                'unable-to-sent' => 'E-mail kon niet worden verzonden.',
 
                 'index' => [
                     'create-btn' => 'Verzoek aanmaken',

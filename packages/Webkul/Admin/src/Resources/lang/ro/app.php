@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'All',
         'description' => 'Urmăriți comenzile, clienții și tot ce are nevoie de atenția dvs.',
+        'description-text' => 'List all the Notifications',
         'empty-description' => 'Notificările noi vor apărea aici imediat ce sosesc.',
         'empty-title' => 'Sunteți la zi',
         'mark-all-read' => 'Marchează toate ca citite',
         'mark-read' => 'Marchează ca citită',
         'mark-unread' => 'Marchează ca necitită',
         'marked-all-read' => 'Toate notificările au fost marcate ca citite.',
+        'marked-success' => 'All notifications have been marked as read',
+        'no-record' => 'No Record Found',
         'of' => 'of',
         'per-page' => 'Per Page',
+        'read-all' => 'Mark as Read',
         'title' => 'Notifications',
         'today' => 'Today',
         'unread' => 'Necitite',
@@ -70,6 +74,16 @@ return [
             'returns' => 'RMA Requests',
             'reviews' => 'Reviews',
             'system' => 'Sistem',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'All',
+            'canceled' => 'Order Canceled',
+            'closed' => 'Order Closed',
+            'completed' => 'Order Completed',
+            'pending' => 'Order Pending',
+            'pending-payment' => 'Pending Payment',
+            'processing' => 'Order Processing',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Add To Cart',
                             'available-qty' => ':qty Available',
-                            'empty-info' => 'Nu există produse disponibile pe canalul :channel pentru termenul căutat.',
+                            'empty-channel-info' => 'Nu există produse disponibile pe canalul :channel pentru termenul căutat.',
+                            'empty-info' => 'No products available for search term.',
                             'empty-title' => 'No products found',
                             'product-image' => 'Product Image',
                             'qty' => 'Qty',

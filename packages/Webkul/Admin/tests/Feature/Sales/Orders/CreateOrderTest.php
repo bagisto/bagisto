@@ -204,7 +204,7 @@ it('should name the customer channel before a product search and when nothing ma
     getJson(route('admin.sales.orders.create', $cart->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.search-info', ['channel' => $channel->name]))
-        ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.empty-info', ['channel' => $channel->name]));
+        ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.empty-channel-info', ['channel' => $channel->name]));
 });
 
 it('should send the admin to the orders listing when the cart does not exist', function () {

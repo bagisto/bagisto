@@ -8,8 +8,10 @@ class CoreController extends APIController
 {
     /**
      * Get every country.
+     *
+     * @return JsonResponse
      */
-    public function getCountries(): JsonResponse
+    public function getCountries()
     {
         return response()->json([
             'data' => core()->countries()->map(fn ($country) => [
@@ -22,8 +24,10 @@ class CoreController extends APIController
 
     /**
      * Get the states of every country.
+     *
+     * @return JsonResponse
      */
-    public function getStates(): JsonResponse
+    public function getStates()
     {
         return response()->json([
             'data' => core()->groupedStatesByCountries(),
