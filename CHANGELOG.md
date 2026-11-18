@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- #11495 [feature] - CMS pages on different channels can now share a URL key, so each channel can have its own page at the same path. A URL key is still refused when another page already uses it on one of the same channels.
 
 ## **v2.5.2 (18th of November 2026)** - *Release*
 
