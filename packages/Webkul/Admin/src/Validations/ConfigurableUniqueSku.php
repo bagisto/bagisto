@@ -3,11 +3,17 @@
 namespace Webkul\Admin\Validations;
 
 use Closure;
+use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Webkul\Product\Repositories\ProductRepository;
 
-class ConfigurableUniqueSku implements ValidationRule
+class ConfigurableUniqueSku implements DataAwareRule, ValidationRule
 {
+    /**
+     * The data under validation.
+     */
+    protected array $data = [];
+
     /**
      * Constructor.
      *
@@ -16,6 +22,16 @@ class ConfigurableUniqueSku implements ValidationRule
     public function __construct(
         protected $currentIds = null,
     ) {}
+
+    /**
+     * Set the data under validation.
+     */
+    public function setData(array $data): static
+    {
+        $this->data = $data;
+
+        return $this;
+    }
 
     /**
      * Run the validation rule.
@@ -28,20 +44,16 @@ class ConfigurableUniqueSku implements ValidationRule
     }
 
     /**
-     * Is SKU is exists in product.
+     * Whether the posted variant skus are free: held by no product outside the current variants and not repeated.
      *
      * @return bool
      */
     protected function isSkuExistsInProduct()
     {
-        $requestedSkus = collect(request()->input('variants'))->pluck('sku')->toArray();
+        $requestedSkus = collect($this->data['variants'] ?? null)->pluck('sku')->toArray();
 
         $productRepository = app(ProductRepository::class);
 
-        /**
-         * First we will check sku in all the products except the
-         * current variant ids.
-         */
         if (
             $productRepository->whereIn('sku', $requestedSkus)
                 ->whereNotIn('id', $this->currentIds)
@@ -50,10 +62,6 @@ class ConfigurableUniqueSku implements ValidationRule
             return false;
         }
 
-        /**
-         * Once, we don't found any sku in all the products then
-         * we will check uniqueness in the current requested variant's skus.
-         */
         return ! (count($requestedSkus) !== count(array_unique($requestedSkus)));
     }
 }
