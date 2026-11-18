@@ -116,6 +116,14 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.vat_id.after') !!}
             </template>
 
+            @php
+                $streetLines = \Webkul\Customer\Facades\AddressSettings::streetLines();
+
+                $firstLineTitle = $streetLines > 1
+                    ? trans('shop::app.checkout.onepage.address.street-address-line', ['line' => 1])
+                    : trans('shop::app.checkout.onepage.address.street-address');
+            @endphp
+
             <!-- Street Address -->
             <x-shop::form.control-group>
                 <x-shop::form.control-group.label class="required mt-0!" ::for="controlName + '_address_0'">
@@ -127,8 +135,8 @@
                     ::name="controlName + '.address.[0]'"
                     ::value="address.address[0]"
                     rules="required|address"
-                    :label="trans('shop::app.checkout.onepage.address.street-address')"
-                    :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
+                    :label="$firstLineTitle"
+                    :placeholder="$firstLineTitle"
                     ::id="controlName + '_address_0'"
                 />
 
@@ -137,23 +145,22 @@
                     ::name="controlName + '.address.[0]'"
                 />
 
-                @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                        <x-shop::form.control-group.control
-                            type="text"
-                            ::name="controlName + '.address.[{{ $i }}]'"
-                            rules="address"
-                            :label="trans('shop::app.checkout.onepage.address.street-address')"
-                            :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
-                            ::id="controlName + '_address_{{ $i }}'"
-                        />
+                @for ($i = 1; $i < $streetLines; $i++)
+                    <x-shop::form.control-group.control
+                        type="text"
+                        ::name="controlName + '.address.[{{ $i }}]'"
+                        ::value="address.address[{{ $i }}]"
+                        rules="address"
+                        :label="trans('shop::app.checkout.onepage.address.street-address-line', ['line' => $i + 1])"
+                        :placeholder="trans('shop::app.checkout.onepage.address.street-address-line', ['line' => $i + 1])"
+                        ::id="controlName + '_address_{{ $i }}'"
+                    />
 
-                        <x-shop::form.control-group.error
-                            class="mb-2"
-                            ::name="controlName + '.address.[{{ $i }}]'"
-                        />
-                    @endfor
-                @endif
+                    <x-shop::form.control-group.error
+                        class="mb-2"
+                        ::name="controlName + '.address.[{{ $i }}]'"
+                    />
+                @endfor
             </x-shop::form.control-group>
 
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.address.after') !!}

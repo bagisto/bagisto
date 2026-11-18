@@ -15,6 +15,10 @@
 {!! view_render_event('bagisto.admin.sales.order.create.cart.items.after') !!}
 
 @pushOnce('scripts')
+    @php
+        $customerChannelName = $cart->customer?->channel?->name ?? core()->getDefaultChannel()->name;
+    @endphp
+
     <script
         type="text/x-template"
         id="v-cart-items-template"
@@ -353,27 +357,40 @@
                         </div>
                     </div>
 
-                    <!-- For Empty Variations -->
+                    <!-- No Products Found -->
                     <div
                         class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
-                        v-else
+                        v-else-if="searchTerm.length > 1 && ! isSearching"
                     >
-                        <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                             class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                         />
 
-                        <!-- Add Variants Information -->
                         <div class="flex flex-col items-center gap-1.5">
                             <p class="text-base font-semibold text-gray-400">
                                 @lang('admin::app.sales.orders.create.cart.items.search.empty-title')
                             </p>
 
-                            <p class="text-gray-400">
-                                @lang('admin::app.sales.orders.create.cart.items.search.empty-info')
+                            <p class="text-center text-gray-400">
+                                @lang('admin::app.sales.orders.create.cart.items.search.empty-info', ['channel' => e($customerChannelName)])
                             </p>
                         </div>
+                    </div>
+
+                    <!-- Search Prompt -->
+                    <div
+                        class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
+                        v-else
+                    >
+                        <img
+                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                            class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
+                        />
+
+                        <p class="text-center text-gray-400">
+                            @lang('admin::app.sales.orders.create.cart.items.search.search-info', ['channel' => e($customerChannelName)])
+                        </p>
                     </div>
                 </x-slot>
             </x-admin::drawer>
@@ -413,6 +430,9 @@
             },
 
             methods: {
+                /**
+                 * Search the products the customer's channel sells, once the term is two characters long.
+                 */
                 search() {
                     if (this.searchTerm.length <= 1) {
                         this.searchedProducts = [];
@@ -423,7 +443,7 @@
                     this.isSearching = true;
 
                     let self = this;
-                    
+
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
                             params: {
                                 query: this.searchTerm,
@@ -439,6 +459,9 @@
                         });
                 },
 
+                /**
+                 * Hand the chosen product and quantity to the cart and close the search drawer.
+                 */
                 addToCart(params) {
                     this.$emit('add-to-cart', {
                         product: this.searchedProducts.find(product => product.id == params.product_id),
@@ -448,6 +471,9 @@
                     this.$refs.searchProductDrawer.close();
                 },
 
+                /**
+                 * Remove the item once confirmed. An answer carrying only a message is an error, flashed and kept off the cart.
+                 */
                 removeItem(item) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
@@ -465,11 +491,6 @@
                                         return;
                                     }
 
-                                    /**
-                                     * Cart-shaped payloads are emitted upward; error
-                                     * payloads (only `message`) are surfaced as a flash
-                                     * toast so they don't overwrite the cart state.
-                                     */
                                     if (payload.items !== undefined) {
                                         this.$emit('remove-from-cart', payload);
 
@@ -491,6 +512,10 @@
                     });
                 },
 
+                /**
+                 * Update the item's quantity. An answer carrying only a message, as when stock runs short, is an error,
+                 * flashed rather than emitted, so it cannot replace the cart and break its list.
+                 */
                 updateItem(item, qty) {
                     this.isUpdating = true;
 
@@ -504,12 +529,6 @@
                         .then(response => {
                             this.isUpdating = false;
 
-                            /**
-                             * updateItem() returns { data: CartResource, message } on success
-                             * and only { message } on failure (e.g. quantity exceeds stock).
-                             * Guard against emitting the error object upward, which would
-                             * clobber the cart state and crash the v-for render.
-                             */
                             const payload = response.data.data;
 
                             if (payload && payload.items !== undefined) {
@@ -533,6 +552,9 @@
                         });
                 },
 
+                /**
+                 * The quantity the product has to sell: its own figure where it carries one, else the sum of its inventories.
+                 */
                 availbleQty(product) {
                     if (product.qty_available !== undefined && product.qty_available !== null) {
                         return product.qty_available;

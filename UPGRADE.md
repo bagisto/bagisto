@@ -7,7 +7,7 @@
 ## Upgrading To v2.6.0 From v2.5
 
 > [!IMPORTANT]
-> **Upcoming release.** v2.6.0 is not out yet — this section covers the changes already merged into `master` that break compatibility with v2.5, and is still being added to. Changes released on the 2.5 line are documented in that branch's own upgrade guide and apply to v2.6.0 as well.
+> **Upcoming release.** v2.6.0 is not out yet — this section covers the changes already merged into `master` that break compatibility with v2.5, and is still being added to. Changes released on the 2.5 line are documented in that branch's own upgrade guide and apply to v2.6.0 as well, except that what the 2.5 line keeps as deprecated is removed, as [What The 2.5 Line Kept For Compatibility Is Removed](#what-the-25-line-kept-for-compatibility-is-removed) lists.
 >
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
@@ -17,6 +17,7 @@
 - [Core No Longer Resolves Guest Groups Or Tax Categories](#core-no-longer-resolves-guest-groups-or-tax-categories)
 - [Cart Item Type Hints Use The Contract](#cart-item-type-hints-use-the-contract)
 - [The Address Requirement Helpers Left Core](#the-address-requirement-helpers-left-core)
+- [What The 2.5 Line Kept For Compatibility Is Removed](#what-the-25-line-kept-for-compatibility-is-removed)
 
 ### Low Impact Changes
 
@@ -36,7 +37,7 @@ Bagisto is distributed as a full Laravel application rather than as a package in
 
 1. **Stay on PHP 8.4.** v2.6.0 asks for nothing newer than v2.5 did, so an installation already on 8.4 needs no platform work.
 
-2. **Back up the database.** The one migration this release adds makes a search term unique within its channel and locale, and it folds the rows a term had already accumulated into one before adding the index — summing their uses and keeping the earliest row. That is not reversible from the index alone. A store that has already taken this migration on the 2.5 line will see it skipped.
+2. **Back up the database.** One migration this release adds makes a search term unique within its channel and locale, and it folds the rows a term had already accumulated into one before adding the index — summing their uses and keeping the earliest row. That is not reversible from the index alone. A store that has already taken this migration on the 2.5 line will see it skipped. Two more drop the columns the 2.5 line kept for compatibility, `attribute_groups.name` and `notifications.order_id` and `read`, on a store that has them, and do nothing on one that does not.
 
 3. **Maintenance mode is optional.** Nothing in this release rewrites configuration that requests read, or moves files on disk, so a short window while the assets are rebuilt is enough. The sequence below still brackets the work with `php artisan down` and `php artisan up`, which is the safer default.
 
@@ -166,6 +167,44 @@ The 2.5 line moved the three address requirement helpers to the Customer package
 | `core()->isPostCodeRequired()` | `\Webkul\Customer\Facades\AddressSettings::isPostCodeRequired()` |
 
 **A theme that overrides an address view is the usual caller.** The checkout address form, the cart's shipping estimate, the account address create and edit views and the admin's Create Order address form all read these, and an override still calling `core()` fails with an undefined method error the first time it renders. The settings themselves, and what each answers, are unchanged.
+
+---
+
+### What The 2.5 Line Kept For Compatibility Is Removed
+
+**Impact Probability: Medium**
+
+A 2.5 patch release keeps the routes, methods, columns, signatures and translations that code written for an earlier 2.5 release relies on, and deprecates them. v2.6.0 removes everything the line deprecated, whichever 2.5 release a store upgrades from, so code still using it moves to the replacements the [2.5 upgrade guide](https://github.com/bagisto/bagisto/blob/2.5/UPGRADE.md) names for each release.
+
+**Notifications.** The three order-only routes are removed: `admin.notification.get_notification` (`get-notifications`), `admin.notification.viewed_notification` (`viewed-notifications/{orderId}`) and `admin.notification.read_all_notifications` (`read-all-notifications`). Use `admin.notification.list`, `admin.notification.open`, `admin.notification.mark_read`, `admin.notification.mark_unread` and `admin.notification.read_all`. With them go:
+
+- `NotificationController::getNotifications()`, `viewedNotifications()` and `readAllNotifications()`;
+- `NotificationRepository::getParamsData()`, `getAll()`, `countUnreadOrderNotifications()` and `findByOrder()`, replaced by `paginateFor()`, `unreadCountsFor()`, `findFor()`, `markRead()`, `markUnread()` and `markAllRead()`;
+- `Notification::order()` and the `Notification::ORDER_PLACED` constant. A placed order notification carries the order's id in `data['order_id']`;
+- the `notifications.order_id` and `read` columns, dropped by the migration. Each reader's read state is in `notification_reads`;
+- the `admin::app.notifications.description-text`, `marked-success`, `no-record` and `read-all` keys and the `order-status-messages.*` group.
+
+**Attribute groups.** The migration drops `attribute_groups.name`, first copying it into `admin_name` wherever that is empty. Read and write `admin_name`. `$group->name` is the group's name in the current locale, from `attribute_group_translations`, so a group created with only a `name` gets no admin name: pass `admin_name`. The family create and edit routes no longer accept `attribute_groups[...][name]`: post `attribute_groups[...][admin_name]` and `attribute_groups[...][<locale>][name]`.
+
+**Signatures.** These have their return types back, so a subclass overriding one without the same type fails to load:
+
+| Method | Returns |
+|---|---|
+| `Webkul\Shop\Http\Requests\Customer\AddressRequest::authorize()` | `bool` |
+| `Webkul\Shop\Http\Requests\Customer\AddressRequest::rules()` and `attributes()` | `array` |
+| `Webkul\Shop\Http\Controllers\API\CoreController::getCountries()` and `getStates()` | `JsonResponse` |
+| `Webkul\Shop\Http\Controllers\API\CartController::crossSellProducts()` | `JsonResource` |
+| `Webkul\Admin\Http\Controllers\NotificationController::index()` | `View` |
+| `Webkul\Core\Console\Commands\ExchangeRateUpdate::handle()` | `int` |
+| `Webkul\Notification\Providers\NotificationServiceProvider::boot()` | `void` |
+
+`Webkul\Shop\Http\Requests\CartAddressRequest::$rules` is typed `array` again, so a subclass redeclares it as `protected array $rules`. Three constructors take their dependencies as required arguments again, so a subclass calling `parent::__construct()` passes them:
+
+- `Webkul\Shop\Http\Controllers\API\AddressController` takes `AddressSettings` after `CustomerAddressRepository`;
+- `Webkul\Admin\Http\Controllers\NotificationController` takes `TypeRegistry` and `AdminNotifications` after `NotificationRepository`;
+- `Webkul\Notification\Repositories\NotificationRepository` takes `NotificationReadRepository` before the container.
+
+**Translations.** `shop::app.customers.account.gdpr.success-verify`, `success-verify-email-unsent` and `unable-to-sent` are removed, since nothing in core reads them. `admin::app.sales.orders.create.cart.items.search.empty-channel-info` is removed too: `empty-info` carries its message and takes the `:channel` placeholder, so an override printing `empty-info` passes the channel's name.
 
 ---
 

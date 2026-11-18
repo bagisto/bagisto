@@ -3,6 +3,8 @@
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Product\Models\Product;
@@ -90,6 +92,20 @@ it('should search customers via email or name', function () {
         ->assertJsonPath('data.0.email', $customer->email);
 });
 
+it('should name the channel of each customer the search finds', function () {
+    $channel = Channel::factory()->create();
+
+    $customer = Customer::factory()->create(['channel_id' => $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.customers.customers.search', ['query' => $customer->email]))
+        ->assertOk()
+        ->assertJsonPath('data.0.id', $customer->id)
+        ->assertJsonPath('data.0.channel_name', $channel->name)
+        ->assertJsonMissingPath('data.0.channel');
+});
+
 // ============================================================================
 // Cart Creation
 // ============================================================================
@@ -126,6 +142,69 @@ it('should return the admin order create page', function () {
     getJson(route('admin.sales.orders.create', $cart->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.orders.create.title', ['name' => $customer->name]));
+});
+
+it('should fill every street line of an address edited on the order create page', function () {
+    $this->setConfig('customer.address.information.street_lines', 3);
+
+    ['cart' => $cart] = createAdminCart();
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.sales.orders.create', $cart->id))
+        ->assertOk()
+        ->assertSee('placeholder="'.trans('admin::app.sales.orders.create.cart.address.street-address-line', ['line' => 3]).'"', false)
+        ->assertSee(':value="address.address[1]"', false)
+        ->assertSee(':value="address.address[2]"', false);
+});
+
+it('should follow the address settings of the customer channel on the order create page', function () {
+    $channel = Channel::factory()->create();
+
+    foreach (['customer.address.information.street_lines' => 2, 'customer.address.countries.allowed' => 'IN'] as $code => $value) {
+        CoreConfig::factory()->create([
+            'code' => $code,
+            'value' => $value,
+            'channel_code' => $channel->code,
+        ]);
+    }
+
+    ['customer' => $customer, 'cart' => $cart] = createAdminCart();
+
+    $customer->update(['channel_id' => $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.sales.orders.create', $cart->id))
+        ->assertOk()
+        ->assertSee('placeholder="'.trans('admin::app.sales.orders.create.cart.address.street-address-line', ['line' => 2]).'"', false)
+        ->assertDontSee('placeholder="'.trans('admin::app.sales.orders.create.cart.address.street-address-line', ['line' => 3]).'"', false)
+        ->assertSee('"code":"IN"', false)
+        ->assertDontSee('"code":"US"', false);
+
+    postJson(route('admin.sales.cart.addresses.store', $cart->id), [
+        'billing' => array_merge(adminCartAddress($customer), [
+            'country' => 'US',
+            'state' => 'CA',
+        ]),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['billing.country' => trans('customer::app.validations.allowed-country.not-allowed')]);
+});
+
+it('should name the customer channel before a product search and when nothing matches it', function () {
+    $channel = Channel::factory()->create();
+
+    ['customer' => $customer, 'cart' => $cart] = createAdminCart();
+
+    $customer->update(['channel_id' => $channel->id]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.sales.orders.create', $cart->id))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.search-info', ['channel' => $channel->name]))
+        ->assertSeeText(trans('admin::app.sales.orders.create.cart.items.search.empty-info', ['channel' => $channel->name]));
 });
 
 it('should send the admin to the orders listing when the cart does not exist', function () {

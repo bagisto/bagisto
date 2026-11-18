@@ -148,6 +148,15 @@
                                         v-show="editableGroup.id != element.id"
                                     >
                                         @{{ element.admin_name }}
+
+                                        <!-- Rename In Place -->
+                                        <button
+                                            type="button"
+                                            class="icon-edit inline-block cursor-pointer rounded-md py-0.5 align-text-bottom text-sm font-normal text-gray-400 transition-all hover:bg-gray-100 hover:text-gray-700 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                                            title="@lang($translation.'.edit-group-btn')"
+                                            aria-label="@lang($translation.'.edit-group-btn')"
+                                            @click.stop="startRenaming(element)"
+                                        ></button>
                                     </span>
 
                                     <input
@@ -565,16 +574,29 @@
                 },
 
                 /**
-                 * Select a group, and make it renameable in place on a second click, ready to type into.
+                 * Select a group, and make it renameable in place on a second click.
                  */
                 groupSelected(group) {
-                    this.editableGroup = this.isSelected(group) ? group : { id: null };
+                    if (this.isSelected(group)) {
+                        this.startRenaming(group);
+
+                        return;
+                    }
+
+                    this.editableGroup = { id: null };
 
                     this.selectedGroup = group;
+                },
 
-                    if (this.editableGroup.id == group.id) {
-                        this.$nextTick(() => this.$el.querySelector(`input[name="attribute_groups[${group.id}][admin_name]"]`)?.focus());
-                    }
+                /**
+                 * Select a group and turn its name into a field, ready to type into.
+                 */
+                startRenaming(group) {
+                    this.selectedGroup = group;
+
+                    this.editableGroup = group;
+
+                    this.$nextTick(() => this.$el.querySelector(`input[name="attribute_groups[${group.id}][admin_name]"]`)?.focus());
                 },
 
                 /**

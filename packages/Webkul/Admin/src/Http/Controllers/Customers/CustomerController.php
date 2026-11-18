@@ -268,18 +268,22 @@ class CustomerController extends Controller
     }
 
     /**
-     * Result of search customer.
+     * Result of search customer, each carrying the name of the channel the customer belongs to.
      *
      * @return JsonResponse
      */
     public function search()
     {
-        $customers = $this->customerRepository->scopeQuery(function ($query) {
+        $customers = $this->customerRepository->with('channel')->scopeQuery(function ($query) {
             return $query->where('email', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('first_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('last_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(self::COUNT);
+
+        $customers->through(fn ($customer) => array_merge($customer->withoutRelations()->toArray(), [
+            'channel_name' => $customer->channel?->name,
+        ]));
 
         return response()->json($customers);
     }

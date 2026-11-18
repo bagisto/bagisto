@@ -1,4 +1,15 @@
 @pushOnce('scripts')
+    @php
+        $addressChannelCode = $cart->customer?->channel?->code;
+
+        $addressCountries = \Webkul\Customer\Facades\AddressSettings::allowedCountries($addressChannelCode)
+            ->map(fn ($country) => [
+                'id' => $country->id,
+                'code' => $country->code,
+                'name' => $country->name,
+            ]);
+    @endphp
+
     <script
         type="text/x-template"
         id="v-checkout-address-form-template"
@@ -107,6 +118,14 @@
 
             {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.email.after') !!}
 
+            @php
+                $streetLines = \Webkul\Customer\Facades\AddressSettings::streetLines($addressChannelCode);
+
+                $firstLineTitle = $streetLines > 1
+                    ? trans('admin::app.sales.orders.create.cart.address.street-address-line', ['line' => 1])
+                    : trans('admin::app.sales.orders.create.cart.address.street-address');
+            @endphp
+
             <!-- Street Address -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.label class="required mt-0!">
@@ -118,8 +137,8 @@
                     ::name="controlName + '.address.[0]'"
                     ::value="address.address[0]"
                     rules="required|address"
-                    :label="trans('admin::app.sales.orders.create.cart.address.street-address')"
-                    :placeholder="trans('admin::app.sales.orders.create.cart.address.street-address')"
+                    :label="$firstLineTitle"
+                    :placeholder="$firstLineTitle"
                 />
 
                 <x-admin::form.control-group.error
@@ -127,30 +146,29 @@
                     ::name="controlName + '.address.[0]'"
                 />
 
-                @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                        <x-admin::form.control-group.control
-                            type="text"
-                            ::name="controlName + '.address.[{{ $i }}]'"
-                            class="mt-2"
-                            rules="address"
-                            :label="trans('admin::app.sales.orders.create.cart.address.street-address')"
-                            :placeholder="trans('admin::app.sales.orders.create.cart.address.street-address')"
-                        />
+                @for ($i = 1; $i < $streetLines; $i++)
+                    <x-admin::form.control-group.control
+                        type="text"
+                        ::name="controlName + '.address.[{{ $i }}]'"
+                        ::value="address.address[{{ $i }}]"
+                        class="mt-2"
+                        rules="address"
+                        :label="trans('admin::app.sales.orders.create.cart.address.street-address-line', ['line' => $i + 1])"
+                        :placeholder="trans('admin::app.sales.orders.create.cart.address.street-address-line', ['line' => $i + 1])"
+                    />
 
-                        <x-admin::form.control-group.error
-                            class="mb-2"
-                            ::name="controlName + '.address.[{{ $i }}]'"
-                        />
-                    @endfor
-                @endif
+                    <x-admin::form.control-group.error
+                        class="mb-2"
+                        ::name="controlName + '.address.[{{ $i }}]'"
+                    />
+                @endfor
             </x-admin::form.control-group>
 
             {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.address.after') !!}
 
             <!-- Country -->
             <x-admin::form.control-group class="mb-4!">
-                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }} mt-0!">
+                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired($addressChannelCode) ? 'required' : '' }} mt-0!">
                     @lang('admin::app.sales.orders.create.cart.address.country')
                 </x-admin::form.control-group.label>
 
@@ -159,7 +177,7 @@
                     ::name="controlName + '.country'"
                     ::value="address.country"
                     v-model="selectedCountry"
-                    rules="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired() ? 'required' : '' }}"
+                    rules="{{ \Webkul\Customer\Facades\AddressSettings::isCountryRequired($addressChannelCode) ? 'required' : '' }}"
                     :label="trans('admin::app.sales.orders.create.cart.address.country')"
                     :placeholder="trans('admin::app.sales.orders.create.cart.address.country')"
                     @change="selectedState = ''"
@@ -183,7 +201,7 @@
 
             <!-- State -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }} mt-0!">
+                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired($addressChannelCode) ? 'required' : '' }} mt-0!">
                     @lang('admin::app.sales.orders.create.cart.address.state')
                 </x-admin::form.control-group.label>
 
@@ -194,7 +212,7 @@
                             ::name="controlName + '.state'"
                             ::value="address.state"
                             v-model="selectedState"
-                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
+                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired($addressChannelCode) ? 'required' : '' }}"
                             :label="trans('admin::app.sales.orders.create.cart.address.state')"
                             :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
                         >
@@ -217,7 +235,7 @@
                             ::name="controlName + '.state'"
                             ::value="address.state"
                             v-model="selectedState"
-                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired() ? 'required' : '' }}"
+                            rules="{{ \Webkul\Customer\Facades\AddressSettings::isStateRequired($addressChannelCode) ? 'required' : '' }}"
                             :label="trans('admin::app.sales.orders.create.cart.address.state')"
                             :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
                         />
@@ -251,7 +269,7 @@
 
             <!-- Postcode -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }} mt-0!">
+                <x-admin::form.control-group.label class="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired($addressChannelCode) ? 'required' : '' }} mt-0!">
                     @lang('admin::app.sales.orders.create.cart.address.postcode')
                 </x-admin::form.control-group.label>
 
@@ -259,7 +277,7 @@
                     type="text"
                     ::name="controlName + '.postcode'"
                     ::value="address.postcode"
-                    rules="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() ? 'required' : '' }}|postcode"
+                    rules="{{ \Webkul\Customer\Facades\AddressSettings::isPostCodeRequired($addressChannelCode) ? 'required' : '' }}|postcode"
                     :label="trans('admin::app.sales.orders.create.cart.address.postcode')"
                     :placeholder="trans('admin::app.sales.orders.create.cart.address.postcode')"
                 />
@@ -326,16 +344,10 @@
 
                     selectedState: this.address.state,
 
-                    countries: [],
+                    countries: @json($addressCountries),
 
-                    states: null,
+                    states: @json(\Webkul\Customer\Facades\AddressSettings::allowedGroupedStates($addressChannelCode)),
                 }
-            },
-
-            created() {
-                this.getCountries();
-
-                this.getStates();
             },
 
             computed: {
@@ -343,24 +355,6 @@
                     return !! this.states[this.selectedCountry]?.length;
                 },
             },
-
-            methods: {
-                getCountries() {
-                    this.$axios.get("{{ route('shop.api.core.countries') }}")
-                        .then(response => {
-                            this.countries = response.data.data;
-                        })
-                        .catch(() => {});
-                },
-
-                getStates() {
-                    this.$axios.get("{{ route('shop.api.core.states') }}")
-                        .then(response => {
-                            this.states = response.data.data;
-                        })
-                        .catch(() => {});
-                },
-            }
         });
     </script>
 @endPushOnce

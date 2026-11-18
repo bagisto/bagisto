@@ -154,6 +154,16 @@
                             <x-admin::form.control-group.error control-name="phone" />
                         </x-admin::form.control-group>
 
+                        @php
+                            $addressChannelCode = $customer->channel?->code;
+
+                            $streetLines = \Webkul\Customer\Facades\AddressSettings::streetLines($addressChannelCode);
+
+                            $firstLineTitle = $streetLines > 1
+                                ? trans('admin::app.customers.customers.view.address.create.street-address-line', ['line' => 1])
+                                : trans('admin::app.customers.customers.view.address.create.street-address');
+                        @endphp
+
                         <!-- Street Address -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -164,10 +174,9 @@
                                 type="text"
                                 id="address[0]"
                                 name="address[0]"
-                                class="mb-2"
                                 rules="required"
-                                :label="trans('admin::app.customers.customers.view.address.create.street-address')"
-                                :placeholder="trans('admin::app.customers.customers.view.address.create.street-address')"
+                                :label="$firstLineTitle"
+                                :placeholder="$firstLineTitle"
                             />
 
                             <x-admin::form.control-group.error
@@ -177,19 +186,21 @@
 
                             <x-admin::form.control-group.error control-name="address[]" />
 
-                            @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        id="address[{{ $i }}]"
-                                        name="address[{{ $i }}]"
-                                        :label="trans('admin::app.customers.customers.view.address.create.street-address')"
-                                        :placeholder="trans('admin::app.customers.customers.view.address.create.street-address')"
-                                    />
+                            @for ($i = 1; $i < $streetLines; $i++)
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    id="address[{{ $i }}]"
+                                    name="address[{{ $i }}]"
+                                    class="mt-2"
+                                    :label="trans('admin::app.customers.customers.view.address.create.street-address-line', ['line' => $i + 1])"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.street-address-line', ['line' => $i + 1])"
+                                />
 
-                                    <x-admin::form.control-group.error control-name="address[{{ $i }}]" />
-                                @endfor
-                            @endif
+                                <x-admin::form.control-group.error
+                                    class="mb-2"
+                                    control-name="address[{{ $i }}]"
+                                />
+                            @endfor
                         </x-admin::form.control-group>
 
                         <!-- City -->
@@ -240,7 +251,7 @@
                                 :label="trans('admin::app.customers.customers.view.address.create.country')"
                                 @change="state = ''"
                             >
-                                @foreach (core()->countries() as $country)
+                                @foreach (\Webkul\Customer\Facades\AddressSettings::allowedCountries($addressChannelCode) as $country)
                                     <option value="{{ $country->code }}">{{ $country->name }}</option>
                                 @endforeach
                             </x-admin::form.control-group.control>
@@ -343,7 +354,7 @@
 
                     state: "",
 
-                    countryStates: @json(core()->groupedStatesByCountries()),
+                    countryStates: @json(\Webkul\Customer\Facades\AddressSettings::allowedGroupedStates($addressChannelCode)),
 
                     isLoading: false,
                 };

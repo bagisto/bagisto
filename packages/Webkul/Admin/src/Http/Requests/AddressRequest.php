@@ -7,6 +7,9 @@ use Webkul\Core\Rules\AddressLines;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
 use Webkul\Core\Rules\StateBelongsToCountry;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Rules\AllowedCountry;
 use Webkul\Customer\Rules\VatIdRule;
 
 class AddressRequest extends FormRequest
@@ -33,7 +36,7 @@ class AddressRequest extends FormRequest
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
             'address' => ['required', 'array', 'min:1', new AddressLines],
-            'country' => ['required'],
+            'country' => ['required', new AllowedCountry($this->customerChannelCode())],
             'state' => ['required', 'max:255', new StateBelongsToCountry($this->input('country'))],
             'city' => ['required', 'max:255'],
             'postcode' => ['required', 'max:255', new PostCode],
@@ -54,5 +57,17 @@ class AddressRequest extends FormRequest
         return [
             'address.*' => 'address',
         ];
+    }
+
+    /**
+     * Retrieve the channel of the customer the address belongs to, whose address settings apply.
+     */
+    protected function customerChannelCode(): ?string
+    {
+        $customer = $this->routeIs('admin.customers.customers.addresses.store')
+            ? app(CustomerRepository::class)->find($this->route('id'))
+            : app(CustomerAddressRepository::class)->find($this->route('id'))?->customer;
+
+        return $customer?->channel?->code;
     }
 }
