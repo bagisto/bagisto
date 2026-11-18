@@ -400,6 +400,9 @@ return [
             'gdpr' => [
                 'create-success' => 'Permintaan berhasil dibuat',
                 'revoked-successfully' => 'Permintaan berhasil dibatalkan',
+                'success-verify' => 'Berhasil! Email verifikasi telah dikirim.',
+                'success-verify-email-unsent' => 'Berhasil! Email verifikasi belum dikirim.',
+                'unable-to-sent' => 'Tidak dapat mengirim email.',
 
                 'index' => [
                     'create-btn' => 'Buat Permintaan',

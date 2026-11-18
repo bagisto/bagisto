@@ -400,6 +400,9 @@ return [
             'gdpr' => [
                 'create-success' => 'Request created successfully',
                 'revoked-successfully' => 'Request revoked successfully',
+                'success-verify' => 'Success! Verification email has been sent.',
+                'success-verify-email-unsent' => 'Success! Verification email has not been sent.',
+                'unable-to-sent' => 'Unable to sent email.',
 
                 'index' => [
                     'create-btn' => 'Create Request',

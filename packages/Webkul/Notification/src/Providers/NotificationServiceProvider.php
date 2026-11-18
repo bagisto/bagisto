@@ -26,8 +26,10 @@ class NotificationServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 

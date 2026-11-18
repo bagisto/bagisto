@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Zote',
         'description' => 'Fuatilia maagizo, wateja na kila kitu kinachohitaji umakini wako.',
+        'description-text' => 'Orodhesha Taarifa Zote',
         'empty-description' => 'Arifa mpya zitaonekana hapa mara zinapofika.',
         'empty-title' => 'Umeona kila kitu',
         'mark-all-read' => 'Weka zote kuwa zimesomwa',
         'mark-read' => 'Weka kuwa imesomwa',
         'mark-unread' => 'Weka kuwa haijasomwa',
         'marked-all-read' => 'Arifa zote zimewekwa kuwa zimesomwa.',
+        'marked-success' => 'Taarifa zote zimeashiriwa kama zimesomwa',
+        'no-record' => 'Hakuna Rekodi Iliyopatikana',
         'of' => 'kati ya',
         'per-page' => 'Kila Ukurasa',
+        'read-all' => 'Ashiria Kama Imesomwa',
         'title' => 'Taarifa',
         'today' => 'Leo',
         'unread' => 'Hazijasomwa',
@@ -70,6 +74,16 @@ return [
             'returns' => 'Maombi ya RMA',
             'reviews' => 'Maoni',
             'system' => 'Mfumo',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Zote',
+            'canceled' => 'Oda Imeghairiwa',
+            'closed' => 'Oda Imefungwa',
+            'completed' => 'Oda Imekamilika',
+            'pending' => 'Oda Inasubiri',
+            'pending-payment' => 'Inasubiri Malipo',
+            'processing' => 'Oda Inachakatwa',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Ongeza Kwenye Kikapu',
                             'available-qty' => ':qty Zinazopatikana',
-                            'empty-info' => 'Hakuna bidhaa zinazopatikana kwenye chaneli ya :channel kwa neno hilo la utaftaji.',
+                            'empty-channel-info' => 'Hakuna bidhaa zinazopatikana kwenye chaneli ya :channel kwa neno hilo la utaftaji.',
+                            'empty-info' => 'Hakuna bidhaa zinazopatikana kwa neno hilo la utaftaji.',
                             'empty-title' => 'Hakuna bidhaa zilizopatikana',
                             'product-image' => 'Picha ya Bidhaa',
                             'qty' => 'Kiasi',

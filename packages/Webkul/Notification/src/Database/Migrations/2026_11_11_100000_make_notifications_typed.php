@@ -9,7 +9,8 @@ use Webkul\User\Models\AdminProxy;
 return new class extends Migration
 {
     /**
-     * Turn the order-only notifications into typed ones for an audience, read per reader.
+     * Turn the order-only notifications into typed ones for an audience, read per reader. The order and read
+     * columns stay for code written against them, the order one now empty for every other type.
      */
     public function up(): void
     {
@@ -34,45 +35,20 @@ return new class extends Migration
         $this->convertOrderNotifications();
 
         Schema::table('notifications', function (Blueprint $table) {
-            $table->dropForeign(['order_id']);
-        });
-
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->dropColumn(['order_id', 'read']);
+            $table->integer('order_id')->unsigned()->nullable()->change();
 
             $table->string('audience')->nullable(false)->change();
         });
     }
 
     /**
-     * Put the order columns back, keeping only the admin notifications raised for a placed order that still exists.
+     * Keep only the placed order notifications, which the order columns can still describe, and drop the rest.
      */
     public function down(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->boolean('read')->default(0)->after('type');
-            $table->integer('order_id')->unsigned()->nullable()->after('read');
-        });
+        DB::table('notifications')->whereNull('order_id')->delete();
 
-        DB::table('notifications')
-            ->where(fn ($query) => $query->where('type', '!=', 'order.placed')->orWhere('audience', '!=', 'admin'))
-            ->delete();
-
-        DB::table('notifications')->orderBy('id')->chunkById(500, function ($notifications) {
-            foreach ($notifications as $notification) {
-                $data = json_decode($notification->data ?? '[]', true) ?: [];
-
-                DB::table('notifications')->where('id', $notification->id)->update([
-                    'type' => 'order',
-                    'order_id' => $data['order_id'] ?? null,
-                    'read' => DB::table('notification_reads')->where('notification_id', $notification->id)->exists(),
-                ]);
-            }
-        });
-
-        DB::table('notifications')
-            ->whereNotExists(fn ($query) => $query->select(DB::raw(1))->from('orders')->whereColumn('orders.id', 'notifications.order_id'))
-            ->delete();
+        DB::table('notifications')->update(['type' => 'order']);
 
         Schema::dropIfExists('notification_reads');
 
@@ -80,9 +56,11 @@ return new class extends Migration
             $table->dropIndex(['audience', 'type']);
             $table->dropMorphs('notifiable');
             $table->dropColumn(['audience', 'data']);
-
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
+
+        Schema::withoutForeignKeyConstraints(fn () => Schema::table('notifications', function (Blueprint $table) {
+            $table->integer('order_id')->unsigned()->nullable(false)->change();
+        }));
     }
 
     /**

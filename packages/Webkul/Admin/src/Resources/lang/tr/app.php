@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Tümü',
         'description' => 'Siparişleri, müşterileri ve ilgilenmeniz gereken her şeyi takip edin.',
+        'description-text' => 'Tüm Bildirimleri Listele',
         'empty-description' => 'Yeni bildirimler geldiğinde burada görünecek.',
         'empty-title' => 'Her şeyi gördünüz',
         'mark-all-read' => 'Tümünü okundu olarak işaretle',
         'mark-read' => 'Okundu olarak işaretle',
         'mark-unread' => 'Okunmadı olarak işaretle',
         'marked-all-read' => 'Tüm bildirimler okundu olarak işaretlendi.',
+        'marked-success' => 'Tüm bildirimler okundu olarak işaretlendi',
+        'no-record' => 'Kayıt Bulunamadı',
         'of' => 'of',
         'per-page' => 'Sayfa Başına',
+        'read-all' => 'Tümünü Okundu Olarak İşaretle',
         'title' => 'Bildirimler',
         'today' => 'Bugün',
         'unread' => 'Okunmamış',
@@ -70,6 +74,16 @@ return [
             'returns' => 'RMA Talepleri',
             'reviews' => 'Değerlendirmeler',
             'system' => 'Sistem',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Tümü',
+            'canceled' => 'Sipariş İptal Edildi',
+            'closed' => 'Sipariş Kapatıldı',
+            'completed' => 'Sipariş Tamamlandı',
+            'pending' => 'Sipariş Bekliyor',
+            'pending-payment' => 'Bekleyen Ödeme',
+            'processing' => 'Sipariş İşleniyor',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Sepete Ekle',
                             'available-qty' => ':qty Mevcut',
-                            'empty-info' => ':channel kanalında arama terimi için ürün bulunamadı.',
+                            'empty-channel-info' => ':channel kanalında arama terimi için ürün bulunamadı.',
+                            'empty-info' => 'Arama terimi için ürün bulunamadı.',
                             'empty-title' => 'Ürün bulunamadı',
                             'product-image' => 'Ürün Görseli',
                             'qty' => 'Adet',

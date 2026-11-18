@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => '全部',
         'description' => '随时掌握订单、客户以及所有需要您关注的事项。',
+        'description-text' => '列出所有通知',
         'empty-description' => '新的通知到达后会显示在这里。',
         'empty-title' => '您已查看所有通知',
         'mark-all-read' => '全部标为已读',
         'mark-read' => '标为已读',
         'mark-unread' => '标为未读',
         'marked-all-read' => '所有通知已标为已读。',
+        'marked-success' => '所有通知已标记为已读',
+        'no-record' => '未找到记录',
         'of' => '的',
         'per-page' => '每页',
+        'read-all' => '标记为已读',
         'title' => '通知',
         'today' => '今天',
         'unread' => '未读',
@@ -70,6 +74,16 @@ return [
             'returns' => 'RMA 请求',
             'reviews' => '评论',
             'system' => '系统',
+        ],
+
+        'order-status-messages' => [
+            'all' => '全部',
+            'canceled' => '订单已取消',
+            'closed' => '订单已关闭',
+            'completed' => '订单已完成',
+            'pending' => '订单待处理',
+            'pending-payment' => '待付款订单',
+            'processing' => '订单处理中',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => '添加到购物车',
                             'available-qty' => ':qty 可用',
-                            'empty-info' => ':channel 渠道中没有可用于搜索词的产品。',
+                            'empty-channel-info' => ':channel 渠道中没有可用于搜索词的产品。',
+                            'empty-info' => '没有可用于搜索词的产品。',
                             'empty-title' => '未找到产品',
                             'product-image' => '产品图片',
                             'qty' => '数量',

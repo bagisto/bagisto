@@ -73,6 +73,8 @@ class AttributeFamilyController extends Controller
      */
     public function store()
     {
+        $this->acceptLegacyGroupNames();
+
         $this->validate(request(), [
             'code' => ['required', 'max:255', 'unique:attribute_families,code', new Code],
             'name' => 'required|max:255',
@@ -118,6 +120,8 @@ class AttributeFamilyController extends Controller
      */
     public function update(int $id)
     {
+        $this->acceptLegacyGroupNames();
+
         $this->validate(request(), [
             'code' => ['required', 'max:255', 'unique:attribute_families,code,'.$id, new Code],
             'name' => 'required|max:255',
@@ -177,5 +181,33 @@ class AttributeFamilyController extends Controller
         return new JsonResponse([
             'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'admin::app.catalog.families.family']),
         ], 500);
+    }
+
+    /**
+     * Take a group posted with a name and no admin name, as the form posted it before groups were translated.
+     *
+     * @deprecated Post each group's `admin_name`.
+     */
+    protected function acceptLegacyGroupNames(): void
+    {
+        $groups = request('attribute_groups');
+
+        if (! is_array($groups)) {
+            return;
+        }
+
+        request()->merge([
+            'attribute_groups' => array_map(function ($group) {
+                if (
+                    is_array($group)
+                    && is_string($group['name'] ?? null)
+                    && ! array_key_exists('admin_name', $group)
+                ) {
+                    $group['admin_name'] = $group['name'];
+                }
+
+                return $group;
+            }, $groups),
+        ]);
     }
 }

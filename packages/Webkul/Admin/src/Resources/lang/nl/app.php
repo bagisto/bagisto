@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Alles',
         'description' => 'Houd bestellingen, klanten en alles wat uw aandacht nodig heeft in de gaten.',
+        'description-text' => 'Alle meldingen weergeven',
         'empty-description' => 'Nieuwe meldingen verschijnen hier zodra ze binnenkomen.',
         'empty-title' => 'U bent helemaal bij',
         'mark-all-read' => 'Alles als gelezen markeren',
         'mark-read' => 'Als gelezen markeren',
         'mark-unread' => 'Als ongelezen markeren',
         'marked-all-read' => 'Alle meldingen zijn als gelezen gemarkeerd.',
+        'marked-success' => 'Alle meldingen zijn gemarkeerd als gelezen',
+        'no-record' => 'Geen Records Gevonden',
         'of' => 'van',
         'per-page' => 'Per pagina',
+        'read-all' => 'Markeer als Gelezen',
         'title' => 'Meldingen',
         'today' => 'Vandaag',
         'unread' => 'Ongelezen',
@@ -70,6 +74,16 @@ return [
             'returns' => 'RMA-verzoeken',
             'reviews' => 'Beoordelingen',
             'system' => 'Systeem',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Alles',
+            'canceled' => 'Bestelling Geannuleerd',
+            'closed' => 'Bestelling Gesloten',
+            'completed' => 'Bestelling Voltooid',
+            'pending' => 'Bestelling In Afwachting',
+            'pending-payment' => 'In Afwachting van Betaling',
+            'processing' => 'Bestelling In Verwerking',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Toevoegen aan winkelwagen',
                             'available-qty' => ':qty beschikbaar',
-                            'empty-info' => 'Geen producten beschikbaar op kanaal :channel voor zoekterm.',
+                            'empty-channel-info' => 'Geen producten beschikbaar op kanaal :channel voor zoekterm.',
+                            'empty-info' => 'Geen producten beschikbaar voor zoekterm.',
                             'empty-title' => 'Geen producten gevonden',
                             'product-image' => 'Productafbeelding',
                             'qty' => 'Aantal',

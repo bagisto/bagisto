@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'הכל',
         'description' => 'עקבו אחר הזמנות, לקוחות וכל מה שדורש את תשומת לבכם.',
+        'description-text' => 'לרשום את כל ההתראות',
         'empty-description' => 'התראות חדשות יופיעו כאן ברגע שיגיעו.',
         'empty-title' => 'אין התראות חדשות',
         'mark-all-read' => 'סמן הכול כנקרא',
         'mark-read' => 'סמן כנקרא',
         'mark-unread' => 'סמן כלא נקרא',
         'marked-all-read' => 'כל ההתראות סומנו כנקראו.',
+        'marked-success' => 'כל ההתראות סומנו כנקראו',
+        'no-record' => 'לא נמצאו רשומות',
         'of' => 'מתוך',
         'per-page' => 'לעמוד',
+        'read-all' => 'סמן כנקרא',
         'title' => 'התראות',
         'today' => 'היום',
         'unread' => 'לא נקראו',
@@ -70,6 +74,16 @@ return [
             'returns' => 'בקשות RMA',
             'reviews' => 'ביקורות',
             'system' => 'מערכת',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'הכל',
+            'canceled' => 'הזמנה בוטלה',
+            'closed' => 'הזמנה נסגרה',
+            'completed' => 'הזמנה הושלמה',
+            'pending' => 'הזמנה ממתינה',
+            'pending-payment' => 'הזמנה ממתינה לתשלום',
+            'processing' => 'הזמנה בעיבוד',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'הוסף לעגלה',
                             'available-qty' => ':qty זמין',
-                            'empty-info' => 'אין מוצרים זמינים בערוץ :channel עבור מונח החיפוש.',
+                            'empty-channel-info' => 'אין מוצרים זמינים בערוץ :channel עבור מונח החיפוש.',
+                            'empty-info' => 'אין מוצרים זמינים עבור מונח החיפוש.',
                             'empty-title' => 'לא נמצאו מוצרים',
                             'product-image' => 'תמונת מוצר',
                             'qty' => 'כמות',

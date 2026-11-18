@@ -30,7 +30,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.5.x-dev';
+    const BAGISTO_VERSION = '2.5.2';
 
     /**
      * Current Channel.
@@ -769,8 +769,10 @@ class Core
      * Is country required.
      *
      * @deprecated Use Webkul\Customer\Facades\AddressSettings::isCountryRequired() instead.
+     *
+     * @return bool
      */
-    public function isCountryRequired(): bool
+    public function isCountryRequired()
     {
         return app(AddressSettings::class)->isCountryRequired();
     }
@@ -779,8 +781,10 @@ class Core
      * Is state required.
      *
      * @deprecated Use Webkul\Customer\Facades\AddressSettings::isStateRequired() instead.
+     *
+     * @return bool
      */
-    public function isStateRequired(): bool
+    public function isStateRequired()
     {
         return app(AddressSettings::class)->isStateRequired();
     }
@@ -789,8 +793,10 @@ class Core
      * Is postcode required.
      *
      * @deprecated Use Webkul\Customer\Facades\AddressSettings::isPostCodeRequired() instead.
+     *
+     * @return bool
      */
-    public function isPostCodeRequired(): bool
+    public function isPostCodeRequired()
     {
         return app(AddressSettings::class)->isPostCodeRequired();
     }

@@ -16,8 +16,10 @@ class CartAddressRequest extends FormRequest
 {
     /**
      * The validation rules gathered for the addresses the request carries.
+     *
+     * @var array
      */
-    protected array $rules = [];
+    protected $rules = [];
 
     /**
      * Determine if the user is authorized to make this request.

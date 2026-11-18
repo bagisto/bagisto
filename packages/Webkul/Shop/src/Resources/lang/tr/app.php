@@ -400,6 +400,9 @@ return [
             'gdpr' => [
                 'create-success' => 'Talep başarıyla oluşturuldu.',
                 'revoked-successfully' => 'Talep başarıyla iptal edildi.',
+                'success-verify' => 'Doğrulama e-postası gönderildi.',
+                'success-verify-email-unsent' => 'Doğrulama e-postası gönderilemedi.',
+                'unable-to-sent' => 'E-posta gönderilemiyor.',
 
                 'index' => [
                     'create-btn' => 'Talep Oluştur',

@@ -19,3 +19,16 @@ Route::controller(NotificationController::class)->prefix('notifications')->group
 
     Route::delete('{id}/read', 'markUnread')->name('admin.notification.mark_unread');
 });
+
+/**
+ * Notification routes a panel written before notifications were typed still calls.
+ *
+ * @deprecated Use the routes above.
+ */
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('get-notifications', 'getNotifications')->name('admin.notification.get_notification');
+
+    Route::get('viewed-notifications/{orderId}', 'viewedNotifications')->name('admin.notification.viewed_notification');
+
+    Route::post('read-all-notifications', 'readAllNotifications')->name('admin.notification.read_all_notifications');
+});

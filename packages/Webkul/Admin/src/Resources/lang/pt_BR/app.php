@@ -48,14 +48,18 @@ return [
     'notifications' => [
         'all' => 'Todos',
         'description' => 'Acompanhe pedidos, clientes e tudo o que precisa da sua atenção.',
+        'description-text' => 'Listar todas as notificações',
         'empty-description' => 'Novas notificações aparecerão aqui assim que chegarem.',
         'empty-title' => 'Tudo em dia',
         'mark-all-read' => 'Marcar tudo como lido',
         'mark-read' => 'Marcar como lida',
         'mark-unread' => 'Marcar como não lida',
         'marked-all-read' => 'Todas as notificações foram marcadas como lidas.',
+        'marked-success' => 'Todas as notificações foram marcadas como lidas',
+        'no-record' => 'Nenhum Registro Encontrado',
         'of' => 'de',
         'per-page' => 'Por página',
+        'read-all' => 'Marcar como Lido',
         'title' => 'Notificações',
         'today' => 'Hoje',
         'unread' => 'Não lidas',
@@ -70,6 +74,16 @@ return [
             'returns' => 'Solicitações de RMA',
             'reviews' => 'Avaliações',
             'system' => 'Sistema',
+        ],
+
+        'order-status-messages' => [
+            'all' => 'Todos',
+            'canceled' => 'Pedido Cancelado',
+            'closed' => 'Pedido Fechado',
+            'completed' => 'Pedido Concluído',
+            'pending' => 'Pedido Pendente',
+            'pending-payment' => 'Pagamento Pendente',
+            'processing' => 'Pedido em Processamento',
         ],
 
         'types' => [
@@ -450,7 +464,8 @@ return [
                         'search' => [
                             'add-to-cart' => 'Adicionar ao Carrinho',
                             'available-qty' => ':qty Disponível',
-                            'empty-info' => 'Nenhum produto disponível no canal :channel para o termo de pesquisa.',
+                            'empty-channel-info' => 'Nenhum produto disponível no canal :channel para o termo de pesquisa.',
+                            'empty-info' => 'Nenhum produto disponível para o termo de pesquisa.',
                             'empty-title' => 'Nenhum produto encontrado',
                             'product-image' => 'Imagem do Produto',
                             'qty' => 'Quantidade',

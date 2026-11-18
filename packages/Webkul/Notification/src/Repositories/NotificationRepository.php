@@ -2,9 +2,9 @@
 
 namespace Webkul\Notification\Repositories;
 
-use Illuminate\Container\Container;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
@@ -12,16 +12,6 @@ use Webkul\Notification\Contracts\Notification;
 
 class NotificationRepository extends Repository
 {
-    /**
-     * Create a new repository instance.
-     */
-    public function __construct(
-        protected NotificationReadRepository $notificationReadRepository,
-        Container $container
-    ) {
-        parent::__construct($container);
-    }
-
     /**
      * Specify the model class name.
      */
@@ -87,7 +77,7 @@ class NotificationRepository extends Repository
      */
     public function markRead(int $notificationId, Model $reader): void
     {
-        $this->notificationReadRepository->markRead([$notificationId], $reader);
+        $this->readRepository()->markRead([$notificationId], $reader);
     }
 
     /**
@@ -95,7 +85,7 @@ class NotificationRepository extends Repository
      */
     public function markUnread(int $notificationId, Model $reader): void
     {
-        $this->notificationReadRepository->markUnread($notificationId, $reader);
+        $this->readRepository()->markUnread($notificationId, $reader);
     }
 
     /**
@@ -107,10 +97,76 @@ class NotificationRepository extends Repository
     {
         $this->visibleTo($reader, $audience, $types, true)
             ->select('id')
-            ->chunkById(500, fn ($notifications) => $this->notificationReadRepository->markRead(
+            ->chunkById(500, fn ($notifications) => $this->readRepository()->markRead(
                 $notifications->pluck('id')->all(),
                 $reader
             ));
+    }
+
+    /**
+     * Return the placed order notifications with their orders, filtered as the bell asked before notifications were typed.
+     *
+     * @deprecated Use paginateFor() and unreadCountsFor().
+     */
+    public function getParamsData(array $params): array
+    {
+        $query = $this->orderNotifications()->with('order');
+
+        if (
+            isset($params['status'])
+            && $params['status'] != 'All'
+        ) {
+            $query->whereHas('order', fn (Builder $order) => $order->where('status', $params['status']));
+        }
+
+        if (
+            isset($params['read'])
+            && isset($params['limit'])
+        ) {
+            $this->readByAnyone($query, (bool) $params['read'])->limit($params['limit']);
+        } elseif (isset($params['limit'])) {
+            $query->limit($params['limit']);
+        }
+
+        return [
+            'notifications' => $query->latest()->paginate($params['limit'] ?? 10),
+            'status_counts' => $this->orderStatusCounts(),
+        ];
+    }
+
+    /**
+     * Return the placed order notifications with their orders.
+     *
+     * @deprecated Use paginateFor() and unreadCountsFor().
+     *
+     * @return array
+     */
+    public function getAll(array $params = [])
+    {
+        return [
+            'notifications' => $this->orderNotifications()->with('order')->latest()->paginate($params['limit'] ?? 10),
+            'status_counts' => $this->orderStatusCounts(),
+        ];
+    }
+
+    /**
+     * Count the placed order notifications no reader has read.
+     *
+     * @deprecated Use unreadCountsFor().
+     */
+    public function countUnreadOrderNotifications(): int
+    {
+        return $this->readByAnyone($this->orderNotifications(), false)->count();
+    }
+
+    /**
+     * Find the placed order notification of an order.
+     *
+     * @deprecated Use findFor().
+     */
+    public function findByOrder(int $orderId): ?Notification
+    {
+        return $this->orderNotifications()->where('order_id', $orderId)->first();
     }
 
     /**
@@ -132,6 +188,44 @@ class NotificationRepository extends Repository
                 'reads',
                 fn (Builder $reads) => $this->readBy($reads, $reader)
             ));
+    }
+
+    /**
+     * The notifications that carry the deprecated order column.
+     */
+    protected function orderNotifications(): Builder
+    {
+        return $this->model->newQuery()->whereNotNull('order_id');
+    }
+
+    /**
+     * How many placed order notifications there are for each status their orders are in.
+     */
+    protected function orderStatusCounts(): Collection
+    {
+        return $this->model->newQuery()
+            ->join('orders', 'notifications.order_id', '=', 'orders.id')
+            ->select('orders.status', DB::raw('COUNT(*) as status_count'))
+            ->groupBy('orders.status')
+            ->get();
+    }
+
+    /**
+     * Narrow to the notifications some reader has read, or to those no reader has, as the shared flag once meant.
+     */
+    protected function readByAnyone(Builder $query, bool $read): Builder
+    {
+        return $read
+            ? $query->whereHas('reads')
+            : $query->whereDoesntHave('reads');
+    }
+
+    /**
+     * The repository read marks are written through, resolved here so the constructor stays the parent's.
+     */
+    protected function readRepository(): NotificationReadRepository
+    {
+        return app(NotificationReadRepository::class);
     }
 
     /**

@@ -12,12 +12,14 @@ use Webkul\Shop\Http\Resources\AddressResource;
 class AddressController extends APIController
 {
     /**
-     * Create a new controller instance.
+     * Create a new controller instance. The address settings are optional so a subclass passing only the repository still works.
      */
     public function __construct(
         protected CustomerAddressRepository $customerAddressRepository,
-        protected AddressSettings $addressSettings,
-    ) {}
+        protected ?AddressSettings $addressSettings = null,
+    ) {
+        $this->addressSettings ??= app(AddressSettings::class);
+    }
 
     /**
      * Get the countries an address on the storefront can be in.
