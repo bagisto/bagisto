@@ -30,7 +30,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.5.2';
+    const BAGISTO_VERSION = '2.5.x-dev';
 
     /**
      * Current Channel.

@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Soon.
+
 ## **v2.5.2 (18th of November 2026)** - *Release*
 
 - The admin customer address forms and Create Order now follow the street lines and allowed countries of the customer's channel, not the default channel's.
