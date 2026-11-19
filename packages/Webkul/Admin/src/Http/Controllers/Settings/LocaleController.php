@@ -46,14 +46,16 @@ class LocaleController extends Controller
             'logo_path.*' => 'image:allow_svg|extensions:jpeg,jpg,png,svg,webp',
         ], [], ['logo_path.*' => trans('admin::app.settings.locales.index.create.locale-logo')]);
 
-        Event::dispatch('core.locale.create.before');
-
-        $locale = $this->localeRepository->create(request()->only([
+        $data = request()->only([
             'code',
             'name',
             'direction',
             'logo_path',
-        ]));
+        ]);
+
+        Event::dispatch('core.locale.create.before', [$data]);
+
+        $locale = $this->localeRepository->create($data);
 
         Event::dispatch('core.locale.create.after', $locale);
 

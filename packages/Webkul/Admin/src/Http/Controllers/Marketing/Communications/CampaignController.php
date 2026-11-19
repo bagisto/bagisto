@@ -66,7 +66,7 @@ class CampaignController extends Controller
             'status' => 'sometimes|required|in:0,1',
         ]);
 
-        Event::dispatch('marketing.campaigns.create.before');
+        Event::dispatch('marketing.campaigns.create.before', [$validatedData]);
 
         $campaign = $this->campaignRepository->create($validatedData);
 

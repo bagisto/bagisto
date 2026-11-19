@@ -31,7 +31,7 @@ class CoreConfigRepository extends Repository
      */
     public function create(array $data)
     {
-        Event::dispatch('core.configuration.save.before');
+        Event::dispatch('core.configuration.save.before', [$data]);
 
         DB::transaction(function () use ($data) {
             $locale = Arr::pull($data, 'locale') ?: core()->getRequestedLocaleCode();
@@ -134,7 +134,7 @@ class CoreConfigRepository extends Repository
             }
         });
 
-        Event::dispatch('core.configuration.save.after');
+        Event::dispatch('core.configuration.save.after', [$data]);
     }
 
     /**

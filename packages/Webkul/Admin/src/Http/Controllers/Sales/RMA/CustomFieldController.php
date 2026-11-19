@@ -58,9 +58,7 @@ class CustomFieldController extends Controller
             'value' => 'required_if:type,select,multiselect,checkbox,radio|array|min:1',
         ]);
 
-        Event::dispatch('sales.rma.custom-field.create.before');
-
-        $rmaCustomField = $this->rmaCustomFieldRepository->create(request()->only(
+        $data = request()->only(
             'label',
             'code',
             'position',
@@ -68,7 +66,11 @@ class CustomFieldController extends Controller
             'is_required',
             'input_validation',
             'status',
-        ));
+        );
+
+        Event::dispatch('sales.rma.custom-field.create.before', [$data]);
+
+        $rmaCustomField = $this->rmaCustomFieldRepository->create($data);
 
         if (
             in_array(request()->input('type'), ['select', 'multiselect', 'checkbox', 'radio'])

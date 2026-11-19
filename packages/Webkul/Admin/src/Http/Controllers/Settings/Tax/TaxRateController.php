@@ -55,9 +55,7 @@ class TaxRateController extends Controller
      */
     public function store(TaxRateRequest $request)
     {
-        Event::dispatch('tax.rate.create.before');
-
-        $taxRate = $this->taxRateRepository->create($request->only([
+        $data = $request->only([
             'identifier',
             'country',
             'state',
@@ -66,7 +64,11 @@ class TaxRateController extends Controller
             'is_zip',
             'zip_from',
             'zip_to',
-        ]));
+        ]);
+
+        Event::dispatch('tax.rate.create.before', [$data]);
+
+        $taxRate = $this->taxRateRepository->create($data);
 
         Event::dispatch('tax.rate.create.after', $taxRate);
 

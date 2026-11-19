@@ -66,8 +66,6 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $categoryRequest)
     {
-        Event::dispatch('catalog.category.create.before');
-
         $data = $categoryRequest->only([
             'locale',
             'name',
@@ -91,6 +89,8 @@ class CategoryController extends Controller
         if (! empty($data['description'])) {
             $data['description'] = clean_content($data['description']);
         }
+
+        Event::dispatch('catalog.category.create.before', [$data]);
 
         $category = $this->categoryRepository->create($data);
 
