@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- #11592 [fixed] - A bundle product imported with an option quantity of 0 could not be added to the cart, failing with "field must be at least 1". The product import now rejects a bundle option quantity below 1, as the product edit page does.
 
 ## **v2.5.2 (18th of November 2026)** - *Release*
 

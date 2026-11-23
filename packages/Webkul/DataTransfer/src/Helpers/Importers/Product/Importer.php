@@ -443,7 +443,7 @@ class Importer extends AbstractImporter
                 'bundle_options.*.required' => 'sometimes|required|boolean',
                 'bundle_options.*.sku' => 'sometimes|required',
                 'bundle_options.*.price' => ['sometimes', 'required', new Decimal],
-                'bundle_options.*.qty' => 'sometimes|required|integer',
+                'bundle_options.*.qty' => 'sometimes|required|integer|min:1',
                 'bundle_options.*.default' => 'sometimes|required|boolean',
             ];
 
