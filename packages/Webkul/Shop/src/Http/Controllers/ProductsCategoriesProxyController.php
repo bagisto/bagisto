@@ -30,13 +30,16 @@ class ProductsCategoriesProxyController extends Controller
 
     /**
      * Show the category or product a storefront slug names, or the home page for a path that is no slug, redirecting a
-     * nested category path or a rewritten url, and answer not found otherwise, a path under the admin url included.
+     * nested category path or a rewritten url, and answer not found otherwise, an admin or api path included.
      *
      * @return View|RedirectResponse
      */
     public function index(Request $request)
     {
-        if (is_admin_request($request)) {
+        if (
+            is_admin_request($request)
+            || $request->is('api/*')
+        ) {
             abort(404);
         }
 
