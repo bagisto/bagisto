@@ -29,8 +29,8 @@ class ProductsCategoriesProxyController extends Controller
     ) {}
 
     /**
-     * Show the category or product a storefront slug names, or the home page for a path that is no slug, redirecting a
-     * nested category path or a rewritten url, and answer not found otherwise, a path under the admin url included.
+     * Show the category or product a storefront slug names, redirecting a nested category path or a rewritten url, and
+     * answer not found otherwise, a path that is no slug and a path under the admin url included.
      *
      * @return View|RedirectResponse
      */
@@ -43,12 +43,7 @@ class ProductsCategoriesProxyController extends Controller
         $slugOrURLKey = urldecode(trim($request->getPathInfo(), '/'));
 
         if (! $this->isSlug($slugOrURLKey)) {
-            $sections = $this->sectionRepository->getRenderable(
-                core()->getCurrentChannel()->id,
-                core()->getCurrentChannel()->theme
-            );
-
-            return view('shop::home.index', compact('sections'));
+            abort(404);
         }
 
         $category = $this->categoryRepository->findBySlug($slugOrURLKey);
