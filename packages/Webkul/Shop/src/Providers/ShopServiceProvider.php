@@ -13,6 +13,7 @@ use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\CacheResponse;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
+use Webkul\Shop\Http\Middleware\NoIndexResponse;
 use Webkul\Shop\Http\Middleware\PreviewChannel;
 use Webkul\Shop\Http\Middleware\PreviewImageTheme;
 use Webkul\Shop\Http\Middleware\Theme;
@@ -51,7 +52,7 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('customer', AuthenticateCustomer::class);
 
         Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/web.php');
-        Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/api.php');
+        Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class, NoIndexResponse::class])->group(__DIR__.'/../Routes/api.php');
 
         $this->registerBreadcrumbs();
 
