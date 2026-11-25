@@ -26,10 +26,10 @@
                         class="after:content-[' '] relative bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
                         ::srcset="`
-                            ${product.base_image.small_image_url} 150w,
-                            ${product.base_image.medium_image_url} 300w,
+                            ${product.base_image.medium_image_url} 350w,
+                            ${product.base_image.large_image_url} 560w,
                         `"
-                        sizes="(max-width: 768px) 150px, (max-width: 1200px) 300px, 600px"
+                        sizes="(max-width: 1023px) 45vw, 291px"
                         ::key="product.id"
                         ::index="product.id"
                         width="291"

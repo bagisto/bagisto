@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\CMS;
 
+use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
@@ -53,7 +54,7 @@ class PageController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'url_key' => ['required', 'max:255', 'unique:cms_page_translations,url_key', new Slug],
+            'url_key' => ['required', 'max:255', new Slug, $this->uniqueUrlKeyRule()],
             'page_title' => 'required|max:255',
             'html_content' => 'required',
             'channels' => 'required|array|min:1',
@@ -104,11 +105,7 @@ class PageController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale.'.url_key' => ['required', 'max:255', new Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->pageRepository->isUrlKeyUnique($id, $value)) {
-                    $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
-                }
-            }],
+            $locale.'.url_key' => ['required', 'max:255', new Slug, $this->uniqueUrlKeyRule($id)],
             $locale.'.page_title' => 'required|max:255',
             $locale.'.html_content' => 'required',
             'channels' => 'required|array|min:1',
@@ -169,5 +166,23 @@ class PageController extends Controller
         return new JsonResponse([
             'message' => trans('admin::app.cms.index.datagrid.mass-delete-success'),
         ], 200);
+    }
+
+    /**
+     * Build the rule refusing a url key another page already uses in one of the requested channels.
+     */
+    protected function uniqueUrlKeyRule(?int $id = null): Closure
+    {
+        return function (string $attribute, mixed $value, Closure $fail) use ($id) {
+            if (! is_string($value)) {
+                return;
+            }
+
+            $channelIds = array_filter((array) request()->input('channels', []), 'is_numeric');
+
+            if (! $this->pageRepository->isUrlKeyUniqueInChannels($id, $value, $channelIds)) {
+                $fail(trans('admin::app.cms.index.already-taken', ['name' => trans('admin::app.cms.create.url-key')]));
+            }
+        };
     }
 }

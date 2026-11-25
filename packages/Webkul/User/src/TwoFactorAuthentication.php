@@ -2,9 +2,12 @@
 
 namespace Webkul\User;
 
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Hash;
 use PragmaRX\Google2FA\Google2FA;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TwoFactorAuthentication
 {
@@ -32,11 +35,10 @@ class TwoFactorAuthentication
             $secret
         );
 
-        $qrCodeSvg = QrCode::format('svg')
-            ->size(200)
-            ->generate($qrCodeUrl);
+        $qrCodeSvg = (new Writer(new ImageRenderer(new RendererStyle(200), new SvgImageBackEnd)))
+            ->writeString($qrCodeUrl);
 
-        $qrCodeSvg = $this->cleanSvgString((string) $qrCodeSvg);
+        $qrCodeSvg = $this->cleanSvgString($qrCodeSvg);
 
         return [
             'qrCodeSvg' => $qrCodeSvg,
@@ -75,7 +77,7 @@ class TwoFactorAuthentication
             if (Hash::check($code, $storedCode)) {
                 unset($backupCodes[$index]);
 
-                return array_values($backupCodes); // return remaining hashed codes
+                return array_values($backupCodes);
             }
         }
 
@@ -106,6 +108,16 @@ class TwoFactorAuthentication
     }
 
     /**
+     * Generate the given number of six-digit backup codes for 2FA.
+     */
+    public function generateBackupCodes(int $count = 8): array
+    {
+        return collect(range(1, $count))
+            ->map(fn () => str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT))
+            ->toArray();
+    }
+
+    /**
      * Clean SVG string from invalid characters.
      */
     protected function cleanSvgString(string $svg): string
@@ -113,17 +125,5 @@ class TwoFactorAuthentication
         $svg = mb_convert_encoding($svg, 'UTF-8', 'UTF-8');
 
         return str_replace(["\0", "\x00"], '', $svg);
-    }
-
-    /**
-     * Generate and store backup codes for 2FA.
-     *
-     * @param  int  $count  Number of codes to generate (default: 8)
-     */
-    public function generateBackupCodes(int $count = 8): array
-    {
-        return collect(range(1, $count))
-            ->map(fn () => str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT))
-            ->toArray();
     }
 }

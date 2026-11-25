@@ -174,7 +174,7 @@ The 2.5 line moved the three address requirement helpers to the Customer package
 
 **Impact Probability: Medium**
 
-A 2.5 patch release keeps the routes, methods, columns, signatures and translations that code written for an earlier 2.5 release relies on, and deprecates them. v2.6.0 removes everything the line deprecated, whichever 2.5 release a store upgrades from, so code still using it moves to the replacements the [2.5 upgrade guide](https://github.com/bagisto/bagisto/blob/2.5/UPGRADE.md) names for each release.
+A 2.5 patch release keeps the routes, methods, columns, signatures, translations and dependencies that code written for an earlier 2.5 release relies on, and deprecates them. v2.6.0 removes everything the line deprecated, whichever 2.5 release a store upgrades from, so code still using it moves to the replacements the [2.5 upgrade guide](https://github.com/bagisto/bagisto/blob/2.5/UPGRADE.md) names for each release.
 
 **Notifications.** The three order-only routes are removed: `admin.notification.get_notification` (`get-notifications`), `admin.notification.viewed_notification` (`viewed-notifications/{orderId}`) and `admin.notification.read_all_notifications` (`read-all-notifications`). Use `admin.notification.list`, `admin.notification.open`, `admin.notification.mark_read`, `admin.notification.mark_unread` and `admin.notification.read_all`. With them go:
 
@@ -185,6 +185,8 @@ A 2.5 patch release keeps the routes, methods, columns, signatures and translati
 - the `admin::app.notifications.description-text`, `marked-success`, `no-record` and `read-all` keys and the `order-status-messages.*` group.
 
 **Attribute groups.** The migration drops `attribute_groups.name`, first copying it into `admin_name` wherever that is empty. Read and write `admin_name`. `$group->name` is the group's name in the current locale, from `attribute_group_translations`, so a group created with only a `name` gets no admin name: pass `admin_name`. The family create and edit routes no longer accept `attribute_groups[...][name]`: post `attribute_groups[...][admin_name]` and `attribute_groups[...][<locale>][name]`.
+
+**CMS pages.** `PageRepository::isUrlKeyUnique()` is removed. Call `isUrlKeyUniqueInChannels($id, $urlKey, $channelIds)`, which checks the pages on the given channels, or every page when `$channelIds` is empty.
 
 **Signatures.** These have their return types back, so a subclass overriding one without the same type fails to load:
 
@@ -204,7 +206,23 @@ A 2.5 patch release keeps the routes, methods, columns, signatures and translati
 - `Webkul\Admin\Http\Controllers\NotificationController` takes `TypeRegistry` and `AdminNotifications` after `NotificationRepository`;
 - `Webkul\Notification\Repositories\NotificationRepository` takes `NotificationReadRepository` before the container.
 
+`Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController` no longer takes `SectionRepository`, which it stopped using once a path that is no slug answered 404 rather than the home page, and its unused `STATUS` constant is removed. A subclass passes `CategoryRepository`, `ProductRepository` and `URLRewriteRepository` to `parent::__construct()`.
+
 **Translations.** `shop::app.customers.account.gdpr.success-verify`, `success-verify-email-unsent` and `unable-to-sent` are removed, since nothing in core reads them. `admin::app.sales.orders.create.cart.items.search.empty-channel-info` is removed too: `empty-info` carries its message and takes the `:channel` placeholder, so an override printing `empty-info` passes the channel's name.
+
+**QR codes.** `simplesoftwareio/simple-qrcode` is no longer installed, and `bacon/bacon-qr-code`, which draws the admin's two-factor QR code, is required at `^3.0`. A module that calls the `QrCode` facade requires a QR package in its own `composer.json`, or renders with Bacon directly:
+
+```php
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+
+$svg = (new Writer(new ImageRenderer(new RendererStyle(200), new SvgImageBackEnd)))
+    ->writeString($content);
+```
+
+A package that requires `simplesoftwareio/simple-qrcode` `^4` cannot be installed beside v2.6.0, since it holds Bacon to `^2`. Code that uses Bacon itself moves from 2.0 to 3.1, where `Writer`, `ImageRenderer`, `RendererStyle` and the image back ends keep their names.
 
 ---
 

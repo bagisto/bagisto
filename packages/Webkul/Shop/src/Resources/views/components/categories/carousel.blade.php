@@ -35,9 +35,9 @@
                             <x-shop::media.images.lazy
                                 ::src="category.logo?.small_image_url || fallback"
                                 ::srcset="`
-                                    ${(category.logo?.small_image_url || fallback)} 60w,
+                                    ${(category.logo?.small_image_url || fallback)} 80w,
                                     ${(category.logo?.medium_image_url || fallback)} 110w,
-                                    ${(category.logo?.large_image_url || fallback)} 300w
+                                    ${(category.logo?.large_image_url || fallback)} 220w
                                 `"
                                 sizes="(max-width: 640px) 60px, 110px"
                                 width="110"
