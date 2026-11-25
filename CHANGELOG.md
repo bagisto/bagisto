@@ -4,7 +4,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- A storefront path that is not a product or category slug, such as `/wp-login.php`, now answers 404 instead of showing the home page.
+
 - #11495 [feature] - CMS pages on different channels can now share a URL key, so each channel can have its own page at the same path. A URL key is still refused when another page already uses it on one of the same channels.
+
+- #11592 [fixed] - A bundle with an optional option left on None could not be added to the cart or to an admin order, failing with "field must be at least 1". The product import also now refuses a bundle option quantity below 1.
+
+- #11589 [fixed] - Search engines crawling the review and booking slot URLs printed on product pages got a 500, as did any non-numeric product, review, attribute or booking product id. These now answer 404.
 
 ## **v2.5.2 (18th of November 2026)** - *Release*
 

@@ -565,12 +565,13 @@ export class ProductCreatePage extends BasePage {
         optionType: string,
         title: string,
         items: string[],
+        isRequired = true,
     ) {
         await this.addOptionButton.click();
         await this.addLableInput.fill(title);
         await this.selectType.selectOption({ value: optionType });
         await this.isRequiredCheckbox.selectOption({
-            value: "1",
+            value: isRequired ? "1" : "0",
         });
         await this.saveButton.click();
 
@@ -1295,6 +1296,16 @@ export class ProductCreatePage extends BasePage {
             "Bundle Option 1",
             product.bundleItems ?? [],
         );
+
+        if (product.bundleOptionalItems?.length) {
+            await this.bundleAddOption(
+                "radio",
+                "Bundle Option 2",
+                product.bundleOptionalItems,
+                false,
+            );
+        }
+
         await this.applyRmaSetting(product, true);
     }
 

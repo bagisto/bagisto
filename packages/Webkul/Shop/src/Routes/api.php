@@ -28,7 +28,9 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
 
-        Route::get('attributes/{attribute_id}/options', 'getAttributeOptions')->name('shop.api.categories.attribute_options');
+        Route::get('attributes/{attribute_id}/options', 'getAttributeOptions')
+            ->whereNumber('attribute_id')
+            ->name('shop.api.categories.attribute_options');
 
         Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
@@ -43,7 +45,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('{id}/up-sell', 'upSellProducts')->name('shop.api.products.up_sell.index');
     });
 
-    Route::controller(ReviewController::class)->prefix('product/{id}')->group(function () {
+    Route::controller(ReviewController::class)->prefix('product/{id}')->whereNumber('id')->group(function () {
         Route::get('reviews', 'index')->name('shop.api.products.reviews.index');
 
         Route::post('review', 'store')
@@ -51,6 +53,7 @@ Route::group(['prefix' => 'api'], function () {
             ->name('shop.api.products.reviews.store');
 
         Route::get('reviews/{review_id}/translate', 'translate')
+            ->whereNumber('review_id')
             ->middleware('throttle:10,1')
             ->name('shop.api.products.reviews.translate');
     });
