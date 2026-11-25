@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11495 [feature] - CMS pages on different channels can now share a URL key, so each channel can have its own page at the same path. A URL key is still refused when another page already uses it on one of the same channels.
 
+- #11593 [fixed] - The admin two-factor QR code is now drawn with `bacon/bacon-qr-code` directly instead of `simplesoftwareio/simple-qrcode`. simple-qrcode stays installed for modules that use the `QrCode` facade; a store without such modules can remove it, which moves Bacon to 3 and clears its PHP 8.4 deprecations.
+
 - #11592 [fixed] - A bundle with an optional option left on None could not be added to the cart or to an admin order, failing with "field must be at least 1". The product import also now refuses a bundle option quantity below 1.
 
 - #11591 [fixed] - A Razorpay payment carrying the convenience fee Razorpay charges the shopper was refused, so no order was created. It is now accepted, and the order is recorded at the cart total.
