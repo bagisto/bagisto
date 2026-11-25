@@ -64,3 +64,27 @@ it('should still answer a numeric product or attribute id', function () {
         ->assertOk()
         ->assertJsonStructure(['data']);
 });
+
+// ============================================================================
+// Paths That Are No Slug
+// ============================================================================
+
+it('should answer a path the slug pattern rejects as not found, showing no home page', function (string $path) {
+    $shown = false;
+
+    View::composer('shop::home.index', function () use (&$shown) {
+        $shown = true;
+    });
+
+    get($path)->assertNotFound();
+
+    expect($shown)->toBeFalse();
+})->with([
+    'file name' => ['wp-login.php'],
+    'well-known file' => ['.well-known/security.txt'],
+    'url template placeholder' => ['product/:slug'],
+]);
+
+it('should still show the home page at the root', function () {
+    get(route('shop.home.index'))->assertOk();
+});
