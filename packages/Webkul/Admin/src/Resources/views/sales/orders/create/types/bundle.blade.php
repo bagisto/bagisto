@@ -209,7 +209,7 @@
                 <x-admin::form.control-group.error ::name="'bundle_options[' + option.id + '][]'" />
             </x-admin::form.control-group>
 
-            <template v-if="['select', 'radio'].includes(option.type)">
+            <template v-if="['select', 'radio'].includes(option.type) && isProductSelected">
                 <x-admin::quantity-changer
                     ::name="'bundle_option_qty[' + option?.id + ']'"
                     ::value="productQty"
@@ -239,6 +239,9 @@
             },
 
             computed: {
+                /**
+                 * The total of the chosen products, each at its quantity.
+                 */
                 formattedTotalPrice: function() {
                     var total = 0;
 
@@ -260,6 +263,9 @@
             },
 
             methods: {
+                /**
+                 * Load the bundle's options for the product being added to the order.
+                 */
                 getOptions() {
                     this.isLoading = true;
 
@@ -276,6 +282,9 @@
                         .catch(error => {});
                 },
 
+                /**
+                 * Mark the products chosen in an option as its defaults, so the summary and total follow the choice.
+                 */
                 productSelected: function(option, value) {
                     var selectedProductIds = Array.isArray(value) ? value : [value];
 
@@ -298,6 +307,16 @@
             },
 
             computed: {
+                /**
+                 * Whether one of the option's products is chosen, rather than none of them.
+                 */
+                isProductSelected: function() {
+                    return this.option.products.some(product => product.id == this.selectedProduct);
+                },
+
+                /**
+                 * The quantity of the chosen product, or 0 while none is chosen.
+                 */
                 productQty: function() {
                     let qty = 0;
 
@@ -331,6 +350,9 @@
             },
 
             methods: {
+                /**
+                 * Keep the chosen product's quantity in step with the quantity changer.
+                 */
                 qtyUpdated: function(qty) {
                     if (! this.option.products.find(data => data.id == this.selectedProduct)) {
                         return;

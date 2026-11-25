@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- #11592 [fixed] - A bundle product imported with an option quantity of 0 could not be added to the cart, failing with "field must be at least 1". The product import now rejects a bundle option quantity below 1, as the product edit page does.
+- #11592 [fixed] - A bundle with an optional option left on None could not be added to the cart or to an admin order, failing with "field must be at least 1". The product import also now refuses a bundle option quantity below 1.
 
 - #11589 [fixed] - Search engines crawling the review and booking slot URLs printed on product pages got a 500, as did any non-numeric product, review, attribute or booking product id. These now answer 404.
 
