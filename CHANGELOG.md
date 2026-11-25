@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11592 [fixed] - A bundle product imported with an option quantity of 0 could not be added to the cart, failing with "field must be at least 1". The product import now rejects a bundle option quantity below 1, as the product edit page does.
 
+- #11589 [fixed] - Search engines crawling the review and booking slot URLs printed on product pages got a 500, as did any non-numeric product, review, attribute or booking product id. These now answer 404.
+
 ## **v2.5.2 (18th of November 2026)** - *Release*
 
 - The admin customer address forms and Create Order now follow the street lines and allowed countries of the customer's channel, not the default channel's.
