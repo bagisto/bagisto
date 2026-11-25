@@ -181,7 +181,7 @@ class PageController extends Controller
             $channelIds = array_filter((array) request()->input('channels', []), 'is_numeric');
 
             if (! $this->pageRepository->isUrlKeyUniqueInChannels($id, $value, $channelIds)) {
-                $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
+                $fail(trans('admin::app.cms.index.already-taken', ['name' => trans('admin::app.cms.create.url-key')]));
             }
         };
     }
