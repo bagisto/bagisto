@@ -65,14 +65,25 @@ class PageRepository extends Repository
     }
 
     /**
-     * Check that no other page uses the url key, among the given channels when any are passed.
+     * Check that no other page, on any channel, uses the url key.
+     *
+     * @deprecated Use isUrlKeyUniqueInChannels().
      *
      * @param  int|null  $id
      * @param  string  $urlKey
-     * @param  array<int, int|string>  $channelIds
      * @return bool
      */
-    public function isUrlKeyUnique($id, $urlKey, array $channelIds = [])
+    public function isUrlKeyUnique($id, $urlKey)
+    {
+        return $this->isUrlKeyUniqueInChannels($id, $urlKey, []);
+    }
+
+    /**
+     * Check that no other page uses the url key, among the given channels when any are passed.
+     *
+     * @param  array<int, int|string>  $channelIds
+     */
+    public function isUrlKeyUniqueInChannels(?int $id, string $urlKey, array $channelIds): bool
     {
         return ! PageTranslationProxy::modelClass()::query()
             ->when($id, fn ($query) => $query->where('cms_page_id', '<>', $id))

@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - A storefront path that is not a product or category slug, such as `/wp-login.php`, now answers 404 instead of showing the home page.
 
+- Added `PageRepository::isUrlKeyUniqueInChannels()`, which checks a CMS page's URL key only among the given channels. `isUrlKeyUnique()` still works and is deprecated.
+
 - #11495 [feature] - CMS pages on different channels can now share a URL key, so each channel can have its own page at the same path. A URL key is still refused when another page already uses it on one of the same channels.
 
 - #11593 [fixed] - The admin two-factor QR code is now drawn with `bacon/bacon-qr-code` directly instead of `simplesoftwareio/simple-qrcode`. simple-qrcode stays installed for modules that use the `QrCode` facade; a store without such modules can remove it, which moves Bacon to 3 and clears its PHP 8.4 deprecations.
