@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11591 [fixed] - A Razorpay payment carrying the convenience fee Razorpay charges the shopper was refused, so no order was created. It is now accepted, and the order is recorded at the cart total.
 
+- #11590 [fixed] - Product cards loaded images smaller than they are shown on phones and high-density screens, so photos looked soft. They now load a large enough image, and category icons are sharp on high-density screens.
+
 - #11589 [fixed] - Search engines crawling the review and booking slot URLs printed on product pages got a 500, as did any non-numeric product, review, attribute or booking product id. These now answer 404.
 
 ## **v2.5.2 (18th of November 2026)** - *Release*
