@@ -126,4 +126,5 @@ Route::controller(ProductController::class)->group(function () {
  * Booking products.
  */
 Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
+    ->whereNumber('id')
     ->name('shop.booking_product.slots.index');

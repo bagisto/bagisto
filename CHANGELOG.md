@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- #11589 [fixed] - Search engines crawling the review translate url printed on product pages got a 500, as did any shop api url with a non-numeric product, review or attribute id. Those urls now answer 404, and an unknown api url no longer falls through to the storefront home page.
+- #11589 [fixed] - Search engines crawling the review and booking slot URLs printed on product pages got a 500, as did any non-numeric product, review, attribute or booking product id. These now answer 404.
 
 ## **v2.5.2 (18th of November 2026)** - *Release*
 

@@ -14,7 +14,7 @@ use Webkul\Theme\Repositories\SectionRepository;
 class ProductsCategoriesProxyController extends Controller
 {
     /**
-     * Using const variable for status.
+     * The status of an enabled theme section.
      */
     const STATUS = 1;
 
@@ -30,7 +30,7 @@ class ProductsCategoriesProxyController extends Controller
 
     /**
      * Show the category or product a storefront slug names, or the home page for a path that is no slug, redirecting a
-     * nested category path or a rewritten url, and answer not found otherwise, an admin or api path included.
+     * nested category path or a rewritten url, and answer not found otherwise, an admin or reserved path included.
      *
      * @return View|RedirectResponse
      */
@@ -38,7 +38,7 @@ class ProductsCategoriesProxyController extends Controller
     {
         if (
             is_admin_request($request)
-            || $request->is('api/*')
+            || $this->isReservedPath($request)
         ) {
             abort(404);
         }
@@ -64,9 +64,9 @@ class ProductsCategoriesProxyController extends Controller
             return view('shop::categories.view', [
                 'category' => $category,
                 'params' => [
-                    'sort' => request()->query('sort'),
-                    'limit' => request()->query('limit'),
-                    'mode' => request()->query('mode'),
+                    'sort' => $request->query('sort'),
+                    'limit' => $request->query('limit'),
+                    'mode' => $request->query('mode'),
                 ],
             ]);
         }
@@ -127,5 +127,13 @@ class ProductsCategoriesProxyController extends Controller
     protected function isSlug(string $path): bool
     {
         return (bool) preg_match('/^([\p{L}\p{N}\p{M}\x{0900}-\x{097F}\x{0590}-\x{05FF}\x{0600}-\x{06FF}\x{0400}-\x{04FF}_-]+\/?)+$/u', $path);
+    }
+
+    /**
+     * Whether a path sits under a prefix the storefront's own routes use, where a miss is a malformed request, not a slug.
+     */
+    protected function isReservedPath(Request $request): bool
+    {
+        return $request->is('api/*', 'booking-slots/*');
     }
 }
