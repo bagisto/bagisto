@@ -26,6 +26,40 @@ function createImport(array $attributes = []): Import
     ], $attributes));
 }
 
+/**
+ * The import fixture's bundle row as a products CSV, every option product at the given quantity.
+ */
+function bundleImportCsv(int $quantity): string
+{
+    $fixture = fopen(base_path('packages/Webkul/Admin/tests/e2e-pw/data/data-transfer/products.csv'), 'r');
+
+    $header = fgetcsv($fixture, escape: '\\');
+
+    while (($row = fgetcsv($fixture, escape: '\\')) !== false) {
+        $product = array_combine($header, $row);
+
+        if ($product['type'] === 'bundle') {
+            break;
+        }
+    }
+
+    fclose($fixture);
+
+    $product['sku'] = 'BP-QTY-'.$quantity;
+    $product['url_key'] = 'bundle-option-quantity-'.$quantity;
+    $product['images'] = '';
+    $product['bundle_options'] = preg_replace('/qty=\d+/', 'qty='.$quantity, $product['bundle_options']);
+
+    $csv = fopen('php://temp', 'r+');
+
+    fputcsv($csv, $header, escape: '\\');
+    fputcsv($csv, array_values($product), escape: '\\');
+
+    rewind($csv);
+
+    return stream_get_contents($csv);
+}
+
 beforeEach(function () {
     Storage::fake('private');
 });
@@ -381,3 +415,19 @@ it('should validate an xls import whose sheet reports columns past the header', 
         ->assertOk()
         ->assertJsonPath('is_valid', true);
 });
+
+it('should only accept a bundle row whose option quantities are at least 1', function (int $quantity, bool $isValid) {
+    $import = createImport(['file_path' => 'imports/bundle-option-quantity.csv']);
+
+    Storage::disk('private')->put($import->file_path, bundleImportCsv($quantity));
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.settings.data_transfer.imports.validate', $import->id))
+        ->assertOk()
+        ->assertJsonPath('is_valid', $isValid)
+        ->assertJsonPath('import.invalid_rows_count', $isValid ? 0 : 1);
+})->with([
+    'quantity of 0' => [0, false],
+    'quantity of 1' => [1, true],
+]);

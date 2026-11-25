@@ -20,6 +20,7 @@ export interface BaseProduct {
     allowRma?: boolean;
     groupedItems?: string[];
     bundleItems?: string[];
+    bundleOptionalItems?: string[];
     downloadableFile?: string;
     downloadableExtraFile?: string;
     downloadsAllowed?: number;
