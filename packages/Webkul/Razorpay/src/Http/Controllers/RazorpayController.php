@@ -154,7 +154,8 @@ class RazorpayController extends Controller
     }
 
     /**
-     * Whether Razorpay holds a payment for this cart's amount that no order has used yet.
+     * Whether Razorpay holds a payment, no order has used yet, for a Razorpay order made for this cart's current amount.
+     * The payment may exceed that amount by a convenience fee Razorpay charges the shopper on top.
      */
     protected function paymentCoversCart(Request $request, $cart): bool
     {
@@ -183,7 +184,21 @@ class RazorpayController extends Controller
             return false;
         }
 
-        return $payment['amount'] === $this->razorpayPayment->getAmountInSubunits($cart);
+        return $this->razorpayOrderMatchesCart($payment['order_id'], $cart, $currency)
+            && $payment['amount'] >= $this->razorpayPayment->getAmountInSubunits($cart);
+    }
+
+    /**
+     * Whether the Razorpay order was created for this cart, in its currency and for its current amount.
+     */
+    protected function razorpayOrderMatchesCart(string $razorpayOrderId, $cart, string $currency): bool
+    {
+        $razorpayOrder = $this->razorpayPayment->fetchOrder($razorpayOrderId);
+
+        return $razorpayOrder !== null
+            && (string) $razorpayOrder['cart_id'] === (string) $cart->id
+            && strtoupper((string) $razorpayOrder['currency']) === $currency
+            && $razorpayOrder['amount'] === $this->razorpayPayment->getAmountInSubunits($cart);
     }
 
     /**

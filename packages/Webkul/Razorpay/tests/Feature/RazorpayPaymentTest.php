@@ -9,8 +9,8 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderTransaction;
 
 /**
- * A Razorpay API double that is its own order and payment resource: creating an order records the
- * amount it was charged for, and fetching the payment reports a capture of exactly that amount.
+ * A Razorpay API double that is its own order and payment resource: creating an order records its amount
+ * and notes, fetching the order returns them, and fetching the payment reports a capture of that amount.
  */
 function razorpayApiStub(string $orderId, string $currency = 'INR'): object
 {
@@ -20,6 +20,11 @@ function razorpayApiStub(string $orderId, string $currency = 'INR'): object
          * The subunit amount the order was created for.
          */
         public ?int $orderAmount = null;
+
+        /**
+         * The notes the order was created with.
+         */
+        public array $orderNotes = [];
 
         /**
          * The order resource, which this double serves itself.
@@ -42,11 +47,13 @@ function razorpayApiStub(string $orderId, string $currency = 'INR'): object
         }
 
         /**
-         * Record the amount an order is created for, as the order resource does.
+         * Record the amount and notes an order is created with, as the order resource does.
          */
         public function create(array $data): array
         {
             $this->orderAmount = $data['amount'];
+
+            $this->orderNotes = $data['notes'] ?? [];
 
             return [
                 'id' => $this->orderId,
@@ -56,12 +63,21 @@ function razorpayApiStub(string $orderId, string $currency = 'INR'): object
         }
 
         /**
-         * Report a captured payment for the amount the order was created for.
+         * Return the order when asked for it by id, and otherwise a captured payment for the order's amount.
          */
-        public function fetch(string $paymentId): object
+        public function fetch(string $id): object
         {
+            if ($id === $this->orderId) {
+                return (object) [
+                    'id' => $id,
+                    'amount' => $this->orderAmount,
+                    'currency' => $this->currency,
+                    'notes' => $this->orderNotes,
+                ];
+            }
+
             return (object) [
-                'id' => $paymentId,
+                'id' => $id,
                 'order_id' => $this->orderId,
                 'amount' => $this->orderAmount,
                 'currency' => $this->currency,
@@ -94,15 +110,29 @@ function razorpayPaymentFor(object $cart, array $overrides = []): array
 }
 
 /**
- * Hit the success route with a signature the gateway accepts.
+ * The Razorpay order Bagisto creates for a cart: its amount, currency and cart.
  */
-function razorpaySuccess(array $payment, array $query = []): TestResponse
+function razorpayOrderFor(object $cart, array $overrides = []): array
+{
+    return array_merge([
+        'amount' => (int) round($cart->base_grand_total * 100),
+        'currency' => 'INR',
+        'cart_id' => $cart->id,
+    ], $overrides);
+}
+
+/**
+ * Hit the success route with a signature the gateway accepts, Razorpay reporting the given payment and order.
+ */
+function razorpaySuccess(array $payment, array $order, array $query = []): TestResponse
 {
     $mockRazorpay = test()->mock(RazorpayPayment::class)->makePartial();
 
     $mockRazorpay->shouldReceive('verifySignature')->andReturn(true);
 
     $mockRazorpay->shouldReceive('fetchPayment')->andReturn($payment);
+
+    $mockRazorpay->shouldReceive('fetchOrder')->andReturn($order);
 
     app()->instance(RazorpayPayment::class, $mockRazorpay);
 
@@ -199,6 +229,8 @@ it('should process the Razorpay payment and create the order with an invoice', f
 
     $mockRazorpay->shouldReceive('fetchPayment')->andReturn(razorpayPaymentFor($cart));
 
+    $mockRazorpay->shouldReceive('fetchOrder')->andReturn(razorpayOrderFor($cart));
+
     $this->app->instance(RazorpayPayment::class, $mockRazorpay);
 
     $response = $this->get(route('razorpay.payment.success', [
@@ -268,7 +300,7 @@ it('should redirect to the cart when the signature verification fails', function
 it('should refuse a payment that does not cover the cart total', function () {
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
-    razorpaySuccess(razorpayPaymentFor($cart, ['amount' => 100]))
+    razorpaySuccess(razorpayPaymentFor($cart, ['amount' => 100]), razorpayOrderFor($cart))
         ->assertRedirect(route('shop.checkout.cart.index'))
         ->assertSessionHas('error');
 
@@ -278,7 +310,7 @@ it('should refuse a payment that does not cover the cart total', function () {
 it('should refuse a payment the gateway has not taken money for', function () {
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
-    razorpaySuccess(razorpayPaymentFor($cart, ['status' => 'failed']))
+    razorpaySuccess(razorpayPaymentFor($cart, ['status' => 'failed']), razorpayOrderFor($cart))
         ->assertRedirect(route('shop.checkout.cart.index'))
         ->assertSessionHas('error');
 
@@ -288,7 +320,7 @@ it('should refuse a payment the gateway has not taken money for', function () {
 it('should refuse a payment belonging to another razorpay order', function () {
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
-    razorpaySuccess(razorpayPaymentFor($cart, ['order_id' => 'order_somebody_else']))
+    razorpaySuccess(razorpayPaymentFor($cart, ['order_id' => 'order_somebody_else']), razorpayOrderFor($cart))
         ->assertRedirect(route('shop.checkout.cart.index'))
         ->assertSessionHas('error');
 
@@ -298,15 +330,57 @@ it('should refuse a payment belonging to another razorpay order', function () {
 it('should refuse a payment that already paid for an order', function () {
     $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
-    razorpaySuccess(razorpayPaymentFor($cart))->assertRedirect(route('shop.checkout.onepage.success'));
+    razorpaySuccess(razorpayPaymentFor($cart), razorpayOrderFor($cart))->assertRedirect(route('shop.checkout.onepage.success'));
 
     $replayCart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
 
-    razorpaySuccess(razorpayPaymentFor($replayCart))
+    razorpaySuccess(razorpayPaymentFor($replayCart), razorpayOrderFor($replayCart))
         ->assertRedirect(route('shop.checkout.cart.index'))
         ->assertSessionHas('error');
 
     expect(Order::query()->where('cart_id', $replayCart->id)->exists())->toBeFalse();
+});
+
+it('should place the order at the cart total when the payment carries a convenience fee on top', function () {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    $amount = (int) round($cart->base_grand_total * 100);
+
+    razorpaySuccess(razorpayPaymentFor($cart, ['amount' => $amount + 236]), razorpayOrderFor($cart))
+        ->assertRedirect(route('shop.checkout.onepage.success'));
+
+    $order = Order::query()->where('cart_id', $cart->id)->firstOrFail();
+
+    expect((float) OrderTransaction::query()->where('order_id', $order->id)->value('amount'))
+        ->toBe((float) $order->base_grand_total);
+});
+
+it('should refuse a payment whose razorpay order was made for a different cart total', function (int $difference) {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    $orderAmount = (int) round($cart->base_grand_total * 100) + $difference;
+
+    razorpaySuccess(
+        razorpayPaymentFor($cart, ['amount' => $orderAmount]),
+        razorpayOrderFor($cart, ['amount' => $orderAmount])
+    )
+        ->assertRedirect(route('shop.checkout.cart.index'))
+        ->assertSessionHas('error');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
+})->with([
+    'cart grown since' => [-1000],
+    'cart shrunk since' => [1000],
+]);
+
+it('should refuse a payment whose razorpay order was made for another cart', function () {
+    $cart = $this->createCartWithItems('razorpay', ['base_currency_code' => 'INR']);
+
+    razorpaySuccess(razorpayPaymentFor($cart), razorpayOrderFor($cart, ['cart_id' => $cart->id + 1000]))
+        ->assertRedirect(route('shop.checkout.cart.index'))
+        ->assertSessionHas('error');
+
+    expect(Order::query()->where('cart_id', $cart->id)->exists())->toBeFalse();
 });
 
 // ============================================================================

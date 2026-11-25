@@ -199,6 +199,28 @@ class RazorpayPayment extends Payment
     }
 
     /**
+     * Fetch an order from Razorpay, so the cart and amount it was created for can be checked.
+     *
+     * @return array{amount: int|null, currency: string|null, cart_id: int|string|null}|null
+     */
+    public function fetchOrder(string $orderId): ?array
+    {
+        try {
+            $order = $this->getApi()->order->fetch($orderId);
+        } catch (\Throwable $e) {
+            report($e);
+
+            return null;
+        }
+
+        return [
+            'amount' => isset($order->amount) ? (int) $order->amount : null,
+            'currency' => $order->currency ?? null,
+            'cart_id' => data_get($order, 'notes.cart_id'),
+        ];
+    }
+
+    /**
      * Get a cart's grand total in the currency's smallest unit, which is what Razorpay charges in.
      *
      * @param  \Webkul\Checkout\Contracts\Cart  $cart
