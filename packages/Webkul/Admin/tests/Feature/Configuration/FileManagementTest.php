@@ -196,6 +196,8 @@ it('should answer that there is nothing to copy when the local disk is the confi
 it('should say the disk is unreachable rather than failing when it cannot be listed', function () {
     $this->loginAsAdmin();
 
+    Storage::disk('public')->put('products/1/front.webp', 'front');
+
     useRemoteDisk();
 
     get(route('admin.configuration.file_management.sync_status'))
