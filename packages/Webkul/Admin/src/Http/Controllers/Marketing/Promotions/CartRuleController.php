@@ -84,9 +84,11 @@ class CartRuleController extends Controller
     public function store(CartRuleRequest $cartRuleRequest)
     {
         try {
-            Event::dispatch('promotions.cart_rule.create.before');
+            $data = $cartRuleRequest->all();
 
-            $cartRule = $this->cartRuleRepository->create($cartRuleRequest->all());
+            Event::dispatch('promotions.cart_rule.create.before', [$data]);
+
+            $cartRule = $this->cartRuleRepository->create($data);
 
             Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 

@@ -55,10 +55,11 @@ class AddressController extends Controller
             'email',
             'default_address',
         ]), [
+            'customer_id' => $id,
             'address' => implode(PHP_EOL, array_filter(request()->input('address'))),
         ]);
 
-        Event::dispatch('customer.addresses.create.before');
+        Event::dispatch('customer.addresses.create.before', [$data]);
 
         if (! empty($data['default_address'])) {
             $this->customerAddressRepository->where('customer_id', $id)
@@ -66,9 +67,7 @@ class AddressController extends Controller
                 ->update(['default_address' => 0]);
         }
 
-        $address = $this->customerAddressRepository->create(array_merge($data, [
-            'customer_id' => $id,
-        ]));
+        $address = $this->customerAddressRepository->create($data);
 
         Event::dispatch('customer.addresses.create.after', $address);
 

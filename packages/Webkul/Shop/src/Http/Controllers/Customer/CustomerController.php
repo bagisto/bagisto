@@ -82,7 +82,7 @@ class CustomerController extends Controller
             unset($data['new_password']);
         }
 
-        Event::dispatch('customer.update.before');
+        Event::dispatch('customer.update.before', auth()->guard('customer')->id());
 
         if ($customer = $this->customerRepository->update($data, auth()->guard('customer')->user()->id)) {
             if ($isPasswordChanged) {

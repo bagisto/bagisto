@@ -51,9 +51,11 @@ class CatalogRuleController extends Controller
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
     {
-        Event::dispatch('promotions.catalog_rule.create.before');
+        $data = $catalogRuleRequest->all();
 
-        $catalogRule = $this->catalogRuleRepository->create($catalogRuleRequest->all());
+        Event::dispatch('promotions.catalog_rule.create.before', [$data]);
+
+        $catalogRule = $this->catalogRuleRepository->create($data);
 
         Event::dispatch('promotions.catalog_rule.create.after', $catalogRule);
 

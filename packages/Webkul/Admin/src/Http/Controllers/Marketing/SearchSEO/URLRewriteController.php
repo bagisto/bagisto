@@ -47,15 +47,17 @@ class URLRewriteController extends Controller
             'locale' => 'required|exists:locales,code',
         ]);
 
-        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
-
-        $urlRewrite = $this->urlRewriteRepository->create(request()->only([
+        $data = request()->only([
             'entity_type',
             'request_path',
             'target_path',
             'redirect_type',
             'locale',
-        ]));
+        ]);
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before', [$data]);
+
+        $urlRewrite = $this->urlRewriteRepository->create($data);
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
 

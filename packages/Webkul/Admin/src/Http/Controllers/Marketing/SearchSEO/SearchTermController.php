@@ -46,14 +46,16 @@ class SearchTermController extends Controller
             'locale' => 'required|exists:locales,code',
         ]);
 
-        Event::dispatch('marketing.search_seo.search_terms.create.before');
-
-        $searchTerm = $this->searchTermRepository->create(request()->only([
+        $data = request()->only([
             'term',
             'redirect_url',
             'channel_id',
             'locale',
-        ]));
+        ]);
+
+        Event::dispatch('marketing.search_seo.search_terms.create.before', [$data]);
+
+        $searchTerm = $this->searchTermRepository->create($data);
 
         Event::dispatch('marketing.search_seo.search_terms.create.after', $searchTerm);
 

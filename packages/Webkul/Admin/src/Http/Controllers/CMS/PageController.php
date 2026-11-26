@@ -60,8 +60,6 @@ class PageController extends Controller
             'channels' => 'required|array|min:1',
         ]);
 
-        Event::dispatch('cms.page.create.before');
-
         $data = request()->only([
             'page_title',
             'channels',
@@ -73,6 +71,8 @@ class PageController extends Controller
         ]);
 
         $data['html_content'] = clean_content($data['html_content']);
+
+        Event::dispatch('cms.page.create.before', [$data]);
 
         $page = $this->pageRepository->create($data);
 

@@ -48,9 +48,7 @@ class CurrencyController extends Controller
             ...$this->getFormatRules(),
         ]);
 
-        Event::dispatch('core.currency.create.before');
-
-        $currency = $this->currencyRepository->create(request()->only([
+        $data = request()->only([
             'code',
             'name',
             'symbol',
@@ -58,7 +56,11 @@ class CurrencyController extends Controller
             'group_separator',
             'decimal_separator',
             'currency_position',
-        ]));
+        ]);
+
+        Event::dispatch('core.currency.create.before', [$data]);
+
+        $currency = $this->currencyRepository->create($data);
 
         Event::dispatch('core.currency.create.after', $currency);
 

@@ -97,15 +97,17 @@ class SectionController extends Controller
 
         $this->guardSingleton($validated['type'], $code, $channel->id);
 
-        Event::dispatch('section.create.before');
-
-        $section = $this->sectionRepository->create($validated + [
+        $data = $validated + [
             'channel_id' => $channel->id,
             'theme_code' => $code,
             'sort_order' => count($this->editableSections($code, $channel->id)) + 1,
             'status' => 0,
             'draft_status' => true,
-        ]);
+        ];
+
+        Event::dispatch('section.create.before', [$data]);
+
+        $section = $this->sectionRepository->create($data);
 
         Event::dispatch('section.create.after', $section);
 
@@ -342,7 +344,7 @@ class SectionController extends Controller
 
         $this->guardSingleton($section->type, $section->theme_code, $section->channel_id);
 
-        Event::dispatch('section.create.before');
+        Event::dispatch('section.create.before', $id);
 
         $section = $this->sectionRepository->duplicate($id);
 

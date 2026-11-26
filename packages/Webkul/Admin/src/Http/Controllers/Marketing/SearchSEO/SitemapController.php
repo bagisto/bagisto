@@ -44,13 +44,15 @@ class SitemapController extends Controller
             'channels' => 'required|array|min:1',
         ]);
 
-        Event::dispatch('marketing.search_seo.sitemap.create.before');
-
-        $sitemap = $this->sitemapRepository->create(request()->only([
+        $data = request()->only([
             'file_name',
             'path',
             'channels',
-        ]));
+        ]);
+
+        Event::dispatch('marketing.search_seo.sitemap.create.before', [$data]);
+
+        $sitemap = $this->sitemapRepository->create($data);
 
         ProcessSitemap::dispatch($sitemap);
 
