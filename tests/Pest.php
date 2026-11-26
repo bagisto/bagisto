@@ -72,13 +72,17 @@ uses(ThemeTestCase::class)->in('../packages/Webkul/Theme/tests');
 | Storage Isolation
 |--------------------------------------------------------------------------
 |
-| Editing or removing a theme section deletes its uploads from the disk, and a rolled back
-| transaction does not put a deleted file back. The screens that do it work on a temporary
-| disk, so a run against a developer's own database leaves that store's media alone.
+| Tests upload, write and delete files on the default and private disks, and a rolled back
+| transaction neither removes a written file nor puts a deleted one back. Every test works on
+| temporary disks, so a run against a developer's own store leaves that store's files alone.
 |
 */
 
-uses()->beforeEach(fn () => Storage::fake())->in('../packages/Webkul/Admin/tests/Feature/Appearance');
+uses()->beforeEach(function () {
+    foreach ([config('filesystems.default'), 'private'] as $disk) {
+        Storage::fake($disk, config("filesystems.disks.{$disk}", []));
+    }
+})->in('../packages/Webkul');
 
 /*
 |--------------------------------------------------------------------------
