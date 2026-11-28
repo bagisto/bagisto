@@ -1053,6 +1053,8 @@ return [
         'view' => [
             'empty' => 'Tidak ada produk dalam kategori ini',
             'load-more' => 'Muat Lebih Banyak',
+            'read-less' => 'Tampilkan Lebih Sedikit',
+            'read-more' => 'Baca Selengkapnya',
         ],
     ],
 

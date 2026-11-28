@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'ゲストチェックアウトを許可すると、アカウントを作成せずに商品を購入できるようになり、便利で迅速な取引が可能になります。',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => '商品の下',
+                        'collapsible-description' => '説明を折りたたむ',
+                        'collapsible-description-info' => '長い説明の最初の数行を表示し、「続きを読む」ボタンで残りを展開します。',
+                        'description-position' => '説明の表示位置',
+                        'title' => 'カテゴリ表示ページの設定',
+                        'title-info' => 'カテゴリページでカテゴリの説明を表示する位置と、長い説明を折りたたむかどうか。',
+                        'top' => '商品の上',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => '関連製品の許可数',
                         'allow-no-of-up-sells-products' => 'アップセル製品の許可数',

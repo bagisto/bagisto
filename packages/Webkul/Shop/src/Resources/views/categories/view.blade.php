@@ -40,17 +40,13 @@
 
     {!! view_render_event('bagisto.shop.categories.view.banner_path.after') !!}
 
-    {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
+    @php
+        $isDescriptionBelowProducts = core()->getConfigData('catalog.products.category_view_page.description_position') === 'bottom';
+    @endphp
 
-    @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
-        @if ($category->description)
-            <div class="rich-text container mt-8.5 px-15 max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
-                {!! $category->description !!}
-            </div>
-        @endif
+    @if (! $isDescriptionBelowProducts)
+        @include('shop::categories.description')
     @endif
-
-    {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
 
     @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
         <!-- Category Vue Component -->
@@ -58,6 +54,10 @@
             <!-- Category Shimmer Effect -->
             <x-shop::shimmer.categories.view />
         </v-category>
+    @endif
+
+    @if ($isDescriptionBelowProducts)
+        @include('shop::categories.description')
     @endif
 
     @pushOnce('scripts')

@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'La validation des invités permet aux clients d\'acheter des produits sans créer de compte, simplifiant le processus d\'achat pour plus de commodité et de rapidité.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Sous les produits',
+                        'collapsible-description' => 'Description repliable',
+                        'collapsible-description-info' => 'Affiche les premières lignes d\'une description longue avec un bouton Lire la suite qui déplie le reste.',
+                        'description-position' => 'Position de la description',
+                        'title' => 'Configuration de la page de catégorie',
+                        'title-info' => 'Où la description de la catégorie s\'affiche sur la page de catégorie, et si une description longue est repliée.',
+                        'top' => 'Au-dessus des produits',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Nombre autorisé de produits associés',
                         'allow-no-of-up-sells-products' => 'Nombre autorisé de produits de vente croisée',

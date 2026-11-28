@@ -1053,6 +1053,8 @@ return [
         'view' => [
             'empty' => 'Bu kategoride ürün bulunamadı.',
             'load-more' => 'Daha Fazla Yükle',
+            'read-less' => 'Daha Az Göster',
+            'read-more' => 'Devamını Oku',
         ],
     ],
 

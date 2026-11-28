@@ -1053,6 +1053,8 @@ return [
         'view' => [
             'empty' => 'Nenhum produto disponível nesta categoria',
             'load-more' => 'Carregar Mais',
+            'read-less' => 'Ler menos',
+            'read-more' => 'Ler mais',
         ],
     ],
 

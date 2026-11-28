@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per comodità e transazioni più veloci.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Sotto i prodotti',
+                        'collapsible-description' => 'Descrizione comprimibile',
+                        'collapsible-description-info' => 'Mostra le prime righe di una descrizione lunga con un pulsante Leggi di più che espande il resto.',
+                        'description-position' => 'Posizione della descrizione',
+                        'title' => 'Configurazione della pagina di categoria',
+                        'title-info' => 'Dove viene mostrata la descrizione della categoria nella pagina di categoria e se una descrizione lunga viene compressa.',
+                        'top' => 'Sopra i prodotti',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Numero consentito di prodotti correlati',
                         'allow-no-of-up-sells-products' => 'Numero consentito di prodotti Up-Sell',

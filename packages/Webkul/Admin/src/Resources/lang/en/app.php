@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Below the products',
+                        'collapsible-description' => 'Collapsible Description',
+                        'collapsible-description-info' => 'Shows the first lines of a long description with a Read More button that expands the rest.',
+                        'description-position' => 'Description Position',
+                        'title' => 'Category view page configuration',
+                        'title-info' => 'Where the category description is shown on the category page, and whether a long one is collapsed.',
+                        'top' => 'Above the products',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Allowed number of Related Products',
                         'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',

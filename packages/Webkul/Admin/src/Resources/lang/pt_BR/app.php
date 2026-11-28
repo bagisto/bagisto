@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'O checkout de convidado permite que os clientes comprem produtos sem criar uma conta, agilizando o processo de compra para maior conveniência e transações mais rápidas.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Abaixo dos produtos',
+                        'collapsible-description' => 'Descrição recolhível',
+                        'collapsible-description-info' => 'Mostra as primeiras linhas de uma descrição longa com um botão Ler mais que expande o restante.',
+                        'description-position' => 'Posição da descrição',
+                        'title' => 'Configuração da página de categoria',
+                        'title-info' => 'Onde a descrição da categoria é exibida na página da categoria e se uma descrição longa é recolhida.',
+                        'top' => 'Acima dos produtos',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Número Permitido de Produtos Relacionados',
                         'allow-no-of-up-sells-products' => 'Número Permitido de Produtos de Up-Sell',

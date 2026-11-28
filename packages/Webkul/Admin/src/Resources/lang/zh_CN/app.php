@@ -5424,6 +5424,16 @@ return [
                         'title-info' => '访客结账允许客户在不创建帐户的情况下购买产品，简化购买流程，提供更便捷和快速的交易。',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => '商品下方',
+                        'collapsible-description' => '可折叠描述',
+                        'collapsible-description-info' => '显示长描述的前几行，并提供“阅读更多”按钮以展开其余内容。',
+                        'description-position' => '描述位置',
+                        'title' => '分类浏览页面配置',
+                        'title-info' => '分类描述在分类页面中的显示位置，以及是否折叠较长的描述。',
+                        'top' => '商品上方',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => '允许相关产品的数量',
                         'allow-no-of-up-sells-products' => '允许上销售产品的数量',

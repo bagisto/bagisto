@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Sub produse',
+                        'collapsible-description' => 'Descriere restrângibilă',
+                        'collapsible-description-info' => 'Afișează primele rânduri ale unei descrieri lungi cu un buton Citește mai mult care extinde restul.',
+                        'description-position' => 'Poziția descrierii',
+                        'title' => 'Configurarea paginii de categorie',
+                        'title-info' => 'Unde este afișată descrierea categoriei pe pagina categoriei și dacă o descriere lungă este restrânsă.',
+                        'top' => 'Deasupra produselor',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Allowed number of Related Products',
                         'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',

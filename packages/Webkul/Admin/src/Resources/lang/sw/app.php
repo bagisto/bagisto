@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Malipo ya wageni huruhusu wateja kununua bidhaa bila kuunda akaunti, kurahisisha mchakato wa ununuzi kwa urahisi na miamala ya haraka.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Chini ya bidhaa',
+                        'collapsible-description' => 'Maelezo Yanayokunjika',
+                        'collapsible-description-info' => 'Huonyesha mistari ya kwanza ya maelezo marefu pamoja na kitufe cha Soma Zaidi kinachofungua yaliyobaki.',
+                        'description-position' => 'Mahali pa Maelezo',
+                        'title' => 'Usanidi wa ukurasa wa kuonyesha kategoria',
+                        'title-info' => 'Mahali maelezo ya kategoria yanaonyeshwa kwenye ukurasa wa kategoria, na kama maelezo marefu yanakunjwa.',
+                        'top' => 'Juu ya bidhaa',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Idadi Yaliyoruhusiwa ya Bidhaa Zinazohusiana',
                         'allow-no-of-up-sells-products' => 'Idadi Yaliyoruhusiwa ya Bidhaa za Up-Sell',

@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Zamówienie gościa umożliwia klientom zakup produktów bez tworzenia konta, upraszczając proces zakupu dla wygody i szybszych transakcji.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Pod produktami',
+                        'collapsible-description' => 'Zwijany opis',
+                        'collapsible-description-info' => 'Pokazuje pierwsze wiersze długiego opisu z przyciskiem Czytaj więcej, który rozwija resztę.',
+                        'description-position' => 'Położenie opisu',
+                        'title' => 'Konfiguracja strony widoku kategorii',
+                        'title-info' => 'Gdzie na stronie kategorii wyświetlany jest opis kategorii i czy długi opis jest zwijany.',
+                        'top' => 'Nad produktami',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Limit produktów powiązanych',
                         'allow-no-of-up-sells-products' => 'Limit produktów Up-Sell',

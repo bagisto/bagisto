@@ -2530,10 +2530,40 @@ return [
             ],
         ],
     ], [
+        'key' => 'catalog.products.category_view_page',
+        'name' => 'admin::app.configuration.index.catalog.products.category-view-page.title',
+        'info' => 'admin::app.configuration.index.catalog.products.category-view-page.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'description_position',
+                'title' => 'admin::app.configuration.index.catalog.products.category-view-page.description-position',
+                'type' => 'select',
+                'default' => 'top',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.category-view-page.top',
+                        'value' => 'top',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.category-view-page.bottom',
+                        'value' => 'bottom',
+                    ],
+                ],
+                'channel_based' => true,
+            ], [
+                'name' => 'collapsible_description',
+                'title' => 'admin::app.configuration.index.catalog.products.category-view-page.collapsible-description',
+                'info' => 'admin::app.configuration.index.catalog.products.category-view-page.collapsible-description-info',
+                'type' => 'boolean',
+                'default' => 0,
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'catalog.products.product_view_page',
         'name' => 'admin::app.configuration.index.catalog.products.product-view-page.title',
         'info' => 'admin::app.configuration.index.catalog.products.product-view-page.title-info',
-        'sort' => 3,
+        'sort' => 4,
         'fields' => [
             [
                 'name' => 'no_of_related_products',
@@ -2555,7 +2585,7 @@ return [
         'key' => 'catalog.products.review',
         'name' => 'admin::app.configuration.index.catalog.products.review.title',
         'info' => 'admin::app.configuration.index.catalog.products.review.title-info',
-        'sort' => 4,
+        'sort' => 5,
         'fields' => [
             [
                 'name' => 'customer_review',
@@ -2591,7 +2621,7 @@ return [
         'key' => 'catalog.products.social_share',
         'name' => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info' => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort' => 5,
+        'sort' => 6,
         'fields' => [
             [
                 'name' => 'enabled',
@@ -2632,7 +2662,7 @@ return [
         'key' => 'catalog.products.cart_view_page',
         'name' => 'admin::app.configuration.index.catalog.products.cart-view-page.title',
         'info' => 'admin::app.configuration.index.catalog.products.cart-view-page.title-info',
-        'sort' => 6,
+        'sort' => 7,
         'fields' => [
             [
                 'name' => 'no_of_cross_sells_products',
@@ -2645,7 +2675,7 @@ return [
         'key' => 'catalog.products.attribute',
         'name' => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info' => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort' => 7,
+        'sort' => 8,
         'fields' => [
             [
                 'name' => 'image_attribute_upload_size',
@@ -2663,7 +2693,7 @@ return [
         'key' => 'catalog.products.omnibus',
         'name' => 'admin::app.configuration.index.catalog.products.omnibus.title',
         'info' => 'admin::app.configuration.index.catalog.products.omnibus.title-info',
-        'sort' => 8,
+        'sort' => 9,
         'fields' => [
             [
                 'name' => 'is_enabled',

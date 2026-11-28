@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'El pagament per a convidats permet als clients comprar productes sense crear un compte, agilitzant el procés de compra per a més comoditat i transaccions més ràpides.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Sota els productes',
+                        'collapsible-description' => 'Descripció plegable',
+                        'collapsible-description-info' => 'Mostra les primeres línies d\'una descripció llarga amb un botó Llegeix-ne més que desplega la resta.',
+                        'description-position' => 'Posició de la descripció',
+                        'title' => 'Configuració de la pàgina de categoria',
+                        'title-info' => 'On es mostra la descripció de la categoria a la pàgina de categoria i si una descripció llarga es plega.',
+                        'top' => 'Sobre els productes',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Nombre permès de productes relacionats',
                         'allow-no-of-up-sells-products' => 'Nombre permès de productes de venda creuada',
