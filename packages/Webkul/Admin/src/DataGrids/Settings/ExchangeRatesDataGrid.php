@@ -27,6 +27,7 @@ class ExchangeRatesDataGrid extends DataGrid
             ->select(
                 'currency_exchange_rates.id as currency_exchange_id',
                 'currencies.name as currency_name',
+                'currencies.code as currency_code',
                 'currency_exchange_rates.rate as currency_rate'
             );
 
@@ -37,6 +38,11 @@ class ExchangeRatesDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+    /**
+     * Prepare columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -59,13 +65,19 @@ class ExchangeRatesDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'currency_rate',
             'label' => trans('admin::app.settings.exchange-rates.index.datagrid.exchange-rate'),
-            'type' => 'integer',
+            'type' => 'decimal',
             'searchable' => true,
             'filterable' => true,
             'sortable' => true,
+            'closure' => fn ($row) => '1 '.core()->getBaseCurrencyCode().' = '.$this->formatRate((string) $row->currency_rate).' '.$row->currency_code,
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         if (bouncer()->hasPermission('settings.exchange_rates.edit')) {
@@ -91,5 +103,17 @@ class ExchangeRatesDataGrid extends DataGrid
                 },
             ]);
         }
+    }
+
+    /**
+     * Drop the trailing zeros the rate column pads to twelve decimal places, so 90.560000000000 reads 90.56.
+     */
+    protected function formatRate(string $rate): string
+    {
+        if (! str_contains($rate, '.')) {
+            return $rate;
+        }
+
+        return rtrim(rtrim($rate, '0'), '.');
     }
 }
