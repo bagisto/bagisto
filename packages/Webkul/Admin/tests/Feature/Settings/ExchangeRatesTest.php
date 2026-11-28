@@ -6,6 +6,7 @@ use Webkul\Core\Models\CurrencyExchangeRate;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -26,6 +27,53 @@ it('should return the exchange rate index page', function () {
 it('should deny guest access to the exchange rate index page', function () {
     get(route('admin.settings.exchange_rates.index'))
         ->assertRedirect(route('admin.session.create'));
+});
+
+it('should list a rate against the base currency without the zeros its column pads it with', function (float $rate, string $displayedRate) {
+    $currency = Currency::factory()->create();
+
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => $currency->id,
+        'rate' => $rate,
+    ]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.settings.exchange_rates.index', [
+        'filters' => ['currency_exchange_id' => [$exchangeRate->id]],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.currency_rate', '1 '.core()->getBaseCurrencyCode().' = '.$displayedRate.' '.$currency->code);
+})->with([
+    'decimal rate' => [90.56, '90.56'],
+    'whole rate' => [100, '100'],
+    'small rate' => [0.000125, '0.000125'],
+]);
+
+it('should filter the exchange rates by a decimal rate', function () {
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+        'rate' => 90.56,
+    ]);
+
+    CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+        'rate' => 90,
+    ]);
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.settings.exchange_rates.index', [
+        'filters' => ['currency_rate' => ['90.56']],
+    ]), [
+        'X-Requested-With' => 'XMLHttpRequest',
+    ])
+        ->assertOk()
+        ->assertJsonCount(1, 'records')
+        ->assertJsonPath('records.0.currency_exchange_id', $exchangeRate->id);
 });
 
 // ============================================================================

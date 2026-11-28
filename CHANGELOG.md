@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- #11482 [feature] - The admin exchange rate list now shows each rate against the base currency without the zeros its column pads it with, such as `1 USD = 90.56 INR` instead of `90.560000000000`, and filtering it by a decimal rate such as `90.56` now finds that rate instead of comparing against `90`.
+
 - A storefront path that is not a product or category slug, such as `/wp-login.php`, now answers 404 instead of showing the home page.
 
 - Added `PageRepository::isUrlKeyUniqueInChannels()`, which checks a CMS page's URL key only among the given channels. `isUrlKeyUnique()` still works and is deprecated.
