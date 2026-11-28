@@ -1053,6 +1053,8 @@ return [
         'view' => [
             'empty' => '此类别中没有可用产品',
             'load-more' => '加载更多',
+            'read-less' => '收起',
+            'read-more' => '阅读更多',
         ],
     ],
 

@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Pembayaran tamu memungkinkan pelanggan untuk membeli produk tanpa membuat akun, menyederhanakan proses pembelian untuk kenyamanan dan transaksi yang lebih cepat.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Di bawah produk',
+                        'collapsible-description' => 'Deskripsi yang Dapat Diciutkan',
+                        'collapsible-description-info' => 'Menampilkan baris pertama deskripsi yang panjang dengan tombol Baca Selengkapnya untuk membuka sisanya.',
+                        'description-position' => 'Posisi Deskripsi',
+                        'title' => 'Konfigurasi halaman tampilan kategori',
+                        'title-info' => 'Di mana deskripsi kategori ditampilkan pada halaman kategori, dan apakah deskripsi yang panjang diciutkan.',
+                        'top' => 'Di atas produk',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Jumlah Produk Terkait yang Diizinkan',
                         'allow-no-of-up-sells-products' => 'Jumlah Produk Up-Sell yang Diizinkan',

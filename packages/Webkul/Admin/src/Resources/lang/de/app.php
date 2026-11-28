@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Der Gast-Checkout ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, um den Kaufprozess für Bequemlichkeit und schnellere Transaktionen zu optimieren.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Unter den Produkten',
+                        'collapsible-description' => 'Einklappbare Beschreibung',
+                        'collapsible-description-info' => 'Zeigt die ersten Zeilen einer langen Beschreibung mit einer Schaltfläche „Mehr lesen“, die den Rest aufklappt.',
+                        'description-position' => 'Position der Beschreibung',
+                        'title' => 'Konfiguration der Kategorieansichtsseite',
+                        'title-info' => 'Wo die Kategoriebeschreibung auf der Kategorieseite angezeigt wird und ob eine lange Beschreibung eingeklappt wird.',
+                        'top' => 'Über den Produkten',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Zulässige Anzahl verwandter Produkte',
                         'allow-no-of-up-sells-products' => 'Zulässige Anzahl von Up-Sell-Produkten',

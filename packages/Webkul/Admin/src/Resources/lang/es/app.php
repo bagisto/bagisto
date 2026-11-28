@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'El pago de invitados permite a los clientes comprar productos sin crear una cuenta, agilizando el proceso de compra para mayor comodidad y transacciones más rápidas.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Debajo de los productos',
+                        'collapsible-description' => 'Descripción contraíble',
+                        'collapsible-description-info' => 'Muestra las primeras líneas de una descripción larga con un botón Leer más que despliega el resto.',
+                        'description-position' => 'Posición de la descripción',
+                        'title' => 'Configuración de la página de categoría',
+                        'title-info' => 'Dónde se muestra la descripción de la categoría en la página de categoría y si una descripción larga se contrae.',
+                        'top' => 'Encima de los productos',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'Número permitido de productos relacionados',
                         'allow-no-of-up-sells-products' => 'Número permitido de productos de venta cruzada',

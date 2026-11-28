@@ -1053,6 +1053,8 @@ return [
         'view' => [
             'empty' => 'Hakuna bidhaa zinazopatikana katika jamii hii',
             'load-more' => 'Onyesha Zaidi',
+            'read-less' => 'Soma Kidogo',
+            'read-more' => 'Soma Zaidi',
         ],
     ],
 

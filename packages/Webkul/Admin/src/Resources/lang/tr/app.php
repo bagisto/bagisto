@@ -5424,6 +5424,16 @@ return [
                         'title-info' => 'Konuk ödemesi, müşterilerin bir hesap oluşturmadan ürün satın almalarına olanak tanır, kullanım kolaylığı ve daha hızlı işlemler için satın alma sürecini basitleştirir.',
                     ],
 
+                    'category-view-page' => [
+                        'bottom' => 'Ürünlerin altında',
+                        'collapsible-description' => 'Daraltılabilir Açıklama',
+                        'collapsible-description-info' => 'Uzun bir açıklamanın ilk satırlarını, kalanını açan bir Devamını Oku düğmesiyle gösterir.',
+                        'description-position' => 'Açıklama Konumu',
+                        'title' => 'Kategori görünüm sayfası yapılandırması',
+                        'title-info' => 'Kategori açıklamasının kategori sayfasında nerede gösterileceği ve uzun bir açıklamanın daraltılıp daraltılmayacağı.',
+                        'top' => 'Ürünlerin üstünde',
+                    ],
+
                     'product-view-page' => [
                         'allow-no-of-related-products' => 'İzin Verilen İlgili Ürün Sayısı',
                         'allow-no-of-up-sells-products' => 'İzin Verilen Yükseltme Ürün Sayısı',

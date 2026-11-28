@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- #11498 [feature] - Catalog > Products > Category View Page now sets, per channel, whether the category description is shown above or below the products, and can collapse a long description to its first lines behind a Read More button. The description stays in the page, so search engines still read it, and the defaults keep the current layout.
+
 - A storefront path that is not a product or category slug, such as `/wp-login.php`, now answers 404 instead of showing the home page.
 
 - Added `PageRepository::isUrlKeyUniqueInChannels()`, which checks a CMS page's URL key only among the given channels. `isUrlKeyUnique()` still works and is deprecated.
